@@ -1,6 +1,18 @@
 #!/usr/bin/env sh
 
-filepath=$(readlink -f "$1")
+current_machine="$(uname -s)"
+case "$(current_machine)" in
+    Linux*)
+        filepath=$(readlink -f "$1")
+        ;;
+    Darwin*)
+        filepath=$(greadlink -f "$1")
+        ;;
+    *)
+        exit 1
+        ;;
+esac
+
 # unset COLORTERM
 
 # IMG_CACHE_SIZE=4096x2160

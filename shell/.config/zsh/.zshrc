@@ -25,13 +25,16 @@ source_array=(
         "/usr/share/zsh/plugins/fzf-tab-bin-git/fzf-tab.zsh"
 	"/usr/share/fzf/completion.zsh"
 	"/usr/share/fzf/key-bindings.zsh"
-        "/usr/share/lf/lfcd.sh"
+	"/usr/local/Cellar/fzf/0.30.0/shell/completion.zsh"
+	"/usr/local/Cellar/fzf/0.30.0/shell/key-bindings.zsh"
+        # "/usr/share/lf/lfcd.sh"
 )
 for source_file in ${source_array[@]}; do
 	[ -f "$source_file"  ] && source "$source_file"
 done
 
 # FASD
+# TODO: fasd has been deprecated <2022-06-24, Hyunjae Kim>
 type fasd > /dev/null && eval "$(fasd --init auto)"
 
 # Thefuck
@@ -40,25 +43,25 @@ type fuck > /dev/null && eval "$(thefuck --alias)"
 # auto completion for pip
 type pip > /dev/null && eval "$(pip completion --zsh)" && compctl -K _pip_completion pip3
 
+lfcd () {
+    tmp="$(mktemp)"
+    lf -last-dir-path="$tmp" "$@"
+    # echo "$tmp"
+    if [ -f "$tmp" ]; then
+        dir="$(cat "$tmp")"
+        # echo "$dir"
+        rm -f "$tmp"
+        if [ -d "$dir" ]; then
+            if [ "$dir" != "$(pwd)" ]; then
+                cd "$dir"
+            fi
+        fi
+    fi
+}
+
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 # -f: if file exists and is a regular file
 [ -f "${ZDOTDIR:-$HOME}/.p10k.zsh" ] && source "${ZDOTDIR:-$HOME}/.p10k.zsh"
 
-
-# lfcd () {
-#     tmp="$(mktemp)"
-#     lf -last-dir-path="$tmp" "$@"
-#     # echo "$tmp"
-#     if [ -f "$tmp" ]; then
-#         dir="$(cat "$tmp")"
-#         # echo "$dir"
-#         rm -f "$tmp"
-#         if [ -d "$dir" ]; then
-#             if [ "$dir" != "$(pwd)" ]; then
-#                 cd "$dir"
-#             fi
-#         fi
-#     fi
-# }
 # -r: if file exists and is readable
 [ -r "${ZDOTDIR:-$HOME}/zsh-alias.zsh" ] && source "${ZDOTDIR:-$HOME}/zsh-alias.zsh"

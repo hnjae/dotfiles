@@ -127,7 +127,6 @@ alias system-update="sudo pacman -Sy && sudo powerpill -Su && paru -Su"
 alias system-cleanup='paccache -ruk0; paccache -rk1'
 
 alias yay="paru"
-
 type lfcd > /dev/null && alias lf="lfcd"
 
 type asciidoctor > /dev/null 2>&1 \

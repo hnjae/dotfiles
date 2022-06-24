@@ -24,8 +24,7 @@ fi
 # Browser
 ########
 
-[[ "$OSTYPE" == darwin* ]] && export BROWSER='open'
-
+[[ "$OSTYPE" == darwin* ]] && export BROWSER='open' &&  export OPENER='open'
 ########
 # Editors, PAGER, VISUAL
 ########
@@ -47,6 +46,23 @@ typeset -gU cdpath fpath mailpath path
 # cdpath=(
 #   $cdpath
 # )
+
+
+# Set GNU Tools
+if [[ "$OSTYPE" == darwin* ]]; then
+    gnu=(
+        "/usr/local/opt/gnu-sed/libexec/gnubin"
+        "/usr/local/opt/gnu-tar/libexec/gnubin"
+        "/usr/local/opt/gnu-which/libexec/gnubin"
+        "/usr/local/opt/gnu-indent/libexec/gnubin"
+        "/usr/local/opt/grep/libexec/gnubin"
+        "/usr/local/opt/coreutils/libexec/gnubin"
+    )
+    for new_path in ${gnu[@]}; do
+        [ -d "$new_path" ] && PATH="$new_path:$PATH"
+    done
+    type gawk > /dev/null && alias awk=gawk
+fi
 
 # Set the list of directories that Zsh searches for programs.
 path=(

@@ -8,7 +8,7 @@
 ################################################################################
 # Prezto
 ################################################################################
-#
+
 # Ensure that a non-login, non-interactive shell has a defined environment.
 [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]] \
    && source "${ZDOTDIR:-$HOME}/.zprofile"
@@ -21,7 +21,6 @@
 ################################################################################
 
 # Global
-export OPENER=xdg-open
 
 # source "$PYENV_ROOT/completions/pyenv.zsh"
 
