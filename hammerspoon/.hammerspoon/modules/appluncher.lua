@@ -7,6 +7,7 @@
 -- Alt-Tab 윈도우 선택기
 hs.hints.hintChars = {'1', '2', '3', '4', 'Q', 'W', 'E', 'R'}
 hs.hotkey.bind({'option'}, 'Tab', hs.hints.windowHints)
+hs.hotkey.bind({}, 'F17', hs.hints.windowHints)
 
 --------------------------------------------------------------------------------
 -- 앱 숏컷Shortcuts

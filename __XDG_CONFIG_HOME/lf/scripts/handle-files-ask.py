@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import sys
+import platform
 from typing import List, Dict
 import tty, termios
 import subprocess
@@ -91,6 +92,8 @@ COMMANDS_DICT: Dict = {
     "rmdir": ("rmdir-ing", ["rmdir", "--"], None),
     "trash-with-trace-file": ("trashing",  ["trash-put", "--"], create_trace),
 }
+if platform.system() == "Darwin":
+    COMMANDS_DICT["trash"] = ("trashing", ["trash", "--"], None)
 
 
 def main(command: str, argv: List[str]) -> int:

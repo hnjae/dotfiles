@@ -2,48 +2,57 @@
 local term_width_px = 793
 
 -- 윈도우 스냅 & 풀스크린
-local function move_win_to_left()
+local windowSnap = function(position)
 	local win = hs.window.focusedWindow()   -- 현재 활성화된 앱의 윈도우
 	local frame = win:frame()
 	local screen = win:screen():frame()	 -- 현재 화면
-	frame.x = screen.x
-	frame.y = screen.y
-	frame.w = screen.w - term_width_px
-	frame.h = screen.h
+
+        if position == "left" then
+          frame.x = screen.x
+          frame.y = screen.y
+          frame.w = screen.w / 2
+          frame.h = screen.h
+        elseif position == "right" then
+          frame.x = screen.x + (screen.w /2)
+          frame.y = screen.y
+          frame.w = screen.w / 2
+          frame.h = screen.h
+        elseif position == "up" then
+          frame.y = screen.y
+          frame.h = screen.h /2
+        elseif position == "down" then
+          frame.y = screen.y + screen.h / 2
+          frame.h = screen.h / 2
+        elseif position == "full" then
+          frame.x = screen.x
+          frame.y = screen.y
+          frame.w = screen.w
+          frame.h = screen.h
+        end
+
 	win:setFrame(frame)
 end
 
-local function move_win_to_right()
-	local win = hs.window.focusedWindow()
-	local frame = win:frame()
-	local screen = win:screen():frame()
-	frame.x = screen.x + (screen.w - term_width_px)
-	frame.y = screen.y
-	-- frame.w = screen.w * 4 / 100
-	frame.w = term_width_px	  -- width를 화면의 1/2 로 조정
-	frame.h = screen.h
-	win:setFrame(frame)
-end
 
 
-local function window_fullscreen()
-	local win = hs.window.focusedWindow()
-	local frame = win:frame()
-	local screen = win:screen():frame()
-	frame.x = screen.x
-	frame.y = screen.y
-	frame.w = screen.w
-	frame.h = screen.h
-	win:setFrame(frame)
-end
+hs.hotkey.bind({'option', 'command'}, 'left', function() windowSnap("left") end)
+hs.hotkey.bind({'option', 'command'}, 'right', function() windowSnap("right") end)
+hs.hotkey.bind({'option', 'command'}, 'up', function() windowSnap("up") end)
+hs.hotkey.bind({'option', 'command'}, 'down', function() windowSnap("down") end)
+hs.hotkey.bind({'option', 'command'}, 'f', function() windowSnap("full") end)
 
-hs.hotkey.bind({'option', 'command'}, 'left', move_win_to_left)
-hs.hotkey.bind({'option', 'command'}, 'right', move_win_to_right)
-hs.hotkey.bind({'option', 'command'}, 'up', window_fullscreen)
+hs.hotkey.bind({'F16'}, 'left', function() windowSnap("left") end)
+hs.hotkey.bind({'F16'}, 'right', function() windowSnap("right") end)
+hs.hotkey.bind({'F16'}, 'up', function() windowSnap("up") end)
+hs.hotkey.bind({'F16'}, 'down', function() windowSnap("down") end)
+hs.hotkey.bind({'F16'}, 'F', function() windowSnap("full") end)
 
-hs.hotkey.bind({'option', 'command'}, 'h', move_win_to_left)
-hs.hotkey.bind({'option', 'command'}, 'l', move_win_to_right)
-hs.hotkey.bind({'option', 'command'}, 'k', window_fullscreen)
+-- hs.hotkey.bind({'option', 'command'}, 'right', move_win_to_right)
+-- hs.hotkey.bind({'option', 'command'}, 'up', window_fullscreen)
+
+-- hs.hotkey.bind({'option', 'command'}, 'h', move_win_to_left)
+-- hs.hotkey.bind({'option', 'command'}, 'l', move_win_to_right)
+-- hs.hotkey.bind({'option', 'command'}, 'k', window_fullscreen)
 
 ------
 -- 십자키 배치

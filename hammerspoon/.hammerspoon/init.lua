@@ -14,8 +14,9 @@ hs.hotkey.bind({ 'option', 'cmd' }, 'r', hs.reload)
 require('modules.appluncher')
 require('modules.windows_man')
 require('modules.clipboard')
-require('modules.ime2abc')
-require('modules.hangul')
+-- require('modules.ime2abc')
+require('modules.ime')
+require('modules.ime-nonlatin-aurora')
 
 
 -------------------------------------------------------------------------------

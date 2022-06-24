@@ -21,6 +21,7 @@ stow -nv --stow --target="$XDG_CONFIG_HOME/smplayer" "smplayer"
 stow -nv --stow --target="$HOME" "__HOME--ZEPHY-G15"
 stow -nv --stow --target="$HOME" "window-manager"
 stow -nv --stow --target="$HOME" "shell"
+stow -nv --stow --target="$HOME/.local/bin" "__MY_BIN"
 
 read -p "Continue? (y/Any)" should_run
 [ "$should_run" != "y" ] && echo "O.K. No" && exit 1
@@ -31,3 +32,4 @@ stow -v --stow --target="$XDG_CONFIG_HOME/smplayer" "smplayer"
 stow -v --stow --target="$HOME" "__HOME--ZEPHY-G15"
 stow -v --stow --target="$HOME" "window-manager"
 stow -v --stow --target="$HOME" "shell"
+stow -v --stow --target="$HOME/.local/bin" "__MY_BIN"

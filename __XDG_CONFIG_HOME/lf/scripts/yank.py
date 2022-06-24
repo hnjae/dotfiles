@@ -6,6 +6,7 @@ import shutil
 from typing import List, Optional, Set, Callable, Dict
 import subprocess
 from subprocess import CompletedProcess
+import platform
 from pathlib import Path
 
 
@@ -28,6 +29,10 @@ class Clipboard():
                     ['xsel', '-b'],
                 ],
             }
+
+            if platform.system() == "Darwin":
+                return [ ["pbcopy"] ]
+                # return [["echo",  "rrst", "|", "pbcopy" ]]
 
             session_type: Optional[str] = os.environ.get('XDG_SESSION_TYPE')
             if session_type == "x11":
@@ -83,7 +88,7 @@ class Clipboard():
         return seats
 
 
-def yank(mode: str, path: Path):
+def yank(mode: str, path: Path) -> str:
 
     def _parse_paren(string: str):
         start, end = None, None
@@ -111,7 +116,8 @@ def yank(mode: str, path: Path):
 
     string:str = yank_modes[mode](path)
     Clipboard.clips(string)
-    # return (string)
+
+    return string
 
 
 def main(argv: List[str]) -> int:
@@ -120,7 +126,7 @@ def main(argv: List[str]) -> int:
 
     try:
         cliped_string = yank(argv[0], Path(argv[1]))
-        # print(f"Saved to clipboard: {cliped_string}")
+        print(f"Saved to clipboard: {cliped_string}")
     except Exception:
         return 1
     return 0

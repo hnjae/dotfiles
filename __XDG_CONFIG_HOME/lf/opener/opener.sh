@@ -17,8 +17,8 @@ case "$current_machine" in
         ;;
 esac
 
-
 EDITOR="${EDITOR:-nvim}"
+
 mime_type=`file --brief --mime-type "$abspath"`
 case "$mime_type" in
     text/*|application/json|application/x-wine-extension-ini)

@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 current_machine="$(uname -s)"
-case "$(current_machine)" in
+case "$current_machine" in
     Linux*)
         filepath=$(readlink -f "$1")
         ;;
@@ -12,6 +12,10 @@ case "$(current_machine)" in
         exit 1
         ;;
 esac
+
+
+type bat > /dev/null || "bat is not installed"
+
 
 # unset COLORTERM
 
@@ -57,7 +61,8 @@ case "$FILE_EXTENSION" in
         if [ -s "$cache" ]; then
             prev_file="$cache"
         else
-            comicthumb "$filepath" "$cache" "$IMG_CACHE_SIZE_S"
+            type comicthumb > /dev/null &&  \
+                comicthumb "$filepath" "$cache" "$IMG_CACHE_SIZE_S"
         fi
 
         prev_file="$cache"
