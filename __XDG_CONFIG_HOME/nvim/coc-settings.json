@@ -1,0 +1,52 @@
+// vim: nospell
+{
+  ///////////////////////////////////////////////////////////////
+  // coc
+  ///////////////////////////////////////////////////////////////
+  // https://github.com/weirongxu/coc-explorer/issues/41
+  "coc.preferences.jumpCommand": "tab drop",
+  "coc.preferences.formatOnSaveFiletypes": [
+    "rust"
+  ],
+  "diagnostic.displayByAle": false,
+  ///////////////////////////////////////////////////////////////
+  // coc-snippets
+  ///////////////////////////////////////////////////////////////
+  "snippets.snipmate.enable": false,
+  "snippets.priority": 99,
+  "snippets.userSnippetsDirectory": "$HOME/.config/nvim/coc-snippets",
+  ///////////////////////////////////////////////////////////////
+  // coc-pyright
+  ///////////////////////////////////////////////////////////////
+  "pyright.enable": true,
+  "pyright.disableCompletion": false,
+  "pyright.completion.snippetSupport": true,
+  "pyright.organizeimports.provider": "isort",
+  "python.formatting.provider": "black",
+  "python.formatting.blackArgs": [
+    "--line-length",
+    "79"
+  ],
+  "python.linting.pylintEnabled": true,
+  "python.linting.pylintArgs": [
+    "--disable",
+    "W0511,C0301,C0411"
+    // "W0511,W0611,W0612,W0613,C0114,C0116,C0301,C0411"
+    // W0511: fix-me
+    // W0611: unused-import
+    // W0612: unused-variable
+    // W0613: unused-argument
+    // C0103: invalid-name
+    // C0114: missing-module-docstring
+    // C0116: missing-function-docstring
+    // C0301: line-too-long
+    // C0411: wrong-import-order
+  ],
+  // "jedi.enable": false,
+
+  ///////////////////////////////////////////////////////////////
+  // coc-sumneko-lua
+  ///////////////////////////////////////////////////////////////
+  "sumneko-lua.enableNvimLuaDev": true,
+  "Lua.telemetry.enable": false
+}

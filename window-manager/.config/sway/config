@@ -1,0 +1,21 @@
+# Default config for sway
+#
+# Copy this to ~/.config/sway/config and edit it to your liking.
+#
+# Read `man 5 sway` for a complete reference.
+# exec eval $(gnome-keyring-daemon --start)
+# export SSH_AUTH_SOCK
+
+# exec --no-startup-id dbus-update-activation-environment --all
+# exec systemctl --user stop xdg-desktop-portal-gtk
+# exec systemctl --user stop xdg-desktop-portal-gnome
+# exec systemctl --user start xdg-desktop-portal-wlr
+# GTK+ applications take 20 seconds to start
+# This is due to GTK+ waiting for xdg-desktop-portal to start via D-Bus. This times out because the D-Bus activated service doesn't know what WAYLAND_DISPLAY to connect to.
+# This can be fixed by adding the following to your configuration file:
+# exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+# exec hash dbus-update-activation-environment 2>/dev/null && \
+#      dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+#      dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+# include /etc/sway/config.d/*
+include /home/hyunjae/.config/sway/config.d/*

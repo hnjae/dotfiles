@@ -1,0 +1,144 @@
+{
+  "layer": "bottom",
+  "positoin": "top",
+  // Waybar height (to be removed for auto height)
+  "height": 28,
+  "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
+  // "modules-center": ["custom/pomo"],
+  // "modules-right": ["cpu", "memory","temperature", "network", "battery", "pulseaudio", "tray", "clock"],
+  "modules-right": ["cpu", "memory", "temperature", "pulseaudio",  "battery", "tray",  "idle_inhibitor","clock"],
+  // "margin": 10px,
+  "sway/workspaces": {
+      "format": "{name}",
+      "format-icons": {
+        "1": "",
+        "2": "",
+        "urgent": ""
+        // "focused": "",
+        // "default": ""
+         // "1": "",
+         // "2": "",
+         // "3": "",
+             // "urgent": "",
+             // "default": "",
+      }
+  },
+  "sway/mode": {
+      "format": "{}"
+  },
+  "sway/window": {
+    "format": " {}"
+  },
+  "cpu": {
+    // tooltip-format dose not exists (2021-11-13)(v 0.9.8)
+    "format": " {usage}%",
+    "on-click": "gtk-launch gnome-system-monitor.desktop",
+    "interval": 15
+  },
+  "memory": {
+    "format": " {percentage}%",
+    "on-click": "gtk-launch gnome-system-monitor.desktop"
+  },
+  "temperature": {
+    "interval": 15,
+    "format": "{icon} {temperatureC}℃",
+    // "format-icons": ["", "", ""],
+    "format-icons": ["","","","",""],
+    "critical-threshold": 65,
+    "format-critical": "{icon} {temperatureC}°C",
+    "on-click": "gtk-launch gnome-system-monitor.desktop"
+  },
+  "tray": {
+    "icon-size": 17,
+    "spacing": 12,
+    "show-passive-items": true
+  },
+  "network": {
+    "format": "{icon}",
+    "format-linked": " {ifname} NO IP",
+    "format-wifi": "直 {signalStrength}%",
+    "format-ethernet": " /{cidr}",
+    "format-disconnected": " {ifname}",
+    "format-disabled": "睊",
+    // "format-disconnected": " {ifname}",
+    "tooltip-format-wifi": "直 {ifname}: {essid} {signalStrength}%;{ipaddr}/{cidr}",
+    "tooltip-format-ethernet": "{ifname}: {ipaddr}/{cidr}",
+    // "tooltip-format-disconnected": "{ifname}",
+    "on-click": "termite -e nmtui-connect -t nmtui --name=nmtui --class=nmtui  -i networkmanager.svg",
+    "on-click-right": "nm-connection-editor"
+  },
+  "pulseaudio": {
+    // "format": "{icon} {volume}%{format_source}",
+    "format": "{icon} {volume}%",
+    "format-bluetooth": " {volume}%",
+    "format-bluetooth-muted": "婢",
+    "format-muted": "婢",
+    "format-source": " {volume}%",
+    "format-source-muted": "",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      // "default": ["", "", ""]
+      "default": ["奄", "奔", "墳"]
+    },
+    "on-click": "pavucontrol"
+  },
+  "battery": {
+    "format": "{icon} {capacity}%",
+    // "tooltip-format": "{icon} {capacity}%: {timeto} {time} {power}",
+    // "tooltip-format": "{timeto}",
+    // "format-icons": ["", "", "", "", ""],
+    "format-icons": ["", "", "", "", "", "", "", "", "", "", ""],
+    "interval": "75",
+    "states": {
+      "warning": 30,
+      "critical": 10
+    }
+    // "max-length": 50
+  },
+  "clock": {
+    // https://howardhinnant.github.io/date/date.html#to_stream_formatting
+    "format": "{:%F %a %H:%M}"
+    // "format-alt": "{:%F %a %H:%M:%S}",
+    // "interval": 1,
+  },
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+        "activated": "",
+        "deactivated": ""
+    }
+  },
+  "bluetooth": {
+    "format": "{icon}",
+    "format-icons": {
+      "enabled": "",
+      "disabled": ""
+    },
+    "tooltip": "{icon}: {status}",
+    "on-click": "gtk-launch blueman-manager.desktop"
+  },
+  "custom/pomo": {
+    "interval": 1,
+    "exec": "echo '' `pomo status`",
+    "exec-if": "pgrep pomo"
+
+  }
+  //    "custom/ime": {
+  //	    "format": " {} ",
+  //	    "interval": 1,
+  //	    "return-type": "text",
+  //	    "max-length": 40,
+  //	    "escape": true,
+  //	    "exec": "/usr/bin/cat /tmp/current_ime || echo 'ENG'"
+  //    }
+}
+
+
+
+
+// vi: ft=jsonc:sw=2:softtabstop=2:expandtab

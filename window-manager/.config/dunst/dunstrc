@@ -1,0 +1,228 @@
+[global]
+	### DISPLAY {{{
+	# Display notification on focused monitor.  Possible modes are:
+	#   mouse: follow mouse pointer
+	#   keyboard: follow window with keyboard focus
+	#   none: don't follow anything
+	#
+	# "keyboard" needs a window manager that exports the
+	# _NET_ACTIVE_WINDOW property.
+	# This should be the case for almost all modern window managers.
+	#
+	# If this option is set to mouse or keyboard, the monitor option
+	# will be ignored.
+	follow = mouse
+
+        # width=
+        # height=
+        # origin=
+        # offset
+
+        # Scale: X11 Only
+        scale = 2
+
+        progress_bar = true
+	# progress_bar_max_width = 600
+	# progress_bar_min_width = 300
+	# progress_bar_height = 20
+	# progress_bar_frame_width = 2
+
+        # indicate_hidden = yes
+
+        # transparency: X11 Only
+	# transparency=25
+
+	# The distance in pixels from the content to the separator/border of
+	# the window in the vertical axis
+	separator_height = 2
+
+	padding = 8
+	horizontal_padding = 8
+	# text_icon_padding = 16
+
+	frame_width = 2
+
+	# -----------------------------
+	# Define a color for the separator.
+	# possible values are:
+	#  * auto: dunst tries to find a color fitting to the background;
+	#  * foreground: use the same color as the foreground;
+	#  * frame: use the same color as the frame;
+	#  * anything else will be interpreted as a X color.
+	# separator_color = frame
+	# separator_color = auto
+	separator_color = "auto"
+
+	sort = true
+
+	# idle_threshold = 120
+
+        # layer: wayland only
+        # layer = top or  overlay
+
+	### }}}
+
+	# = Theme 10
+	font = Monospace 11
+        # line_height = 0
+	# The format of the message.  Possible variables are:
+	#   %a  appname
+	#   %s  summary
+	#   %b  body
+	#   %i  iconname (including its path)
+	#   %I  iconname (without its path)
+	#   %p  progress value if set ([  0%] to [100%]) or nothing
+	#   %n  progress value if set without any extra characters
+	#   %%  Literal %
+	# format = "<b>%s</b>\n%b"
+	format = "%s %p\n%b"
+
+	# vertical_alignment = center
+	show_age_threshold = 30
+        # ignore_newline
+        # stack_duplicates
+        hide_duplicate_count = false
+        # show_indicators = true
+#
+	icon_position = left
+	min_icon_size = 32
+	max_icon_size = 32
+	# icon_path = "/usr/share/icons/Newaita-dark/status/symbolic/:/usr/share/icons/Newaita-dark/status/48/:/usr/share/icons/Newaita-dark/devices/symbolic/:/usr/share/icons/Newaita-dark/devices/64/:/usr/share/icons/breeze-dark/status/symbolic:/usr/share/icons/breeze-dark/status/64:/usr/share/icons/breeze-dark/devices/symbolic:/usr/share/icons/breeze-dark/devices/64:/usr/share/icons/HighContrast/scalable/devices/:/usr/share/icons/HighContrast/scalable/status/:/usr/share/icons/HighContrast/scalable/status-extra/:/usr/share/icons/HighContrast/256x256/devices/:/usr/share/icons/HighContrast/256x256/status/:/usr/share/icons/breeze-dark/status/symbolic/:/usr/share/icons/breeze-dark/devices/symbolic/:/usr/share/icons/Adwaita/scalable/status/:/usr/share/icons/Adwaita/scalable/devices/"
+        # icon_theme = "Newaita-dark, breeze-dark, HighContrast, Adwaita"
+        enable_recursive_icon_lookup = true
+
+        # !!!!!!!!!!!! 여기까지 2022-02-14
+
+	# Markup is allowed
+	markup = full
+
+
+	word_wrap = true
+	# ellipsize = end
+	transparency = 0
+
+
+	alignment = left
+
+	# word_wrap = true
+	# stack_duplicates = false
+# "
+	# icon_path = "/usr/share/icons/Fluent-dark/symbolic/status/:/usr/share/icons/Fluent-dark/symbolic/devices/:/usr/share/icons/la-capitaine/status/scalable-dark/:/usr/share/icons/la-capitaine/devices/scalable-dark/:/usr/share/icons/Adwaita++-Dark/status/symbolic/:/usr/share/icons/Adwaita++-Dark/devices/scalable/:/usr/share/icons/Adwaita/scalable/status/:/usr/share/icons/Adwaita/scalable/devices/"
+
+		# If set to true, notifications that have been recalled from history will not time out automatically. (default: true)
+	sticky_history = false
+
+	corner_radius = 8
+
+	# Always run rule-defined scripts, even if the notification is suppressed
+	# always_run_script = true
+
+	# title = Dunst
+	# class = Dunst
+	# startup_notification = false
+
+[shortcuts]
+	# DEPRECATED - SEE DUNSTCTL (X11 Only)
+	# close = ctrl+space
+	# close_all = ctrl+shift+space
+	# history = ctrl+grave
+	context = ctrl+shift+period
+
+[urgency_low]
+	# IMPORTANT: colors have to be defined in quotation marks.
+	# Otherwise the "#" and following would be interpreted as a comment.
+	background = "#282828"
+	foreground = "#ebdbb2"
+	timeout = 4
+
+[urgency_normal]
+	background = "#282828"
+	foreground = "#ebdbb2"
+	timeout = 10
+
+[urgency_critical]
+	background = "#282828"
+	foreground = "#ebdbb2"
+	timeout = 0
+
+# Every section that isn't one of the above is interpreted as a rules to
+# override settings for certain messages.
+# Messages can be matched by "appname", "summary", "body", "icon", "category",
+# "msg_urgency" and you can override the "timeout", "urgency", "foreground",
+# "background", "new_icon" and "format".
+# Shell-like globbing will get expanded.
+#
+# SCRIPTING
+# You can specify a script that gets run when the rule matches by
+# setting the "script" option.
+# The script will be called as follows:
+#   script appname summary body icon urgency
+# where urgency can be "LOW", "NORMAL" or "CRITICAL".
+#
+# NOTE: if you don't want a notification to be displayed, set the format
+# to "".
+# NOTE: It might be helpful to run dunst -print in a terminal in order
+# to find fitting options for rules.
+
+# find out desktop_entry by `dunst -print`
+[fcitx5]
+	summary = "Switch group"
+	body = "Switched group to *"
+	# desktop_entry="org.fcitx.Fcitx5-migration"
+	# msg_urgency = "normal"
+	# background = "#ff0000"
+	# timeout = 1
+	skip_display = true
+	# urgency = low
+
+[rfield]
+	summary = "(A) Connection Established"
+	body = "*\"rfield\"."
+	skip_display = true
+
+# [experimental]
+#         icon_size = 32
+#         icon_theme = "Newaita-dark,breeze-dark,HighContrast,Newaita,Adwaita,breeze,elementary,hicolor"
+# [xbacklight]
+# 	appname = "xbacklight"
+
+
+#[espeak]
+#	summary = "*"
+#	script = dunst_espeak.sh
+
+#[script-test]
+#	summary = "*script*"
+#	script = dunst_test.sh
+
+#[ignore]
+#	# This notification will not be displayed
+#	summary = "foobar"
+#	format = ""
+
+#[history-ignore]
+#	# This notification will not be saved in history
+#	summary = "foobar"
+#	history_ignore = yes
+
+#[signed_on]
+#	appname = Pidgin
+#	summary = "*signed on*"
+#	urgency = low
+#
+#[signed_off]
+#	appname = Pidgin
+#	summary = *signed off*
+#	urgency = low
+#
+#[says]
+#	appname = Pidgin
+#	summary = *says*
+#	urgency = critical
+#
+#[twitter]
+#	appname = Pidgin
+#	summary = *twitter.com*
+#	urgency = normal
+#
+# vim: ft=cfg

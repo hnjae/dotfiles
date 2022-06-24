@@ -1,0 +1,12 @@
+border-radius=2
+# background-color=#28557799
+background-color=#22222299
+font=monospace 11
+icons=1
+icon-path=/usr/share/icons/breeze-dark:/usr/share/icons/Newaita-dark:/usr/share/icons/HighContrast:/usr/share/icons/Adwaita
+# /usr/share/icons/HighContrast:/usr/share/icons/Adwaita
+max-icon-size=64
+default-timeout=1600
+ignore-timeout=0
+group-by=summary
+max-visible=-1

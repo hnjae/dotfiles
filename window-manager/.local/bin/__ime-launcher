@@ -1,0 +1,20 @@
+#!/usr/bin/sh
+
+case "$GTK_IM_MODULE" in
+    fcitx5)
+        fcitx5 -r -d
+        ;;
+    ibus)
+        [ "$XDG_SESSION_DESKTOP" != 'gnome' ] && GDK_BACKEND=x11 ibus-daemon -xrd -n "$XDG_SESSION_DESKTOP"
+        ;;
+    kime)
+        [ "$XDG_SESSION_TYPE" = "wayland" ] && kime-wayland || kime
+        ;;
+    uim)
+        GDK_BACKEND=x11 uim-toolbar-gtk3-systray
+        ;;
+    fcitx)
+        fcitx --relpace -d
+        ;;
+esac
+echo "Launching $GTK_IM_MODULE"

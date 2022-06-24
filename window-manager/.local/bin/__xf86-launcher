@@ -1,0 +1,82 @@
+#!/usr/bin/sh
+
+# wmctrl: for X
+# wlrctl: for Sway like wm
+
+open_or_swith () {
+    # $1: bin
+    # $2: app
+    if `pgrep -x "$1" > /dev/null`; then
+        echo "Focusing $1"
+
+        if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
+            if [ "$XDG_CURRENT_DESKTOP" = "gnome" ]; then
+                echo "NOT SUPPORTED DE: $XDG_CURRENT_DESKTOP"
+            elif [ "$XDG_CURRENT_DESKTOP" = "kde" ]; then
+                echo "NOT SUPPORTED DE: $XDG_CURRENT_DESKTOP"
+            else
+                wlrctl window focus "$1"
+            fi
+        else
+            # TODO: Implement this with wmctrl <2022-04-18, Hyunjae Kim> #
+            echo ""
+        fi
+    else
+        gtk-launch "$2" </dev/null > /dev/null  2>&1 \
+            && echo "Opening $2" \
+            || echo "Could not Open $2"
+    fi
+}
+
+
+case $1 in
+    mail)
+        # app=`xdg-mime query default "x-scheme-handler/mailto"`
+        app="thunderbird.desktop"
+        bin="thunderbird"
+        # TODO: thunderbird bin 구하기? <2022-04-18, Hyunjae Kim> #
+        open_or_swith "$bin" "$app"
+        ;;
+    calculator|calc)
+        if type qalculate-gtk  > /dev/null 2>&1; then
+            app="qalculate-gtk.desktop"
+            bin="qalculate-gtk"
+        elif type gnome-calculator > /dev/null 2>&1; then
+            app="org.gnome.Calculator.desktop"
+            bin="gnome-calculator"
+        elif type kcalc  > /dev/null 2>&1; then
+            app="org.kde.kcalc.desktop"
+            bin="kcalc"
+        else
+            # TODO: open qcalc in terminal <2022-04-18, Hyunjae Kim> #
+            echo "No calculator founded in your system"
+            exit 1
+        fi
+        open_or_swith "$bin" "$app"
+        ;;
+    search)
+        ;;
+    favorites)
+        ;;
+    reload)
+        ;;
+    stop)
+        ;;
+    forward)
+        ;;
+    back)
+        ;;
+    www)
+        app=`xdg-mime query default "x-scheme-handler/https"`
+        gtk-launch "$app" </dev/null > /dev/null  2>&1 \
+            && echo "Opening $app" \
+            || echo "Could not Open $app"
+        ;;
+    explorer|mycomputer)
+        # app=`xdg-mime query default inode/directory`
+        xdg-open "$HOME"
+        ;;
+esac
+# ydotool
+# wmctrl
+# wlrctl

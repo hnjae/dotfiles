@@ -1,0 +1,149 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# pylint: disable=invalid-name
+
+from collections import defaultdict
+import time
+import json
+import os
+import itertools
+import subprocess
+from subprocess import CompletedProcess
+import sys
+from typing import Dict, Iterable, List, Union, Optional
+
+TypeDevice = Dict[str, Union[str, List[Dict[str, str]], Dict[str, str]]]
+
+
+# PD 2700U
+HOME_MONITOR_SERIAL: str = "ET83K02766SL0"
+HOME_MONITOR_MODE: str = "3840x2160@60.000Hz"
+
+
+def sway_power_device(device: TypeDevice, power: bool):
+    if power:
+        print(f"Turning On Device - {device['name']}")
+        power_str: str = "enable"
+    else:
+        print(f"Turning Off Device - {device['name']}")
+        power_str: str = "disable"
+        args = ["swaymsg", device["type"], device["name"], power_str]
+        # print(args)
+        subprocess.run(args, check=True)
+
+        # if power and device.get("model") == "0x152A":
+        #     args = ["swaymsg", device["type"], device["name"], "scale", "1.6"]
+        #     subprocess.run(args, check=True)
+        # if power and device.get("model") == "BenQ PD2700U":
+        #     args = ["swaymsg", device["type"], device["name"], "scale", "1.875"]
+        #     subprocess.run(args, check=True)
+
+
+
+def get_outputs() -> Iterable[TypeDevice]:
+    args: List = ["swaymsg", "--type", "get_outputs", "--raw"]
+    proc: CompletedProcess = subprocess.run(
+        args, capture_output=True, check=True
+    )
+    return json.loads(proc.stdout.decode("UTF-8"))
+
+
+def is_device_on(device: TypeDevice) -> Optional[bool]:
+    for output in get_outputs():
+        if output["name"] == device["name"]:
+            # if output['serial'] == device['serial']:
+            if output["active"] == "false":
+                return False
+            return True
+    return None
+
+
+def sway_mode() -> None:
+    displays_not_home: List[TypeDevice] = []
+    home_display: Optional[TypeDevice] = {}
+    # print ("{:<10} {:<10} {:<10} {:<10}".format())
+    table_format = "| {:<27}| {:<13}| {:14}| {:<9}|"
+    print(table_format.format("Maker", "Model", "Serial", "Port"))
+    print("-" * 72)
+    for device in get_outputs():
+        # print(device)
+        print(
+            table_format.format(
+                device["make"],
+                device["model"],
+                device["serial"],
+                device["name"],
+            )
+        )
+        if device["serial"] == HOME_MONITOR_SERIAL:
+            home_display = device
+        else:
+            displays_not_home.append(device)
+            print("-" * 72)
+
+    if home_display:
+        # sway_power_devices(displays_not_home, False)
+        sway_power_device(home_display, True)
+        if is_device_on(home_display):
+            list(
+                map(
+                    sway_power_device,
+                    displays_not_home,
+                    itertools.repeat(False),
+                )
+            )
+        else:
+            list(
+                map(
+                    sway_power_device,
+                    displays_not_home,
+                    itertools.repeat(True),
+                )
+            )
+
+
+def send_noti():
+    display_icons = [
+        "video-display",
+        # "display",
+        # "preferences-desktop-display",
+        # "video-display-symbolic",
+        # "display-symbolic",
+    ]
+    noti_args = [
+        "notify-send",
+        "Display",
+        "Adjusted",
+        "--urgency=normal",
+        f"--icon={','.join(display_icons)}",
+        "--category=device",
+    ]
+    subprocess.run(noti_args, check=True)
+
+
+def main():
+    env = defaultdict(str, os.environ)
+
+    if env["WLR_DRM_DEVICES"][:14] == "/dev/dri/card1":
+        print("You are using nvidia GPU.")
+        return 1
+
+    if env["XDG_SESSION_TYPE"].lower() != "wayland":
+        print("Session is not wayland")
+        return 0
+
+    if "sway" not in {
+        env["XDG_SESSION_DESKTOP"].lower(),
+        env["DESKTOP_SESSION"].lower(),
+    }:
+        print("DESKTOP_SESSION is not sway")
+        return 0
+
+    sway_mode()
+    time.sleep(0.2)
+    send_noti()
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

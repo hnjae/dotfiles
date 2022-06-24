@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+
+swaymsg mark i3ha
+swaymsg focus parent
+swaymsg focus parent
+swaymsg focus parent
+swaymsg mark i3hb
+swaymsg "[con_mark=\"i3ha\"]" focus
+swaymsg move container to next
+swaymsg "[con_mark=\"i3ha\"]" focus
+swaymsg move container to mark i3hb
+# swaymsg unmark i3ha
+# swaymsg unmark i3hb

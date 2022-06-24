@@ -1,5 +1,8 @@
 ######################
 __hidden*
+.zsh_history
+.p10k.zsh
+tags
 
 ######################
 __pycache__

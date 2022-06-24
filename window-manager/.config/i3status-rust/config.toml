@@ -1,0 +1,125 @@
+[theme]
+name = "semi-native"
+[theme.overrides]
+idle_fg = "#cccccc"
+info_fg = "#83a598"
+
+[icons]
+name = "awesome5"
+[icons.overrides]
+backlight_empty = ""
+backlight_1 = ""
+backlight_2 = ""
+backlight_3 = ""
+backlight_4 = ""
+backlight_5 = ""
+backlight_6 = ""
+backlight_7 = ""
+backlight_8 = ""
+backlight_9 = ""
+backlight_10 = ""
+backlight_11 = ""
+backlight_12 = ""
+backlight_13 = ""
+backlight_full = ""
+bat_charging = ""
+bat_discharging = ""
+bat_full = ""
+bat = "BAT"
+cpu = ""
+music = ""
+memory_swap = "Swap"
+net_wireless = " "
+# music = "阮"
+# bat = ""
+cogs = "COGS"
+
+# [[block]]
+# block = "focused_window"
+# max_width = 60
+# # show_marks = "visible"
+
+[[block]]
+block = "disk_space"
+path = "/"
+info_type = "available"
+unit = "GB"
+interval = 30
+warning = 20.0
+alert = 10.0
+format = "{icon} {available}"
+
+[[block]]
+block = "memory"
+display_type = "memory"
+format_mem = "{mem_used}"
+format_swap = "{swap_used}"
+interval = 6
+
+[[block]]
+block = "cpu"
+interval = 3
+format = "{frequency} {utilization}"
+
+[[block]]
+block = "temperature"
+collapsed = false
+interval = 12
+good = 45
+idle = 64
+info = 70
+# warning = 80
+format = "{max}"
+
+[[block]]
+block = "music"
+# player = "spotify"
+smart_trim = true
+buttons = ["play", "prev", "next"]
+on_collapsed_click = "spotify --force-device-scale-factor=2.0"
+
+[[block]]
+block = "networkmanager"
+on_click = "nm-connection-editor"
+device_format = "{icon}{ap}"
+ap_format = "{ssid} {strength}"
+
+[[block]]
+block = "backlight"
+
+# [[block]]
+# block = "pomodoro"
+# length = 25
+# break_length = 5
+# use_nag = false
+
+[[block]]
+block = "sound"
+driver = "pulseaudio"
+on_click = "pavucontrol"
+format = "{output_name} {volume}"
+step_width = 2
+max_vol = 110
+[block.mappings]
+"alsa_output.pci-0000_07_00.6.analog-stereo" = "HD Audio"
+"alsa_output.pci-0000_01_00.1.hdmi-stereo-extra2" = "Nvidia"
+"bluez_sink.40_ED_98_1A_41_27.a2dp_sink" = "Fiio BTR3K"
+"alsa_output.usb-FiiO_FiiO_BTR3K_ABCDEF0123456789-00.analog-stereo" = "Fiio BTR3K USB Audio"
+"bluez_sink.40_ED_98_1A_41_27.headset_head_unit" = "Fiio BTR3K HSP/HFP"
+
+[[block]]
+block = "battery"
+# driver = "upower"
+device = "BAT0"
+interval = 6
+# good = 80
+format = "{percentage} {time} {power}"
+full_format = "{percentage}"
+missing_format = "Not recognized"
+
+[[block]]
+block = "time"
+interval = 3
+format = "%m/%d %a %R"
+
+# vim:ft=conf

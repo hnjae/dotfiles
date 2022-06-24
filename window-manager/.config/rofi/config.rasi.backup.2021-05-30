@@ -1,0 +1,18 @@
+/*-*- mode: css; -*-*/
+configuration {
+	width: 1740; /* default 2240 maybe ? */
+	lines: 20;
+	font: "Monospace 26";
+	/* solarized + adwaita mix (not done yet */
+	color-normal: "#282828, #c1c1c1, #282828, #15539e, #ffffff";
+	color-urgent: "#282828, #ff1844, #282828, #15539e, #ff1844";
+	color-active: "#282828, #80cbc4, #282828, #15539e, #80cbc4";
+	color-window: "#282828, #282828, #1e2529";
+	/*
+	color-window: "#383c4a, #5294E2, #5294E2, #5294E2, #383c4a";
+	color-normal: "#202332, #5294E2, #383c4a, #5294E2, #383c4a";
+	color-active: "#202332, #5294E2, #383c4a, #5294E2, #383c4a";
+	color-urgent: "#202332, #5294E2, #383c4a, #5294E2, #383c4a";
+	*/
+}
+/* vim:ft=css

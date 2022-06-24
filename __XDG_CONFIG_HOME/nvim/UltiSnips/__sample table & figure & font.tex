@@ -1,0 +1,66 @@
+% For table
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \multicolumn{2}{|c|}{b} & c \\ \hline
+% tabular 대신 \usepackage{longtable} 가능
+\begin{longtable}[l or c or r]{l r l}  식으로
+\end{longtable}
+
+\begin{table}
+	\centering
+	\caption{計算結果}
+	\label{tab:rst2}
+	\begin{tabular}{l l}
+		\toprule
+		 & \\
+		\midrule
+		 & \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+% file name should not include . inside
+\begin{figure} % option htbp / ! for force it
+	\centering
+	% natheight, natwidth for bounding box
+	\includegraphics[width=0.6\textwidth]{}
+	\caption{}
+	\label{}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\begin{subfigure}[b]{0.3\textwidth}
+		\includegraphics[width=\textwidth]{}
+		\caption{}
+		\label{fig:}
+	\end{subfigure}
+	~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+	%(or a blank line to force the subfigure onto a new line)
+	\begin{subfigure}[b]{0.3\textwidth}
+		\includegraphics[width=\textwidth]{}
+		\caption{}
+		\label{fig:}
+	\end{subfigure}
+	~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+	%(or a blank line to force the subfigure onto a new line)
+	\begin{subfigure}[b]{0.3\textwidth}
+		\includegraphics[width=\textwidth]{}
+		\caption{}
+		\label{fig:}
+	\end{subfigure}
+	\caption{}\label{fig:}
+\end{figure}
+
+% full width space :　　　　　
+\paragraph{}　\\
+\subparagraph{}　\\
+
+% font
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%wkj
+\underline{}
+\emph{emph}
+\textit{type italic} % italic
+\texttt{typewriter} %type
+\textsf{sans serif} % sans serif
+\textbf{bold}

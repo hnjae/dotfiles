@@ -1,0 +1,15 @@
+[submodule "shell/.config/zsh/.zprezto"]
+	path = shell/.config/zsh/.zprezto
+	url = https://github.com/sorin-ionescu/prezto.git
+[submodule "window-manager/.local/share/rofi/rofi-themes"]
+	path = window-manager/.local/share/rofi/rofi-themes
+	url = https://github.com/davatorium/rofi-themes
+[submodule "window-manager/.config/rofi/rofi"]
+	path = window-manager/.config/rofi/rofi
+	url = https://github.com/adi1090x/rofi
+[submodule "__XDG_CONFIG_HOME/ranger/plugins/devicons2"]
+	path = __XDG_CONFIG_HOME/ranger/plugins/devicons2
+	url = https://github.com/cdump/ranger-devicons2
+[submodule "__XDG_CONFIG_HOME/ranger/plugins/ranger-fzf-marks"]
+	path = __XDG_CONFIG_HOME/ranger/plugins/ranger-fzf-marks
+	url = https://github.com/laggardkernel/ranger-fzf-marks

@@ -1,0 +1,4 @@
+-- if packer_plugins['fcitx.vim'] and packer_plugins['fcitx.vim'].loaded then
+-- if packer_plugins['fcitx.vim'] then
+--   vim.g.fcitx5_remote = '/usr/bin/fcitx5-remote'
+-- end
