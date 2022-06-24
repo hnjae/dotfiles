@@ -1,6 +1,7 @@
 ######################
 __hidden*
 .zsh_history
+.zsh_sessions
 .p10k.zsh
 tags
 
