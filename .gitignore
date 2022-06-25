@@ -1,5 +1,6 @@
 ######################
 __hidden*
+__local_config*
 .zsh_history
 .zsh_sessions
 .p10k.zsh
