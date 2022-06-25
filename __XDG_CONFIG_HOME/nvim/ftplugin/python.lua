@@ -56,7 +56,7 @@ wk.register({
 -------------------------------------------------------------------------------
 -- python-mode 가 특정 ft에서 실행하도록 되어서 그런가 loaded 체크 하면 작동이 안됨.
 -- 지금으 될수도 있음.
-if packer_plugins['python-mode'] then
+if _IS_PLUGIN('python-mode') then
   vim.g.pymode_rope_regenerate_on_write = 1
   -- vim.g.pymode_warnings = 1
 

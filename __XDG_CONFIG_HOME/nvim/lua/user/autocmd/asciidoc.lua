@@ -23,23 +23,7 @@ local last_modified = function()
 end
 
 local new_template = function()
-  -- if vim.opt.filetype:get() ~= "vimwiki" then
-  --   return
-  -- end
-  --
-  -- local is_wiki = false
-  -- for _, wiki in pairs(vim.g.vimwiki_list) do
-  --   if vim.fn.expand(('%:p:h'), false, false) == vim.fn.expand(wiki["path"], false, false) then
-  --     is_wiki = true
-  --     break
-  --   end
-  -- end
-
-  -- if not is_wiki or vim.fn.line("$") > 1 then
-  --   return
-  -- end
-
-  if vim.fn.line("$") > 1 or vim.fn.col("$") > 1 then
+  if vim.fn.col("$") > 1 or vim.fn.line("$") > 1 then
     return
   end
 
@@ -72,10 +56,12 @@ end
 
 function M.setup()
   -- local vimwikiauto = vim.api.nvim_create_augroup("vimwikiauto")
+  local asciidoc_auto_id = vim.api.nvim_create_augroup("asciidoc-auto", {})
   vim.api.nvim_create_autocmd({
     "BufRead", "BufNewFile"
   }, {
     -- pattern = {"*wiki/*.md"},
+    group = asciidoc_auto_id,
     pattern = { "*.adoc" },
     callback = new_template
   })
@@ -84,6 +70,7 @@ function M.setup()
     "BufWritePre"
   }, {
     -- pattern = {"*wiki/*.md"},
+    group = asciidoc_auto_id,
     pattern = { "*.adoc" },
     callback = last_modified
   })

@@ -1,5 +1,4 @@
 -- TODO: vimtex integration not finished <2022-04-22, Hyunjae Kim> --
--- local _ft_tex = function ()
 -- UI
 vim.opt_local.colorcolumn = "0"
 
@@ -50,30 +49,25 @@ vim.g.vimtex_complete_close_braces = 1 -- default 0 (2021-01-16)
 
 -- After installing Plug-tex-conceal
 -- vim.opt_local.conceallevel=2
-local wk = require("which-key")
-wk.register( {
-  ["i"] = { "<plug>(vimtex-info)", "info"},
-  ["I"] = { "<plug>(vimtex-info-full)", "info-full"},
-  ["t"] = { "<plug>(vimtex-toc-toggle)", "toc-toggle"},
-  ["q"] = { "<plug>(vimtex-log)", "log"},
-  ["v"] = { "<plug>(vimtex-view)", "view"},
-  ["r"] = { "<plug>(vimtex-reverse-search)", "reverse-search" },
 
-  ["s"] = { "<plug>(vimtex-compile)", "compile" },
-  -- ["sS"] = { "<plug>(vimtex-compile-selected)", "compile-selected", mode = "x", buffer = 0 },
-  -- ["sS"] = { "<plug>(vimtex-compile-selected)", "compile-selected", mode = "x", buffer = 0 },
+local status_wk, wk = require("which-key")
+if status_wk then
+  wk.register(
+    {
+      ["i"] = { "<plug>(vimtex-info)", "info"},
+      ["I"] = { "<plug>(vimtex-info-full)", "info-full"},
+      ["t"] = { "<plug>(vimtex-toc-toggle)", "toc-toggle"},
+      ["q"] = { "<plug>(vimtex-log)", "log"},
+      ["v"] = { "<plug>(vimtex-view)", "view"},
+      ["r"] = { "<plug>(vimtex-reverse-search)", "reverse-search" },
 
+      ["s"] = { "<plug>(vimtex-compile)", "compile" },
+      -- ["sS"] = { "<plug>(vimtex-compile-selected)", "compile-selected", mode = "x", buffer = 0 },
+      -- ["sS"] = { "<plug>(vimtex-compile-selected)", "compile-selected", mode = "x", buffer = 0 },
 
-  ["w"] = { ":<C-u>VimtexCountWords", "count-words"},
-  ["l"] = { ":<C-u>VimtexCountLetters", "count-letters"},
-},
-{buffer = 0, prefix=_LANG_PREFIX}
-)
--- end
-
--- vim.api.nvim_create_autocmd(
---   "FileType", {
---     pattern  = {"tex"},
---     callback = _ft_tex
---   }
--- )
+      ["w"] = { ":<C-u>VimtexCountWords", "count-words"},
+      ["l"] = { ":<C-u>VimtexCountLetters", "count-letters"},
+    },
+    {buffer = 0, prefix=_LANG_PREFIX}
+  )
+end
