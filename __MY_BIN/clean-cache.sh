@@ -6,4 +6,4 @@ type fd > /dev/null || echo "fd not installed" || exit 1
 
 XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
 fd . -H -I --changed-before 3weeks -t file "$XDG_CACHE_HOME" --exec rm -rf > /dev/null 2>&1
-fd . -H -I --changed-before 3weeks -t d -t empty "$XDG_CACHE_HOME" --exec rmdir > /dev/null 2>&1
+fd . -H -I -t d -t empty "$XDG_CACHE_HOME" --exec rmdir > /dev/null 2>&1
