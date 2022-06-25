@@ -6,7 +6,7 @@
   vim-surrounded
 --]]
 
-if packer_plugins and packer_plugins['vim-signature'] and packer_plugins['vim-signature'].loaded then
+if _IS_PLUGIN('vim-signature') then
   vim.g.SignatureMap = {
     -- ['Leader']            = "m",
     -- ['PlaceNextMark']     = "m,",

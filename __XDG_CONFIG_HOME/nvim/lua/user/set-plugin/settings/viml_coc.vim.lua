@@ -1,4 +1,4 @@
-if packer_plugins and packer_plugins['coc.nvim'] and packer_plugins['coc.nvim'].loaded then
+if _IS_PLUGIN('coc.nvim') then
   -- coc must have config
   -- if hidden is not set, TextEdit might fail.
   vim.opt.hidden = true

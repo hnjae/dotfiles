@@ -124,8 +124,9 @@ return packer.startup({
     -- COMPLETION
     ---------------------------------------------
     use 'ludovicchabant/vim-gutentags'
-    use 'jiangmiao/auto-pairs'
+    -- use 'jiangmiao/auto-pairs'
     -- use 'reedes/vim-lexical'
+    use { "windwp/nvim-autopairs" }
     if vim.fn.has('nvim-0.7') == 1 then
       use { 'hrsh7th/nvim-cmp' }
       use { 'hrsh7th/cmp-nvim-lsp' }

@@ -1,7 +1,7 @@
 -- better-whitespace.txt
 
 -- if _IS_PLUGIN['vim-better-whitespace'] then
-if packer_plugins and packer_plugins['vim-better-whitespace'] and packer_plugins['vim-better-whitespace'].loaded then
+if _IS_PLUGIN('vim-better-whitespace') then
   vim.g.strip_whitespace_on_save = 1
   vim.g.strip_whitelines_at_eof = 1
 

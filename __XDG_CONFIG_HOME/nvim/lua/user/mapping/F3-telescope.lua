@@ -38,8 +38,11 @@ function M.setup()
     ["c"] = { t_builtin.commands, "commands" },
     ["t"] = { t_builtin.treesitter, "treesitter" },
     ["f"] = { t_builtin.find_files, "find-files" },
-    ["g"] = { t_builtin.grep_string, "grep-string" },
     ["r"] = { t_builtin.registers, "registers" },
+
+    ["g"] = { t_builtin.grep_string, "grep-string" },
+    -- ["g"] = { t_builtin.live_grep, "live-grep" },
+    --
     -- TODO: file_browser<2022-06-16, Hyunjae Kim>
     -- TODO: lvie_grep <2022-06-16, Hyunjae Kim>
     -- ["tt"] = { t_builtin.tags, "tags" },
