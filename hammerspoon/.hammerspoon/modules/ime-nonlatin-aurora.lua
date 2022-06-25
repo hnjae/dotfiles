@@ -3,8 +3,8 @@
 -- MIT License (2022-06-24)
 
 local boxes = {}
-local box_height = 23
-local box_alpha = 0.3
+local box_height = 24
+local box_alpha = 0.28
 local GREEN = hs.drawing.color.osx_green
 
 local latinIMEs = {

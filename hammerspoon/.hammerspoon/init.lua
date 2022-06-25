@@ -15,7 +15,7 @@ require('modules.appluncher')
 require('modules.windows_man')
 require('modules.clipboard')
 -- require('modules.ime2abc')
-require('modules.ime')
+require('modules.ime').setup()
 require('modules.ime-nonlatin-aurora')
 
 
@@ -44,6 +44,8 @@ hs.hotkey.bind({ 'option' }, 'l', function()
 end)
 
 hs.hotkey.bind({'cmd'}, 'i', function()
-    local input_source = hs.keycodes.currentSourceID()
+    -- local input_source = hs.keycodes.currentSourceID()
+    local input_source = hs.keycodes.currentLayout()
+    -- local input_source = hs.keycodes.currentLayout()
     print(input_source)
 end)

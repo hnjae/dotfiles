@@ -9,6 +9,8 @@ require('user.lsp-setup-global').setup()
 require('user.set-plugin').setup()
 require('user.mapping').setup()
 require('user.autocmd').setup()
+require('mac-ime-switcher').setup()
+
 
 -- local paths = vim.fn.uniq(
 --   vim.fn.sort(
