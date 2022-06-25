@@ -1,7 +1,3 @@
-if vim.fn.has('mac') ~= 1 then
-  return
-end
-
 local M = {}
 
 M.setup = function()
@@ -38,10 +34,3 @@ M.setup = function()
 end
 
 return M
-
--- Connect to insert mode change events
--- augroup ibus
---     autocmd!
---     autocmd InsertLeave * :call s:SetIBusEng()
---     autocmd InsertEnter * :call s:SetIBusBack()
--- augroup END

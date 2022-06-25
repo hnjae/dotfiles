@@ -12,14 +12,14 @@ snippet lstinput "input listing files"
 \begin{figure}[tbp] % option htbp
 	\centering
 	lstinputlisting[
-	       language=$1,
-	       linerange={},
-	       firstnumber=,
-	{"$4"}
+		language=$1,
+		linerange={},
+		firstnumber=,
+		{"$4"}
+		]
 	\caption{$4}
 	\label{fig:$3}
 \end{figure}
-
 endsnippet
 
 snippet lst "input myself"

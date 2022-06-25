@@ -23,6 +23,15 @@ end
 
 -- Autocommand that reloads neovim whenever you save the plugins.lua file
 -- PackerSync: Clean, Updates, Install, Compiles
+-- local augroup_packer_user_config = vim.api.nvim_create_augroup("packer_user_config", {})
+-- vim.api.nvim_create_autocmd(
+--   {"BufWritePost"}, {
+--     group = augroup_packer_user_config,
+--     pattern = {"*/lua/user/plugins.lua"},
+--     callback = function()
+--     end
+--   }
+-- )
 vim.cmd [[
   augroup packer_user_config
     autocmd!
@@ -243,9 +252,6 @@ return packer.startup({
     end
   end,
   config = {
-    -- TODO: XDG_DATA_SHARE 로 옮기면 어떨까? 그리고 파일이 없으면 bootstrap 하기로
-    -- <2022-05-08, Hyunjae Kim>
     compile_path = _PACKER_COMPILED
-    -- compile_path = util.join_paths(vim.fn.stdpath('config'), 'packer_compiled.vim')
   }
 })

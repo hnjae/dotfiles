@@ -8,11 +8,10 @@ vim.opt_local.expandtab = true
 
 
 -- 여기서 lspconfig 설정하면 먹질 않음.
-if packer_plugins['coc.nvim'] and packer_plugins['coc.nvim'].loaded then
+if _IS_PLUGIN('coc.nvim') then
   ----------------------------------------------------------------
   -- Formatting (==)
   ----------------------------------------------------------------
   vim.api.nvim_buf_set_keymap(0, "x", "==", "<plug>(coc-format-selected)", {})
   vim.api.nvim_buf_set_keymap(0, "n", "==", "<plug>(coc-format)", {})
 end
--- 여기서 lspconfig 설정하면 먹질 않음.
