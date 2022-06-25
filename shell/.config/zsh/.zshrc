@@ -65,3 +65,4 @@ lfcd () {
 
 # -r: if file exists and is readable
 [ -r "${ZDOTDIR:-$HOME}/zsh-alias.zsh" ] && source "${ZDOTDIR:-$HOME}/zsh-alias.zsh"
+[ -r "${ZDOTDIR:-$HOME}/__local_config.zsh" ] && source "${ZDOTDIR:-$HOME}/__local_config.zsh"

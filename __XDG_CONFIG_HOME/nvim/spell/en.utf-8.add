@@ -277,7 +277,7 @@ fi
 rsync
 plugins
 sudo
-zsh
+#sh
 uname
 r
 fasd
@@ -1596,3 +1596,4 @@ keylayout
 F18
 hammerspoon
 hs
+zsh/!
