@@ -18,7 +18,6 @@ require('modules.clipboard')
 require('modules.ime').setup()
 require('modules.ime-nonlatin-aurora')
 
-
 -------------------------------------------------------------------------------
 
 -- 선택기 (demo app)
@@ -30,7 +29,7 @@ end)
 hs.hotkey.bind({ 'option' }, 'l', function()
   local list = {}
   table.insert(list, {
-    text = 'alert1',
+    text = 'alert2',
     subText = '화면에 첫 번째 알림을 띄웁니다',
     -- image = hs.image.imageFromPath( 이미지 주소 .. '.jpg'),
   })

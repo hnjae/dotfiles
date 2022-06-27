@@ -3,10 +3,10 @@
 current_machine="$(uname -s)"
 case "$current_machine" in
     Linux*)
-        filepath=$(readlink -f "$1")
+        filepath="$(readlink -f "$1")"
         ;;
     Darwin*)
-        filepath=$(greadlink -f "$1")
+        filepath="$(greadlink -f "$1")"
         ;;
     *)
         exit 1
@@ -57,7 +57,7 @@ mime_type=`file --brief --mime-type "$filepath"`
 
 case "$FILE_EXTENSION" in
     cbz)
-        cache=`img_cache "$filepath"`
+        cache="$(img_cache "$filepath")"
         if [ -s "$cache" ]; then
             prev_file="$cache"
         else

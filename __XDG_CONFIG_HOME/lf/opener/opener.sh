@@ -5,11 +5,11 @@ path="$1"
 current_machine="$(uname -s)"
 case "$current_machine" in
     Linux*)
-        abspath=$(readlink -f "$1")
+        abspath="$(readlink -f "$1")"
         OPENER="${OPENER:-xdg-open}"
         ;;
     Darwin*)
-        abspath=$(greadlink "$1")
+        abspath="$(greadlink -f "$1")"
         OPENER="${OPENER:-open}"
         ;;
     *)
@@ -19,7 +19,7 @@ esac
 
 EDITOR="${EDITOR:-nvim}"
 
-mime_type=`file --brief --mime-type "$abspath"`
+mime_type="$(file --brief --mime-type "$abspath")"
 case "$mime_type" in
     text/*|application/json|application/x-wine-extension-ini)
         type "$EDITOR" > /dev/null 2>&1 < /dev/null && "$EDITOR" "$path" && exit 0

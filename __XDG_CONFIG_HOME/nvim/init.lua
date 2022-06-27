@@ -10,7 +10,7 @@ require('user.set-plugin').setup()
 require('user.mapping').setup()
 require('user.autocmd').setup()
 if vim.fn.has('mac') == 1 then
-  require("mac_ime_switcher").setup()
+  require("mac-ime-switcher").setup()
 end
 
 local paths = vim.fn.uniq(
