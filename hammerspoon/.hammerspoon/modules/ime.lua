@@ -10,7 +10,8 @@ local imeGroups = {
   {
     name = "Colemak Mod-DH - 세벌식",
     latin ="io.github.colemakmods.keyboardlayout.colemakdh.colemakdhansi",
-    nonLatin = "com.apple.inputmethod.Korean.3SetKorean",
+    -- nonLatin = "com.apple.inputmethod.Korean.3SetKorean",
+    nonLatin = "org.youknowone.inputmethod.Gureum.han3final",
     layout = "Colemak DH ANSI",
   },
   {
@@ -52,7 +53,7 @@ M.iterIMEGroups = function()
   hs.alert.show(imeGroups[currentGroupId].name)
   -- hs.notify.new({title="hammerspoon", informativeText=imeGroups[currentGroupId].name}):send()
   hs.keycodes.currentSourceID(imeGroups[currentGroupId].latin)
-  -- hs.keycodes.setLayout(imeGroups[currentGroupId].layout)
+  hs.keycodes.setLayout(imeGroups[currentGroupId].layout)
 end
 
 M.vimEscape = function()
