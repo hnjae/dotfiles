@@ -24,3 +24,5 @@ error.log
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+__XDG_CONFIG_HOME/nvim/lua/asciidoc-wiki
