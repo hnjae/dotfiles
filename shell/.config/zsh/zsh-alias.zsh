@@ -123,8 +123,8 @@ alias td="ranger '$HOME/Sync/Library/wiki/todo'"
 alias st="ranger '$HOME/Sync/Study/Leetcode'"
 alias powersave="sudo cpupower frequency-set -g powersave"
 
-alias system-update="sudo pacman -Sy && sudo powerpill -Su && paru -Su"
-alias system-cleanup='paccache -ruk0; paccache -rk1'
+alias update-system="sudo pacman -Sy && sudo powerpill -Su && paru -Su"
+alias cleanup-pacman='paccache -ruk0; paccache -rk1'
 
 alias yay="paru"
 type lfcd > /dev/null && alias lf="lfcd"

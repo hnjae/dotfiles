@@ -142,12 +142,14 @@ map ss
 map st
 map oa :set sortby atime; set info atime
 map oA :set sortby atime; set info atime; set reverse!
-map oc :set sortby ctime; set info ctime
-map oC :set sortby ctime; set info ctime; set reverse!
+map oC :set sortby ctime; set info ctime
+map oc :set sortby ctime; set info ctime; set reverse!
 map oe :set sortby ext; set info size
 map oE :set sortby ext; set info size; set reverse!
 map on :set sortby natural; set info size:time
 map oN :set sortby natural; set info size:time; set reverse!
+map ob :set sortby name; set info size:time
+map oB :set sortby name; set info size:time; set reverse!
 map os :set sortby size; set info size
 map oS :set sortby size; set info size; set reverse!
 map zr
