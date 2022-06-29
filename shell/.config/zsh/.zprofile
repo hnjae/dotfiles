@@ -38,6 +38,12 @@ fi
 ########
 # Paths
 ########
+#
+# export PATH="$HOME/.local/bin:$PATH"
+# # export MANPATH="$HOME/.local/man:$MANPATH"
+fpath=("${XDG_DATA_HOME:-$HOME/.local/share}/zsh/site-functions" $fpath)
+[ -d /usr/local/share/zsh/site-functions ] \
+    && fpath=("/usr/local/share/zsh/site-functions" $fpath)
 
 # Ensure path arrays do not contain duplicates.
 typeset -gU cdpath fpath mailpath path
@@ -86,11 +92,3 @@ export LESS='-g -i -M -R -S -w -X -z-4'
 if (( $#commands[(i)lesspipe(|.sh)] )); then
   export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
 fi
-
-###################################################################
-# USER EDIT
-#################################################################
-
-# export PATH="$HOME/.local/bin:$PATH"
-# # export MANPATH="$HOME/.local/man:$MANPATH"
-# fpath=("${XDG_DATA_HOME:-$HOME/.local/share}/zsh/site-functions" $fpath)

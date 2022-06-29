@@ -1,4 +1,4 @@
-#!/usr/bin/dash
+#!/usr/bin/env sh
 
 exe="$1"
 type "$exe" > /dev/null || exit 1

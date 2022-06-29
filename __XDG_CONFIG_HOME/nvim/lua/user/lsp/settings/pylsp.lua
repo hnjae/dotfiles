@@ -21,8 +21,8 @@ return {
           enabled = true,
           args = {
             "--disable",
-            "W0511,W0611,C0411"
-            -- "W0511,W0611,W0612,W0613,C0114,C0116,C0301,C0411"
+            -- "W0511,W0611,C0411"
+            "W0511,W0611,W0612,W0613,C0114,C0116,C0301,C0411"
             -- W0511: fix-me
             -- W0611: unused-import  -- checked in pyflakes
             -- W0612: unused-variable

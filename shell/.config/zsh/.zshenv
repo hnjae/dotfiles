@@ -21,18 +21,16 @@
 ################################################################################
 
 # Global
+export PYENV_ROOT="${XDG_DATA_HOME:-$HOME/.local/share}/pyenv"
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+# type pyenv > /dev/null && eval "$(pyenv init -)"
+# type pyenv-virtualenv-init > /dev/null && eval "$(pyenv virtualenv-init -)"
 
 # source "$PYENV_ROOT/completions/pyenv.zsh"
 
 # nvim virtual_env fix
 # if [[ -n $VIRTUAL_ENV && -e "${VIRTUAL_ENV}/bin/activate" ]]; then
 #   source "${VIRTUAL_ENV}/bin/activate"
-# fi
-#
-# if [ -f "/usr/bin/pyenv" ]; then
-# 	export PYENV_ROOT="$HOME/.local/share/pyenv"
-# 	eval "$(pyenv init -)"
-# 	eval "$(pyenv virtualenv-init -)"
 # fi
 
 
