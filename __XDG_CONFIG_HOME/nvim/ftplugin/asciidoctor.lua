@@ -44,6 +44,17 @@ if _IS_PLUGIN('auto-pairs') then
     ["{"] = "}"
   }
 end
+local status, nvim_autopairs = pcall(require, "nvim-autopairs")
+if status then
+  local rule = require('nvim-autopairs.rule')
+  nvim_autopairs.add_rules( {
+      rule("`+", "+`", "asciidoctor"),
+      rule("`+", "+`", "asciidoc"),
+      rule("``", "``", "asciidoctor"),
+      rule("``", "``", "asciidoc"),
+  })
+  nvim_autopairs.remove_rule('`')
+end
 -- {'```': '```', '`': '`', '"': '"', '{': '}', '''': '''', '(': ')', '''''''': '''''''', '[': ']', '"""': '"""'}
 
 -- require("asciidoc_wiki").buffer_setup()

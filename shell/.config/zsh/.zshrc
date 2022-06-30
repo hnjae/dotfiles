@@ -67,6 +67,8 @@ lfcd () {
 [ -r "${ZDOTDIR:-$HOME}/zsh-alias.zsh" ] && source "${ZDOTDIR:-$HOME}/zsh-alias.zsh"
 [ -r "${ZDOTDIR:-$HOME}/__local_config.zsh" ] && source "${ZDOTDIR:-$HOME}/__local_config.zsh"
 
-
-type pyenv > /dev/null && eval "$(pyenv init -)"
-type pyenv-virtualenv-init > /dev/null && eval "$(pyenv virtualenv-init -)"
+if [ type pyenv > /dev/null 2>&1 ]; then
+    eval "$(pyenv init -)"
+    type pyenv-virtualenv-init > /dev/null \
+        && eval "$(pyenv virtualenv-init -)"
+fi

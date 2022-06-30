@@ -20,6 +20,8 @@
 # uname -r 에서 arch 가 있으면 이라고 한정 지어도 될 것 같다.
 ################################################################################
 
+export HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/zsh_history"
+
 # Global
 export PYENV_ROOT="${XDG_DATA_HOME:-$HOME/.local/share}/pyenv"
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1

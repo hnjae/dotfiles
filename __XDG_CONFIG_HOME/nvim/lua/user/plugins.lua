@@ -248,6 +248,8 @@ return packer.startup({
     -- use { 'ratfactor/vviki' }
     -- use { 'shuntaka9576/preview-asciidoc.nvim' }
 
+    use {"akinsho/toggleterm.nvim", tag = 'v1.*'}
+
     if PACKER_BOOTSTRAP then
       packer.sync()
     end

@@ -10,6 +10,7 @@ function M.setup()
     'user.mapping.F1-help',
     'user.mapping.F3-telescope',
     'user.mapping.F2-C-w',
+    'user.mapping.C-',
   }
 
   for _, module_name in ipairs(module_list) do

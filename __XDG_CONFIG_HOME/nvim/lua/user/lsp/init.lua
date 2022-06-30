@@ -10,7 +10,6 @@ end
 
 local M = {}
 
-
 local is_lsp_active = function(lsp)
     local clients = vim.lsp.get_active_clients()
     if next(clients) == nil then
@@ -26,7 +25,7 @@ local is_lsp_active = function(lsp)
   return false
 end
 
-M.setup = function (lsps)
+M.setup = function (lsps, path)
   lsp_installer.setup {
     ensure_installed = lsps
   }
@@ -42,9 +41,9 @@ M.setup = function (lsps)
       on_attach = require("user.lsp.handlers").on_attach,
       capabilities = require("user.lsp.handlers").capabilities,
     }
-    local has_custom_opts, lsp_custom_opts = pcall(require, "user.lsp.settings." .. lsp)
+    local has_custom_opts, get_lsp_custom_opts = pcall(require, "user.lsp.settings." .. lsp)
     if has_custom_opts then
-      opts = vim.tbl_deep_extend("force", lsp_custom_opts, opts)
+      opts = vim.tbl_deep_extend("force", get_lsp_custom_opts(path), opts)
     end
 
 

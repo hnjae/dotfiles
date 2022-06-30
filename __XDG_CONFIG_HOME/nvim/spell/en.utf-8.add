@@ -1606,3 +1606,9 @@ SLB
 DSR
 GSLB
 sub/!
+Ansible
+ansible
+netstat
+tln
+ansiblels
+bashls
