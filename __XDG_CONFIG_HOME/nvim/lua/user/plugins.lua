@@ -54,6 +54,9 @@ packer.init {
       return require("packer.util").float { border = "rounded" }
     end,
   },
+  git = {
+    clone_timeout = 10,
+  },
   max_jobs = 6
 }
 
@@ -90,6 +93,15 @@ return packer.startup({
     use {
       'python-mode/python-mode',
       branch = 'develop',
+      ft = { 'python' },
+    }
+    use {
+      'psf/black',
+      ft = { 'python' },
+    }
+    use {
+      'averms/black-nvim',
+      branch = 'master',
       ft = { 'python' },
     }
     use {

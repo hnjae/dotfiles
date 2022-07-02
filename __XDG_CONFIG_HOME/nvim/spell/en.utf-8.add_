@@ -1572,6 +1572,7 @@ hass
 diy
 ToDo
 Todo
+eeeeee/!
 GPT
 luaeval
 stdlib
@@ -1595,13 +1596,16 @@ keylayout
 F18
 hammerspoon
 hs
+zsh/!
 TelescopePrompt
 autopairs
+vim/!
 BufWritePre
 venv
 SLB
 DSR
 GSLB
+sub/!
 Ansible
 ansible
 netstat

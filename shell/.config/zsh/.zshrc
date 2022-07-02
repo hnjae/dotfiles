@@ -67,8 +67,11 @@ lfcd () {
 [ -r "${ZDOTDIR:-$HOME}/zsh-alias.zsh" ] && source "${ZDOTDIR:-$HOME}/zsh-alias.zsh"
 [ -r "${ZDOTDIR:-$HOME}/__local_config.zsh" ] && source "${ZDOTDIR:-$HOME}/__local_config.zsh"
 
-if [ type pyenv > /dev/null 2>&1 ]; then
+if type pyenv > /dev/null 2>&1; then
     eval "$(pyenv init -)"
     type pyenv-virtualenv-init > /dev/null \
         && eval "$(pyenv virtualenv-init -)"
 fi
+
+# HISTFILE 은, zprofile, zenvironment 에 있으면 먹질 않음
+export HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/zsh_history"

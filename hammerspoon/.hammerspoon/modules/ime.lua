@@ -80,8 +80,8 @@ M.vimInput = function()
 end
 
 M.setup = function()
-  hs.hotkey.bind({}, 'F18', M.toggleIME)
-  hs.hotkey.bind({ 'control' }, 'F18', M.iterIMEGroups)
+  hs.hotkey.bind({}, 'F17', M.toggleIME)
+  hs.hotkey.bind({ 'control' }, 'F17', M.iterIMEGroups)
   hs.hotkey.bind({}, 'F19', M.vimEscape)
   hs.hotkey.bind({}, 'F20', M.vimInput)
 end
