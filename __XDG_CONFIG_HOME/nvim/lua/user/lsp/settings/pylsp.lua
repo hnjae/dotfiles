@@ -12,10 +12,21 @@ local gen_custom_opts = function(path)
           ---------------------------
           -- style check
           pycodestyle = {enabled = false},
-          -- various errors
-          pyflakes = {enabled = true},
+          -- missing-function-docstring 일 경우 ERROR 를 내뱉어서 사용X
+          pydocstyle = {
+            enabled = false,
+            -- ignroe = {},
+          },
+
+          -- linter to detect various error
+          -- var not use 를 warning 로 내뿜어서 (2022-07-02)
+          -- import but not use 를 warning 으로 내뿜음.
+          -- 따로 설정도 불가능 (2022-07-02)
+          pyflakes = {enabled = false},
+
           -- complexity check
           mccabe = {enabled = true},
+
 
           -- pycodestyle = { ignore = { } },,
           pylint = {
@@ -35,15 +46,20 @@ local gen_custom_opts = function(path)
               -- C0411: wrong-import-order
             },
           },
-          -- missing-function-docstring 일 경우 ERROR 를 내뱉어서 사용X
-          pydocstyle = { enabled = false },
           ---------------------------
+          --error checking?
+          ---------------------------
+          -- error checking (disabled by default 2022-07-02)
+          -- assigned not use, import not use 가 warning (2022-07-02)
+          -- 해당 기능은 pyright 에서 하면 될것 같음.
+          -- 이건 설정은 가능
+          flake8 = {enabled = false},
 
           ---------------------------
           -- rope
           ---------------------------
           -- rope_completion 은 그 내용을 보여주지 않는다. 2022-05-09
-          rope_completion = {enabled = false},
+          rope_completion = {enabled = true, eager=true},
 
           ---------------------------
           -- jedi

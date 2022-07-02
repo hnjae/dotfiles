@@ -12,17 +12,9 @@
 -- sort imports
 -- :CocCommand python.sortImports<CR>
 --------------------------------------------------------------------------
-
 -- TODO: REPL, rope, breakpoints <2021-11-16, Hyunjae Kim> "
+-- black, isort
 -- rope 는 coc로도 가능한듯! -> coc-pyright 에 있음.
-
-
--- vim.api.nvim_create_autocmd(
---   "FileType", {
---     pattern  = { "python" },
---     callback = _ft_python
---   }
--- )
 --------------------------------------------------------------------------
 
 -------------------------------------------------------------------------------
@@ -39,17 +31,27 @@ vim.opt_local.foldmethod = "indent"
 -- vim.opt_local.foldlevel = 9
 vim.opt_local.colorcolumn = vim.fn.join(vim.fn.range(80, 999), ",")
 
+------
+-- for test
+-----
+vim.cmd([[
+  setlocal complete+=t
+  setlocal formatoptions -=t
+]])
 
 -------------------------------------------------------------------------------
 local wk = require("which-key")
 
-wk.register({
-  s = { name = "+inferior-repl-process" },
-  v = { name = "+environments" },
-  -- h = { name = "+help" },
-  t = { name = "+test" },
-  }, {prefix = _LANG_PREFIX, buffer = 0}
-  )
+wk.register(
+  {
+    p = { name = "+pymode" },
+    -- s = { name = "+inferior-repl-process" },
+    -- v = { name = "+environments" },
+    -- h = { name = "+help" },
+    -- t = { name = "+test" },
+  },
+  { prefix = _LANG_PREFIX, buffer = 0 }
+)
 
 -------------------------------------------------------------------------------
 -- python-mode
@@ -58,7 +60,7 @@ wk.register({
 -- 지금으 될수도 있음.
 if _IS_PLUGIN('python-mode') then
   vim.g.pymode_rope_regenerate_on_write = 1
-  -- vim.g.pymode_warnings = 1
+  vim.g.pymode_warnings = 1
 
   -- Whitespace 기능은 다른 extension 으로 수행함.
   vim.g.pymode_trim_whitespaces = 0
@@ -125,28 +127,42 @@ if _IS_PLUGIN('python-mode') then
   --   ["[m"] =  "class/method", -- normal, visual, operator
   --   ["]m"] =  "class/method", -- normal, visual, operator
 
-  -- coc 기능 할용
-  vim.g.pymode_doc = 0
-  vim.g.pymode_doc_bind = ''
+  -- coc 도 비슷한 기능 있는듯.
+  vim.g.pymode_doc = 1
+  vim.g.pymode_doc_bind = 'sh'
+
+  ------------------------------------------------------------------------------
+  -- 2.6 Support Virtualenv
+  ------------------------------------------------------------------------------
 
   vim.g.pymode_virtualenv = 1
+  -- manually set virtualenv path
   -- vim.g.pymode_virtualenv_path =
 
+  ------------------------------------------------------------------------------
+  -- 2.7 Run code
+  ------------------------------------------------------------------------------
   vim.g.pymode_run = 1
-  vim.g.pymode_run_bind = _LANG_PREFIX .. 'cc'
+  vim.g.pymode_run_bind = _LANG_PREFIX .. 'pc'
 
+  ------------------------------------------------------------------------------
   -- 2.8 Breakpoints
+  ------------------------------------------------------------------------------
   vim.g.pymode_breakpoint = 1
-  vim.g.pymode_breakpoint_bind = _LANG_PREFIX .. 'db'
+  vim.g.pymode_breakpoint_bind = _LANG_PREFIX .. 'pb'
 
+  ------------------------------------------------------------------------------
   -- 3. Code Checking
+  ------------------------------------------------------------------------------
   vim.g.pymode_lint = 0
 
+  ------------------------------------------------------------------------------
   -- 4. Rope
+  ------------------------------------------------------------------------------
   -- TODO: rope 각종 에러떠서 비활성화 <2022-04-23, Hyunjae Kim> --
   -- 설정하기에 따라 사용은 가능할 것 같긴하다.
   vim.g.pymode_rope = 0
-  vim.g.pymode_rofe_refix = ''
+  vim.g.pymode_rofe_refix = 'sr'
 
   -- TODO: show_doc 활용할까? <2022-04-23, Hyunjae Kim> --
   vim.g.pymode_rope_show_doc_bint = ''
@@ -180,7 +196,10 @@ if _IS_PLUGIN('python-mode') then
   vim.g.pymode_rope_move_bind = ''
   vim.g.pymode_rope_change_signature_bind = ''
 
+  ------------------------------------------------------------------------------
   -- 5. syntax
+  ------------------------------------------------------------------------------
+  -- use neovim's feature
   vim.g.pymode_syntax = 0
   vim.g.pymode_syntax_all = 0
 
@@ -190,7 +209,7 @@ end
 -------------------------------------------------------------------------------
 -- lsp
 -------------------------------------------------------------------------------
-if _IS_PLUGIN('coc.nvim')then
+if _IS_PLUGIN('coc.nvim') then
   ----------------------------------------------------------------
   -- Formatting (==)
   ----------------------------------------------------------------
@@ -198,8 +217,39 @@ if _IS_PLUGIN('coc.nvim')then
   -- vim.api.nvim_buf_set_keymap(0, "x", "==", "<plug>(coc-format-selected)", {})
   vim.api.nvim_buf_set_keymap(0, "n", "==", "<plug>(coc-format)", {})
 else
-  require('user.lsp').setup({"pylsp", "pyright"})
+  -- require('user.lsp').setup({"pylsp", "pyright"})
+  -- require('user.lsp').setup({"pylsp", "pyright"})
+  require('user.lsp').setup({ "pylsp", "pyright" })
 end
+
+-- if _IS_PLUGIN('black') then
+-- vim.api.nvim_buf_set_keymap(0, "n", "==", "<cmd>Black<CR>", {})
+-- vim.api.nvim_buf_del_keymap(0, "n", "==")
+wk.register(
+  {
+    -- ["=="] = { name = "black", "" },
+    ["=="] = { '<cmd>Black<CR>',  "black" },
+  }, {
+    buffer = 0, noremap=false, mode = "n"
+  }
+)
+-- end
+
+-- if _IS_PLUGIN('black-nvim') then
+--   vim.cmd([[
+--     let g:black#settings = {
+--       \ 'fast': 1,
+--       \ 'line_length': 79
+--       \}
+--   ]])
+--   wk.register(
+--     {
+--       -- ["=="] = { name = "black", "" },
+--       ["=="] = { '<cmd>lua vim.diagnostic.goto_prev()<CR>', "warning", mode = "n" },
+--     }, {buffer=0}
+--   )
+--       -- nnoremap <buffer><silent> <c-q> <cmd>call Black()<cr>
+-- end
 
 ----------------------------------------------------------------
 vim.cmd([[TagbarOpen]])

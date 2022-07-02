@@ -57,17 +57,16 @@ M.on_attach = function(client, bufnr)
     ["gd"] = { '<cmd>lua vim.lsp.buf.definition()<CR>', 'lsp-definition' },
     ["gD"] = { '<cmd>lua vim.lsp.buf.declaration()<CR>', 'lsp-declaration' },
     ["K"] = { '<cmd>lua vim.lsp.buf.hover()<CR>', 'lsp-declaration' },
-    ["=="] = { '<cmd>lua vim.lsp.buf.formatting()<CR>', 'lsp-formatting' },
+    -- ["=="] = { '<cmd>lua vim.lsp.buf.formatting()<CR>', 'lsp-formatting' },
     --
     ["gli"] = { '<cmd>lua vim.lsp.buf.implementation()<CR>', 'lsp-implementation' },
     ["glt"] = { '<cmd>lua vim.lsp.buf.type_definition()<CR>', 'lsp-type-definition' },
     ["glr"] = { '<cmd>lua vim.lsp.buf.references()<CR>', 'lsp-references' },
     ["gls"] = { '<cmd>lua vim.lsp.buf.signature_help()<CR>', 'lsp-signature-help' },
     --
-    [_LANG_PREFIX .. "r"] = { name = '+refactor' },
-    [_LANG_PREFIX .. "rn"] = { '<cmd>lua vim.lsp.buf.rename()<CR>', 'lsp-rename' },
-    [_LANG_PREFIX .. "c"] = { name = '+code' },
-    [_LANG_PREFIX .. "ca"] = { '<cmd>lua vim.lsp.buf.code_action()<CR>', 'lsp-code-action' },
+    [_LANG_PREFIX .. "l"] = { name = '+lsp' },
+    [_LANG_PREFIX .. "ln"] = { '<cmd>lua vim.lsp.buf.rename()<CR>', 'lsp-rename' },
+    [_LANG_PREFIX .. "la"] = { '<cmd>lua vim.lsp.buf.code_action()<CR>', 'lsp-code-action' },
     --
     ["Zl"] = { '<cmd>lua _STOP_LSP()<CR>', 'stop-lsp' },
   }
@@ -75,7 +74,7 @@ M.on_attach = function(client, bufnr)
 
   local vkeymap = {
     ["=="] = { '<cmd>lua vim.lsp.buf.range_formatting()<CR>', 'lsp-formatting' },
-    [_LANG_PREFIX .. "ca"] = { '<cmd>lua vim.lsp.buf.range_code_action()<CR>', 'lsp-code-action' },
+    [_LANG_PREFIX .. "la"] = { '<cmd>lua vim.lsp.buf.range_code_action()<CR>', 'lsp-code-action' },
   }
   wk.register(vkeymap, { mode = "v", silent = true, noremap = true, buffer = bufnr })
   -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>lwa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)

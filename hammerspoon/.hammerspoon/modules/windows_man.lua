@@ -37,9 +37,9 @@ end
 
 hs.hotkey.bind({'option', 'command'}, 'left', function() windowSnap("left") end)
 hs.hotkey.bind({'option', 'command'}, 'right', function() windowSnap("right") end)
-hs.hotkey.bind({'option', 'command'}, 'up', function() windowSnap("up") end)
+hs.hotkey.bind({'option', 'command'}, 'up', function() windowSnap("full") end)
 hs.hotkey.bind({'option', 'command'}, 'down', function() windowSnap("down") end)
-hs.hotkey.bind({'option', 'command'}, 'f', function() windowSnap("full") end)
+-- hs.hotkey.bind({'option', 'command'}, 'f', function() windowSnap("full") end)
 
 -- hs.hotkey.bind({'F16'}, 'left', function() windowSnap("left") end)
 -- hs.hotkey.bind({'F16'}, 'right', function() windowSnap("right") end)
