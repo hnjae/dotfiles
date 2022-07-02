@@ -25,4 +25,4 @@ error.log
 ehthumbs.db
 Thumbs.db
 
-__XDG_CONFIG_HOME/nvim/lua/asciidoc-wiki
+asciidoc-wiki
