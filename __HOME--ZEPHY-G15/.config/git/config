@@ -4,3 +4,6 @@
 
 [color]
 	ui = true
+
+[diff]
+	tool = nvimdiff
