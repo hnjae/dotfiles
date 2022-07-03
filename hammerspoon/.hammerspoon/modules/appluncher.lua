@@ -72,7 +72,9 @@ function M:init()
     mode:exit()
   end)
 
-  -- hs.hotkey.bind({}, 'F17', mode:enter)
+  hs.hotkey.bind({'command'}, 'p', function()
+    hs.application.launchOrFocus('1Password')
+  end)
   -- self.mode = mode
 end
 
