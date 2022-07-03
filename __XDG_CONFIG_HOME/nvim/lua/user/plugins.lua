@@ -78,10 +78,17 @@ return packer.startup({
       'williamboman/nvim-lsp-installer',
       requires = { 'neovim/nvim-lspconfig' },
     }
-    use { 'nvim-lua/lsp-status.nvim' }
-    use { 'ray-x/lsp_signature.nvim' }
+    use {
+      'tamago324/nlsp-settings.nvim',
+      requires = { 'neovim/nvim-lspconfig', 'rcarriga/nvim-notify' },
+    }
+    -- use { 'nvim-lua/lsp-status.nvim' } -- lualine 에서 setup 해야함.
+    use { 'ray-x/lsp_signature.nvim' } -- it shows popup window.
+    use { 'onsails/lspkind.nvim' }
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-    use { 'mfussenegger/nvim-dap' }
+    use { 'puremourning/vimspector' }
+    -- use { 'mfussenegger/nvim-dap' }
+    -- use { 'mfussenegger/nvim-dap-python' }
 
     use { 'p00f/nvim-ts-rainbow', requires = {'nvim-treesitter/nvim-treesitter'} }
     use { 'nvim-treesitter/nvim-treesitter-context', requires = {'nvim-treesitter/nvim-treesitter'} }
@@ -100,8 +107,11 @@ return packer.startup({
       ft = { 'python' },
     }
     use {
-      'averms/black-nvim',
-      branch = 'master',
+      'brentyi/isort.vim',
+      ft = { 'python' },
+    }
+    use {
+      'tenfyzhong/autoflake.vim',
       ft = { 'python' },
     }
     use {
@@ -157,6 +167,7 @@ return packer.startup({
 
     --
     use { 'projekt0n/github-nvim-theme', opt = false }
+    use { 'rafamadriz/neon', opt = false }
     use { 'Mofiqul/vscode.nvim', opt = false }
     use { 'kvrohit/rasmus.nvim', opt = false }
     -- use { 'arnau/teaspoon.nvim', opt = false }

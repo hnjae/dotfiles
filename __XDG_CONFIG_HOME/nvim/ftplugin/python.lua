@@ -209,6 +209,25 @@ end
 -------------------------------------------------------------------------------
 -- lsp
 -------------------------------------------------------------------------------
+
+if _IS_PLUGIN('black') then
+  wk.register(
+    { ["=="] = { '<cmd>Black<CR>',  "black" }, },
+    { buffer = 0, noremap=false, mode = "n" }
+  )
+end
+if _IS_PLUGIN('isort.vim') then
+  local mapping = { [_LANG_PREFIX .. "ri"] = { '<cmd>Isort<CR>',  "isort" }, }
+  wk.register(mapping, { buffer = 0, noremap=false, mode = "n" })
+  wk.register(mapping, { buffer = 0, noremap=false, mode = "v" })
+end
+if _IS_PLUGIN('autoflake.vim') then
+  local mapping = { [_LANG_PREFIX .. "ra"] = { '<cmd>Autoflake --remove-all-unused-imports<CR>',  "autoflake-remove-imports" }, }
+  wk.register(mapping, { buffer = 0, noremap=false, mode = "n" })
+end
+local mapping = { [_LANG_PREFIX .. "rC"] = { '<cmd>Autoflake --remove-all-unused-imports<CR><cmd>Isort<CR><cmd>Black<CR>',  "clean" }, }
+wk.register(mapping, { buffer = 0, noremap=false, mode = "n" })
+
 if _IS_PLUGIN('coc.nvim') then
   ----------------------------------------------------------------
   -- Formatting (==)
@@ -219,21 +238,8 @@ if _IS_PLUGIN('coc.nvim') then
 else
   -- require('user.lsp').setup({"pylsp", "pyright"})
   -- require('user.lsp').setup({"pylsp", "pyright"})
-  require('user.lsp').setup({ "pylsp", "pyright" })
+  -- require('user.lsp').setup({ "pylsp", "pyright" })
 end
-
--- if _IS_PLUGIN('black') then
--- vim.api.nvim_buf_set_keymap(0, "n", "==", "<cmd>Black<CR>", {})
--- vim.api.nvim_buf_del_keymap(0, "n", "==")
-wk.register(
-  {
-    -- ["=="] = { name = "black", "" },
-    ["=="] = { '<cmd>Black<CR>',  "black" },
-  }, {
-    buffer = 0, noremap=false, mode = "n"
-  }
-)
--- end
 
 -- if _IS_PLUGIN('black-nvim') then
 --   vim.cmd([[
@@ -249,6 +255,16 @@ wk.register(
 --     }, {buffer=0}
 --   )
 --       -- nnoremap <buffer><silent> <c-q> <cmd>call Black()<cr>
+-- end
+
+-- local has_dap_python, dap_python require('dap-python')
+-- local dap_mapping = {
+--   tm = { dap_python.test_method, "test-method"},
+--   tc = { dap_python.test_class, "test-class"},
+--   -- s = { dap_python.test_method, "debug-selection"},
+-- }
+-- if has_dap_python then
+--   -- wk.register(dap_mapping, { buffer = 0, noremap=false, mode = "n", prefix = _LANG_PREFIX .. "d" })
 -- end
 
 ----------------------------------------------------------------

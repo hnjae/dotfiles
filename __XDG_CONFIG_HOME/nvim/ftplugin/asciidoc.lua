@@ -1,1 +1,1 @@
-../../../../../.config/nvim/ftplugin/asciidoctor.lua
+asciidoctor.lua

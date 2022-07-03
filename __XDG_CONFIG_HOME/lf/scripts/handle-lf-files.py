@@ -55,6 +55,8 @@ def main(command: str, argv: Optional[List[str]] = None) -> int:
                 new_path: Path = get_unique_name(cwd.joinpath(path.name))
                 new_path.symlink_to(os.path.abspath(path))
             elif command == "symlink-relative":
+                # TODO: cwd 혹은, path 가 symlink 안에 있으면 말썽이다.
+                # 애초에 받을 때 뭘로 받았는지 확인할 것. <2022-07-02, Hyunjae Kim>
                 new_path: Path = get_unique_name(cwd.joinpath(path.name))
                 new_path.symlink_to(os.path.relpath(path, start=cwd))
             # elif command == "mv-to-newfold" and argv and len(argv) == 1:

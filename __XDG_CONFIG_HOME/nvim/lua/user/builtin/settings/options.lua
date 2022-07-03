@@ -63,9 +63,10 @@ if vim.api.nvim_create_autocmd ~= nil then
       pattern = {"*"},
       callback  = function ()
         local file_path = vim.fn.expand('%:p')
-        if string.match(file_path, ".*/tmp/.*") ~= nil then
+        if file_path:match(".*/tmp/.*") ~= nil then
           return
         end
+        -- TODO: 홈폴더 바로 아래에 있는 파일도 삭제해도 되지 않을까? <2022-07-02, Hyunjae Kim>
 
         local filetype = vim.opt_local.filetype:get()
         if filetype ~= "" then
@@ -91,9 +92,21 @@ end
     - 아마도 override 하는 플러그인이 있을터
 --]]
 
+vim.api.nvim_create_autocmd(
+  {"BufRead", "BufNewFile", "BufNew"}, {
+    pattern = {"*"},
+    callback = function()
+      vim.opt_local.formatoptions:remove("r")
+      vim.opt_local.formatoptions:remove("o")
+    end
+  }
+)
+-- formatoptions 는 쉽게 override 된다.
+-- vim.opt.formatoptions:remove("r")
+-- vim.opt.formatoptions:remove("o")
 -- defaults: tcqj (2022-05-15)
 -- jcroql -- override by something?
-vim.opt.formatoptions = "tcqjprn"
+-- vim.opt.formatoptions = "tcqjpn"
 -- t: auto-wrap text using textwidth
 -- c: auto-wrap comments using textwidth, inserting the current comment leader automatically
 -- q: allow formatting of comments with gq

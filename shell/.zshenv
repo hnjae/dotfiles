@@ -5,4 +5,4 @@
 export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
 
 # -r: if file exists and is readable
-[ -r "$ZDOTDIR/.zshenv"  ] && source "$ZDOTDIR/.zshenv"
+[ -r "$ZDOTDIR/.zshenv" ] && source "$ZDOTDIR/.zshenv"

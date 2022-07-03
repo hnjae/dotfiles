@@ -1,6 +1,7 @@
-local gen_custom_opts = function(path)
+local M = {}
+
+M.opts = {
   -- default: 2022-06-30
-  return {
     -- ansible = {
     --   ansible = {
     --     path = "ansible"
@@ -16,7 +17,6 @@ local gen_custom_opts = function(path)
     --     interpreterPath = "python"
     --   }
     -- }
-  }
-end
+}
 
-return gen_custom_opts
+return M

@@ -1,9 +1,10 @@
 -- if packer_plugins['nvim-cmp'] and packer_plugins['nvim-cmp'].loaded then
 -- local cmp = require('cmp')
-local status_ok, cmp = pcall(require, "cmp")
-if status_ok then
+local has_cmp, cmp = pcall(require, "cmp")
+local has_lspkind, lspkind = pcall(require, "lspkind")
 
-  cmp.setup({
+if has_cmp then
+  local cmp_opts = {
     snippet = {
       -- REQUIRED - you must specify a snippet engine
       expand = function(args)
@@ -32,18 +33,20 @@ if status_ok then
         -- { name = 'snippy' }, -- For snippy users.
         -- { name = 'orgmode' },
       },
-      {
-        { name = 'nvim_lsp' },
-      },
-      {
-        { name = 'buffer' },
-      },
-      {
-        { name = 'path' }
-      }
-    )
-  })
+      { { name = 'nvim_lsp' }, },
+      { { name = 'buffer' }, },
+      { { name = 'path' } }
+    ),
+  }
+  if has_lspkind then
+    cmp_opts["formatting"] = {
+      format = lspkind.cmp_format({
+        mode = 'symbol',
+      })
+    }
+  end
 
+  cmp.setup(cmp_opts)
 
   -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
   cmp.setup.cmdline('/', {

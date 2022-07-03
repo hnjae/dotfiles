@@ -48,6 +48,12 @@ function M.setup()
     }
   )
   lsp.setup({"ansiblels"})
+  lsp.setup({"yamlls"})
+  lsp.setup({"jsonls"})
+
+  -- test
+  require('user.lsp').setup({ "pylsp", "pyright" })
+  -- require('user.lsp').setup({ "pylsp" })
 end
 
 return M

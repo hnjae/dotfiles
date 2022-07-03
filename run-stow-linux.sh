@@ -15,6 +15,7 @@ mkdir -p "$XDG_CONFIG_HOME"
 mkdir -p "$XDG_CONFIG_HOME/smplayer"
 mkdir -p "$XDG_DATA_HOME"
 mkdir -p "$HOME/.local/bin"
+mkdir -p "$HOME/.local/share/zsh"
 
 stow -nv --stow --target="$XDG_CONFIG_HOME" "__XDG_CONFIG_HOME"
 stow -nv --stow --target="$XDG_CONFIG_HOME/smplayer" "smplayer"

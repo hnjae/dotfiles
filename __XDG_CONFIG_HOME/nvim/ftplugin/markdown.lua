@@ -4,6 +4,8 @@ vim.opt_local.shiftwidth = 4
 vim.opt_local.expandtab = true
 vim.opt_local.colorcolumn = "0"
 vim.opt_local.conceallevel = 1
+vim.opt.formatoptions:remove("r")
+vim.opt.formatoptions:remove("o")
 
 if _IS_PLUGIN('tagbar') then
   vim.b.tagbar_show_data_type = 0

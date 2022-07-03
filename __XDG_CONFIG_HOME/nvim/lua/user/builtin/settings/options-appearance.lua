@@ -19,17 +19,17 @@ end
 -- vim.g.adwaita_disable_cursorline = true -- to disable cursorline
 -- vim.cmd([[silent! colorscheme adwaita]])
 ------------------------------------------------------------------
-vim.g.rasmus_italic_functions = true
-vim.g.rasmus_bold_functions = true
-vim.g.rasmus_variant = "dark"
-vim.cmd([[silent! colorscheme rasmus]])
+-- vim.g.rasmus_italic_functions = true
+-- vim.g.rasmus_bold_functions = true
+-- vim.g.rasmus_variant = "dark"
+-- vim.cmd([[silent! colorscheme rasmus]])
 
 ------------------------------------------------------------------
 -- vscode.nvim
 -- does not support htmlH1 (2022-06-21)
--- vim.g.vscode_style = "dark"
--- vim.g.vscode_italic_comment = 1
--- vim.cmd([[silent! colorscheme vscode]])
+vim.g.vscode_style = "dark"
+vim.g.vscode_italic_comment = 1
+vim.cmd([[silent! colorscheme vscode]])
 ------------------------------------------------------------------
 -- vim.g.material_style = "darker"
 -- vim.cmd([[silent! colorscheme material]])
@@ -64,4 +64,8 @@ vim.cmd([[silent! colorscheme rasmus]])
 -- -- Disable nvim-tree background color
 -- -- vim.g.vscode_disable_nvimtree_bg = true
 -- vim.cmd([[colorscheme vscode]])
---
+------------------------------------------------------------------
+-- neon
+vim.g.neon_style="dark"
+vim.g.neon_italic_keyword=true
+vim.cmd[[silent! colorscheme neon]]

@@ -4,6 +4,7 @@ __local_config*
 .zsh_history
 .zsh_sessions
 .p10k.zsh
+p10k.zsh
 tags
 
 ######################

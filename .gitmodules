@@ -1,5 +1,5 @@
 [submodule "shell/.config/zsh/.zprezto"]
-	path = shell/.config/zsh/.zprezto
+	path = shell/.local/share/zsh/zprezto
 	url = https://github.com/sorin-ionescu/prezto.git
 [submodule "window-manager/.local/share/rofi/rofi-themes"]
 	path = window-manager/.local/share/rofi/rofi-themes

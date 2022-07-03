@@ -1,13 +1,19 @@
-local gen_custom_opts = function(path)
-  return {
-    python = {
-      analysis = {
-        autoSearchPaths = true,
-        diagnosticMode = "workspace",
-        useLibraryCodeForTypes = true
-      }
+local M = {}
+
+M.unavailable = {
+  -- [vim.lsp.buf.range_formatting] = true
+  -- [vim.lsp.buf.range_formatting] = true
+  [vim.lsp.buf.formatting] = true
+}
+
+M.opts = {
+  python = {
+    analysis = {
+      autoSearchPaths = true,
+      diagnosticMode = "workspace",
+      useLibraryCodeForTypes = true
     }
   }
-end
+}
 
-return gen_custom_opts
+return M
