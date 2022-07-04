@@ -30,7 +30,6 @@ if packer_plugins and packer_plugins['coc.nvim'] and packer_plugins['coc.nvim'].
       -- rename symbol
       -- 이건 작동 안됨
       -- r = { ":call CocAction('rename')<CR>", "rename", mode = "n" },
-      n = { "<plug>(coc-rename)", "rename-val", mode = "n" },
 
       -- refactor: Open refactor window
       r = { "<plug>(coc-refactor)", "refactor-win", mode = "n" },

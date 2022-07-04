@@ -9,16 +9,47 @@
     "rust"
   ],
   "diagnostic.displayByAle": false,
+  "suggest.completionItemKindLabels": {
+    "method": "  ",
+    "function": "  ",
+    "variable": "[]",
+    "field": "  ",
+    "typeParameter": "<>",
+    "constant": "  ",
+    "class": " פּ ",
+    "interface": " 蘒",
+    "struct": "  ",
+    "event": "  ",
+    "operator": "  ",
+    "module": "  ",
+    "property": "  ",
+    "enum": " 練",
+    "reference": "  ",
+    "keyword": "  ",
+    "file": "  ",
+    "folder": " ﱮ ",
+    "color": "  ",
+    "unit": " 塞 ",
+    "snippet": "  ",
+    "text": "  ",
+    "constructor": "  ",
+    "value": "  ",
+    "enumMember": "  "
+  },
   ///////////////////////////////////////////////////////////////
   // coc-snippets
   ///////////////////////////////////////////////////////////////
-  "snippets.snipmate.enable": false,
-  "snippets.priority": 99,
-  "snippets.userSnippetsDirectory": "$HOME/.config/nvim/coc-snippets",
+  // "snippets.snipmate.enable": false,
+  // "snippets.priority": 99,
+  // "snippets.userSnippetsDirectory": "$HOME/.config/nvim/coc-snippets",
+
   ///////////////////////////////////////////////////////////////
   // coc-pyright
   ///////////////////////////////////////////////////////////////
   "pyright.enable": true,
+  "python.analysis.autoImportCompletions": true,
+  "python.analysis.autoSearchPaths": true,
+  // "python.analysis.diagnosticMode":
   "pyright.disableCompletion": false,
   "pyright.completion.snippetSupport": true,
   "pyright.organizeimports.provider": "isort",
@@ -30,8 +61,8 @@
   "python.linting.pylintEnabled": true,
   "python.linting.pylintArgs": [
     "--disable",
-    "W0511,C0301,C0411"
-    // "W0511,W0611,W0612,W0613,C0114,C0116,C0301,C0411"
+    "W0511,W0611,W0612,W0613,C0114,C0116,C0301,C0411"
+    // "W0511,C0301,C0411"
     // W0511: fix-me
     // W0611: unused-import
     // W0612: unused-variable
@@ -42,7 +73,10 @@
     // C0301: line-too-long
     // C0411: wrong-import-order
   ],
-  // "jedi.enable": false,
+  ///////////////////////////////////////////////////////////////
+  // coc-jedi
+  ///////////////////////////////////////////////////////////////
+  "jedi.enable": true,
 
   ///////////////////////////////////////////////////////////////
   // coc-sumneko-lua

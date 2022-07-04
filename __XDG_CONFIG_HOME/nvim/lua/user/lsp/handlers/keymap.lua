@@ -28,6 +28,10 @@ local Nkeymap = {
   [_LANG_PREFIX .. "l"] = { name = '+lsp' },
   [_LANG_PREFIX .. "ln"] = { vim.lsp.buf.rename, 'lsp-rename' },
   [_LANG_PREFIX .. "la"] = { vim.lsp.buf.code_action, 'lsp-code-action' },
+  [_LANG_PREFIX .. "lw"] = { name = '+lsp-workspace' },
+  [_LANG_PREFIX .. "lwa"] = { vim.lsp.buf.add_workspace_folder, 'lsp-add-workspace' },
+  [_LANG_PREFIX .. "lwr"] = { vim.lsp.buf.remove_workspace_folder, 'lsp-remove-workspace' },
+  [_LANG_PREFIX .. "lwl"] = { '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', 'lsp-list-workspace' },
   --
   ["Zl"] = {
     function()
@@ -54,11 +58,6 @@ local Telescope_keymap = {
   ["sw"] = { t_builtin.lsp_workspace_symbols, "workspace-symbols" },
   ["sW"] = { t_builtin.lsp_workspace_symbols, "all-workspace-symbols" },
 }
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>lwa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>lwr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>lwl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  --
 
 local register_keymap = function(client_name, keymap, opts)
   local has_lsp_settings, lsp_settings = pcall(require, 'user.lsp.settings.' .. client_name)
@@ -79,10 +78,14 @@ local register_keymap = function(client_name, keymap, opts)
 end
 
 local setup = function(client, bufnr)
-  -- TODO: 키맵이 버퍼에 설정되어 있으면, 재설정 금지  <2022-07-04, Hyunjae Kim>
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'ghd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+
+  if vim.b[bufnr]._is_lsp_keymap then
+    return
+  end
+  vim.b[bufnr]._is_lsp_keymap = true
 
   register_keymap(
     client.name,

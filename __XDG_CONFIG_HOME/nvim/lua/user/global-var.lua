@@ -1,5 +1,7 @@
 _LANG_PREFIX = 's'
--- vim.api.nvim_del_keymap("n", )
+-- vim.cmd([[map s <Nop>]])
+
+-- vim.api.nvim_del_keymap("n", "s")
 
 _OPEN_PREFIX = "<Leader>p"
 

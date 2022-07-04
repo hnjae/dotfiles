@@ -5,10 +5,17 @@ local packer_startup =  require('user.plugins')
 vim.cmd('source ' .. _PACKER_COMPILED)
 -- vim.cmd('source ' .. packer_startup.config.compile_path)
 require('user.global-var')
-require('user.lsp-setup').setup()
+
+
+if _IS_PLUGIN("coc.nvim") then
+  require('user.coc').setup()
+else
+  require('user.lsp-setup').setup()
+end
 require('user.set-plugin').setup()
-require('user.mapping').setup()
 require('user.autocmd').setup()
+require('user.mapping').setup()
+
 -- if vim.fn.has('mac') == 1 then
 --   require("mac-ime-switcher").setup()
 -- end

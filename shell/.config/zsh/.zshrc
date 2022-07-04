@@ -52,9 +52,9 @@ lfcd () {
 }
 
 if type pyenv > /dev/null 2>&1; then
-    eval "$(pyenv init -)"
-    type pyenv-virtualenv-init > /dev/null \
-        && eval "$(pyenv virtualenv-init -)"
+    eval "$(pyenv init - zsh)"
+    # type pyenv-virtualenv-init > /dev/null \
+    #     && eval "$(pyenv virtualenv-init -)"
 fi
 
 

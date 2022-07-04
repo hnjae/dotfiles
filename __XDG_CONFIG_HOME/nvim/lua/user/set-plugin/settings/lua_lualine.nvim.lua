@@ -18,6 +18,7 @@ if status_ok then
   local ime = {
     -- ime status
     function()
+
       local fcitx5_status = vim.fn.system("fcitx5-remote")
       if fcitx5_status == 1 then
         return "🇺🇸"
@@ -32,6 +33,22 @@ if status_ok then
     -- color = { fg = '#ffffff', gui = 'bold' },
   }
 
+  -- A = vim.fn.call(coc#status())
+  -- local coc = {
+  --   -- Lsp server name
+  --   function()
+  --     eturn vim.api.nvim_call_function("coc#status", {})
+	-- -- set statusline^=%{coc#status()}
+  --     -- return "stst"
+  --   end,
+  --   icon = '',
+  --   cond = function()
+  --     return _IS_PLUGIN("coc.nvim") ~= nil
+  --   end
+  --   -- color = { fg = '#ffffff', gui = 'bold' },
+  -- }
+
+  local has_lspconfig, _ = pcall(require, "lspconfig")
   local lsp = {
     -- Lsp server name .
     function()
@@ -70,10 +87,12 @@ if status_ok then
     end,
     icon = '',
     cond = function()
-      return next(vim.lsp.get_active_clients()) ~= nil
+      return has_lspconfig and (next(vim.lsp.get_active_clients()) ~= nil)
     end
     -- color = { fg = '#ffffff', gui = 'bold' },
   }
+
+
   -- local theme = {
   --   normal = {
   --     a = { fg = colors.white, bg = colors.black },
@@ -115,8 +134,8 @@ if status_ok then
       -- This feature is only available in neovim 0.7 and higher.
     },
     sections = {
-      lualine_a = { 'mode' },
-      lualine_b = { 'branch', 'diff', 'diagnostics' },
+      lualine_a = { 'mode',  },
+      lualine_b = { 'diagnostics', 'branch', 'diff'  },
       lualine_c = { 'filename' },
       lualine_x = { lsp, encoding_opt, fileformat_opt, "filetype" },
       lualine_y = { 'progress' },

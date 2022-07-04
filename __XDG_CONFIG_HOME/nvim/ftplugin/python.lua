@@ -13,7 +13,6 @@
 -- :CocCommand python.sortImports<CR>
 --------------------------------------------------------------------------
 -- TODO: REPL, rope, breakpoints <2021-11-16, Hyunjae Kim> "
--- black, isort
 -- rope 는 coc로도 가능한듯! -> coc-pyright 에 있음.
 --------------------------------------------------------------------------
 
@@ -210,23 +209,20 @@ end
 -- lsp
 -------------------------------------------------------------------------------
 
-if _IS_PLUGIN('black') then
-  wk.register(
-    { ["=="] = { '<cmd>Black<CR>',  "black" }, },
-    { buffer = 0, noremap=false, mode = "n" }
-  )
-end
-if _IS_PLUGIN('isort.vim') then
-  local mapping = { [_LANG_PREFIX .. "ri"] = { '<cmd>Isort<CR>',  "isort" }, }
-  wk.register(mapping, { buffer = 0, noremap=false, mode = "n" })
-  wk.register(mapping, { buffer = 0, noremap=false, mode = "v" })
-end
 if _IS_PLUGIN('autoflake.vim') then
-  local mapping = { [_LANG_PREFIX .. "ra"] = { '<cmd>Autoflake --remove-all-unused-imports<CR>',  "autoflake-remove-imports" }, }
-  wk.register(mapping, { buffer = 0, noremap=false, mode = "n" })
+  local mapping = { [_LANG_PREFIX .. "ra"] = { '<cmd>Autoflake --remove-all-unused-imports<CR>',
+    "autoflake-remove-imports" }, }
+  wk.register(mapping, { buffer = 0, noremap = false, mode = "n" })
 end
-local mapping = { [_LANG_PREFIX .. "rC"] = { '<cmd>Autoflake --remove-all-unused-imports<CR><cmd>Isort<CR><cmd>Black<CR>',  "clean" }, }
-wk.register(mapping, { buffer = 0, noremap=false, mode = "n" })
+
+local mapping = {
+  [_LANG_PREFIX .. "rC"] = {
+    '<cmd>Autoflake --remove-all-unused-imports<CR><cmd>Isort<CR><cmd>Black<CR>',
+    "clean"
+  },
+}
+
+wk.register(mapping, { buffer = 0, noremap = false, mode = "n" })
 
 if _IS_PLUGIN('coc.nvim') then
   ----------------------------------------------------------------
@@ -234,28 +230,27 @@ if _IS_PLUGIN('coc.nvim') then
   ----------------------------------------------------------------
   -- python lsp does not support "Format Selection"
   -- vim.api.nvim_buf_set_keymap(0, "x", "==", "<plug>(coc-format-selected)", {})
-  vim.api.nvim_buf_set_keymap(0, "n", "==", "<plug>(coc-format)", {})
+  local mapping = {
+    [_LANG_PREFIX .. "ri"] = { ":call CocAction('organizeImport')<CR>", "organize-import" },
+    -- ["=="] = { "<plug>(coc-format)", "coc-format" },
+  }
+  wk.register(mapping, { buffer = 0, noremap = false, mode = "n" })
 else
+  if _IS_PLUGIN('isort.vim') then
+    local mapping = { [_LANG_PREFIX .. "ri"] = { '<cmd>Isort<CR>', "isort" }, }
+    wk.register(mapping, { buffer = 0, noremap = false, mode = "n" })
+    wk.register(mapping, { buffer = 0, noremap = false, mode = "v" })
+  end
+  if _IS_PLUGIN('black') then
+    wk.register(
+      { ["=="] = { '<cmd>Black<CR>', "black" }, },
+      { buffer = 0, noremap = false, mode = "n" }
+    )
+  end
   -- require('user.lsp').setup({"pylsp", "pyright"})
   -- require('user.lsp').setup({"pylsp", "pyright"})
   -- require('user.lsp').setup({ "pylsp", "pyright" })
 end
-
--- if _IS_PLUGIN('black-nvim') then
---   vim.cmd([[
---     let g:black#settings = {
---       \ 'fast': 1,
---       \ 'line_length': 79
---       \}
---   ]])
---   wk.register(
---     {
---       -- ["=="] = { name = "black", "" },
---       ["=="] = { '<cmd>lua vim.diagnostic.goto_prev()<CR>', "warning", mode = "n" },
---     }, {buffer=0}
---   )
---       -- nnoremap <buffer><silent> <c-q> <cmd>call Black()<cr>
--- end
 
 -- local has_dap_python, dap_python require('dap-python')
 -- local dap_mapping = {
@@ -268,4 +263,4 @@ end
 -- end
 
 ----------------------------------------------------------------
--- vim.cmd([[TagbarOpen]])
+vim.cmd([[TagbarOpen]])

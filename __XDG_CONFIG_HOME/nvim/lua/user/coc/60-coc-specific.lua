@@ -30,7 +30,7 @@ if packer_plugins and packer_plugins['coc.nvim'] and packer_plugins['coc.nvim'].
       h = { ":<C-u>CocList --reverse cmdhistory<CR>", "cmdhistory", mode = "n" },
       -- Show commands.
       C = { ":<C-u>CocList --reverse commands<CR>", "commands", mode = "n" },
-      V = { ":<C-u>CocList --reverse vimcommands<CR>", "vimcommands", mode = "n" },
+      V = { ":<C-u>CocList --reverse dimcommands<CR>", "vimcommands", mode = "n" },
       -- Find symbol of current document.
       o = { ":<C-u>CocList --reverse outline<CR>", "outline", mode = "n" },
       -- Search workspace symbols.

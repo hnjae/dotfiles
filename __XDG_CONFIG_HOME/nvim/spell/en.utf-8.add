@@ -1631,3 +1631,6 @@ UUID
 datetime
 APIRouter
 submodule
+submodules
+funcobj
+classobj

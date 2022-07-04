@@ -73,16 +73,19 @@ return packer.startup({
     use 'wbthomason/packer.nvim'
 
     -- IDE
-    -- use { 'neoclide/coc.nvim', branch = 'release' }
-    use {
-      'williamboman/nvim-lsp-installer',
-      requires = { 'neovim/nvim-lspconfig' },
-    }
-    -- use {
-    --   'tamago324/nlsp-settings.nvim',
-    --   requires = { 'neovim/nvim-lspconfig', 'rcarriga/nvim-notify' },
-    -- }
-    if vim.fn.has('nvim-0.7') == 1 then
+    use { 'neoclide/coc.nvim', branch = 'release' }
+    -- Plug 'junegunn/fzf', {'dir': '~/.fzf','do': './install --all'}
+    use 'junegunn/fzf.vim'
+    use { 'antoinemadec/coc-fzf' }
+    if false and vim.fn.has('nvim-0.7') == 1 then
+      -- use {
+      --   'tamago324/nlsp-settings.nvim',
+      --   requires = { 'neovim/nvim-lspconfig', 'rcarriga/nvim-notify' },
+      -- }
+      use {
+        'williamboman/nvim-lsp-installer',
+        requires = { 'neovim/nvim-lspconfig' },
+      }
       use { 'hrsh7th/nvim-cmp' }
       use { 'hrsh7th/cmp-nvim-lsp' }
       use { 'hrsh7th/cmp-path' }
@@ -90,12 +93,12 @@ return packer.startup({
       use { 'hrsh7th/cmp-cmdline' }
       use { 'quangnguyen30192/cmp-nvim-ultisnips' }
       use { 'hrsh7th/cmp-nvim-lua' }
+
+      -- use { 'nvim-lua/lsp-status.nvim' } -- lualine 에서 setup 해야함.
+      use { 'ray-x/lsp_signature.nvim' } -- it shows popup window.
+      use { 'onsails/lspkind.nvim' } -- it shows kind icons
     end
 
-
-    -- use { 'nvim-lua/lsp-status.nvim' } -- lualine 에서 setup 해야함.
-    use { 'ray-x/lsp_signature.nvim' } -- it shows popup window.
-    use { 'onsails/lspkind.nvim' }
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
     use { 'puremourning/vimspector' }
     -- use { 'mfussenegger/nvim-dap' }
@@ -214,7 +217,6 @@ return packer.startup({
       'wfxr/minimap.vim',
       disable = true
     }
-    use 'junegunn/fzf.vim'
     use {
       'nvim-telescope/telescope.nvim',
       requires = {
