@@ -84,8 +84,6 @@ end
 
 ----------------------------------------------
 -- "sourcery",
--- "pylsp",
--- "pylsp"
 -- local servers = { "jsonls", "sumneko_lua",  }
 -- lsp_installer.setup {
 --   ensure_installed = servers

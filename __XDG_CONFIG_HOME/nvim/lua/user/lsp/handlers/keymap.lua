@@ -79,6 +79,7 @@ local register_keymap = function(client_name, keymap, opts)
 end
 
 local setup = function(client, bufnr)
+  -- TODO: 키맵이 버퍼에 설정되어 있으면, 재설정 금지  <2022-07-04, Hyunjae Kim>
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'ghd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)

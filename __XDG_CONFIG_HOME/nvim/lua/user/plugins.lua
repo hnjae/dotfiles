@@ -78,10 +78,21 @@ return packer.startup({
       'williamboman/nvim-lsp-installer',
       requires = { 'neovim/nvim-lspconfig' },
     }
-    use {
-      'tamago324/nlsp-settings.nvim',
-      requires = { 'neovim/nvim-lspconfig', 'rcarriga/nvim-notify' },
-    }
+    -- use {
+    --   'tamago324/nlsp-settings.nvim',
+    --   requires = { 'neovim/nvim-lspconfig', 'rcarriga/nvim-notify' },
+    -- }
+    if vim.fn.has('nvim-0.7') == 1 then
+      use { 'hrsh7th/nvim-cmp' }
+      use { 'hrsh7th/cmp-nvim-lsp' }
+      use { 'hrsh7th/cmp-path' }
+      use { 'hrsh7th/cmp-buffer' }
+      use { 'hrsh7th/cmp-cmdline' }
+      use { 'quangnguyen30192/cmp-nvim-ultisnips' }
+      use { 'hrsh7th/cmp-nvim-lua' }
+    end
+
+
     -- use { 'nvim-lua/lsp-status.nvim' } -- lualine 에서 setup 해야함.
     use { 'ray-x/lsp_signature.nvim' } -- it shows popup window.
     use { 'onsails/lspkind.nvim' }
@@ -149,15 +160,6 @@ return packer.startup({
     -- use 'jiangmiao/auto-pairs'
     -- use 'reedes/vim-lexical'
     use { "windwp/nvim-autopairs" }
-    if vim.fn.has('nvim-0.7') == 1 then
-      use { 'hrsh7th/nvim-cmp' }
-      use { 'hrsh7th/cmp-nvim-lsp' }
-      use { 'hrsh7th/cmp-path' }
-      use { 'hrsh7th/cmp-buffer' }
-      use { 'hrsh7th/cmp-cmdline' }
-      use { 'quangnguyen30192/cmp-nvim-ultisnips' }
-      use { 'hrsh7th/cmp-nvim-lua' }
-    end
 
     -- CODE DISPLAY
     -- ## color scheme

@@ -1,5 +1,6 @@
 -- if packer_plugins and packer_plugins['tagbar'] and packer_plugins['tagbar'].loaded then
 if _IS_PLUGIN('tagbar') then
+  -- vim.g.tagbar_ctags_bin = "/usr/local/Cellar/universal-ctags/p5.9.20220626.0/bin/ctags"
   -- vim.cmd([[
   -- autocmd filetype snippets let b:tagbar_ignore = 1
   -- ]])

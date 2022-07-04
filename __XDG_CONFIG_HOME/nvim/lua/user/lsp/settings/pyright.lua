@@ -7,13 +7,22 @@ M.unavailable = {
 }
 
 M.opts = {
-  python = {
-    analysis = {
-      autoSearchPaths = true,
-      diagnosticMode = "workspace",
-      useLibraryCodeForTypes = true
+  -- python = {
+  --   analysis = {
+  --     autoSearchPaths = true,
+  --     diagnosticMode = "workspace",
+  --     useLibraryCodeForTypes = true
+  --   }
+  -- }
+
+  settings = {
+    python = {
+      analysis = {
+        extraPaths = {"/Users/kakao/remote/infra-handler"}
+      }
     }
   }
+
 }
 
 return M
