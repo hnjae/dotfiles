@@ -12,6 +12,7 @@ function M.setup()
     'user.mapping.F2-C-w',
     'user.mapping.C-tilda',
     'user.mapping.vimspector',
+    'user.mapping.vim-easymotion',
   }
 
   for _, module_name in ipairs(module_list) do

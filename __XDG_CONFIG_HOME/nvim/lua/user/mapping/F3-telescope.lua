@@ -31,16 +31,21 @@ function M.setup()
 
   -- nnoremap <leader>fb <cmd>Telescope buffers<cr>
   wk.register({
+    ["ff"] = { t_builtin.find_files, "find-files" },
+    ["fg"] = { t_builtin.git_files, "git-files" },
+    ["fo"] = { t_builtin.oldfiles, "oldfiles" },
+    -- ["fl"] = { t_builtin.loclist, "loclist" },
+
     ["l"] = { t_builtin.current_buffer_fuzzy_find, "line" },
     ["b"] = { t_builtin.buffers, "buffers" },
 
-    ["o"] = { t_builtin.oldfiles, "oldfiles" },
     ["c"] = { t_builtin.commands, "commands" },
     ["t"] = { t_builtin.treesitter, "treesitter" },
-    ["f"] = { t_builtin.find_files, "find-files" },
     ["r"] = { t_builtin.registers, "registers" },
 
     ["g"] = { t_builtin.grep_string, "grep-string" },
+    ["<F6>"] = { t_builtin.grep_string, "grep-string" },
+    -- ["F3"] = { t_builtin.grep_string, "grep-string" },
     -- ["g"] = { t_builtin.live_grep, "live-grep" },
     --
     -- TODO: file_browser<2022-06-16, Hyunjae Kim>
@@ -78,7 +83,7 @@ function M.setup()
     ["so"] = { t_builtin.vim_options, "vim-options" },
     ---
     ["u"] = { t_ext.ultisnips.ultisnips, "ultisnips" },
-    [_TELESCOPE_PREFIX] = { "<cmd>Telescope<CR>", "ultisnips" },
+    [_TELESCOPE_PREFIX] = { "<cmd>Telescope<CR>", "builtins" },
   }, { prefix = _TELESCOPE_PREFIX, mode = "n" }
   )
 end

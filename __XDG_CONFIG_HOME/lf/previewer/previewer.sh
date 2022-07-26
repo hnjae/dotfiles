@@ -103,7 +103,7 @@ case "$mime_type" in
                 -- "$filepath"
         fi
         ;;
-    application/zip|application/x-bzip2|application/gzip|application/x-xz|application/zstd|application/x-archive)
+    application/zip|application/x-bzip2|application/gzip|application/x-xz|application/zstd|application/x-archive|application/x-rar|application/x-tar|application/x-7z-compressed)
         # 7z l -- "$filepath" | tac
         "$PREVIEWERS/7z-wrapper.sh" -- "$filepath"
         ;;

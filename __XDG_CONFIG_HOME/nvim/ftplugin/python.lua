@@ -230,14 +230,19 @@ if _IS_PLUGIN('coc.nvim') then
   ----------------------------------------------------------------
   -- python lsp does not support "Format Selection"
   -- vim.api.nvim_buf_set_keymap(0, "x", "==", "<plug>(coc-format-selected)", {})
-  local mapping = {
+  mapping = {
     [_LANG_PREFIX .. "ri"] = { ":call CocAction('organizeImport')<CR>", "organize-import" },
     -- ["=="] = { "<plug>(coc-format)", "coc-format" },
   }
   wk.register(mapping, { buffer = 0, noremap = false, mode = "n" })
+  -- vim.api.nvim_buf_del_user_command(0, "Black")
+  -- vim.api.nvim_buf_del_user_command(0, "Isort")
+  vim.api.nvim_buf_create_user_command(0, "Black", ":CocCommand editor.action.formatDocument", {})
+  vim.api.nvim_buf_create_user_command(0, "Isort", ":call CocAction('organizeImport')", {})
+
 else
   if _IS_PLUGIN('isort.vim') then
-    local mapping = { [_LANG_PREFIX .. "ri"] = { '<cmd>Isort<CR>', "isort" }, }
+    mapping = { [_LANG_PREFIX .. "ri"] = { '<cmd>Isort<CR>', "isort" }, }
     wk.register(mapping, { buffer = 0, noremap = false, mode = "n" })
     wk.register(mapping, { buffer = 0, noremap = false, mode = "v" })
   end
@@ -247,9 +252,6 @@ else
       { buffer = 0, noremap = false, mode = "n" }
     )
   end
-  -- require('user.lsp').setup({"pylsp", "pyright"})
-  -- require('user.lsp').setup({"pylsp", "pyright"})
-  -- require('user.lsp').setup({ "pylsp", "pyright" })
 end
 
 -- local has_dap_python, dap_python require('dap-python')

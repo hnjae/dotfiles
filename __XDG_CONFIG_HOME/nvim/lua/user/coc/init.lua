@@ -14,7 +14,7 @@ M.setup = function()
     "coc-ultisnips",
     "coc-yank",
     "coc-explorer",
-    "coc-spell-checker",
+    -- "coc-spell-checker",
     "coc-prettier",
     "coc-dictionary",
     -- "coc-word",

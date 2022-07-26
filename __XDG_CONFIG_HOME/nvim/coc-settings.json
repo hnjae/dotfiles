@@ -58,10 +58,12 @@
     "--line-length",
     "79"
   ],
+  "python.linting.enabled": true,
   "python.linting.pylintEnabled": true,
   "python.linting.pylintArgs": [
     "--disable",
-    "W0511,W0611,W0612,W0613,C0114,C0116,C0301,C0411"
+    "W0511,W0611,W0612,W0613,C0114,C0116,C0301,C0411",
+    "--load-plugins pylint_pydantic"
     // "W0511,C0301,C0411"
     // W0511: fix-me
     // W0611: unused-import
@@ -72,11 +74,47 @@
     // C0116: missing-function-docstring
     // C0301: line-too-long
     // C0411: wrong-import-order
+    // E0611: no-name-in-hodule (use pyright)
   ],
+  "python.linting.flake8Enabled": false,
+  "python.linting.flake8Args": [
+    "--max-line-length", "79",
+    "--ignore=E225,E226,E251,E261,E302,E303,E305,E501,F401,F821,F841"
+    // E225: = blanks
+    // E226: arithmetic blanks
+    // E251:
+    // E261: inline-blank
+    // E302: too-fiew-blank-linens
+    // E303: too-many-blank-lines
+    // E305: blank-line-related
+    // E501: line-to-long
+    // F401: unused-imports
+    // F821: undifiened-names
+    // F841: naver-used
+  ],
+  "python.linting.banditEnabled": true,
+  "python.linting.mypyEnabled": false,
+  // mypy imports 를 제대로 handling 하지 못함 (2022-07-23)
+  "python.linting.pytypeEnabled": true,
+  "python.linting.pycodestyleEnabled": false,
+  "python.linting.pycodestyleArgs": [
+    "--ignore=E225,E226,E251,E261,E302,E303,E305,E501"
+    // E225: = blanks
+    // E226: blanks
+    // E251
+    // E261: inline-blank
+    // E302: too-fiew-blank-linens
+    // E303: too-many-blank-lines
+    // E305: blank-line-related
+    // E501: line-to-long
+  ],
+  "python.linting.prospectorEnabled": true,
+  "python.linting.pydocstyleEnabled": true,
+  "python.linting.pylamaEnabled": true,
   ///////////////////////////////////////////////////////////////
   // coc-jedi
   ///////////////////////////////////////////////////////////////
-  "jedi.enable": true,
+  "jedi.enable": false,
 
   ///////////////////////////////////////////////////////////////
   // coc-sumneko-lua
