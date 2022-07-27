@@ -38,9 +38,11 @@ fi
 ########
 # export PATH="$HOME/.local/bin:$PATH"
 # # export MANPATH="$HOME/.local/man:$MANPATH"
-fpath=("${XDG_DATA_HOME:-$HOME/.local/share}/zsh/site-functions" $fpath)
 [ -d /usr/local/share/zsh/site-functions ] \
     && fpath=("/usr/local/share/zsh/site-functions" $fpath)
+[ -d /usr/local/share/zsh/completions ] \
+    && fpath=("/usr/local/share/zsh/zsh-completions" $fpath)
+fpath=("${XDG_DATA_HOME:-$HOME/.local/share}/zsh/site-functions" $fpath)
 
 # Ensure path arrays do not contain duplicates.
 typeset -gU cdpath fpath mailpath path
