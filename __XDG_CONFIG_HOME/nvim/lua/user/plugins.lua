@@ -259,6 +259,7 @@ return packer.startup({
     -- use { 'neoclide/coc.nvim', branch = 'release' }
     use { 'scrooloose/nerdtree', requires = { 'tiagofumo/vim-nerdtree-syntax-highlight' } }
     use { 'tpope/vim-vinegar' }
+    use 'tpope/vim-fugitive'
 
     -- netrw를 못쓰게 됨
     -- use {

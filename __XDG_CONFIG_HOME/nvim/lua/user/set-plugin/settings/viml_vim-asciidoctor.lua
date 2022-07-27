@@ -5,7 +5,7 @@ if _IS_PLUGIN('vim-asciidoctor') then
 
   vim.g.asciidoctor_folding = 1
   vim.g.asciidoctor_fenced_languages = {
-    'html', 'python', 'java', 'sh', 'ruby'
+    'html', 'python', 'java', 'sh', 'ruby', "dockerfile"
   }
   vim.g.asciidoctor_syntax_conceal = 1
 

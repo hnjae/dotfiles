@@ -10,7 +10,6 @@
 -- remove unused imports (with autoflake for e.g.)
 -- nmap sri
 -- sort imports
--- :CocCommand python.sortImports<CR>
 --------------------------------------------------------------------------
 -- TODO: REPL, rope, breakpoints <2021-11-16, Hyunjae Kim> "
 -- rope 는 coc로도 가능한듯! -> coc-pyright 에 있음.
@@ -33,17 +32,17 @@ vim.opt_local.colorcolumn = vim.fn.join(vim.fn.range(80, 999), ",")
 ------
 -- for test
 -----
-vim.cmd([[
-  setlocal complete+=t
-  setlocal formatoptions -=t
-]])
+-- vim.cmd([[
+--   setlocal complete+=t
+--   setlocal formatoptions -=t
+-- ]])
 
 -------------------------------------------------------------------------------
 local wk = require("which-key")
 
 wk.register(
   {
-    p = { name = "+pymode" },
+    p = { pame = "+pymode" },
     -- s = { name = "+inferior-repl-process" },
     -- v = { name = "+environments" },
     -- h = { name = "+help" },
@@ -89,8 +88,8 @@ if _IS_PLUGIN('python-mode') then
       ["[C"] = "class/function", -- normal, operator
       ["]C"] = "class/function", -- normal, operator
     }
-    wk.register(nomap, { mode = "n", buffer = 0 })
-    wk.register(nomap, { mode = "o", buffer = 0 })
+    wk.register(nomap, { mode = "n", buffer = 0, silent = true })
+    wk.register(nomap, { mode = "o", buffer = 0, silent = true })
     local nxomap = {
       ["[["] = "class/function", -- normal, visual, operator
       ["]]"] = "class/function", -- normal, visual, operator
@@ -101,9 +100,9 @@ if _IS_PLUGIN('python-mode') then
       -- ["[m"] =  "class/method", -- normal, visual, operator
       -- ["]m"] =  "class/method", -- normal, visual, operator
     }
-    wk.register(nxomap, { mode = "n", buffer = 0 })
-    wk.register(nxomap, { mode = "x", buffer = 0 })
-    wk.register(nxomap, { mode = "o", buffer = 0 })
+    wk.register(nxomap, { mode = "n", buffer = 0, silent = true })
+    wk.register(nxomap, { mode = "x", buffer = 0, silent = true })
+    wk.register(nxomap, { mode = "o", buffer = 0, silent = true })
     local omap = {
       ["aC"] = "class",
       ["iC"] = "inner=class",
@@ -114,21 +113,18 @@ if _IS_PLUGIN('python-mode') then
       ["C"]  = "class",
       ["M"]  = "function/method",
     }
-    wk.register(omap, { mode = "o", buffer = 0 })
+    wk.register(omap, { mode = "o", buffer = 0, silent = true })
     local xmap = {
       -- help 에는 operator 이라고 적혀있지만 visual 도 있는 맵핑
       ["aM"] = "function/method",
       ["iM"] = "inner-function/method",
     }
-    wk.register(xmap, { mode = "x", buffer = 0 })
+    wk.register(xmap, { mode = "x", buffer = 0, silent = true })
   end
-
-  --   ["[m"] =  "class/method", -- normal, visual, operator
-  --   ["]m"] =  "class/method", -- normal, visual, operator
 
   -- coc 도 비슷한 기능 있는듯.
   vim.g.pymode_doc = 1
-  vim.g.pymode_doc_bind = 'sh'
+  vim.g.pymode_doc_bind = 'sph'
 
   ------------------------------------------------------------------------------
   -- 2.6 Support Virtualenv
@@ -147,7 +143,7 @@ if _IS_PLUGIN('python-mode') then
   ------------------------------------------------------------------------------
   -- 2.8 Breakpoints
   ------------------------------------------------------------------------------
-  vim.g.pymode_breakpoint = 1
+  vim.g.pymode_breakpoint = 0
   vim.g.pymode_breakpoint_bind = _LANG_PREFIX .. 'pb'
 
   ------------------------------------------------------------------------------
@@ -201,8 +197,6 @@ if _IS_PLUGIN('python-mode') then
   -- use neovim's feature
   vim.g.pymode_syntax = 0
   vim.g.pymode_syntax_all = 0
-
-
 end
 
 -------------------------------------------------------------------------------
@@ -247,9 +241,7 @@ else
       { buffer = 0, noremap = false, mode = "n" }
     )
   end
-  -- require('user.lsp').setup({"pylsp", "pyright"})
-  -- require('user.lsp').setup({"pylsp", "pyright"})
-  -- require('user.lsp').setup({ "pylsp", "pyright" })
+  require('user.lsp').setup({"pylsp", "pyright"})
 end
 
 -- local has_dap_python, dap_python require('dap-python')

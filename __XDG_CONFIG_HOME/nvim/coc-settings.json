@@ -5,9 +5,7 @@
   ///////////////////////////////////////////////////////////////
   // https://github.com/weirongxu/coc-explorer/issues/41
   "coc.preferences.jumpCommand": "tab drop",
-  "coc.preferences.formatOnSaveFiletypes": [
-    "rust"
-  ],
+  "coc.preferences.formatOnSaveFiletypes": ["rust"],
   "diagnostic.displayByAle": false,
   "suggest.completionItemKindLabels": {
     "method": "  ",
@@ -47,6 +45,7 @@
   // coc-pyright
   ///////////////////////////////////////////////////////////////
   "pyright.enable": true,
+  "python.pythonPath": "/usr/local/bin/python3",
   "python.analysis.autoImportCompletions": true,
   "python.analysis.autoSearchPaths": true,
   // "python.analysis.diagnosticMode":
@@ -54,10 +53,7 @@
   "pyright.completion.snippetSupport": true,
   "pyright.organizeimports.provider": "isort",
   "python.formatting.provider": "black",
-  "python.formatting.blackArgs": [
-    "--line-length",
-    "79"
-  ],
+  "python.formatting.blackArgs": ["--line-length", "79"],
   "python.linting.pylintEnabled": true,
   "python.linting.pylintArgs": [
     "--disable",
@@ -76,7 +72,7 @@
   ///////////////////////////////////////////////////////////////
   // coc-jedi
   ///////////////////////////////////////////////////////////////
-  "jedi.enable": true,
+  "jedi.enable": false,
 
   ///////////////////////////////////////////////////////////////
   // coc-sumneko-lua
