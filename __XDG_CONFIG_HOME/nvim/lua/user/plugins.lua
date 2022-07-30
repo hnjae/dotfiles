@@ -295,7 +295,9 @@ vim.api.nvim_set_keymap('', 'T', "<cmd>lua require'hop'.hint_char1({ direction =
     -- use { 'ratfactor/vviki' }
     -- use { 'shuntaka9576/preview-asciidoc.nvim' }
 
-    use {"akinsho/toggleterm.nvim", tag = 'v1.*'}
+    if vim.fn.has('nvim-0.7') == 1 then
+      use {"akinsho/toggleterm.nvim", tag = 'v2.*'}
+    end
 
     if PACKER_BOOTSTRAP then
       packer.sync()

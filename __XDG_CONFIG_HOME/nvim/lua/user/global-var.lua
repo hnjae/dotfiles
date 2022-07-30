@@ -10,7 +10,7 @@ _EDIT_PREFIX = "<Leader>ne"
 _WINDOW_PREFIX = "<Leader>nw"
 _SIDEBAR_PREFIX = "<Leader>s"
 
-_SEARCH_PREFIX = "<Leader>/"
+-- _SEARCH_PREFIX = "<Leader>/"
 
 _IS_PLUGIN = function (plugin)
   return packer_plugins and packer_plugins[plugin]

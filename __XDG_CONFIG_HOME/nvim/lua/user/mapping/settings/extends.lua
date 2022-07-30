@@ -1,10 +1,15 @@
 local M = {}
 
 function M.setup()
+  -- make Esc work at terminal. Not working at which-key
+  vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", {})
+
+
   local status_wk, wk = pcall(require, "which-key")
   if not status_wk then
     return
   end
+
 
   if _IS_PLUGIN('tagbar') then
 
