@@ -1,5 +1,6 @@
 local M = {}
 
+_SEARCH_PREFIX = "<leader>s"
 
 function M.setup()
   local status_wk, wk = pcall(require, "which-key")

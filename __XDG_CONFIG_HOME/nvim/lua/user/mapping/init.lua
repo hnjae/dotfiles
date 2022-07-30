@@ -1,33 +1,23 @@
 local M = {}
 
+
 function M.setup()
-  local module_list = {
-    'user.mapping.extend-defaults',
-    'user.mapping.sidebar',
-    'user.mapping.l_-fzf',
-    'user.mapping.telescope',
-    'user.mapping.open',
-    'user.mapping.F1-help',
-    'user.mapping.F3-telescope',
-    'user.mapping.F2-C-w',
-    'user.mapping.C-tilda',
-    'user.mapping.vimspector',
-    'user.mapping.vim-easymotion',
-  }
+  local setting_files = vim.fn.sort(
+    vim.fn.globpath(vim.fn.stdpath('config'), 'lua/user/mapping/settings/*.lua', false, true)
+  )
 
-  for _, module_name in ipairs(module_list) do
-    local status, module = pcall(require, module_name)
-    if status then
-      module.setup()
-    end
+  for _, setting in pairs(setting_files) do
+    local module_name = "user.mapping.settings." .. setting:match("[^/\\]+$"):sub(1,-5)
+    local module = require(module_name)
+    module.setup()
   end
-end
 
-  -- require('user.mapping.extend-defaults').setup()
-  -- -- require('user.mapping.edit-tab-window-sidebar')
-  -- require('leader_s-sidebar.lua').setup()
-  -- require('user.mapping.search').setup()
-  -- require('user.mapping.telescope').setup()
-  -- require('user.mapping.f1-help').setup()
+  -- for _, module_name in ipairs(module_list) do
+  --   local status, module = pcall(require, module_name)
+  --   if status then
+  --     module.setup()
+  --   end
+  -- end
+end
 
 return M

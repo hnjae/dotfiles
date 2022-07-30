@@ -7,8 +7,11 @@ function M.setup()
     return
   end
 
+  -- vim.cmd([[
+  -- map "<F2>" "<C-w>w"
+  -- ]])
   wk.register({
-    ["<C-`>"] = { "<cmd>ToggleTerm<CR>", "open-terminal" },
+    ["<F4>"] = { "<C-w>w", "C-w" },
   })
 end
 

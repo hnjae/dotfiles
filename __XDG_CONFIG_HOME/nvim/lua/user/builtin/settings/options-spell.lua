@@ -1,6 +1,6 @@
 -- help: https://soooprmx.com/vim의-autocmd-이벤트들/
 
-vim.opt.spell = true
+vim.opt.spell = false
 vim.opt.spelllang = "en,en_us,cjk"
 vim.opt.spellcapcheck = ""
 
@@ -11,13 +11,18 @@ vim.opt.spellcapcheck = ""
 --   }
 -- )
 
-local is_nospell_ft = function(ft)
+local is_spell_ft = function(ft)
+  if ft == nil or ft == "" then
+    return false
+  end
+
   for _, ft_nospell in pairs({"CHADTree", "help", "tagbar", "fstab", "checkhealth"})  do
     if ft == ft_nospell then
-      return true
+      return false
     end
   end
-  return false
+
+  return true
 end
 
 if vim.api.nvim_create_autocmd ~= nil then
@@ -25,8 +30,8 @@ if vim.api.nvim_create_autocmd ~= nil then
     {"BufRead", "BufNewFile", "BufNew"}, {
       pattern = {"*"},
       callback  = function ()
-        if is_nospell_ft(vim.opt_local.filetype:get()) then
-          vim.opt_local.spell = false
+        if is_spell_ft(vim.opt_local.filetype:get()) then
+          vim.opt_local.spell = true
         end
       end
     }

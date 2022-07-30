@@ -1,0 +1,4 @@
+{
+  "sumneko-lua.enable": true,
+  "sumneko-lua.enableNvimLuaDev": true
+}
