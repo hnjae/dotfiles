@@ -11,12 +11,19 @@ vim.opt.spellcapcheck = ""
 --   }
 -- )
 
+    -- au TermOpen * setlocal list
+
 local is_nospell_ft = function(ft)
+  if ft == nil or ft == "" then
+    return true
+  end
+
   for _, ft_nospell in pairs({"CHADTree", "help", "tagbar", "fstab", "checkhealth"})  do
     if ft == ft_nospell then
       return true
     end
   end
+
   return false
 end
 

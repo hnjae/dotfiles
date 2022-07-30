@@ -3,6 +3,15 @@ vim.g.mapleader = " "
 -- ,: reverse t/T/f/F
 vim.g.maplocalleader = ','
 
+-- vim.api.nvim_set_keymap("n", "", "s", {})
+
+-- disable s/S, use c/0C instead
+vim.cmd([[
+nmap s ""
+nmap S ""
+]])
+-- vim.api.nvim_set_keymap("n", "<Leader>a", "s", {})
+
 -------------------------------------------------------------------
 vim.api.nvim_set_keymap("n", "<Leader>a", "za", {})
 vim.api.nvim_set_keymap("n", "<Leader><Leader>", "za", {})

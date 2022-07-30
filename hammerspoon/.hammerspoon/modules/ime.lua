@@ -10,8 +10,8 @@ local imeGroups = {
   {
     name = "Colemak Mod-DH - 세벌식",
     latin ="io.github.colemakmods.keyboardlayout.colemakdh.colemakdhansi",
-    -- nonLatin = "com.apple.inputmethod.Korean.3SetKorean",
-    nonLatin = "org.youknowone.inputmethod.Gureum.han3final",
+    nonLatin = "com.apple.inputmethod.Korean.3SetKorean",
+    -- nonLatin = "org.youknowone.inputmethod.Gureum.han3final",
     layout = "Colemak DH ANSI",
   },
   {
@@ -44,6 +44,7 @@ M.toggleIME = function()
     nextInput = imeGroups[currentGroupId].latin
   end
 
+  -- TODO: 맥에서 한영 전환시, 바로 입력이 안되는 문제 있음. 한 키 누르고 지우고 반복할 것. <2022-07-29, Hyunjae Kim>
   hs.keycodes.currentSourceID(nextInput)
 end
 
