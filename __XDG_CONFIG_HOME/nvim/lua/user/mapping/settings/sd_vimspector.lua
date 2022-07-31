@@ -32,8 +32,8 @@
 local M = {}
 
 local has_wk, wk = pcall(require, "which-key")
+local _DAP_PREFIX = "sd"
 
-local _DAP_PREFIX = _LANG_PREFIX .. "d"
 local mapping = {
   c = {"<Plug>VimspectorContinue", "continue"},
   s = {"<Plug>VimspectorStop", "stop"},

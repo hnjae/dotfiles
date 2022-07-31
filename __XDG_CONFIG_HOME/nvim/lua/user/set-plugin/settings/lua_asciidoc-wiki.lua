@@ -1,6 +1,12 @@
-local status_ok, wiki = pcall(require, "asciidoc-wiki")
+local M = {}
 
-if status_ok then
+local status_wk, wiki = pcall(require, "asciidoc-wiki")
+
+M.setup = function ()
+  if not status_wk then
+    return
+  end
+
   wiki.setup{
     wiki_list = {
       {
@@ -14,3 +20,5 @@ if status_ok then
     key_mappings = { prefix = "s" },
   }
 end
+
+return M

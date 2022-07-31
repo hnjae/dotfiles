@@ -2,8 +2,14 @@
 -- coc-list
 ----------------------------------------------------------------
 
-if packer_plugins and packer_plugins['coc.nvim'] and packer_plugins['coc.nvim'].loaded then
-  local wk = require("which-key")
+local M = {}
+
+local status_wk, wk = pcall(require, "which-key")
+
+M.setup = function ()
+  if not status_wk or not _IS_PLUGIN("coc.nvim") then
+    return
+  end
   ----------------------------------------------------------------
   wk.register({ ["<leader>c"] = { name = "+coc" } })
   ----------------------------------------------------------------
@@ -73,7 +79,7 @@ if packer_plugins and packer_plugins['coc.nvim'] and packer_plugins['coc.nvim'].
   nnoremap <Leader>cii :<C-u>CocInfo<CR>
   nnoremap <Leader>cil :<C-u>CocOpenLog<CR>
 
-  nnoremap <leader>ol <Plug>(coc-openlink)
+  " nnoremap <leader>ol <Plug>(coc-openlink)
   ]])
   ----------------------------------------------------------------
   -- ce
@@ -94,3 +100,5 @@ if packer_plugins and packer_plugins['coc.nvim'] and packer_plugins['coc.nvim'].
     ["<leader>cR"] = { ":<C-u>CocRestart<CR>", "restart", mode = "n" },
   })
 end
+
+return M

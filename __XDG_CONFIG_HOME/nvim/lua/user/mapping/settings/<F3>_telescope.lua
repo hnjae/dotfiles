@@ -40,7 +40,7 @@ function M.setup()
     ["b"] = { t_builtin.buffers, "buffers" },
 
     ["c"] = { t_builtin.commands, "commands" },
-    ["t"] = { t_builtin.treesitter, "treesitter" },
+    ["s"] = { t_builtin.treesitter, "symbols-treesitter" },
     ["r"] = { t_builtin.registers, "registers" },
 
     ["g"] = { t_builtin.grep_string, "grep-string" },
@@ -59,7 +59,6 @@ function M.setup()
     -- ["a"] = { ":<C-u>Ag", "Ag" },
     -- ["r"] = { ":<C-u>Rg", "Rg" },
     ----
-    -- ["b"] = { ":<C-u>Buffers<CR>", "buffer" },
     -- ["l"] = { ":<C-u>BLines<CR>", "buffer-line" },
     -- ["L"] = { ":<C-u>Lines<CR>", "line" },
     -- ["m"] = { ":<C-u>Marks<CR>", "marks" },
@@ -68,6 +67,8 @@ function M.setup()
     -- ["p"] = { ":<C-u>Maps<CR>", "maps" },
     -- ["f"] = { ":<C-u>Filetypes<CR>", "filetypes" },
     ["q"] = { t_builtin.quickfix, "quickfix" },
+
+    ----------------------------------------------------------------------
     ["h"] = { name = "+history" },
     -- ["hh"] = { ":<C-u>History<CR>", "history" },
     -- ["h:"] = { ":<C-u>History:<CR>", "history-:" },
@@ -76,12 +77,13 @@ function M.setup()
     ["hq"] = { t_builtin.quickfixhistory, "quickfixhistory" },
     ["hk"] = { t_builtin.keymaps, "keymaps" },
 
-    ["s"] = { name = "+set" },
-    -- ["sr"] = { t_builtin.reloader "reload-lua-module" },
-    ["sf"] = { t_builtin.filetypes, "filetypes" },
-    ["sh"] = { t_builtin.highlights, "highlights" },
-    ["so"] = { t_builtin.vim_options, "vim-options" },
-    ---
+    ----------------------------------------------------------------------
+    -- ["s"] = { name = "+set" },
+    -- ["sf"] = { t_builtin.filetypes, "filetypes" },
+    -- ["sh"] = { t_builtin.highlights, "highlights" },
+    -- ["so"] = { t_builtin.vim_options, "vim-options" },
+    ----------------------------------------------------------------------
+
     ["u"] = { t_ext.ultisnips.ultisnips, "ultisnips" },
     [_TELESCOPE_PREFIX] = { "<cmd>Telescope<CR>", "builtins" },
   }, { prefix = _TELESCOPE_PREFIX, mode = "n" }
@@ -89,3 +91,16 @@ function M.setup()
 end
 
 return M
+
+-- local Telescope_keymap = {
+--   name = "+telescope-lsp",
+--   ["r"] = { t_builtin.lsp_references, "references" },
+--   ["w"] = { t_builtin.diagnostics, "diagnostics" },
+--   ["i"] = { t_builtin.lsp_implementations, "implementation" },
+--   ["d"] = { t_builtin.lsp_definitions, "definition" },
+--   ["t"] = { t_builtin.lsp_type_definitions, "type-definition" },
+--   ["s"] = { name = "+symbols" },
+--   ["sd"] = { t_builtin.lsp_document_symbols, "document-symbols" },
+--   ["sw"] = { t_builtin.lsp_workspace_symbols, "workspace-symbols" },
+--   ["sW"] = { t_builtin.lsp_workspace_symbols, "all-workspace-symbols" },
+-- }

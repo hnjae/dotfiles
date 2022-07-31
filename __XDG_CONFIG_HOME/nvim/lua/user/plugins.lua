@@ -237,21 +237,15 @@ return packer.startup({
     use { 'numToStr/Comment.nvim' }
     use { 'ntpeters/vim-better-whitespace' }
     -- use { 'easymotion/vim-easymotion' }
-    use { 'phaazon/hop.nvim', branch = 'v2', config = function()
-          require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
-          vim.api.nvim_set_keymap('', 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", {})
-vim.api.nvim_set_keymap('', 'F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", {})
-vim.api.nvim_set_keymap('', 't', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<cr>", {})
-vim.api.nvim_set_keymap('', 'T', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<cr>", {})
-    end
-    }
+    use { 'phaazon/hop.nvim', branch = 'v2' }
     -- use 'svermeulen/vim-easyclip'
 
     -- code-runner
     -- use { 'CRAG666/code_runner.nvim' }
     -- use { 'pianocomposer321/yabs.nvim' }
+
     -- repl/repl-like
-    use { 'michaelb/sniprun' }
+    use { 'michaelb/sniprun', run = 'bash ./install.sh'}
     -- run test
     use { 'vim-test/vim-test' }
 
@@ -279,6 +273,7 @@ vim.api.nvim_set_keymap('', 'T', "<cmd>lua require'hop'.hint_char1({ direction =
     use { 'tpope/vim-vinegar' }
     use { 'tpope/vim-repeat' }
     use { 'tpope/vim-fugitive' }
+    -- use { 'tpope/vim-scriptease' }
 
     -- netrw를 못쓰게 됨
     -- use {

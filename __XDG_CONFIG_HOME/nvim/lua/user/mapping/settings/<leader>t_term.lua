@@ -1,13 +1,11 @@
 local M = {}
 
+local status_wk, wk = pcall(require, "which-key")
 
 function M.setup()
-  local status_wk, wk = pcall(require, "which-key")
   if not status_wk then
     return
   end
-
-
 
 
   -- vim.cmd([[

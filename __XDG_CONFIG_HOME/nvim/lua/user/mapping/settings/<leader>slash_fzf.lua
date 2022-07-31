@@ -1,6 +1,6 @@
 local M = {}
 
-_SEARCH_PREFIX = "<leader>s"
+_SEARCH_PREFIX = "<leader>/"
 
 function M.setup()
   local status_wk, wk = pcall(require, "which-key")
@@ -14,9 +14,8 @@ function M.setup()
     ["a"] = { ":<C-u>Ag", "Ag" },
     ["r"] = { ":<C-u>Rg", "Rg" },
     ----
-    ["b"] = { ":<C-u>Buffers<CR>", "buffer" },
     ["l"] = { ":<C-u>BLines<CR>", "buffer-line" },
-    ["L"] = { ":<C-u>Lines<CR>", "line" },
+    -- ["L"] = { ":<C-u>Lines<CR>", "line" },
     ["m"] = { ":<C-u>Marks<CR>", "marks" },
     ["w"] = { ":<C-u>Windows<CR>", "windows" },
     ["s"] = { ":<C-u>Snippets<CR>", "snippets" },

@@ -1,6 +1,11 @@
-local status_ok, which_key = pcall(require, "which-key")
+local M = {}
+local status_wk, which_key = pcall(require, "which-key")
 
-if status_ok then
+M.setup = function()
+  if not status_wk then
+    return
+  end
+
   which_key.setup({
     -- plugins = {
     --   marks = true, -- shows a list of your marks on ' and `
@@ -73,3 +78,5 @@ if status_ok then
     -- },
   })
 end
+
+return M

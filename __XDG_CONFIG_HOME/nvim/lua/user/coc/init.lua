@@ -1,6 +1,11 @@
 local M = {}
 M.setup = function()
+  if not _IS_PLUGIN("coc.nvim") then
+    return
+  end
+
   require("user.coc.override-defaults").setup()
+  require("user.coc.command").setup()
 
   ----------------------------------------------------------------------
   -- 아래 리스트는, 설치 안되있으면 자동으로 설치됨
@@ -77,7 +82,6 @@ M.setup = function()
   --   )
   -- end
 
-  require("user.coc.keymap").setup()
 end
 
 return M

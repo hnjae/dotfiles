@@ -1,5 +1,10 @@
-local status_ok, toggleterm = pcall(require, "toggleterm")
+local M = {}
+local status_toggleterm, toggleterm = pcall(require, "toggleterm")
 
-if status_ok then
+M.setup = function ()
+  if not status_toggleterm then
+    return
+  end
   toggleterm.setup()
 end
+return M

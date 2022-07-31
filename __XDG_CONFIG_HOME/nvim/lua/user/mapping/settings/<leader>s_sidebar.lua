@@ -1,5 +1,6 @@
 local M = {}
 
+local _SIDEBAR_PREFIX="<leader>s"
 function M.setup()
   local status_wk, wk = pcall(require, "which-key")
   if not status_wk then

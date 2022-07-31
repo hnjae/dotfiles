@@ -5,21 +5,16 @@ vim.g.maplocalleader = ','
 
 -- vim.api.nvim_set_keymap("n", "", "s", {})
 
--- disable s/S, use c/0C instead
-vim.cmd([[
-nmap s ""
-nmap S ""
-]])
 -- vim.api.nvim_set_keymap("n", "<Leader>a", "s", {})
 
 -------------------------------------------------------------------
-vim.api.nvim_set_keymap("n", "<Leader>a", "za", {})
+-- vim.api.nvim_set_keymap("n", "<Leader>a", "za", {})
 vim.api.nvim_set_keymap("n", "<Leader><Leader>", "za", {})
 
 vim.api.nvim_set_keymap("n", "ZA", "<cmd>wa<CR>", {})
 
-vim.api.nvim_set_keymap("", "gb", "<cmd>bnext<CR>", {})
-vim.api.nvim_set_keymap("", "gB", "<cmd>bprevious<CR>", {})
+-- vim.api.nvim_set_keymap("", "gb", "<cmd>bnext<CR>", {})
+-- vim.api.nvim_set_keymap("", "gB", "<cmd>bprevious<CR>", {})
 
 -- nnoremap <space> za
 -- nnoremap <F2> gt

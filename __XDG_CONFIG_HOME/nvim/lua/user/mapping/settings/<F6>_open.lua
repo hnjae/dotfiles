@@ -1,5 +1,7 @@
 local M = { }
 
+local _OPEN_PREFIX = "<F6>"
+
 function M.setup()
   local status_wk, wk = pcall(require, "which-key")
   if not status_wk then

@@ -1,6 +1,12 @@
-local status_ok, telescope = pcall(require, "telescope")
+local M = {}
 
-if status_ok then
+local status_telescope, telescope = pcall(require, "telescope")
+
+M.setup = function()
+  if not status_telescope then
+    return
+  end
+
   local config = {
     defaults = {
       -- vimgrep_arguments = {
@@ -45,3 +51,5 @@ if status_ok then
   telescope.load_extension('fzf')
   telescope.load_extension('ultisnips')
 end
+
+return M
