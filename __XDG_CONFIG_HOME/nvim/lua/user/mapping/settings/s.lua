@@ -1,6 +1,6 @@
 local M = {}
 
-local _PREFIX = "s"
+_LANG_PREFIX = "s"
 local status_wk, wk = pcall(require, "which-key")
 
 local coc_setup = function()
@@ -15,7 +15,7 @@ local coc_setup = function()
   ]])
 
   wk.register({
-    [_PREFIX] = {
+    [_LANG_PREFIX] = {
       c = { name = "+execute" },
       d = { name = "+debug" },
       -- difine bottom
@@ -44,7 +44,7 @@ local coc_setup = function()
       -- 화면 갱신해야함.
       s = { ":CocSearch ", "search", mode = "n" },
     }
-  }, {prefix = _PREFIX})
+  }, {prefix = _LANG_PREFIX})
 
   wk.register({
     ["l"] = { name = "+lsp" },
@@ -54,7 +54,7 @@ local coc_setup = function()
 -- [_LANG_PREFIX .. "lwa"] = { vim.lsp.buf.add_workspace_folder, 'lsp-add-workspace' },
 -- [_LANG_PREFIX .. "lwr"] = { vim.lsp.buf.remove_workspace_folder, 'lsp-remove-workspace' },
 -- [_LANG_PREFIX .. "lwl"] = { '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', 'lsp-list-workspace' },
-  }, {prefix = _PREFIX})
+  }, {prefix = _LANG_PREFIX})
   local Vkeymap = {
     -- [_LANG_PREFIX .. "la"] = { vim.lsp.buf.range_code_action, 'lsp-code-action' },
   }
@@ -76,12 +76,12 @@ local coc_setup = function()
     ["x"] = {"<cmd>CocFzfList extensions<CR>", "extensions"},
   }
   wk.register(
-    {[_PREFIX .. "c"] = {name = "+coclist"}}
+    {[_LANG_PREFIX .. "c"] = {name = "+coclist"}}
   )
   wk.register(
     coclist_keymap,
     {
-      mode="n", silent = true, prefix = _PREFIX .. "c"
+      mode="n", silent = true, prefix = _LANG_PREFIX .. "c"
     }
   )
 end
@@ -98,7 +98,7 @@ M.setup = function()
   -- ]])
 
   wk.register({
-    [_PREFIX] = { name="+lang" }
+    [_LANG_PREFIX] = { name="+lang" }
   })
 
   -- wk.register({[_PREFIX] = {name = "+lang", mode="n"}})

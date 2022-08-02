@@ -6,6 +6,7 @@ __local_config*
 .p10k.zsh
 p10k.zsh
 tags
+fish_variables
 
 ######################
 __pycache__
