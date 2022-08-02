@@ -4,6 +4,7 @@
 # -r: if file exists and is readable
 # -f: if file exists and is a regular file
 
+# type starship > /dev/null && eval "$(starship init zsh)"
 # "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 # "/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 # "/usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh"
@@ -18,7 +19,6 @@ source_array=(
     "/usr/local/Cellar/fzf/0.30.0/shell/key-bindings.zsh"
     # "/usr/share/lf/lfcd.sh"
     "${XDG_DATA_HOME:-$HOME/.local/share}/zsh/p10k.zsh"
-    # "${ZDOTDIR:-$HOME}/.p10k.zsh"
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 )
 for source_file in ${source_array[@]}; do
@@ -34,6 +34,8 @@ type fuck > /dev/null && eval "$(thefuck --alias)"
 
 # auto completion for pip
 type pip > /dev/null && eval "$(pip completion --zsh)" && compctl -K _pip_completion pip3
+
+type zoxide > /dev/null && eval "$(zoxide init zsh)"
 
 lfcd () {
     tmp="$(mktemp)"
