@@ -2,12 +2,10 @@
 # Bt https://githib.com/mofiqul
 
 font:
-  size: 11
+  size: 14
   normal:
-    family: Monospace
+    family: MesloLGS NF
     style: Regular
-
-background_opacity: 1
 
 window:
   padding:
@@ -21,6 +19,9 @@ window:
   dimensions:
     columns: 90
     lines: 30
+
+  dynamic_title: true
+  gtk_theme_variant: dark
 
 schemes:
   codelight: &light
@@ -82,4 +83,4 @@ schemes:
       cyan:    '#56b6c2'
       white:   '#d4d4d4'
 
-colors: *dark
+# colors: *dark
