@@ -38,6 +38,7 @@ local new_template = function()
     "date    : " .. dateiso,
     "lastmod : " .. dateiso,
     "isCJKLanguage : true",
+    "draft   : true",
     "---",
     "",
     "= " .. filename,

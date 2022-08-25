@@ -1,0 +1,15 @@
+#!/usr/bin/sh
+
+if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
+    # echo "Wayland Support Not YET! (2021-11-04)"
+    # spotify --enable-features=UseOzonePlatform --ozone-platform=wayland "$1"
+    # spotify --enable-features=UseOzonePlatform --ozone-platform=wayland "$1"
+    # nohup spotify "$1" < /dev/null > /dev/null 2>&1 &
+    exec spotify --enable-features=UseOzonePlatform --ozone-platform=wayland
+elif [ "$GDK_SCALE" ]; then
+    # nohup spotify --force-device-scale-factor="$GDK_SCALE" "$1" < /dev/null > /dev/null 2>&1 &
+    exec spotify --force-device-scale-factor="$GDK_SCALE"
+else
+    # nohup spotify "$1" < /dev/null > /dev/null 2>&1 &
+    exec spotify
+fi

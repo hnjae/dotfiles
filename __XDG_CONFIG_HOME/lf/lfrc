@@ -78,19 +78,19 @@ cmd open $~/.config/lf/opener/opener.sh "$f"
 # 	lf -remote "send $id load"
 # 	lf -remote "send $id unselect"
 # }}
-cmd bulkrename :${{clear; ~/.config/lf/scripts/bulkrename.py "$fx"}}; load
+cmd bulkrename :${{clear; ~/.config/lf/scripts/bulkrename.py "$fx"}}; reload
 map C bulkrename
 cmd test %~/.config/lf/scripts/test.sh
 ################################################################################
 map d
 map dd cut
-cmd trash :${{clear; ~/.config/lf/scripts/handle-files-ask.py trash "$fx"}}; load
+cmd trash :${{clear; ~/.config/lf/scripts/handle-files-ask.py trash "$fx"}}; reload
 map dt trash
-cmd delete :${{clear; ~/.config/lf/scripts/handle-files-ask.py delete "$fx"}}; load
+cmd delete :${{clear; ~/.config/lf/scripts/handle-files-ask.py delete "$fx"}}; reload
 map dD delete
-cmd rmdir :${{clear; ~/.config/lf/scripts/handle-files-ask.py rmdir "$fx"}}; load
+cmd rmdir :${{clear; ~/.config/lf/scripts/handle-files-ask.py rmdir "$fx"}}; reload
 map dR rmdir
-cmd trace :${{clear; ~/.config/lf/scripts/handle-files-ask.py "trash-with-trace-file" "$fx"}}; load
+cmd trace :${{clear; ~/.config/lf/scripts/handle-files-ask.py "trash-with-trace-file" "$fx"}}; reload
 map dT trace
 
 map y
@@ -123,6 +123,7 @@ map zz push :filter<enter>
 
 
 map R reload
+map @ load
 ################################################################################
 
 
@@ -156,6 +157,7 @@ map zr
 map or set reverse!
 
 # cmd touch :%{{~/.config/lf/scripts/concatenate-arg.sh touch "$@"}}; load
+
 cmd touch %{{~/.config/lf/scripts/concatenate-arg.sh touch "$@"}}
 map xt push :touch<space>
 cmd mkdir %{{~/.config/lf/scripts/concatenate-arg.sh mkdir "$@"}}

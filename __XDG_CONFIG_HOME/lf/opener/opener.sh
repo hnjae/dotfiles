@@ -22,15 +22,21 @@ EDITOR="${EDITOR:-nvim}"
 mime_type="$(file --brief --mime-type "$abspath")"
 case "$mime_type" in
     text/*|application/json|application/x-wine-extension-ini)
-        type "$EDITOR" > /dev/null 2>&1 < /dev/null && "$EDITOR" "$path" && exit 0
+        type "$EDITOR" > /dev/null 2>&1 < /dev/null && "$EDITOR" "$path" &
         # type vim > /dev/null 2>&1 < /dev/null && vim "$path" && exit 0
         # type vi > /dev/null 2>&1 < /dev/null && vi "$path" && exit 0
         ;;
     inode/x-empty)
         echo "MIME: $mime_type"
         ;;
+    application/zip)
+        # GDK_SCALE=1 mcomix "$path" > /dev/null 2>&1 < /dev/null && exit 0
+        GDK_SCALE=1 mcomix "$path" > /dev/null 2>&1 < /dev/null &
+        ;;
     *)
         # type handlr > /dev/null 2>&1 < /dev/null && handlr open "$path" && exit 0
-        type "$OPENER" > /dev/null 2>&1 < /dev/null && "$OPENER" "$path" && exit 0
+        type "$OPENER" > /dev/null 2>&1 < /dev/null && "$OPENER" "$path" &
         ;;
 esac
+
+exit 0

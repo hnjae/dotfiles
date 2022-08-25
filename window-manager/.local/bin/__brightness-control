@@ -237,6 +237,7 @@ def main():
     order = sys.argv[1]
     monitors: List[Monitor] = get_active_monitors()
 
+    val: int = 80
     if order in {"set", "min", "max"}:
         if order == "set":
             val = int(sys.argv[2])

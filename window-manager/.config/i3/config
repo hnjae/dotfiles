@@ -11,7 +11,9 @@
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 # DO NOT TOUCH THIS FILE
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-# vim:ft=conf
+# autostart.conf
+###################################################################################
+
 # Polkit Agent
 exec_always lxqt-policykit-agent
 
@@ -20,15 +22,45 @@ exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=pkcs11
 exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=secrets
 exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=ssh
 
-# geoclue: not show in gnome, xdg-desktop-portal 의존 패키지
+# geoclue: xdg-desktop-portal 의존 패키지
 exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
 # exec --no-startup-id /usr/lib/pam_kwallet_init
 
 # exec --no-startup-id ~/.config/sway/scripts/xdg-desktop-portal-fix.sh
-
 exec --no-startup-id pcmanfm-qt -d
+
+# vim:ft=conf
+# gtk-theme.conf
+################################################################################
+
+# vim:ft=conf
+set $gnome-schema org.gnome.desktop.interface
+# exec_always {
+#     gsettings set $gnome-schema gtk-theme 'Adwaita-dark'
+#     gsettings set $gnome-schema icon-theme 'Newaita-dark'
+#     gsettings set $gnome-schema cursor-theme 'Fluent-dark-cursors'
+#     gsettings set $gnome-schema color-scheme 'prefer-dark'
+#     gsettings set $gnome-schema document-font-name 'Sans Serif 11'
+#     gsettings set $gnome-schema font-name 'Sans Serif 10'
+#     gsettings set $gnome-schema monospace-font-name 'Monospace 10'
+#     gsettings set org.gnome.desktop.wm.preferences button-layout 'appmenu'
+# }
+exec_always gsettings set $gnome-schema gtk-theme 'Adwaita-dark'
+exec_always gsettings set $gnome-schema icon-theme 'Newaita-dark'
+exec_always gsettings set $gnome-schema cursor-theme 'Fluent-dark-cursors'
+exec_always gsettings set $gnome-schema color-scheme 'prefer-dark'
+exec_always gsettings set $gnome-schema document-font-name 'Sans Serif 11'
+exec_always gsettings set $gnome-schema font-name 'Sans Serif 10'
+exec_always gsettings set $gnome-schema monospace-font-name 'Monospace 10'
+exec_always gsettings set org.gnome.desktop.wm.preferences button-layout 'appmenu'
+# i3-autostart-fast
+################################################################################
+
 exec_always --no-startup-id gsettings set org.gnome.desktop.interface scaling-factor 2
 exec_always --no-startup-id gsettings set org.gnome.settings-daemon.plugins.xsettings overrides "{'Gdk/WindowScalingFactor': <2>}"
+# variables
+################################################################################
+
 # vim:ft=conf
 ### Variables
 
@@ -49,7 +81,6 @@ set $term konsole
 # set $term termite
 # set $term $TERMINAL
 
-
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -59,18 +90,20 @@ set $menu "albert show"
 set $clipboard clipmenu -font "Monospace 26" -hide-scrollbar
 set $emoji rofi -show emoji -modi emoji
 set $launcher "$HOME/.config/rofi/launchers/ribbon/launcher.sh"
-set $classic_menu "_rofi-launcher.sh"
-set $powermenu "_rofi-power-menu.sh"
-set $setting_menu "_rofi-settings.sh"
-set $program-relauncher "_program-relauncher.sh"
-set $volume_control "_volume-control.sh"
-# = Theme =
+set $classic_menu "__rofi-launcher.sh"
+set $powermenu "__rofi-power-menu.sh"
+set $setting_menu "__rofi-settings.sh"
+set $program-relauncher "__program-relauncher.sh"
+# set $volume_control "__volume-control.sh"
+# Theme
+################################################################################
+
 # font pango:FontAwesome, monospace 10
 font pango:Pretendard 11
 
 # gaps inner 3
 # smart_borders on : deprecated?? 2021-11-04 Not Listed in docs
-hide_edge_borders --i3 none
+# hide_edge_borders --i3 none # i3 에서는 작동하지 않음.
 
 # gruvbox theme (by me)
 client.focused           #458588 #458588 #FFFFFF
@@ -93,50 +126,39 @@ set $border_px 3
 # default_border normal|none|pixel <px>
 # default_border pixel $border_px
 default_border pixel $border_px
-#
-# = Status Bar =
-#
-#   bar {
-#   	output primary
-#    	position top
-#     	font pango:Font Awesome 5 Brands, Monospace 12
-#
-#    	status_command i3status-rs
-#
-#    	colors {
-#    		separator #666666
-#    		background #282828
-#
-#    		statusline #dddddd
-#    		focused_workspace #15539e #15539e #ffffff
-#    		active_workspace #353535 #353535 #ffffff
-#    		inactive_workspace #353535 #353535 #888888
-#    		urgent_workspace #a43b34 #a43b34 #ffffff
-#   	}
-#
-#   	tray_output primary
-#   }
-#   bar {
-#   	output nonprimary
-#    	position top
-#     	font pango:Font Awesome 5 Brands, Monospace 12
-#
-#    	colors {
-#    		separator #666666
-#    		background #282828
-#
-#    		statusline #dddddd
-#    		focused_workspace #15539e #15539e #ffffff
-#    		active_workspace #353535 #353535 #ffffff
-#    		inactive_workspace #353535 #353535 #888888
-#    		urgent_workspace #a43b34 #a43b34 #ffffff
-#   	}
-#
-#   	tray_output primary
-# = Basic Key bindings =
-#
+# workspace-and-settings
+################################################################################
+
+focus_follows_mouse no
+# = Workspaces =
+set $ws1 "1 "
+set $ws2 "2 "
+set $ws3 "3 "
+set $ws4 "4 "
+set $ws5 "5 "
+set $ws6 "6 "
+set $ws7 "7 "
+set $ws8 "8 "
+set $ws9 "9 "
+set $ws10 "10 "
+#
+# nf-fa 먼저 쓰자
+#nf-mdi 쓰면 아이콘이 숫자 보다 먼저 뜨는 이상 현상 뜰때가 있음.특히: ﮷
+# putting workspace on specific screens
+workspace $ws1 output primary
+workspace $ws2 output primary
+workspace $ws3 output primary
+workspace $ws4 output primary
+workspace $ws5 output primary
+workspace $ws6 output primary
+workspace $ws7 output primary
+# workspace $ws8 output primary
+# workspace $ws9 output eDP-1
+# workspace $ws10 output DP-2.1
+# Basic Key Bindings
+################################################################################
+
 # == Basics ==
-#
 # Kill focused window
 bindsym $mod+Shift+q kill
 bindsym Control+Shift+q kill
@@ -306,7 +328,7 @@ bindsym $mod+Shift+grave move scratchpad
 # TODO: 1password 는 전체 scratchpad 에서 안보이게 설정하기, regex 잘 건드리면 될 것 같다.  <2021-08-19, Hyunjae Kim> #
 bindsym $mod+grave scratchpad show
 # bindsym $mod+p [instance="1password"] scratchpad show
-bindsym $mod+p exec --no-startup-id "_show-1password.sh"
+bindsym $mod+p exec --no-startup-id "__show-1password.sh"
 # bindsym $mod+o exec --no-startup-id qalc
 # n
 #
@@ -315,14 +337,19 @@ bindsym $mod+Control+l move workspace to output left
 bindsym $mod+Control+h move workspace to output right
 
 #
-#
-#
-bindsym $mod+w exec "/home/hyunjae/.config/sway/scripts/i3helper.sh" "moveToParent"
-# = Advanced Key bindings =
+bindsym $mod+w exec "__i3helper" "moveToParent"
+# Advanced Key bindings
+################################################################################
+
+# Programs
+set $volume_control "__volume-control.sh"
+
+
 # == App Launcher ==
 # Start a terminal
 bindsym $mod+Return exec $term
 bindsym $mod+n exec termite -e nvim
+
 
 # Shortcut (Mod4: Super)
 set $app_launcher1 Mod4+Mod1
@@ -353,7 +380,7 @@ bindsym Mod1+Hangul+s exec $setting_menu
 # bindsym $mod+c exec $clipboard
 # bindsym $mod+n exec $emoji
 # bindsym $mod+o exec $rofi_pulse sink
-set $rofi_pulse_sink "_rofi-pulse.sh sink"
+set $rofi_pulse_sink "__rofi-pulse.sh sink"
 bindsym $mod+o exec $rofi_pulse_sink
 
 # == XF86 Keys (/usr/share/X11/xkb/symbols/inet) ==
@@ -370,24 +397,24 @@ bindsym XF86AudioRewind   $execi playerctl position -6
 bindsym XF86AudioStop $execi playerctl stop
 # bindsym XF86Eject $execi playerctl stop
 # XF86AudioStop 랑 XF86Eject 는 같은 keycode 로 매핑되어 있는 경우가 많다.
-bindsym XF86AudioLowerVolume \
-    $execi $volume_control down 2
-bindsym XF86AudioRaiseVolume \
-    $execi $volume_control up 2
-bindsym XF86AudioLowerVolume+Mod1 \
-     $execi $volume_control down 8
-bindsym XF86AudioRaiseVolume+Mod1 \
-    $execi $volume_control up 8
-bindsym XF86AudioMute \
-    $execi $volume_control mute
-bindsym XF86AudioMicMute $execi pactl set-source-mute @DEFAULT_SOURCE@ toggle
+# bindsym XF86AudioLowerVolume $execi $volume_control down 2
+# bindsym XF86AudioRaiseVolume $execi $volume_control up 2
+bindsym XF86AudioLowerVolume $execi "__volume-control.sh down 2"
+bindsym XF86AudioRaiseVolume $execi "__volume-control.sh up 2"
+# bindsym XF86AudioLowerVolume+Mod1 \
+#      $execi $volume_control down 8
+# bindsym XF86AudioRaiseVolume+Mod1 \
+#     $execi $volume_control up 8
+# bindsym XF86AudioMute $execi $volume_control mute
+bindsym XF86AudioMute $execi "__volume-control.sh mute"
+bindsym XF86AudioMicMute $execi "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
 # === }}}
 # === Popular web navigation Keys (nav_common) === {{{
-bindsym XF86Calculator $execi _xf86-launcher.sh calculator
-bindsym XF86Mail       $execi _xf86-launcher.sh mail
-bindsym XF86Explorer   $execi _xf86-launcher.sh explorer
-bindsym XF86WWW        $execi _xf86-launcher.sh www
-bindsym XF86MyComputer $execi _xf86-launcher.sh mycomputer
+bindsym XF86Calculator $execi __xf86-launcher calculator
+bindsym XF86Mail       $execi __xf86-launcher mail
+bindsym XF86Explorer   $execi __xf86-launcher explorer
+bindsym XF86WWW        $execi __xf86-launcher www
+bindsym XF86MyComputer $execi __xf86-launcher mycomputer
 # bindsym XF86Search $execi _xf86-launcher search
 # bindsym XF86Favorites
 # bindsym XF86Reload
@@ -408,9 +435,9 @@ bindsym XF86MyComputer $execi _xf86-launcher.sh mycomputer
 # bindsym XF86Open
 # bindsym XF86Paste
 # bindsym XF86Cut
-bindsym XF86TouchpadToggle $execi _touchpad-toggle.py
-bindsym XF86TouchpadOn     $execi _touchpad-toggle.py on
-bindsym XF86TouchpadOff    $execi _touchpad-toggle.py off
+bindsym XF86TouchpadToggle $execi __touchpad-toggle
+bindsym XF86TouchpadOn     $execi __touchpad-toggle on
+bindsym XF86TouchpadOff    $execi __touchpad-toggle off
 # bindsym XF86LaunchA
 # bindsym XF86MenuKB
 # bindsym XF86Send
@@ -424,7 +451,7 @@ bindsym XF86Launch1 $execi $setting_menu
 # FN + F4 (AURA Key)
 bindsym XF86Launch3 $execi "playerctl play-pause"
 # FN + F5 (Fan Mark)
-bindsym XF86Launch4 $execi "_asusctl-profile.sh"
+bindsym XF86Launch4 $execi "__asusctl-profile.sh"
 # bindsym XF86LaunchB
 # bindsym XF86Launch2
 # bindsym XF86DOS
@@ -448,10 +475,10 @@ bindsym XF86Launch4 $execi "_asusctl-profile.sh"
 # bindsym XF86Finance
 # bindsym XF86Game
 # bindsym XF86Shop
-bindsym XF86MonBrightnessDown $execi _brightnessctl.py down 5
-bindsym XF86MonBrightnessUp   $execi _brightnessctl.py up 5
-bindsym Control+7 $execi _brightnessctl.py down 5
-bindsym Control+8 $execi _brightnessctl.py up 5
+bindsym XF86MonBrightnessDown $execi __brightness-control down 5
+bindsym XF86MonBrightnessUp   $execi __brightness-control up 5
+bindsym Control+7 $execi __brightness-control down 5
+bindsym Control+8 $execi __brightness-control up 5
 # bindsym XF86Send
 # bindsym XF86Reply
 # bindsym XF86MailForward
@@ -540,7 +567,7 @@ bindsym XF86KbdBrightnessUp \
 # -----------------------------------------------------------------------------
 # Capture Entire Screen to clipboard
 # bindsym Print exec flameshot full --clipboard
-bindsym Print exec "/home/hyunjae/.config/sway/scripts/screenshot.sh"
+bindsym Print exec "__screenshot"
 bindsym Mod1+Print exec flameshot gui
 bindsym Mod4+Print exec flameshot gui
 # Window + PrintScreen: Capture Screen and save it to file
@@ -551,7 +578,7 @@ bindsym Mod4+Print exec flameshot gui
 # bindsym Mod1+Print exec "$HOME/.config/sway/scripts/screenshot.sh window clipboard"
 # bindsym Control+Print exec "$HOME/.config/i3/scripts/maim_activewindow_clipboard.sh"
 # bindsym Mod1+Mod4+Print exec "$HOME/.config/i3/scripts/maim_activewindow.sh" file
-bindsym Control+Print exec "$HOME/.config/sway/scripts/screenshot.sh window file"
+bindsym Control+Print exec "__screenshot window file"
 
 # FN + F6: Super + Shift + s (Mod4: Super)
 bindsym Mod4+Shift+s exec flameshot gui --path "$HOME/Pictures"
@@ -563,13 +590,32 @@ bindsym Mod1+Shift+r exec flameshot gui --path "$HOME/Pictures"
 # FN + F9: Alt_L + p
 # -----------------------------------------------------------------------------
 # bindsym Mod1+p exec arandr
+# i3-key-bindings
+################################################################################
+
 # bindsym $mod+Shift+c reload, $execi "notify-send i3 reloaded"
 # bindsym $mod+Shift+c $execi update-i3-config.sh, reload, $execi "notify-send i3 reloaded"
 # bindsym $mod+Shift+r $execi update-i3-config.sh, restart, $execi "notify-send i3 restarted"
 #
-bindsym $mod+Shift+c $execi _i3-update.sh reload
-bindsym $mod+Shift+r $execi _i3-update.sh restart
-# = Windows Settings (xprop) =
+bindsym $mod+Shift+c $execi __i3-update.sh, reload
+bindsym $mod+Shift+r $execi __i3-update.sh, restart
+# X11 Assign Windows
+################################################################################
+
+assign [class="Spotify"] → $ws10
+assign [instance="spotify"] → $ws10
+assign [class="pomotroid"] → $ws7
+# spotify not working 2021-05-31
+# assign [class="firefox" title="todoist.com"] → $ws8
+assign [instance="calendar.google.com__calendar"] → $ws8
+# exec --no-startup-id sleep 30; "$HOME/.local/share/applications/Todoist (WebApp).desktop"
+assign [instance="Mail" class="Thunderbird"] → $ws7
+# assign [class="kakaotalk.exe"] → $ws9
+# assign [class="kakaotalk.exe" window_type="dialog" title="KakaoTalkShadowWnd"]
+# assign [class="kakaotalk.exe" window_type="dialog" title="KakaoTalkEdgeWnd"]
+# Windows Settings (xprop)
+################################################################################
+
 # Doc
 # -----------------------------------------------------------------------------
 # * instance, class: WM_CLASS (instance 는 wm_class 의 첫번째 부분)
@@ -662,7 +708,8 @@ for_window [instance="pomotroid"] floating disable
 for_window [class="1Password" title=".* 1Password"] resize set width 2000px height 1400px, move position center
 for_window [class="1Password"] move scratchpad, scratchpad show
 # In-App Popup Windows
-# ---------------------------
+################################################################################
+
 for_window [window_role="GtkFileChooserDialog"] resize set width 1600px
 for_window [class="firefox" title="About Mozilla Firefox"] floating enable
 for_window [class="firefox" title="Picture-in-Picture"] floating enable, \
@@ -695,16 +742,18 @@ for_window [class="1Password" title="Two-factor authentication"] \
 	floating enable
 # for_window [class="matplotlib"] floating enable
 # vim:ft=conf
-# = AUTOSTART CONFIG  =
+# AUTOSTART CONFIG
+################################################################################
+
 #### DE Features
 
 # set program-relauncher.sh "$HOME/.local/bin/program-relauncher.sh"
-exec_always --no-startup-id _program-relauncher.sh _sway-output-setup.py
+# exec_always --no-startup-id __program-relauncher.sh __sway-output-setup
 
 # $execi dunst # dunst 실행안해도 자동으로 불러들이는 듯 (2020-12-06)
 # KDE 패키지 여럿 설치해서 그런가 dunst 자동 실행 안됨 (2021-11-03)
 # dunst는 i3 restart 해도 살아있어서 다시 시작할 필요 없음 (2021-11-03)
-# exec --no-startup-id dunst
+exec --no-startup-id dunst
 
 # exec --no-startup-id pcmanfm --daemon-mode
 # exec --no-startup-id lxqt-policykit-agent
@@ -716,8 +765,8 @@ exec_always --no-startup-id _program-relauncher.sh _sway-output-setup.py
 
 ###
 exec_always --no-startup-id brightnessctl --device=asus::kbd_backlight set 3
-exec --no-startup-id gammastep
-exec_always --no-startup-id _ime-launcher.sh
+# exec --no-startup-id gammastep
+exec_always --no-startup-id __ime-launcher
 
 
 # Late Start
@@ -730,15 +779,15 @@ exec_always --no-startup-id _ime-launcher.sh
 
 
 # exec_always --no-startup-id program-relauncher.sh ulauncher --hide-window
-exec_always --no-startup-id _program-relauncher.sh blueman-applet
-exec_always --no-startup-id _program-relauncher.sh nm-applet --indicator
-exec_always --no-startup-id _program-relauncher.sh albert
+exec_always --no-startup-id __program-relauncher.sh blueman-applet
+exec_always --no-startup-id __program-relauncher.sh nm-applet --indicator
+exec_always --no-startup-id __program-relauncher.sh albert
 # exec_always --no-startup-id program-relauncher.sh firewall-applet "" 2
-exec_always --no-startup-id _program-relauncher.sh 1password --silent
-exec_always --no-startup-id _program-relauncher.sh kdeconnect-indicator
+exec_always --no-startup-id __program-relauncher.sh 1password --silent
+exec_always --no-startup-id __program-relauncher.sh kdeconnect-indicator
 # exec_always --no-startup-id program-relauncher.sh copyq
-# exec_always --no-startup-id _program-relauncher.sh nextcloud --background
-exec_always --no-startup-id _program-relauncher.sh syncthing-gtk --minimized
+# exec_always --no-startup-id __program-relauncher.sh nextcloud --background
+exec_always --no-startup-id __program-relauncher.sh syncthing-gtk --minimized
 # exec --no-startup-id kdeconnect
 exec --no-startup-id spotifyd
 
@@ -750,10 +799,9 @@ exec_always --no-startup-id brightnessctl --device=asus::kbd_backlight set 0
 ##################
 # python 프로그램이라 _program-relauncher 안먹음
 exec sleep 2; gammastep-indicator
-# exec_always --no-startup-id _program-relauncher.sh gammastep-indicator
-#
+# exec_always --no-startup-id __program-relauncher.sh gammastep-indicator
 # i3 autostart
-#
+################################################################################
 
 # exec_always --no-startup-id \
 # 	setxkbmap -layout us -variant colemak_dh_matrix -option altwin:swap_alt_win
@@ -783,3 +831,9 @@ exec_always --no-startup-id feh --bg-fill $HOME/.local/share/wallpaper.jpg
 
 exec --no-startup-id optimus-manager-qt
 # exec --no-startup-id pasystray
+# desktop-app
+################################################################################
+
+# vim:ft=conf
+exec --no-startup-id thunderbird
+# exec --no-startup-id spot

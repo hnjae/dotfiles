@@ -24,14 +24,15 @@ IMG_CACHE_SIZE=1920x1080
 IMG_CACHE_SIZE_S=1080
 
 image() {
-	if [ -n "$DISPLAY" ] && [ -z "$WAYLAND_DISPLAY" ]; then
-		printf '{"action": "add", "identifier": "PREVIEW", "x": "%s", "y": "%s", "width": "%s", "height": "%s", "scaler": "contain", "path": "%s"}\n' "$4" "$5" "$(($2-1))" "$(($3-1))" "$1" > "$FIFO_UEBERZUG"
-		exit 1
-	else
-		# chafa "$filepath" -s "$4x"
-                h=`expr $3 - 1`
-                chafa "$1" -f symbols -s "$2x$h"
-	fi
+	# if [ -n "$DISPLAY" ] && [ -z "$WAYLAND_DISPLAY" ]; then
+	# 	# printf '{"action": "add", "identifier": "PREVIEW", "x": "%s", "y": "%s", "width": "%s", "height": "%s", "scaler": "contain", "path": "%s"}\n' "$4" "$5" "$(($2-1))" "$(($3-1))" "$1" > "$FIFO_UEBERZUG"
+	# 	# exit 1
+ #                img2sixel "$1"
+	# else
+	# 	# chafa "$filepath" -s "$4x"
+	# fi
+        h=`expr $3 - 1`
+        chafa "$1" -f symbols -s "$2x$h"
 }
 
 
