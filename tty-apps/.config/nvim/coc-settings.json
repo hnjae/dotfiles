@@ -1,0 +1,123 @@
+// vim: nospell
+{
+  ///////////////////////////////////////////////////////////////
+  // coc
+  ///////////////////////////////////////////////////////////////
+  // https://github.com/weirongxu/coc-explorer/issues/41
+  "coc.preferences.jumpCommand": "tab drop",
+  // "coc.preferences.formatOnSaveFiletypes": ["rust"],
+  "diagnostic.displayByAle": false,
+  "suggest.noselect": true,
+  // "suggest.enablePreselect": false,
+  "suggest.completionItemKindLabels": {
+    "method": "  ",
+    "function": "  ",
+    "variable": "[]",
+    "field": "  ",
+    "typeParameter": "<>",
+    "constant": "  ",
+    "class": " פּ ",
+    "interface": " 蘒",
+    "struct": "  ",
+    "event": "  ",
+    "operator": "  ",
+    "module": "  ",
+    "property": "  ",
+    "enum": " 練",
+    "reference": "  ",
+    "keyword": "  ",
+    "file": "  ",
+    "folder": " ﱮ ",
+    "color": "  ",
+    "unit": " 塞 ",
+    "snippet": "  ",
+    "text": "  ",
+    "constructor": "  ",
+    "value": "  ",
+    "enumMember": "  "
+  },
+  ///////////////////////////////////////////////////////////////
+  // coc-snippets
+  ///////////////////////////////////////////////////////////////
+  // "snippets.snipmate.enable": false,
+  // "snippets.priority": 99,
+  // "snippets.userSnippetsDirectory": "$HOME/.config/nvim/coc-snippets",
+
+  ///////////////////////////////////////////////////////////////
+  // coc-pyright
+  ///////////////////////////////////////////////////////////////
+  "pyright.enable": true,
+  // "python.pythonPath": "/usr/local/bin/python3",
+  "python.analysis.autoImportCompletions": true,
+  "python.analysis.autoSearchPaths": true,
+  // "python.analysis.diagnosticMode":
+  "pyright.disableCompletion": false,
+  "pyright.completion.snippetSupport": true,
+  "pyright.organizeimports.provider": "isort",
+  "python.formatting.provider": "black",
+  "python.formatting.blackArgs": ["--line-length", "79"],
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": true,
+  "python.linting.pylintArgs": [
+    "--disable",
+    "W0511,W0611,W0612,W0613,C0114,C0116,C0301,C0411",
+    "--load-plugins pylint_pydantic"
+    // "W0511,C0301,C0411"
+    // W0511: fix-me
+    // W0611: unused-import
+    // W0612: unused-variable
+    // W0613: unused-argument
+    // C0103: invalid-name
+    // C0114: missing-module-docstring
+    // C0116: missing-function-docstring
+    // C0301: line-too-long
+    // C0411: wrong-import-order
+    // E0611: no-name-in-hodule (use pyright)
+  ],
+  "python.linting.flake8Enabled": false,
+  "python.linting.flake8Args": [
+    "--max-line-length", "79",
+    "--ignore=E225,E226,E251,E261,E302,E303,E305,E501,F401,F821,F841"
+    // E225: = blanks
+    // E226: arithmetic blanks
+    // E251:
+    // E261: inline-blank
+    // E302: too-fiew-blank-linens
+    // E303: too-many-blank-lines
+    // E305: blank-line-related
+    // E501: line-to-long
+    // F401: unused-imports
+    // F821: undifiened-names
+    // F841: naver-used
+  ],
+  "python.linting.banditEnabled": true,
+  "python.linting.mypyEnabled": false,
+  // mypy imports 를 제대로 handling 하지 못함 (2022-07-23)
+  "python.linting.pytypeEnabled": true,
+  "python.linting.pycodestyleEnabled": false,
+  "python.linting.pycodestyleArgs": [
+    "--ignore=E225,E226,E251,E261,E302,E303,E305,E501"
+    // E225: = blanks
+    // E226: blanks
+    // E251
+    // E261: inline-blank
+    // E302: too-fiew-blank-linens
+    // E303: too-many-blank-lines
+    // E305: blank-line-related
+    // E501: line-to-long
+  ],
+  "python.linting.prospectorEnabled": true,
+  "python.linting.pydocstyleEnabled": false,
+  "python.linting.pylamaEnabled": true,
+  ///////////////////////////////////////////////////////////////
+  // coc-jedi
+  ///////////////////////////////////////////////////////////////
+  "jedi.enable": false,
+
+  ///////////////////////////////////////////////////////////////
+  // coc-sumneko-lua
+  ///////////////////////////////////////////////////////////////
+  "sumneko-lua.enable": true,
+  // "sumneko-lua.enableNvimLuaDev": true,
+  "Lua.telemetry.enable": false
+}

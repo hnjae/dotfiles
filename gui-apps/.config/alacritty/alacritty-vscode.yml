@@ -1,0 +1,52 @@
+# Colors (vscode)
+# https://github.com/Mofiqul/vscode.nvim
+
+font:
+  size: 12
+  normal:
+    family: Monospace
+    style: Regular
+
+window:
+  padding:
+    x: 0
+    y: 0
+
+  dynamic_padding: false
+
+  decorations: full
+
+  dimensions:
+    columns: 90
+    lines: 30
+
+  dynamic_title: true
+
+colors:
+
+    background: '#1e1e1e'
+    foreground: '#d4d4d4'
+
+    cursor:
+      text: '#d4d4d4'
+      cursor: '#d4d4d4'
+
+    normal:
+      black:   '#1e1e1e'
+      red:     '#f44747'
+      green:   '#608b4e'
+      yellow:  '#dcdcaa'
+      blue:    '#569cd6'
+      magenta: '#c678dd'
+      cyan:    '#56b6c2'
+      white:   '#d4d4d4'
+
+    bright:
+      black:   '#545454'
+      red:     '#f44747'
+      green:   '#608b4e'
+      yellow:  '#dcdcaa'
+      blue:    '#569cd6'
+      magenta: '#c678dd'
+      cyan:    '#56b6c2'
+      white:   '#d4d4d4'

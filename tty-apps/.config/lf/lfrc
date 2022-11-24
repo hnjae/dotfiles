@@ -1,0 +1,237 @@
+# 커스텀 커맨드와 맵핑
+# interpreter for shell commands (needs to be POSIX compatible)
+set shell dash
+
+# set '-eu' options for shell commands
+## These options are used to have safer shell commands. Option '-e' is used to
+## exit on error and option '-u' is used to give error for unset variables.
+## Option '-f' disables pathname expansion which can be useful when $f, $fs, and
+## $fx variables contain names with '*' or '?' characters. However, this option
+## is used selectively within individual commands as it can be limiting at
+## times.
+# set shellopts '-eu:--shwordsplit' # shwordsplit 은 dash 에서 작동하지 않음.
+set shellopts '-euf'
+
+# also run at startup
+
+################################################################################
+################################################################################
+# UI
+set dircounts on
+# set drawbox!
+set icons on
+set ratios "1:10:11"
+set previewer ~/.config/lf/previewer/previewer.sh
+map i $clear; ~/.config/lf/previewer/previewer.sh "$f" | less -R
+# map i $LESSOPEN='| ~/.config/lf/scripts/previewer.sh %f' less -R $f
+set number
+set relativenumber
+set info size:time
+# set drawbox
+# set promptfmt ""
+set incfilter off
+# set ifs
+set ignorecase true
+
+# https://pkg.go.dev/time#example-Time.Format
+# Jan 2 15:04:05 2006 MST
+set infotimefmtnew "--0102 1504"
+set infotimefmtold "2006-01-02"
+set timefmt "2006-01-02 15:04:05 MST Mon"
+
+set scrolloff 2
+
+################################################################################
+cmd open &~/.config/lf/opener/opener.sh "$f"
+################################################################################
+# cmd on-cd &{{
+# 	# display git repository status in your prompt
+# 	source /usr/share/git/completion/git-prompt.sh
+# 	GIT_PS1_SHOWDIRTYSTATE=auto
+# 	GIT_PS1_SHOWSTASHSTATE=auto
+# 	GIT_PS1_SHOWUNTRACKEDFILES=auto
+# 	GIT_PS1_SHOWUPSTREAM=auto
+# 	git=$(__git_ps1 " (%s)") || true
+# 	fmt="\033[32;1m%u@%h\033[0m:\033[34;1m%d\033[0m\033[1m%f$git\033[0m"
+# 	lf -remote "send $id set promptfmt \"$fmt\""
+# }}
+# on-cd
+# cmd paste !{{~/.config/lf/scripts/paste.py "$1" "$2" "$@"}}
+# cmd paste &{{
+#     set -- $(cat ~/.local/share/lf/files)
+#     mode="$1"
+#     shift
+#     case "$mode" in
+#         copy)
+#             rsync -ahX --ignore-existing --info=progress2 -- "$@" . |
+#             stdbuf -i0 -o0 -e0 tr '\r' '\n' |
+#             while IFS= read -r line; do
+#                 lf -remote "send $id echo $line"
+#             done
+#             ;;
+#         move) mv -n -- "$@" .;;
+#     esac
+#     rm ~/.local/share/lf/files
+#     lf -remote "send clear"
+# }}
+# cmd bulkrename ${{
+# 	lf -remote "send $id load"
+# 	lf -remote "send $id unselect"
+# }}
+cmd bulkrename :${{clear; ~/.config/lf/scripts/bulkrename "$fx"}}; reload
+map C bulkrename
+cmd test %~/.config/lf/scripts/test.sh
+################################################################################
+map d
+map dd cut
+cmd trash :${{clear; ~/.config/lf/scripts/handle-files-ask.py trash "$fx"}}; load
+map dt trash
+cmd delete :${{clear; ~/.config/lf/scripts/handle-files-ask.py delete "$fx"}}; load
+map dD delete
+cmd rmdir :${{clear; ~/.config/lf/scripts/handle-files-ask.py rmdir "$fx"}}; load
+map dR rmdir
+cmd trace :${{clear; ~/.config/lf/scripts/handle-files-ask.py "trash-with-trace-file" "$fx"}}; load
+map dT trace
+
+map y
+map yy copy
+cmd yank &{{~/.config/lf/scripts/yank.py "$1" "$f"}}
+map yd yank dir
+map yn yank name
+map yp yank path
+map yl yank paren
+map ys yank stem
+# map yd $~/.config/lf/scripts/yank.py dir "$f"
+# map yn $~/.config/lf/scripts/yank.py name "$f"
+# map yp $~/.config/lf/scripts/yank.py path "$f"
+# map yl $~/.config/lf/scripts/yank.py paren "$f"
+# map ys $~/.config/lf/scripts/yank.py stem "$f"
+
+map p
+map pp :paste; load
+# map pp paste
+# TODO: creat paste_symlink relative, relative_false <2022-06-04, Hyunjae Kim>
+cmd paste-symlink-absolute $clear; ~/.config/lf/scripts/handle-lf-files.py "symlink-absolute"
+cmd paste-symlink-relative $clear; ~/.config/lf/scripts/handle-lf-files.py "symlink-relative"
+# TODO: mv to pasted item <2022-06-10, Hyunjae Kim>
+map pl paste-symlink-absolute
+map pL paste-symlink-relative
+################################################################################
+
+map zz push :filter<enter>
+# map zp toggle preview
+
+
+map R reload
+map @ load
+################################################################################
+
+
+cmd echo2 !echo $f
+
+map w
+# ranger - log
+map W push :shell-wait<enter>:<enter>
+map s push :shell-wait<enter><space>
+map S $$SHELL
+
+map sa
+map sc
+map se
+map sn
+map ss
+map st
+map oa :set sortby atime; set info atime
+map oA :set sortby atime; set info atime; set reverse!
+map oC :set sortby ctime; set info ctime
+map oc :set sortby ctime; set info ctime; set reverse!
+map oe :set sortby ext; set info size
+map oE :set sortby ext; set info size; set reverse!
+map on :set sortby natural; set info size:time
+map oN :set sortby natural; set info size:time; set reverse!
+map ob :set sortby name; set info size:time
+map oB :set sortby name; set info size:time; set reverse!
+map os :set sortby size; set info size
+map oS :set sortby size; set info size; set reverse!
+map zr
+map or set reverse!
+
+# cmd touch :%{{~/.config/lf/scripts/concatenate-arg.sh touch "$@"}}; load
+
+cmd touch %{{~/.config/lf/scripts/concatenate-arg.sh touch "$@"}}
+map xt push :touch<space>
+cmd mkdir %{{~/.config/lf/scripts/concatenate-arg.sh mkdir "$@"}}
+# cmd mkdir :%{{~/.config/lf/scripts/concatenate-arg.sh mkdir "$@"}}; load
+map xM push :mkdir<space>
+cmd mkcd %~/.config/lf/scripts/mkcd.sh "$id" "$@"
+map xm push :mkcd<space>
+
+map xf !{{fmna}}
+map xc ${{
+	rm -rf "$HOME/.local/share/lf"
+	killall lf
+	}}
+# cmd newfold !~/.config/lf/scripts/handle-lf-files.py "mv-to-newfold" "$@"
+# map xn push :newfold<space>
+
+# map s push :rename<space>
+
+map E $sudoedit "$f"
+
+# rename은 띄어쓰기 처리 잘하는 명령어. (2022-06-02)
+map r
+map rc push :rename<space>
+map c
+map cw push :rename<enter><c-u>
+map A push :rename<enter>
+# TODO: fix this  <2022-06-13, Hyunjae Kim>
+# map a push :rename<enter><c-b><c-b><c-b><c-b>
+# map a push :rename<enter><c-b><c-b><c-b><c-b>
+map a &~/.config/lf/scripts/rename-append.py "$id" "$f"
+
+map u
+map uu jump-prev
+map <c-r> jump-next
+map uv unselect
+map uc clear
+map ud clear
+map uy clear
+
+# map [ :updir; down; open
+# map ] :updir; up; open
+
+# ${{
+# 	lf -remote "send $id push :rename<space>$f<a-b><c-b>"
+# }}
+# map a push :rename<enter>"%s"
+
+# cd
+# cmd cd-fix $cd "/"
+# cmd cd-fix !echo "$id"
+cmd cd2 !~/.config/lf/scripts/cd.py  "$id" "$@"
+
+
+#### g
+map gc<space> cd "~/.config"
+map gct cd "/tmp"
+map gcl cd "~/.config/lf"
+map gci cd "~/.config/i3"
+map gcn cd "~/.config/nvim/lua"
+map gcz cd "~/.config/zsh"
+map gcs cd "~/.config/sway"
+map glb cd "~/.local/bin"
+map gls<space> cd "~/.local/share"
+map glst cd "~/.local/share/Trash/files"
+map glsn cd "~/.local/share/nvim"
+map glsl cd "~/.local/share/lf"
+map gs<space> cd "~/Sync"
+map gsc cd "~/Sync/Config Files"
+map gsl cd "~/Sync/Library"
+map gsw cd "~/Sync/Library/wiki"
+map gw cd "~/Sync/Library/wiki"
+map gss cd "~/Sync/Study"
+map gsp cd "~/Sync/Projects"
+map gi cd "/run/user/1000/gvfs"
+map g/ cd "/"
+
+#### g

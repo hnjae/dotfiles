@@ -1,0 +1,50 @@
+font:
+  size: 12
+  normal:
+    family: Monospace
+    style: Regular
+
+window:
+  padding:
+    x: 0
+    y: 0
+
+  dynamic_padding: false
+
+  decorations: full
+
+  dimensions:
+    columns: 90
+    lines: 30
+
+  dynamic_title: true
+
+# scheme: "codedark"
+# author: "Tomas Iser (https://github.com/tomasiser)"
+colors:
+  # Default colors
+  primary:
+    background: '0x1e1e1e'
+    foreground: '0xd4d4d4'
+
+  # Normal colors
+  normal:
+    black:   '0x1e1e1e'
+    red:     '0xd16969'
+    green:   '0x608b4e'
+    yellow:  '0xd7ba7d'
+    blue:    '0x569cd6'
+    magenta: '0xc586c0'
+    cyan:    '0x9cdcfe'
+    white:   '0xd4d4d4'
+
+  # Bright colors
+  bright:
+    black:   '0x3c3c3c'
+    red:     '0xd16969'
+    green:   '0x608b4e'
+    yellow:  '0xd7ba7d'
+    blue:    '0x569cd6'
+    magenta: '0xc586c0'
+    cyan:    '0x9cdcfe'
+    white:   '0xffffff'

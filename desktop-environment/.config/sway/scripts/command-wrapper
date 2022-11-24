@@ -1,0 +1,389 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+# NOTE: splith is alike vsplit in vim
+
+import argparse
+import collections
+import logging
+import sys
+import time
+from typing import Any, List, Optional, Tuple
+
+import i3ipc
+from i3ipc import Connection
+
+i3 = Connection()
+logging.basicConfig(level=logging.DEBUG)
+Logger = logging.getLogger()
+TEMP_CON_MARKING: str = "temporarily-container"
+TEMP_CON_ARGS: str = (
+    "urxvt "
+    "+rv +ss +vb +sb -ut "
+    '-title "temporarily-container" '
+    "-hold "
+    "-e sleep 0.01"
+)
+TEMP_CON_ARGS_XTERM: str = (
+    "xterm "
+    "+cm +l +lc +mb +u8 +uc +vb "
+    "-hold "
+    '-name "temporarily-container" '
+    '-class "temporarily-container" '
+    '-T "temporarily-container" '
+    "-e sleep 0.01"
+)
+TEMP_CON_WORKSPACE: str = "|"
+
+# MAXIMUM_DEPTH: int = 4
+
+# def calc_depth(i3con: i3ipc.con.Con) -> int:
+#     i = 0
+#     node = i3con
+#     while node.type == "con":
+#         node = node.parent
+#         i += 1
+#     return i
+
+
+def _layout_fix(con):
+    """
+    node is container with a stacked or tabbed layout.
+    """
+
+    parent = con.parent
+    son = con.nodes[0]
+
+    if (
+        (parent.type == "workspace" and len(parent.nodes) == 1)
+        or parent.layout in {"splitv", "stacked"}
+    ) and con.layout != "tabbed":
+        Logger.info(
+            f"layout-swap {con.id} to tab (parent-layout: {parent.layout}; "
+            f"{parent.id})"
+        )
+        i3.command(f"[con_id={son.id}] focus; layout tabbed")
+        con.layout = "tabbed"
+        return
+
+    if (
+        not (parent.type == "workspace" and len(parent.nodes) == 1)
+        and parent.layout in {"splith", "tabbed"}
+    ) and con.layout != "stacked":
+        Logger.info(
+            f"layout-swap {con.id} to stack (parent-layout: {parent.layout}; "
+            f"{parent.id})"
+        )
+        i3.command(f"[con_id={son.id}] focus; layout stacking")
+        con.layout = "stacked"
+        return
+
+    Logger.info(
+        f"I will not layout-swap {con.layout} {con.id} "
+        f"(parent-layout: {parent.layout}; {parent.id})"
+    )
+
+
+def fix_tree() -> int:
+    def recursive_swap_tabbed_stacked(root_node):
+        for node in root_node.nodes:
+            if node.layout in {"stacked", "tabbed"} and node.nodes:
+                _layout_fix(node)
+            recursive_swap_tabbed_stacked(node)
+
+    def get_workspace_and_focused_id() -> Tuple[
+        Optional[i3ipc.Con], Optional[int]
+    ]:
+        con: Any = i3.get_tree().find_focused()
+
+        if con is None:
+            return None, None
+
+        workspace = con.workspace()
+        if workspace is None:
+            return None, None
+
+        return workspace, con.id
+
+    root_node, cur_id = get_workspace_and_focused_id()
+    if root_node is None:
+        Logger.error("can not detect workspace")
+        i3.command(f"[con_id={cur_id}] focus")
+        return 1
+
+    # fix dangling tree
+    queue: collections.deque = collections.deque(root_node.nodes)
+    while queue:
+        node = queue.popleft()
+
+        if len(node.nodes) == 1:
+            son = node.nodes[0]
+            if (
+                node.parent.type == "workspace"
+                and len(node.parent.nodes) == 1
+                # and node.layout in {"stacked", "tabbed"}
+                and node.layout == "tabbed"
+            ):
+                Logger.debug(
+                    "Detected stacked/tabbed layout under workspace. ignoring"
+                )
+            else:
+                _move_up_tree(son)
+            queue.append(son)
+        else:
+            queue.extend(node.nodes)
+
+    # swap tabbed/stacked
+    root_node, _ = get_workspace_and_focused_id()
+    if root_node is None:
+        Logger.error("can not detect workspace")
+        i3.command(f"[con_id={cur_id}] focus")
+        return 1
+    recursive_swap_tabbed_stacked(root_node)
+
+    i3.command(f"[con_id={cur_id}] focus")
+    return 0
+
+
+def _move_up_tree(con):
+    """
+    inter function that makes container up tree
+
+    condition checking won't be occured here.
+
+    con: i3ipc.Con
+    """
+
+    def launch_temp_con():
+        """
+        Launch temporarily container
+        """
+
+        # Logger.debug("finding temporarily container")
+        # temp_cons: List[i3ipc.Con] = i3.get_tree().find_marked(
+        #     TEMP_CON_MARKING
+        # )
+
+        # if not temp_cons:
+        Logger.info("executing temporarily-container")
+
+        i3.command(f"exec --no-startup-id {TEMP_CON_ARGS}")
+        time.sleep(0.4)
+
+        Logger.debug(f"finding temporarily-container")
+        cons: List[Any] = i3.get_tree().find_named(TEMP_CON_MARKING)
+        if not cons:
+            raise Exception("temporarily-container won't launched")
+        temp_con = cons[0]
+        Logger.debug(f"temporarily-container id: {temp_con.id}")
+        i3.command(f"[con_id={temp_con.id}] mark {TEMP_CON_MARKING}")
+        # else:
+        #     temp_con = temp_cons[0]
+
+        i3.command(
+            f"[con_mark={TEMP_CON_MARKING}] "
+            f"move container to workspace {TEMP_CON_WORKSPACE}"
+        )
+        return
+
+    parent = con.parent
+
+    logging.info(f"swapping container {con.id} with {parent.id}")
+    Logger.debug("swapping parent container with temporarily container")
+    # mmmm
+    rets: List[Any] = i3.command(
+        f"[con_mark={TEMP_CON_MARKING}] swap container with con_id {parent.id}"
+    )
+    ret = rets[0]
+    if not ret.success and ret.error == "No matching node.":
+        launch_temp_con()
+        i3.command(f"[con_id={con.id}] focus")
+        rets = i3.command(
+            f"[con_mark={TEMP_CON_MARKING}] "
+            f"swap container with con_id {parent.id}"
+        )
+        ret = rets[0]
+
+    if ret.success:
+        # focus con_mark to prevent workspace switching
+        i3.command(
+            f"[con_mark={TEMP_CON_MARKING}] focus; "
+            f"[con_mark={TEMP_CON_MARKING}] "
+            f"swap container with con_id {con.id}"
+        )
+
+        if parent.layout in {"stacked", "splitv"}:
+            # prevent temporarily container dangling
+            i3.command(
+                f"[con_mark={TEMP_CON_MARKING}] move up; "
+                f"[con_id={con.id}] focus"
+            )
+        return
+
+    if not ret.success and ret.error == "Cannot swap ancestor and descendant":
+        return
+
+    Logger.error(f"{ret.success}, {ret.error}")
+    raise Exception()
+
+
+def move_up_tree() -> int:
+    con: i3ipc.Con | None = i3.get_tree().find_focused()
+    if con is None:
+        return 1
+
+    # if con.parent.type == workspace 는 신경 안쓴다.
+    if len(con.parent.nodes) == 1 and con.parent.type == "con":
+        _move_up_tree(con)
+
+    return 0
+
+
+def move(direction: str) -> int:
+    """
+    l: left
+    r: right
+    u: up
+    d: down
+    """
+
+    if direction == "l":
+        i3.command("move left")
+    elif direction == "r":
+        i3.command("move right")
+    elif direction == "u":
+        i3.command("move up")
+    elif direction == "d":
+        i3.command("move down")
+    else:
+        logging.debug("move direction unknown")
+        return 1
+    return fix_tree()
+
+
+def kill() -> int:
+    i3.command("kill")
+    time.sleep(0.01)
+    return fix_tree()
+    # return 0
+    # return 0
+
+
+def layout_toggle(mode: Optional[str] = None) -> int:
+    """
+    mode: str | None
+        None: toggle all
+        v: layout to splitv
+        s: layout to tabbed/stacked
+        h: layout to splith
+    """
+
+    con: i3ipc.Con | None = i3.get_tree().find_focused()
+    if con is None:
+        return 1
+
+    parent = con.parent
+
+    if mode == "s" or (mode is None and parent.layout == "splitv"):
+        if (
+            parent.parent.type == "workspace" and len(parent.parent.nodes) == 1
+        ) or parent.parent.layout in {
+            "splitv",
+            "stacked",
+        }:
+            print("layout tabbed")
+            i3.command("layout tabbed")
+        else:
+            print("layout stacking")
+            i3.command("layout stacking")
+    elif mode == "v" or (mode is None and parent.layout == "splith"):
+        print("layout splitv")
+        i3.command("layout splitv")
+    elif mode == "h" or (mode is None):
+        print("layout splith")
+        i3.command("layout splith")
+
+    return 0
+
+
+def split(type_: str) -> int:
+    focused: i3ipc.Con | None = i3.get_tree().find_focused()
+
+    if focused is None:
+        return 1
+
+    parent = focused.parent
+
+    if len(parent.nodes) == 1:
+        print("split -> layout toggle")
+        return layout_toggle(type_)
+
+    if type_ == "v":
+        print("splitv")
+        i3.command("splitv")
+        return 0
+
+    if type_ == "h":
+        print("splith")
+        i3.command("splith")
+        return 0
+
+    if type_ == "s":
+        # stacking or tabbed
+        if parent.layout in {"splith", "tabbed"}:
+            print("splith; layout stacking")
+            i3.command("splith; layout stacking")
+        else:
+            print("splith; layout tabbed")
+            i3.command("splith; layout tabbed")
+        return 0
+
+    print("unknown")
+    return 1
+
+
+def main() -> int:
+    def get_argparser() -> argparse.ArgumentParser:
+        parser: argparse.ArgumentParser = argparse.ArgumentParser()
+        parser.add_argument(
+            "func",
+            choices=[
+                "split",
+                "layout-toggle",
+                "move-up-tree",
+                "fix-tree",
+                "kill",
+                "move",
+            ],
+        )
+        parser.add_argument("args", nargs="?")
+
+        return parser
+
+    parser: argparse.ArgumentParser = get_argparser()
+    args: argparse.Namespace = parser.parse_args()
+
+    print(args)
+    if args.func == "split" and args.args:
+        return split(args.args[0])
+
+    if args.func == "layout-toggle":
+        return layout_toggle()
+
+    if args.func == "move-up-tree":
+        return move_up_tree()
+
+    if args.func == "fix-tree":
+        return fix_tree()
+
+    if args.func == "kill":
+        return kill()
+
+    if args.func == "move" and args.args:
+        return move(args.args[0])
+
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

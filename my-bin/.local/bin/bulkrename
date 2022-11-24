@@ -1,0 +1,180 @@
+#!/usr/bin/env python3
+
+import os
+import secrets
+import shutil
+import string
+import subprocess
+import sys
+import tempfile
+import termios
+import tty
+from pathlib import Path
+from typing import Dict, Iterable, List
+
+ITERATIONS_LIMIT: int = 10000
+
+# TODO: git mv <2022-06-05, Hyunjae Kim>
+
+
+def get_alt_path(path: Path, random: bool = False) -> Path:
+    """
+    :returns: alternative path of input
+    """
+
+    for i in range(ITERATIONS_LIMIT):
+        if not path.exists():
+            return path
+
+        if random:
+            random_str = "".join(
+                secrets.choice(string.ascii_letters) for _ in range(6)
+            )
+            path = path.with_name(f"{path.name}_{random_str}")
+        else:
+            path = path.with_name(f"{path.name}_{i}")
+
+    raise FileExistsError
+
+
+def readchar():
+    # copied from git://github.com/magmax/python-readchar
+    fd = sys.stdin.fileno()
+    old_settings = termios.tcgetattr(fd)
+    try:
+        tty.setraw(sys.stdin.fileno())
+        ch = sys.stdin.read(1)
+    finally:
+        termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+    return ch
+
+
+def rename(old_paths: List[Path], new_paths: List[Path]) -> int:
+    """
+    :returns: Number of file renamed.
+    """
+
+    def ask_to_proceed() -> bool:
+        """
+        :returns:
+        """
+
+        print("Confirm following renaming:")
+        is_any: bool = False
+        for old, new in zip(old_paths, new_paths):
+            if old == new:
+                continue
+            if new == Path("."):
+                continue
+            if not old.exists():
+                continue
+
+            is_any = True
+            print(f"\t“{old}” → “{new}”")
+
+        if not is_any:
+            return False
+
+        print("Press y key to proceed. (y/Any)")
+        return readchar() == "y"
+
+    if not ask_to_proceed():
+        return 0
+
+    num_renamed: int = 0
+    swap_files: Dict[Path, Path] = {}
+    for old, new in zip(old_paths, new_paths):
+        if old == new:
+            continue
+        if new == Path("."):
+            continue
+        if not old.exists():
+            continue
+
+        if new in old_paths and new.exists():
+            swap_files[old] = new
+            continue
+        os.rename(old, get_alt_path(new))
+        num_renamed += 1
+
+    while swap_files:
+        path_a, path_b = swap_files.popitem()
+
+        if path_b in swap_files and path_b.exists():
+            path_b_temp = get_alt_path(path_b, random=True)
+            os.rename(path_b, path_b_temp)
+            swap_files[path_b_temp] = swap_files[path_b]
+            swap_files.pop(path_b)
+
+        # get_alt_path might not needed here.
+        os.rename(path_a, get_alt_path(path_b))
+        num_renamed += 1
+    return num_renamed
+
+
+def get_new_paths(old_paths: Iterable[Path]) -> List[Path]:
+    """
+    :old_paths:
+    :returns: Paths with new name
+    """
+
+    def get_editor() -> str:
+        for editor in [
+            os.environ.get("EDITOR"),
+            "nvim",
+            "vim",
+            "vi",
+            "nano",
+            "gnome-text-editor",
+            "gedit",
+            "kate",
+            "kwrite",
+        ]:
+            if editor and shutil.which(editor) is not None:
+                return editor
+
+        raise Exception
+
+    filelist_path = Path(
+        tempfile.mkstemp(prefix="bulkrename-", suffix=".txt", dir=None)[1]
+    )
+    with open(filelist_path, mode="w", encoding="UTF-8") as fpp:
+        for path in old_paths:
+            fpp.write(f"{path}\n")
+
+    subprocess.run([get_editor(), "--", str(filelist_path)], check=True)
+    with open(filelist_path, mode="r", encoding="UTF-8") as fpp:
+        new_paths: List[Path] = [
+            Path(file.strip()) for file in fpp.read().splitlines()
+        ]
+    filelist_path.unlink()
+
+    return new_paths
+
+
+def main(paths: List[Path]) -> int:
+    if not paths:
+        return 0
+
+    # cannot handle filepath with "\n"
+    for path in paths[:]:
+        if "\n" in str(path):
+            paths.remove(path)
+
+    try:
+        new_paths = get_new_paths(paths)
+        num_renamed = rename(paths, new_paths)
+        # Print final message to stderr for easy capture in other program.
+        print(f"{num_renamed} file(s) renamed.", file=sys.stderr)
+    except Exception as eee:
+        print(eee)
+        return 1
+    return 0
+
+
+if __name__ == "__main__":
+    # Usage: <bulkrename> <files>
+    if len(sys.argv) <= 1:
+        sys.exit(main(list(Path().cwd().iterdir())))
+    else:
+        sys.exit(main([Path(arg) for arg in sys.argv[1:]]))

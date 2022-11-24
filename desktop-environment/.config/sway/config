@@ -1,0 +1,9 @@
+# Default config for sway
+# Read `man 5 sway` for a complete reference.
+
+# exec eval $(gnome-keyring-daemon --start)
+
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway
+# exec hash dbus-update-activation-environment 2>/dev/null && \
+exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway
+include $HOME/.config/sway/config.d/*

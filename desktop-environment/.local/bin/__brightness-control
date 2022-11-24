@@ -1,0 +1,266 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import sys
+import os
+import subprocess
+from typing import Optional, List, Any
+import json
+import argparse
+
+# LAPTOP_MONITOR_SERIAL = "0x00000000"
+# TODO: 모니터 여러개 연결되었을시, ddcutil 이 이를 구분 못함
+# <2022-04-19, Hyunjae Kim> #
+
+
+IS_WAYLAND: bool = os.environ.get("XDG_SESSION_TYPE") == "wayland"
+
+class Monitor:
+    """class Monitor"""
+
+    def __init__(
+        self, serial: str, is_external: bool, status: bool, model: Optional[str] = None
+    ):
+        self.serial = serial
+        self.is_external = is_external
+        self.status = status
+        self.brightness = None
+        self.model = model
+
+    def get_brightness(self):
+        if self.brightness is not None:
+            return self.brightness
+
+        if self.is_external:
+            proc = subprocess.run(
+                ["ddcutil", "--sn", self.serial, "getvcp", "10"],
+                capture_output=True,
+                check=True,
+            )
+            temp = proc.stdout.decode("UTF-8")[:-1].split(",")
+            cur_val = int(temp[0].split("=")[1].strip())
+        else:
+            proc = subprocess.run(
+                ["brightnessctl", "get"], capture_output=True, check=True
+            )
+            cur_val = round(int(proc.stdout.decode("UTF-8")) / 255 * 100)
+
+        return cur_val
+
+    def set_brightness(self, val: int):
+        """
+        :val: brightness percentage
+        """
+        val = min(max(val, 0), 100)
+
+        if not self.is_external:
+            subprocess.run(
+                ["brightnessctl", "set", f"{val:d}%"],
+                stdout=subprocess.DEVNULL,
+                check=True,
+            )
+        else:
+            subprocess.run(
+                ["ddcutil", "--sn", self.serial, "setvcp", "10", f"{val:d}"],
+                stdout=subprocess.DEVNULL,
+                check=True,
+            )
+        self.brightness = val
+
+
+    def adjust_brightness(self, val: int) -> Optional[str]:
+        """
+        adjust brightness
+
+        :val: brightness percentage
+
+        :returns: None if success
+                 str with error
+        """
+        if val == 0:
+            return None
+        if val < 0:
+            adjust = "-"
+        else:
+            adjust = "+"
+
+        val = max(min(val, 100), -100)
+        if not self.is_external:
+            proc = subprocess.run(
+                ["brightnessctl", "set", f"{abs(val):d}%{adjust}"],
+                capture_output=True,
+                # stdout=subprocess.DEVNULL,
+            )
+        else:
+            proc = subprocess.run(
+                [
+                    "ddcutil",
+                    "--sn",
+                    self.serial,
+                    "setvcp",
+                    "10",
+                    adjust,
+                    f"{abs(val):d}",
+                ],
+                capture_output=True,
+            )
+        if proc.returncode != 0:
+            # print(f"ERROR: ddcutil: {proc.stderr}", file=sys.stderr)
+            return f"{proc.args[0]}: {proc.stderr.decode('UTF-8')}"
+        return None
+
+
+def send_noti(brightness: int, device: Optional[str], err_msg: Optional[str] = None):
+    # icons = [
+    #     "display-brightness",
+    #     "display-brightness-symbolic",
+    #     "brightness-display",
+    #     "brightness-display-symbolic",
+    #     "notification-display",
+    #     "notification-display-brightness",
+    #     "video-display",
+    #     "video-display-symbolic",
+    #     "display",
+    #     "monitors",
+    #     "video-display-tv",
+    # ]
+    if brightness > 50:
+        icon_arg = "--icon=brightness-high"
+    else:
+        icon_arg = "--icon=brightness-low"
+
+    # ddcutil / xbackilght
+    # "--app-name=ddcutil"
+
+    if device:
+        mon: str = f"Monitor - {device}"
+    else:
+        mon = "Monitor"
+    if err_msg:
+        noti_args = [
+            "notify-send",
+            "--urgency=normal",
+            "--category=device",
+            # f"--icon={','.join(icons)}",
+            icon_arg,
+            f"--hint=string:x-canonical-private-synchronous:my-notification",
+            # f"--hint=int:value:{brightness}",
+            mon,
+            f"Brightness: {err_msg}",
+        ]
+    else:
+        noti_args = [
+            "notify-send",
+            "--urgency=normal",
+            "--category=device",
+            # f"--icon={','.join(icons)}",
+            icon_arg,
+            f"--hint=string:x-canonical-private-synchronous:my-notification",
+            f"--hint=int:value:{brightness}",
+            mon,
+            "Brightness",
+        ]
+    subprocess.run(noti_args, check=True)
+
+
+def get_active_monitors() -> List[Any]:
+    if not IS_WAYLAND:
+        proc = subprocess.run(
+            ["xrandr", "--listmonitors"], capture_output=True, check=True
+        )
+        # TODO: implement this <2022-04-19, Hyunjae Kim> #
+        monitors = []
+
+    # Session is wayland
+    elif os.environ["XDG_SESSION_DESKTOP"].lower().startswith("sway") or os.environ["XDG_CURRENT_DESKTOP"].startswith("sway"):
+        proc = subprocess.run(
+            ["swaymsg", "--type", "get_outputs", "--raw"],
+            capture_output=True,
+            check=True,
+        )
+        monitors = []
+        for device in json.loads(proc.stdout.decode("UTF-8")):
+            if device["active"]:
+                monitors.append(
+                    Monitor(
+                        device["serial"],
+                        is_external=not (
+                            len(device["name"]) >= 3
+                            and device["name"][:3] == "eDP"
+                        ),
+                        status=True,
+                        model = device['model']
+                    )
+                )
+    else:
+        print(f"SESSION {os.environ['XDG_SESSION_DESKTOP']} is not supported")
+        return []
+
+    return monitors
+
+
+def main():
+    """
+    main function
+    """
+
+    if (
+        len(sys.argv) <= 1
+        or (
+            sys.argv[1]
+            not in {
+                "up",
+                "u",
+                "down",
+                "d",
+                "min",
+                "max",
+                "set",
+            }
+        )
+        or not (
+            sys.argv[1] in {"up", "down", "u", "d", "set"}
+            and (len(sys.argv) == 3 and sys.argv[2].isdecimal())
+        )
+    ):
+        print(
+            f"usage: {sys.argv[0].split('/')[-1]}"
+            " up/down/min/max/set [number]"
+        )
+        return
+
+    # TODO: if ddcutil running wait for it ends <2022-04-19, Hyunjae Kim> #
+    # try:
+    #     import psutil
+
+    # except ModuleNotFoundError:
+    #     pass
+
+    order = sys.argv[1]
+    monitors: List[Monitor] = get_active_monitors()
+
+    val: int = 80
+    if order in {"set", "min", "max"}:
+        if order == "set":
+            val = int(sys.argv[2])
+        elif order == "min":
+            val = 0
+        else:
+            val = 100
+
+        for monitor in monitors:
+            err = monitor.set_brightness(val)
+            send_noti(monitors[0].get_brightness(), monitor.model, err)
+    else:
+        if order in {"up", "u"}:
+            val = int(sys.argv[2])
+        elif order in {"down", "d"}:
+            val = - int(sys.argv[2])
+        for monitor in monitors:
+            err = monitor.adjust_brightness(val)
+            send_noti(monitors[0].get_brightness(), monitor.model, err)
+
+
+
+if __name__ == "__main__":
+    sys.exit(main())

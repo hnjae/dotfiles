@@ -1,0 +1,66 @@
+#!/usr/bin/sh
+
+# *Lock) i3lock-fancy ;;
+# -font "Monospace 26" \
+# -padding 20 -line-padding 4
+
+MENUS=" : arandr
+ : fcitx5-config
+醙 : pavucontrol
+朗 : system-config-printer
+ : blueman
+ : blueman-assistant
+ : nm-connection-editor
+ : gnome-logs"
+LINES=$(echo "$MENUS" | wc -l)
+
+if type wofi > /dev/null 2>&1; then
+    menu="$( \
+        wofi \
+            --dmenu \
+            --insensitive \
+            --lines="$LINES" \
+            <<< "$MENUS" \
+    )"
+            # --height="$LINES" \
+            # --width="$WIDTH" \
+elif type rofi > /dev/null 2>&1; then
+    WIDTH=18
+    menu="$(\
+        rofi -dmenu -i \
+        -p 'Settings' \
+        -width "$WIDTH" \
+        -lines "$LINES" \
+        <<< "$MENUS" \
+    )"
+else
+    echo "Niether wofi and rofi is installed"
+    exit 1
+fi
+
+case "$menu" in
+    *arandr)
+        exec arandr &
+        ;;
+    *fcitx5-config)
+        exec fcitx5-config-qt &
+        ;;
+    *pavucontrol)
+        exec pavucontrol &
+        ;;
+    *system-config-printer)
+        exec system-config-printer &
+        ;;
+    *blueman)
+        exec blueman-manager &
+        ;;
+    *blueman-assistant)
+        exec blueman-assistant &
+        ;;
+    *nm-connection-editor)
+        exec nm-connection-editor &
+        ;;
+    *gnome-logs)
+        exec gnome-logs &
+        ;;
+esac

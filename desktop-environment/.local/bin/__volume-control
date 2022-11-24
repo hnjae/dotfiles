@@ -1,0 +1,90 @@
+#!/usr/bin/sh
+
+DEFAULT_SINK="$(pactl get-default-sink)"
+
+get_volume () {
+    pactl list sinks \
+        | grep "$DEFAULT_SINK" -A 8 \
+        | grep '^[[:space:]]Volume:' \
+        | tail -n 1 \
+        | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,'
+}
+
+is_mute () {
+    # return "true" or "false" to stdout
+    [ \
+        $( \
+            pactl list sinks \
+            | grep "$DEFAULT_SINK" -A 8 \
+            | grep '^[[:space:]]Mute:' \
+            | tail -n 1 \
+            | awk '{print $2}' \
+        ) \
+        = "yes" ]
+}
+
+send_notification () {
+
+    if is_mute; then
+        icon_name="audio-volume-muted-symbolic"
+        msg="Muted"
+        vol="0"
+    else
+        vol="$1"
+        msg="$1 %"
+        if [ "$vol" -le 0 ]; then
+            icon_name="audio-volume-muted-symbolic"
+        elif [ "$vol" -lt 33 ]; then
+            icon_name="audio-volume-low-symbolic"
+        elif [ "$vol" -lt 67 ]; then
+            icon_name="audio-volume-medium-symbolic"
+        else
+            icon_name="audio-volume-high-symbolic"
+        fi
+    fi
+
+    notify-send \
+        --urgency="low" \
+        --app-name="pulseaudio" \
+        --icon="$icon_name" \
+        -h string:x-canonical-private-synchronous:volume \
+        -h "int:value:$vol" \
+        "Volume" \
+        "$msg"
+}
+
+calc_volume () {
+    vol=$(expr $(get_volume) $1 $2)
+    echo "$vol"
+}
+
+case "$1" in
+    mute)
+        # Toggle mute
+        pactl set-sink-mute @DEFAULT_SINK@ toggle
+        vol="$(get_volume)"
+        send_notification $vol
+        exit 0
+        ;;
+    up)
+        vol=$(calc_volume "+" "${2:-2}")
+        ;;
+    down)
+        vol=$(calc_volume "-" "${2:-2}")
+        ;;
+    set)
+        vol="${2:-50}"
+        ;;
+    *)
+        echo "Usage: $0 up|down|mute|set ammount[optional]"
+        exit 1
+        ;;
+esac
+
+if [ "$vol" -gt 100 ]; then
+    vol=100
+elif [ "$vol" -lt 0 ]; then
+    vol=0
+fi
+pactl set-sink-volume @DEFAULT_SINK@ "${vol}%"
+send_notification "$vol"

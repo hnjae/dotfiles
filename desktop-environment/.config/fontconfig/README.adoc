@@ -1,0 +1,50 @@
+= Font to install
+
+* Unicode Font
+** 한자 (일본식 자형)
+*** ttf-hanazono (sans-serief)(확장 A~F 영역 폰트)
+*** http://ko.glyphwiki.org/wiki/Group:cutra_AppendingToHanaMin[cutra_AppendingToHanaMin (확장 G 영역 폰트)]
+*** ttf-plangothic (serif)
+** others
+*** ttf-tibetan-machine (Tibetan Font)
+*** ttf-jomolhari (Tibetan 종카 문자)
+*** lohit-fonts (Indic TrueType Fonts)(Oriya Fonts)
+*** Paduk Fonts (Miyanma)
+
+* For MS font subsititution
+** ipa-fonts ttf-liberation ttf-caladea ttf-carlito
+** ttf-gelasio-ib ttf-selawik ttf-tahoma
+
+* Nerd fonts
+** ttf-nerd-fonts-symbols-2048-em-mono
+** ttf-meslo-nerd-font-powerlevel10k
+** nerd-fonts-meslo
+
+* Emoji
+** otf-openmoji
+
+* Fonts not in Arch repository
+** A시네마 (KoreanCNML)
+** HCR
+** KoPub
+
+run `+fc-cache -vf+` to load fonts
+
+https://uncyclopedia.kr/wiki/%EB%8F%84%EC%9B%80%EB%A7%90:%EC%9C%A4%ED%9D%AC%EC%BD%94%EB%93%9C_%ED%8A%B9%EC%88%98_%EB%AC%B8%EC%9E%90[백괴사전 윤희코드 특수 문자] 링크 참고
+
+= Metric compatible font list
+.MS Fonts (/usr/share/fontconfig/conf.avail/30-metric-aliases.conf)
+----
+Arial          : Liberation Sans
+Times New Roman: Liberation Serif
+Courier New    : Liberation Mono
+Arial Narrow   : Liberation Sans Narrow
+Georgia        : Gelasio
+Cambria        : Caladea
+Calibri        : Carlito
+Symbol         : SymbolNeu (not exists in AUR or arch repo 2020-11-07)
+
+MS UI Fonts (not assigned)
+Segoe UI       : Selawik
+Tahoma         : ttf-tahoma
+----

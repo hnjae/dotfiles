@@ -1,0 +1,823 @@
+# i3 config file (v4)
+#
+# Please see https://i3wm.org/docs/userguide.html for a complete reference!
+#
+# This config file uses keycodes (bindsym) and was written for the QWERTY
+# layout.
+#
+# To get a config file with the same key positions, but for your current
+# layout, use the i3-config-wizard
+#
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# DO NOT TOUCH THIS FILE
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# comm.variables
+################################################################################
+
+### Variables
+set $border_px 2
+
+## Logo key. Use Mod1 for Alt. Mod4 for super
+set $mod Mod4
+set $execi exec --no-startup-id
+set $exec_alwaysi exec_always --no-startup-id
+
+# Home row direction keys, like vim
+set $left h
+set $down j
+set $up k
+set $right l
+
+# set $term footclient
+# set $term foot
+set $term qterminal
+# set $term wezterm
+
+# set $term gnome-terminal
+# set $term termite
+# set $term $TERMINAL
+
+# Your preferred application launcher
+# Note: pass the final command to swaymsg so that the resulting window can be opened
+# on the original workspace that the command was run on.
+# set $menu dmenu_path | dmenu | xargs swaymsg exec --
+
+# NOTE: DO NOT USE "" to set executable variables : i3 reports error
+set $menu "albert show"
+set $clipboard clipmenu -font "Monospace 26" -hide-scrollbar
+set $emoji rofi -show emoji -modi emoji
+# set $launcher "$HOME/.config/rofi/launchers/ribbon/launcher.sh"
+set $classic_menu $HOME/.local/bin/__rofi-launcher
+set $powermenu $HOME/.local/bin/__rofi-power-menu
+set $setting_menu $HOME/.local/bin/__rofi-settings
+set $program-relauncher $HOME/.local/bin/__program-relauncher
+
+# vim:ft=conf
+# i3wm.var.conf
+##############################
+
+# Overrides
+set $border_px 3
+# set $term qterminal
+
+set $term wezterm-gui
+# set $term alacritty
+# set $term gnome-terminal
+# comm.autostart.conf
+###################################################################################
+
+# Polkit Agent
+# exec_always lxqt-policykit-agent
+
+# Gnome - Keyring
+exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=pkcs11
+exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=secrets
+exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=ssh
+
+# geoclue: xdg-desktop-portal 의존 패키지
+# exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
+# exec --no-startup-id /usr/lib/pam_kwallet_init
+
+# exec --no-startup-id ~/.config/sway/scripts/xdg-desktop-portal-fix.sh
+# exec --no-startup-id pcmanfm-qt -d
+
+
+# vim:ft=conf
+# comm.gtk-theme
+# vim:ft=conf
+################################################################################
+# exec_always gsettings set org.gnome.desktop.interface icon-theme 'Adwaita'
+
+$exec_alwaysi gsettings set org.gnome.desktop.interface icon-theme 'Newaita-dark'
+$exec_alwaysi gsettings set org.gnome.desktop.interface icon-theme 'We10X-dark'
+$exec_alwaysi gsettings set org.gnome.desktop.interface cursor-theme 'Capitaine-cursors-light'
+$exec_alwaysi gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+$exec_alwaysi gsettings set org.gnome.desktop.interface document-font-name 'Sans Serif 11'
+$exec_alwaysi gsettings set org.gnome.desktop.interface font-name 'Sans Serif 10'
+$exec_alwaysi gsettings set org.gnome.desktop.interface monospace-font-name 'Monospace 10'
+$exec_alwaysi gsettings set org.gnome.desktop.wm.preferences button-layout 'appmenu'
+$exec_alwaysi gsettings set org.gnome.settings-daemon.plugins.xsettings overrides "{'Gtk/IMModule':<'fcitx5'>}"
+# i3wm.autostart
+
+$exec_alwaysi "$HOME/.local/bin/__xrandr-auto"
+# i3wm.gtk-settings
+################################################################################
+
+$exec_alwaysi gsettings set org.gnome.desktop.interface scaling-factor 2
+$exec_alwaysi gsettings set org.gnome.desktop.interface cursor-size 48
+
+# exec_always --no-startup-id gsettings set org.gnome.settings-daemon.plugins.xsettings overrides "{'Gdk/WindowScalingFactor': <2>}"
+# comm.theme
+################################################################################
+
+# gruvbox theme (by me)
+
+client.focused           #458588 #458588 #FFFFFF
+
+# 353535
+client.focused_inactive  #353535 #353535 #eeeeec
+client.unfocused         #424242 #424242 #eeeeec
+client.urgent            #cc241d #cc241d #d3869b
+
+# theme (Adwaita-dark from https://gist.github.com/voodoojello/9138ed6f43d1a022a7e41033eca69427)
+#                        border     bg         fg         indicator  child_border
+# client.focused           #15539e    #15539e    #e0e0e0    #00ff00    #202332
+# client.focused_inactive  #383c4a    #383c4a    #e0e0e0    #00ff00    #202332
+# client.unfocused         #383c4a    #383c4a    #808080    #00ff00    #202332
+# client.urgent            #383c4a    #900000    #ffffff    #00ff00    #202332
+# client.placeholder       #383c4a    #0c0c0c    #ffffff    #00ff00    #202332
+client.background        #282828
+# i3wm.theme
+################################################################################
+
+gaps inner 4
+# smart_borders on : deprecated?? 2021-11-04 Not Listed in docs
+# hide_edge_borders --i3 none # i3 에서는 작동하지 않음.
+
+font pango:FontAwesome, monospace 10.1
+# font pango:MesloLGS Nerd Font Mono 21
+# Pretendard 19
+
+# border & floating
+# default_border pixel 5
+# default_border normal|none|pixel <px>
+# default_border pixel $border_px
+default_border pixel $border_px
+# workspace-and-settings
+################################################################################
+
+focus_follows_mouse no
+# = Workspaces =
+set $ws1 "1 "
+set $ws2 "2 "
+set $ws3 "3 "
+set $ws4 "4 "
+set $ws5 "5 "
+set $ws6 "6 "
+set $ws7 "7 "
+set $ws8 "8 "
+set $ws9 "9 "
+set $ws10 "10 "
+#
+# nf-fa 먼저 쓰자
+#nf-mdi 쓰면 아이콘이 숫자 보다 먼저 뜨는 이상 현상 뜰때가 있음.특히: ﮷
+# putting workspace on specific screens
+workspace $ws1 output primary
+workspace $ws2 output primary
+workspace $ws3 output primary
+workspace $ws4 output primary
+# workspace $ws5 output primary
+# workspace $ws6 output primary
+# workspace $ws7 output primary
+# workspace $ws8 output primary
+# workspace $ws9 output eDP-1
+# workspace $ws10 output DP-2.1
+# comm.basic-key-bindings
+################################################################################
+
+# == Basics ==
+# Kill focused window
+bindsym $mod+Shift+q kill
+bindsym Control+Shift+q kill
+bindsym $mod+Pause kill
+
+# Start your launcher
+bindsym $mod+space exec --no-startup-id $menu
+bindsym Control+space exec --no-startup-id $menu
+bindsym $mod+backspace exec --no-startup-id $menu
+bindsym Mod1+Mod4+n exec --no-startup-id $classic_menu
+# bindsym $mod+u exec --no-startup-id ulauncher --no-window-shadow
+
+# Drag floating windows by holding down $mod and left mouse button.
+# Resize them with right mouse button + $mod.
+# Despite the name, also works for non-floating windows.
+# Change normal to inverse to use left mouse button for resizing and right
+# mouse button for dragging.
+floating_modifier $mod
+
+# == Moving Window around ==
+# Move your focus around
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+# Or use $mod+[up|down|left|right]
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move the focused window with the same, but add Shift
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+# Ditto, with arrow keys
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# switch workspaces
+bindsym $mod+1	workspace $ws1
+bindsym $mod+2	workspace $ws2
+bindsym $mod+3	workspace $ws3
+bindsym $mod+4	workspace $ws4
+bindsym $mod+5	workspace $ws5
+bindsym $mod+6	workspace $ws6
+bindsym $mod+7	workspace $ws7
+bindsym $mod+8	workspace $ws8
+bindsym $mod+9	workspace $ws9
+bindsym $mod+0	workspace $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1	move container to workspace $ws1
+bindsym $mod+Shift+2	move container to workspace $ws2
+bindsym $mod+Shift+3	move container to workspace $ws3
+bindsym $mod+Shift+4	move container to workspace $ws4
+bindsym $mod+Shift+5	move container to workspace $ws5
+bindsym $mod+Shift+6	move container to workspace $ws6
+bindsym $mod+Shift+7	move container to workspace $ws7
+bindsym $mod+Shift+8	move container to workspace $ws8
+bindsym $mod+Shift+9	move container to workspace $ws9
+bindsym $mod+Shift+0	move container to workspace $ws10
+
+# TODO fix this
+# bindsym $mode+Control+l move workspace to output right
+#bindsym $mode+p         move workspace to output HDMI1
+# bindsym $mode+Control+h move workspace to output left
+# END == Moving Window around == }}}
+# == Resizing Containers ==
+mode "resize" {
+	bindsym h resize shrink width 20px
+	bindsym j resize grow height 20px
+	bindsym k resize shrink height 20px
+	bindsym l resize grow width 20px
+
+	bindsym b resize shrink width 80px
+	bindsym Control+d resize grow height 80px
+	bindsym Control+u resize shrink height 80px
+	bindsym w resize grow width 80px
+
+	# Ditto, with arrow keys
+	bindsym Left resize shrink width 20px
+	bindsym Down resize grow height 20px
+	bindsym Up resize shrink height 20px
+	bindsym Right resize grow width 20px
+
+	bindsym 1 resize set width 348px
+	# 'm'inimum width  (80 width of terminal)
+	bindsym m resize set width 800px
+	bindsym 2 resize set width 800px
+	# (84 width of terminal)
+	bindsym 3 resize set width 874px
+
+	# vim one pane + tagbar
+	bindsym 7 resize set width 1254px
+	# vim two pane
+	bindsym 8 resize set width 1705px
+
+	# 1/3 width
+	bindsym t resize set width 33ppt
+	bindsym Shift+t resize set width 66ppt
+
+	# 2/5 width
+	bindsym f resize set width 40ppt
+	bindsym Shift+f resize set width 60ppt
+
+	# 45% width
+	bindsym n resize set width 45ppt
+	bindsym Shift+n resize set width 55ppt
+
+	# Return to default mode
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+	bindsym Backspace mode "default"
+}
+bindsym $mod+r mode "resize"
+
+#
+# == Layout stuff ==
+#
+# You can "split" the current object of your focus with
+# $mod+b or $mod+v, for horizontal and vertical splits
+# respectively.
+bindsym $mod+b splitv
+bindsym $mod+v splith
+
+# Switch the current container between different layout styles
+bindsym $mod+s layout stacking
+bindsym $mod+t layout tabbed
+bindsym $mod+e layout toggle all
+# bindsym $mod+e layout toggle split
+
+# Make the current focus fullscreen
+bindsym $mod+Shift+f fullscreen
+
+# Toggle the current focus between tiling and floating mode
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+backspace floating toggle
+# bindsym ScrollLock floating toggle
+
+# Swap focus between the tiling area and the floating area
+bindsym $mod+control+space focus mode_toggle
+bindsym $mod+control+backspace focus mode_toggle
+# not default
+bindsym $mod+g focus mode_toggle
+
+# Move focus to the parent container
+bindsym $mod+a focus parent
+bindsym $mod+x focus child # default Mod1+d
+
+
+#
+# == Scratchpad ==
+#
+# Sway has a "scratchpad", which is a bag of holding for windows.
+# You can send windows there and get them back later.
+
+# Move the currently focused window to the scratchpad
+bindsym $mod+Shift+grave move scratchpad
+# grave
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+# TODO: 1password 는 전체 scratchpad 에서 안보이게 설정하기, regex 잘 건드리면 될 것 같다.  <2021-08-19, Hyunjae Kim> #
+
+bindsym $mod+grave scratchpad show
+# bindsym $mod+p [instance="1password"] scratchpad show
+bindsym $mod+p exec --no-startup-id "$HOME/.local/bin/__show-1password"
+# bindsym $mod+o exec --no-startup-id qalc
+# n
+#
+
+bindsym $mod+Control+l move workspace to output left
+bindsym $mod+Control+h move workspace to output right
+
+#
+# bindsym $mod+w exec "__i3helper" "moveToParent"
+# Advanced Key bindings
+################################################################################
+
+# Programs
+
+
+# == App Launcher ==
+# Start a terminal
+bindsym $mod+Return exec $term
+bindsym $mod+n exec termite -e nvim
+
+
+# Shortcut (Mod4: Super)
+set $app_launcher1 Mod4+Mod1
+set $app_launcher2 Hangul+Mod1
+bindsym $app_launcher1+b exec firefox
+bindsym $app_launcher2+b exec firefox
+bindsym $app_launcher1+f exec pcmanfm-qt
+bindsym $app_launcher2+f exec pcmanfm-qt
+bindsym $app_launcher1+r exec $term -e ranger
+bindsym $app_launcher2+r exec $term -e ranger
+bindsym $app_launcher1+w exec $term -e 'ranger "/home/hyunjae/Sync/Library/wiki/"'
+bindsym $app_launcher2+w exec $term -e 'ranger "/home/hyunjae/Sync/Library/wiki/"'
+bindsym $app_launcher1+t exec $term -e 'ranger "/home/hyunjae/Sync/Library/wiki/todo/"'
+bindsym $app_launcher2+t exec $term -e 'ranger "/home/hyunjae/Sync/Library/wiki/todo/"'
+bindsym $app_launcher1+h exec $term -e htop
+bindsym $app_launcher2+h exec $term -e htop
+
+bindsym Control+F9 exec $launcher
+
+
+bindsym Mod1+Mod4+s exec $setting_menu
+bindsym Mod1+Hangul+s exec $setting_menu
+
+# bindsym Control+semicolon exec $clipboard
+# bindsym $mod+c exec $clipboard
+# bindsym $mod+n exec $emoji
+# bindsym $mod+o exec $rofi_pulse sink
+bindsym $mod+o exec "$HOME/.local/bin/__wofi-pulse sink"
+
+# == XF86 Keys (/usr/share/X11/xkb/symbols/inet) ==
+# === Very Common Media Keys (media_common) === {{{
+# bindsym XF86AudioMedia
+bindsym XF86AudioPrev $execi playerctl previous
+bindsym XF86AudioNext $execi playerctl next
+bindsym XF86AudioPlay $execi playerctl play-pause
+bindsym XF86AudioPause $execi playerctl play-pause
+bindsym XF86AudioForward  $execi playerctl position +6
+bindsym XF86AudioRewind   $execi playerctl position -6
+# TODO: xt86 rewind back 도 추가하기 <2021-07-19, Hyunjae Kim> #
+# XF86AudioPlay 랑 XF86AudioPause 는 같은 keycode 로 매핑되어 있는 경우가 많다.
+bindsym XF86AudioStop $execi playerctl stop
+# bindsym XF86Eject $execi playerctl stop
+# XF86AudioStop 랑 XF86Eject 는 같은 keycode 로 매핑되어 있는 경우가 많다.
+bindsym XF86AudioLowerVolume $execi "$HOME/.local/bin/__volume-control down 2"
+bindsym XF86AudioRaiseVolume $execi "$HOME/.local/bin/__volume-control up 2"
+bindsym XF86AudioMute $execi "$HOME/.local/bin/__volume-control mute"
+bindsym XF86AudioMicMute $execi "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
+# === }}}
+# === Popular web navigation Keys (nav_common) === {{{
+bindsym XF86Calculator $execi $HOME/.local/bin/__xf86-launcher calculator
+bindsym XF86Mail       $execi $HOME/.local/bin/__xf86-launcher mail
+bindsym XF86Explorer   $execi $HOME/.local/bin/__xf86-launcher explorer
+bindsym XF86WWW        $execi $HOME/.local/bin/__xf86-launcher www
+bindsym XF86MyComputer $execi $HOME/.local/bin/__xf86-launcher mycomputer
+# bindsym XF86Search $execi _xf86-launcher search
+# bindsym XF86Favorites
+# bindsym XF86Reload
+# bindsym XF86Stop
+# bindsym XF86Forward
+# bindsym XF86Back
+# === }}}
+# === ACPI Standard (acpi_common) === {{{
+# bindsym XF86PowerOff
+# bindsym XF86Standby
+# bindsym XF86WakeUp
+# bindsym XF86Battery
+# bindsym XF86WLAN
+# bindsym XF86Sleep
+# === }}}
+# === Evdev Standardized Keycodes (evdev) === {{{
+# bindsym XF86Copy
+# bindsym XF86Open
+# bindsym XF86Paste
+# bindsym XF86Cut
+bindsym XF86TouchpadToggle $execi "$HOME/.local/bin/__touchpad-toggle"
+bindsym XF86TouchpadOn     $execi "$HOME/.local/bin/__touchpad-toggle on"
+bindsym XF86TouchpadOff    $execi "$HOME/.local/bin/__touchpad-toggle off"
+# bindsym XF86LaunchA
+# bindsym XF86MenuKB
+# bindsym XF86Send
+# bindsym XF86Xfer
+# ==== Rog Key ====
+bindsym XF86Launch1 $execi $setting_menu
+# bindsym XF86LaunchC
+# bindsym XF86LaunchD
+# bindsym XF86LaunchE
+# bindsym XF86LaunchF
+# FN + F4 (AURA Key)
+bindsym XF86Launch3 $execi "playerctl play-pause"
+# FN + F5 (Fan Mark)
+bindsym XF86Launch4 $execi "$HOME/.local/bin/__asusctl-profile"
+# bindsym XF86LaunchB
+# bindsym XF86Launch2
+# bindsym XF86DOS
+# bindsym XF86ScreenSaver
+# bindsym XF86RotateWindows
+# bindsym XF86TaskPane
+# bindsym XF86AudioRecord
+# bindsym XF86Phone
+# bindsym XF86Tools
+# bindsym XF86HomePage
+# bindsym XF86Close
+# bindsym XF86ScrollUp
+# bindsym XF86ScrollDown
+# bindsym XF86New
+# bindsym XF86Suspend
+# bindsym XF86Close
+# bindsym XF86WebCam
+# bindsym XF86AudioPreset
+# bindsym XF86Messenger
+# bindsym XF86Go
+# bindsym XF86Finance
+# bindsym XF86Game
+# bindsym XF86Shop
+bindsym XF86MonBrightnessDown $execi "$HOME/.local/bin/__brightness-control down 5"
+bindsym XF86MonBrightnessUp   $execi "$HOME/.local/bin/__brightness-control up 5"
+bindsym Control+7 $execi "$HOME/.local/bin/__brightness-control down 5"
+bindsym Control+8 $execi "$HOME/.local/bin/__brightness-control up 5"
+# bindsym XF86Send
+# bindsym XF86Reply
+# bindsym XF86MailForward
+# bindsym XF86Save
+# bindsym XF86Documents
+# bindsym XF86Bluetooth
+bindsym XF86MonBrightnessCycle exec \
+    "notify-send i3 'XF86MonBrightnessCycle Not implemented'"
+# bindsym XF86WWAN
+# bindsym XF86RFKill
+# bindsym XF86FullScreen
+# bindsym XF86Keyboard
+# bindsym XF86RotationLockToggle
+# bindsym XF86Launch5
+# bindsym XF86Launch6
+# bindsym XF86Launch7
+# bindsym XF86Launch8
+# bindsym XF86Launch9
+# === }}}
+# === ETC Keycodes === {{{
+# bindsym XF86Terminal
+# bindsym XF86Display
+# bindsym XF86ZoomIn
+# bindsym XF86ZoomOut
+# bindsym XF86ContrastAdjust
+# bindsym XF86BrightnessAdjust
+# bindsym XF86Pictures
+# bindsym XF86LogOff
+# bindsym XF86Spell
+# bindsym XF86Music
+# bindsym XF86Calendar
+# bindsym XF86OfficeHome
+# bindsym XF86Word
+# bindsym XF86Excel
+# bindsym XF86Start
+# bindsym XF86ApplicationLeft
+# bindsym XF86ApplicationRight
+# bindsym XF86ModeLock
+# bindsym XF86iTouch
+# bindsym XF86Launch0
+# bindsym XF86Away
+# bindsym XF86Video
+# bindsym XF86CD
+# bindsym XF86Clear
+# bindsym XF86Suport
+# bindsym XF86Travel
+# bindsym XF86ToDoList
+# bindsym XF86VendorHome
+# bindsym XF86History
+# bindsym XF86AddFavorite
+# bindsym XF86HotLinks
+# bindsym XF86OpenURL
+# bindsym XF86Community
+# bindsym XF86ScrollClick
+# bindsym XF86Q
+# bindsym XF86BackForward
+# bindsym XF86LightBulb
+# bindsym XF86Market
+# bindsym XF86Meeting
+# bindsym XF86News
+# bindsym XF86Book
+# ==== Symplon PaceBook Tablet ==== {{{
+# bindsym XF86RotationPB
+# bindsym XF86SplitScreen
+# bindsym XF86User2KB
+# bindsym XF86RotationKB
+# bindsym XF86User1KB
+# bindsym XF86UserPB
+# bindsym XF86MenuPB
+# ==== }}}
+# === }}}
+# === PC 105 === {{{
+# bindsym XF86KbdLightOnOff
+# FN + F2
+bindsym XF86KbdBrightnessDown \
+    exec brightnessctl --device=asus::kbd_backlight set 1-, \
+    exec "$HOME/.config/i3/scripts/notify_KbdBrightness.sh"
+# FN + F3
+bindsym XF86KbdBrightnessUp \
+    exec brightnessctl --device=asus::kbd_backlight set +1, \
+    exec "$HOME/.config/i3/scripts/notify_KbdBrightness.sh"
+# }}}
+#
+# == Windows Shortcut ==
+# === Screenshot (use flameshot or maim) ===
+# -----------------------------------------------------------------------------
+# Capture Entire Screen to clipboard
+# bindsym Print exec flameshot full --clipboard
+bindsym Print exec "$HOME/.local/bin/__screenshot"
+bindsym Mod1+Print exec flameshot gui
+bindsym Mod4+Print exec flameshot gui
+# Window + PrintScreen: Capture Screen and save it to file
+# bindsym Mod4+Print exec "$HOME/.config/i3/scripts/scrot_fullscreen_file.sh"
+
+# Alt + PrintScreen: Capture Window to Clipboard
+# 2021-05-22 Mod1+Print does not work (키보드 문제인듯)
+# bindsym Mod1+Print exec "$HOME/.config/sway/scripts/screenshot.sh window clipboard"
+# bindsym Control+Print exec "$HOME/.config/i3/scripts/maim_activewindow_clipboard.sh"
+# bindsym Mod1+Mod4+Print exec "$HOME/.config/i3/scripts/maim_activewindow.sh" file
+bindsym Control+Print exec "__screenshot window file"
+
+# FN + F6: Super + Shift + s (Mod4: Super)
+bindsym Mod4+Shift+s exec flameshot gui --path "$HOME/Pictures"
+bindsym Mod1+Shift+s exec flameshot gui --path "$HOME/Pictures"
+# FN + F6: Alt + Shift + r (mode
+bindsym Mod1+Shift+r exec flameshot gui --path "$HOME/Pictures"
+# bindsym Mod4+Shift+r exec flameshot gui --path "$HOME/Pictures"
+
+# FN + F9: Alt_L + p
+# -----------------------------------------------------------------------------
+# bindsym Mod1+p exec arandr
+# i3-key-bindings
+################################################################################
+
+# bindsym $mod+Shift+c reload, $execi "notify-send i3 reloaded"
+# bindsym $mod+Shift+c $execi update-i3-config.sh, reload, $execi "notify-send i3 reloaded"
+# bindsym $mod+Shift+r $execi update-i3-config.sh, restart, $execi "notify-send i3 restarted"
+#
+bindsym $mod+Shift+c $execi "$HOME/.local/bin/__i3-update", reload
+bindsym $mod+Shift+r $execi "$HOME/.local/bin/__i3-update", restart
+# X11 Assign Windows
+################################################################################
+
+assign [class="Spotify"] → $ws10
+assign [instance="spotify"] → $ws10
+assign [class="pomotroid"] → $ws7
+# spotify not working 2021-05-31
+# assign [class="firefox" title="todoist.com"] → $ws8
+assign [instance="calendar.google.com__calendar"] → $ws8
+# exec --no-startup-id sleep 30; "$HOME/.local/share/applications/Todoist (WebApp).desktop"
+assign [instance="Mail" class="Thunderbird"] → $ws7
+# assign [class="kakaotalk.exe"] → $ws9
+# assign [class="kakaotalk.exe" window_type="dialog" title="KakaoTalkShadowWnd"]
+# assign [class="kakaotalk.exe" window_type="dialog" title="KakaoTalkEdgeWnd"]
+# Windows Settings (xprop)
+################################################################################
+
+# Doc
+# -----------------------------------------------------------------------------
+# * instance, class: WM_CLASS (instance 는 wm_class 의 첫번째 부분)
+# * window_role: WM_WINDOW_RORE
+# * window_type: _NET_WM_WINDOW_TYPE
+# * title: _NET_WM_NAME / WM_NAME
+# resizing을 한줄로 쓰면 기존 focus 윈도우가 영향을 받음.
+# 	(sway 에서는 안 이랬던것 같은데··? 2020-11-17)
+# GNOME Apps ignore above by _MOTIF_WM_HINTS
+# move absolute position center
+# -----------------------------------------------------------------------------
+# for_window [floating] move position center
+for_window [instance=".*"] border pixel $border_px
+
+# == Border pixel ==
+# -----------------------------------------------------------------------------
+
+# for_window [class="" title=" *"] border pixel $border_px # xprop
+for_window [instance="YACReader"] border normal $border_px
+for_window [instance="mcomix"] border normal $border_px
+for_window [instance="Lutris"] border pixel $border_px
+for_window [class="Steam"] border pixel $border_px
+for_window [class="Eog"] border pixel $border_px
+for_window [class="pomotroid"] border pixel $border_px
+for_window [class="Lutris"] \
+	floating enable, border pixel $border_px
+
+# == Floating Window role / type ==
+# -----------------------------------------------------------------------------
+# role: WM_WINDOW_RORE, type: _NET_WM_WINDOW_TYPE
+for_window [class="Kvantum Manager"] floating enable
+for_window [class="Ulauncher"] floating enable, border none
+for_window [class="albert"] floating enable, border none, move position center, move up 300px
+for_window [class="kdeconnect.app"] floating enable
+for_window [class="Syncthing GTK"] floating enable, \
+	resize set width 1160px height 500px, move position center
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_type="splash"] floating enable, move position center, \
+	border none
+# window_role="browser-window": e.g. 1password
+for_window [window_role="browser-window"] border $border_px
+
+
+# == Open Windows float ==
+# -----------------------------------------------------------------------------
+for_window [class="Lxappearance|qt5ct"] floating enable
+for_window [class="Lxappearance|qt5ct"] resize set width 1px height 1px
+for_window [class="Arandr"] floating enable
+for_window [class="Blueman-.*"] floating enable
+for_window [class="Pavucontrol"] floating enable
+for_window [class="Nm-connection-editor"] floating enable
+for_window [class="Gcolor3"] floating enable, border pixel $border_px
+for_window [class="File-roller|Xarchiver"] floating enable
+for_window [class="zoom"] floating enable
+for_window [class="fcitx5-config-qt"] floating enable
+for_window [class="Ice"] floating enable
+for_window [class="org.remmina.Remmina" title="Remmina Remote Desktop Client"] floating enable
+for_window [class="Virt-manager" title="Virtual Machine Manager"] floating enable
+for_window [title="Event Tester"] floating enable # xev
+for_window [class="kakaotalk.exe"] floating enable
+for_window [class="kakaotalk.exe"] resize set width 100px height 600px
+for_window [class="anbox"] floating enable
+for_window [class="Nwg-menu"] floating enable
+# Steam News
+for_window [class="Steam" title="Steam - .*"] floating enable, resize set width 1px
+
+# == Disable Windows float ==
+for_window [class="pomotroid"] floating disable
+for_window [instance="pomotroid"] floating disable
+for_window [class="1Password" title=".* 1Password"] resize set width 2000px height 1400px, move position center
+for_window [class="1Password"] move scratchpad, scratchpad show
+# comm.x11-for-window-popup
+###############################################################################
+
+for_window [window_role="GtkFileChooserDialog"] resize set width 1600px
+for_window [class="firefox" title="About Mozilla Firefox"] floating enable
+for_window [class="firefox" title="Picture-in-Picture"] floating enable, \
+	border pixel $border_px
+for_window [class="1Password" title="Keyboard Shortcuts"] floating enable, \
+	move position mouse
+for_window [class="1Password" title="1Password"] floating enable, \
+	resize set width 1px height 1px, \
+	sticky enable
+for_window [class="Anki" title="환경 설정"] floating enable
+for_window [class="firefox" title="네이버페이 비밀번호 — Mozilla Firefox"] \
+	floating enable
+for_window [class="Thunderbird" window_role="Manager|filterlist|Preferences|EventSummaryDialog|EventDialog|addressbookAddWindow"] \
+	floating enable
+for_window [class="Steam" title="Steam - News (.*)|Friends List|KOMOJU|Steam Library Folders"] floating enable
+for_window [class="1Password" title="Two-factor authentication"] \
+	floating enable
+# vim:ft=conf
+# comm.late-autostart
+################################################################################
+exec_always --no-startup-id brightnessctl --device=asus::kbd_backlight set 3
+
+# dunst 실행안해도 자동으로 불러들이는 듯 (2020-12-06)
+# KDE 패키지 여럿 설치한 후 dunst 자동 실행 안됨 (2021-11-03)
+# dunst는 i3 restart 해도 살아있어서 다시 시작할 필요 없음 (2021-11-03)
+exec_always --no-startup-id $program-relauncher dunst
+
+#### DE Features
+
+# set program-relauncher.sh "$HOME/.local/bin/program-relauncher.sh"
+# exec_always --no-startup-id __program-relauncher.sh __sway-output-setup
+
+# $execi dunst # dunst 실행안해도 자동으로 불러들이는 듯 (2020-12-06)
+# KDE 패키지 여럿 설치해서 그런가 dunst 자동 실행 안됨 (2021-11-03)
+# dunst는 i3 restart 해도 살아있어서 다시 시작할 필요 없음 (2021-11-03)
+# exec --no-startup-id dunst
+
+# exec --no-startup-id pcmanfm --daemon-mode
+# exec --no-startup-id lxqt-policykit-agent
+# exec --no-startup-id clipmenud
+# exec_always --no-startup-id clipcatd
+
+# $execi autocutsel -fork
+# $execi autocutsel -selection PRIMARY -fork
+
+###
+# exec --no-startup-id gammastep
+# exec_always --no-startup-id __ime-launcher
+exec_always --no-startup-id fcitx5 -rd
+
+
+# Late Start
+#### exec_always --no-startup-id sleep 1; blueman-applet
+# exec --no-startup-id sleep 1; QT_FONT_DPI=200 dropbox
+
+# icon size does not match
+# exec --no-startup-id alacritty
+# exec --no-startup-id /usr/lib/evolution-data-server/evolution-alarm-notify
+
+
+# exec_always --no-startup-id program-relauncher ulauncher --hide-window
+exec_always --no-startup-id $program-relauncher blueman-applet
+exec_always --no-startup-id $program-relauncher nm-applet --indicator
+exec_always --no-startup-id $program-relauncher albert
+# exec_always --no-startup-id program-relauncher firewall-applet "" 2
+exec_always --no-startup-id $program-relauncher 1password --silent
+
+# exec_always --no-startup-id program-relauncher copyq
+
+# exec_always --no-startup-id __program-relauncher.sh kdeconnect-indicator
+# exec --no-startup-id kdeconnect
+# exec_always --no-startup-id __program-relauncher.sh syncthing-gtk --minimized
+
+# exec --no-startup-id program-relauncher.sh kmail "" 2
+# exec --no-startup-id spotifyd
+# exec systemctl --user start spotifyd
+
+
+##################
+# python 프로그램이라 _program-relauncher 안먹음
+# exec sleep 2; gammastep-indicator
+
+# exec_always --no-startup-id __program-relauncher.sh gammastep-indicator
+
+####
+exec_always --no-startup-id brightnessctl --device=asus::kbd_backlight set 0
+# i3wm.late-autostart
+################################################################################
+
+# exec_always --no-startup-id setxkbmap -layout us -variant colemak_dh_matrix -option altwin:swap_alt_win
+
+# Lockscreen
+# exec --no-startup-id xss-lock -n /usr/lib/xsecurelock/dimmer -l -- xsecurelock
+
+# Backgrounds
+# $exec_alwaysi feh --bg-fill $HOME/.local/share/wallpaper.jpg
+$exec_alwaysi feh --bg-tile /usr/share/backgrounds/gnome/adwaita-d.webp
+
+# NOTE: picom 이랑 xrandr 이랑 붙어 있으면 화면 이상하게 뜸. 2020-11-17
+$execi picom --experimental-backends --daemon
+
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
+exec --no-startup-id pasystray
+
+# == Legacy X Server Setting Code (Disabled) ==
+# nature scroll & lefthanded mode
+# do not use xinput because xinput tool had issue (different behavior for different program)
+# $execi_always xinput set-prop "PixArt HP USB Optical Mouse" "libinput Natural Scrolling Enabled" 1
+# $execi_always xinput set-prop "PixArt HP USB Optical Mouse" "libinput Left Handed Enabled" 1
+# $execi_always setxkbmap -option altwin:swap_alt_win
+# exec_always --no-startup-id xrandr --output DisplayPort-1 --scale-from 4512x2538
+# exec xrandr --output DisplayPort-1 --scale 1.22x1.22 (2/ 1.75 = 1.14 (if you want 1.75%))
+# MEMO: 96.55 DPI for 27inch monitor (x1.702) 2256x1269
+# MEMO: 96.38 DPI for 24inch monitor 2016x1134
+# MEMO: 97.03 DPI for 14inch monitor 1184x666
+# 참고 자료: https://ricostacruz.com/til/fractional-scaling-on-xorg-linux
+# desktop-app
+################################################################################
+
+# vim:ft=conf
+# exec --no-startup-id evolution
+# exec --no-startup-id spot

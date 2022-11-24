@@ -1,0 +1,60 @@
+[options]
+cursor_blink = off
+cursor_shape = block
+font = Monospace 11
+scrollbar = off
+allow_bold = true
+bold_is_bright = true
+dynamic_title = true
+clickable_url = true
+hyperlinks = true
+search_wrap = true
+smart_copy = false
+
+gtk_dark_theme=true
+icon_name = utilities-terminal
+
+[colors]
+# scheme: "codedark"
+# author: "Tomas Iser (https://github.com/tomasiser)"
+
+# special
+foreground      = #d4d4d4
+foreground_bold = #d4d4d4
+cursor          = #d4d4d4
+background      = #1e1e1e
+
+# black
+color0  = #1e1e1e
+color8  = #3c3c3c
+
+# red
+color1  = #d16969
+color9  = #d16969
+
+# green
+color2  = #608b4e
+color10 = #608b4e
+
+# yellow
+color3  = #d7ba7d
+color11 = #d7ba7d
+
+# blue
+color4  = #569cd6
+color12 = #569cd6
+
+# magenta
+color5  = #c586c0
+color13 = #c586c0
+
+# cyan
+color6  = #9cdcfe
+color14 = #9cdcfe
+
+# white
+color7  = #d4d4d4
+color15 = #ffffff
+
+
+# vim: ft=dosini cms=#%s

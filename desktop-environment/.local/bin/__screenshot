@@ -1,0 +1,44 @@
+#!/usr/bin/sh
+
+fail=1
+if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
+    case $1 in
+        window)
+            case $2 in
+                clipboard)
+                    grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.focused?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"')" "$HOME/Pictures/srerstes".png
+                    ;;
+                file)
+                    grim "$HOME/Pictures/$(date +%s).png" && fail=0
+                    ;;
+            esac
+            ;;
+        screen)
+            grim "$HOME/Pictures/$(date +%s).png" && fail=0
+            ;;
+    esac
+else
+    case $1 in
+        window)
+            ;;
+        screen)
+            case $2 in
+                clipboard)
+                    maim -i $(xdotool getactivewindow) --hidecursor \
+                        | xclip -selection clipboard -t image/png \
+                        && fail=0
+                    ;;
+                file)
+                    maim -i $(xdotool getactivewindow) -f png -m 10  --hidecursor  "$HOME/Pictures/$(date +%s)" \
+                        && fail=0
+                    ;;
+            esac
+            ;;
+        esac
+fi
+
+if [ $fail = 1 ]; then
+    notify-send --app-name=screenshot --icon=screenshot-app-symbolic,screenshot-app,screenshot --urgency=critical "Screen Capture" "FAILED to capture $1 to $2"
+else
+    notify-send --app-name=screenshot --icon=screenshot-app-symbolic,screenshot-app,screenshot "Screen Capture" "$1 captured to $2"
+fi

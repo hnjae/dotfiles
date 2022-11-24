@@ -1,0 +1,153 @@
+# Get editor completions based on the config schema
+# "$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+$cmd_duration\
+$line_break\
+$python\
+$character"""
+
+# Inserts a blank line between shell prompts
+add_newline = true
+
+[directory]
+read_only = " "
+style = "blue"
+format = "[$path]($style)[$read_only]($read_only_style)"
+
+[character]
+success_symbol = "[❯](purple)"
+error_symbol = "[❯](red)"
+vicmd_symbol = "[❮](green)"
+
+[cmd_duration]
+min_time = 500
+format = " [$duration]($style)"
+style = "yellow"
+
+# Disable the package module, hiding it from the prompt completely
+# [package]
+# disabled = true
+
+[aws]
+symbol = "  "
+
+[buf]
+symbol = " "
+
+[c]
+symbol = " "
+
+[conda]
+symbol = " "
+
+[dart]
+symbol = " "
+
+[docker_context]
+symbol = " "
+
+[elixir]
+symbol = " "
+
+[elm]
+symbol = " "
+
+[git_branch]
+symbol = ""
+format = " [$symbol $branch]($style)"
+style = "bright-black"
+
+[git_commit]
+disabled=false
+
+[git_metrics]
+# The git_metrics module will show the number of added and deleted lines in the current git repository.
+disabled=true
+
+[git_status]
+disabled=false
+# format='[${ahead_behind}]($style) ([${all_status}]($style))'
+style="cyan"
+format = " [[($conflicted$untracked$modified$staged$renamed$deleted)](red) ($ahead_behind$stashed)]($style)"
+conflicted = "=${count}"
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+up_to_date = "[✓](bold green)"
+untracked = "?${count}"
+stashed = "${count}"
+modified = "!${count}"
+staged = '[+${count}](bold green)'
+renamed = "»${count}"
+deleted = "✘${count}"
+
+
+[golang]
+symbol = " "
+
+[haskell]
+symbol = " "
+
+[hg_branch]
+symbol = " "
+
+[java]
+symbol = " "
+
+[julia]
+symbol = " "
+
+[memory_usage]
+symbol = " "
+
+[nim]
+symbol = " "
+
+[nix_shell]
+symbol = " "
+
+[nodejs]
+symbol = " "
+
+[package]
+symbol = " "
+
+[python]
+symbol = " "
+disabled = false
+# format = "[$virtualenv]($style) "
+style = "bright-black"
+
+[spack]
+symbol = "🅢 "
+
+[rust]
+symbol = " "
+
+# [sudo]
+# disabled = false
+
+[kubernetes]
+disabled = false
+
+[shell]
+disabled = true
+fish_indicator = ""
+bash_indicator = "bsh"
+zsh_indicator = "zsh"
+
+[username]
+disabled = false
+
+[jobs]
+disabled = false
+
+[localip]
+disabled = false

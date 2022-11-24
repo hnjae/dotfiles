@@ -1,0 +1,77 @@
+#!/usr/bin/sh
+
+# X11 Specific Profile
+# SDDM Does not source this file while wayland session.
+# Loads After .profile
+
+# export MOZ_DISABLE_RDD_SANDBOX=1
+
+# else
+# 	cur_mode=`optimus-manager --print-mode`
+# 	[ cur_mode = "Current GPU mode : nvidia"]
+# fi
+
+
+# [ "$XDG_SESSION_TYPE" != "x11" ] && exit 0
+#
+# export BEMENU_SCALE=2
+#
+# # TODO: Unset 할 필요 있을까? Session Specific 한 건지 아닌지 확인할 필요가 있다. <2021-11-03, Hyunjae Kim> #
+# # unset GDK_SCALE
+# # unset GDK_DPI_SCALE
+# # unset QT_SCALE_FACTOR
+# # unset QT_FONT_DPI
+# # unset GDK_SCALE
+# # unset QT_SCALE_FACTOR
+# # unset GDK_DPI_SCALE
+# # unset QT_AUTO_SCREEN_SET_FACTOR
+# # unset QT_SCREEN_SCALE_FACTORS
+# # unset PLASMA_USE_QT_SCALING
+# # unset KDE_APPLICATIONS_AS_SCOPE
+# # unset MOZ_X11_EGL
+# # unset MOZ_ENABLE_WAYLAND
+# # unset GDK_BACKEND
+# # unset QT_QPA_PLATFORM
+# # unset CLUTTER_BACKEND
+# # unset SDL_VIDEODRIVER
+# # unset WINIT_UNIX_BACKEND
+# # unset BEMENU_BACKEND
+# # export BEMENU_BACKEND=x11
+# # unset QT_QPA_PLATFORMTHEME
+#
+# # XDG_SESSION_TYPE 은 xprofile 부르기 전에 선언 되는 것 같지 않다.
+# # if [ "$XDG_SESSION_TYPE" = "X11" ]; then
+# # if [ "$XDG_SESSION_TYPE" = "X11" ]; then
+# export MOZ_X11_EGL=1
+#
+# if [ \
+# 	"$XDG_CURRENT_DESKTOP" = "KDE" \
+# 	-o "$XDG_SESSION_DESKTOP" = "KDE" \
+# 	-o "$DESKTOP_SESSION" = "plasma" \
+# 	]; then
+# 	export PLASMA_USE_QT_SCALING=1
+# elif [ \
+# 	"$XDG_CURRENT_DESKTOP" = "GNOME" \
+# 	-o "$XDG_SESSION_DESKTOP" = "gnome" \
+# 	-o "$DESKTOP_SESSION" = "gnome" \
+# 	-o "$GDMSESSION" = "gnome" \
+# 	]; then
+# 	export QT_QPA_PLATFORMTHEME="gnome"
+# else
+# 	export QT_QPA_PLATFORMTHEME="gnome"
+# 	export GDK_SCALE=2
+# 	# export GDK_DPI_SCALE=0.5
+# 	# export GTK_CSD=0
+# 	export QT_SCALE_FACTOR=2
+# 	# export QT_FONT_DPI=96
+# 	# export QT_AUTO_SCREEN_SET_FACTOR=0
+#         # export QT_AUTO_SCREEN_SCALE_FACTOR=1
+# fi
+#
+#
+# # export USERXSESSION="$XDG_CACHE_HOME/X11/xsession"
+# # export USERXSESSIONRC="$XDG_CACHE_HOME/X11/xsessionrc"
+# # export ALTUSERXSESSION="$XDG_CACHE_HOME/X11/Xsession"
+# # export ERRFILE="$XDG_CACHE_HOME/X11/xsession-errors"
+#
+# # vim:ft=sh

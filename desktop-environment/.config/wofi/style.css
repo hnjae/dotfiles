@@ -1,0 +1,30 @@
+*{
+	font-family: monospace;
+}
+
+#text{
+	font-size: 16px;
+}
+
+#input{
+    	margin: 4px;
+	font-size: 16px;
+}
+
+#outer-box {
+    margin: 4px;
+    padding:10px;
+    /* background-color: #383C4A; */
+}
+#inner-box {
+    padding: 4px;
+}
+
+#text {
+	padding: 4px;
+	/* color: white; */
+}
+
+/* #entry:nth-child(even){ */
+/*     background-color: #404552; */
+/* } */

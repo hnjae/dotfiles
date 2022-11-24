@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+if ! which stow > /dev/null 2>&1; then
+    echo "stow is not installed"
+    exit 1
+fi
+
+XDG_CONFIG_HOME="$HOME/.config"
+XDG_DATA_HOME="$HOME/.local/share"
+
+# NOTE: Bashism syntax
+targets=(
+    "my-bin"
+    "shell"
+    "tty-apps"
+)
+
+for target in ${targets[@]}; do
+    stow --no -v --stow --ignore="__hidden" --target="$HOME" "$target"
+done
+
+read -p "Continue? (y/Any)" should_run
+[ "$should_run" != "y" ] && echo "O.K. No" && exit 0
+
+for target in $tragets; do
+    stow -v --stow --ignore="__hidden" --target="$HOME" "$target"
+done

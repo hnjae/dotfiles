@@ -1,0 +1,65 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+
+import re
+import time
+from typing import Any, List
+
+from loguru import logger
+from i3ipc import Connection, Event
+
+_BROSER_POPUP_PATTERNS: List = [
+    # 알라딘
+    re.compile(r"\[알라딘\] .*"),
+    re.compile(r"마일리지를 적립금으로 전환 .*"),
+    re.compile(r"알라딘 .*"),
+    # 네이버
+    re.compile(r"네이버페이 .*"),
+    # Payco
+    re.compile(r"로그인 .*"),
+    re.compile(r"PAYCO .*"),
+    #
+]
+
+PATTERNS = {
+    # value: (Should_wait, patterns)
+    "firefox": (True, _BROSER_POPUP_PATTERNS),
+    "chromium": (True, _BROSER_POPUP_PATTERNS),
+}
+PATTERNS_KEYS = PATTERNS.keys()
+
+
+def on_window_new(i3, e: Any):
+
+    if e.container.app_id not in PATTERNS_KEYS:
+        return
+
+    logger.info(f"new window event: {e.container.id}[{e.container.app_id}({e.container.name})]")
+
+    if PATTERNS[e.container.app_id][0]:
+        logger.info(f"detected browser: waiting to load page")
+        time.sleep(0.8)
+
+    con: Any | None = i3.get_tree().find_by_id(e.container.id)
+
+    if con is None:
+        return
+    if not con.focused:
+        return
+    if not isinstance(con.name, str) or len(con.name) == 0:
+        return
+
+    for pattern in PATTERNS[e.container.app_id][1]:
+        if not pattern.fullmatch(con.name):
+            continue
+        logger.info(f"con {con.id}[{con.app_id}({con.name})]  popup")
+        i3.command(f"[con_id={con.id}] floating enable")
+        return
+    return
+
+
+if __name__ == "__main__":
+    i3: Connection = Connection()
+    i3.on(Event.WINDOW_NEW, on_window_new)
+    i3.main()

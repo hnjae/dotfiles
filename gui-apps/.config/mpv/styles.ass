@@ -1,0 +1,7 @@
+[Script Info]
+ScriptType: v4.00+
+Collisions: Normal
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, BackColour, OutlineColour, Bold, Italic, Alignment, BorderStyle, Outline, Shadow, MarginL, MarginR, MarginV
+Style: Default,KoreanCNMM,20.4,&H00ffffff,&HDD000000,&H00111111,0,0,2,1,1.1,0.9,20,20,17.8

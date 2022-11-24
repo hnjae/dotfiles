@@ -1,0 +1,4 @@
+<match target="pattern">
+  <test qual="any" name="family"><string>Georgia</string></test>
+  <edit name="family" mode="assign" binding="same"><string>Ubuntu</string></edit>
+</match>

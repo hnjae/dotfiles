@@ -1,0 +1,6 @@
+=
+== ~/.local/share/fonts
+* Pretendard (v1.3.6 2022-10-19 released)
+* Meslo LG Font (2022-10-10 commited / https://github.com/ryanoasis/nerd-fonts/)
+* KoPub 2.0 & KoPubWorld (2022-10-30 downloaded)
+* RIDIBatang.otf (from https://ridicorp.com/ridibatang/)

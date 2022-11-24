@@ -1,0 +1,12 @@
+[user]
+	email = hyunjae.kim@gmx.com
+	name = Hyunjae Kim
+[color]
+	ui = true
+	editor = nvim
+[diff]
+	tool = nvimdiff
+[push]
+	autoSetupRemote = true
+[commit]
+	template = /home/hyunjae/.config/git/git-commit-message-template

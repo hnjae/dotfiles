@@ -4,6 +4,10 @@ __not-in-use
 __local_config*
 
 ######################
+.vim
+*/asciidoc-wiki
+
+######################
 .zsh_history
 .zsh_sessions
 .zcompdump
@@ -30,6 +34,3 @@ error.log
 .Trashes
 ehthumbs.db
 Thumbs.db
-
-######################
-*/asciidoc-wiki

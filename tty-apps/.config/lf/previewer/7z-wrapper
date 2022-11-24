@@ -1,0 +1,109 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import locale
+import shutil
+import subprocess
+import sys
+from pathlib import Path
+from typing import List
+
+EXE: str = "7z"
+ATTR_LEN = 5
+TIME_LEN = 19
+SIZE_LEN = 12
+
+
+proc = subprocess.run
+
+
+class ArchiveFile:
+    def __init__(self, name: str, size: int, time: str, attr: str):
+        self.name: str = name
+        self.size: int = size
+        self.time: str = time
+        self.attr: str = attr
+
+    def __lt__(self, other):
+        return self.name < other.name
+
+    def __gt__(self, other):
+        return self.name > other.name
+
+    def __str__(self):
+        return "".join([
+            f"{self.time:>{TIME_LEN}}"
+            f" {self.attr:>{ATTR_LEN}}"
+            f" {self.size:{SIZE_LEN}d}"
+            f"  {self.name}"
+        ])
+
+
+
+def main(file: Path) -> int:
+    """
+    Main function
+    """
+
+    if shutil.which(EXE) is None:
+        print(f"{EXE} is not installed")
+        return 1
+
+    if not file.is_file():
+        print(f"{file} is not file")
+        return 1
+
+    args: List[str] = [
+        EXE,
+        "l",
+        "--",
+        str(file),
+    ]
+
+    proc: subprocess.CompletedProcess = subprocess.run(
+        args, capture_output=True, encoding=locale.getpreferredencoding()
+    )
+
+    lines: List[str] = proc.stdout.splitlines()
+    tab_start: int = -1
+    for tab_start, line in enumerate(lines):
+        if line == "   Date      Time    Attr         Size   Compressed  Name":
+            break
+    if tab_start == -1:
+        print(f"Parsing {EXE}'s output failed")
+        return 1
+
+    # NOTE: 7z's table's gap size is not consistent
+    # Recognize table size
+    # col_size: List[int] = [len(str_) for str_ in lines[tab_start+1].split()]
+    #
+    # for line in lines[tab_start:tab_start+3]:
+    #     col_start: int = 0
+    #     print(line)
+    #     for size in col_size:
+    #         print(col_start, size)
+    #         print(line[col_start:col_start+size])
+    #         col_start += (size+1)
+
+    files: List[ArchiveFile] = []
+    for line in lines[tab_start + 2 : -2]:
+        files.append(
+            ArchiveFile(
+                name=line[53:].strip(),
+                size=int(line[26 : 26 + SIZE_LEN]),
+                time=line[:TIME_LEN],
+                attr=line[20 : 20 + ATTR_LEN],
+            )
+        )
+
+    print(f"Total {len(files)} files")
+    print("-" * 50)
+    files.sort(reverse=True)
+    for file_ in files:
+        print(file_)
+
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main(Path(sys.argv[1])))

@@ -1,0 +1,5 @@
+lock "__screenlock"
+timeout 240 "loginctl lock-session"
+timeout 300 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"'
+timeout 600 "__suspend" resume 'swaymsg "output * dpms on"'
+before-sleep "loginctl lock-session"

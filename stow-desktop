@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+if ! which stow > /dev/null 2>&1; then
+    echo "stow is not installed"
+    exit 1
+fi
+
+# XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
+# XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
+XDG_CONFIG_HOME="$HOME/.config"
+XDG_DATA_HOME="$HOME/.local/share"
+
+mkdir -p "$XDG_CONFIG_HOME"
+mkdir -p "$XDG_CONFIG_HOME/smplayer"
+mkdir -p "$XDG_DATA_HOME"
+mkdir -p "$HOME/.local/bin"
+mkdir -p "$XDG_DATA_HOME/zsh"
+mkdir -p "$XDG_DATA_HOME/fonts"
+mkdir -p "$XDG_DATA_HOME/applications"
+mkdir -p "$XDG_DATA_HOME/konsole"
+
+# NOTE: Bashism syntax
+targets=(
+    "gui-apps"
+    "my-bin"
+    "shell"
+    "smplayer"
+    "tty-apps"
+    "desktop-environment"
+)
+
+for target in ${targets[@]}; do
+    # stow --no -v --adopt --restow --target="$HOME" "$target"
+    stow --no -v --stow  --target="$HOME" "$target"
+done
+
+read -p "Continue? (y/Any)" should_run
+[ "$should_run" != "y" ] && echo "O.K. No" && exit 0
+
+for target in ${targets[@]}; do
+    stow -v --stow --target="$HOME" "$target"
+done

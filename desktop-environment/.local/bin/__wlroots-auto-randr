@@ -1,0 +1,255 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# pylint: disable=invalid-name
+
+import itertools
+import json
+import locale
+import os
+import secrets
+import subprocess
+import sys
+import time
+from collections import defaultdict
+from subprocess import CompletedProcess
+from typing import Dict, Iterable, List, Literal, Optional, Set, Union
+
+# TypeDevice = Dict[str, Union[str, List[Dict[str, str]], Dict[str, str]]]
+# if power and device.get("model") == "0x152A":
+#     args = ["swaymsg", device["type"], device["name"], "scale", "1.6"]
+#     subprocess.run(args, check=True)
+# if power and device.get("model") == "BenQ PD2700U":
+#     args = ["swaymsg", device["type"], device["name"], "scale", "1.875"]
+#     subprocess.run(args, check=True)
+
+
+# PD2700U
+MY_HOME_MONITOR_SERIAL: str = "ET83K02766SL0"
+MY_MONITOR_MODE: str = "3840x2160@60.000Hz"
+
+LAPTOP_MONITOR_SERIAL: str = "0x00000000"
+
+BgImages: List[str] = []
+for bgimage in [
+    # Gnome Wallpapers
+    "/usr/share/backgrounds/gnome/adwaita-d.webp",
+    "/usr/share/backgrounds/gnome/blobs-d.svg",
+
+    # Archlinux wallpapers
+    "/usr/share/backgrounds/archlinux/awesome.png",
+    # "/usr/share/backgrounds/archlinux/wild.png",
+    # "/usr/share/backgrounds/archlinux/geolanes.png",
+    # "/usr/share/backgrounds/archlinux/geowaves.png",
+    # "/usr/share/backgrounds/archlinux/small.png",
+    # "/usr/share/backgrounds/archlinux/wave.png",
+
+    # Elementary wallpapers
+    # "/usr/share/backgrounds/Mr. Lee.jpg",
+    "/usr/share/backgrounds/odin.jpg",
+    # "/usr/share/backgrounds/Sunset by the Pier.jpg",
+    # "/usr/share/backgrounds/Tj Holowaychuk.jpg",
+    "/usr/share/backgrounds/Morskie Oko.jpg",
+    "/usr/share/backgrounds/Photo by SpaceX.jpg",
+
+    # ubuntu-wallpapers (aur)
+    "/usr/share/backgrounds/80s_Disco_Dingo_Simulation_by_Abubakar_NK.jpg",
+    "/usr/share/backgrounds/160218-deux-two_by_Pierre_Cante.jpg",
+    "/usr/share/backgrounds/canvas_by_roytanck.jpg",
+    # "/usr/share/backgrounds/Definitive_Light_Zen_Orange_by_Pierre_Cante.jpg",
+    "/usr/share/backgrounds/Disco_Dingo_Alt_Default_by_Abubakar_NK.png",
+    "/usr/share/backgrounds/Ermine_lines_by_Gustavo_Brenner.png",
+    # "/usr/share/backgrounds/hardy_wallpaper_uhd.png",
+    # "/usr/share/backgrounds/Headstock_by_Bernhard_Hanakam.jpg",
+    # "/usr/share/backgrounds/jj_dark_by_Hiking93.jpg",
+    "/usr/share/backgrounds/Kinetic_Kudu_by_Joshua_T_dark.jpg",
+    # "/usr/share/backgrounds/Landscape_Photography_Of_Mountains_by_Simon_Berger.jpg",
+    # "/usr/share/backgrounds/Manhattan_Sunset_by_Giacomo_Ferroni.jpg",
+    # "/usr/share/backgrounds/matt-mcnulty-nyc-2nd-ave.jpg",
+    # "/usr/share/backgrounds/Milky_Way_before_the_dawn_by_Tomas_Sobek.jpg",
+    # "/usr/share/backgrounds/Milky_Way_by_Paulo_José_Oliveira_Amaro.jpg",
+    # "/usr/share/backgrounds/Mirror_by_Uday_Nakade.jpg",
+    "/usr/share/backgrounds/Mr._Tau_and_The_Tree_-_by_TJ.jpg",
+    # "/usr/share/backgrounds/Optical_Fibers_in_Dark_by_Elena_Stravoravdi.jpg",
+    "/usr/share/backgrounds/Passion_by_Vilia_Majere.jpg",
+    "/usr/share/backgrounds/Reflection_by_Juliette_Taka.png",
+    # "/usr/share/backgrounds/Ross_Jones_Rockpool_(Sydney)_by_Chris_Carignan.jpg",
+    # "/usr/share/backgrounds/Seebrücke_Graal-Müritz_by_Oliver_hb.jpg",
+    "/usr/share/backgrounds/Snow-Capped Mountain.jpg",
+    # "/usr/share/backgrounds/Some_Light_Reading_by_Brandilyn_Carpenter.jpg",
+    "/usr/share/backgrounds/Spices_in_Athens_by_Makis_Chourdakis.jpg",
+    "/usr/share/backgrounds/Stalking_Ocelot_by_Sayantan_Chaudhuri.jpg",
+    # "/usr/share/backgrounds/Sunset by the Pier.jpg",
+    # "/usr/share/backgrounds/Tapiola_Espoo_Cultural_Center_by_Agostino_Faedda.jpg",
+    "/usr/share/backgrounds/warty-final-ubuntu.png",
+    # "/usr/share/backgrounds/Way_by_Kacper_Ślusarczyk.jpg",
+]:
+    if os.path.isfile(bgimage):
+        BgImages.append(bgimage)
+
+
+class Monitor:
+    def __init__(self, init: Dict):
+        self.name: str = init["name"]
+        self.active: bool = init["active"]
+        self.type: str = init["type"]  # output
+        self.make: Optional[str] = init.get("make")
+        self.model: Optional[str] = init.get("model")
+        self.serial: Optional[str] = init.get("serial")
+
+    def __str__(self):
+        return self.name
+
+    def power(self, power: bool):
+        if power != self.active:
+            if power:
+                print(f"Turning On Device - {self}")
+                power_str: str = "enable"
+            else:
+                print(f"Turning Off Device - {self}")
+                power_str: str = "disable"
+            args = ["swaymsg", self.type, self.name, power_str]
+            subprocess.run(args, check=True)
+
+        if power:
+            self.set_bg()
+
+        return
+
+    def power_status(self, update: Optional[bool] = False) -> bool:
+        if update:
+            for mon in self.get_outputs():
+                if self == mon:
+                    self.active = mon.active
+                    return mon.active
+            raise Exception("monitor does not exists")
+        else:
+            return self.active
+
+    def __eq__(self, other):
+        return (
+            self.name == other.name
+            and self.serial == other.serial
+            and self.make == other.make
+            and self.model == other.model
+        )
+
+    def set_bg(self):
+        sys.stdout.flush()
+
+        if not BgImages:
+            args = ["swaybg", "-o", self.name, "-c", "#111111"]
+        else:
+            image: str = secrets.choice(BgImages)
+            args = [
+                "swaybg",
+                "--output",
+                self.name,
+                "--image",
+                image,
+                "--mode",
+                "fill",
+            ]
+        subprocess.Popen(
+            args,
+            stdin=subprocess.DEVNULL,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+
+        return
+
+    @staticmethod
+    def get_outputs() -> List:
+        args: List[str] = ["swaymsg", "--type", "get_outputs", "--raw"]
+        proc: CompletedProcess = subprocess.run(
+            args,
+            capture_output=True,
+            check=True,
+            encoding=locale.getpreferredencoding(),
+        )
+        return [Monitor(device) for device in json.loads(proc.stdout)]
+
+
+def sway_mode() -> None:
+    displays_not_home: List[Monitor] = []
+    home_display: Optional[Monitor] = None
+
+    # Print
+    table_format: str = "| {:<27}| {:<13}| {:14}| {:<9}|"
+    print(table_format.format("Maker", "Model", "Serial", "Port"))
+    print("-" * 72)
+    for device in Monitor.get_outputs():
+        # print(device)
+        print(
+            table_format.format(
+                device.make,
+                device.model,
+                device.serial,
+                device.name,
+            )
+        )
+        if device.serial == MY_HOME_MONITOR_SERIAL:
+            home_display = device
+        else:
+            displays_not_home.append(device)
+            print("-" * 72)
+    # Print END
+
+    if home_display is not None:
+        home_display.power(True)
+        is_powered_on = home_display.power_status(update=True)
+        for display in displays_not_home:
+            display.power(not is_powered_on)
+    else:
+        for display in displays_not_home:
+            display.power(True)
+
+
+def send_noti():
+    display_icons: List[str] = [
+        "video-display-symbolic",
+        # "display",
+        # "preferences-desktop-display",
+        # "video-display-symbolic",
+        # "display-symbolic",
+    ]
+    noti_args = [
+        "notify-send",
+        "Display",
+        "Adjusted",
+        "--urgency=normal",
+        f"--icon={','.join(display_icons)}",
+        "--category=device",
+    ]
+    subprocess.run(noti_args, check=True)
+
+
+def main():
+
+    # if env["XDG_SESSION_TYPE"].lower() != "wayland":
+    #     print("Session is not wayland")
+    #     return 0
+
+    if "sway" not in {
+        os.environ.get("XDG_SESSION_DESKTOP"),
+        os.environ.get("XDG_CURRENT_DESKTOP"),
+        os.environ.get("DESKTOP_SESSION"),
+    }:
+        print("XDG_DESKTOP_SESSION is not sway")
+        return 0
+
+    subprocess.run(
+        ["killall", "swaybg"],
+        stdout=subprocess.DEVNULL,
+        stdin=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+    sway_mode()
+    time.sleep(0.2)
+    # send_noti()
+    return 0
+
+
+if __name__ == "__main__":
+    # time.sleep(1)
+    sys.exit(main())

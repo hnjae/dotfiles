@@ -1,0 +1,53 @@
+#!/usr/bin/env python3
+
+# Promotes the focused window by swapping it with the largest window.
+
+import sys
+from typing import Any
+
+import i3ipc
+from i3ipc import Connection, Event
+
+i3: Connection = Connection()
+
+# TODO: do not promote with same tab/stack <2022-11-09, Hyunjae Kim>
+
+# NOTE: find_appropriate_win()
+# Original Author: https://aduros.com/blog/hacking-i3-window-promoting/
+# Edited by Hyunjae Kim (github.com/hnjae)
+def find_appropriate_win(container: Any, focused_win_size: int) -> Any | None:
+    """ find largest or second largest window """
+
+    max_leaf: Any | None = None
+    max_area: int = 0
+    for leaf in container.leaves():
+        area = leaf.rect.width * leaf.rect.height
+
+        if not leaf.focused and area > max_area and area != focused_win_size:
+            max_area = area
+            max_leaf = leaf
+
+    return max_leaf
+
+
+def main() -> int:
+    # reply: Any
+    # for reply in i3.get_workspaces():
+    #     if reply.focused:
+    #         workspace = i3.get_tree().find_by_id(reply.ipc_data["id"])
+    #         master = find_biggest_window(workspace)
+    #         i3.command("swap container with con_id %s" % master.id)
+
+    con: i3ipc.Con | None = i3.get_tree().find_focused()
+    if con is None:
+        return 1
+
+    main = find_appropriate_win(con.workspace(), con.rect.width * con.rect.height)
+    if main is not None:
+        i3.command(f"swap container with con_id {main.id}")
+
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

@@ -1,0 +1,5 @@
+#!/usr/bin/sh
+
+type handlr > /dev/null \
+    && handlr open "$@" \
+    || /usr/bin/xdg-open "$@"

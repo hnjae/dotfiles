@@ -1,0 +1,60 @@
+#!/usr/bin/sh
+
+if ! [ "$TERM" = linux -a -z "$DISPLAY" ]; then
+    echo "Should be in /dev/tty"
+    exit 1
+fi
+
+echo "RUN DE: 1) sway 2) startx"
+read -p "Select: " sel
+
+export GTK_IM_MODULE=fcitx5
+export QT_IM_MODULE="$GTK_IM_MODULE"
+export XMODIFIERS="@im=$GTK_IM_MODULE"
+export SDL_IM_MODULE="$GTK_IM_MODULE"
+
+case "$sel" in
+	"1")
+                [ -f "$HOME/.profile" ] && . "$HOME/.profile"
+
+		export DESKTOP_SESSION="sway"
+		export XDG_SESSION_DESKTOP="$DESKTOP_SESSION"
+		export XDG_CURRENT_DESKTOP="$DESKTOP_SESSION"
+		export LIBSEAT_BACKEND=logind
+
+                # export WLR_RENDERER=vulkan
+                export VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/radeon_icd.x86_64.json
+		export MOZ_ENABLE_WAYLAND=1
+
+                # export GDK_BACKEND=wayland
+		# export __GLX_VENDOR_LIBRARY_NAME=mesa
+		# export QT_QPA_PLATFORMTHEME="gnome"
+                export QT_STYLE_OVERRIDE=kvantum
+
+		# export QT_QPA_PLATFORM="wayland;x11"
+		export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+		# export XDG_SESSION_TYPE="wayland" -- auto exported maybe
+
+                # exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+                # exec dbus-update-activation-environment DISPLAY XAUTHORITY WAYLAND_DISPLAY
+                # exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+	        # export=WLR_DRM_DEVICES=/dev/dri/card1
+	        # export=WLR_NO_HARDWARE_CURSORS=1
+
+		exec sway -V
+                #  --unsupported-gpu -V
+		# dbus-run-session sway --unsupported-gpu -V
+		;;
+	"2")
+		export DESKTOP_SESSION="cinnamon-session"
+		export XDG_SESSION_DESKTOP="$DESKTOP_SESSION"
+		export XDG_CURRENT_DESKTOP="$DESKTOP_SESSION"
+
+                # NOTE: Do not use xdg-desktop-portal
+                export GTK_USE_PORTAL=0
+		startx
+		;;
+	*)
+                echo "ERROR: Not implemented error: $sel"
+		;;
+esac

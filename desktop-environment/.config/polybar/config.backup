@@ -1,0 +1,634 @@
+;==========================================================
+;
+; TODO: nonprimary laptop 모니터 구분하기.
+;   To learn more about how to configure Polybar
+;   go to https://github.com/polybar/polybar
+;
+;   The README contains a lot of information
+;
+;==========================================================
+
+[colors]
+# {{{
+;background = ${xrdb:color0:#222}
+; adwaita-dark theme
+background = #282828
+
+; background 와 차이가 별로 없어 사용 안하기로
+;background-hover = #2b2b2b
+
+background-alt = #353535
+;foreground = ${xrdb:color7:#222}
+foreground = #eceeec
+foreground-alt = #4b4b4b
+
+
+selected=#15539e
+button = #1d72db
+
+underline=#15539e
+
+; color from https://github.com/Gnostiphage/adwaita-color-gen
+alert = #a43b34
+
+; for i3
+;primary = #ffb52a
+;secondary = #e60053
+# }}}
+
+[bar/nonprimary]
+# {{{
+monitor = ${env:MONITOR}
+width = 100%
+height = 60
+; height default 54 for hidpi
+offset-x = 0
+offset-y = 0
+fixed-center = true
+bottom = false
+
+radius = 0
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 6
+line-color = #f00
+
+; polybar 주변 border. 투명으로 하면 공중에 뜨게 된다.
+border-size = 0
+; border-color = #00000000
+
+format-spacing = 1
+padding = 1
+module-margin-left = 1
+module-margin-right = 1
+
+separator = |
+separator-foreground = ${colors.foreground-alt}
+
+font-0 = Monospace:size=11
+
+modules-left = i3
+
+; tray-position = right
+; tray-maxsize= 36
+; tray-padding = 4
+dpi-x = 192
+dpi-y = 192
+;tray-background = #0063ff
+
+;override-redirect = true
+; wm-restack = i3
+
+scroll-up   = "#i3.prev"
+scroll-down = "#i3.next"
+
+cursor-click = pointer
+# cursor-scroll = ns-resize
+# }}}
+
+
+[bar/laptop_nonprimary]
+# {{{
+monitor = ${env:MONITOR}
+width = 100%
+height = 60
+; height default 54 for hidpi
+offset-x = 0
+offset-y = 0
+fixed-center = true
+bottom = false
+
+radius = 0
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 6
+line-color = #f00
+
+; polybar 주변 border. 투명으로 하면 공중에 뜨게 된다.
+border-size = 0
+; border-color = #00000000
+
+format-spacing = 1
+padding = 1
+module-margin-left = 1
+module-margin-right = 1
+
+separator = |
+separator-foreground = ${colors.foreground-alt}
+
+font-0 = Monospace:size=11
+
+modules-left = i3 xwindow
+modules-right = backlight
+
+; tray-position = right
+; tray-maxsize= 36
+; tray-padding = 4
+dpi-x = 192
+dpi-y = 192
+;tray-background = #0063ff
+
+;override-redirect = true
+; wm-restack = i3
+
+scroll-up   = "#i3.prev"
+scroll-down = "#i3.next"
+
+cursor-click = pointer
+# cursor-scroll = ns-resize
+# }}}
+
+[bar/laptop_primary]
+# {{{
+# not ready 2021-06-02
+width = 100%
+height = 60
+; height default 54 for hidpi
+offset-x = 0
+offset-y = 0
+fixed-center = true
+bottom = false
+
+radius = 0
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 6
+line-color = #f00
+
+; polybar 주변 border. 투명으로 하면 공중에 뜨게 된다.
+border-size = 0
+; border-color = #00000000
+
+format-spacing = 1
+padding = 1
+module-margin-left = 1
+module-margin-right = 1
+
+separator = |
+separator-foreground = ${colors.foreground-alt}
+
+font-0 = Monospace:size=11
+
+modules-left = i3-minimal xwindow_short
+; modules-center = mpd
+modules-right = memory cpu temperature backlight pulseaudio battery date
+# filesystem memory cpu
+
+tray-position = right
+tray-maxsize= 36
+tray-padding = 2
+dpi-x = 192
+dpi-y = 192
+;tray-background = #0063ff
+
+;override-redirect = true
+; wm-restack = i3
+
+scroll-up   = "#i3.prev"
+scroll-down = "#i3.next"
+
+cursor-click = pointer
+# cursor-scroll = ns-resize
+# }}}
+
+[bar/external_primary]
+# {{{
+width = 100%
+height = 60
+; height default 54 for hidpi
+offset-x = 0
+offset-y = 0
+fixed-center = true
+bottom = false
+
+radius = 0
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 6
+line-color = #f00
+
+; polybar 주변 border. 투명으로 하면 공중에 뜨게 된다.
+border-size = 0
+; border-color = #00000000
+
+format-spacing = 1
+padding = 1
+module-margin-left = 1
+module-margin-right = 1
+
+separator = "|"
+separator-foreground = ${colors.foreground-alt}
+
+font-0 = Monospace:size=11
+
+modules-left = jgmenu i3 xwindow
+; modules-center = mpd
+modules-right =  memory cpu temperature pulseaudio battery date
+
+tray-position = right
+tray-maxsize= 36
+tray-padding = 4
+dpi-x = 192
+dpi-y = 192
+;tray-background = #0063ff
+
+;override-redirect = true
+; wm-restack = i3
+
+scroll-up   = "#i3.prev"
+scroll-down = "#i3.next"
+
+cursor-click = pointer
+# cursor-scroll = ns-resize
+# }}}
+
+# Modules: {{{
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:40:...%
+
+[module/xwindow_short]
+type = internal/xwindow
+label = %title:0:15:...%
+
+[module/filesystem]
+type = internal/fs
+interval = 30
+
+mount-0 = /
+
+# format-prefix fix!!!
+format-mounted-prefix = " "
+label-mounted = %free%
+
+[module/i3]
+type = internal/i3
+format = <label-state><label-mode>
+index-sort = true
+wrapping-scroll = false
+
+; Only show workspaces on the same output as the bar
+pin-workspaces = true
+
+; strip-wsnumbers = true
+label-mode = %mode%
+label-mode-padding = 1
+label-mode-foreground = ${colors.foreground}
+;label-mode-background = ${colors.primary}
+label-mode-background = ${colors.selected}
+
+; focused = Active workspace on focused monitor
+label-focused = %name%
+label-focused-background = ${colors.background-alt}
+;label-focused-background = ${colors.background-hover}
+;label-focused-underline= ${colors.primary}
+label-focused-underline= ${colors.selected}
+label-focused-padding = 1
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %name%
+label-unfocused-padding = ${self.label-focused-padding}
+
+; visible = Active workspace on unfocused monitor
+label-visible = %name%
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = ${self.label-focused-padding}
+
+; urgent = Workspace with urgency hint set
+label-urgent = %name%
+label-urgent-background = ${colors.alert}
+label-urgent-padding = ${self.label-focused-padding}
+
+; Separator in between workspaces
+label-separator = |
+label-separator-padding = 0
+label-separator-foreground = ${colors.background}
+;ws-icon-0 = 1;
+;ws-icon-1 = 2;
+;ws-icon-2 = 3;♚
+; ws-icon-1 = 10;
+; ws-icon-default = ""
+
+
+[module/i3-minimal]
+type = internal/i3
+format = <label-state><label-mode>
+index-sort = true
+wrapping-scroll = false
+
+; Only show workspaces on the same output as the bar
+pin-workspaces = true
+
+; strip-wsnumbers = true
+label-mode = %mode%
+label-mode-padding = 1
+label-mode-foreground = ${colors.foreground}
+;label-mode-background = ${colors.primary}
+label-mode-background = ${colors.selected}
+
+; focused = Active workspace on focused monitor
+label-focused = %index%
+label-focused-background = ${colors.background-alt}
+;label-focused-background = ${colors.background-hover}
+label-focused-underline= ${colors.selected}
+label-focused-padding = 1
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %index%
+label-unfocused-padding = ${self.label-focused-padding}
+
+; visible = Active workspace on unfocused monitor
+label-visible = %index%
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = ${self.label-focused-padding}
+
+; urgent = Workspace with urgency hint set
+label-urgent = %index%
+label-urgent-background = ${colors.alert}
+label-urgent-padding = ${self.label-focused-padding}
+
+; Separator in between workspaces
+label-separator = |
+label-separator-padding = 0
+label-separator-foreground = ${colors.background}
+
+
+[module/mpd]
+type = internal/mpd
+format-online = <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
+
+icon-prev = 
+icon-stop = 
+icon-play = 
+icon-pause = 
+icon-next = 
+
+label-song-maxlen = 25
+label-song-ellipsis = true
+
+[module/backlight]
+type = internal/backlight
+card = amdgpu_bl0
+format = <ramp> <label>
+enable-scroll = true
+
+ramp-0 = ""
+ramp-1 = ""
+ramp-2 = ""
+ramp-3 = ""
+ramp-4 = ""
+ramp-5 = ""
+ramp-6 = ""
+ramp-7 = ""
+ramp-8 = ""
+ramp-9 = ""
+ramp-10 = ""
+ramp-11 = ""
+ramp-12 = ""
+ramp-13 = ""
+ramp-14 = ""
+
+[module/cpu]
+type = internal/cpu
+interval = 3
+format-prefix = ""
+# ﮕ      
+label = %percentage:3%%
+
+[module/memory]
+type = internal/memory
+interval = 3
+format-prefix = ""
+label = %percentage_used:3%%
+
+[module/enp3s0]
+type = internal/network
+interface = enp3s0
+interval = 6.0
+
+# format-connected-prefix = " "
+# label-connected = %linkspeed%
+label-connected = ""
+
+# format-disconnected-prefix = " "
+# label-disconnected = DC'D
+format-disconnected-underline = ${colors.alert}
+label-disconnected = ""
+
+[module/wlan0]
+type = internal/network
+interface = wlan0
+interval = 6.0
+
+format-connected = <label-connected>
+format-connected-prefix = "直 "
+# label-connected = %essid% %signal%%
+label-connected = %signal%%
+
+format-packetloss = <animation-packetloss> <label-connected>
+
+format-disconnected-prefix = "直 "
+format-disconnected-underline = ${colors.alert}
+label-disconnected = ''
+
+; Only applies if <ramp-signal> is used
+; ramp-signal-0 = 
+; ramp-signal-1 = 
+; ramp-signal-2 = 
+; ramp-signal-3 = 
+; ramp-signal-4 = 
+; ramp-signal-5 = 
+
+; Only applies if <animation-packetloss> is used
+animation-packetloss-0 = ⚠
+animation-packetloss-0-foreground = #ffa64c
+animation-packetloss-1 = ﲁ
+animation-packetloss-1-foreground = #000000
+; Framerate in milliseconds
+animation-packetloss-framerate = 500
+
+
+[module/date]
+type = internal/date
+interval = 1.0
+
+date = %Y-%m-%d
+date-alt = %a, %Y-%m-%d
+
+time = %H:%M
+time-alt = %H:%M:%S
+
+format-prefix = " "
+# format-prefix-foreground = ${colors.foreground-alt}
+# format-underline = ${colors.underline}
+
+label = %date% %time%
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+; Use PA_VOLUME_UI_MAX (~153%) if true, or PA_VOLUME_NORM (100%) if false
+; Default: true
+use-ui-max = false
+
+format-volume = <ramp-volume> <label-volume>
+label-volume = %percentage%%
+label-volume-foreground = ${colors.foreground}
+
+;format-muted-prefix = "婢 "
+format-muted = <label-muted>
+label-muted = 婢 MUTE
+# label-muted-foreground = #ffdddd
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+
+; bar-volume-width = 10
+; bar-volume-foreground-0 = #55aa55
+; bar-volume-foreground-1 = #55aa55
+; bar-volume-foreground-2 = #55aa55
+; bar-volume-foreground-3 = #55aa55
+; bar-volume-foreground-4 = #55aa55
+; bar-volume-foreground-5 = #f5a70a
+; bar-volume-foreground-6 = #ff5555
+; bar-volume-gradient = false
+; bar-volume-indicator = |
+; bar-volume-indicator-font = 2
+; bar-volume-fill = ─
+; bar-volume-fill-font = 2
+; bar-volume-empty = ─
+; bar-volume-empty-font = 2
+; bar-volume-empty-foreground = ${colors.foreground-alt}
+
+click-right = pavucontrol
+
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+interval = 6
+
+base-temperature = 36
+warn-temperature = 72
+
+format = <ramp> <label>
+label = %temperature-c%
+
+format-warn = <ramp> <label-warn>
+format-warn-underline = ${colors.alert}
+label-warn = %temperature-c%
+label-warn-foreground = ${colors.alert}
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-3 = 
+ramp-4 = 
+; ramp-foreground = ${colors.foreground-alt}
+
+[settings]
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+;pseudo-transparency = false
+
+[global/wm]
+margin-top = 0
+margin-bottom = 0
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC0
+
+poll-interval = 3
+
+; see "man date" for details on how to format the time string
+time-format = %H:%M
+
+; Available tags:
+;   <label-charging> (default)
+;   <bar-capacity>
+;   <ramp-capacity>
+;   <animation-charging>
+format-charging-prefix= " "
+#   ﮣ 
+format-charging = <label-charging>
+
+; Available tags:
+;   <label-discharging> (default)
+;   <bar-capacity>
+;   <ramp-capacity>
+;   <animation-discharging>
+format-discharging = <ramp-capacity> <label-discharging>
+
+format-full-prefix = " "
+format-full = <label-full>
+; Available tags:
+;   <label-full> (default)
+;   <bar-capacity>
+;   <ramp-capacity>
+;format-full = <ramp-capacity> <label-full>
+
+; Available tokens:
+;   %percentage% (default) - is set to 100 if full-at is reached
+;   %percentage_raw%
+;   %time%
+;   %consumption% (shows current charge rate in watts)
+label-charging = %percentage%%
+
+
+; Available tokens:
+;   %percentage% (default) - is set to 100 if full-at is reached
+;   %percentage_raw%
+;   %time%
+;   %consumption% (shows current discharge rate in watts)
+label-discharging = %percentage%% %consumption%W %time%
+
+; Available tokens:
+;   %percentage% (default) - is set to 100 if full-at is reached
+;   %percentage_raw%
+label-full = %percentage%%
+
+; Only applies if <ramp-capacity> is used
+# 
+ramp-capacity-0 = ""
+ramp-capacity-1 = ""
+ramp-capacity-2 = ""
+ramp-capacity-3 = ""
+ramp-capacity-4 = ""
+ramp-capacity-5 = ""
+ramp-capacity-6 = ""
+ramp-capacity-7 = ""
+ramp-capacity-8 = ""
+ramp-capacity-9 = ""
+ramp-capacity-10 = ""
+
+; Only applies if <animation-charging> is used
+# animation-charging-0 = " "
+# animation-charging-1 = " "
+# animation-charging-2 = " "
+# animation-charging-3 = " "
+# animation-charging-4 = " "
+; Framerate in milliseconds
+# animation-charging-framerate = 750
+
+# }}}
+
+
+[module/jgmenu]
+type = custom/text
+content-padding = 0
+content = 
+click-left = "jgmenu_run >/dev/null 2>&1 &"
+
+; vim:ft=dosini

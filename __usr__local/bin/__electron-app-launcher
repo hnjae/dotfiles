@@ -1,0 +1,12 @@
+#!/usr/bin/sh
+
+[ "$1" ] || exit 0
+
+if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
+    exec "$@" \
+            --enable-features=UseOzonePlatform \
+            --ozone-platform=wayland \
+            < /dev/null > /dev/null 2>&1 &
+else
+    exec "$@" < /dev/null > /dev/null 2>&1 &
+fi

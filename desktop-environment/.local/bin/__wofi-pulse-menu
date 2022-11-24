@@ -1,0 +1,94 @@
+#!/usr/bin/sh
+# Choose pulseaudio sink/source via wofi/rofi.
+# Changes default sink/source and moves all streams to that device.
+
+# Usage:
+# $0 source
+# $0 sinks
+
+if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
+    type "wofi" > /dev/null 2>&1 && selector="wofi" || selector="rofi"
+    if [ ! type "$selector" > /dev/null 2>&1 ]; then
+        echo "Neither wofi and rofi are installed"
+        exit 1
+    fi
+
+    DPI="0"
+
+elif [ "$XDG_SESSION_TYPE" = "x11" ]; then
+    selector="rofi"
+    if [ ! type "$selector" > /dev/null 2>&1 ]; then
+        echo "$selector not installed"
+        exit 1
+    fi
+    DPI="1"
+else
+    echo "ERROR: XDG_SESSION_TYPE is not set"
+    exit 1
+fi
+
+# set -euo pipefail
+
+if [ -z "${1-}" ]; then
+    readonly type="sink"
+else
+    readonly type="$1"
+fi
+
+case "$type" in
+    "sink" )
+        list=$(pactl list short sinks | awk '{print $2}')
+        default=$(pactl get-default-sink)
+        default_row=$(echo "$list" | grep -nr "$default" - | cut -f1 -d: | awk '{print $0-1}')
+        ;;
+    "source" )
+        list=$(pactl list short sources | awk '{print $2}')
+        default=$(pactl get-default-source)
+        default_row=$(echo "$list" | grep -nr "$default" - | cut -f1 -d: | awk '{print $0-1}')
+        ;;
+    * )
+	echo "error: unknown type: $type"
+        exit 1
+        ;;
+esac
+
+# line number of default in list (note: row starts at 0)
+case "$selector" in
+    "rofi" )
+        # NOTE: in dmenu mode rofi reads from STDIN and output to STDOUT
+        target_device=$(echo "$list" | \
+            rofi \
+                -dmenu \
+                -p "pulseaudio $type:" \
+                -selected-row $default_row  \
+                -dpi "$DPI" \
+                -theme-str "listview {scrollbar: false;}" \
+        )
+        ;;
+    "wofi" )
+        target_device=$(echo "$list" | \
+            wofi \
+                --dmenu \
+                -p "pulseaudio $type:" \
+                --insensitive \
+                --hide-scroll \
+        )
+        ;;
+    * )
+        echo "$selector is not implemented."
+        exit 1
+        ;;
+esac
+
+case "$type" in
+    "sink" )
+        pactl set-default-sink "$target_device"
+        ;;
+    "source" )
+        pactl set-default-source "$target_device"
+        ;;
+    * )
+	echo "error: unknown type: $type"
+        exit 1
+        ;;
+esac

@@ -1,0 +1,215 @@
+[global]
+monitor = 0
+
+# follow:
+# Display notification on focused monitor.  Possible modes are:
+#   mouse: follow mouse pointer
+#   keyboard: follow window with keyboard focus
+#   none: don't follow anything
+follow = mouse
+
+enable_posix_regex = true
+
+# width
+# height
+# notification_limit
+# origin
+
+# offset: offset_x x offset_y
+offset = 20x10
+
+# Scale: X11 Only
+scale = 2
+
+progress_bar = true
+# indicate_hidden = yes
+
+# transparency: X11 Only
+# transparency=25
+# separator_height = 2
+# padding = 8
+# horizontal_padding = 8
+# text_icon_padding = 16
+# frame_width: width in pixels of frame around the notification window
+frame_width = 0
+
+gap_size = 2
+
+# -----------------------------
+# Define a color for the separator.
+# possible values are:
+#  * auto: dunst tries to find a color fitting to the background;
+#  * foreground: use the same color as the foreground;
+#  * frame: use the same color as the frame;
+#  * anything else will be interpreted as a X color.
+separator_color = "auto"
+
+sort = true
+
+# idle_threshold = 120
+# layer: wayland only
+# layer = top or  overlay
+
+# ---------------------------------------------------------
+# Theme
+# ---------------------------------------------------------
+font = Monospace 11
+# line_height = 0
+# format:
+# The format of the message.  Possible variables are:
+#   %a  appname
+#   %s  summary
+#   %b  body
+#   %p  progress value if set ([  0%] to [100%]) or nothing
+#   %n  progress value if set without any extra characters
+format = "<b>%s</b> - %a %p\n%b"
+
+# vertical_alignment = center
+show_age_threshold = 30
+
+# ignore_newline
+# stack_duplicates
+hide_duplicate_count = false
+show_indicators = true
+
+icon_theme = "Fluent-dark, WhiteSur-dark"
+enable_recursive_icon_lookup = true
+
+# If set to true, notifications that have been recalled from history will not time out automatically. (default: true)
+sticky_history
+# history_length
+
+dmenu="/usr/bin/wofi --dmenu --prompt dunst"
+# browser=""
+# always_run_script
+# title = Dunst
+# class = Dunst
+# force_xinerma
+corner_radius = 6
+# mouse_left/middle/right_click
+
+# ---------------
+icon_position = left
+min_icon_size = 32
+max_icon_size = 80
+
+# Markup is allowed
+markup = full
+
+word_wrap = true
+# ellipsize = end
+transparency = 0
+
+alignment = left
+
+# word_wrap = true
+# stack_duplicates = false
+
+# startup_notification = false
+
+# [shortcuts]
+	# DEPRECATED - SEE DUNSTCTL (X11 Only)
+	# close = ctrl+space
+	# close_all = ctrl+shift+space
+	# history = ctrl+grave
+	# context = ctrl+shift+period
+
+[urgency_low]
+	# IMPORTANT: colors have to be defined in quotation marks.
+	# Otherwise the "#" and following would be interpreted as a comment.
+	# background = "#353535"
+	background = "#353535"
+	# foreground = "#eeeeee"
+	foreground = "#dddddd"
+	frame_color = "#1b1b1b"
+	highlight = "#1b6dd0"
+	timeout = 4
+
+[urgency_normal]
+	background = "#353535"
+	foreground = "#eeeeee"
+	frame_color = "#1b1b1b"
+	highlight = "#1b6dd0"
+	timeout = 10
+
+[urgency_critical]
+	background = "#f6f5f4"
+	foreground = "#222222"
+	frame_color = "#cdc7c2"
+	highlight = "#4b92e7"
+	timeout = 0
+
+# Every section that isn't one of the above is interpreted as a rules to
+# override settings for certain messages.
+# Messages can be matched by "appname", "summary", "body", "icon", "category",
+# "msg_urgency" and you can override the "timeout", "urgency", "foreground",
+# "background", "new_icon" and "format".
+# Shell-like globbing will get expanded.
+#
+# SCRIPTING
+# You can specify a script that gets run when the rule matches by
+# setting the "script" option.
+# The script will be called as follows:
+#   script appname summary body icon urgency
+# where urgency can be "LOW", "NORMAL" or "CRITICAL".
+#
+# NOTE: if you don't want a notification to be displayed, set the format
+# to "".
+# NOTE: It might be helpful to run dunst -print in a terminal in order
+# to find fitting options for rules.
+
+# find out desktop_entry by `dunst -print`
+# [fcitx5]
+# 	summary = "Switch group"
+# 	body = "Switched group to *"
+# 	# desktop_entry="org.fcitx.Fcitx5-migration"
+# 	# msg_urgency = "normal"
+# 	# background = "#ff0000"
+# 	# timeout = 1
+# 	skip_display = true
+# 	# urgency = low
+
+# [rfield]
+# 	summary = "(A) Connection Established"
+# 	body = "*\"rfield\"."
+# 	skip_display = true
+
+#[espeak]
+#	summary = "*"
+#	script = dunst_espeak.sh
+
+#[script-test]
+#	summary = "*script*"
+#	script = dunst_test.sh
+
+#[ignore]
+#	# This notification will not be displayed
+#	summary = "foobar"
+#	format = ""
+
+#[history-ignore]
+#	# This notification will not be saved in history
+#	summary = "foobar"
+#	history_ignore = yes
+
+#[signed_on]
+#	appname = Pidgin
+#	summary = "*signed on*"
+#	urgency = low
+#
+#[signed_off]
+#	appname = Pidgin
+#	summary = *signed off*
+#	urgency = low
+#
+#[says]
+#	appname = Pidgin
+#	summary = *says*
+#	urgency = critical
+#
+#[twitter]
+#	appname = Pidgin
+#	summary = *twitter.com*
+#	urgency = normal
+#
+# vim: ft=cfg

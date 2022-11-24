@@ -1,0 +1,119 @@
+/* https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-22/gtk/theme/Adwaita/_colors-public.scss */
+
+
+/* https://git.sr.ht/~troels/dotfiles/tree/master/.config/waybar/style.css */
+/* https://github.com/Alexays/Waybar/wiki/Styling */
+* {
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+
+    font-size: 13px;
+    font-family: Symbols Nerd Font Mono, monospace;
+    /* font-family: MesloLGS Nerd Fond Mono; */
+    /* Symbols Nerd Font Mono; */
+    /* font-family: Symbols Nerd Font Mono, Noto Sans Mono; */
+    /* Symbols Nerd Font Mono, FontAwesome; */
+    /* font-style: "normal"; */
+    /* font-weight: "normal"; */
+
+
+    /* font-family: MesloLGS Nerd Font Mono, Font Awesome 5 Brands; */
+
+    color: @theme_fg_color;
+    /* NOTE: do not set background here */
+}
+
+window#waybar {
+    background: @theme_base_color;
+    /* border-bottom: 1px solid alpha(@unfocused_borders, 0.85); */
+    /* border-bottom: 2px solid alpha(shade(@unfocused_borders, 0.5), 0.9); */
+    /* border-bottom: 1px solid @unfocused_borders; */
+
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+#workspaces button {
+    /* background: transparent; */
+    /* box-shadow: inset 0 -3px transparent; */
+    padding: 0 3px;
+    margin: 0 2px;
+}
+
+#workspaces button:hover {
+    /* background: @theme_bg_color; */
+    /* color: @wm_button_hover_color_a; */
+    background-color: @wm_button_hover_color_b;
+    box-shadow: inset 0 -4px @theme_selected_bg_color;
+}
+
+#workspaces button.focused {
+    /*
+    background: @theme_selected_bg_color;
+    color: @theme_selected_fg_color;
+    */
+
+    box-shadow: inset 0 -4px @theme_selected_bg_color;
+}
+
+#workspaces button.urgent {
+    background: @warning_color;
+    color: @theme_selected_fg_color;
+}
+
+#mode {
+    background: @theme_selected_bg_color;
+    color: @theme_selected_fg_color;
+}
+
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}
+
+
+#battery,
+#mode,
+#clock,
+#cpu,
+#memory,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#tray,
+#idle_inhibitor,
+#mpd {
+    padding: 0 6px;
+    margin: 0 3px;
+}
+
+#tray.needs-attention,
+#temperature.warning,
+#network.disconnected,
+#battery.warning:not(.charging) {
+    background: @warning_color;
+    color: @theme_selected_fg_color;
+}
+#battery.critical:not(.charging) {
+    background: @error_color;
+    color: @theme_selected_fg_color;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#temperature.critical {
+    background: @error_color;
+    color: @theme_selected_fg_color;
+}

@@ -1,0 +1,173 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# pylint: disable=invalid-name
+
+import sys
+import os
+import subprocess
+
+# import notify2
+# from subprocess import CompletedProcess
+from typing import List, Dict, Any, Optional
+from time import sleep
+import json
+# from itertools import chain
+
+# icons_data: Dict[str, str] = {
+#     "Adwaita"
+# }
+
+
+def _get_touchpad_status() -> bool:
+    """
+    :returns: return false if all touchpad devices is off
+    """
+    args: List[str] = ["swaymsg", "--type", "get_inputs", "--raw"]
+    proc: subprocess.CompletedProcess = subprocess.run(
+        args, capture_output=True, check=True
+    )
+
+    # touchpads: List[Dict[str, Any]] = []
+    for input_device in json.loads(proc.stdout.decode("UTF-8")):
+        if input_device["type"] == "touchpad" \
+                and input_device["libinput"]["send_events"] == "enabled":
+            return True
+    return False
+
+# TODO: send errormsg <2022-05-24, Hyunjae Kim>
+
+
+def send_noti(status: bool):
+    if status:
+        # icons = [
+        #     "touchpad-enabled-symbolic",
+        #     "input-touchpad-on",
+        #     "touchpad-enabled",
+        # ]
+        body_msg: str = "Enabled"
+        icon_arg: str = "--icon=input-touchpad-on"
+    else:
+        # icons = [
+        #     "touchpad-disabled-symbolic",
+        #     "input-touchpad-off",
+        #     "touchpad-disabled",
+        # ]
+        body_msg = "Disabled"
+        icon_arg: str = "--icon=input-touchpad-off"
+
+    # icons_neutral = [
+    #     "input-touchpad",
+    #     "input-touchpad-symbolic",
+    #     "touch",
+    # ]
+
+    noti_args = [
+        "notify-send",
+        "Touchpad",
+        body_msg,
+        "--urgency=low",
+        # f"--icon={','.join(chain(icons, icons_neutral))}",
+        # f"--icon=input-touchpad",
+        icon_arg,
+        "--category=device",
+    ]
+    subprocess.run(noti_args, check=False)
+
+
+def set_cursor(status: bool = None):
+    """
+    Hide cursor if status == false
+    """
+
+    if status:
+        timeout = "0"
+    else:
+        timeout = "1"
+
+    # TODO: get current seat <2022-05-24, Hyunjae Kim>
+    # swaymsg seat <seat0> hide_cursor <timeout>
+    args: List[str] = [
+        "swaymsg", "seat", "seat0", "hide_cursor", timeout
+    ]
+
+    subprocess.run(args, check=True)
+
+
+def touchpad_power(status: Optional[bool] = None) -> bool:
+    """
+    if no status is provided it will toggle current status
+
+    :returns: Return Current Status
+    """
+    if status is None:
+        status = not _get_touchpad_status()
+
+    args = [
+        "swaymsg",
+        "input",
+        "type:touchpad",
+        "events",
+    ]
+    if status:
+        args.append("enabled")
+    else:
+        args.append("disabled")
+
+    subprocess.run(args, check=True)
+
+    if status != _get_touchpad_status():
+        print("Touchpad Toggle Failed", file=sys.stderr)
+        return not status
+
+
+    return status
+
+def set_dwt(status: bool):
+    """ dwt == disable-while-typing """
+    args = [
+        "swaymsg",
+        "input",
+        "type:touchpad",
+        "dwt",
+    ]
+    if status:
+        args.append("enabled")
+    else:
+        args.append("disabled")
+
+    subprocess.run(args, check=True)
+
+
+def main() -> int:
+    """
+    :returns: exit code
+    """
+
+    if os.environ["XDG_SESSION_TYPE"].lower() != "wayland":
+        print("Session is not wayland", file=sys.stderr)
+        return 1
+
+    if not (
+        os.environ["XDG_SESSION_DESKTOP"].lower() == "sway"
+        or os.environ["DESKTOP_SESSION"].lower() == "sway"
+    ):
+        print("Session is not sway", file=sys.stderr)
+        return 1
+
+    if len(sys.argv) > 1:
+        if sys.argv[1].lower() in {"on", "true", "yes"}:
+            status:bool = touchpad_power(True)
+        elif sys.argv[1].lower() in {"off", "false", "no"}:
+            status = touchpad_power(False)
+    else:
+        status = touchpad_power()
+
+    set_dwt(status)
+    set_cursor(status)
+    send_noti(status)
+
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

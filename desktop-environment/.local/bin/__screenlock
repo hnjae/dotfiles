@@ -1,0 +1,44 @@
+#!/usr/bin/sh
+
+# grim -q 0 -o /tmp/lockscreen.png
+# magick /tmp/lockscreen.png -resize 1% /tmp/lockscreen.png
+
+# Lock 1password
+[ \
+    $(pgrep -x "1password" > /dev/null) \
+    -a $(type 1password < /dev/null > /dev/null 2>&1) \
+] && 1password --lock > /dev/null 2>&1
+
+# Pause Any Music
+type playerctl > /dev/null 2>&1 && playerctl -a pause
+
+# if [ "$XDG_SESSION_DESKTOP" = gnome -o "$XDG_SESSION_DESKTOP" = kde ]; then
+#     # TODO: implement this <2022-04-12, Hyunjae Kim>
+#     exit 0
+# fi
+
+if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
+    # if type magick > /dev/null && type grim > /dev/null; then
+    #     grim -t ppm /tmp/lockscreen.png
+    #     magick /tmp/lockscreen.png -scale "2.5%" /tmp/lockscreen.png
+    #     magick /tmp/lockscreen.png -scale "4000%" /tmp/lockscreen.png
+    #     swaylock -i /tmp/lockscreen.png
+    # else
+    if $(type gtklock > /dev/null 2>&1); then
+        gtklock \
+            --modules /usr/lib/gtklock/playerctl-module.so \
+            --modules /usr/lib/gtklock/powerbar-module.so
+            # --background /usr/share/backgrounds/gnome/symbolic-d.webp \
+            # --modules /usr/lib/gtklock/userinfo-module.so \
+    elif $(type swaylock > /dev/null 2>&1); then
+        swaylock
+    else
+        exit 1
+    fi
+elif [ "$XDG_SESSION_TYPE" = "x11" ]; then
+    if $(type xsecurelock > /dev/null 2>&1); then
+        xsecurelock
+    else
+        exit 1
+    fi
+fi
