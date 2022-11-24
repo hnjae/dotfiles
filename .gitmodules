@@ -1,0 +1,6 @@
+[submodule "shell/.local/share/zprezto"]
+	path = shell/.local/share/zprezto
+	url = git@github.com:sorin-ionescu/prezto.git
+[submodule "shell/.local/share/zprezto-contrib/fzf-tab"]
+	path = shell/.local/share/zprezto-contrib/fzf-tab
+	url = git@github.com:Aloxaf/fzf-tab
