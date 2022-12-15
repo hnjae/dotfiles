@@ -1,5 +1,9 @@
 #!/usr/bin/env sh
 
+if [ ! "$1" ]; then
+    exit 0
+fi
+
 current_machine="$(uname -s)"
 case "$current_machine" in
     Linux*)
@@ -38,10 +42,12 @@ image() {
             || echo "exiftool is not installed"
     else
         if [ "$TERM" = foot ]; then
+            # chafa "$HOME/.config/lf/previewer/clear.png" -f sixel -s "$(($2-2))x$(($3-1))" | sed 's/#/\n#/g'
             chafa "$1" -f sixel -s "$(($2-2))x$(($3-1))" | sed 's/#/\n#/g'
         elif [ "$TERM" = "Linux" -o "$TERM" = "tmux-256color" ]; then
             chafa "$1" -f symbols -s "$(($2-2))x$(($3-1))"
         else
+            # chafa "$HOME/.config/lf/previewer/clear.png" -f sixel -s "$(($2-2))x$(($3-1))" | sed 's/#/\n#/g'
             chafa "$1" -f sixel -s "$(($2-2))x$(($3-1))" | sed 's/#/\n#/g'
         fi
     fi
@@ -205,6 +211,7 @@ case "$mime_type" in
             || od --format=xz -N 4096 --address-radix=n -- "$filepath"
         ;;
 esac
+
 
 # --italic-text=always  won't work
 # bat --style=plain --italic-text=always --color=always --paging=never "$filepath"

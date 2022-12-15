@@ -1,3 +1,5 @@
 == dotfiles
 
 Personal dotfiles.
+
+Follows the GPLv3 license, except for font files or separately described code.

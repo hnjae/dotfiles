@@ -26,6 +26,7 @@ M.setup = function()
       -- buffers = {
       --   theme ="dropdown"
       -- },
+      -- TODO: use vim.fn.executable to find fd
       find_files = {
         find_command = { "fd", "--type", "f", "--strip-cwd-prefix" }
       }
@@ -48,8 +49,12 @@ M.setup = function()
   }
 
   telescope.setup(config)
-  telescope.load_extension('fzf')
-  telescope.load_extension('ultisnips')
+  if _IS_PLUGIN('telescope-fzf-native.nvim') then
+    telescope.load_extension('fzf')
+  end
+  if _IS_PLUGIN('telescope-ultisnips.nvim') then
+    telescope.load_extension('ultisnips')
+  end
 end
 
 return M

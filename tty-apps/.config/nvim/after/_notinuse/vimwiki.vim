@@ -1,1 +1,0 @@
-/home/hyunjae/.config/nvim/after/syntax/markdown.vim

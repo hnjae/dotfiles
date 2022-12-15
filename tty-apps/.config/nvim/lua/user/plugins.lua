@@ -11,7 +11,7 @@ if vim.fn.executable("git") == 1 and vim.fn.empty(vim.fn.glob(install_path)) > 0
     "clone",
     "--depth",
     "1",
-    "git@github.com:wbthomason/packer.nvim",
+    "https://github.com/wbthomason/packer.nvim",
     install_path,
   }
   print("Installing packer close and reopen Neovim...")
@@ -81,7 +81,9 @@ return packer.startup({
     end
     -- 0.082 x
     -- Plug 'junegunn/fzf', {'dir': '~/.fzf','do': './install --all'}
-    use 'junegunn/fzf.vim'
+    if vim.fn.executable("fzf") == 1 then
+      use 'junegunn/fzf.vim'
+    end
     use 'neoclide/jsonc.vim'
     -- use { 'antoinemadec/coc-fzf' }
 
@@ -107,13 +109,20 @@ return packer.startup({
       use { 'onsails/lspkind.nvim' } -- it shows kind icons
     end
 
-    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-    use { 'puremourning/vimspector' }
+    if vim.fn.has('nvim-0.8.0') == 1 then
+      use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+      use { 'p00f/nvim-ts-rainbow', requires = {'nvim-treesitter/nvim-treesitter', run = ":TSUpdate"} }
+      use { 'nvim-treesitter/nvim-treesitter-context', requires = {'nvim-treesitter/nvim-treesitter', run = ":TSUpdate"} }
+      use { 'toppair/prospector.nvim', opt = false, registers = 'nvim-treesitter/nvim-treesitter'  }
+    end
+
+    if vim.g.loaded_python3_provider ~= 0 then
+      use { 'puremourning/vimspector' }
+      use 'sirver/ultisnips'
+    end
     -- use { 'mfussenegger/nvim-dap' }
     -- use { 'mfussenegger/nvim-dap-python' }
 
-    use { 'p00f/nvim-ts-rainbow', requires = {'nvim-treesitter/nvim-treesitter', run = ":TSUpdate"} }
-    use { 'nvim-treesitter/nvim-treesitter-context', requires = {'nvim-treesitter/nvim-treesitter', run = ":TSUpdate"} }
     -- LANGUAGE
     use {
       'lervag/vimtex',
@@ -140,6 +149,7 @@ return packer.startup({
       'rust-lang/rust.vim',
       ft = { 'rust' },
     }
+    -- vimscript
     use { 'junegunn/vader.vim' }
     use {
       'mfussenegger/nvim-jdtls',
@@ -176,7 +186,6 @@ return packer.startup({
     -- ## color scheme
     -- use { 'tomasiser/vim-code-dark', opt = false }
     -- use { 'arnau/teaspoon.nvim', opt = false, requires = 'rktjmp/lush.nvim' }
-    use { 'toppair/prospector.nvim', opt = false, registers = 'nvim-treesitter/nvim-treesitter'  }
 
     --
     use { 'projekt0n/github-nvim-theme', opt = false }
@@ -206,7 +215,8 @@ return packer.startup({
     }
 
     -- INTEGRATION
-    use 'sirver/ultisnips'
+    -- if vim.fn.
+    -- end
     -- m의 mark 가 보이게 해준다.
     use 'kshenoy/vim-signature'
 
@@ -232,6 +242,7 @@ return packer.startup({
     }
 
     if vim.fn.executable("cmake") == 1 then
+      -- if vim.g.loaded_python3_provider ~= 0 then
       use {
         'nvim-telescope/telescope.nvim',
         requires = {

@@ -34,3 +34,6 @@ error.log
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+*.lock
+*.temp

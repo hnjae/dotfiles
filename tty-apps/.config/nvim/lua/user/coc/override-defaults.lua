@@ -1,7 +1,7 @@
+-- coc needs these config to work
 local M = {}
 
 M.setup = function()
-  -- coc needs these config
 
   -- if hidden is not set, TextEdit might fail.
   vim.opt.hidden = true

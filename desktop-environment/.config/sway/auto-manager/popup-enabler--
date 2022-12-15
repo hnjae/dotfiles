@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import asyncio
 import re
 import time
 from typing import Any, List
 
+from i3ipc import Event
+from i3ipc.aio import Connection
 from loguru import logger
-from i3ipc import Connection, Event
 
 _BROSER_POPUP_PATTERNS: List = [
     # 알라딘
@@ -24,8 +26,6 @@ _BROSER_POPUP_PATTERNS: List = [
     re.compile(r"옥션 - 로그인 .*"),
     # lotte card from market
     re.compile(r"롯데카드 통합 일반/간편서비스 .*"),
-    # address
-    re.compile(r"Daum Postcode Service .*"),
 ]
 
 PATTERNS = {
@@ -36,46 +36,45 @@ PATTERNS = {
 PATTERNS_KEYS = PATTERNS.keys()
 
 
-def on_window_new(i3, e: Any):
+async def on_window_new(i3, e: Any):
 
     if e.container.app_id not in PATTERNS_KEYS:
         return
 
     logger.info(
-        f"({e.container.id}) new pop-up may need window event: "
-        f"[{e.container.app_id}({e.container.name})]"
+        "new window event: "
+        f"{e.container.id}[{e.container.app_id}({e.container.name})]"
     )
 
     if PATTERNS[e.container.app_id][0]:
-        logger.info(
-            f"({e.container.id}) waiting window to load its contents"
-        )
+        logger.info(f"detected browser: waiting browser to load page")
         time.sleep(0.8)
 
-    con: Any | None = i3.get_tree().find_by_id(e.container.id)
+    con: Any | None = await i3.get_tree().find_by_id(e.container.id)
 
     if con is None:
-        logger.info(f"({e.container.id}) window closed")
         return
     if not con.focused:
-        logger.info(f"({e.container.id}) window is not focused")
         return
     if not isinstance(con.name, str) or len(con.name) == 0:
-        # logger.info(f"({e.container.id}) window is not focused")
         return
 
     for pattern in PATTERNS[e.container.app_id][1]:
         if not pattern.fullmatch(con.name):
             continue
         logger.info(
-            f"({e.container.id}) floating window: {con.name}"
+            f"container {con.id}[{con.app_id}({con.name})] floating enable"
         )
-        i3.command(f"[con_id={con.id}] floating enable")
+        await i3.command(f"[con_id={con.id}] floating enable")
         return
     return
 
 
-if __name__ == "__main__":
-    i3: Connection = Connection()
+async def main():
+    # i3: Connection = await Connection()
+    i3: Connection = await Connection(auto_reconnect=True).connect()
     i3.on(Event.WINDOW_NEW, on_window_new)
-    i3.main()
+    await i3.main()
+
+if __name__ == "__main__":
+    asyncio.get_event_loop().run_until_complete(main())

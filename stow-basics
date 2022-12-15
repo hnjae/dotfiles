@@ -10,18 +10,16 @@ XDG_DATA_HOME="$HOME/.local/share"
 
 # NOTE: Bashism syntax
 targets=(
-    "my-bin"
-    "shell"
-    "tty-apps"
+    "basics"
 )
 
 for target in ${targets[@]}; do
-    stow --no -v --stow --ignore="__hidden" --target="$HOME" "$target"
+    stow --no -v --stow --target="$HOME" "$target"
 done
 
 read -p "Continue? (y/Any)" should_run
 [ "$should_run" != "y" ] && echo "O.K. No" && exit 0
 
 for target in $tragets; do
-    stow -v --stow --ignore="__hidden" --target="$HOME" "$target"
+    stow -v --stow --target="$HOME" "$target"
 done

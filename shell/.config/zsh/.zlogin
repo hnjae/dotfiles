@@ -32,3 +32,7 @@ fi >&2
 # Colorscheme for console
 [ "$TERM" = "linux" -a -f "$ZDOTDIR/colorscheme.sh" ] \
     && . "$ZDOTDIR/colorscheme.sh"
+
+if [ "$TERM" = linux -a -z "$DISPLAY" -a "$(tty)" = "/dev/tty1" ]; then
+    "$HOME/.local/bin/run-de" sway
+fi

@@ -2,19 +2,19 @@
 
 path="$1"
 
-# current_machine="$(uname -s)"
-# case "$current_machine" in
-#     Linux*)
-#         abspath="$(readlink -f "$1")"
-#         ;;
-#     Darwin*)
-#         abspath="$(greadlink -f "$1")"
-#         OPENER="${OPENER:-open}"
-#         ;;
-#     *)
-#         exit 1
-#         ;;
-# esac
+current_machine="$(uname -s)"
+case "$current_machine" in
+    Linux*)
+        abspath="$(readlink -f "$1")"
+        ;;
+    Darwin*)
+        abspath="$(greadlink -f "$1")"
+        OPENER="${OPENER:-open}"
+        ;;
+    *)
+        exit 1
+        ;;
+esac
 
 EDITOR="${EDITOR:-nvim}"
 

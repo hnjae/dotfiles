@@ -1,4 +1,4 @@
-=
+= README
 == ~/.local/share/fonts
 * Pretendard (v1.3.6 2022-10-19 released)
 * Meslo LG Font (2022-10-10 commited / https://github.com/ryanoasis/nerd-fonts/)

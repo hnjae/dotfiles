@@ -5,8 +5,12 @@ if ! [ "$TERM" = linux -a -z "$DISPLAY" ]; then
     exit 1
 fi
 
-echo "RUN DE: 1) sway 2) startx"
-read -p "Select: " sel
+if [ "$1" ]; then
+    sel="sway"
+else
+    echo "RUN DE: 1) sway 2) sway-nvidia 3) startx 4) startx-nvidia"
+    read -p "Select: " sel
+fi
 
 export GTK_IM_MODULE=fcitx5
 export QT_IM_MODULE="$GTK_IM_MODULE"
@@ -14,7 +18,12 @@ export XMODIFIERS="@im=$GTK_IM_MODULE"
 export SDL_IM_MODULE="$GTK_IM_MODULE"
 
 case "$sel" in
-	"1")
+	"1"|"sway")
+                export GTK_IM_MODULE=fcitx4
+                # export QT_IM_MODULE="$GTK_IM_MODULE"
+                # export XMODIFIERS="@im=$GTK_IM_MODULE"
+                # export SDL_IM_MODULE="$GTK_IM_MODULE"
+
                 [ -f "$HOME/.profile" ] && . "$HOME/.profile"
 
 		export DESKTOP_SESSION="sway"
@@ -23,13 +32,14 @@ case "$sel" in
 		export LIBSEAT_BACKEND=logind
 
                 # export WLR_RENDERER=vulkan
-                export VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/radeon_icd.x86_64.json
+                export VK_ICD_FILENAMES="/usr/share/vulkan/icd.d/radeon_icd.x86_64.json:/usr/share/vulkan/icd.d/radeon_icd.i686.json:/usr/share/vulkan/icd.d/nvidia_icd.drm"
+                export LIBVA_DRIVER_NAME=radeonsi
 		export MOZ_ENABLE_WAYLAND=1
 
                 # export GDK_BACKEND=wayland
 		# export __GLX_VENDOR_LIBRARY_NAME=mesa
-		# export QT_QPA_PLATFORMTHEME="gnome"
-                export QT_STYLE_OVERRIDE=kvantum
+		export QT_QPA_PLATFORMTHEME="gnome"
+                # export QT_STYLE_OVERRIDE=kvantum
 
 		# export QT_QPA_PLATFORM="wayland;x11"
 		export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
@@ -39,21 +49,83 @@ case "$sel" in
                 # exec dbus-update-activation-environment DISPLAY XAUTHORITY WAYLAND_DISPLAY
                 # exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 	        # export=WLR_DRM_DEVICES=/dev/dri/card1
-	        # export=WLR_NO_HARDWARE_CURSORS=1
+	        # export=WLR_NO_HARDWARE_CURSORS=0
 
-		exec sway -V
-                #  --unsupported-gpu -V
+		exec sway --unsupported-gpu -V
 		# dbus-run-session sway --unsupported-gpu -V
 		;;
-	"2")
+	"2"|"sway-nvidia")
+                export GTK_IM_MODULE=fcitx4
+                # export QT_IM_MODULE="$GTK_IM_MODULE"
+                # export XMODIFIERS="@im=$GTK_IM_MODULE"
+                # export SDL_IM_MODULE="$GTK_IM_MODULE"
+
+                [ -f "$HOME/.profile" ] && . "$HOME/.profile"
+
+		export DESKTOP_SESSION="sway"
+		export XDG_SESSION_DESKTOP="$DESKTOP_SESSION"
+		export XDG_CURRENT_DESKTOP="$DESKTOP_SESSION"
+		export LIBSEAT_BACKEND=logind
+
+                export WLR_RENDERER=vulkan
+                export VK_ICD_FILENAMES="/usr/share/vulkan/icd.d/nvidia_icd.json:/usr/share/vulkan/icd.d/radeon_icd.x86_64.json:/usr/share/vulkan/icd.d/radeon_icd.i686.json"
+                export LIBVA_DRIVER_NAME=nvidia
+                export GBM_BACKEND=nvidia-drm
+                export __VK_LAYER_NV_optimus=NVIDIA_only
+                export __GLX_VENDOR_LIBRARY_NAME=nvidia
+		export MOZ_ENABLE_WAYLAND=1
+
+                # export GDK_BACKEND=wayland
+		# export __GLX_VENDOR_LIBRARY_NAME=mesa
+		export QT_QPA_PLATFORMTHEME="gnome"
+                # export QT_STYLE_OVERRIDE=kvantum
+
+		# export QT_QPA_PLATFORM="wayland;x11"
+		export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+		# export XDG_SESSION_TYPE="wayland" -- auto exported maybe
+
+                # exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+                # exec dbus-update-activation-environment DISPLAY XAUTHORITY WAYLAND_DISPLAY
+                # exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+	        export WLR_DRM_DEVICES="/dev/dri/card1"
+	        export WLR_NO_HARDWARE_CURSORS=1
+
+		exec sway --unsupported-gpu -V
+		# dbus-run-session sway --unsupported-gpu -V
+		;;
+	"3"|"startx")
 		export DESKTOP_SESSION="cinnamon-session"
 		export XDG_SESSION_DESKTOP="$DESKTOP_SESSION"
 		export XDG_CURRENT_DESKTOP="$DESKTOP_SESSION"
+		export XDG_SESSION_TYPE="x11"
+
+                # export VK_ICD_FILENAMES="/usr/share/vulkan/icd.d/radeon_icd.x86_64.json:/usr/share/vulkan/icd.d/radeon_icd.i686.json"
+                export VK_ICD_FILENAMES="/usr/share/vulkan/icd.d/radeon_icd.x86_64.json:/usr/share/vulkan/icd.d/radeon_icd.i686.json:/usr/share/vulkan/icd.d/nvidia_icd.drm"
+                export LIBVA_DRIVER_NAME=radeonsi
 
                 # NOTE: Do not use xdg-desktop-portal
                 export GTK_USE_PORTAL=0
 		startx
 		;;
+	"4"|"startx-nvidia")
+		export DESKTOP_SESSION="cinnamon-session"
+		export XDG_SESSION_DESKTOP="$DESKTOP_SESSION"
+		export XDG_CURRENT_DESKTOP="$DESKTOP_SESSION"
+		export XDG_SESSION_TYPE="x11"
+
+                # export VK_ICD_FILENAMES="/usr/share/vulkan/icd.d/nvidia_icd.json"
+                export VK_ICD_FILENAMES="/usr/share/vulkan/icd.d/nvidia_icd.json:/usr/share/vulkan/icd.d/radeon_icd.x86_64.json:/usr/share/vulkan/icd.d/radeon_icd.i686.json"
+                export LIBVA_DRIVER_NAME=nvidia
+                export GBM_BACKEND=nvidia-drm
+                export __VK_LAYER_NV_optimus=NVIDIA_only
+                export __GLX_VENDOR_LIBRARY_NAME=nvidia
+
+                # NOTE: Do not use xdg-desktop-portal
+                export GTK_USE_PORTAL=0
+                # /usr/bin/prime-offload
+		startx
+                # /usr/bin/prime-offload &
+                ;;
 	*)
                 echo "ERROR: Not implemented error: $sel"
 		;;

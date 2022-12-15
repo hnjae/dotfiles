@@ -2,6 +2,7 @@
 # Executes commands at login pre-zshrc.
 # Only sourced initial login (tty, tmux)
 
+
 ########################################################################
 # Source fallback profile
 # X11 세션일 경우 xprofile 도 읽어 들임

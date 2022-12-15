@@ -43,6 +43,9 @@ M.setup = function()
     'coc-jedi',
     'coc-sumneko-lua',
     'coc-sh',
+
+    --
+    'coc-prettier',
   }
 
   -- coc-snippets

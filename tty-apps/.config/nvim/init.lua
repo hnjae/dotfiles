@@ -3,8 +3,8 @@
 require('user.builtin').setup()
 
 -- NOTE: packer_startup: table
-is_packer, packer_startup =  pcall(require, 'user.plugins')
-if is_packer and packer_startup ~= 1 then
+is_packer, packer_startup = pcall(require, 'user.plugins')
+if is_packer and packer_startup ~= 1 and vim.fn.filereadable(_PACKER_COMPILED) == 1 then
   vim.cmd('source ' .. _PACKER_COMPILED)
   -- vim.cmd('source ' .. packer_startup.config.compile_path)
 end
@@ -30,7 +30,7 @@ require('user.mapping').setup()
 --     )
 --   )
 -- )
--- 
+--
 -- for _, file in pairs(paths) do
 --   vim.cmd('source ' .. file)
 -- end

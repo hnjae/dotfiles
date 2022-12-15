@@ -1,4 +1,5 @@
 #!/usr/bin/sh
+
 # Choose pulseaudio sink/source via wofi/rofi.
 # Changes default sink/source and moves all streams to that device.
 

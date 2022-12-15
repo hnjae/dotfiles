@@ -6,6 +6,7 @@ type "$1" > /dev/null 2>&1 || exit 1
 
 killall -q "$1"
 
+# Bashism code
 # NOTE: bash는 "$UID" 변수가 존재하나, dash 는 없음.
 # Wait until the processes have been shut down
 while pgrep --uid "$UID" -x "$1" > /dev/null; do sleep 0.4; done
