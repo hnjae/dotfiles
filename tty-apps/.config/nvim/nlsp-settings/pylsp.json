@@ -1,5 +1,0 @@
-{
-  "pylsp.plugins.flake8.enabled": false,
-  "pylsp.plugins.pycodestyle.enabled": true,
-  "pylsp.plugins.pylint.enabled": false
-}
