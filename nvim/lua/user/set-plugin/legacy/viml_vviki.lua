@@ -1,0 +1,6 @@
+-- if _IS_PLUGIN('vviki') then
+--   vim.g.vviki_root = "~/Sync/Library/wiki"
+--   vim.g.vviki_ext = ".adoc"
+--   -- vim.g.vviki_indexgc
+--   vim.g.vvki_conceal_links = 0
+-- end
