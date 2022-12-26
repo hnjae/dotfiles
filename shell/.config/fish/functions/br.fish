@@ -1,0 +1,1 @@
+/home/hyunjae/.local/share/broot/launcher/fish/br.fish

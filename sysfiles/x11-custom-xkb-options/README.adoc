@@ -1,0 +1,17 @@
+---
+title   : README
+date    : 2022-12-21T18:44:55+0900
+lastmod : 2022-12-21T19:20:45+0900
+isCJKLanguage : true
+draft   : true
+---
+
+= README
+
+Custom xkboption
+
+modified `+backspace+` option to fit my needs.
+
+== How to install
+. Replace `+/usr/shar/X11/xkb/symbols/capslock+`
+. Make packge manager to not to update this file.

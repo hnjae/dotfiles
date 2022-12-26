@@ -1,0 +1,17 @@
+---
+title   : README
+date    : 2022-12-21T18:44:05+0900
+lastmod : 2022-12-21T19:20:35+0900
+isCJKLanguage : true
+draft   : true
+---
+
+= README
+
+colemak_dh-matrix
+
+
+== How to install
+. Replace files in `+/usr/share/X11/xkb/symbols+`
+. Replace files in `+/usr/share/X11/xkb/rules+`
+. Make packge manager to not to update these files.

@@ -11,8 +11,9 @@ if vim.fn.has("termguicolors") == 1 then
 end
 
 ------------------------------------------------------------------
--- vim.g.codedark_italics = 1
--- vim.cmd([[silent! colorscheme codedark]])
+-- https://github.com/tomasiser/vim-code-dark
+vim.g.codedark_italics = 1
+vim.cmd([[silent! colorscheme codedark]])
 
 ------------------------------------------------------------------
 -- vim.g.adwaita_darker = true -- for darker version
@@ -63,12 +64,12 @@ end
 -- vim.g.vscode_italic_comment = 1
 -- -- Disable nvim-tree background color
 -- -- vim.g.vscode_disable_nvimtree_bg = true
--- vim.cmd([[colorscheme vscode]])
+-- vim.cmd([[silent! colorscheme vscode]])
 ------------------------------------------------------------------
 -- neon
-vim.g.neon_style="dark"
-vim.g.neon_italic_keyword=true
-vim.cmd[[silent! colorscheme neon]]
+-- vim.g.neon_style="dark"
+-- vim.g.neon_italic_keyword=true
+-- vim.cmd[[silent! colorscheme neon]]
 
 -- vim.cmd[[silent! colorscheme dracula]]
 -- vim.g.dracula_bold = 1

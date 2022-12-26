@@ -112,3 +112,9 @@ case "$TERM" in (foot|rxvt|rxvt-*|st|st-*|*xterm*|(dt|k|E)term)
     }
   ;;
 esac
+
+# broot (https://github.com/Canop/broot): Fuzzy Search + tree + cd
+type broot > /dev/null && [ \
+	-f "${XDG_CONFIG_HOME:-$HOME/.config}/broot/launcher/bash/br" \
+] \
+	&& source "${XDG_CONFIG_HOME:-$HOME/.config}/broot/launcher/bash/br"

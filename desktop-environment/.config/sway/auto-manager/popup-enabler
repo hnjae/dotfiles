@@ -26,6 +26,8 @@ _BROSER_POPUP_PATTERNS: List = [
     re.compile(r"롯데카드 통합 일반/간편서비스 .*"),
     # address
     re.compile(r"Daum Postcode Service .*"),
+    # 신용카드인증
+    re.compile(r"라온시큐어 카드본인확인서비스 .*"),
 ]
 
 PATTERNS = {

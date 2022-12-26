@@ -184,7 +184,7 @@ return packer.startup({
 
     -- CODE DISPLAY
     -- ## color scheme
-    -- use { 'tomasiser/vim-code-dark', opt = false }
+    use { 'tomasiser/vim-code-dark', opt = false }
     -- use { 'arnau/teaspoon.nvim', opt = false, requires = 'rktjmp/lush.nvim' }
 
     --

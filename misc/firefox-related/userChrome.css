@@ -1,0 +1,28 @@
+/*
+@-moz-document url(about:blank) {
+	html,body {
+		background: #282828d;
+	}
+}
+*/
+
+/* hides the native tabs */
+#TabsToolbar {
+	visibility: collapse !important;
+}
+
+/* hides the sidebar */
+#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] #sidebar-header {
+	display: none;
+}
+
+/* Hide splitter, when using Tree Style Tab. */
+/*
+#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] + #sidebar-splitter {
+	display: none !important;
+}
+*/
+
+#sidebar {
+	min-width: 60px !important;
+}

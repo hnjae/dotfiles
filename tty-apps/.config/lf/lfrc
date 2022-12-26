@@ -166,7 +166,36 @@ map xM push :mkdir<space>
 cmd mkcd %~/.config/lf/scripts/mkcd.sh "$id" "$@"
 map xm push :mkcd<space>
 
-map xf !{{fmna}}
+map xf !{{
+	# https://stackoverflow.com/questions/8725925/how-to-read-just-a-single-character-in-shell-script
+	echo " "
+	echo "---- $(date --iso-8601=seconds) ----"
+	target_dir=$(fmna)
+
+	read_char() {
+	  stty -icanon -echo
+	  eval "$1=\$(dd bs=1 count=1 2>/dev/null)"
+	  stty icanon echo
+	}
+
+
+	if [ ! "$target_dir" ]; then
+		exit 0
+	fi
+
+	echo "cd to $target_dir ? (y/Any)"
+	read_char char
+	echo "input char: $char"
+	if [ "$char" = "y" ]; then
+		echo "O.k Yes"
+		[ -d "$target_dir" ] && lf -remote "send $id cd \"$target_dir\"" || echo "$target_dir is not dir"
+	else
+		echo "O.k No"
+	fi
+	# [ -d "$target_dir" ] && lf -remote "send $id cd \"$target_dir\""
+
+	}}
+
 map xc ${{
 	rm -rf "$HOME/.local/share/lf"
 	killall lf

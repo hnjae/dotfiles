@@ -1,0 +1,17 @@
+---
+title   : README
+date    : 2022-12-21T18:44:05+0900
+lastmod : 2022-12-21T19:21:48+0900
+isCJKLanguage : true
+draft   : true
+---
+
+= README
+
+Modified version of colemak_dh (to not to replace RALT key)
+
+Based on xkeyboard-config 2.34-1
+
+== How to install
+. Replace `+/usr/share/X11/xkb/symbols/us+`
+. Make packge manager to not to update this file.

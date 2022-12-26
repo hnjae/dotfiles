@@ -1,0 +1,3 @@
+# Set bluetooth keyboard power up
+# written 2019-07-18
+ACTION=="add", KERNEL=="hci0", RUN+="/bin/bluetooth --agent menu power on"

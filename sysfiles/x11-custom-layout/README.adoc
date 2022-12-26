@@ -1,0 +1,17 @@
+---
+title   : README
+date    : 2022-12-21T18:44:55+0900
+lastmod : 2022-12-21T19:20:41+0900
+isCJKLanguage : true
+draft   : true
+---
+
+= README
+
+Modified keyboard layout to fit my needs.
+
+Based on xkeyboard-config 2.34-1
+
+== How to install
+. Replace `+/usr/shar/X11/xkb/symbols/pc+`
+. Make packge manager to not to update this file.

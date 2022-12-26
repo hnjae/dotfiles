@@ -1,0 +1,6 @@
+# device '/devices/pci0000:00/0000:00:01.2/0000:01:00.2/0000:02:00.0/0000:03:00.0':
+
+# amdgpu
+ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x1002", ATTR{class}=="0x030000", ATTR{power/control}="auto", ATTR{remove}="1"
+# snd_hda_intel (audio)
+ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x1002", ATTR{class}=="0x040300", ATTR{power/control}="auto", ATTR{remove}="1"

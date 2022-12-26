@@ -1,0 +1,47 @@
+# ~/.mplayer/config
+
+## Decoding Option
+vo=gl
+framedrop=no
+hardframedrop=no
+ao=pulse
+softvol=no #No SwMixer
+double=1 #double buffering
+lavdopts=threads=8 #For MPEG-1/2 & H.264 only
+
+## Scaling & Filters
+fs=yes
+#zoom=yes #Allow SwScaling
+#sws=10 #set Natural Bicubic Spline as SwScaler
+#vf=hqdn3d=2:1:8:8,scale=1920:-3:0:0::::0:,screenshot
+# vf=scale=1920:-3:0:0::::0:,screenshot
+#vf=hqdn3d=2:1:7,scale=4000:-3:0:0::::0:
+#ssf=ls=75 #SwScaler Parameters
+#ssf=cs=75 #Sharpen Filter (luma / chroma)
+af=volnorm=2:0.25 #Volume Normalize
+
+## Subtitle and OSD
+ass=no
+#ass-styles=path to styles.ass
+fontconfig=yes
+subcp=utf-8
+subfont="KoreanCNML"
+subfont-autoscale=1 #proportional to movie height
+subfont-text-scale=7.1
+subfont-osd-scale=5
+subfont-outline=4.6
+subfont-blur=1.5
+subalign=2 # Align Sub bottom edge
+subpos=94
+spuaa=4 #antialiasing mode for DVD/VOBsub
+font="Source Han Sans J"
+
+# msic
+fixed-vo=yes
+stop-xscreensaver=yes
+use-filename-title=yes
+nomouseinput=yes
+ontop=no
+cache=4096
+alang=jpn,en,ko #Priority list of Audio Lang to be used
+slang=ko,en,jpn #Priority list of sub lang to be used

@@ -1,0 +1,15 @@
+---
+title   : README
+date    : 2022-12-21T18:44:55+0900
+lastmod : 2022-12-21T19:25:23+0900
+isCJKLanguage : true
+draft   : true
+---
+
+= README
+
+. Linux colemak-dh keymap file for Linux Console.
+. Replaced CAPS with CTRL_L
+
+== How to install
+Place .map.gz file in `+/usr/shar/kbd/keymaps/i386/colemak/+`
