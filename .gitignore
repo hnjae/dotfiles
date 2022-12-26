@@ -1,3 +1,11 @@
+######################
+__hidden*
+__not-in-use
+__local_config*
+.vim
+*/asciidoc-wiki
+*.add.spl
+
 # Compiled Lua sources
 luac.out
 
@@ -39,3 +47,17 @@ luac.out
 *.x86_64
 *.hex
 
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.lock
+*.temp
+__pycache__
+.ropeproject
+cacheDir
