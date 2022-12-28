@@ -1,9 +1,14 @@
 -- if packer_plugins['nvim-cmp'] and packer_plugins['nvim-cmp'].loaded then
 -- local cmp = require('cmp')
-local has_cmp, cmp = pcall(require, "cmp")
-local has_lspkind, lspkind = pcall(require, "lspkind")
 
-if has_cmp then
+local M = {}
+M.setup = function ()
+  local has_cmp, cmp = pcall(require, "cmp")
+
+  if not has_cmp then
+    return
+  end
+
   local cmp_opts = {
     snippet = {
       -- REQUIRED - you must specify a snippet engine
@@ -38,6 +43,8 @@ if has_cmp then
       { { name = 'path' } }
     ),
   }
+
+  local has_lspkind, lspkind = pcall(require, "lspkind")
   if has_lspkind then
     cmp_opts["formatting"] = {
       format = lspkind.cmp_format({
@@ -73,3 +80,5 @@ if has_cmp then
   --   capabilities = capabilities
   -- }
 end
+
+return M

@@ -1,6 +1,10 @@
-local status_ok, tabline = pcall(require, "tabline")
+local M = {}
+M.setup = function ()
+  local status_ok, tabline = pcall(require, "tabline")
 
-if status_ok then
+  if not status_ok then
+    return
+  end
     tabline.setup {
       -- Defaults configuration options
       enable = true,
@@ -26,3 +30,4 @@ if status_ok then
     --   set sessionoptions+=tabpages,globals " store tabpages and globals in session
     -- ]]
 end
+return M

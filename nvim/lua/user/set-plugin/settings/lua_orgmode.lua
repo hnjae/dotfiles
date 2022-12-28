@@ -1,7 +1,11 @@
+local M = {}
 local status_ok, orgmode = pcall(require, "orgmode")
 -- local status_treesitter, treesitter_configs = pcall(require, "nvim-treesitter.configs")
 
-if status_ok  then
+M.setup = function()
+  if not status_ok  then
+    return
+  end
   -- vim.cmd([[TSUpdate org]])
 
   -- require('orgmode').setup({
@@ -104,12 +108,16 @@ if status_ok  then
     }, { prefix = "<Leader>o", buffer = 0 }
     )
   end
+
+  -- local status_bullets, org_bullets = pcall(require, "org-bullets")
+  -- if status_bullets then
+  --   org_bullets.setup({
+  --     symbols = { "◉", "○", "✸", "✿" }
+  --   })
+  -- end
+  orgmode.setup({
+    org_agenda_files = {'~/Sync/Library/org/agenda/*' },
+    org_default_notes_file = '~/Sync/Library/org/index.org',
+  })
 end
-
-
--- local status_bullets, org_bullets = pcall(require, "org-bullets")
--- if status_bullets then
---   org_bullets.setup({
---     symbols = { "◉", "○", "✸", "✿" }
---   })
--- end
+return M

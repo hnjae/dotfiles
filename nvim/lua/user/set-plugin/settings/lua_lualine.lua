@@ -1,6 +1,9 @@
-local status_ok, lualine = pcall(require, "lualine")
-
-if status_ok then
+local M = {}
+M.setup = function()
+  local status_ok, lualine = pcall(require, "lualine")
+  if not status_ok then
+    return
+  end
 
   local encoding_opt = {
     "encoding",
@@ -38,7 +41,7 @@ if status_ok then
   --   -- Lsp server name
   --   function()
   --     eturn vim.api.nvim_call_function("coc#status", {})
-	-- -- set statusline^=%{coc#status()}
+        -- -- set statusline^=%{coc#status()}
   --     -- return "stst"
   --   end,
   --   icon = '',
@@ -163,3 +166,4 @@ if status_ok then
   }
 
 end
+return M

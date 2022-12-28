@@ -1,8 +1,13 @@
 -- jiangmiao/auto-pairs alternative for Telescope
 
-local status, nvim_autopairs = pcall(require, "nvim-autopairs")
+local M = {}
 
-if status then
+M.setup = function()
+  local status, nvim_autopairs = pcall(require, "nvim-autopairs")
+
+  if not status then
+    return
+  end
   -- local n_rule = require('nvim-autopairs.rule')
 
   local opts = {
@@ -21,6 +26,6 @@ if status then
     -- map_c_h = false,  -- Map the <C-h> key to delete a pair
     -- map_c_w = false, -- map <c-w> to delete a pair if possible
   }
-
   nvim_autopairs.setup(opts)
 end
+return M

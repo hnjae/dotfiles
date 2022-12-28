@@ -1,4 +1,9 @@
-if _IS_PLUGIN('vimwiki') then
+local M = {}
+M.setup = function ()
+  if not _IS_PLUGIN('vimwiki') then
+    return
+  end
+
   -- if packer_plugins and packer_plugins['vimwiki'] then
   ----------------------------------------------------------------------------
   -- CONCEAL
@@ -183,5 +188,6 @@ if _IS_PLUGIN('vimwiki') then
     pattern = { "*.md" },
     callback = last_modified
   })
-
 end
+
+return M
