@@ -42,7 +42,6 @@
   // "snippets.snipmate.enable": false,
   // "snippets.priority": 99,
   // "snippets.userSnippetsDirectory": "$HOME/.config/nvim/coc-snippets",
-
   ///////////////////////////////////////////////////////////////
   // coc-pyright
   ///////////////////////////////////////////////////////////////
@@ -55,7 +54,10 @@
   "pyright.completion.snippetSupport": true,
   "pyright.organizeimports.provider": "isort",
   "python.formatting.provider": "black",
-  "python.formatting.blackArgs": ["--line-length", "79"],
+  "python.formatting.blackArgs": [
+    "--line-length",
+    "79"
+  ],
   "python.linting.enabled": true,
   "python.linting.pylintEnabled": true,
   "python.linting.pylintArgs": [
@@ -76,7 +78,8 @@
   ],
   "python.linting.flake8Enabled": false,
   "python.linting.flake8Args": [
-    "--max-line-length", "79",
+    "--max-line-length",
+    "79",
     "--ignore=E225,E226,E251,E261,E302,E303,E305,E501,F401,F821,F841"
     // E225: = blanks
     // E226: arithmetic blanks
@@ -113,11 +116,10 @@
   // coc-jedi
   ///////////////////////////////////////////////////////////////
   "jedi.enable": false,
-
   ///////////////////////////////////////////////////////////////
-  // coc-sumneko-lua
+  // coc-lua
   ///////////////////////////////////////////////////////////////
   "sumneko-lua.enable": true,
-  // "sumneko-lua.enableNvimLuaDev": true,
-  "Lua.telemetry.enable": false
+  "lua.enable": false,
+  "Lua.telemetry.enable": false,
 }

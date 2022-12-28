@@ -67,31 +67,26 @@ end
 
 return packer.startup({
   function(use)
-    -- Packer can manage itself
     use 'wbthomason/packer.nvim'
 
-    -- IDE
-    -- use { 'neoclide/coc.nvim', branch = 'release' }
-    -- 2022-07-31 Ok
-    -- use { 'neoclide/coc.nvim', branch = 'release', commit = 'be513c7f61d61143e696878ab4c33c8337c15692' }
+    -- TODO: only when node neovim available <2022-11-03, Hyunjae Kim>
 
-    -- TODO: only when node neovim availalbe <2022-11-03, Hyunjae Kim>
-    if vim.fn.executable("yarn") == 1 then
-      use { 'neoclide/coc.nvim', branch = 'release'}
-    end
-    -- 0.082 x
-    -- Plug 'junegunn/fzf', {'dir': '~/.fzf','do': './install --all'}
     if vim.fn.executable("fzf") == 1 then
       use 'junegunn/fzf.vim'
     end
-    use 'neoclide/jsonc.vim'
-    -- use { 'antoinemadec/coc-fzf' }
 
-    if false and vim.fn.has('nvim-0.7') == 1 then
-      -- use {
-      --   'tamago324/nlsp-settings.nvim',
-      --   requires = { 'neovim/nvim-lspconfig', 'rcarriga/nvim-notify' },
-      -- }
+    use 'neoclide/jsonc.vim'
+
+
+
+    if vim.fn.has("node") == 1 then
+      use { 'neoclide/coc.nvim', branch = 'release'}
+      use { 'antoinemadec/coc-fzf', branch = 'release', requires = {'neoclide/coc.nvim'}}
+    elseif vim.fn.has('nvim-0.7') == 1 then
+      use {
+        'tamago324/nlsp-settings.nvim',
+        requires = { 'neovim/nvim-lspconfig', 'rcarriga/nvim-notify', 'williamboman/nvim-lsp-installer' },
+      }
       use {
         'williamboman/nvim-lsp-installer',
         requires = { 'neovim/nvim-lspconfig' },
@@ -105,8 +100,17 @@ return packer.startup({
       use { 'hrsh7th/cmp-nvim-lua' }
 
       -- use { 'nvim-lua/lsp-status.nvim' } -- lualine 에서 setup 해야함.
-      use { 'ray-x/lsp_signature.nvim' } -- it shows popup window.
+      use { 'ray-x/lsp_signature.nvim',
+        config = function()
+          require('lsp_signature').setup()
+        end
+  } -- it shows popup window.
       use { 'onsails/lspkind.nvim' } -- it shows kind icons
+
+      if vim.fn.has('nvim-0.7.2') == 1 then
+        -- Project based config
+        use {"folke/neodev.nvim"}
+      end
     end
 
     if vim.fn.has('nvim-0.8.0') == 1 then
@@ -116,7 +120,8 @@ return packer.startup({
       use { 'toppair/prospector.nvim', opt = false, registers = 'nvim-treesitter/nvim-treesitter'  }
     end
 
-    if vim.g.loaded_python3_provider ~= 0 then
+    -- if vim.g.loaded_python3_provider ~= 0 then
+    if vim.fn.has('python3') == 1 then
       use { 'puremourning/vimspector' }
       use 'sirver/ultisnips'
     end
@@ -133,14 +138,14 @@ return packer.startup({
       branch = 'develop',
       ft = { 'python' },
     }
-    use {
-      'psf/black',
-      ft = { 'python' },
-    }
-    use {
-      'brentyi/isort.vim',
-      ft = { 'python' },
-    }
+    -- use {
+    --   'psf/black',
+    --   ft = { 'python' },
+    -- }
+    -- use {
+    --   'brentyi/isort.vim',
+    --   ft = { 'python' },
+    -- }
     use {
       'tenfyzhong/autoflake.vim',
       ft = { 'python' },
@@ -174,7 +179,6 @@ return packer.startup({
     -- }
 
 
-
     -- COMPLETION
     ---------------------------------------------
     use 'ludovicchabant/vim-gutentags'
@@ -184,13 +188,13 @@ return packer.startup({
 
     -- CODE DISPLAY
     -- ## color scheme
-    use { 'tomasiser/vim-code-dark', opt = false }
     -- use { 'arnau/teaspoon.nvim', opt = false, requires = 'rktjmp/lush.nvim' }
 
     --
     use { 'projekt0n/github-nvim-theme', opt = false }
     use { 'rafamadriz/neon', opt = false }
     use { 'Mofiqul/vscode.nvim', opt = false }
+    -- use { 'tomasiser/vim-code-dark', opt = false }
     use { 'kvrohit/rasmus.nvim', opt = false }
     -- use { 'arnau/teaspoon.nvim', opt = false }
     use { 'Mofiqul/adwaita.nvim', opt = false }
@@ -224,7 +228,9 @@ return packer.startup({
       use 'lilydjwg/fcitx.vim'
     end
 
-    use { 'folke/which-key.nvim' }
+    if vim.fn.has('nvim-0.5') == 1 then
+      use { 'folke/which-key.nvim' }
+    end
     -- netrw 개선
     -- use 'yggdroot/indentline'
     -- use 'ctrlpvim/ctrlp.vim'
@@ -283,12 +289,6 @@ return packer.startup({
     -- use { 'renerocksai/telekasten' }
     -- use { 'lervag/wiki.vim' }
     -- use { 'preservim/vim-markdown' }
-    -- use {
-    --   'nvim-orgmode/orgmode',
-    --   requires = {
-    --     'nvim-treesitter/nvim-treesitter',
-    --   },
-    -- }
     -- Plug 'michal-h21/vim-zettel'
     -- Plug '907th/vim-auto-save'
     -- Plug 'freitass/todo.txt-vim'
@@ -320,6 +320,13 @@ return packer.startup({
     if vim.fn.has('nvim-0.7') == 1 then
       use {"akinsho/toggleterm.nvim", tag = 'v2.*'}
     end
+
+    if vim.fn.has('nvim-0.7.2') == 1 then
+      -- Project based config
+      -- use {"folke/neoconf.nvim"}
+      use {"folke/neodev.nvim"}
+    end
+
 
     if PACKER_BOOTSTRAP then
       packer.sync()

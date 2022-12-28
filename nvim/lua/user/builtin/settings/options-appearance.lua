@@ -12,8 +12,8 @@ end
 
 ------------------------------------------------------------------
 -- https://github.com/tomasiser/vim-code-dark
-vim.g.codedark_italics = 1
-vim.cmd([[silent! colorscheme codedark]])
+-- vim.g.codedark_italics = 1
+-- vim.cmd([[silent! colorscheme codedark]])
 
 ------------------------------------------------------------------
 -- vim.g.adwaita_darker = true -- for darker version
@@ -28,9 +28,12 @@ vim.cmd([[silent! colorscheme codedark]])
 ------------------------------------------------------------------
 -- vscode.nvim
 -- does not support htmlH1 (2022-06-21)
--- vim.g.vscode_style = "dark"
--- vim.g.vscode_italic_comment = 1
--- vim.cmd([[silent! colorscheme vscode]])
+vim.o.background = 'dark'
+vim.g.vscode_style = "dark"
+vim.g.vscode_italic_comment = 1
+vim.cmd([[silent! colorscheme vscode]])
+-- require('vscode').setup({})
+
 ------------------------------------------------------------------
 -- vim.g.material_style = "darker"
 -- vim.cmd([[silent! colorscheme material]])

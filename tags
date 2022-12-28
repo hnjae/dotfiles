@@ -9,28 +9,74 @@
 !_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
 !_TAG_PROGRAM_URL	https://ctags.io/	/official site/
 !_TAG_PROGRAM_VERSION	5.9.0	/p5.9.20220828.0/
+$schema	nvim/lua/.luarc.json	/^    "$schema": "https:\/\/raw.githubusercontent.com\/sumneko\/vscode-lua\/master\/setting\/schem/;"	s
 0	nvim/coc-settings.json	/^    "--disable",$/;"	s	array:python.linting.pylintArgs
 0	nvim/coc-settings.json	/^    "--ignore=E225,E226,E251,E261,E302,E303,E305,E501"$/;"	s	array:python.linting.pycodestyleArgs
-0	nvim/coc-settings.json	/^    "--max-line-length", "79",$/;"	s	array:python.linting.flake8Args
-0	nvim/coc-settings.json	/^  "python.formatting.blackArgs": ["--line-length", "79"],$/;"	s	array:python.formatting.blackArgs
+0	nvim/coc-settings.json	/^    "--line-length",$/;"	s	array:python.formatting.blackArgs
+0	nvim/coc-settings.json	/^    "--max-line-length",$/;"	s	array:python.linting.flake8Args
+0	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/start\/neodev.nvim\/types\/st/;"	s	array:Lua.workspace.library
 0	nvim/nlsp-settings/sumneko_lua.json	/^    "unused-local", "unused-vararg", "lowercase-global", "undefined-field"$/;"	s	array:Lua.diagnostics.disable
 0	nvim/nlsp-settings/sumneko_lua.json	/^    "vim", "describe", "it", "before_each", "after_each"$/;"	s	array:Lua.diagnostics.globals
-1	nvim/coc-settings.json	/^    "--max-line-length", "79",$/;"	s	array:python.linting.flake8Args
+1	nvim/coc-settings.json	/^    "79"$/;"	s	array:python.formatting.blackArgs
+1	nvim/coc-settings.json	/^    "79",$/;"	s	array:python.linting.flake8Args
 1	nvim/coc-settings.json	/^    "W0511,W0611,W0612,W0613,C0114,C0116,C0301,C0411",$/;"	s	array:python.linting.pylintArgs
-1	nvim/coc-settings.json	/^  "python.formatting.blackArgs": ["--line-length", "79"],$/;"	s	array:python.formatting.blackArgs
+1	nvim/lua/.luarc.json	/^        "\/usr\/share\/nvim\/runtime",$/;"	s	array:Lua.workspace.library
 1	nvim/nlsp-settings/sumneko_lua.json	/^    "unused-local", "unused-vararg", "lowercase-global", "undefined-field"$/;"	s	array:Lua.diagnostics.disable
 1	nvim/nlsp-settings/sumneko_lua.json	/^    "vim", "describe", "it", "before_each", "after_each"$/;"	s	array:Lua.diagnostics.globals
+10	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/start\/cmp-nvim-ultisnips",$/;"	s	array:Lua.workspace.library
+11	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/start\/cmp-path",$/;"	s	array:Lua.workspace.library
+12	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/start\/github-nvim-theme",$/;"	s	array:Lua.workspace.library
+13	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/start\/gruvbox.nvim",$/;"	s	array:Lua.workspace.library
+14	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/start\/hop.nvim",$/;"	s	array:Lua.workspace.library
+15	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/start\/lsp_signature.nvim",$/;"	s	array:Lua.workspace.library
+16	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/start\/lspkind.nvim",$/;"	s	array:Lua.workspace.library
+17	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/start\/lualine.nvim",$/;"	s	array:Lua.workspace.library
+18	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/start\/material.nvim",$/;"	s	array:Lua.workspace.library
+19	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/start\/neoconf.nvim",$/;"	s	array:Lua.workspace.library
 2	nvim/coc-settings.json	/^    "--ignore=E225,E226,E251,E261,E302,E303,E305,E501,F401,F821,F841"$/;"	s	array:python.linting.flake8Args
 2	nvim/coc-settings.json	/^    "--load-plugins pylint_pydantic"$/;"	s	array:python.linting.pylintArgs
+2	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/opt\/nvim-web-devicons",$/;"	s	array:Lua.workspace.library
 2	nvim/nlsp-settings/sumneko_lua.json	/^    "unused-local", "unused-vararg", "lowercase-global", "undefined-field"$/;"	s	array:Lua.diagnostics.disable
 2	nvim/nlsp-settings/sumneko_lua.json	/^    "vim", "describe", "it", "before_each", "after_each"$/;"	s	array:Lua.diagnostics.globals
+20	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/start\/neodev.nvim",$/;"	s	array:Lua.workspace.library
+21	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/start\/neon",$/;"	s	array:Lua.workspace.library
+22	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/start\/nlsp-settings.nvim",$/;"	s	array:Lua.workspace.library
+23	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/start\/nvim-autopairs",$/;"	s	array:Lua.workspace.library
+24	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/start\/nvim-cmp",$/;"	s	array:Lua.workspace.library
+25	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/start\/nvim-jdtls",$/;"	s	array:Lua.workspace.library
+26	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/start\/nvim-lsp-installer",$/;"	s	array:Lua.workspace.library
+27	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/start\/nvim-lspconfig",$/;"	s	array:Lua.workspace.library
+28	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/start\/nvim-notify",$/;"	s	array:Lua.workspace.library
+29	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/start\/nvim-treesitter",$/;"	s	array:Lua.workspace.library
+3	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/start\/Comment.nvim",$/;"	s	array:Lua.workspace.library
 3	nvim/nlsp-settings/sumneko_lua.json	/^    "unused-local", "unused-vararg", "lowercase-global", "undefined-field"$/;"	s	array:Lua.diagnostics.disable
 3	nvim/nlsp-settings/sumneko_lua.json	/^    "vim", "describe", "it", "before_each", "after_each"$/;"	s	array:Lua.diagnostics.globals
+30	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/start\/nvim-treesitter-contex/;"	s	array:Lua.workspace.library
+31	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/start\/nvim-ts-rainbow",$/;"	s	array:Lua.workspace.library
+32	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/start\/packer.nvim",$/;"	s	array:Lua.workspace.library
+33	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/start\/plenary.nvim",$/;"	s	array:Lua.workspace.library
+34	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/start\/prospector.nvim",$/;"	s	array:Lua.workspace.library
+35	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/start\/rasmus.nvim",$/;"	s	array:Lua.workspace.library
+36	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/start\/sniprun",$/;"	s	array:Lua.workspace.library
+37	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/start\/tabline.nvim",$/;"	s	array:Lua.workspace.library
+38	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/start\/telescope-fzf-native.n/;"	s	array:Lua.workspace.library
+39	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/start\/telescope-ultisnips.nv/;"	s	array:Lua.workspace.library
+4	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/start\/adwaita.nvim",$/;"	s	array:Lua.workspace.library
 4	nvim/nlsp-settings/sumneko_lua.json	/^    "vim", "describe", "it", "before_each", "after_each"$/;"	s	array:Lua.diagnostics.globals
+40	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/start\/telescope.nvim",$/;"	s	array:Lua.workspace.library
+41	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/start\/toggleterm.nvim",$/;"	s	array:Lua.workspace.library
+42	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/start\/vscode.nvim",$/;"	s	array:Lua.workspace.library
+43	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/start\/which-key.nvim",$/;"	s	array:Lua.workspace.library
+44	nvim/lua/.luarc.json	/^        "${3rd}\/luassert\/library"$/;"	s	array:Lua.workspace.library
+5	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/start\/bufferline.nvim",$/;"	s	array:Lua.workspace.library
+6	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/start\/cmp-buffer",$/;"	s	array:Lua.workspace.library
+7	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/start\/cmp-cmdline",$/;"	s	array:Lua.workspace.library
+8	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/start\/cmp-nvim-lsp",$/;"	s	array:Lua.workspace.library
+9	nvim/lua/.luarc.json	/^        "\/home\/hyunjae\/.local\/share\/nvim\/site\/pack\/packer\/start\/cmp-nvim-lua",$/;"	s	array:Lua.workspace.library
 <LocalLeader>lW	nvim/vim-include/_not_implemented/99_layer-lang-tex.vim	/^nmap <LocalLeader>lW :VimtexCountLetters<Cr>$/;"	m
 <LocalLeader>lt	nvim/vim-include/_not_implemented/99_layer-lang-tex.vim	/^nmap <LocalLeader>lt <Plug>(vimtex-toc-toggle)$/;"	m
 <LocalLeader>lw	nvim/vim-include/_not_implemented/99_layer-lang-tex.vim	/^nmap <LocalLeader>lw :VimtexCountWords<Cr>$/;"	m
-<c-x><c-k>	nvim/vim-include/_notinuse/50-plugin-ultisnips.vim	/^inoremap <c-x><c-k> <c-x><c-k>$/;"	m
+<c-x><c-k>	nvim/vim-include/__not-in-use/50-plugin-ultisnips.vim	/^inoremap <c-x><c-k> <c-x><c-k>$/;"	m
 EventLoggin	nvim/vim-include/_testcode/events-debug.vim	/^augroup EventLoggin$/;"	a
 Lua.completion.callSnippet	nvim/nlsp-settings/sumneko_lua.json	/^  "Lua.completion.callSnippet": "Both",$/;"	s
 Lua.completion.keywordSnippet	nvim/nlsp-settings/sumneko_lua.json	/^  "Lua.completion.keywordSnippet": "Both"$/;"	s
@@ -38,29 +84,32 @@ Lua.diagnostics.disable	nvim/nlsp-settings/sumneko_lua.json	/^  "Lua.diagnostics
 Lua.diagnostics.enable	nvim/nlsp-settings/sumneko_lua.json	/^  "Lua.diagnostics.enable": true,$/;"	b
 Lua.diagnostics.globals	nvim/nlsp-settings/sumneko_lua.json	/^  "Lua.diagnostics.globals": [$/;"	a
 Lua.runtime.version	nvim/nlsp-settings/sumneko_lua.json	/^  "Lua.runtime.version": "LuaJIT",$/;"	s
-Lua.telemetry.enable	nvim/coc-settings.json	/^  "Lua.telemetry.enable": false$/;"	b
+Lua.telemetry.enable	nvim/coc-settings.json	/^  "Lua.telemetry.enable": false,$/;"	b
+Lua.workspace.library	nvim/lua/.luarc.json	/^    "Lua.workspace.library": [$/;"	a
 ["M"]	nvim/ftplugin/python.lua	/^      ["M"]  = "function\/method",$/;"	f
 ["[C"]	nvim/ftplugin/python.lua	/^      ["[C"] = "class\/function", -- normal, operator$/;"	f
 ["[["]	nvim/ftplugin/python.lua	/^      ["[["] = "class\/function", -- normal, visual, operator$/;"	f
 ["]C"]	nvim/ftplugin/python.lua	/^      ["]C"] = "class\/function", -- normal, operator$/;"	f
 ["]]"]	nvim/ftplugin/python.lua	/^      ["]]"] = "class\/function", -- normal, visual, operator$/;"	f
 ["aM"]	nvim/ftplugin/python.lua	/^      ["aM"] = "function\/method",$/;"	f
-["ac"]	nvim/lua/user/mapping/settings/coc-others-fixthis.lua	/^  ["ac"] = {"<Plug>(coc-classobj-a)", "inside-function"},$/;"	f
-["af"]	nvim/lua/user/mapping/settings/coc-others-fixthis.lua	/^  ["af"] = {"<Plug>(coc-funcobj-a)", "around-function"},$/;"	f
+["ac"]	nvim/lua/user/mapping/settings/coc-others-fixthis.lua	/^    ["ac"] = { "<Plug>(coc-classobj-a)", "inside-function" },$/;"	f
+["af"]	nvim/lua/user/mapping/settings/coc-others-fixthis.lua	/^    ["af"] = { "<Plug>(coc-funcobj-a)", "around-function" },$/;"	f
 ["iM"]	nvim/ftplugin/python.lua	/^      ["iM"] = "inner-function\/method",$/;"	f
-["ic"]	nvim/lua/user/mapping/settings/coc-others-fixthis.lua	/^  ["ic"] = {"<Plug>(coc-classobj-i)", "inside-function"},$/;"	f
-["if"]	nvim/lua/user/mapping/settings/coc-others-fixthis.lua	/^  ["if"] = {"<Plug>(coc-funcobj-i)", "inside-function"},$/;"	f
+["ic"]	nvim/lua/user/mapping/settings/coc-others-fixthis.lua	/^    ["ic"] = { "<Plug>(coc-classobj-i)", "inside-function" },$/;"	f
+["if"]	nvim/lua/user/mapping/settings/coc-others-fixthis.lua	/^    ["if"] = { "<Plug>(coc-funcobj-i)", "inside-function" },$/;"	f
 _IS_PLUGIN	nvim/lua/user/global-var.lua	/^_IS_PLUGIN = function (plugin)$/;"	f
 after/syntax/tex/amsmath.vim	nvim/after/syntax/tex/amsmath.vba	/^after\/syntax\/tex\/amsmath.vim	[[[1$/;"	n
 after/syntax/tex/array.vim	nvim/after/syntax/tex/array.vba	/^after\/syntax\/tex\/array.vim	[[[1$/;"	n
 after/syntax/tex/lstlisting.vim	nvim/after/syntax/tex/lstlisting.vba	/^after\/syntax\/tex\/lstlisting.vim	[[[1$/;"	n
 after/syntax/tex/moreverb.vim	nvim/after/syntax/tex/moreverb.vba	/^after\/syntax\/tex\/moreverb.vim	[[[1$/;"	n
-auto_save_ft	nvim/vim-include/_notinuse/50_set-vim-auto-save.vim	/^augroup auto_save_ft$/;"	a
+auto_save_ft	nvim/vim-include/__not-in-use/50_set-vim-auto-save.vim	/^augroup auto_save_ft$/;"	a
 autocmd	nvim/lua/_notinuse/au.lua	/^local function autocmd(this, event, spec)$/;"	f
+autocmd_set	nvim/lua/user/lsp/set_coc.lua	/^local autocmd_set = function ()$/;"	f
 b:current_syntax	nvim/syntax/asciidoc.vim	/^let b:current_syntax = "asciidoc"$/;"	v
 b:current_syntax	nvim/syntax/asciidoctor.vim	/^let b:current_syntax = "asciidoctor"$/;"	v
-b:quickrun_config	nvim/vim-include/_notinuse/50_set-quickrun.vim	/^let b:quickrun_config = {'outputter\/buffer\/opener': '8new'}$/;"	v
+b:quickrun_config	nvim/vim-include/__not-in-use/50_set-quickrun.vim	/^let b:quickrun_config = {'outputter\/buffer\/opener': '8new'}$/;"	v
 buf_set_keymap	nvim/lua/asciidoc-wiki/key_mapping_handler.lua	/^local buf_set_keymap = function(keymap, map_mode, map_prefix)$/;"	f
+buf_set_option	nvim/lua/user/lsp/init.lua	/^    local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end$/;"	f
 buf_setup	nvim/lua/asciidoc-wiki/init.lua	/^function M.buf_setup()$/;"	f	unknown:M
 buf_setup	nvim/lua/asciidoc-wiki/key_mapping_handler.lua	/^M.buf_setup = function()$/;"	f	unknown:M
 buf_setup	nvim/lua/asciidoc-wiki/user_command_handler.lua	/^M.buf_setup = function()$/;"	f	unknown:M
@@ -70,12 +119,12 @@ callback	nvim/lua/user/builtin/settings/map.lua	/^      callback  = function ()$
 callback	nvim/lua/user/builtin/settings/options-spell.lua	/^    callback = function()$/;"	f
 callback	nvim/lua/user/builtin/settings/options.lua	/^      callback  = function ()$/;"	f
 callback	nvim/lua/user/builtin/settings/options.lua	/^    callback = function()$/;"	f
-callback	nvim/lua/user/lsp-setup.lua	/^      callback = function()$/;"	f
-check_back_space	nvim/lua/user/coc/autocmd.lua	/^  function _G.check_back_space()$/;"	f	unknown:_G
+check_back_space	nvim/lua/user/lsp/set_coc.lua	/^  function _G.check_back_space()$/;"	f	unknown:_G
 class	nvim/coc-settings.json	/^    "class": " פּ ",$/;"	s	object:suggest.completionItemKindLabels
-coc_setup	nvim/lua/user/mapping/settings/s.lua	/^local coc_setup = function()$/;"	f
+coc_show_documentation	nvim/lua/user/mapping/settings/coc-others-fixthis.lua	/^local coc_show_documentation = function()$/;"	f
 color	nvim/coc-settings.json	/^    "color": "  ",$/;"	s	object:suggest.completionItemKindLabels
-cond	nvim/lua/user/set-plugin/legacy/lua_lualine.nvim.lua	/^    cond = function()$/;"	f
+cond	nvim/lua/user/set-plugin/settings/lua_lualine.lua	/^    cond = function()$/;"	f
+config	nvim/lua/user/plugins.lua	/^        config = function()$/;"	f
 constant	nvim/coc-settings.json	/^    "constant": "  ",$/;"	s	object:suggest.completionItemKindLabels
 constructor	nvim/coc-settings.json	/^    "constructor": "  ",$/;"	s	object:suggest.completionItemKindLabels
 create_link	nvim/lua/asciidoc-wiki/link.lua	/^local create_link = function()$/;"	f
@@ -85,7 +134,7 @@ enum	nvim/coc-settings.json	/^    "enum": " 練",$/;"	s	object:suggest.completio
 enumMember	nvim/coc-settings.json	/^    "enumMember": "  "$/;"	s	object:suggest.completionItemKindLabels
 event	nvim/coc-settings.json	/^    "event": "  ",$/;"	s	object:suggest.completionItemKindLabels
 exec	nvim/lua/_notinuse/au.lua	/^function S.exec(id)$/;"	f	unknown:S
-expand	nvim/lua/user/set-plugin/legacy/lua_nvim-cmp.lua	/^      expand = function(args)$/;"	f
+expand	nvim/lua/user/set-plugin/settings/lua_nvim-cmp.lua	/^      expand = function(args)$/;"	f
 f	nvim/lua/user/mapping/settings/sd_vimspector.lua	/^  f = {"<Plug>VimspectorAddFunctionBreakpoint", "add-function-breakpoint"},$/;"	f
 field	nvim/coc-settings.json	/^    "field": "  ",$/;"	s	object:suggest.completionItemKindLabels
 fig:	nvim/UltiSnips/__sample table & figure & font.tex	/^		\\label{fig:}$/;"	l
@@ -96,27 +145,27 @@ follow_link	nvim/lua/asciidoc-wiki/link.lua	/^M.follow_link = function()$/;"	f	u
 func	nvim/lua/asciidoc-wiki/key_mapping_handler.lua	/^local func = require('asciidoc-wiki.functions')$/;"	f
 func	nvim/lua/asciidoc-wiki/user_command_handler.lua	/^local func = require('asciidoc-wiki.functions')$/;"	f
 function	nvim/coc-settings.json	/^    "function": "  ",$/;"	s	object:suggest.completionItemKindLabels
-g:UltiSnipsEditSplit	nvim/vim-include/_notinuse/50-plugin-ultisnips.vim	/^let g:UltiSnipsEditSplit="horizontal" " if you want$/;"	v
-g:UltiSnipsExpandTrigger	nvim/vim-include/_notinuse/50-plugin-ultisnips.vim	/^let g:UltiSnipsExpandTrigger = '<tab>'$/;"	v
-g:UltiSnipsJumpBackwardTrigger	nvim/vim-include/_notinuse/50-plugin-ultisnips.vim	/^let g:UltiSnipsJumpBackwardTrigger = '<s-tab>' " default: <c-k>$/;"	v
-g:UltiSnipsJumpForwardTrigger	nvim/vim-include/_notinuse/50-plugin-ultisnips.vim	/^let g:UltiSnipsJumpForwardTrigger = '<tab>'    " default: <c-j>$/;"	v
-g:UltiSnipsSnippetDirectories	nvim/vim-include/_notinuse/50-plugin-ultisnips.vim	/^let g:UltiSnipsSnippetDirectories = ['~\/.config\/nvim\/UltiSnips', 'UltiSnips']$/;"	v
+g:UltiSnipsEditSplit	nvim/vim-include/__not-in-use/50-plugin-ultisnips.vim	/^let g:UltiSnipsEditSplit="horizontal" " if you want$/;"	v
+g:UltiSnipsExpandTrigger	nvim/vim-include/__not-in-use/50-plugin-ultisnips.vim	/^let g:UltiSnipsExpandTrigger = '<tab>'$/;"	v
+g:UltiSnipsJumpBackwardTrigger	nvim/vim-include/__not-in-use/50-plugin-ultisnips.vim	/^let g:UltiSnipsJumpBackwardTrigger = '<s-tab>' " default: <c-k>$/;"	v
+g:UltiSnipsJumpForwardTrigger	nvim/vim-include/__not-in-use/50-plugin-ultisnips.vim	/^let g:UltiSnipsJumpForwardTrigger = '<tab>'    " default: <c-j>$/;"	v
+g:UltiSnipsSnippetDirectories	nvim/vim-include/__not-in-use/50-plugin-ultisnips.vim	/^let g:UltiSnipsSnippetDirectories = ['~\/.config\/nvim\/UltiSnips', 'UltiSnips']$/;"	v
 g:asciidoctor_fenced_languages	nvim/syntax/asciidoctor.vim	/^    let g:asciidoctor_fenced_languages = []$/;"	v
-g:auto_save	nvim/vim-include/_notinuse/50_set-vim-auto-save.vim	/^let g:auto_save = 0$/;"	v
-g:auto_save_events	nvim/vim-include/_notinuse/50_set-vim-auto-save.vim	/^let g:auto_save_events = ["TextChanged"]$/;"	v
-g:auto_save_silent	nvim/vim-include/_notinuse/50_set-vim-auto-save.vim	/^let g:auto_save_silent = 1$/;"	v
-g:markdown_fenced_languages	nvim/vim-include/_notinuse/90_autocmd.vim	/^let g:markdown_fenced_languages = [$/;"	v
-g:ranger_map_keys	nvim/vim-include/_notinuse/50_set-ranger.vim	/^let g:ranger_map_keys = 0$/;"	v
-g:ranger_replace_netrw	nvim/vim-include/_notinuse/50_set-ranger.vim	/^let g:ranger_replace_netrw = 0 " open ranger when vim open a directory$/;"	v
+g:auto_save	nvim/vim-include/__not-in-use/50_set-vim-auto-save.vim	/^let g:auto_save = 0$/;"	v
+g:auto_save_events	nvim/vim-include/__not-in-use/50_set-vim-auto-save.vim	/^let g:auto_save_events = ["TextChanged"]$/;"	v
+g:auto_save_silent	nvim/vim-include/__not-in-use/50_set-vim-auto-save.vim	/^let g:auto_save_silent = 1$/;"	v
+g:markdown_fenced_languages	nvim/vim-include/__not-in-use/90_autocmd.vim	/^let g:markdown_fenced_languages = [$/;"	v
+g:ranger_map_keys	nvim/vim-include/__not-in-use/50_set-ranger.vim	/^let g:ranger_map_keys = 0$/;"	v
+g:ranger_replace_netrw	nvim/vim-include/__not-in-use/50_set-ranger.vim	/^let g:ranger_replace_netrw = 0 " open ranger when vim open a directory$/;"	v
 g:rust_conceal	nvim/vim-include/_not_implemented/99_layer-lang-rust.vim	/^    let g:rust_conceal = 0$/;"	v
 g:rust_conceal_mod_path	nvim/vim-include/_not_implemented/99_layer-lang-rust.vim	/^    let g:rust_conceal_mod_path = 0$/;"	v
 g:rust_conceal_pub	nvim/vim-include/_not_implemented/99_layer-lang-rust.vim	/^    let g:rust_conceal_pub = 0$/;"	v
 g:rust_fold	nvim/vim-include/_not_implemented/99_layer-lang-rust.vim	/^    let g:rust_fold = 2$/;"	v
-g:syntastic_check_on_open	nvim/vim-include/_notinuse/50_set-syntastic.vim	/^let g:syntastic_check_on_open = 1$/;"	v
-g:syntastic_error_symbol	nvim/vim-include/_notinuse/50_set-syntastic.vim	/^let g:syntastic_error_symbol = '✘'$/;"	v
-g:syntastic_warning_symbol	nvim/vim-include/_notinuse/50_set-syntastic.vim	/^let g:syntastic_warning_symbol = "▲"$/;"	v
+g:syntastic_check_on_open	nvim/vim-include/__not-in-use/50_set-syntastic.vim	/^let g:syntastic_check_on_open = 1$/;"	v
+g:syntastic_error_symbol	nvim/vim-include/__not-in-use/50_set-syntastic.vim	/^let g:syntastic_error_symbol = '✘'$/;"	v
+g:syntastic_warning_symbol	nvim/vim-include/__not-in-use/50_set-syntastic.vim	/^let g:syntastic_warning_symbol = "▲"$/;"	v
 g:tex_flavor	nvim/vim-include/_not_implemented/99_layer-lang-tex.vim	/^let g:tex_flavor="latex"$/;"	v
-g:todo_done_filename	nvim/vim-include/_notinuse/50_set-todo.vim	/^let g:todo_done_filename = 'archive.txt'$/;"	v
+g:todo_done_filename	nvim/vim-include/__not-in-use/50_set-todo.vim	/^let g:todo_done_filename = 'archive.txt'$/;"	v
 g:vim_f_hangul_alias	nvim/vim-include/_not_implemented/50-plugin-vim-f-hangul.vim	/^    let g:vim_f_hangul_alias = han$/;"	v
 g:vimtex_compiler_progname	nvim/vim-include/_not_implemented/99_layer-lang-tex.vim	/^let g:vimtex_compiler_progname = 'nvr'$/;"	v
 g:vimtex_complete_close_braces	nvim/vim-include/_not_implemented/99_layer-lang-tex.vim	/^let g:vimtex_complete_close_braces=1 " default 0 (2021-01-16)$/;"	v
@@ -127,18 +176,18 @@ g:vimtex_indent_enabled	nvim/vim-include/_not_implemented/99_layer-lang-tex.vim	
 g:vimtex_syntax_enabled	nvim/vim-include/_not_implemented/99_layer-lang-tex.vim	/^let g:vimtex_syntax_enabled=1$/;"	v
 g:vimtex_view_method	nvim/vim-include/_not_implemented/99_layer-lang-tex.vim	/^	let g:vimtex_view_method='skim'$/;"	v
 g:vimtex_view_method	nvim/vim-include/_not_implemented/99_layer-lang-tex.vim	/^	let g:vimtex_view_method='zathura'$/;"	v
-g:ycm_collect_identifiers_from_comments_and_strings	nvim/vim-include/_notinuse/50_set-youcompleteme.vim	/^let g:ycm_collect_identifiers_from_comments_and_strings = 1$/;"	v
-g:ycm_complete_in_comments	nvim/vim-include/_notinuse/50_set-youcompleteme.vim	/^let g:ycm_complete_in_comments = 1$/;"	v
-g:ycm_complete_in_strings	nvim/vim-include/_notinuse/50_set-youcompleteme.vim	/^let g:ycm_complete_in_strings = 1$/;"	v
-g:ycm_filetype_blacklist	nvim/vim-include/_notinuse/50_set-youcompleteme.vim	/^let g:ycm_filetype_blacklist = {}$/;"	v
-g:ycm_key_list_previous_completion	nvim/vim-include/_notinuse/50_set-youcompleteme.vim	/^let g:ycm_key_list_previous_completion=['<C-p>']$/;"	v
-g:ycm_key_list_select_completion	nvim/vim-include/_notinuse/50_set-youcompleteme.vim	/^let g:ycm_key_list_select_completion = ['<C-n>']$/;"	v
-g:ycm_min_num_of_chars_for_completion	nvim/vim-include/_notinuse/50_set-youcompleteme.vim	/^let g:ycm_min_num_of_chars_for_completion = 1$/;"	v
-g:ycm_server_python_interpreter	nvim/vim-include/_notinuse/50_set-youcompleteme.vim	/^	let g:ycm_server_python_interpreter = '\/usr\/local\/bin\/python3'$/;"	v
+g:ycm_collect_identifiers_from_comments_and_strings	nvim/vim-include/__not-in-use/50_set-youcompleteme.vim	/^let g:ycm_collect_identifiers_from_comments_and_strings = 1$/;"	v
+g:ycm_complete_in_comments	nvim/vim-include/__not-in-use/50_set-youcompleteme.vim	/^let g:ycm_complete_in_comments = 1$/;"	v
+g:ycm_complete_in_strings	nvim/vim-include/__not-in-use/50_set-youcompleteme.vim	/^let g:ycm_complete_in_strings = 1$/;"	v
+g:ycm_filetype_blacklist	nvim/vim-include/__not-in-use/50_set-youcompleteme.vim	/^let g:ycm_filetype_blacklist = {}$/;"	v
+g:ycm_key_list_previous_completion	nvim/vim-include/__not-in-use/50_set-youcompleteme.vim	/^let g:ycm_key_list_previous_completion=['<C-p>']$/;"	v
+g:ycm_key_list_select_completion	nvim/vim-include/__not-in-use/50_set-youcompleteme.vim	/^let g:ycm_key_list_select_completion = ['<C-n>']$/;"	v
+g:ycm_min_num_of_chars_for_completion	nvim/vim-include/__not-in-use/50_set-youcompleteme.vim	/^let g:ycm_min_num_of_chars_for_completion = 1$/;"	v
+g:ycm_server_python_interpreter	nvim/vim-include/__not-in-use/50_set-youcompleteme.vim	/^	let g:ycm_server_python_interpreter = '\/usr\/local\/bin\/python3'$/;"	v
 get_cur_wiki	nvim/lua/asciidoc-wiki/functions.lua	/^local get_cur_wiki = function()$/;"	f
 get_link_from_cursor	nvim/lua/asciidoc-wiki/link.lua	/^local get_link_from_cursor = function()$/;"	f
 get_link_from_line	nvim/lua/asciidoc-wiki/link.lua	/^local get_link_from_line = function(reg_obj, linestr)$/;"	f
-get_theme	nvim/lua/user/set-plugin/legacy/lua_lualine.nvim.lua	/^  local get_theme = function()$/;"	f
+get_theme	nvim/lua/user/set-plugin/settings/lua_lualine.lua	/^  local get_theme = function()$/;"	f
 glob_setup	nvim/lua/asciidoc-wiki/init.lua	/^function M.glob_setup()$/;"	f	unknown:M
 glob_setup	nvim/lua/asciidoc-wiki/key_mapping_handler.lua	/^M.glob_setup = function()$/;"	f	unknown:M
 glob_setup	nvim/lua/asciidoc-wiki/user_command_handler.lua	/^M.glob_setup = function()$/;"	f	unknown:M
@@ -160,26 +209,30 @@ han	nvim/vim-include/_not_implemented/50-plugin-vim-f-hangul.vim	/^    let han['
 han	nvim/vim-include/_not_implemented/50-plugin-vim-f-hangul.vim	/^    let han['u'] = 'ㄷ'$/;"	v
 han	nvim/vim-include/_not_implemented/50-plugin-vim-f-hangul.vim	/^    let han['y'] = 'ㄹ'$/;"	v
 interface	nvim/coc-settings.json	/^    "interface": " 蘒",$/;"	s	object:suggest.completionItemKindLabels
-is_lsp_active	nvim/lua/user/lsp/init.lua	/^local is_lsp_active = function(lsp)$/;"	f
+is_lsp_active	nvim/lua/user/lsp-/init.lua	/^local is_lsp_active = function(lsp)$/;"	f
 is_note	nvim/lua/user/builtin/settings/options.lua	/^local is_note = function(ft)$/;"	f
 is_spell_ft	nvim/lua/user/builtin/settings/options-spell.lua	/^local is_spell_ft = function(ft)$/;"	f
 keyword	nvim/coc-settings.json	/^    "keyword": "  ",$/;"	s	object:suggest.completionItemKindLabels
 last_modified	nvim/lua/user/autocmd/asciidoc.lua	/^local last_modified = function()$/;"	f
-last_modified	nvim/lua/user/set-plugin/legacy/lua_orgmode.lua	/^  local last_modified = function()$/;"	f
-last_modified	nvim/lua/user/set-plugin/legacy/viml_vimwiki.lua	/^  local last_modified = function()$/;"	f
+last_modified	nvim/lua/user/set-plugin/settings/lua_orgmode.lua	/^  local last_modified = function()$/;"	f
+last_modified	nvim/lua/user/set-plugin/settings/viml_vimwiki.lua	/^  local last_modified = function()$/;"	f
+lua.enable	nvim/coc-settings.json	/^  "lua.enable": false,$/;"	b
 main_syntax	nvim/syntax/asciidoctor.vim	/^    let main_syntax = 'asciidoctor'$/;"	v
 method	nvim/coc-settings.json	/^    "method": "  ",$/;"	s	object:suggest.completionItemKindLabels
 module	nvim/coc-settings.json	/^    "module": "  ",$/;"	s	object:suggest.completionItemKindLabels
 new_template	nvim/lua/user/autocmd/asciidoc.lua	/^local new_template = function()$/;"	f
-new_template	nvim/lua/user/set-plugin/legacy/lua_orgmode.lua	/^  local new_template = function()$/;"	f
-new_template	nvim/lua/user/set-plugin/legacy/viml_vimwiki.lua	/^  local new_template = function()$/;"	f
+new_template	nvim/lua/user/set-plugin/settings/lua_orgmode.lua	/^  local new_template = function()$/;"	f
+new_template	nvim/lua/user/set-plugin/settings/viml_vimwiki.lua	/^  local new_template = function()$/;"	f
 next_xref	nvim/lua/asciidoc-wiki/link.lua	/^M.next_xref = function()$/;"	f	unknown:M
-on_attach	nvim/lua/user/lsp/handlers/init.lua	/^M.on_attach = function(client, bufnr)$/;"	f	unknown:M
+on_attach	nvim/lua/user/lsp-/handlers/init.lua	/^M.on_attach = function(client, bufnr)$/;"	f	unknown:M
+on_attach	nvim/lua/user/lsp/init.lua	/^  local on_attach = function(client, bufnr)$/;"	f
 open_external	nvim/lua/asciidoc-wiki/link.lua	/^  local open_external = function(target)$/;"	f
 open_fn	nvim/lua/user/plugins.lua	/^    open_fn = function()$/;"	f
 open_target	nvim/lua/asciidoc-wiki/link.lua	/^local open_target = function(arg, anchor, link_type)$/;"	f
 operator	nvim/coc-settings.json	/^    "operator": "  ",$/;"	s	object:suggest.completionItemKindLabels
+override_defaults	nvim/lua/user/lsp/set_coc.lua	/^local override_defaults = function()$/;"	f
 parse_link	nvim/lua/asciidoc-wiki/link.lua	/^local parse_link = function(link_type, link_raw)$/;"	f
+prettier.enable	.vim/coc-settings.json	/^  "prettier.enable": false$/;"	b
 prev_xref	nvim/lua/asciidoc-wiki/link.lua	/^M.prev_xref = function()$/;"	f	unknown:M
 property	nvim/coc-settings.json	/^    "property": "  ",$/;"	s	object:suggest.completionItemKindLabels
 pylsp.plugins.flake8.enabled	nvim/nlsp-settings/pylsp.json	/^  "pylsp.plugins.flake8.enabled": false,$/;"	b
@@ -189,7 +242,7 @@ pyright.completion.snippetSupport	nvim/coc-settings.json	/^  "pyright.completion
 pyright.organizeimports.provider	nvim/coc-settings.json	/^  "pyright.organizeimports.provider": "isort",$/;"	s
 python.analysis.autoImportCompletions	nvim/coc-settings.json	/^  "python.analysis.autoImportCompletions": true,$/;"	b
 python.analysis.autoSearchPaths	nvim/coc-settings.json	/^  "python.analysis.autoSearchPaths": true,$/;"	b
-python.formatting.blackArgs	nvim/coc-settings.json	/^  "python.formatting.blackArgs": ["--line-length", "79"],$/;"	a
+python.formatting.blackArgs	nvim/coc-settings.json	/^  "python.formatting.blackArgs": [$/;"	a
 python.formatting.provider	nvim/coc-settings.json	/^  "python.formatting.provider": "black",$/;"	s
 python.linting.banditEnabled	nvim/coc-settings.json	/^  "python.linting.banditEnabled": true,$/;"	b
 python.linting.enabled	nvim/coc-settings.json	/^  "python.linting.enabled": true,$/;"	b
@@ -204,7 +257,6 @@ python.linting.pylamaEnabled	nvim/coc-settings.json	/^  "python.linting.pylamaEn
 python.linting.pylintArgs	nvim/coc-settings.json	/^  "python.linting.pylintArgs": [$/;"	a
 python.linting.pylintEnabled	nvim/coc-settings.json	/^  "python.linting.pylintEnabled": true,$/;"	b
 reference	nvim/coc-settings.json	/^    "reference": "  ",$/;"	s	object:suggest.completionItemKindLabels
-register_keymap	nvim/lua/user/lsp/handlers/keymap.lua	/^local register_keymap = function(client_name, keymap, opts)$/;"	f
 rhs	nvim/lua/asciidoc-wiki/key_mapping_handler.lua	/^      rhs = function_to_lua_string[rhs_capsuled[1]]$/;"	f
 s:Log	nvim/vim-include/_testcode/events-debug.vim	/^function! s:Log(eventName) abort$/;"	f
 set	nvim/lua/_notinuse/au.lua	/^function S.set(fn)$/;"	f	unknown:S
@@ -213,17 +265,11 @@ setup	nvim/lua/mac-ime-switcher/init.lua	/^M.setup = function()$/;"	f	unknown:M
 setup	nvim/lua/user/autocmd/asciidoc.lua	/^function M.setup()$/;"	f	unknown:M
 setup	nvim/lua/user/autocmd/init.lua	/^function M.setup()$/;"	f	unknown:M
 setup	nvim/lua/user/builtin/init.lua	/^M.setup = function()$/;"	f	unknown:M
-setup	nvim/lua/user/coc/autocmd.lua	/^M.setup = function ()$/;"	f	unknown:M
-setup	nvim/lua/user/coc/command.lua	/^M.setup = function ()$/;"	f	unknown:M
-setup	nvim/lua/user/coc/init.lua	/^M.setup = function()$/;"	f	unknown:M
-setup	nvim/lua/user/coc/override-defaults.lua	/^M.setup = function()$/;"	f	unknown:M
+setup	nvim/lua/user/commands/init.lua	/^M.setup = function()$/;"	f	unknown:M
 setup	nvim/lua/user/dap/mapping.lua	/^M.setup = function (bufnr)$/;"	f	unknown:M
-setup	nvim/lua/user/lsp-setup.lua	/^function M.setup()$/;"	f	unknown:M
-setup	nvim/lua/user/lsp/handlers/commands.lua	/^function M.setup(client, bufnr)$/;"	f	unknown:M
-setup	nvim/lua/user/lsp/handlers/keymap.lua	/^  M.setup = function() end$/;"	f	unknown:M
-setup	nvim/lua/user/lsp/handlers/keymap.lua	/^local setup = function(client, bufnr)$/;"	f
-setup	nvim/lua/user/lsp/init.lua	/^  M.setup = function() end$/;"	f	unknown:M
-setup	nvim/lua/user/lsp/init.lua	/^M.setup = function(lsps, path)$/;"	f	unknown:M
+setup	nvim/lua/user/lsp-/init.lua	/^M.setup = function(lsps, path)$/;"	f	unknown:M
+setup	nvim/lua/user/lsp/init.lua	/^M.setup = function()$/;"	f	unknown:M
+setup	nvim/lua/user/lsp/set_coc.lua	/^M.setup = function()$/;"	f	unknown:M
 setup	nvim/lua/user/mapping/init.lua	/^function M.setup()$/;"	f	unknown:M
 setup	nvim/lua/user/mapping/settings/<F12>.lua	/^M.setup = function ()$/;"	f	unknown:M
 setup	nvim/lua/user/mapping/settings/<F1>_help.lua	/^M.setup = function ()$/;"	f	unknown:M
@@ -239,25 +285,32 @@ setup	nvim/lua/user/mapping/settings/<leader>slash_fzf.lua	/^function M.setup()$
 setup	nvim/lua/user/mapping/settings/<leader>t_term.lua	/^function M.setup()$/;"	f	unknown:M
 setup	nvim/lua/user/mapping/settings/_brackets.lua	/^M.setup = function()$/;"	f	unknown:M
 setup	nvim/lua/user/mapping/settings/_extends.lua	/^M.setup = function()$/;"	f	unknown:M
-setup	nvim/lua/user/mapping/settings/coc-others-fixthis.lua	/^  M.setup = function() end$/;"	f	unknown:M
 setup	nvim/lua/user/mapping/settings/coc-others-fixthis.lua	/^M.setup = function()$/;"	f	unknown:M
 setup	nvim/lua/user/mapping/settings/s.lua	/^M.setup = function()$/;"	f	unknown:M
 setup	nvim/lua/user/mapping/settings/sd_vimspector.lua	/^M.setup = function()$/;"	f	unknown:M
-setup	nvim/lua/user/set-plugin/_not_in_use/viml_fcitx-vim.lua	/^M.setup = function ()$/;"	f	unknown:M
+setup	nvim/lua/user/set-plugin/__not-in-use/viml_fcitx-vim.lua	/^M.setup = function ()$/;"	f	unknown:M
 setup	nvim/lua/user/set-plugin/init.lua	/^M.setup = function()$/;"	f	unknown:M
 setup	nvim/lua/user/set-plugin/settings/lua_Comment.lua	/^M.setup = function()$/;"	f	unknown:M
 setup	nvim/lua/user/set-plugin/settings/lua_asciidoc-wiki.lua	/^M.setup = function ()$/;"	f	unknown:M
 setup	nvim/lua/user/set-plugin/settings/lua_hop.lua	/^M.setup = function()$/;"	f	unknown:M
+setup	nvim/lua/user/set-plugin/settings/lua_lualine.lua	/^M.setup = function()$/;"	f	unknown:M
+setup	nvim/lua/user/set-plugin/settings/lua_nvim-autopairs.lua	/^M.setup = function()$/;"	f	unknown:M
+setup	nvim/lua/user/set-plugin/settings/lua_nvim-cmp.lua	/^M.setup = function ()$/;"	f	unknown:M
+setup	nvim/lua/user/set-plugin/settings/lua_nvim-tree.lua	/^M.setup = function ()$/;"	f	unknown:M
+setup	nvim/lua/user/set-plugin/settings/lua_nvim-treesitter.lua	/^M.setup = function ()$/;"	f	unknown:M
+setup	nvim/lua/user/set-plugin/settings/lua_orgmode.lua	/^M.setup = function()$/;"	f	unknown:M
+setup	nvim/lua/user/set-plugin/settings/lua_tabline.lua	/^M.setup = function ()$/;"	f	unknown:M
 setup	nvim/lua/user/set-plugin/settings/lua_telescope.lua	/^M.setup = function()$/;"	f	unknown:M
 setup	nvim/lua/user/set-plugin/settings/lua_toggleterm.lua	/^M.setup = function ()$/;"	f	unknown:M
 setup	nvim/lua/user/set-plugin/settings/lua_which-key.lua	/^M.setup = function()$/;"	f	unknown:M
 setup	nvim/lua/user/set-plugin/settings/viml_vimspector.lua	/^M.setup = function ()$/;"	f	unknown:M
-setup	nvim/lua/user/set-plugin/viml_fcitx.vim.lua	/^M.setup = function ()$/;"	f	unknown:M
-show_documentation	nvim/lua/user/mapping/settings/coc-others-fixthis.lua	/^local show_documentation = function()$/;"	f
+setup	nvim/lua/user/set-plugin/settings/viml_vimwiki.lua	/^M.setup = function ()$/;"	f	unknown:M
 snippet	nvim/coc-settings.json	/^    "snippet": "  ",$/;"	s	object:suggest.completionItemKindLabels
 struct	nvim/coc-settings.json	/^    "struct": "  ",$/;"	s	object:suggest.completionItemKindLabels
 suggest.completionItemKindLabels	nvim/coc-settings.json	/^  "suggest.completionItemKindLabels": {$/;"	o
 suggest.noselect	nvim/coc-settings.json	/^  "suggest.noselect": true,$/;"	b
+sumneko-lua.enable	.vim/coc-settings.json	/^  "sumneko-lua.enable": true,$/;"	b
+sumneko-lua.enableNvimLuaDev	.vim/coc-settings.json	/^  "sumneko-lua.enableNvimLuaDev": true,$/;"	b
 tab:rst2	nvim/UltiSnips/__sample table & figure & font.tex	/^	\\label{tab:rst2}$/;"	l
 text	nvim/coc-settings.json	/^    "text": "  ",$/;"	s	object:suggest.completionItemKindLabels
 toggle_list_item	nvim/lua/asciidoc-wiki/list.lua	/^M.toggle_list_item = function()$/;"	f	unknown:M

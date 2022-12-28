@@ -1,13 +1,12 @@
 local M = {}
-
--- local status_hop, hop = pcall(require, "hop")
-
 local status_wk, wk = pcall(require, "which-key")
+-- local status_hop, hop = pcall(require, "hop")
 
 M.setup = function()
   if not status_wk then
     return
   end
+
   -- make Esc work at terminal. Not working at which-key
   vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", {})
 
@@ -27,12 +26,6 @@ M.setup = function()
   end
 
   if _IS_PLUGIN("coc.nvim") then
-  ----------------------------------------------------------------
-  -- ]/[: Misc
-  ----------------------------------------------------------------
-  -- Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-  --   ":<C-u>call CocAction('diagnosticPrevious', 'error')<CR>", {})
-
     ----------------------------------------------------------------
     -- gh
     ----------------------------------------------------------------
@@ -48,7 +41,21 @@ M.setup = function()
       ["gli"] = { "<Plug>(coc-implementation)", 'coc-implementation' },
       ["glr"] = { "<Plug>(coc-references)", 'coc-references' },
     }, { mode = "n" })
+  else
+    wk.register({
+      ["gd"] = { vim.lsp.buf.definition, 'lsp-definition' },
+      ["gD"] = { vim.lsp.buf.declaration, 'lsp-declaration' },
+      ["gl"] = { name="+lsp" },
+      -- ["glu"] = { "<plug>(coc-references-used)", "references-used" },
+      ["gli"] = { vim.lsp.buf.implementation, 'lsp-implementation' },
+      ["glr"] = { vim.lsp.buf.references, 'lsp-references' },
+      ["gly"] = { vim.lsp.buf.type_definition, 'lsp-type-definition' },
 
+      ["gls"] = { vim.lsp.buf.signature_help, 'lsp-signature-help' },
+    }, { mode = "n" })
+  end
+
+  if _IS_PLUGIN("coc.nvim") then
     ----------------------------------------------------------------
     -- scroll coc-float window
     ----------------------------------------------------------------
@@ -87,9 +94,6 @@ M.setup = function()
   -- Requires 'textDocument/selectionRange' support of language server.
   -- nnoremap <silent> <C-s> <Plug>(coc-range-select)
   -- xnoremap <silent> <C-s> <Plug>(coc-range-select)
-
-
-
   end
 
 

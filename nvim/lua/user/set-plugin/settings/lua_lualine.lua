@@ -111,7 +111,7 @@ M.setup = function()
   local get_theme = function()
     local background = vim.opt_local.background:get()
     if vim.g.colors_name == "vscode" and background == "dark" then
-      -- vscode's lualine theme sucks
+      -- NOTE: vscode's lualine theme sucks
       return "codedark"
     end
     return "auto"
