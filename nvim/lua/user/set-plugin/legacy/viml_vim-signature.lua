@@ -42,8 +42,8 @@ if _IS_PLUGIN('vim-signature') then
     ['GotoPrevMarkerAny'] = "",
   }
 
-  if packer_plugins['which-key.nvim'] then
-    local wk = require("which-key")
+  local status_wk, wk = pcall(require, "which-key")
+  if status_wk then
     wk.register({
       -- ["m,"] = { "place-next-mark" },
       -- ["m."] = { "toggle-mark-at-line" },

@@ -11,6 +11,12 @@ _WINDOW_PREFIX = "<Leader>nw"
 
 -- _SEARCH_PREFIX = "<Leader>/"
 
+
+-- TODO: remove these code
+packages = {}
+for _, pack in ipairs(require("plugins").packages) do
+  packages[pack[1]:sub(pack[1]:find("/")+1, -1)] = true
+end
 _IS_PLUGIN = function (plugin)
-  return packer_plugins ~= nil and packer_plugins[plugin]
+  return packages[plugin] == true
 end

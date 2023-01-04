@@ -5,6 +5,7 @@ __local_config*
 .vim
 */asciidoc-wiki
 *.add.spl
+tags
 
 # Compiled Lua sources
 luac.out
