@@ -1,4 +1,5 @@
 local yank_auto_id = vim.api.nvim_create_augroup("yank", {})
+
 vim.api.nvim_create_autocmd(
   {"TextYankPost"}, {
   group=yank_auto_id,

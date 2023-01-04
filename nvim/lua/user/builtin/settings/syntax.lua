@@ -1,1 +1,1 @@
-vim.cmd('syntax enable')
+vim.api.nvim_exec('syntax enable', false)

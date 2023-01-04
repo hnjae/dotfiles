@@ -11,8 +11,6 @@ vim.g.maplocalleader = ','
 -- vim.api.nvim_set_keymap("n", "<Leader>a", "za", {})
 vim.api.nvim_set_keymap("n", "<Leader><Leader>", "za", {})
 
-vim.api.nvim_set_keymap("n", "ZA", "<cmd>wa<CR>", {})
-
 -- vim.api.nvim_set_keymap("", "gb", "<cmd>bnext<CR>", {})
 -- vim.api.nvim_set_keymap("", "gB", "<cmd>bprevious<CR>", {})
 

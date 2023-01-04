@@ -1,0 +1,33 @@
+---
+# flake8: wrapper of pycodestyle, pyflakes, mccabe, etc
+pylsp.plugins.flake8.enabled: false
+# pycodestyle: check style conventions in PEP 8
+pylsp.plugins.pycodestyle.enabled: false
+# mccabe: complexity checker
+pylsp.plugins.mccabe.enabled: true
+# yapf: formatter
+pylsp.plugins.yapf.enabled: true
+# autopep8: formatter
+pylsp.plugins.autopep8.enabled: false
+# pylint: linter
+pylsp.plugins.pylint.enabled: true
+pylsp.plugins.pylint.args:
+  - "--disable"
+  -  "W0511,W0611,W0612,W0613,C0114,C0116,C0301,C0411"
+  # - "--load-plugins pylint_pydantic"
+  # W0511: fix-me
+  # W0611: unused-import
+  # W0612: unused-variable
+  # W0613: unused-argument
+  # C0103: invalid-name
+  # C0114: missing-module-docstring
+  # C0116: missing-function-docstring
+  # C0301: line-too-long
+  # C0411: wrong-import-order
+  # E0611: no-name-in-hodule (use pyright)
+# pyflakes: linter; check errors
+pylsp.plugins.pyflakes.enabled: false
+# pylsp.plugins.preload.enabled: false
+# pydocstyle: docstring style checker (PEP 257)
+pylsp.plugins.pydocstyle.enabled: true
+pylsp.plugins.pydocstyle.convention: pep257

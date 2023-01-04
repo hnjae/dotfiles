@@ -1,0 +1,4 @@
+---
+pyright.disableOrganizeImports: false
+# python.analysis.diagnosticSeverityOverrides:
+  # reportUnusedImport: none

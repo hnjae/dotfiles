@@ -17,6 +17,13 @@ require('user.autocmd').setup()
 require('user.set-plugin').setup()
 require('user.mapping').setup()
 
+
+pp = function(arg)
+  print(vim.inspect(aa))
+end
+
+-- vim.api.nvim_set_keymap("n", "<F6>", "print(vim.inspect(vim.fn.getpos('.')))", {})
+
 -- local paths = vim.fn.uniq(
 --   vim.fn.sort(
 --     vim.fn.globpath(

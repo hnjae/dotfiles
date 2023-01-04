@@ -22,7 +22,7 @@ end
 -- Use a protected call so we don't error out on first use
 local status_ok, packer = pcall(require, "packer")
 if not status_ok then
-  return 1
+    return 1
 end
 
 -- Autocommand that reloads neovim whenever you save the plugins.lua file
@@ -68,8 +68,7 @@ end
 return packer.startup({
   function(use)
     use 'wbthomason/packer.nvim'
-
-    -- TODO: only when node neovim available <2022-11-03, Hyunjae Kim>
+    use { "dstein64/vim-startuptime" }
 
     if vim.fn.executable("fzf") == 1 then
       use 'junegunn/fzf.vim'
@@ -79,9 +78,9 @@ return packer.startup({
 
 
 
-    if vim.fn.has("node") == 1 then
-      use { 'neoclide/coc.nvim', branch = 'release'}
-      use { 'antoinemadec/coc-fzf', branch = 'release', requires = {'neoclide/coc.nvim'}}
+    if false and vim.fn.has("node") == 1 then
+      use { 'neoclide/coc.nvim', branch = 'release' }
+      use { 'antoinemadec/coc-fzf', branch = 'release', requires = { 'neoclide/coc.nvim' } }
     elseif vim.fn.has('nvim-0.7') == 1 then
       use {
         'tamago324/nlsp-settings.nvim',
@@ -104,20 +103,23 @@ return packer.startup({
         config = function()
           require('lsp_signature').setup()
         end
-  } -- it shows popup window.
+      } -- it shows popup window.
       use { 'onsails/lspkind.nvim' } -- it shows kind icons
 
       if vim.fn.has('nvim-0.7.2') == 1 then
         -- Project based config
-        use {"folke/neodev.nvim"}
+        use { "folke/neodev.nvim" }
       end
+
+      use { "simrat39/symbols-outline.nvim" }
     end
 
     if vim.fn.has('nvim-0.8.0') == 1 then
       use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-      use { 'p00f/nvim-ts-rainbow', requires = {'nvim-treesitter/nvim-treesitter', run = ":TSUpdate"} }
-      use { 'nvim-treesitter/nvim-treesitter-context', requires = {'nvim-treesitter/nvim-treesitter', run = ":TSUpdate"} }
-      use { 'toppair/prospector.nvim', opt = false, registers = 'nvim-treesitter/nvim-treesitter'  }
+      use { 'p00f/nvim-ts-rainbow', requires = { 'nvim-treesitter/nvim-treesitter', run = ":TSUpdate" } }
+      use { 'nvim-treesitter/nvim-treesitter-context',
+        requires = { 'nvim-treesitter/nvim-treesitter', run = ":TSUpdate" } }
+      use { 'toppair/prospector.nvim', opt = false, registers = 'nvim-treesitter/nvim-treesitter' }
     end
 
     -- if vim.g.loaded_python3_provider ~= 0 then
@@ -265,9 +267,11 @@ return packer.startup({
     -- COMMANDS
     use 'honza/vim-snippets'
     use 'tpope/vim-surround'
-    if vim.fn.executable('ctags') == 1 then
-      use 'preservim/tagbar'
-    end
+
+    -- if vim.fn.executable('ctags') == 1 then
+    --   use 'preservim/tagbar'
+    -- end
+
     -- use 'tpope/vim-commentary'
     use { 'numToStr/Comment.nvim' }
     use { 'ntpeters/vim-better-whitespace' }
@@ -280,7 +284,7 @@ return packer.startup({
     -- use { 'pianocomposer321/yabs.nvim' }
 
     -- repl/repl-like
-    use { 'michaelb/sniprun', run = 'bash ./install.sh'}
+    use { 'michaelb/sniprun', run = 'bash ./install.sh' }
     -- run test
     use { 'vim-test/vim-test' }
 
@@ -314,17 +318,12 @@ return packer.startup({
 
     -- Asciidoc
     use { 'habamax/vim-asciidoctor' }
+    use {'lukas-reineke/indent-blankline.nvim'}
     -- use { 'ratfactor/vviki' }
     -- use { 'shuntaka9576/preview-asciidoc.nvim' }
 
     if vim.fn.has('nvim-0.7') == 1 then
-      use {"akinsho/toggleterm.nvim", tag = 'v2.*'}
-    end
-
-    if vim.fn.has('nvim-0.7.2') == 1 then
-      -- Project based config
-      -- use {"folke/neoconf.nvim"}
-      use {"folke/neodev.nvim"}
+      use { "akinsho/toggleterm.nvim", tag = 'v2.*' }
     end
 
 

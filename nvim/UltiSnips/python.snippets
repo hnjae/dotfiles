@@ -1,4 +1,3 @@
-#! header
 snippet head "#!/usr/bin/env python" b
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
@@ -21,11 +20,29 @@ if __name__ == "__main__":
 endsnippet
 
 # ${1:${VISUAL:main()}}
-
 snippet pylint-disable "pylint-disable" b
 # pylint: disable=
 endsnippet
 
 snippet pd "pylint-disable" b
 # pylint: disable=
+endsnippet
+
+snippet docstring "RST-style docstring" b
+"""$0
+
+Extended description
+
+:param int arg1: description
+:raise: ValueError if arg1 blabla
+:return: description
+:rtype: bool
+
+:example:
+
+>>> a=1
+>>> fucn_name(a)
+True
+"""
+
 endsnippet
