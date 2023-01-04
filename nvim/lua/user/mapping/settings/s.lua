@@ -15,6 +15,7 @@ M.setup = function()
     vmap s <Nop>
     omap s <Nop>
   ]])
+  -- vim.api.nvim_del_keymap("n", "s")
 
   wk.register({
     [_LANG_PREFIX] = { name="+lang" }
@@ -32,7 +33,6 @@ M.setup = function()
   --   },
   -- })
 
-
   -----------------------------------------------------------------------------
   -- lsp
   -----------------------------------------------------------------------------
@@ -49,8 +49,8 @@ M.setup = function()
   else
     wk.register({
       name = "+lsp",
-      ["n"] = {"vim.lsp.buf.rename", "lsp-rename"},
-      ["a"] = {"vim.lsp.buf.code_action", "lsp-code-action"},
+      ["n"] = {vim.lsp.buf.rename, "lsp-rename"},
+      ["a"] = {vim.lsp.buf.code_action, "lsp-code-action"},
       ["w"] = { name = '+lsp-workspace' },
       ["wa"] = { vim.lsp.buf.add_workspace_folder, 'lsp-add-workspace' },
       ["wr"] = { vim.lsp.buf.remove_workspace_folder, 'lsp-remove-workspace' },
@@ -58,11 +58,10 @@ M.setup = function()
     }, {mode = "n", prefix = _LANG_PREFIX .. "l"})
     wk.register({
       name = "+lsp",
-      ["a"] = {"vim.lsp.buf.range_code_action", "lsp-code-action"},
+      ["a"] = {vim.lsp.buf.range_code_action, "lsp-code-action"},
     }, {mode = "v", prefix = _LANG_PREFIX .. "l"})
-    -- local XNkeymap = {
-      -- [_LANG_PREFIX .. "la"] = { "<Plug>(coc-codeaction-selected)", 'lsp-code-action' },
-    -- }
+
+    -- TODO: xmap for code-action? <2022-12-28, Hyunjae Kim>
   end
 
   -----------------------------------------------------------------------------
@@ -134,7 +133,6 @@ M.setup = function()
       )
     end
   end
-
 end
 
 return M

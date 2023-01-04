@@ -68,6 +68,8 @@ M.setup = function()
   end
   -- buffer = bufnr
 
+  -- TODO: load this config when LSP attaches its buffer <2023-01-02, Hyunjae Kim>
+
   ------------------------------------------------------------------------------
   -- n keymap
   ------------------------------------------------------------------------------
@@ -82,8 +84,15 @@ M.setup = function()
     local nkeymap = {
       -- replace default gd
       ["K"] = { vim.lsp.buf.hover, 'lsp-declaration' },
-      ["=="] = { vim.lsp.buf.formatting, 'lsp-formatting' },
+      -- ["=="] =
     }
+
+    if vim.fn.has("nvim-0.8.0") then
+      nkeymap["=="] = { vim.lsp.buf.format {async=true}, 'lsp-formatting' }
+    else
+      nkeymap["=="] = { vim.lsp.buf.formatting, 'lsp-formatting' }
+    end
+
     wk.register(nkeymap, { mode = "n", silent = true, noremap = true, })
   end
 
@@ -97,6 +106,8 @@ M.setup = function()
     wk.register(vkeymap, { mode = "v", silent = true, noremap = true, })
   else
     local vkeymap = {
+      -- TODO: use vim.lsp.buf.format <2022-12-28, Hyunjae Kim>
+      -- range 설정을 vmap 에서 어떻게 해야할지..
       ["=="] = { vim.lsp.buf.range_formatting, 'lsp-formatting' },
     }
     wk.register(vkeymap, { mode = "v", silent = true, noremap = true, })
@@ -116,20 +127,6 @@ M.setup = function()
   wk.register(XOkeymap, { mode = "o", silent = true, noremap = true, })
 
   ------------------------------------------------------------------------------
-  ----------------------------------------------------------------
-  wk.register({
-    ["Zl"] = {
-      function()
-        for _, buf_client in pairs(vim.lsp.buf_get_clients()) do
-          buf_client.stop()
-        end
-      end,
-      'stop-lsp'
-    },
-  },
-    { mode = "n", silent = true, noremap = true }
-
-  )
 end
 
 return M

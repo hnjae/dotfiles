@@ -29,10 +29,12 @@ M.setup = function()
     wk.register(nkeymap, { mode = "n", silent = false, noremap = true, })
   else
     local nkeymap = {
-      ["[w"] = { "vim.diagnostic.goto_prev", "warning" },
-      ["]w"] = { "vim.diagnostic.goto_next", "warning" },
+      ["[w"] = { vim.diagnostic.goto_prev, "warning" },
+      ["]w"] = { vim.diagnostic.goto_next, "warning" },
       ["[g"] = { "<cmd>lua vim.diagnostic.goto_prev({ severity = {min=vim.diagnostic.severity.ERROR} })<CR>", "error" },
       ["]g"] = { "<cmd>lua vim.diagnostic.goto_next({ severity = {min=vim.diagnostic.severity.ERROR} })<CR>", "error" },
+      -- ["[g"] = { vim.diagnostic.goto_prev({ severity = {min=vim.diagnostic.severity.ERROR} }), "error" },
+      -- ["]g"] = { vim.diagnostic.goto_next({ severity = {min=vim.diagnostic.severity.ERROR} }), "error" },
     }
     wk.register(nkeymap, { mode = "n", silent = false, noremap = true, })
   end
