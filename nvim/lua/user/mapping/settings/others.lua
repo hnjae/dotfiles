@@ -21,24 +21,6 @@ local status_wk, wk = pcall(require, "which-key")
 -- },
 -- 0, { severity = {min=vim.diagnostic.severity.WARN} }
 
-local coc_show_documentation = function()
-  vim.cmd([[
-  if CocAction('hasProvider', 'hover')
-    call CocActionAsync('doHover')
-  else
-    call feedkeys('K', 'in')
-  endif
-  ]])
-  -- if vim.fn.CocAction("hasProvider", "hover") then
-  --   vim.fn.CocActionAsync("doHover")
-  -- else
-  --   vim.fn.feedkeys("K", "in")
-  -- end
-  -- TODO: implement this in lua <2022-07-04, Hyunjae Kim>
-  -- if (index(['vim','help'], &filetype) >= 0)
-  --   execute 'h '.expand('<cword>')
-  -- else
-end
 
 
 
@@ -73,58 +55,42 @@ M.setup = function()
   ------------------------------------------------------------------------------
   -- n keymap
   ------------------------------------------------------------------------------
-  if _IS_PLUGIN("coc.nvim") then
-    local nkeymap = {
-      -- replace default gd
-      ["K"] = { coc_show_documentation, 'show-documentation' },
-      ["=="] = { "<plug>(coc-format)", 'coc-format' },
-    }
-    wk.register(nkeymap, { mode = "n", silent = true, noremap = true, })
+  local nkeymap = {
+    -- replace default gd
+    ["K"] = { vim.lsp.buf.hover, 'lsp-declaration' },
+    -- ["=="] =
+  }
+
+  if vim.fn.has("nvim-0.8.0") then
+    nkeymap["=="] = { vim.lsp.buf.format {async=true}, 'lsp-formatting' }
   else
-    local nkeymap = {
-      -- replace default gd
-      ["K"] = { vim.lsp.buf.hover, 'lsp-declaration' },
-      -- ["=="] =
-    }
-
-    if vim.fn.has("nvim-0.8.0") then
-      nkeymap["=="] = { vim.lsp.buf.format {async=true}, 'lsp-formatting' }
-    else
-      nkeymap["=="] = { vim.lsp.buf.formatting, 'lsp-formatting' }
-    end
-
-    wk.register(nkeymap, { mode = "n", silent = true, noremap = true, })
+    nkeymap["=="] = { vim.lsp.buf.formatting, 'lsp-formatting' }
   end
+
+  wk.register(nkeymap, { mode = "n", silent = true, noremap = true, })
 
   ------------------------------------------------------------------------------
   -- v keymap
   ------------------------------------------------------------------------------
-  if _IS_PLUGIN("coc.nvim") then
-    local vkeymap = {
-      ["=="] = { "<plug>(coc-format-selected)", 'coc-format-selected' },
-    }
-    wk.register(vkeymap, { mode = "v", silent = true, noremap = true, })
-  else
-    local vkeymap = {
-      -- TODO: use vim.lsp.buf.format <2022-12-28, Hyunjae Kim>
-      -- range 설정을 vmap 에서 어떻게 해야할지..
-      ["=="] = { vim.lsp.buf.range_formatting, 'lsp-formatting' },
-    }
-    wk.register(vkeymap, { mode = "v", silent = true, noremap = true, })
-  end
+  local vkeymap = {
+    -- TODO: use vim.lsp.buf.format <2022-12-28, Hyunjae Kim>
+    -- range 설정을 vmap 에서 어떻게 해야할지..
+    ["=="] = { vim.lsp.buf.range_formatting, 'lsp-formatting' },
+  }
+  wk.register(vkeymap, { mode = "v", silent = true, noremap = true, })
 
   ----------------------------------------------------------------
   -- Map function and class text objects
   -- NOTE: Requires 'textDocument.documentSymbol' support from the language server.
   ----------------------------------------------------------------
-  local XOkeymap = {
-    ["if"] = { "<Plug>(coc-funcobj-i)", "inside-function" },
-    ["af"] = { "<Plug>(coc-funcobj-a)", "around-function" },
-    ["ic"] = { "<Plug>(coc-classobj-i)", "inside-function" },
-    ["ac"] = { "<Plug>(coc-classobj-a)", "inside-function" },
-  }
-  wk.register(XOkeymap, { mode = "x", silent = true, noremap = true, })
-  wk.register(XOkeymap, { mode = "o", silent = true, noremap = true, })
+  -- local XOkeymap = {
+  --   ["if"] = { "<Plug>(coc-funcobj-i)", "inside-function" },
+  --   ["af"] = { "<Plug>(coc-funcobj-a)", "around-function" },
+  --   ["ic"] = { "<Plug>(coc-classobj-i)", "inside-function" },
+  --   ["ac"] = { "<Plug>(coc-classobj-a)", "inside-function" },
+  -- }
+  -- wk.register(XOkeymap, { mode = "x", silent = true, noremap = true, })
+  -- wk.register(XOkeymap, { mode = "o", silent = true, noremap = true, })
 
   ------------------------------------------------------------------------------
 end

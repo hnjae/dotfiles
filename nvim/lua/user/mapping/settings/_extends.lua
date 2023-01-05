@@ -25,77 +25,17 @@ M.setup = function()
       , {})
   end
 
-  if _IS_PLUGIN("coc.nvim") then
-    ----------------------------------------------------------------
-    -- gh
-    ----------------------------------------------------------------
-    -- definition을 새 탭에 열지 말지,
-    -- 그런 설정은 `coc.preferences.jumpCommand` 로 설정이 가능
-    -- 또는 :call CocAction('jumpDefinition', 'tab drop') 식으로 수동 지정이 가능
-    wk.register({
-      ["gd"] = { "<Plug>(coc-definition)", 'coc-definition' },
-      ["gD"] = { "<Plug>(coc-declaration)", 'coc-declaration' },
-      ["gl"] = { name="+lsp" },
-      ["gly"] = { "<plug>(coc-type-definition)", "type-definition" },
-      ["glu"] = { "<plug>(coc-references-used)", "references-used" },
-      ["gli"] = { "<Plug>(coc-implementation)", 'coc-implementation' },
-      ["glr"] = { "<Plug>(coc-references)", 'coc-references' },
-    }, { mode = "n" })
-  else
-    wk.register({
-      ["gd"] = { vim.lsp.buf.definition, 'lsp-definition' },
-      ["gD"] = { vim.lsp.buf.declaration, 'lsp-declaration' },
-      ["gl"] = { name="+lsp" },
-      -- ["glu"] = { "<plug>(coc-references-used)", "references-used" },
-      ["gli"] = { vim.lsp.buf.implementation, 'lsp-implementation' },
-      ["glr"] = { vim.lsp.buf.references, 'lsp-references' },
-      ["gly"] = { vim.lsp.buf.type_definition, 'lsp-type-definition' },
+  wk.register({
+    ["gd"] = { vim.lsp.buf.definition, 'lsp-definition' },
+    ["gD"] = { vim.lsp.buf.declaration, 'lsp-declaration' },
+    ["gl"] = { name="+lsp" },
+    -- ["glu"] = { "<plug>(coc-references-used)", "references-used" },
+    ["gli"] = { vim.lsp.buf.implementation, 'lsp-implementation' },
+    ["glr"] = { vim.lsp.buf.references, 'lsp-references' },
+    ["gly"] = { vim.lsp.buf.type_definition, 'lsp-type-definition' },
 
-      ["gls"] = { vim.lsp.buf.signature_help, 'lsp-signature-help' },
-    }, { mode = "n" })
-  end
-
-  if _IS_PLUGIN("coc.nvim") then
-    ----------------------------------------------------------------
-    -- scroll coc-float window
-    ----------------------------------------------------------------
-    -- Remap <C-f> and <C-b> for scroll float windows/popups.
-    -- float window 없을때는 정상 작동.
-    vim.cmd([[
-    nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-    nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-    inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-    inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-    vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-    vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-    ]])
-
-  ----------------------------------------------------------------
-  -- codeaction
-  ----------------------------------------------------------------
-  -- let g:which_key_map.m.a = {'name': '+codeaction'}
-  -- vim.cmd([[
-  -- " Applying codeAction to the selected region.
-  -- " Example: `<leader>aap` for current paragraph
-  -- xnoremap sa  <Plug>(coc-codeaction-selected)
-  -- nnoremap sa  <Plug>(coc-codeaction-selected)
-
-  -- " Remap keys for applying codeAction to the current buffer.
-  -- nnoremap sac  <Plug>(coc-codeaction)
-  -- " Apply AutoFix to problem on the current line.
-  -- nnoremap sqf  <Plug>(coc-fix-current)
-
-  -- " Run the Code Lens action on the current line.
-  -- nnoremap scl  <Plug>(coc-codelens-action)
-  -- ]])
-
-  ----------------------------------------------------------------
-  -- Use CTRL-S for selections ranges.
-  -- Requires 'textDocument/selectionRange' support of language server.
-  -- nnoremap <silent> <C-s> <Plug>(coc-range-select)
-  -- xnoremap <silent> <C-s> <Plug>(coc-range-select)
-  end
-
+    ["gls"] = { vim.lsp.buf.signature_help, 'lsp-signature-help' },
+  }, { mode = "n" })
 
 end
 
