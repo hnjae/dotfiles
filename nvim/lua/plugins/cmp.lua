@@ -1,13 +1,7 @@
--- if packer_plugins['nvim-cmp'] and packer_plugins['nvim-cmp'].loaded then
--- local cmp = require('cmp')
+-- cmp
 
-local M = {}
-M.setup = function ()
-  local has_cmp, cmp = pcall(require, "cmp")
-
-  if not has_cmp then
-    return
-  end
+local cmp_config = function()
+  local cmp = require("cmp")
 
   local cmp_opts = {
     snippet = {
@@ -64,14 +58,16 @@ M.setup = function ()
   })
 
   -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-  cmp.setup.cmdline(':', {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = cmp.config.sources({
-      { name = 'path' }
-    }, {
-      { name = 'cmdline' }
-    })
-  })
+  cmp.setup.cmdline(
+    ':',
+    {
+      mapping = cmp.mapping.preset.cmdline(),
+      sources = cmp.config.sources(
+        { { name = 'path' } },
+        { { name = 'cmdline' } }
+      )
+    }
+  )
 
   -- Setup lspconfig.
   -- local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
@@ -81,4 +77,15 @@ M.setup = function ()
   -- }
 end
 
-return M
+return {
+  { 'hrsh7th/cmp-nvim-lsp', dependenceis = { 'hrsh7th/nvim-cmp' }},
+  { 'hrsh7th/cmp-path', dependenceis = { 'hrsh7th/nvim-cmp' } },
+  { 'hrsh7th/cmp-buffer', dependenceis = { 'hrsh7th/nvim-cmp' } },
+  { 'hrsh7th/cmp-cmdline', dependenceis = { 'hrsh7th/nvim-cmp' } },
+  { 'hrsh7th/cmp-nvim-lua', dependenceis = { 'hrsh7th/nvim-cmp' } },
+  {
+    'quangnguyen30192/cmp-nvim-ultisnips',
+    dependenceis = { 'hrsh7th/nvim-cmp', 'sirver/ultisnips' }
+  },
+  { 'hrsh7th/nvim-cmp', config=cmp_config },
+}

@@ -27,12 +27,6 @@ end
 
 ------------------------------------------------------------------
 -- vscode.nvim
--- does not support htmlH1 (2022-06-21)
-vim.o.background = 'dark'
-vim.g.vscode_style = "dark"
-vim.g.vscode_italic_comment = 1
-vim.cmd([[silent! colorscheme vscode]])
--- require('vscode').setup({})
 
 ------------------------------------------------------------------
 -- vim.g.material_style = "darker"

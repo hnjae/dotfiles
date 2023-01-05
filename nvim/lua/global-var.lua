@@ -13,8 +13,8 @@ _WINDOW_PREFIX = "<Leader>nw"
 
 
 -- TODO: remove these code
-packages = {}
-for _, pack in ipairs(require("plugins").packages) do
+local packages = {}
+for _, pack in ipairs(require("plugins.misc")) do
   packages[pack[1]:sub(pack[1]:find("/")+1, -1)] = true
 end
 _IS_PLUGIN = function (plugin)

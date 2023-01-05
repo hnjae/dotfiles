@@ -1,2 +1,0 @@
--- if packer_plugins['fzf.vim'] and packer_plugins['fzf.vim'].loaded then
--- end

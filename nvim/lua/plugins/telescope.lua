@@ -1,11 +1,7 @@
-local M = {}
+-- telescope
 
-local status_telescope, telescope = pcall(require, "telescope")
-
-M.setup = function()
-  if not status_telescope then
-    return
-  end
+local telescope_config =  function()
+  local telescope = require("telescope")
 
   local config = {
     defaults = {
@@ -49,12 +45,35 @@ M.setup = function()
   }
 
   telescope.setup(config)
-  if _IS_PLUGIN('telescope-fzf-native.nvim') then
-    telescope.load_extension('fzf')
-  end
-  if _IS_PLUGIN('telescope-ultisnips.nvim') then
-    telescope.load_extension('ultisnips')
-  end
+  telescope.load_extension('fzf')
+  telescope.load_extension('ultisnips')
 end
 
-return M
+
+
+return {
+  { 'nvim-lua/plenary.nvim', lazy = true },
+  {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release"
+      .. " && cmake --build build --config Release"
+      .. " && cmake --install build --prefix build",
+    cond = vim.fn.executable("cmake") == 1,
+    lazy = true
+  },
+  {
+    'fhill2/telescope-ultisnips.nvim',
+    dependenceis = { 'sirver/ultisnips' },
+    lazy = true
+  },
+  {
+    'nvim-telescope/telescope.nvim',
+    dependenceis = {
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope-fzf-native.nvim',
+      'fhill2/telescope-ultisnips.nvim'
+    },
+    config = telescope_config,
+    lazy = true
+  },
+}

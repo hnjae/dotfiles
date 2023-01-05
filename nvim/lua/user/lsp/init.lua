@@ -2,11 +2,6 @@ local M = {}
 
 M.setup = function()
 
-  if _IS_PLUGIN("coc.nvim") then
-    require("user.lsp.set_coc").setup()
-    return
-  end
-
   local status_lsp_installer, lsp_installer = pcall(require, "nvim-lsp-installer")
   local status_lspconfig, lspconfig = pcall(require, "lspconfig")
   if not status_lspconfig or not status_lsp_installer then

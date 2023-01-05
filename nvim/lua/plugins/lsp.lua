@@ -1,22 +1,12 @@
-local M = {}
-local autocmd_set = function ()
-  vim.cmd([[
-  autocmd CursorHold * silent call CocActionAsync('highlight')
-  ]])
+-- lsp
 
+local use_native_lsp = true
 
-  -- test
-  local keyset = vim.keymap.set
-  -- Auto complete
-  function _G.check_back_space()
-      local col = vim.fn.col('.') - 1
-      return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s')
-  end
-
-end
-
-local override_defaults = function()
+local coc_config = function()
+  ------------------------------------------------------------------------------
+  -- override default setting
   -- coc needs these configs to work
+  ------------------------------------------------------------------------------
   -- if hidden is not set, TextEdit might fail.
   vim.opt.hidden = true
 
@@ -45,16 +35,19 @@ local override_defaults = function()
 
   -- to use coc-highlight
   vim.opt.termguicolors = true
-end
 
+  ------------------------------------------------------------------------------
+  -- autocmd set
+  ------------------------------------------------------------------------------
+  vim.cmd([[
+  autocmd CursorHold * silent call CocActionAsync('highlight')
+  ]])
 
-M.setup = function()
-  if not _IS_PLUGIN("coc.nvim") then
-    return
+  -- Auto complete
+  function _G.check_back_space()
+      local col = vim.fn.col('.') - 1
+      return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s')
   end
-
-  override_defaults()
-  autocmd_set()
 
   ----------------------------------------------------------------------
   -- 아래 리스트는, 설치 안되있으면 자동으로 설치됨
@@ -139,4 +132,76 @@ M.setup = function()
 
 end
 
-return M
+
+return {
+  -----------------------------------------------------------------------------
+  -- coc
+  -----------------------------------------------------------------------------
+  {
+    'neoclide/coc.nvim',
+    branch = 'release',
+    lazy = false,
+    enabled = not use_native_lsp,
+    cond = vim.fn.has("node") == 1,
+    config = coc_config
+  },
+  {
+    'antoinemadec/coc-fzf',
+    branch = 'release',
+    lazy = false,
+    dependenceis = { 'neoclide/coc.nvim' },
+    enabled = not use_native_lsp,
+    cond = vim.fn.has("node") == 1,
+  },
+
+  -----------------------------------------------------------------------------
+  -- native lsp
+  -----------------------------------------------------------------------------
+  {
+    'neovim/nvim-lspconfig',
+    lazy = true,
+    enabled = use_native_lsp,
+  },
+  {
+    "simrat39/symbols-outline.nvim",
+    enabled = use_native_lsp,
+      config=function()
+        local opts = {
+          width = 17
+        }
+        require("symbols-outline").setup(opts)
+    end
+  },
+  {
+    'rcarriga/nvim-notify',
+    enabled = use_native_lsp,
+  },
+  {
+    'tamago324/nlsp-settings.nvim',
+    lazy = true,
+    enabled = use_native_lsp,
+    dependenceis = {
+      'neovim/nvim-lspconfig',
+      'rcarriga/nvim-notify',
+      'williamboman/nvim-lsp-installer'
+    },
+  },
+  {
+    'williamboman/nvim-lsp-installer',
+    lazy = true,
+    enabled = use_native_lsp,
+    dependenceis = { 'neovim/nvim-lspconfig' },
+  },
+  -- use { 'nvim-lua/lsp-status.nvim' } -- lualine 에서 setup 해야함.
+  -- it shows popup window.
+  {
+    'ray-x/lsp_signature.nvim',
+    lazy = true,
+    enabled = use_native_lsp,
+    config = function() require('lsp_signature').setup() end,
+  },
+  {
+    'onsails/lspkind.nvim',
+    enabled = use_native_lsp,
+  }, -- it shows kind icons
+}
