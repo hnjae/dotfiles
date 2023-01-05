@@ -1,6 +1,15 @@
 -- UI
 
-local lualine_config = function()
+local lualine_spec =  {
+  'nvim-lualine/lualine.nvim',
+  dependenceis={
+    'kyazdani42/nvim-web-devicons',
+  },
+  lazy=false,
+  priority=1,
+}
+
+lualine_spec.config = function()
   local encoding_opt = {
     "encoding",
     cond = function()
@@ -31,21 +40,6 @@ local lualine_config = function()
     end
     -- color = { fg = '#ffffff', gui = 'bold' },
   }
-
-  -- A = vim.fn.call(coc#status())
-  -- local coc = {
-  --   -- Lsp server name
-  --   function()
-  --     eturn vim.api.nvim_call_function("coc#status", {})
-        -- -- set statusline^=%{coc#status()}
-  --     -- return "stst"
-  --   end,
-  --   icon = '',
-  --   cond = function()
-  --     return _IS_PLUGIN("coc.nvim") ~= nil
-  --   end
-  --   -- color = { fg = '#ffffff', gui = 'bold' },
-  -- }
 
   local has_lspconfig, _ = pcall(require, "lspconfig")
   local lsp = {
@@ -162,51 +156,155 @@ local lualine_config = function()
   }
 end
 
+local tabline_spec =  {
+  'kdheepak/tabline.nvim',
+  lazy=false,
+  priority=1,
+  config=function()
+    require("tabline").setup {
+      -- Defaults configuration options
+      enable = true,
+      options = {
+        -- If lualine is installed tabline will use separators configured in lualine by default.
+        -- These options can be used to override those settings.
+        -- section_separators = {'', ''},
+        -- component_separators = {'', ''},
+        -- section_separators = {'', ''},
+        -- component_separators = {'', ''},
+        -- max_bufferline_percent = 66, -- set to nil by default, and it uses vim.o.columns * 2/3
+        -- show_tabs_always = false, -- this shows tabs only when there are more than one tab or if the first tab is named
+        -- show_devicons = true, -- this shows devicons in buffer section
+        -- show_bufnr = false, -- this appends [bufnr] to buffer section,
+        -- show_filename_only = false, -- shows base filename only instead of relative path in filename
+        -- modified_icon = "+ ", -- change the default modified icon
+        -- modified_italic = false, -- set to true by default; this determines whether the filename turns italic if modified
+        -- show_tabs_only = true, -- this shows only tabs instead of tabs + buffers
+      }
+    }
+    -- vim.cmd[[
+    --   set guioptions-=e " Use showtabline in gui vim
+    --   set sessionoptions+=tabpages,globals " store tabpages and globals in session
+    -- ]]
+    end
+}
+
 
 
 return {
-  {
-    'lukas-reineke/indent-blankline.nvim'
-  }, -- show indent line
-  {
-    'nvim-lualine/lualine.nvim',
-    dependenceis={ 'kyazdani42/nvim-web-devicons'},
-    lazy=false,
-    config=lualine_config
-  },
-  {
-    'kdheepak/tabline.nvim',
-    lazy=false,
-    config=function()
-      require("tabline").setup {
-        -- Defaults configuration options
-        enable = true,
-        options = {
-          -- If lualine is installed tabline will use separators configured in lualine by default.
-          -- These options can be used to override those settings.
-          -- section_separators = {'', ''},
-          -- component_separators = {'', ''},
-          -- section_separators = {'', ''},
-          -- component_separators = {'', ''},
-          -- max_bufferline_percent = 66, -- set to nil by default, and it uses vim.o.columns * 2/3
-          -- show_tabs_always = false, -- this shows tabs only when there are more than one tab or if the first tab is named
-          -- show_devicons = true, -- this shows devicons in buffer section
-          -- show_bufnr = false, -- this appends [bufnr] to buffer section,
-          -- show_filename_only = false, -- shows base filename only instead of relative path in filename
-          -- modified_icon = "+ ", -- change the default modified icon
-          -- modified_italic = false, -- set to true by default; this determines whether the filename turns italic if modified
-          -- show_tabs_only = true, -- this shows only tabs instead of tabs + buffers
-        }
-      }
-      -- vim.cmd[[
-      --   set guioptions-=e " Use showtabline in gui vim
-      --   set sessionoptions+=tabpages,globals " store tabpages and globals in session
-      -- ]]
-      end
-  },
+  lualine_spec,
+  tabline_spec,
   {
     'akinsho/bufferline.nvim',
     tag = "v3.1.0",
     dependenceis = { 'kyazdani42/nvim-web-devicons' }
+  },
+  -----------------------------------------------------------------------------
+  -- 
+  -----------------------------------------------------------------------------
+  {
+    'rcarriga/nvim-notify',
+    lazy=true,
+    config=function()
+      vim.opt.termguicolors = true
+      -- replace builtin notify
+      -- vim.notify = require("notify")
+    end
+  },
+  -----------------------------------------------------------------------------
+  -- LSP-related
+  -----------------------------------------------------------------------------
+  {
+    -- shows popup window about parameter/func
+    -- NOTE: activated when on_attach() happens / or call .setup() in init.lua
+    'ray-x/lsp_signature.nvim',
+    lazy = true,
+    -- config = function() require('lsp_signature').setup() end,
+  },
+  {
+    -- adds vscode-like pictograms to neovim built-in lsp
+    -- NOTE: should be init/configured in lsp/cmp settings
+    'onsails/lspkind.nvim',
+    lazy = true,
+  },
+  -----------------------------------------------------------------------------
+  -- shows things
+  -----------------------------------------------------------------------------
+  {
+    -- shows indent line
+    'lukas-reineke/indent-blankline.nvim',
+    lazy=false
+  },
+  {
+    -- m의 mark 가 보이게 해준다.
+    'kshenoy/vim-signature',
+    lazy=false,
+    config=function()
+      --[[
+        이유는 모르지만 vim-commentary 와 gc 에서 mapping 이 충돌.
+        vim-surrounded
+      --]]
+      vim.g.SignatureMap = {
+        -- ['Leader']            = "m",
+        -- ['PlaceNextMark']     = "m,",
+        -- ['ToggleMarkAtLine']  = "m.",
+        -- ['PurgeMarksAtLine']  = "m-",
+        -- ['PurgeMarks']        = "m<Space>",
+        ['Leader']            = "m",
+        ['PlaceNextMark']     = "",
+        ['ToggleMarkAtLine']  = "",
+        ['PurgeMarksAtLine']  = "",
+        ['PurgeMarks']        = "",
+        --
+        ['PurgeMarkers']      = "",
+        ['ListBufferMarks']   = "",
+        ['ListBufferMarkers'] = "",
+        ------
+        ['DeleteMark']        = "",
+        ------
+        -- ['GotoNextLineAlpha']  =  "']",
+        -- ['GotoPrevLineAlpha']  =  "'[",
+        ['GotoNextLineAlpha'] = "", -- 기본 맵핑이 있음
+        ['GotoPrevLineAlpha'] = "", -- 기본 맵핑이 있음
+        ['GotoNextSpotAlpha'] = "", -- 기본 맵핑이 있음
+        ['GotoPrevSpotAlpha'] = "", -- 기본 맵핑이 있음
+        ------
+        ['GotoNextLineByPos'] = "",
+        ['GotoPrevLineByPos'] = "",
+        ['GotoNextSpotByPos'] = "",
+        ['GotoPrevSpotByPos'] = "",
+        ['GotoNextMarker']    = "",
+        ['GotoPrevMarker']    = "",
+        ['GotoNextMarkerAny'] = "",
+        ['GotoPrevMarkerAny'] = "",
+      }
+
+      local status_wk, wk = pcall(require, "which-key")
+      if status_wk then
+        wk.register({
+          -- ["m,"] = { "place-next-mark" },
+          -- ["m."] = { "toggle-mark-at-line" },
+          -- ["m-"] = { "purge-marks-at-line" },
+          -- ["m "] = { "purge-marks-at-buffer" },
+          -- ["m/"] = { "list-buffer-marks" },
+          -- ["m?"] = { "list-buffer-markers" },
+          ----
+          ["dm"] = { "delete-mark" },
+          ----
+          -- ["'["] = { "goto-prev-line-alpha" },
+          -- ["']"] = { "goto-next-line-alpha" },
+          -- ["`["] = { "goto-prev-spot-alpha" },
+          -- ["`]"] = { "goto-next-spot-alpha" },
+          ----
+          -- ["]`"] = { "signature-spot-by-pos" },
+          -- ["[`"] = { "signature-spot-by-pos" },
+          -- ["['"] = { "signature-line-by-pos" },
+          -- ["]'"] = { "signature-line-by-pos" },
+          -- ["]-"] = { "signature-marker" },
+          -- ["[-"] = { "signature-marker" },
+          -- ["[="] = { "signature-marker-any" },
+          -- ["]="] = { "signature-marker-any" },
+        })
+      end
+    end
   },
 }

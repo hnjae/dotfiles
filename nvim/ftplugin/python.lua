@@ -56,8 +56,8 @@ end
 -- python-mode
 -------------------------------------------------------------------------------
 -- python-mode 가 특정 ft에서 실행하도록 되어서 그런가 loaded 체크 하면 작동이 안됨.
--- 지금으 될수도 있음.
-if _IS_PLUGIN('python-mode') then
+-- if _IS_PLUGIN('python-mode') then
+if true then
   vim.g.pymode_rope_regenerate_on_write = 1
   vim.g.pymode_warnings = 1
 
@@ -204,51 +204,51 @@ end
 -- lsp
 -------------------------------------------------------------------------------
 
-if _IS_PLUGIN('autoflake.vim') then
-  local mapping = { [_LANG_PREFIX .. "ra"] = { '<cmd>Autoflake --remove-all-unused-imports<CR>',
-    "autoflake-remove-imports" }, }
-  wk.register(mapping, { buffer = 0, noremap = false, mode = "n" })
-end
+-- if _IS_PLUGIN('autoflake.vim') then
+--   local mapping = { [_LANG_PREFIX .. "ra"] = { '<cmd>Autoflake --remove-all-unused-imports<CR>',
+--     "autoflake-remove-imports" }, }
+--   wk.register(mapping, { buffer = 0, noremap = false, mode = "n" })
+-- end
+--
+-- local mapping = {
+--   [_LANG_PREFIX .. "rC"] = {
+--     '<cmd>Autoflake --remove-all-unused-imports<CR><cmd>Isort<CR><cmd>Black<CR>',
+--     "clean"
+--   },
+-- }
+--
+-- wk.register(mapping, { buffer = 0, noremap = false, mode = "n" })
 
-local mapping = {
-  [_LANG_PREFIX .. "rC"] = {
-    '<cmd>Autoflake --remove-all-unused-imports<CR><cmd>Isort<CR><cmd>Black<CR>',
-    "clean"
-  },
-}
-
-wk.register(mapping, { buffer = 0, noremap = false, mode = "n" })
-
-if _IS_PLUGIN('coc.nvim') then
-  ----------------------------------------------------------------
-  -- Formatting (==)
-  ----------------------------------------------------------------
-  -- python lsp does not support "Format Selection"
-  -- vim.api.nvim_buf_set_keymap(0, "x", "==", "<plug>(coc-format-selected)", {})
-  mapping = {
-    [_LANG_PREFIX .. "ri"] = { ":call CocAction('organizeImport')<CR>", "organize-import" },
-    -- ["=="] = { "<plug>(coc-format)", "coc-format" },
-  }
-  wk.register(mapping, { buffer = 0, noremap = false, mode = "n" })
-  -- vim.api.nvim_buf_del_user_command(0, "Black")
-  -- vim.api.nvim_buf_del_user_command(0, "Isort")
-  vim.api.nvim_buf_create_user_command(0, "Black", ":CocCommand editor.action.formatDocument", {})
-  vim.api.nvim_buf_create_user_command(0, "Isort", ":call CocAction('organizeImport')", {})
-
-else
-  if _IS_PLUGIN('isort.vim') then
-    mapping = { [_LANG_PREFIX .. "ri"] = { '<cmd>Isort<CR>', "isort" }, }
-    wk.register(mapping, { buffer = 0, noremap = false, mode = "n" })
-    wk.register(mapping, { buffer = 0, noremap = false, mode = "v" })
-  end
-  if _IS_PLUGIN('black') then
-    wk.register(
-      { ["=="] = { '<cmd>Black<CR>', "black" }, },
-      { buffer = 0, noremap = false, mode = "n" }
-    )
-  end
-  require('user.lsp').setup({"pylsp", "pyright"})
-end
+-- if _IS_PLUGIN('coc.nvim') then
+--   ----------------------------------------------------------------
+--   -- Formatting (==)
+--   ----------------------------------------------------------------
+--   -- python lsp does not support "Format Selection"
+--   -- vim.api.nvim_buf_set_keymap(0, "x", "==", "<plug>(coc-format-selected)", {})
+--   mapping = {
+--     [_LANG_PREFIX .. "ri"] = { ":call CocAction('organizeImport')<CR>", "organize-import" },
+--     -- ["=="] = { "<plug>(coc-format)", "coc-format" },
+--   }
+--   wk.register(mapping, { buffer = 0, noremap = false, mode = "n" })
+--   -- vim.api.nvim_buf_del_user_command(0, "Black")
+--   -- vim.api.nvim_buf_del_user_command(0, "Isort")
+--   vim.api.nvim_buf_create_user_command(0, "Black", ":CocCommand editor.action.formatDocument", {})
+--   vim.api.nvim_buf_create_user_command(0, "Isort", ":call CocAction('organizeImport')", {})
+--
+-- else
+--   if _IS_PLUGIN('isort.vim') then
+--     mapping = { [_LANG_PREFIX .. "ri"] = { '<cmd>Isort<CR>', "isort" }, }
+--     wk.register(mapping, { buffer = 0, noremap = false, mode = "n" })
+--     wk.register(mapping, { buffer = 0, noremap = false, mode = "v" })
+--   end
+--   if _IS_PLUGIN('black') then
+--     wk.register(
+--       { ["=="] = { '<cmd>Black<CR>', "black" }, },
+--       { buffer = 0, noremap = false, mode = "n" }
+--     )
+--   end
+--   require('user.lsp').setup({"pylsp", "pyright"})
+-- end
 
 -- local has_dap_python, dap_python require('dap-python')
 -- local dap_mapping = {
@@ -261,4 +261,4 @@ end
 -- end
 
 ----------------------------------------------------------------
-vim.cmd([[TagbarOpen]])
+-- vim.cmd([[TagbarOpen]])

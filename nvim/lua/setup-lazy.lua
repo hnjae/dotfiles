@@ -1,5 +1,5 @@
 -- bootstrap lazy.nvim
-if vim.fn.has('nvim-0.8') ~= 1 then
+if vim.fn.has('nvim-0.8') ~= 1 or not vim.fn.executable('git') then
   return
 end
 

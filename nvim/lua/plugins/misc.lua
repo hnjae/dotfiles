@@ -7,7 +7,7 @@ return {
   -- run test
   { 'vim-test/vim-test', lazy = true },
   { 'vimwiki/vimwiki', lazy = true },
-  { 'tpope/vim-surround'},
+  { 'tpope/vim-surround' },
   { 'johngrib/vim-f-hangul' },
   { 'ap/vim-css-color' },
   { 'tpope/vim-repeat' },
@@ -16,7 +16,7 @@ return {
     'habamax/vim-asciidoctor',
     lazy = true,
     ft = { "asciidoc", "asciidoctor" },
-    config=function()
+    config = function()
       -- NOTE: handlr can not handle asciidoc file.
       -- It recognize it as text file.
       local browser = vim.fn.expand("$BROWSER")
@@ -43,8 +43,8 @@ return {
   { 'rust-lang/rust.vim', lazy = true, ft = { 'rust' }, },
   {
     'ludovicchabant/vim-gutentags',
-    lazy=false,
-    config=function()
+    lazy = false,
+    config = function()
       vim.g.gutentags_cache_dir = vim.fn.stdpath('cache') .. "/gutentags"
       vim.g.gutentags_exclude_filetypes = {
         '',
@@ -60,16 +60,16 @@ return {
   -- { "folke/neodev.nvim" },
   {
     'puremourning/vimspector',
-    lazy=true,
-    cond=vim.fn.has('python3'),
-    config=function()
+    lazy = true,
+    cond = vim.fn.has('python3'),
+    config = function()
       vim.g.vimspector_install_gadgets = {
         "depugby"
       }
     end
   },
-    -- use { 'mfussenegger/nvim-dap' }
-    -- use { 'mfussenegger/nvim-dap-python' }
+  -- use { 'mfussenegger/nvim-dap' }
+  -- use { 'mfussenegger/nvim-dap-python' }
 
 
   -- editing experince
@@ -79,16 +79,16 @@ return {
   {
     'phaazon/hop.nvim',
     branch = 'v2',
-    config=function()
+    config = function()
       require("hop").setup { keys = 'etovxqpdygfblzhckisuran' }
     end
 
   },
   {
     "akinsho/toggleterm.nvim",
-    tag='2.3.0',
-    lazy=false,
-    config=function()
+    tag = '2.3.0',
+    lazy = false,
+    config = function()
       require("toggleterm").setup()
     end
   },
@@ -98,8 +98,8 @@ return {
   ------------------------------------------------------------------------------
   {
     'junegunn/fzf.vim',
-    lazy=false,
-    enabled=false,
+    lazy = false,
+    enabled = false,
     cond = vim.fn.executable("fzf") == 1,
   },
   { 'wfxr/minimap.vim', enabled = false },

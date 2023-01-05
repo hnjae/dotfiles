@@ -1,9 +1,8 @@
-
 return {
   {
     'numToStr/Comment.nvim',
     lazy = false,
-    config = function ()
+    config = function()
       -- local config = {
       --   toggler = {
       --     bblock = 'gBc'
@@ -22,8 +21,8 @@ return {
   },
   {
     'ntpeters/vim-better-whitespace',
-    lazy=false,
-    cond=function()
+    lazy = false,
+    cond = function()
       vim.g.strip_whitespace_on_save = 1
       vim.g.strip_whitelines_at_eof = 1
 
@@ -49,18 +48,19 @@ return {
   },
   {
     "windwp/nvim-autopairs",
-    lazy=false,
-    config=function()
+    lazy = false,
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    config = function()
       -- local n_rule = require('nvim-autopairs.rule')
 
       local opts = {
         -- disable_filetype = { "TelescopePrompt" },
-        disable_in_macro = true,  -- disable when recording or executing a macro
+        disable_in_macro = true, -- disable when recording or executing a macro
         disable_in_visualblock = true, -- disable when insert after visual block mode
         -- ignored_next_char = [=[[%w%%%'%[%"%.]]=],
         -- enable_moveright = true,
         -- enable_afterquote = true,  -- add bracket pairs after quote
-        enable_check_bracket_line = false,  --- check bracket in same line
+        enable_check_bracket_line = false, --- check bracket in same line
         -- enable_bracket_in_quote = true, --
         -- break_undo = true, -- switch for basic rule break undo sequence
         check_ts = true, -- treesitter
@@ -70,7 +70,6 @@ return {
         -- map_c_w = false, -- map <c-w> to delete a pair if possible
       }
       require("nvim-autopairs").setup(opts)
-
     end
   },
 }

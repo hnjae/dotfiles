@@ -3,6 +3,7 @@ return {
   {
     'Mofiqul/vscode.nvim',
     lazy = false,
+    priority=999999999,
     config = function()
       -- does not support htmlH1 (2022-06-21)
       vim.o.background = 'dark'
@@ -15,7 +16,8 @@ return {
     end
   },
   {
-    'toppair/prospector.nvim', lazy = true ,
+    'toppair/prospector.nvim',
+    lazy = true,
     dependenceis = { 'nvim-treesitter/nvim-treesitter' }
   },
   { 'projekt0n/github-nvim-theme', lazy = true },

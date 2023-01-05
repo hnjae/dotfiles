@@ -10,6 +10,16 @@ vim.g.maplocalleader = ','
 -------------------------------------------------------------------
 -- vim.api.nvim_set_keymap("n", "<Leader>a", "za", {})
 vim.api.nvim_set_keymap("n", "<Leader><Leader>", "za", {})
+-- Move to window using the movement keys
+vim.keymap.set("n", "<left>", "<C-w>h")
+vim.keymap.set("n", "<down>", "<C-w>j")
+vim.keymap.set("n", "<up>", "<C-w>k")
+vim.keymap.set("n", "<right>", "<C-w>l")
+-- vim.keymap.set("n", "<Shift><left>", "<C-w><Shift>h")
+-- vim.keymap.set("n", "<Shift><down>", "<C-w>J")
+-- vim.keymap.set("n", "<Shift><up>", "<C-w>K")
+-- vim.keymap.set("n", "<Shift><right>", "<C-w>L")
+
 
 -- vim.api.nvim_set_keymap("", "gb", "<cmd>bnext<CR>", {})
 -- vim.api.nvim_set_keymap("", "gB", "<cmd>bprevious<CR>", {})

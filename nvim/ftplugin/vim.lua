@@ -7,17 +7,8 @@ vim.opt_local.foldmethod = "marker"
 vim.opt_local.foldlevel = 0
 vim.opt_local.colorcolumn = vim.fn.join(vim.fn.range(81, 999), ",")
 
-if _IS_PLUGIN('auto-pairs') then
-  vim.b.AutoPairs = {
-    ["''"] = "''",
-    -- ['"'] = '"',
-    -- ['"""'] = '"""',
-    ["'"] = "'",
-    ["'''"] = "'''",
-    ["("] = ")",
-    ["["] = "]",
-    ["`"] = "`",
-    ["```"] = "```",
-    ["{"] = "}"
-  }
-end
+-- local status_npairs, npairs = pcall(require, 'nvim-autopairs')
+-- if status_npairs then
+  -- npairs.remove_rule('"')
+  -- npairs.remove_rule('"""')
+-- end

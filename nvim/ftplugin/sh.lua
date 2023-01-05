@@ -11,7 +11,7 @@ vim.opt_local.expandtab = true
 vim.opt_local.foldmethod = "marker"
 vim.opt_local.colorcolumn = vim.fn.join(vim.fn.range(81, 999), ",")
 
-local status_ok, lsp = pcall(require, "user.lsp")
-if status_ok then
-  lsp.setup({"bashls"})
-end
+-- local status_ok, lsp = pcall(require, "user.lsp")
+-- if status_ok then
+--   lsp.setup({"bashls"})
+-- end

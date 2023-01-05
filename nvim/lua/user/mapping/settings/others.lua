@@ -3,14 +3,14 @@ local M = {}
 -- local status_tscope, t_builtin= pcall(require, "telescope.builtin")
 local status_wk, wk = pcall(require, "which-key")
 
-  -- Mappings.
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'ghd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+-- Mappings.
+-- See `:help vim.lsp.*` for documentation on any of the below functions
+-- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'ghd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
 
-  -- if vim.b[bufnr]._is_lsp_keymap then
-  --   return
-  -- end
-  -- vim.b[bufnr]._is_lsp_keymap = true
+-- if vim.b[bufnr]._is_lsp_keymap then
+--   return
+-- end
+-- vim.b[bufnr]._is_lsp_keymap = true
 -- ["Zl"] = {
 --   function()
 --     for _, buf_client in pairs(vim.lsp.buf_get_clients()) do
@@ -62,7 +62,8 @@ M.setup = function()
   }
 
   if vim.fn.has("nvim-0.8.0") then
-    nkeymap["=="] = { vim.lsp.buf.format {async=true}, 'lsp-formatting' }
+    -- nkeymap["=="] = { function() vim.lsp.buf.format({ async = true }) end, 'lsp-formatting' }
+    nkeymap["=="] = { vim.lsp.buf.format, 'lsp-formatting' }
   else
     nkeymap["=="] = { vim.lsp.buf.formatting, 'lsp-formatting' }
   end

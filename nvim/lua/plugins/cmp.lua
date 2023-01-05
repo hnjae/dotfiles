@@ -1,4 +1,5 @@
 -- cmp
+-- TODO: nvim-autopair <2023-01-05, Hyunjae Kim>
 
 local cmp_config = function()
   local cmp = require("cmp")

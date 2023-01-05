@@ -1677,3 +1677,7 @@ EOL
 TEMP_CON_ID
 d
 snapraid
+InsertLeave
+WinEnter
+WinLeave
+InsertEnter

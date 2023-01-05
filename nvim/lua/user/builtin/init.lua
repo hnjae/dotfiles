@@ -10,6 +10,7 @@ M.setup = function()
       )
     )
   for _, file in pairs(paths) do
+    -- TODO: use `require` <2023-01-05, Hyunjae Kim>
     vim.cmd('source ' .. file)
   end
 end
