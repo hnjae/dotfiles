@@ -5,8 +5,6 @@ require('user.builtin').setup()
 require('setup-lazy')
 require('global-var')
 
-require('user.lsp').setup()
-require('user.commands').setup()
 require('user.autocmd').setup()
 require('user.mapping').setup()
 

@@ -1,207 +1,123 @@
 -- lsp
+-- local use_native_lsp = true
 
-local use_native_lsp = true
+local mason_lspconfig_spec = {
+  'williamboman/mason-lspconfig.nvim',
+  lazy = false,
+  priority = 1,
+  dependenceis = {
+    'neovim/nvim-lspconfig',
+    'williamboman/mason.nvim',
+  },
+  -- event = "VimEnter",
+}
+mason_lspconfig_spec.config = function()
+  require("mason").setup()
+  require("mason-lspconfig").setup()
 
-local coc_config = function()
-  ------------------------------------------------------------------------------
-  -- override default setting
-  -- coc needs these configs to work
-  ------------------------------------------------------------------------------
-  -- if hidden is not set, TextEdit might fail.
-  vim.opt.hidden = true
-
-  -- Some servers have issues with backup files, see #649
-  vim.opt.backup = false
-  vim.opt.writebackup = false
-
-  -- Better display for messages
-  vim.opt.cmdheight = 2
-
-  -- Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-  -- delays and poor user experience.
-  vim.opt.updatetime=300
-
-  -- Don't pass messages to |ins-completion-menu|.
-  vim.opt.shortmess:append("c")
-
-  -- Always show the signcolumn, otherwise it would shift the text each time
-  -- diagnostics appear/become resolved.
-  if vim.fn.has("nvim-0.5.0") == 1 then
-    -- Recently vim can merge signcolumn and number column into one
-    vim.opt.signcolumn = "number"
-  else
-    vim.optsigncolumn= "yes"
+  local status_nlspsettings, nlspsettings = pcall(require, "nlspsettings")
+  if status_nlspsettings then
+    nlspsettings.setup({
+      config_home = vim.fn.stdpath('config') .. '/nlsp-settings',
+      local_settings_dir = ".nlsp-settings",
+      local_settings_root_markers_fallback = { '.git' },
+      append_default_schemas = true,
+      loader = 'yaml'
+    })
   end
 
-  -- to use coc-highlight
-  vim.opt.termguicolors = true
-
-  ------------------------------------------------------------------------------
-  -- autocmd set
-  ------------------------------------------------------------------------------
-  vim.cmd([[
-  autocmd CursorHold * silent call CocActionAsync('highlight')
-  ]])
-
-  -- Auto complete
-  function _G.check_back_space()
-      local col = vim.fn.col('.') - 1
-      return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s')
+  local status_neodev, neodev = pcall(require, "neodev")
+  if status_neodev then
+    neodev.setup()
   end
 
-  ----------------------------------------------------------------------
-  -- 아래 리스트는, 설치 안되있으면 자동으로 설치됨
-  -- :CocList extensions 으로 설치된 extensions 확인 가능
-  -- coc-tabnin (all-language autocompleter)
+  local status_lsp_status, lsp_status = pcall(require, "lsp-status")
+  local status_lsp_signature, lsp_signature = pcall(require, "lsp_signature")
+  local status_cmp_nvim_lsp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 
-  -- \ 'coc-diagnostic',
-  -- https://github.com/neoclide/coc.nvim/wiki/Language-servers
-  vim.g.coc_global_extensions = {
-    -- "coc-lists",
-    "coc-ultisnips",
-    -- "coc-yank",
-    -- "coc-explorer",
-    -- "coc-spell-checker",
-    "coc-prettier",
-    -- "coc-dictionary",
-    -- "coc-word",
-    "coc-emoji",
-    -- 'coc-highlight',
+  -------------------------------------
+  -- on_attach
+  -------------------------------------
+  local on_attach = function(client, bufnr)
+    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-    -- markup language
-    "coc-css",
-    -- "coc-html",
-    -- "coc-ansible",
-    "coc-docker",
-    "coc-yaml",
-    'coc-vimtex',
-    'coc-json',
+    if status_lsp_status then
+      lsp_status.on_attach(client)
+    end
 
-    -- language
-    'coc-vimlsp',
-    'coc-rls',
-    'coc-pyright',
-    'coc-jedi',
-    'coc-sumneko-lua',
-    -- 'coc-lua',
-    'coc-sh',
+    if status_lsp_signature then
+      lsp_signature.on_attach()
+    end
+  end
 
-    --
-    'coc-prettier',
-  }
+  -------------------------------------
+  -- capabilities
+  -------------------------------------
+  local global_capabilities = vim.lsp.protocol.make_client_capabilities()
+  global_capabilities.textDocument.completion.completionItem.snippetSupport = true
+  if status_cmp_nvim_lsp then
+    -- capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
+    global_capabilities = vim.tbl_extend(
+      'keep', global_capabilities or {}, cmp_nvim_lsp.default_capabilities()
+    )
+  end
+  if status_lsp_status then
+    global_capabilities = vim.tbl_extend(
+      'keep', global_capabilities or {}, lsp_status.capabilities
+    )
+  end
 
-  -- coc-snippets
-  -- default C-l
-  -- vim.api.nvim_set_keymap("i", "<tab>", "<plug>(coc-snippets-expand)", {})
-  -- default C-j
-  -- vim.api.nvim_set_keymap("v", "<tab>", "<plug>(coc-snippets-select)", {})
-  -- vim.g.coc_snippet_next = '<tab>'
-  -- vim.g.coc_snippet_prev = '<s-tab>'
-  -- vim.api.nvim_set_keymap("i", "<tab>", "<plug>(coc-snippets-expand-jump)", {})
-  -- xmap <leader>x  <Plug>(coc-convert-snippet)
-  -- vim.cmd([[
-  -- function! s:check_back_space() abort
-  -- let col = col('.') - 1
-  -- return !col || getline('.')[col - 1]  =~# '\s'
-  -- endfunction
+  -------------------------------------
+  --
+  -------------------------------------
+  local lspconfig = require("lspconfig")
+  lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_config, {
+    capabilities = global_capabilities,
+  })
 
-  -- inoremap <silent><expr> <TAB>
-  -- \ pumvisible() ? coc#_select_confirm() :
-  -- \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-  -- \ <SID>check_back_space() ? "\<TAB>" :
-  -- \ coc#refresh()
-
-  -- let g:coc_snippet_next = '<tab>'
-  -- ]])
-
-  -- Highlight the symbol and its references when holding the cursor.
-
-  -- if "coc-highlight" in  vim.g.coc_global_extensions then
-  --   vim.api.nvim_create_autocmd(
-  --     {
-  --       "CursorHold"
-  --     },
-  --     {
-  --       pattern = {"*"},
-  --       callback = function()
-  --         vim.fn.CocActionAsync("highlight")
-  --       end
-  --     }
-  --   )
-  -- end
-
+  -- setup each server
+  for _, server in ipairs(require("mason-lspconfig").get_installed_servers()) do
+    lspconfig[server].setup({
+      on_attach = on_attach
+    })
+  end
 end
 
-
 return {
-  -----------------------------------------------------------------------------
-  -- coc
-  -----------------------------------------------------------------------------
-  {
-    'neoclide/coc.nvim',
-    branch = 'release',
-    lazy = false,
-    enabled = not use_native_lsp,
-    cond = vim.fn.has("node") == 1,
-    config = coc_config
-  },
-  {
-    'antoinemadec/coc-fzf',
-    branch = 'release',
-    lazy = false,
-    dependenceis = { 'neoclide/coc.nvim' },
-    enabled = not use_native_lsp,
-    cond = vim.fn.has("node") == 1,
-  },
-
   -----------------------------------------------------------------------------
   -- native lsp
   -----------------------------------------------------------------------------
   {
-    'neovim/nvim-lspconfig',
-    lazy = true,
-    enabled = use_native_lsp,
-  },
-  {
-    "simrat39/symbols-outline.nvim",
-    enabled = use_native_lsp,
-      config=function()
-        local opts = {
-          width = 17
-        }
-        require("symbols-outline").setup(opts)
-    end
-  },
-  {
-    'rcarriga/nvim-notify',
-    enabled = use_native_lsp,
-  },
-  {
     'tamago324/nlsp-settings.nvim',
     lazy = true,
-    enabled = use_native_lsp,
     dependenceis = {
       'neovim/nvim-lspconfig',
-      'rcarriga/nvim-notify',
-      'williamboman/nvim-lsp-installer'
+      -- 'williamboman/nvim-lsp-installer', -- recommends
+      'rcarriga/nvim-notify', -- optional
     },
+    module = true,
   },
   {
-    'williamboman/nvim-lsp-installer',
+    'neovim/nvim-lspconfig',
     lazy = true,
-    enabled = use_native_lsp,
-    dependenceis = { 'neovim/nvim-lspconfig' },
+    module = true,
   },
-  -- use { 'nvim-lua/lsp-status.nvim' } -- lualine 에서 setup 해야함.
-  -- it shows popup window.
   {
-    'ray-x/lsp_signature.nvim',
+    -- lsp/formatter/... installer
+    'williamboman/mason.nvim',
     lazy = true,
-    enabled = use_native_lsp,
-    config = function() require('lsp_signature').setup() end,
+    module = true,
   },
   {
-    'onsails/lspkind.nvim',
-    enabled = use_native_lsp,
-  }, -- it shows kind icons
+    'folke/neodev.nvim',
+    lazy=true,
+    module=true,
+  },
+  mason_lspconfig_spec
+
+  -- {
+  --   'williamboman/nvim-lsp-installer',
+  --   lazy = true,
+  --   dependenceis = { 'neovim/nvim-lspconfig' },
+  -- },
 }
