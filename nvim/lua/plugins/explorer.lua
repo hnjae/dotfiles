@@ -3,7 +3,6 @@ local nvim_tree_spec = {
   "nvim-tree/nvim-tree.lua",
   dependencies = {
     { 'nvim-tree/nvim-web-devicons', module = true },
-    'folke/which-key.nvim', -- for key mapping in config function
   },
   lazy = false,
   -- event = { "UIEnter" },
@@ -12,33 +11,23 @@ local nvim_tree_spec = {
     {
       _MAPPING_PREFIX["sidebar"] .. "t",
       "<cmd>NvimTreeToggle<CR>",
-      desc ="NvimTreeToggle"
+      desc = "NvimTreeToggle"
     },
   },
   config = function()
-    local toggle_replace = function()
-      if require("nvim-tree.view").is_visible() then
-        require("nvim-tree.api").tree.close()
-      else
-        require("nvim-tree").open_replacing_current_buffer()
-      end
-    end
-
-    require("which-key").register({
-      ["-"] = { toggle_replace, "nvim-tree-toggle" }
-    })
-
     require("nvim-tree").setup({
+      disable_netrw = false,
+      hijack_netrw = false,
       hijack_directories = {
-        enable = true,
-        auto_open = true,
+        enable = false,
+        auto_open = false,
       },
       view = {
         mappings = {
-          list = {
-            { key = "<C-e>", action = "edit" },
-            { key = "<CR>", action = "edit_in_place" }
-          }
+          -- list = {
+          --   { key = "<C-e>", action = "edit" },
+          --   { key = "<CR>", action = "edit_in_place" }
+          -- }
         }
       },
       diagnostics = {
@@ -54,6 +43,7 @@ local nvim_tree_spec = {
     })
   end
 }
+
 return {
   nvim_tree_spec,
   {
@@ -74,6 +64,7 @@ return {
       -- },
     },
   },
+  { 'tpope/vim-vinegar', enabled = true },
 
   ---------------------------------------------------
   -- disabled
@@ -93,5 +84,4 @@ return {
       -- https://medium.com/@victormours/a-better-nerdtree-setup-3d3921abc0b9
     end
   },
-  { 'tpope/vim-vinegar', enabled = false },
 }
