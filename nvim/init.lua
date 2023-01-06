@@ -1,15 +1,8 @@
 -- $XDG_CONFIG_HOME/nvim/init.lua
 
-_MAPPING_PREFIX = {
-  ["tab"] = "<Leader>nt",
-  ["edit"] = "<Leader>ne",
-  ["window"] = "<Leader>nw",
-  ["sidebar"] = "<Leader>s",
-}
-
+require('global-var')
 require('user.builtin').setup()
 
-require('global-var')
 require('setup-lazy')
 
 require('user.autocmd').setup()
@@ -30,3 +23,5 @@ if status_wk then
     key_mappings = { prefix = "s" },
   }
 end
+
+-- vim.keymap.set('n', '<leader>w', function() print("blabla") end, {desc="blabla2"})
