@@ -41,20 +41,6 @@ return {
     ft = { 'python' },
   },
   { 'rust-lang/rust.vim', lazy = true, ft = { 'rust' }, },
-  {
-    'ludovicchabant/vim-gutentags',
-    lazy = false,
-    config = function()
-      vim.g.gutentags_cache_dir = vim.fn.stdpath('cache') .. "/gutentags"
-      vim.g.gutentags_exclude_filetypes = {
-        '',
-        'fugitive',
-        'nerdtree',
-        'tagbar',
-        'help',
-      }
-    end
-  },
 
   -- dev
   -- { "folke/neodev.nvim" },

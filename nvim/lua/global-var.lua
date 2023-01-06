@@ -1,4 +1,14 @@
+_MAPPING_PREFIX = {
+  ["tab"] = "<Leader>nt",
+  ["edit"] = "<Leader>ne",
+  ["window"] = "<Leader>nw",
+  ["sidebar"] = "<Leader>s",
+  ["open"] = "<F6>",
+  ["fuzzy-finder"] = "<F3>",
+}
+
 -- _LANG_PREFIX = 's'
+-- TODO: remove these code <2023-01-05, Hyunjae Kim>
 -- vim.cmd([[map s <Nop>]])
 
 -- vim.api.nvim_del_keymap("n", "s")

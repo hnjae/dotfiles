@@ -10,13 +10,6 @@ M.setup = function()
     return
   end
 
-  if _IS_PLUGIN('tagbar') then
-    wk.register({
-      ["[t"] = { ":<C-u>TagbarJumpPrev<CR>", "tag", mode = "n" },
-      ["]t"] = { ":<C-u>TagbarJumpNext<CR>", "tag", mode = "n" },
-    }, {noremap = true})
-  end
-
   local nkeymap = {
     ["[w"] = { vim.diagnostic.goto_prev, "warning" },
     ["]w"] = { vim.diagnostic.goto_next, "warning" },

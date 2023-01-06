@@ -11,11 +11,6 @@ function M.setup()
   ------------------------------------------------------
   -- window_prefix specific
   ------------------------------------------------------
-  if _IS_PLUGIN('tagbar') then
-    vim.api.nvim_set_keymap("n", _SIDEBAR_PREFIX .. "t", ":TagbarToggle<CR>", {})
-    wk.register({ ["t"] = "tagbar" }, { prefix = _SIDEBAR_PREFIX })
-  end
-
   if _IS_PLUGIN('minimap') then
     vim.api.nvim_set_keymap("n", _SIDEBAR_PREFIX .. "m", ":MinimapToggle<CR>", {})
     wk.register({ ["m"] = "minimap" }, { prefix = _SIDEBAR_PREFIX })
