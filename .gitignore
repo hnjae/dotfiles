@@ -6,6 +6,7 @@ __local_config*
 */asciidoc-wiki
 *.add.spl
 tags
+.luarc.json
 
 # Compiled Lua sources
 luac.out

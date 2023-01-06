@@ -84,4 +84,72 @@ return {
       -- https://medium.com/@victormours/a-better-nerdtree-setup-3d3921abc0b9
     end
   },
+  {
+    'ludovicchabant/vim-gutentags',
+    lazy = true,
+    ft = { "asciidoc", "asciidoctor" },
+    config = function()
+      vim.g.gutentags_cache_dir = vim.fn.stdpath('cache') .. "/gutentags"
+      vim.g.gutentags_exclude_filetypes = {
+        '',
+        'fugitive',
+        'nerdtree',
+        'tagbar',
+        'help',
+      }
+    end
+  },
+  {
+    'preservim/tagbar',
+    lazy = true,
+    ft = { "asciidoc", "asciidoctor" },
+    config = function()
+      vim.g.tagbar_width = 26 -- default: 40
+      vim.g.tagbar_wrap = 0
+      vim.g.tagbar_zoomwidth = 0 -- default 1 (use maximum width)
+      vim.g.tagbar_indent = 1
+      vim.g.tagbar_show_data_type = 1
+      vim.g.tagbar_help_visiblity = 1
+      vim.g.tagbar_show_balloon = 1
+
+      vim.g.tagbar_type_asciidoctor = {
+        ['sro'] = '""',
+        ['sort'] = 0,
+        ['ctagstype'] = 'asciidoc',
+        ['kinds'] = {
+          'c:chapter:0:1',
+          's:section:0:1',
+          'S:subsection:0:1',
+          't:subsubsection:0:1',
+          'T:l4subsection:0:1',
+          'u:l5subsection:0:1',
+          'a:anchor:0:1',
+        },
+        ['kind2scope'] = {
+          ['c'] = 'chapter',
+          ['s'] = 'section',
+          ['S'] = 'subsection',
+          ['t'] = 'subsubsection',
+          ['T'] = 'l4subsection',
+          ['u'] = 'l5subsection',
+          ['a'] = 'anchor',
+        },
+        ['scope2kind'] = {
+          ['chapter']       = 'c',
+          ['section']       = 's',
+          ['subsection']    = 'S',
+          ['subsubsection'] = 't',
+          ['l4subsection']  = 'T',
+          ['l5subsection']  = 'u',
+          ['anchor']        = 'a',
+        },
+      }
+
+      vim.keymap.set("n", "[t", "<cmd>TagbarJumpPrev<CR>", { desc = "prev-tag" })
+      vim.keymap.set("n", "]t", "<cmd>TagbarJumpNext<CR>", { desc = "next-tag" })
+
+      vim.keymap.set("n", _MAPPING_PREFIX["sidebar"] .. "t", "<cmd>TagbarToggle<CR>", { desc = "tagbar" })
+
+    end
+  }
 }

@@ -1,24 +1,75 @@
 --------------------------------------------------------------------------------
 vim.g.mapleader = " "
--- ,: reverse t/T/f/F
+-- NOTE: , : repeat t/T/f/F backwards
 vim.g.maplocalleader = ','
 
 -- vim.api.nvim_set_keymap("n", "", "s", {})
-
 -- vim.api.nvim_set_keymap("n", "<Leader>a", "s", {})
 
 -------------------------------------------------------------------
 -- vim.api.nvim_set_keymap("n", "<Leader>a", "za", {})
-vim.api.nvim_set_keymap("n", "<Leader><Leader>", "za", {})
--- Move to window using the movement keys
+vim.keymap.set("n", "<Leader><Leader>", "za", { desc = "toggle-fold" })
+vim.keymap.set("n", "ZA", "<cmd>wa<CR>", { desc = "save" })
+vim.keymap.set(
+  "n",
+  "Zl",
+  function()
+    for _, buf_client in pairs(vim.lsp.get_active_clients({bufnr = 0})) do
+      buf_client.stop()
+    end
+  end,
+  { desc='stop-lsp' }
+)
+
 vim.keymap.set("n", "<left>", "<C-w>h")
 vim.keymap.set("n", "<down>", "<C-w>j")
 vim.keymap.set("n", "<up>", "<C-w>k")
 vim.keymap.set("n", "<right>", "<C-w>l")
--- vim.keymap.set("n", "<Shift><left>", "<C-w><Shift>h")
--- vim.keymap.set("n", "<Shift><down>", "<C-w>J")
--- vim.keymap.set("n", "<Shift><up>", "<C-w>K")
--- vim.keymap.set("n", "<Shift><right>", "<C-w>L")
+vim.keymap.set("n", "<S-left>", "<C-w>H")
+vim.keymap.set("n", "<S-down>", "<C-w>J")
+vim.keymap.set("n", "<S-up>", "<C-w>K")
+vim.keymap.set("n", "<S-right>", "<C-w>L")
+
+vim.keymap.set({ "n", "v" }, "<F12>", '"+y', { desc = "copy-to-clipboard" })
+vim.keymap.set({ "n", "v" }, "<S-F12>", '"+p', { desc = "paste-from-clipboard" })
+vim.keymap.set({ "n", "v" }, "<F24>", '"+p', { desc = "paste-from-clipboard" })
+
+
+vim.keymap.set("n", "[w", vim.diagnostic.goto_prev, { desc = "warning" })
+vim.keymap.set("n", "]w", vim.diagnostic.goto_next, { desc = "warning" })
+vim.keymap.set(
+  "n",
+  "[g",
+  function()
+    vim.diagnostic.goto_prev({
+      severity = { min = vim.diagnostic.severity.ERROR }
+    })
+  end,
+  { desc = "error" }
+)
+vim.keymap.set(
+  "n",
+  "]g",
+  function()
+    vim.diagnostic.goto_next({
+      severity = { min = vim.diagnostic.severity.ERROR }
+    })
+  end,
+  { desc = "error" }
+)
+
+vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "lsp-declaration" })
+vim.keymap.set("n", "==", vim.lsp.buf.formatting, { desc = "lsp-formatting" })
+vim.keymap.set(
+  "v", "==", vim.lsp.buf.range_formatting, { desc = "lsp-formatting" }
+)
+
+vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc='lsp-definition' })
+vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc='lsp-declaration' })
+vim.keymap.set("n", "gli", vim.lsp.buf.implementation, { desc='lsp-implementation' })
+vim.keymap.set("n", "glr", vim.lsp.buf.references, { desc='lsp-references' })
+vim.keymap.set("n", "gly", vim.lsp.buf.type_definition, { desc='lsp-type-definition' })
+vim.keymap.set("n", "glr", vim.lsp.buf.signature_help, { desc='lsp-signature-help' })
 
 
 -- vim.api.nvim_set_keymap("", "gb", "<cmd>bnext<CR>", {})
@@ -37,15 +88,8 @@ vim.keymap.set("n", "<right>", "<C-w>l")
 -- nnoremap <F8> $
 -- nnoremap <C-e> $
 
--- let g:vimspector_enable_mappings='HUMAN'
--- try
---   nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
---   nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
---   nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
---   nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
--- endtry
-
--- VS Code Matching: https://code.visualstudio.com/shortcuts/keyboard-shortcuts-Linux.pdf
+-- VS Code Mapping:
+-- https://code.visualstudio.com/shortcuts/keyboard-shortcuts-Linux.pdf
 -- F1: VS Code 에서는 커맨드 검색인듯
 -- F5: Start Debugging
 -- General
@@ -110,10 +154,10 @@ iabbr <expr> __uuid system("uuidgen")
 
 if vim.api.nvim_create_autocmd ~= nil then
   vim.api.nvim_create_autocmd(
-    {"FileType"}, {
-      pattern = {"text", "markdown", "vimwiki", "org", "tex", "plaintex", "man"},
-      callback  = function ()
-        vim.cmd([[
+    { "FileType" }, {
+    pattern  = { "text", "markdown", "vimwiki", "org", "tex", "plaintex", "man" },
+    callback = function()
+      vim.cmd([[
           " OS
           iabbr <buffer> linux Linux
           iabbr <buffer> macos macOS
@@ -308,7 +352,7 @@ if vim.api.nvim_create_autocmd ~= nil then
           iabbr <buffer> -> →
           iabbr <buffer> <- ←
         ]])
-      end
-    }
+    end
+  }
   )
 end

@@ -86,7 +86,10 @@ return {
   { 'hrsh7th/cmp-nvim-lua', dependenceis = { 'hrsh7th/nvim-cmp' } },
   {
     'quangnguyen30192/cmp-nvim-ultisnips',
-    dependenceis = { 'hrsh7th/nvim-cmp', 'sirver/ultisnips' }
+    dependenceis = {
+      'hrsh7th/nvim-cmp',
+      'sirver/ultisnips'
+    }
   },
   { 'hrsh7th/nvim-cmp', config=cmp_config },
 }

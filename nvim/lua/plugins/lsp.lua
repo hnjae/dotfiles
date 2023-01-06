@@ -111,6 +111,7 @@ return {
   {
     'folke/neodev.nvim',
     lazy=true,
+    enabled=false,
     module=true,
   },
   mason_lspconfig_spec
