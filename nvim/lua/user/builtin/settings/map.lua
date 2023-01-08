@@ -14,11 +14,11 @@ vim.keymap.set(
   "n",
   "Zl",
   function()
-    for _, buf_client in pairs(vim.lsp.get_active_clients({bufnr = 0})) do
+    for _, buf_client in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
       buf_client.stop()
     end
   end,
-  { desc='stop-lsp' }
+  { desc = 'stop-lsp' }
 )
 
 vim.keymap.set("n", "<left>", "<C-w>h")
@@ -31,8 +31,8 @@ vim.keymap.set("n", "<S-up>", "<C-w>K")
 vim.keymap.set("n", "<S-right>", "<C-w>L")
 
 vim.keymap.set({ "n", "v" }, "<F12>", '"+y', { desc = "copy-to-clipboard" })
-vim.keymap.set({ "n", "v" }, "<S-F12>", '"+p', { desc = "paste-from-clipboard" })
-vim.keymap.set({ "n", "v" }, "<F24>", '"+p', { desc = "paste-from-clipboard" })
+vim.keymap.set({ "n", "v", "i" }, "<S-F12>", '"+p', { desc = "paste-from-clipboard" })
+vim.keymap.set({ "n", "v", "i" }, "<F24>", '"+p', { desc = "paste-from-clipboard" })
 
 
 vim.keymap.set("n", "[w", vim.diagnostic.goto_prev, { desc = "warning" })
@@ -59,34 +59,65 @@ vim.keymap.set(
 )
 
 vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "lsp-declaration" })
-vim.keymap.set("n", "==", vim.lsp.buf.formatting, { desc = "lsp-formatting" })
 vim.keymap.set(
-  "v", "==", vim.lsp.buf.range_formatting, { desc = "lsp-formatting" }
+  "n",
+  "==",
+  function()
+    vim.lsp.buf.format({ async = true })
+  end,
+  { desc = "lsp-formatting" }
+)
+vim.keymap.set(
+  "v", "==",
+  function()
+    vim.lsp.buf.format({
+      async = true,
+      range = {
+        ["start"] = vim.api.nvim_buf_get_mark(0, '<'),
+        ["end"] = vim.api.nvim_buf_get_mark(0, '>'),
+      },
+    })
+  end,
+  { desc = "lsp-formatting" }
 )
 
-vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc='lsp-definition' })
-vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc='lsp-declaration' })
-vim.keymap.set("n", "gli", vim.lsp.buf.implementation, { desc='lsp-implementation' })
-vim.keymap.set("n", "glr", vim.lsp.buf.references, { desc='lsp-references' })
-vim.keymap.set("n", "gly", vim.lsp.buf.type_definition, { desc='lsp-type-definition' })
-vim.keymap.set("n", "glr", vim.lsp.buf.signature_help, { desc='lsp-signature-help' })
+vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = 'lsp-definition' })
+vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = 'lsp-declaration' })
+vim.keymap.set("n", "gli", vim.lsp.buf.implementation, { desc = 'lsp-implementation' })
+vim.keymap.set("n", "glr", vim.lsp.buf.references, { desc = 'lsp-references' })
+vim.keymap.set("n", "gly", vim.lsp.buf.type_definition, { desc = 'lsp-type-definition' })
+vim.keymap.set("n", "glr", vim.lsp.buf.signature_help, { desc = 'lsp-signature-help' })
+
+
+-- disable s/S, use c/0C instead
+vim.keymap.set({ "n", "v", "x", "o" }, "s", "<Nop>")
+vim.keymap.set({ "n", "v", "x", "o" }, "S", "<Nop>")
+
+local nmapping = {
+  { "n", vim.lsp.buf.rename, { desc = 'lsp-rename' } },
+  { "a", vim.lsp.buf.code_action, { desc = 'lsp-code-action' } },
+  { "wa", vim.lsp.buf.add_workspace_folder, { desc = 'lsp-add-workspace' } },
+  { "wr", vim.lsp.buf.remove_workspace_folder, { desc = 'lsp-remove-workspace' } },
+  {
+    "wl",
+    function()
+      vim.notify(vim.inspect(vim.lsp.buf.lisp_workspace_folders))
+    end,
+    { desc = 'lsp-list-workspace' }
+  },
+}
+for _, map in ipairs(nmapping) do
+  vim.keymap.set("n", _MAPPING_PREFIX["lang"] .. "l" .. map[1], map[2], map[3])
+end
+
+-- TODO: code-action? <2023-01-07, Hyunjae Kim>
+vim.keymap.set("v", _MAPPING_PREFIX["lang"] .. "la", vim.lsp.buf.range_code_action, { desc = "lsp-code-action" })
+
+
 
 
 -- vim.api.nvim_set_keymap("", "gb", "<cmd>bnext<CR>", {})
 -- vim.api.nvim_set_keymap("", "gB", "<cmd>bprevious<CR>", {})
-
--- nnoremap <space> za
--- nnoremap <F2> gt
--- nnoremap <s-F2> gT
--- nnoremap <F4> :TagbarToggle<CR>
--- imap <F7> <C-o>0
--- imap <C-a> <C-o>0
--- imap <F8> <C-o>$
--- imap <C-e> <C-o>$
--- nnoremap <F7> 0
--- nnoremap <C-a> 0
--- nnoremap <F8> $
--- nnoremap <C-e> $
 
 -- VS Code Mapping:
 -- https://code.visualstudio.com/shortcuts/keyboard-shortcuts-Linux.pdf

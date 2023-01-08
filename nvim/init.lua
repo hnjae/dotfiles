@@ -6,7 +6,6 @@ require('user.builtin').setup()
 require('setup-lazy')
 
 require('user.autocmd').setup()
-require('user.mapping').setup()
 
 local status_wk, wiki = pcall(require, "asciidoc-wiki")
 if status_wk then
