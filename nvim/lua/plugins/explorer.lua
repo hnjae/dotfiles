@@ -73,7 +73,7 @@ return {
     'scrooloose/nerdtree',
     lazy = false,
     enabled = false,
-    dependenceis = { 'tiagofumo/vim-nerdtree-syntax-highlight' },
+    dependencies = { 'tiagofumo/vim-nerdtree-syntax-highlight' },
     config = function()
       vim.g.NERDTreeHijackNetrw = 0
       vim.g.NERDTreeMinimalUI = 0

@@ -1,7 +1,5 @@
 return {
   -- vimL plugin
-  { "dstein64/vim-startuptime" },
-  { 'neoclide/jsonc.vim', lazy = true },
   -- repl/repl-like
   { 'michaelb/sniprun', lazy = true, build = 'bash ./install.sh' },
   -- run test
@@ -44,18 +42,6 @@ return {
 
   -- dev
   -- { "folke/neodev.nvim" },
-  {
-    'puremourning/vimspector',
-    lazy = true,
-    cond = vim.fn.has('python3'),
-    config = function()
-      vim.g.vimspector_install_gadgets = {
-        "depugby"
-      }
-    end
-  },
-  -- use { 'mfussenegger/nvim-dap' }
-  -- use { 'mfussenegger/nvim-dap-python' }
 
 
   -- editing experince
@@ -89,4 +75,5 @@ return {
     cond = vim.fn.executable("fzf") == 1,
   },
   { 'wfxr/minimap.vim', enabled = false },
+  { 'neoclide/jsonc.vim', lazy = true, enabled = false },
 }

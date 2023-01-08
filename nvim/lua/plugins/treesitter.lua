@@ -62,11 +62,11 @@ end
 return {
   -- {
   --   'p00f/nvim-ts-rainbow',
-  --   dependenceis = { 'nvim-treesitter/nvim-treesitter' }
+  --   dependencies = { 'nvim-treesitter/nvim-treesitter' }
   -- },
   {
     'nvim-treesitter/nvim-treesitter-context',
-    dependenceis = { 'nvim-treesitter/nvim-treesitter' }
+    dependencies = { 'nvim-treesitter/nvim-treesitter' }
   },
   {
     'nvim-treesitter/nvim-treesitter',

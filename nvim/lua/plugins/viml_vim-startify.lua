@@ -6,7 +6,7 @@ return {
   {
     'mhinz/vim-startify',
     lazy = false,
-    dependenceis = { "folke/which-key.nvim" },
+    dependencies = { "folke/which-key.nvim" },
     config = function()
       vim.g.startify_change_to_vcs_root = 1
       vim.g.startify_bookmarks = {

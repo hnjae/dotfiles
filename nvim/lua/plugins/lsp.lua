@@ -5,7 +5,7 @@ local mason_lspconfig_spec = {
   'williamboman/mason-lspconfig.nvim',
   lazy = false,
   priority = 1,
-  dependenceis = {
+  dependencies = {
     'neovim/nvim-lspconfig',
     'williamboman/mason.nvim',
   },
@@ -90,7 +90,7 @@ return {
   {
     'tamago324/nlsp-settings.nvim',
     lazy = true,
-    dependenceis = {
+    dependencies = {
       'neovim/nvim-lspconfig',
       -- 'williamboman/nvim-lsp-installer', -- recommends
       'rcarriga/nvim-notify', -- optional
@@ -110,15 +110,108 @@ return {
   },
   {
     'folke/neodev.nvim',
-    lazy=true,
-    enabled=false,
-    module=true,
+    lazy = true,
+    enabled = true,
+    module = true,
   },
-  mason_lspconfig_spec
+  {
+    -- A pretty diagnostics, references, telescope results, quickfix and location list to help you solve all the trouble your code is causing.
+    'folke/trouble.nvim',
+    lazy = false,
+    enabled = true,
+    dependencies = {
+      'nvim-tree/nvim-web-devicons',
+      'williamboman/mason-lspconfig.nvim',
+    }
+  },
+  {
+    -- TODO: chick this out! <2023-01-08, Hyunjae Kim>
+    'jose-elias-alvarez/null-ls.nvim',
+    lazy = false,
+  },
+  mason_lspconfig_spec,
 
-  -- {
-  --   'williamboman/nvim-lsp-installer',
-  --   lazy = true,
-  --   dependenceis = { 'neovim/nvim-lspconfig' },
-  -- },
+
+  -- https://github.com/sbdchd/neoformat
+  -- https://github.com/mhartington/formatter.nvim
+  -- https://github.com/folke/lsp-colors.nvim
+
+  ------------------------------------------------------------------------------
+  -- dap
+  ------------------------------------------------------------------------------
+  {
+    'mfussenegger/nvim-dap',
+    lazy = false,
+    dependencies = {
+      'folke/which-key.nvim'
+    },
+    config = function()
+      local dap_prefix = "_LANG_PREFIX" .. "d"
+      local dap = require("dap")
+      local wk = require("which-key")
+
+      local mapping = {
+        name = "+dap",
+        c = { dap.continue, "continue" },
+        s = { name = "+step" },
+        sv = { dap.step_over, "step-over" },
+        si = { dap.step_into, "step-into" },
+        so = { dap.step_into, "step-out" },
+        b = { dap.toggle_breakpoint, "toggle-breakpoint" },
+        -- B = { dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')), "set-breakpoint-cond" },
+        -- v = { dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')), "set-breakpoint-log" },
+        r = { dap.repl.open, "repl-open" },
+        l = { dap.run_last, "run-last" },
+      }
+      wk.register(
+        mapping,
+        { noremap=false, mode = "n", prefix = _MAPPING_PREFIX["lang"] .. "d" }
+      )
+    end
+  },
+  {
+    'rcarriga/nvim-dap-ui',
+    lazy = false,
+    config = function()
+      require("dapui").setup()
+    end
+  },
+
+
+  {
+    'puremourning/vimspector',
+    lazy = true,
+    enabled = false,
+    cond = vim.fn.has('python3'),
+    dependencies = {
+      'folke/which-key.nvim'
+    },
+    config = function()
+      vim.g.vimspector_install_gadgets = {
+        "depugby"
+      }
+      local has_wk, wk = pcall(require, "which-key")
+
+      if has_wk then
+        local mapping = {
+          ["name"] = "+vimspector",
+          c = { "<Plug>VimspectorContinue", "continue" },
+          s = { "<Plug>VimspectorStop", "stop" },
+          R = { "<Plug>VimspectorRestart", "restart" },
+          p = { "<Plug>VimspectorPause", "pause" },
+          --
+          b = { "<Plug>VimspectorToggleBreakpoint", "toggle-line-breakpoint" },
+          B = { "<Plug>VimspectorToggleConditionalBreakpoint", "toggle-conditional-line-breakpoint" },
+          f = { "<Plug>VimspectorAddFunctionBreakpoint", "add-function-breakpoint" },
+          --
+          v = { "<Plug>VimspectorStepOver", "step-over" },
+          i = { "<Plug>VimspectorStepInto", "step-into" },
+          o = { "<Plug>VimspectorStepOut", "step-out" },
+          --
+          r = { "<Plug>VimspectorRunToCursor", "run-to-cursor" },
+        }
+        wk.register(mapping, { prefix = _MAPPING_PREFIX["lang"] .. "d" })
+      end
+    end
+  },
 }

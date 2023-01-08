@@ -18,7 +18,7 @@ return {
   {
     'toppair/prospector.nvim',
     lazy = true,
-    dependenceis = { 'nvim-treesitter/nvim-treesitter' }
+    dependencies = { 'nvim-treesitter/nvim-treesitter' }
   },
   { 'projekt0n/github-nvim-theme', lazy = true },
   { 'rafamadriz/neon', lazy = true },

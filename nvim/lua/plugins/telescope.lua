@@ -2,13 +2,13 @@
 
 local telescope_spec = {
   'nvim-telescope/telescope.nvim',
-  dependenceis = {
+  dependencies = {
     'nvim-lua/plenary.nvim',
     'nvim-telescope/telescope-fzf-native.nvim',
     'fhill2/telescope-ultisnips.nvim',
     'folke/which-key.nvim',
   },
-  lazy = true
+  lazy = false
 }
 
 telescope_spec.config = function()
@@ -79,10 +79,6 @@ telescope_spec.config = function()
       ["m"] = { t_builtin.registers, "marks" },
       -- ["fl"] = { t_builtin.loclist, "loclist" },
 
-      ["k"] = { name = "+keywords" },
-      ["ks"] = { t_builtin.treesitter, "symbols-treesitter" },
-      ["kt"] = { t_builtin.tags, "tags" },
-
       ["l"] = { t_builtin.current_buffer_fuzzy_find, "line" },
       ["g"] = { t_builtin.grep_string, "rg-from-workspace" },
       ["B"] = { t_builtin.current_buffer_fuzzy_find, "current_buffer_fuzzy_find" },
@@ -119,6 +115,26 @@ telescope_spec.config = function()
     },
     { prefix = _MAPPING_PREFIX["fuzzy-finder"], mode = "n" }
   )
+
+  wk.register(
+    {
+      name = "+telescope-lsp",
+      ["d"] = { t_builtin.diagnostics, "diagnostics" },
+      ["r"] = { t_builtin.lsp_references, "references" },
+      ["i"] = { t_builtin.lsp_implementations, "implementation" },
+      ["k"] = { t_builtin.lsp_definitions, "definition" },
+      ["t"] = { t_builtin.lsp_type_definitions, "type-definition" },
+      ["s"] = { name = "+symbols" },
+      ["sd"] = { t_builtin.lsp_document_symbols, "document-symbols" },
+      ["sw"] = { t_builtin.lsp_workspace_symbols, "workspace-symbols" },
+      ["sW"] = { t_builtin.lsp_workspace_symbols, "all-workspace-symbols" },
+      ["st"] = { t_builtin.treesitter, "symbols-treesitter" },
+      ["sT"] = { t_builtin.tags, "tags" },
+    },
+    { prefix = _MAPPING_PREFIX["lang"] .. "t", mode = "n" }
+  )
+
+
 end
 
 
@@ -140,7 +156,7 @@ return {
   },
   {
     'fhill2/telescope-ultisnips.nvim',
-    dependenceis = { 'sirver/ultisnips' },
+    dependencies = { 'sirver/ultisnips' },
     lazy = true,
     module = true,
   },

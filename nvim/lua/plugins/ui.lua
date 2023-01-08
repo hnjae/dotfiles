@@ -2,7 +2,7 @@
 
 local lualine_spec =  {
   'nvim-lualine/lualine.nvim',
-  dependenceis={
+  dependencies={
     'kyazdani42/nvim-web-devicons',
   },
   lazy=false,
@@ -196,7 +196,7 @@ return {
   {
     'akinsho/bufferline.nvim',
     tag = "v3.1.0",
-    dependenceis = { 'kyazdani42/nvim-web-devicons' }
+    dependencies = { 'kyazdani42/nvim-web-devicons' }
   },
   -----------------------------------------------------------------------------
   -- 
