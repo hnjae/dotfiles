@@ -8,7 +8,13 @@ local telescope_spec = {
     'fhill2/telescope-ultisnips.nvim',
     'folke/which-key.nvim',
   },
-  lazy = false
+  lazy = true,
+  keys = {
+    -- lazy load on following keys
+    { _MAPPING_PREFIX["fuzzy-finder"], nil, desc = "+telescope"},
+    { _MAPPING_PREFIX["lang"] .. "t", nil, desc = "+telescope-lsp"},
+    { "<F1>", nil, desc = "help-tags"},
+  }
 }
 
 telescope_spec.config = function()
@@ -30,7 +36,6 @@ telescope_spec.config = function()
       -- TODO: buffers doesn't show its content  <2022-06-16, Hyunjae Kim>
       -- buffers = {
       --   theme ="dropdown"
-      -- },
       -- TODO: use vim.fn.executable to find fd
       find_files = {
         find_command = { "fd", "--type", "f", "--strip-cwd-prefix" }
@@ -69,7 +74,7 @@ telescope_spec.config = function()
 
   wk.register(
     {
-      name = "+telescope",
+      -- name = "+telescope",
       [":"] = { t_builtin.commands, "commands" },
 
       ["f"] = { t_builtin.find_files, "find-from-pwd" },
@@ -118,7 +123,7 @@ telescope_spec.config = function()
 
   wk.register(
     {
-      name = "+telescope-lsp",
+      -- name = "+telescope-lsp",
       ["d"] = { t_builtin.diagnostics, "diagnostics" },
       ["r"] = { t_builtin.lsp_references, "references" },
       ["i"] = { t_builtin.lsp_implementations, "implementation" },

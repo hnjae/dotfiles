@@ -1,11 +1,12 @@
-  -- colorscheme
+-- colorscheme
 return {
   {
     'Mofiqul/vscode.nvim',
     lazy = false,
-    priority=999999999,
+    enabled = true,
+    priority = 999999999,
     config = function()
-      -- does not support htmlH1 (2022-06-21)
+      -- NOTE: does not support htmlH1 (2022-06-21)
       vim.o.background = 'dark'
       vim.g.vscode_style = "dark"
       -- vim.g.vscode_italic_comment = 1
@@ -17,13 +18,55 @@ return {
   },
   {
     'toppair/prospector.nvim',
-    lazy = true,
-    dependencies = { 'nvim-treesitter/nvim-treesitter' }
+    lazy = false,
+    enabled = false,
+    priority = 99999999999,
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    config = function()
+      require("prospector").setup()
+      vim.cmd('colorscheme prospector_darker')
+    end,
   },
-  { 'projekt0n/github-nvim-theme', lazy = true },
-  { 'rafamadriz/neon', lazy = true },
-  { 'kvrohit/rasmus.nvim', lazy = true },
-  { 'Mofiqul/adwaita.nvim', lazy = true },
-  { 'marko-cerovac/material.nvim', lazy = true },
-  { 'ellisonleao/gruvbox.nvim', lazy = true },
+  {
+    'kvrohit/rasmus.nvim',
+    lazy = false,
+    enabled = false,
+    priority = 999999999,
+    config = function()
+      vim.g.rasmus_italic_functions = true
+      vim.g.rasmus_bold_functions = true
+      vim.cmd [[colorscheme rasmus]]
+    end
+  },
+  {
+    'Mofiqul/adwaita.nvim',
+    lazy = false,
+    enabled = false,
+    priority = 999999999,
+    config = function()
+      vim.g.adwaita_darker = true -- for darker version
+      vim.g.adwaita_disable_cursorline = true -- to disable cursorline
+      vim.cmd([[colorscheme adwaita]])
+    end
+  },
+  {
+    'marko-cerovac/material.nvim',
+    lazy = false,
+    enabled = false,
+  },
+  {
+    'ellisonleao/gruvbox.nvim',
+    lazy = false,
+    enabled = false,
+  },
+  {
+    'projekt0n/github-nvim-theme',
+    lazy = false,
+    enabled = false,
+  },
+  {
+    'rafamadriz/neon',
+    lazy = false,
+    enabled = false,
+  },
 }

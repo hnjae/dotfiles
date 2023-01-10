@@ -199,32 +199,16 @@ return {
     dependencies = { 'kyazdani42/nvim-web-devicons' }
   },
   -----------------------------------------------------------------------------
-  -- 
+  --
   -----------------------------------------------------------------------------
   {
     'rcarriga/nvim-notify',
     lazy=true,
     config=function()
-      vim.opt.termguicolors = true
+      -- vim.opt.termguicolors = true
       -- replace builtin notify
       -- vim.notify = require("notify")
     end
-  },
-  -----------------------------------------------------------------------------
-  -- LSP-related
-  -----------------------------------------------------------------------------
-  {
-    -- shows popup window about parameter/func
-    -- NOTE: activated when on_attach() happens / or call .setup() in init.lua
-    'ray-x/lsp_signature.nvim',
-    lazy = true,
-    -- config = function() require('lsp_signature').setup() end,
-  },
-  {
-    -- adds vscode-like pictograms to neovim built-in lsp
-    -- NOTE: should be init/configured in lsp/cmp settings
-    'onsails/lspkind.nvim',
-    lazy = true,
   },
   -----------------------------------------------------------------------------
   -- shows things

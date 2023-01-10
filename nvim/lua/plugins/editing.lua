@@ -4,9 +4,7 @@ return {
     lazy = false,
     enabled = true,
     config = function()
-      local config = {
-
-      }
+      local config = {}
       require("Comment").setup(config)
     end
   },
@@ -24,6 +22,7 @@ return {
   {
     'ntpeters/vim-better-whitespace',
     lazy = false,
+    -- event = { "FileWritePre", "BufWritePre" },
     config = function()
       vim.g.strip_whitespace_on_save = 1
       vim.g.strip_whitelines_at_eof = 1
@@ -50,7 +49,8 @@ return {
   },
   {
     "windwp/nvim-autopairs",
-    lazy = false,
+    lazy = true,
+    event = "InsertEnter",
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
     config = function()
       -- local n_rule = require('nvim-autopairs.rule')

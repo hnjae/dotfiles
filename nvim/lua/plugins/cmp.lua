@@ -1,16 +1,31 @@
--- cmp
--- TODO: nvim-autopair <2023-01-05, Hyunjae Kim>
+local nvim_cmp_spec = {
+  'hrsh7th/nvim-cmp',
+  lazy = true,
+  event = { "InsertEnter", "CmdlineEnter" },
+  dependencies = {
+    { 'onsails/lspkind.nvim', }, -- adds vscode-like pictograms to built-in lsp
+    { 'hrsh7th/cmp-nvim-lsp', },
+    { 'hrsh7th/cmp-nvim-lsp-document-symbol', },
+    { 'hrsh7th/cmp-nvim-lsp-signature-help', },
+    { 'hrsh7th/cmp-path', },
+    { 'hrsh7th/cmp-buffer', },
+    { 'hrsh7th/cmp-cmdline', },
+    {
+      'quangnguyen30192/cmp-nvim-ultisnips',
+      dependencies = { 'sirver/ultisnips' },
+    },
+    --
+    { 'hrsh7th/cmp-nvim-lua', },
+  },
+}
 
-local cmp_config = function()
+nvim_cmp_spec.config = function()
   local cmp = require("cmp")
 
   local cmp_opts = {
     snippet = {
       -- REQUIRED - you must specify a snippet engine
       expand = function(args)
-        -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-        -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-        -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
         vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
       end,
     },
@@ -25,7 +40,9 @@ local cmp_config = function()
       ['<C-e>'] = cmp.mapping.abort(),
       -- ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     }),
+
     sources = cmp.config.sources(
+      { { name = 'buffer' }, },
       {
         { name = 'ultisnips' }, -- For ultisnips users.
         -- { name = 'vsnip' }, -- For vsnip users.
@@ -34,29 +51,26 @@ local cmp_config = function()
         -- { name = 'orgmode' },
       },
       { { name = 'nvim_lsp' }, },
-      { { name = 'buffer' }, },
+      { { name = 'nvim_lsp_document_symbol' }, },
+      { { name = 'nvim_lsp_signature_help' }, },
       { { name = 'path' } }
     ),
-  }
 
-  local has_lspkind, lspkind = pcall(require, "lspkind")
-  if has_lspkind then
-    cmp_opts["formatting"] = {
-      format = lspkind.cmp_format({
-        mode = 'symbol',
-      })
+    formatting  = {
+      format = require("lspkind").cmp_format({ mode = 'symbol', })
     }
-  end
+  }
 
   cmp.setup(cmp_opts)
 
   -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-  cmp.setup.cmdline('/', {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = {
-      { name = 'buffer' }
+  cmp.setup.cmdline(
+    { '/', '?' },
+    {
+      mapping = cmp.mapping.preset.cmdline(),
+      sources = { { name = 'buffer' } }
     }
-  })
+  )
 
   -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
   cmp.setup.cmdline(
@@ -64,32 +78,23 @@ local cmp_config = function()
     {
       mapping = cmp.mapping.preset.cmdline(),
       sources = cmp.config.sources(
-        { { name = 'path' } },
-        { { name = 'cmdline' } }
+        { { name = 'path' } }, { { name = 'cmdline' } }
       )
     }
   )
 
-  -- Setup lspconfig.
-  -- local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-  -- -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
-  -- require('lspconfig')['<YOUR_LSP_SERVER>'].setup {
-  --   capabilities = capabilities
-  -- }
+  -- Set configuration for specific filetype.
+  cmp.setup.filetype(
+    'gitcommit',
+    {
+      sources = cmp.config.sources(
+        { { name = 'cmp_git' }, }, -- You can specify the `cmp_git` source if you were installed it.
+        { { name = 'buffer' }, }
+      )
+    }
+  )
 end
 
 return {
-  { 'hrsh7th/cmp-nvim-lsp', dependencies = { 'hrsh7th/nvim-cmp' }},
-  { 'hrsh7th/cmp-path', dependencies = { 'hrsh7th/nvim-cmp' } },
-  { 'hrsh7th/cmp-buffer', dependencies = { 'hrsh7th/nvim-cmp' } },
-  { 'hrsh7th/cmp-cmdline', dependencies = { 'hrsh7th/nvim-cmp' } },
-  { 'hrsh7th/cmp-nvim-lua', dependencies = { 'hrsh7th/nvim-cmp' } },
-  {
-    'quangnguyen30192/cmp-nvim-ultisnips',
-    dependencies = {
-      'hrsh7th/nvim-cmp',
-      'sirver/ultisnips'
-    }
-  },
-  { 'hrsh7th/nvim-cmp', config=cmp_config },
+  nvim_cmp_spec,
 }
