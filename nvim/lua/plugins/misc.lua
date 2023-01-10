@@ -32,12 +32,6 @@ return {
   },
   -- language
   { 'lervag/vimtex', lazy = true, ft = { "tex" } },
-  {
-    'python-mode/python-mode',
-    lazy = true,
-    branch = 'develop',
-    ft = { 'python' },
-  },
   { 'rust-lang/rust.vim', lazy = true, ft = { 'rust' }, },
 
   -- dev
