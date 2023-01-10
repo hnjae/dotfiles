@@ -2,27 +2,29 @@ return {
   {
     'numToStr/Comment.nvim',
     lazy = false,
+    enabled = true,
     config = function()
-      -- local config = {
-      --   toggler = {
-      --     bblock = 'gBc'
-      --   },
-      --
-      --   opleader = {
-      --       ---Block-comment keymap
-      --       block = 'gB',
-      --   },
-      -- }
-      -- vim.cmd([[
-      -- nmap gb ""
-      -- ]])
-      require("Comment").setup()
+      local config = {
+
+      }
+      require("Comment").setup(config)
+    end
+  },
+  {
+    'folke/todo-comments.nvim',
+    lazy = false,
+    enabled = false,
+    dependencies = {
+      "nvim-lua/plenary.nvim"
+    },
+    config = function()
+      require("todo-comments").setup({})
     end
   },
   {
     'ntpeters/vim-better-whitespace',
     lazy = false,
-    cond = function()
+    config = function()
       vim.g.strip_whitespace_on_save = 1
       vim.g.strip_whitelines_at_eof = 1
 

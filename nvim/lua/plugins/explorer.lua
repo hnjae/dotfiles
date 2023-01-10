@@ -147,7 +147,6 @@ return {
 
       vim.keymap.set("n", "[t", "<cmd>TagbarJumpPrev<CR>", { desc = "prev-tag" })
       vim.keymap.set("n", "]t", "<cmd>TagbarJumpNext<CR>", { desc = "next-tag" })
-
       vim.keymap.set("n", _MAPPING_PREFIX["sidebar"] .. "t", "<cmd>TagbarToggle<CR>", { desc = "tagbar" })
 
     end
