@@ -20,9 +20,14 @@ return {
     end
   },
   {
+    'matze/vim-move',
+    lazy = true,
+    event = { "ModeChanged" },
+  },
+  {
     'ntpeters/vim-better-whitespace',
     lazy = false,
-    -- event = { "FileWritePre", "BufWritePre" },
+    event = { "TextChanged", },
     config = function()
       vim.g.strip_whitespace_on_save = 1
       vim.g.strip_whitelines_at_eof = 1

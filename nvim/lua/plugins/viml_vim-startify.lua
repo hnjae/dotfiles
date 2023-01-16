@@ -5,6 +5,7 @@
 return {
   {
     'mhinz/vim-startify',
+    enabled = true,
     lazy = false,
     dependencies = { "folke/which-key.nvim" },
     config = function()

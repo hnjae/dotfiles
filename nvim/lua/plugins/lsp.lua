@@ -1,14 +1,15 @@
 -- lsp
 -- local use_native_lsp = true
 
-local on_fts = {
-  'python', 'lua', "*"
-}
+-- local on_fts = {
+--   'python', 'lua', 'sh',
+-- }
 
 local mason_spec = {
   'williamboman/mason.nvim',
-  lazy = true,
-  ft = on_fts,
+  lazy = false,
+  -- ft = on_fts,
+  event = { 'InsertEnter' },
   dependencies = {
     'hrsh7th/nvim-cmp',
     { 'neovim/nvim-lspconfig' },
@@ -103,13 +104,17 @@ return {
     enabled = true,
     dependencies = {
       'nvim-tree/nvim-web-devicons',
-      'williamboman/mason-lspconfig.nvim',
-    }
+      'williamboman/mason.nvim',
+    },
   },
   {
     -- TODO: chick this out! <2023-01-08, Hyunjae Kim>
     'jose-elias-alvarez/null-ls.nvim',
     lazy = true,
+    dependencies = {
+      'nvim-tree/nvim-web-devicons',
+      'williamboman/mason.nvim',
+    },
   },
 
 

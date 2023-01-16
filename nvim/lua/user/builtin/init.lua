@@ -10,9 +10,14 @@ M.setup = function()
       )
     )
   for _, file in pairs(paths) do
-    -- TODO: use `require` <2023-01-05, Hyunjae Kim>
     vim.cmd('source ' .. file)
   end
+
+  -- for _, setting in pairs(paths) do
+  --   local module_name = "user.mapping.settings." .. setting:match("[^/\\]+$"):sub(1,-5)
+  --   local module = require(module_name)
+  --   module.setup()
+  -- end
 end
 
 return M

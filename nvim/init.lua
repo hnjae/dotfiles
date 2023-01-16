@@ -23,4 +23,5 @@ if status_wk then
   }
 end
 
+vim.keymap.set('n', '<F4>', "<cmd>Lazy<CR>", {})
 -- vim.keymap.set('n', '<leader>w', function() print("blabla") end, {desc="blabla2"})

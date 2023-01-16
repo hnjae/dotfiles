@@ -1,12 +1,13 @@
 -- UI
 
-local lualine_spec =  {
+local lualine_spec = {
   'nvim-lualine/lualine.nvim',
-  dependencies={
-    'kyazdani42/nvim-web-devicons',
+  dependencies = {
+    'nvim-tree/nvim-web-devicons',
   },
-  lazy=false,
-  priority=1,
+  lazy = true,
+  event = { "BufReadPost", "BufNewFile"  },
+  priority = 1,
 }
 
 lualine_spec.config = function()
@@ -41,7 +42,7 @@ lualine_spec.config = function()
     -- color = { fg = '#ffffff', gui = 'bold' },
   }
 
-  local has_lspconfig, _ = pcall(require, "lspconfig")
+  -- local has_lspconfig, _ = pcall(require, "lspconfig")
   local lsp = {
     -- Lsp server name .
     function()
@@ -67,7 +68,7 @@ lualine_spec.config = function()
             modified_msg = client.name
             is_first_client = false
           else
-            modified_msg = modified_msg ..  ", " .. client.name
+            modified_msg = modified_msg .. ", " .. client.name
           end
         end
       end
@@ -80,7 +81,7 @@ lualine_spec.config = function()
     end,
     icon = '',
     cond = function()
-      return has_lspconfig and (next(vim.lsp.get_active_clients()) ~= nil)
+      return (next(vim.lsp.get_active_clients()) ~= nil)
     end
     -- color = { fg = '#ffffff', gui = 'bold' },
   }
@@ -107,8 +108,19 @@ lualine_spec.config = function()
     return "auto"
   end
 
+  local my_ext_tagbar = {
+    sections = {
+      lualine_a = { 'filetype' },
+    },
+    filetypes = { 'tagbar' }
+  }
+  local my_ext_nvimtree = {
+    sections = vim.deepcopy(require('lualine.extensions.nerdtree').sections),
+    filetypes = { 'NvimTree' },
+  }
 
-  require("lualine").setup {
+
+  local opts = {
     options = {
       icons_enabled = true,
       -- theme = 'codedark',
@@ -127,8 +139,8 @@ lualine_spec.config = function()
       -- This feature is only available in neovim 0.7 and higher.
     },
     sections = {
-      lualine_a = { 'mode',  },
-      lualine_b = { 'diagnostics', 'branch', 'diff'  },
+      lualine_a = { 'mode', },
+      lualine_b = { 'diagnostics', 'branch', 'diff' },
       lualine_c = { 'filename' },
       lualine_x = { lsp, encoding_opt, fileformat_opt, "filetype" },
       lualine_y = { 'progress' },
@@ -145,22 +157,34 @@ lualine_spec.config = function()
       lualine_z = {}
     },
     tabline = {
-      -- lualine_a = { "buffers" },
+      lualine_a = { "buffers" },
       -- lualine_b = { 'branch' },
+      -- lualine_c = { 'filename' },
       -- lualine_c = {tabline.tabline_buffers },
       -- lualine_x = {tabline.tabline_tabs},
       -- lualine_y = {},
-      -- lualine_z = { "tabs" }
+      lualine_z = { "tabs" },
     },
-    extensions = {}
+    extensions = {
+      my_ext_tagbar,
+      my_ext_nvimtree,
+      'symbols-outline',
+      'fugitive',
+      'nvim-dap-ui',
+      'toggleterm',
+      'quickfix'
+    },
   }
+  require("lualine").setup(opts)
 end
 
-local tabline_spec =  {
+local tabline_spec = {
   'kdheepak/tabline.nvim',
-  lazy=false,
-  priority=1,
-  config=function()
+  lazy = false,
+  enabled = false,
+  priority = 1,
+  dependencies = { 'nvim-lualine/lualine.nvim', },
+  config = function()
     require("tabline").setup {
       -- Defaults configuration options
       enable = true,
@@ -185,7 +209,7 @@ local tabline_spec =  {
     --   set guioptions-=e " Use showtabline in gui vim
     --   set sessionoptions+=tabpages,globals " store tabpages and globals in session
     -- ]]
-    end
+  end
 }
 
 
@@ -196,15 +220,16 @@ return {
   {
     'akinsho/bufferline.nvim',
     tag = "v3.1.0",
-    dependencies = { 'kyazdani42/nvim-web-devicons' }
+    enabled = false,
+    dependencies = { 'nvim-tree/nvim-web-devicons' }
   },
   -----------------------------------------------------------------------------
   --
   -----------------------------------------------------------------------------
   {
     'rcarriga/nvim-notify',
-    lazy=true,
-    config=function()
+    lazy = true,
+    config = function()
       -- vim.opt.termguicolors = true
       -- replace builtin notify
       -- vim.notify = require("notify")
@@ -216,13 +241,14 @@ return {
   {
     -- shows indent line
     'lukas-reineke/indent-blankline.nvim',
-    lazy=false
+    lazy = true,
+    event = { "BufWritePost", "BufReadPost",  },
   },
   {
     -- m의 mark 가 보이게 해준다.
     'kshenoy/vim-signature',
-    lazy=false,
-    config=function()
+    lazy = false,
+    config = function()
       --[[
         이유는 모르지만 vim-commentary 와 gc 에서 mapping 이 충돌.
         vim-surrounded

@@ -4,16 +4,25 @@ local telescope_spec = {
   'nvim-telescope/telescope.nvim',
   dependencies = {
     'nvim-lua/plenary.nvim',
-    'nvim-telescope/telescope-fzf-native.nvim',
-    'fhill2/telescope-ultisnips.nvim',
     'folke/which-key.nvim',
+    {
+      'nvim-telescope/telescope-fzf-native.nvim',
+      build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release"
+          .. " && cmake --build build --config Release"
+          .. " && cmake --install build --prefix build",
+      cond = vim.fn.executable("cmake") == 1,
+    },
+    {
+      'fhill2/telescope-ultisnips.nvim',
+      dependencies = { 'sirver/ultisnips' },
+    },
   },
   lazy = true,
   keys = {
     -- lazy load on following keys
-    { _MAPPING_PREFIX["fuzzy-finder"], nil, desc = "+telescope"},
-    { _MAPPING_PREFIX["lang"] .. "t", nil, desc = "+telescope-lsp"},
-    { "<F1>", nil, desc = "help-tags"},
+    { _MAPPING_PREFIX["fuzzy-finder"], nil, desc = "+telescope" },
+    { _MAPPING_PREFIX["lang"] .. "t", nil, desc = "+telescope-lsp" },
+    { "<F1>", nil, desc = "help-tags" },
   }
 }
 
@@ -145,24 +154,4 @@ end
 
 return {
   telescope_spec,
-  {
-    'nvim-lua/plenary.nvim',
-    lazy = true,
-    module = true,
-  },
-  {
-    'nvim-telescope/telescope-fzf-native.nvim',
-    build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release"
-        .. " && cmake --build build --config Release"
-        .. " && cmake --install build --prefix build",
-    cond = vim.fn.executable("cmake") == 1,
-    lazy = true,
-    module = true,
-  },
-  {
-    'fhill2/telescope-ultisnips.nvim',
-    dependencies = { 'sirver/ultisnips' },
-    lazy = true,
-    module = true,
-  },
 }
