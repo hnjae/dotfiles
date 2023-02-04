@@ -1,8 +1,6 @@
 ---
-Lua.runtime.version: LuaJIT
 Lua.diagnostics.enable: true
 Lua.diagnostics.globals:
-- vim
 - describe
 - it
 - before_each
@@ -12,5 +10,7 @@ Lua.diagnostics.disable:
 # - unused-vararg
 # - lowercase-global
 # - undefined-field
+Lua.completion.enable: true
 Lua.completion.callSnippet: Both
 Lua.completion.keywordSnippet: Both
+Lua.workspace.checkThirdParty: false
