@@ -1,13 +1,13 @@
 -- UI
 
 local lualine_spec = {
-  'nvim-lualine/lualine.nvim',
+  "nvim-lualine/lualine.nvim",
   dependencies = {
-    'nvim-tree/nvim-web-devicons',
+    "nvim-tree/nvim-web-devicons",
   },
-  lazy = true,
-  event = { "BufReadPost", "BufNewFile"  },
-  priority = 1,
+  lazy = false,
+  -- event = { "BufReadPost", "BufNewFile" },
+  priority = 1, -- default 50
 }
 
 lualine_spec.config = function()
@@ -15,19 +15,19 @@ lualine_spec.config = function()
     "encoding",
     cond = function()
       return vim.opt_local.encoding:get() ~= "utf-8"
-    end
+    end,
   }
+
   local fileformat_opt = {
     "fileformat",
     cond = function()
       return vim.opt_local.fileformat:get() ~= "unix"
-    end
+    end,
   }
 
   local ime = {
     -- ime status
     function()
-
       local fcitx5_status = vim.fn.system("fcitx5-remote")
       if fcitx5_status == 1 then
         return "🇺🇸"
@@ -35,18 +35,18 @@ lualine_spec.config = function()
 
       return fcitx5_status
     end,
-    icon = '',
+    icon = "",
     cond = function()
       return next(vim.lsp.get_active_clients()) ~= nil
-    end
+    end,
     -- color = { fg = '#ffffff', gui = 'bold' },
   }
 
   -- local has_lspconfig, _ = pcall(require, "lspconfig")
-  local lsp = {
+  local lsp_opt = {
     -- Lsp server name .
     function()
-      local msg = 'No Active Lsp'
+      local msg = "No Active Lsp"
       -- local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
       local buf_ft = vim.opt_local.filetype:get()
       local clients = vim.lsp.get_active_clients()
@@ -60,16 +60,30 @@ lualine_spec.config = function()
       local is_first_client = true
       for _, client in ipairs(clients) do
         local filetypes = client.config.filetypes
-        if (
-            (filetypes and vim.fn.index(filetypes, buf_ft) ~= -1)
-                or (buf_ft == "java" and client.name == "jdt.ls")
-            ) then
-          if is_first_client then
-            modified_msg = client.name
-            is_first_client = false
-          else
-            modified_msg = modified_msg .. ", " .. client.name
-          end
+        -- if (
+        --     (filetypes and vim.fn.index(filetypes, buf_ft) ~= -1)
+        --         or (buf_ft == "java" and client.name == "jdt.ls")
+        --     ) then
+        --   if is_first_client then
+        --     modified_msg = client.name
+        --     is_first_client = false
+        --   else
+        --     modified_msg = modified_msg .. ", " .. client.name
+        --   end
+        -- end
+
+        local client_name = nil
+        if client.name:sub(-16, -1) == "_language_server" then
+          client_name = client.name:sub(1, -17) .. "-ls"
+        else
+          client_name = client.name
+        end
+
+        if is_first_client then
+          modified_msg = client_name
+          is_first_client = false
+        else
+          modified_msg = modified_msg .. ", " .. client_name
         end
       end
 
@@ -79,13 +93,24 @@ lualine_spec.config = function()
 
       return msg
     end,
-    icon = '',
+    icon = "",
     cond = function()
       return (next(vim.lsp.get_active_clients()) ~= nil)
-    end
+    end,
     -- color = { fg = '#ffffff', gui = 'bold' },
   }
 
+  local spell_opt = {
+    function()
+      -- for _, lang in ipairs(vim.opt_local.spelllang:get()) do
+      -- end
+      return "on"
+    end,
+    icon = "暈",
+    cond = function()
+      return vim.opt_local.spell:get()
+    end,
+  }
 
   -- local theme = {
   --   normal = {
@@ -108,17 +133,100 @@ lualine_spec.config = function()
     return "auto"
   end
 
-  local my_ext_tagbar = {
-    sections = {
-      lualine_a = { 'filetype' },
+  local opt_extensions = {
+    {
+      sections = {
+        lualine_a = { {
+          function()
+            return " "
+          end,
+        } },
+        lualine_c = { "filename" },
+        lualine_x = { "filetype" },
+        lualine_y = { "progress" },
+        lualine_z = { "location" },
+      },
+      inactive_sections = {
+        lualine_c = { "filename" },
+        lualine_x = { "location" },
+      },
+      filetypes = { "help" },
     },
-    filetypes = { 'tagbar' }
+    {
+      sections = {
+        lualine_a = { {
+          function()
+            return " "
+          end,
+        } },
+        lualine_c = { "filetype" },
+        lualine_y = { "progress" },
+        lualine_z = { "location" },
+      },
+      inactive_sections = {
+        lualine_c = { "filetype" },
+        lualine_x = { "location" },
+      },
+      filetypes = {
+        "tagbar",
+        "dbui",
+        "dbout",
+        "startify",
+        "toggleterm",
+        -- symbols-outline
+        "Outline",
+      },
+    },
+    {
+      sections = {
+        lualine_a = { {
+          function()
+            return " "
+          end,
+        } },
+        lualine_c = {
+          {
+            function()
+              return vim.fn.fnamemodify(vim.fn.getcwd(), ":~")
+            end,
+          },
+        },
+      },
+      inactive_sections = {
+        lualine_c = { "filetype" },
+      },
+      filetypes = { "NvimTree" },
+    },
+    {
+      sections = {
+        lualine_a = { "mode" },
+        lualine_c = {
+          {
+            function()
+              return " " .. vim.fn.FugitiveHead()
+            end,
+          },
+        },
+        lualine_x = { "filetype" },
+        lualine_y = { "progress" },
+        lualine_z = { "location" },
+      },
+      inactive_sections = {
+        -- lualine_c = { 'filetype' },
+        lualine_c = {
+          {
+            function()
+              return " " .. vim.fn.FugitiveHead()
+            end,
+          },
+        },
+        lualine_x = { "location" },
+      },
+      filetypes = { "fugitive" },
+    },
+    "quickfix",
+    -- 'nvim-dap-ui',
   }
-  local my_ext_nvimtree = {
-    sections = vim.deepcopy(require('lualine.extensions.nerdtree').sections),
-    filetypes = { 'NvimTree' },
-  }
-
 
   local opts = {
     options = {
@@ -127,9 +235,9 @@ lualine_spec.config = function()
       theme = get_theme(),
       -- theme = 'vscode',
       -- component_separators = { left = '', right = '' },
-      component_separators = { left = '|', right = '|' },
+      component_separators = { left = "|", right = "|" },
       -- component_separators = { left = '', right = '' },
-      section_separators = { left = '', right = '' },
+      section_separators = { left = "", right = "" },
       disabled_filetypes = {}, -- Filetypes to disable lualine for.
       always_divide_middle = true, -- When set to true, left sections i.e. 'a','b' and 'c'
       -- can't take over the entire statusline even
@@ -139,22 +247,22 @@ lualine_spec.config = function()
       -- This feature is only available in neovim 0.7 and higher.
     },
     sections = {
-      lualine_a = { 'mode', },
-      lualine_b = { 'diagnostics', 'branch', 'diff' },
-      lualine_c = { 'filename' },
-      lualine_x = { lsp, encoding_opt, fileformat_opt, "filetype" },
-      lualine_y = { 'progress' },
-      lualine_z = { 'location' }
+      lualine_a = { "mode" },
+      lualine_b = { "diagnostics", "branch", "diff" },
+      lualine_c = { "filename" },
+      lualine_x = { spell_opt, lsp_opt, encoding_opt, fileformat_opt, "filetype" },
+      lualine_y = { "progress" },
+      lualine_z = { "location" },
       -- lualine_y = {},
       -- lualine_z = {  'progress', 'location' }
     },
     inactive_sections = {
       lualine_a = {},
       lualine_b = {},
-      lualine_c = { 'filename' },
-      lualine_x = { 'location' },
+      lualine_c = { "filename" },
+      lualine_x = { "location" },
       lualine_y = {},
-      lualine_z = {}
+      lualine_z = {},
     },
     tabline = {
       lualine_a = { "buffers" },
@@ -165,27 +273,19 @@ lualine_spec.config = function()
       -- lualine_y = {},
       lualine_z = { "tabs" },
     },
-    extensions = {
-      my_ext_tagbar,
-      my_ext_nvimtree,
-      'symbols-outline',
-      'fugitive',
-      'nvim-dap-ui',
-      'toggleterm',
-      'quickfix'
-    },
+    extensions = opt_extensions,
   }
   require("lualine").setup(opts)
 end
 
 local tabline_spec = {
-  'kdheepak/tabline.nvim',
+  "kdheepak/tabline.nvim",
   lazy = false,
   enabled = false,
   priority = 1,
-  dependencies = { 'nvim-lualine/lualine.nvim', },
+  dependencies = { "nvim-lualine/lualine.nvim" },
   config = function()
-    require("tabline").setup {
+    require("tabline").setup({
       -- Defaults configuration options
       enable = true,
       options = {
@@ -203,50 +303,48 @@ local tabline_spec = {
         -- modified_icon = "+ ", -- change the default modified icon
         -- modified_italic = false, -- set to true by default; this determines whether the filename turns italic if modified
         -- show_tabs_only = true, -- this shows only tabs instead of tabs + buffers
-      }
-    }
+      },
+    })
     -- vim.cmd[[
     --   set guioptions-=e " Use showtabline in gui vim
     --   set sessionoptions+=tabpages,globals " store tabpages and globals in session
     -- ]]
-  end
+  end,
 }
-
-
 
 return {
   lualine_spec,
   tabline_spec,
   {
-    'akinsho/bufferline.nvim',
+    "akinsho/bufferline.nvim",
     tag = "v3.1.0",
     enabled = false,
-    dependencies = { 'nvim-tree/nvim-web-devicons' }
+    dependencies = { "nvim-tree/nvim-web-devicons" },
   },
   -----------------------------------------------------------------------------
   --
   -----------------------------------------------------------------------------
   {
-    'rcarriga/nvim-notify',
+    "rcarriga/nvim-notify",
     lazy = true,
     config = function()
       -- vim.opt.termguicolors = true
       -- replace builtin notify
       -- vim.notify = require("notify")
-    end
+    end,
   },
   -----------------------------------------------------------------------------
   -- shows things
   -----------------------------------------------------------------------------
   {
     -- shows indent line
-    'lukas-reineke/indent-blankline.nvim',
+    "lukas-reineke/indent-blankline.nvim",
     lazy = true,
-    event = { "BufWritePost", "BufReadPost",  },
+    event = { "BufWritePost", "BufReadPost" },
   },
   {
     -- m의 mark 가 보이게 해준다.
-    'kshenoy/vim-signature',
+    "kshenoy/vim-signature",
     lazy = false,
     config = function()
       --[[
@@ -259,33 +357,33 @@ return {
         -- ['ToggleMarkAtLine']  = "m.",
         -- ['PurgeMarksAtLine']  = "m-",
         -- ['PurgeMarks']        = "m<Space>",
-        ['Leader']            = "m",
-        ['PlaceNextMark']     = "",
-        ['ToggleMarkAtLine']  = "",
-        ['PurgeMarksAtLine']  = "",
-        ['PurgeMarks']        = "",
+        ["Leader"] = "m",
+        ["PlaceNextMark"] = "",
+        ["ToggleMarkAtLine"] = "",
+        ["PurgeMarksAtLine"] = "",
+        ["PurgeMarks"] = "",
         --
-        ['PurgeMarkers']      = "",
-        ['ListBufferMarks']   = "",
-        ['ListBufferMarkers'] = "",
+        ["PurgeMarkers"] = "",
+        ["ListBufferMarks"] = "",
+        ["ListBufferMarkers"] = "",
         ------
-        ['DeleteMark']        = "",
+        ["DeleteMark"] = "",
         ------
         -- ['GotoNextLineAlpha']  =  "']",
         -- ['GotoPrevLineAlpha']  =  "'[",
-        ['GotoNextLineAlpha'] = "", -- 기본 맵핑이 있음
-        ['GotoPrevLineAlpha'] = "", -- 기본 맵핑이 있음
-        ['GotoNextSpotAlpha'] = "", -- 기본 맵핑이 있음
-        ['GotoPrevSpotAlpha'] = "", -- 기본 맵핑이 있음
+        ["GotoNextLineAlpha"] = "", -- 기본 맵핑이 있음
+        ["GotoPrevLineAlpha"] = "", -- 기본 맵핑이 있음
+        ["GotoNextSpotAlpha"] = "", -- 기본 맵핑이 있음
+        ["GotoPrevSpotAlpha"] = "", -- 기본 맵핑이 있음
         ------
-        ['GotoNextLineByPos'] = "",
-        ['GotoPrevLineByPos'] = "",
-        ['GotoNextSpotByPos'] = "",
-        ['GotoPrevSpotByPos'] = "",
-        ['GotoNextMarker']    = "",
-        ['GotoPrevMarker']    = "",
-        ['GotoNextMarkerAny'] = "",
-        ['GotoPrevMarkerAny'] = "",
+        ["GotoNextLineByPos"] = "",
+        ["GotoPrevLineByPos"] = "",
+        ["GotoNextSpotByPos"] = "",
+        ["GotoPrevSpotByPos"] = "",
+        ["GotoNextMarker"] = "",
+        ["GotoPrevMarker"] = "",
+        ["GotoNextMarkerAny"] = "",
+        ["GotoPrevMarkerAny"] = "",
       }
 
       local status_wk, wk = pcall(require, "which-key")
@@ -315,6 +413,6 @@ return {
           -- ["]="] = { "signature-marker-any" },
         })
       end
-    end
+    end,
   },
 }

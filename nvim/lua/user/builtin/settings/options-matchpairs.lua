@@ -1,20 +1,20 @@
 -- full width char mapping
-vim.opt.matchpairs:append "（:）"
-vim.opt.matchpairs:append "「:」"
-vim.opt.matchpairs:append "｛:｝"
-vim.opt.matchpairs:append "＜:＞"
-vim.opt.matchpairs:append "【:】"
-vim.opt.matchpairs:append "『:』"
-vim.opt.matchpairs:append "［:］"
-vim.opt.matchpairs:append "《:》"
-vim.opt.matchpairs:append "〔:〕"
+vim.opt.matchpairs:append("（:）")
+vim.opt.matchpairs:append("「:」")
+vim.opt.matchpairs:append("｛:｝")
+vim.opt.matchpairs:append("＜:＞")
+vim.opt.matchpairs:append("【:】")
+vim.opt.matchpairs:append("『:』")
+vim.opt.matchpairs:append("［:］")
+vim.opt.matchpairs:append("《:》")
+vim.opt.matchpairs:append("〔:〕")
 
 -- half width char mapping
-vim.opt.matchpairs:append "‘:’"
-vim.opt.matchpairs:append "“:”"
-vim.opt.matchpairs:append "«:»"
-vim.opt.matchpairs:append "‹:›"
-vim.opt.matchpairs:append "｢:｣"
-vim.opt.matchpairs:append "[:]"
-vim.opt.matchpairs:append "<:>"
-vim.opt.matchpairs:append "`:`"
+vim.opt.matchpairs:append("‘:’")
+vim.opt.matchpairs:append("“:”")
+vim.opt.matchpairs:append("«:»")
+vim.opt.matchpairs:append("‹:›")
+vim.opt.matchpairs:append("｢:｣")
+vim.opt.matchpairs:append("[:]")
+vim.opt.matchpairs:append("<:>")
+vim.opt.matchpairs:append("`:`")

@@ -1,64 +1,136 @@
 -- lsp
--- local use_native_lsp = true
 
--- local on_fts = {
---   'python', 'lua', 'sh',
--- }
-
-local mason_spec = {
-  'williamboman/mason.nvim',
+local null_ls_spec = {
+  "jose-elias-alvarez/null-ls.nvim",
   lazy = false,
-  -- ft = on_fts,
-  event = { 'InsertEnter' },
+  enabled = true,
   dependencies = {
-    'hrsh7th/nvim-cmp',
-    { 'neovim/nvim-lspconfig' },
-    {
-      'tamago324/nlsp-settings.nvim',
-      dependencies = { 'neovim/nvim-lspconfig', 'rcarriga/nvim-notify' }
-    },
-    {
-      'williamboman/mason-lspconfig.nvim',
-      dependencies = { 'neovim/nvim-lspconfig' },
-    },
+    "nvim-lua/plenary.nvim",
+    "williamboman/mason.nvim",
+  },
+  -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/CONFIG.md
+  -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md
+  config = function()
+    local null_ls = require("null-ls")
+    null_ls.setup({
+      diagnostics_format = "#{m} (#{s})",
+      -- diagnostics_format = "[#{c}] #{m} (#{s})",
+      sources = {
+        -- null_ls.builtins.completion.spell,
+        -- null_ls.builtins.completion.tags,
+        -- null_ls.builtins.diagnostics.cspell,
+        -- null_ls.builtins.diagnostics.eslint,
+        -- null_ls.builtins.code_actions.cspell,
+
+        -- kotlin
+        null_ls.builtins.formatting.ktlint,
+        null_ls.builtins.diagnostics.ktlint,
+
+        -- "sh"
+        null_ls.builtins.formatting.shfmt,
+        null_ls.builtins.hover.printenv,
+        null_ls.builtins.code_actions.shellcheck,
+        null_ls.builtins.diagnostics.shellcheck,
+        null_ls.builtins.diagnostics.dotenv_linter,
+        -- null_ls.builtins.formatting.shellharden,
+
+        -- zsh
+        null_ls.builtins.diagnostics.zsh,
+        null_ls.builtins.formatting.beautysh.with({ filetypes = { "zsh" } }),
+
+        -- sqlfluff
+        null_ls.builtins.diagnostics.sqlfluff,
+        null_ls.builtins.formatting.sqlfluff,
+
+        -- lua
+        null_ls.builtins.diagnostics.selene.with({
+          -- condition = function(utils)
+          --   return utils.root_has_file({ "selene.toml" })
+          -- end,
+        }),
+        null_ls.builtins.formatting.stylua,
+
+        -- python
+        null_ls.builtins.formatting.ruff, -- sort imports
+        null_ls.builtins.formatting.black, -- format code
+        null_ls.builtins.diagnostics.mypy.with({
+          diagnostics_format = "[#{s}] #{m}",
+        }),
+        null_ls.builtins.diagnostics.ruff.with({
+          diagnostics_postprocess = function(diagnostic)
+            diagnostic.message = "["
+              .. diagnostic.code
+              .. "] "
+              .. diagnostic.message
+              .. " ("
+              .. diagnostic.source
+              .. ")"
+            local severity = diagnostic.severity
+            if diagnostic.code == "E902" or diagnostic.code == "E999" then
+              severity = vim.diagnostic.severity.ERROR
+            else
+              severity = vim.diagnostic.severity.WARN
+              -- -- TODO: this is dirty <2023-01-27, Hyunjae Kim>
+              -- local code_1 = diagnostic.code:sub(1, 1)
+              -- if code_1 == "I" or code_1 == "Q" or diagnostic.code:sub(1, 3) == "COM" then
+              --   severity = vim.diagnostic.severity.HINT
+              -- else
+              -- end
+            end
+            diagnostic.severity = severity
+          end,
+        }),
+      },
+      root_dir = require("null-ls.utils").root_pattern(
+        ".neoconf.json",
+        ".editorconfig",
+        "pyproject.toml",
+        "vim.toml",
+        "selene.toml",
+        ".nlsp-settings",
+        ".git"
+      ),
+    })
+  end,
+}
+
+local lspconfig_spec = {
+  "neovim/nvim-lspconfig",
+  dependencies = {
+    "folke/neodev.nvim",
+    "tamago324/nlsp-settings.nvim",
+    "williamboman/mason-lspconfig",
     {
       -- shows popup window about parameter/func
       -- NOTE: activated when on_attach() happens / or call .setup() in init.lua
-      'ray-x/lsp_signature.nvim',
-      -- config = function() require('lsp_signature').setup() end,
+      "ray-x/lsp_signature.nvim",
+      lazy = true,
+      module = true,
     },
-    { 'folke/neodev.nvim', },
-  }
-
+  },
 }
-
-mason_spec.config = function()
-  require("mason").setup()
-  require("mason-lspconfig").setup()
-
-  local status_nlspsettings, nlspsettings = pcall(require, "nlspsettings")
-  if status_nlspsettings then
-    nlspsettings.setup({
-      config_home = vim.fn.stdpath('config') .. '/nlsp-settings',
-      local_settings_dir = ".nlsp-settings",
-      local_settings_root_markers_fallback = { '.git' },
-      append_default_schemas = true,
-      loader = 'yaml'
-    })
-  end
-
-  local status_neodev, neodev = pcall(require, "neodev")
-  if status_neodev then
-    neodev.setup()
-  end
-
-  local status_cmp_nvim_lsp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+lspconfig_spec.config = function()
+  local lspconfig = require("lspconfig")
 
   -------------------------------------
   -- on_attach
   -------------------------------------
   local on_attach = function(client, bufnr)
-    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+    vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+
+    vim.keymap.set("n", "==", function()
+      vim.lsp.buf.format({ async = true })
+    end, { desc = "lsp-format", buffer = bufnr })
+
+    vim.keymap.set("v", "==", function()
+      vim.lsp.buf.format({
+        async = true,
+        range = {
+          ["start"] = vim.api.nvim_buf_get_mark(0, "<"),
+          ["end"] = vim.api.nvim_buf_get_mark(0, ">"),
+        },
+      })
+    end, { desc = "lsp-buf-format", buffer = bufnr })
 
     require("lsp_signature").on_attach()
   end
@@ -68,137 +140,93 @@ mason_spec.config = function()
   -------------------------------------
   local global_capabilities = vim.lsp.protocol.make_client_capabilities()
   global_capabilities.textDocument.completion.completionItem.snippetSupport = true
+  local status_cmp_nvim_lsp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
   if status_cmp_nvim_lsp then
     -- capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
-    global_capabilities = vim.tbl_extend(
-      'keep', global_capabilities or {}, cmp_nvim_lsp.default_capabilities()
-    )
+    global_capabilities = vim.tbl_extend("keep", global_capabilities or {}, cmp_nvim_lsp.default_capabilities())
   end
 
   -------------------------------------
   --
   -------------------------------------
-  local lspconfig = require("lspconfig")
   lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_config, {
     capabilities = global_capabilities,
   })
 
-  -- setup each server
   for _, server in ipairs(require("mason-lspconfig").get_installed_servers()) do
     lspconfig[server].setup({
-      on_attach = on_attach
+      on_attach = on_attach,
+      -- https://www.reddit.com/r/neovim/comments/syjqdp/lua_lsp_unpack_is_shown_as_deprecated/
+      root_dir = lspconfig.util.root_pattern(
+        ".neoconf.json",
+        ".editorconfig",
+        "pyproject.toml",
+        "vim.toml",
+        "selene.toml",
+        ".nlsp-settings",
+        ".git"
+      ),
     })
   end
 end
 
 return {
-  -----------------------------------------------------------------------------
-  -- native lsp
-  -----------------------------------------------------------------------------
-  mason_spec,
+  lspconfig_spec,
+  null_ls_spec,
+  {
+    "folke/neodev.nvim",
+    lazy = true,
+    opts = {},
+  },
+  {
+    "tamago324/nlsp-settings.nvim",
+    dependencies = {
+      "rcarriga/nvim-notify",
+      "folke/neodev.nvim",
+    },
+    config = function()
+      local nlspsettings = require("nlspsettings")
+      nlspsettings.setup({
+        config_home = vim.fn.stdpath("config") .. "/nlsp-settings",
+        local_settings_dir = ".nlsp-settings",
+        local_settings_root_markers_fallback = { ".git" },
+        append_default_schemas = false,
+        loader = "yaml",
+      })
+      -- use LspSettings instead
+      vim.api.nvim_del_user_command("NlspConfig")
+      vim.api.nvim_del_user_command("NlspBufConfig")
+      vim.api.nvim_del_user_command("NlspLocalConfig")
+      vim.api.nvim_del_user_command("NlspLocalBufConfig")
+      vim.api.nvim_del_user_command("NlspUpdateSettings")
+    end,
+  },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    lazy = true,
+    dependencies = { "williamboman/mason.nvim" },
+    opts = {
+      ensure_installed = {
+        "rust_analyzer",
+      },
+    },
+  },
+  {
+    "williamboman/mason.nvim",
+    lazy = true,
+    opts = {},
+  },
+  --
   {
     -- A pretty diagnostics, references, telescope results, quickfix and location list to help you solve all the trouble your code is causing.
-    'folke/trouble.nvim',
+    "folke/trouble.nvim",
     lazy = true,
     -- event = {},
-    enabled = true,
-    dependencies = {
-      'nvim-tree/nvim-web-devicons',
-      'williamboman/mason.nvim',
-    },
-  },
-  {
-    -- TODO: chick this out! <2023-01-08, Hyunjae Kim>
-    'jose-elias-alvarez/null-ls.nvim',
-    lazy = true,
-    dependencies = {
-      'nvim-tree/nvim-web-devicons',
-      'williamboman/mason.nvim',
-    },
-  },
-
-
-  -- https://github.com/sbdchd/neoformat
-  -- https://github.com/mhartington/formatter.nvim
-  -- https://github.com/folke/lsp-colors.nvim
-
-  ------------------------------------------------------------------------------
-  -- dap
-  ------------------------------------------------------------------------------
-  {
-    'mfussenegger/nvim-dap',
-    lazy = true,
-    dependencies = {
-      'folke/which-key.nvim'
-    },
-    config = function()
-      local dap_prefix = "_LANG_PREFIX" .. "d"
-      local dap = require("dap")
-      local wk = require("which-key")
-
-      local mapping = {
-        name = "+dap",
-        c = { dap.continue, "continue" },
-        s = { name = "+step" },
-        sv = { dap.step_over, "step-over" },
-        si = { dap.step_into, "step-into" },
-        so = { dap.step_into, "step-out" },
-        b = { dap.toggle_breakpoint, "toggle-breakpoint" },
-        -- B = { dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')), "set-breakpoint-cond" },
-        -- v = { dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')), "set-breakpoint-log" },
-        r = { dap.repl.open, "repl-open" },
-        l = { dap.run_last, "run-last" },
-      }
-      wk.register(
-        mapping,
-        { noremap = false, mode = "n", prefix = _MAPPING_PREFIX["lang"] .. "d" }
-      )
-    end
-  },
-  {
-    'rcarriga/nvim-dap-ui',
-    lazy = true,
-    config = function()
-      require("dapui").setup()
-    end
-  },
-
-
-  {
-    'puremourning/vimspector',
-    lazy = true,
     enabled = false,
-    cond = vim.fn.has('python3'),
     dependencies = {
-      'folke/which-key.nvim'
+      "nvim-tree/nvim-web-devicons",
+      "williamboman/mason.nvim",
     },
-    config = function()
-      vim.g.vimspector_install_gadgets = {
-        "depugby"
-      }
-      local has_wk, wk = pcall(require, "which-key")
-
-      if has_wk then
-        local mapping = {
-          ["name"] = "+vimspector",
-          c = { "<Plug>VimspectorContinue", "continue" },
-          s = { "<Plug>VimspectorStop", "stop" },
-          R = { "<Plug>VimspectorRestart", "restart" },
-          p = { "<Plug>VimspectorPause", "pause" },
-          --
-          b = { "<Plug>VimspectorToggleBreakpoint", "toggle-line-breakpoint" },
-          B = { "<Plug>VimspectorToggleConditionalBreakpoint", "toggle-conditional-line-breakpoint" },
-          f = { "<Plug>VimspectorAddFunctionBreakpoint", "add-function-breakpoint" },
-          --
-          v = { "<Plug>VimspectorStepOver", "step-over" },
-          i = { "<Plug>VimspectorStepInto", "step-into" },
-          o = { "<Plug>VimspectorStepOut", "step-out" },
-          --
-          r = { "<Plug>VimspectorRunToCursor", "run-to-cursor" },
-        }
-        wk.register(mapping, { prefix = _MAPPING_PREFIX["lang"] .. "d" })
-      end
-    end
   },
-
+  -- https://github.com/folke/lsp-colors.nvim
 }

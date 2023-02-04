@@ -2,13 +2,79 @@
 -- language specific
 ------------------------------------------------------------------------------
 
+local vim_dabbod_ui_spec = {
+  "kristijanhusak/vim-dadbod-ui",
+  lazy = true,
+  dependencies = {
+    { "tpope/vim-dadbod" },
+    { "kristijanhusak/vim-dadbod-completion" },
+  },
+  cmd = {
+    "DBUI",
+    "DBUIToggle",
+  },
+  config = function()
+    vim.g.db_ui_show_database_icon = 1
+    vim.g.db_ui_use_nerd_fonts = 1
+    -- TODO: manual mapping <2023-01-16, Hyunjae Kim>
+    -- o / <CR> - Open/Toggle Drawer options (<Plug>(DBUI_SelectLine))
+    -- S - Open in vertical split (<Plug>(DBUI_SelectLineVsplit))
+    -- d - Delete buffer or saved sql (<Plug>(DBUI_DeleteLine))
+    -- R - Redraw (<Plug>(DBUI_Redraw))
+    -- A - Add connection (<Plug>(DBUI_AddConnection))
+    -- H - Toggle database details (<Plug>(DBUI_ToggleDetails))
+
+    -- For queries, filetype is automatically set to sql. Also, two mappings is added for the sql filetype:
+    -- <Leader>W - Permanently save query for later use (<Plug>(DBUI_SaveQuery))
+    -- <Leader>E - Edit bind parameters (<Plug>(DBUI_EditBindParameters))
+
+    -- vim.api.nvim_create_autocmd(
+    --   { 'FileType' },
+    --   {
+    --     pattern = { 'dbui' },
+    --     callback = function()
+    --       vim.keymap.set(
+    --         'n', 'o', "<Plug>(DBUI_SelectLine)", { buffer = true, desc = "dbui-SelectLine" }
+    --       )
+    --       vim.keymap.set(
+    --         'n', '<CR>', "<Plug>(DBUI_SelectLine)", { buffer = true, desc = "dbui-SelectLine" }
+    --       )
+    --       vim.keymap.set(
+    --         'n', 'R', "<Plug>(DBUI_Redraw)", { buffer = true, desc = "dbui-Redraw" }
+    --       )
+    --     end
+    --   }
+    -- )
+    -- vim.api.nvim_create_autocmd(
+    --   { 'FileType' },
+    --   {
+    --     pattern = { 'mysql' },
+    --     callback = function()
+    --       vim.keymap.set(
+    --         'n', 'o', "<Plug>(DBUI_ExecuteQuery)", { buffer = true, desc = "dbui-SelectLine" }
+    --       )
+    --     end
+    --   }
+    -- )
+
+    vim.g.db_ui_disable_mappings = 0
+  end,
+}
+
 return {
+  -- add syntax/indent support for kdl
+  { 'imsnif/kdl.vim', lazy = false },
+  vim_dabbod_ui_spec,
   {
-    'habamax/vim-asciidoctor',
-    lazy = false,
+    "habamax/vim-asciidoctor",
+    lazy = true,
     ft = { "asciidoc", "asciidoctor" },
     keys = {
-      { _MAPPING_PREFIX["lang"] .. "p", "<cmd>AsciidoctorOpenRAW<CR>", desc = "preview"}
+      {
+        _MAPPING_PREFIX["lang"] .. "p",
+        "<cmd>AsciidoctorOpenRAW<CR>",
+        desc = "preview",
+      },
     },
     config = function()
       -- NOTE: handlr can not handle asciidoc file.
@@ -17,28 +83,35 @@ return {
       if browser == nil then
         browser = "firefox"
       end
+
       vim.g.asciidoctor_opener = "!" .. browser
 
       vim.g.asciidoctor_folding = 1
       vim.g.asciidoctor_syntax_indented = 1
       vim.g.asciidoctor_fenced_languages = {
-        'html', 'python', 'java', 'sh', 'ruby', "dockerfile", 'sql'
+        "html",
+        "python",
+        "java",
+        "sh",
+        "ruby",
+        "dockerfile",
+        "sql",
       }
       vim.g.asciidoctor_syntax_conceal = 1
-    end
+    end,
   },
   {
-    'lervag/vimtex',
+    "lervag/vimtex",
     lazy = true,
     ft = { "tex" },
     dependencies = {
-      'folke/which-key.nvim'
+      "folke/which-key.nvim",
     },
     config = function()
       -- TODO: vimtex integration not finished <2022-04-22, Hyunjae Kim> --
 
       -- neovim-remote needed
-      vim.g.vimtex_compiler_progname = 'nvr'
+      vim.g.vimtex_compiler_progname = "nvr"
       -- to use synctex in neovim / neovim-remote(pip3) should be installed
       -- Synctex synchronize the position of the editor and viewer
       -- let g:vimtex_quickfix_mode=0
@@ -55,10 +128,10 @@ return {
 
       -- Plugin : VIMTEX Settings
       vim.g.tex_flavor = "latex"
-      if vim.fn.has('mac') == 1 then
-        vim.g.vimtex_view_method = 'skim'
+      if vim.fn.has("mac") == 1 then
+        vim.g.vimtex_view_method = "skim"
       else
-        vim.g.vimtex_view_method = 'zathura'
+        vim.g.vimtex_view_method = "zathura"
       end
 
       -- SYNTAX HIGHLIGHTING
@@ -67,7 +140,7 @@ return {
 
       -- Folding
       vim.g.vimtex_fold_enabled = 1
-      vim.cmd([[set foldlevel 6]])
+      -- vim.cmd([[set foldlevel 6]])
       -- vim.opt_local.foldlevel = 6 -- using vimtex's foldmethod
 
       -- COMPLETE FILEs
@@ -84,37 +157,35 @@ return {
 
       local status_wk, wk = pcall(require, "which-key")
       if status_wk then
-        wk.register(
-          {
-            ["i"] = { "<plug>(vimtex-info)", "info" },
-            ["I"] = { "<plug>(vimtex-info-full)", "info-full" },
-            ["t"] = { "<plug>(vimtex-toc-toggle)", "toc-toggle" },
-            ["q"] = { "<plug>(vimtex-log)", "log" },
-            ["v"] = { "<plug>(vimtex-view)", "view" },
-            ["r"] = { "<plug>(vimtex-reverse-search)", "reverse-search" },
+        wk.register({
+          ["i"] = { "<plug>(vimtex-info)", "info" },
+          ["I"] = { "<plug>(vimtex-info-full)", "info-full" },
+          ["t"] = { "<plug>(vimtex-toc-toggle)", "toc-toggle" },
+          ["q"] = { "<plug>(vimtex-log)", "log" },
+          ["v"] = { "<plug>(vimtex-view)", "view" },
+          ["r"] = { "<plug>(vimtex-reverse-search)", "reverse-search" },
 
-            ["s"] = { "<plug>(vimtex-compile)", "compile" },
-            -- ["sS"] = { "<plug>(vimtex-compile-selected)", "compile-selected", mode = "x", buffer = 0 },
-            -- ["sS"] = { "<plug>(vimtex-compile-selected)", "compile-selected", mode = "x", buffer = 0 },
+          ["s"] = { "<plug>(vimtex-compile)", "compile" },
+          -- ["sS"] = { "<plug>(vimtex-compile-selected)", "compile-selected", mode = "x", buffer = 0 },
+          -- ["sS"] = { "<plug>(vimtex-compile-selected)", "compile-selected", mode = "x", buffer = 0 },
 
-            ["w"] = { ":<C-u>VimtexCountWords", "count-words" },
-            ["l"] = { ":<C-u>VimtexCountLetters", "count-letters" },
-          },
-          { buffer = 0, prefix = _MAPPING_PREFIX["lang"] }
-        )
+          ["w"] = { ":<C-u>VimtexCountWords", "count-words" },
+          ["l"] = { ":<C-u>VimtexCountLetters", "count-letters" },
+        }, { buffer = 0, prefix = _MAPPING_PREFIX["lang"] })
       end
-    end
+    end,
   },
-  { 'rust-lang/rust.vim', lazy = true, ft = { 'rust' }, },
+  { "rust-lang/rust.vim", lazy = true, ft = { "rust" } },
+  { "udalov/kotlin-vim", lazy = false, ft = { "kotlin" } }, -- syntax won't work if lazy=true
   {
-    'python-mode/python-mode',
+    "python-mode/python-mode",
     lazy = true,
-    branch = 'develop',
-    cond = vim.fn.has('python3'),
+    branch = "develop",
+    cond = vim.fn.has("python3"),
     dependencies = {
-      'folke/which-key.nvim'
+      "folke/which-key.nvim",
     },
-    ft = { 'python' },
+    ft = { "python" },
     config = function()
       local wk = require("which-key")
 
@@ -163,10 +234,10 @@ return {
           ["iC"] = "inner=class",
           ["aM"] = "function/method",
           ["iM"] = "inner-function/method",
-          ["V"]  = "logical-line",
+          ["V"] = "logical-line",
           -- 다음은 help에 없는데 which-key에 뜨는 값
-          ["C"]  = "class",
-          ["M"]  = "function/method",
+          ["C"] = "class",
+          ["M"] = "function/method",
         }
         wk.register(omap, { mode = "o", buffer = 0, silent = true })
         local xmap = {
@@ -179,7 +250,7 @@ return {
 
       -- coc 도 비슷한 기능 있는듯.
       vim.g.pymode_doc = 1
-      vim.g.pymode_doc_bind = _MAPPING_PREFIX["lang"] .. 'ph'
+      vim.g.pymode_doc_bind = _MAPPING_PREFIX["lang"] .. "ph"
 
       ------------------------------------------------------------------------------
       -- 2.6 Support Virtualenv
@@ -193,13 +264,13 @@ return {
       -- 2.7 Run code
       ------------------------------------------------------------------------------
       vim.g.pymode_run = 1
-      vim.g.pymode_run_bind = _MAPPING_PREFIX["lang"] .. 'pc'
+      vim.g.pymode_run_bind = _MAPPING_PREFIX["lang"] .. "pc"
 
       ------------------------------------------------------------------------------
       -- 2.8 Breakpoints
       ------------------------------------------------------------------------------
       vim.g.pymode_breakpoint = 0
-      vim.g.pymode_breakpoint_bind = _MAPPING_PREFIX["lang"] .. 'pb'
+      vim.g.pymode_breakpoint_bind = _MAPPING_PREFIX["lang"] .. "pb"
 
       ------------------------------------------------------------------------------
       -- 3. Code Checking
@@ -212,36 +283,40 @@ return {
       -- TODO: rope 각종 에러떠서 비활성화 <2022-04-23, Hyunjae Kim> --
       -- 설정하기에 따라 사용은 가능할 것 같긴하다.
       vim.g.pymode_rope = 0
-      vim.g.pymode_rofe_refix = 'sr'
+      vim.g.pymode_rofe_refix = "sr"
 
       -- TODO: show_doc 활용할까? <2022-04-23, Hyunjae Kim> --
-      vim.g.pymode_rope_show_doc_bint = ''
+      vim.g.pymode_rope_show_doc_bint = ""
 
       -- 4.1 Completion
       vim.g.pymode_rope_completion = 0
       vim.g.pymode_rope_completion_on_dot = 0
-      vim.g.pymode_rope_completion_bind = ''
+      vim.g.pymode_rope_completion_bind = ""
       vim.g.pymode_rope_autoimport = 1
       vim.g.pymode_rope_autoimport_modules = {
-        'os', 'shutil', 'datetime', 'subprocess',
-        'typing', 'pathlib'
+        "os",
+        "shutil",
+        "datetime",
+        "subprocess",
+        "typing",
+        "pathlib",
       }
       vim.g.pymode_rofe_autoimport_after_complete = 1
 
       -- 4.2 find definition
-      vim.g.pymode_rope_goto_definition_bind = ''
+      vim.g.pymode_rope_goto_definition_bind = ""
 
       -- 4.3 refactoring
-      vim.g.pymode_rope_rename_bind = ''
-      vim.g.pymode_rope_rename_module_bind = ''
-      vim.g.pymode_rope_organize_imports_bind = ''
-      vim.g.pymode_rope_autoimport_bind = _MAPPING_PREFIX["lang"] .. 'rf'
-      vim.g.pymode_rope_module_to_package_bind = ''
-      vim.g.pymode_rope_extract_method_bind = ''
-      vim.g.pymode_rope_extract_variable_bind = ''
-      vim.g.pymode_rope_use_function_bind = ''
-      vim.g.pymode_rope_move_bind = ''
-      vim.g.pymode_rope_change_signature_bind = ''
+      vim.g.pymode_rope_rename_bind = ""
+      vim.g.pymode_rope_rename_module_bind = ""
+      vim.g.pymode_rope_organize_imports_bind = ""
+      vim.g.pymode_rope_autoimport_bind = _MAPPING_PREFIX["lang"] .. "rf"
+      vim.g.pymode_rope_module_to_package_bind = ""
+      vim.g.pymode_rope_extract_method_bind = ""
+      vim.g.pymode_rope_extract_variable_bind = ""
+      vim.g.pymode_rope_use_function_bind = ""
+      vim.g.pymode_rope_move_bind = ""
+      vim.g.pymode_rope_change_signature_bind = ""
 
       ------------------------------------------------------------------------------
       -- 5. syntax
@@ -249,6 +324,6 @@ return {
       -- use neovim's feature
       vim.g.pymode_syntax = 0
       vim.g.pymode_syntax_all = 0
-    end
+    end,
   },
 }

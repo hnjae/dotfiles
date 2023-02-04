@@ -3,7 +3,7 @@ return {
     -- set keymap / show keymap
     "folke/which-key.nvim",
     lazy = true,
-    config = function ()
+    config = function()
       require("which-key").setup({
         -- plugins = {
         --   marks = true, -- shows a list of your marks on ' and `
@@ -27,7 +27,7 @@ return {
         -- add operators that will trigger motion and text object completion
         -- to enable all native operators, set the preset / operators plugin above
         -- operators = { gc = "Comments" },
-        operators = {  },
+        operators = {},
 
         -- key_labels = {
         --   -- override the label used to display some keys. It doesn't effect WK in any other way.
@@ -60,8 +60,15 @@ return {
         -- },
         -- ignore_missing = false, -- enable this to hide mappings for which you didn't specify a label
         hidden = {
-          "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ ",
-          'require',
+          "<silent>",
+          "<cmd>",
+          "<Cmd>",
+          "<CR>",
+          "call",
+          "lua",
+          "^:",
+          "^ ",
+          "require",
           '("orgmode")',
         }, -- hide mapping boilerplate
         -- show_help = true, -- show help message on the command line when the popup is visible
@@ -75,6 +82,6 @@ return {
         --   v = { "j", "k" },
         -- },
       })
-    end
-  }, 
+    end,
+  },
 }

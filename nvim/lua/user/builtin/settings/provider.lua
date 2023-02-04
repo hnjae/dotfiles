@@ -6,11 +6,11 @@
 --   vim.g.python3_host_prog = temp:sub(ps+1, pe)
 -- vim.g.python3_host_prog = "~/.local/share/pyenv/shims/python3"
 
-if vim.fn.has('mac') == 1 then
+if vim.fn.has("mac") == 1 then
   local temp = vim.fn.execute("!pyenv which python3")
   local ps, pe = vim.regex("/[a-zA-Z0-9.\\-_/]*"):match_str(temp)
   if ps ~= nil then
-    vim.g.python3_host_prog = temp:sub(ps+1, pe)
+    vim.g.python3_host_prog = temp:sub(ps + 1, pe)
   else
     vim.g.python3_host_prog = "~/.local/share/pyenv/shims/python3"
   end

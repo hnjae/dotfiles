@@ -2,7 +2,7 @@ local M = {}
 
 function M.setup()
   local module_list = {
-    'user.autocmd.asciidoc',
+    "user.autocmd.asciidoc",
     -- 'user.autocmd.event-test',
   }
 

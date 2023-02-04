@@ -1,7 +1,7 @@
 --------------------------------------------------------------------------------
 vim.g.mapleader = " "
 -- NOTE: , : repeat t/T/f/F backwards
-vim.g.maplocalleader = ','
+vim.g.maplocalleader = ","
 
 -- vim.api.nvim_set_keymap("n", "", "s", {})
 -- vim.api.nvim_set_keymap("n", "<Leader>a", "s", {})
@@ -10,100 +10,91 @@ vim.g.maplocalleader = ','
 -- vim.api.nvim_set_keymap("n", "<Leader>a", "za", {})
 vim.keymap.set("n", "<Leader><Leader>", "za", { desc = "toggle-fold" })
 vim.keymap.set("n", "ZA", "<cmd>wa<CR>", { desc = "save" })
-vim.keymap.set(
-  "n",
-  "Zl",
-  function()
-    for _, buf_client in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
-      buf_client.stop()
-    end
-  end,
-  { desc = 'stop-lsp' }
-)
+vim.keymap.set("n", "Zl", function()
+  for _, buf_client in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
+    buf_client.stop()
+  end
+end, { desc = "stop-lsp" })
 
-vim.keymap.set("n", "<left>", "<C-w>h")
-vim.keymap.set("n", "<down>", "<C-w>j")
-vim.keymap.set("n", "<up>", "<C-w>k")
-vim.keymap.set("n", "<right>", "<C-w>l")
+-- vim.keymap.set({"n", "t"}, "<left>", "<C-\\><C-n><C-w>h")
+-- vim.keymap.set({"n", "t"}, "<down>", "<C-\\><C-n><C-w>j")
+-- vim.keymap.set({"n", "t"}, "<up>", "<C-\\><C-n><C-w>k")
+-- vim.keymap.set({"n", "t"}, "<right>", "<C-\\><C-n><C-w>l")
+vim.keymap.set({"n", "t"}, "<left>", "<cmd>wincmd h<CR>")
+vim.keymap.set({"n", "t"}, "<down>", "<cmd>wincmd j<CR>")
+vim.keymap.set({"n", "t"}, "<up>", "<cmd>wincmd k<CR>")
+vim.keymap.set({"n", "t"}, "<right>", "<cmd>wincmd l<CR>")
 vim.keymap.set("n", "<S-left>", "<C-w>H")
 vim.keymap.set("n", "<S-down>", "<C-w>J")
 vim.keymap.set("n", "<S-up>", "<C-w>K")
 vim.keymap.set("n", "<S-right>", "<C-w>L")
+vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], {})
+-- vim.keymap.set({'n', 'v', 'x'}, '<C-h>', [[<Cmd>wincmd h<CR>]], {})
+-- vim.keymap.set({'n', 'v', 'x'}, '<C-j>', [[<Cmd>wincmd j<CR>]], {})
+-- vim.keymap.set({'n', 'v', 'x'}, '<C-k>', [[<Cmd>wincmd k<CR>]], {})
+-- vim.keymap.set({'n', 'v', 'x'}, '<C-l>', [[<Cmd>wincmd l<CR>]], {})
 
 vim.keymap.set({ "n", "v" }, "<F12>", '"+y', { desc = "copy-to-clipboard" })
 vim.keymap.set({ "n", "v", "i" }, "<S-F12>", '"+p', { desc = "paste-from-clipboard" })
 vim.keymap.set({ "n", "v", "i" }, "<F24>", '"+p', { desc = "paste-from-clipboard" })
 
-
-vim.keymap.set("n", "[w", vim.diagnostic.goto_prev, { desc = "warning" })
-vim.keymap.set("n", "]w", vim.diagnostic.goto_next, { desc = "warning" })
-vim.keymap.set(
-  "n",
-  "[g",
-  function()
-    vim.diagnostic.goto_prev({
-      severity = { min = vim.diagnostic.severity.ERROR }
-    })
-  end,
-  { desc = "error" }
-)
-vim.keymap.set(
-  "n",
-  "]g",
-  function()
-    vim.diagnostic.goto_next({
-      severity = { min = vim.diagnostic.severity.ERROR }
-    })
-  end,
-  { desc = "error" }
-)
+-- vim.keymap.set("n", "[i", vim.diagnostic.goto_prev, { desc = "information" })
+-- vim.keymap.set("n", "]i", vim.diagnostic.goto_next, { desc = "information" })
+vim.keymap.set("n", "[f", function()
+  vim.diagnostic.goto_prev({
+    severity = { max = vim.diagnostic.severity.INFO },
+  })
+end, { desc = "information" })
+vim.keymap.set("n", "]f", function()
+  vim.diagnostic.goto_next({
+    severity = { max = vim.diagnostic.severity.INFO },
+  })
+end, { desc = "information" })
+vim.keymap.set("n", "]w", function()
+  vim.diagnostic.goto_next({
+    severity = { min = vim.diagnostic.severity.WARN },
+  })
+end, { desc = "error" })
+vim.keymap.set("n", "[w", function()
+  vim.diagnostic.goto_prev({
+    severity = { min = vim.diagnostic.severity.WARN },
+  })
+end, { desc = "error" })
+vim.keymap.set("n", "[g", function()
+  vim.diagnostic.goto_prev({
+    severity = { min = vim.diagnostic.severity.ERROR },
+  })
+end, { desc = "error" })
+vim.keymap.set("n", "]g", function()
+  vim.diagnostic.goto_next({
+    severity = { min = vim.diagnostic.severity.ERROR },
+  })
+end, { desc = "error" })
 
 vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "lsp-declaration" })
-vim.keymap.set(
-  "n",
-  "==",
-  function()
-    vim.lsp.buf.format({ async = true })
-  end,
-  { desc = "lsp-formatting" }
-)
-vim.keymap.set(
-  "v", "==",
-  function()
-    vim.lsp.buf.format({
-      async = true,
-      range = {
-        ["start"] = vim.api.nvim_buf_get_mark(0, '<'),
-        ["end"] = vim.api.nvim_buf_get_mark(0, '>'),
-      },
-    })
-  end,
-  { desc = "lsp-formatting" }
-)
 
-vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = 'lsp-definition' })
-vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = 'lsp-declaration' })
-vim.keymap.set("n", "gli", vim.lsp.buf.implementation, { desc = 'lsp-implementation' })
-vim.keymap.set("n", "glr", vim.lsp.buf.references, { desc = 'lsp-references' })
-vim.keymap.set("n", "gly", vim.lsp.buf.type_definition, { desc = 'lsp-type-definition' })
-vim.keymap.set("n", "glr", vim.lsp.buf.signature_help, { desc = 'lsp-signature-help' })
-
+vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "lsp-definition" })
+vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "lsp-declaration" })
+vim.keymap.set("n", "gli", vim.lsp.buf.implementation, { desc = "lsp-implementation" })
+vim.keymap.set("n", "glr", vim.lsp.buf.references, { desc = "lsp-references" })
+vim.keymap.set("n", "gly", vim.lsp.buf.type_definition, { desc = "lsp-type-definition" })
+vim.keymap.set("n", "glr", vim.lsp.buf.signature_help, { desc = "lsp-signature-help" })
 
 -- disable s/S, use c/0C instead
 vim.keymap.set({ "n", "v", "x", "o" }, "s", "<Nop>")
 vim.keymap.set({ "n", "v", "x", "o" }, "S", "<Nop>")
 
 local nmapping = {
-  { "n", vim.lsp.buf.rename, { desc = 'lsp-rename' } },
-  { "a", vim.lsp.buf.code_action, { desc = 'lsp-code-action' } },
-  { "wa", vim.lsp.buf.add_workspace_folder, { desc = 'lsp-add-workspace' } },
-  { "wr", vim.lsp.buf.remove_workspace_folder, { desc = 'lsp-remove-workspace' } },
+  { "n", vim.lsp.buf.rename, { desc = "lsp-rename" } },
+  { "a", vim.lsp.buf.code_action, { desc = "lsp-code-action" } },
+  { "wa", vim.lsp.buf.add_workspace_folder, { desc = "lsp-add-workspace" } },
+  { "wr", vim.lsp.buf.remove_workspace_folder, { desc = "lsp-remove-workspace" } },
   {
     "wl",
     function()
       vim.notify(vim.inspect(vim.lsp.buf.lisp_workspace_folders))
     end,
-    { desc = 'lsp-list-workspace' }
+    { desc = "lsp-list-workspace" },
   },
 }
 for _, map in ipairs(nmapping) do
@@ -112,9 +103,6 @@ end
 
 -- TODO: code-action? <2023-01-07, Hyunjae Kim>
 vim.keymap.set("v", _MAPPING_PREFIX["lang"] .. "la", vim.lsp.buf.range_code_action, { desc = "lsp-code-action" })
-
-
-
 
 -- vim.api.nvim_set_keymap("", "gb", "<cmd>bnext<CR>", {})
 -- vim.api.nvim_set_keymap("", "gB", "<cmd>bprevious<CR>", {})
@@ -184,9 +172,8 @@ iabbr <expr> __uuid system("uuidgen")
 ]])
 
 if vim.api.nvim_create_autocmd ~= nil then
-  vim.api.nvim_create_autocmd(
-    { "FileType" }, {
-    pattern  = { "text", "markdown", "vimwiki", "org", "tex", "plaintex", "man" },
+  vim.api.nvim_create_autocmd({ "FileType" }, {
+    pattern = { "text", "markdown", "vimwiki", "org", "tex", "plaintex", "man" },
     callback = function()
       vim.cmd([[
           " OS
@@ -383,7 +370,6 @@ if vim.api.nvim_create_autocmd ~= nil then
           iabbr <buffer> -> →
           iabbr <buffer> <- ←
         ]])
-    end
-  }
-  )
+    end,
+  })
 end

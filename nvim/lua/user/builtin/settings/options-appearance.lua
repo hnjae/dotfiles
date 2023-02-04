@@ -4,7 +4,7 @@
 -- endif
 
 -- VIM Mode 에 따라 커서 Shape 바뀌는 옵션 해제
-vim.opt.guicursor=""
+vim.opt.guicursor = ""
 
 if vim.fn.has("termguicolors") == 1 then
   vim.opt.termguicolors = true

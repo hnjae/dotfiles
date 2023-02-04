@@ -1,33 +1,39 @@
 return {
   {
-    'numToStr/Comment.nvim',
+    "numToStr/Comment.nvim",
     lazy = false,
     enabled = true,
     config = function()
       local config = {}
       require("Comment").setup(config)
-    end
+    end,
   },
   {
-    'folke/todo-comments.nvim',
+    "folke/todo-comments.nvim",
     lazy = false,
     enabled = false,
     dependencies = {
-      "nvim-lua/plenary.nvim"
+      "nvim-lua/plenary.nvim",
     },
     config = function()
       require("todo-comments").setup({})
-    end
+    end,
   },
   {
-    'matze/vim-move',
+    "matze/vim-move",
     lazy = true,
-    event = { "ModeChanged" },
+    keys = {
+      { "<A-h>", nil, mode = { "n", "v" }, desc = "vim-move-left" },
+      { "<A-j>", nil, mode = { "n", "v" }, desc = "vim-move-down" },
+      { "<A-k>", nil, mode = { "n", "v" }, desc = "vim-move-up" },
+      { "<A-l>", nil, mode = { "n", "v" }, desc = "vim-move-right" },
+    },
+    -- event = { "ModeChanged" },
   },
   {
-    'ntpeters/vim-better-whitespace',
+    "ntpeters/vim-better-whitespace",
     lazy = false,
-    event = { "TextChanged", },
+    event = { "TextChanged" },
     config = function()
       vim.g.strip_whitespace_on_save = 1
       vim.g.strip_whitelines_at_eof = 1
@@ -45,21 +51,25 @@ return {
 
       -- exclude markdown from blacklists
       vim.g.better_whitespace_filetypes_blacklist = {
-        'diff', 'git', 'gitcommit', 'unite', 'qf', 'help', 'fugitive'
+        "diff",
+        "git",
+        "gitcommit",
+        "unite",
+        "qf",
+        "help",
+        "fugitive",
       }
 
       -- disable mappings
       vim.g.better_whitespace_operator = ""
-    end
+    end,
   },
   {
     "windwp/nvim-autopairs",
     lazy = true,
     event = "InsertEnter",
-    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
     config = function()
-      -- local n_rule = require('nvim-autopairs.rule')
-
       local opts = {
         -- disable_filetype = { "TelescopePrompt" },
         disable_in_macro = true, -- disable when recording or executing a macro
@@ -77,6 +87,6 @@ return {
         -- map_c_w = false, -- map <c-w> to delete a pair if possible
       }
       require("nvim-autopairs").setup(opts)
-    end
+    end,
   },
 }

@@ -4,24 +4,24 @@
 
 return {
   {
-    'mhinz/vim-startify',
+    "mhinz/vim-startify",
     enabled = true,
     lazy = false,
     dependencies = { "folke/which-key.nvim" },
     config = function()
       vim.g.startify_change_to_vcs_root = 1
       vim.g.startify_bookmarks = {
-        '~/Sync/Library/wiki/index.adoc',
-        '~/.config/ranger/',
-        '~/.config/nvim/vim-include/',
+        "~/Sync/Library/wiki/index.adoc",
+        "~/.config/ranger/",
+        "~/.config/nvim/vim-include/",
       }
       vim.g.startify_lists = {
-        { ['type'] = 'sessions', ['header'] = { '   Sessions' } },
-        { ['type'] = 'bookmarks', ['header'] = { '   Bookmarks' } },
-        { ['type'] = 'files', ['header'] = { '   MRU' } },
-        { ['type'] = 'commands', ['header'] = { '   Commands' } },
+        { ["type"] = "sessions", ["header"] = { "   Sessions" } },
+        { ["type"] = "bookmarks", ["header"] = { "   Bookmarks" } },
+        { ["type"] = "files", ["header"] = { "   MRU" } },
+        { ["type"] = "commands", ["header"] = { "   Commands" } },
       }
-      vim.g.startify_custom_header = ''
+      vim.g.startify_custom_header = ""
 
       -- Misc Options:
       -- default: ASCII
@@ -29,8 +29,8 @@ return {
 
       -- Sessions:
       vim.g.startify_session_persistence = 1
-      vim.g.startify_session_autoload    = 1
-      vim.g.startify_session_sort        = 1
+      vim.g.startify_session_autoload = 1
+      vim.g.startify_session_sort = 1
 
       --------------------------------------------------------------------------
       -- key-mapping
@@ -42,9 +42,7 @@ return {
         ["v"] = { "<cmd>vnew<CR><cmd>Startify<CR>", "vnew-vertical" },
         ["h"] = { "<cmd>new<CR><cmd>Startify<CR>", "new-horizontal" },
       }
-      require("which-key").register(
-        keymap_startify, { prefix = _MAPPING_PREFIX["open"] .. "s" }
-      )
-    end
+      require("which-key").register(keymap_startify, { prefix = _MAPPING_PREFIX["open"] .. "s" })
+    end,
   },
 }
