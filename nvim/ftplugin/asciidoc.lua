@@ -1,0 +1,1 @@
+/home/hyunjae/.config/nvim/ftplugin/asciidoctor.lua

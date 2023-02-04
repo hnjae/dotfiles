@@ -9,6 +9,6 @@ vim.opt_local.colorcolumn = vim.fn.join(vim.fn.range(81, 999), ",")
 
 -- local status_npairs, npairs = pcall(require, 'nvim-autopairs')
 -- if status_npairs then
-  -- npairs.remove_rule('"')
-  -- npairs.remove_rule('"""')
+-- npairs.remove_rule('"')
+-- npairs.remove_rule('"""')
 -- end

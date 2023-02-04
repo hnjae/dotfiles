@@ -1,6 +1,5 @@
 local status_wk, wk = pcall(require, "which-key")
 if status_wk then
-
   wk.register({
     ["$"] = "archive",
     ["'"] = "edit-special",
@@ -13,8 +12,7 @@ if status_wk then
     ["o"] = "open-at-point",
     ["r"] = "capture-refile-headline-to-dst",
     ["t"] = "set-tag",
-  }, { prefix = "<Leader>o", buffer = 0 }
-  )
+  }, { prefix = "<Leader>o", buffer = 0 })
 
   wk.register({
     ["!"] = "org-time-stamp-inactive",
@@ -24,8 +22,7 @@ if status_wk then
     ["s"] = "insert/update-schedule",
     ["t"] = "insert-todo-heading-respect-content",
     ["T"] = "insert-todo-heading",
-  }, { prefix = "<Leader>oi", buffer = 0 }
-  )
+  }, { prefix = "<Leader>oi", buffer = 0 })
 
   wk.register({
     ["e"] = "org-set-effort",
@@ -33,6 +30,5 @@ if status_wk then
     ["j"] = "org-clock-goto",
     ["o"] = "org-clock-out",
     ["q"] = "org-clock-cancel",
-  }, { prefix = "<Leader>ox", buffer = 0 }
-  )
+  }, { prefix = "<Leader>ox", buffer = 0 })
 end
