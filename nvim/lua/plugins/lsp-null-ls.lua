@@ -4,6 +4,16 @@ return {
   enabled = true,
   dependencies = {
     "nvim-lua/plenary.nvim",
+    {
+      "jay-babu/mason-null-ls.nvim",
+      lazy = true,
+      dependencies = {
+        "williamboman/mason.nvim",
+      },
+      opts = {
+        ensure_installed = {"ktlint"},
+      },
+    },
   },
   -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/CONFIG.md
   -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md
@@ -56,12 +66,12 @@ return {
         null_ls.builtins.diagnostics.ruff.with({
           diagnostics_postprocess = function(diagnostic)
             diagnostic.message = "["
-              .. diagnostic.code
-              .. "] "
-              .. diagnostic.message
-              .. " ("
-              .. diagnostic.source
-              .. ")"
+                .. diagnostic.code
+                .. "] "
+                .. diagnostic.message
+                .. " ("
+                .. diagnostic.source
+                .. ")"
             local severity = diagnostic.severity
             if diagnostic.code == "E902" or diagnostic.code == "E999" then
               severity = vim.diagnostic.severity.ERROR

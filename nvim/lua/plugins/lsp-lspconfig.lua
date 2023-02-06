@@ -3,7 +3,18 @@ return {
   dependencies = {
     "folke/neodev.nvim",
     "tamago324/nlsp-settings.nvim",
-    "williamboman/mason-lspconfig",
+    {
+      "williamboman/mason-lspconfig.nvim",
+      lazy = true,
+      dependencies = {
+        "williamboman/mason.nvim", -- mason should been setuped before mason-lspconfig
+      },
+      opts = {
+        ensure_installed = {
+          "rust_analyzer",
+        },
+      },
+    },
     {
       -- shows popup window about parameter/func
       -- NOTE: activated when on_attach() happens / or call .setup() in init.lua
