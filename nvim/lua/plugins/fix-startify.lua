@@ -1,3 +1,4 @@
+local prefix = require("var").prefix
 -- exclude buffers from sessionoptions
 -- vim.opt.sessionoptions = "blank,curdir,folds,help,tabpages,winsize"
 -- minimap 문제 해결 안됨.
@@ -8,7 +9,7 @@ return {
     enabled = true,
     lazy = false,
     dependencies = { "folke/which-key.nvim" },
-    config = function()
+    init = function()
       vim.g.startify_change_to_vcs_root = 1
       vim.g.startify_bookmarks = {
         "~/Sync/Library/wiki/index.adoc",
@@ -31,7 +32,8 @@ return {
       vim.g.startify_session_persistence = 1
       vim.g.startify_session_autoload = 1
       vim.g.startify_session_sort = 1
-
+    end,
+    config = function()
       --------------------------------------------------------------------------
       -- key-mapping
       --------------------------------------------------------------------------
@@ -42,7 +44,7 @@ return {
         ["v"] = { "<cmd>vnew<CR><cmd>Startify<CR>", "vnew-vertical" },
         ["h"] = { "<cmd>new<CR><cmd>Startify<CR>", "new-horizontal" },
       }
-      require("which-key").register(keymap_startify, { prefix = _MAPPING_PREFIX["open"] .. "s" })
+      require("which-key").register(keymap_startify, { prefix = prefix.open .. "s" })
     end,
   },
 }

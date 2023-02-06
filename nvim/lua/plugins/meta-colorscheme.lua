@@ -2,18 +2,16 @@
 return {
   {
     "Mofiqul/vscode.nvim",
+    -- NOTE: does not support htmlH1 (2022-06-21)
     lazy = false,
     enabled = true,
     priority = 999999999,
-    config = function()
-      -- NOTE: does not support htmlH1 (2022-06-21)
+    opts = {
+      italic_comments = true,
+    },
+    init = function()
       vim.o.background = "dark"
-      vim.g.vscode_style = "dark"
-      -- vim.g.vscode_italic_comment = 1
-      -- vim.cmd([[silent! colorscheme vscode]])
-      require("vscode").setup({
-        italic_comments = true,
-      })
+      vim.g.vscode_style = vim.o.background
     end,
   },
   {
@@ -32,9 +30,11 @@ return {
     lazy = false,
     enabled = false,
     priority = 999999999,
-    config = function()
+    init = function()
       vim.g.rasmus_italic_functions = true
       vim.g.rasmus_bold_functions = true
+    end,
+    config = function()
       vim.cmd([[colorscheme rasmus]])
     end,
   },

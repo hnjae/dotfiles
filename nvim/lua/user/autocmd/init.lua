@@ -3,6 +3,8 @@ local M = {}
 function M.setup()
   local module_list = {
     "user.autocmd.asciidoc",
+    "user.autocmd.writings",
+    "user.autocmd.highlight-yank",
     -- 'user.autocmd.event-test',
   }
 

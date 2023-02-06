@@ -1,63 +1,96 @@
 -- telescope
+local prefix = require("var").prefix
 
-local telescope_spec = {
+return {
   "nvim-telescope/telescope.nvim",
   dependencies = {
     "nvim-lua/plenary.nvim",
-    "folke/which-key.nvim",
     {
       "nvim-telescope/telescope-fzf-native.nvim",
       build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release"
-          .. " && cmake --build build --config Release"
-          .. " && cmake --install build --prefix build",
+        .. " && cmake --build build --config Release"
+        .. " && cmake --install build --prefix build",
       cond = vim.fn.executable("cmake") == 1,
+      module = true,
     },
     {
       "fhill2/telescope-ultisnips.nvim",
       dependencies = { "sirver/ultisnips" },
+      module = true,
     },
   },
   lazy = true,
-  keys = {
-    -- lazy load on following keys
-    { _MAPPING_PREFIX["fuzzy-finder"], nil, desc = "+telescope" },
-    { _MAPPING_PREFIX["lang"] .. "t", nil, desc = "+telescope-lsp" },
-    { "<F1>", nil, desc = "help-tags" },
+  cmd = {
+    "Telescope"
   },
-}
+  keys = function()
+    local t_builtin = require("telescope.builtin")
+    local status_wk, wk = pcall(require, "which-key")
+    if status_wk then
+      wk.register({
+        [prefix.fuzzy_finder] = { name = "+telescope" },
+        [prefix.fuzzy_finder .. "h"] = { name = "+history" },
+        [prefix.fuzzy_finder .. "G"] = { name = "+git" },
+        [prefix.fuzzy_finder .. "S"] = { name = "+set" },
+        [prefix.lang .. "t"] = { name = "+telescope-lsp" },
+        [prefix.lang .. "ts"] = { name = "+telescope-lsp-symbols" },
+      }, {})
+    end
 
-telescope_spec.config = function()
-  local config = {
-    defaults = {
-      -- vimgrep_arguments = {
-      --   "rg",
-      --   "--color=never",
-      --   "--no-heading",
-      --   "--with-filename",
-      --   "--line-number",
-      --   "--column",
-      --   "--smart-case",
-      --   "--trim" -- add this value
-      -- }
-      -- theme = "dropdown"
-    },
+    --@type LazyKeys[]
+    local lazykeys = {
+      -- lazy load on following keys
+      -- { prefix.lang .. "t", nil, desc = "+telescope-lsp" },
+      -- replace default behavior
+      { "<F1>", t_builtin.help_tags, desc = "help-tags" },
+      { prefix.fuzzy_finder .. ":", t_builtin.commands, desc = "commands" },
+      { prefix.fuzzy_finder .. "f", t_builtin.find_files, desc = "find-from-pwd" },
+      { prefix.fuzzy_finder .. "b", t_builtin.buffers, desc = "buffers" },
+      { prefix.fuzzy_finder .. "r", t_builtin.registrs, desc = "registers" },
+      { prefix.fuzzy_finder .. "m", t_builtin.marks, desc = "marks" },
+      { prefix.fuzzy_finder .. "l", t_builtin.current_buffer_fuzzy_find, desc = "line" },
+      { prefix.fuzzy_finder .. "g", t_builtin.grep_string, desc = "rg-from-workspace" },
+      { prefix.fuzzy_finder .. "j", t_builtin.jumplist, desc = "jumplist" },
+      { prefix.fuzzy_finder .. "q", t_builtin.quickfix, desc = "quickfix" },
+      { prefix.fuzzy_finder .. "hc", t_builtin.command_history, desc = "command" },
+      { prefix.fuzzy_finder .. "hs", t_builtin.search_history, desc = "search" },
+      { prefix.fuzzy_finder .. "hk", t_builtin.keymaps, desc = "keymaps" },
+      { prefix.fuzzy_finder .. "hf", t_builtin.oldfiles, desc = "old-recent-file" },
+      { prefix.fuzzy_finder .. "Gf", t_builtin.git_files, desc = "git-files" },
+      { prefix.fuzzy_finder .. "Gc", t_builtin.git_commits, desc = "git-commits-pwd" },
+      { prefix.fuzzy_finder .. "Gb", t_builtin.git_bcommits, desc = "git-commits-cur-buffer" },
+      { prefix.fuzzy_finder .. "GB", t_builtin.git_branches, desc = "git-branches" },
+      { prefix.fuzzy_finder .. "GB", t_builtin.git_status, desc = "git-status" },
+      { prefix.fuzzy_finder .. "GB", t_builtin.git_stash, desc = "git-stash" },
+      { prefix.fuzzy_finder .. "Sf", t_builtin.filetypes, desc = "filetypes" },
+      { prefix.fuzzy_finder .. "Sh", t_builtin.highlights, desc = "highlights" },
+      { prefix.fuzzy_finder .. "So", t_builtin.vim_options, desc = "vim-options" },
+      { prefix.fuzzy_finder .. "Sa", t_builtin.autocommands, desc = "autocmd" },
+      { prefix.fuzzy_finder .. "u", require("telescope").extensions.ultisnips.ultisnips, desc = "ultisnips" },
+      { prefix.fuzzy_finder .. prefix.fuzzy_finder, "<cmd>Telescope<CR>", desc = "builtins" },
+      --
+      { prefix.lang .. "td", t_builtin.diagnostics, desc = "diagnostics" },
+      { prefix.lang .. "tr", t_builtin.lsp_references, desc = "references" },
+      { prefix.lang .. "ti", t_builtin.lsp_implementations, desc = "implementation" },
+      { prefix.lang .. "tk", t_builtin.lsp_definitions, desc = "definition" },
+      { prefix.lang .. "tt", t_builtin.lsp_type_definitions, desc = "type-definition" },
+      { prefix.lang .. "tsd", t_builtin.lsp_document_symbols, desc = "document-symbols" },
+      { prefix.lang .. "tsw", t_builtin.lsp_workspace_symbols, desc = "workspace-symbols" },
+      { prefix.lang .. "tsW", t_builtin.lsp_dynamic_workspace_symbols, desc = "dynamic-workspace-symbols" },
+      { prefix.lang .. "tst", t_builtin.treesitter, desc = "symbols-treesitter" },
+      { prefix.lang .. "tsT", t_builtin.current_buffer_tags, desc = "symbols-tags" },
+    }
+    return lazykeys
+  end,
+  opts = {
+    defaults = {},
     pickers = {
-      -- TODO: buffers doesn't show its content  <2022-06-16, Hyunjae Kim>
-      -- buffers = {
-      --   theme ="dropdown"
       -- TODO: use vim.fn.executable to find fd
       find_files = {
         find_command = { "fd", "--type", "f", "--strip-cwd-prefix" },
       },
     },
-    -- TODO: Not working <2022-06-16, Hyunjae Kim>
-    -- builtin.current_buffer_fuzzy_find({opts}) *telescope.builtin.current_buffer_fuzzy_find()*
     extensions = {
-      -- Your extension configuration goes here:
-      -- extension_name = {
-      --   extension_config_key = value,
-      -- }
-      -- please take a look at the readme of the extension you want to configure
       fzf = {
         fuzzy = true, -- false will only do exact matching
         override_generic_sorter = true, -- override the generic sorter
@@ -65,84 +98,11 @@ telescope_spec.config = function()
         case_mode = "smart_case", -- or "ignore_case" or "respect_case"
       },
     },
-  }
-
-  local telescope = require("telescope")
-  telescope.setup(config)
-  telescope.load_extension("fzf")
-  telescope.load_extension("ultisnips")
-
-  ------------------------------------------------------------------------------
-  -- key mapping
-  ------------------------------------------------------------------------------
-  local wk = require("which-key")
-  local t_builtin = require("telescope.builtin")
-
-  -- replace default behavior
-  vim.keymap.set("n", "<F1>", t_builtin.help_tags, { desc = "help-tags" })
-
-  wk.register({
-    name = "+telescope",
-    [":"] = { t_builtin.commands, "commands" },
-
-    ["f"] = { t_builtin.find_files, "find-from-pwd" },
-
-    ["b"] = { t_builtin.buffers, "buffers" },
-    ["r"] = { t_builtin.registers, "registers" },
-    ["m"] = { t_builtin.registers, "marks" },
-    -- ["fl"] = { t_builtin.loclist, "loclist" },
-
-    ["l"] = { t_builtin.current_buffer_fuzzy_find, "line" },
-    ["g"] = { t_builtin.grep_string, "rg-from-workspace" },
-    ["B"] = { t_builtin.current_buffer_fuzzy_find, "current_buffer_fuzzy_find" },
-
-    ["j"] = { t_builtin.builtin, "jumplist" },
-    ["q"] = { t_builtin.quickfix, "quickfix" },
-
-    ----------------------------------------------------------------------
-    ["h"] = { name = "+history" },
-    ["hc"] = { t_builtin.command_history, "command" },
-    ["hs"] = { t_builtin.search_history, "search" },
-    ["hq"] = { t_builtin.quickfixhistory, "quickfixhistory" },
-    ["hk"] = { t_builtin.keymaps, "keymaps" },
-    ["hf"] = { t_builtin.oldfiles, "old-recent-file" },
-
-    ----------------------------------------------------------------------
-    ["G"] = { name = "+git" },
-    ["Gf"] = { t_builtin.git_files, "git-files" },
-    ["Gc"] = { t_builtin.git_commits, "git-commits-pwd" },
-    ["Gb"] = { t_builtin.git_bcommits, "git-commits-cur-buffer" },
-    ["GB"] = { t_builtin.git_branches, "git-branches" },
-    ["Gs"] = { t_builtin.git_status, "git-status" },
-    ["GS"] = { t_builtin.git_stash, "git-gstash" },
-    -------------------------------------
-    ["S"] = { name = "+set" },
-    ["Sf"] = { t_builtin.filetypes, "filetypes" },
-    ["Sh"] = { t_builtin.highlights, "highlights" },
-    ["So"] = { t_builtin.vim_options, "vim-options" },
-    ["Sa"] = { t_builtin.autocommands, "autocmd" },
-    ----------------------------------------------------------------------
-
-    ["u"] = { telescope.extensions.ultisnips.ultisnips, "ext-ultisnips" },
-    [_MAPPING_PREFIX["fuzzy-finder"]] = { "<cmd>Telescope<CR>", "builtins" },
-  }, { prefix = _MAPPING_PREFIX["fuzzy-finder"], mode = "n" })
-
-  wk.register({
-    name = "+telescope-lsp",
-    ["d"] = { t_builtin.diagnostics, "diagnostics" },
-    ["r"] = { t_builtin.lsp_references, "references" },
-    ["i"] = { t_builtin.lsp_implementations, "implementation" },
-    ["k"] = { t_builtin.lsp_definitions, "definition" },
-    ["t"] = { t_builtin.lsp_type_definitions, "type-definition" },
-    ["s"] = { name = "+symbols" },
-    ["sd"] = { t_builtin.lsp_document_symbols, "document-symbols" },
-    ["sw"] = { t_builtin.lsp_workspace_symbols, "workspace-symbols" },
-    ["sW"] = { t_builtin.lsp_workspace_symbols, "all-workspace-symbols" },
-    ["st"] = { t_builtin.treesitter, "symbols-treesitter" },
-    ["sT"] = { t_builtin.current_buffer_tags, "tags" },
-  }, { prefix = _MAPPING_PREFIX["lang"] .. "t", mode = "n" })
-end
-
-return {
-  telescope_spec,
+  },
+  config = function(_, opts)
+    local telescope = require("telescope")
+    telescope.setup(opts)
+    telescope.load_extension("fzf")
+    telescope.load_extension("ultisnips")
+  end,
 }

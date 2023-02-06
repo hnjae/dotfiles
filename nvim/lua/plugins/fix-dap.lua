@@ -10,6 +10,7 @@ return {
     },
     config = function()
       local dap = require("dap")
+
       local wk = require("which-key")
 
       local mapping = {
@@ -25,7 +26,7 @@ return {
         r = { dap.repl.open, "repl-open" },
         l = { dap.run_last, "run-last" },
       }
-      wk.register(mapping, { noremap = false, mode = "n", prefix = _MAPPING_PREFIX["lang"] .. "d" })
+      wk.register(mapping, { noremap = false, mode = "n", prefix = require("var").prefix.lang .. "d" })
     end,
   },
   {
