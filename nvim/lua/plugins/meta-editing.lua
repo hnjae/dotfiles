@@ -80,6 +80,21 @@ return {
       -- disable mappings
       vim.g.better_whitespace_operator = ""
     end,
+    config = function()
+      -- remove all unnecessary commands
+      vim.api.nvim_del_user_command("ToggleWhitespace")
+      vim.api.nvim_del_user_command("EnableWhitespace")
+      vim.api.nvim_del_user_command("DisableWhitespace")
+      vim.api.nvim_del_user_command("NextTrailingWhitespace")
+      vim.api.nvim_del_user_command("PrevTrailingWhitespace")
+      vim.api.nvim_del_user_command("StripWhitespace")
+      vim.api.nvim_del_user_command("StripWhitespaceOnChangedLines")
+      vim.api.nvim_del_user_command("ToggleStripWhitespaceOnSave")
+      vim.api.nvim_del_user_command("EnableStripWhitespaceOnSave")
+      vim.api.nvim_del_user_command("DisableStripWhitespaceOnSave")
+      vim.api.nvim_del_user_command("CurrentLineWhitespaceOn")
+      vim.api.nvim_del_user_command("CurrentLineWhitespaceOff")
+    end,
   },
   {
     "windwp/nvim-autopairs",
@@ -101,5 +116,17 @@ return {
       -- map_c_h = false,  -- Map the <C-h> key to delete a pair
       -- map_c_w = false, -- map <c-w> to delete a pair if possible
     },
+    config = function(_, opts)
+      local nvim_autopairs = require("nvim-autopairs")
+      local rule = require("nvim-autopairs.rule")
+      nvim_autopairs.setup(opts)
+      nvim_autopairs.add_rules({
+        rule("`+", "+`", "asciidoctor"),
+        rule("`+", "+`", "asciidoc"),
+        rule("``", "``", "asciidoctor"),
+        rule("``", "``", "asciidoc"),
+      })
+      nvim_autopairs.remove_rule("`")
+    end,
   },
 }

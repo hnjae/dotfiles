@@ -10,15 +10,3 @@ vim.opt.linebreak = true
 vim.opt.list = false
 -- vim.opt.textwidth = 80
 -- vim.cmd([[set nolist]])
-
-local status, nvim_autopairs = pcall(require, "nvim-autopairs")
-if status then
-  local rule = require("nvim-autopairs.rule")
-  nvim_autopairs.add_rules({
-    rule("`+", "+`", "asciidoctor"),
-    rule("`+", "+`", "asciidoc"),
-    rule("``", "``", "asciidoctor"),
-    rule("``", "``", "asciidoc"),
-  })
-  nvim_autopairs.remove_rule("`")
-end
