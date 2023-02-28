@@ -45,13 +45,14 @@ return {
         local msg = "No Active Lsp"
         -- local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
         -- local buf_ft = vim.opt_local.filetype:get()
-        local clients = vim.lsp.get_active_clients()
+        local clients = vim.lsp.get_active_clients({ bufnr = 0 })
         if next(clients) == nil then
           return msg
         end
 
         -- local ft_clients = {}
         -- local num_ft_clients = 0
+        --@type string
         local modified_msg = ""
         local is_first_client = true
         for _, client in ipairs(clients) do
@@ -99,11 +100,13 @@ return {
     local opt_extensions = {
       {
         sections = {
-          lualine_a = { {
-            function()
-              return " "
-            end,
-          } },
+          lualine_a = {
+            {
+              function()
+                return " "
+              end,
+            },
+          },
           lualine_c = { "filename" },
           lualine_x = { "filetype" },
           lualine_y = { "progress" },
@@ -117,11 +120,13 @@ return {
       },
       {
         sections = {
-          lualine_a = { {
-            function()
-              return " "
-            end,
-          } },
+          lualine_a = {
+            {
+              function()
+                return " "
+              end,
+            },
+          },
           lualine_c = { "filetype" },
           lualine_y = { "progress" },
           lualine_z = { "location" },
@@ -136,17 +141,20 @@ return {
           "dbout",
           "startify",
           "toggleterm",
+          "alpha",
           -- symbols-outline
           "Outline",
         },
       },
       {
         sections = {
-          lualine_a = { {
-            function()
-              return " "
-            end,
-          } },
+          lualine_a = {
+            {
+              function()
+                return " "
+              end,
+            },
+          },
           lualine_c = {
             {
               function()

@@ -4,10 +4,10 @@ return {
   dependencies = {
     {
       -- database interface
-      "tpope/vim-dadbod"
+      "tpope/vim-dadbod",
     },
     {
-      "kristijanhusak/vim-dadbod-completion"
+      "kristijanhusak/vim-dadbod-completion",
     },
   },
   cmd = {

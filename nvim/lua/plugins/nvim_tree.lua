@@ -19,9 +19,9 @@ return {
   },
   keys = {
     {
-      require("var").prefix.sidebar .. "e",
+      require("val").prefix.sidebar .. "e",
       "<cmd>NvimTreeToggle<CR>",
-      desc = "NvimTreeToggle",
+      desc = "NvimTree-toggle",
     },
   },
   opts = {

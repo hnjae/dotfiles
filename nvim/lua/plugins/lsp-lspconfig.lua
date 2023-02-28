@@ -7,11 +7,18 @@ return {
       "williamboman/mason-lspconfig.nvim",
       lazy = true,
       dependencies = {
-        "williamboman/mason.nvim", -- mason should been setuped before mason-lspconfig
+        -- mason should been setuped before mason-lspconfig
+        "williamboman/mason.nvim",
       },
       opts = {
         ensure_installed = {
           "rust_analyzer",
+          "jedi_language_server",
+          "lua_ls",
+          "kotlin_language_server",
+          "jsonls",
+          "yamlls",
+          "clangd",
         },
       },
     },
@@ -20,7 +27,8 @@ return {
       -- NOTE: activated when on_attach() happens / or call .setup() in init.lua
       "ray-x/lsp_signature.nvim",
       lazy = true,
-      module = true,
+      module = false,
+      opts = {},
     },
   },
   config = function()
@@ -29,7 +37,7 @@ return {
     -------------------------------------
     -- on_attach
     -------------------------------------
-    local on_attach = function(client, bufnr)
+    local on_attach = function(_, bufnr)
       vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
       vim.keymap.set("n", "==", function()
@@ -45,8 +53,6 @@ return {
           },
         })
       end, { desc = "lsp-buf-format", buffer = bufnr })
-
-      require("lsp_signature").on_attach()
     end
 
     -------------------------------------
@@ -67,20 +73,20 @@ return {
       capabilities = global_capabilities,
     })
 
+    local opts = {
+      on_attach = on_attach,
+      -- https://www.reddit.com/r/neovim/comments/syjqdp/lua_lsp_unpack_is_shown_as_deprecated/
+      root_dir = lspconfig.util.root_pattern(
+        -- NOTE: unpack available on lua 5.1
+        unpack(require("val").root_patterns)
+      ),
+    }
+    local status_coq, coq = pcall(require, "coq")
+    if status_coq  then
+      opts = coq.lsp_ensure_capabilities(opts)
+    end
     for _, server in ipairs(require("mason-lspconfig").get_installed_servers()) do
-      lspconfig[server].setup({
-        on_attach = on_attach,
-        -- https://www.reddit.com/r/neovim/comments/syjqdp/lua_lsp_unpack_is_shown_as_deprecated/
-        root_dir = lspconfig.util.root_pattern(
-          ".neoconf.json",
-          ".editorconfig",
-          "pyproject.toml",
-          "vim.toml",
-          "selene.toml",
-          ".nlsp-settings",
-          ".git"
-        ),
-      })
+      lspconfig[server].setup(opts)
     end
   end,
 }

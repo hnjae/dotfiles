@@ -62,7 +62,7 @@ syn sync match syncH2 grouphere NONE "^===\s.*$"
 syn sync match syncH3 grouphere NONE "^====\s.*$"
 syn sync match syncH4 grouphere NONE "^=====\s.*$"
 syn sync match syncH5 grouphere NONE "^======\s.*$"
-syn sync match syncH6 grouphere NONE "^=======\s.*$"
+" syn sync match syncH6 grouphere NONE "^=======\s.*$"
 
 syn match asciidoctorAttribute "{[[:alpha:]][[:alnum:]-_:]\{-}}"
 
@@ -104,6 +104,7 @@ if get(g:, 'asciidoctor_syntax_conceal', 0)
     syn region asciidoctorBoldItalic matchgroup=Conceal start=/\m\%(^\|[[:punct:][:space:]]\@<=\)\*_\ze[^*_ ].\{-}\S/ end=/_\*\%([[:punct:][:space:]]\@=\|$\)/ contains=@Spell concealends oneline
 
     syn region asciidoctorCode matchgroup=Conceal start=/\m``/ end=/``/ contains=@Spell concealends oneline
+    " syn region asciidoctorCode matchgroup=Conceal start=/\m\%(^\|[[:punct:][:space:]]\@<=\)`\ze[^` ].\{-}\S/ end=/`\%([[:punct:][:space:]]\@=\|$\)/ contains=@Spell concealends oneline
     syn region asciidoctorCode matchgroup=Conceal start=/\m\%(^\|[[:punct:][:space:]]\@<=\)`+\ze[^` ].\{-}\S/ end=/+`\%([[:punct:][:space:]]\@=\|$\)/ contains=@Spell concealends oneline
 else
     syn region asciidoctorLink start="\%(link\|xref\|mailto\):\zs[^:].\{-}\ze\[" end="\[.\{-}\]" oneline keepend skipwhite contained
@@ -127,8 +128,10 @@ else
     syn match asciidoctorBoldItalic /\%(^\|[[:punct:][:space:]]\@<=\)\*_[^*_ ]_\*\%([[:punct:][:space:]]\@=\|$\)/ contains=@Spell
     syn match asciidoctorBoldItalic /\*\*_\S.\{-}_\*\*/ contains=@Spell
 
+    " syn match asciidoctorCode /\%(^\|[[:punct:][:space:]]\@<=\)`[^` ].\{-}\S`\%([[:punct:][:space:]]\@=\|$\)/
     syn match asciidoctorCode /\%(^\|[[:punct:][:space:]]\@<=\)`+[^` ].\{-}\S+`\%([[:punct:][:space:]]\@=\|$\)/
     " single char `c` code
+    " syn match asciidoctorCode /\%(^\|[[:punct:][:space:]]\@<=\)`[^` ]`\%([[:punct:][:space:]]\@=\|$\)/
     syn match asciidoctorCode /\%(^\|[[:punct:][:space:]]\@<=\)`+[^` ]+`\%([[:punct:][:space:]]\@=\|$\)/
     syn match asciidoctorCode /``.\{-}``/
 endif
@@ -256,19 +259,20 @@ syn region asciidoctorComment start="^////.*$" end="^////.*$" contains=@Spell
 
 hi def link asciidoctorTitle                 Title
 hi def link asciidoctorSetextHeader          Title
-hi def link asciidoctorH1                    htmlH1
-hi def link asciidoctorH2                    htmlH2
-hi def link asciidoctorH3                    htmlH3
-hi def link asciidoctorH4                    htmlH4
-hi def link asciidoctorH5                    htmlH5
-hi def link asciidoctorH6                    htmlH6
+hi def link asciidoctorH1                    Title
+hi def link asciidoctorH2                    Title
+hi def link asciidoctorH3                    Title
+hi def link asciidoctorH4                    Special
+hi def link asciidoctorH5                    Keyword
+" hi def link asciidoctorH6                    Keyword -- does not exists
+"  delimiter:           Type
 hi def link asciidoctorTitleDelimiter        markdownHeadingDelimiter
 hi def link asciidoctorH1Delimiter           markdownHeadingDelimiter
 hi def link asciidoctorH2Delimiter           markdownHeadingDelimiter
 hi def link asciidoctorH3Delimiter           markdownHeadingDelimiter
 hi def link asciidoctorH4Delimiter           markdownHeadingDelimiter
 hi def link asciidoctorH5Delimiter           markdownHeadingDelimiter
-hi def link asciidoctorH6Delimiter           markdownHeadingDelimiter
+" hi def link asciidoctorH6Delimiter           markdownHeadingDelimiter
 hi def link asciidoctorSetextHeaderDelimiter Type
 hi def link asciidoctorListMarker            Delimiter
 hi def link asciidoctorOrderedListMarker     asciidoctorListMarker
@@ -280,28 +284,31 @@ hi def link asciidoctorPageBreak             PreProc
 hi def link asciidoctorCallout               Float
 hi def link asciidoctorCalloutDesc           String
 
-" hi def link asciidoctorListingBlock          Comment
-" hi def link asciidoctorLiteralBlock          Comment
+hi def link asciidoctorListingBlock          Comment
+hi def link asciidoctorLiteralBlock          Comment
 
 hi def link asciidoctorFile                  Underlined
-" hi def link asciidoctorUrl                   markdownURL
-hi def link asciidoctorUrl                   Underlined
+" hi def link asciidoctorUrl                   Underlined
+hi def link asciidoctorUrl                   markdownUrl
 hi def link asciidoctorEmail                 Underlined
-hi def link asciidoctorUrlAuto               Underlined
+" hi def link asciidoctorUrlAuto               Underlined
+hi def link asciidoctorUrlAuto               markdownUrl
 hi def link asciidoctorEmailAuto             Underlined
 hi def link asciidoctorUrlDescription        String
 
 hi def link asciidoctorLink                  Underlined
 hi def link asciidoctorAnchor                Underlined
 hi def link asciidoctorAttribute             Identifier
-hi def link asciidoctorCode                  markdownCode " Constant
+" hi def link asciidoctorCode                  Constant
+hi def link asciidoctorCode                  markdownCode
 hi def link asciidoctorOption                PreProc
-hi def link asciidoctorBlock                 Delimiter " PreProc
+" hi def link asciidoctorBlock                 PreProc
+hi def link asciidoctorBlock                 htmlTag
 hi def link asciidoctorBlockOptions          PreProc
 hi def link asciidoctorTableSep              PreProc
 hi def link asciidoctorTableCell             PreProc
 hi def link asciidoctorTableEmbed            PreProc
-hi def link asciidoctorInlineAnchor          markdownLinkDelimiter " PreProc
+hi def link asciidoctorInlineAnchor          PreProc
 hi def link asciidoctorMacro                 Macro
 hi def link asciidoctorIndexTerm             Macro
 
@@ -312,10 +319,6 @@ hi def asciidoctorBoldItalic                 gui=bold,italic cterm=bold,italic
 hi def link asciidoctorDefList               asciidoctorBold
 hi def link asciidoctorCaption               Statement
 hi def link asciidoctorAdmonition            asciidoctorBold
-
-" Edit
-hi def link asciidoctorQuoteBlock            markdownItalic
-" hi def link asciidoctorBlockquote            htmlItalic
 
 let b:current_syntax = "asciidoctor"
 if main_syntax ==# 'asciidoctor'

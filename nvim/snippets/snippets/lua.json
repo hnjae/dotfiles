@@ -1,0 +1,215 @@
+{
+  "alias-anotation": {
+    "prefix": "alias",
+    "body": [
+      "---@alias ${1:<name>} ${2:<type>}"
+    ],
+    "description": "alias annotation"
+  },
+  "param-annotation": {
+    "prefix": "param",
+    "body": [
+      "---@param ${1:<name[?]>} ${2:<type[|type...]>} ${3:[description]}"
+    ],
+    "description": "param annotation"
+  },
+  "return-annotation": {
+    "prefix": "return",
+    "body": [
+      "---@return ${1:<type>} ${2:[<name> [comment] | [name] #<comment>]}"
+    ],
+    "description": "return annotation"
+  },
+  "array-type-annotation": {
+    "prefix": "typearray",
+    "body": [
+      "---@type ${1:<type>}[]"
+    ]
+  },
+  "dictionary-type-annotation": {
+    "prefix": "typedict",
+    "body": [
+      "---@type { [${1:<type>}]: ${2:<type>} }"
+    ]
+  },
+  "table-type-annotation": {
+    "prefix": "typetable",
+    "body": [
+      "---@type table<$1, $2>"
+    ]
+  },
+  "function-type-annotation": {
+    "prefix": "typefunc",
+    "body": [
+      "---@type fun(${2:<arg>}: ${3:<arg type>}): ${1:<return type>}"
+    ]
+  },
+  "type-annotation": {
+    "prefix": "type",
+    "body": [
+      "---@type ${1:<type>}"
+    ],
+    "description": "type annotation"
+  },
+  "require": {
+    "prefix": "req",
+    "body": [
+      "require(\"${1:module}\")"
+    ],
+    "description": "Require module"
+  },
+  "return": {
+    "prefix": "rt",
+    "body": [
+      "return $0"
+    ],
+    "description": "return value"
+  },
+  "assigment": {
+    "prefix": "ll",
+    "body": [
+      "local ${1:varName} = ${0:value}"
+    ],
+    "description": "create a variable"
+  },
+  "local": {
+    "prefix": "l",
+    "body": [
+      "local ${0}"
+    ],
+    "description": "create a variable"
+  },
+  "locreq": {
+    "prefix": "lreq",
+    "body": [
+      "local ${1:var} = require(\"${2:module}\")"
+    ],
+    "description": "Require module as a variable"
+  },
+  "class": {
+    "prefix": "cl",
+    "body": [
+      "${1:className} = {}\n",
+      "$1.${2:new} = function($3)",
+      "\tlocal ${4:varName} = ${5:value}\n",
+      "\t${6: --code}\n",
+      "\treturn $4",
+      "end"
+    ],
+    "description": "Create a class"
+  },
+  "if": {
+    "prefix": "if",
+    "body": [
+      "if ${1:true} then",
+      "\t$0",
+      "end"
+    ]
+  },
+  "elseif": {
+    "prefix": "elseif",
+    "body": [
+      "elseif ${1:true} then",
+      "\t$0"
+    ]
+  },
+  "for": {
+    "prefix": "for",
+    "body": [
+      "for ${1:i}=${2:1},${3:10} do",
+      "\t$0",
+      "end"
+    ],
+    "description": "for loop range"
+  },
+  "for-pairs": {
+    "prefix": "forp",
+    "body": [
+      "for ${3:key}, ${2:val} in pairs(${1:table}) do",
+      "\t$0",
+      "end"
+    ],
+    "description": "iter table (key, val)"
+  },
+  "fori": {
+    "prefix": "for-ipairs",
+    "body": [
+      "for i, ${1:x} in ipairs(${2:table}) do",
+      "\t$0",
+      "end"
+    ],
+    "description": "enumerate table"
+  },
+  "forline": {
+    "prefix": "forline",
+    "body": [
+      "f = io.open(${1:\"${2:filename}\"}, \"${3:r}\")\n",
+      "while true do",
+      "\tline = f:read()",
+      "\tif line == nil then break end\n",
+      "\t${0:-- code}",
+      "end"
+    ],
+    "description": "read file line by line"
+  },
+  "function": {
+    "prefix": "fu",
+    "body": [
+      "function ${1:name}($2)",
+      "\t${0:-- code}",
+      "end"
+    ]
+  },
+  "inline-function": {
+    "prefix": "f=",
+    "body": [
+      "---@return ${3:return-type}",
+      "local ${1:name} = function($2)",
+      "\t${0:-- code}",
+      "end"
+    ]
+  },
+  "print": {
+    "prefix": "p",
+    "body": [
+      "print(${0})"
+    ]
+  },
+  "self": {
+    "prefix": "self:",
+    "body": [
+      "function self:${1:methodName}($2)",
+      "\t$0",
+      "end"
+    ]
+  },
+  "while": {
+    "prefix": "while",
+    "body": [
+      "while ${1:true} do",
+      "\t$0",
+      "end"
+    ]
+  },
+  "pcall": {
+    "prefix": "pca",
+    "body": [
+      "pcall(${1:function})"
+    ],
+    "description": "Protect call a function"
+  },
+  "locpcall": {
+    "prefix": "locpca",
+    "body": [
+      "local ${1:status}, ${2:err_or_value} = pcall(${3:function})"
+    ],
+    "description": "Protect call a function as a variable"
+  },
+  "locpcallmodule": {
+    "prefix": "locpcamo",
+    "body": [
+      "local is_${1:module_name}, ${1:module_name} = pcall(require, \"${1:module_name}\")"
+    ],
+    "description": "Protect call a function as a variable"
+  }
+}

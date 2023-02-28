@@ -1,0 +1,40 @@
+{
+  "stem": {
+    "prefix": "stem",
+    "body": [
+      ":stem: latexmath"
+    ],
+    "description": "add stem attribute"
+  },
+  "source-highlight": {
+    "prefix": "source-highlight",
+    "body": [
+      ":source-highlighter: highlightjs",
+      ":highlightjs-languages: $0"
+    ],
+    "description": "add highlighter attribute"
+  },
+  "listing": {
+    "prefix": "lst",
+    "body": [
+      ".${2:name}",
+      "[source, ${1:lang}]",
+      "----${0}",
+      "----"
+    ],
+    "description": "insert source block"
+  },
+  "table": {
+    "prefix": "tab",
+    "body": [
+      ".${0:table_title}",
+      "|===",
+      "|.${1:Name of Column 1}",
+      "|Name of Column 2",
+      "|Cell in column 1, row 1",
+      "|Cell in column 2, row 1",
+      "|==="
+    ],
+    "description": "draw table"
+  }
+}

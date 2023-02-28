@@ -1,10 +1,10 @@
 return {
   "habamax/vim-asciidoctor",
-  lazy = true,
-  ft = { "asciidoc", "asciidoctor" },
+  lazy = false,
+  -- ft = { "asciidoc", "asciidoctor" },
   keys = {
     {
-      require("var").prefix.lang .. "p",
+      require("val").prefix.lang .. "p",
       "<cmd>AsciidoctorOpenRAW<CR>",
       desc = "preview",
     },
@@ -15,6 +15,11 @@ return {
     local browser = os.getenv("BROWSER")
     if browser == nil then
       browser = "firefox"
+    end
+
+    local is_luasnip, luasnip = pcall(require, "luasnip")
+    if is_luasnip then
+      luasnip.filetype_extend("asciidoctor", {"asciidoc"})
     end
 
     vim.g.asciidoctor_opener = "!" .. browser
@@ -29,6 +34,7 @@ return {
       "ruby",
       "dockerfile",
       "sql",
+      "c",
     }
     vim.g.asciidoctor_syntax_conceal = 1
   end,

@@ -2,6 +2,7 @@
 __hidden*
 __not-in-use
 __local_config*
+__local*
 .vim
 */asciidoc-wiki
 *.add.spl

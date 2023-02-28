@@ -1,4 +1,4 @@
-local prefix = require("var").prefix
+local prefix = require("val").prefix
 
 return {
   "preservim/tagbar",
@@ -15,8 +15,8 @@ return {
   dependencies = {
     {
       "ludovicchabant/vim-gutentags",
-      config = function()
-        vim.g.gutentags_cache_dir = vim.fn.stdpath("cache") .. "/gutentags"
+      init = function()
+        vim.g.gutentags_cache_dir = require("plenary.path"):new(vim.fn.stdpath("cache"), "/gutentags")
         vim.g.gutentags_exclude_filetypes = {
           "",
           "fugitive",

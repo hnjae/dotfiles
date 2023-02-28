@@ -1,4 +1,4 @@
-local prefix = require("var").prefix
+local prefix = require("val").prefix
 
 -- explores code/file etc
 return {
@@ -42,5 +42,4 @@ return {
       -- { "-", nil, desc = "vinegar-up" },
     }
   },
-  { "johngrib/vim-f-hangul", enabled = false },
 }

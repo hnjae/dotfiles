@@ -8,7 +8,8 @@ local function _Fcitx2latin()
   end
 
   vim.b._fcitx_non_latin = true
-  os.execute(fcitx_cmd .. " -c")
+  -- os.execute(fcitx_cmd .. " -c")
+  io.popen(fcitx_cmd .. " -c")
 end
 
 local function _Fcitx2NonLatin()
@@ -17,7 +18,7 @@ local function _Fcitx2NonLatin()
   end
 
   -- Needs sleep to prevent fcitx5-hangul's issue in text-input-v3
-  io.popen("sleep 0.12 && " .. fcitx_cmd .. " -o")
+  io.popen("sleep 0.13 && " .. fcitx_cmd .. " -o")
   vim.b._fcitx_non_latin = false
 end
 

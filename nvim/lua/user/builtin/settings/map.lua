@@ -1,4 +1,4 @@
-local prefix = require("var").prefix
+local prefix = require("val").prefix
 --------------------------------------------------------------------------------
 vim.g.mapleader = " "
 -- NOTE: , : repeat t/T/f/F backwards
@@ -22,15 +22,11 @@ vim.keymap.set("n", "<S-left>", "<C-w>H")
 vim.keymap.set("n", "<S-down>", "<C-w>J")
 vim.keymap.set("n", "<S-up>", "<C-w>K")
 vim.keymap.set("n", "<S-right>", "<C-w>L")
-vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], {})
--- vim.keymap.set({'n', 'v', 'x'}, '<C-h>', [[<Cmd>wincmd h<CR>]], {})
--- vim.keymap.set({'n', 'v', 'x'}, '<C-j>', [[<Cmd>wincmd j<CR>]], {})
--- vim.keymap.set({'n', 'v', 'x'}, '<C-k>', [[<Cmd>wincmd k<CR>]], {})
--- vim.keymap.set({'n', 'v', 'x'}, '<C-l>', [[<Cmd>wincmd l<CR>]], {})
+-- vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], {})
 
-vim.keymap.set({ "n", "v" }, "<F12>", '"+y', { desc = "copy-to-clipboard" })
-vim.keymap.set({ "n", "v", "i" }, "<S-F12>", '"+p', { desc = "paste-from-clipboard" })
-vim.keymap.set({ "n", "v", "i" }, "<F24>", '"+p', { desc = "paste-from-clipboard" })
+vim.keymap.set({ "n", "v" }, "<F12>", [["+y]], { desc = "copy-to-clipboard" })
+vim.keymap.set({ "n", "v", "i" }, "<S-F12>", [["+p]], { desc = "paste-from-clipboard" })
+vim.keymap.set({ "n", "v", "i" }, "<F24>", [["+p]], { desc = "paste-from-clipboard" })
 
 -- vim.keymap.set("n", "[i", vim.diagnostic.goto_prev, { desc = "information" })
 -- vim.keymap.set("n", "]i", vim.diagnostic.goto_next, { desc = "information" })
@@ -75,8 +71,8 @@ vim.keymap.set("n", "gly", vim.lsp.buf.type_definition, { desc = "lsp-type-defin
 vim.keymap.set("n", "glr", vim.lsp.buf.signature_help, { desc = "lsp-signature-help" })
 
 -- disable s/S, use c/0C instead
-vim.keymap.set({ "n", "v", "o", "l", "t" }, "s", "<Nop>")
-vim.keymap.set({ "n", "v", "o", "l", "t" }, "S", "<Nop>")
+vim.keymap.set({ "n", "v", "o", "l", }, "s", "<Nop>" )
+vim.keymap.set({ "n", "v", "o", "l", }, "S", "<Nop>" )
 
 local nmapping = {
   { "n", vim.lsp.buf.rename, { desc = "lsp-rename" } },
@@ -91,11 +87,10 @@ local nmapping = {
     { desc = "lsp-list-workspace" },
   },
 }
-for _, map in ipairs(nmapping) do
+for _, map in pairs(nmapping) do
   vim.keymap.set("n", prefix.lang .. "l" .. map[1], map[2], map[3])
 end
 
--- TODO: code-action? <2023-01-07, Hyunjae Kim>
 vim.keymap.set("v", prefix.lang .. "la", vim.lsp.buf.range_code_action, { desc = "lsp-code-action" })
 
 -- vim.api.nvim_set_keymap("", "gb", "<cmd>bnext<CR>", {})

@@ -11,12 +11,6 @@ return {
     -- let g:vimtex_quickfix_mode=0
 
     vim.opt_local.smartindent = false
-    -- vim.opt_local.cindent = false
-    -- vim.opt_local.autoindent = false
-    vim.cmd([[
-      set nocindent
-      set noautoindent
-      ]])
     vim.g.vimtex_indent_enabled = 1
     vim.g.vimtex_indent_bib_enabled = 1
 
@@ -51,23 +45,36 @@ return {
   end,
   config = function()
     local status_wk, wk = pcall(require, "which-key")
-    -- TODO: use lazy.nvim's key mapping <2023-02-06, Hyunjae Kim>
-    if status_wk then
-      wk.register({
-        ["i"] = { "<plug>(vimtex-info)", "info" },
-        ["I"] = { "<plug>(vimtex-info-full)", "info-full" },
-        ["t"] = { "<plug>(vimtex-toc-toggle)", "toc-toggle" },
-        ["q"] = { "<plug>(vimtex-log)", "log" },
-        ["v"] = { "<plug>(vimtex-view)", "view" },
-        ["r"] = { "<plug>(vimtex-reverse-search)", "reverse-search" },
-
-        ["s"] = { "<plug>(vimtex-compile)", "compile" },
-        -- ["sS"] = { "<plug>(vimtex-compile-selected)", "compile-selected", mode = "x", buffer = 0 },
-        -- ["sS"] = { "<plug>(vimtex-compile-selected)", "compile-selected", mode = "x", buffer = 0 },
-
-        ["w"] = { ":<C-u>VimtexCountWords", "count-words" },
-        ["l"] = { ":<C-u>VimtexCountLetters", "count-letters" },
-      }, { buffer = 0, prefix = require("var").prefix.lang })
+    if not status_wk then
+      return
     end
+
+    local wk_maps = {
+      ["i"] = { "<plug>(vimtex-info)", "info" },
+      ["I"] = { "<plug>(vimtex-info-full)", "info-full" },
+      ["t"] = { "<plug>(vimtex-toc-toggle)", "toc-toggle" },
+      ["q"] = { "<plug>(vimtex-log)", "log" },
+      ["v"] = { "<plug>(vimtex-view)", "view" },
+      ["r"] = { "<plug>(vimtex-reverse-search)", "reverse-search" },
+      ["s"] = { "<plug>(vimtex-compile)", "compile" },
+      -- ["sS"] = { "<plug>(vimtex-compile-selected)", "compile-selected", mode = "x", buffer = 0 },
+      -- ["sS"] = { "<plug>(vimtex-compile-selected)", "compile-selected", mode = "x", buffer = 0 },
+
+      ["w"] = { "<cmd>VimtexCountWords<CR>", "count-words" },
+      ["l"] = { "<cmd>VimtexCountLetters<CR>", "count-letters" },
+    }
+    local wk_opts = { buffer = 0, prefix = require("val").prefix.lang }
+    vim.api.nvim_create_autocmd({
+      "BufRead",
+      "BufNewFile",
+    }, {
+      pattern = { "*.tex" },
+      callback = function()
+        wk.register(wk_maps, wk_opts)
+      end,
+    })
+
+    -- register maps to current buffer
+    wk.register(wk_maps, wk_opts)
   end,
 }

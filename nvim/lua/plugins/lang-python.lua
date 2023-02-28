@@ -1,4 +1,4 @@
-local prefix = require("var").prefix
+local prefix = require("val").prefix
 
 return {
   "python-mode/python-mode",
@@ -152,7 +152,5 @@ return {
       }
       wk.register(xmap, { mode = "x", buffer = 0, silent = true })
     end
-
-    return
   end,
 }

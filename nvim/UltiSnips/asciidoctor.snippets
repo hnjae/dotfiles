@@ -1,3 +1,10 @@
+snippet math "math block" b
+[stem]
+++++
+$0
+++++
+endsnippet
+
 snippet hb "Hard line breaks" b
 [%hardbreaks]
 $0
@@ -26,6 +33,13 @@ $0
 ----
 endsnippet
 
+snippet ja "java source block" b
+[source, java]
+----
+$0
+----
+endsnippet
+
 snippet py "Python source block" b
 [source, python]
 ----
@@ -47,8 +61,8 @@ $0
 ----
 endsnippet
 
-snippet admonition  "Admonition block" b
-[${1:Admonition Type}]
+snippet admonition "Block - Admonition(충고)" b
+[${1:NOTE,IMPORTANT,TIP,CAUTION,WARNING,IMPORTANT}]
 ====
 $0
 ====
@@ -62,7 +76,7 @@ $0
 endsnippet
 
 snippet bquote "Blockquotes" b
-[quote, ${1:comma separted names}]
+[quote, ${1:attributione,citation title and information}]
 ____
 $0
 ____
@@ -75,7 +89,7 @@ ____
 endsnippet
 
 snippet table "Table" b
-.${1:Table Title}
+.${1:table_title}
 |===
 |Name of Column 1
 |Name of Column 2
