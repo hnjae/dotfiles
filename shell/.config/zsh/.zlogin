@@ -12,7 +12,7 @@
   # Compile the completion dump to increase startup speed.
   zcompdump="${XDG_CACHE_HOME:-$HOME/.cache}/prezto/zcompdump"
   if [[ -s "$zcompdump" && (! -s "${zcompdump}.zwc" || "$zcompdump" -nt "${zcompdump}.zwc") ]]; then
-    zcompile "$zcompdump"
+      zcompile "$zcompdump"
   fi
 } &!
 
@@ -32,6 +32,28 @@ fi >&2
 # Colorscheme for console
 [ "$TERM" = "linux" -a -f "$ZDOTDIR/colorscheme.sh" ] \
     && . "$ZDOTDIR/colorscheme.sh"
+
+type neofetch > /dev/null 2>&1 \
+    && neofetch \
+        --gtk_shorthand off \
+        --de_version off \
+        --gtk2 off \
+        --gtk3 off \
+        --disable resolution \
+        --disable de \
+        --disable wm \
+        --uptime_shorthand tiny \
+        --speed_shorthand on \
+        --kernel_shorthand on \
+        --distro_shorthand off \
+        --color_blocks off \
+        --gpu_brand on \
+        --cpu_brand on \
+        --memory_percent on \
+        --disk_show '/' \
+        --disk_display 'infobar' \
+        --disk_percent on \
+        --disk_subtitle 'dir'
 
 if [ "$TERM" = linux -a -z "$DISPLAY" -a "$(tty)" = "/dev/tty1" ]; then
     "$HOME/.local/bin/run-de" sway

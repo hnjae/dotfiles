@@ -75,3 +75,7 @@ source_array=(
 for source_file in ${source_array[@]}; do
         [ -f "$source_file"  ] && source "$source_file"
 done
+
+# linuxbrew
+[ -f "/home/linuxbrew/.linuxbrew/bin/brew" ] \
+	&& eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"

@@ -1,1 +1,1 @@
-../../../../../../.config/zsh/colorschemes/codedark.sh
+colorschemes/codedark.sh

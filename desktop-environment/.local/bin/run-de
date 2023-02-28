@@ -1,6 +1,6 @@
-#!/usr/bin/sh
+#!/usr/bin/env bash
 
-if ! [ "$TERM" = linux -a -z "$DISPLAY" ]; then
+if ! [ "$TERM" = linux ] && [ -z "$DISPLAY" ]; then
     echo "Should be in /dev/tty"
     exit 1
 fi
@@ -8,7 +8,7 @@ fi
 if [ "$1" ]; then
     sel="sway"
 else
-    echo "RUN DE: 1) sway 2) sway-nvidia 3) startx 4) startx-nvidia"
+    echo "RUN DE: 1) sway 2)sway-amd-glx 3) sway-nvidia 4)sway-nvidia-glx 6) kde-wayland 7) kde-wayland-nvidia"
     read -p "Select: " sel
 fi
 
@@ -16,14 +16,42 @@ export GTK_IM_MODULE=fcitx5
 export QT_IM_MODULE="$GTK_IM_MODULE"
 export XMODIFIERS="@im=$GTK_IM_MODULE"
 export SDL_IM_MODULE="$GTK_IM_MODULE"
+export GTK_IM_MODULE=fcitx4
 
 case "$sel" in
 	"1"|"sway")
-                export GTK_IM_MODULE=fcitx4
-                # export QT_IM_MODULE="$GTK_IM_MODULE"
-                # export XMODIFIERS="@im=$GTK_IM_MODULE"
-                # export SDL_IM_MODULE="$GTK_IM_MODULE"
+                [ -f "$HOME/.profile" ] && . "$HOME/.profile"
+                # export GTK_THEME=adw-gtk3:dark
+		export DESKTOP_SESSION="sway"
+		export XDG_SESSION_DESKTOP="$DESKTOP_SESSION"
+		export XDG_CURRENT_DESKTOP="$DESKTOP_SESSION"
+		export LIBSEAT_BACKEND=logind
 
+                export WLR_RENDERER=vulkan
+	        # export WLR_DRM_DEVICES="/dev/dri/card0:/dev/dri/card1"
+
+                export AMD_VULKAN_ICD=RADV
+                export VK_ICD_FILENAMES="/usr/share/vulkan/icd.d/radeon_icd.x86_64.json:/usr/share/vulkan/icd.d/radeon_icd.i686.json:/usr/share/vulkan/icd.d/nvidia_icd.drm"
+                # export VK_ICD_FILENAMES="/usr/share/vulkan/icd.d/amd_icd64.json:/usr/share/vulkan/icd.d/amd_icd32.json:/usr/share/vulkan/icd.d/nvidia_icd.drm"
+                export LIBVA_DRIVER_NAME=radeonsi
+		export MOZ_ENABLE_WAYLAND=1
+
+                # zink
+                # export __GLX_VENDOR_LIBRARY_NAME=mesa
+                # export MESA_LOADER_DRIVER_OVERRIDE=zink
+                # export GALLIUM_DRIVER=zink
+
+		export QT_QPA_PLATFORMTHEME="gnome"
+		export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+
+                # for nvidia-connected-monitor
+                # export __GL_GSYNC_ALLOWED=0
+                # export __GL_VRR_ALLOWED=0
+	        export WLR_NO_HARDWARE_CURSORS=0
+
+		exec sway --unsupported-gpu -V
+		;;
+	"2"|"sway-amd-glx")
                 [ -f "$HOME/.profile" ] && . "$HOME/.profile"
 
 		export DESKTOP_SESSION="sway"
@@ -32,34 +60,20 @@ case "$sel" in
 		export LIBSEAT_BACKEND=logind
 
                 # export WLR_RENDERER=vulkan
-                export VK_ICD_FILENAMES="/usr/share/vulkan/icd.d/radeon_icd.x86_64.json:/usr/share/vulkan/icd.d/radeon_icd.i686.json:/usr/share/vulkan/icd.d/nvidia_icd.drm"
+	        # export WLR_DRM_DEVICES="/dev/dri/card0:/dev/dri/card1"
+                # export VK_ICD_FILENAMES="/usr/share/vulkan/icd.d/amd_icd64.json:/usr/share/vulkan/icd.d/amd_icd32.json:/usr/share/vulkan/icd.d/nvidia_icd.drm"
+                export VK_ICD_FILENAMES="/usr/share/vulkan/icd.d/amd_icd64.json:/usr/share/vulkan/icd.d/amd_icd32.json:/usr/share/vulkan/icd.d/nvidia_icd.drm"
                 export LIBVA_DRIVER_NAME=radeonsi
 		export MOZ_ENABLE_WAYLAND=1
 
-                # export GDK_BACKEND=wayland
-		# export __GLX_VENDOR_LIBRARY_NAME=mesa
 		export QT_QPA_PLATFORMTHEME="gnome"
-                # export QT_STYLE_OVERRIDE=kvantum
 
-		# export QT_QPA_PLATFORM="wayland;x11"
 		export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
-		# export XDG_SESSION_TYPE="wayland" -- auto exported maybe
-
-                # exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-                # exec dbus-update-activation-environment DISPLAY XAUTHORITY WAYLAND_DISPLAY
-                # exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
-	        # export=WLR_DRM_DEVICES=/dev/dri/card1
-	        # export=WLR_NO_HARDWARE_CURSORS=0
+	        export WLR_NO_HARDWARE_CURSORS=0
 
 		exec sway --unsupported-gpu -V
-		# dbus-run-session sway --unsupported-gpu -V
 		;;
-	"2"|"sway-nvidia")
-                export GTK_IM_MODULE=fcitx4
-                # export QT_IM_MODULE="$GTK_IM_MODULE"
-                # export XMODIFIERS="@im=$GTK_IM_MODULE"
-                # export SDL_IM_MODULE="$GTK_IM_MODULE"
-
+	"3"|"sway-nvidia-vulkan")
                 [ -f "$HOME/.profile" ] && . "$HOME/.profile"
 
 		export DESKTOP_SESSION="sway"
@@ -68,12 +82,17 @@ case "$sel" in
 		export LIBSEAT_BACKEND=logind
 
                 export WLR_RENDERER=vulkan
-                export VK_ICD_FILENAMES="/usr/share/vulkan/icd.d/nvidia_icd.json:/usr/share/vulkan/icd.d/radeon_icd.x86_64.json:/usr/share/vulkan/icd.d/radeon_icd.i686.json"
+                export VK_ICD_FILENAMES="/usr/share/vulkan/icd.d/nvidia_icd.json:/usr/share/vulkan/icd.d/amd_icd64.json:/usr/share/vulkan/icd.d/amd_icd32.json/usr/share/vulkan/icd.d/radeon_icd.x86_64.json:/usr/share/vulkan/icd.d/radeon_icd.i686.json"
                 export LIBVA_DRIVER_NAME=nvidia
                 export GBM_BACKEND=nvidia-drm
                 export __VK_LAYER_NV_optimus=NVIDIA_only
-                export __GLX_VENDOR_LIBRARY_NAME=nvidia
+                # export __GL_GSYNC_ALLOWED=0
+                # export __GL_VRR_ALLOWED=0
 		export MOZ_ENABLE_WAYLAND=1
+
+                export __GLX_VENDOR_LIBRARY_NAME=nvidia
+                # export MESA_LOADER_DRIVER_OVERRIDE=zink
+                # export GALLIUM_DRIVER=zink
 
                 # export GDK_BACKEND=wayland
 		# export __GLX_VENDOR_LIBRARY_NAME=mesa
@@ -84,47 +103,90 @@ case "$sel" in
 		export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
 		# export XDG_SESSION_TYPE="wayland" -- auto exported maybe
 
-                # exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-                # exec dbus-update-activation-environment DISPLAY XAUTHORITY WAYLAND_DISPLAY
-                # exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
-	        export WLR_DRM_DEVICES="/dev/dri/card1"
+	        export WLR_DRM_DEVICES="/dev/dri/card1:/dev/dri/card0"
 	        export WLR_NO_HARDWARE_CURSORS=1
 
 		exec sway --unsupported-gpu -V
-		# dbus-run-session sway --unsupported-gpu -V
 		;;
-	"3"|"startx")
-		export DESKTOP_SESSION="cinnamon-session"
+	"4"|"sway-nvidia-glx")
+                [ -f "$HOME/.profile" ] && . "$HOME/.profile"
+
+		export DESKTOP_SESSION="sway"
 		export XDG_SESSION_DESKTOP="$DESKTOP_SESSION"
 		export XDG_CURRENT_DESKTOP="$DESKTOP_SESSION"
-		export XDG_SESSION_TYPE="x11"
+		export LIBSEAT_BACKEND=logind
 
-                # export VK_ICD_FILENAMES="/usr/share/vulkan/icd.d/radeon_icd.x86_64.json:/usr/share/vulkan/icd.d/radeon_icd.i686.json"
-                export VK_ICD_FILENAMES="/usr/share/vulkan/icd.d/radeon_icd.x86_64.json:/usr/share/vulkan/icd.d/radeon_icd.i686.json:/usr/share/vulkan/icd.d/nvidia_icd.drm"
-                export LIBVA_DRIVER_NAME=radeonsi
-
-                # NOTE: Do not use xdg-desktop-portal
-                export GTK_USE_PORTAL=0
-		startx
-		;;
-	"4"|"startx-nvidia")
-		export DESKTOP_SESSION="cinnamon-session"
-		export XDG_SESSION_DESKTOP="$DESKTOP_SESSION"
-		export XDG_CURRENT_DESKTOP="$DESKTOP_SESSION"
-		export XDG_SESSION_TYPE="x11"
-
-                # export VK_ICD_FILENAMES="/usr/share/vulkan/icd.d/nvidia_icd.json"
+                # export WLR_RENDERER=vulkan
                 export VK_ICD_FILENAMES="/usr/share/vulkan/icd.d/nvidia_icd.json:/usr/share/vulkan/icd.d/radeon_icd.x86_64.json:/usr/share/vulkan/icd.d/radeon_icd.i686.json"
-                export LIBVA_DRIVER_NAME=nvidia
+                # export LIBVA_DRIVER_NAME=nvidia
+                # export LIBVA_DRIVER_NAME=zink
                 export GBM_BACKEND=nvidia-drm
+
                 export __VK_LAYER_NV_optimus=NVIDIA_only
                 export __GLX_VENDOR_LIBRARY_NAME=nvidia
+                export MESA_LOADER_DRIVER_OVERRIDE=nvidia_drv_video.so
+                # export GALLIUM_DRIVER=zink
 
-                # NOTE: Do not use xdg-desktop-portal
-                export GTK_USE_PORTAL=0
-                # /usr/bin/prime-offload
-		startx
-                # /usr/bin/prime-offload &
+                export __GL_GSYNC_ALLOWED=0
+                export __GL_VRR_ALLOWED=0
+		export MOZ_ENABLE_WAYLAND=1
+
+		export QT_QPA_PLATFORMTHEME="gnome"
+
+		export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+
+	        export WLR_DRM_DEVICES="/dev/dri/card1:/dev/dri/card0"
+	        export WLR_NO_HARDWARE_CURSORS=1
+
+		exec sway --unsupported-gpu -V
+		;;
+	# "5"|"startx-nvidia")
+	# 	export DESKTOP_SESSION="cinnamon-session"
+	# 	export XDG_SESSION_DESKTOP="$DESKTOP_SESSION"
+	# 	export XDG_CURRENT_DESKTOP="$DESKTOP_SESSION"
+	# 	export XDG_SESSION_TYPE="x11"
+	#
+ #                export VK_ICD_FILENAMES="/usr/share/vulkan/icd.d/nvidia_icd.json:/usr/share/vulkan/icd.d/radeon_icd.x86_64.json:/usr/share/vulkan/icd.d/radeon_icd.i686.json"
+ #                # export LIBVA_DRIVER_NAME=nvidia
+ #                export __VK_LAYER_NV_optimus=NVIDIA_only
+ #                export __GLX_VENDOR_LIBRARY_NAME=nvidia
+	#
+ #                # NOTE: Do not use xdg-desktop-portal
+ #                export GTK_USE_PORTAL=0
+ #                # /usr/bin/prime-offload
+	# 	startx
+ #                # /usr/bin/prime-offload &
+ #                ;;
+	"6"|"kde-wayland")
+                # unset QT_IM_MODULE # use text-input-v{2,3}
+                unset QT_IM_MODULE
+                unset GTK_IM_MODULE
+		export MOZ_ENABLE_WAYLAND=1
+                startplasma-wayland
+                ;;
+	"7"|"kde-wayland-nvidia")
+                # unset QT_IM_MODULE
+                unset GTK_IM_MODULE
+		export MOZ_ENABLE_WAYLAND=1
+	        # export KWIN_DRM_DEVICES="/dev/dri/card-2:/dev/dri/card0"
+	        # export KWIN_DRM_DEVICES="/dev/dri/card1:/dev/dri/card0"
+	        export KWIN_DRM_DEVICES="/dev/dri/card1:/dev/dri/card0"
+
+                export __GLX_VENDOR_LIBRARY_NAME=nvidia
+                # export DISABLE_LAYER_AMD_SWITCHABLE_GRAPHICS_1=1
+                export VK_ICD_FILENAMES="/usr/share/vulkan/icd.d/nvidia_icd.json:/usr/share/vulkan/icd.d/radeon_icd.x86_64.json:/usr/share/vulkan/icd.d/radeon_icd.i686.json"
+                export __VK_LAYER_NV_optimus=NVIDIA_only
+
+                export LIBVA_DRIVER_NAME="nvidia"
+                export LIBVA_DRIVERS_PATH="/usr/lib/dri/nvidia_drv_video.so"
+                export GBM_BACKEND=nvidia-drm
+
+                # export DRI_PRIME=1
+                # export
+                startplasma-wayland
+                ;;
+        "8")
+                XDG_SESSION_TYPE=wayland dbus-run-session gnome-session
                 ;;
 	*)
                 echo "ERROR: Not implemented error: $sel"

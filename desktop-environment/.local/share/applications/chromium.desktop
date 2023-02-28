@@ -3,7 +3,8 @@ Version=1.0
 Name=Chromium
 Comment=Access the Internet
 GenericName=Web Browser
-Exec=/usr/bin/chromium --ozone-platform-hint=auto  --gtk-version=4 %U
+# NOTE: chromium does not accept wayland-input <2023-02-15>
+Exec=env GTK_IM_MODULE=fcitx5 chromium --ozone-platform-hint=auto --gtk-version=4 %U
 StartupNotify=true
 Terminal=false
 Icon=chromium
@@ -14,8 +15,8 @@ Actions=new-window;new-private-window;
 
 [Desktop Action new-window]
 Name=New Window
-Exec=/usr/bin/chromium --ozone-platform-hint=auto  --gtk-version=4 %U
+Exec=env GTK_IM_MODULE=fcitx5 chromium --ozone-platform-hint=auto --gtk-version=4 %U
 
 [Desktop Action new-private-window]
 Name=New Incognito Window
-Exec=/usr/bin/chromium  --ozone-platform-hint=auto --gtk-version=4 --incognito %U
+Exec=env GTK_IM_MODULE=fcitx5 chromium --ozone-platform-hint=auto --gtk-version=4 --incognito %U

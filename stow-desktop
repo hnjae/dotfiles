@@ -27,6 +27,7 @@ targets=(
     "smplayer"
     "tty-apps"
     "desktop-environment"
+    "lsp"
 )
 
 for target in ${targets[@]}; do

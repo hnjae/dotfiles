@@ -1,5 +1,7 @@
 # Executes commands at the start of an interactive session.
 
+[ -f "/home/linuxbrew/.linuxbrew/bin/brew" ] \
+    && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 
 # -s: if file exists and is greater than zero
@@ -60,7 +62,7 @@ source_array=(
 # type pip3 > /dev/null && eval "$(pip3 completion --zsh)" && compctl -K _pip_completion pip3
 
 # smart cd
-type zoxide > /dev/null && eval "$(zoxide init zsh)"
+type zoxide > /dev/null && eval "$(zoxide init zsh)" && alias cd="z"
 
 
 lfcd () {
@@ -115,6 +117,6 @@ esac
 
 # broot (https://github.com/Canop/broot): Fuzzy Search + tree + cd
 type broot > /dev/null && [ \
-	-f "${XDG_CONFIG_HOME:-$HOME/.config}/broot/launcher/bash/br" \
+    -f "${XDG_CONFIG_HOME:-$HOME/.config}/broot/launcher/bash/br" \
 ] \
-	&& source "${XDG_CONFIG_HOME:-$HOME/.config}/broot/launcher/bash/br"
+    && source "${XDG_CONFIG_HOME:-$HOME/.config}/broot/launcher/bash/br"

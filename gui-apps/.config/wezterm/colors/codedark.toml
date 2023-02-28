@@ -1,0 +1,37 @@
+# scheme: "codedark"
+# colorscheme author: "Tomas Iser (https://github.com/tomasiser/vim-code-dark)"
+
+[colors]
+ansi = [
+	'#1e1e1e',
+	'#d16969',
+	'#608b4e',
+	'#d7ba7d',
+	'#569cd6',
+	'#c586c0',
+	'#9cdcfe',
+	'#d4d4d4',
+]
+brights = [
+	'#3c3c3c',
+	'#da6969',
+	'#608b4e',
+	'#d7ba7d',
+	'#569cd6',
+	'#c586c0',
+	'#9cdcfe',
+	'#ffffff',
+]
+background = '#1e1e1e'
+foreground = '#d4d4d4'
+cursor_bg = '#e6d4a3'
+cursor_border = '#e6d4a3'
+cursor_fg = '#1e1e1e'
+selection_bg = '#e6d4a3'
+selection_fg = '#534a42'
+
+[colors.indexed]
+
+[metadata]
+name = 'codedark'
+origin_url = 'https://github.com/tomasiser/vim-code-dark'

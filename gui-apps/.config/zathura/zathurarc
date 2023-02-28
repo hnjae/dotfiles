@@ -2,14 +2,22 @@
 
 map D set "first-page-column 1:1"
 
+map 0 adjust_window best-fit
+map = zoom in
+map 9 adjust_window width
+# map Down scroll page-bottom
+# map Up scroll page-top
+# map Left navigate page-top
+# map Right navigate page-top
+
+map f toggle_fullscreen
+
+
 # map k navigate previous
 # map h navigate next
-# map f toggle_fullscreen
 # map = zoom in
 # map - zoom out
 # map d toggle_page_mode
-
-map 0 adjust_window best-fit
 
 
 # vscode dark zathura colorscheme
@@ -33,7 +41,7 @@ set highlight-color             "#007acc"
 set highlight-active-color      "#d4d4d4"
 
 set completion-highlight-fg     "#56b6c2"
-set completion-highlight-bg     false
+# set completion-highlight-bg     false
 
 set completion-bg               "#1e1e1e"
 set completion-fg               "#d4d4d4"
@@ -48,4 +56,7 @@ set index-fg                    "#d4d4d4"
 set index-bg                    "#1e1e1e"
 
 set index-active-fg             "#56b6c2"
-set index-active-bg             false
+# set index-active-bg             false
+
+set database sqlite
+#

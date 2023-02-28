@@ -120,3 +120,15 @@ if [ ! -z "$XDG_SESSION_ID" -a $(type loginctl > /dev/null 2>&1) ]; then
     alias loginctl-lock="loginctl lock-session '$XDG_SESSION_ID'"
     alias loginctl-logout="loginctl terminate-session '$XDG_SESSION_ID'"
 fi
+
+# rsync-mfs="rsync -r --no-perms --inplace --info=progress2"
+# alias rsyncmv='rsync --remove-source-files --recursive --times --modify-window=2 --progress --verbose --itemize-changes --stats --human-readable --chmod=Du+rwx,go-rwx,Fu+rw,go-rw --no-perms'
+# alias rsynccp='rsync --recursive --times --modify-window=2 --progress --verbose --itemize-changes --stats --human-readable --chmod=Du+rwx,go-rwx,Fu+rw,go-rw --no-perms'
+alias rsyncmv='rsync --remove-source-files --recursive --times --modify-window=2 --progress --verbose --itemize-changes --stats --human-readable --chmod=Du+rwx,go-rwx,Fu+rw,go-rw --no-perms --inplace --ignore-existing'
+alias rsynccp='rsync --recursive --times --modify-window=2 --progress --verbose --itemize-changes --stats --human-readable --chmod=Du+rwx,go-rwx,Fu+rw,go-rw --no-perms --inplace --ignore-existing'
+
+type na > /dev/null 2>&1 && alias na='OPENSSL_CONF=$HOME/.local/share/openssel-na.conf na'
+
+type fdfind > /dev/null 2>&1 && alias fd='fdfind'
+
+type rmlint > /dev/null 2>&1 && alias rmlint-old="rmlint --algorithm=xxhash -S m"
