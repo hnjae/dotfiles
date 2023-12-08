@@ -17,7 +17,7 @@ local pairs_ = {
   "｢:｣",
   "[:]",
   "<:>",
-  "`:`",
+  -- "`:`",
 }
 
 for _, val in ipairs(pairs_) do

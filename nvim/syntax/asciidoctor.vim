@@ -17,7 +17,7 @@ endif
 if !exists('g:asciidoctor_fenced_languages')
     let g:asciidoctor_fenced_languages = []
 endif
-for s:type in g:asciidoctor_fenced_languages + [get(b:, "asciidoctor_source_language", "NONE")]
+for s:type in g:asciidoctor_fenced_languages
     if s:type ==# "NONE"
         continue
     endif
@@ -183,35 +183,12 @@ syn region asciidoctorSourceBlock matchgroup=asciidoctorBlock start="^```\%(\w\+
 " Source highlighting with programming languages
 if main_syntax ==# 'asciidoctor'
 
-    "" if :source-language: is set up
-    "" b:asciidoctor_source_language should be set up in ftplugin -- reading
-    "" first 20(?) rows of a file
-    if get(b:, "asciidoctor_source_language", "NONE") != "NONE"
-        " :source-language: python
-        "[source]
-        " for i in ...
-        "
-        exe 'syn region asciidoctorSourceHighlightDefault'.b:asciidoctor_source_language.' matchgroup=asciidoctorBlock start="^\[source\]\s*$" end="^\s*$" keepend contains=asciidoctorCallout,@asciidoctorSourceHighlight'.b:asciidoctor_source_language
-
-        " :source-language: python
-        "[source]
-        "----
-        " for i in ...
-        "----
-        exe 'syn region asciidoctorSourceHighlightDefault'.b:asciidoctor_source_language.' matchgroup=asciidoctorBlock start="^\[source\]\s*\n\z(--\+\)\s*$" end="^.*\n\zs\z1\s*$" keepend contains=asciidoctorCallout,@asciidoctorSourceHighlight'.b:asciidoctor_source_language
-
-        " :source-language: python
-        "```lang
-        "for i in ...
-        "```
-        exe 'syn region asciidoctorSourceHighlightDefault'.b:asciidoctor_source_language.' matchgroup=asciidoctorBlock start="^```\s*$" end="^.*\n\?\zs```\s*$" keepend contains=asciidoctorCallout,@asciidoctorSourceHighlight'.b:asciidoctor_source_language
-    endif
-
     "" Other languages
-    for s:type in g:asciidoctor_fenced_languages + [get(b:, "asciidoctor_source_language", "NONE")]
+    for s:type in g:asciidoctor_fenced_languages
         if s:type ==# "NONE"
             continue
         endif
+
         "[source,lang]
         " for i in ...
         "
@@ -221,12 +198,14 @@ if main_syntax ==# 'asciidoctor'
         "----
         "for i in ...
         "----
-        exe 'syn region asciidoctorSourceHighlight'.s:type.' matchgroup=asciidoctorBlock start="^\[\%(source\)\?,\s*'.s:type.'\%(,.*\)*\]\s*\n\z(--\+\)\s*$" end="^.*\n\zs\z1\s*$" keepend contains=asciidoctorCallout,@asciidoctorSourceHighlight'.s:type
+        " exe 'syn region asciidoctorSourceHighlight'.s:type.' matchgroup=asciidoctorBlock start="^\[\%(source\)\?,\s*'.s:type.'\%(,.*\)*\]\s*\n\z(--\+\)\s*$" end="^.*\n\zs\z1\s*$" keepend contains=asciidoctorCallout,@asciidoctorSourceHighlight'.s:type
+        exe 'syn region asciidoctorSourceHighlight'.s:type.' matchgroup=asciidoctorBlock start="^\[\%(source\)\?,\s*'.s:type.'\%(,.*\)*\]\s*\n\z(----\+\)\s*$" end="^\z1$" contains=asciidoctorCallout,@asciidoctorSourceHighlight'.s:type
 
         "```lang
         "for i in ...
         "```
-        exe 'syn region asciidoctorSourceHighlightDefault'.s:type.' matchgroup=asciidoctorBlock start="^```'.s:type.'\s*$" end="^.*\n\?\zs```\s*$" keepend contains=asciidoctorCallout,@asciidoctorSourceHighlight'.s:type
+        " exe 'syn region asciidoctorSourceHighlightDefault'.s:type.' matchgroup=asciidoctorBlock start="^```'.s:type.'\s*$" end="^.*\n\?\zs```\s*$" keepend contains=asciidoctorCallout,@asciidoctorSourceHighlight'.s:type
+        exe 'syn region asciidoctorSourceHighlightDefault'.s:type.' matchgroup=asciidoctorBlock start="^```'.s:type.'\s*$" end="^```$" contains=asciidoctorCallout,@asciidoctorSourceHighlight'.s:type
 
 
     endfor

@@ -4,6 +4,7 @@ return {
   "python-mode/python-mode",
   lazy = true,
   branch = "develop",
+  enabled = false,
   cond = vim.fn.has("python3"),
   ft = { "python" },
   init = function()

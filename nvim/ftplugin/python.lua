@@ -14,6 +14,6 @@
 -- vim.opt_local.autoindent = false
 -- vim.opt_local.cindent = false
 -- vim.opt_local.smartindent = false
-vim.opt_local.foldmethod = "indent"
+-- vim.opt_local.foldmethod = "indent"
 -- vim.opt_local.foldlevel = 9
-vim.opt_local.colorcolumn = vim.fn.join(vim.fn.range(80, 999), ",")
+-- vim.opt_local.colorcolumn = vim.fn.join(vim.fn.range(80, 999), ",")

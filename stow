@@ -1,23 +1,10 @@
 #!/bin/sh
 
-# if ! which stow > /dev/null 2>&1; then
-#     echo "stow is not installed"
-#     exit 1
-# fi
-
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
-echo "$XDG_CONFIG_HOME"
 
 [ ! -d "$XDG_CONFIG_HOME" ] && mkdir -p "$XDG_CONFIG_HOME"
 
-target="nvim"
+[ -h "${XDG_CONFIG_HOME}/nvim" ] && rm "${XDG_CONFIG_HOME}/nvim" && echo "rm pervious symlinks"
+[ -d "${XDG_CONFIG_HOME}/nvim" ] && echo "Erase ${XDG_CONFIG_HOME}/nvim to continue." && exit 1
 
-ln -s ./nvim "$XDG_CONFIG_HOME/nvim"
-
-# stow --no -v --adopt --restow --target="$HOME" "$target"
-# stow --no -v --stow --target="$XDG_CONFIG_HOME" "$target"
-
-# read -p "Continue? (y/Any)" should_run
-# [ "$should_run" != "y" ] && echo "O.K. No" && exit 0
-
-# stow -v --stow --target="$XDG_CONFIG_HOME" "$target"
+ln -v -s "$(pwd)/nvim" "${XDG_CONFIG_HOME}/nvim"

@@ -14,13 +14,16 @@ return {
       vim.o.background = "dark"
       vim.g.vscode_style = vim.o.background
     end,
+    config = function()
+      vim.cmd([[colorscheme vscode]])
+    end,
   },
   {
     "toppair/prospector.nvim",
     lazy = false,
     enabled = false,
     priority = 99999999999,
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    -- dependencies = { "nvim-treesitter/nvim-treesitter" },
     config = function()
       require("prospector").setup()
       vim.cmd("colorscheme prospector_darker")

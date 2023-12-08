@@ -13,7 +13,7 @@
 vim.opt.smarttab = true
 
 -- List of Indent Options
-vim.opt.smartindent = true
+vim.opt.smartindent = false -- use treesitter's feature instead
 -- automatically inserts one extra level of indentation in some case.
 
 -- set cindent		-- is more customizable, but also more strict when it comes to syntax.

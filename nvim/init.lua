@@ -1,25 +1,16 @@
 -- $XDG_CONFIG_HOME/nvim/init.lua
 
 require("user.builtin").setup()
-require("setup-lazy")
+
+require("setup-lazy").setup()
+
 require("user.autocmd").setup()
-require("fcitx").setup()
+require("setup-semi-plugins").setup()
 
--- local status_wk, wiki = pcall(require, "asciidoc-wiki")
--- if status_wk then
---   wiki.setup({
---     wiki_list = {
---       {
---         path = "~/Sync/Library/wiki",
---       },
---       {
---         path = "~/Sync/Library/hnjae.github.io/content/posts",
---       },
---     },
---     conceal_links = true,
---     key_mappings = { prefix = "s" },
---   })
--- end
+-- require("test")
 
-
-vim.keymap.set("i", "<C-e>", "<Esc>f`a")
+-- vim.cmd([[
+--   " set foldlevel=20
+--   set nofoldenable
+-- ]])
+--

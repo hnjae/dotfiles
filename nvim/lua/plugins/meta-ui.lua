@@ -1,10 +1,11 @@
 -- UI
 
-local prefix = require("val").prefix
+-- local prefix = require("val").prefix
 
 return {
   -- TODO: make following to support *.kdl, *.toml <2023-02-04, Hyunjae Kim>
   { "ap/vim-css-color" }, -- preview color
+
   -----------------------------------------------------------------------------
   -- changes vim's default ui
   -----------------------------------------------------------------------------
@@ -44,6 +45,7 @@ return {
   --   event = "VimEnter",
   --   opts = {}
   -- },
+
   -----------------------------------------------------------------------------
   -- shows things
   -----------------------------------------------------------------------------
@@ -63,11 +65,14 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter-context",
-    lazy = true,
-    ft = require("val").treesitter_fts,
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
+    lazy = false,
+    -- ft = require("val").treesitter_fts,
+    -- dependencies = {
+    --   "nvim-treesitter/nvim-treesitter",
+    -- },
+    opts = {
+      max_lines = 10,
+      -- multiline_threshold = 10,
     },
-    opts = {},
   },
 }

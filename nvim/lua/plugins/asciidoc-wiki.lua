@@ -1,17 +1,36 @@
+local dir_ = vim.fn.getenv("HOME") .. "/Projects/asciidoc-wiki.nvim"
+
 return {
-  dir = "~/Sync/Projects/asciidoc-wiki.nvim",
+  dir = dir_,
+  enabled = vim.loop.fs_stat(dir_) ~= nil,
   name = "asciidoc-wiki",
-  dev = true,
+  -- dev = true,
   opts = {
     wiki_list = {
       {
-        path = "~/Sync/Library/wiki",
+        path = "~/Library/wiki",
       },
       {
-        path = "~/Sync/Library/hnjae.github.io/content/posts",
+        path = "~/Library/wiki_test",
       },
     },
     conceal_links = true,
-    key_mappings = { prefix = "s" },
+    key_mappings = { prefix = "s", buffer = true },
   },
+  -- keys = function()
+  --
+  -- end,
+  config = function(plugin, opts)
+    local wiki = require("asciidoc-wiki")
+    local wiki_link = require("asciidoc-wiki.link")
+    wiki.setup(opts)
+
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = { "asciidoc", "asciidoctor" },
+      callback = function()
+        vim.keymap.set({'n'}, "CR", wiki_link.follow_link, { desc = "follow-wiki-link", buffer = true })
+      end,
+    })
+
+  end,
 }

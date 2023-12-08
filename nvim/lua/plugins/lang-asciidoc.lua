@@ -30,11 +30,15 @@ return {
       "html",
       "python",
       "java",
+      "kotlin",
       "sh",
       "ruby",
       "dockerfile",
       "sql",
       "c",
+      "nix",
+      "typescript",
+      "javascript",
     }
     vim.g.asciidoctor_syntax_conceal = 1
   end,

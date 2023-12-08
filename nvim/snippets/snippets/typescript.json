@@ -1,0 +1,100 @@
+{
+  "Import external module.": {
+    "prefix": "im",
+    "body": [
+      "import { $2 } from \"${1:module}\";\n$0"
+    ],
+    "description": "Import external module."
+  },
+  "for-entries": {
+    "prefix": "foren",
+    "body": [
+      "for (const [key, val] of Object.entries(${object:1}) {",
+      "\t$0",
+      "}"
+    ],
+    "description": "객체의 키·값을 순회"
+  },
+  "Interface Definition": {
+    "prefix": [
+      "iface",
+      "interface",
+      "int"
+    ],
+    "body": [
+      "interface ${1:name} {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Interface Definition"
+  },
+  "Class Definition": {
+    "prefix": [
+      "cls",
+      "class"
+    ],
+    "body": [
+      "class ${1:name} {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Class Definition"
+  },
+  "Method Definition": {
+    "prefix": [
+      "meth",
+      "method"
+    ],
+    "body": [
+      "${1:name}(${2:arguments})${3:return type} {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Method Definition"
+  },
+  "Arrow Function": {
+    "prefix": "af",
+    "body": "(${1:arguments}) => {\n\t${0}\n}"
+  },
+  "Arrow Function with return": {
+    "prefix": "afr",
+    "body": "(${1:arguments}) => {\n\treturn ${0}\n}"
+  },
+  "ASync Function": {
+    "prefix": "asf",
+    "body": "async function ${1:name}(${2:arguments}) {\n\t${0}\n}"
+  },
+  "Async Arrow Function": {
+    "prefix": "asaf",
+    "body": "async (${1:arguments}) => {\n\t${0}\n}"
+  },
+  "Async Method": {
+    "prefix": "asm",
+    "body": "async ${1:name}(${2:arguments}) {\n\t${0}\n}"
+  },
+  "export": {
+    "prefix": "ex",
+    "body": "export $0"
+  },
+  "console.log": {
+    "prefix": "log",
+    "body": "console.log($1);$0",
+    "description": "Log to the console"
+  },
+  "console.warn": {
+    "prefix": "warn",
+    "body": [
+      "console.warn($1);",
+      "$0"
+    ],
+    "description": "Log warning to the console"
+  },
+  "console.error": {
+    "prefix": "error",
+    "body": [
+      "console.error($1);",
+      "$0"
+    ],
+    "description": "Log error to the console"
+  }
+}

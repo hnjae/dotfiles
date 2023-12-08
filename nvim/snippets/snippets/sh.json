@@ -1,0 +1,16 @@
+{
+  "array (bash)": {
+    "prefix": "barr",
+    "body": "[.line-through]#${1:blabla}# $0",
+    "description": "strikethrough"
+  },
+  "for array (bash)": {
+    "prefix": "forarr",
+    "body": [
+			"for t in ${allThreads[@]}; do",
+  "./pipeline --threads $t",
+"done"
+		],
+    "description": "strikethrough"
+  }
+}

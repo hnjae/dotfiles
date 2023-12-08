@@ -198,8 +198,8 @@
     ],
     "description": "Protect call a function"
   },
-  "locpcall": {
-    "prefix": "locpca",
+  "local pcall": {
+    "prefix": ["locpca", "lp", "localpcall"],
     "body": [
       "local ${1:status}, ${2:err_or_value} = pcall(${3:function})"
     ],

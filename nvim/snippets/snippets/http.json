@@ -1,0 +1,26 @@
+{
+  "DELETE": {
+    "prefix": "de",
+    "body": "DELETE "
+  },
+  "GET": {
+    "prefix": "ge",
+    "body": "GET "
+  },
+  "PUT": {
+    "prefix": "pu",
+    "body": "PUT "
+  },
+  "POST": {
+    "prefix": "po",
+    "body": "POST "
+  },
+  "server": {
+    "prefix": "se",
+    "body": "{{server}\\}\\}$0"
+  },
+  "Content-Type: application/json": {
+    "prefix": "ctj",
+    "body": "Content-Type: application/json"
+  }
+}

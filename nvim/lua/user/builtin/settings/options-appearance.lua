@@ -10,8 +10,13 @@ if vim.fn.has("termguicolors") == 1 then
   vim.opt.termguicolors = true
 end
 
-vim.opt.guifont = { "MesloLGS NF", "h14" }
--- if vim.fn.exists("g:neovide")
--- if false and vim.fn.has('nvim-0.7') == 1 then
--- vim.opt.neovide_refresh_rate= 30
--- end
+if vim.g.neovide then
+  vim.opt.guifont = "monospace:h12"
+  -- vim.opt.guifont = "MesloLGM Nerd Font Mono:h11,monospace:h11"
+  -- vim.opt.guifont = "D2Coding:h11"
+end
+
+-- vim.opt.guifont = { "MesloLGS NF", "h2" }
+-- vim.opt.guifont = "MesloLGS NF:h11,Noto Sans Mono CJK KR:h11"
+-- vim.opt.guifont = "MesloLGS NF,Noto Sans Mono CJK KR:h11"
+-- vim.opt.guifont = "MesloLGS NF,Pretendard:h11"

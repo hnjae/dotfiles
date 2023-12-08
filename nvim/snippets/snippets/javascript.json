@@ -1,0 +1,54 @@
+{
+  "ASync Function": {
+    "prefix": "asf",
+    "body": "async function ${1:name}(${2:arguments}) {\n\t${0}\n}"
+  },
+  "Arrow Function": {
+    "prefix": "af",
+    "body": "(${1:arguments}) => {\n\t${0}\n}"
+  },
+  "Arrow Function with return": {
+    "prefix": "afr",
+    "body": "(${1:arguments}) => {\n\treturn ${0}\n}"
+  },
+  "Async Arrow Function": {
+    "prefix": "asaf",
+    "body": "async (${1:arguments}) => {\n\t${0}\n}"
+  },
+  "If Statement": {
+    "prefix": "if",
+    "body": ["if (${1:condition}) {", "\t$0", "}"],
+    "description": "If Statement"
+  },
+  "If-Else Statement": {
+    "prefix": "ifel",
+    "body": ["if (${1:condition}) {", "\t$0", "} else {", "\t", "}"],
+    "description": "If-Else Statement"
+  },
+  "else statement": {
+    "prefix": "else",
+    "body": "else {\n\t${0}\n}"
+  },
+  "else if statement": {
+    "prefix": "elif",
+    "body": "else if (${1:condition}) {\n\t${0}\n}"
+  },
+  "try/catch": {
+    "prefix": "tc",
+    "body": "try {\n\t${0}\n} catch (${1:err}) {\n\t\n}",
+    "description": "Try-Catch Statement"
+  },
+  "try/finally": {
+    "prefix": "tf",
+    "body": "try {\n\t${0}\n} finally {\n\t\n}"
+  },
+  "try/catch/finally": {
+    "prefix": "tcf",
+    "body": "try {\n\t${0}\n} catch (${1:err}) {\n\t\n} finally {\n\t\n}"
+  },
+  "catch": {
+    "prefix": "catch",
+    "body": "catch (${1:err}) {\n\t${0}\n}",
+    "description": "Catch Statement"
+  }
+}

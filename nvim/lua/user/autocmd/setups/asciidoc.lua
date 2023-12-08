@@ -5,7 +5,7 @@ local last_modified = function()
   --   return
   -- end
 
-  if vim.opt.modified:get() then
+  if vim.opt_local.modified:get() then
     local save_cur = vim.fn.getpos(".")
     -- local n = math.min(6, vim.fn.line("$"))
     vim.cmd([[
@@ -13,8 +13,6 @@ local last_modified = function()
       keepjumps exe '1,' . n . 's#^\(.\{,10}lastmod\s*: \).*#\1' .
                   \ strftime('%Y-%m-%dT%H:%M:%S%z') . '#e'
     ]])
-    -- local keepjumps_exe = "keepjumps exe " .. "'1,'" .. n .. "'s#^(.{,4}updated\\s*: ).*#\1'" .. vim.fn.strftime('%Y-%m-%dT%H:%M:%S%z') .. "'#e'"
-    -- vim.fn.execute(keepjumps_exe)
     vim.fn.histdel("search", -1)
     vim.fn.setpos(".", save_cur)
     -- vim.fn.keepjumps(exe, keepjumps_exe)
@@ -40,21 +38,30 @@ local new_template = function()
     "draft   : true",
     "---",
     "",
-    "= " .. filename,
     -- "Hyunjae Kim <hyunjae.kim@gmx.com>",
     ":toc:",
+    ":stem: latexmath",
+    ":source-highlighter: highlightjs",
+    "// :highlightjs-languages: ",
     "",
-    "",
+    "== " .. "h2",
     -- TODO: read author and email from ultisnips <2022-06-15, Hyunjae Kim>
   }
   -- print(vim.inspect(template))
   vim.fn.call(vim.fn.setline, { 1, template })
+
+  -- TODO: change cursor using neovim's api <2023-08-03>
   vim.fn.execute("normal! G")
   vim.fn.execute("normal! $")
 end
 
+local change_commentstring = function ()
+  -- NOTE: ftplugin/asciidoctor.lua 에 적는걸로는 적용이 안된다. <2023-08-03>
+  vim.opt_local.comments = "://"
+  vim.opt_local.commentstring = "// %s"
+end
+
 function M.setup()
-  -- local vimwikiauto = vim.api.nvim_create_augroup("vimwikiauto")
   local asciidoc_auto_id = vim.api.nvim_create_augroup("asciidoc-auto", {})
   vim.api.nvim_create_autocmd({
     "BufRead",
@@ -62,7 +69,10 @@ function M.setup()
   }, {
     group = asciidoc_auto_id,
     pattern = { "*.adoc" },
-    callback = new_template,
+    callback = function ()
+      new_template()
+      change_commentstring()
+    end,
   })
   vim.api.nvim_create_autocmd({
     "BufWritePre",

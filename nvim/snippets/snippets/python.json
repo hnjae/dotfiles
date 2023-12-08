@@ -1,0 +1,79 @@
+{
+  "#!/usr/bin/env python3": {
+    "prefix": "env",
+    "body": "#!/usr/bin/env python3\n$0",
+    "description": "Adds shebang line for default python interpreter."
+  },
+  "if __name__ == \"__main__\"": {
+    "prefix": "ifm",
+    "body": "if __name__ == \"__main__\":\n\t${1:main()}$0",
+    "description": "Create implicitly all the code at the top level using the __name__ special variable."
+  },
+  "import": {
+    "prefix": "im",
+    "body": "import ${1:package/module}$0",
+    "description": "Import a package or module"
+  },
+  "from ... import ...": {
+    "prefix": "fim",
+    "body": "from ${1:package/module} import ${2:names}$0",
+    "description": "Import statement that allows individual objects from the module to be imported directly into the caller’s symbol table."
+  },
+  "docstring-short": {
+    "prefix": "doc",
+    "body": [
+      "\"\"\"${0}.\"\"\""
+    ],
+    "description": "Oneline docstring"
+  },
+  "docstring-full": {
+    "prefix": "docf",
+    "body": [
+      "\"\"\"",
+      "$0",
+      ":param int arg1: description",
+      ":raise: ValueError if arg1 blabla",
+      ":return: description",
+      ":rtype: bool",
+      "",
+      ":example:",
+      ">>> a=1",
+      ">>> fucn_name(a)",
+      "True",
+      "\"\"\""
+    ],
+    "description": "RST Style docstring"
+  },
+  "ignore-rule": {
+    "prefix": "noqa",
+    "body": [
+      "# noqa: ${0:rule-name}"
+    ],
+    "description": "noqa"
+  },
+  "iso8601_compact": {
+    "prefix": "iso8601",
+    "body": ["%Y%m%dT%H%M%S%z"],
+    "description": "use with strftime"
+  },
+  "time": {
+    "prefix": "time",
+    "body": ["datetime.now(timezone.utc)"],
+    "description": "Oneline docstring"
+  },
+  "timeinsec": {
+    "prefix": "timeinsec",
+    "body": ["datetime.now(timezone.utc).replace(microsecond=0)"],
+    "description": "Oneline docstring"
+  },
+  "localtime": {
+    "prefix": "localtime",
+    "body": ["datetime.now(timezone.utc).astimezone()"],
+    "description": "Oneline docstring"
+  },
+  "localtimeinsec": {
+    "prefix": "localtimeinsec",
+    "body": ["datetime.now(timezone.utc).replace(microsecond=0).astimezone()"],
+    "description": "Oneline docstring"
+  }
+}

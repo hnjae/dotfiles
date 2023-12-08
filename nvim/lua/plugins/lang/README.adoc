@@ -1,0 +1,15 @@
+---
+title   : README
+date    : 2023-06-07T22:23:30+0900
+lastmod : 2023-06-09T14:12:44+0900
+isCJKLanguage : true
+draft   : false
+---
+
+= README
+:toc:
+
+``.get_null_ls_sources(null_ls, null_ls_utils)``::
+  returns sources that null-ls will use to setup.
+``.setup_lspconfig(lspconfig, opts)``::
+  setup lspconfig

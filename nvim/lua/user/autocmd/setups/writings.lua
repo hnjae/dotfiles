@@ -5,7 +5,7 @@ M.setup = function()
     return
   end
   vim.api.nvim_create_autocmd({ "FileType" }, {
-    pattern = { "text", "markdown", "vimwiki", "org", "tex", "plaintex", "man", "asciidoc", "asciidoctor" },
+    pattern = { "markdown", "vimwiki", "org", "tex", "plaintex", "man", "asciidoc", "asciidoctor" },
     callback = function()
       vim.cmd([[
           " OS
@@ -55,7 +55,6 @@ M.setup = function()
           iabbr <buffer> fat16 FAT16
           iabbr <buffer> fat32 FAT32
 
-
           " License
           iabbr <buffer> gnu GNU
           iabbr <buffer> gpl GPL
@@ -75,45 +74,38 @@ M.setup = function()
           iabbr <buffer> iab IAB
 
           " Protocol
-          " OSI 1
           iabbr <buffer> usb USB
           iabbr <buffer> dsl DSL
-          " OSI 2
           iabbr <buffer> ppp PPP
           iabbr <buffer> mac MAC
           iabbr <buffer> atm ATM
           iabbr <buffer> arp ARP
           iabbr <buffer> cslip CSLIP
           iabbr <buffer> slip SLIP
-          " OSI 3
           iabbr <buffer> ip IP
           iabbr <buffer> icmp ICMP
           iabbr <buffer> igmp IGMP
-          " OSI 4
           iabbr <buffer> tcp TCP
           iabbr <buffer> udp UDP
           iabbr <buffer> sctp SCTP
           iabbr <buffer> dccp DCCP
           iabbr <buffer> spx SPX
-          " OSI 5
           iabbr <buffer> pptp PPTP
           iabbr <buffer> rtp RTP
           iabbr <buffer> socks SOCKS
           iabbr <buffer> spdy SPDY
-          " OSI 6
-          iabbr <buffer> mime MIME
-          " OSI 7
+          " iabbr <buffer> mime MIME
           iabbr <buffer> dns DNS
           iabbr <buffer> nntp NNTP
           iabbr <buffer> sip SIP
           iabbr <buffer> dhcp DHCP
           iabbr <buffer> ntp NTP
           iabbr <buffer> nfs NFS
-          iabbr <buffer> http HTTP
-          iabbr <buffer> https HTTPS
-          iabbr <buffer> FTP FTP
-          iabbr <buffer> FTPS FTPS
-          iabbr <buffer> SFTP SFTP
+          " iabbr <buffer> http HTTP
+          " iabbr <buffer> https HTTPS
+          " iabbr <buffer> FTP FTP
+          " iabbr <buffer> FTPS FTPS
+          " iabbr <buffer> SFTP SFTP
           iabbr <buffer> pop3 POP3
           iabbr <buffer> imap IMAP
           iabbr <buffer> smtp SMTP
@@ -125,18 +117,18 @@ M.setup = function()
           iabbr <buffer> ldap LDAP
 
           " Codec
-          iabbr <buffer> mp4 MP4
-          iabbr <buffer> ogg Ogg
+          " iabbr <buffer> mp4 MP4
+          " iabbr <buffer> ogg Ogg
           iabbr <buffer> ldac LDAC
           iabbr <buffer> sbc SBC
           iabbr <buffer> abpx aptX
           iabbr <buffer> speex Speex
           iabbr <buffer> aac AAC
           iabbr <buffer> mp2 MP2
-          iabbr <buffer> mp3 MP3
-          iabbr <buffer> opus Opus
+          " iabbr <buffer> mp3 MP3
+          " iabbr <buffer> opus Opus
           iabbr <buffer> vorbis Vorbis
-          iabbr <buffer> flac FLAC
+          " iabbr <buffer> flac FLAC
           iabbr <buffer> xvid XviD
           iabbr <buffer> divx DivX
           iabbr <buffer> h264 H.264
@@ -146,10 +138,10 @@ M.setup = function()
           iabbr <buffer> vp8 VP8
           iabbr <buffer> vp9 VP9
           iabbr <buffer> theora Theora
-          iabbr <buffer> webm WebM
-          iabbr <buffer> webp WebP
-          iabbr <buffer> png PNG
-          iabbr <buffer> gif GIF
+          " iabbr <buffer> webm WebM
+          " iabbr <buffer> webp WebP
+          " iabbr <buffer> png PNG
+          " iabbr <buffer> gif GIF
           iabbr <buffer> jpeg JPEG
 
           " 기업, 단체
@@ -157,46 +149,13 @@ M.setup = function()
           iabbr <buffer> xiph Xiph
           iabbr <buffer> google Google
           iabbr <buffer> facebook Facebook
+          iabbr <buffer> twitter Twitter
 
           " 일반명사
           iabbr <buffer> osi OSI
           iabbr <buffer> dvd DVD
           iabbr <buffer> ngo NGO
           iabbr <buffer> acl ACL
-          iabbr <buffer> twitter Twitter
-
-          " language
-          iabbr <buffer> kotlin Kotlin
-          iabbr <buffer> perl Perl
-          iabbr <buffer> lisp Lisp
-          iabbr <buffer> luajit LuaJIT
-          iabbr <buffer> luavela LuaVela
-          iabbr <buffer> cobol COBOL
-          iabbr <buffer> swift Swift
-          iabbr <buffer> fortran Fortran
-          iabbr <buffer> pascal Pascal
-          iabbr <buffer> javascript JavaScript
-          iabbr <buffer> typescript TypeScript
-          iabbr <buffer> livescript LiveScript
-          iabbr <buffer> purescript PureScript
-          iabbr <buffer> haskell Haskell
-          iabbr <buffer> c# C#
-          iabbr <buffer> c# C#
-          iabbr <buffer> c++ C++
-          iabbr <buffer> cpp C++
-          iabbr <buffer> perl Perl
-          iabbr <buffer> php PHP
-          iabbr <buffer> css CSS
-          iabbr <buffer> html HTML
-          iabbr <buffer> xml XML
-          iabbr <buffer> yaml YAML
-          iabbr <buffer> sgml SGML
-          iabbr <buffer> viml VimL
-          iabbr <buffer> vala Vala
-          iabbr <buffer> verilog Verilog
-          iabbr <buffer> clojure Clojure
-          iabbr <buffer> julia Julia
-          iabbr <buffer> r R
 
           " Unicode
           iabbr <buffer> -> →
