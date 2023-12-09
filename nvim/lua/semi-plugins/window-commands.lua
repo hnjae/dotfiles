@@ -2,8 +2,7 @@ local M = {}
 
 -- iterate only limited buffer
 
-local ALLOWED_FTS = { ["help"] = true }
--- local DISALLOWED_FTS = { ["notify"] = true, }
+local ALLOWED_FTS = { help = true, netrw = true }
 
 M.w = function()
   local initial_winnr = vim.fn.winnr()
