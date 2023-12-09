@@ -1,5 +1,6 @@
-local prefix = require("val").prefix["toggleterm-send"]
-local prefix_focus = require("val").prefix["focus"]
+local prefix = require("val").prefix
+local map_keyword = require("val").map_keyword
+local prefix_send = prefix["toggleterm-send"]
 
 local spec = {
   "akinsho/toggleterm.nvim",
@@ -20,32 +21,32 @@ local spec = {
     { "<F4>", nil, desc = "toggleterm" },
     -- { prefix, nil, desc = "toggleterm"},
     {
-      prefix .. "l",
+      prefix_send .. "l",
       "<cmd>ToggleTermSendCurrentLine<CR>",
       mode = { "n" },
       desc = "send-line",
     },
     -- { prefix .. "b", ":<C-u>%>ToggleTermSendCurrentLine<CR>", mode = { "n" }, desc = "send-buffer" },
     {
-      prefix .. "b",
+      prefix_send .. "b",
       "<C-\\><C-n>ggVG:<C-u>'<,'>ToggleTermSendVisualLines<CR>",
       mode = { "n" },
       desc = "send-buffer",
     },
     {
-      prefix .. "l",
+      prefix_send .. "l",
       ":<C-u>'<,'>ToggleTermSendVisualLines<CR>",
       mode = { "x" },
       desc = "send-visual-lines",
     },
     {
-      prefix .. "s",
+      prefix_send .. "s",
       ":<C-u>'<,'>ToggleTermSendVisualSelection<CR>",
       mode = { "x" },
       desc = "send-visual-selection",
     },
     {
-      prefix_focus .. "t",
+      prefix.focus .. map_keyword.terminal,
       function()
         local len_winnr = vim.fn.winnr("$")
 

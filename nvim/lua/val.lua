@@ -22,6 +22,11 @@ M.prefix = {
   open = "<F6>",
 }
 
+M.map_keyword = {
+  terminal = "t",
+  explorer = "e"
+}
+
 -- TODO: root_patterns을 각 언어별로 구분해서 선언할 것 <2023-05-18>
 -- null-ls 가 잘 지원하는지 모르겠다.
 M.root_patterns = {
