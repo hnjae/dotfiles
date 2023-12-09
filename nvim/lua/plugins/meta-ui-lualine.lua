@@ -13,7 +13,6 @@ return {
       theme = "codedark"
     end
 
-
     local status_luasnip, luasnip = pcall(require, "luasnip")
     local luasnip_opt = {
       function()
@@ -27,21 +26,18 @@ return {
       cond = function()
         return status_luasnip
       end,
-      color = 'Pmenu',
+      color = "Pmenu",
       -- Automatically updates active buffer color to match color of other components (will be overidden if buffers_color is set)
       use_mode_colors = false,
     }
 
     local buffers_opt = {
-      'buffers',
+      "buffers",
       mode = 4, -- show buffer name + buffer number
       buffers_color = {
-        active = 'BufferCurrent',
-        inactive = 'BufferInactive',
+        active = "BufferCurrent",
+        inactive = "BufferInactive",
       },
-      -- symbols = {
-      --   modified = ' '
-      -- }
     }
 
     local spell_opt = {
@@ -74,53 +70,39 @@ return {
       -- Lsp server name .
       function()
         local msg = "No Active LSP"
-        -- local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
-        -- local buf_ft = vim.opt_local.filetype:get()
 
         local clients = vim.lsp.get_active_clients({ bufnr = 0 })
         if next(clients) == nil then
           return msg
         end
 
-        -- local ft_clients = {}
-        -- local num_ft_clients = 0
+        local names = {}
         --@type string
-        local modified_msg = ""
-        local is_first_client = true
+        local client_name
         for _, client in ipairs(clients) do
+          client_name = client.name:sub(-16, -1) == "_language_server" and client.name:sub(1, -17) .. "_ls"
+            or client.name
 
-          local client_name = nil
-          if client.name:sub(-16, -1) == "_language_server" then
-            client_name = client.name:sub(1, -17) .. "_ls"
-          -- elseif client.name:sub(-2, -1) == "ls" and client.name:sub(-3,-3) ~= "_" then
-            -- TODO: use regex <2023-06-09>
-            -- client_name = client.name:sub(1,-3) .. "_ls"
-          else
-            client_name = client.name
-          end
-
-          if is_first_client then
-            modified_msg = client_name
-            is_first_client = false
-          else
-            modified_msg = modified_msg .. ", " .. client_name
-          end
+          table.insert(names, client_name)
         end
 
-        if modified_msg ~= "" then
-          return modified_msg
+        if next(names) == nil then
+          return msg
         end
 
-        return msg
+        return table.concat(names, ", ")
       end,
       icon = "",
       cond = function()
         return (next(vim.lsp.get_active_clients()) ~= nil)
       end,
-      -- color = { fg = '#ffffff', gui = 'bold' },
     }
 
     local opt_extensions = {
+      -- pre-configured-extensions
+      "quickfix",
+      -- 'nvim-dap-ui',
+      -- help
       {
         sections = {
           lualine_a = {
@@ -141,6 +123,7 @@ return {
         },
         filetypes = { "help" },
       },
+      -- for non editable filetypes
       {
         sections = {
           lualine_a = {
@@ -163,12 +146,12 @@ return {
           "dbui",
           "dbout",
           "startify",
-          "toggleterm",
           "alpha",
-          -- symbols-outline
           "Outline",
+          "netrw",
         },
       },
+      -- NvimTree
       {
         sections = {
           lualine_a = {
@@ -191,6 +174,7 @@ return {
         },
         filetypes = { "NvimTree" },
       },
+      -- fugitive
       {
         sections = {
           lualine_a = { "mode" },
@@ -218,8 +202,6 @@ return {
         },
         filetypes = { "fugitive" },
       },
-      "quickfix",
-      -- 'nvim-dap-ui',
     }
 
     local opts = {
@@ -229,7 +211,7 @@ return {
         -- component_separators = { left = '', right = '' },
         component_separators = { left = "|", right = "|" },
         section_separators = { left = "", right = "" },
-        disabled_filetypes = {},     -- Filetypes to disable lualine for.
+        disabled_filetypes = {}, -- Filetypes to disable lualine for.
         always_divide_middle = true, -- When set to true, left sections i.e. 'a','b' and 'c'
         -- can't take over the entire statusline even
         -- if neither of 'x', 'y' or 'z' are present.
@@ -244,8 +226,6 @@ return {
         lualine_x = { spell_opt, lsp_opt, encoding_opt, fileformat_opt, "filetype" },
         lualine_y = { "progress" },
         lualine_z = { "location" },
-        -- lualine_y = {},
-        -- lualine_z = {  'progress', 'location' }
       },
       inactive_sections = {
         lualine_a = {},
@@ -256,11 +236,7 @@ return {
         lualine_z = {},
       },
       tabline = {
-        lualine_a = { luasnip_opt, },
-        -- lualine_b = {  },
-        -- lualine_c = { 'filename' },
-        -- lualine_c = {tabline.tabline_buffers },
-        -- lualine_x = {tabline.tabline_tabs},
+        lualine_a = { luasnip_opt },
         lualine_y = { buffers_opt },
         lualine_z = { "tabs" },
       },
