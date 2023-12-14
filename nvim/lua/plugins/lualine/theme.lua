@@ -6,7 +6,6 @@
 -- * normal
 -- * inactive
 -- * terminal
---
 
 if vim.g.colors_name == nil then
   return "auto"

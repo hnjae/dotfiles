@@ -17,7 +17,7 @@ return {
         component_separators = { left = "𑗅", right = "𑗅" },
         -- section_separators = { left = "", right = "" },
         section_separators = { left = "", right = "" },
-        disabled_filetypes = {},     -- Filetypes to disable lualine for.
+        disabled_filetypes = {}, -- Filetypes to disable lualine for.
         always_divide_middle = true, -- When set to true, left sections i.e. 'a','b' and 'c'
         -- can't take over the entire statusline even
         -- if neither of 'x', 'y' or 'z' are present.
@@ -29,7 +29,11 @@ return {
         lualine_a = {
           require("plugins.lualine.components.mode"),
         },
-        lualine_b = { "diagnostics", "branch", "diff" },
+        lualine_b = {
+          require("plugins.lualine.components.diagnostics"),
+          "branch",
+          "diff",
+        },
         lualine_c = { "filename" },
         lualine_x = {
           require("plugins.lualine.components.null-ls"),
