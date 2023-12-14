@@ -1,5 +1,5 @@
 -- UI
-vim.opt_local.colorcolumn = "0"
+-- vim.opt_local.colorcolumn = "0"
 
 --  Tabs
 -- syntatic's chktex will not work if tabstop is not 8
