@@ -12,11 +12,11 @@ return {
       options = {
         icons_enabled = true,
         theme = require("plugins.lualine.theme"),
-        -- component_separators = { left = '', right = '' },
-        component_separators = { left = "|", right = "|" },
+        -- component_separators = { left = "¦", right = "¦" },
+        -- component_separators = { left = "❘", right = "❘" },
+        component_separators = { left = "𑗅", right = "𑗅" },
         -- section_separators = { left = "", right = "" },
         section_separators = { left = "", right = "" },
-        -- component_separators = { left = "", right = "" },
         disabled_filetypes = {},     -- Filetypes to disable lualine for.
         always_divide_middle = true, -- When set to true, left sections i.e. 'a','b' and 'c'
         -- can't take over the entire statusline even
@@ -32,13 +32,15 @@ return {
         lualine_b = { "diagnostics", "branch", "diff" },
         lualine_c = { "filename" },
         lualine_x = {
-          require("plugins.lualine.components.spell"),
+          require("plugins.lualine.components.null-ls"),
           require("plugins.lualine.components.lsp"),
+          require("plugins.lualine.components.spell"),
+        },
+        lualine_y = {
           require("plugins.lualine.components.encoding"),
           require("plugins.lualine.components.fileformat"),
           "filetype",
         },
-        lualine_y = {},
         lualine_z = { "location", "progress" },
       },
       inactive_sections = {
