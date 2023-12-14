@@ -2,13 +2,13 @@ local sources = require("null-ls.sources")
 
 return {
   function()
-    local msgs = {}
+    local names = {}
     local filetype = vim.api.nvim_buf_get_option(0, "filetype")
     for _, source in ipairs(sources.get_available(filetype)) do
-      table.insert(msgs, source.name)
+      table.insert(names, source.name)
     end
 
-    return table.concat(msgs, ", ")
+    return table.concat(names, ", ")
   end,
   icon = "󰟢",
   cond = function()

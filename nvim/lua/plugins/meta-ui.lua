@@ -53,14 +53,14 @@ return {
     -- shows indent line
     "lukas-reineke/indent-blankline.nvim",
     lazy = true,
-    event = { "BufWritePost", "BufReadPost" },
+    event = { "BufNewFile", "BufReadPost" },
   },
   {
     -- shows marks
     "chentoast/marks.nvim",
     lazy = true,
     enabled = true,
-    event = { "BufWritePost", "BufReadPost" },
+    event = { "BufNewFile", "BufReadPost" },
     opts = {},
   },
   {

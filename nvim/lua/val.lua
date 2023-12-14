@@ -24,7 +24,7 @@ M.prefix = {
 
 M.map_keyword = {
   terminal = "t",
-  explorer = "e"
+  explorer = "e",
 }
 
 -- TODO: root_patterns을 각 언어별로 구분해서 선언할 것 <2023-05-18>

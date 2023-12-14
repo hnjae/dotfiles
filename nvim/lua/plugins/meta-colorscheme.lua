@@ -1,5 +1,6 @@
 -- colorscheme
 -- https://github.com/folke/lsp-colors.nvim
+
 return {
   {
     "Mofiqul/vscode.nvim",

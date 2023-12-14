@@ -1,7 +1,7 @@
 ---
 title   : README
 date    : 2023-12-05T20:24:00+0900
-lastmod : 2023-12-11T14:15:02+0900
+lastmod : 2023-12-11T16:20:23+0900
 isCJKLanguage : true
 draft   : false
 ---
@@ -11,6 +11,6 @@ draft   : false
 :source-highlighter: highlightjs
 // :highlightjs-languages:
 
-NOTE: ftplugin 보다 .editorconfig 설정이 우선됨. nvim 0.9.4 <2023-12-05>
+NOTE: ftplugin이 .editorconfig 이전에 로드 됨. nvim 0.9.4 <2023-12-05>
 
 현재 파일의 Filetype 보기 위해서: `:set filetype?` or `:set ft?`
