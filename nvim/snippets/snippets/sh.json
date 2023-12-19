@@ -7,10 +7,50 @@
   "for array (bash)": {
     "prefix": "forarr",
     "body": [
-			"for t in ${allThreads[@]}; do",
-  "./pipeline --threads $t",
-"done"
-		],
+      "for t in ${allThreads[@]}; do",
+      "./pipeline --threads $t",
+      "done"
+    ],
     "description": "strikethrough"
+  },
+  "confirm (POSIX)": {
+    "prefix": "confirm",
+    "body": [
+      "confirm() {",
+      "\techo \"Are you sure? [YES/Any]: \\c\"",
+      "\tread -r response",
+      "\tcase \"\\$response\" in",
+      "\t\"YES\")",
+      "\t\ttrue",
+      "\t\t;;",
+      "\t*)",
+      "\t\tfalse",
+      "\t\t;;",
+      "\tesac",
+      "}$0"
+    ],
+    "description": "confirm user"
+  },
+  "confirm (bash)": {
+    "prefix": "confirmbash",
+    "body": [
+      "confirm() {",
+      "\tread -n 1 -r -p \"Are you sure? [y/Any]\" response",
+      "\tcase \"\\$response\" in",
+      "\t[yY])",
+      "\t\ttrue",
+      "\t\t;;",
+      "\t*)",
+      "\t\tfalse",
+      "\t\t;;",
+      "\tesac",
+      "}$0"
+    ],
+    "description": "confirm user"
+  },
+  "sete (bash)": {
+    "prefix": "sete",
+    "body": "set -e",
+    "description": "exit when error occur"
   }
 }

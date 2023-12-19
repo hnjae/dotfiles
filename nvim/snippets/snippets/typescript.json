@@ -2,7 +2,14 @@
   "Import external module.": {
     "prefix": "im",
     "body": [
-      "import { $2 } from \"${1:module}\";\n$0"
+      "import { $0 } from \"${1:module}\";"
+    ],
+    "description": "Import external module."
+  },
+  "Import external module (without curly brackets)": {
+    "prefix": "imx",
+    "body": [
+      "import $0 from \"${1:module}\";"
     ],
     "description": "Import external module."
   },
@@ -73,7 +80,13 @@
     "body": "async ${1:name}(${2:arguments}) {\n\t${0}\n}"
   },
   "export": {
-    "prefix": "ex",
+    "prefix": [
+      "ex",
+      "exp",
+      "expo",
+      "expor",
+      "export"
+    ],
     "body": "export $0"
   },
   "console.log": {
@@ -96,5 +109,34 @@
       "$0"
     ],
     "description": "Log error to the console"
+  },
+  "If Statement": {
+    "prefix": "if",
+    "body": [
+      "if (${1:condition}) {",
+      "\t$0",
+      "}"
+    ],
+    "description": "If Statement"
+  },
+  "If-Else Statement": {
+    "prefix": "ifelse",
+    "body": [
+      "if (${1:condition}) {",
+      "\t$0",
+      "} else {",
+      "\t",
+      "}"
+    ],
+    "description": "If-Else Statement"
+  },
+  "Else Statement": {
+    "prefix": "else",
+    "body": [
+      "else {",
+      "\t",
+      "}"
+    ],
+    "description": "(If-)Else Statement"
   }
 }

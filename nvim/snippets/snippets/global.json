@@ -14,7 +14,11 @@
     "description": "Write todo"
   },
   "ISO Date": {
-    "prefix": ["diso", "dateiso", "isodate"],
+    "prefix": [
+      "diso",
+      "dateiso",
+      "isodate"
+    ],
     "body": [
       "${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}T${CURRENT_HOUR}:${CURRENT_MINUTE}:${CURRENT_SECOND}"
     ],
@@ -22,12 +26,16 @@
   },
   "date": {
     "prefix": "date",
-    "body": ["${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}"],
+    "body": [
+      "${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}"
+    ],
     "description": "Put the date in (Y-m-D) format"
   },
   "time in H:M:S": {
     "prefix": "time",
-    "body": ["${CURRENT_HOUR}:${CURRENT_MINUTE}:${CURRENT_SECOND}"],
+    "body": [
+      "${CURRENT_HOUR}:${CURRENT_MINUTE}:${CURRENT_SECOND}"
+    ],
     "description": "Put the time in (H:M:S) format"
   }
 }
