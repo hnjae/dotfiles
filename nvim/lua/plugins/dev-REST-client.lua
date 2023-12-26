@@ -1,21 +1,10 @@
 local prefix = require("val").prefix.lang
 
--- or use nvim_buf_set_keymap
-vim.api.nvim_create_autocmd({ "FileType" }, {
-  pattern = { "http" },
-  -- group = au_id,
-  desc = "Set keymaps for rest.nvim",
-  callback = function()
-    vim.keymap.set("n", prefix .. "r", "<Plug>RestNvim", { noremap = true, silent = true, buffer = 0 })
-    vim.keymap.set("n", prefix .. "R", "<Plug>RestNvimPreview", { noremap = true, silent = true, buffer = 0 })
-    vim.keymap.set("n", prefix .. "l", "<cmd>RestLog<CR>", { noremap = true, silent = true, buffer = 0 })
-  end,
-})
-
 return {
-  "rest-nvim/rest.nvim",
+  [1] = "rest-nvim/rest.nvim",
   requires = { "nvim-lua/plenary.nvim" },
-  lazy = false,
+  lazy = true,
+  ft = { "http" },
   opts = {
     highlight = {
       enabled = true,
@@ -33,6 +22,10 @@ return {
       },
     },
   },
-  ft = { "http" },
   cmd = { "RestLog", "RestSelectEnv" },
+  keys = {
+    { [1] = prefix .. "r", [2] = "<Plug>RestNvim", ft = "http", desc = "RestNvim" },
+    { [1] = prefix .. "R", [2] = "<Plug>RestNvimPreview", ft = "http", desc = "RestNvimPreview" },
+    { [1] = prefix .. "g", [2] = "<cmd>RestLog<CR>", ft = "http", desc = "RestLog" },
+  },
 }
