@@ -1,16 +1,18 @@
 -- UI
-
--- local prefix = require("val").prefix
+--
+-- TODO: check https://gitlab.com/HiPhish/rainbow-delimiters.nvim <2023-12-26>
 
 return {
   -- TODO: make following to support *.kdl, *.toml <2023-02-04, Hyunjae Kim>
+  -- TODO: check: https://github.com/brenoprata10/nvim-highlight-colors
   { "ap/vim-css-color" }, -- preview color
 
   -----------------------------------------------------------------------------
   -- changes vim's default ui
   -----------------------------------------------------------------------------
   {
-    "rcarriga/nvim-notify",
+    -- alternative:  "vigoux/notifier.nvim",
+    [1] = "rcarriga/nvim-notify",
     lazy = true,
     enabled = true,
     event = "VimEnter",
@@ -20,59 +22,57 @@ return {
       stages = "static",
       -- stages = "fade_in_fade_out",
     },
-    keys = {{"z" .. "n", nil, desc="noti-dismiss"}},
+    keys = { { [1] = "z" .. "n", [2] = nil, desc = "noti-dismiss" } },
     config = function(plugin, opts)
       local notify = require("notify")
       notify.setup(opts)
       vim.notify = notify
 
       local rhsmap = {
-        ["noti-dismiss"] = notify.dismiss
+        ["noti-dismiss"] = notify.dismiss,
       }
 
       for _, key in pairs(plugin.keys) do
-        vim.keymap.set("n", key[1], rhsmap[key.desc], {desc=key.desc})
+        vim.keymap.set("n", key[1], rhsmap[key.desc], { desc = key.desc })
       end
-    end
-    -- config = function(_, opts)
-    --   -- replace builtin notify
-    -- end,
+    end,
   },
-  -- {
-  --   "vigoux/notifier.nvim",
-  --   lazy = true,
-  --   enabled = false,
-  --   event = "VimEnter",
-  --   opts = {}
-  -- },
 
   -----------------------------------------------------------------------------
   -- shows things
   -----------------------------------------------------------------------------
   {
     -- shows indent line
-    "lukas-reineke/indent-blankline.nvim",
+    [1] = "lukas-reineke/indent-blankline.nvim",
     lazy = true,
     event = { "BufNewFile", "BufReadPost" },
+    main = "ibl",
+    opts = {},
   },
   {
     -- shows marks
-    "chentoast/marks.nvim",
+    [1] = "chentoast/marks.nvim",
     lazy = true,
     enabled = true,
     event = { "BufNewFile", "BufReadPost" },
     opts = {},
   },
   {
-    "nvim-treesitter/nvim-treesitter-context",
+    [1] = "nvim-treesitter/nvim-treesitter-context",
     lazy = false,
-    -- ft = require("val").treesitter_fts,
-    -- dependencies = {
-    --   "nvim-treesitter/nvim-treesitter",
-    -- },
+    dependencies = {
+      [1] = "nvim-treesitter/nvim-treesitter",
+    },
     opts = {
-      max_lines = 10,
-      -- multiline_threshold = 10,
+      max_lines = 3,
     },
   },
+  {
+    [1] = "HiPhish/rainbow-delimiters.nvim",
+    url = "https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
+    lazy = false,
+    dependencies = {
+      [1] = "nvim-treesitter/nvim-treesitter",
+    },
+  }
 }
