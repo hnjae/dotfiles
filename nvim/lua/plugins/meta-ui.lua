@@ -1,6 +1,4 @@
 -- UI
---
--- TODO: check https://gitlab.com/HiPhish/rainbow-delimiters.nvim <2023-12-26>
 
 return {
   -- TODO: make following to support *.kdl, *.toml <2023-02-04, Hyunjae Kim>
@@ -47,7 +45,26 @@ return {
     lazy = true,
     event = { "BufNewFile", "BufReadPost" },
     main = "ibl",
-    opts = {},
+    opts = {
+      scope = {
+        enabled = false,
+        -- highlight = require('rainbow-delimiters.default').highlight
+      },
+    },
+    -- config = function(_, opts)
+    --   local hooks = require("ibl.hooks")
+    --   require("ibl").setup(opts)
+    --   hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
+    -- end,
+  },
+  {
+    [1] = "HiPhish/rainbow-delimiters.nvim",
+    url = "https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
+    lazy = true,
+    event = { "BufNewFile", "BufReadPost" },
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+    },
   },
   {
     -- shows marks
@@ -67,12 +84,4 @@ return {
       max_lines = 3,
     },
   },
-  {
-    [1] = "HiPhish/rainbow-delimiters.nvim",
-    url = "https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
-    lazy = false,
-    dependencies = {
-      [1] = "nvim-treesitter/nvim-treesitter",
-    },
-  }
 }
