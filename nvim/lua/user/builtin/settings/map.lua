@@ -70,7 +70,8 @@ vim.keymap.set(
 
 -------------------------------------------------------------------
 vim.keymap.set("n", "<Leader><Leader>", "za", { desc = "toggle-fold" })
-vim.keymap.set("n", "ZA", "<cmd>wa<CR>", { desc = "save" })
+vim.keymap.set("n", prefix.close .. "A", "<cmd>wa<CR>", { desc = "write-all" })
+vim.keymap.set("n", prefix.close .. "b", "<cmd>bd<CR>", { desc = "buffer-delete" })
 vim.keymap.set("n", prefix.close .. map_keyword.lsp, function()
   for _, buf_client in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
     buf_client.stop()
