@@ -1,6 +1,7 @@
 -- telescope
 local val = require("val")
 local prefix = val.prefix
+local map_keyword = val.map_keyword
 
 return {
   [1] = "nvim-telescope/telescope.nvim",
@@ -10,8 +11,8 @@ return {
       -- requires cmake, make, gcc or clang
       [1] = "nvim-telescope/telescope-fzf-native.nvim",
       build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release"
-        .. " && cmake --build build --config Release"
-        .. " && cmake --install build --prefix build",
+          .. " && cmake --build build --config Release"
+          .. " && cmake --install build --prefix build",
       cond = vim.fn.executable("cmake") == 1,
       enabled = false,
       module = true,
@@ -52,27 +53,49 @@ return {
 
     --@type LazyKeys[]
     local lazykeys = {
-      -- lazy load on following keys
-      -- { prefix.lang .. "t", nil, desc = "+telescope-lsp" },
+      { [1] = prefix.finder .. map_keyword.snippet, [2] = nil,                  desc = "luasnip" },
+      -- { [1] = "g" .. "l",                             [2] = t_builtin.current_buffer_tags, desc = "telescope-symbols (tags)" },
+
       -- replace default behavior
-      { [1] = "<F1>", [2] = t_builtin.help_tags, desc = "help-tags" },
-      { [1] = prefix.finder .. ":", [2] = t_builtin.commands, desc = "commands" },
+      { [1] = "<F1>",                               [2] = t_builtin.help_tags,  desc = "help-tags" },
+
+      --
+      { [1] = prefix.finder .. map_keyword.marks,   [2] = t_builtin.marks,      desc = "marks" },
+      { [1] = prefix.finder .. "0",                 [2] = "<cmd>Telescope<CR>", desc = "builtins" },
+      {
+        [1] = prefix.finder .. map_keyword.marks,
+        [2] = t_builtin.marks,
+        desc = "telescope-marks",
+      },
+      {
+        [1] = prefix.finder .. map_keyword.line,
+        [2] = t_builtin.current_buffer_fuzzy_find,
+        desc = "telescope-line",
+      },
+      {
+        [1] = prefix.finder .. map_keyword.symbols,
+        [2] = t_builtin.treesitter,
+        desc = "telescope-symbols (treesitter)",
+      },
+      {
+        [1] = prefix.finder .. string.upper(map_keyword.symbols),
+        [2] = t_builtin.lsp_document_symbols,
+        desc = "telescope-symbols (lsp)",
+      },
+
+      --
+      { [1] = prefix.finder .. ":", [2] = t_builtin.commands,  desc = "commands" },
       { [1] = prefix.finder .. "R", [2] = t_builtin.registers, desc = "registers" },
-      { [1] = "g" .. val.map_keyword.marks, [2] = t_builtin.marks, desc = "marks" },
-      { [1] = prefix.finder .. val.map_keyword.marks, [2] = t_builtin.marks, desc = "marks" },
-      { [1] = prefix.finder .. "l", [2] = t_builtin.current_buffer_fuzzy_find, desc = "line" },
-      -- { prefix.finder .. "j", t_builtin.jumplist, desc = "jumplist" },
-      { [1] = prefix.finder .. "q", [2] = t_builtin.quickfix, desc = "quickfix" },
+      { [1] = prefix.finder .. "q", [2] = t_builtin.quickfix,  desc = "quickfix" },
+
+      -- +history
+      { [1] = prefix.finder .. "h", [2] = nil,                 desc = "+history" },
       {
         [1] = prefix.finder .. "hc",
         [2] = t_builtin.command_history,
         desc = "command-history",
       },
-      {
-        [1] = prefix.finder .. "hs",
-        [2] = t_builtin.search_history,
-        desc = "search-history",
-      },
+      { [1] = prefix.finder .. "hs", [2] = t_builtin.search_history, desc = "search-history" },
       {
         [1] = prefix.finder .. "hk",
         [2] = t_builtin.keymaps,
@@ -88,7 +111,9 @@ return {
         [2] = nil,
         desc = "notify-history",
       },
-      { [1] = prefix.finder .. "Gf", [2] = t_builtin.git_files, desc = "git-files" },
+
+      -- git
+      { [1] = prefix.finder .. "Gf", [2] = t_builtin.git_files,      desc = "git-files" },
       {
         [1] = prefix.finder .. "Gc",
         [2] = t_builtin.git_commits,
@@ -99,44 +124,22 @@ return {
         [2] = t_builtin.git_bcommits,
         desc = "git-commits-cur-buffer",
       },
-      { [1] = prefix.finder .. "GB", [2] = t_builtin.git_branches, desc = "git-branches" },
-      { [1] = prefix.finder .. "GB", [2] = t_builtin.git_status, desc = "git-status" },
-      { [1] = prefix.finder .. "GB", [2] = t_builtin.git_stash, desc = "git-stash" },
+      { [1] = prefix.finder .. "GB", [2] = t_builtin.git_branches,         desc = "git-branches" },
+      { [1] = prefix.finder .. "GB", [2] = t_builtin.git_status,           desc = "git-status" },
+      { [1] = prefix.finder .. "GB", [2] = t_builtin.git_stash,            desc = "git-stash" },
 
       -- { prefix.finder .. "Sf", t_builtin.filetypes, desc = "filetypes" },
       -- { prefix.finder .. "Sh", t_builtin.highlights, desc = "highlights" },
       -- { prefix.finder .. "So", t_builtin.vim_options, desc = "vim-options" },
       -- { prefix.finder .. "Sa", t_builtin.autocommands, desc = "autocmd" },
 
-      -- { prefix.fuzzy_finder .. "u", require("telescope").extensions.ultisnips.ultisnips, desc = "ultisnips" },
-      { [1] = prefix.finder .. "s", [2] = nil, desc = "luasnip" },
-      { [1] = prefix.finder .. prefix.finder, [2] = "<cmd>Telescope<CR>", desc = "builtins" },
-      { [1] = prefix.lang .. "td", [2] = t_builtin.diagnostics, desc = "diagnostics" },
-      { [1] = prefix.lang .. "tr", [2] = t_builtin.lsp_references, desc = "references" },
-      { [1] = prefix.lang .. "ti", [2] = t_builtin.lsp_implementations, desc = "implementation" },
-      { [1] = prefix.lang .. "tk", [2] = t_builtin.lsp_definitions, desc = "definition" },
-      { [1] = prefix.lang .. "tt", [2] = t_builtin.lsp_type_definitions, desc = "type-definition" },
-      {
-        [1] = prefix.lang .. "tsd",
-        [2] = t_builtin.lsp_document_symbols,
-        desc = "document-symbols",
-      },
-      {
-        [1] = prefix.lang .. "tsw",
-        [2] = t_builtin.lsp_workspace_symbols,
-        desc = "workspace-symbols",
-      },
-      {
-        [1] = prefix.lang .. "tsW",
-        [2] = t_builtin.lsp_dynamic_workspace_symbols,
-        desc = "dynamic-workspace-symbols",
-      },
-      {
-        [1] = prefix.lang .. "tst",
-        [2] = t_builtin.treesitter,
-        desc = "symbols-treesitter",
-      },
-      { [1] = prefix.lang .. "tsT", [2] = t_builtin.current_buffer_tags, desc = "symbols-tags" },
+      -- telescope
+      { [1] = prefix.lang .. "t",    [2] = nil,                            desc = "+telescope" },
+      { [1] = prefix.lang .. "td",   [2] = t_builtin.diagnostics,          desc = "diagnostics" },
+      { [1] = prefix.lang .. "tr",   [2] = t_builtin.lsp_references,       desc = "references" },
+      { [1] = prefix.lang .. "ti",   [2] = t_builtin.lsp_implementations,  desc = "implementation" },
+      { [1] = prefix.lang .. "tk",   [2] = t_builtin.lsp_definitions,      desc = "definition" },
+      { [1] = prefix.lang .. "tt",   [2] = t_builtin.lsp_type_definitions, desc = "type-definition" },
     }
 
     local base_presets = {
