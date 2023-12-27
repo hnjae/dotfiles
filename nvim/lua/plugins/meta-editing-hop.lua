@@ -1,42 +1,23 @@
+-- TODO: hop.nvim is now deprecated <2023-12-27>
 return {
-  "phaazon/hop.nvim",
-  -- version = "2.0.x",
+  [1] = "phaazon/hop.nvim",
   branch = "v2",
   -- NOTE: macro에 간섭하는데 어떻게 끌수 있는지 모르겠다. <2023-06-09>
-  enabled = false,
-  lazy = true,
+  enabled = true,
+  lazy = false,
   opts = {
     {
       keys = "etovxqpdygfblzhckisuran",
-      -- current_line_only = true, -- default false
     },
   },
-  ---@type LazyKeys[]
+  ---@type LazyKeysSpec[]
   keys = {
-    {
-      "f",
-      nil,
-      remap = true,
-    },
-    {
-      "F",
-      nil,
-      remap = true,
-    },
-    {
-      "t",
-      nil,
-      remap = true,
-    },
-    {
-      "T",
-      nil,
-      remap = true,
-    },
+    { [1] = "f", [2] = nil, remap = true, desc = "hop-f" },
+    { [1] = "F", [2] = nil, remap = true, desc = "hop-F" },
+    { [1] = "t", [2] = nil, remap = true, desc = "hop-t" },
+    { [1] = "T", [2] = nil, remap = true, desc = "hop-T" },
   },
   config = function(plugin, opts)
-    -- local sniprun = require("sniprun")
-    -- sniprun.setup(opts)
     local hop = require("hop")
     hop.setup(opts)
 
