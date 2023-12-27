@@ -1,5 +1,5 @@
 return {
-  "nvim-lualine/lualine.nvim",
+  [1] = "nvim-lualine/lualine.nvim",
   dependencies = {
     "nvim-tree/nvim-web-devicons",
   },
@@ -12,13 +12,12 @@ return {
       options = {
         icons_enabled = true,
         theme = require("plugins.lualine.theme"),
-        -- component_separators = { left = "¦", right = "¦" },
-        -- component_separators = { left = "❘", right = "❘" },
-        -- component_separators = { left = "𑗅", right = "𑗅" },
-        component_separators = { left = "┃", right = "┃" },
+        component_separators = os.getenv("XDG_SESSION_TYPE") ~= "tty" and { left = "┃", right = "┃" }
+          or { left = "❘", right = "❘" },
         -- component_separators = { left = "│", right = "│" },
         -- section_separators = { left = "", right = "" },
-        section_separators = { left = "", right = "" },
+        section_separators = os.getenv("XDG_SESSION_TYPE") ~= "tty" and { left = "", right = "" }
+          or { left = ">", right = "<" },
         disabled_filetypes = {}, -- Filetypes to disable lualine for.
         always_divide_middle = true, -- When set to true, left sections i.e. 'a','b' and 'c'
         -- can't take over the entire statusline even
