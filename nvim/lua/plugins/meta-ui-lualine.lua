@@ -16,7 +16,8 @@ return {
           or { left = "❘", right = "❘" },
         -- component_separators = { left = "│", right = "│" },
         -- section_separators = { left = "", right = "" },
-        section_separators = os.getenv("XDG_SESSION_TYPE") ~= "tty" and { left = "", right = "" }
+        -- section_separators = os.getenv("XDG_SESSION_TYPE") ~= "tty" and { left = "", right = "" }
+        section_separators = os.getenv("XDG_SESSION_TYPE") ~= "tty" and { left = "█", right = "█" }
           or { left = ">", right = "<" },
         disabled_filetypes = {}, -- Filetypes to disable lualine for.
         always_divide_middle = true, -- When set to true, left sections i.e. 'a','b' and 'c'
@@ -58,13 +59,15 @@ return {
       },
       tabline = {
         lualine_a = {
-          require("plugins.lualine.components.tabs"),
+          require("plugins.lualine.components.luasnip"),
         },
-        lualine_c = {
+        lualine_c = {},
+        lualine_x = {},
+        lualine_y = {
           require("plugins.lualine.components.buffers"),
         },
         lualine_z = {
-          require("plugins.lualine.components.luasnip"),
+          require("plugins.lualine.components.tabs"),
         },
       },
       extensions = {
