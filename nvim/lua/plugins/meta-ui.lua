@@ -66,6 +66,19 @@ return {
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
     },
+    opts = {
+      highlight = {
+        "Normal",
+        "RainbowDelimiterYellow",
+        "RainbowDelimiterBlue",
+        "RainbowDelimiterOrange",
+        "RainbowDelimiterGreen",
+        "RainbowDelimiterViolet",
+        "RainbowDelimiterCyan",
+        "RainbowDelimiterRed",
+      },
+    },
+    main = "rainbow-delimiters.setup",
   },
   {
     -- shows marks
