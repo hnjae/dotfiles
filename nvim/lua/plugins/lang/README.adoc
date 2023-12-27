@@ -1,7 +1,7 @@
 ---
 title   : README
 date    : 2023-06-07T22:23:30+0900
-lastmod : 2023-06-09T14:12:44+0900
+lastmod : 2023-12-22T19:26:31+0900
 isCJKLanguage : true
 draft   : false
 ---
@@ -13,3 +13,18 @@ draft   : false
   returns sources that null-ls will use to setup.
 ``.setup_lspconfig(lspconfig, opts)``::
   setup lspconfig
+
+== Features Of LSP's
+. Code completion
+. Hover
+. Jump to def
+. Workspace symbols
+. Find references
+. Diagnostics
+
+=== 같이 보기
+* https://langserver.org/
+* https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/
+* https://github.com/nvimtools/none-ls.nvim/blob/main/doc/BUILTINS.md
+* https://github.com/neovim/nvim-lspconfig/wiki/Language-specific-plugins
+* https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md

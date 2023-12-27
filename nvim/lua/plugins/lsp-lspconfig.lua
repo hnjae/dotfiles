@@ -2,11 +2,11 @@ local val = require("val")
 
 return {
   {
-    "williamboman/mason-lspconfig.nvim",
+    [1] = "williamboman/mason-lspconfig.nvim",
     lazy = true,
     enabled = function()
       if vim.fn.has("unix") == 1 then
-        -- NOTE: use system package manager instaed <2023-11-24>
+        -- NOTE: use system package manager instead <2023-11-24>
         return false
       end
 
@@ -52,14 +52,14 @@ return {
   },
 
   {
-    "neovim/nvim-lspconfig",
+    [1] = "neovim/nvim-lspconfig",
     dependencies = {
       "folke/neodev.nvim",
       "tamago324/nlsp-settings.nvim",
       {
         -- shows popup window about parameter/func
         -- NOTE: activated when on_attach() happens / or call .setup() in init.lua
-        "ray-x/lsp_signature.nvim",
+        [1] = "ray-x/lsp_signature.nvim",
         lazy = true,
         module = false,
         opts = {},
@@ -100,16 +100,10 @@ return {
       --   opts = coq.lsp_ensure_capabilities(opts)
       -- end
 
-      -- key: executable name / val: lspconfig's key
-      local mapping = {
-        -- yaml
-        -- ["yaml-language-server"] = "yamlls",
-      }
-
       local paths =
         vim.fn.uniq(vim.fn.sort(vim.fn.globpath(vim.fn.stdpath("config"), "lua/plugins/lang/*.lua", false, true)))
 
-      local lang_conf = nil
+      local lang_conf
       for _, file in pairs(paths) do
         lang_conf = require("plugins.lang." .. file:match("[^/\\]+$"):sub(1, -5))
         if lang_conf.setup_lspconfig then

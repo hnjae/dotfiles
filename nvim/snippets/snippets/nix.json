@@ -1,9 +1,7 @@
 {
-  "merge-attrs": {
-    "prefix": "mergeattrs",
-    "body": [
-      "builtins.listToAttrs [\n$0\n]"
-    ],
-    "description": "merge attrs"
+  "installPhase": {
+    "prefix": [ "inp" ],
+    "body": "installPhase = ''\n\t$0\n'';",
+    "description": "installPhase in stdenv.mkDerivation"
   }
 }

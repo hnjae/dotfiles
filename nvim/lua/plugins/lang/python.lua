@@ -7,6 +7,11 @@ M.setup_lspconfig = function(lspconfig, opts)
     ["jedi-language-server"] = "jedi_language_server",
     -- linter
     ["ruff-lsp"] = "ruff_lsp",
+    --
+    ["pylsp"] = "pylsp",
+    -- a static type checker
+    -- ["pyright-langserver"] = "pyright",
+    --
   }
 
   for exe, lspname in pairs(mapping) do
@@ -27,6 +32,9 @@ M.get_null_ls_sources = function(null_ls, null_ls_utils)
     },
     black = { -- format code
       null_ls.builtins.formatting.black,
+    },
+    pydocstyle = { -- a static analysis tool for checking compliance with Python docstring conventions.
+      null_ls.builtins.diagnostics.pydocstyle,
     },
     mypy = { -- static typing checker
       null_ls.builtins.diagnostics.mypy.with({

@@ -1,15 +1,15 @@
 {
   "Import external module.": {
-    "prefix": "im",
+    "prefix": [ "im", "imp" ],
     "body": [
-      "import { $0 } from \"${1:module}\";"
+      "import { $2 } from \"${1:module}\";$0"
     ],
     "description": "Import external module."
   },
   "Import external module (without curly brackets)": {
     "prefix": "imx",
     "body": [
-      "import $0 from \"${1:module}\";"
+      "import $2 from \"${1:module}\";$0"
     ],
     "description": "Import external module."
   },

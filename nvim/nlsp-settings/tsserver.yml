@@ -1,0 +1,5 @@
+---
+# Use separate formatter
+javascript.format.enable: false
+typescript.format.enable: false
+...

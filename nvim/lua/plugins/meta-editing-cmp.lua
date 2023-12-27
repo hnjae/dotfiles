@@ -30,22 +30,22 @@ local icons = {
 }
 
 return {
-  "hrsh7th/nvim-cmp",
+  [1] = "hrsh7th/nvim-cmp",
   lazy = false,
   event = { "InsertEnter", "CmdlineEnter" },
   dependencies = {
     -- { "onsails/lspkind.nvim", module = true }, -- adds vscode-like pictograms to built-in lsp
-    { "hrsh7th/cmp-nvim-lsp", module = true },
-    { "hrsh7th/cmp-nvim-lsp-document-symbol", module = true },
-    { "hrsh7th/cmp-nvim-lsp-signature-help", module = true },
-    { "ray-x/cmp-treesitter", module = true },
-    { "hrsh7th/cmp-path", module = true },
-    { "hrsh7th/cmp-buffer", module = true },
-    { "hrsh7th/cmp-cmdline", module = true },
-    { "hrsh7th/cmp-nvim-lua", module = true },
-    { "saadparwaiz1/cmp_luasnip", module = true },
+    { [1] = "hrsh7th/cmp-nvim-lsp",                 module = true },
+    { [1] = "hrsh7th/cmp-nvim-lsp-document-symbol", module = true },
+    { [1] = "hrsh7th/cmp-nvim-lsp-signature-help",  module = true },
+    { [1] = "ray-x/cmp-treesitter",                 module = true },
+    { [1] = "hrsh7th/cmp-path",                     module = true },
+    { [1] = "hrsh7th/cmp-buffer",                   module = true },
+    { [1] = "hrsh7th/cmp-cmdline",                  module = true },
+    { [1] = "hrsh7th/cmp-nvim-lua",                 module = true },
+    { [1] = "saadparwaiz1/cmp_luasnip",             module = true },
     -- { "hrsh7th/cmp-omni", module = true },
-    { "hrsh7th/cmp-emoji", module = true },
+    { [1] = "hrsh7th/cmp-emoji",                    module = true },
     -- { "petertriho/cmp-git", module = true },
     -- {
     --   "quangnguyen30192/cmp-nvim-ultisnips",
@@ -93,7 +93,7 @@ return {
       }),
       -- ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
       sources = cmp.config.sources({
-        { name = "ultisnips" },
+        -- { name = "ultisnips" },
         { name = "luasnip" },
         { name = "nvim_lsp" },
         -- { name = "nvim_lsp_document_symbol" },
@@ -188,10 +188,7 @@ return {
 
     local is_cmp_autopairs, cmp_autopairs = pcall(require, "nvim-autopairs.completion.cmp")
     if is_cmp_autopairs then
-      cmp.event:on(
-        'confirm_done',
-        cmp_autopairs.on_confirm_done()
-      )
+      cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
     end
   end,
 }

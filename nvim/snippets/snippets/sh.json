@@ -1,14 +1,24 @@
 {
+  "shell bang": {
+    "prefix": [ "sh" ],
+    "body": "#!/bin/sh",
+    "description": "This is POSIX script"
+  },
+  "env": {
+    "prefix": ["env", "bash"],
+    "body": "#!/usr/bin/env bash",
+    "description": "this is bash script"
+  },
   "array (bash)": {
     "prefix": "barr",
-    "body": "[.line-through]#${1:blabla}# $0",
+    "body": "(\n\t$0\n)",
     "description": "strikethrough"
   },
   "for array (bash)": {
     "prefix": "forarr",
     "body": [
-      "for t in ${allThreads[@]}; do",
-      "./pipeline --threads $t",
+      "for ${2:name} in \"${${1:array_name}[@]}\"; do",
+      "\t${0:echo} \"${${2:name}}\"",
       "done"
     ],
     "description": "strikethrough"

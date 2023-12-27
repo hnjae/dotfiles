@@ -25,6 +25,8 @@ M.prefix = {
 M.map_keyword = {
   terminal = "t",
   explorer = "e",
+  marks = "m",
+  lsp = "l",
 }
 
 -- TODO: root_patterns을 각 언어별로 구분해서 선언할 것 <2023-05-18>
@@ -32,9 +34,9 @@ M.map_keyword = {
 M.root_patterns = {
   ".git",
   ".editorconfig",
+  "flake.nix",
   ".neoconf.json",
   ".nlsp-settings",
-  "flake.nix",
   ".envrc",
 }
 

@@ -1,4 +1,5 @@
 local prefix = require("val").prefix
+local map_keyword = require("val").map_keyword
 
 --------------------------------------------------------------------------------
 -- leader & localleader
@@ -49,7 +50,7 @@ local nmapping = {
 }
 
 for _, map in pairs(nmapping) do
-  vim.keymap.set("n", prefix.lang .. "l" .. map[1], map[2], map[3])
+  vim.keymap.set("n", prefix.lang .. map_keyword.lsp .. map[1], map[2], map[3])
 end
 
 --------------------------------------------------------------------------------
