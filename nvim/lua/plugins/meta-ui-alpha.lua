@@ -9,7 +9,7 @@ local setup_startify = function()
   -- }
   startify.section.top_buttons.val = {
     startify.button("e", " New file", "<cmd>enew<CR>"),
-    startify.button("s", " Load Sessions", "<cmd>SSLoad<CR>"),
+    startify.button("s", " Load Sessions", "<cmd>Sload<CR>"),
     -- startify.group(function()vim.notify('aaaaa')end),
   }
 
@@ -19,24 +19,24 @@ local setup_startify = function()
 end
 
 return {
-  "goolord/alpha-nvim",
+  [1] = "goolord/alpha-nvim",
   -- lazy = false,
-  event = {"VimEnter"},
+  event = { "VimEnter" },
   dependencies = { "nvim-tree/nvim-web-devicons" },
   opts = function()
     return require("alpha.themes.startify").config
   end,
-  config = function(_ , opts)
+  config = function(_, opts)
     setup_startify()
     require("alpha").setup(opts)
   end,
   keys = function()
-    local suffix = 'p'
+    local suffix = "p"
     --@type LazyKeys[]
     local lazykeys = {
       {
-        prefix.tab .. suffix,
-        function()
+        [1] = prefix.tab .. suffix,
+        [2] = function()
           vim.cmd([[
           tab split
           Alpha
@@ -45,8 +45,8 @@ return {
         desc = "Alpha",
       },
       {
-        prefix.split .. suffix,
-        function()
+        [1] = prefix.split .. suffix,
+        [2] = function()
           vim.cmd([[
           split
           Alpha
@@ -55,8 +55,8 @@ return {
         desc = "Alpha",
       },
       {
-        prefix.vsplit .. suffix,
-        function()
+        [1] = prefix.vsplit .. suffix,
+        [2] = function()
           vim.cmd([[
           vsplit
           Alpha

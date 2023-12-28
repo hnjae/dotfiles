@@ -1,6 +1,7 @@
+local prefix = require("val").prefix
 return {
   {
-    "shatur/neovim-session-manager",
+    [1] = "shatur/neovim-session-manager",
     dependencies = {
       "nvim-lua/plenary.nvim",
       -- to use telescope's vim.ui.select() UI
@@ -9,23 +10,27 @@ return {
     lazy = true,
     cmd = {
       "SessionManager",
-      "SSLoad",
-      "SSSave",
-      "SSDelete",
+      "Sload",
+      "Ssave",
+      "Sdelete",
     },
     opts = function()
       local opts = {
-        autoload_mode = require('session_manager.config').AutoloadMode.Disabled,
-        sessions_dir = require('plenary.path'):new(vim.fn.stdpath('data'), 'session'),
+        autoload_mode = require("session_manager.config").AutoloadMode.Disabled,
+        sessions_dir = require("plenary.path"):new(vim.fn.stdpath("data"), "session"),
       }
       return opts
     end,
+    ---@type LazyKeysSpec[]
+    keys = {
+      { [1] = prefix.close .. "s", [2] = "<cmd>SLoad<CR>", desc = "session-load" },
+    },
     config = function(_, opts)
       require("session_manager").setup(opts)
 
-      vim.api.nvim_create_user_command("SSLoad", "SessionManager load_session", {} )
-      vim.api.nvim_create_user_command("SSSave", "SessionManager save_current_session", {} )
-      vim.api.nvim_create_user_command("SSDelete", "SessionManager delete_session", {} )
-    end
+      vim.api.nvim_create_user_command("Sload", "SessionManager load_session", {})
+      vim.api.nvim_create_user_command("Ssave", "SessionManager save_current_session", {})
+      vim.api.nvim_create_user_command("Sdelete", "SessionManager delete_session", {})
+    end,
   },
 }
