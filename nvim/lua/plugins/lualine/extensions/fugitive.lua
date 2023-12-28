@@ -21,7 +21,8 @@ return {
         end,
       },
     },
-    lualine_x = { "location" },
+    lualine_x = { "filetype" },
+    lualine_z = { "location" },
   },
   filetypes = { "fugitive" },
 }

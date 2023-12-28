@@ -16,7 +16,8 @@ return {
     },
   },
   inactive_sections = {
-    lualine_c = { "filetype" },
+    lualine_x = { "filetype" },
+    lualine_z = { "location" },
   },
   filetypes = { "NvimTree" },
 }

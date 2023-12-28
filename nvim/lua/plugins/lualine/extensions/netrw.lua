@@ -20,10 +20,14 @@ return {
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = { "filename" },
-    lualine_x = {},
-    lualine_y = { "filetype" },
-    lualine_z = {},
+    lualine_c = {
+      function()
+        return vim.b.netrw_curdir
+      end,
+    },
+    lualine_x = { "filetype" },
+    lualine_y = {},
+    lualine_z = { "location" },
   },
   filetypes = {
     "netrw",

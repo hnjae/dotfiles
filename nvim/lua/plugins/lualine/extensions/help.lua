@@ -14,7 +14,8 @@ return {
   },
   inactive_sections = {
     lualine_c = { "filename" },
-    lualine_x = { "location" },
+    lualine_x = { "filetype" },
+    lualine_z = { "location" },
   },
   filetypes = { "help" },
 }
