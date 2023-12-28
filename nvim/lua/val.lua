@@ -64,54 +64,43 @@ M.root_patterns2 = {
   },
 }
 
--- TODO: implement following <2023-12-28>
---[[
-  1. client.supports_method("textDocument/formatting") 를 이용해서 formatting 을 지원할 경우에만 keymap 설정
-  2. BufWritePre 이벤트를 활용해서, 1의 상황에서는 buf.format을 실행할 것.
-
-  다음 코드 스니펫을 활용할 수 있다: https://github.com/NvChad/NvChad/issues/2016#issuecomment-1545289371
-
-  ```lua
-		vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-		vim.api.nvim_create_autocmd("BufWritePre", {
-			group = augroup,
-			buffer = bufnr,
-			callback = function()
-				vim.lsp.buf.format({ bufnr = bufnr })
-			end,
-		})
-  ```
-]]
-
 -- on_attach function for lspconfig and null-ls
-M.on_attach = function(_, bufnr)
+M.on_attach = function(client, bufnr)
   local buf_format_deny_list = {
     tsserver = true,
   }
+  local buf_format_filter = function(client_)
+    return not buf_format_deny_list[client_.name]
+  end
 
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
-  vim.keymap.set("n", "==", function()
-    vim.lsp.buf.format({
-      async = true,
-      filter = function(client)
-        return not buf_format_deny_list[client.name]
-      end,
-    })
-  end, { desc = "lsp-format", buffer = bufnr })
+  if client.supports_method("textDocument/formatting") and not buf_format_deny_list[client.name] then
+    vim.keymap.set("n", "==", function()
+      vim.lsp.buf.format({
+        async = true,
+        filter = buf_format_filter,
+      })
+    end, { desc = "lsp-format", buffer = bufnr })
 
-  vim.keymap.set("v", "==", function()
-    vim.lsp.buf.format({
-      async = true,
-      range = {
-        ["start"] = vim.api.nvim_buf_get_mark(0, "<"),
-        ["end"] = vim.api.nvim_buf_get_mark(0, ">"),
-      },
-      filter = function(client)
-        return not buf_format_deny_list[client.name]
+    vim.keymap.set("v", "==", function()
+      vim.lsp.buf.format({
+        async = true,
+        range = {
+          ["start"] = vim.api.nvim_buf_get_mark(0, "<"),
+          ["end"] = vim.api.nvim_buf_get_mark(0, ">"),
+        },
+        filter = buf_format_filter,
+      })
+    end, { desc = "lsp-buf-format", buffer = bufnr })
+
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = bufnr,
+      callback = function()
+        vim.lsp.buf.format({ bufnr = bufnr, filter = buf_format_filter })
       end,
     })
-  end, { desc = "lsp-buf-format", buffer = bufnr })
+  end
 end
 
 return M
