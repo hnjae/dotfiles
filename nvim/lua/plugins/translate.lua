@@ -1,5 +1,5 @@
 return {
-  "uga-rosa/translate.nvim",
+  [1] = "uga-rosa/translate.nvim",
   lazy = true,
   cmd = {
     "Translate",
@@ -7,7 +7,7 @@ return {
   opts = {
     default = {
       -- command = "deepl_pro",
-      output = "split"
+      output = "split",
     },
     preset = {
       output = {

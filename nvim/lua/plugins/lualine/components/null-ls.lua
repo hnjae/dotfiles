@@ -1,5 +1,6 @@
 local sources = require("null-ls.sources")
 
+-- TODO: null-ls 가 vim.lsp.get_active_clients({ bufnr = 0 }) 에 있는지 확인 <2023-12-27>
 local get_sources = function()
   local names = {}
   local filetype = vim.api.nvim_buf_get_option(0, "filetype")
@@ -13,7 +14,7 @@ local get_sources = function()
 end
 
 return {
-  function()
+  [1] = function()
     return table.concat(get_sources(), ", ")
   end,
   icon = "󰟢",

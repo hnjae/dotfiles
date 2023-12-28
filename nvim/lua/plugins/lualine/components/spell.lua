@@ -1,5 +1,5 @@
 return {
-  function()
+  [1] = function()
     -- for _, lang in ipairs(vim.opt_local.spelllang:get()) do
     -- end
     return "on"

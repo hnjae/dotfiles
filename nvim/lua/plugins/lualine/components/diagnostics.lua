@@ -1,5 +1,5 @@
 return {
-  "diagnostics",
+  [1] = "diagnostics",
   symbols = {
     error = vim.fn.sign_getdefined("DiagnosticSignError")[1].text,
     warn = vim.fn.sign_getdefined("DiagnosticSignWarn")[1].text,

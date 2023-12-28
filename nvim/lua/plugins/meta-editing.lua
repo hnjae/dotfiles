@@ -1,15 +1,15 @@
 return {
   -- TODO: consider replacing following with https://github.com/kylechui/nvim-surround  <2023-01-10, Hyunjae Kim>
   {
-    "tpope/vim-surround",
+    [1] = "tpope/vim-surround",
     lazy = false,
     enabled = true,
     keys = {
-      { "ys",  nil, mode = { "n" }, desc = "Ysurround" },
-      { "yS",  nil, mode = { "n" }, desc = "YSurround" },
-      { "Yss", nil, mode = { "n" }, desc = "Yssurround" },
-      { "YSs", nil, mode = { "n" }, desc = "YSsurround" },
-      { "YSS", nil, mode = { "n" }, desc = "YSsurround" },
+      { [1] = "ys", [2] = nil, mode = { "n" }, desc = "Ysurround" },
+      { [1] = "yS", [2] = nil, mode = { "n" }, desc = "YSurround" },
+      { [1] = "Yss", [2] = nil, mode = { "n" }, desc = "Yssurround" },
+      { [1] = "YSs", [2] = nil, mode = { "n" }, desc = "YSsurround" },
+      { [1] = "YSS", [2] = nil, mode = { "n" }, desc = "YSsurround" },
     },
     config = function()
       -- vim.api.nvim_create_autocmd({ "FileType" }, {
@@ -22,13 +22,13 @@ return {
     end,
   },
   {
-    "numToStr/Comment.nvim",
+    [1] = "numToStr/Comment.nvim",
     lazy = false,
     enabled = true,
     opts = {},
   },
   {
-    "folke/todo-comments.nvim",
+    [1] = "folke/todo-comments.nvim",
     lazy = false,
     enabled = false,
     dependencies = {
@@ -37,18 +37,18 @@ return {
     opts = {},
   },
   {
-    "matze/vim-move",
+    [1] = "matze/vim-move",
     lazy = true,
     keys = {
-      { "<A-h>", nil, mode = { "n", "v" }, desc = "vim-move-left" },
-      { "<A-j>", nil, mode = { "n", "v" }, desc = "vim-move-down" },
-      { "<A-k>", nil, mode = { "n", "v" }, desc = "vim-move-up" },
-      { "<A-l>", nil, mode = { "n", "v" }, desc = "vim-move-right" },
+      { [1] = "<A-h>", [2] = nil, mode = { "n", "v" }, desc = "vim-move-left" },
+      { [1] = "<A-j>", [2] = nil, mode = { "n", "v" }, desc = "vim-move-down" },
+      { [1] = "<A-k>", [2] = nil, mode = { "n", "v" }, desc = "vim-move-up" },
+      { [1] = "<A-l>", [2] = nil, mode = { "n", "v" }, desc = "vim-move-right" },
     },
     opts = {},
   },
   {
-    "ntpeters/vim-better-whitespace",
+    [1] = "ntpeters/vim-better-whitespace",
     lazy = false,
     event = { "TextChanged" },
     init = function()
@@ -101,7 +101,7 @@ return {
     end,
   },
   {
-    "windwp/nvim-autopairs",
+    [1] = "windwp/nvim-autopairs",
     lazy = true,
     event = { "InsertEnter" },
     enabled = true, -- "jiangmiao/auto-pairs" 가 조금더 신뢰할 만 한 것 같다.
@@ -110,7 +110,7 @@ return {
     -- },
     opts = {
       -- disable_filetype = { "TelescopePrompt", "spectre_panel" },
-      disable_in_macro = true,       -- disable when recording or executing a macro
+      disable_in_macro = true, -- disable when recording or executing a macro
       disable_in_visualblock = true, -- disable when insert after visual block mode
       -- ignored_next_char = [=[[%w%%%'%[%"%.]]=],
       -- enable_moveright = true,
@@ -119,10 +119,10 @@ return {
       -- enable_bracket_in_quote = true, --
       -- break_undo = true, -- switch for basic rule break undo sequence
       check_ts = true, -- use treesitter
-      map_cr = true,   -- add indent when new line
-      map_bs = true,   -- delete paren if <BS>
+      map_cr = true, -- add indent when new line
+      map_bs = true, -- delete paren if <BS>
       -- NOTE: <C-h> delete single char in insert mode <2023-03-02>
-      map_c_h = true,  -- Map the <C-h> key to delete a pair
+      map_c_h = true, -- Map the <C-h> key to delete a pair
       -- map_c_w = false, -- map <c-w> to delete a pair if possible
 
       -- NOTE: fast_wrap: wrap text with surrounding
@@ -132,7 +132,7 @@ return {
     },
     config = function(_, opts)
       local nvim_autopairs = require("nvim-autopairs")
-      local rule = require("nvim-autopairs.rule")
+      -- local rule = require("nvim-autopairs.rule")
       nvim_autopairs.setup(opts)
       nvim_autopairs.add_rules({
         -- rule("`+", "+`", "asciidoctor"),
@@ -147,7 +147,7 @@ return {
     end,
   },
   {
-    "jiangmiao/auto-pairs",
+    [1] = "jiangmiao/auto-pairs",
     lazy = false,
     enabled = false,
     event = { "InsertEnter" },

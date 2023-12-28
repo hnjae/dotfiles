@@ -3,7 +3,7 @@
 
 return {
   {
-    "Mofiqul/vscode.nvim",
+    [1] = "Mofiqul/vscode.nvim",
     -- NOTE: does not support htmlH1 (2022-06-21)
     lazy = false,
     enabled = true,
@@ -20,7 +20,7 @@ return {
     end,
   },
   {
-    "toppair/prospector.nvim",
+    [1] = "toppair/prospector.nvim",
     lazy = false,
     enabled = false,
     priority = 99999999999,
@@ -31,7 +31,7 @@ return {
     end,
   },
   {
-    "kvrohit/rasmus.nvim",
+    [1] = "kvrohit/rasmus.nvim",
     lazy = false,
     enabled = false,
     priority = 999999999,
@@ -44,7 +44,7 @@ return {
     end,
   },
   {
-    "Mofiqul/adwaita.nvim",
+    [1] = "Mofiqul/adwaita.nvim",
     lazy = false,
     enabled = false,
     priority = 999999999,
@@ -55,22 +55,22 @@ return {
     end,
   },
   {
-    "marko-cerovac/material.nvim",
+    [1] = "marko-cerovac/material.nvim",
     lazy = false,
     enabled = false,
   },
   {
-    "ellisonleao/gruvbox.nvim",
+    [1] = "ellisonleao/gruvbox.nvim",
     lazy = false,
     enabled = false,
   },
   {
-    "projekt0n/github-nvim-theme",
+    [1] = "projekt0n/github-nvim-theme",
     lazy = false,
     enabled = false,
   },
   {
-    "rafamadriz/neon",
+    [1] = "rafamadriz/neon",
     lazy = false,
     enabled = false,
   },

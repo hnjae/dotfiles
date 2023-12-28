@@ -9,7 +9,7 @@ end
 
 return {
   {
-    "jay-babu/mason-null-ls.nvim",
+    [1] = "jay-babu/mason-null-ls.nvim",
     lazy = true,
     enabled = vim.fn.has("unix") ~= 1,
     dependencies = {
@@ -30,7 +30,7 @@ return {
 
   {
     -- "jose-elias-alvarez/null-ls.nvim",
-    "nvimtools/none-ls.nvim",
+    [1] = "nvimtools/none-ls.nvim",
     lazy = false,
     enabled = true,
     dependencies = {

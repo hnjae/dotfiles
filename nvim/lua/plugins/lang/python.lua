@@ -27,15 +27,12 @@ M.get_null_ls_sources = function(null_ls, null_ls_utils)
   -- key: executable, val: null_ls's source
   local mapping = {
     -- python
-    isort = { -- format imports
-      null_ls.builtins.formatting.isort,
-    },
-    black = { -- format code
-      null_ls.builtins.formatting.black,
-    },
-    pydocstyle = { -- a static analysis tool for checking compliance with Python docstring conventions.
-      null_ls.builtins.diagnostics.pydocstyle,
-    },
+    -- format imports
+    isort = { null_ls.builtins.formatting.isort },
+    -- format code
+    black = { null_ls.builtins.formatting.black },
+    -- a static analysis tool for checking compliance with Python docstring conventions.
+    pydocstyle = { null_ls.builtins.diagnostics.pydocstyle },
     mypy = { -- static typing checker
       null_ls.builtins.diagnostics.mypy.with({
         -- diagnostics_format = "[#{s}] #{m}",

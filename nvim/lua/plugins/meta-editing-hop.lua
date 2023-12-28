@@ -1,10 +1,14 @@
 -- TODO: hop.nvim is now deprecated <2023-12-27>
+-- Check following plugins:
+-- https://github.com/ggandor/leap.nvim
+-- https://github.com/rlane/pounce.nvim
+
 return {
   [1] = "phaazon/hop.nvim",
   branch = "v2",
   -- NOTE: macro에 간섭하는데 어떻게 끌수 있는지 모르겠다. <2023-06-09>
   enabled = true,
-  lazy = false,
+  lazy = true,
   opts = {
     {
       keys = "etovxqpdygfblzhckisuran",

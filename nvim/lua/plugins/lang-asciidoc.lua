@@ -1,11 +1,11 @@
 return {
-  "habamax/vim-asciidoctor",
+  [1] = "habamax/vim-asciidoctor",
   lazy = false,
   -- ft = { "asciidoc", "asciidoctor" },
   keys = {
     {
-      require("val").prefix.lang .. "p",
-      "<cmd>AsciidoctorOpenRAW<CR>",
+      [1] = require("val").prefix.lang .. "p",
+      [2] = "<cmd>AsciidoctorOpenRAW<CR>",
       desc = "preview",
     },
   },
@@ -19,7 +19,7 @@ return {
 
     local is_luasnip, luasnip = pcall(require, "luasnip")
     if is_luasnip then
-      luasnip.filetype_extend("asciidoctor", {"asciidoc"})
+      luasnip.filetype_extend("asciidoctor", { "asciidoc" })
     end
 
     vim.g.asciidoctor_opener = "!" .. browser

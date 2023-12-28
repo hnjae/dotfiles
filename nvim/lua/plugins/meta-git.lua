@@ -1,21 +1,21 @@
 return {
   {
-    "sindrets/diffview.nvim",
+    [1] = "sindrets/diffview.nvim",
     enabled = false,
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
   },
   {
-    "ewis6991/gitsigns.nvim",
+    [1] = "ewis6991/gitsigns.nvim",
     enabled = false,
   },
   {
-    "TimUntersberger/neogit",
+    [1] = "TimUntersberger/neogit",
     enabled = false,
   },
   {
-    "tpope/vim-fugitive",
+    [1] = "tpope/vim-fugitive",
     lazy = false,
   },
 }

@@ -12,6 +12,6 @@ return {
     return status_luasnip
   end,
   color = "Pmenu",
-  -- Automatically updates active buffer color to match color of other components (will be overidden if buffers_color is set)
+  -- Automatically updates active buffer color to match color of other components (will be overridden if buffers_color is set)
   use_mode_colors = false,
 }

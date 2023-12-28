@@ -1,4 +1,4 @@
 return {
-  "tabs",
+  [1] = "tabs",
   mode = 2,
 }

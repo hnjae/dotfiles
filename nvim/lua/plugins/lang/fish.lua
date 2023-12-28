@@ -5,12 +5,8 @@ M.get_null_ls_sources = function(null_ls)
 
   local mapping = {
     -- fish
-    fish = {
-      null_ls.builtins.diagnostics.fish,
-    },
-    fish_indent = {
-      null_ls.builtins.formatting.fish_indent,
-    },
+    fish = { null_ls.builtins.diagnostics.fish },
+    fish_indent = { null_ls.builtins.formatting.fish_indent },
   }
 
   for exe, sources in pairs(mapping) do

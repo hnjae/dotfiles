@@ -96,9 +96,9 @@ return {
         -- { name = "ultisnips" },
         { name = "luasnip" },
         { name = "nvim_lsp" },
-        -- { name = "nvim_lsp_document_symbol" },
         { name = "nvim_lsp_signature_help" },
         { name = "treesitter" },
+        { name = "nvim_lsp_document_symbol" },
         -- { name = "omni" },
         { name = "path" },
         { name = "nvim_lua" },
@@ -138,12 +138,7 @@ return {
             vim_item.kind = icons[vim_item.kind] .. " " .. entry.source.name
           elseif entry.source.name == "cmdline" then
             vim_item.kind = "cmdline"
-            -- local icon = nvim_web_devicons.get_icon(vim_item.word, nil, { default = false })
-            -- if icon then
-            --   vim_item.abbr = icon .. " " .. vim_item.abbr
-            -- end
           else
-            -- vim_item.kind = icons[vim_item.kind] .. " " .. vim_item.kind .. " [" .. entry.source.name .. "]"
             vim_item.kind = vim_item.kind .. " [" .. entry.source.name .. "]"
           end
 

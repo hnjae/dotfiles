@@ -4,9 +4,7 @@ M.get_null_ls_sources = function(null_ls, null_ls_utils)
 
   local mapping = {
     ["editorconfig-checker"] = {
-      null_ls.builtins.diagnostics.editorconfig_checker.with({
-        filetypes = { "editorconfig" },
-      }),
+      null_ls.builtins.diagnostics.editorconfig_checker.with({ filetypes = { "editorconfig" } }),
     },
   }
 

@@ -1,7 +1,7 @@
 local prefix = require("val").prefix
 
 return {
-  "python-mode/python-mode",
+  [1] = "python-mode/python-mode",
   lazy = true,
   branch = "develop",
   enabled = false,

@@ -2,12 +2,12 @@
 
 return {
   {
-    "nvim-tree/nvim-web-devicons",
+    [1] = "nvim-tree/nvim-web-devicons",
     lazy = true,
     module = true,
   },
   {
-    "nvim-lua/plenary.nvim",
+    [1] = "nvim-lua/plenary.nvim",
     lazy = true,
     module = true,
   },

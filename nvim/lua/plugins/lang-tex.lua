@@ -1,5 +1,5 @@
 return {
-  "lervag/vimtex",
+  [1] = "lervag/vimtex",
   lazy = true,
   ft = { "tex" },
   init = function()

@@ -8,19 +8,16 @@ return {
   opts = {
     wiki_list = {
       {
-        path = "~/Library/wiki",
+        path = "~/Documents/wiki",
       },
       {
-        path = "~/Library/wiki_test",
+        path = "~/Documents/wiki_test",
       },
     },
     conceal_links = true,
     key_mappings = { prefix = "s", buffer = true },
   },
-  -- keys = function()
-  --
-  -- end,
-  config = function(plugin, opts)
+  config = function(_, opts)
     local wiki = require("asciidoc-wiki")
     local wiki_link = require("asciidoc-wiki.link")
     wiki.setup(opts)
@@ -28,9 +25,8 @@ return {
     vim.api.nvim_create_autocmd("FileType", {
       pattern = { "asciidoc", "asciidoctor" },
       callback = function()
-        vim.keymap.set({'n'}, "CR", wiki_link.follow_link, { desc = "follow-wiki-link", buffer = true })
+        vim.keymap.set({ "n" }, "CR", wiki_link.follow_link, { desc = "follow-wiki-link", buffer = true })
       end,
     })
-
   end,
 }

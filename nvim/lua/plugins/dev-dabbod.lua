@@ -1,7 +1,7 @@
 -- Dadbod is a Vim plugin for interacting with databases.
 
 return {
-  "kristijanhusak/vim-dadbod-ui",
+  [1] = "kristijanhusak/vim-dadbod-ui",
   lazy = true,
   dependencies = {
     {

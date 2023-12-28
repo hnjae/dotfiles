@@ -1,4 +1,4 @@
 return {
-  "tpope/vim-repeat",
+  [1] = "tpope/vim-repeat",
   lazy = false,
 }

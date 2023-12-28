@@ -17,12 +17,8 @@ M.get_null_ls_sources = function(null_ls)
   local ret = {}
 
   local mapping = {
-    selene = {
-      null_ls.builtins.diagnostics.selene,
-    },
-    stylua = {
-      null_ls.builtins.formatting.stylua,
-    },
+    selene = { null_ls.builtins.diagnostics.selene },
+    stylua = { null_ls.builtins.formatting.stylua },
   }
 
   for exe, sources in pairs(mapping) do

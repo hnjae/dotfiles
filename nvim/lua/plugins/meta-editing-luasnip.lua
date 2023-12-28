@@ -4,10 +4,11 @@
 새 snippet을 추가하고 싶으면
 my_snippets 의 package.json 파일을 수정해주고, 관련 파일을 수정해준다.
 https://github.com/rafamadriz/friendly-snippets 의 형식 참고.
-]]--
+]]
+--
 
 return {
-  "L3MON4D3/LuaSnip",
+  [1] = "L3MON4D3/LuaSnip",
   version = "1.2.x",
   build = "make install_jsregexp",
   -- cond = vim.fn.executable("make") == 1,
@@ -16,20 +17,19 @@ return {
   event = { "InsertEnter" },
   dependencies = {
     {
-      "rafamadriz/friendly-snippets",
+      [1] = "rafamadriz/friendly-snippets",
       module = true,
     },
     -- "nvim-lua/plenary.nvim",
     {
-      "honza/vim-snippets",
+      [1] = "honza/vim-snippets",
       init = function()
         vim.g.snips_author = "KIM Hyunjae"
-        vim.g.snips_email = "hyunjaem@gmx.com"
+        vim.g.snips_email = "hyunjae@gmx.com"
         vim.g.snips_github = "https://github.com/hnjae"
       end,
     },
   },
-  -- opts = {},
   keys = function()
     local status_luasnip, luasnip = pcall(require, "luasnip")
     if not status_luasnip then
@@ -40,8 +40,8 @@ return {
     local keys = {
       {
         -- press <Tab> to expand or jump in a snippet. These can also be mapped separately
-        "<Tab>",
-        function()
+        [1] = "<Tab>",
+        [2] = function()
           return (luasnip.expand_or_locally_jumpable() and "<Plug>luasnip-expand-or-jump" or "<Tab>")
           -- return (luasnip.expand_or_jumpable() and "<Plug>luasnip-expand-or-jump" or "<Tab>")
           -- return (luasnip.expandable() and "<Plug>luasnip-expand-or-jump" or "<Tab>")
@@ -80,7 +80,6 @@ return {
         end,
         edit = function(file)
           vim.api.nvim_command("split " .. file)
-          -- vim.cmd("edit " .. file)
         end,
         extend = function(ft, paths)
           if ft == "all" then
@@ -101,19 +100,8 @@ return {
       })
     end, {})
 
-    -- local util = require("luasnip.util.util")
-    -- local fts = util.get_snippet_filetypes()
-
     require("luasnip.loaders.from_vscode").lazy_load({
       paths = my_snippets.filename,
     })
-
-    -- require("luasnip.loaders.from_vscode").lazy_load({
-    --   exclude = { "lua", "python", "tex", "kotlin", "gitcommit", "rust", "all", "asciidoc", "asciidoctor", "sh" },
-    -- })
-    -- require("luasnip.loaders.from_snipmate").lazy_load({
-    --   exclude = { "lua", "all" },
-    -- })
-
   end,
 }

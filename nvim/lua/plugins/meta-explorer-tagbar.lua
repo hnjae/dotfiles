@@ -1,22 +1,21 @@
 local prefix = require("val").prefix
 
 return {
-  "preservim/tagbar",
+  [1] = "preservim/tagbar",
   lazy = true,
-  -- ft = { "asciidoc", "asciidoctor" },
   enabled = vim.fn.executable("ctags") == 1,
   cmd = {
     "TagbarToggle",
   },
   keys = {
-    { "[t", "<cmd>TagbarJumpPrev<CR>", desc = "prev-tag" },
-    { "]t", "<cmd>TagbarJumpNext<CR>", desc = "next-tag" },
-    { prefix.sidebar .. "t", "<cmd>TagbarToggle<CR>", desc = "tagbar" },
+    { [1] = "[t",                  [2] = "<cmd>TagbarJumpPrev<CR>", desc = "prev-tag" },
+    { [1] = "]t",                  [2] = "<cmd>TagbarJumpNext<CR>", desc = "next-tag" },
+    { [1] = prefix.sidebar .. "t", [2] = "<cmd>TagbarToggle<CR>",   desc = "tagbar" },
   },
   dependencies = {
     "nvim-lua/plenary.nvim",
     {
-      "ludovicchabant/vim-gutentags",
+      [1] = "ludovicchabant/vim-gutentags",
       init = function()
         vim.g.gutentags_cache_dir = require("plenary.path"):new(vim.fn.stdpath("cache"), "gutentags").filename
         vim.g.gutentags_exclude_filetypes = {
@@ -30,7 +29,7 @@ return {
     },
   },
   config = function()
-    vim.g.tagbar_width = 26 -- default: 40
+    vim.g.tagbar_width = 26    -- default: 40
     vim.g.tagbar_wrap = 0
     vim.g.tagbar_zoomwidth = 0 -- default 1 (use maximum width)
     vim.g.tagbar_indent = 1
@@ -63,25 +62,24 @@ return {
     --     'u:subparagraph:0:1',
     --     -- 'a:anchor:0:1',
     --   },
-      -- ['kind2scope'] = {
-      --   ['c'] = 'chapter',
-      --   ['s'] = 'section',
-      --   ['S'] = 'subsection',
-      --   ['t'] = 'subsubsection',
-      --   ['T'] = 'l4subsection',
-      --   ['u'] = 'l5subsection',
-      --   -- ['a'] = 'anchor',
-      -- },
-      -- ['scope2kind'] = {
-      --   ['chapter']       = 'c',
-      --   ['section']       = 's',
-      --   ['subsection']    = 'S',
-      --   ['subsubsection'] = 't',
-      --   ['l4subsection']  = 'T',
-      --   ['l5subsection']  = 'u',
-      --   -- ['anchor']        = 'a',
-      -- },
+    -- ['kind2scope'] = {
+    --   ['c'] = 'chapter',
+    --   ['s'] = 'section',
+    --   ['S'] = 'subsection',
+    --   ['t'] = 'subsubsection',
+    --   ['T'] = 'l4subsection',
+    --   ['u'] = 'l5subsection',
+    --   -- ['a'] = 'anchor',
+    -- },
+    -- ['scope2kind'] = {
+    --   ['chapter']       = 'c',
+    --   ['section']       = 's',
+    --   ['subsection']    = 'S',
+    --   ['subsubsection'] = 't',
+    --   ['l4subsection']  = 'T',
+    --   ['l5subsection']  = 'u',
+    --   -- ['anchor']        = 'a',
+    -- },
     -- }
-
   end,
 }

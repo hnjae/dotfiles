@@ -3,17 +3,18 @@ local prefix = require("val").prefix
 -- explores code/file etc
 return {
   {
-    "simrat39/symbols-outline.nvim",
+    [1] = "simrat39/symbols-outline.nvim",
     lazy = true,
     cmd = {
       "SymbolsOutline",
       "SymbolsOutlineOpen",
       "SymbolsOutlineClose",
     },
+    ---@type LazyKeysSpec[]
     keys = {
       {
-        prefix.sidebar .. "s",
-        "<cmd>SymbolsOutline<CR>",
+        [1] = prefix.sidebar .. "s",
+        [2] = "<cmd>SymbolsOutline<CR>",
         desc = "symbols-outline",
       },
     },
@@ -35,11 +36,11 @@ return {
     },
   },
   {
-    "tpope/vim-vinegar",
+    [1] = "tpope/vim-vinegar",
     lazy = false,
     enabled = true,
     keys = {
       -- { "-", nil, desc = "vinegar-up" },
-    }
+    },
   },
 }

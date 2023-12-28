@@ -1,7 +1,6 @@
 return {
-  "rust-lang/rust.vim",
+  [1] = "rust-lang/rust.vim",
   lazy = true,
   ft = { "rust" },
-  init = function()
-  end,
+  init = function() end,
 }

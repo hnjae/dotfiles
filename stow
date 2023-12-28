@@ -4,7 +4,7 @@ XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 
 [ ! -d "$XDG_CONFIG_HOME" ] && mkdir -p "$XDG_CONFIG_HOME"
 
-[ -h "${XDG_CONFIG_HOME}/nvim" ] && rm "${XDG_CONFIG_HOME}/nvim" && echo "rm pervious symlinks"
+[ -h "${XDG_CONFIG_HOME}/nvim" ] && rm "${XDG_CONFIG_HOME}/nvim" && echo "rm previous symlinks"
 [ -d "${XDG_CONFIG_HOME}/nvim" ] && echo "Erase ${XDG_CONFIG_HOME}/nvim to continue." && exit 1
 
 ln -v -s "$(pwd)/nvim" "${XDG_CONFIG_HOME}/nvim"

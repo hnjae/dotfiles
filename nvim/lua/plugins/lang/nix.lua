@@ -19,13 +19,13 @@ M.get_null_ls_sources = function(null_ls)
   local ret = {}
 
   local mapping = {
-    statix = { --lints & suggestions
+    --lints & suggestions
+    statix = {
       null_ls.builtins.diagnostics.statix,
       -- null_ls.builtins.code_actions.statix,
     },
-    deadnix = { -- scan dead code
-      null_ls.builtins.diagnostics.deadnix,
-    },
+    -- scan dead code
+    deadnix = { null_ls.builtins.diagnostics.deadnix },
   }
 
   for exe, sources in pairs(mapping) do
@@ -35,7 +35,6 @@ M.get_null_ls_sources = function(null_ls)
       end
     end
   end
-
 
   return ret
 end
