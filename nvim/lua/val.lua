@@ -64,14 +64,27 @@ M.root_patterns2 = {
   },
 }
 
--- on_attach function for lspconfig and null-ls
-local is_attached = false;
-M.on_attach = function(_, bufnr)
-  if is_attached then
-    return
-  end
-  is_attached = true
+-- TODO: implement following <2023-12-28>
+--[[
+  1. client.supports_method("textDocument/formatting") 를 이용해서 formatting 을 지원할 경우에만 keymap 설정
+  2. BufWritePre 이벤트를 활용해서, 1의 상황에서는 buf.format을 실행할 것.
 
+  다음 코드 스니펫을 활용할 수 있다: https://github.com/NvChad/NvChad/issues/2016#issuecomment-1545289371
+
+  ```lua
+		vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+		vim.api.nvim_create_autocmd("BufWritePre", {
+			group = augroup,
+			buffer = bufnr,
+			callback = function()
+				vim.lsp.buf.format({ bufnr = bufnr })
+			end,
+		})
+  ```
+]]
+
+-- on_attach function for lspconfig and null-ls
+M.on_attach = function(_, bufnr)
   local buf_format_deny_list = {
     tsserver = true,
   }
