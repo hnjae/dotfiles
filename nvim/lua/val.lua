@@ -65,11 +65,26 @@ M.root_patterns2 = {
 }
 
 -- on_attach function for lspconfig and null-ls
+local is_attached = false;
 M.on_attach = function(_, bufnr)
+  if is_attached then
+    return
+  end
+  is_attached = true
+
+  local buf_format_deny_list = {
+    tsserver = true,
+  }
+
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
   vim.keymap.set("n", "==", function()
-    vim.lsp.buf.format({ async = true })
+    vim.lsp.buf.format({
+      async = true,
+      filter = function(client)
+        return not buf_format_deny_list[client.name]
+      end,
+    })
   end, { desc = "lsp-format", buffer = bufnr })
 
   vim.keymap.set("v", "==", function()
@@ -79,6 +94,9 @@ M.on_attach = function(_, bufnr)
         ["start"] = vim.api.nvim_buf_get_mark(0, "<"),
         ["end"] = vim.api.nvim_buf_get_mark(0, ">"),
       },
+      filter = function(client)
+        return not buf_format_deny_list[client.name]
+      end,
     })
   end, { desc = "lsp-buf-format", buffer = bufnr })
 end
