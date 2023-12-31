@@ -3,7 +3,10 @@ return {
   [1] = "rcarriga/nvim-notify",
   lazy = true,
   enabled = true,
-  event = "VimEnter",
+  event = {
+    -- "VimEnter",
+    "VeryLazy",
+  },
   opts = {
     -- fps = 60,
     render = "compact",

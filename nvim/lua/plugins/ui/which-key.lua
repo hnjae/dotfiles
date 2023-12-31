@@ -1,7 +1,11 @@
+---@type LazySpec
 return {
   -- set keymap / show keymap
   [1] = "folke/which-key.nvim",
-  lazy = false,
+  lazy = true,
+  event = {
+    "VeryLazy",
+  },
   opts = {
     operators = {},
     hidden = {

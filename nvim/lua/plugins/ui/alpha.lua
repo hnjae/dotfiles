@@ -20,7 +20,7 @@ end
 
 return {
   [1] = "goolord/alpha-nvim",
-  -- lazy = false,
+  lazy = true,
   event = { "VimEnter" },
   dependencies = { "nvim-tree/nvim-web-devicons" },
   opts = function()

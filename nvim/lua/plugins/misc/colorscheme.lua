@@ -1,6 +1,7 @@
 -- colorscheme
 -- https://github.com/folke/lsp-colors.nvim
 
+---@type LazySpec[]
 return {
   {
     [1] = "Mofiqul/vscode.nvim",

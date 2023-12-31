@@ -1,6 +1,9 @@
 return {
   [1] = "nvim-treesitter/nvim-treesitter-context",
-  lazy = false,
+  lazy = true,
+  event = {
+    "InsertEnter",
+  },
   dependencies = {
     [1] = "nvim-treesitter/nvim-treesitter",
   },

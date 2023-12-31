@@ -1,14 +1,25 @@
 local M = {}
 
 -- NOTE
--- BufRead - 파일을 열때가 아니면 생기지 않음.
 -- BufNewFile
 
--- BufAdd
--- BufEnter -- happens every buffer-enter
+-- BufReadPre
+-- FileType
 -- BufReadPost
---
+-- BufRead - 파일을 열때가 아니면 생기지 않음.
+-- BufEnter -- happens every buffer-enter
+-- VimEnter
+-- UiEnter
+
 -- BufLeave
+--
+-- BufNew
+-- BufNewFile
+
+-- BufEnter -- happens every buffer-enter
+-- BufAdd
+-- VimEnter
+-- UiEnter
 
 local idx = 0
 local Notify = require("notify")
@@ -17,11 +28,18 @@ function M.setup()
     "VimEnter",
     "BufEnter",
     -- "BufRead",
+    "BufAdd",
+    -- "FileType",
     "BufReadPost",
-    "FileReadPost",
+    "BufRead",
+    "BufReadPre",
+    -- "FileReadPost",
     -- "BufAdd",
     "BufNewFile",
+    "BufNew",
     -- "InsertEnter",
+    "UiEnter",
+    -- "VeryLazy",
   }) do
     vim.api.nvim_create_autocmd({
       event,

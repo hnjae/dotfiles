@@ -6,6 +6,10 @@ return {
   enabled = vim.loop.fs_stat(dir_) ~= nil,
   name = "fcitx",
   opts = { sleep = 0.13 },
+  lazy = true,
+  event = {
+    "InsertEnter",
+  },
 }
 
 -- return {

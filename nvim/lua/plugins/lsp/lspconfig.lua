@@ -4,7 +4,7 @@ local val = require("val")
 return {
   [1] = "neovim/nvim-lspconfig",
   lazy = true,
-  events = { "VeryLazy" },
+  event = { "BufRead", "BufNewFile" },
   dependencies = {
     "folke/neodev.nvim",
     "tamago324/nlsp-settings.nvim",

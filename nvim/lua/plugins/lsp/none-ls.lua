@@ -11,7 +11,8 @@ local val = require("val")
 return {
   -- "jose-elias-alvarez/null-ls.nvim",
   [1] = "nvimtools/none-ls.nvim",
-  lazy = false,
+  lazy = true,
+  event = { "VeryLazy" },
   enabled = true,
   dependencies = {
     "nvim-lua/plenary.nvim",
@@ -32,7 +33,7 @@ return {
     local utils = require("null-ls.utils")
 
     local paths =
-      vim.fn.uniq(vim.fn.sort(vim.fn.globpath(vim.fn.stdpath("config"), "lua/plugins/lsp/lang/*.lua", false, true)))
+        vim.fn.uniq(vim.fn.sort(vim.fn.globpath(vim.fn.stdpath("config"), "lua/plugins/lsp/lang/*.lua", false, true)))
 
     local lang_conf = nil
     for _, file in pairs(paths) do

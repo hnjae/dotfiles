@@ -1,7 +1,7 @@
 return {
   [1] = "habamax/vim-asciidoctor",
-  lazy = false,
-  -- ft = { "asciidoc", "asciidoctor" },
+  lazy = true,
+  ft = { "asciidoc", "asciidoctor" },
   keys = {
     {
       [1] = require("val").prefix.lang .. "p",

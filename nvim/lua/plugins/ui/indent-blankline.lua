@@ -4,7 +4,7 @@ return {
   lazy = true,
   enabled = true,
   cond = os.getenv("XDG_SESSION_TYPE") ~= "tty",
-  event = { "BufNewFile", "BufReadPost" },
+  event = { "BufReadPost", "BufNewFile" },
   main = "ibl",
   opts = {
     scope = {

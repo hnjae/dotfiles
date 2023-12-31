@@ -3,7 +3,7 @@ return {
   [1] = "tamago324/nlsp-settings.nvim",
   lazy = true,
   -- commit = "3cdc23e302d6283d294f42ef5b57edb6dc9b6c5e",
-  events = { "VeryLazy" },
+  event = { "BufRead", "BufNewFile" },
   dependencies = {
     -- "rcarriga/nvim-notify", -- optional
     "folke/neodev.nvim",

@@ -8,7 +8,8 @@ return {
   --   "netrw",
   -- },
   event = {
-    "BufEnter",
+    "VimEnter",
+    -- VeryLazy 보다는 빨라야함
   },
   keys = {
     { [1] = "-", [2] = nil, desc = "vinegar-up" },

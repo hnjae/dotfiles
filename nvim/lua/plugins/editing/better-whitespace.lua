@@ -1,6 +1,6 @@
 return {
   [1] = "ntpeters/vim-better-whitespace",
-  lazy = false,
+  lazy = true,
   event = { "TextChanged" },
   init = function()
     vim.g.strip_whitespace_on_save = 1
