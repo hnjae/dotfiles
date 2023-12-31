@@ -38,6 +38,7 @@ M.setup = function()
     spec = {
       { import = "plugins" },
       { import = "plugins.ui" },
+      { import = "plugins.sidebar" },
       { import = "plugins.editing" },
       { import = "plugins.lsp" },
     },

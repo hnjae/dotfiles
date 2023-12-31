@@ -12,12 +12,12 @@ local spec = {
     "ToggleTermToggleAll",
     -- 'ToggleTermSetName',
   },
-  -- event = { "CmdlineEnter" },
   opts = {
     open_mapping = [[<F4>]],
     shell = os.getenv("SHELL") or vim.o.shell,
     -- direction="horizontal",
   },
+  ---@type LazyKeysSpec[]
   keys = {
     { [1] = "<F4>", [2] = nil, desc = "toggleterm" },
     {

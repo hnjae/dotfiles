@@ -1,5 +1,6 @@
 local prefix = require("val").prefix
 
+---@type LazyPlugin
 return {
   [1] = "preservim/tagbar",
   lazy = true,

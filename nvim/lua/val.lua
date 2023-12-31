@@ -11,6 +11,7 @@ M.prefix = {
   repl = "<Leader>r",
   sidebar = "<Leader>b",
 
+  trouble = "<Leader>x",
   ["toggleterm-send"] = "<Leader>t",
 
   tab = "<Leader>nt",
