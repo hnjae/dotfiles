@@ -1,4 +1,7 @@
-local sources = require("null-ls.sources")
+local is_null_ls, sources = pcall(require, "null-ls.sources")
+if not is_null_ls then
+  return { [1] = "" }
+end
 
 return {
   [1] = function()

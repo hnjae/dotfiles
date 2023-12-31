@@ -1,5 +1,7 @@
 local M = {}
 
+-- TODO: modifiable 이 off 일 때는 활성화 금지 <2023-12-28>
+
 M.setup_lspconfig = function(lspconfig, opts)
   -- key: executable name / val: lspconfig's key
   local mapping = {

@@ -52,11 +52,11 @@ return {
       local utils = require("null-ls.utils")
 
       local paths =
-          vim.fn.uniq(vim.fn.sort(vim.fn.globpath(vim.fn.stdpath("config"), "lua/plugins/lang/*.lua", false, true)))
+          vim.fn.uniq(vim.fn.sort(vim.fn.globpath(vim.fn.stdpath("config"), "lua/plugins/lsp/lang/*.lua", false, true)))
 
       local lang_conf = nil
       for _, file in pairs(paths) do
-        lang_conf = require("plugins.lang." .. file:match("[^/\\]+$"):sub(1, -5))
+        lang_conf = require("plugins.lsp.lang." .. file:match("[^/\\]+$"):sub(1, -5))
 
         if lang_conf.get_null_ls_sources then
           for _, source in pairs(lang_conf.get_null_ls_sources(null_ls, utils)) do

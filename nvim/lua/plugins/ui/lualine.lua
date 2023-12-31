@@ -11,15 +11,15 @@ return {
     local opts = {
       options = {
         icons_enabled = true,
-        theme = require("plugins.lualine.theme"),
+        theme = require("plugins.ui.lualine.theme"),
         component_separators = os.getenv("XDG_SESSION_TYPE") ~= "tty" and { left = "┃", right = "┃" }
-          or { left = "❘", right = "❘" },
+            or { left = "❘", right = "❘" },
         -- component_separators = { left = "│", right = "│" },
         -- section_separators = { left = "", right = "" },
         -- section_separators = os.getenv("XDG_SESSION_TYPE") ~= "tty" and { left = "", right = "" }
         section_separators = os.getenv("XDG_SESSION_TYPE") ~= "tty" and { left = "█", right = "█" }
-          or { left = ">", right = "<" },
-        disabled_filetypes = {}, -- Filetypes to disable lualine for.
+            or { left = ">", right = "<" },
+        disabled_filetypes = {},     -- Filetypes to disable lualine for.
         always_divide_middle = true, -- When set to true, left sections i.e. 'a','b' and 'c'
         -- can't take over the entire statusline even
         -- if neither of 'x', 'y' or 'z' are present.
@@ -29,22 +29,22 @@ return {
       },
       sections = {
         lualine_a = {
-          require("plugins.lualine.components.mode"),
+          require("plugins.ui.lualine.components.mode"),
         },
         lualine_b = {
-          require("plugins.lualine.components.diagnostics"),
+          require("plugins.ui.lualine.components.diagnostics"),
           "branch",
           "diff",
         },
         lualine_c = { "filename" },
         lualine_x = {
-          require("plugins.lualine.components.null-ls"),
-          require("plugins.lualine.components.lsp"),
-          require("plugins.lualine.components.spell"),
+          require("plugins.ui.lualine.components.null-ls"),
+          require("plugins.ui.lualine.components.lsp"),
+          require("plugins.ui.lualine.components.spell"),
         },
         lualine_y = {
-          require("plugins.lualine.components.encoding"),
-          require("plugins.lualine.components.fileformat"),
+          require("plugins.ui.lualine.components.encoding"),
+          require("plugins.ui.lualine.components.fileformat"),
           "filetype",
         },
         lualine_z = { "location", "progress" },
@@ -59,25 +59,25 @@ return {
       },
       tabline = {
         lualine_a = {
-          require("plugins.lualine.components.luasnip"),
+          require("plugins.ui.lualine.components.luasnip"),
         },
         lualine_c = {},
         lualine_x = {},
         lualine_y = {
-          require("plugins.lualine.components.buffers"),
+          require("plugins.ui.lualine.components.buffers"),
         },
         lualine_z = {
-          require("plugins.lualine.components.tabs"),
+          require("plugins.ui.lualine.components.tabs"),
         },
       },
       extensions = {
         -- pre-configured-extensions
         "quickfix",
-        require("plugins.lualine.extensions.help"),
-        require("plugins.lualine.extensions.fugitive"),
-        require("plugins.lualine.extensions.misc"),
-        require("plugins.lualine.extensions.netrw"),
-        require("plugins.lualine.extensions.nvimtree"),
+        require("plugins.ui.lualine.extensions.help"),
+        require("plugins.ui.lualine.extensions.fugitive"),
+        require("plugins.ui.lualine.extensions.misc"),
+        require("plugins.ui.lualine.extensions.netrw"),
+        require("plugins.ui.lualine.extensions.nvimtree"),
       },
     }
     return opts

@@ -1,7 +1,7 @@
 ---
 title   : README
 date    : 2023-06-07T22:23:30+0900
-lastmod : 2023-12-22T19:26:31+0900
+lastmod : 2023-12-28T15:54:40+0900
 isCJKLanguage : true
 draft   : false
 ---
@@ -15,6 +15,8 @@ draft   : false
   setup lspconfig
 
 == Features Of LSP's
+https://neovim.io/doc/user/lsp.html#lsp-api
+
 . Code completion
 . Hover
 . Jump to def
