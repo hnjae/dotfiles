@@ -1,7 +1,9 @@
+---@type LazySpec
 return {
   [1] = "tamago324/nlsp-settings.nvim",
   lazy = true,
   -- commit = "3cdc23e302d6283d294f42ef5b57edb6dc9b6c5e",
+  events = { "VeryLazy" },
   dependencies = {
     -- "rcarriga/nvim-notify", -- optional
     "folke/neodev.nvim",
@@ -12,7 +14,7 @@ return {
     local_settings_root_markers_fallback = require("val").root_patterns,
     append_default_schemas = true,
     loader = "yaml",
-    nvim_notify = { enable = true },
+    nvim_notify = { enable = false },
   },
   main = "nlspsettings",
   config = function(_, opts)

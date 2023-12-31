@@ -1,6 +1,6 @@
 local prefix = require("val").prefix
 
----@type LazyPlugin
+---@type LazySpec
 return {
   [1] = "preservim/tagbar",
   lazy = true,
@@ -9,9 +9,9 @@ return {
     "TagbarToggle",
   },
   keys = {
-    { [1] = "[t",                  [2] = "<cmd>TagbarJumpPrev<CR>", desc = "prev-tag" },
-    { [1] = "]t",                  [2] = "<cmd>TagbarJumpNext<CR>", desc = "next-tag" },
-    { [1] = prefix.sidebar .. "t", [2] = "<cmd>TagbarToggle<CR>",   desc = "tagbar" },
+    { [1] = "[t", [2] = "<cmd>TagbarJumpPrev<CR>", desc = "prev-tag" },
+    { [1] = "]t", [2] = "<cmd>TagbarJumpNext<CR>", desc = "next-tag" },
+    { [1] = prefix.sidebar .. "t", [2] = "<cmd>TagbarToggle<CR>", desc = "tagbar" },
   },
   dependencies = {
     "nvim-lua/plenary.nvim",
@@ -30,7 +30,7 @@ return {
     },
   },
   config = function()
-    vim.g.tagbar_width = 26    -- default: 40
+    vim.g.tagbar_width = 26 -- default: 40
     vim.g.tagbar_wrap = 0
     vim.g.tagbar_zoomwidth = 0 -- default 1 (use maximum width)
     vim.g.tagbar_indent = 1

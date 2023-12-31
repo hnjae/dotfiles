@@ -1,6 +1,6 @@
 local prefix = require("val").prefix
 
----@type LazyPlugin
+---@type LazySpec
 return {
   [1] = "simrat39/symbols-outline.nvim",
   lazy = true,

@@ -1,5 +1,5 @@
 return {
-  "nvim-tree/nvim-tree.lua",
+  [1] = "nvim-tree/nvim-tree.lua",
   dependencies = {
     "nvim-tree/nvim-web-devicons",
   },
@@ -44,5 +44,13 @@ return {
         error = "",
       },
     },
+    on_attach = function(bufnr)
+      local api = require("nvim-tree.api")
+
+      -- vim.keymap.set()
+    end,
   },
+  config = function(_, opts)
+    require("nvim-tree").setup(opts)
+  end,
 }

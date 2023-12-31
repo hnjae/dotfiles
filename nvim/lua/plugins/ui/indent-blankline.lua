@@ -2,7 +2,7 @@ return {
   -- shows indent line
   [1] = "lukas-reineke/indent-blankline.nvim",
   lazy = true,
-  enabled = false,
+  enabled = true,
   cond = os.getenv("XDG_SESSION_TYPE") ~= "tty",
   event = { "BufNewFile", "BufReadPost" },
   main = "ibl",

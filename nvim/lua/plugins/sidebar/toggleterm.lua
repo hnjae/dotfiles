@@ -2,7 +2,8 @@ local prefix = require("val").prefix
 local map_keyword = require("val").map_keyword
 local prefix_send = prefix["toggleterm-send"]
 
-local spec = {
+---@type LazySpec
+return {
   [1] = "akinsho/toggleterm.nvim",
   version = "2.3.x",
   lazy = true,
@@ -77,5 +78,3 @@ local spec = {
     -- visual 서 lazy 랑 같이 쓰려면 <cmd>로는 안된다.
   },
 }
-
-return { spec }

@@ -26,13 +26,7 @@ return {
       [1] = "benfowler/telescope-luasnip.nvim",
       module = true,
     },
-    -- {
-    --   "fhill2/telescope-ultisnips.nvim",
-    --   dependencies = { "sirver/ultisnips" },
-    --   module = true,
-    -- },
   },
-  -- TODO: disable extension if unavailable
   cond = vim.fn.executable("cmake") == 1,
   lazy = true,
   -- TODO: find appropriate event that calls vim.ui.select()
@@ -51,7 +45,7 @@ return {
 
     local find_project_root = lspconfig.util.root_pattern(unpack(val.root_patterns))
 
-    --@type LazyKeys[]
+    ---@type LazyKeysSpec[]
     local lazykeys = {
       { [1] = prefix.finder .. map_keyword.snippet, [2] = nil,                  desc = "luasnip" },
       -- { [1] = "g" .. "l",                             [2] = t_builtin.current_buffer_tags, desc = "telescope-symbols (tags)" },

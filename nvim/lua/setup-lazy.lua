@@ -41,6 +41,9 @@ M.setup = function()
       { import = "plugins.sidebar" },
       { import = "plugins.editing" },
       { import = "plugins.lsp" },
+      { import = "plugins.lang" },
+      { import = "plugins.feature" },
+      { import = "plugins.misc" },
     },
     performance = {
       -- NOTE: nix를 사용할 경우, 시스템의 packpath를 사용할 것. <??>
