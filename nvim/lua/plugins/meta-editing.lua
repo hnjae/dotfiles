@@ -5,8 +5,8 @@ return {
     lazy = false,
     enabled = true,
     keys = {
-      { [1] = "ys", [2] = nil, mode = { "n" }, desc = "Ysurround" },
-      { [1] = "yS", [2] = nil, mode = { "n" }, desc = "YSurround" },
+      { [1] = "ys",  [2] = nil, mode = { "n" }, desc = "Ysurround" },
+      { [1] = "yS",  [2] = nil, mode = { "n" }, desc = "YSurround" },
       { [1] = "Yss", [2] = nil, mode = { "n" }, desc = "Yssurround" },
       { [1] = "YSs", [2] = nil, mode = { "n" }, desc = "YSsurround" },
       { [1] = "YSS", [2] = nil, mode = { "n" }, desc = "YSsurround" },
@@ -37,8 +37,10 @@ return {
     opts = {},
   },
   {
+    -- move text
     [1] = "matze/vim-move",
     lazy = true,
+    ---@type LazyKeysSpec[]
     keys = {
       { [1] = "<A-h>", [2] = nil, mode = { "n", "v" }, desc = "vim-move-left" },
       { [1] = "<A-j>", [2] = nil, mode = { "n", "v" }, desc = "vim-move-down" },
@@ -110,7 +112,7 @@ return {
     -- },
     opts = {
       -- disable_filetype = { "TelescopePrompt", "spectre_panel" },
-      disable_in_macro = true, -- disable when recording or executing a macro
+      disable_in_macro = true,       -- disable when recording or executing a macro
       disable_in_visualblock = true, -- disable when insert after visual block mode
       -- ignored_next_char = [=[[%w%%%'%[%"%.]]=],
       -- enable_moveright = true,
@@ -119,10 +121,10 @@ return {
       -- enable_bracket_in_quote = true, --
       -- break_undo = true, -- switch for basic rule break undo sequence
       check_ts = true, -- use treesitter
-      map_cr = true, -- add indent when new line
-      map_bs = true, -- delete paren if <BS>
+      map_cr = true,   -- add indent when new line
+      map_bs = true,   -- delete paren if <BS>
       -- NOTE: <C-h> delete single char in insert mode <2023-03-02>
-      map_c_h = true, -- Map the <C-h> key to delete a pair
+      map_c_h = true,  -- Map the <C-h> key to delete a pair
       -- map_c_w = false, -- map <c-w> to delete a pair if possible
 
       -- NOTE: fast_wrap: wrap text with surrounding
@@ -157,6 +159,20 @@ return {
       -- " au FileType asciidoctor  let b:AutoPairs = AutoPairsDefine({'`+' : '+`'})
       -- au FileType asciidoctor  let b:AutoPairs = AutoPairsDefine({'``' : '``'})
       -- ]])
+    end,
+  },
+  {
+    [1] = "tpope/vim-sleuth",
+    lazy = true,
+    enabled = true,
+    event = {
+      "BufNewFile",
+      "BufReadPost",
+      "BufFilePost",
+    },
+    init = function()
+      vim.g.slueth_text_heuristics = 0
+      vim.g.slueth_no_filetype_indint_on = 1
     end,
   },
 }
