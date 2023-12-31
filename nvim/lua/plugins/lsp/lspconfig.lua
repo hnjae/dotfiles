@@ -8,13 +8,16 @@ return {
   dependencies = {
     "folke/neodev.nvim",
     "tamago324/nlsp-settings.nvim",
+
     {
       -- shows popup window about parameter/func
       -- NOTE: activated when on_attach() happens / or call .setup() in init.lua
+      -- use folkey/noice.nvim instead
       [1] = "ray-x/lsp_signature.nvim",
       lazy = true,
-      module = false,
       opts = {},
+      module = false,
+      enabled = false,
     },
   },
   config = function()
@@ -53,7 +56,7 @@ return {
     -- end
 
     local paths =
-      vim.fn.uniq(vim.fn.sort(vim.fn.globpath(vim.fn.stdpath("config"), "lua/plugins/lsp/lang/*.lua", false, true)))
+        vim.fn.uniq(vim.fn.sort(vim.fn.globpath(vim.fn.stdpath("config"), "lua/plugins/lsp/lang/*.lua", false, true)))
 
     local lang_conf
     for _, file in pairs(paths) do

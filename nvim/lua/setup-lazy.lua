@@ -36,7 +36,6 @@ M.setup = function()
 
   require("lazy").setup({
     spec = {
-      { import = "plugins" },
       { import = "plugins.ui" },
       { import = "plugins.sidebar" },
       { import = "plugins.editing" },
