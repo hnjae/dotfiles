@@ -5,4 +5,5 @@ return {
     active = "BufferCurrent",
     inactive = "BufferInactive",
   },
+  draw_empty = false,
 }

@@ -3,6 +3,10 @@ if not is_null_ls then
   return { [1] = "" }
 end
 
+-- local supress_sources = {
+--   "codespell",
+-- }
+
 return {
   [1] = function()
     local names = {}

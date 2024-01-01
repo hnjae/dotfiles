@@ -1,12 +1,11 @@
 --------------------------------------------------------------------------------
 -- VIM UI
 --------------------------------------------------------------------------------
--- set laststatus=2 -- 상태라인
--- vim-airline 에서 대신함.
-vim.opt.showmode = false -- no showmode under status line. e.g.) INSERT, REPLACE
+-- vim.opt.laststatus = 2 -- 상태라인
+vim.opt.showmode = true -- no showmode under status line. e.g.) INSERT, REPLACE
 vim.opt.cursorline = true -- cursorline = color cursorline
 vim.opt.showcmd = true -- showcmd under status line. e.g.) 32j
-vim.opt.cmdheight = 2
+-- vim.opt.cmdheight = 1
 
 vim.opt.ruler = true -- display ruler on the right side of the *status line*
 vim.opt.number = true -- display number of lines left

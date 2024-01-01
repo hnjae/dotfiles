@@ -1,3 +1,5 @@
+-- docs: map-table
+
 local prefix = require("val").prefix
 local map_keyword = require("val").map_keyword
 
@@ -13,8 +15,8 @@ vim.g.maplocalleader = ","
 --------------------------------------------------------------------------------
 -- disable s/S, use c/0C instead
 -- NOTE: do not include selection mode here <2023-07-20>
-vim.keymap.set({ "n", "x", "o" }, "s", "<Nop>")
-vim.keymap.set({ "n", "x", "o" }, "S", "<Nop>")
+vim.keymap.set({ "n", "x", "s", "o" }, "s", "<Nop>")
+vim.keymap.set({ "n", "x", "s", "o" }, "S", "<Nop>")
 
 --------------------------------------------------------------------------------
 -- escape teriminal
@@ -69,9 +71,13 @@ vim.keymap.set(
 --------------------------------------------------------------------------------
 
 -------------------------------------------------------------------
-vim.keymap.set("n", "<Leader><Leader>", "za", { desc = "toggle-fold" })
+vim.keymap.set({ "n", "v" }, "<Leader><Leader>", ":", { desc = "cmdline" })
+vim.keymap.set({ "n", "x", "s" }, ":", "<Nop>") -- disable default behavior
+
 vim.keymap.set("n", prefix.close .. "A", "<cmd>wa<CR>", { desc = "write-all" })
 vim.keymap.set("n", prefix.close .. "b", "<cmd>bd<CR>", { desc = "buffer-delete" })
+vim.keymap.set("n", prefix.close .. "QA", "<cmd>qa<CR>", { desc = "quit-all" })
+-- vim.keymap.set("n", prefix.close .. "s", "<cmd>luafile $MYVIMRC<CR>", { desc = "source $MYVIMRC" })
 vim.keymap.set("n", prefix.close .. map_keyword.lsp, function()
   for _, buf_client in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
     buf_client.stop()

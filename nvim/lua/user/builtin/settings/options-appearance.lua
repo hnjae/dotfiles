@@ -15,8 +15,3 @@ if vim.g.neovide then
   -- vim.opt.guifont = "MesloLGM Nerd Font Mono:h11,monospace:h11"
   -- vim.opt.guifont = "D2Coding:h11"
 end
-
--- vim.opt.guifont = { "MesloLGS NF", "h2" }
--- vim.opt.guifont = "MesloLGS NF:h11,Noto Sans Mono CJK KR:h11"
--- vim.opt.guifont = "MesloLGS NF,Noto Sans Mono CJK KR:h11"
--- vim.opt.guifont = "MesloLGS NF,Pretendard:h11"

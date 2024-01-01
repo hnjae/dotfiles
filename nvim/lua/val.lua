@@ -1,5 +1,17 @@
 local M = {}
 
+M.map_keyword = {
+  terminal = "t",
+  explorer = "e",
+  window = "w",
+
+  marks = "m",
+  line = "e",
+  lsp = "l",
+  symbols = "s",
+  snippet = "p",
+}
+
 -- this prefix will be registered by which.key
 M.prefix = {
   lang = "s",
@@ -15,25 +27,14 @@ M.prefix = {
   ["toggleterm-send"] = "<Leader>t",
 
   tab = "<Leader>nt",
-  -- window = "<Leader>nw",
+  window = "<Leader>" .. M.map_keyword.window,
+
   edit = "<Leader>ne",
   vsplit = "<Leader>nv",
   split = "<Leader>ns",
 
   open = "<F6>",
 }
-
-M.map_keyword = {
-  terminal = "t",
-  explorer = "e",
-
-  marks = "m",
-  line = "e",
-  lsp = "l",
-  symbols = "s",
-  snippet = "p",
-}
-
 -- TODO: root_patterns을 각 언어별로 구분해서 선언할 것 <2023-05-18>
 -- null-ls 가 잘 지원하는지 모르겠다.
 M.root_patterns = {
