@@ -8,13 +8,9 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
     {
-      -- requires cmake, make, gcc or clang
       [1] = "nvim-telescope/telescope-fzf-native.nvim",
-      build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release"
-          .. " && cmake --build build --config Release"
-          .. " && cmake --install build --prefix build",
-      cond = vim.fn.executable("cmake") == 1,
-      enabled = false,
+      build = "make",
+      enabled = vim.fn.executable("make") == 1 and vim.fn.executable("cc") == 1,
       module = true,
     },
     {
@@ -27,7 +23,6 @@ return {
       module = true,
     },
   },
-  cond = vim.fn.executable("cmake") == 1,
   lazy = true,
   -- TODO: find appropriate event that calls vim.ui.select()
   event = { "CmdLineEnter", "MenuPopup" },
@@ -35,13 +30,8 @@ return {
     "Telescope",
   },
   keys = function()
-    -- local status_tl, t_builtin = pcall(require, "telescope.builtin")
-    -- if not status_tl then
-    --   return {}
-    -- end
     local t_builtin = require("telescope.builtin")
     local _, lspconfig = pcall(require, "lspconfig")
-    -- local utils = require("telescope.utils")
 
     local find_project_root = lspconfig.util.root_pattern(unpack(val.root_patterns))
 
@@ -121,11 +111,6 @@ return {
       { [1] = prefix.finder .. "GB", [2] = t_builtin.git_branches,         desc = "git-branches" },
       { [1] = prefix.finder .. "GB", [2] = t_builtin.git_status,           desc = "git-status" },
       { [1] = prefix.finder .. "GB", [2] = t_builtin.git_stash,            desc = "git-stash" },
-
-      -- { prefix.finder .. "Sf", t_builtin.filetypes, desc = "filetypes" },
-      -- { prefix.finder .. "Sh", t_builtin.highlights, desc = "highlights" },
-      -- { prefix.finder .. "So", t_builtin.vim_options, desc = "vim-options" },
-      -- { prefix.finder .. "Sa", t_builtin.autocommands, desc = "autocmd" },
 
       -- telescope
       { [1] = prefix.lang .. "t",    [2] = nil,                            desc = "+telescope" },
@@ -234,9 +219,11 @@ return {
 
     return opts
   end,
+  ---@type fun(LazyPlugin, opts: table)
   config = function(plugin, opts)
     local telescope = require("telescope")
     telescope.setup(opts)
+    telescope.load_extension("fzf")
     telescope.load_extension("ui-select")
 
     local rhs_mapping = {
