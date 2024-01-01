@@ -1,15 +1,18 @@
 {
   "Import external module.": {
-    "prefix": [ "im", "imp" ],
+    "prefix": [
+      "im",
+      "imp"
+    ],
     "body": [
-      "import { $2 } from \"${1:module}\";$0"
+      "import { $2 } from '${1:module}';$0"
     ],
     "description": "Import external module."
   },
   "Import external module (without curly brackets)": {
     "prefix": "imx",
     "body": [
-      "import $2 from \"${1:module}\";$0"
+      "import $2 from '${1:module}';$0"
     ],
     "description": "Import external module."
   },
@@ -77,7 +80,7 @@
   },
   "Async Method": {
     "prefix": "asm",
-    "body": "async ${1:name}(${2:arguments}) {\n\t${0}\n}"
+    "body": "async ${1:name}(${2:arguments}): Promise<${3:returnType}> {\n\t${0}\n}"
   },
   "export": {
     "prefix": [
@@ -103,7 +106,7 @@
     "description": "Log warning to the console"
   },
   "console.error": {
-    "prefix": "error",
+    "prefix": "err",
     "body": [
       "console.error($1);",
       "$0"
@@ -138,5 +141,25 @@
       "}"
     ],
     "description": "(If-)Else Statement"
+  },
+  "Try-Catch Statement": {
+    "prefix": "trycatch",
+    "body": [
+      "try {",
+      "\t$0",
+      "} catch (${1:error}) {",
+      "\t",
+      "}"
+    ],
+    "description": "Try-Catch Statement"
+  },
+  "Catch Statement": {
+    "prefix": "catch",
+    "body": [
+      "catch (${1:error}) {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Catch Statement"
   }
 }

@@ -20,37 +20,6 @@
     ],
     "description": "return annotation"
   },
-  "array-type-annotation": {
-    "prefix": "typearray",
-    "body": [
-      "---@type ${1:<type>}[]"
-    ]
-  },
-  "dictionary-type-annotation": {
-    "prefix": "typedict",
-    "body": [
-      "---@type { [${1:<type>}]: ${2:<type>} }"
-    ]
-  },
-  "table-type-annotation": {
-    "prefix": "typetable",
-    "body": [
-      "---@type table<$1, $2>"
-    ]
-  },
-  "function-type-annotation": {
-    "prefix": "typefunc",
-    "body": [
-      "---@type fun(${2:<arg>}: ${3:<arg type>}): ${1:<return type>}"
-    ]
-  },
-  "type-annotation": {
-    "prefix": "type",
-    "body": [
-      "---@type ${1:<type>}"
-    ],
-    "description": "type annotation"
-  },
   "require": {
     "prefix": "req",
     "body": [
@@ -65,15 +34,20 @@
     ],
     "description": "return value"
   },
-  "assigment": {
-    "prefix": "ll",
+  "local-variable": {
+    "prefix": "lv",
     "body": [
       "local ${1:varName} = ${0:value}"
     ],
-    "description": "create a variable"
+    "description": "create a local variable"
   },
   "local": {
-    "prefix": "l",
+    "prefix": [
+      "l",
+      "lo",
+      "loc",
+      "loca"
+    ],
     "body": [
       "local ${0}"
     ],
@@ -153,9 +127,25 @@
     "description": "read file line by line"
   },
   "function": {
-    "prefix": "fu",
+    "prefix": [
+      "fu",
+      "fun",
+      "func"
+    ],
     "body": [
       "function ${1:name}($2)",
+      "\t${0:-- code}",
+      "end"
+    ]
+  },
+  "function with out name": {
+    "prefix": [
+      "fux",
+      "funx",
+      "funcx"
+    ],
+    "body": [
+      "function (${1:arg})",
       "\t${0:-- code}",
       "end"
     ]
@@ -215,5 +205,38 @@
       "local is_${1:module_name}, ${1:module_name} = pcall(require, \"${1:module_name}\")"
     ],
     "description": "Protect call a function as a variable"
+  },
+  "@type": {
+    "prefix": [
+      "type",
+      "typ",
+      "ty"
+    ],
+    "body": "---@type $0",
+    "description": "@type $0"
+  },
+  "@type - array": {
+    "prefix": "typearray",
+    "body": [
+      "---@type ${1:<type>}[]"
+    ]
+  },
+  "@type - dict": {
+    "prefix": "typedict",
+    "body": [
+      "---@type { [${1:<type>}]: ${2:<type>} }"
+    ]
+  },
+  "@type - table": {
+    "prefix": "typetable",
+    "body": [
+      "---@type table<$1, $2>"
+    ]
+  },
+  "@type - function": {
+    "prefix": "typefunc",
+    "body": [
+      "---@type fun(${2:<arg>}: ${3:<arg type>}): ${1:<return type>}"
+    ]
   }
 }
