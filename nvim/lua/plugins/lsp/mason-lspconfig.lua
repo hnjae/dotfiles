@@ -2,7 +2,7 @@
 return {
   [1] = "williamboman/mason-lspconfig.nvim",
   lazy = true,
-  event = { "BufRead", "BufNewFile" },
+  event = { "VeryLazy" },
   enabled = function()
     if vim.fn.has("unix") == 1 then
       -- NOTE: use system package manager instead <2023-11-24>

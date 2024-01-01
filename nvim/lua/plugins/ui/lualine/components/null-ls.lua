@@ -1,11 +1,12 @@
-local is_null_ls, sources = pcall(require, "null-ls.sources")
-if not is_null_ls then
-  return { [1] = "" }
-end
+local trunc = require("plugins.ui.lualine.utils").trunc
 
--- local supress_sources = {
---   "codespell",
--- }
+local modules = require("lualine_require").lazy_require({
+  sources = "null-ls.sources",
+})
+
+local suppress_sources = {
+  codespell = true,
+}
 
 return {
   [1] = function()
@@ -18,15 +19,17 @@ return {
     end
 
     local filetype = vim.api.nvim_buf_get_option(0, "filetype")
-    for _, source in ipairs(sources.get_available(filetype)) do
-      if not names[source.name] then
+    for _, source in ipairs(modules.sources.get_available(filetype)) do
+      if not names[source.name] and not suppress_sources[source.name] then
         table.insert(names, source.name)
         names[source.name] = true
       end
     end
+
     return table.concat(names, ", ")
   end,
   icon = "󰟢",
   -- NOTE: lualine 은 출력이 없을 경우를 별도로 체크할 필요가 없다. <2023-12-28>
   cond = nil,
+  fmt = trunc(110, 0, 70, 20, false),
 }

@@ -2,7 +2,7 @@
 return {
   [1] = "jay-babu/mason-null-ls.nvim",
   lazy = true,
-  event = { "BufRead", "BufNewFile" },
+  event = { "VeryLazy" },
   enabled = vim.fn.has("unix") ~= 1,
   dependencies = {
     "williamboman/mason.nvim",
