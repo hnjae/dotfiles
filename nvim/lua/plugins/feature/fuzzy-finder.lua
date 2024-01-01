@@ -37,15 +37,31 @@ return {
 
     ---@type LazyKeysSpec[]
     local lazykeys = {
-      { [1] = prefix.finder .. map_keyword.snippet, [2] = nil,                  desc = "luasnip" },
+      {
+        [1] = prefix.finder .. map_keyword.snippet,
+        [2] = nil,
+        desc = "luasnip",
+      },
       -- { [1] = "g" .. "l",                             [2] = t_builtin.current_buffer_tags, desc = "telescope-symbols (tags)" },
 
       -- replace default behavior
-      { [1] = "<F1>",                               [2] = t_builtin.help_tags,  desc = "help-tags" },
+      {
+        [1] = "<F1>",
+        [2] = t_builtin.help_tags,
+        desc = "help-tags",
+      },
 
       --
-      { [1] = prefix.finder .. map_keyword.marks,   [2] = t_builtin.marks,      desc = "marks" },
-      { [1] = prefix.finder .. "0",                 [2] = "<cmd>Telescope<CR>", desc = "builtins" },
+      {
+        [1] = prefix.finder .. map_keyword.marks,
+        [2] = t_builtin.marks,
+        desc = "marks",
+      },
+      {
+        [1] = prefix.finder .. "0",
+        [2] = "<cmd>Telescope<CR>",
+        desc = "builtins",
+      },
       {
         [1] = prefix.finder .. map_keyword.marks,
         [2] = t_builtin.marks,
@@ -68,18 +84,38 @@ return {
       },
 
       --
-      { [1] = prefix.finder .. ":", [2] = t_builtin.commands,  desc = "commands" },
-      { [1] = prefix.finder .. "R", [2] = t_builtin.registers, desc = "registers" },
-      { [1] = prefix.finder .. "q", [2] = t_builtin.quickfix,  desc = "quickfix" },
+      {
+        [1] = prefix.finder .. ":",
+        [2] = t_builtin.commands,
+        desc = "commands",
+      },
+      {
+        [1] = prefix.finder .. "R",
+        [2] = t_builtin.registers,
+        desc = "registers",
+      },
+      {
+        [1] = prefix.finder .. "q",
+        [2] = t_builtin.quickfix,
+        desc = "quickfix",
+      },
 
       -- +history
-      { [1] = prefix.finder .. "h", [2] = nil,                 desc = "+history" },
+      {
+        [1] = prefix.finder .. "h",
+        [2] = nil,
+        desc = "+history",
+      },
       {
         [1] = prefix.finder .. "hc",
         [2] = t_builtin.command_history,
         desc = "command-history",
       },
-      { [1] = prefix.finder .. "hs", [2] = t_builtin.search_history, desc = "search-history" },
+      {
+        [1] = prefix.finder .. "hs",
+        [2] = t_builtin.search_history,
+        desc = "search-history",
+      },
       {
         [1] = prefix.finder .. "hk",
         [2] = t_builtin.keymaps,
@@ -97,7 +133,11 @@ return {
       },
 
       -- git
-      { [1] = prefix.finder .. "Gf", [2] = t_builtin.git_files,      desc = "git-files" },
+      {
+        [1] = prefix.finder .. "Gf",
+        [2] = t_builtin.git_files,
+        desc = "git-files",
+      },
       {
         [1] = prefix.finder .. "Gc",
         [2] = t_builtin.git_commits,
@@ -108,17 +148,53 @@ return {
         [2] = t_builtin.git_bcommits,
         desc = "git-commits-cur-buffer",
       },
-      { [1] = prefix.finder .. "GB", [2] = t_builtin.git_branches,         desc = "git-branches" },
-      { [1] = prefix.finder .. "GB", [2] = t_builtin.git_status,           desc = "git-status" },
-      { [1] = prefix.finder .. "GB", [2] = t_builtin.git_stash,            desc = "git-stash" },
+      {
+        [1] = prefix.finder .. "GB",
+        [2] = t_builtin.git_branches,
+        desc = "git-branches",
+      },
+      {
+        [1] = prefix.finder .. "GB",
+        [2] = t_builtin.git_status,
+        desc = "git-status",
+      },
+      {
+        [1] = prefix.finder .. "GB",
+        [2] = t_builtin.git_stash,
+        desc = "git-stash",
+      },
 
       -- telescope
-      { [1] = prefix.lang .. "t",    [2] = nil,                            desc = "+telescope" },
-      { [1] = prefix.lang .. "td",   [2] = t_builtin.diagnostics,          desc = "diagnostics" },
-      { [1] = prefix.lang .. "tr",   [2] = t_builtin.lsp_references,       desc = "references" },
-      { [1] = prefix.lang .. "ti",   [2] = t_builtin.lsp_implementations,  desc = "implementation" },
-      { [1] = prefix.lang .. "tk",   [2] = t_builtin.lsp_definitions,      desc = "definition" },
-      { [1] = prefix.lang .. "tt",   [2] = t_builtin.lsp_type_definitions, desc = "type-definition" },
+      {
+        [1] = prefix.lang .. "t",
+        [2] = nil,
+        desc = "+telescope",
+      },
+      {
+        [1] = prefix.lang .. "td",
+        [2] = t_builtin.diagnostics,
+        desc = "diagnostics",
+      },
+      {
+        [1] = prefix.lang .. "tr",
+        [2] = t_builtin.lsp_references,
+        desc = "references",
+      },
+      {
+        [1] = prefix.lang .. "ti",
+        [2] = t_builtin.lsp_implementations,
+        desc = "implementation",
+      },
+      {
+        [1] = prefix.lang .. "tk",
+        [2] = t_builtin.lsp_definitions,
+        desc = "definition",
+      },
+      {
+        [1] = prefix.lang .. "tt",
+        [2] = t_builtin.lsp_type_definitions,
+        desc = "type-definition",
+      },
     }
 
     local base_presets = {
@@ -126,7 +202,9 @@ return {
         key = "f",
         desc = "find-files",
         func = function()
-          t_builtin.find_files({ cwd = find_project_root(vim.fn.expand("%:p:h")) })
+          t_builtin.find_files({
+            cwd = find_project_root(vim.fn.expand("%:p:h")),
+          })
         end,
       },
       {
@@ -139,7 +217,9 @@ return {
         desc = "rg",
         func = function()
           -- t_builtin.grep_string({ use_regex = true })
-          t_builtin.grep_string({ cwd = find_project_root(vim.fn.expand("%:p:h")) })
+          t_builtin.grep_string({
+            cwd = find_project_root(vim.fn.expand("%:p:h")),
+          })
         end,
       },
     }

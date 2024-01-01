@@ -19,7 +19,9 @@ M.get_null_ls_sources = function(null_ls, _)
   local ret = {}
 
   local mapping = {
-    deno = { null_ls.builtins.formatting.deno_fmt.with({ filetypes = { "markdown" } }) },
+    deno = {
+      null_ls.builtins.formatting.deno_fmt.with({ filetypes = { "markdown" } }),
+    },
   }
 
   for exe, sources in pairs(mapping) do

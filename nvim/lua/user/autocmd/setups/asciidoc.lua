@@ -55,7 +55,7 @@ local new_template = function()
   vim.fn.execute("normal! $")
 end
 
-local change_commentstring = function ()
+local change_commentstring = function()
   -- NOTE: ftplugin/asciidoctor.lua 에 적는걸로는 적용이 안된다. <2023-08-03>
   vim.opt_local.comments = "://"
   vim.opt_local.commentstring = "// %s"
@@ -69,7 +69,7 @@ function M.setup()
   }, {
     group = asciidoc_auto_id,
     pattern = { "*.adoc" },
-    callback = function ()
+    callback = function()
       new_template()
       change_commentstring()
     end,

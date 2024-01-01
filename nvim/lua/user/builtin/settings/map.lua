@@ -38,10 +38,14 @@ vim.keymap.set({ "n" }, prefix.tab .. "e", "<cmd>tabedit<CR>", { desc = "empty-f
 --------------------------------------------------------------------------------
 
 local nmapping = {
-  { "n",  vim.lsp.buf.rename,                  { desc = "lsp-rename" } },
-  { "a",  vim.lsp.buf.code_action,             { desc = "lsp-code-action" } },
-  { "wa", vim.lsp.buf.add_workspace_folder,    { desc = "lsp-add-workspace" } },
-  { "wr", vim.lsp.buf.remove_workspace_folder, { desc = "lsp-remove-workspace" } },
+  { "n", vim.lsp.buf.rename, { desc = "lsp-rename" } },
+  { "a", vim.lsp.buf.code_action, { desc = "lsp-code-action" } },
+  { "wa", vim.lsp.buf.add_workspace_folder, { desc = "lsp-add-workspace" } },
+  {
+    "wr",
+    vim.lsp.buf.remove_workspace_folder,
+    { desc = "lsp-remove-workspace" },
+  },
   {
     "wl",
     function()

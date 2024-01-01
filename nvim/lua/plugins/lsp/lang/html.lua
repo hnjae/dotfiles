@@ -5,8 +5,8 @@ M.get_null_ls_sources = function(null_ls)
 
   local mapping = {
     -- prettier = {
-      -- null_ls.builtins.formatting.prettier.with({ filetypes = { "html" } }),
-      -- null_ls.builtins.range_formatting.prettier.with({ filetypes = { "html" } }),
+    -- null_ls.builtins.formatting.prettier.with({ filetypes = { "html" } }),
+    -- null_ls.builtins.range_formatting.prettier.with({ filetypes = { "html" } }),
     -- },
     tidy = {
       null_ls.builtins.formatting.tidy.with({ filetypes = { "html" } }),

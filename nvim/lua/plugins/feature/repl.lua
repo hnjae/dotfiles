@@ -18,14 +18,38 @@ return {
       desc = "ripple-send-selection",
     },
     --
-    { [1] = prefix.repl .. "O", [2] = "<Plug>(ripple_open_repl)", desc = "Open-repl" },
+    {
+      [1] = prefix.repl .. "O",
+      [2] = "<Plug>(ripple_open_repl)",
+      desc = "Open-repl",
+    },
     --
-    { [1] = prefix.repl .. "m", [2] = "<Plug>(ripple_send_motion)", desc = "+ripple-motion" },
+    {
+      [1] = prefix.repl .. "m",
+      [2] = "<Plug>(ripple_send_motion)",
+      desc = "+ripple-motion",
+    },
     --
-    { [1] = prefix.repl .. "p", [2] = "<Plug>(ripple_send_previous)", desc = "send-previous" },
-    { [1] = prefix.repl .. "l", [2] = "<Plug>(ripple_send_line)", desc = "send-line" },
-    { [1] = prefix.repl .. "b", [2] = "<Plug>(ripple_send_buffer)", desc = "send-buffer" },
-    { [1] = prefix.repl .. "L", [2] = "<Plug>(ripple_link_term)", desc = "link-term" },
+    {
+      [1] = prefix.repl .. "p",
+      [2] = "<Plug>(ripple_send_previous)",
+      desc = "send-previous",
+    },
+    {
+      [1] = prefix.repl .. "l",
+      [2] = "<Plug>(ripple_send_line)",
+      desc = "send-line",
+    },
+    {
+      [1] = prefix.repl .. "b",
+      [2] = "<Plug>(ripple_send_buffer)",
+      desc = "send-buffer",
+    },
+    {
+      [1] = prefix.repl .. "L",
+      [2] = "<Plug>(ripple_link_term)",
+      desc = "link-term",
+    },
     -- { "1" .. prefix.repl, [["1]] .. prefix.repl },
     -- { "1" .. prefix.repl .. "l", [["1]] .. prefix.repl .. "l" },
   },

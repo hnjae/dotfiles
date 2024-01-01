@@ -23,7 +23,11 @@ return {
     end,
     ---@type LazyKeysSpec[]
     keys = {
-      { [1] = prefix.close .. "l", [2] = "SessionManager load_session", desc = "session-load" },
+      {
+        [1] = prefix.close .. "l",
+        [2] = "SessionManager load_session",
+        desc = "session-load",
+      },
     },
     config = function(_, opts)
       require("session_manager").setup(opts)

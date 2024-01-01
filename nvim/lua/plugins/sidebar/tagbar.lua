@@ -11,7 +11,11 @@ return {
   keys = {
     { [1] = "[t", [2] = "<cmd>TagbarJumpPrev<CR>", desc = "prev-tag" },
     { [1] = "]t", [2] = "<cmd>TagbarJumpNext<CR>", desc = "next-tag" },
-    { [1] = prefix.sidebar .. "t", [2] = "<cmd>TagbarToggle<CR>", desc = "tagbar" },
+    {
+      [1] = prefix.sidebar .. "t",
+      [2] = "<cmd>TagbarToggle<CR>",
+      desc = "tagbar",
+    },
   },
   dependencies = {
     "nvim-lua/plenary.nvim",

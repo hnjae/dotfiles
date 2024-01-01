@@ -5,7 +5,9 @@ M.get_null_ls_sources = function(null_ls)
 
   local mapping = {
     zsh = { null_ls.builtins.diagnostics.zsh },
-    beautysh = { null_ls.builtins.formatting.beautysh.with({ filetypes = { "zsh" } }) },
+    beautysh = {
+      null_ls.builtins.formatting.beautysh.with({ filetypes = { "zsh" } }),
+    },
   }
 
   for exe, sources in pairs(mapping) do

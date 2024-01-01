@@ -13,12 +13,12 @@ return {
         icons_enabled = true,
         theme = require("plugins.ui.lualine.theme"),
         component_separators = os.getenv("XDG_SESSION_TYPE") ~= "tty" and { left = "┃", right = "┃" }
-            or { left = "❘", right = "❘" },
+          or { left = "❘", right = "❘" },
         -- section_separators = { left = "", right = "" },
         -- section_separators = os.getenv("XDG_SESSION_TYPE") ~= "tty" and { left = "", right = "" }
         section_separators = os.getenv("XDG_SESSION_TYPE") ~= "tty" and { left = "█", right = "█" }
-            or { left = ">", right = "<" },
-        disabled_filetypes = {},     -- Filetypes to disable lualine for.
+          or { left = ">", right = "<" },
+        disabled_filetypes = {}, -- Filetypes to disable lualine for.
         always_divide_middle = true, -- When set to true, left sections i.e. 'a','b' and 'c'
         -- can't take over the entire statusline even
         -- if neither of 'x', 'y' or 'z' are present.

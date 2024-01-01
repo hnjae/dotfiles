@@ -46,10 +46,14 @@ M.get_null_ls_sources = function(null_ls, null_ls_utils)
   local formatter = {
     -- prettierd: prettier as daemon
     prettierd = {
-      null_ls.builtins.formatting.prettierd.with({ filetypes = { "typescript" } }),
+      null_ls.builtins.formatting.prettierd.with({
+        filetypes = { "typescript" },
+      }),
     },
     prettier = {
-      null_ls.builtins.formatting.prettierd.with({ filetypes = { "typescript" } }),
+      null_ls.builtins.formatting.prettierd.with({
+        filetypes = { "typescript" },
+      }),
     },
   }
 

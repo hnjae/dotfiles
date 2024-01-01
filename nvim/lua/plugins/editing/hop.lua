@@ -28,16 +28,30 @@ return {
     local directions = require("hop.hint").HintDirection
     local mapping = {
       f = function()
-        hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true })
+        hop.hint_char1({
+          direction = directions.AFTER_CURSOR,
+          current_line_only = true,
+        })
       end,
       F = function()
-        hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true })
+        hop.hint_char1({
+          direction = directions.BEFORE_CURSOR,
+          current_line_only = true,
+        })
       end,
       t = function()
-        hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })
+        hop.hint_char1({
+          direction = directions.AFTER_CURSOR,
+          current_line_only = true,
+          hint_offset = -1,
+        })
       end,
       T = function()
-        hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })
+        hop.hint_char1({
+          direction = directions.BEFORE_CURSOR,
+          current_line_only = true,
+          hint_offset = 1,
+        })
       end,
     }
 

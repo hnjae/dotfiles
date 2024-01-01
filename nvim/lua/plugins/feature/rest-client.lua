@@ -27,8 +27,23 @@ return {
   },
   cmd = { "RestLog", "RestSelectEnv" },
   keys = {
-    { [1] = prefix .. "r", [2] = "<Plug>RestNvim",        ft = "http", desc = "RestNvim" },
-    { [1] = prefix .. "R", [2] = "<Plug>RestNvimPreview", ft = "http", desc = "RestNvimPreview" },
-    { [1] = prefix .. "g", [2] = "<cmd>RestLog<CR>",      ft = "http", desc = "RestLog" },
+    {
+      [1] = prefix .. "r",
+      [2] = "<Plug>RestNvim",
+      ft = "http",
+      desc = "RestNvim",
+    },
+    {
+      [1] = prefix .. "R",
+      [2] = "<Plug>RestNvimPreview",
+      ft = "http",
+      desc = "RestNvimPreview",
+    },
+    {
+      [1] = prefix .. "g",
+      [2] = "<cmd>RestLog<CR>",
+      ft = "http",
+      desc = "RestLog",
+    },
   },
 }

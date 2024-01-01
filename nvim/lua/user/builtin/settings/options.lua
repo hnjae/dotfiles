@@ -30,7 +30,7 @@ vim.opt.visualbell = true -- use visual bell
 vim.opt.history = 1000
 
 vim.opt.foldmethod = "expr"
-vim.opt.foldexpr="nvim_treesitter#foldexpr()"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldenable = false -- disable folding at startup
 -- vim.opt.foldlevelstart = 10 -- default -1
 

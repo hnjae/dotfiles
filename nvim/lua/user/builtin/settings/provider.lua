@@ -16,9 +16,9 @@ if vim.fn.has("mac") == 1 then
   end
 end
 
-  -- vim.g.python3_host_prog = '/usr/local/bin/python3'
+-- vim.g.python3_host_prog = '/usr/local/bin/python3'
 -- else
-  -- vim.g.python3_host_prog = "/usr/bin/python3"
+-- vim.g.python3_host_prog = "/usr/bin/python3"
 -- vim.g.python3_host_prog = "~/.local/share/pyenv/shims/python3"
 
 vim.g.loaded_ruby_provider = 0 -- disable ruby

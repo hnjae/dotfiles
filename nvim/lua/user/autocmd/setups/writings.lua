@@ -5,7 +5,16 @@ M.setup = function()
     return
   end
   vim.api.nvim_create_autocmd({ "FileType" }, {
-    pattern = { "markdown", "vimwiki", "org", "tex", "plaintex", "man", "asciidoc", "asciidoctor" },
+    pattern = {
+      "markdown",
+      "vimwiki",
+      "org",
+      "tex",
+      "plaintex",
+      "man",
+      "asciidoc",
+      "asciidoctor",
+    },
     callback = function()
       vim.cmd([[
           " OS

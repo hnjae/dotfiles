@@ -17,7 +17,9 @@ M.get_null_ls_sources = function(null_ls, _)
   local ret = {}
 
   local mapping = {
-    deno = { null_ls.builtins.formatting.deno_fmt.with({ filetypes = { "json" } }) },
+    deno = {
+      null_ls.builtins.formatting.deno_fmt.with({ filetypes = { "json" } }),
+    },
   }
 
   for exe, sources in pairs(mapping) do

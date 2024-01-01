@@ -33,7 +33,7 @@ return {
     local utils = require("null-ls.utils")
 
     local paths =
-        vim.fn.uniq(vim.fn.sort(vim.fn.globpath(vim.fn.stdpath("config"), "lua/plugins/lsp/lang/*.lua", false, true)))
+      vim.fn.uniq(vim.fn.sort(vim.fn.globpath(vim.fn.stdpath("config"), "lua/plugins/lsp/lang/*.lua", false, true)))
 
     local lang_conf = nil
     for _, file in pairs(paths) do
