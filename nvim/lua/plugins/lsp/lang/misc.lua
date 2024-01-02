@@ -25,7 +25,10 @@ M.get_null_ls_sources = function(null_ls, null_ls_utils)
 
   local mapping = {
     codespell = {
-      null_ls.builtins.diagnostics.codespell,
+      null_ls.builtins.diagnostics.codespell.with({
+        -- TODO: microsoft windows path  <2024-01-02>
+        args = { "-I", vim.fn.stdpath("config") .. "/spell/en.utf-8.add", "-" },
+      }),
     },
     -- english prose linter
     proselint = {

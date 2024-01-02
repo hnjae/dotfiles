@@ -26,13 +26,14 @@ return {
   opts = function()
     return require("alpha.themes.startify").config
   end,
-  config = function(_, opts)
+  main = "alpha",
+  config = function(plugin, opts)
     setup_startify()
-    require("alpha").setup(opts)
+    require(plugin.main).setup(opts)
   end,
   keys = function()
     local suffix = "p"
-    --@type LazyKeys[]
+    ---@type LazyKeys[]
     local lazykeys = {
       {
         [1] = prefix.tab .. suffix,
