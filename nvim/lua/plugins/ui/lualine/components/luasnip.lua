@@ -1,7 +1,11 @@
 local is_luasnip, luasnip = pcall(require, "luasnip")
-if is_luasnip then
+if not is_luasnip then
   return { "" }
 end
+
+-- local modules = require("lualine_require").lazy_require({
+--   sources = "luasnip",
+-- })
 
 return {
   [1] = function()

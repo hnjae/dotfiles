@@ -12,13 +12,15 @@ return {
       options = {
         icons_enabled = true,
         theme = require("plugins.ui.lualine.theme"),
-        component_separators = os.getenv("XDG_SESSION_TYPE") ~= "tty" and { left = "┃", right = "┃" }
-            or { left = "❘", right = "❘" },
+        component_separators = os.getenv("XDG_SESSION_TYPE") ~= "tty"
+            and { left = "┃", right = "┃" }
+          or { left = "❘", right = "❘" },
         -- section_separators = { left = "", right = "" },
         -- section_separators = os.getenv("XDG_SESSION_TYPE") ~= "tty" and { left = "", right = "" }
-        section_separators = os.getenv("XDG_SESSION_TYPE") ~= "tty" and { left = "█", right = "█" }
-            or { left = ">", right = "<" },
-        disabled_filetypes = {},     -- Filetypes to disable lualine for.
+        section_separators = os.getenv("XDG_SESSION_TYPE") ~= "tty"
+            and { left = "█", right = "█" }
+          or { left = ">", right = "<" },
+        disabled_filetypes = {}, -- Filetypes to disable lualine for.
         always_divide_middle = true, -- When set to true, left sections i.e. 'a','b' and 'c'
         -- can't take over the entire statusline even
         -- if neither of 'x', 'y' or 'z' are present.
@@ -57,9 +59,14 @@ return {
         lualine_a = {},
         lualine_b = {},
         lualine_c = { "filename" },
-        lualine_x = { "filetype" },
-        lualine_y = {},
-        lualine_z = { "location" },
+        lualine_x = {},
+        lualine_y = {
+          require("plugins.ui.lualine.components.filetype"),
+        },
+        lualine_z = {
+          "location",
+          require("plugins.ui.lualine.components.progress"),
+        },
       },
       tabline = {
         lualine_a = {
@@ -76,13 +83,14 @@ return {
       },
       extensions = {
         -- pre-configured-extensions
-        "quickfix",
-        -- require("plugins.ui.lualine.extensions.help"),
-        -- require("plugins.ui.lualine.extensions.fugitive"),
-        -- require("plugins.ui.lualine.extensions.misc"),
-        -- require("plugins.ui.lualine.extensions.netrw"),
+        -- "quickfix",
+        require("plugins.ui.lualine.extensions.help"),
+        require("plugins.ui.lualine.extensions.readonly"),
+        require("plugins.ui.lualine.extensions.netrw"),
         -- require("plugins.ui.lualine.extensions.nvimtree"),
-        "trouble",
+        -- "trouble",
+        -- "toggleterm",
+        -- "symbols-outline",
       },
     }
     return opts

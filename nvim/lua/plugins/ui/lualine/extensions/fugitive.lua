@@ -1,28 +1,19 @@
-return {
+local filename = function()
+  return " " .. vim.fn.FugitiveHead()
+end
+
+local fugitive = {
   sections = {
-    lualine_a = { "mode" },
-    lualine_c = {
-      {
-        function()
-          return " " .. vim.fn.FugitiveHead()
-        end,
-      },
-    },
-    lualine_x = { "filetype" },
-    lualine_y = {},
-    lualine_z = { "location", "progress" },
+    lualine_a = { { filename } },
   },
   inactive_sections = {
-    -- lualine_c = { 'filetype' },
-    lualine_c = {
-      {
-        function()
-          return " " .. vim.fn.FugitiveHead()
-        end,
-      },
-    },
-    lualine_x = { "filetype" },
-    lualine_z = { "location" },
+    lualine_a = { { filename } },
   },
   filetypes = { "fugitive" },
 }
+
+return vim.tbl_extend(
+  "keep",
+  require("plugins.ui.lualine.extensions.basic"),
+  fugitive
+)

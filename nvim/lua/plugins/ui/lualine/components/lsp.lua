@@ -14,8 +14,12 @@ return {
         goto continue
       end
 
-      client_name = client.name:sub(-16, -1) == "_language_server" and client.name:sub(1, -17) .. "-ls"
-          or (client.name:sub(-3, -1) == "_ls" and client.name:sub(1, -4) .. "-ls" or client.name)
+      client_name = client.name:sub(-16, -1) == "_language_server"
+          and client.name:sub(1, -17) .. "-ls"
+        or (
+          client.name:sub(-3, -1) == "_ls" and client.name:sub(1, -4) .. "-ls"
+          or client.name
+        )
 
       table.insert(names, client_name)
       ::continue::

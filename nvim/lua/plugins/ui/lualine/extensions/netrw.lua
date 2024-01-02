@@ -1,35 +1,27 @@
-return {
-  sections = {
-    lualine_a = {
-      {
-        function()
-          return " "
-        end,
-      },
-    },
-    lualine_b = {},
-    lualine_c = {
-      function()
-        return vim.b.netrw_curdir
-      end,
-    },
-    lualine_x = { "filetype" },
-    lualine_y = {},
-    lualine_z = { "location", "progress" },
-  },
-  inactive_sections = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = {
-      function()
-        return vim.b.netrw_curdir
-      end,
-    },
-    lualine_x = { "filetype" },
-    lualine_y = {},
-    lualine_z = { "location" },
-  },
+local modules = require("lualine_require").lazy_require({
+  lspconfig = "lspconfig",
+  Path = "plenary.path",
+})
+
+local find_project_root =
+  modules.lspconfig.util.root_pattern(unpack(require("val").root_patterns))
+
+local name = function()
+  return modules.Path
+    :new(vim.b.netrw_curdir)
+    :make_relative(find_project_root(vim.b.netrw_curdir))
+end
+
+local extension = {
+  sections = { lualine_c = { name } },
+  inactive_sections = { lualine_c = { name } },
   filetypes = {
     "netrw",
   },
 }
+
+return vim.tbl_deep_extend(
+  "keep",
+  require("plugins.ui.lualine.extensions.basic"),
+  extension
+)

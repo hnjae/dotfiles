@@ -14,7 +14,12 @@ M.trunc = function(trunc_width, trunc_len, hide_width, max_len, no_ellipsis)
     local win_width = vim.fn.winwidth(0)
     if hide_width and win_width < hide_width then
       return ""
-    elseif trunc_width and trunc_len and win_width < trunc_width and #str > trunc_len then
+    elseif
+      trunc_width
+      and trunc_len
+      and win_width < trunc_width
+      and #str > trunc_len
+    then
       -- "" 을 리턴할 경우, luasnip 에서 아이콘을 출력지 않음.
       if trunc_len <= 0 then
         return "⋯"

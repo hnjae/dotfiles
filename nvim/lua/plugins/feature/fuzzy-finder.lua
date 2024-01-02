@@ -33,7 +33,8 @@ return {
     local t_builtin = require("telescope.builtin")
     local _, lspconfig = pcall(require, "lspconfig")
 
-    local find_project_root = lspconfig.util.root_pattern(unpack(val.root_patterns))
+    local find_project_root =
+      lspconfig.util.root_pattern(unpack(val.root_patterns))
 
     ---@type LazyKeysSpec[]
     local lazykeys = {
@@ -42,7 +43,6 @@ return {
         [2] = nil,
         desc = "luasnip",
       },
-      -- { [1] = "g" .. "l",                             [2] = t_builtin.current_buffer_tags, desc = "telescope-symbols (tags)" },
 
       -- replace default behavior
       {

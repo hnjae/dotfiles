@@ -42,7 +42,11 @@ return {
         -- press <Tab> to expand or jump in a snippet. These can also be mapped separately
         [1] = "<Tab>",
         [2] = function()
-          return (luasnip.expand_or_locally_jumpable() and "<Plug>luasnip-expand-or-jump" or "<Tab>")
+          return (
+            luasnip.expand_or_locally_jumpable()
+              and "<Plug>luasnip-expand-or-jump"
+            or "<Tab>"
+          )
           -- return (luasnip.expand_or_jumpable() and "<Plug>luasnip-expand-or-jump" or "<Tab>")
           -- return (luasnip.expandable() and "<Plug>luasnip-expand-or-jump" or "<Tab>")
         end,
@@ -61,7 +65,9 @@ return {
     local Path = require("plenary.path")
 
     -- NOTE: Path module does not resolve path <2023-02-13>
-    local my_snippets = Path:new(vim.fn.resolve(Path:new(vim.fn.stdpath("config"), "snippets").filename))
+    local my_snippets = Path:new(
+      vim.fn.resolve(Path:new(vim.fn.stdpath("config"), "snippets").filename)
+    )
 
     vim.api.nvim_create_user_command("LuaSnipEdit", function()
       require("luasnip.loaders").edit_snippet_files({
@@ -73,7 +79,12 @@ return {
             -- ["vim-snippets"] = vim.pesc("vim-snippets"),
           }) do
             if file:find(pattern) ~= nil then
-              return string.format("%8s: %17s: %s", source_name, type_, filename)
+              return string.format(
+                "%8s: %17s: %s",
+                source_name,
+                type_,
+                filename
+              )
             end
           end
           return string.format("%8s: %s", source_name, file)
@@ -86,7 +97,8 @@ return {
             return {}
           end
 
-          local filepath = my_snippets:joinpath("snippets", ft .. ".json").filename
+          local filepath =
+            my_snippets:joinpath("snippets", ft .. ".json").filename
           for _, path in pairs(paths) do
             if filepath == path then
               return {}
