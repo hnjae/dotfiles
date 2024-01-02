@@ -42,7 +42,7 @@ M.setup = function()
       { import = "plugins.lsp" },
       { import = "plugins.lang" },
       { import = "plugins.feature" },
-      { import = "plugins.misc" },
+      { import = "plugins.lib" },
     },
     performance = {
       -- NOTE: nix를 사용할 경우, 시스템의 packpath를 사용할 것. <??>
