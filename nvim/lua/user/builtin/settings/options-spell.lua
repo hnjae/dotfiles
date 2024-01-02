@@ -1,7 +1,6 @@
 -- HELP: https://soooprmx.com/vim의-autocmd-이벤트들/
 
 vim.opt.spell = false
--- vim.opt.spelllang = "en,en_us,cjk"
 vim.opt.spelllang = "en_us,cjk"
 vim.opt.spellcapcheck = ""
 
@@ -26,17 +25,13 @@ local is_spell_ft = function(ft)
   return true
 end
 
-if vim.api.nvim_create_autocmd ~= nil then
-  vim.api.nvim_create_autocmd(
-    -- { "BufRead", "BufNewFile", "BufNew" },
-    { "BufRead" },
-    {
-      pattern = { "*" },
-      callback = function()
-        if is_spell_ft(vim.opt_local.filetype:get()) then
-          vim.opt_local.spell = true
-        end
-      end,
-    }
-  )
-end
+-- if vim.api.nvim_create_autocmd ~= nil then
+--   vim.api.nvim_create_autocmd({ "BufRead" }, {
+--     -- pattern = { "*" },
+--     callback = function()
+--       if is_spell_ft(vim.opt_local.filetype:get()) then
+--         vim.opt_local.spell = true
+--       end
+--     end,
+--   })
+-- end

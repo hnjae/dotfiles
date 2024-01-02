@@ -33,7 +33,8 @@ local org_opts = {
 return {
   [1] = "nvim-treesitter/nvim-treesitter",
   build = "<cmd>TSUpdate<CR>",
-  lazy = false,
+  lazy = true,
+  event = { "VeryLazy" },
   -- event = { "BufReadPost", "BufNewFile" },
   opts = opts,
   config = function(_, opts_)

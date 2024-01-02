@@ -1730,3 +1730,9 @@ multiline
 BufferedReader
 nextLine
 OrdinaryObjectCreate
+NvimTree
+nvim
+NvimTree
+Lualine
+Treesitter
+indent
