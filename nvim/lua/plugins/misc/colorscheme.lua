@@ -1,5 +1,19 @@
 -- colorscheme
--- https://github.com/folke/lsp-colors.nvim
+---@type table<string, integer>
+local colorschemes = {
+  kanagawa = 1,
+  github = 2,
+  vscode = 3,
+  tokyonight = 4,
+  ---
+  adwaita = 11,
+  ---
+  rasmus = 31,
+  neon = 32,
+  gruvbox = 33,
+}
+
+local colorscheme = colorschemes.github
 
 ---@type LazySpec[]
 return {
@@ -7,7 +21,7 @@ return {
     [1] = "Mofiqul/vscode.nvim",
     -- NOTE: does not support htmlH1 (2022-06-21)
     lazy = false,
-    enabled = true,
+    cond = colorscheme == colorschemes.vscode,
     priority = 999999999,
     opts = {
       italic_comments = true,
@@ -21,20 +35,11 @@ return {
     end,
   },
   {
-    [1] = "toppair/prospector.nvim",
-    lazy = false,
-    enabled = false,
-    priority = 99999999999,
-    -- dependencies = { "nvim-treesitter/nvim-treesitter" },
-    config = function()
-      require("prospector").setup()
-      vim.cmd("colorscheme prospector_darker")
-    end,
-  },
-  {
+    -- supports
+    -- treesitter/lsp/telescope/nvim-cmp/which-key/indent-blankline
     [1] = "kvrohit/rasmus.nvim",
     lazy = false,
-    enabled = false,
+    cond = colorscheme == colorschemes.rasmus,
     priority = 999999999,
     init = function()
       vim.g.rasmus_italic_functions = true
@@ -47,7 +52,7 @@ return {
   {
     [1] = "Mofiqul/adwaita.nvim",
     lazy = false,
-    enabled = false,
+    cond = colorscheme == colorschemes.adwaita,
     priority = 999999999,
     config = function()
       vim.g.adwaita_darker = true -- for darker version
@@ -56,23 +61,67 @@ return {
     end,
   },
   {
-    [1] = "marko-cerovac/material.nvim",
-    lazy = false,
-    enabled = false,
-  },
-  {
-    [1] = "ellisonleao/gruvbox.nvim",
-    lazy = false,
-    enabled = false,
-  },
-  {
     [1] = "projekt0n/github-nvim-theme",
     lazy = false,
-    enabled = false,
+    cond = colorscheme == colorschemes.github,
+    priority = 999999999,
+    main = "github-theme",
+    config = function(plugin, opts)
+      --[[
+      NOTE:
+      github_dark
+      github_dark_default
+      github_dark_dimmed
+      ]]
+      require(plugin.main).setup(opts)
+      vim.cmd("colorscheme github_dark_default")
+    end,
   },
   {
     [1] = "rafamadriz/neon",
     lazy = false,
-    enabled = false,
+    priority = 999999999,
+    cond = colorscheme == colorschemes.neon,
+    config = function()
+      vim.g.neon_style = "dark"
+      vim.cmd([[colorscheme neon]])
+    end,
+  },
+  {
+    [1] = "ellisonleao/gruvbox.nvim",
+    lazy = false,
+    priority = 999999999,
+    cond = colorscheme == colorschemes.gruvbox,
+    config = function()
+      vim.cmd([[colorscheme gruvbox]])
+    end,
+  },
+  {
+    [1] = "rebelot/kanagawa.nvim",
+    lazy = false,
+    priority = 999999999,
+    cond = colorscheme == colorschemes.kanagawa,
+    opts = {
+      compile = true,
+    },
+    config = function(_, opts)
+      require("kanagawa").setup(opts)
+      -- NOTE:
+      --[[
+      kanagawa-dragon: dark theme
+      kanagawa-lotus: light theme
+      kanagawa-wave: puple theme
+      ]]
+      vim.cmd([[colorscheme kanagawa-wave]])
+    end,
+  },
+  {
+    [1] = "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 999999999,
+    cond = colorscheme == colorschemes.tokyonight,
+    config = function()
+      vim.cmd([[colorscheme tokyonight-night]])
+    end,
   },
 }
