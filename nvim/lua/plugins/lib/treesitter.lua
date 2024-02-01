@@ -1,11 +1,80 @@
-local is_orgmode, orgmode = pcall(require, "orgmode")
-
-local opts = {
-  ensure_installed = "all",
+local treesitter_opts = {
+  ensure_installed = {
+    -- required by noice
+    "vim",
+    "regex",
+    "lua",
+    "bash",
+    "query",
+    "markdown",
+    "markdown_inline",
+    --
+    "python",
+    -- "java",
+    -- "kotlin",
+    "javascript",
+    "typescript",
+    "tsx",
+    -- "rust",
+    -- "ruby",
+    -- "c",
+    -- "cpp",
+    -- "go",
+    -- "zig",
+    -- "nix",
+    -- "sql",
+    "regex",
+    "luadoc",
+    "luap", -- https://www.lua.org/pil/20.2.html
+    --
+    -- "graphql",
+    -- --
+    "fish",
+    "dockerfile",
+    -- "cmake",
+    -- "requirements",
+    "diff",
+    -- "comment",
+    -- data interchange format
+    "json",
+    -- "json5",
+    "jsonc",
+    -- "jsonnet",
+    "yaml",
+    "xml",
+    -- "toml",
+    -- "kdl",
+    -- "ini",
+    -- "rasi",
+    --
+    -- "rst",
+    "html",
+    "css",
+    -- "cue",
+    "ssh_config",
+    "gitignore",
+    "gitcommit",
+    "git_config",
+    "gitattributes",
+    "git_rebase",
+    "git_config",
+    "gpg",
+    "udev",
+    --
+    "http",
+    "jq",
+    --
+    -- "latex",
+    -- "bibtex",
+    -- "gnuplot",
+  },
+  sync_install = true,
+  auto_install = true,
+  ignore_install = {},
   highlight = {
     enable = true,
-    disable = { "vimdoc" },
-    -- additional_vim_regex_highlighting = false,
+    disable = {},
+    additional_vim_regex_highlighting = false,
     -- disable = function(lang, buf)
     --   vim.notify(lang)
     --   local max_filesize = 100 * 1024 -- 100 KB
@@ -23,25 +92,24 @@ local opts = {
   },
 }
 
-local org_opts = {
-  highlight = {
-    enable = true,
-    additional_vim_regex_highlighting = { "org" },
-  },
-}
-
+---@type LazySpec
 return {
   [1] = "nvim-treesitter/nvim-treesitter",
   build = "<cmd>TSUpdate<CR>",
-  lazy = true,
+  lazy = false,
   event = { "VeryLazy" },
   -- event = { "BufReadPost", "BufNewFile" },
-  opts = opts,
-  config = function(_, opts_)
-    if is_orgmode then
-      orgmode.setup_ts_grammar()
-      opts_ = vim.tbl_deep_extend("force", {}, opts_, org_opts)
+  opts = treesitter_opts,
+  main = "nvim-treesitter.configs",
+  config = function(plugin, opts)
+    require(plugin.main).setup(opts)
+
+    local del_commands = {
+      "TSEditQuery",
+      "TSEditQueryUserAfter",
+    }
+    for _, command in ipairs(del_commands) do
+      vim.api.nvim_del_user_command(command)
     end
-    require("nvim-treesitter.configs").setup(opts_)
   end,
 }

@@ -1,18 +1,22 @@
 {
   "shell bang": {
-    "prefix": [ "sh" ],
+    "prefix": [
+      "sh"
+    ],
     "body": "#!/bin/sh",
     "description": "This is POSIX script"
   },
   "env": {
-    "prefix": ["env", "bash"],
+    "prefix": [
+      "env",
+      "bash"
+    ],
     "body": "#!/usr/bin/env bash",
     "description": "this is bash script"
   },
   "array (bash)": {
     "prefix": "barr",
-    "body": "(\n\t$0\n)",
-    "description": "strikethrough"
+    "body": "(\n\t$0\n)"
   },
   "for array (bash)": {
     "prefix": "forarr",
@@ -20,8 +24,7 @@
       "for ${2:name} in \"${${1:array_name}[@]}\"; do",
       "\t${0:echo} \"${${2:name}}\"",
       "done"
-    ],
-    "description": "strikethrough"
+    ]
   },
   "confirm (POSIX)": {
     "prefix": "confirm",
@@ -62,5 +65,13 @@
     "prefix": "sete",
     "body": "set -e",
     "description": "exit when error occur"
+  },
+  "get script directory of script": {
+    "prefix": [
+      "dir",
+      "scriptdir"
+    ],
+    "body": "$0\"$(cd -- \"$(dirname -- \"$0\")\" && pwd -P)\" >/dev/null 2>&1",
+    "description": "It will NOT resolve path. It will NOT WORK if script is being sourced."
   }
 }

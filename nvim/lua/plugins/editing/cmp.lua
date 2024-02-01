@@ -29,23 +29,24 @@ local icons = {
   TypeParameter = "",
 }
 
+---@type LazySpec
 return {
   [1] = "hrsh7th/nvim-cmp",
   lazy = true,
   event = { "InsertEnter", "CmdlineEnter" },
   dependencies = {
     -- { "onsails/lspkind.nvim", module = true }, -- adds vscode-like pictograms to built-in lsp
-    { [1] = "hrsh7th/cmp-nvim-lsp",                 module = true },
+    { [1] = "hrsh7th/cmp-nvim-lsp", module = true },
     { [1] = "hrsh7th/cmp-nvim-lsp-document-symbol", module = true },
-    { [1] = "hrsh7th/cmp-nvim-lsp-signature-help",  module = true },
-    { [1] = "ray-x/cmp-treesitter",                 module = true },
-    { [1] = "hrsh7th/cmp-path",                     module = true },
-    { [1] = "hrsh7th/cmp-buffer",                   module = true },
-    { [1] = "hrsh7th/cmp-cmdline",                  module = true },
-    { [1] = "hrsh7th/cmp-nvim-lua",                 module = true },
-    { [1] = "saadparwaiz1/cmp_luasnip",             module = true },
+    { [1] = "hrsh7th/cmp-nvim-lsp-signature-help", module = true },
+    { [1] = "ray-x/cmp-treesitter", module = true },
+    { [1] = "hrsh7th/cmp-path", module = true },
+    { [1] = "hrsh7th/cmp-buffer", module = true },
+    { [1] = "hrsh7th/cmp-cmdline", module = true },
+    { [1] = "hrsh7th/cmp-nvim-lua", module = true },
+    { [1] = "saadparwaiz1/cmp_luasnip", module = true },
     -- { "hrsh7th/cmp-omni", module = true },
-    { [1] = "hrsh7th/cmp-emoji",                    module = true },
+    { [1] = "hrsh7th/cmp-emoji", module = true },
     -- { "petertriho/cmp-git", module = true },
     -- {
     --   "quangnguyen30192/cmp-nvim-ultisnips",
@@ -93,15 +94,13 @@ return {
       }),
       -- ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
       sources = cmp.config.sources({
-        -- { name = "ultisnips" },
-        { name = "luasnip" },
         { name = "nvim_lsp" },
         { name = "nvim_lsp_signature_help" },
-        { name = "treesitter" },
         { name = "nvim_lsp_document_symbol" },
+        { name = "luasnip" },
         -- { name = "omni" },
-        { name = "path" },
         { name = "nvim_lua" },
+        { name = "treesitter" },
         {
           name = "buffer",
           option = {
@@ -116,16 +115,17 @@ return {
           },
         },
         { name = "emoji" },
+        { name = "path" },
         -- { name = "git" },
       }),
-      -- completion = {
-      --   autocomplete = { cmp.TriggerEvent.TextChanged }
-      -- },
-
       formatting = {
         format = function(entry, vim_item)
           if vim_item.kind == "File" then
-            vim_item.abbr = nvim_web_devicons.get_icon(vim_item.word, nil, { default = true }) .. " " .. vim_item.abbr
+            vim_item.abbr = nvim_web_devicons.get_icon(
+              vim_item.word,
+              nil,
+              { default = true }
+            ) .. " " .. vim_item.abbr
             vim_item.kind = entry.source.name
           elseif vim_item.kind == "Folder" then
             vim_item.abbr = icons[vim_item.kind] .. " " .. vim_item.abbr
@@ -181,7 +181,8 @@ return {
       }),
     })
 
-    local is_cmp_autopairs, cmp_autopairs = pcall(require, "nvim-autopairs.completion.cmp")
+    local is_cmp_autopairs, cmp_autopairs =
+      pcall(require, "nvim-autopairs.completion.cmp")
     if is_cmp_autopairs then
       cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
     end

@@ -1,18 +1,41 @@
 {
   "Import external module.": {
     "prefix": [
-      "im",
-      "imp"
+      "imc",
+      "impc"
     ],
     "body": [
-      "import { $2 } from '${1:module}';$0"
+      "import { $2 } from '${1:module}';$3"
     ],
     "description": "Import external module."
   },
   "Import external module (without curly brackets)": {
-    "prefix": "imx",
+    "prefix": [
+      "im",
+      "imp"
+    ],
     "body": [
-      "import $2 from '${1:module}';$0"
+      "import ${2:*} from '${1:module}';$3"
+    ],
+    "description": "Import external module."
+  },
+  "Import * as _": {
+    "prefix": [
+      "im*",
+      "imp*"
+    ],
+    "body": [
+      "import * as $1 from '${2:module}';$3"
+    ],
+    "description": "이렇게 해야 lsp가 module 명을 알려주는듯?"
+  },
+  "Import type": {
+    "prefix": [
+      "imt",
+      "impt"
+    ],
+    "body": [
+      "import type {$2} from '${1:module}';$3"
     ],
     "description": "Import external module."
   },
@@ -37,6 +60,30 @@
       "}"
     ],
     "description": "Interface Definition"
+  },
+  "const statement": {
+    "prefix": "c",
+    "body": "const ${1:name}"
+  },
+  "const statement from destructuring (fs)": {
+    "prefix": "cd",
+    "body": "const { ${2:prop} } = ${1:value}"
+  },
+  "const statement from array destructuring": {
+    "prefix": "cad",
+    "body": "const [ ${2:prop} ] = ${1:value}"
+  },
+  "const assignment awaited": {
+    "prefix": "ca",
+    "body": "const ${1:name} = await ${2:value}"
+  },
+  "const destructuring assignment awaited": {
+    "prefix": "cda",
+    "body": "const { ${1:name} } = await ${2:value}"
+  },
+  "const arrow function assignment": {
+    "prefix": "cf",
+    "body": "const ${1:name} = (${2:arguments}) => {\n\treturn ${0}\n}"
   },
   "Class Definition": {
     "prefix": [
@@ -64,7 +111,7 @@
   },
   "Arrow Function": {
     "prefix": "af",
-    "body": "(${1:arguments}) => {\n\t${0}\n}"
+    "body": "(${1:arguments}) => $0"
   },
   "Arrow Function with return": {
     "prefix": "afr",
@@ -112,6 +159,33 @@
       "$0"
     ],
     "description": "Log error to the console"
+  },
+  "switch": {
+    "prefix": [
+      "swi"
+    ],
+    "body": [
+      "switch (${1:'expression'}) {",
+      "\t$0",
+      "\tdefault: {",
+      "\t\t${2:'statement'};",
+      "\t\tbreak;",
+      "\t}",
+      "}"
+    ],
+    "description": "switch"
+  },
+  "case": {
+    "prefix": [
+      "cas"
+    ],
+    "body": [
+      "case ${1:'constant-expression'}: {",
+      "\t$0",
+      "\tbreak;",
+      "}"
+    ],
+    "description": "case"
   },
   "If Statement": {
     "prefix": "if",
@@ -161,5 +235,64 @@
       "}"
     ],
     "description": "Catch Statement"
+  },
+  "require": {
+    "prefix": [
+      "req"
+    ],
+    "body": "require($1)$0",
+    "description": ""
+  },
+  "tsx-root": {
+    "prefix": [
+      "troot"
+    ],
+    "body": "const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)",
+    "description": ""
+  },
+  "tsx-useCallback": {
+    "prefix": [
+      "usecallbac"
+    ],
+    "body": [
+      "useCallback(($1) => {\n\t$0\n}, [$2])"
+    ],
+    "description": "react - useCallback"
+  },
+  "tsx-useState": {
+    "prefix": [
+      "usestat"
+    ],
+    "body": [
+      "const [${1}, set${2}] = useState<${3:type}>(${4:init value})$0"
+    ],
+    "description": ""
+  },
+  "tsx-onSubmit": {
+    "prefix": [
+      "onsubm"
+    ],
+    "body": [
+      "const onSubmit = useCallback(",
+      "\t(e: FormEvent<HTMLFormElement>) => {",
+      "\t\te.preventDefault()",
+      "\t\t$0",
+      "\t},",
+      "\t[$1],",
+      ")"
+    ],
+    "description": "onSubmit for <form>"
+  },
+  "new-promise": {
+    "prefix": [
+      "newp",
+      "pro"
+    ],
+    "body": [
+      "new Promise<${1:type}>((resolve, reject) => {",
+      "\t$0",
+      "})"
+    ],
+    "description": "new Promise<type>()"
   }
 }

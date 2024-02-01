@@ -1,20 +1,62 @@
 {
-  "alias-anotation": {
-    "prefix": "alias",
+  "@type": {
+    "prefix": [
+      "type",
+      "typ",
+      "ty"
+    ],
+    "body": "---@type $0",
+    "description": "@type $0"
+  },
+  "@type - array": {
+    "prefix": [
+      "typearray",
+      "array"
+    ],
+    "body": [
+      "---@type ${1:<type>}[]$0"
+    ]
+  },
+  "@type - table": {
+    "prefix": [
+      "typetable",
+      "table"
+    ],
+    "body": [
+      "---@type table<$1, $2>$0"
+    ]
+  },
+  "@type - function": {
+    "prefix": "typefunc",
+    "body": [
+      "---@type fun(${2:<arg>}: ${3:<arg type>}): ${1:<return type>}"
+    ]
+  },
+  "@alias": {
+    "prefix": [
+      "alias",
+      "an-alias"
+    ],
     "body": [
       "---@alias ${1:<name>} ${2:<type>}"
     ],
     "description": "alias annotation"
   },
-  "param-annotation": {
-    "prefix": "param",
+  "@param": {
+    "prefix": [
+      "param",
+      "an-param"
+    ],
     "body": [
       "---@param ${1:<name[?]>} ${2:<type[|type...]>} ${3:[description]}"
     ],
     "description": "param annotation"
   },
-  "return-annotation": {
-    "prefix": "return",
+  "@return": {
+    "prefix": [
+      "return",
+      "an-return"
+    ],
     "body": [
       "---@return ${1:<type>} ${2:[<name> [comment] | [name] #<comment>]}"
     ],
@@ -105,10 +147,10 @@
     ],
     "description": "iter table (key, val)"
   },
-  "fori": {
-    "prefix": "for-ipairs",
+  "for-ipairs": {
+    "prefix": "fori",
     "body": [
-      "for i, ${1:x} in ipairs(${2:table}) do",
+      "for ${3:i}, ${2:x} in ipairs(${1:table}) do",
       "\t$0",
       "end"
     ],
@@ -205,38 +247,5 @@
       "local is_${1:module_name}, ${1:module_name} = pcall(require, \"${1:module_name}\")"
     ],
     "description": "Protect call a function as a variable"
-  },
-  "@type": {
-    "prefix": [
-      "type",
-      "typ",
-      "ty"
-    ],
-    "body": "---@type $0",
-    "description": "@type $0"
-  },
-  "@type - array": {
-    "prefix": "typearray",
-    "body": [
-      "---@type ${1:<type>}[]"
-    ]
-  },
-  "@type - dict": {
-    "prefix": "typedict",
-    "body": [
-      "---@type { [${1:<type>}]: ${2:<type>} }"
-    ]
-  },
-  "@type - table": {
-    "prefix": "typetable",
-    "body": [
-      "---@type table<$1, $2>"
-    ]
-  },
-  "@type - function": {
-    "prefix": "typefunc",
-    "body": [
-      "---@type fun(${2:<arg>}: ${3:<arg type>}): ${1:<return type>}"
-    ]
   }
 }

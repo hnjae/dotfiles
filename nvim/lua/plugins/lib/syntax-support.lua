@@ -8,5 +8,5 @@ return {
   { [1] = "mustache/vim-mustache-handlebars", lazy = false },
 
   -- add syntax/indent support for kdl
-  { [1] = "imsnif/kdl.vim", lazy = false },
+  { [1] = "imsnif/kdl.vim", lazy = false, enabled = true },
 }

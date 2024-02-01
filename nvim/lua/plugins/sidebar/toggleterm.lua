@@ -1,6 +1,6 @@
 local prefix = require("val").prefix
 local map_keyword = require("val").map_keyword
-local prefix_send = prefix["toggleterm-send"]
+local prefix_send = prefix.toggleterm_send
 
 ---@type LazySpec
 return {
@@ -52,7 +52,9 @@ return {
         local len_winnr = vim.fn.winnr("$")
 
         -- 이미 terminal buffer 에 focus 중일 경우
-        if vim.fn.getbufinfo(vim.fn.bufnr())[1]["variables"]["terminal_job_id"] then
+        if
+          vim.fn.getbufinfo(vim.fn.bufnr())[1]["variables"]["terminal_job_id"]
+        then
           local last_winnr = vim.t._last_toggleterm_winnr or 1
           last_winnr = last_winnr > len_winnr and 1 or last_winnr
           vim.cmd(string.format([[exe %d .. "wincmd w"]], last_winnr))
@@ -61,7 +63,9 @@ return {
 
         for winnr = 0, (len_winnr - 1) do
           winnr = len_winnr - winnr
-          if vim.fn.getbufinfo(vim.fn.winbufnr(winnr))[1]["variables"]["terminal_job_id"] then
+          if
+            vim.fn.getbufinfo(vim.fn.winbufnr(winnr))[1]["variables"]["terminal_job_id"]
+          then
             vim.t._last_toggleterm_winnr = vim.fn.winnr()
             vim.cmd(string.format([[exe %d .. "wincmd w"]], winnr))
             return

@@ -1,5 +1,3 @@
--- for non editable filetypes
-
 local extension = {
   sections = {
     lualine_c = { "filename" },

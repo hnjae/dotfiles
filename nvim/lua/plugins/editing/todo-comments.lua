@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
   [1] = "folke/todo-comments.nvim",
   lazy = false,

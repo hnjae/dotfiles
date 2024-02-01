@@ -1,18 +1,20 @@
-local filename = function()
-  return " " .. vim.fn.FugitiveHead()
+local name = function()
+  return require("plugins.ui.lualine.utils").icons.git_branch
+    .. " "
+    .. vim.fn.FugitiveHead()
 end
 
 local fugitive = {
   sections = {
-    lualine_a = { { filename } },
+    lualine_c = { { name } },
   },
   inactive_sections = {
-    lualine_a = { { filename } },
+    lualine_c = { { name } },
   },
   filetypes = { "fugitive" },
 }
 
-return vim.tbl_extend(
+return vim.tbl_deep_extend(
   "keep",
   require("plugins.ui.lualine.extensions.basic"),
   fugitive

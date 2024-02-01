@@ -3,8 +3,8 @@ return {
   [1] = "lukas-reineke/indent-blankline.nvim",
   lazy = true,
   enabled = true,
-  cond = os.getenv("XDG_SESSION_TYPE") ~= "tty",
-  event = { "BufReadPost", "BufNewFile" },
+  cond = not require("utils").is_console,
+  event = { "VeryLazy" },
   main = "ibl",
   opts = {
     scope = {

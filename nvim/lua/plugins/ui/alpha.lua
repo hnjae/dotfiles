@@ -1,4 +1,5 @@
 local prefix = require("val").prefix
+local map_keyword = require("val").map_keyword
 
 ---@type fun(): nil
 local setup_startify = function()
@@ -18,6 +19,7 @@ local setup_startify = function()
   -- }
 end
 
+local keyword_alpha = "p"
 return {
   [1] = "goolord/alpha-nvim",
   lazy = true,
@@ -30,42 +32,48 @@ return {
   config = function(plugin, opts)
     setup_startify()
     require(plugin.main).setup(opts)
+
+    -- 아래가 작동안해서 임시로 추가
+    local m = {}
+    m[prefix.new .. keyword_alpha] = { name = "+alpha" }
+    require("which-key").register(m)
   end,
-  keys = function()
-    local suffix = "p"
-    ---@type LazyKeys[]
-    local lazykeys = {
-      {
-        [1] = prefix.tab .. suffix,
-        [2] = function()
-          vim.cmd([[
+  keys = {
+    {
+      -- TODO: 이거 왜 작동 안해? <2024-02-01>
+      [1] = prefix.new .. keyword_alpha,
+      [2] = nil,
+      desc = "+alpha",
+    },
+    {
+      [1] = prefix.new .. keyword_alpha .. map_keyword.tab,
+      [2] = function()
+        vim.cmd([[
           tab split
           Alpha
           ]])
-        end,
-        desc = "Alpha",
-      },
-      {
-        [1] = prefix.split .. suffix,
-        [2] = function()
-          vim.cmd([[
+      end,
+      desc = "tab",
+    },
+    {
+      [1] = prefix.new .. keyword_alpha .. map_keyword.split,
+      [2] = function()
+        vim.cmd([[
           split
           Alpha
           ]])
-        end,
-        desc = "Alpha",
-      },
-      {
-        [1] = prefix.vsplit .. suffix,
-        [2] = function()
-          vim.cmd([[
+      end,
+      desc = "split",
+    },
+    {
+      [1] = prefix.new .. keyword_alpha .. map_keyword.vsplit,
+      [2] = function()
+        vim.cmd([[
           vsplit
           Alpha
           ]])
-        end,
-        desc = "Alpha",
-      },
-    }
-    return lazykeys
-  end,
+      end,
+      desc = "vsplit",
+    },
+  },
 }

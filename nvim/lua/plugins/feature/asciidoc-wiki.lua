@@ -1,5 +1,6 @@
 local dir_ = vim.fn.getenv("HOME") .. "/Projects/asciidoc-wiki.nvim"
 
+---@type LazySpec
 return {
   dir = dir_,
   enabled = vim.loop.fs_stat(dir_) ~= nil,
@@ -25,7 +26,12 @@ return {
     vim.api.nvim_create_autocmd("FileType", {
       pattern = { "asciidoc", "asciidoctor" },
       callback = function()
-        vim.keymap.set({ "n" }, "CR", wiki_link.follow_link, { desc = "follow-wiki-link", buffer = true })
+        vim.keymap.set(
+          { "n" },
+          "CR",
+          wiki_link.follow_link,
+          { desc = "follow-wiki-link", buffer = true }
+        )
       end,
     })
   end,

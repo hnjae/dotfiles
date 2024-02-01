@@ -15,7 +15,7 @@ return {
       return ""
     end
   end,
-  icon = "",
+  icon = require("utils").is_console and "" or "",
   color = "Pmenu",
   -- Automatically updates active buffer color to match color of other components (will be overridden if buffers_color is set)
   use_mode_colors = false,

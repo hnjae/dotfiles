@@ -1,7 +1,0 @@
-{
-  "installPhase": {
-    "prefix": [ "inp" ],
-    "body": "installPhase = ''\n\t$0\n'';",
-    "description": "installPhase in stdenv.mkDerivation"
-  }
-}

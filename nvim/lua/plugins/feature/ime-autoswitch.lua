@@ -1,5 +1,6 @@
 local dir_ = vim.fn.getenv("HOME") .. "/Projects/fcitx.nvim"
 
+---@type LazySpec
 return {
   dir = dir_,
   -- enabled = true,

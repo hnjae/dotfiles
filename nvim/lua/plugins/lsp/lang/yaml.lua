@@ -18,20 +18,17 @@ end
 M.get_null_ls_sources = function(null_ls, null_ls_utils)
   local ret = {}
 
+  local opts = { filetypes = { "yaml" } }
   local formatter = {
-    prettierd = {
-      null_ls.builtins.formatting.prettierd.with({ filetypes = { "yaml" } }),
-    },
-    prettier = {
-      null_ls.builtins.formatting.prettier.with({ filetypes = { "yaml" } }),
-    },
+    -- 우선 순위 높음
+    { "prettier", null_ls.builtins.formatting.prettier.with(opts) },
+    { "prettierd", null_ls.builtins.formatting.prettierd.with(opts) },
+    { "deno", null_ls.builtins.formatting.deno_fmt.with(opts) },
+    -- 우선 순위 낮음
   }
-
-  for exe, sources in pairs(formatter) do
-    if vim.fn.executable(exe) == 1 then
-      for _, source in pairs(sources) do
-        table.insert(ret, source)
-      end
+  for _, source in pairs(formatter) do
+    if vim.fn.executable(source[1]) == 1 then
+      table.insert(ret, source[2])
       break
     end
   end

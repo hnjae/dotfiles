@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
   [1] = "ntpeters/vim-better-whitespace",
   lazy = true,

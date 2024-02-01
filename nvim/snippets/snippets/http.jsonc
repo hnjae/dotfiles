@@ -39,6 +39,12 @@
     ],
     "body": "Content-Type: application/json"
   },
+  "Content-Type: multipart/form-data": {
+    "prefix": [
+      "ctm"
+    ],
+    "body": "Content-Type: multipart/form-data"
+  },
   "http": {
     "prefix": [
       "ht",

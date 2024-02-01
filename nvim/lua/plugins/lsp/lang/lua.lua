@@ -17,8 +17,8 @@ M.get_null_ls_sources = function(null_ls)
   local ret = {}
 
   local mapping = {
-    selene = { null_ls.builtins.diagnostics.selene },
-    stylua = { null_ls.builtins.formatting.stylua },
+    selene = { null_ls.builtins.diagnostics.selene }, -- lua linter written in rust
+    -- stylua = { null_ls.builtins.formatting.stylua }, -- lua formatter written in rust
   }
 
   for exe, sources in pairs(mapping) do
@@ -30,6 +30,14 @@ M.get_null_ls_sources = function(null_ls)
   end
 
   return ret
+end
+
+M.conform = function()
+  return {
+    formatters_by_ft = {
+      lua = { "stylua" },
+    },
+  }
 end
 
 return M

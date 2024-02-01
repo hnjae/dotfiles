@@ -79,7 +79,7 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile", "BufNew" }, {
 -- vim.opt.formatoptions:remove("r")
 -- vim.opt.formatoptions:remove("o")
 -- defaults: tcqj (2022-05-15)
--- jcroql -- overrided by something?
+-- jcroql -- override by something?
 -- vim.opt.formatoptions = "tcqjpn"
 -- t: auto-wrap text using textwidth
 -- c: auto-wrap comments using textwidth, inserting the current comment leader automatically
@@ -91,3 +91,6 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile", "BufNew" }, {
 -- n: when formatting text, recognize numbered lists. it wraps after "1."
 --
 -- o: automatically insert the current comment leader after hitting 'o'
+
+-----------------------------
+vim.opt.mouse = ""

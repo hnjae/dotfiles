@@ -5,7 +5,7 @@
       "\"${1:name}\": {",
       "\t\"prefix\": [ \"${2:prefix}\" ],",
       "\t\"body\": \"${0}\",",
-      "\t\"description\": \"${3:description}\"",
+      "\t\"description\": \"${3}\"",
       "},"
     ],
     "description": "New luasnip entry"
@@ -18,7 +18,7 @@
       "\t\"body\": [",
       "\t\t\"${0}\"",
       "\t],",
-      "\t\"description\": \"${3:description}\"",
+      "\t\"description\": \"${3}\"",
       "},"
     ],
     "description": "New luasnip entry"

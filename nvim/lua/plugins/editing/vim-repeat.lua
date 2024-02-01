@@ -1,4 +1,6 @@
+---@type LazySpec
 return {
   [1] = "tpope/vim-repeat",
-  lazy = false,
+  lazy = true,
+  event = { "InsertEnter" },
 }

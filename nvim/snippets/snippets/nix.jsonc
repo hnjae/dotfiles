@@ -1,0 +1,147 @@
+{
+  "new": {
+    "prefix": [
+      "ne",
+      "new"
+    ],
+    "body": [
+      "{...}: {",
+      "\t$0",
+      "}"
+    ]
+  },
+  "imports": {
+    "prefix": [
+      "imp",
+      "im"
+    ],
+    "body": "imports = [\n\t$0\n];",
+    "description": ""
+  },
+  "installPhase": {
+    "prefix": [
+      "inp"
+    ],
+    "body": "installPhase = ''\n\t$0\n'';",
+    "description": "installPhase in stdenv.mkDerivation"
+  },
+  "concatStringsSep": {
+    "prefix": [
+      "concatss",
+      "lsc",
+      "lib.strings.concatStringsSep",
+      "builtins.concatStringsSep"
+    ],
+    "body": "builtins.concatStringsSep \"${1}\" [$0]",
+    "description": "concatStringsSep :: string -> [string] -> string"
+  },
+  "builtins.concatLists": {
+    "prefix": [
+      "llconcat",
+      "lib.lists.concatLists"
+    ],
+    "body": "builtins.concatLists [$0]",
+    "description": "concatLists :: [List] -> []"
+  },
+  "builtins.readFile": {
+    "prefix": [
+      "readFile",
+      "builtins.readFile",
+      "lib.strings.readFile",
+      "lsreadfile"
+    ],
+    "body": "builtins.readFile ${0:path}",
+    "description": "readFile :: Path -> String"
+  },
+  "builtins.map": {
+    "prefix": [
+      "llm",
+      "lib.lists.map"
+    ],
+    "body": "builtins.map (x: $1) [ $0 ]",
+    "description": [
+      "map :: (a -> b) -> [a] -> [b]",
+      "map (x: \"foo\" + x) [ \"bar\" \"bla\" \"abc\" ]"
+    ]
+  },
+  "lib.lists.remove": {
+    "prefix": [
+      "llr"
+    ],
+    "body": "lib.lists.remove ${1:entry} [${0:list}]",
+    "description": "remove :: a -> [a] -> [a]"
+  },
+  "lib.lists.optionals": {
+    "prefix": [
+      "llos",
+      "liblistsoptionals"
+    ],
+    "body": "lib.lists.optional ${1:bool} [${0:list}]",
+    "description": "optionals :: bool -> [a] -> [a]"
+  },
+  "lib.lists.optional": {
+    "prefix": [
+      "llo",
+      "liblistsoptionals"
+    ],
+    "body": "lib.lists.optional ${1:bool} ${0:single-entry}",
+    "description": "optional :: bool -> a -> [a]"
+  },
+  "lib.lists.count": {
+    "prefix": [
+      "llcount",
+      "lib.lists.count"
+    ],
+    "body": "lib.lists.count ${0:list}",
+    "description": "optional :: bool -> a -> [a]"
+  },
+  "lib.attrsets.filterAttrs": {
+    "prefix": [
+      "lafilter",
+      "lib.attrsets.filterAttrs"
+    ],
+    "body": "lib.attrsets.filterAttrs (n: v: $1) $0 ",
+    "description": "filterAttrs :: (String -> Any -> Bool) -> AttrSet -> AttrSet"
+  },
+  "lib.attrsets.mergeAttrsList": {
+    "prefix": [
+      "lam",
+      "lib.attrsets.mergeAttrsList"
+    ],
+    "body": "lib.attrsets.mergeAttrsList [ ${0:AttrSets}] ",
+    "description": "mergeAttrsList :: [ Attrs ] -> Attrs"
+  },
+  "lib.attrsets.optionalAttrs": {
+    "prefix": [
+      "lao",
+      "lib.attrsets.optionalAttrs",
+      "optionalAttrs"
+    ],
+    "body": "lib.attrsets.optionalAttrs ${1:bool} ${0:AttrSet}",
+    "description": "optionalAttrs :: Bool -> AttrSet -> AttrSet"
+  },
+  "builtins.hasAttr": {
+    "prefix": [
+      "bh",
+      "hasattr"
+    ],
+    "body": "builtins.hasAttr ${1:attr} ${0:attrset}",
+    "description": ""
+  },
+  "builtins.elem": {
+    "prefix": [
+      "be",
+      "elem"
+    ],
+    "body": "builtins.elem ${1:value} ${0:list}",
+    "description": "return `true` if a value ouccurs in the list."
+  },
+  "lib.mkOverride": {
+    "prefix": [
+      "lmo",
+      "mkOverride"
+    ],
+    "body": "lib.mkOverride ${1:priority(1000)} ${0:value}",
+    "description": ""
+  }
+}

@@ -1,5 +1,6 @@
 -- TODO: use copilot-cmp.lua instead of official version <2023-11-14>
 
+---@type LazySpec
 return {
   [1] = "github/copilot.vim",
   lazy = true,

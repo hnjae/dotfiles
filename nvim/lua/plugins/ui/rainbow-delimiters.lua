@@ -2,7 +2,9 @@ return {
   [1] = "HiPhish/rainbow-delimiters.nvim",
   url = "https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
   lazy = true,
-  event = { "BufNewFile", "BufReadPost" },
+  -- NOTE: VeryLaze/VimEnter 은 너무 늦음 <2024-01-04>
+  -- event = { "BufNewFile", "BufReadPost" },
+  event = { "FileType" },
   dependencies = {
     "nvim-treesitter/nvim-treesitter",
   },

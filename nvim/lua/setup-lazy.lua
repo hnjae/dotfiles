@@ -1,6 +1,10 @@
 local M = {}
 
 M.setup = function()
+  if require("utils").is_root() then
+    return
+  end
+
   local msg
   if vim.fn.has("unix") == 0 then
     msg = "Only *nix are supported."
@@ -15,7 +19,7 @@ M.setup = function()
   end
 
   if vim.fn.executable("git") == 0 then
-    msg = "lazy.nvim requires git to be installed."
+    msg = "lazy.nvim requires git."
     vim.notify(msg, vim.log.levels.WARN)
     return
   end
@@ -49,7 +53,7 @@ M.setup = function()
       -- NOTE: -> treesitter 이슈로 더 이상 시스템의 packpath를 사용하지 않음 <2023-11-24>
       reset_packpath = true,
     },
-    lockfile = vim.fn.stdpath("data") .. "/lazy-lock.json",
+    lockfile = vim.fn.stdpath("config") .. "/lazy-lock.json",
   })
 end
 

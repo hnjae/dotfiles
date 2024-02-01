@@ -3,6 +3,7 @@
 -- https://github.com/ggandor/leap.nvim
 -- https://github.com/rlane/pounce.nvim
 
+---@type LazySpec
 return {
   [1] = "phaazon/hop.nvim",
   branch = "v2",

@@ -3,7 +3,7 @@ local modules = require("lualine_require").lazy_require({
 })
 
 local get_color = function()
-  local utils = require("user.utils")
+  local utils = require("utils")
   local highlights = {
     "GitSignsChange",
     "WarningMsg",

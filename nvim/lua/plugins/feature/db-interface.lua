@@ -1,5 +1,6 @@
 -- Dadbod is a Vim plugin for interacting with databases.
 
+---@type LazySpec
 return {
   [1] = "kristijanhusak/vim-dadbod-ui",
   lazy = true,

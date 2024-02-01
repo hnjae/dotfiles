@@ -8,7 +8,7 @@ M.setup_lspconfig = function(lspconfig, opts)
     -- linter
     ["ruff-lsp"] = "ruff_lsp",
     --
-    ["pylsp"] = "pylsp",
+    -- ["pylsp"] = "pylsp",
     -- a static type checker
     -- ["pyright-langserver"] = "pyright",
     --
@@ -26,21 +26,20 @@ M.get_null_ls_sources = function(null_ls, null_ls_utils)
 
   -- key: executable, val: null_ls's source
   local mapping = {
-    -- python
-    -- format imports
-    isort = { null_ls.builtins.formatting.isort },
-    -- format code
-    black = { null_ls.builtins.formatting.black },
     -- a static analysis tool for checking compliance with Python docstring conventions.
-    pydocstyle = { null_ls.builtins.diagnostics.pydocstyle },
+    -- pydocstyle = { null_ls.builtins.diagnostics.pydocstyle },
     mypy = { -- static typing checker
       null_ls.builtins.diagnostics.mypy.with({
         -- diagnostics_format = "[#{s}] #{m}",
         diagnostics_postprocess = function(diagnostic)
-          diagnostic.message = "[" .. diagnostic.source .. "] " .. diagnostic.message
+          diagnostic.message = "["
+            .. diagnostic.source
+            .. "] "
+            .. diagnostic.message
 
           -- dirty hacks
-          local ignore_msg = "module is installed, but missing library stubs or py.typed marker"
+          local ignore_msg =
+            "module is installed, but missing library stubs or py.typed marker"
           if diagnostic.message:match(ignore_msg .. "$") then
             diagnostic.severity = vim.diagnostic.severity.HINT
           end
@@ -63,6 +62,14 @@ M.get_null_ls_sources = function(null_ls, null_ls_utils)
   end
 
   return ret
+end
+
+M.conform = function()
+  return {
+    formatters_by_ft = {
+      python = { "black", "isort" },
+    },
+  }
 end
 
 return M

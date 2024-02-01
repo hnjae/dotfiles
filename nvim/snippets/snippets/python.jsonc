@@ -1,8 +1,25 @@
 {
   "#!/usr/bin/env python3": {
-    "prefix": "env",
+    "prefix": [
+      "env"
+    ],
     "body": "#!/usr/bin/env python3\n$0",
     "description": "Adds shebang line for default python interpreter."
+  },
+  "def": {
+    "prefix": "de",
+    "body": "def ${1:function_name}($2) -> {$3:None}:\n\t${0:pass}",
+    "description": ""
+  },
+  "if": {
+    "prefix": "if",
+    "body": "if ${1:condition}:\n\t",
+    "description": ""
+  },
+  "for-in": {
+    "prefix": "fori",
+    "body": "for ${2} in ${1}:\n\t${0}",
+    "description": ""
   },
   "if __name__ == \"__main__\"": {
     "prefix": "ifm",
@@ -31,8 +48,8 @@
     "body": [
       "\"\"\"",
       "$0",
-      ":param int arg1: description",
-      ":raise: ValueError if arg1 blabla",
+      ":param arg1 int: description",
+      ":raises ValueError: description",
       ":return: description",
       ":rtype: bool",
       "",
@@ -44,8 +61,20 @@
     ],
     "description": "RST Style docstring"
   },
+  "ignore-rule-entire-file": {
+    "prefix": [
+      "ignore-entire"
+    ],
+    "body": [
+      "# ruff: noqa: ${0:rule-name}"
+    ],
+    "description": "noqa"
+  },
   "ignore-rule": {
-    "prefix": "noqa",
+    "prefix": [
+      "noqa",
+      "ignore"
+    ],
     "body": [
       "# noqa: ${0:rule-name}"
     ],
@@ -53,27 +82,37 @@
   },
   "iso8601_compact": {
     "prefix": "iso8601",
-    "body": ["%Y%m%dT%H%M%S%z"],
+    "body": [
+      "%Y%m%dT%H%M%S%z"
+    ],
     "description": "use with strftime"
   },
-  "time": {
+  "timenow": {
     "prefix": "time",
-    "body": ["datetime.now(timezone.utc)"],
-    "description": "Oneline docstring"
+    "body": [
+      "datetime.now(timezone.utc)"
+    ],
+    "description": ""
   },
   "timeinsec": {
     "prefix": "timeinsec",
-    "body": ["datetime.now(timezone.utc).replace(microsecond=0)"],
-    "description": "Oneline docstring"
+    "body": [
+      "datetime.now(timezone.utc).replace(microsecond=0)"
+    ],
+    "description": ""
   },
   "localtime": {
     "prefix": "localtime",
-    "body": ["datetime.now(timezone.utc).astimezone()"],
-    "description": "Oneline docstring"
+    "body": [
+      "datetime.now(timezone.utc).astimezone()"
+    ],
+    "description": ""
   },
   "localtimeinsec": {
     "prefix": "localtimeinsec",
-    "body": ["datetime.now(timezone.utc).replace(microsecond=0).astimezone()"],
-    "description": "Oneline docstring"
+    "body": [
+      "datetime.now(timezone.utc).replace(microsecond=0).astimezone()"
+    ],
+    "description": ""
   }
 }

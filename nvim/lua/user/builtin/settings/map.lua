@@ -1,7 +1,13 @@
 -- docs: map-table
-
 local prefix = require("val").prefix
 local map_keyword = require("val").map_keyword
+
+vim.keymap.set(
+  { "n", "x", "s" },
+  "<F12>",
+  [["+y]],
+  { desc = "yank-to-clipboard" }
+)
 
 --------------------------------------------------------------------------------
 -- leader & localleader
@@ -19,21 +25,58 @@ vim.keymap.set({ "n", "x", "s", "o" }, "s", "<Nop>")
 vim.keymap.set({ "n", "x", "s", "o" }, "S", "<Nop>")
 
 --------------------------------------------------------------------------------
+-- handy emacs-like behavior
+--------------------------------------------------------------------------------
+vim.keymap.set({ "i" }, "<C-e>", "<C-\\><C-n>A")
+vim.keymap.set({ "i" }, "<C-a>", "<C-\\><C-n>I")
+
+--------------------------------------------------------------------------------
 -- escape teriminal
+--------------------------------------------------------------------------------
 vim.keymap.set({ "t" }, "<S-Esc>", "<C-\\><C-n>", { desc = "escape-terminal" })
 
 --------------------------------------------------------------------------------
---------------------------------------------------------------------------------
 
 -- open new page with current buffer
-vim.keymap.set({ "n" }, prefix.vsplit .. prefix.vsplit:sub(-1, -1), "<cmd>vsplit<CR>", { desc = "current-buffer" })
-vim.keymap.set({ "n" }, prefix.split .. prefix.split:sub(-1, -1), "<cmd>split<CR>", { desc = "current-buffer" })
-vim.keymap.set({ "n" }, prefix.tab .. prefix.tab:sub(-1, -1), "<cmd>tabedit %<CR>", { desc = "current-buffer" })
+-- vim.keymap.set({ "n" }, prefix.new .. "c", "", { desc = "+current" })
+vim.keymap.set(
+  { "n" },
+  prefix.new .. "c" .. map_keyword.vsplit,
+  "<cmd>vsplit<CR>",
+  { desc = "current-buffer-vsplit" }
+)
+vim.keymap.set(
+  { "n" },
+  prefix.new .. "c" .. map_keyword.split,
+  "<cmd>split<CR>",
+  { desc = "current-buffer-split" }
+)
+vim.keymap.set(
+  { "n" },
+  prefix.new .. "c" .. map_keyword.tab,
+  "<cmd>tabedit %<CR>",
+  { desc = "current-buffer-tab" }
+)
 
 -- open new page with an empty window
-vim.keymap.set({ "n" }, prefix.vsplit .. "e", "<cmd>vnew<CR>", { desc = "empty-file" })
-vim.keymap.set({ "n" }, prefix.split .. "e", "<cmd>new<CR>", { desc = "empty-file" })
-vim.keymap.set({ "n" }, prefix.tab .. "e", "<cmd>tabedit<CR>", { desc = "empty-file" })
+vim.keymap.set(
+  { "n" },
+  prefix.new .. "e" .. map_keyword.vsplit,
+  "<cmd>vnew<CR>",
+  { desc = "empty-vsplit" }
+)
+vim.keymap.set(
+  { "n" },
+  prefix.new .. "e" .. map_keyword.split,
+  "<cmd>new<CR>",
+  { desc = "empty-split" }
+)
+vim.keymap.set(
+  { "n" },
+  prefix.new .. "e" .. map_keyword.tab,
+  "<cmd>tabedit<CR>",
+  { desc = "empty-tab" }
+)
 
 --------------------------------------------------------------------------------
 
@@ -56,7 +99,12 @@ local nmapping = {
 }
 
 for _, map in pairs(nmapping) do
-  vim.keymap.set("n", prefix.lang .. map_keyword.lsp .. map[1], map[2], map[3])
+  vim.keymap.set(
+    "n",
+    prefix.buffer .. map_keyword.lsp .. map[1],
+    map[2],
+    map[3]
+  )
 end
 
 --------------------------------------------------------------------------------
@@ -64,7 +112,7 @@ end
 -- NOTE: xmap is vmap without selection mode <2023-07-20>
 vim.keymap.set(
   "x",
-  prefix.lang .. map_keyword.lsp .. "a",
+  prefix.buffer .. map_keyword.lsp .. "a",
   -- NOTE: vim 9.0 부터 function() 으로 랩핑 해줘야 동작. <2022-?>
   function()
     vim.lsp.buf.range_code_action()
@@ -76,11 +124,24 @@ vim.keymap.set(
 
 -------------------------------------------------------------------
 vim.keymap.set({ "n", "v" }, "<Leader><Leader>", ":", { desc = "cmdline" })
-vim.keymap.set({ "n", "x", "s" }, ":", "<Nop>") -- disable default behavior
+-- vim.keymap.set({ "n", "x", "s" }, ":", "<Nop>") -- disable default behavior
 
-vim.keymap.set("n", prefix.close .. "A", "<cmd>wa<CR>", { desc = "write-all" })
-vim.keymap.set("n", prefix.close .. "b", "<cmd>bd<CR>", { desc = "buffer-delete" })
+vim.keymap.set({ "n" }, "<F3>", "<cmd>wa<CR>", { desc = "write-all" })
+-- vim.keymap.set("n", "<C-s>", "<cmd>wa<CR>", { desc = "write-all" })
+
+vim.keymap.set(
+  "n",
+  prefix.close .. "b",
+  "<cmd>bd<CR>",
+  { desc = "buffer-delete" }
+)
 vim.keymap.set("n", prefix.close .. "QA", "<cmd>qa<CR>", { desc = "quit-all" })
+vim.keymap.set(
+  "n",
+  prefix.close .. "h",
+  "<cmd>nohlsearch<CR>",
+  { desc = "no-highlight-search" }
+)
 -- vim.keymap.set("n", prefix.close .. "s", "<cmd>luafile $MYVIMRC<CR>", { desc = "source $MYVIMRC" })
 vim.keymap.set("n", prefix.close .. map_keyword.lsp, function()
   for _, buf_client in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
@@ -111,14 +172,12 @@ end, { desc = "stop-lsp" })
 
 --------------------------------------------------------------------------------
 
--- vim.keymap.set("n", "[i", vim.diagnostic.goto_prev, { desc = "information" })
--- vim.keymap.set("n", "]i", vim.diagnostic.goto_next, { desc = "information" })
-vim.keymap.set("n", "[f", function()
+vim.keymap.set("n", "[i", function()
   vim.diagnostic.goto_prev({
     severity = { max = vim.diagnostic.severity.INFO },
   })
 end, { desc = "information" })
-vim.keymap.set("n", "]f", function()
+vim.keymap.set("n", "]i", function()
   vim.diagnostic.goto_next({
     severity = { max = vim.diagnostic.severity.INFO },
   })
@@ -133,12 +192,12 @@ vim.keymap.set("n", "[w", function()
     severity = { min = vim.diagnostic.severity.WARN },
   })
 end, { desc = "error" })
-vim.keymap.set("n", "[g", function()
+vim.keymap.set("n", "[W", function()
   vim.diagnostic.goto_prev({
     severity = { min = vim.diagnostic.severity.ERROR },
   })
 end, { desc = "error" })
-vim.keymap.set("n", "]g", function()
+vim.keymap.set("n", "]W", function()
   vim.diagnostic.goto_next({
     severity = { min = vim.diagnostic.severity.ERROR },
   })
@@ -147,65 +206,38 @@ end, { desc = "error" })
 vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "lsp-declaration" })
 
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "lsp-definition" })
-vim.keymap.set("n", "<F12>", vim.lsp.buf.definition, { desc = "lsp-definition" })
+vim.keymap.set(
+  "n",
+  "<F12>",
+  vim.lsp.buf.definition,
+  { desc = "lsp-definition" }
+)
 
 vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "lsp-declaration" })
-vim.keymap.set("n", "g" .. map_keyword.lsp .. "i", vim.lsp.buf.implementation, { desc = "lsp-implementation" })
-vim.keymap.set("n", "g" .. map_keyword.lsp .. "r", vim.lsp.buf.references, { desc = "lsp-references" })
-vim.keymap.set("n", "g" .. map_keyword.lsp .. "y", vim.lsp.buf.type_definition, { desc = "lsp-type-definition" })
-vim.keymap.set("n", "g" .. map_keyword.lsp .. "r", vim.lsp.buf.signature_help, { desc = "lsp-signature-help" })
-
--- ----
-
--- vim.api.nvim_set_keymap("", "gb", "<cmd>bnext<CR>", {})
--- vim.api.nvim_set_keymap("", "gB", "<cmd>bprevious<CR>", {})
+vim.keymap.set(
+  "n",
+  "g" .. map_keyword.lsp .. "i",
+  vim.lsp.buf.implementation,
+  { desc = "lsp-implementation" }
+)
+vim.keymap.set(
+  "n",
+  "g" .. map_keyword.lsp .. "r",
+  vim.lsp.buf.references,
+  { desc = "lsp-references" }
+)
+vim.keymap.set(
+  "n",
+  "g" .. map_keyword.lsp .. "y",
+  vim.lsp.buf.type_definition,
+  { desc = "lsp-type-definition" }
+)
+vim.keymap.set(
+  "n",
+  "g" .. map_keyword.lsp .. "r",
+  vim.lsp.buf.signature_help,
+  { desc = "lsp-signature-help" }
+)
 
 -- NOTE: VS Code Mapping:
 -- https://code.visualstudio.com/shortcuts/keyboard-shortcuts-Linux.pdf
--- F1: VS Code 에서는 커맨드 검색인듯
--- F5: Start Debugging
--- General
-----------------------------------------------------------
--- Basic Editing
-----------------------------------------------------------
--- Rich Languages Editing
-----------------------------------------------------------
--- Multi-cursor and selection
-----------------------------------------------------------
--- Display
-----------------------------------------------------------
--- C-B Toggle Sidebar visibility
--- F11: Toggle full screen
--- nnoremap <F3> :NERDTreeToggle<CR>
-
--- Search and replace
-----------------------------------------------------------
--- F3 / Shift-F3: Find next/previous
-
--- Navigation
-----------------------------------------------------------
--- Editor management
-----------------------------------------------------------
--- File Management
-----------------------------------------------------------
--- Debug
-----------------------------------------------------------
--- F9: Toggle breakpoint
--- F5: Start / continue
--- nnoremap <F5> :QuickRun<CR>
--- nnoremap <Leader>mcc :QuickRun<CR>
--- nnoremap <Leader>mcc :AsyncRun -raw python %<CR>
--- nnoremap <Leader>rr :AsyncRun -mode=term %:p<CR>
--- nnoremap <F6> :CocCommand python.execSelectionInTerminal
--- Shift-F5 Stop
--- F11 / S-F11 Step into/out
--- F10: Step over
--- C-K C-I Show hover
-
--- Integrated terminal
-----------------------------------------------------------
--- C-grave: Show integrated terminal
--- Create New terminal
--- C-S-Up/Down: Scroll up/down
--- imap <C-l> <Plug>(coc-snippets-expand)
---

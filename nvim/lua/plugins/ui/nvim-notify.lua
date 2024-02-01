@@ -10,8 +10,11 @@ return {
   },
   opts = {
     -- fps = 60,
-    render = "compact",
+    top_down = false,
+    -- render = "compact",
+    render = "default",
     stages = "static",
+    timeout = 2500,
     -- stages = "fade_in_fade_out",
   },
   main = "notify",

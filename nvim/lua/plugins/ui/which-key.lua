@@ -33,9 +33,12 @@ return {
     end
 
     -- TODO: dirty code. fix it <2023-12-26>
-    maps[prefix.lang .. map_keyword.lsp] = { name = "+lsp" }
-    maps[prefix.lang .. map_keyword.lsp .. "w"] = { name = "+workspace" }
+    maps[prefix.buffer .. map_keyword.lsp] = { name = "+lsp" }
+    maps[prefix.buffer .. map_keyword.lsp .. "w"] = { name = "+workspace" }
     maps["g" .. map_keyword.lsp] = { name = "+lsp" }
+
+    maps[prefix.new .. "c"] = { name = "+current-buffer" }
+    maps[prefix.new .. "e"] = { name = "+empty" }
 
     wk.register(maps, {})
   end,

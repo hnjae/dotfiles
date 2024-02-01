@@ -33,7 +33,7 @@ return {
     ---------------------------------------------------
 
     vim.g.pymode_doc = 1
-    vim.g.pymode_doc_bind = prefix.lang .. "ph"
+    vim.g.pymode_doc_bind = prefix.buffer .. "ph"
 
     ------------------------------------------------------------------------------
     -- 2.6 Support Virtualenv
@@ -47,13 +47,13 @@ return {
     -- 2.7 Run code
     ------------------------------------------------------------------------------
     vim.g.pymode_run = 1
-    vim.g.pymode_run_bind = prefix.lang .. "pc"
+    vim.g.pymode_run_bind = prefix.buffer .. "pc"
 
     ------------------------------------------------------------------------------
     -- 2.8 Breakpoints
     ------------------------------------------------------------------------------
     vim.g.pymode_breakpoint = 0
-    vim.g.pymode_breakpoint_bind = prefix.lang .. "pb"
+    vim.g.pymode_breakpoint_bind = prefix.buffer .. "pb"
 
     ------------------------------------------------------------------------------
     -- 3. Code Checking
@@ -93,7 +93,7 @@ return {
     vim.g.pymode_rope_rename_bind = ""
     vim.g.pymode_rope_rename_module_bind = ""
     vim.g.pymode_rope_organize_imports_bind = ""
-    vim.g.pymode_rope_autoimport_bind = prefix.lang .. "rf"
+    vim.g.pymode_rope_autoimport_bind = prefix.buffer .. "rf"
     vim.g.pymode_rope_module_to_package_bind = ""
     vim.g.pymode_rope_extract_method_bind = ""
     vim.g.pymode_rope_extract_variable_bind = ""

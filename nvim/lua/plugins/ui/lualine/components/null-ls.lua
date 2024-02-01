@@ -28,8 +28,8 @@ return {
 
     return table.concat(names, ", ")
   end,
-  icon = "󰟢",
+  icon = require("utils").is_console and "" or "󰟢",
   -- NOTE: lualine 은 출력이 없을 경우를 별도로 체크할 필요가 없다. <2023-12-28>
   cond = nil,
-  fmt = trunc(110, 0, 70, 20, false),
+  fmt = trunc(110, 0, 90, 20, false),
 }

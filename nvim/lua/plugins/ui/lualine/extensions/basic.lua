@@ -8,14 +8,13 @@ return {
       require("plugins.ui.lualine.components.noice-command"),
     },
     lualine_z = {
-      "location",
       require("plugins.ui.lualine.components.progress"),
+      "location",
     },
   },
   inactive_sections = {
     lualine_z = {
       "location",
-      require("plugins.ui.lualine.components.progress"),
     },
   },
 }

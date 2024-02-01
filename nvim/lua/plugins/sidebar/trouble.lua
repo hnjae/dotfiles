@@ -1,4 +1,5 @@
 local prefix = require("val").prefix
+local map_keyword = require("val").map_keyword
 
 ---@type LazySpec
 return {
@@ -16,7 +17,7 @@ return {
   },
   keys = {
     {
-      [1] = prefix.focus .. "x",
+      [1] = prefix.focus .. map_keyword.trouble,
       [2] = "<cmd>Trouble<CR>",
       desc = "focus-trouble",
     },
@@ -26,7 +27,12 @@ return {
       desc = "+trouble",
     },
     {
-      [1] = prefix.trouble .. "x",
+      [1] = prefix.trouble .. map_keyword.trouble,
+      [2] = "<cmd>TroubleToggle<CR>",
+      desc = "trouble-toggle",
+    },
+    {
+      [1] = prefix.sidebar .. map_keyword.trouble,
       [2] = "<cmd>TroubleToggle<CR>",
       desc = "trouble-toggle",
     },

@@ -1,42 +1,76 @@
 local M = {}
 
-M.map_keyword = {
-  terminal = "t",
-  explorer = "e",
-  window = "w",
+-- Type Effort (colemak-dh):
+-- 1.0 tn
+-- 1.1 se
+-- 1.3 ri
+-- 1.6 ~ 1.8 aodh
+-- 2.0 ~ 2.2 yflvk
+-- 2.3 ~ 2.4 bycu,
+-- 2.5~ 2.7 wbx.
+-- 2.9 gm
+-- 3.0 + l
+-- 3+ bq;/j
 
+-- 설정 전역e서 각종 키워드
+
+-- 설정 전역에서 각종 키워드 통일 위해 사용.
+---@type table<string, string>
+M.map_keyword = {
+  -- 보통 특정 목적의 윈도우를 여는 식의 작업에 사용되길 기대.
+  trouble = "x",
+  filemanager = "m",
+  finder = "e", -- e.g. telescope
+  window = "w",
+  terminal = "i",
+  git = "g",
+
+  -- 위와 미교하게 focus 가 다름
+  focus = "f",
+
+  -- 아래는 위와 같은 scope 에서 쓰이지 않을걸로 기대됨.
+  -- 특정 키워드를 찾거나 하는데 사용되길 기대.
   marks = "m",
   line = "e",
   lsp = "l",
-  symbols = "s",
+  symbols = "y",
   snippet = "p",
+  tag = "g",
+
+  --
+  tab = "t",
+  current = "e",
+  vsplit = "v",
+  split = "s",
 }
 
 -- this prefix will be registered by which.key
 M.prefix = {
+  -- NOTE(buffer): filetype 에 따라 달라지거나, buffer 와 interact 하는 기능 할당.
+  buffer = "s",
   lang = "s",
+  toggleterm_send = "s" .. M.map_keyword.terminal,
+  buffer_finder = "s" .. M.map_keyword.finder,
+  sniprun = "sr",
+  task = "st",
+  repl = "sp",
+
+  -- NOTE(close): 무언가를 닫거나, clear 하는 기능을 할당.
   close = "Z",
 
-  finder = "<Leader>f",
-  sniprun = "<Leader>r",
-  focus = "<Leader>f",
-  repl = "<Leader>r",
+  -- NOTE(<Leader>): filetype 와 무관한 기능 할당
+  finder = "<Leader>" .. M.map_keyword.finder,
+  focus = "<Leader>" .. M.map_keyword.focus,
   sidebar = "<Leader>b",
-
-  trouble = "<Leader>x",
-  ["toggleterm-send"] = "<Leader>t",
-
-  tab = "<Leader>nt",
+  trouble = "<Leader>" .. M.map_keyword.trouble,
   window = "<Leader>" .. M.map_keyword.window,
+  git = "<Leader>" .. M.map_keyword.git,
 
-  edit = "<Leader>ne",
-  vsplit = "<Leader>nv",
-  split = "<Leader>ns",
+  new = "<Leader>n",
 
   open = "<F6>",
 }
--- TODO: root_patterns을 각 언어별로 구분해서 선언할 것 <2023-05-18>
--- null-ls 가 잘 지원하는지 모르겠다.
+
 M.root_patterns = {
   ".git",
   ".editorconfig",
@@ -44,65 +78,13 @@ M.root_patterns = {
   ".neoconf.json",
   ".nlsp-settings",
   ".envrc",
+  ".gitignore",
 }
 
-M.root_patterns2 = {
-  python = {
-    "pyproject.toml",
-  },
-  lua = {
-    "selene.toml",
-    "stylua.toml",
-  },
-  typescript = {
-    "tsconfig.json",
-  },
-  ["_"] = {
-    ".nlsp-settings",
-    ".neoconf.json",
-    ".editorconfig",
-    -- ".envrc",
-    ".git",
-  },
-}
-
+---@type fun(client: table, bufnr: integer): nil
 -- on_attach function for lspconfig and null-ls
 M.on_attach = function(client, bufnr)
-  local buf_format_deny_list = {
-    tsserver = true,
-  }
-  local buf_format_filter = function(client_)
-    return not buf_format_deny_list[client_.name]
-  end
-
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-
-  if client.supports_method("textDocument/formatting") and not buf_format_deny_list[client.name] then
-    vim.keymap.set("n", "==", function()
-      vim.lsp.buf.format({
-        async = true,
-        filter = buf_format_filter,
-      })
-    end, { desc = "lsp-format", buffer = bufnr })
-
-    vim.keymap.set("v", "==", function()
-      vim.lsp.buf.format({
-        async = true,
-        range = {
-          ["start"] = vim.api.nvim_buf_get_mark(0, "<"),
-          ["end"] = vim.api.nvim_buf_get_mark(0, ">"),
-        },
-        filter = buf_format_filter,
-      })
-    end, { desc = "lsp-buf-format", buffer = bufnr })
-
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      buffer = bufnr,
-      callback = function()
-        vim.lsp.buf.format({ bufnr = bufnr, filter = buf_format_filter })
-      end,
-    })
-  end
 end
 
 return M

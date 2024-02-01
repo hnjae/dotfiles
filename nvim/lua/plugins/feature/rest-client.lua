@@ -1,8 +1,9 @@
-local prefix = require("val").prefix.lang
+local prefix = require("val").prefix.buffer
 
+---@type LazySpec
 return {
   [1] = "rest-nvim/rest.nvim",
-  requires = { "nvim-lua/plenary.nvim" },
+  dependencies = { "nvim-lua/plenary.nvim" },
   lazy = true,
   ft = { "http" },
   opts = {

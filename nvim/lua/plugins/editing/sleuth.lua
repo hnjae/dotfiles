@@ -1,10 +1,13 @@
 -- 자동으로 expandtab/shiftwidth 인식
 -- editorconfig 존중
+
+---@type LazySpec
 return {
   [1] = "tpope/vim-sleuth",
   lazy = true,
   enabled = true,
   event = {
+    -- TODO: VeryLazy 해도 작동하는지 <2024-01-19>
     "BufNewFile",
     "BufReadPost",
     "BufFilePost",

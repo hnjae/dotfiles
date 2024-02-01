@@ -7,9 +7,15 @@
     "snippets": [
       {
         "language": [
+          "markdown"
+        ],
+        "path": "./snippets/markdown.jsonc"
+      },
+      {
+        "language": [
           "sh"
         ],
-        "path": "./snippets/sh.json"
+        "path": "./snippets/sh.jsonc"
       },
       {
         "language": [
@@ -19,7 +25,7 @@
           "html",
           "global"
         ],
-        "path": "./snippets/license.json"
+        "path": "./snippets/license.jsonc"
       },
       {
         "language": [
@@ -30,43 +36,49 @@
           "global",
           "all"
         ],
-        "path": "./snippets/global.json"
+        "path": "./snippets/global.jsonc"
       },
       {
         "language": [
           "javascript"
         ],
-        "path": "./snippets/javascript.json"
+        "path": "./snippets/javascript.jsonc"
       },
       {
         "language": [
           "typescript"
         ],
-        "path": "./snippets/typescript.json"
+        "path": "./snippets/typescript.jsonc"
+      },
+      {
+        "language": [
+          "typescriptreact"
+        ],
+        "path": "./snippets/typescriptreact.jsonc"
       },
       {
         "language": "python",
-        "path": "./snippets/python.json"
+        "path": "./snippets/python.jsonc"
       },
       {
         "language": "lua",
-        "path": "./snippets/lua.json"
+        "path": "./snippets/lua.jsonc"
       },
       {
         "language": "asciidoc",
-        "path": "./snippets/asciidoc.json"
+        "path": "./snippets/asciidoc.jsonc"
       },
       {
         "language": "http",
-        "path": "./snippets/http.json"
+        "path": "./snippets/http.jsonc"
       },
       {
         "language": "nix",
-        "path": "./snippets/nix.json"
+        "path": "./snippets/nix.jsonc"
       },
       {
-        "language": "json",
-        "path": "./snippets/json.json"
+        "language": "jsonc",
+        "path": "./snippets/jsonc.jsonc"
       }
     ]
   }

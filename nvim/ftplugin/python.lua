@@ -1,5 +1,10 @@
 vim.opt_local.textwidth = 79
 
+-- use treesitter
+vim.opt_local.autoindent = false
+vim.opt_local.smartindent = false
+vim.opt_local.cindent = false
+
 -- https://develop.spacemacs.org/layers/+lang/python/README.html
 -- autocmd Filetype python setlocal python_highlight_all=1
 -- let python_highlight_all=1 " 이거 키면 공백이 하이라이트 되는 게 짜증나

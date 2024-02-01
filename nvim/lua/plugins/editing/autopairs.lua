@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
   {
     [1] = "windwp/nvim-autopairs",
@@ -42,7 +43,7 @@ return {
         -- rule("%", "%", "lua"):with_pair(ts_conds.is_ts_node({'string','comment'})),
         -- rule("$", "$", "lua"):with_pair(ts_conds.is_not_ts_node({'function'}))
       })
-      nvim_autopairs.remove_rule("`")
+      -- nvim_autopairs.remove_rule("`")
     end,
   },
   {

@@ -6,7 +6,7 @@ return {
     local clients = vim.lsp.get_active_clients({ bufnr = 0 })
     local names = {}
 
-    --@type string
+    ---@type string
     local client_name
     for _, client in ipairs(clients) do
       if client.name == "null-ls" then
@@ -27,7 +27,7 @@ return {
 
     return table.concat(names, ", ")
   end,
-  icon = "",
+  icon = require("utils").is_console and "" or "",
   cond = nil,
-  fmt = trunc(100, 0, 70, 28, false),
+  fmt = trunc(100, 0, 85, 28, false),
 }
