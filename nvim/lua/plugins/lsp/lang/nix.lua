@@ -1,3 +1,4 @@
+---@type LspSpec
 local M = {}
 
 M.setup_lspconfig = function(lspconfig, opts)
@@ -39,13 +40,6 @@ M.get_null_ls_sources = function(null_ls)
     deadnix = { null_ls.builtins.diagnostics.deadnix },
   }
 
-  local formatter = {
-    alejandra = null_ls.builtins.formatting.alejandra,
-
-    -- NOTE: last-update 2022-06-15 <2024-01-05>
-    -- ["nixpkgs-fmt"] = null_ls.builtins.formatting.nixpkgs_fmt,
-  }
-
   for exe, sources in pairs(mapping) do
     if vim.fn.executable(exe) == 1 then
       for _, source in pairs(sources) do
@@ -54,22 +48,17 @@ M.get_null_ls_sources = function(null_ls)
     end
   end
 
-  for exe, source in pairs(formatter) do
-    if vim.fn.executable(exe) == 1 then
-      table.insert(ret, source)
-      break
-    end
-  end
-
   return ret
 end
 
--- M.conform = function()
---   return {
---     formatters_by_ft = {
---       python = { "black", "isort" },
---     },
---   }
--- end
+M.get_conform_opts = function()
+  -- NOTE: last-update 2022-06-15 <2024-01-05>
+  -- ["nixpkgs-fmt"] = null_ls.builtins.formatting.nixpkgs_fmt,
+  return {
+    formatters_by_ft = {
+      nix = { "alejandra" },
+    },
+  }
+end
 
 return M

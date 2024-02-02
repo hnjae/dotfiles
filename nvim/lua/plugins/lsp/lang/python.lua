@@ -1,3 +1,4 @@
+---@type LspSpec
 local M = {}
 
 M.setup_lspconfig = function(lspconfig, opts)
@@ -7,7 +8,7 @@ M.setup_lspconfig = function(lspconfig, opts)
     ["jedi-language-server"] = "jedi_language_server",
     -- linter
     ["ruff-lsp"] = "ruff_lsp",
-    --
+
     -- ["pylsp"] = "pylsp",
     -- a static type checker
     -- ["pyright-langserver"] = "pyright",
@@ -64,7 +65,7 @@ M.get_null_ls_sources = function(null_ls, null_ls_utils)
   return ret
 end
 
-M.conform = function()
+M.get_conform_opts = function()
   return {
     formatters_by_ft = {
       python = { "black", "isort" },

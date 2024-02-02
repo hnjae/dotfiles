@@ -1,3 +1,4 @@
+---@type LspSpec
 local M = {}
 
 M.setup_lspconfig = function(lspconfig, opts)
@@ -18,7 +19,6 @@ M.get_null_ls_sources = function(null_ls)
 
   local mapping = {
     selene = { null_ls.builtins.diagnostics.selene }, -- lua linter written in rust
-    -- stylua = { null_ls.builtins.formatting.stylua }, -- lua formatter written in rust
   }
 
   for exe, sources in pairs(mapping) do
@@ -32,8 +32,9 @@ M.get_null_ls_sources = function(null_ls)
   return ret
 end
 
-M.conform = function()
+M.get_conform_opts = function()
   return {
+    -- stylua:  lua formatter written in rust
     formatters_by_ft = {
       lua = { "stylua" },
     },

@@ -1,6 +1,7 @@
+---@type LspSpec
 local M = {}
 
-M.get_null_ls_sources = function(null_ls)
+M.get_null_ls_sources = function(null_ls, _)
   local ret = {}
 
   local mapping = {

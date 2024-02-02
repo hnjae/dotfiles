@@ -200,6 +200,16 @@ return {
             "treesitter-history"
           ).filename,
         },
+        mappings = {
+          i = {
+            [string.format("<C-%s>", map_keyword.split)] = "select_horizontal",
+            -- ["<C-x>"] = nil,
+          },
+          n = {
+            -- [string.format("<C-%s>", map_keyword.split)] = "select_horizontal",
+            -- ["<C-x>"] = nil,
+          },
+        },
       },
       pickers = {
         find_files = {

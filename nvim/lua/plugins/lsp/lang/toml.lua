@@ -1,3 +1,4 @@
+---@type LspSpec
 local M = {}
 
 M.setup_lspconfig = function(lspconfig, opts)

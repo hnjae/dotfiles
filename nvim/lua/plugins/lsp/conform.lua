@@ -12,8 +12,8 @@ return {
     }
 
     for _, lang_conf in ipairs(require("plugins.lsp.utils.get_lang_confs")()) do
-      if lang_conf.conform then
-        ret = vim.tbl_deep_extend("keep", ret, lang_conf.conform())
+      if lang_conf.get_conform_opts then
+        ret = vim.tbl_deep_extend("keep", ret, lang_conf.get_conform_opts())
       end
     end
 

@@ -1,3 +1,4 @@
+---@type LspSpec
 local M = {}
 
 -- TODO: modifiable 이 off 일 때는 활성화 금지 <2023-12-28>
@@ -53,22 +54,6 @@ M.get_null_ls_sources = function(null_ls, _)
     },
   }
 
-  local opts = { filetypes = { "markdown" } }
-  local formatter = {
-    -- 우선 순위 높음
-    -- { "mdformat", null_ls.builtins.formatting.mdformat.with(opts) },
-    { "prettier", null_ls.builtins.formatting.prettier.with(opts) },
-    { "prettierd", null_ls.builtins.formatting.prettierd.with(opts) },
-    { "deno", null_ls.builtins.formatting.deno_fmt.with(opts) },
-    -- 우선 순위 낮음
-  }
-  for _, source in pairs(formatter) do
-    if vim.fn.executable(source[1]) == 1 then
-      table.insert(ret, source[2])
-      break
-    end
-  end
-
   for exe, sources in pairs(mapping) do
     if vim.fn.executable(exe) == 1 then
       for _, source in pairs(sources) do
@@ -78,6 +63,14 @@ M.get_null_ls_sources = function(null_ls, _)
   end
 
   return ret
+end
+
+M.get_conform_opts = function()
+  return {
+    formatters_by_ft = {
+      html = { { "prettierd", "prettier", "deno" } },
+    },
+  }
 end
 
 return M

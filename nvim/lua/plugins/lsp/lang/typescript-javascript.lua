@@ -1,3 +1,4 @@
+---@type LspSpec
 local M = {}
 
 M.setup_lspconfig = function(lspconfig, opts)
@@ -13,7 +14,7 @@ M.setup_lspconfig = function(lspconfig, opts)
   end
 end
 
-M.get_null_ls_sources = function(null_ls, null_ls_utils)
+M.get_null_ls_sources = function(null_ls, _)
   local ret = {}
 
   local mapping = {
@@ -44,29 +45,6 @@ M.get_null_ls_sources = function(null_ls, null_ls_utils)
     ]]
   }
 
-  local opts = {
-    filetypes = {
-      "javascript",
-      "javascriptreact",
-      "typescript",
-      "typescriptreact",
-    },
-  }
-
-  -- local formatter = {
-  --   -- 우선 순위 높음
-  --   { "prettier", null_ls.builtins.formatting.prettier.with(opts) },
-  --   { "prettierd", null_ls.builtins.formatting.prettierd.with(opts) },
-  --   { "deno", null_ls.builtins.formatting.deno_fmt.with(opts) },
-  --   -- 우선 순위 낮음
-  -- }
-  -- for _, source in pairs(formatter) do
-  --   if vim.fn.executable(source[1]) == 1 then
-  --     table.insert(ret, source[2])
-  --     break
-  --   end
-  -- end
-
   for exe, sources in pairs(mapping) do
     if vim.fn.executable(exe) == 1 then
       for _, source in pairs(sources) do
@@ -78,7 +56,7 @@ M.get_null_ls_sources = function(null_ls, null_ls_utils)
   return ret
 end
 
-M.conform = function()
+M.get_conform_opts = function()
   return {
     formatters_by_ft = {
       typescript = { { "prettierd", "prettier" } },

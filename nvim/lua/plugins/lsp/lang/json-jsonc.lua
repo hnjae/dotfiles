@@ -1,3 +1,4 @@
+---@type LspSpec
 local M = {}
 
 M.setup_lspconfig = function(lspconfig, opts)
@@ -13,26 +14,13 @@ M.setup_lspconfig = function(lspconfig, opts)
   end
 end
 
-M.get_null_ls_sources = function(null_ls, _)
-  local ret = {}
-
-  local fts = { "json", "jsonc" }
-  local opts = { filetypes = fts }
-  local formatter = {
-    -- 우선 순위 높음
-    { "prettier", null_ls.builtins.formatting.prettier.with(opts) },
-    { "prettierd", null_ls.builtins.formatting.prettierd.with(opts) },
-    { "deno", null_ls.builtins.formatting.deno_fmt.with(opts) },
-    -- 우선 순위 낮음
+M.get_conform_opts = function()
+  return {
+    formatters_by_ft = {
+      json = { { "prettierd", "prettier", "deno" } },
+      jsonc = { { "prettierd", "prettier", "deno" } },
+    },
   }
-  for _, source in pairs(formatter) do
-    if vim.fn.executable(source[1]) == 1 then
-      table.insert(ret, source[2])
-      break
-    end
-  end
-
-  return ret
 end
 
 return M

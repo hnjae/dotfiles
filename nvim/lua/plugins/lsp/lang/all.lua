@@ -1,8 +1,7 @@
+---@type LspSpec
 local M = {}
 
-M.setup_lspconfig = function(lspconfig, opts) end
-
-M.get_null_ls_sources = function(null_ls, null_ls_utils)
+M.get_null_ls_sources = function(null_ls, _)
   local ret = {
     -- null_ls.builtins.completion.luasnip,
     -- null_ls.builtins.completion.spell, -- completion scope 더럽힘. 쓰지말자.
@@ -29,4 +28,5 @@ M.get_null_ls_sources = function(null_ls, null_ls_utils)
 
   return ret
 end
+
 return M

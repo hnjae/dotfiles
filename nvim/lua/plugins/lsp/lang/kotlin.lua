@@ -1,3 +1,4 @@
+---@type LspSpec
 local M = {}
 
 M.get_null_ls_sources = function(null_ls)
@@ -5,7 +6,7 @@ M.get_null_ls_sources = function(null_ls)
 
   local mapping = {
     ktlint = {
-      null_ls.builtins.formatting.ktlint,
+      -- null_ls.builtins.formatting.ktlint,
       null_ls.builtins.diagnostics.ktlint,
     },
   }

@@ -1,3 +1,4 @@
+---@type LspSpec
 local M = {}
 
 M.get_null_ls_sources = function(null_ls)
@@ -11,9 +12,6 @@ M.get_null_ls_sources = function(null_ls)
       null_ls.builtins.code_actions.shellcheck,
       null_ls.builtins.diagnostics.shellcheck,
     },
-    shfmt = {
-      null_ls.builtins.formatting.shfmt,
-    },
   }
 
   for exe, sources in pairs(mapping) do
@@ -25,6 +23,14 @@ M.get_null_ls_sources = function(null_ls)
   end
 
   return ret
+end
+
+M.get_conform_opts = function()
+  return {
+    formatters_by_ft = {
+      sh = { "shfmt" },
+    },
+  }
 end
 
 return M
