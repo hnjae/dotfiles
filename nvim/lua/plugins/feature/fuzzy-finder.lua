@@ -23,7 +23,7 @@ return {
       [1] = "nvim-telescope/telescope-ui-select.nvim",
     },
     {
-      [1] = "benfowler/telescope-luasnip.nvim",
+      [1] = "fhill2/telescope-ultisnips.nvim",
     },
   },
   lazy = true,
@@ -44,8 +44,8 @@ return {
     local keys_buffer = {
       {
         [1] = prefix.buffer_finder .. map_keyword.snippet,
-        [2] = require("telescope").extensions.luasnip.luasnip,
-        desc = "luasnip",
+        [2] = require("telescope").extensions.ultisnips.ultisnips,
+        desc = "snippet",
       },
       {
         [1] = prefix.buffer_finder .. map_keyword.marks,
@@ -248,5 +248,6 @@ return {
     end
 
     telescope.load_extension("ui-select")
+    telescope.load_extension("ultisnips")
   end,
 }

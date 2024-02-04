@@ -4,11 +4,6 @@ return {
   lazy = true,
   ft = { "asciidoc", "asciidoctor" },
   init = function()
-    local is_luasnip, luasnip = pcall(require, "luasnip")
-    if is_luasnip then
-      luasnip.filetype_extend("asciidoctor", { "asciidoc" })
-    end
-
     -- NOTE: handlr can not handle asciidoc file.
     -- It recognize it as text file.
     local browser = os.getenv("BROWSER")

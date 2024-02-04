@@ -1,8 +1,7 @@
-local is_luasnip, luasnip = pcall(require, "luasnip")
-
 return {
   [1] = function()
-    if is_luasnip and luasnip.locally_jumpable() then
+    -- if is_luasnip and luasnip.locally_jumpable() then
+    if vim.fn.empty(vim.fn["UltiSnips#SnippetsInCurrentScope"]()) == 1 then
       return " JUMPABLE"
     end
 

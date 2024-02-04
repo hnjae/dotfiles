@@ -97,6 +97,7 @@ return {
   [1] = "nvim-treesitter/nvim-treesitter",
   build = "<cmd>TSUpdate<CR>",
   lazy = false,
+  enabled = true,
   event = { "VeryLazy" },
   -- event = { "BufReadPost", "BufNewFile" },
   opts = treesitter_opts,

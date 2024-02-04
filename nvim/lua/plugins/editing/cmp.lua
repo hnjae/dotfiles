@@ -32,27 +32,26 @@ local icons = {
 ---@type LazySpec
 return {
   [1] = "hrsh7th/nvim-cmp",
-  lazy = true,
+  lazy = false,
+  enabled = true,
   event = { "InsertEnter", "CmdlineEnter" },
   dependencies = {
     -- { "onsails/lspkind.nvim", module = true }, -- adds vscode-like pictograms to built-in lsp
-    { [1] = "hrsh7th/cmp-nvim-lsp", module = true },
-    { [1] = "hrsh7th/cmp-nvim-lsp-document-symbol", module = true },
-    { [1] = "hrsh7th/cmp-nvim-lsp-signature-help", module = true },
-    { [1] = "ray-x/cmp-treesitter", module = true },
-    { [1] = "hrsh7th/cmp-path", module = true },
-    { [1] = "hrsh7th/cmp-buffer", module = true },
-    { [1] = "hrsh7th/cmp-cmdline", module = true },
-    { [1] = "hrsh7th/cmp-nvim-lua", module = true },
-    { [1] = "saadparwaiz1/cmp_luasnip", module = true },
+    { [1] = "hrsh7th/cmp-nvim-lsp" },
+    { [1] = "hrsh7th/cmp-nvim-lsp-document-symbol" },
+    { [1] = "hrsh7th/cmp-nvim-lsp-signature-help" },
+    { [1] = "ray-x/cmp-treesitter" },
+    { [1] = "hrsh7th/cmp-path" },
+    { [1] = "hrsh7th/cmp-buffer" },
+    { [1] = "hrsh7th/cmp-cmdline" },
+    { [1] = "hrsh7th/cmp-nvim-lua" },
     -- { "hrsh7th/cmp-omni", module = true },
-    { [1] = "hrsh7th/cmp-emoji", module = true },
+    { [1] = "hrsh7th/cmp-emoji" },
     -- { "petertriho/cmp-git", module = true },
-    -- {
-    --   "quangnguyen30192/cmp-nvim-ultisnips",
-    --   module = true,
-    --   dependencies = { "sirver/ultisnips" },
-    -- },
+    {
+      [1] = "quangnguyen30192/cmp-nvim-ultisnips",
+      dependencies = { "sirver/ultisnips" },
+    },
   },
   opts = function()
     local nvim_web_devicons = require("nvim-web-devicons")
@@ -62,11 +61,7 @@ return {
       snippet = {
         -- REQUIRED - you must specify a snippet engine
         expand = function(args)
-          -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-          local has_luasnip, luasnip = pcall(require, "luasnip")
-          if has_luasnip then
-            luasnip.lsp_exapnd(args.body)
-          end
+          vim.fn["UltiSnips#Anon"](args.body)
         end,
       },
       window = {
@@ -97,7 +92,7 @@ return {
         { name = "nvim_lsp" },
         { name = "nvim_lsp_signature_help" },
         { name = "nvim_lsp_document_symbol" },
-        { name = "luasnip" },
+        { name = "ultisnips" },
         -- { name = "omni" },
         { name = "nvim_lua" },
         { name = "treesitter" },
