@@ -15,4 +15,8 @@ return {
     lazy = true,
     enabled = vim.fn.executable("sqlite3") == 1,
   },
+  {
+    [1] = "MunifTanjim/nui.nvim",
+    lazy = true,
+  },
 }

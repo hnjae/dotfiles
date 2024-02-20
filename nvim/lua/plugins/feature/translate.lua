@@ -2,7 +2,7 @@
 return {
   [1] = "uga-rosa/translate.nvim",
   lazy = true,
-  enabled = true,
+  enabled = false,
   cmd = {
     "Translate",
   },

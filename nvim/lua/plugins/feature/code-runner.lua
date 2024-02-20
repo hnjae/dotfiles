@@ -9,7 +9,10 @@ return {
     dependencies = {
       "rcarriga/nvim-notify",
     },
-    selected_interpreters = {},
+    opts = {
+      -- selected_interpreters = { "Python3_fifo" },
+      -- repl_enable = { "Python3_fifo" },
+    },
   },
   {
     [1] = "CRAG666/code_runner.nvim",

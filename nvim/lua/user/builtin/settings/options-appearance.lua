@@ -6,7 +6,7 @@
 -- VIM Mode 에 따라 커서 Shape 바뀌는 옵션 해제
 vim.opt.guicursor = ""
 
-if vim.fn.has("termguicolors") == 1 then
+if vim.fn.has("termguicolors") == 1 and not require("utils").is_console then
   vim.opt.termguicolors = true
 end
 

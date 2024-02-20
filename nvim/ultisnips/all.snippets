@@ -1,0 +1,11 @@
+snippet note "note"
+`!v luaeval("string.format(vim.bo.commentstring, string.find(vim.bo.commentstring, ' ') and 'NOTE:' or ' NOTE:')")` $0 <`!v strftime("%Y-%m-%d")`>
+endsnippet
+
+snippet todo "todo"
+`!v luaeval("string.format(vim.bo.commentstring, string.find(vim.bo.commentstring, ' ') and 'TODO:' or ' TODO:')")` $0 <`!v strftime("%Y-%m-%d")`>
+endsnippet
+
+snippet vim "vi modeline"
+`!v luaeval("string.format(vim.bo.commentstring, string.find(vim.bo.commentstring, ' ') and '' or ' ')")`vi:tw=80:ft=${0:filetype}:
+endsnippet

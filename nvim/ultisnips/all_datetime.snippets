@@ -1,0 +1,39 @@
+snippet __time "hh:mm:ss"
+`!v strftime('%H:%M:%S')`
+endsnippet
+
+snippet __time2 "hh:mm"
+`!v strftime("%H:%M")`
+endsnippet
+
+snippet __dt2 "datetim"
+`!v strftime("%Y-%m-%d %H:%M:%S")`
+endsnippet
+
+snippet __dt "datetime in ISO 8601 Format"
+`!v strftime("%Y-%m-%dT%H:%M:%S%z")`
+endsnippet
+
+snippet __dtutc "datetime in UTC"
+`date -u +"%Y-%m-%dT%H:%M:%SZ"`
+endsnippet
+
+snippet __dtshort "datetime in UTC short"
+`date -u +"%Y%m%dT%H%M%SZ"`
+endsnippet
+
+snippet __date "date"
+`!v strftime("%Y-%m-%d")`
+endsnippet
+
+snippet __weekday "Week with weekday"
+`!v strftime("%G-W%V-%u")`
+endsnippet
+
+snippet __week "Week"
+`!v strftime("%G-W%V")`
+endsnippet
+
+snippet __duration "duration"
+P${1:nYnMnD}T${2:nHnMnS}
+endsnippet

@@ -2,6 +2,9 @@
 -- Check following plugins:
 -- https://github.com/ggandor/leap.nvim
 -- https://github.com/rlane/pounce.nvim
+--
+-- use this
+-- https://github.com/folke/flash.nvim
 
 ---@type LazySpec
 return {

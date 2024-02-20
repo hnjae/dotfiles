@@ -67,6 +67,7 @@ local treesitter_opts = {
     "latex",
     "bibtex",
     "gnuplot",
+    --
   },
   sync_install = true,
   auto_install = true,
@@ -98,6 +99,12 @@ return {
   build = "<cmd>TSUpdate<CR>",
   lazy = false,
   enabled = true,
+  dependencies = {
+    -- {
+    --   [1] = "IndianBoy42/tree-sitter-just",
+    --   opts = {},
+    -- },
+  },
   event = { "VeryLazy" },
   -- event = { "BufReadPost", "BufNewFile" },
   opts = treesitter_opts,
@@ -112,5 +119,15 @@ return {
     for _, command in ipairs(del_commands) do
       vim.api.nvim_del_user_command(command)
     end
+
+    require("nvim-treesitter.parsers").get_parser_configs()["just"] = {
+      install_info = {
+        url = "https://github.com/IndianBoy42/tree-sitter-just", -- local path or git repo
+        files = { "src/parser.c", "src/scanner.c" },
+        branch = "main",
+        -- use_makefile = true -- this may be necessary on MacOS (try if you see compiler errors)
+      },
+      maintainers = { "@IndianBoy42" },
+    }
   end,
 }

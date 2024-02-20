@@ -35,7 +35,11 @@ return {
         lualine_b = {
           require("plugins.ui.lualine.components.branch"),
           require("plugins.ui.lualine.components.diagnostics"),
-          "overseer",
+          {
+            [1] = "overseer",
+            icons_enabled = not require("utils").is_console,
+          },
+          -- "overseer",
           -- "diff",
         },
         lualine_c = {
@@ -92,6 +96,10 @@ return {
         require("plugins.ui.lualine.extensions.netrw"),
         require("plugins.ui.lualine.extensions.toggleterm"),
         require("plugins.ui.lualine.extensions.nvim-tree"),
+        require("plugins.ui.lualine.extensions.no-filetype"),
+        require("plugins.ui.lualine.extensions.minimap"),
+        require("plugins.ui.lualine.extensions.trouble"),
+        require("plugins.ui.lualine.extensions.oil"),
         -- "trouble",
         -- "toggleterm",
         -- "symbols-outline",

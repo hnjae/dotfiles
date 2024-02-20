@@ -32,4 +32,43 @@ M.get_xdg_path = function(type)
   return ""
 end
 
+-- for debugging
+M.__get_windows = function()
+  local window_ids = vim.api.nvim_tabpage_list_wins(0)
+  local ret = {}
+  for _, winid in pairs(window_ids) do
+    local bufid = vim.api.nvim_win_get_buf(winid)
+    if bufid == nil then
+      goto continue
+    end
+
+    if vim.tbl_contains({"notify", "noice"}, vim.api.nvim_buf_get_option(bufid, "filetype")) then
+      goto continue
+    end
+
+    ret[winid] = {
+      bufid = bufid,
+      name = vim.api.nvim_buf_get_name(bufid),
+      filetype = vim.api.nvim_buf_get_option(bufid, "filetype"),
+      buftype = vim.api.nvim_buf_get_option(bufid, "buftype"),
+    }
+    ::continue::
+  end
+
+  vim.notify(vim.inspect(ret))
+  return window_ids
+end
+
+M.__get_files = function()
+  local a =vim.fn.sort(
+        vim.fn.globpath(
+          vim.fn.stdpath("config"),
+          "lua/overseer/template/user/*.lua",
+          false,
+          true
+        )
+      )
+    require("messages.api").capture_thing(a)
+end
+
 return M

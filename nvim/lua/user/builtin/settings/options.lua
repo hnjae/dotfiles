@@ -46,6 +46,7 @@ vim.opt.backup = false
 -------------------------------------------------------------------------------
 -- https://vim.fandom.com/wiki/Word_wrap_without_line_breaks
 vim.opt.wrap = true
+vim.opt.linebreak = true -- 단어 중간에 wrap 금지
 vim.opt.textwidth = 0
 
 -------------------------------------------------------------------------------
@@ -94,3 +95,7 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile", "BufNew" }, {
 
 -----------------------------
 vim.opt.mouse = ""
+
+----
+vim.opt.splitbelow = true
+vim.opt.splitright = false -- default

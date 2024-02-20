@@ -4,6 +4,10 @@ vim.opt_local.expandtab = false
 vim.opt_local.colorcolumn = "0"
 vim.opt_local.conceallevel = 0
 
+vim.opt_local.wrap = true
+vim.opt_local.linebreak = true -- 단어 중간 wrap 금지
+vim.opt_local.list = false
+
 vim.opt.formatoptions:remove("r")
 vim.opt.formatoptions:remove("o")
 

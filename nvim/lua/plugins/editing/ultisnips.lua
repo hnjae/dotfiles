@@ -23,7 +23,7 @@ return {
 
     local ulti_dir = require("plenary.path"):new(
       vim.fn.stdpath("config"),
-      "after",
+      -- "after",
       "ultisnips"
     ).filename
 

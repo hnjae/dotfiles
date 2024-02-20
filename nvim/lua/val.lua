@@ -26,7 +26,8 @@ M.map_keyword = {
   git = "g",
 
   -- 위와 미교하게 focus 가 다름
-  focus = "f",
+  focus = "F", -- deprecated 2024-02-19
+  focus_picker = "f", -- focus window using s1n7ax/nvim-window-picker
 
   -- 아래는 위와 같은 scope 에서 쓰이지 않을걸로 기대됨.
   -- 특정 키워드를 찾거나 하는데 사용되길 기대.

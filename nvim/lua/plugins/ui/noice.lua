@@ -10,7 +10,7 @@ return {
   },
   dependencies = {
     "rcarriga/nvim-notify",
-    { [1] = "MunifTanjim/nui.nvim", module = true },
+    { "MunifTanjim/nui.nvim" },
     "nvim-treesitter/nvim-treesitter",
   },
   opts = {

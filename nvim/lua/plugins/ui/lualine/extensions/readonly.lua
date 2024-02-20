@@ -9,6 +9,7 @@ local filetype_names = {
   noice = "Noice",
 }
 local filetype_icons = {
+  OverseerList = " ",
   Alpha = "󰀫 ",
   Noice = icons.message .. " ",
   NvimTree = "󰙅 ",
@@ -48,10 +49,10 @@ local extension = {
     "startify",
     "alpha",
     "Outline", -- symbols outline
-    "Trouble",
     "NvimTree",
     "NeogitStatus",
     "NeogitPopUp",
+    "OverseerList",
     "noice",
     "checkhealth",
     "qf",
