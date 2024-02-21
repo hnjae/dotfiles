@@ -7,7 +7,13 @@ return {
     { "anuvyklack/middleclass" },
     { [1] = "anuvyklack/animation.nvim", enabled = false },
   },
-  keys = { { "<leader>m", "<cmd>WindowsMaximize<cr>", desc = "Zoom" } },
+  keys = {
+    {
+      [1] = "<leader>m",
+      [2] = "<cmd>WindowsMaximize<cr>",
+      desc = "windows-zoom",
+    },
+  },
   opts = {
     ignore = {
       buftype = {
@@ -36,11 +42,4 @@ return {
       enable = false,
     },
   },
-  -- config = function()
-  --   vim.o.winwidth = 5
-  --   vim.o.equalalways = false
-  --   require("windows").setup({
-  --     animation = { enable = false, duration = 150 },
-  --   })
-  -- end,
 }

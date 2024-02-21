@@ -78,7 +78,7 @@ M.root_patterns = {
   "flake.nix",
   ".neoconf.json",
   ".nlsp-settings",
-  ".envrc",
+  -- ".envrc",
   ".gitignore",
 }
 
