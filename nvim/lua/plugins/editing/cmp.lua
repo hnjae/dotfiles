@@ -49,8 +49,8 @@ return {
     { [1] = "hrsh7th/cmp-emoji" },
     -- { "petertriho/cmp-git", module = true },
     {
-      [1] = "quangnguyen30192/cmp-nvim-ultisnips",
-      dependencies = { "sirver/ultisnips" },
+      [1] = "dcampos/cmp-snippy",
+      dependencies = { "dcampos/nvim-snippy" },
     },
   },
   opts = function()
@@ -61,7 +61,7 @@ return {
       snippet = {
         -- REQUIRED - you must specify a snippet engine
         expand = function(args)
-          vim.fn["UltiSnips#Anon"](args.body)
+          require("snippy").expand_snippet(args.body)
         end,
       },
       window = {
@@ -93,7 +93,7 @@ return {
         { name = "nvim_lsp" },
         { name = "nvim_lsp_signature_help" },
         { name = "nvim_lsp_document_symbol" },
-        { name = "ultisnips" },
+        { name = "snippy" },
         -- { name = "omni" },
         { name = "nvim_lua" },
         { name = "treesitter" },
@@ -112,7 +112,7 @@ return {
         },
         { name = "emoji" },
         { name = "path" },
-        -- { name = "git" },
+        -- { name = "month" },
       }),
       formatting = {
         format = function(entry, vim_item)
@@ -147,6 +147,7 @@ return {
   end,
   config = function(_, opts)
     local cmp = require("cmp")
+    -- cmp.register_source("month", require("cmp_month.source"))
     cmp.setup(opts)
 
     -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).

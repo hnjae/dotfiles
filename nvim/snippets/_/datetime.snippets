@@ -1,0 +1,26 @@
+# snippet __dtutc "datetime in UTC"
+# `date -u +"%Y-%m-%dT%H:%M:%SZ"`
+# endsnippet
+#
+# snippet __dtshort "datetime in UTC short"
+# `date -u +"%Y%m%dT%H%M%SZ"`
+# endsnippet
+
+snippet __time hh:mm:ss
+	`strftime('%H:%M:%S')`
+snippet __time2 hh:mm
+	`strftime("%H:%M")`
+snippet __dt2 datetim
+	`strftime("%Y-%m-%d %H:%M:%S")`
+snippet __dt datetime in ISO 8601 Format
+	`strftime("%Y-%m-%dT%H:%M:%S%z")`
+snippet __date date
+	`strftime("%Y-%m-%d")`
+snippet date date
+	`strftime("%Y-%m-%d")`
+snippet __weekday Week with weekday
+	`strftime("%G-W%V-%u")`
+snippet __week Week
+	`strftime("%G-W%V")`
+snippet __duration ISO 8601 duration format
+	P${1:nYnMnD}T${2:nHnMnS}

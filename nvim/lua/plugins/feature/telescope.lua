@@ -22,9 +22,6 @@ return {
       -- replace vim.ui.select with telescope
       [1] = "nvim-telescope/telescope-ui-select.nvim",
     },
-    {
-      [1] = "fhill2/telescope-ultisnips.nvim",
-    },
   },
   lazy = true,
   -- TODO: find appropriate event that calls vim.ui.select()
@@ -42,11 +39,11 @@ return {
 
     ---@type LazyKeysSpec[]
     local keys_buffer = {
-      {
-        [1] = prefix.buffer_finder .. map_keyword.snippet,
-        [2] = require("telescope").extensions.ultisnips.ultisnips,
-        desc = "snippet",
-      },
+      -- {
+      --   [1] = prefix.buffer_finder .. map_keyword.snippet,
+      --   [2] = require("telescope").extensions.ultisnips.ultisnips,
+      --   desc = "snippet",
+      -- },
       {
         [1] = prefix.buffer_finder .. map_keyword.marks,
         [2] = t_builtin.marks,
@@ -248,6 +245,6 @@ return {
     end
 
     telescope.load_extension("ui-select")
-    telescope.load_extension("ultisnips")
+    -- telescope.load_extension("ultisnips")
   end,
 }
