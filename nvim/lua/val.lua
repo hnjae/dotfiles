@@ -32,11 +32,11 @@ M.map_keyword = {
   -- 아래는 위와 같은 scope 에서 쓰이지 않을걸로 기대됨.
   -- 특정 키워드를 찾거나 하는데 사용되길 기대.
   marks = "m",
-  line = "e",
-  lsp = "l",
+  line = "l",
+  lsp = "s",
   symbols = "y",
   snippet = "p",
-  tag = "g",
+  tag = "t",
 
   --
   tab = "t",
@@ -66,8 +66,8 @@ M.prefix = {
   trouble = "<Leader>" .. M.map_keyword.trouble,
   window = "<Leader>" .. M.map_keyword.window,
   git = "<Leader>" .. M.map_keyword.git,
-
   new = "<Leader>n",
+  snippet = "<Leader>" .. M.map_keyword.snippet,
 
   open = "<F6>",
 }
