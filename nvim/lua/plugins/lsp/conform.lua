@@ -36,5 +36,10 @@ return {
     --   function() end,
     --   { desc = "conform-format", buffer =  }
     -- )
+    for _, lang_conf in ipairs(require("plugins.lsp.utils.get_lang_confs")()) do
+      if lang_conf.post_conform_setup then
+        lang_conf.post_conform_setup()
+      end
+    end
   end,
 }
