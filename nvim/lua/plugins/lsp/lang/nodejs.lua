@@ -17,6 +17,7 @@ M.setup_lspconfig = function(lspconfig, opts)
   -- key: executable name / val: lspconfig's key
   local mapping = {
     ["typescript-language-server"] = "tsserver",
+    ["vscode-eslint-language-server"] = "eslint",
   }
   for exe, lspname in pairs(mapping) do
     if vim.fn.executable(exe) == 1 then
@@ -25,41 +26,9 @@ M.setup_lspconfig = function(lspconfig, opts)
   end
 end
 
-M.get_null_ls_sources = function(null_ls, _)
-  local ret = {}
-
-  local root_patterns = {
-    "package.json",
-    "pnpm-lock.yaml",
-  }
-
-  -- nil if project_root not found
-  local project_root = require("lspconfig").util.root_pattern(
-    unpack(root_patterns)
-  )(vim.fn.expand("%:p:h"))
-
-  if project_root == nil then
-    return {}
-  end
-
-  local mapping = {
-    xo = {
-      null_ls.builtins.code_actions.xo,
-      null_ls.builtins.diagnostics.xo,
-    },
-    eslint = {
-      null_ls.builtins.code_actions.eslint,
-      null_ls.builtins.diagnostics.eslint,
-    },
-    -- eslint_d = {
-    --   null_ls.builtins.diagnostics.eslint_d,
-    --   null_ls.builtins.code_actions.eslint_d,
-    -- },
-  }
-
-  -- NOTE: Using prettier with linters
-  -- https://prettier.io/docs/en/integrating-with-linters.html
-  --[[
+-- NOTE: Using prettier with linters
+-- https://prettier.io/docs/en/integrating-with-linters.html
+--[[
     requires:
     `npm install --save-dev eslint-config-prettier`
 
@@ -72,18 +41,6 @@ M.get_null_ls_sources = function(null_ls, _)
     }
     ```
     ]]
-
-  for exe, sources in pairs(mapping) do
-    if vim.fn.executable(exe) == 1 then
-      for _, source in pairs(sources) do
-        table.insert(ret, source)
-      end
-      break
-    end
-  end
-
-  return ret
-end
 
 M.get_conform_opts = function()
   return {

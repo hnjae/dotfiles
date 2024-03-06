@@ -43,7 +43,7 @@ return {
       )
     )
 
-    local lang_conf = nil
+    local lang_conf
     for _, file in pairs(paths) do
       lang_conf =
         require("plugins.lsp.lang." .. file:match("[^/\\]+$"):sub(1, -5))
