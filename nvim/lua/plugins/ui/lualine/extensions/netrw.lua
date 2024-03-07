@@ -2,21 +2,32 @@ local modules = require("lualine_require").lazy_require({
   lspconfig = "lspconfig",
   Path = "plenary.path",
 })
-local icon = require("plugins.ui.lualine.utils").icons.extension .. " "
-local icon_project = require("plugins.ui.lualine.utils").icons.project .. " "
+local icon = require("plugins.ui.lualine.utils.get-icon")(nil, "netrw")
 
 local find_project_root =
   modules.lspconfig.util.root_pattern(unpack(require("val").root_patterns))
 
-local name = function()
-  local project_root = find_project_root(vim.b.netrw_curdir)
+local get_name = function()
+  local cur_dir = vim.api.nvim_buf_get_var(0, "netrw_curdir")
+  local project_root = find_project_root(cur_dir)
 
+  local path
   if project_root ~= nil then
-    return icon_project
-      .. modules.Path:new(vim.b.netrw_curdir):make_relative(project_root)
+    path = modules.Path:new(cur_dir):make_relative(project_root)
+  else
+    path = vim.fn.fnamemodify(cur_dir, ":~")
   end
 
-  return icon .. vim.fn.fnamemodify(vim.b.netrw_curdir, ":~")
+  return path
+end
+
+local name
+if not require("utils").enable_icon then
+  name = function()
+    return string.format("%s %s", icon, get_name())
+  end
+else
+  name = get_name
 end
 
 local extension = {

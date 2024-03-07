@@ -1,9 +1,13 @@
 local extension = {
   sections = {
-    lualine_c = { "filename" },
+    lualine_c = {
+      require("plugins.ui.lualine.components.filename"),
+    },
   },
   inactive_sections = {
-    lualine_c = { "filename" },
+    lualine_c = {
+      require("plugins.ui.lualine.components.filename"),
+    },
   },
   filetypes = {
     "help",

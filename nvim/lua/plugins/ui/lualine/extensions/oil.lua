@@ -3,19 +3,29 @@ local modules = require("lualine_require").lazy_require({
   lspconfig = "lspconfig",
   Path = "plenary.path",
 })
-local icon = require("plugins.ui.lualine.utils").icons.extension .. " "
+
 local find_project_root =
   modules.lspconfig.util.root_pattern(unpack(require("val").root_patterns))
 
-local name = function()
+local get_name = function()
   local cur_dir = modules.oil.get_current_dir()
   local project_root = find_project_root(cur_dir)
 
   if project_root ~= nil then
-    return icon .. modules.Path:new(cur_dir):make_relative(project_root)
+    return modules.Path:new(cur_dir):make_relative(project_root)
   end
 
-  return icon .. vim.fn.fnamemodify(cur_dir, ":~")
+  return vim.fn.fnamemodify(cur_dir, ":~")
+end
+
+local name
+if require("utils").enable_icon then
+  local icon = require("plugins.ui.lualine.utils.get-icon")(nil, "oil")
+  name = function()
+    return string.format("%s %s", icon, get_name())
+  end
+else
+  name = get_name
 end
 
 local extension = {

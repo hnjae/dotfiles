@@ -1,4 +1,4 @@
-local icon = require("utils").is_console and "" or ""
+local icon = require("utils").enable_icon and "" or ""
 local hide_width = 65
 local truc_width = 100
 local num_source_semi_limit = 2
@@ -55,7 +55,7 @@ return {
 
     if next(names) == nil then
       return (
-        require("utils").is_console and "No active LSP" or (icon .. " ∅")
+        require("utils").enable_icon and "No active LSP" or (icon .. " ∅")
       )
     end
 

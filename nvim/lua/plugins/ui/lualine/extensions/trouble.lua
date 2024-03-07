@@ -1,4 +1,4 @@
-local name = function()
+local get_name = function()
   local opts = require("trouble.config").options
 
   local words = vim.split(opts.mode, "[%W]")
@@ -7,6 +7,16 @@ local name = function()
   end
 
   return table.concat(words, " ")
+end
+
+local name
+if require("utils").enable_icon then
+  local icon = require("plugins.ui.lualine.utils.get-icon")(nil, "Trouble")
+  name = function()
+    return string.format("%s %s", icon, get_name())
+  end
+else
+  name = get_name
 end
 
 local extension = {

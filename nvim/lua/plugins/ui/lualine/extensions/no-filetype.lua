@@ -1,12 +1,23 @@
-local name = function()
-  local bname = vim.api.nvim_buf_get_name(0)
+local name
+if require("utils").enable_icon then
+  name = function()
+    local bname = vim.api.nvim_buf_get_name(0)
 
-  if vim.bo.buftype("terminal") and not require("utils").is_console then
-    local icon = require("nvim-web-devicons").get_icon("sh")
+    local icon = nil
+    if vim.bo.buftype == "terminal" then
+      icon = require("nvim-web-devicons").get_icon("sh")
+    end
+
+    if not icon then
+      return bname
+    end
+
     return string.format("%s %s", icon, bname)
   end
-
-  return bname
+else
+  name = function()
+    return vim.api.nvim_buf_get_name(0)
+  end
 end
 
 local extension = {

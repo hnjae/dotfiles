@@ -32,13 +32,4 @@ M.trunc = function(trunc_width, trunc_len, hide_width, max_len, no_ellipsis)
   end
 end
 
-M.icons = {
-  extension = "",
-  -- project = "",
-  project = "P:",
-  message = "󰍡",
-  git = "",
-  git_branch = "",
-}
-
 return M

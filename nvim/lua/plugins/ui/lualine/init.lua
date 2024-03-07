@@ -10,23 +10,25 @@ return {
     -- NOTE: function 으로 랩핑해야, vim.g.colors_name 을 참조할 수 있음. <2023-12-12>
     local opts = {
       options = {
-        icons_enabled = true,
+        icons_enabled = require("utils").enable_icon,
         theme = require("plugins.ui.lualine.theme"),
-        component_separators = not require("utils").is_console
+
+        -- NOTE: do not use something like   <2024-03-07>
+        component_separators = require("utils").enable_icon
             and { left = "┃", right = "┃" }
           or { left = "❘", right = "❘" },
 
-        -- and { left = "", right = "" }
-        -- and { left = "█", right = "█" }
-        -- and { left = "", right = "" }
         section_separators = { left = "", right = "" },
-        disabled_filetypes = {}, -- Filetypes to disable lualine for.
-        always_divide_middle = true, -- When set to true, left sections i.e. 'a','b' and 'c'
+        disabled_filetypes = {},
+
+        -- When set to true, left sections i.e. 'a','b' and 'c'
         -- can't take over the entire statusline even
         -- if neither of 'x', 'y' or 'z' are present.
-        globalstatus = false, -- enable global statusline (have a single statusline
+        always_divide_middle = true,
+
+        -- enable global statusline (have a single statusline
         -- at bottom of neovim instead of one for  every window).
-        -- This feature is only available in neovim 0.7 and higher.
+        globalstatus = false,
       },
       sections = {
         lualine_a = {
@@ -37,10 +39,7 @@ return {
           require("plugins.ui.lualine.components.diagnostics"),
           {
             [1] = "overseer",
-            icons_enabled = not require("utils").is_console,
           },
-          -- "overseer",
-          -- "diff",
         },
         lualine_c = {
           require("plugins.ui.lualine.components.filename"),
@@ -48,8 +47,6 @@ return {
         lualine_x = {
           require("plugins.ui.lualine.components.noice-search"),
           require("plugins.ui.lualine.components.noice-command"),
-          -- require("plugins.ui.lualine.components.null-ls"),
-          -- require("plugins.ui.lualine.components.lsp"),
           require("plugins.ui.lualine.components.lsp-null-ls"),
           require("plugins.ui.lualine.components.spell"),
         },
@@ -95,7 +92,6 @@ return {
         require("plugins.ui.lualine.extensions.fugitive"),
         require("plugins.ui.lualine.extensions.netrw"),
         require("plugins.ui.lualine.extensions.toggleterm"),
-        require("plugins.ui.lualine.extensions.nvim-tree"),
         require("plugins.ui.lualine.extensions.no-filetype"),
         require("plugins.ui.lualine.extensions.minimap"),
         require("plugins.ui.lualine.extensions.trouble"),

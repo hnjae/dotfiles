@@ -27,7 +27,7 @@ return {
 
     return table.concat(names, ", ")
   end,
-  icon = require("utils").is_console and "" or "",
+  icon = require("utils").enable_icon("") or "",
   cond = nil,
   fmt = trunc(100, 0, 85, 28, false),
 }

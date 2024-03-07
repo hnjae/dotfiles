@@ -17,6 +17,8 @@ end
 
 M.is_console = os.getenv("XDG_SESSION_TYPE") == "tty"
 
+M.enable_icon = os.getenv("XDG_SESSION_TYPE") ~= "tty"
+
 local xdg_cache = {}
 M.get_xdg_path = function(type)
   if xdg_cache[type] ~= nil then

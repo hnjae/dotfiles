@@ -1,39 +1,32 @@
 -- for non editable filetypes
 
--- local get_icon_by_filetype = require("nvim-web-devicons").get_icon_by_filetype
-local icons = require("plugins.ui.lualine.utils").icons
-
 local filetype_names = {
   alpha = "Alpha",
   tagbar = "Tagbar",
   noice = "Noice",
 }
-local filetype_icons = {
-  OverseerList = " ",
-  Alpha = "󰀫 ",
-  Noice = icons.message .. " ",
-  NvimTree = "󰙅 ",
-  NeogitStatus = require("nvim-web-devicons").get_icon("git")[1],
-  NeogitPopUp = icons.message .. " ",
-  -- startify = "󰕮 ",
-  -- dbui = get_icon_by_filetype("db") .. " ",
-  -- dbout = get_icon_by_filetype("db") .. " ",
-  etc = icons.extension .. " ",
-}
 
-local name = {
-  [1] = function()
-    local filetype = vim.opt_local.filetype:get()
-    if filetype_names[filetype] then
-      filetype = filetype_names[filetype]
-    end
+local get_name = function()
+  local filetype = vim.bo.filetype
 
-    if filetype_icons[filetype] then
-      return filetype_icons[filetype] .. filetype
-    end
-    return filetype_icons.etc .. filetype
-  end,
-}
+  if filetype_names[filetype] then
+    filetype = filetype_names[filetype]
+  end
+
+  return filetype
+end
+
+local name
+if require("utils").enable_icon then
+  local get_icon = require("plugins.ui.lualine.utils.get-icon")
+  -- name = get_name
+  name = function()
+    local icon = get_icon(nil, vim.bo.filetype)
+    return string.format("%s %s", icon, get_name())
+  end
+else
+  name = get_name
+end
 
 local extension = {
   sections = {
