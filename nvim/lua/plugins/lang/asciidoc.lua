@@ -2,23 +2,28 @@
 return {
   [1] = "habamax/vim-asciidoctor",
   lazy = true,
+  enabled = true,
   ft = { "asciidoc", "asciidoctor" },
+  cmd = {
+    "AsciidoctorOpenRAW",
+  },
+  ---@type LazyKeysSpec[]
+  keys = {
+    {
+      [1] = require("val").prefix.buffer .. "p",
+      [2] = "<cmd>AsciidoctorOpenRAW<CR>",
+      desc = "preview-asciidoc",
+      ft = {
+        "asciidoc",
+        "asciidoctor",
+      },
+    },
+  },
   init = function()
     -- NOTE: handlr can not handle asciidoc file.
     -- It recognize it as text file.
-    local browser = os.getenv("BROWSER")
-    if browser == nil then
-      if vim.fn.has("linux") and vim.fn.executable("flatpak") then
-        browser = "flatpak run org.mozilla.firefox --"
-      elseif vim.fn.executable("firefox") == 1 then
-        browser = "firefox --"
-      elseif vim.fn.executable("chromium") then
-        browser = "chromium --"
-      end
-    end
-    if browser then
-      vim.g.asciidoctor_opener = "!" .. browser
-    end
+    local utils = require("utils")
+    vim.g.asciidoctor_opener = "!" .. utils.get_browser_cmd()
 
     vim.g.asciidoctor_folding = 1
     vim.g.asciidoctor_syntax_indented = 1
@@ -37,23 +42,5 @@ return {
       "javascript",
     }
     vim.g.asciidoctor_syntax_conceal = 1
-
-    local keys = {
-      {
-        "n",
-        require("val").prefix.buffer .. "p",
-        "<cmd>AsciidoctorOpenRAW<CR>",
-        { desc = "preview", buffer = 0, silent = true, noremap = true },
-      },
-    }
-
-    vim.api.nvim_create_autocmd({ "FileType" }, {
-      pattern = { "asciidoc", "asciidoctor" },
-      callback = function()
-        for _, key in pairs(keys) do
-          vim.keymap.set(unpack(key))
-        end
-      end,
-    })
   end,
 }
