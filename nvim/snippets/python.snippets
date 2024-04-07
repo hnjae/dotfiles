@@ -3,8 +3,8 @@
 snippet env Adds shebang line for default python interpreter.
 	#!/usr/bin/env python3
 	$0
-snippet de 
-	def ${1:function_name}($2) -> {$3:None}:
+snippet de
+	def ${1:function_name}($2) -> ${3:None}:
 		${0:pass}
 snippet docf RST Style docstring
 	"""
@@ -13,7 +13,7 @@ snippet docf RST Style docstring
 	:raises ValueError: description
 	:return: description
 	:rtype: bool
-	
+
 	:example:
 	>>> a=1
 	>>> fucn_name(a)
@@ -21,14 +21,14 @@ snippet docf RST Style docstring
 	"""
 snippet doc Oneline docstring
 	"""$0."""
-snippet fori 
+snippet fori
 	for $2 in $1:
 		$0
 snippet fim Import statement that allows individual objects from the module to be imported directly into the caller’s symbol table.
 	from ${1:package/module} import ${2:names}
-snippet if 
+snippet if
 	if ${1:condition}:
-	
+
 snippet ifm Create implicitly all the code at the top level using the __name__ special variable.
 	if __name__ == "__main__":
 		${1:main()}$0
@@ -42,11 +42,11 @@ snippet im Import a package or module
 	import ${1:package/module}$0
 snippet iso8601 use with strftime
 	%Y%m%dT%H%M%S%z
-snippet localtime 
+snippet localtime
 	datetime.now(timezone.utc).astimezone()
-snippet localtimeinsec 
+snippet localtimeinsec
 	datetime.now(timezone.utc).replace(microsecond=0).astimezone()
-snippet timeinsec 
+snippet timeinsec
 	datetime.now(timezone.utc).replace(microsecond=0)
-snippet time 
+snippet time
 	datetime.now(timezone.utc)

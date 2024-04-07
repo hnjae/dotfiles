@@ -1,7 +1,7 @@
 return {
   sections = {
     lualine_a = {
-      require("plugins.ui.lualine.components.mode"),
+      require("plugins.ui.lualine.components.mode-enhanced"),
     },
     lualine_x = {
       require("plugins.ui.lualine.components.noice-search"),

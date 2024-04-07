@@ -1,0 +1,16 @@
+{
+  "lspconfig": {
+    "eslint": {
+      // https://github.com/Microsoft/vscode-eslint#settings-options
+      // severity: error, warn, info, hint, (downgrade, upgrade, default)
+      "rulesCustomizations": [
+        // { "rule": "*", "severity": "info" },
+        { "rule": "no-*", "severity": "info" },
+        { "rule": "!no-*", "severity": "downgrade" }
+      ]
+    },
+    "cssls": {
+      "css.lint.unknownAtRules": "ignore"
+    }
+  }
+}

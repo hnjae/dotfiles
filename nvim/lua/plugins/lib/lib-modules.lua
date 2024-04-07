@@ -3,19 +3,6 @@
 ---@type LazySpec[]
 return {
   {
-    [1] = "nvim-tree/nvim-web-devicons",
-    lazy = true,
-    cond = require("utils").enable_icon,
-    opts = {
-      default = true,
-      override = {
-        -- default_icon =
-      },
-      override_by_filename = {},
-      override_by_extension = {},
-    },
-  },
-  {
     [1] = "nvim-lua/plenary.nvim",
     lazy = true,
   },

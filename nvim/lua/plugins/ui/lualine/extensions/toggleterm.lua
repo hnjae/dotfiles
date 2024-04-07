@@ -14,9 +14,10 @@ local name = function()
 
   -- return string.format("%s %s %s", tterm_msg, get_icon(fname), fname)
   return string.format(
-    "%s %s %s",
-    tterm_msg,
+    "%s  %s %s",
+    -- get_icon(nil, nil, vim.bo.buftype),
     get_icon(nil, nil, vim.bo.buftype),
+    tterm_msg,
     fname
   )
 end

@@ -5,5 +5,8 @@ return {
   lazy = true,
   enabled = true,
   event = { "VeryLazy" },
-  opts = {},
+  opts = {
+    default_mappings = false,
+    refresh_interval = 200, -- default 150
+  },
 }

@@ -1,39 +1,39 @@
 -- for non editable filetypes
 
-local filetype_names = {
-  alpha = "Alpha",
-  tagbar = "Tagbar",
-  noice = "Noice",
-}
-
-local get_name = function()
-  local filetype = vim.bo.filetype
-
-  if filetype_names[filetype] then
-    filetype = filetype_names[filetype]
-  end
-
-  return filetype
-end
-
-local name
-if require("utils").enable_icon then
-  local get_icon = require("plugins.ui.lualine.utils.get-icon")
-  -- name = get_name
-  name = function()
-    local icon = get_icon(nil, vim.bo.filetype)
-    return string.format("%s %s", icon, get_name())
-  end
-else
-  name = get_name
-end
+-- local ft_names = require("plugins.ui.lualine.utils.filetype-names")
+--
+-- local get_name = function()
+--   local filetype = vim.bo.filetype
+--
+--   if ft_names[filetype] then
+--     filetype = ft_names[filetype]
+--   end
+--
+--   return filetype
+-- end
+--
+-- local name
+-- if require("utils").enable_icon then
+--   local get_icon = require("plugins.ui.lualine.utils.get-icon")
+--   -- name = get_name
+--   name = function()
+--     local icon = get_icon(nil, vim.bo.filetype)
+--     return string.format("%s %s", icon, get_name())
+--   end
+-- else
+--   name = get_name
+-- end
 
 local extension = {
   sections = {
-    lualine_c = { name },
+    lualine_c = {
+      require("plugins.ui.lualine.components.filename"),
+    },
   },
   inactive_sections = {
-    lualine_c = { name },
+    lualine_c = {
+      require("plugins.ui.lualine.components.filename"),
+    },
   },
   filetypes = {
     "tagbar",
@@ -49,6 +49,13 @@ local extension = {
     "noice",
     "checkhealth",
     "qf",
+    "TelescopePrompt",
+    "sagafinder",
+    "sagaoutline",
+    -- popup
+    "saga_codeaction",
+    "sagarename",
+    "neo-tree-popup",
     -- "NetrwMessage", -- not a filetype
   },
 }

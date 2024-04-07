@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
   [1] = "rust-lang/rust.vim",
   lazy = true,

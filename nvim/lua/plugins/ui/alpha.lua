@@ -1,24 +1,6 @@
 local prefix = require("val").prefix
 local map_keyword = require("val").map_keyword
 
----@type fun(): nil
-local setup_startify = function()
-  local startify = require("alpha.themes.startify")
-  startify.section.header.val = {}
-  -- startify.section.session.val = {
-  --   startify.button("qaaaa", "aaaa  Quit NVIM", ":<C-u>qa<CR>"),
-  -- }
-  startify.section.top_buttons.val = {
-    startify.button("e", " New file", "<cmd>enew<CR>"),
-    startify.button("s", " Load Sessions", "<cmd>Sload<CR>"),
-    -- startify.group(function()vim.notify('aaaaa')end),
-  }
-
-  startify.section.bottom_buttons.val = {}
-  --   startify.button("q", "  Quit NVIM", "<cmd>qall<CR>"),
-  -- }
-end
-
 local keyword_alpha = "p"
 return {
   [1] = "goolord/alpha-nvim",
@@ -26,17 +8,45 @@ return {
   event = { "VimEnter" },
   dependencies = { "nvim-tree/nvim-web-devicons" },
   opts = function()
-    return require("alpha.themes.startify").config
+    return vim.tbl_deep_extend(
+      "force",
+      -- require("alpha.themes.dashboard").config,
+      require("alpha.themes.startify").config,
+      {
+        nvim_web_devicons = {
+          enabled = require("utils").enable_icon,
+        },
+      }
+    )
   end,
   main = "alpha",
   config = function(plugin, opts)
-    setup_startify()
+    local startify = require("alpha.themes.startify")
+    -- local devicons = require("nvim-web-devicons")
+
+    local enable_icon = opts.nvim_web_devicons.enabled
+    startify.section.header.val = { "Hi!" }
+    startify.section.top_buttons.val = {
+      startify.button("e", enable_icon and string.format(
+        "%s  %s",
+        -- require("utils.get-icon")(nil, nil, "terminal"),
+        require("val").icons.file,
+        "New File"
+      ) or "New File", "<cmd>enew<CR>"),
+      startify.button(
+        "s",
+        enable_icon and string.format("%s  %s", "", "Load Sessions")
+          or "Load Sessions",
+        "<cmd>Sload<CR>"
+      ),
+    }
+
     require(plugin.main).setup(opts)
 
     -- 아래가 작동안해서 임시로 추가
-    local m = {}
-    m[prefix.new .. keyword_alpha] = { name = "+alpha" }
-    require("which-key").register(m)
+    -- local m = {}
+    -- m[prefix.new .. keyword_alpha] = { name = "+alpha" }
+    -- require("which-key").register(m)
   end,
   keys = {
     {

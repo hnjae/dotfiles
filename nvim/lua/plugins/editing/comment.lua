@@ -1,15 +1,24 @@
 -- NOTE: support dot-repeat
 
+-- :h comment-nvim
+
+-- NOTE: which-key.nvim complains key conflict:
+-- https://github.com/folke/which-key.nvim/issues/218#issuecomment-1890858022
+-- https://github.com/numToStr/Comment.nvim/issues/167
+
+local is_treesitter = require("utils").is_treesitter
+
 ---@type LazySpec
 return {
   [1] = "numToStr/Comment.nvim",
-  lazy = true,
+  lazy = false,
   event = { "VeryLazy" },
   enabled = true,
   dependencies = {
     {
       [1] = "JoosepAlviste/nvim-ts-context-commentstring",
-      lazy = false,
+      lazy = true,
+      enabled = is_treesitter,
       event = { "VeryLazy" },
       dependencies = {
         "nvim-treesitter/nvim-treesitter",
@@ -21,8 +30,19 @@ return {
     },
   },
   opts = function()
-    return {
-      pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
+    local ret = {
+      -- opleader = { line = "gc", block = "gb" },
+      mappings = { basic = true, extra = true },
     }
+
+    if is_treesitter then
+      return vim.tbl_extend("force", ret, {
+        pre_hook = require(
+          "ts_context_commentstring.integrations.comment_nvim"
+        ).create_pre_hook(),
+      })
+    end
+
+    return ret
   end,
 }

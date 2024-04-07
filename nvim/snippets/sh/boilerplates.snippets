@@ -1,0 +1,29 @@
+snippet confirm confirm user
+	confirm() {
+		echo "Are you sure? [YES/Any]: \\c"
+		read -r response
+		case "\$response" in
+		"YES")
+			true
+			;;
+		*)
+			false
+			;;
+		esac
+	}$0
+snippet confirmb "confirm user (bash)"
+	confirm() {
+		read -n 1 -r -p "Are you sure? [y/Any]" response
+		case "\$response" in
+		[yY])
+			true
+			;;
+		*)
+			false
+			;;
+		esac
+	}$0
+snippet scriptdir "It will NOT resolve path. It will NOT WORK if script is being sourced."
+	$0"\$(cd -- "\$(dirname -- "$0")" && pwd -P)" >/dev/null 2>&1
+snippet symlinkreslove ""
+	readlink -f -- <path>

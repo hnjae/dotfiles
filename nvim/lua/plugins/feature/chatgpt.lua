@@ -19,9 +19,28 @@ return {
   },
   cond = vim.fn.executable("curl") == 1
     and vim.fn.executable("op") == 1
-    and require("utils").is_console,
+    and not require("utils").is_console,
   opts = {
     api_key_cmd = "op read op://Personal/OpenAI/api/editor --no-newline",
+    openai_params = {
+      -- model = "gpt-3.5-turbo",
+      model = "gpt-4-1106-preview",
+    },
+    openai_edit_params = {
+      model = "gpt-4-1106-preview",
+    },
+    actions_paths = {
+      require("plenary.path"):new(
+        vim.fn.stdpath("config"),
+        "chatgpt",
+        "default-actions.json"
+      ).filename,
+      -- require("plenary.path"):new(
+      --   vim.fn.stdpath("config"),
+      --   "chatgpt",
+      --   "new-actions.json"
+      -- ).filename,
+    },
   },
   -- config = function(plugin, opts)
   --   require(plugin.main).setup(opts)

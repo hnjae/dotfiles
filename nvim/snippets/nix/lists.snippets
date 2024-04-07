@@ -1,0 +1,12 @@
+snippet ll "lib.lists"
+	lib.lists
+snippet llconcat "builtins.concatLists :: [List] -> []"
+	concatLists [$0]
+snippet llcount "lib.lists.count :: (a -> bool) -> [a] -> int"
+	count ${0:list}
+snippet lloptional "lib.lists.optional :: bool -> a -> [a]"
+	optional ${1:bool} ${0:single-entry}
+snippet lloptionals "lib.lists.optionals :: bool -> [a] -> [a]"
+	optionals ${1:bool} [${0:list}]
+snippet llremove "lib.lists.remove :: a -> [a] -> [a]"
+	remove ${1:entry} [${0:list}]

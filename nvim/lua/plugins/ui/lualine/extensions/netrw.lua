@@ -2,7 +2,6 @@ local modules = require("lualine_require").lazy_require({
   lspconfig = "lspconfig",
   Path = "plenary.path",
 })
-local icon = require("plugins.ui.lualine.utils.get-icon")(nil, "netrw")
 
 local find_project_root =
   modules.lspconfig.util.root_pattern(unpack(require("val").root_patterns))
@@ -22,7 +21,8 @@ local get_name = function()
 end
 
 local name
-if not require("utils").enable_icon then
+if require("utils").enable_icon then
+  local icon = require("plugins.ui.lualine.utils.get-icon")(nil, "netrw")
   name = function()
     return string.format("%s %s", icon, get_name())
   end

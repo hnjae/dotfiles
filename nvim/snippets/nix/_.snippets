@@ -1,0 +1,53 @@
+# https://nixos.org/manual/nix/stable/language/index.html
+
+snippet if if-then-else
+	if (${1:true}) then ($2) else ($3)
+snippet im "import other nix file"
+	import ${0:path-to-other-nix}
+snippet funs "example of function that expects a set"
+	{ x, y ? "bar", ... } @ args: x + y
+snippet fun
+	{${1:...}}: {
+		$0
+	}
+snippet ims
+	imports = [
+		$0
+	];
+
+# for auto complete (현재 자동완성 기능을 제공해주는 툴이 없음. (2024-03))
+snippet ssystem "stdenv.system :: string (e.g. x86_64-linux)"
+	stdenv.system
+snippet sisAarch64 "stdenv.isAarch64 :: bool"
+	stdenv.isAarch64
+snippet sisx86_64 "stdenv.isx86_64 :: bool"
+	stdenv.isx86_64
+snippet sisLinux "stdenv.isLinux :: bool"
+	stdenv.isLinux
+snippet sisDarwin "stdenv.isDarwin :: bool"
+	stdenv.isDarwin
+
+snippet desktopentry "New desktop entries"
+	xdg.desktopEntries."${1:name}" = {
+		name = "$1";
+		icon = "$1";
+		comment = "";
+		exec = "";
+		terminal = false;
+		type = "Application";
+		startupNotify = true;
+		categories = [];
+		mimeType = [];
+		actions = {
+			"name" = {
+				name = "";
+				exec = "";
+			};
+		};
+	};
+
+snippet writeScriptBin "writeScriptBin"
+	(pkgs.writeScriptBin "${1:name}" ''
+		#!{pkgs.dash}/bin/dash
+		$0 "$@"
+	'')

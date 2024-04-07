@@ -9,7 +9,7 @@ return function()
     vim.fn.sort(
       vim.fn.globpath(
         vim.fn.stdpath("config"),
-        "lua/plugins/lsp/lang/*.lua",
+        "lua/plugins/lsp/configs/*.lua",
         false,
         true
       )
@@ -19,7 +19,7 @@ return function()
   for _, file in pairs(paths) do
     table.insert(
       _confs,
-      require("plugins.lsp.lang." .. file:match("[^/\\]+$"):sub(1, -5))
+      require("plugins.lsp.configs." .. file:match("[^/\\]+$"):sub(1, -5))
     )
   end
   return _confs

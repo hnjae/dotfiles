@@ -1,11 +1,4 @@
--- telescope
-local val = require("val")
-local prefix = val.prefix
-local map_keyword = val.map_keyword
-
-local enable_fzf_native = function()
-  return vim.fn.executable("make") == 1 and vim.fn.executable("cc") == 1
-end
+-- telescopej
 
 ---@type LazySpec
 return {
@@ -16,7 +9,7 @@ return {
     {
       [1] = "nvim-telescope/telescope-fzf-native.nvim",
       build = "make",
-      enabled = enable_fzf_native(),
+      enabled = vim.fn.executable("make") == 1 and vim.fn.executable("cc") == 1,
     },
     {
       -- replace vim.ui.select with telescope
@@ -31,11 +24,27 @@ return {
   },
   ---@type fun(LazyPlugin, opts: table): LazyKeysSpec[]
   keys = function()
+    local val = require("val")
+    local prefix = val.prefix
+    local map_keyword = val.map_keyword
     local t_builtin = require("telescope.builtin")
     local _, lspconfig = pcall(require, "lspconfig")
 
     local find_project_root =
       lspconfig.util.root_pattern(unpack(val.root_patterns))
+
+    ---@param ft? string filtepye
+    local get_cwd = function(ft)
+      if ft == "oil" then
+        return require("oil").get_current_dir()
+      end
+
+      if ft == "netrw" then
+        return vim.api.nvim_buf_get_var(0, "netrw_curdir")
+      end
+
+      return vim.fn.expand("%:p:h")
+    end
 
     ---@type LazyKeysSpec[]
     local keys_buffer = {
@@ -128,8 +137,10 @@ return {
         key = "f",
         desc = "find-files",
         func = function()
+          -- local ft = vim.api.nvim_buf_get_option(0, "filetype")
+          -- local ft = vim.bo.filetype
           t_builtin.find_files({
-            cwd = find_project_root(vim.fn.expand("%:p:h")),
+            cwd = find_project_root(get_cwd(vim.bo.filetype)),
           })
         end,
       },
@@ -138,14 +149,19 @@ return {
         desc = "find-files-cwd",
         func = function()
           t_builtin.find_files({
-            cwd = vim.fn.expand("%:p:h"),
+            cwd = get_cwd(vim.bo.filetype),
           })
         end,
       },
       {
         key = "b",
         desc = "buffers",
-        func = t_builtin.buffers,
+        func = function()
+          t_builtin.buffers({
+            sort_mru = true,
+            cwd = find_project_root(get_cwd(vim.bo.filetype)),
+          })
+        end,
       },
       {
         key = "r",
@@ -153,7 +169,7 @@ return {
         func = function()
           -- t_builtin.grep_string({ use_regex = true })
           t_builtin.live_grep({
-            cwd = find_project_root(vim.fn.expand("%:p:h")),
+            cwd = find_project_root(get_cwd(vim.bo.filetype)),
           })
         end,
       },
@@ -163,7 +179,7 @@ return {
         func = function()
           -- t_builtin.grep_string({ use_regex = true })
           t_builtin.live_grep({
-            cwd = vim.fn.expand("%:p:h"),
+            cwd = get_cwd(vim.bo.filetype),
           })
         end,
       },
@@ -189,7 +205,9 @@ return {
     return keys
   end,
   opts = function()
-    local opts = {
+    local map_keyword = require("val").map_keyword
+
+    local ret = {
       defaults = {
         history = {
           path = require("plenary.path"):new(
@@ -231,17 +249,22 @@ return {
       },
     }
 
-    return opts
+    return ret
   end,
   ---@type fun(LazyPlugin, opts: table)
   config = function(_, opts)
     local telescope = require("telescope")
+    local utils = require("utils")
     telescope.setup(opts)
 
-    if enable_fzf_native() then
+    if utils.is_plugin("telescope-fzf-native.nvim") then
       telescope.load_extension("fzf")
     else
-      vim.notify("treesitter: fzf-native module could not be installed.")
+      vim.notify(
+        "treesitter: fzf-native module could not be installed.",
+        vim.log.levels.INFO,
+        {}
+      )
     end
 
     telescope.load_extension("ui-select")

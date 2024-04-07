@@ -1,5 +1,6 @@
 local prefix = require("val").prefix
 
+---@type LazySpec
 return {
   [1] = "python-mode/python-mode",
   lazy = true,

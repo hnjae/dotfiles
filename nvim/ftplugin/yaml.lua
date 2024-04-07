@@ -7,7 +7,9 @@ vim.opt_local.cindent = false
 vim.opt_local.smartindent = false
 
 --
-vim.opt_local.textwidth = 80
+vim.opt.wrap = false
+vim.opt.linebreak = false
+vim.opt.textwidth = 0
 
 -- vim.opt_local.filetype = "yaml.ansible"
 -- if vim.fn.expand("%:t") == "docker-compose.yml" then

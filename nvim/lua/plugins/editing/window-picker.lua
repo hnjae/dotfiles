@@ -1,45 +1,64 @@
+local bufname_allowlist = {
+  messages = true,
+}
+
+-- vim.api.nvim_set_keymap()
 ---@type LazySpec
 return {
   [1] = "s1n7ax/nvim-window-picker",
-  event = "VeryLazy",
+  lazy = true,
+  -- event = "VeryLazy",
   version = "2.*",
   main = "window-picker",
-  keys = {
-    {
-      [1] = "<Leader>f",
-      [2] = function()
-        local picked_window_id = require("window-picker").pick_window()
-        if picked_window_id == nil then
-          return
-        end
-        vim.api.nvim_set_current_win(picked_window_id)
-      end,
-    },
-  },
   opts = {
+    show_prompt = false,
     hint = "floating-big-letter",
+    -- hint = "statusline-winbar",
     selection_chars = "neitsrhodaylkfv",
+    -- picker_config = {
+    --   floating_big_letter = {
+    --     font = "ansi-shadow", -- ansi-shadow |
+    --   },
+    -- },
     filter_func = function(window_ids, filters)
       local filtered_window_ids = {}
       for _, win_id in ipairs(window_ids) do
-        local win_buf = vim.api.nvim_win_get_buf(win_id)
-        local win_bo = vim.bo[win_buf]
+        local bufnr = vim.api.nvim_win_get_buf(win_id)
+        local win_bo = vim.bo[bufnr]
 
-        -- 이것 때문에 filter_func 별도 작성
+        if bufname_allowlist[vim.fn.bufname(bufnr)] then
+          table.insert(filtered_window_ids, win_id)
+          ::continue::
+        end
+
         if win_bo.buftype == "nofile" and win_bo.filetype == "" then
+          -- nofile 통째로 filter 하면, 각종 sidebar 류 작동 안함
           goto continue
         end
 
-        -- Check filetype against filter
-        if filters.bo and filters.bo.filetype then
-          if vim.tbl_contains(filters.bo.filetype, win_bo.filetype) then
-            goto continue
-          end
+        if
+          win_bo.buftype == "nofile"
+          and win_bo.filetype ~= ""
+          and vim.b[bufnr].did_ftplugin ~= nil
+        then
+          -- e.g. preview pane of LspSaga's outline
+          goto continue
         end
 
-        -- Check buftype against filter
-        if filters.bo and filters.bo.buftype then
-          if vim.tbl_contains(filters.bo.buftype, win_bo.buftype) then
+        if filters.bo then
+          -- Check filetype against filter
+          if
+            filters.bo.filetype
+            and vim.tbl_contains(filters.bo.filetype, win_bo.filetype)
+          then
+            goto continue
+          end
+
+          -- Check buftype against filter
+          if
+            filters.bo.buftype
+            and vim.tbl_contains(filters.bo.buftype, win_bo.buftype)
+          then
             goto continue
           end
         end
@@ -68,14 +87,66 @@ return {
           "TelescopePrompt",
           "lazy",
           "minimap",
+          "sagafinder",
+          "saga_codeaction",
         },
         buftype = {
           "picker",
           "prompt",
+          "acwrite",
         },
       },
     },
+    -- highlights = {
+    --   enabled = true,
+    --   statusline = {
+    --     focused = {
+    --       fg = "#ededed",
+    --       bg = "#e35e4f",
+    --       bold = true,
+    --     },
+    --     unfocused = {
+    --       fg = "#ededed",
+    --       bg = "#44cc41",
+    --       bold = true,
+    --     },
+    --   },
+    --   winbar = {
+    --     focused = {
+    --       fg = "#ededed",
+    --       bg = "#e35e4f",
+    --       bold = true,
+    --     },
+    --     unfocused = {
+    --       fg = "#ededed",
+    --       bg = "#44cc41",
+    --       bold = true,
+    --     },
+    --   },
+    -- },
   },
+  keys = {
+    {
+      [1] = "<Leader>f",
+      [2] = function()
+        local picked_window_id = require("window-picker").pick_window()
+        if picked_window_id == nil then
+          return
+        end
+        vim.api.nvim_set_current_win(picked_window_id)
+      end,
+      desc = "window-picker",
+    },
+  },
+  config = function(plugin, opts)
+    -- {
+    --   "WindowPickerStatusLine",
+    --   "WindowPickerStatusLineNC",
+    --     "WindowPickerWinBar",
+    --     "WindowPickerWinBarNC"
+    -- }
+    require(plugin.main).setup(opts)
+  end,
 }
 
 -- for debugging

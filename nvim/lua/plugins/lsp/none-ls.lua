@@ -16,17 +16,28 @@ return {
   enabled = true,
   dependencies = {
     "nvim-lua/plenary.nvim",
+    "gbprod/none-ls-shellcheck.nvim",
   },
   -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/CONFIG.md
   -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md
   opts = function()
     local ret = {
-      debug = true,
+      debug = false,
+      fallback_severity = vim.diagnostic.severity.WARN,
+
       -- diagnostics_format = "#{m} (#{s})",
       diagnostics_format = "[#{c}] #{m} (#{s})",
       -- root_dir = require("null-ls.utils").root_pattern(unpack(val.root_patterns)),
       sources = {},
       on_attach = val.on_attach,
+
+      should_attach = function(bufnr)
+        -- vim.api.nvim_buf_get_option(bufnr, "filetype")
+        if vim.api.nvim_buf_get_option(bufnr, "buftype") ~= "" then
+          return false
+        end
+        return true
+      end,
     }
 
     local null_ls = require("null-ls")
@@ -36,7 +47,7 @@ return {
       vim.fn.sort(
         vim.fn.globpath(
           vim.fn.stdpath("config"),
-          "lua/plugins/lsp/lang/*.lua",
+          "lua/plugins/lsp/configs/*.lua",
           false,
           true
         )
@@ -46,7 +57,7 @@ return {
     local lang_conf
     for _, file in pairs(paths) do
       lang_conf =
-        require("plugins.lsp.lang." .. file:match("[^/\\]+$"):sub(1, -5))
+        require("plugins.lsp.configs." .. file:match("[^/\\]+$"):sub(1, -5))
 
       if lang_conf.get_null_ls_sources then
         for _, source in pairs(lang_conf.get_null_ls_sources(null_ls, utils)) do
@@ -56,5 +67,9 @@ return {
     end
 
     return ret
+  end,
+  config = function(_, opts)
+    local null_ls = require("null-ls")
+    null_ls.setup(opts)
   end,
 }

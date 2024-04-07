@@ -6,15 +6,28 @@ return {
   cond = not require("utils").is_console,
   event = { "VeryLazy" },
   main = "ibl",
-  opts = {
-    scope = {
-      enabled = false,
-      -- highlight = require('rainbow-delimiters.default').highlight
-    },
-  },
-  -- config = function(_, opts)
-  --   local hooks = require("ibl.hooks")
-  --   require("ibl").setup(opts)
-  --   hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
-  -- end,
+  opts = function()
+    local ret = {
+      indent = {},
+      whitespace = {
+        remove_blankline_trail = false,
+      },
+      scope = {
+        enabled = false,
+      },
+      exclude = {
+        filetypes = {
+          "dashboard",
+          "text",
+        },
+      },
+    }
+
+    if vim.fn.hlexists("IndentBlanklineChar") == 1 then
+      -- default: IblIndent
+      ret.indent.highlight = "IndentBlanklineChar"
+    end
+
+    return ret
+  end,
 }

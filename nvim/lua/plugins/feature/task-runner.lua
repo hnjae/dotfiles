@@ -28,7 +28,7 @@ end
 return {
   [1] = "stevearc/overseer.nvim",
   enabled = true,
-  lazy = false,
+  lazy = true,
   dependencies = {
     "nvim-telescope/telescope.nvim",
   },
@@ -82,7 +82,7 @@ return {
 
         local cur_bufnr = vim.fn.bufnr()
         vim.cmd("OverseerOpen!")
-        vim.cmd([[OverseerQuickAction open hsplit]])
+        -- vim.cmd([[OverseerQuickAction open hsplit]])
         vim.cmd(
           string.format([[exe %d .. "wincmd w"]], vim.fn.bufwinnr(cur_bufnr))
         )
@@ -112,15 +112,15 @@ return {
       --   preserve_output = false,
       --   use_terminal = true,
       -- },
-      strategy = "terminal",
-      -- strategy = {
-      --   [1] = "toggleterm",
-      --   use_shell = false,
-      --   -- direction = "float",
-      --   open_on_start = true,
-      --   close_on_exit = false,
-      --   auto_scroll = false,
-      -- },
+      -- strategy = "terminal",
+      strategy = {
+        [1] = "toggleterm",
+        use_shell = false,
+        direction = "float",
+        open_on_start = true,
+        close_on_exit = false,
+        hidden = false,
+      },
 
       templates = {
         "builtin",

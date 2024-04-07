@@ -31,7 +31,7 @@ return {
       "html",
       "python",
       "java",
-      "kotlin",
+      -- "kotlin", -- requires styles/kotlin.vim
       "sh",
       "ruby",
       "dockerfile",
@@ -41,6 +41,12 @@ return {
       "typescript",
       "javascript",
     }
+    --[[ NOTE: <2024-04-08>
+    `asciidoctor_fenced_languages` 는 styles/<ft-name>.vim 를 요구하는 것 같음
+    kotlin의 경우 syntax support 가 내장되어 있지 않아, 에러 메시지가 뜸.
+
+    그러나 treesitter 에서 syntax 를 지원해서 별도로 설치 하지는 않을 예정.
+    ]]
     vim.g.asciidoctor_syntax_conceal = 1
   end,
 }

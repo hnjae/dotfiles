@@ -19,43 +19,42 @@ return {
   keys = function()
     local snippy = require("snippy")
     return {
+      -- NOTE: cmp 에서 관리 <2024-03-11>
+      -- {
+      --   [1] = "<Tab>",
+      --   [2] = function()
+      --     return snippy.can_expand_or_advance()
+      --         and "<Plug>(snippy-expand-or-advance)"
+      --       or "<Tab>"
+      --   end,
+      --   mode = "i",
+      --   desc = "snippy-expand-or-advance",
+      --   expr = true,
+      -- },
+      -- {
+      --   [1] = "<S-Tab>",
+      --   [2] = function()
+      --     return snippy.can_jump(-1) and "<plug>(snippy-previous)" or "<S-Tab>"
+      --   end,
+      --   mode = "i",
+      --   desc = "snippy-previous",
+      --   expr = true,
+      -- },
       {
         [1] = "<Tab>",
         [2] = function()
-          return snippy.can_expand_or_advance()
-              and "<Plug>(snippy-expand-or-advance)"
-            or "<Tab>"
+          snippy.next("<Tab>")
         end,
-        mode = "i",
-        desc = "snippy-expand-or-advance",
-        expr = true,
+        mode = "n",
+        desc = "snippy-next-or-tab",
       },
       {
         [1] = "<S-Tab>",
         [2] = function()
-          return snippy.can_jump(-1) and "<plug>(snippy-previous)" or "<S-Tab>"
+          snippy.previous("<S-Tab>")
         end,
-        mode = "i",
-        desc = "snippy-previous",
-        expr = true,
-      },
-      {
-        [1] = "<Tab>",
-        [2] = function()
-          return snippy.can_jump(1) and "<plug>(snippy-next)" or "<Tab>"
-        end,
-        mode = "s",
-        desc = "snippy-next",
-        expr = true,
-      },
-      {
-        [1] = "<S-Tab>",
-        [2] = function()
-          return snippy.can_jump(-1) and "<plug>(snippy-previous)" or "<S-Tab>"
-        end,
-        mode = "s",
-        desc = "snippy-previous",
-        expr = true,
+        mode = "n",
+        desc = "snippy-previous-or-s-tab",
       },
       {
         [1] = "<Tab>",
@@ -63,16 +62,21 @@ return {
         mode = "x",
         desc = "snippy-cut-text",
       },
+      {
+        [1] = "g<Tab>",
+        [2] = "<Plug>(snippy-cut-text)",
+        mode = "n",
+        desc = "snippy-cut-text (operator)",
+      },
+      {
+        [1] = "<Leader>R",
+        [2] = "<cmd>SnippyReload<cr>",
+        mode = "n",
+        desc = "snippy-reload",
+      },
     }
   end,
   config = function(_, opts)
     require("snippy").setup(opts)
-    -- vim.cmd([[
-    --     imap <expr> <Tab> snippy#can_expand_or_advance() ? '<Plug>(snippy-expand-or-advance)' : '<Tab>'
-    --     imap <expr> <S-Tab> snippy#can_jump(-1) ? '<Plug>(snippy-previous)' : '<S-Tab>'
-    --     smap <expr> <Tab> snippy#can_jump(1) ? '<Plug>(snippy-next)' : '<Tab>'
-    --     smap <expr> <S-Tab> snippy#can_jump(-1) ? '<Plug>(snippy-previous)' : '<S-Tab>'
-    --     xmap <Tab> <Plug>(snippy-cut-text)
-    -- ]])
   end,
 }

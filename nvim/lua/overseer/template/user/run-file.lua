@@ -9,6 +9,8 @@ return {
       cmd = { "go", "run", file }
     elseif vim.bo.filetype == "typescript" then
       cmd = { "bun", file }
+    elseif vim.bo.filetype == "python" then
+      cmd = { "ipython3", file }
     else
       cmd = { file }
     end

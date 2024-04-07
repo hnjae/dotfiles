@@ -1,39 +1,20 @@
-local devicons = require("nvim-web-devicons")
-local icons = {
-  -- project = "",
-  extension = "",
-  project = "P:",
-  message = "󰍡",
-  git = "",
-  symbol = "", -- nf-cod-symbol_field
-}
+local is_devicons, devicons = pcall(require, "nvim-web-devicons")
+if not is_devicons then
+  return function()
+    return ""
+  end
+end
 
+local default_icon = require("val").icons.file
+local icons = require("val").icons
+
+local ft_data = require("plugins.ui.lualine.utils.ft-data")
 local filename_icons = {
   ["NetrwMessage"] = icons.message,
 }
 
--- 일반적인 filetype 이면 devicons 설정에 추가.
-local filetype_icons = {
-  netrw = "󰙅", -- nf-md-file_tree
-  oil = "󰙅", -- nf-md-file_tree
-  NvimTree = "󰙅",
-  fugitive = icons.git,
-  NeogitStatus = devicons.get_icon("git")[1],
-  NeogitPopUp = icons.message,
-  help = "󰘥", -- nf-md-help-circle-out-line
-  alpha = "󰀫",
-  OverseerList = "",
-  Noice = icons.message,
-  tagbar = "", -- nf-oct-tag
-  Outline = icons.symbol,
-  Trouble = "", --nf-oct-tools
-  TelescopePrompt = "", -- nf-oct-serch
-  dbui = devicons.get_icon("db"),
-  dbout = devicons.get_icon("db"),
-}
-
 local buftype_icons = {
-  terminal = devicons.get_icon("sh"),
+  terminal = devicons.get_icon("terminal"),
 }
 
 ---@param filename? string
@@ -45,8 +26,8 @@ return function(filename, filetype, buftype)
     return buftype_icons[buftype]
   end
 
-  if filetype and filetype_icons[filetype] then
-    return filetype_icons[filetype]
+  if filetype and ft_data[filetype] and ft_data[filetype][2] then
+    return ft_data[filetype][2]
   end
 
   if filename and filename_icons[filename] then
@@ -54,10 +35,16 @@ return function(filename, filetype, buftype)
   end
 
   local icon
+  -- devicon 의 default_icon 받아오지 말기
   icon = devicons.get_icon(filename or filetype, nil)
   if icon then
     return icon
   end
 
-  return "?"
+  icon = devicons.get_icon_by_filetype(filetype)
+  if icon then
+    return icon
+  end
+
+  return default_icon
 end

@@ -1,0 +1,16 @@
+# https://direnv.net/man/direnv-stdlib.1.html
+
+snippet path "add bin to PATH"
+	PATH_add "${1:node_modules/.bin}"
+snippet man "add"
+	MANPATH_add "$1"
+snippet flake "load flake.nix's `devShell` "
+	use flake
+snippet nix "use `shell.nix` or `default.nix`"
+	use nix
+snippet nixp "use package"
+	use nix -p "${1:hello}"
+snippet node "add node_modules/.bin to path"
+	layout node
+snippet go "Add $(direnv_layout_dir)/go to GOPATH and bin to PATH"
+	layout go

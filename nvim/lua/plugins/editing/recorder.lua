@@ -1,3 +1,5 @@
+-- noice 의 require("noice").api.status.command.get 로 어느정도 대체 가능?
+
 local mapping = {
   startStopRecording = "q",
   playMacro = "Q",
@@ -22,6 +24,8 @@ return {
   },
   opts = {
     mapping = mapping,
-    useNerdfontIcons = not require("utils").is_console,
+    useNerdfontIcons = false, -- which-key description scope를 더럽힘
+    -- require("utils").enable_icon,
+    -- lessNotifications = true,
   },
 }

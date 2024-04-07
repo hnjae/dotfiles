@@ -15,6 +15,9 @@ return {
     "TroubleClose",
     "TroubleToggle",
   },
+  opts = {
+    icon = require("utils").enable_icon,
+  },
   keys = {
     {
       [1] = prefix.focus .. map_keyword.trouble,

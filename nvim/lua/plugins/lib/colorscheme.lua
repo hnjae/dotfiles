@@ -14,6 +14,8 @@ local colorschemes = {
 }
 
 local colorscheme = colorschemes.github
+-- local colorscheme = colorschemes.rasmus
+-- local colorscheme = colorschemes.adwaita
 
 ---@type LazySpec[]
 return {
@@ -35,15 +37,13 @@ return {
     end,
   },
   {
-    -- supports
-    -- treesitter/lsp/telescope/nvim-cmp/which-key/indent-blankline
     [1] = "kvrohit/rasmus.nvim",
     lazy = false,
     cond = colorscheme == colorschemes.rasmus,
     priority = 999999999,
     init = function()
-      vim.g.rasmus_italic_functions = true
-      vim.g.rasmus_bold_functions = true
+      -- vim.g.rasmus_italic_functions = false
+      -- vim.g.rasmus_bold_functions = true
     end,
     config = function()
       vim.cmd([[colorscheme rasmus]])
@@ -55,7 +55,7 @@ return {
     cond = colorscheme == colorschemes.adwaita,
     priority = 999999999,
     config = function()
-      vim.g.adwaita_darker = true -- for darker version
+      vim.g.adwaita_darker = false -- for darker version
       vim.g.adwaita_disable_cursorline = true -- to disable cursorline
       vim.cmd([[colorscheme adwaita]])
     end,
@@ -66,6 +66,28 @@ return {
     cond = colorscheme == colorschemes.github,
     priority = 999999999,
     main = "github-theme",
+    opts = {
+      options = {
+        dim_inactive = true,
+        -- terminal_colors = true,
+        darken = {
+          sidebars = {
+            enabled = true,
+            list = {
+              "tagbar",
+              "Outline",
+              "sagaoutline",
+              "NvimTree",
+              "neo-tree",
+              "OverseerList",
+              "Trouble",
+              "toggleterm",
+              "qf",
+            },
+          },
+        },
+      },
+    },
     config = function(plugin, opts)
       --[[
       NOTE:

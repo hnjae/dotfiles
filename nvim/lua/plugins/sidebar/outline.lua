@@ -4,7 +4,7 @@ local map_keyword = require("val").map_keyword
 ---@type LazySpec
 return {
   [1] = "hedyhli/outline.nvim",
-  lazy = false,
+  lazy = true,
   cmd = {
     "Outline",
     "OutlineOpen",
@@ -30,9 +30,13 @@ return {
     },
   },
   dependencies = {
-    "neovim/nvim-lspconfig",
+    "onsails/lspkind.nvim",
+    -- "neovim/nvim-lspconfig",
   },
   opts = {
+    symbols = {
+      icon_source = "lspkind",
+    },
     outline_window = {
       width = 20,
     },

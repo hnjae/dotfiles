@@ -1,0 +1,71 @@
+snippet for for loop range
+	for ${1:i}=${2:1},${3:10} do
+		${0}
+	end
+snippet fori enumerate table
+	for ${3:i}, ${2:x} in ipairs(${1:$TM_SELECTED_TEXT}) do
+		${0}
+	end
+snippet forp iter table (key, val)
+	for ${3:key}, ${2:val} in pairs(${1:$TM_SELECTED_TEXT}) do
+		${0}
+	end
+snippet forline read file line by line
+	f = io.open(${1:"${2:filename}"}, "${3:r}")
+
+	while true do
+		line = f:read()
+		if line == nil then break end
+
+		${0:-- code}
+	end
+snippet while
+	while ${1:true} do
+		${0:$TM_SELECTED_TEXT}
+	end
+snippet fun function without annotation
+	function ${1:name}($2)
+		${0:$TM_SELECTED_TEXT}
+	end
+snippet funs function
+	---@type fun(${2:<arg>}: ${3:<arg type>}): ${1:<return type>}
+	function ${1:name}($2)
+		${0:$TM_SELECTED_TEXT}
+	end
+snippet funx function
+	---@param ${2:name[?]} ${3:type[|type...]} ${4:[description]}
+	---@return ${5:type} ${6:[name [comment] | [name] #<comment>]}
+	function ${1:name}($2)
+		${0:$TM_SELECTED_TEXT}
+	end
+snippet if
+	if ${1:true} then
+		${0:$TM_SELECTED_TEXT}
+	end
+snippet elseif
+	elseif ${1:true} then
+		$0
+snippet rt return value
+	return $0
+snippet lo "create a variable"
+	local $0
+snippet lv "create a local variable"
+	local ${1:varName} = ${0:value}
+snippet lopca "Protect call a function as a variable"
+	local ${1:status}, ${2:err_or_value} = pcall(${3:function})
+snippet lopcareq "Protect call a function as a variable"
+	local is_${1:module_name}, ${1:module_name} = pcall(require, "${1:module_name}")
+snippet loreq "Require module as a variable"
+	local ${1:var} = require("${2:module}")
+snippet pca Protect call a function
+	pcall(${1:function})
+snippet req "Require module"
+	require("${1:module}")
+snippet p
+	print($0)
+snippet styluaib "stylua ignore block"
+	-- stylua: ignore start
+	$0
+	-- stylua: ignore end
+snippet styluas "stylua ignore single line"
+	$0 -- style: ignore

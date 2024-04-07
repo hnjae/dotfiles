@@ -5,13 +5,13 @@
 | Telescope               |   O    |    O     |     O      |   O    |    O    |   O    |   O    |    O    |
 | gitsigns                |   O    |    O     |     O      |   O    |    O    |   O    |   O    |    O    |
 | nvim-cmp                |   O    |    O     |     O      |   O    |    O    |   O    |   X    |    O    |
-| Lualine                 |   O    |    O     |     O      |   O    |    O    |   X    |   O    |    X    |
 | indent-blank-line       |   O    |    O     |     O      |   O    |    X    |   O    |   O    |    X    |
-| nvim-tree               |   O    |    O     |     O      |   O    |    O    |   O    |   O    |    O    |
-| neogit                  |   O    |    O     |     O      |   X    |    X    |   X    |   O    |    O    |
-| nvim-notify             |   O    |    O     |     O      |        |         |        |        |    O    |
-| neotest                 |   X    |    X     |     O      |   X    |    X    |   X    |   X    |    X    |
 | which-key.nvim          |   O    |    O     |     O      |   X    |    X    |   O    |   O    |    X    |
-| nvim-treesitter-context |   O    |    X     |     O      |        |         |        |        |    X    |
-| neotree                 |   O    |    O     |     O      |        |         |        |   X    |    X    |
+| Lualine                 |   O    |    O     |     O      |   O    |    O    |   X    |   O    |    X    |
+| nvim-notify             |   O    |    O     |     O      |        |         |   X    |        |    O    |
+| nvim-treesitter-context |   O    |    X     |     O      |        |         |   X    |        |    X    |
+| neotest                 |   X    |    X     |     O      |   X    |    X    |   X    |   X    |    X    |
+| nvim-tree               |   O    |    O     |     O      |   O    |    O    |   O    |   O    |    O    |
+| neotree                 |   O    |    O     |     O      |        |         |   X    |   X    |    X    |
+| neogit                  |   O    |    O     |     O      |   X    |    X    |   X    |   O    |    O    |
 | checked                 | 240102 |  240102  |   240102   | 240102 | 240102  | 240102 | 240102 | 240102  |

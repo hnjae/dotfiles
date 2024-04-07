@@ -1,5 +1,6 @@
 local dir_ = vim.fn.getenv("HOME") .. "/Projects/asciidoc-wiki.nvim"
 
+-- vim.api.nvim_create_autocmd(name, {})
 ---@type LazySpec
 return {
   dir = dir_,

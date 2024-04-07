@@ -17,11 +17,29 @@ return {
   },
   opts = {
     use_default_keymaps = false,
+    default_file_explorer = false, -- replace netrw
+    delete_to_trash = true,
+    columns = {
+      {
+        [1] = "icon",
+        directory = require("val").icons.directory,
+      },
+      {
+        [1] = "mtime",
+        format = "%Y-%m-%d %H:%M:%S",
+      },
+      -- icon = {
+      --   directory = "1",
+      -- },
+    },
     keymaps = {
       -- match telescope
       ["<C-v>"] = "actions.select_vsplit",
       ["<C-x>"] = "actions.select_split",
       ["<C-t>"] = "actions.select_tab",
+
+      -- match netrw
+      ["gh"] = "actions.toggle_hidden",
 
       -- defaults
       ["g?"] = "actions.show_help",
@@ -29,13 +47,12 @@ return {
       ["<C-p>"] = "actions.preview",
       ["<C-c>"] = "actions.close",
       ["<C-l>"] = "actions.refresh",
-      ["-"] = "actions.parent",
+      -- ["-"] = "actions.parent",
       ["_"] = "actions.open_cwd",
       ["`"] = "actions.cd",
       ["~"] = "actions.tcd",
       ["gs"] = "actions.change_sort",
       ["gx"] = "actions.open_external",
-      ["g."] = "actions.toggle_hidden",
       ["g\\"] = "actions.toggle_trash",
     },
   },

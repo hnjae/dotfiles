@@ -19,5 +19,5 @@ vim.opt.cindent = false
 vim.opt.autoindent = false
 
 -- set smartindent: automatically inserts one extra level of indentation in some case.
--- set cindent		: is more customizable, but also more strict when it comes to syntax.
+-- set cindent    : is more customizable, but also more strict when it comes to syntax.
 -- set autoindent : does nothing more than copy the indentation from the previous line

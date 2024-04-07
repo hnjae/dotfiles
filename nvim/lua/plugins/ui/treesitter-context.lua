@@ -2,6 +2,7 @@
 return {
   [1] = "nvim-treesitter/nvim-treesitter-context",
   lazy = true,
+  cond = require("utils").is_treesitter,
   event = { "VeryLazy" },
   dependencies = {
     [1] = "nvim-treesitter/nvim-treesitter",

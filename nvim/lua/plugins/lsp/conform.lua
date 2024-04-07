@@ -6,9 +6,10 @@ return {
   cmd = { "ConformInfo" },
   opts = function()
     local ret = {
+      lsp_fallback = false,
       -- Define your formatters
       formatters_by_ft = {},
-      format_on_save = { timeout_ms = 500, lsp_fallback = true },
+      format_on_save = { timeout_ms = 500 },
     }
 
     for _, lang_conf in ipairs(require("plugins.lsp.utils.get_lang_confs")()) do
@@ -21,6 +22,7 @@ return {
   end,
   init = function()
     -- If you want the formatexpr, here is the place to set it
+    -- 이게 == 대체할 것 (아마도)
     vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 
     vim.api.nvim_create_user_command("Format", function()
@@ -30,12 +32,6 @@ return {
   config = function(_, opts)
     require("conform").setup(opts)
 
-    -- vim.keymap.set(
-    --   "n",
-    --   "==",
-    --   function() end,
-    --   { desc = "conform-format", buffer =  }
-    -- )
     for _, lang_conf in ipairs(require("plugins.lsp.utils.get_lang_confs")()) do
       if lang_conf.post_conform_setup then
         lang_conf.post_conform_setup()

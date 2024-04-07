@@ -1,3 +1,5 @@
+-- TODO: map keys using lazy-key-spec (which has filetype option) <2024-03-20>
+---@type LazySpec
 return {
   [1] = "lervag/vimtex",
   lazy = true,
@@ -63,7 +65,7 @@ return {
       ["w"] = { "<cmd>VimtexCountWords<CR>", "count-words" },
       ["l"] = { "<cmd>VimtexCountLetters<CR>", "count-letters" },
     }
-    local wk_opts = { buffer = 0, prefix = require("val").prefix.lang }
+    local wk_opts = { buffer = 0, prefix = require("val").prefix.buffer }
     vim.api.nvim_create_autocmd({
       "BufRead",
       "BufNewFile",

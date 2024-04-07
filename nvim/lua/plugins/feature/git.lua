@@ -1,9 +1,11 @@
--- NOTE: fugitive does not support git@github.com: syntax <2024-01-02>
 local val = require("val")
 
 ---@type LazySpec
 return {
   [1] = "tpope/vim-fugitive",
+  dependencies = {
+    { [1] = "tpope/vim-rhubarb" },
+  },
   lazy = true,
   enabled = true,
   cmd = {
@@ -32,6 +34,7 @@ return {
     "GRemove",
     "GUnlink",
     "GBrowse",
+    "Browse",
   },
   keys = {
     {
@@ -46,6 +49,7 @@ return {
       desc = "commit",
     },
   },
+  init = function() end,
   config = function()
     -- remove(delete) all deprecated commands
     for _, command in pairs({

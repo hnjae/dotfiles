@@ -29,10 +29,10 @@ vim.opt.visualbell = true -- use visual bell
 
 vim.opt.history = 1000
 
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldmethod = "syntax"
 vim.opt.foldenable = false -- disable folding at startup
 -- vim.opt.foldlevelstart = 10 -- default -1
+vim.opt.foldlevel = 999 -- default 0 (fold-all)
 
 -- TODO: fish가 아닐때 vim.env.SHELL 값쓰기.  <2022-04-14, Hyunjae Kim>
 vim.opt.shell = "bash"

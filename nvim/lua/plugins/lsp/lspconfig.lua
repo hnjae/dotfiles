@@ -9,15 +9,17 @@ return {
   event = { "BufRead", "BufNewFile" },
   dependencies = {
     "folke/neodev.nvim",
-    "tamago324/nlsp-settings.nvim",
-
+    "folke/neoconf.nvim",
     {
       -- shows popup window about parameter/func
       -- NOTE: activated when on_attach() happens / or call .setup() in init.lua
-      -- use folkey/noice.nvim instead
+      -- can be replaced by noice (or partial cmp-nvim-lsp-signature-help)
+      -- either does not open popup permanently while typing
       [1] = "ray-x/lsp_signature.nvim",
       lazy = true,
-      opts = {},
+      opts = {
+        -- fix_pos = false,
+      },
       module = false,
       enabled = false,
     },
@@ -28,22 +30,24 @@ return {
     -------------------------------------
     -- capabilities
     -------------------------------------
+    -- local global_capabilities = {}
+
     local global_capabilities = vim.lsp.protocol.make_client_capabilities()
-    global_capabilities.textDocument.completion.completionItem.snippetSupport =
-      true
     local status_cmp_nvim_lsp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
     if status_cmp_nvim_lsp then
       -- capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
-      global_capabilities = vim.tbl_extend(
-        "keep",
-        global_capabilities or {},
-        cmp_nvim_lsp.default_capabilities()
+      global_capabilities = vim.tbl_deep_extend(
+        "force",
+        global_capabilities,
+        cmp_nvim_lsp.default_capabilities() -- includes snippet support
       )
     end
 
     -------------------------------------
     --
     -------------------------------------
+    -- lspconfig.util.default_config.capabilities = global_capabilities
+
     lspconfig.util.default_config =
       vim.tbl_extend("force", lspconfig.util.default_config, {
         capabilities = global_capabilities,
@@ -67,7 +71,7 @@ return {
       vim.fn.sort(
         vim.fn.globpath(
           vim.fn.stdpath("config"),
-          "lua/plugins/lsp/lang/*.lua",
+          "lua/plugins/lsp/configs/*.lua",
           false,
           true
         )
@@ -77,7 +81,7 @@ return {
     local lang_conf
     for _, file in pairs(paths) do
       lang_conf =
-        require("plugins.lsp.lang." .. file:match("[^/\\]+$"):sub(1, -5))
+        require("plugins.lsp.configs." .. file:match("[^/\\]+$"):sub(1, -5))
       if lang_conf.setup_lspconfig then
         lang_conf.setup_lspconfig(lspconfig, opts)
       end

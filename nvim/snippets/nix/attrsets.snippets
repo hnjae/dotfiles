@@ -1,0 +1,12 @@
+snippet la "lib.attrsets"
+	lib.attrsets.$0
+snippet lahasAttr "builtins.hasAttr :: String -> AttrSet -> Bool"
+	builtins.hasAttr ${1:attr} ${0:attrset}
+snippet lafilter "lib.attrsets.filterAttrs :: (String -> Any -> Bool) -> AttrSet -> AttrSet"
+	filterAttrs (n: v: $1) ${0:AttrSets}
+snippet lamergeAttrsList "lib.attrsets.mergeAttrsList :: [ Attrs ] -> Attrs"
+	mergeAttrsList [ ${0:Attrs} ]
+snippet laoptionalAttrs "lib.attrsets.optionalAttrs :: Bool -> AttrSet -> AttrSet"
+	optionalAttrs ${1:bool} ${0:AttrSet}
+snippet lagenAttrs "lib.attrsets.genAttrs :: [ String ] -> (String -> Any) -> AttrSet"
+	genAttrs [ "foo" "bar" ] (name: "x_" + name)

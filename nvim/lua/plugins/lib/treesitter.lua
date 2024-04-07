@@ -98,13 +98,7 @@ return {
   [1] = "nvim-treesitter/nvim-treesitter",
   build = "<cmd>TSUpdate<CR>",
   lazy = false,
-  enabled = true,
-  dependencies = {
-    -- {
-    --   [1] = "IndianBoy42/tree-sitter-just",
-    --   opts = {},
-    -- },
-  },
+  enabled = require("utils").is_treesitter,
   event = { "VeryLazy" },
   -- event = { "BufReadPost", "BufNewFile" },
   opts = treesitter_opts,
@@ -129,5 +123,8 @@ return {
       },
       maintainers = { "@IndianBoy42" },
     }
+
+    vim.opt.foldmethod = "expr"
+    vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
   end,
 }

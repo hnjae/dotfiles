@@ -2,7 +2,8 @@
 return {
   [1] = "windwp/nvim-ts-autotag",
   lazy = true,
-  enabled = true,
+  cond = require("utils").is_treesitter,
+  event = { "VeryLazy" },
   dependencies = {
     "nvim-treesitter/nvim-treesitter",
   },

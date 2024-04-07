@@ -2,6 +2,7 @@
 return {
   [1] = "nvim-treesitter/nvim-treesitter-textobjects",
   lazy = true,
+  cond = require("utils").is_treesitter,
   event = { "VeryLazy" },
   dependencies = {
     "nvim-treesitter/nvim-treesitter",
@@ -12,6 +13,22 @@ return {
         enable = true,
         lookahead = true,
         keymaps = {
+          -- NOTE:  <2024-04-02>
+          --[[
+          reserved keywords:
+          b: ()
+          ( or ): ()
+          B: {}
+          { or }: {}
+          < or >: <>
+          [ or ]: []
+          p: paragraph
+          s: sentence
+          t: tag
+          w: word
+          W: WORD
+          ]]
+          --
           --
           ["af"] = {
             query = "@function.outer",
@@ -29,10 +46,12 @@ return {
             query = "@loop.inner",
             desc = "@loop.inner",
           },
+
           ["in"] = {
             query = "@number.inner",
             desc = "@number.inner",
           },
+
           ["im"] = {
             query = "@parameter.inner",
             desc = "@parameter.inner",
@@ -62,7 +81,26 @@ return {
           --   desc = "@conditional.inner",
           -- },
 
-          -- rust, typescript, python, lua, go, bash, fish, yaml
+          ["aC"] = {
+            query = "@call.outer",
+            desc = "@call.outer",
+          },
+          ["iC"] = {
+            query = "@call.inner",
+            desc = "@call.inner",
+          },
+
+          -- go, js, tex, lua, py, rs, ts
+          ["ak"] = {
+            query = "@block.outer",
+            desc = "@block.outer",
+          },
+          ["ik"] = {
+            query = "@block.inner",
+            desc = "@block.inner",
+          },
+
+          -- sh, css, fish, go, js, lua, py, rs, ts, yaml
           ["aa"] = {
             query = "@assignment.outer",
             desc = "@assignment.outer",
@@ -78,6 +116,12 @@ return {
           ["ra"] = {
             query = "@assignment.rhs",
             desc = "@assignment.rhs",
+          },
+
+          -- override sentence
+          ["as"] = {
+            query = "@statement.outer",
+            desc = "@statement.outer",
           },
         },
         -- You can choose the select mode (default is charwise 'v')

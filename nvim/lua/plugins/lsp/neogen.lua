@@ -1,3 +1,5 @@
+-- annotation generator
+
 ---@type LazySpec
 return {
   [1] = "danymat/neogen",
