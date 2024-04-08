@@ -2,6 +2,56 @@ local bufname_allowlist = {
   messages = true,
 }
 
+local filter_single_win = function(window_id, filters)
+  local bufnr = vim.api.nvim_win_get_buf(window_id)
+  local win_bo = vim.bo[bufnr]
+
+  if bufname_allowlist[vim.fn.bufname(bufnr)] then
+    return true
+  end
+
+  -- Check filetype against filter
+  if
+    filters.bo
+    and filters.bo.filetype
+    and vim.tbl_contains(filters.bo.filetype, win_bo.filetype)
+  then
+    return false
+  end
+
+  -- Check buftype against filter
+  if
+    filters.bo
+    and filters.bo.buftype
+    and vim.tbl_contains(filters.bo.buftype, win_bo.buftype)
+  then
+    return false
+  end
+
+  if
+    not filters.include_current_win
+    and window_id == vim.api.nvim_get_current_win()
+  then
+    return false
+  end
+
+  -- if win_bo.buftype == "nofile" and win_bo.filetype == "" then
+  --   -- nofile 통째로 filter 하면, 각종 sidebar 류 작동 안함
+  --   return false
+  -- end
+
+  -- if
+  --   win_bo.buftype == "nofile"
+  --   and win_bo.filetype ~= ""
+  --   and vim.b[bufnr].did_ftplugin ~= nil
+  -- then
+  --   -- e.g. preview pane of LspSaga's outline
+  --   return false
+  -- end
+
+  return true
+end
+
 -- vim.api.nvim_set_keymap()
 ---@type LazySpec
 return {
@@ -22,57 +72,10 @@ return {
     -- },
     filter_func = function(window_ids, filters)
       local filtered_window_ids = {}
-      for _, win_id in ipairs(window_ids) do
-        local bufnr = vim.api.nvim_win_get_buf(win_id)
-        local win_bo = vim.bo[bufnr]
-
-        if bufname_allowlist[vim.fn.bufname(bufnr)] then
-          table.insert(filtered_window_ids, win_id)
-          ::continue::
+      for _, window_id in ipairs(window_ids) do
+        if filter_single_win(window_id, filters) then
+          table.insert(filtered_window_ids, window_id)
         end
-
-        if win_bo.buftype == "nofile" and win_bo.filetype == "" then
-          -- nofile 통째로 filter 하면, 각종 sidebar 류 작동 안함
-          goto continue
-        end
-
-        if
-          win_bo.buftype == "nofile"
-          and win_bo.filetype ~= ""
-          and vim.b[bufnr].did_ftplugin ~= nil
-        then
-          -- e.g. preview pane of LspSaga's outline
-          goto continue
-        end
-
-        if filters.bo then
-          -- Check filetype against filter
-          if
-            filters.bo.filetype
-            and vim.tbl_contains(filters.bo.filetype, win_bo.filetype)
-          then
-            goto continue
-          end
-
-          -- Check buftype against filter
-          if
-            filters.bo.buftype
-            and vim.tbl_contains(filters.bo.buftype, win_bo.buftype)
-          then
-            goto continue
-          end
-        end
-
-        -- Include or exclude the current window based on the filter
-        if
-          not filters.include_current_win
-          and win_id == vim.api.nvim_get_current_win()
-        then
-          goto continue
-        end
-
-        table.insert(filtered_window_ids, win_id)
-        ::continue::
       end
 
       return filtered_window_ids
@@ -93,7 +96,7 @@ return {
         buftype = {
           "picker",
           "prompt",
-          "acwrite",
+          -- "acwrite", -- e.g. oil
         },
       },
     },
@@ -148,32 +151,3 @@ return {
     require(plugin.main).setup(opts)
   end,
 }
-
--- for debugging
--- filter_func = function(window_ids, filters)
---   require("notify").dismiss()
---   local ret = {}
---   for _, winid in pairs(window_ids) do
---     local bufid = vim.api.nvim_win_get_buf(winid)
---     if bufid == nil then
---       goto continue
---     end
---
---     if vim.api.nvim_buf_get_option(bufid, "filetype") == "noice" then
---       goto continue
---     end
---     if vim.api.nvim_buf_get_option(bufid, "filetype") == "notify" then
---       goto continue
---     end
---     ret[winid] = {
---       bufid = bufid,
---       name = vim.api.nvim_buf_get_name(bufid),
---       filetype = vim.api.nvim_buf_get_option(bufid, "filetype"),
---       buftype = vim.api.nvim_buf_get_option(bufid, "buftype"),
---     }
---     ::continue::
---   end
---
---   vim.notify(vim.inspect(ret))
---   return window_ids
--- end,
