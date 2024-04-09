@@ -8,6 +8,7 @@ M.setup = function()
     for _, winnr in ipairs(vim.api.nvim_list_wins()) do
       local bufnr = vim.api.nvim_win_get_buf(winnr)
       msg[winnr] = {}
+
       for _, option in ipairs({ "buftype", "filetype" }) do
         msg[winnr][option] = vim.api.nvim_buf_get_option(bufnr, option)
       end

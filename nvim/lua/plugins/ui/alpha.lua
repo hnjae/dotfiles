@@ -4,27 +4,16 @@ local map_keyword = require("val").map_keyword
 local keyword_alpha = "p"
 return {
   [1] = "goolord/alpha-nvim",
-  lazy = true,
-  event = { "VimEnter" },
+  lazy = false,
+  event = { "VeryLazy" },
   dependencies = { "nvim-tree/nvim-web-devicons" },
-  opts = function()
-    return vim.tbl_deep_extend(
-      "force",
-      -- require("alpha.themes.dashboard").config,
-      require("alpha.themes.startify").config,
-      {
-        nvim_web_devicons = {
-          enabled = require("utils").enable_icon,
-        },
-      }
-    )
-  end,
   main = "alpha",
-  config = function(plugin, opts)
+  config = function(plugin, _)
     local startify = require("alpha.themes.startify")
-    -- local devicons = require("nvim-web-devicons")
+    local enable_icon = require("utils").enable_icon
 
-    local enable_icon = opts.nvim_web_devicons.enabled
+    startify.nvim_web_devicons.enabled = enable_icon
+
     startify.section.header.val = { "Hi!" }
     startify.section.top_buttons.val = {
       startify.button("e", enable_icon and string.format(
@@ -41,16 +30,11 @@ return {
       ),
     }
 
-    require(plugin.main).setup(opts)
-
-    -- 아래가 작동안해서 임시로 추가
-    -- local m = {}
-    -- m[prefix.new .. keyword_alpha] = { name = "+alpha" }
-    -- require("which-key").register(m)
+    -- require(plugin.main).setup(require("alpha.themes.startify").config)
+    require(plugin.main).setup(startify.config)
   end,
   keys = {
     {
-      -- TODO: 이거 왜 작동 안해? <2024-02-01>
       [1] = prefix.new .. keyword_alpha,
       [2] = nil,
       desc = "+alpha",

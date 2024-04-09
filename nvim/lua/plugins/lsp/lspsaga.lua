@@ -30,6 +30,7 @@ local M = {
         open_cmd = "!" .. utils.get_browser_cmd(),
       },
       symbol_in_winbar = {
+        -- alternatives https://github.com/utilyre/barbecue.nvim
         -- Breadcrumbs
         enable = not utils.is_plugin("lualine.nvim"),
         delay = 500, -- default: 300
@@ -82,8 +83,8 @@ local M = {
       ret.ui = {
         devicons = false,
         code_action = "!",
-        actionfix = "!F", -- nf-cod-lightbulb_autofix
-        imp_sign = "I", -- nf-cod-arrow_circle_down
+        actionfix = "!F",
+        imp_sign = "I",
       }
     end
     return ret

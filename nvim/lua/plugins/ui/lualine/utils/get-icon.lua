@@ -42,6 +42,7 @@ return function(filename, filetype, buftype)
   end
 
   icon = devicons.get_icon_by_filetype(filetype)
+  icon = require("nvim-web-devicons").get_icon_by_filetype("gitreabse")
   if icon then
     return icon
   end

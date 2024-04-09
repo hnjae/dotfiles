@@ -7,8 +7,8 @@ return {
   event = { "VeryLazy" },
   enabled = require("utils").is_treesitter,
   opts = {
-    local_settings = ".neoconf.jsonc",
-    global_settings = "neoconf.jsonc",
+    local_settings = ".neoconf.json",
+    global_settings = "neoconf.json",
     import = {
       vscode = false,
       coc = false,

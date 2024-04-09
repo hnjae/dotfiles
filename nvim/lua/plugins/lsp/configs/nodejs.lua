@@ -27,8 +27,8 @@ M.setup_lspconfig = function(lspconfig, opts)
     ["typescript-language-server"] = {
       "tsserver",
       opts,
-      -- vim.tbl_deep_extend("force", opts, { }, }),
     },
+
     ["vscode-eslint-language-server"] = {
       "eslint",
       vim.tbl_deep_extend("force", opts, {
@@ -46,10 +46,12 @@ M.setup_lspconfig = function(lspconfig, opts)
         })),
       }),
     },
+    ["tailwindcss-language-server"] = { "tailwindcss", opts },
+
     ["vscode-json-language-server"] = { "jsonls", opts },
     ["vscode-css-language-server"] = { "cssls", opts },
     ["vscode-html-language-server"] = { "html", opts },
-    ["tailwindcss-language-server"] = { "tailwindcss", opts },
+
     -- ["vscode-markdown-language-server"] = "",
   }
   for exe, obj in pairs(mapping) do

@@ -50,7 +50,7 @@ return function()
       -- },
     }
     local keymap_opts =
-      { desc = (is_lspsaga and "lspsaga-" or "lsp-") .. map[1] }
+      { desc = (is_lspsaga and "lspsaga-" or "lsp-") .. map[3] }
     local prev_func, next_func
     if is_lspsaga then
       prev_func = function()

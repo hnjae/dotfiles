@@ -2,66 +2,63 @@
 return {
   [1] = "nvim-tree/nvim-web-devicons",
   lazy = true,
-  -- cond = require("utils").enable_icon,
   opts = {
     default = true,
-    override = {
-      default_icon = require("val").icons.file,
-    },
-    override_by_filename = {},
-    override_by_extension = {},
+    -- override = {},
+    -- override_by_filename = {},
+    -- override_by_extension = {},
   },
   config = function(_, opts)
     local devicons = require("nvim-web-devicons")
     devicons.setup(opts)
 
-    local icons = {
-      snippets = { icon = "", name = "Snippets" }, -- nf-cod-symbol_snippet
-      snippet = { icon = "", name = "Snippets" }, -- nf-cod-symbol_snippet
-      -- snippets = { icon = "", name = "Snippets" }, -- nf-oct-code
-      -- nf-oct-paperclip
-      cheat = { icon = "", name = "Cheat" },
+    local icon, color, cterm_color
+
+    _, color, cterm_color =
+      devicons.get_icon_colors(nil, nil, { default = true })
+    devicons.set_default_icon(require("val").icons.file, color, cterm_color)
+
+    -- key= filename or extension (not filetype)
+    local icons = {}
+
+    -- key= filename or extension (not filetype)
+    local icon_map = {
+      -- stylua: ignore start
+      -- extensions
+      snippets = { overrides = { icon = "", name = "Snippets" } }, -- nf-cod-symbol_snippet
+      snippet  = { overrides = { icon = "", name = "Snippets" } }, -- nf-cod-symbol_snippet
+      cheat    = { overrides = { icon = "", name = "Cheat" } }, -- nf-oct-paperclip
+
+      kdl  = { base = "yaml",     overrides = { name = "Kdl" } }, -- https://kdl.dev/
+      toml = { base = "yaml",     overrides = { name = "Toml" } },
+      adoc = { base = "markdown", overrides = { name = "AsciiDoc", icon = "󱇗" }, }, -- nf-md-note_text_outline
+
+      -- filenames
+      justfile            = { base = "cmake", overrides = { name = "Just" } },
+      [".envrc"]          = { base = "cmake", overrides = { name = "Direnv" } },
+      ["git-rebase-todo"] = { base = "git",   overrides = { name = "GitRebase" } },
+      -- stylua: ignore end
     }
 
-    local icon, color, cterm_color = devicons.get_icon_colors("cmake")
-    icons.justfile = {
-      icon = icon,
-      color = color,
-      cterm_color = cterm_color,
-      name = "Just",
-    }
-    icons[".envrc"] = {
-      icon = icon,
-      color = color,
-      cterm_color = cterm_color,
-      name = "Direnv",
-    }
-
-    icon, color, cterm_color = devicons.get_icon_colors("", "yaml")
-    icons.kdl = {
-      -- https://kdl.dev/
-      icon = icon,
-      color = color,
-      cterm_color = cterm_color,
-      name = "Kdl",
-    }
-
-    icon, color, cterm_color = devicons.get_icon_colors("", "yaml")
-    icons.toml = {
-      icon = icon,
-      color = color,
-      cterm_color = cterm_color,
-      name = "Toml",
-    }
-
-    _, color, cterm_color = devicons.get_icon_colors("", "markdown")
-    icons.adoc = {
-      icon = "󱇗", -- nf-md-note_text_outline
-      color = color,
-      cterm_color = cterm_color,
-      name = "AsciiDoc",
-    }
+    for extension, val in pairs(icon_map) do
+      if val.base then
+        -- if type(val.base) == "table" then
+        --   icon, color, cterm_color = devicons.get_icon_colors(unpack(val.base))
+        icon, color, cterm_color = devicons.get_icon_colors(val.base)
+        icons[extension] = vim.tbl_extend("force", {
+          icon = icon,
+          color = color,
+          cterm_color = cterm_color,
+        }, val.overrides)
+      else
+        icons[extension] = val.overrides
+      end
+    end
 
     devicons.set_icon(icons)
   end,
 }
+
+-- print default icon
+-- print(require("nvim-web-devicons").get_icon("rstsr", "srtst", {default=true}))
+-- print(require("nvim-web-devicons").get_icon_colors("markdown"))

@@ -24,7 +24,7 @@ return {
         Method = "",
         -- Function = "",
         -- Constructor = "",
-        -- Field = "",
+        Field = "",
         -- Variable = "",
         -- Class = "",
         -- Interface = "",
@@ -40,7 +40,7 @@ return {
         -- Reference = "",
         -- Folder = "",
         -- EnumMember = "",
-        -- Constant = "",
+        Constant = "",
         -- Struct = "",
         -- Event = "",
         -- Operator = "",
@@ -53,6 +53,8 @@ return {
         --  nf-cod-globe
         --  nf-cod-heart
         --  nf-cod-layout
+
+        Conceal = icons.Keyword,
 
         --
         File = "", -- nf-cod-file
@@ -82,15 +84,24 @@ return {
         Type = icons.TypeParameter,
         FunctionCall = icons.Function,
         Comment = "", -- nf-cod-comment
+
         KeywordConditional = icons.Keyword,
         KeywordRepeat = icons.Keyword,
         KeywordFunction = icons.Keyword,
         KeywordDirective = icons.Keyword,
         KeywordReturn = icons.Keyword,
-        Label = "󰌖", -- nf-md-label_outline
+        KeywordImport = icons.Keyword,
+        KeywordConditionalTernary = icons.Keyword,
+
         None = icons.Null,
-        PunctuationSpecial = "", -- nf-cod-quote
+        ConstantBuiltin = icons.Constant,
         VariableParameter = icons.Parameter,
+        VariableMember = icons.Field,
+
+        Label = "󰌖", -- nf-md-label_outline
+        PunctuationSpecial = "", -- nf-cod-quote
+        TagDelimiter = icons.Keyword,
+
         MarkupLink = "", -- nf-cod-link
         MarkupRaw = "", -- nf-cod-markdown
         MarkupRawBlock = "", -- nf-cod-markdown
@@ -101,8 +112,8 @@ return {
 
         -- Outline.nvim
         StaticMethod = icons.method,
-        Component = "",
-        Fragment = "",
+        -- Component = "",
+        -- Fragment = "",
       }),
     }
   end,

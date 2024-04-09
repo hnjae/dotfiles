@@ -130,7 +130,8 @@ return {
       path = "[Path]",
       -- lsps
       nvim_lsp = "[LSP]",
-      nvim_lsp_document_symbol = "[LSP+D]",
+      nvim_lsp_document_symbol = "[DOCUMENT-SYMBOL]",
+      nvim_lsp_signature_help = "[SIGNATURE]",
       nvim_lua = "[NVIM_LUA]",
       --
       cmdline = "[CMDLINE]",

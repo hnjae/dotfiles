@@ -9,7 +9,7 @@ return {
       lsp_fallback = false,
       -- Define your formatters
       formatters_by_ft = {},
-      format_on_save = { timeout_ms = 500 },
+      format_on_save = { timeout_ms = 1000 },
     }
 
     for _, lang_conf in ipairs(require("plugins.lsp.utils.get_lang_confs")()) do

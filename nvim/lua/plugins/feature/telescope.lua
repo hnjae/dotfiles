@@ -159,6 +159,7 @@ return {
         func = function()
           t_builtin.buffers({
             sort_mru = true,
+            show_all_buffers = true,
             cwd = find_project_root(get_cwd(vim.bo.filetype)),
           })
         end,

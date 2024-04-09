@@ -2,39 +2,6 @@ local utils = require("utils")
 local get_icon = require("plugins.ui.lualine.utils.get-icon")
 
 local ft_data = require("plugins.ui.lualine.utils.ft-data")
--- local ft_names = {}
--- for key, val in pairs(fts) do
--- end
-
--- local ft_names = {
---   --
---   checkhealth = "CheckHealth",
---   qf = "QuickFix",
---   netrw = "Netrw",
---   --
---   toggleterm = "ToggleTerm",
---   TelescopePrompt = "Telescope",
---   dashboard = "Dashboard",
---   packer = "Packer",
---   fzf = "FZF",
---   alpha = "Alpha",
---   -- sidebar
---   oil = "Oil",
---   tagbar = "Tagbar",
---   Outline = "Outline",
---   NvimTree = "NvimTree",
---   ["neo-tree"] = "NeoTree",
---   -- lspsaga
---   sagafinder = "SagaFinder",
---   sagaoutline = "SagaOutline",
---   -- popup
---   saga_codeaction = "Saga CodeAction",
---   sagarename = "SagaRename",
---   ["neo-tree-popup"] = "NeoTree Popup",
---   noice = "Noice",
---   --
---   ["chatgpt-input"] = "ChatGPT Input",
--- }
 
 ---@type fun(name: string, context: table): string
 return function(name, context)
