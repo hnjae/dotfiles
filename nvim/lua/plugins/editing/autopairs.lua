@@ -1,10 +1,17 @@
+-- alternative: "jiangmiao/auto-pairs"
+
 ---@type LazySpec
 local M = {
   [1] = "windwp/nvim-autopairs",
   lazy = true,
   event = { "InsertEnter" },
-  enabled = true, -- "jiangmiao/auto-pairs" 가 조금더 신뢰할 만 한 것 같다.
-  dependencies = {},
+  enabled = true,
+  dependencies = {
+    {
+      [1] = "nvim-treesitter/nvim-treesitter",
+      optional = true,
+    },
+  },
   opts = {
     -- disable_filetype = { "TelescopePrompt", "spectre_panel" },
     disable_in_macro = true, -- disable when recording or executing a macro
@@ -43,10 +50,5 @@ local M = {
     -- nvim_autopairs.remove_rule("`")
   end,
 }
-
-if require("utils").is_treesitter then
-  ---@diagnostic disable-next-line: param-type-mismatch
-  table.insert(M.dependencies, "nvim-treesitter/nvim-treesitter")
-end
 
 return M

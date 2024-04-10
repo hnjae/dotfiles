@@ -65,50 +65,6 @@ return {
     vim.g.tagbar_show_data_type = 1
     vim.g.tagbar_help_visiblity = 1
     vim.g.tagbar_show_balloon = 1
-
-    vim.g.tagbar_type_asciidoctor = {
-      ["sro"] = '""',
-      ["sort"] = 0,
-      ["ctagstype"] = "asciidoc",
-      ["regex"] = {
-        "/^(={1,6})[[:space:]\\t]+([^=]+)/\\1 \\2/h,header,AsciiDoctor Headers/",
-      },
-      ["kinds"] = {
-        "h:headings",
-      },
-    }
-
-    -- vim.g.tagbar_type_asciidoctor = {
-    --   ["sro"] = '""',
-    --   ["sort"] = 0,
-    --   ["ctagstype"] = "asciidoc",
-    --   ['kinds'] = {
-    --     'c:chapter:0:1',
-    --     's:section:0:1',
-    --     'S:subsection:0:1',
-    --     't:subsubsection:0:1',
-    --     'T:paragraph:0:1',
-    --     'u:subparagraph:0:1',
-    --     -- 'a:anchor:0:1',
-    --   },
-    -- ['kind2scope'] = {
-    --   ['c'] = 'chapter',
-    --   ['s'] = 'section',
-    --   ['S'] = 'subsection',
-    --   ['t'] = 'subsubsection',
-    --   ['T'] = 'l4subsection',
-    --   ['u'] = 'l5subsection',
-    --   -- ['a'] = 'anchor',
-    -- },
-    -- ['scope2kind'] = {
-    --   ['chapter']       = 'c',
-    --   ['section']       = 's',
-    --   ['subsection']    = 'S',
-    --   ['subsubsection'] = 't',
-    --   ['l4subsection']  = 'T',
-    --   ['l5subsection']  = 'u',
-    --   -- ['anchor']        = 'a',
-    -- },
-    -- }
   end,
+  config = function() end,
 }

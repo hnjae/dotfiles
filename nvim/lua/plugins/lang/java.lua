@@ -1,5 +1,14 @@
+require("state.treesitter-langs"):add("java")
+
 ---@type LazySpec
 return {
+  {
+    [1] = "nvim-treesitter/nvim-treesitter",
+    optional = true,
+    opts = function()
+      require("state.treesitter-langs"):add("java")
+    end,
+  },
   -- {
   --   "mfussenegger/nvim-jdtls",
   --   enable = false and vim.fn.executable("jdt-language-server") == 1,

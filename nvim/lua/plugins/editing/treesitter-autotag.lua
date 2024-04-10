@@ -5,7 +5,10 @@ return {
   cond = require("utils").is_treesitter,
   event = { "VeryLazy" },
   dependencies = {
-    "nvim-treesitter/nvim-treesitter",
+    {
+      [1] = "nvim-treesitter/nvim-treesitter",
+      optional = true,
+    },
   },
   ft = {
     "astro",

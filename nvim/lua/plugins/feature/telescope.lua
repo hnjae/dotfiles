@@ -6,11 +6,11 @@ return {
   enabled = true,
   dependencies = {
     "nvim-lua/plenary.nvim",
-    {
-      [1] = "nvim-telescope/telescope-fzf-native.nvim",
-      build = "make",
-      enabled = vim.fn.executable("make") == 1 and vim.fn.executable("cc") == 1,
-    },
+    -- {
+    --   [1] = "nvim-telescope/telescope-fzf-native.nvim",
+    --   build = "make",
+    --   enabled = vim.fn.executable("make") == 1 and vim.fn.executable("cc") == 1,
+    -- },
     {
       -- replace vim.ui.select with telescope
       [1] = "nvim-telescope/telescope-ui-select.nvim",

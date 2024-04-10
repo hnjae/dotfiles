@@ -6,7 +6,10 @@ return {
   branch = "v3.x",
   dependencies = {
     "nvim-lua/plenary.nvim",
-    "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+    {
+      [1] = "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      optional = true,
+    },
     "MunifTanjim/nui.nvim",
   },
   lazy = true,

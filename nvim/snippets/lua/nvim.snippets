@@ -4,3 +4,7 @@ snippet contains obj in table
 	vim.tbl_contains($0)
 snippet getft get ft
 	vim.api.nvim_buf_get_option(bufid, "filetype"),
+snippet packpathi "package_path of init.lua"
+	local package_path = (...)
+snippet packpath "package_path of file"
+	local package_path = (...):match("(.-)[^%.]+$")

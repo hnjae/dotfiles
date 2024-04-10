@@ -31,7 +31,7 @@ return {
   },
   dependencies = {
     "onsails/lspkind.nvim",
-    -- "neovim/nvim-lspconfig",
+    "neovim/nvim-lspconfig",
   },
   opts = {
     symbols = {

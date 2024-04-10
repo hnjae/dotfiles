@@ -1,4 +1,5 @@
 -- vim:foldmethod=marker:foldlevel=0:foldenable:tw=0
+local package_path = (...):match("(.-)[^%.]+$")
 
 local is_setup = false
 return function()
@@ -7,16 +8,16 @@ return function()
   end
 
   is_setup = true
-  local prefix = require("val").prefix
-  local map_keyword = require("val").map_keyword
+  local prefix = require(package_path .. ".prefix")
+  local map_keyword = require(package_path .. ".map-keyword")
   local utils = require("utils")
 
-  local plugins = require("lazy.core.config").plugins
+  -- local plugins = require("lazy.core.config").plugins
   -- local is_lspsaga, _ = pcall(require, "lspsaga")
   local is_lspsaga = utils.is_plugin("lspsaga.nvim")
   local is_wk, wk = pcall(require, "which-key")
 
-  vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "lsp-hover" })
+  -- vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "lsp-hover" })
   for _, map in ipairs({
     {
       [1] = "K",
@@ -41,14 +42,17 @@ return function()
     { "i", "INFO", "information" },
     { "w", "WARN", "warning" },
     { "r", "ERROR", "error" },
+    { [1] = "d", [3] = "diagnostic" },
   }) do
-    local func_opts = {
-      severity = vim.diagnostic.severity[map[2]],
-      -- severity = {
-      --   min = vim.diagnostic.severity[type[2]],
-      --   max = vim.diagnostic.severity[type[2]],
-      -- },
-    }
+    local func_opts = map[2]
+        and {
+          severity = vim.diagnostic.severity[map[2]],
+          -- severity = {
+          --   min = vim.diagnostic.severity[type[2]],
+          --   max = vim.diagnostic.severity[type[2]],
+          -- },
+        }
+      or {}
     local keymap_opts =
       { desc = (is_lspsaga and "lspsaga-" or "lsp-") .. map[3] }
     local prev_func, next_func
@@ -97,6 +101,16 @@ return function()
       end,
       -- NOTE: xmap is vmap without selection mode <2023-07-20>
       mode = { "x" },
+    },
+    {
+      [1] = "s",
+      [2] = "code-lens",
+      fallback = vim.lsp.codelens.run,
+    },
+    {
+      [1] = "S",
+      [2] = "code-lens refresh",
+      fallback = vim.lsp.codelens.refresh,
     },
 
     -- stylua: ignore start

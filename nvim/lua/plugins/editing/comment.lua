@@ -36,11 +36,9 @@ return {
     }
 
     if is_treesitter then
-      return vim.tbl_extend("force", ret, {
-        pre_hook = require(
-          "ts_context_commentstring.integrations.comment_nvim"
-        ).create_pre_hook(),
-      })
+      ret.pre_hook = require(
+        "ts_context_commentstring.integrations.comment_nvim"
+      ).create_pre_hook()
     end
 
     return ret
