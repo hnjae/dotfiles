@@ -44,7 +44,7 @@ return {
           handlebars = { formatter },
 
           markdown = { formatter },
-          yaml = { formatter },
+          -- yaml = { formatter },
           ["markdown.mdx"] = { formatter },
         }
       end

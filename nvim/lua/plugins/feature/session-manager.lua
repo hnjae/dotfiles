@@ -7,7 +7,10 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       -- to use telescope's vim.ui.select() UI
-      "nvim-telescope/telescope.nvim",
+      {
+        [1] = "nvim-telescope/telescope.nvim",
+        optional = true,
+      },
     },
     lazy = true,
     cmd = {

@@ -11,7 +11,12 @@ return {
     [1] = "stevearc/conform.nvim",
     optional = true,
     opts = function(_, opts)
-      opts.formatters_by_ft.yaml = { { "prettierd", "prettier", "yamlfmt" } }
+      if require("utils").lsp.is_prettier() then
+        opts.formatters_by_ft.yaml = { { "prettierd", "prettier" } }
+        return
+      end
+
+      opts.formatters_by_ft.yaml = { { "yamlfmt" } }
     end,
   },
   {

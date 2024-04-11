@@ -31,15 +31,14 @@ return {
     enabled = true,
     lazy = true,
     dependencies = {
-      "nvim-telescope/telescope.nvim",
       {
-        [1] = "nvim-lualine/lualine.nvim",
-        opts = function(_, opts)
-          table.insert(
-            opts.sections.lualine_b,
-            { component = "overseer", priority = 60 }
-          )
-        end,
+        [1] = "nvim-telescope/telescope.nvim",
+        optional = true,
+        keys = {
+      -- stylua: ignore start
+      { [1] = prefix .. "z", [2] = "<cmd>Telescope commands<CR>overseer ", desc = "list", },
+          -- stylua: ignore end
+        },
       },
     },
     cmd = {
@@ -50,12 +49,6 @@ return {
       "WatchRun",
     },
     keys = {
-      {
-        [1] = prefix .. "z",
-        -- [2] = "<C-\\><C-n>:Overseer"
-        [2] = "<cmd>Telescope commands<CR>overseer ",
-        desc = "list",
-      },
       {
         [1] = prefix .. key_word_overseer:upper(),
         [2] = "<cmd>OverseerRun<CR>",
@@ -99,21 +92,11 @@ return {
         end,
         desc = "overseer",
       },
-      {
-        [1] = prefix .. "a",
-        [2] = "<cmd>OverseerTaskAction<CR>",
-        desc = "actions",
-      },
-      {
-        [1] = prefix .. "c",
-        [2] = "<cmd>OverseerClearCache<CR>",
-        desc = "clear-cache",
-      },
-      -- {
-      --   [1] = prefix .. "i",
-      --   [2] = "<cmd>OverseerInfo<CR>",
-      --   desc = "info",
-      -- },
+      -- stylua: ignore start
+      { [1] = prefix .. "a", [2] = "<cmd>OverseerTaskAction<CR>", desc = "actions" },
+      { [1] = prefix .. "c", [2] = "<cmd>OverseerClearCache<CR>", desc = "clear-cache" },
+      -- { [1] = prefix .. "i", [2] = "<cmd>OverseerInfo<CR>", desc = "info" },
+      -- stylua: ignore end
     },
     opts = function()
       local ret = {
@@ -183,6 +166,16 @@ return {
           end
         end)
       end, {})
+    end,
+  },
+  {
+    [1] = "nvim-lualine/lualine.nvim",
+    optional = true,
+    opts = function(_, opts)
+      table.insert(
+        opts.sections.lualine_b,
+        { component = "overseer", priority = 60 }
+      )
     end,
   },
 }

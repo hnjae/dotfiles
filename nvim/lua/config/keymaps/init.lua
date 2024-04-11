@@ -128,12 +128,12 @@ M.setup = function()
   --------------------------------------------------------------------------------
   -- {{{ close things
   --------------------------------------------------------------------------------
-  vim.keymap.set(
-    "n",
-    prefix.close .. "b",
-    "<cmd>bd<CR>",
-    { desc = "buffer-delete" }
-  )
+  -- vim.keymap.set(
+  --   "n",
+  --   prefix.close .. "b",
+  --   "<cmd>bd<CR>",
+  --   { desc = "buffer-delete" }
+  -- )
   vim.keymap.set(
     "n",
     prefix.close .. "QA",

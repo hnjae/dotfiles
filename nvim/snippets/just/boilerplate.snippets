@@ -1,0 +1,10 @@
+snippet boilerplate "justfile boilerplate"
+	#!/usr/bin/env -S just --justfile
+
+	alias fmt := format
+
+	format:
+	  nix fmt
+
+	build:
+	  typst c *.typ

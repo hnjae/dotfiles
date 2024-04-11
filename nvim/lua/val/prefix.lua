@@ -12,7 +12,8 @@ return {
   repl = "sp",
 
   -- NOTE(close): 무언가를 닫거나, clear 하는 기능을 할당.
-  close = "Z",
+  -- close = "Z",
+  close = "<F9>",
 
   -- NOTE(<Leader>): filetype 와 무관한 기능 할당
   finder = "<Leader>" .. map_keyword.finder,
