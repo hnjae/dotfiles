@@ -1,19 +1,34 @@
--- telescopej
-
 ---@type LazySpec
 return {
   [1] = "nvim-telescope/telescope.nvim",
   enabled = true,
   dependencies = {
     "nvim-lua/plenary.nvim",
-    -- {
-    --   [1] = "nvim-telescope/telescope-fzf-native.nvim",
-    --   build = "make",
-    --   enabled = vim.fn.executable("make") == 1 and vim.fn.executable("cc") == 1,
-    -- },
+    {
+      [1] = "nvim-telescope/telescope-fzf-native.nvim",
+      build = vim.fn.executable("make") == 1 and "make" or table.concat({
+        "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release &&",
+        "cmake --build build --config Release &&",
+        "cmake --install build --prefix build",
+      }, " "),
+      enabled = (
+        vim.fn.executable("make") == 1 and vim.fn.executable("cc") == 1
+      ) or vim.fn.executable("cmake") == 1,
+
+      config = function()
+        require("utils.plugin").on_load("telescope.nvim", function()
+          require("telescope").load_extension("fzf")
+        end)
+      end,
+    },
     {
       -- replace vim.ui.select with telescope
       [1] = "nvim-telescope/telescope-ui-select.nvim",
+      config = function()
+        require("utils.plugin").on_load("telescope.nvim", function()
+          require("telescope").load_extension("ui-select")
+        end)
+      end,
     },
   },
   lazy = true,
@@ -47,89 +62,32 @@ return {
     end
 
     ---@type LazyKeysSpec[]
-    local keys_buffer = {
-      -- {
-      --   [1] = prefix.buffer_finder .. map_keyword.snippet,
-      --   [2] = require("telescope").extensions.ultisnips.ultisnips,
-      --   desc = "snippet",
-      -- },
-      {
-        [1] = prefix.buffer_finder .. map_keyword.marks,
-        [2] = t_builtin.marks,
-        desc = "marks",
-      },
-      {
-        [1] = prefix.buffer_finder .. map_keyword.line,
-        [2] = t_builtin.current_buffer_fuzzy_find,
-        desc = "line",
-      },
-      {
-        [1] = prefix.buffer_finder .. string.upper(map_keyword.symbols),
-        [2] = t_builtin.treesitter,
-        desc = "symbols (treesitter)",
-      },
-      {
-        [1] = prefix.buffer_finder .. map_keyword.symbols,
-        [2] = t_builtin.lsp_document_symbols,
-        desc = "symbols (lsp)",
-      },
-    }
-
-    ---@type LazyKeysSpec[]
-    local keys = {
+    local lazykeys = {
+      -- stylua: ignore start
       -- replace default behavior
-      {
-        [1] = "<F1>",
-        [2] = t_builtin.help_tags,
-        desc = "help-tags",
-      },
-      {
-        [1] = prefix.finder .. "0",
-        [2] = "<cmd>Telescope<CR>",
-        desc = "builtins",
-      },
-      {
-        [1] = prefix.finder .. "R",
-        [2] = t_builtin.registers,
-        desc = "registers",
-      },
-      {
-        [1] = prefix.finder .. "q",
-        [2] = t_builtin.quickfix,
-        desc = "quickfix",
-      },
+      { [1] = "<F1>", [2] = t_builtin.help_tags, desc = "help-tags" },
+
+      { [1] = prefix.finder .. "0", [2] = "<cmd>Telescope<CR>", desc = "builtins" },
+      { [1] = prefix.finder .. "R", [2] = t_builtin.registers,  desc = "registers" },
+      { [1] = prefix.finder .. "q", [2] = t_builtin.quickfix,   desc = "quickfix" },
 
       -- +history
-      {
-        [1] = prefix.finder .. "h",
-        [2] = nil,
-        desc = "+history",
-      },
-      {
-        [1] = prefix.finder .. "hc",
-        [2] = t_builtin.command_history,
-        desc = "command-history",
-      },
-      {
-        [1] = prefix.finder .. "hs",
-        [2] = t_builtin.search_history,
-        desc = "search-history",
-      },
-      {
-        [1] = prefix.finder .. "hk",
-        [2] = t_builtin.keymaps,
-        desc = "keymaps-history",
-      },
-      {
-        [1] = prefix.finder .. "hf",
-        [2] = t_builtin.oldfiles,
-        desc = "oldfiles-history",
-      },
-      {
-        [1] = prefix.finder .. "hn",
-        [2] = require("telescope").extensions.notify.notify,
-        desc = "notify-history",
-      },
+      { [1] = prefix.finder .. "h",  [2] = nil,                       desc = "+history" },
+      { [1] = prefix.finder .. "hc", [2] = t_builtin.command_history, desc = "command-history" },
+      { [1] = prefix.finder .. "hs", [2] = t_builtin.search_history,  desc = "search-history" },
+      { [1] = prefix.finder .. "hk", [2] = t_builtin.keymaps,         desc = "keymaps-history" },
+      { [1] = prefix.finder .. "hf", [2] = t_builtin.oldfiles,        desc = "oldfiles-history" },
+      { [1] = prefix.finder .. "hn", [2] = require("telescope").extensions.notify.notify, desc = "notify-history" },
+      -- stylua: ignore end
+
+
+      -- stylua: ignore start
+      -- { [1] = prefix.buffer_finder .. map_keyword.snippet, [2] = require("telescope").extensions.ultisnips.ultisnips, desc = "snippet" },
+      { [1] = prefix.buffer_finder .. map_keyword.marks,   [2] = t_builtin.marks,                     desc = "marks" },
+      { [1] = prefix.buffer_finder .. map_keyword.line,    [2] = t_builtin.current_buffer_fuzzy_find, desc = "line" },
+      { [1] = prefix.buffer_finder .. map_keyword.symbols, [2] = t_builtin.lsp_document_symbols,      desc = "symbols (lsp)" },
+      { [1] = prefix.buffer_finder .. string.upper(map_keyword.symbols), [2] = t_builtin.treesitter, desc = "symbols (treesitter)" },
+      -- stylua: ignore end
     }
 
     local new_win_presets = {
@@ -137,8 +95,6 @@ return {
         key = "f",
         desc = "find-files",
         func = function()
-          -- local ft = vim.api.nvim_buf_get_option(0, "filetype")
-          -- local ft = vim.bo.filetype
           t_builtin.find_files({
             cwd = find_project_root(get_cwd(vim.bo.filetype)),
           })
@@ -194,16 +150,10 @@ return {
           desc = preset.desc,
         },
       }
-      for _, keysets in pairs(new_keysets) do
-        table.insert(keys, keysets)
-      end
+      vim.list_extend(lazykeys, new_keysets)
     end
 
-    for _, keysets in pairs(keys_buffer) do
-      table.insert(keys, keysets)
-    end
-
-    return keys
+    return lazykeys
   end,
   opts = function()
     local map_keyword = require("val").map_keyword
@@ -255,20 +205,6 @@ return {
   ---@type fun(LazyPlugin, opts: table)
   config = function(_, opts)
     local telescope = require("telescope")
-    local utils = require("utils")
     telescope.setup(opts)
-
-    if utils.is_plugin("telescope-fzf-native.nvim") then
-      telescope.load_extension("fzf")
-    else
-      vim.notify(
-        "treesitter: fzf-native module could not be installed.",
-        vim.log.levels.INFO,
-        {}
-      )
-    end
-
-    telescope.load_extension("ui-select")
-    -- telescope.load_extension("ultisnips")
   end,
 }
