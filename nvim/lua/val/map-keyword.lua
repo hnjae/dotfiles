@@ -15,11 +15,13 @@
 return {
   -- 보통 특정 목적의 윈도우를 여는 식의 작업에 사용되길 기대.
   trouble = "x",
-  filemanager = "m",
-  finder = "e", -- e.g. telescope
+  filemanager = "e", -- tree, filemanager
   window = "w",
   terminal = "i",
   git = "g",
+
+  --
+  finder = "e", -- e.g. telescope
 
   --
   execute = "x",

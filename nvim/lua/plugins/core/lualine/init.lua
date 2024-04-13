@@ -8,37 +8,37 @@ return {
   enabled = true,
   lazy = false,
   priority = 1, -- default 50
-  ---@return myLualineOpts
-  opts = function()
+  ---@param opts myLualineOpts
+  opts = function(_, opts)
     -- NOTE: function 으로 랩핑해야, vim.g.colors_name 을 참조할 수 있음. <2023-12-12>
-    -- package.path = "./theme/?.lua;" .. package.path
     local utils = require("utils")
-    local ret = {}
-    ret.__extension_basic = require(package_path .. ".extensions.basic")
+    opts.__extension_basic = require(package_path .. ".extensions.basic")
 
-    ret.options = {
-      icons_enabled = utils.enable_icon,
-      theme = require(package_path .. ".theme"),
+    opts.options = vim.tbl_deep_extend(
+      "keep",
+      require("val.plugins.lualine").options,
+      (opts.options and opts.options or {}),
+      {
+        icons_enabled = utils.enable_icon,
+        theme = require(package_path .. ".theme"),
 
-      -- NOTE: do not use something like   <2024-03-07>
-      component_separators = utils.enable_icon
-          and { left = "┃", right = "┃" }
-        or { left = "❘", right = "❘" },
+        -- NOTE: do not use something like   <2024-03-07>
+        component_separators = utils.enable_icon
+            and { left = "┃", right = "┃" }
+          or { left = "❘", right = "❘" },
 
-      section_separators = { left = "", right = "" },
-      disabled_filetypes = {},
+        section_separators = { left = "", right = "" },
+        disabled_filetypes = {},
 
-      -- When set to true, left sections i.e. 'a','b' and 'c'
-      -- can't take over the entire statusline even
-      -- if neither of 'x', 'y' or 'z' are present.
-      always_divide_middle = true,
+        -- When set to true, left sections i.e. 'a','b' and 'c'
+        -- can't take over the entire statusline even
+        -- if neither of 'x', 'y' or 'z' are present.
+        always_divide_middle = true,
+      }
+    )
 
-      -- enable global statusline (have a single statusline
-      -- at bottom of neovim instead of one for  every window).
-      globalstatus = true,
-    }
-
-    ret.sections = {
+    local lualine_components = {}
+    lualine_components.sections = {
       lualine_a = {
         -- "mode",
         require(package_path .. ".components.mode-enhanced"),
@@ -54,15 +54,15 @@ return {
       lualine_x = {
         require(package_path .. ".components.noice-command"),
         require(package_path .. ".components.noice-search"),
-        {
-          component = require(package_path .. ".components.lsp-null-ls")(
-            ret.options
-          ),
-          priority = 999,
-        },
+        -- {
+        --   component = require(package_path .. ".components.lsp-null-ls")(
+        --     opts.options
+        --   ),
+        --   priority = 99,
+        -- },
         {
           component = require(package_path .. ".components.spell"),
-          priority = 1000,
+          priority = 100,
         },
       },
       lualine_y = {
@@ -73,7 +73,7 @@ return {
         "location",
       },
     }
-    ret.inactive_sections = {
+    lualine_components.inactive_sections = {
       lualine_a = {},
       lualine_b = {},
       lualine_c = {
@@ -85,7 +85,7 @@ return {
         "location",
       },
     }
-    ret.tabline = {
+    lualine_components.tabline = {
       lualine_a = {},
       lualine_b = {},
       lualine_c = {},
@@ -97,15 +97,29 @@ return {
         require(package_path .. ".components.tabs"),
       },
     }
-    ret.extensions = {
+
+    for part_name, sections in pairs(lualine_components) do
+      if not opts[part_name] then
+        opts[part_name] = {}
+      end
+      for section_name, components in pairs(sections) do
+        if not opts[part_name][section_name] then
+          opts[part_name][section_name] = {}
+        end
+        vim.list_extend(opts[part_name][section_name], components)
+      end
+    end
+
+    if not opts.extensions then
+      opts.extensions = {}
+    end
+    vim.list_extend(opts.extensions, {
       require(package_path .. ".extensions.help"),
       require(package_path .. ".extensions.readonly"),
       require(package_path .. ".extensions.netrw"),
       require(package_path .. ".extensions.no-filetype"),
       require(package_path .. ".extensions.minimap"),
-    }
-
-    return ret
+    })
   end,
   ---@param opts myLualineOpts
   config = function(_, opts)

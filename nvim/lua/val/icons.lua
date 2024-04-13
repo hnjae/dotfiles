@@ -17,6 +17,9 @@ return {
     -- question = "" , -- nf-fa-question_circle
     code_action = "", -- nf-cod-lightbulb
   },
+  codicons = {
+    gear = "",
+  },
 
   -- oct, md
   extension = "", -- nf-oct-rocket
@@ -45,4 +48,7 @@ return {
   -- heart = "♥", --nf-oct-heart
   -- "", -- nf-oct-rows
   -- "", -- nf-oct-checklist
+  null = "󰟢", -- nf-md-null
+  sort = "󱎅", -- nf-md-sort_bool_ascending
+  empty_set = "∅", -- unicode
 }

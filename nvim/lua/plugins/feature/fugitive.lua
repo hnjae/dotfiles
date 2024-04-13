@@ -40,7 +40,7 @@ return {
     keys = {
       {
         [1] = val.prefix.git .. val.map_keyword.git,
-        [2] = "<cmd>vert G<CR>",
+        [2] = "<cmd>tab G<CR>",
         desc = "open-fugitive",
       },
       { [1] = val.prefix.git .. "l", [2] = "<cmd>tab Gclog<CR>", desc = "log" },
@@ -67,8 +67,11 @@ return {
   {
     [1] = "nvim-lualine/lualine.nvim",
     optional = true,
+    ---@param opts myLualineOpts
     opts = function(_, opts)
-      local get_icon = require("plugins.core.lualine.utils.get-icon")
+      local get_icon = require(
+        require("val.plugins.lualine").__my_lualine_path .. ".utils.get-icon"
+      )
       local icon = get_icon(nil, "fugitive")
 
       local name
@@ -90,12 +93,15 @@ return {
         filetypes = { "fugitive" },
       }
 
+      if not opts.extensions then
+        opts.extensions = {}
+      end
+
       table.insert(
         opts.extensions,
         vim.tbl_deep_extend(
           "keep",
-          opts.__extension_basic,
-          require("plugins.core.lualine.extensions.basic"),
+          require("val.plugins.lualine").__get_basic_layout(),
           extension
         )
       )
