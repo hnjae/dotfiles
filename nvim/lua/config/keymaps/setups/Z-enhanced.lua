@@ -1,11 +1,9 @@
-local description = "ZZ-enhanced"
-
 local M = {}
 
 M.setup = function()
   local ignore_fts = {
-    notify = true,
-    noice = true,
+    -- notify = true,
+    -- noice = true,
     -- cmp_menu = true,
     -- cmp_docs = true,
   }
@@ -17,7 +15,7 @@ M.setup = function()
     return false
   end
 
-  local zz_enhanced = function()
+  local zz_enhanced = function(mode)
     local normal_bufnrs = {}
     local abnormal_bufnrs = {}
     local winnrs = vim.api.nvim_tabpage_list_wins(vim.fn.tabpagenr())
@@ -52,10 +50,19 @@ M.setup = function()
       end
     end
 
-    vim.cmd("x")
+    if mode == "ZZ" then
+      vim.cmd("x")
+    elseif mode == "ZQ" then
+      vim.cmd("q!")
+    end
   end
 
-  vim.keymap.set("n", "ZZ", zz_enhanced, { desc = description })
+  vim.keymap.set("n", "ZZ", function()
+    zz_enhanced("ZZ")
+  end, { desc = "ZZ-enhanced" })
+  vim.keymap.set("n", "ZQ", function()
+    zz_enhanced("ZQ")
+  end, { desc = "ZQ-enhanced" })
 end
 
 return M
