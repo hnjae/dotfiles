@@ -163,12 +163,6 @@ return {
         -- { name = "nvim_lua" },
       }),
     })
-
-    local is_cmp_autopairs, cmp_autopairs =
-      pcall(require, "nvim-autopairs.completion.cmp")
-    if is_cmp_autopairs then
-      cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
-    end
   end,
 }
 -- vim:foldmethod=marker:foldenable:foldlevel=1:
