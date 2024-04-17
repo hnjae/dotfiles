@@ -66,6 +66,7 @@ return {
       -- stylua: ignore start
       -- replace default behavior
       { [1] = "<F1>", [2] = t_builtin.help_tags, desc = "help-tags" },
+      { [1] = "<F1>", [2] = t_builtin.help_tags, desc = "help-tags", ft= "netrw" },
 
       { [1] = prefix.finder .. "0", [2] = "<cmd>Telescope<CR>", desc = "builtins" },
       { [1] = prefix.finder .. "R", [2] = t_builtin.registers,  desc = "registers" },
@@ -104,9 +105,7 @@ return {
         key = "F",
         desc = "find-files-cwd",
         func = function()
-          t_builtin.find_files({
-            cwd = get_cwd(vim.bo.filetype),
-          })
+          t_builtin.find_files({ cwd = get_cwd(vim.bo.filetype) })
         end,
       },
       {
