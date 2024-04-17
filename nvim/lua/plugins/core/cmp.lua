@@ -15,12 +15,12 @@ return {
     -- { [1] = "hrsh7th/cmp-omni" },
     { [1] = "hrsh7th/cmp-emoji" },
   },
-  opts = function()
+  opts = function(_, opts)
     local cmp = require("cmp")
     local lspkind = require("lspkind")
     local ret = {}
 
-    ret.sorting = {
+    opts.sorting = vim.tbl_extend("keep", {
       priority_weight = 0, -- default 2
       --[[  NOTE:  <2024-04-10>
           -- priority 계산법
@@ -28,68 +28,80 @@ return {
 
           e.score = e.score + priority
         ]]
-    }
-    ret.mapping = cmp.mapping.preset.insert({
-      ["<C-k>"] = cmp.mapping.scroll_docs(-4),
-      -- ["<C-S-h>"] = cmp.mapping.scroll_docs(-4),
-      ["<C-j>"] = cmp.mapping.scroll_docs(4),
-      -- ["<C-S-l>"] = cmp.mapping.scroll_docs(4),
-      -- ["<F3>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-      ["<C-n>"] = cmp.mapping(function()
-        if cmp.visible() then
-          cmp.select_next_item()
-        else
-          cmp.complete()
-        end
-      end, { "i" }),
-      ["<C-p>"] = cmp.mapping(function()
-        if cmp.visible() then
-          cmp.select_prev_item()
-        else
-          cmp.complete()
-        end
-      end, { "i" }),
-      -- ["<C-y>"] = cmp.mapping(function()
-      --   cmp.mapping.confirm({ select = false })
-      -- end, { "i" }),
-      -- ["<C-e>"] = cmp.mapping(function()
-      --   cmp.mapping.abort()
-      -- end, { "i" }),
+    }, opts.sorting or {})
 
-      -- replace omnifunc's mapping
-      -- ["<C-x><C-o>"] = cmp.mapping(cmp.complete, { "i" }),
-    })
+    opts.mapping = vim.tbl_extend(
+      "keep",
+      cmp.mapping.preset.insert({
+        ["<C-k>"] = cmp.mapping.scroll_docs(-4),
+        -- ["<C-S-h>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-j>"] = cmp.mapping.scroll_docs(4),
+        -- ["<C-S-l>"] = cmp.mapping.scroll_docs(4),
+        -- ["<F3>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+        ["<C-n>"] = cmp.mapping(function()
+          if cmp.visible() then
+            cmp.select_next_item()
+          else
+            cmp.complete()
+          end
+        end, { "i" }),
+        ["<C-p>"] = cmp.mapping(function()
+          if cmp.visible() then
+            cmp.select_prev_item()
+          else
+            cmp.complete()
+          end
+        end, { "i" }),
+        -- ["<C-y>"] = cmp.mapping(function()
+        --   cmp.mapping.confirm({ select = false })
+        -- end, { "i" }),
+        -- ["<C-e>"] = cmp.mapping(function()
+        --   cmp.mapping.abort()
+        -- end, { "i" }),
 
-    ret.sources = cmp.config.sources({
-      { name = "nvim_lsp", priority = 10 },
-      {
-        name = "buffer",
-        priority = 0,
-        option = {
-          get_bufnrs = function()
-            -- use all visible buffers
-            local bufs = {}
-            for _, win in ipairs(vim.api.nvim_list_wins()) do
-              local buf = vim.api.nvim_win_get_buf(win)
-              if
-                vim.bo[buf].buftype == ""
-                or vim.bo[buf].buftype == "terminal"
-              then
-                bufs[vim.api.nvim_win_get_buf(win)] = true
+        -- replace omnifunc's mapping
+        -- ["<C-x><C-o>"] = cmp.mapping(cmp.complete, { "i" }),
+      }),
+      opts.mapping or {}
+    )
+
+    if not opts.sources then
+      opts.sources = {}
+    end
+
+    vim.list_extend(
+      opts.sources,
+      cmp.config.sources({
+        { name = "nvim_lsp", priority = 10 },
+        {
+          name = "buffer",
+          priority = 0,
+          option = {
+            get_bufnrs = function()
+              -- use all visible buffers
+              local bufs = {}
+              for _, win in ipairs(vim.api.nvim_list_wins()) do
+                local buf = vim.api.nvim_win_get_buf(win)
+                if
+                  vim.bo[buf].buftype == ""
+                  or vim.bo[buf].buftype == "terminal"
+                then
+                  bufs[vim.api.nvim_win_get_buf(win)] = true
+                end
               end
-            end
-            return vim.tbl_keys(bufs)
-          end,
+              return vim.tbl_keys(bufs)
+            end,
+          },
         },
-      },
-      { name = "emoji" },
-      { name = "path" },
-      -- { name = "month" },
-    })
+        { name = "emoji" },
+        { name = "path" },
+        -- { name = "month" },
+      })
+    )
 
     ----------------------------------------------------------------------------
     -- {{{ formatting
-    ret.formatting = {}
+    opts.formatting = {}
 
     local enable_icon = require("utils").enable_icon
     local format_menu = {
@@ -108,7 +120,7 @@ return {
     }
 
     if not enable_icon then
-      ret.formatting.format = function(entry, vim_item)
+      opts.formatting.format = function(entry, vim_item)
         vim_item.menu = (vim_item.menu or "")
           .. (
             format_menu[entry.source.name]
@@ -117,7 +129,7 @@ return {
         return vim_item
       end
     else
-      ret.formatting.format = function(entry, vim_item)
+      opts.formatting.format = function(entry, vim_item)
         vim_item.menu = (vim_item.menu or "")
           .. (
             format_menu[entry.source.name]
@@ -135,8 +147,6 @@ return {
     end
     -- }}}
     ----------------------------------------------------------------------------
-
-    return ret
   end,
   config = function(_, opts)
     local cmp = require("cmp")
