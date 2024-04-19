@@ -124,7 +124,7 @@ return {
         vim.fn.sort(
           vim.fn.globpath(
             vim.fn.stdpath("config"),
-            "overseer/template/user/*.lua",
+            "lua/overseer/template/user/*.lua",
             false,
             true
           )
