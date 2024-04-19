@@ -13,9 +13,9 @@ return {
     -- "jose-elias-alvarez/null-ls.nvim",
     [1] = "nvimtools/none-ls.nvim",
     lazy = true,
+    enabled = true,
     event = { "VeryLazy" },
     cmd = { "NullLsInfo", "NullLsLog" },
-    enabled = true,
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
@@ -53,7 +53,7 @@ return {
     ---@param opts myLualineOpts
     opts = function(_, opts)
       local utils = require("utils")
-      local hide_width = 65
+      local hide_width = 40
       local truc_width = 100
       local num_source_semi_limit = 2
 
@@ -97,14 +97,16 @@ return {
           end
 
           if next(names) == nil then
-            if vim.bo.buftype ~= "" or vim.bo.filetype == "text" then
-              return ""
-            end
+            return ""
 
-            return (
-              require("utils").enable_icon and (icon .. val.icons.empty_set)
-              or "No soures attached"
-            )
+            -- if vim.bo.buftype ~= "" or vim.bo.filetype == "text" then
+            --   return ""
+            -- end
+            --
+            -- return (
+            --   require("utils").enable_icon and (icon .. val.icons.empty_set)
+            --   or "No soures attached"
+            -- )
           end
 
           if lualine_width < truc_width then

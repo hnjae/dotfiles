@@ -3,7 +3,7 @@ return {
   {
     [1] = "nvim-treesitter/nvim-treesitter",
     optional = true,
-    init = function()
+    opts = function()
       require("state.treesitter-langs"):add("typst")
     end,
   },

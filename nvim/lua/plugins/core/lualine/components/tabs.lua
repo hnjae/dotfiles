@@ -3,6 +3,7 @@
 local M = {
   [1] = "tabs",
   mode = 0, -- shows tab_nr
+  separator = { left = "", right = "" },
   draw_empty = false,
   -- use_mode_colors = true,
   -- fmt = function(name, context)

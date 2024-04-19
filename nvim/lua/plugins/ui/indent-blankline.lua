@@ -3,12 +3,17 @@ return {
   [1] = "lukas-reineke/indent-blankline.nvim",
   lazy = true,
   enabled = true,
-  cond = not require("utils").is_console,
+  cond = require("utils").enable_icon,
   event = { "VeryLazy" },
   main = "ibl",
   opts = function()
     local ret = {
-      indent = {},
+      -- debounce = 400, -- default 200
+      indent = {
+        -- char = "▎", -- default left one quarter block (U+258E)
+        char = "▏",
+        -- char = "",
+      },
       whitespace = {
         remove_blankline_trail = false,
       },
@@ -19,6 +24,7 @@ return {
         filetypes = {
           "dashboard",
           "text",
+          -- 
         },
       },
     }

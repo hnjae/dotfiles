@@ -81,7 +81,6 @@ local M = {
     },
     opts = function(_, opts)
       table.insert(opts.sources, { name = "treesitter", group_index = 1 })
-      return opts
     end,
   },
 }

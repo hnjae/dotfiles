@@ -76,7 +76,7 @@ return {
     optional = true,
     opts = function(_, opts)
       local utils = require("utils")
-      local hide_width = 65
+      local hide_width = 40
       local truc_width = 100
       local num_source_semi_limit = 2
       local suppress_sources = {
@@ -85,7 +85,7 @@ return {
 
       local lsp_icon = utils.enable_icon
           and (require("val").icons.codicons.gear .. " ")
-        or ""
+        or "L "
 
       local lsp_name_fmt = function(name)
         return name:sub(-16, -1) == "_language_server"
@@ -122,14 +122,15 @@ return {
           end
 
           if next(names) == nil then
-            if vim.bo.buftype ~= "" or vim.bo.filetype == "text" then
-              return ""
-            end
-
-            return (
-              require("utils").enable_icon and (lsp_icon .. "∅")
-              or "No active LSP"
-            )
+            return ""
+            -- if vim.bo.buftype ~= "" or vim.bo.filetype == "text" then
+            --   return ""
+            -- end
+            --
+            -- return (
+            --   require("utils").enable_icon and (lsp_icon .. "∅")
+            --   or "No active LSP"
+            -- )
           end
 
           if lualine_width < truc_width then
@@ -163,7 +164,7 @@ return {
       vim.list_extend(opts.sections.lualine_x, {
         {
           component = component,
-          priority = 90,
+          priority = 60,
         },
       })
     end,

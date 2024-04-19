@@ -65,7 +65,20 @@ return {
         servers = {
           tsserver = {
             ---@class LspconfigSetupOptsSpec
-            settings = {},
+            settings = {
+              commands = {
+                OrganizeImports = {
+                  [1] = function()
+                    local params = {
+                      command = "_typescript.organizeImports",
+                      arguments = { vim.api.nvim_buf_get_name(0) },
+                    }
+                    vim.lsp.buf.execute_command(params)
+                  end,
+                  description = "Organize Imports",
+                },
+              },
+            },
           },
           eslint = {
             ---@class LspconfigSetupOptsSpec

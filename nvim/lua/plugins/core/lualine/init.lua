@@ -12,7 +12,6 @@ return {
   opts = function(_, opts)
     -- NOTE: function 으로 랩핑해야, vim.g.colors_name 을 참조할 수 있음. <2023-12-12>
     local utils = require("utils")
-    opts.__extension_basic = require(package_path .. ".extensions.basic")
 
     opts.options = vim.tbl_deep_extend(
       "keep",
@@ -24,10 +23,14 @@ return {
 
         -- NOTE: do not use something like   <2024-03-07>
         component_separators = utils.enable_icon
-            and { left = "┃", right = "┃" }
+            and { left = "", right = "" }
+          -- and { left = "┃", right = "┃" }
           or { left = "❘", right = "❘" },
+        -- component_separators = { left = "", right = "" },
+        -- section_separators = { left = "", right = "" },
+        -- section_separators = { left = "", right = "" },
+        section_separators = "",
 
-        section_separators = { left = "", right = "" },
         disabled_filetypes = {},
 
         -- When set to true, left sections i.e. 'a','b' and 'c'
@@ -52,21 +55,32 @@ return {
         require(package_path .. ".components.filename"),
       },
       lualine_x = {
-        require(package_path .. ".components.noice-command"),
-        require(package_path .. ".components.noice-search"),
+        {
+          component = require(package_path .. ".components.noice-command"),
+          priority = 20,
+        },
+        {
+          component = require(package_path .. ".components.noice-search"),
+          priority = 20,
+        },
         -- {
         --   component = require(package_path .. ".components.lsp-null-ls")(
         --     opts.options
         --   ),
         --   priority = 99,
         -- },
-        {
-          component = require(package_path .. ".components.spell"),
-          priority = 100,
-        },
       },
       lualine_y = {
-        require(package_path .. ".components.encoding-fileformat"),
+        {
+          component = require(package_path .. ".components.spell"),
+          priority = 90,
+        },
+        {
+          component = require(
+            package_path .. ".components.encoding-fileformat"
+          ),
+          priority = 100,
+        },
       },
       lualine_z = {
         require(package_path .. ".components.progress"),
@@ -118,7 +132,6 @@ return {
       require(package_path .. ".extensions.readonly"),
       require(package_path .. ".extensions.netrw"),
       require(package_path .. ".extensions.no-filetype"),
-      require(package_path .. ".extensions.minimap"),
     })
   end,
   ---@param opts myLualineOpts

@@ -18,7 +18,6 @@ return {
   opts = function(_, opts)
     local cmp = require("cmp")
     local lspkind = require("lspkind")
-    local ret = {}
 
     opts.sorting = vim.tbl_extend("keep", {
       priority_weight = 0, -- default 2

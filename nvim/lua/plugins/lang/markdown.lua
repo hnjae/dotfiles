@@ -33,6 +33,9 @@ return {
         proselint = {
           null_ls.builtins.diagnostics.proselint.with({
             filetypes = { "markdown" },
+            diagnostics_postprocess = function(diagnostic)
+              diagnostic.severity = vim.diagnostic.severity.HINT
+            end,
           }),
         },
         -- english prose linter

@@ -10,6 +10,7 @@ return {
   },
   config = function(_, opts)
     local devicons = require("nvim-web-devicons")
+    local val = require("val")
     devicons.setup(opts)
 
     local icon, color, cterm_color
@@ -24,18 +25,20 @@ return {
     -- key= filename or extension (not filetype)
     local icon_map = {
       -- stylua: ignore start
-      -- extensions
+      -- Type1: extensions
       snippets = { overrides = { icon = "", name = "Snippets" } }, -- nf-cod-symbol_snippet
       snippet  = { overrides = { icon = "", name = "Snippets" } }, -- nf-cod-symbol_snippet
       cheat    = { overrides = { icon = "", name = "Cheat" } }, -- nf-oct-paperclip
+      http     = { overrides = { icon =  "",} }, -- nf-fa-signs-post
+      -- http     = { overrides = { icon = "" } }, -- nf-oct-mail
 
       kdl  = { base = "yaml",     overrides = { name = "Kdl" } }, -- https://kdl.dev/
       toml = { base = "yaml",     overrides = { name = "Toml" } },
       adoc = { base = "markdown", overrides = { name = "AsciiDoc", icon = "󱇗" }, }, -- nf-md-note_text_outline
 
-      -- filenames
+      -- Type2: filenames
       justfile            = { base = "cmake", overrides = { name = "Just" } },
-      [".envrc"]          = { base = "cmake", overrides = { name = "Direnv" } },
+      [".envrc"]          = { base = ".env",  overrides = { name = "Direnv" } },
       ["git-rebase-todo"] = { base = "git",   overrides = { name = "GitRebase" } },
       -- stylua: ignore end
     }

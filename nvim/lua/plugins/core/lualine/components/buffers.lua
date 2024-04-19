@@ -7,6 +7,7 @@ local M = {
   show_filename_only = true,
   -- M.fmt 에서 처리
   -- filetype_names = require("plugins.core.lualine.utils.filetype-names"),
+  separator = { left = "", right = "" },
   icons_enabled = false,
   symbols = {
     modified = " ", -- nf-cod-circle_filled

@@ -71,9 +71,8 @@ return {
     ---@param opts myLualineOpts
     opts = function(_, opts)
       local utils = require("utils")
-      local val = require("val")
 
-      local hide_width = 65
+      local hide_width = 40
       local truc_width = 100
       local num_source_semi_limit = 2
 
@@ -108,14 +107,14 @@ return {
           end
 
           if #names == 0 then
-            if vim.bo.buftype ~= "" or vim.bo.filetype == "text" then
-              return ""
-            end
-
-            return (
-              require("utils").enable_icon and (icon .. val.icons.empty_set)
-              or "No formatter available"
-            )
+            return ""
+            -- if vim.bo.buftype ~= "" or vim.bo.filetype == "text" then
+            -- end
+            --
+            -- return (
+            --   require("utils").enable_icon and (icon .. val.icons.empty_set)
+            --   or "No formatter available"
+            -- )
           end
 
           if lualine_width < truc_width then

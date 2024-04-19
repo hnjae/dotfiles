@@ -46,10 +46,17 @@ M.setup = function()
       and (#abnormal_bufnrs ~= 0)
     then
       for _, bufnr in ipairs(abnormal_bufnrs) do
-        vim.api.nvim_buf_delete(bufnr, {})
+        if vim.api.nvim_buf_get_option(bufnr, "filetype") == "minimap" then
+          vim.cmd("MinimapClose")
+        else
+          vim.api.nvim_buf_delete(bufnr, {})
+        end
       end
     end
 
+    -- if vim.api.nvim_buf_get_option(0, "filetype") == "minimap" then
+    --   vim.cmd("MinimapClose")
+    -- vim.api.nvim_set_current_win(window_id)
     if mode == "ZZ" then
       vim.cmd("x")
     elseif mode == "ZQ" then

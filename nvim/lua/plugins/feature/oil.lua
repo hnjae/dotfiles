@@ -158,9 +158,17 @@ return {
         filetypes = { "oil" },
       }
 
+      if not opts.extensions then
+        opts.extensions = {}
+      end
+
       return table.insert(
         opts.extensions,
-        vim.tbl_deep_extend("keep", opts.__extension_basic, extension)
+        vim.tbl_deep_extend(
+          "keep",
+          require("val.plugins.lualine").__get_basic_layout(),
+          extension
+        )
       )
     end,
   },

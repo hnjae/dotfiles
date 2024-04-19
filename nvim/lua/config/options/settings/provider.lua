@@ -16,6 +16,6 @@
 
 vim.g.loaded_ruby_provider = 0 -- disable ruby
 vim.g.loaded_python_provider = 0 -- disable python2
-vim.g.loaded_python3_provider = 0 -- disable python3
+-- vim.g.loaded_python3_provider = 0  -- disable python3
 vim.g.loaded_perl_provider = 0 -- disable perl
 vim.g.loaded_node_provider = 0 -- disable node

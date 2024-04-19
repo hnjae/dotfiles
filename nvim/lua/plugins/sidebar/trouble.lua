@@ -84,10 +84,9 @@ return {
 
       local name
       if require("utils").enable_icon then
-        local icon =
-          require("plugins.core.lualine.utils.get-icon")(nil, "Trouble")
+        local icon = require("val.icons").tools
         name = function()
-          return string.format("%s  %s", icon, get_name())
+          return string.format("%s %s", icon, get_name())
         end
       else
         name = get_name

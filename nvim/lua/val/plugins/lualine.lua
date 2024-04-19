@@ -1,8 +1,14 @@
+local package_path = (...):match("(.-)[^%.]+$")
+
 local lualine_path = "plugins.core.lualine"
 
----@type myLualineOpts
+-- ---@type myLualineOpts
 return {
   __my_lualine_path = lualine_path,
+  -- __get_lualine_width = function()
+  --   return require(package_path).options.globalstatus and vim.o.columns
+  --     or vim.fn.winwidth(0)
+  -- end,
   __get_basic_layout = function()
     return {
       sections = {

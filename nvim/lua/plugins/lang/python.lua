@@ -15,31 +15,67 @@ return {
     [1] = "stevearc/conform.nvim",
     optional = true,
     opts = function(_, opts)
-      opts.formatters_by_ft.typescript = {
-        { "black", "ruff" },
+      opts.formatters_by_ft.python = {
+        { "ruff", "black" },
         "isort",
       }
     end,
   },
   {
+    -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
     [1] = "neovim/nvim-lspconfig",
     optional = true,
     opts = {
       servers = {
+        -- language-server
+        -- pylyzer = {
+        --   -- https://github.com/mtshiba/pylyzer
+        --   --  A fast static code analyzer & language server for Python
+        --   ---@class LspconfigSetupOptsSpec
+        --   settings = {},
+        -- },
+        -- pyright = {
+        --   -- a static type checker and language server for python
+        --   ---@class LspconfigSetupOptsSpec
+        --   settings = {},
+        -- },
         jedi_language_server = {
           ---@class LspconfigSetupOptsSpec
           settings = {},
         },
+        -- pylsp = {
+        --   document 없음
+        --   -- https://github.com/python-lsp/python-lsp-server
+        --   ---@class LspconfigSetupOptsSpec
+        --   settings = {},
+        -- },
+
+        -- misc
         ruff_lsp = {
+          -- linter and formatter
           ---@class LspconfigSetupOptsSpec
           settings = {},
         },
+
+        -- misc
+        -- pyre = {
+        --   -- a static type checker for Python 3.
+        --   ---@class LspconfigSetupOptsSpec
+        --   settings = {},
+        -- },
+        -- basedpyright - {
+        --   ---@class LspconfigSetupOptsSpec
+        --   settings = {},
+        -- },
       },
     },
   },
   {
     [1] = "nvimtools/none-ls.nvim",
     optional = true,
+    -- dependencies = {
+    --   https://github.com/nvimtools/none-ls-extras.nvim
+    -- }
     opts = function(_, opts)
       local null_ls = require("null-ls")
 
@@ -65,7 +101,7 @@ return {
 
             -- https://github.com/jose-elias-alvarez/null-ls.nvim/issues/1208
             runtime_condition = function(params)
-              return null_ls_utils.path.exists(params.bufname)
+              return require("null-ls.utils").path.exists(params.bufname)
             end,
           }),
         },
