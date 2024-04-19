@@ -10,7 +10,9 @@ end
 local default_icon = require("val").icons.file
 local icons = require("val").icons
 
-local ft_data = require(package_path .. ".ft-data")
+-- local ft_data = require(package_path .. ".ft-data")
+local ft_data = require("state.lualine-ft-data").data
+
 local filename_icons = {
   ["NetrwMessage"] = icons.message,
 }
@@ -37,14 +39,12 @@ return function(filename, filetype, buftype)
   end
 
   local icon
-  -- devicon 의 default_icon 받아오지 말기
-  icon = devicons.get_icon(filename or filetype, nil)
+  icon = devicons.get_icon(filename or filetype, nil, { default = false })
   if icon then
     return icon
   end
 
   icon = devicons.get_icon_by_filetype(filetype)
-  icon = require("nvim-web-devicons").get_icon_by_filetype("gitreabse")
   if icon then
     return icon
   end
