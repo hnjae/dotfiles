@@ -19,6 +19,7 @@ return {
   window = "w",
   terminal = "i",
   git = "g",
+  ai = "y",
 
   --
   finder = "e", -- e.g. telescope
