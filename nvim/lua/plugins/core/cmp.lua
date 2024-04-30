@@ -18,6 +18,17 @@ return {
   opts = function(_, opts)
     local cmp = require("cmp")
     local lspkind = require("lspkind")
+    local val = require("val")
+
+    -- opts.performance = {
+    --   max_view_entries = 1,
+    -- }
+
+    -- opts.window = {
+    --   documentation = {
+    --     max_height = 2,
+    --   },
+    -- }
 
     opts.sorting = vim.tbl_extend("keep", {
       priority_weight = 0, -- default 2
@@ -32,9 +43,8 @@ return {
     opts.mapping = vim.tbl_extend(
       "keep",
       cmp.mapping.preset.insert({
-        ["<C-k>"] = cmp.mapping.scroll_docs(-4),
-        -- ["<C-S-h>"] = cmp.mapping.scroll_docs(-4),
-        ["<C-j>"] = cmp.mapping.scroll_docs(4),
+        [val.map_keyword.hover_scroll_up] = cmp.mapping.scroll_docs(-4),
+        [val.map_keyword.hover_scroll_down] = cmp.mapping.scroll_docs(4),
         -- ["<C-S-l>"] = cmp.mapping.scroll_docs(4),
         -- ["<F3>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
         ["<C-n>"] = cmp.mapping(function()
@@ -75,6 +85,7 @@ return {
         {
           name = "buffer",
           priority = 0,
+          max_item_count = 8,
           option = {
             get_bufnrs = function()
               -- use all visible buffers

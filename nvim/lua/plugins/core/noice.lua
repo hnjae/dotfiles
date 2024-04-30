@@ -1,4 +1,8 @@
+-- vim.api.nvim_set_keymap()
+
 -- replace cmdline, messages, popupmenu
+
+local val = require("val")
 
 ---@type LazySpec[]
 local M = {
@@ -9,6 +13,31 @@ local M = {
     event = {
       -- "VimEnter",
       "VeryLazy",
+    },
+    ---@type LazyKeysSpec[]
+    keys = {
+      {
+        [1] = val.map_keyword.hover_scroll_up,
+        [2] = function()
+          if not require("noice.lsp").scroll(-4) then
+            return val.map_keyword.hover_scroll_up
+          end
+        end,
+        expr = true,
+        mode = { "n", "i", "s" },
+        silent = true,
+      },
+      {
+        [1] = val.map_keyword.hover_scroll_down,
+        [2] = function()
+          if not require("noice.lsp").scroll(4) then
+            return val.map_keyword.hover_scroll_down
+          end
+        end,
+        expr = true,
+        mode = { "n", "i", "s" },
+        silent = true,
+      },
     },
     dependencies = {
       { [1] = "rcarriga/nvim-notify", optional = true },
@@ -48,16 +77,6 @@ local M = {
           hover = {
             enabled = false,
           },
-          signature = {
-            -- enabled = not require("utils").is_plugin("lsp_signature.nvim"),
-            -- NOTE: 계속 signature hover window를 띄어놓는 법을 모르겠음 <2024-04-06>
-            enabled = false,
-            view = "hover",
-            auto_open = {
-              luasnip = require("utils").is_plugin("luasnip"),
-            },
-            -- view = "popupmenu",
-          },
         },
         messages = {
           -- Messages shown by lsp servers
@@ -75,7 +94,14 @@ local M = {
           lsp_doc_border = true, -- add a border to hover docs and signature help
         },
       }
-      return vim.tbl_deep_extend("force", opts, ret)
+
+      opts = vim.tbl_deep_extend("keep", ret, opts)
+
+      if not opts.lsp.signature then
+        opts.lsp.signature = { enabled = false }
+      end
+
+      return opts
     end,
     config = function(_, opts)
       require("noice").setup(opts)

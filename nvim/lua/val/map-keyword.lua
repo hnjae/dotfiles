@@ -46,4 +46,8 @@ return {
   vsplit = "v",
   split = "x", -- telescope's default
   float = "f",
+
+  --
+  hover_scroll_up = "<C-k>", -- "<C-f>"
+  hover_scroll_down = "<C-j>", -- "<C-j>"
 }
