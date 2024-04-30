@@ -80,7 +80,10 @@ local M = {
       },
     },
     opts = function(_, opts)
-      table.insert(opts.sources, { name = "treesitter", group_index = 1 })
+      table.insert(
+        opts.sources,
+        { name = "treesitter", group_index = 1, max_item_count = 8 }
+      )
     end,
   },
 }

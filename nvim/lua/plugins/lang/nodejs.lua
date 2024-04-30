@@ -61,45 +61,48 @@ return {
         return opts
       end
 
-      local myopt = {
-        servers = {
-          tsserver = {
-            ---@class LspconfigSetupOptsSpec
-            settings = {
-              commands = {
-                OrganizeImports = {
-                  [1] = function()
-                    local params = {
-                      command = "_typescript.organizeImports",
-                      arguments = { vim.api.nvim_buf_get_name(0) },
-                    }
-                    vim.lsp.buf.execute_command(params)
-                  end,
-                  description = "Organize Imports",
-                },
-              },
-            },
-          },
-          eslint = {
-            ---@class LspconfigSetupOptsSpec
-            settings = {
-              root_dir = require("lspconfig").util.root_pattern(unpack({
-                "eslint.config.js",
-                "eslint.config.mjs",
-                "eslint.config.cjs",
-                ".eslintrc.js",
-                ".eslintrc.cjs",
-                ".eslintrc.yaml",
-                ".eslintrc.yml",
-                ".eslintrc.json",
-                "package.json",
-              })),
+      if opts.servers == nil then
+        opts.servers = {}
+      end
+
+      -- requires typescript-language-server
+      opts.servers.tsserver = {
+        ---@class LspconfigSetupOptsSpec
+        settings = {
+          commands = {
+            OrganizeImports = {
+              [1] = function()
+                local params = {
+                  command = "_typescript.organizeImports",
+                  arguments = { vim.api.nvim_buf_get_name(0) },
+                }
+                vim.lsp.buf.execute_command(params)
+              end,
+              description = "Organize Imports",
             },
           },
         },
       }
 
-      return vim.tbl_deep_extend("force", opts, myopt)
+      -- requires vscode-langservers-extracted
+      opts.servers.eslint = {
+        ---@class LspconfigSetupOptsSpec
+        settings = {
+          root_dir = require("lspconfig").util.root_pattern(unpack({
+            "eslint.config.js",
+            "eslint.config.mjs",
+            "eslint.config.cjs",
+            ".eslintrc.js",
+            ".eslintrc.cjs",
+            ".eslintrc.yaml",
+            ".eslintrc.yml",
+            ".eslintrc.json",
+            "package.json",
+          })),
+        },
+      }
+
+      return opts
     end,
   },
 }

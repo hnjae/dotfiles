@@ -8,7 +8,7 @@ return function()
     return _is
   end
 
-  local Path = require("plenary.path")
+  local Path = require("plenary.path") -- lazy.nvim 이 로드해야 하기에 여기서 import
   local project_root = require(package_path .. ".get-project-root")()
   local deno_root = require("lspconfig.util").root_pattern(
     "deno.json",

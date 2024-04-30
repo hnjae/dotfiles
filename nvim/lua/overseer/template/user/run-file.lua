@@ -11,6 +11,10 @@ return {
       cmd = { "bun", file }
     elseif vim.bo.filetype == "python" then
       cmd = { "ipython3", file }
+    elseif vim.bo.filetype == "zsh" then
+      cmd = { "zsh", file }
+    elseif vim.bo.filetype == "sh" then
+      cmd = { "bash", file }
     else
       cmd = { file }
     end

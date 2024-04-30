@@ -24,6 +24,8 @@ M.setup = function()
         msg[winnr][x] = vim.fn[x](bufnr)
       end
 
+      msg[winnr].zindex = vim.api.nvim_win_get_config(winnr).zindex
+
       msg[winnr]["getwininfo"] = vim.fn["getwininfo"](winnr)
     end
 

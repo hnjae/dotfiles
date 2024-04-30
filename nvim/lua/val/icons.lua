@@ -47,8 +47,9 @@ return {
   log = "", --nf-oct-log
   -- heart = "♥", --nf-oct-heart
   -- "", -- nf-oct-rows
-  -- "", -- nf-oct-checklist
   null = "󰟢", -- nf-md-null
   sort = "󱎅", -- nf-md-sort_bool_ascending
   empty_set = "∅", -- unicode
+
+  result = "", -- nf-oct-checklist
 }
