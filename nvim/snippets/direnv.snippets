@@ -1,16 +1,32 @@
-# https://direnv.net/man/direnv-stdlib.1.html
+# HELP: https://direnv.net/man/direnv-stdlib.1.html
 
-snippet path "add bin to PATH"
-	PATH_add "${1:node_modules/.bin}"
-snippet man "add"
+# dotenv
+snippet sdotenv "dotenv"
+	dotenv ${0:optional-dotenv-path}
+snippet sdotenvif "dotenv-if-exists"
+	doten_if_exists ${0:optional-dotenv-path}
+#
+snippet spath "add bin to PATH"
+	PATH_add "${1:}"
+snippet sman "MANPATH_add"
 	MANPATH_add "$1"
-snippet flake "load flake.nix's `devShell` "
+#
+snippet sflake "load flake.nix's `devShell` "
 	use flake
-snippet nix "use `shell.nix` or `default.nix`"
+snippet snix "use `shell.nix` or `default.nix`"
 	use nix
-snippet nixp "use package"
+snippet snixp "use package"
 	use nix -p "${1:hello}"
-snippet node "add node_modules/.bin to path"
+#
+snippet ssource_up "Use parent's .envrc"
+	source_up ${0:optional-filename}
+# layouts
+snippet slnode "add node_modules/.bin to path"
 	layout node
-snippet go "Add $(direnv_layout_dir)/go to GOPATH and bin to PATH"
+snippet slgo "Add $(direnv_layout_dir)/go to GOPATH and bin to PATH"
 	layout go
+# if
+snippet if "if has <command>"
+	if has ${0:curl}; then
+		echo "hello"
+	fi

@@ -12,7 +12,7 @@ snippet afr
 	(${1:arguments}) => {
 		return $0
 	}
-snippet asaf
+snippet asa
 	async (${1:arguments}) => {
 		$0
 	}
@@ -20,6 +20,8 @@ snippet asm
 	async ${1:name}(${2:arguments}): Promise<${3:returnType}> {
 		$0
 	}
+snippet a
+	await $0
 snippet catch Catch Statement
 	catch (${1:error}) {
 		$0
@@ -51,10 +53,10 @@ snippet ifelse If-Else Statement
 
 	}
 # 이렇게 해야 lsp가 module 명을 알려주는듯?
+snippet im "import"
+	import '${1:module}';$0
 snippet im* "import as"
 	import * as $1 from '${2:module}';$3
-snippet im "import"
-	import ${2:*} from '${1:module}';$3
 snippet imc "import {}"
 	import { $2 } from '${1:module}';$3
 snippet imt "import type {}"
@@ -104,15 +106,7 @@ snippet cad
 	const [ ${2:prop} ] = ${1:value}
 snippet cd
 	const { ${2:prop} } = ${1:value}
-snippet exp
-	export $0
-snippet ex
-	export $0
-snippet expo
-	export $0
-snippet export
-	export $0
-snippet expor
+snippet e
 	export $0
 snippet newp new Promise<type>()
 	new Promise<${1:type}>((resolve, reject) => {
