@@ -1,5 +1,11 @@
 local package_path = (...)
 
+local options = {
+  cmp = ".cmp",
+  noice = ".noice",
+  lsp_signature = ".lsp-signature",
+}
+
 -- shows popup window about parameter/func
 ---@type LazySpec|LazySpec[]
-return require(package_path .. ".cmp")
+return require(package_path .. options.lsp_signature)
