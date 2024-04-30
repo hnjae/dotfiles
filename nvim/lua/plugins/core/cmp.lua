@@ -9,7 +9,8 @@ return {
     { [1] = "hrsh7th/cmp-nvim-lsp" },
     -- / (search) 에서 사용 용도 @ + typing
     { [1] = "hrsh7th/cmp-nvim-lsp-document-symbol" },
-    { [1] = "hrsh7th/cmp-path" },
+    -- { [1] = "hrsh7th/cmp-path" },
+    { [1] = "https://codeberg.org/FelipeLema/cmp-async-path" },
     { [1] = "hrsh7th/cmp-buffer" },
     { [1] = "hrsh7th/cmp-cmdline" },
     -- { [1] = "hrsh7th/cmp-omni" },
@@ -104,7 +105,7 @@ return {
           },
         },
         { name = "emoji" },
-        { name = "path" },
+        { name = "async_path" },
         -- { name = "month" },
       })
     )
@@ -120,6 +121,7 @@ return {
       buffer = "[BUF]",
       treesitter = "[TS]",
       path = "[Path]",
+      async_path = "[Path]",
       -- lsps
       nvim_lsp = "[LSP]",
       nvim_lsp_document_symbol = "[DOCUMENT-SYMBOL]",
@@ -177,7 +179,7 @@ return {
     cmp.setup.cmdline(":", {
       mapping = cmp.mapping.preset.cmdline(),
       sources = cmp.config.sources({
-        { name = "path" },
+        { name = "async_path" },
         { name = "cmdline" },
         -- { name = "nvim_lsp" },
         -- { name = "nvim_lua" },
