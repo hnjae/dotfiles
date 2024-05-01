@@ -37,7 +37,7 @@ return {
   line = "e",
   lsp = "l",
   symbols = "y",
-  snippet = "p",
+  -- snippet = "p",
   tag = "g",
   task = "t",
 

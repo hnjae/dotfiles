@@ -37,8 +37,8 @@ return {
   cmd = {
     "Telescope",
   },
-  ---@type fun(LazyPlugin, opts: table): LazyKeysSpec[]
-  keys = function()
+  ---@type fun(LazyPlugin, keys: LazyKeysSpec[]): nil
+  keys = function(_, keys)
     local val = require("val")
     local prefix = val.prefix
     local map_keyword = val.map_keyword
@@ -83,13 +83,13 @@ return {
 
 
       -- stylua: ignore start
-      -- { [1] = prefix.buffer_finder .. map_keyword.snippet, [2] = require("telescope").extensions.ultisnips.ultisnips, desc = "snippet" },
       { [1] = prefix.buffer_finder .. map_keyword.marks,   [2] = t_builtin.marks,                     desc = "marks" },
       { [1] = prefix.buffer_finder .. map_keyword.line,    [2] = t_builtin.current_buffer_fuzzy_find, desc = "line" },
       { [1] = prefix.buffer_finder .. map_keyword.symbols, [2] = t_builtin.lsp_document_symbols,      desc = "symbols (lsp)" },
       { [1] = prefix.buffer_finder .. string.upper(map_keyword.symbols), [2] = t_builtin.treesitter, desc = "symbols (treesitter)" },
       -- stylua: ignore end
     }
+    vim.list_extend(keys, lazykeys)
 
     local new_win_presets = {
       {
@@ -149,10 +149,8 @@ return {
           desc = preset.desc,
         },
       }
-      vim.list_extend(lazykeys, new_keysets)
+      vim.list_extend(keys, new_keysets)
     end
-
-    return lazykeys
   end,
   opts = function()
     local map_keyword = require("val").map_keyword

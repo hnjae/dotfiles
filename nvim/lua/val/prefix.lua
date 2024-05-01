@@ -23,7 +23,7 @@ return {
   window = "<Leader>" .. map_keyword.window,
   git = "<Leader>" .. map_keyword.git,
   new = "<Leader>n",
-  snippet = "<Leader>" .. map_keyword.snippet,
+  -- snippet = "<Leader>" .. map_keyword.snippet,
 
   open = "<F6>",
 }
