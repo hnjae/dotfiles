@@ -1,5 +1,10 @@
 # https://nixos.org/manual/nix/stable/language/index.html
 
+snippet b "bracket"
+	[$0];
+snippet p "parentheses"
+	($0);
+
 snippet if if-then-else
 	if (${1:true}) then ($2) else ($3)
 snippet im "import other nix file"

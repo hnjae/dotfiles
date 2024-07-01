@@ -23,3 +23,6 @@ snippet hack hack
 # @comment.error
 snippet deprecated deprecated
 	`luaeval("string.format(vim.bo.commentstring, string.find(vim.bo.commentstring, ' ') and 'DEPRECATED:' or ' DEPRECATED:')")` $0 <`strftime("%Y-%m-%d")`>
+
+snippet uuid uuidv4
+	`system("uuidgen | tr -d '\n'")`

@@ -27,3 +27,5 @@ snippet scriptdir "It will NOT resolve path. It will NOT WORK if script is being
 	$0"\$(cd -- "\$(dirname -- "$0")" && pwd -P)" >/dev/null 2>&1
 snippet symlinkreslove ""
 	readlink -f -- <path>
+snippet dateiso8601 "ISO-8601 date"
+	date -u +"%Y-%m-%dT%H:%M:%SZ"

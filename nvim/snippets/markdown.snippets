@@ -1,14 +1,16 @@
-snippet /link insert link
+snippet sl insert link
 	[${2:link}](${1:https://example.com})$0
-snippet link insert link
-	[${2:link}](${1:https://example.com})$0
-snippet ___ thematic break
+snippet sthematic-break thematic break
 	---
+snippet scode "code block"
+	\`\`\`${1:lang}
+	${0:TM_SELECTED_TEXT}
+	\`\`\`
 snippet *** thematic break
 	---
 snippet --- thematic break
 	---
-snippet table
+snippet stable
 	| $0name  | foo  |
 	| :------ | :--: |
 	| foobar  | bar  |
