@@ -24,8 +24,13 @@ return {
     optional = true,
     opts = {
       servers = {
-        -- NOTE: last update: 2022-06-14 <2024-01-05>
-        rnix = {
+        -- NOTE: archived projects <2024-01-26>
+        -- rnix = {
+        --   ---@class LspconfigSetupOptsSpec
+        --   settings = {},
+        -- },
+        nil_ls = {
+          -- https://github.com/oxalica/nil
           ---@class LspconfigSetupOptsSpec
           settings = {},
         },

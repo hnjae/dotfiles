@@ -16,8 +16,9 @@ return {
     optional = true,
     opts = function(_, opts)
       opts.formatters_by_ft.python = {
-        { "ruff", "black" },
+        { "black" },
         "isort",
+        "ruff",
       }
     end,
   },
@@ -34,21 +35,24 @@ return {
         --   ---@class LspconfigSetupOptsSpec
         --   settings = {},
         -- },
+
         -- pyright = {
         --   -- a static type checker and language server for python
         --   ---@class LspconfigSetupOptsSpec
         --   settings = {},
         -- },
-        jedi_language_server = {
-          ---@class LspconfigSetupOptsSpec
-          settings = {},
-        },
-        -- pylsp = {
-        --   document 없음
-        --   -- https://github.com/python-lsp/python-lsp-server
+
+        -- jedi_language_server = {
         --   ---@class LspconfigSetupOptsSpec
         --   settings = {},
         -- },
+
+        pylsp = {
+          --   document 없음
+          --   -- https://github.com/python-lsp/python-lsp-server
+          ---@class LspconfigSetupOptsSpec
+          settings = {},
+        },
 
         -- misc
         ruff_lsp = {

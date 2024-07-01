@@ -23,9 +23,10 @@ return {
           javascriptreact = { formatter },
           json = { formatter },
           jsonc = { formatter },
-          markdown = { formatter },
+          -- markdown = { formatter },
         }
-      elseif require("utils").lsp.is_prettier() then
+      -- elseif require("utils").lsp.is_prettier() then
+      else
         formatter = { "prettierd", "prettier" }
         formatters_by_ft = {
           typescript = { formatter },
@@ -43,11 +44,12 @@ return {
           graphql = { formatter },
           handlebars = { formatter },
 
-          markdown = { formatter },
+          -- markdown = { formatter },
           -- yaml = { formatter },
           ["markdown.mdx"] = { formatter },
         }
       end
+
       for key, val in pairs(formatters_by_ft) do
         opts.formatters_by_ft[key] = val
       end

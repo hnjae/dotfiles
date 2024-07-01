@@ -61,6 +61,7 @@ return {
     end,
   },
   {
+    -- alternative: ellisonleao/glow.nvim
     [1] = "toppair/peek.nvim",
     ft = { "markdown" },
     enabled = vim.fn.executable("deno") == 1,
@@ -110,6 +111,35 @@ return {
           )
         end,
       })
+    end,
+  },
+  {
+    [1] = "stevearc/conform.nvim",
+    optional = true,
+    opts = function(_, opts)
+      local formatter = {}
+      local formatters_by_ft = {}
+
+      if require("utils").lsp.is_deno() then
+        formatter = { "deno_fmt" }
+        formatters_by_ft = {
+          markdown = { formatter },
+        }
+      -- elseif require("utils").lsp.is_prettier() then
+      elseif vim.fn.executable("prettier") == 1 then
+        formatter = { "prettierd", "prettier" }
+        formatters_by_ft = {
+          markdown = { formatter },
+        }
+      else
+        formatters_by_ft = {
+          markdown = { { "cbfmt", "mdsf" }, "markdownlint" },
+        }
+      end
+
+      for key, val in pairs(formatters_by_ft) do
+        opts.formatters_by_ft[key] = val
+      end
     end,
   },
 }
