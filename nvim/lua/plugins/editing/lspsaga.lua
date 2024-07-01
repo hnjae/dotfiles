@@ -1,3 +1,5 @@
+-- alternative: https://github.com/utilyre/barbecue.nvim
+
 ---@type LazySpec[]
 local M = {
   {

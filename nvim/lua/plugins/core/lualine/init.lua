@@ -22,10 +22,13 @@ return {
         theme = require(package_path .. ".theme"),
 
         -- NOTE: do not use something like   <2024-03-07>
+        -- component_separators = utils.enable_icon
+        --     and { left = "", right = "" }
+        --   or { left = "❘", right = "❘" },
+
         component_separators = utils.enable_icon
-            and { left = "", right = "" }
-          -- and { left = "┃", right = "┃" }
-          or { left = "❘", right = "❘" },
+            and { left = "|", right = "|" }
+          or { left = "┃", right = "┃" },
         -- component_separators = { left = "", right = "" },
         -- section_separators = { left = "", right = "" },
         -- section_separators = { left = "", right = "" },

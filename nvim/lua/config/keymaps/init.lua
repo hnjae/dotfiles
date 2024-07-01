@@ -157,15 +157,19 @@ M.setup = function()
   --------------------------------------------------------------------------------
   -- {{{ clipboard
   --------------------------------------------------------------------------------
+  -- stylua: ignore start
+  vim.keymap.set( { "n", "x", "s" }, "<F12>",   [["+y]], { desc = "yank-to-clipboard" } )
+  vim.keymap.set( { "n", "v", "s" }, "<S-F12>", [["+p]], { desc = "paste-from-clipboard" })
+  -- stylua: ignore end
+  -- }}}
+  --------------------------------------------------------------------------------
+  -- {{{  misc
   vim.keymap.set(
-    { "n", "x", "s" },
-    "<F12>",
-    [["+y]],
-    { desc = "yank-to-clipboard" }
+    { "n" },
+    "<S-F5>",
+    ":source $MYVIMRC<CR>",
+    { desc = "resource init.lua" }
   )
-  -- vim.keymap.set({ "n", "v" }, "<F12>", [["+y]], { desc = "copy-to-clipboard" })
-  -- vim.keymap.set({ "n", "v", "i" }, "<S-F12>", [["+p]], { desc = "paste-from-clipboard" })
-  -- vim.keymap.set({ "n", "v", "i" }, "<F24>", [["+p]], { desc = "paste-from-clipboard" })
   -- }}}
   --------------------------------------------------------------------------------
   -- vim.keymap.set({"n", "t"}, "<left>", "<cmd>wincmd h<CR>")

@@ -112,6 +112,8 @@ return {
 
     ----------------------------------------------------------------------------
     -- {{{ formatting
+    -- NOTE: cmp formatting: https://github.com/hrsh7th/nvim-cmp/issues/511#issuecomment-1063014008 <2024-05-01>
+    -- vim_item.dup 프로퍼티로 duplicate 부분 제어가 가능한 것 같다.
     opts.formatting = {}
 
     local enable_icon = require("utils").enable_icon

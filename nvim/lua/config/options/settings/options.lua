@@ -47,7 +47,7 @@ vim.opt.backup = false
 -- https://vim.fandom.com/wiki/Word_wrap_without_line_breaks
 vim.opt.wrap = true
 vim.opt.textwidth = 0
-vim.opt.linebreak = true -- 단어 중간에 wrap 금지
+vim.opt.linebreak = false -- true 면 단어 중간에 wrap 금지
 
 -------------------------------------------------------------------------------
 -- complete: set the matches for insert mode completion

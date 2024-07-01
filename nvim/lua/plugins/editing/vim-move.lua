@@ -1,6 +1,7 @@
+-- move text
+
 ---@type LazySpec
 return {
-  -- move text
   [1] = "matze/vim-move",
   lazy = true,
   ---@type LazyKeysSpec[]

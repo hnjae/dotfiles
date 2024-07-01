@@ -103,49 +103,52 @@ return {
         TypeDefinition = icons.TypeParameter,
         -- }}}
 
+        -- stylua: ignore start
         -- {{{ Functions
         FunctionBuiltin = icons.Function,
-        FunctionCall = icons.Function,
+        FunctionCall    = icons.Function,
+
         FunctionMacro = icons.Macro,
-        FunctionMethod = icons.Method,
+
+        FunctionMethod     = icons.Method,
         FunctionMethodCall = icons.Method,
         -- }}}
 
         -- {{{ Keywords
         KeywordCoroutine = icons.Keyword,
-        KeywordFunction = icons.Keyword,
-        KeywordOperator = icons.Keyword,
-        KeywordImport = icons.Keyword,
-        KeywordType = icons.Keyword,
-        KeywordModifier = icons.Keyword,
-        KeywordRepeat = icons.Keyword,
-        KeywordReturn = icons.Keyword,
-        KeywordDebug = icons.Keyword,
+        KeywordFunction  = icons.Keyword,
+        KeywordOperator  = icons.Keyword,
+        KeywordImport    = icons.Keyword,
+        KeywordType      = icons.Keyword,
+        KeywordModifier  = icons.Keyword,
+        KeywordRepeat    = icons.Keyword,
+        KeywordReturn    = icons.Keyword,
+        KeywordDebug     = icons.Keyword,
         KeywordException = icons.Keyword,
 
-        KeywordConditional = icons.Keyword,
+        KeywordConditional        = icons.Keyword,
         KeywordConditionalTernary = icons.Keyword,
 
-        KeywordDirective = icons.Keyword,
+        KeywordDirective       = icons.Keyword,
         KeywordDirectiveDefine = icons.Keyword,
         -- }}}
 
         -- {{{ punctuation
-        PunctuationSpecial = "", -- nf-cod-quote
-        PunctuationBracket = "", -- nf-cod-quote
+        PunctuationSpecial   = "", -- nf-cod-quote
+        PunctuationBracket   = "", -- nf-cod-quote
         PunctuationDelimiter = "", -- nf-cod-quote
         -- }}}
 
         -- {{{ Comments
-        Comment = "", -- nf-cod-comment
+        Comment              = "", -- nf-cod-comment
         CommentDocumentation = "", -- nf-cod-comment
-        CommentError = "", -- nf-cod-comment
-        CommentWarning = "", -- nf-cod-comment
-        CommentTodo = "", -- nf-cod-comment
-        CommentNote = "", -- nf-cod-comment
+        CommentError         = "", -- nf-cod-comment
+        CommentWarning       = "", -- nf-cod-comment
+        CommentTodo          = "", -- nf-cod-comment
+        CommentNote          = "", -- nf-cod-comment
         -- }}}
-
         -- {{{ Markup
+        MarkupHeading  = "", -- nf-cod-markdown
         MarkupHeading1 = "", -- nf-cod-markdown
         MarkupHeading2 = "", -- nf-cod-markdown
         MarkupHeading3 = "", -- nf-cod-markdown
@@ -153,34 +156,37 @@ return {
         MarkupHeading5 = "", -- nf-cod-markdown
         MarkupHeading6 = "", -- nf-cod-markdown
 
-        MarkupQuote = "", -- nf-cod-quote
-        MarkupMath = "", -- nf-cod-markdown
-
-        MarkupLink = "", -- nf-cod-link
+        MarkupLink      = "", -- nf-cod-link
         MarkupLinkLabel = "󰌖", -- nf-md-label_outline
-        MarkupLinkUrl = "", -- nf-cod-link
+        MarkupLinkUrl   = "", -- nf-cod-link
 
-        MarkupRaw = "", -- nf-cod-markdown
-        MarkupRawBlock = "", -- nf-cod-markdown
-
-        MarkupList = "", -- nf-cod-markdown
-        MarkupListChecked = "", -- nf-cod-markdown
+        MarkupList          = "", -- nf-cod-markdown
+        MarkupListChecked   = "", -- nf-cod-markdown
         MarkupListUnchecked = "", -- nf-cod-markdown
 
+        MarkupRaw      = "", -- nf-cod-markdown
+        MarkupRawBlock = "", -- nf-cod-markdown
+
+        MarkupQuote = "", -- nf-cod-quote
+
+        MarkupMath = "", -- nf-cod-markdown
+        -- }}}
+
         -- {{{ diff
-        DiffPlus = "", -- nf-cod-diff_added
+        DiffPlus  = "", -- nf-cod-diff_added
         DiffMinus = "", -- nf-cod-diff_removed
         DiffDelta = "", -- nf-cod-diff_modified
         -- }}}
 
-        -- {{{
-        Tag = "", -- nf-cod-tags
-        TagBuiltin = icons.Method,
+        -- {{{ tag
+        Tag          = "", -- nf-cod-tags
+        TagBuiltin   = icons.Method,
         TagAttribute = icons.Property,
         TagDelimiter = icons.Keyword,
         -- }}}
 
-        -- }}}
+        StringSpecialUrl = icons.String,
+        -- stylua: ignore end
 
         None = icons.Null,
         Spell = "󰓆", -- nf-md-spellcheck

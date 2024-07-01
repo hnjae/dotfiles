@@ -1,3 +1,5 @@
+-- snippet plugin
+
 ---@type LazySpec[]
 return {
   {
@@ -5,58 +7,32 @@ return {
     lazy = true,
     enabled = true,
     event = { "InsertEnter" },
+    cmd = {
+      "SnippyEdit",
+      "SnippyReload",
+    },
     ft = {
       "snippets",
     },
-    opts = function()
-      return {
-        snippet_dirs = require("plenary.path"):new(
-          vim.fn.stdpath("config"),
-          "snippets"
-        ).filename,
+    opts = function(_, opts)
+      opts.snippet_dirs = require("plenary.path"):new(
+        vim.fn.stdpath("config"),
+        "snippets"
+      ).filename
+
+      opts.virtual_markers = {
+        enabled = vim.fn.has("nvim-0.10"),
       }
     end,
     ---@type fun(LazyPlugin, opts: table): LazyKeysSpec[]
     keys = function()
       local snippy = require("snippy")
       return {
-        -- NOTE: cmp 에서 관리 <2024-03-11>
-        -- {
-        --   [1] = "<Tab>",
-        --   [2] = function()
-        --     return snippy.can_expand_or_advance()
-        --         and "<Plug>(snippy-expand-or-advance)"
-        --       or "<Tab>"
-        --   end,
-        --   mode = "i",
-        --   desc = "snippy-expand-or-advance",
-        --   expr = true,
-        -- },
-        -- {
-        --   [1] = "<S-Tab>",
-        --   [2] = function()
-        --     return snippy.can_jump(-1) and "<plug>(snippy-previous)" or "<S-Tab>"
-        --   end,
-        --   mode = "i",
-        --   desc = "snippy-previous",
-        --   expr = true,
-        -- },
-        {
-          [1] = "<Tab>",
-          [2] = function()
-            snippy.next("<Tab>")
-          end,
-          mode = "n",
-          desc = "snippy-next-or-tab",
-        },
-        {
-          [1] = "<S-Tab>",
-          [2] = function()
-            snippy.previous("<S-Tab>")
-          end,
-          mode = "n",
-          desc = "snippy-previous-or-s-tab",
-        },
+        -- stylua: ignore start
+        { [1] = "<Tab>",   [2] = function() snippy.next("<Tab>") end,       mode = "n", desc = "snippy-next-or-tab" },
+        { [1] = "<S-Tab>", [2] = function() snippy.previous("<S-Tab>") end, mode = "n", desc = "snippy-previous-or-s-tab" },
+        -- stylua: ignore end
+
         {
           [1] = "<Tab>",
           [2] = "<Plug>(snippy-cut-text)",
@@ -94,6 +70,14 @@ return {
     opts = function(_, opts)
       local snippy = require("snippy")
       local cmp = require("cmp")
+
+      if not opts.sources then
+        opts.sources = {}
+      end
+
+      if not opts.mapping then
+        opts.mapping = {}
+      end
 
       opts.snippet = {
         -- REQUIRED - you must specify a snippet engine

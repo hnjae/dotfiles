@@ -27,16 +27,21 @@ return {
     api_key_cmd = "op read op://Personal/OpenAI/api/editor --no-newline",
     openai_params = {
       -- model = "gpt-3.5-turbo",
-      model = "gpt-4-1106-preview",
+      model = "gpt-4o",
     },
     openai_edit_params = {
-      model = "gpt-4-1106-preview",
+      model = "gpt-4o",
     },
     actions_paths = {
       require("plenary.path"):new(
         vim.fn.stdpath("config"),
         "chatgpt",
         "default-actions.json"
+      ).filename,
+      require("plenary.path"):new(
+        vim.fn.stdpath("config"),
+        "chatgpt",
+        "custom-actions.json"
       ).filename,
     },
   },

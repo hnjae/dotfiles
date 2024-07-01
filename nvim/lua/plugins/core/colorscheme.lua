@@ -1,6 +1,11 @@
+-- TODO: terminal 색상 읽어서, 맞춰서 변경하기 <2024-06-11>
+-- vim.opt.background = "dark"
+
 -- colorscheme
 ---@type table<string, integer>
 local colorschemes = {
+  ansi = -1,
+  ---
   vscode = 1,
   kanagawa = 2,
   github = 3,
@@ -11,18 +16,35 @@ local colorschemes = {
   rasmus = 31,
   neon = 32,
   gruvbox = 33,
+  --
 }
 
 local colorscheme = colorschemes[require("val.colorscheme")]
 if colorscheme == nil then
-  colorscheme = 1
+  colorscheme = -1
 end
-
--- local colorscheme = colorschemes.rasmus
--- local colorscheme = colorschemes.adwaita
 
 ---@type LazySpec[]
 return {
+  {
+    dir = vim.fn.getenv("HOME") .. "/Projects/ansi.nvim",
+    priority = 999999999,
+    cond = colorscheme == colorschemes.ansi,
+    name = "ansi",
+    lazy = false,
+    opts = {},
+  },
+  {
+    [1] = "jsit/disco.vim",
+    lazy = false,
+    cond = colorscheme == colorschemes.disco,
+    priority = 999999999,
+    opts = {},
+    init = function() end,
+    config = function()
+      vim.cmd([[colorscheme disco]])
+    end,
+  },
   {
     [1] = "Mofiqul/vscode.nvim",
     -- NOTE: does not support htmlH1 (2022-06-21)
@@ -33,7 +55,9 @@ return {
       italic_comments = true,
     },
     init = function()
-      vim.o.background = "dark"
+      if vim.opt.background:get() == nil then
+        vim.opt.background = "dark"
+      end
       vim.g.vscode_style = vim.o.background
     end,
     config = function()
@@ -100,7 +124,11 @@ return {
       github_dark_dimmed
       ]]
       require(plugin.main).setup(opts)
-      vim.cmd("colorscheme github_dark_default")
+      if vim.opt.background:get() == "light" then
+        vim.cmd("colorscheme github_light_default")
+      else
+        vim.cmd("colorscheme github_dark_default")
+      end
     end,
   },
   {
@@ -109,7 +137,10 @@ return {
     priority = 999999999,
     cond = colorscheme == colorschemes.neon,
     config = function()
-      vim.g.neon_style = "dark"
+      if vim.opt.background:get() == "light" then
+      else
+        vim.g.neon_style = "dark"
+      end
       vim.cmd([[colorscheme neon]])
     end,
   },
@@ -118,7 +149,15 @@ return {
     lazy = false,
     priority = 999999999,
     cond = colorscheme == colorschemes.gruvbox,
-    config = function()
+    opts = {
+      -- dim_inactive = true,
+    },
+    config = function(_, opts)
+      require("gruvbox").setup(opts)
+      --[[
+       NOTE: <2024-05-16>
+       gruvbox.nvim 는 vim.opt.background 값에 맞춰서 알아서 설정됨.
+      ]]
       vim.cmd([[colorscheme gruvbox]])
     end,
   },
@@ -138,7 +177,11 @@ return {
       kanagawa-lotus: light theme
       kanagawa-wave: puple theme
       ]]
-      vim.cmd([[colorscheme kanagawa-wave]])
+      if vim.opt.background:get() == "light" then
+        vim.cmd([[colorscheme kanagawa-lotus]])
+      else
+        vim.cmd([[colorscheme kanagawa-dragon]])
+      end
     end,
   },
   {
@@ -147,7 +190,10 @@ return {
     priority = 999999999,
     cond = colorscheme == colorschemes.tokyonight,
     config = function()
-      vim.cmd([[colorscheme tokyonight-night]])
+      if vim.opt.background:get() == "light" then
+      else
+        vim.cmd([[colorscheme tokyonight-night]])
+      end
     end,
   },
 }

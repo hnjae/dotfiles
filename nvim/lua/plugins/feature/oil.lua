@@ -1,3 +1,5 @@
+local REPLACE_NETRW = true
+
 local map_keyword = require("val").map_keyword
 
 ---@type LazySpec[]
@@ -5,7 +7,7 @@ return {
   {
     [1] = "stevearc/oil.nvim",
     lazy = true,
-    -- event = "VeryLazy",
+    event = REPLACE_NETRW and "VimEnter" or nil,
     enabled = true,
     dependencies = {
       "nvim-tree/nvim-web-devicons",
@@ -22,7 +24,7 @@ return {
     },
     opts = {
       use_default_keymaps = false,
-      default_file_explorer = false, -- replace netrw
+      default_file_explorer = REPLACE_NETRW, -- replace netrw
       delete_to_trash = true,
       columns = {
         {

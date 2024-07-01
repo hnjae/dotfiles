@@ -7,7 +7,7 @@ return {
   [1] = "folke/flash.nvim",
   lazy = true,
   event = "VeryLazy",
-  enabled = true,
+  enabled = false,
   keys = {
     -- stylua: ignore start
     {[1] = "s",    mode = { "o", "x" },      [2] = function() require("flash").treesitter_search() end, desc = "Treesitter Search" },

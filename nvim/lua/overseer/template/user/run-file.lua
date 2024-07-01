@@ -8,7 +8,11 @@ return {
     if vim.bo.filetype == "go" then
       cmd = { "go", "run", file }
     elseif vim.bo.filetype == "typescript" then
-      cmd = { "bun", file }
+      if vim.fn.executable("ts-node") == 1 then
+        cmd = { "ts-node", file }
+      else
+        cmd = { "bun", file }
+      end
     elseif vim.bo.filetype == "python" then
       cmd = { "ipython3", file }
     elseif vim.bo.filetype == "zsh" then

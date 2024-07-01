@@ -1,9 +1,7 @@
 return {
-  ".git",
+  ".envrc",
   ".editorconfig",
-  -- "flake.nix",
   ".neoconf.json",
   ".nlsp-settings",
-  -- ".envrc",
-  -- ".gitignore",
+  ".git",
 }
