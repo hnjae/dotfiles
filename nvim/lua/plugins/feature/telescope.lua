@@ -21,6 +21,14 @@ return {
         end)
       end,
     },
+    -- {
+    --   [1] = "nvim-telescope/telescope-frecency.nvim",
+    --   config = function()
+    --     require("utils.plugin").on_load("telescope.nvim", function()
+    --       require("telescope").load_extension("frecency")
+    --     end)
+    --   end,
+    -- },
     {
       -- replace vim.ui.select with telescope
       [1] = "nvim-telescope/telescope-ui-select.nvim",
