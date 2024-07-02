@@ -15,10 +15,7 @@ return {
         lualine_a = {
           require(lualine_path .. ".components.mode-enhanced"),
         },
-        lualine_x = {
-          require(lualine_path .. ".components.noice-search"),
-          require(lualine_path .. ".components.noice-command"),
-        },
+        lualine_x = {},
         lualine_z = {
           require(lualine_path .. ".components.progress"),
           "location",

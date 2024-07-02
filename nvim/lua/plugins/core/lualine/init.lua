@@ -58,14 +58,6 @@ return {
         require(package_path .. ".components.filename"),
       },
       lualine_x = {
-        {
-          component = require(package_path .. ".components.noice-command"),
-          priority = 20,
-        },
-        {
-          component = require(package_path .. ".components.noice-search"),
-          priority = 20,
-        },
         -- {
         --   component = require(package_path .. ".components.lsp-null-ls")(
         --     opts.options
