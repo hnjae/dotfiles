@@ -13,9 +13,9 @@ local colorschemes = {
   ---
   adwaita = 11,
   ---
-  rasmus = 31,
-  neon = 32,
   gruvbox = 33,
+  -- rasmus = 31,
+  -- neon = 32,
   --
 }
 
@@ -127,7 +127,7 @@ return {
       if vim.opt.background:get() == "light" then
         vim.cmd("colorscheme github_light_default")
       else
-        vim.cmd("colorscheme github_dark_default")
+        vim.cmd("colorscheme github_dark")
       end
     end,
   },
@@ -175,7 +175,7 @@ return {
       --[[
       kanagawa-dragon: dark theme
       kanagawa-lotus: light theme
-      kanagawa-wave: puple theme
+      kanagawa-wave: puple theme and colors are more bright
       ]]
       if vim.opt.background:get() == "light" then
         vim.cmd([[colorscheme kanagawa-lotus]])
@@ -191,6 +191,7 @@ return {
     cond = colorscheme == colorschemes.tokyonight,
     config = function()
       if vim.opt.background:get() == "light" then
+        vim.cmd([[colorscheme tokyonight-day]])
       else
         vim.cmd([[colorscheme tokyonight-night]])
       end
