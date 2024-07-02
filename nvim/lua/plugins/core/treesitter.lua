@@ -9,15 +9,14 @@ end
 local M = {
   {
     [1] = "nvim-treesitter/nvim-treesitter",
-    build = "<cmd>TSUpdateSync<CR>",
+    build = ":TSUpdate",
     lazy = false,
     enabled = true,
-    event = { "VeryLazy" },
-    -- event = { "BufReadPost", "BufNewFile" },
+    event = { "VeryLazy" }, -- { "BufReadPost", "BufNewFile" },
     init = function() end,
     opts = {
-      sync_install = true,
-      auto_install = true,
+      sync_install = false,
+      auto_install = false,
       ignore_install = {},
       highlight = {
         enable = true,
