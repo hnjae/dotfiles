@@ -133,6 +133,11 @@ return {
         }
       else
         formatters_by_ft = {
+          --[[
+          NOTE:
+          cbfmt: format codeblocks inside markdown
+          mdsf: format markdown ocde blocks
+            ]]
           markdown = { { "cbfmt", "mdsf" }, "markdownlint" },
         }
       end

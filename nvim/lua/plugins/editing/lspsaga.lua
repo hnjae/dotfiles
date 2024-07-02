@@ -124,6 +124,7 @@ local M = {
   },
   {
     [1] = "nvim-lualine/lualine.nvim",
+    optional = true,
     opts = function(_, opts)
       -- :h lualine-Custom-components
       local modules = require("lualine_require").lazy_require({
@@ -152,7 +153,6 @@ local M = {
 
       table.insert(opts.tabline.lualine_a, component)
     end,
-    optional = true,
   },
 }
 
