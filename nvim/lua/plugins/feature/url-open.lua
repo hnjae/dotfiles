@@ -14,6 +14,6 @@ return {
     { [1] = "gx", [2] = "<cmd>URLOpenUnderCursor<CR>", desc = "url-open" },
   },
   opts = {
-    open_only_when_cursor_on_url = true,
+    open_only_when_cursor_on_url = false,
   },
 }

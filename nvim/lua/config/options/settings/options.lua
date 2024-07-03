@@ -5,7 +5,7 @@
 vim.opt.showmode = true -- no showmode under status line. e.g.) INSERT, REPLACE
 vim.opt.cursorline = true -- cursorline = color cursorline
 vim.opt.showcmd = true -- showcmd under status line. e.g.) 32j
--- vim.opt.cmdheight = 1
+vim.opt.cmdheight = 1
 
 vim.opt.ruler = true -- display ruler on the right side of the *status line*
 vim.opt.number = true -- display number of lines left

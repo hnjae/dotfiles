@@ -6,3 +6,8 @@ vim.opt_local.expandtab = true
 
 vim.opt_local.wrap = true
 vim.opt_local.linebreak = true -- 단어 중간 wrap 금지
+
+-- indent (use treesitter)
+vim.opt_local.cindent = false
+vim.opt_local.autoindent = false
+vim.opt_local.smartindent = false
