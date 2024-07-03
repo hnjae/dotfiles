@@ -43,4 +43,16 @@ return {
 
     return ret
   end,
+  specs = {
+    {
+      [1] = "folke/which-key.nvim",
+      optional = true,
+      opts = {
+        operators = {
+          gc = "comment-line",
+          gb = "comment-block",
+        },
+      },
+    },
+  },
 }
