@@ -5,7 +5,7 @@ return {
   -- alternative:  "vigoux/notifier.nvim",
   [1] = "rcarriga/nvim-notify",
   lazy = true,
-  enabled = true,
+  enabled = false,
   event = {
     "VeryLazy",
   },
@@ -74,4 +74,22 @@ return {
       vim.notify = notify.async
     end
   end,
+  ---@type LazySpec[]
+  specs = {
+    {
+      [1] = "nvim-telescope/telescope.nvim",
+      optional = true,
+      ---@type fun(LazyPlugin, keys: LazyKeysSpec[]): nil
+      keys = function(_, keys)
+        local prefix = require("val").prefix
+
+        local key = {
+          [1] = prefix.finder .. "hn",
+          [2] = require("telescope").extensions.notify.notify,
+          desc = "notify-history",
+        }
+        table.insert(keys, key)
+      end,
+    },
+  },
 }

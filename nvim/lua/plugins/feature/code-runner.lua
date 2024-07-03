@@ -10,7 +10,7 @@ return {
     cond = vim.fn.executable("cargo") == 1,
     build = "sh ./install.sh 1",
     dependencies = {
-      "rcarriga/nvim-notify",
+      { [1] = "rcarriga/nvim-notify", optional = true },
     },
     opts = {
       -- selected_interpreters = { "Python3_fifo" },

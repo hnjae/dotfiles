@@ -86,7 +86,6 @@ return {
       { [1] = prefix.finder .. "hs", [2] = t_builtin.search_history,  desc = "search-history" },
       { [1] = prefix.finder .. "hk", [2] = t_builtin.keymaps,         desc = "keymaps-history" },
       { [1] = prefix.finder .. "hf", [2] = t_builtin.oldfiles,        desc = "oldfiles-history" },
-      { [1] = prefix.finder .. "hn", [2] = require("telescope").extensions.notify.notify, desc = "notify-history" },
       -- stylua: ignore end
 
 
