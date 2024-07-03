@@ -2,6 +2,8 @@ local prefix = require("val").prefix
 local map_keyword = require("val").map_keyword
 
 local keyword_alpha = "p"
+
+---@type LazySpec
 return {
   [1] = "goolord/alpha-nvim",
   lazy = false,

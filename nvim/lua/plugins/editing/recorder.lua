@@ -9,56 +9,56 @@ local mapping = {
   addBreakPoint = "##",
 }
 
----@type LazySpec[]
+---@type LazySpec
 return {
-  {
-    [1] = "chrisgrieser/nvim-recorder",
-    lazy = true,
-    enabled = true,
-    keys = {
-      { [1] = mapping.startStopRecording, desc = "macro" },
-      { [1] = mapping.playMacro, desc = "play-macry" },
-      { [1] = mapping.deleteAllMacros, desc = "delete-all-macros" },
-      { [1] = mapping.editMacro, desc = "edit-macro" },
-      { [1] = mapping.yankMacro, desc = "yank-macro" },
-      { [1] = mapping.addBreakPoint, desc = "add-break-point" },
-    },
-    dependencies = {},
-    opts = {
-      mapping = mapping,
-      useNerdfontIcons = false, -- which-key description scope를 더럽힘
-      -- require("utils").enable_icon,
-      -- lessNotifications = true,
-    },
+  [1] = "chrisgrieser/nvim-recorder",
+  lazy = true,
+  enabled = true,
+  keys = {
+    { [1] = mapping.startStopRecording, desc = "macro" },
+    { [1] = mapping.playMacro, desc = "play-macry" },
+    { [1] = mapping.deleteAllMacros, desc = "delete-all-macros" },
+    { [1] = mapping.editMacro, desc = "edit-macro" },
+    { [1] = mapping.yankMacro, desc = "yank-macro" },
+    { [1] = mapping.addBreakPoint, desc = "add-break-point" },
   },
-  {
-    [1] = "nvim-lualine/lualine.nvim",
-    optional = true,
-    opts = function(_, opts)
-      local modules = require("lualine_require").lazy_require({
-        recorder = "recorder",
-      })
-      local component = {
-        [1] = modules.recorder.recordingStatus,
-      }
+  dependencies = {},
+  opts = {
+    mapping = mapping,
+    useNerdfontIcons = false, -- which-key description scope를 더럽힘
+    -- require("utils").enable_icon,
+    -- lessNotifications = true,
+  },
+  specs = {
+    {
+      [1] = "nvim-lualine/lualine.nvim",
+      optional = true,
+      opts = function(_, opts)
+        local modules = require("lualine_require").lazy_require({
+          recorder = "recorder",
+        })
+        local component = {
+          [1] = modules.recorder.recordingStatus,
+        }
 
-      if
-        not require("lazy.core.config").plugins["nvim-recorder"].opts.useNerdfontIcons
-        and require("utils").enable_icon
-      then
-        local icon = " " -- nf-cod-record
-        component.fmt = function(str)
-          if str ~= "" then
-            return icon .. str
+        if
+          not require("lazy.core.config").plugins["nvim-recorder"].opts.useNerdfontIcons
+          and require("utils").enable_icon
+        then
+          local icon = " " -- nf-cod-record
+          component.fmt = function(str)
+            if str ~= "" then
+              return icon .. str
+            end
+
+            return str
           end
-
-          return str
         end
-      end
 
-      table.insert(opts.tabline.lualine_x, {
-        component = component,
-      })
-    end,
+        table.insert(opts.tabline.lualine_x, {
+          component = component,
+        })
+      end,
+    },
   },
 }

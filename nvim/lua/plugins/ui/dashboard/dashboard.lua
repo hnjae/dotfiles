@@ -1,5 +1,6 @@
 -- local keyword_alpha = "p"
 
+---@type LazySpec
 return {
   [1] = "nvimdev/dashboard-nvim",
   lazy = false,

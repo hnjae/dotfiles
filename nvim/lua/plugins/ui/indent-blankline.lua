@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
   -- shows indent line
   [1] = "lukas-reineke/indent-blankline.nvim",
