@@ -1,0 +1,37 @@
+{
+  "translate": {
+    "type": "chat",
+    "opts": {
+      "template": "Translate this into {{lang}}:\n\n{{input}}",
+      "strategy": "edit",
+      "params": {
+        "model": "gpt-4o",
+        "temperature": 0.3
+      }
+    },
+    "args": {
+      "lang": {
+        "type": "string",
+        "optional": "true",
+        "default": "english"
+      }
+    }
+  },
+  "grammar_correction": {
+    "type": "chat",
+    "opts": {
+      "template": "Correct this to standard {{lang}}:\n\n{{input}}",
+      "strategy": "edit",
+      "params": {
+        "model": "gpt-4o"
+      }
+    },
+    "args": {
+      "lang": {
+        "type": "string",
+        "optional": "true",
+        "default": "english"
+      }
+    }
+  }
+}

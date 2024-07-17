@@ -1,14 +1,24 @@
 {
-  "complete_code": {
+  "generate_variable_name": {
     "type": "chat",
     "opts": {
-      "template": "I want you to act as a variable name generator for a programming project I am working on. I will mention the type of function or data the variable pertains to, and you will generate a semantically appropriate and readable variable name in camelCase/underscore_format, depending on my preference. The names should seek to explain the purpose of the variable without being excessively long. Keep in mind that variable names should adhere to naming conventions and must be perceptive to someone reading the code. For instance, {{input}} in {{filetype}}\n",
-      "strategy": "replace",
+      "template": "I want you to act as a variable name generator for a programming project I am working on. I will mention the type of function or data the variable pertains to, and you will generate a semantically appropriate and readable variable. The names should seek to explain the purpose of the variable without being excessively long. Keep in mind that variable names should adhere to naming conventions and must be perceptive to someone reading the code. For instance, {{input}} in {{filetype}}\n",
+      "strategy": "edit",
       "params": {
         "model": "gpt-4o",
         "stop": [
           "```"
         ]
+      }
+    }
+  },
+  "edit_commit_message": {
+    "type": "chat",
+    "opts": {
+      "template": "I want you to act as a commit message generator. I will provide you with information about the task and the prefix for the task code, and I would like you to generate an appropriate commit message using the conventional commit format. The commit message must be in English. Do not write any explanations or other words, just reply with the commit message. \n\n```gitcommit\n{{input}}\n```",
+      "strategy": "edit",
+      "params": {
+        "model": "gpt-4o"
       }
     }
   }
