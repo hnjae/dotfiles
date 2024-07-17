@@ -70,6 +70,7 @@ M.setup = function()
         },
       },
     },
+    concurrency = 12,
     lockfile = vim.fn.stdpath("config") .. "/lazy-lock.json",
   })
 end
