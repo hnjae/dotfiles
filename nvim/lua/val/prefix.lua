@@ -4,12 +4,12 @@ local map_keyword = require(package_path .. ".map-keyword")
 -- this prefix will be registered by which.key
 return {
   -- NOTE(buffer): filetype 에 따라 달라지거나, buffer 와 interact 하는 기능 할당.
-  buffer = "s",
-  toggleterm_send = "s" .. map_keyword.terminal,
-  buffer_finder = "s" .. map_keyword.finder,
-  sniprun = "sr",
-  task = "s" .. map_keyword.task,
-  repl = "sp",
+  buffer = "<LocalLeader>",
+  toggleterm_send = "<LocalLeader>" .. map_keyword.terminal,
+  buffer_finder = "<LocalLeader>" .. map_keyword.finder,
+  sniprun = "<LocalLeader>" .. "r",
+  task = "<LocalLeader>" .. map_keyword.task,
+  repl = "<LocalLeader>" .. "p",
 
   -- NOTE(close): 무언가를 닫거나, clear 하는 기능을 할당.
   -- close = "Z",

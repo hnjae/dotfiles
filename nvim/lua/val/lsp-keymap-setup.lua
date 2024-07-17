@@ -1,5 +1,7 @@
--- vim:foldmethod=marker:foldlevel=0:foldenable:tw=0
+-- vim:foldmethod=marker:foldlevel=1:foldenable:tw=0
 local package_path = (...):match("(.-)[^%.]+$")
+
+-- TODO: 기본적으로 vim.lsb.buf 함수들로 설정 하고,  lspsaga 설정에서 vim.lsb.buf 관련 함수들을 덮어쓰기로 해결하는게 더 깔끔할듯. <2024-07-17>
 
 local is_setup = false
 return function()
@@ -12,8 +14,6 @@ return function()
   local map_keyword = require(package_path .. ".map-keyword")
   local utils = require("utils")
 
-  -- local plugins = require("lazy.core.config").plugins
-  -- local is_lspsaga, _ = pcall(require, "lspsaga")
   local is_lspsaga = utils.is_plugin("lspsaga.nvim")
   local is_wk, wk = pcall(require, "which-key")
 
@@ -47,10 +47,6 @@ return function()
     local func_opts = map[2]
         and {
           severity = vim.diagnostic.severity[map[2]],
-          -- severity = {
-          --   min = vim.diagnostic.severity[type[2]],
-          --   max = vim.diagnostic.severity[type[2]],
-          -- },
         }
       or {}
     local keymap_opts =
@@ -79,7 +75,7 @@ return function()
   -- {{{ buffer: prefix.buffer .. map_keyword.lsp
   local loc_prefix = prefix.buffer .. map_keyword.lsp
   for _, map in pairs({
-    { [1] = "", [2] = "+lsp", prefix = true },
+    { [1] = "", [2] = "+lsp", group = true },
     {
       [1] = "n",
       [2] = "rename",
@@ -102,16 +98,11 @@ return function()
       -- NOTE: xmap is vmap without selection mode <2023-07-20>
       mode = { "x" },
     },
-    {
-      [1] = "s",
-      [2] = "code-lens",
-      fallback = vim.lsp.codelens.run,
-    },
-    {
-      [1] = "S",
-      [2] = "code-lens refresh",
-      fallback = vim.lsp.codelens.refresh,
-    },
+
+    -- stylua: ignore start
+    { [1] = "s", [2] = "code-lens",         fallback = vim.lsp.codelens.run, },
+    { [1] = "S", [2] = "code-lens refresh", fallback = vim.lsp.codelens.refresh, },
+    -- stylua: ignore end
 
     -- stylua: ignore start
     { [1] = "d", [2] = "peek-definition",      lspsaga = "<cmd>Lspsaga peek_definition<CR>", },
@@ -131,8 +122,7 @@ return function()
     -- stylua: ignore end
 
     -- stylua: ignore start
-    { [1] = "w",  [2] = "+workspace",       prefix=true, },
-    -- { [1] = "w",  [2] = "+workspace", },
+    { [1] = "w",  [2] = "+workspace",       group=true, },
     { [1] = "wa", [2] = "add-workspace",    fallback = vim.lsp.buf.add_workspace_folder, },
     { [1] = "wr", [2] = "remove-workspace", fallback = vim.lsp.buf.remove_workspace_folder, },
     { [1] = "wl", [2] = "list-workspace",   fallback = function()
@@ -151,22 +141,21 @@ return function()
     },
     -- stylua: ignore end
   }) do
-    local temp = (is_lspsaga and map["lspsaga"])
-    if map.prefix and is_wk then
-      wk.register({ [loc_prefix .. map[1]] = { name = map[2] } }, {})
-      goto continue
+    if map.group then
+      if is_wk then
+        wk.add({
+          { [1] = loc_prefix .. map[1], group = map[2] },
+        })
+      end
+    else
+      local is_lspsaga_keymap = (is_lspsaga and map["lspsaga"])
+      vim.keymap.set(
+        (map.mode and map.mode or "n"),
+        loc_prefix .. map[1],
+        (is_lspsaga_keymap and map["lspsaga"] or map.fallback),
+        { desc = (is_lspsaga_keymap and "lspsaga-" or "") .. map[2] }
+      )
     end
-    --   -- maps["g" .. map_keyword.lsp] = { name = "+lsp" }
-    --   vim.notify(vim.inspect({ [loc_prefix .. map[1]] = { name = map[2] } }))
-
-    vim.keymap.set(
-      (map.mode and map.mode or "n"),
-      loc_prefix .. map[1],
-      (temp and map["lspsaga"] or map.fallback),
-      { desc = (temp and "lspsaga-" or "") .. map[2] }
-    )
-
-    ::continue::
   end
   -- }}}
   ------------------------------------------------------------------------------
@@ -192,16 +181,14 @@ return function()
       fallback = vim.lsp.buf.declaration,
     },
   }) do
-    local temp = (is_lspsaga and map["lspsaga"])
+    local is_lspsaga_keymap = (is_lspsaga and map["lspsaga"])
 
     vim.keymap.set(
       (map.mode and map.mode or "n"),
       "g" .. map[1],
-      (temp and map["lspsaga"] or map.fallback),
-      { desc = (temp and "lspsaga-" or "lsp-") .. map[2] }
+      (is_lspsaga_keymap and map["lspsaga"] or map.fallback),
+      { desc = (is_lspsaga_keymap and "lspsaga-" or "lsp-") .. map[2] }
     )
-
-    ::continue::
   end
 
   -- }}}

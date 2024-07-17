@@ -13,7 +13,21 @@ M.setup = function()
   --------------------------------------------------------------------------------
   vim.g.mapleader = " "
   -- NOTE: , : repeat t/T/f/F backwards
-  vim.g.maplocalleader = ","
+  -- NOTE: s : almost same as c
+
+  -- disable s/S, use c/0C instead
+  -- NOTE: do not include selection mode here <2023-07-20>
+  vim.keymap.set({ "n", "x", "o" }, "s", "<Nop>")
+  vim.keymap.set({ "n", "x", "o" }, "S", "<Nop>")
+
+  vim.g.maplocalleader = "s"
+  --[[
+  NOTE:
+  "s" 가 "LocalLeader" 인 경우, vim.o.timeoutlen 이 충분해야 단축키가 작동한다.
+  timeoutlen 이 지나버리면, s 에 맵핑된 키맵이 바로 작동되어 버리기 때문.
+  <2024-07-17>
+  ]]
+  --------------------------------------------------------------------------------
 
   --------------------------------------------------------------------------------
   -- leader & localleader
@@ -50,14 +64,6 @@ M.setup = function()
   -- vim.keymap.set({ "n" }, "zr", "<Nop>")
   -- vim.keymap.set({ "n" }, "zR", "<Nop>")
 
-  -- }}}
-  --------------------------------------------------------------------------------
-  -- {{{ disable some default behavior
-  --------------------------------------------------------------------------------
-  -- disable s/S, use c/0C instead
-  -- NOTE: do not include selection mode here <2023-07-20>
-  vim.keymap.set({ "n", "x", "o" }, "s", "<Nop>")
-  vim.keymap.set({ "n", "x", "o" }, "S", "<Nop>")
   -- }}}
   --------------------------------------------------------------------------------
   -- {{{ handy emacs-like behavior

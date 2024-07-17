@@ -1,49 +1,53 @@
+local prefix = require("val").prefix
+
 ---@type LazySpec
 return {
   -- set keymap / show keymap
   [1] = "folke/which-key.nvim",
   lazy = true,
-  event = {
-    "VeryLazy",
+  enabled = true,
+  event = "VeryLazy",
+  version = "3.*",
+  dependencies = {
+    { [1] = "nvim-tree/nvim-web-devicons", optional = true },
   },
+  ---@class wk.Opts
   opts = {
-    operators = {},
-    hidden = {
-      "<silent>",
-      "<cmd>",
-      "<Cmd>",
-      "<CR>",
-      "call",
-      "lua",
-      "^:",
-      "^ ",
-      "require",
-      [[("orgmode")]],
-    }, -- hide mapping boilerplate
+    preset = "modern",
+    ---@type wk.Spec
+    spec = {
+      -- vim's builtin 인데 which-key.nvim 에 안뜨는 값
+      -- stylua: ignore start
+      { [1] = "g",  group = "extra-cmd" },
+      { [1] = "z",  group = "extra-cmd" },
+      { [1] = "zn", desc = "fold-none" },
+      { [1] = "zN", desc = "fold-normal" },
+      { [1] = "Z",  group = "quit" },
+      { [1] = "['", desc = "prev-line-with-mark" },
+      { [1] = "]'", desc = "next-line-with-mark" },
+      { [1] = "[`", desc = "prev-mark" },
+      { [1] = "]`", desc = "next-mark" },
+      -- stylua: ignore end
+      --
+      { [1] = prefix.new .. "c", group = "current-buffer" },
+      { [1] = prefix.new .. "e", group = "empty" },
+    },
   },
   config = function(_, opts)
     local wk = require("which-key")
     wk.setup(opts)
-    local prefix = require("val").prefix
-    -- local map_keyword = require("val").map_keyword
 
-    local maps = {
-      -- vim builtin
-      ["['"] = { name = "Previous line with mark" },
-      ["]'"] = { name = "Next line with mark" },
-      ["[`"] = { name = "Previous mark" },
-      ["]`"] = { name = "Next mark" },
-    }
-    for name, map in pairs(prefix) do
-      maps[map] = { name = name }
-    end
-
-    -- TODO: dirty code. fix it <2023-12-26>
-    -- maps["g" .. map_keyword.lsp] = { name = "+lsp" }
-
-    maps[prefix.new .. "c"] = { name = "+current-buffer" }
-    maps[prefix.new .. "e"] = { name = "+empty" }
-
-    wk.register(maps, {})
+    -- show which-key fast
+    vim.o.timeoutlen = 500
+    -- ※ timeoutlen 완료전에 타이핑을 못 끝냈을 경우, 아래의 코드가 있어야 작동된다.
+    wk.add({
+      {
+        [1] = "<LocalLeader>",
+        [2] = function()
+          wk.show({ keys = "<LocalLeader>" })
+        end,
+        group = "LocalLeader",
+      },
+    })
   end,
 }

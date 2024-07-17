@@ -47,12 +47,13 @@ return {
     {
       [1] = "folke/which-key.nvim",
       optional = true,
-      opts = {
-        operators = {
-          gc = "comment-line",
-          gb = "comment-block",
-        },
-      },
+      -- deprecated in which-key v3
+      -- opts = {
+      --   operators = {
+      --     gc = "comment-line",
+      --     gb = "comment-block",
+      --   },
+      -- },
     },
   },
 }

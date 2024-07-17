@@ -26,7 +26,6 @@ return {
     },
     {
       [1] = prefix.trouble,
-      [2] = nil,
       desc = "+trouble",
     },
     {

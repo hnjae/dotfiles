@@ -49,7 +49,7 @@ return {
   keys = {
     -- stylua: ignore start
     { [1] = "<Leader>" .. map_keyword.ai, [2] = "<cmd>ChatGPT<CR>", desc = "ChatGPT" },
-    { [1] = prefix.buffer .. map_keyword.ai, [2] = nil, desc = "+ChatGPT" },
+    { [1] = prefix.buffer .. map_keyword.ai, desc = "+ChatGPT" },
     { [1] = prefix.buffer .. map_keyword.ai .. "e", [2] = "<cmd>ChatGPTEditWithInstructions<CR>",          desc = "edit-with-instructions",   mode = { "n", "v" } },
     { [1] = prefix.buffer .. map_keyword.ai .. "g", [2] = "<cmd>ChatGPTRun grammar_correction<CR>",        desc = "grammer-correction",       mode = { "n", "v" } },
     { [1] = prefix.buffer .. map_keyword.ai .. "t", [2] = "<cmd>ChatGPTRun translate<CR>",                 desc = "translate",                mode = { "n", "v" } },
