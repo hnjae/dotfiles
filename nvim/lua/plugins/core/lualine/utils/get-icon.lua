@@ -1,4 +1,4 @@
-local package_path = (...):match("(.-)[^%.]+$") -- lualine.utils
+-- local package_path = (...):match("(.-)[^%.]+$") -- lualine.utils
 
 local is_devicons, devicons = pcall(require, "nvim-web-devicons")
 if not is_devicons then

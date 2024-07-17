@@ -1,4 +1,6 @@
-local package_path = (...) -- "plugins.core.lualine"
+-- local package_path = (...) -- "plugins.core.lualine"
+-- NOTE: Above Does not works after lazy.nvim update <2024-07-09>
+local package_path = "plugins.core.lualine"
 
 return {
   [1] = "nvim-lualine/lualine.nvim",

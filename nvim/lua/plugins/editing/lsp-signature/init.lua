@@ -1,4 +1,5 @@
-local package_path = (...)
+-- local package_path = (...)
+local package_path = "plugins.editing.lsp-signature"
 
 local options = {
   cmp = ".cmp",

@@ -1,4 +1,4 @@
-local package_path = (...):match("(.-)[^%.]+$")
+-- local package_path = (...):match("(.-)[^%.]+$")
 
 local lualine_path = "plugins.core.lualine"
 
