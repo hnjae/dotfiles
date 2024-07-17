@@ -1,9 +1,16 @@
 # https://github.com/denisidoro/navi/blob/master/docs/cheatsheet_syntax.md
-snippet % "tags"
+snippet s% "tags"
 	% ${1:tag1, tag2, tag3}
-snippet "#" "description of commands"
-	# ${1: blabla}
-snippet "$" "commands that generate a list of possible values"
-	$ ${1: var}: ${2: command}
-snippet "@" "reuse variable form other cheatsheets"
+snippet s# "description of commands"
+	# ${1:description of commands}
+snippet s$ "commands that generate a list of possible values"
+	$ ${1:var}: ${2:command}
+snippet s@ "reuse variable form other cheatsheets"
 	@ ${1:same, tags, from, other, cheatsheets}
+snippet s; "주석"
+	; ${1:}
+snippet sboilerplate "Boilerplate"
+	% ${1:tag1, tag2, tag3}
+
+	# ${2:description of commands}
+	${0:echo hi}

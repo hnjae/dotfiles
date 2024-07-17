@@ -27,3 +27,5 @@ snippet type_assertions syntax of type assertions
 	let strLength: number = (someValue as string).length;
 	// or
 	let strLength: number = (<string>someValue).length;
+snippet ternary "1 ? 2 : 3"
+	$1 extends $2 ? ${3} : ${4}
