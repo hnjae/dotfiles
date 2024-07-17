@@ -10,8 +10,10 @@ if vim.fn.has("termguicolors") == 1 and not require("utils").is_console then
   vim.opt.termguicolors = true
 end
 
-if vim.g.neovide then
-  vim.opt.guifont = "monospace:h12"
-  -- vim.opt.guifont = "MesloLGM Nerd Font Mono:h11,monospace:h11"
-  -- vim.opt.guifont = "D2Coding:h11"
-end
+-- if vim.g.neovide then
+-- ~/.config/neovide/config.toml 에서 설정하자.
+-- vim.opt.guifont = "monospace:h11"
+
+-- vim.opt.guifont = "MesloLGM Nerd Font Mono:h11,monospace:h11"
+-- vim.opt.guifont = "D2Coding:h11"
+-- end
