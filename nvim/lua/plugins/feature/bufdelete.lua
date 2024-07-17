@@ -31,6 +31,7 @@ return {
           vim.fn.bufloaded(bufnr) == 1
           and vim.fn.buflisted(bufnr) == 1
           and vim.fn.bufwinid(bufnr) == -1
+          and vim.fn.bufwinnr(bufnr) == -1 -- do I need this?
           and vim.fn.getbufinfo(bufnr)[1].changed == 0
         then
           table.insert(no_win_bufs, bufnr)
