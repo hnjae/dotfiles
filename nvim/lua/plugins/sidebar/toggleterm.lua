@@ -22,9 +22,24 @@ return {
   opts = {
     open_mapping = [[<F4>]],
     shell = os.getenv("SHELL") or vim.o.shell,
-    -- direction = "float",
-    direction = "horizontal",
+    direction = "float",
+    -- direction = "horizontal",
     shade_terminals = false,
+    float_opts = {
+      border = "rounded",
+      width = function(term)
+        if vim.o.columns >= 86 then
+          return 86
+        end
+        return vim.o.columns
+      end,
+      height = function(term)
+        if vim.o.lines - 3 >= 26 then
+          return 26
+        end
+        return vim.o.lines - 3
+      end,
+    },
   },
   ---@type LazyKeysSpec[]
   keys = {
