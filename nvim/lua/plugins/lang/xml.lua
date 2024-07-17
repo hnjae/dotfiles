@@ -12,10 +12,12 @@ return {
     -- https://github.com/stevearc/conform.nvim/tree/master/lua/conform/formatters
     [1] = "stevearc/conform.nvim",
     optional = true,
-    opts = function(_, opts)
-      opts.formatters_by_ft.xml = {
-        { "tidy" },
-      }
-    end,
+    opts = {
+      formatters_by_ft = {
+        xml = {
+          { "xmllint", "xmlformat" },
+        },
+      },
+    },
   },
 }
