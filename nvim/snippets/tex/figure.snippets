@@ -1,0 +1,36 @@
+snippet sfigure "Figure"
+	% file stem should not include `.`
+	\begin{figure} % option htbp / add ! to force it
+		\centering
+		% use natheight, natwidth for bounding box
+		\includegraphics[width=0.6\textwidth]{}
+		\caption{}
+		\label{}
+	\end{figure}
+
+
+snippet smultifigure "Add Multiple Figure"
+	\begin{figure}
+		\centering
+		\begin{subfigure}[b]{0.3\textwidth}
+			\includegraphics[width=\textwidth]{}
+			\caption{}
+			\label{fig:}
+		\end{subfigure}
+		~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
+		%(or a blank line to force the subfigure onto a new line)
+		\begin{subfigure}[b]{0.3\textwidth}
+			\includegraphics[width=\textwidth]{}
+			\caption{}
+			\label{fig:}
+		\end{subfigure}
+		~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
+		%(or a blank line to force the subfigure onto a new line)
+		\begin{subfigure}[b]{0.3\textwidth}
+			\includegraphics[width=\textwidth]{}
+			\caption{}
+			\label{fig:}
+		\end{subfigure}
+		\caption{}\label{fig:}
+	\end{figure}
+
