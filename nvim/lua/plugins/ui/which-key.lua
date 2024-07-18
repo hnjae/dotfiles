@@ -7,7 +7,7 @@ return {
   lazy = true,
   enabled = true,
   event = "VeryLazy",
-  version = "3.*",
+  version = "v3.*",
   dependencies = {
     { [1] = "nvim-tree/nvim-web-devicons", optional = true },
   },
@@ -45,7 +45,8 @@ return {
           wk.show({ keys = "<LocalLeader>" })
         end,
         group = "LocalLeader",
-        mode = { "n", "x", "s", "o" },
+        -- mode = { "n", "x", "s", "o" },
+        mode = { "n", "x" },
       },
     })
 

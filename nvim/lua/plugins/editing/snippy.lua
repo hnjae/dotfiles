@@ -4,7 +4,7 @@
 return {
   [1] = "dcampos/nvim-snippy",
   lazy = true,
-  enabled = true,
+  enabled = false,
   event = { "InsertEnter" },
   cmd = {
     "SnippyEdit",
@@ -24,15 +24,14 @@ return {
       enabled = vim.fn.has("nvim-0.10") == 1,
     }
   end,
-  ---@type fun(LazyPlugin, opts: table): LazyKeysSpec[]
-  keys = function()
+  ---@type fun(LazyPlugin, keys: string[]): LazyKeysSpec[]
+  keys = function(_, keys)
     local snippy = require("snippy")
-    return {
-        -- stylua: ignore start
-        { [1] = "<Tab>",   [2] = function() snippy.next("<Tab>") end,       mode = "n", desc = "snippy-next-or-tab" },
-        { [1] = "<S-Tab>", [2] = function() snippy.previous("<S-Tab>") end, mode = "n", desc = "snippy-previous-or-s-tab" },
+    return vim.list_extend(keys, {
+      -- stylua: ignore start
+      { [1] = "<Tab>",   [2] = function() snippy.next("<Tab>") end,       mode = "n", desc = "snippy-next-or-tab" },
+      { [1] = "<S-Tab>", [2] = function() snippy.previous("<S-Tab>") end, mode = "n", desc = "snippy-previous-or-s-tab" },
       -- stylua: ignore end
-
       {
         [1] = "<Tab>",
         [2] = "<Plug>(snippy-cut-text)",
@@ -51,7 +50,7 @@ return {
         mode = "n",
         desc = "snippy-reload",
       },
-    }
+    })
   end,
   config = function(_, opts)
     require("snippy").setup(opts)
@@ -111,6 +110,13 @@ return {
 
         return opts
       end,
+    },
+    {
+      [1] = "danymat/neogen",
+      optional = true,
+      opts = {
+        snippet_engine = "snippy",
+      },
     },
   },
 }

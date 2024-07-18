@@ -120,6 +120,7 @@ return {
     local format_menu = {
       --key: cmp.Entry.source's name
       snippy = "[SNIP]",
+      luasnip = "[SNIP]",
       buffer = "[BUF]",
       treesitter = "[TS]",
       path = "[Path]",

@@ -11,8 +11,6 @@ return {
   cmd = {
     "Neogen",
   },
-  opts = {
-    snippet_engine = "snippy",
-  },
+  opts = {},
   config = true,
 }
