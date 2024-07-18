@@ -37,9 +37,7 @@ return {
     local wk = require("which-key")
     wk.setup(opts)
 
-    -- show which-key fast
-    vim.o.timeoutlen = 500
-    -- ※ timeoutlen 완료전에 타이핑을 못 끝냈을 경우, 아래의 코드가 있어야 작동된다.
+    -- ※ vim.o.timeoutlen 완료전에 타이핑을 못 끝냈을 경우, 아래의 코드가 있어야 작동된다.
     wk.add({
       {
         [1] = "<LocalLeader>",
@@ -47,7 +45,15 @@ return {
           wk.show({ keys = "<LocalLeader>" })
         end,
         group = "LocalLeader",
+        mode = { "n", "x", "s", "o" },
       },
     })
+
+    -- update group
+    local add = {}
+    for desc, lhs in pairs(prefix) do
+      table.insert(add, { [1] = lhs, group = desc })
+    end
+    wk.add(add)
   end,
 }
