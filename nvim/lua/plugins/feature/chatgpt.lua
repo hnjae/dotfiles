@@ -1,6 +1,8 @@
 local map_keyword = require("val.map-keyword")
 -- local prefix = require("val.prefix")
 
+local use_freedesktop_secret_service = vim.fn.executable("secret-tool") == 1
+
 ---@type LazySpec
 return {
   [1] = "jackMort/ChatGPT.nvim",
@@ -24,7 +26,9 @@ return {
     and vim.fn.executable("op") == 1
     and not require("utils").is_console,
   opts = {
-    api_key_cmd = "op read op://Personal/OpenAI/api/editor --no-newline",
+    api_key_cmd = use_freedesktop_secret_service
+        and "secret-tool lookup api openapi"
+      or "op read op://Personal/OpenAI/api/editor --no-newline",
     openai_params = {
       model = "gpt-4o",
     },
@@ -60,9 +64,6 @@ return {
     { [1] = "<Leader>" .. map_keyword.ai, [2] = "<cmd>ChatGPT<CR>", desc = "toggle-ChatGPT" },
     { [1] = "<Leader>" .. string.upper(map_keyword.ai), [2] = "<cmd>ChatGPTActAs<CR>", desc = "ChatGPTActAs" },
     { [1] = "<LocalLeader>" .. map_keyword.ai, desc = "+ChatGPT" },
-    --
-    -- NOTE: <cmd>ChatGPT<CR> 을 돌려서 1password unlock 을 한 이후에 아래 커맨드가 정상 작동 <2024-07-17>
-    -- TODO: op 말고 pass 나 gpg --decrypt 같은 커맨드 사용. <2024-07-17>
     --
     { [1] = "<LocalLeader>" .. map_keyword.ai .. "e",            [2] = "<cmd>ChatGPTEditWithInstructions<CR>",          desc = "edit-with-instructions",   mode = { "n", "v" } },
     { [1] = "<LocalLeader>" .. map_keyword.ai .. map_keyword.ai, [2] = "<cmd>ChatGPTCompleteCode<CR>",                  desc = "complete-code", },
