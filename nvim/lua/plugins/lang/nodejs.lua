@@ -11,22 +11,17 @@ return {
     [1] = "stevearc/conform.nvim",
     optional = true,
     opts = function(_, opts)
-      local formatter = {}
-      local formatters_by_ft = {}
+      local formatter
+      local formatters_by_ft
 
-      if require("utils").lsp.is_deno() then
-        formatter = { "deno_fmt" }
-        formatters_by_ft = {
-          typescript = { formatter },
-          javascript = { formatter },
-          typescriptreact = { formatter },
-          javascriptreact = { formatter },
-          json = { formatter },
-          jsonc = { formatter },
-          -- markdown = { formatter },
-        }
-      -- elseif require("utils").lsp.is_prettier() then
-      else
+      -- if require("utils").lsp.is_prettier() then
+      if
+        (not require("utils").lsp.is_deno())
+        and (
+          vim.fn.executable("prettierd") == 1
+          or vim.fn.executable("prettier") == 1
+        )
+      then
         formatter = { "prettierd", "prettier" }
         formatters_by_ft = {
           typescript = { formatter },
@@ -48,6 +43,33 @@ return {
           -- yaml = { formatter },
           ["markdown.mdx"] = { formatter },
         }
+      else
+        -- use deno_fmt as fallback
+        if not require("utils").lsp.is_deno() then
+          -- if no deno.json (random javascript file)
+
+          opts.formatters = opts.formatters or {}
+          opts.formatters.deno_fmt = opts.formatters.deno_fmt or {}
+          opts.formatters.deno_fmt.append_args = opts.formatters.deno_fmt.append_args
+            or {}
+          table.insert(opts.formatters.deno_fmt.append_args, "--single-quote")
+        end
+
+        formatter = { "deno_fmt" }
+
+        formatters_by_ft = {
+          typescript = { formatter },
+          javascript = { formatter },
+          typescriptreact = { formatter },
+          javascriptreact = { formatter },
+          json = { formatter },
+          jsonc = { formatter },
+          -- markdown = { formatter },
+        }
+      end
+
+      if opts.formatters_by_ft == nil then
+        opts.formatters_by_ft = {}
       end
 
       for key, val in pairs(formatters_by_ft) do
