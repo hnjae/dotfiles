@@ -14,11 +14,14 @@ return {
     "snippets",
   },
   opts = function(_, opts)
-    opts.snippet_dirs =
-      require("plenary.path"):new(vim.fn.stdpath("config"), "snippets").filename
+    opts.snippet_dirs = require("plenary.path"):new(
+      vim.fn.stdpath("config"),
+      "assets",
+      "snippets"
+    ).filename
 
     opts.virtual_markers = {
-      enabled = vim.fn.has("nvim-0.10"),
+      enabled = vim.fn.has("nvim-0.10") == 1,
     }
   end,
   ---@type fun(LazyPlugin, opts: table): LazyKeysSpec[]

@@ -43,16 +43,19 @@ return {
     actions_paths = {
       require("plenary.path"):new(
         vim.fn.stdpath("config"),
+        "assets",
         "chatgpt",
         "default-actions.json"
       ).filename,
       require("plenary.path"):new(
         vim.fn.stdpath("config"),
+        "assets",
         "chatgpt",
         "default-actions-altered.json"
       ).filename,
       require("plenary.path"):new(
         vim.fn.stdpath("config"),
+        "assets",
         "chatgpt",
         "custom-actions.json"
       ).filename,

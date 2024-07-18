@@ -7,7 +7,8 @@ return {
     return {
       directory = require("plenary.path"):new(
         vim.fn.stdpath("config"),
-        "GlobalNote"
+        "assets",
+        "global-note"
       ).filename,
 
       -- A nvim_open_win config to show float window.

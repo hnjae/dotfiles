@@ -8,7 +8,7 @@ return {
   enabled = require("utils").is_treesitter,
   opts = {
     local_settings = ".neoconf.json",
-    global_settings = "neoconf.json",
+    global_settings = "assets/neoconf.json",
     import = {
       vscode = false,
       coc = false,
