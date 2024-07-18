@@ -13,7 +13,7 @@ return {
   [1] = "numToStr/Comment.nvim",
   lazy = false,
   event = { "VeryLazy" },
-  enabled = true,
+  enabled = vim.fn.has("nvim-0.10") ~= 1,
   dependencies = {
     {
       [1] = "JoosepAlviste/nvim-ts-context-commentstring",
@@ -43,17 +43,4 @@ return {
 
     return ret
   end,
-  specs = {
-    {
-      [1] = "folke/which-key.nvim",
-      optional = true,
-      -- deprecated in which-key v3
-      -- opts = {
-      --   operators = {
-      --     gc = "comment-line",
-      --     gb = "comment-block",
-      --   },
-      -- },
-    },
-  },
 }
