@@ -44,12 +44,12 @@ return {
   ---@type LazyKeysSpec[]
   keys = {
     { [1] = "<F4>", [2] = nil, desc = "toggleterm" },
-      -- { prefix .. "b", ":<C-u>%>ToggleTermSendCurrentLine<CR>", mode = { "n" }, desc = "send-buffer" },
-      -- stylua: ignore start
-      { [1] = prefix_send .. "l", [2] = "<cmd>ToggleTermSendCurrentLine<CR>",                      mode = { "n" }, desc = "send-line" },
-      { [1] = prefix_send .. "b", [2] = "<C-\\><C-n>ggVG:<C-u>'<,'>ToggleTermSendVisualLines<CR>", mode = { "n" }, desc = "send-buffer" },
-      { [1] = prefix_send .. "l", [2] = ":<C-u>'<,'>ToggleTermSendVisualLines<CR>",                mode = { "x" }, desc = "send-visual-lines" },
-      { [1] = prefix_send .. "s", [2] = ":<C-u>'<,'>ToggleTermSendVisualSelection<CR>",            mode = { "x" }, desc = "send-visual-selection" },
+    -- { prefix .. "b", ":<C-u>%>ToggleTermSendCurrentLine<CR>", mode = { "n" }, desc = "send-buffer" },
+    -- stylua: ignore start
+    { [1] = prefix_send .. "l", [2] = "<cmd>ToggleTermSendCurrentLine<CR>",                      mode = { "n" }, desc = "send-line" },
+    { [1] = prefix_send .. "b", [2] = "<C-\\><C-n>ggVG:<C-u>'<,'>ToggleTermSendVisualLines<CR>", mode = { "n" }, desc = "send-buffer" },
+    { [1] = prefix_send .. "l", [2] = ":<C-u>'<,'>ToggleTermSendVisualLines<CR>",                mode = { "x" }, desc = "send-visual-lines" },
+    { [1] = prefix_send .. "s", [2] = ":<C-u>'<,'>ToggleTermSendVisualSelection<CR>",            mode = { "x" }, desc = "send-visual-selection" },
     -- stylua: ignore end
     {
       [1] = prefix.new .. map_keyword.terminal,
