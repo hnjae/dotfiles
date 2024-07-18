@@ -68,8 +68,6 @@ return {
     { [1] = "<LocalLeader>" .. map_keyword.ai .. "e",            [2] = "<cmd>ChatGPTEditWithInstructions<CR>",          desc = "edit-with-instructions",   mode = { "n", "v" } },
     { [1] = "<LocalLeader>" .. map_keyword.ai .. map_keyword.ai, [2] = "<cmd>ChatGPTCompleteCode<CR>",                  desc = "complete-code", },
     --
-    { [1] = "<LocalLeader>" .. map_keyword.ai .. "g", [2] = "<cmd>ChatGPTRun grammar_correction<CR>",        desc = "grammer-correction",       mode = { "n", "v" } },
-    { [1] = "<LocalLeader>" .. map_keyword.ai .. "t", [2] = "<cmd>ChatGPTRun translate<CR>",                 desc = "translate",                mode = { "n", "v" } },
     { [1] = "<LocalLeader>" .. map_keyword.ai .. "s", [2] = "<cmd>ChatGPTRun summarize<CR>",                 desc = "summarize",                mode = { "n", "v" } },
     { [1] = "<LocalLeader>" .. map_keyword.ai .. "o", [2] = "<cmd>ChatGPTRun optimize_code<CR>",             desc = "optimize-code",            mode = { "n", "v" } },
     { [1] = "<LocalLeader>" .. map_keyword.ai .. "l", [2] = "<cmd>ChatGPTRun code_readability_analysis<CR>", desc = "code-readability-analias", mode = { "n", "v" } },
@@ -77,9 +75,54 @@ return {
     { [1] = "<LocalLeader>" .. map_keyword.ai .. "r", [2] = "<cmd>ChatGPTRun roxygen_edit<CR>",              desc = "roxygen-edit",             mode = { "n", "v" } },
     { [1] = "<LocalLeader>" .. map_keyword.ai .. "d", [2] = "<cmd>ChatGPTRun docstring<CR>",                 desc = "docstring",                mode = { "n", "v" } },
     { [1] = "<LocalLeader>" .. map_keyword.ai .. "x", [2] = "<cmd>ChatGPTRun explain_code<CR>",              desc = "explain-code",             mode = { "n", "v" } },
-    -- my actions
-    { [1] = "<LocalLeader>" .. map_keyword.ai .. "v", [2] = "<cmd>ChatGPTRun generate_variable_name<CR>",    desc = "generate_variable_name",   mode = { "n", "v" } },
-    { [1] = "<LocalLeader>" .. map_keyword.ai .. "c", [2] = "<cmd>ChatGPTRun edit_commit_message<CR>",       desc = "edit_commit_message",      mode = { "n", "v" } },
     -- stylua: ignore end
+    {
+      [1] = "<LocalLeader>" .. map_keyword.ai .. "t",
+      [2] = function()
+        -- local mode = vim.api.nvim_get_mode().mode
+        vim.ui.select({
+          "English",
+          "Korean",
+          "Japanese",
+          "Chinese",
+        }, {
+          prompt = "Select language",
+        }, function(lang)
+          -- 이렇게 작성하면 버퍼 전체 전달
+          --   vim.api.nvim_cmd({
+          --     cmd = "ChatGPTRun",
+          --     args = { "translate", lang },
+          --     range = { cursorline },
+          --   }, { output = false })
+          -- or
+          -- require("chatgpt").run_action({
+          --   fargs = { "translate", lang },
+          -- })
+          local cmd = string.format("ChatGPTRun translate %s", lang)
+          vim.api.nvim_command(cmd)
+        end)
+      end,
+      desc = "translate",
+      mode = { "v" },
+    },
+    {
+      [1] = "<LocalLeader>" .. map_keyword.ai .. "g",
+      [2] = "<cmd>ChatGPTRun grammar_correction<CR>",
+      desc = "grammer-correction",
+      mode = { "v" },
+    },
+    -- my actions
+    {
+      [1] = "<LocalLeader>" .. map_keyword.ai .. "v",
+      [2] = "<cmd>ChatGPTRun generate_variable_name<CR>",
+      desc = "generate_variable_name",
+      mode = { "v" },
+    },
+    {
+      [1] = "<LocalLeader>" .. map_keyword.ai .. "c",
+      [2] = "<cmd>ChatGPTRun edit_commit_message<CR>",
+      desc = "edit_commit_message",
+      mode = { "n", "v" },
+    },
   },
 }

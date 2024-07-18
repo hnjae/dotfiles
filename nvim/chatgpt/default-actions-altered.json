@@ -3,7 +3,7 @@
     "type": "chat",
     "opts": {
       "template": "Translate this into {{lang}}:\n\n{{input}}",
-      "strategy": "edit",
+      "strategy": "append",
       "params": {
         "model": "gpt-4o",
         "temperature": 0.3
@@ -20,17 +20,10 @@
   "grammar_correction": {
     "type": "chat",
     "opts": {
-      "template": "Correct this to standard {{lang}}:\n\n{{input}}",
-      "strategy": "edit",
+      "template": "I want you to act as a grammar proofreader of any language. I will provide you with sentences or paragraphs, and you will correct any grammatical errors. In your responses, highlight the corrections clearly and provide a brief explanation for each correction if necessary. Do not alter the original meaning of the text. My first text is:\n\n\"{{input}}\"",
+      "strategy": "append",
       "params": {
         "model": "gpt-4o"
-      }
-    },
-    "args": {
-      "lang": {
-        "type": "string",
-        "optional": "true",
-        "default": "english"
       }
     }
   }
