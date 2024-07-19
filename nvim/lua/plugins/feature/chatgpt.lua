@@ -1,4 +1,5 @@
 local map_keyword = require("val.map-keyword")
+local val = require("val")
 -- local prefix = require("val.prefix")
 
 local use_freedesktop_secret_service = vim.fn.executable("secret-tool") == 1
@@ -38,7 +39,7 @@ return {
     chat = {
       active_sign = "󰄵", -- nf-md-checkbox_marked_outline
       in_active_sign = "󰄱", -- nf-md-checkbox_blank_outline
-      answer_sign = "🤖",
+      answer_sign = val.icons.ai,
     },
     actions_paths = {
       require("plenary.path"):new(
@@ -64,9 +65,9 @@ return {
   ---@type LazyKeysSpec[]
   keys = {
     -- stylua: ignore start
-    { [1] = "<Leader>" .. map_keyword.ai, [2] = "<cmd>ChatGPT<CR>", desc = "toggle-ChatGPT" },
-    { [1] = "<Leader>" .. string.upper(map_keyword.ai), [2] = "<cmd>ChatGPTActAs<CR>", desc = "ChatGPTActAs" },
-    { [1] = "<LocalLeader>" .. map_keyword.ai, desc = "+ChatGPT" },
+    { [1] = "<Leader>" .. map_keyword.ai, [2] = "<cmd>ChatGPT<CR>", desc = "chatgpt-toggle" },
+    { [1] = "<Leader>" .. string.upper(map_keyword.ai), [2] = "<cmd>ChatGPTActAs<CR>", desc = "chatgpt-actas" },
+    -- { [1] = "<LocalLeader>" .. map_keyword.ai, desc = "+ChatGPT" },
     --
     { [1] = "<LocalLeader>" .. map_keyword.ai .. "e",            [2] = "<cmd>ChatGPTEditWithInstructions<CR>",          desc = "edit-with-instructions",   mode = { "n", "v" } },
     { [1] = "<LocalLeader>" .. map_keyword.ai .. map_keyword.ai, [2] = "<cmd>ChatGPTCompleteCode<CR>",                  desc = "complete-code", },
@@ -126,6 +127,39 @@ return {
       [2] = "<cmd>ChatGPTRun edit_commit_message<CR>",
       desc = "edit_commit_message",
       mode = { "n", "v" },
+    },
+  },
+  specs = {
+    {
+      [1] = "folke/which-key.nvim",
+      optional = true,
+      ---@class opts wk.Opts
+      opts = function(_, opts)
+        if opts.spec == nil then
+          opts.spec = {}
+        end
+
+        local icon = { icon = val.icons.ai, color = "green" }
+        vim.list_extend(opts.spec, {
+          {
+            [1] = "<LocalLeader>" .. map_keyword.ai,
+            group = "chatgpt",
+            ---@type wk.Icon
+            -- icon = icon,
+          },
+        })
+
+        if opts.icons == nil then
+          opts.icons = {}
+        end
+        if opts.icons.rules == nil then
+          opts.icons.rules = {}
+        end
+
+        vim.list_extend(opts.icons.rules, {
+          vim.tbl_extend("error", icon, { pattern = "chatgpt" }),
+        })
+      end,
     },
   },
 }

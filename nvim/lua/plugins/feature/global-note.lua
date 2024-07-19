@@ -41,7 +41,7 @@ return {
     -- local map_keyword = require("val").map_keyword
 
     return {
-      { [1] = "<Leader>?", [2] = "<cmd>GlobalNote<CR>" },
+      { [1] = "<Leader>h", [2] = "<cmd>GlobalNote<CR>", desc = "nvim-help" },
     }
   end,
 }

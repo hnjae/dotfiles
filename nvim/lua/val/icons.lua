@@ -22,6 +22,9 @@ return {
   },
 
   -- oct, md
+  code = "", -- nf-oct-code
+  -- code = "󰅴", -- nf-md-code_tags
+
   extension = "", -- nf-oct-rocket
   workflow = "", --nf-oct-workflow
   message = "󰍡", -- nf-md-message
@@ -44,6 +47,7 @@ return {
   tools = "", --nf-oct-tools
 
   check = "", --nf-oct-check
+  checklist = "", -- nf-oct-checklist
   log = "", --nf-oct-log
   -- heart = "♥", --nf-oct-heart
   -- "", -- nf-oct-rows
@@ -52,4 +56,8 @@ return {
   empty_set = "∅", -- unicode
 
   result = "", -- nf-oct-checklist
+
+  --
+  ai = "󱙺", -- nf-md-robot_outline
+  toggle = "󱨦", -- nf-md-toggle_switch_variant_off
 }
