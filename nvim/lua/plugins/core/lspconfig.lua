@@ -1,5 +1,7 @@
 local val = require("val")
 
+-- :help lsp-defaults
+
 ---@type LazySpec
 return {
   [1] = "neovim/nvim-lspconfig",
@@ -7,7 +9,10 @@ return {
   -- event = { "VeryLazy" },
   enabled = true,
   event = { "BufRead", "BufNewFile" },
-  -- keys = {},
+  keys = {
+    -- nvim's default mapping:
+    -- { [1] = "K", [2] = vim.lsp.buf.hover, desc = "lsp-hover" },
+  },
   dependencies = {},
   ---@class PluginLspOpts
   opts = {
@@ -25,6 +30,8 @@ return {
   },
   config = function(_, opts)
     local lspconfig = require("lspconfig")
+    local prefix = require("val.prefix")
+    local map_keyword = require("val.map-keyword")
 
     -------------------------------------
     -- capabilities
@@ -64,6 +71,236 @@ return {
         )
       end
     end
+
+    vim.api.nvim_create_autocmd("LspAttach", {
+      callback = function(args)
+        -- NOTE: https://neovim.io/doc/user/lsp.html#lsp-api
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        if client == nil then
+          return
+        end
+
+        vim.keymap.set("n", prefix.close .. map_keyword.lsp, function()
+          for _, buf_client in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
+            buf_client.stop()
+          end
+        end, { desc = "stop-lsp", buffer = args.buf })
+
+        local keymap_opts = { buffer = args.buf }
+        local local_prefix = "<LocalLeader>" .. map_keyword.lsp
+        local mappings = {
+          ["_"] = {
+            {
+              lhs_suffix = "I",
+              rhs = "<cmd>LspInfo<CR>",
+              desc = "lsp-info",
+            },
+          },
+          ["callHierarchy/incomingCalls"] = {
+            lhs_suffix = "i",
+            rhs = vim.lsp.buf.incoming_calls,
+            desc = "incoming-calls",
+          },
+          ["callHierarchy/outgoingCalls"] = {
+            lhs_suffix = "o",
+            rhs = vim.lsp.buf.outgoing_calls,
+            desc = "outgoing-calls",
+          },
+          ["textDocument/codeAction"] = {
+            {
+              lhs_suffix = map_keyword.execute,
+              rhs = vim.lsp.buf.code_action,
+              desc = "code-action",
+            },
+            {
+              lhs_suffix = map_keyword.execute,
+              -- NOTE: vim 9.0 부터 function() 으로 랩핑 해줘야 동작. <2022-?>
+              rhs = function()
+                vim.lsp.buf.range_code_action()
+              end,
+              desc = "range-code-action",
+              mode = "x",
+            },
+          },
+          -- ["textDocument/completion"] = {},
+          ["textDocument/codeLens"] = {
+            {
+              mode = { "n", "v" },
+              lhs_suffix = "s",
+              rhs = vim.lsp.codelens.run,
+              desc = "code-lens-run",
+            },
+            {
+              lhs_suffix = "S",
+              rhs = vim.lsp.codelens.refresh,
+              desc = "code-lens-refresh",
+            },
+          },
+          ["textDocument/declaration"] = {
+            lhs_suffix = "D",
+            rhs = vim.lsp.buf.declaration,
+            desc = "open-declaration",
+          },
+          ["textDocument/definition"] = {
+            lhs_suffix = "d",
+            rhs = vim.lsp.buf.definition, -- opens definition in current window
+            desc = "open-definition",
+          },
+          ["textDocument/documentHighlight"] = {
+            lhs_suffix = "l",
+            rhs = vim.lsp.buf.document_highlight,
+            desc = "document-highlight",
+          },
+          -- ["textDocument/documentSymbol"] = { lhs_suffix = "y", rhs = vim.lsp.buf.document_symbol, desc = "document-symbol", }, -- telescope 으로 액세스
+          -- ["textDocument/formatting"] = {}, -- use conform.nvim
+          -- ["textDocument/hover"] = {}, -- neovim set this feature to K
+          ["textDocument/implementation"] = {
+            lhs_suffix = "m",
+            rhs = vim.lsp.buf.implementation,
+            desc = "open-implementation",
+          },
+          -- ["textDocument/inlayHint"] = {},
+          ["textDocument/publishDiagnostic"] = {
+            -- -- use lspsagaintsead
+            -- {
+            --   lhs = "[r",
+            --   rhs = function()
+            --     vim.diagnostic.goto_prev({
+            --       severity = vim.diagnostic.severity["ERROR"],
+            --     })
+            --   end,
+            --   desc = "prev-diagnostic-error",
+            -- },
+            -- {
+            --   lhs = "]r",
+            --   rhs = function()
+            --     vim.diagnostic.goto_next({
+            --       severity = vim.diagnostic.severity["ERROR"],
+            --     })
+            --   end,
+            --   desc = "next-diagnostic-error",
+            -- },
+            -- {
+            --   lhs = "[w",
+            --   rhs = function()
+            --     vim.diagnostic.goto_prev({
+            --       severity = vim.diagnostic.severity["WARN"],
+            --     })
+            --   end,
+            --   desc = "prev-diagnostic-warn",
+            -- },
+            -- {
+            --   lhs = "]w",
+            --   rhs = function()
+            --     vim.diagnostic.goto_next({
+            --       severity = vim.diagnostic.severity["WARN"],
+            --     })
+            --   end,
+            --   desc = "next-diagnostic-warn",
+            -- },
+          },
+          -- ["textDocument/prepareTypeHierarchy"] = {},
+          -- ["textDocument/rangeFormatting"] = {},
+          -- ["textDocument/rangesFormatting"] = {},
+          ["textDocument/references"] = {
+            lhs_suffix = "r",
+            rhs = vim.lsp.buf.references,
+            desc = "quickfix-references",
+          },
+          ["textDocument/rename"] = {
+            lhs_suffix = "n",
+            rhs = vim.lsp.buf.rename,
+            desc = "renaem",
+          },
+          -- ["textDocument/semanticTokens/full"] = {},
+          -- ["textDocument/semanticTokens/full/delta"] = {},
+          ["textDocument/signatureHelp"] = {
+            lhs_suffix = "h",
+            rhs = vim.lsp.buf.signature_help,
+            desc = "signature-help",
+          },
+          ["textDocument/typeDefinition"] = {
+            lhs_suffix = "p",
+            rhs = vim.lsp.buf.type_definition,
+            desc = "type-definition",
+          },
+          ["typeHierarchy/subtypes"] = {
+            lhs_suffix = "t",
+            rhs = function()
+              vim.lsp.buf.typehierarchy("subtypes")
+            end,
+            desc = "typehierarchy-subtypes",
+          },
+          ["typeHierarchy/supertypes"] = {
+            lhs_suffix = "T",
+            rhs = function()
+              vim.lsp.buf.typehierarchy("supertypes")
+            end,
+            desc = "typehierarchy-supertypes",
+          },
+          -- ["window/logMessage"] = {},
+          -- ["window/showMessage"] = {},
+          -- ["window/showDocument"] = { lhs_suffix = "ud", rhs = vim.lsp.util.show_document, desc = "show-document", },
+          -- ["window/showMessageRequest"] = {},
+          -- ["workspace/applyEdit"] = {},
+          -- ["workspace/configuration"] = {},
+          -- ["workspace/executeCommand"] = {},
+          -- ["workspace/inlayHint/refresh"] = {},
+          -- ["workspace/symbol"] = { lhs_suffix = "Y", rhs = vim.lsp.buf.workspace_symbol, desc = "workspace-symbol", }, -- treesitter 이용
+          ["workspace/workspaceFolders"] = {
+            {
+              lhs_suffix = "wa",
+              rhs = vim.lsp.buf.add_workspace_folder,
+              desc = "add-workspace",
+            },
+            {
+              lhs_suffix = "wr",
+              rhs = function()
+                vim.ui.select(
+                  vim.lsp.buf.list_workspace_folders(),
+                  { prompt = "vim.lsp.buf.list_workspace_folders()" },
+                  function(choice)
+                    if choice ~= nil then
+                      vim.lsp.buf.remove_workspace_folder(choice)
+                    end
+                  end
+                )
+              end,
+              desc = "remove-workspace",
+            },
+            {
+              lhs_suffix = "wl",
+              rhs = function()
+                vim.ui.select(
+                  vim.lsp.buf.list_workspace_folders(),
+                  { prompt = "vim.lsp.buf.list_workspace_folders()" },
+                  function(choice)
+                    -- let @a = 'Hello, Neovim!'
+                    vim.fn.setreg("@", choice)
+                    vim.notify(
+                      "Selected workspace has been assigned to the register."
+                    )
+                  end
+                )
+              end,
+              desc = "list-workspace-folders",
+            },
+          },
+        }
+        for method, specs in pairs(mappings) do
+          if method == "_" or client.supports_method(method) then
+            for _, spec in ipairs(specs.rhs and { specs } or specs) do
+              vim.keymap.set(
+                spec.mode and spec.mode or "n",
+                spec.lhs and spec.lhs or (local_prefix .. spec.lhs_suffix),
+                spec.rhs,
+                vim.tbl_extend("error", keymap_opts, { desc = spec.desc })
+              )
+            end
+          end
+        end
+      end,
+    })
   end,
   specs = {
     {

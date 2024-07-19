@@ -92,12 +92,51 @@ return {
       -- stylua: ignore start
       { [1] = prefix.buffer_finder .. map_keyword.marks,   [2] = t_builtin.marks,                     desc = "marks" },
       { [1] = prefix.buffer_finder .. map_keyword.line,    [2] = t_builtin.current_buffer_fuzzy_find, desc = "line" },
-      { [1] = prefix.buffer_finder .. map_keyword.symbols, [2] = t_builtin.lsp_document_symbols,      desc = "symbols (lsp)" },
-      { [1] = prefix.buffer_finder .. string.upper(map_keyword.symbols), [2] = t_builtin.treesitter, desc = "symbols (treesitter)" },
+
       -- stylua: ignore end
     }
     vim.list_extend(keys, lazykeys)
 
+    -- symbols
+    table.insert(keys, {
+      [1] = prefix.buffer_finder .. map_keyword.symbols,
+      [2] = t_builtin.treesitter,
+      desc = "symbols (treesitter)",
+    })
+
+    vim.api.nvim_create_autocmd("LspAttach", {
+      callback = function(args)
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+        local keymap_opts = { buffer = args.buf }
+        local mappings = {
+          ["textDocument/documentSymbol"] = {
+            lhs = prefix.buffer_finder .. map_keyword.symbols,
+            rhs = t_builtin.lsp_document_symbols,
+            desc = "symbols (lsp)",
+          },
+          ["workspace/symbol"] = {
+            lhs = prefix.buffer_finder .. string.upper(map_keyword.symbols),
+            rhs = t_builtin.lsp_workspace_symbols,
+            desc = "workspace-symbols (lsp)",
+          },
+        }
+        for method, specs in ipairs(mappings) do
+          if client.supports_method(method) then
+            for _, spec in ipairs(specs.lhs_suffix and { specs } or specs) do
+              vim.keymap.set(
+                spec.mode and spec.mode or "n",
+                spec.lhs,
+                spec.rhs,
+                vim.tbl_extend("error", keymap_opts, { desc = spec.desc })
+              )
+            end
+          end
+        end
+      end,
+    })
+
+    ---------------------------------------------------------------------------
     local new_win_presets = {
       {
         key = "f",

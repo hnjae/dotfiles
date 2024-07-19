@@ -19,6 +19,8 @@ return {
       -- vim's builtin 인데 which-key.nvim 에 안뜨는 값
       -- stylua: ignore start
       { [1] = "g",  group = "extra-cmd" },
+      { [1] = "gd",  group = "goto-local-declaration" },
+      { [1] = "gD",  group = "goto-global-declaration" },
       { [1] = "z",  group = "extra-cmd" },
       { [1] = "zn", desc = "fold-none" },
       { [1] = "zN", desc = "fold-normal" },

@@ -43,8 +43,9 @@ M.on_attach = function(client, bufnr)
   -- end
 
   -- vim.notify(vim.inspect(client))
-  vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-  require(package_path .. ".lsp-keymap-setup")()
+
+  -- 아래는 기본 동작으로 바뀜 i_CTRL-X_CTRL-O 로 사용
+  -- vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 end
 
 M.icons = require(package_path .. ".icons")

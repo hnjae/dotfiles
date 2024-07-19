@@ -17,18 +17,28 @@ return {
     "OutlineRefresh",
   },
   ---@type LazyKeysSpec[]
-  keys = {
-    {
-      [1] = prefix.sidebar .. map_keyword.symbols,
-      [2] = "<cmd>Outline<CR>",
-      desc = "outline (symbols)",
-    },
-    {
-      [1] = prefix.focus .. map_keyword.symbols,
-      [2] = "<cmd>OutlineFocus<CR>",
-      desc = "outline (symbols)",
-    },
-  },
+  ---@type fun(LazyPlugin, keys: LazyKeysSpec[]): nil
+  keys = function(_, keys)
+    vim.api.nvim_create_autocmd("LspAttach", {
+      callback = function(args)
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        if client.supports_method("textDocument/documentSymbol") then
+          vim.keymap.set(
+            "n",
+            prefix.sidebar .. map_keyword.symbols,
+            "<cmd>Outline<CR>",
+            { buffer = args.buf, desc = "outline (symbols)" }
+          )
+          vim.keymap.set(
+            "n",
+            prefix.focus .. map_keyword.symbols,
+            "<cmd>OutlineFocus<CR>",
+            { buffer = args.buf, desc = "outline (symbols)" }
+          )
+        end
+      end,
+    })
+  end,
   dependencies = {
     "onsails/lspkind.nvim",
     "neovim/nvim-lspconfig",
