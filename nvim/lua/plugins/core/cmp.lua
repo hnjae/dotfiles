@@ -102,9 +102,6 @@ return {
     local enable_icon = require("utils").enable_icon
     local format_menu = {
       --key: cmp.Entry.source's name
-      snippy = "[SNIP]",
-      luasnip = "[SNIP]",
-      buffer = "[BUF]",
       treesitter = "[TS]",
       path = "[Path]",
       async_path = "[Path]",
@@ -113,32 +110,56 @@ return {
       nvim_lsp_document_symbol = "[LSP-SYMBOL]",
       nvim_lsp_signature_help = "[SIGNATURE]",
       nvim_lua = "[NVIM-LUA]",
-      --
-      cmdline = "[CMDLINE]",
+    }
+
+    local source_icon_map = {
+      snippy = (lspkind.symbol_map["Snippet"] or " "),
+      luasnip = (lspkind.symbol_map["Snippet"] or " "),
+      cmdline = "", -- nf-oct-command_palette
+      buffer = "", -- nf-fa-buffer
+    }
+    local source_out_map = {
+      snippy = "Snippet",
+      luasnip = "Snippet",
+      cmdline = "Cmdline",
+      buffer = "Buffer",
     }
 
     if not enable_icon then
       opts.formatting.format = function(entry, vim_item)
-        vim_item.menu = (vim_item.menu or "")
-          .. (
-            format_menu[entry.source.name]
-            or string.format("[%s]", entry.source.name)
-          )
+        if source_icon_map[entry.source.name] then
+          vim_item.kind = (source_out_map[entry.source.name] or "")
+        else
+          vim_item.menu = (vim_item.menu or "")
+            .. (
+              format_menu[entry.source.name]
+              or string.format("[%s]", entry.source.name)
+            )
+        end
         return vim_item
       end
     else
       opts.formatting.format = function(entry, vim_item)
-        vim_item.menu = (vim_item.menu or "")
-          .. (
-            format_menu[entry.source.name]
-            or string.format("[%s]", entry.source.name)
+        if source_icon_map[entry.source.name] then
+          vim_item.kind = string.format(
+            " %s %s",
+            source_icon_map[entry.source.name],
+            (source_out_map[entry.source.name] or "")
           )
+        else
+          vim_item.menu = (vim_item.menu or "")
+            .. (
+              format_menu[entry.source.name]
+              or string.format("[%s]", entry.source.name)
+            )
 
-        vim_item.kind = string.format(
-          " %s %s",
-          (lspkind.symbol_map[vim_item.kind] or " "),
-          vim_item.kind
-        )
+          vim_item.kind = string.format(
+            " %s %s",
+            (lspkind.symbol_map[vim_item.kind] or " "),
+            vim_item.kind
+          )
+        end
+
         return vim_item
       end
     end
