@@ -7,79 +7,76 @@ return {
     "nvim-tree/nvim-web-devicons",
   },
   opts = function()
-    local utils = require("utils")
+    -- if utils.is_plugin("lspsaga.nvim") then
+    --   icons.Keyword = ""
+    --   for _, value in pairs(require("lspsaga.lspkind").kind) do
+    --     icons[value[1]] = value[2]:sub(1, #value[2] - 1)
+    --   end
+    local icons = {
+      -- based on lspkind's codicons
+      -- Text = "",
+      Method = "",
+      -- Function = "",
+      -- Constructor = "",
+      Field = "",
+      -- Variable = "",
+      -- Class = "",
+      -- Interface = "",
+      Module = "",
+      Property = "",
+      -- Unit = "",
+      -- Value = "",
+      -- Enum = "",
+      Keyword = "",
+      -- Snippet = "",
+      -- Color = "",
+      -- File = "",
+      -- Reference = "",
+      -- Folder = "",
+      -- EnumMember = "",
+      Constant = "",
+      -- Struct = "",
+      -- Event = "",
+      -- Operator = "",
+      TypeParameter = "",
 
-    local icons = {}
-    if utils.is_plugin("lspsaga.nvim") then
-      icons.Keyword = ""
-      for _, value in pairs(require("lspsaga.lspkind").kind) do
-        icons[value[1]] = value[2]:sub(1, #value[2] - 1)
-      end
-    else
-      icons = {
-        -- based on lspkind's codicons
-        -- Text = "",
-        Method = "",
-        -- Function = "",
-        -- Constructor = "",
-        Field = "",
-        -- Variable = "",
-        -- Class = "",
-        -- Interface = "",
-        Module = "",
-        Property = "",
-        -- Unit = "",
-        -- Value = "",
-        -- Enum = "",
-        Keyword = "",
-        -- Snippet = "",
-        -- Color = "",
-        -- File = "",
-        -- Reference = "",
-        -- Folder = "",
-        -- EnumMember = "",
-        Constant = "",
-        -- Struct = "",
-        -- Event = "",
-        -- Operator = "",
-        TypeParameter = "",
+      -- Overrides defaults
+      Function = "󰊕", -- nf-md-function
+      --  nf-cod-primitive_square
+      --  nf-cod-archive
+      --  nf-cod-globe
+      --  nf-cod-heart
+      --  nf-cod-layout
 
-        -- Overrides
-        Function = "󰊕", -- nf-md-function
-        --  nf-cod-primitive_square
-        --  nf-cod-archive
-        --  nf-cod-globe
-        --  nf-cod-heart
-        --  nf-cod-layout
+      --
+      File = "", -- nf-cod-file
+      Folder = "", -- nf-cod-folder
 
-        Conceal = icons.Keyword,
+      -- for Outline.nvim & lspsaga.nvim
+      Object = "", -- nf-cod-circle
+      Boolean = "", -- nf-cod-symbol_boolean
+      Array = "", -- nf-cod-symbol-array
+      Number = "", -- nf-cod_symbol_numeric
+      String = "", -- nf-cod-symbol_string,
+      Namespace = "", -- nf-cod-symbol_namespace
+      Package = "", -- nf-cod-package
+      TypeAlias = "", -- nf-cod-link
+      Parameter = "",
+      Key = "", -- nf-cod-key
+      Macro = "", -- nf-cod-mention
+      Null = "", -- nf-cod-circle_slash
 
-        --
-        File = "", -- nf-cod-file
-        Folder = "", -- nf-cod-folder
-        -- for Outline.nvim
-        Object = "", -- nf-cod-circle
-        Boolean = "", -- nf-cod-symbol_boolean
-        Array = "", -- nf-cod-symbol-array
-        Number = "", -- nf-cod_symbol_numeric
-        String = "", -- nf-cod-symbol_string,
-        Namespace = "", -- nf-cod-symbol_namespace
-        Package = "", -- nf-cod-package
-        TypeAlias = "", -- nf-cod-link
-        Parameter = "",
-        Key = "", -- nf-cod-key
-        Macro = "", -- nf-cod-mention
-        Null = "", -- nf-cod-circle_slash
-
-        --
-        Misc = "",
-      }
-    end
+      --
+      -- Misc = "",
+    }
 
     return {
       preset = "codicons",
       -- preset = "default",
+
       symbol_map = vim.tbl_extend("keep", icons, {
+        Conceal = icons.Keyword,
+
         -- treesitter
         -- https://github.com/nvim-treesitter/nvim-treesitter/blob/master/CONTRIBUTING.md
 
@@ -185,6 +182,7 @@ return {
         TagDelimiter = icons.Keyword,
         -- }}}
 
+        StringSpecial = icons.String,
         StringSpecialUrl = icons.String,
         StringSpecialPath = "", -- nf-oct-rel_file_path
         -- stylua: ignore end
@@ -193,7 +191,7 @@ return {
         Spell = "󰓆", -- nf-md-spellcheck
 
         -- Outline.nvim
-        StaticMethod = icons.method,
+        StaticMethod = icons.Method,
         -- Component = "",
         -- Fragment = "",
       }),
@@ -203,4 +201,67 @@ return {
     local lspkind = require("lspkind")
     lspkind.init(opts)
   end,
+  specs = {
+    {
+      [1] = "nvimdev/lspsaga.nvim",
+      optional = true,
+      opts = function(_, opts)
+        local kind = {
+          -- type, icon, hlgroup(maybe)
+          { "File", " ", "Tag" },
+          { "Module", " ", "Exception" },
+          { "Namespace", " ", "Include" },
+          { "Package", " ", "Label" },
+          { "Class", " ", "Include" },
+          { "Method", " ", "Function" },
+          { "Property", " ", "@property" },
+          { "Field", " ", "@field" },
+          { "Constructor", " ", "@constructor" },
+          { "Enum", " ", "@number" },
+          { "Interface", " ", "Type" },
+          { "Function", "󰡱 ", "Function" },
+          { "Variable", " ", "@variable" },
+          { "Constant", " ", "Constant" },
+          { "String", "󰅳 ", "String" },
+          { "Number", "󰎠 ", "Number" },
+          { "Boolean", " ", "Boolean" },
+          { "Array", "󰅨 ", "Type" },
+          { "Object", " ", "Type" },
+          { "Key", " ", "Constant" },
+          { "Null", "󰟢 ", "Constant" },
+          { "EnumMember", " ", "Number" },
+          { "Struct", " ", "Type" },
+          { "Event", " ", "Constant" },
+          { "Operator", " ", "Operator" },
+          { "TypeParameter", " ", "Type" },
+          -- ccls
+          [252] = { "TypeAlias", " ", "Type" },
+          [253] = { "Parameter", " ", "@parameter" },
+          [254] = { "StaticMethod", " ", "Function" },
+          [255] = { "Macro", " ", "Macro" },
+          -- for completion sb microsoft!!!
+          [300] = { "Text", "󰭷 ", "String" },
+          [301] = { "Snippet", " ", "@variable" },
+          [302] = { "Folder", " ", "Title" },
+          [303] = { "Unit", "󰊱 ", "Number" },
+          [304] = { "Value", " ", "@variable" },
+          [305] = { "Spell", " ", "@variable" },
+        }
+
+        if not opts.ui then
+          opts.ui = {}
+        end
+        if not opts.ui.kind then
+          opts.ui.kind = {}
+        end
+
+        local symbol_map = require("lspkind").symbol_map
+        for _, val in pairs(kind) do
+          if symbol_map[val[1]] then
+            opts.ui.kind[val[1]] = { symbol_map[val[1]] .. " ", val[3] }
+          end
+        end
+      end,
+    },
+  },
 }

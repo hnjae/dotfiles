@@ -10,11 +10,11 @@ local M = {
     { [1] = "nvim-tree/nvim-web-devicons", optional = true },
     "nvim-treesitter/nvim-treesitter",
   },
-  opts = function()
+  opts = function(_, opts)
     local utils = require("utils")
     local map_keyword = require("val").map_keyword
 
-    local ret = {
+    local default_opts = {
       scroll_preview = {
         scroll_down = "<C-f>",
         scroll_up = "<C-b>",
@@ -71,26 +71,26 @@ local M = {
         },
       },
     }
-
-    if require("utils").enable_icon then
-      ret.ui = {
-        border = "rounded",
-        devicons = true,
-        expand = "", -- nf-cod-expand_all
-        collapse = "", -- nf-cod-collapse_all
-        code_action = require("val").icons.signs.code_action,
-        actionfix = " ", -- nf-cod-lightbulb_autofix
-        imp_sign = "", -- nf-cod-wand
-      }
-    else
-      ret.ui = {
+    default_opts.ui = require("utils").enable_icon
+        and {
+          border = "rounded",
+          devicons = true,
+          expand = "", -- nf-cod-expand_all
+          collapse = "", -- nf-cod-collapse_all
+          code_action = require("val").icons.signs.code_action,
+          actionfix = " ", -- nf-cod-lightbulb_autofix
+          imp_sign = "", -- nf-cod-wand
+        }
+      or {
         devicons = false,
         code_action = "!",
         actionfix = "!F",
         imp_sign = "I",
       }
-    end
-    return ret
+
+    opts = vim.tbl_deep_extend("keep", default_opts, opts or {})
+
+    return opts
   end,
   cmd = {
     "Lspsaga",
