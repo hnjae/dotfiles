@@ -11,9 +11,10 @@ local is_treesitter = require("utils").is_treesitter
 ---@type LazySpec
 return {
   [1] = "numToStr/Comment.nvim",
-  lazy = false,
+  lazy = true,
   event = { "VeryLazy" },
-  enabled = vim.fn.has("nvim-0.10") ~= 1,
+  -- enabled = vim.fn.has("nvim-0.10") ~= 1,
+  enabled = true,
   dependencies = {
     {
       [1] = "JoosepAlviste/nvim-ts-context-commentstring",

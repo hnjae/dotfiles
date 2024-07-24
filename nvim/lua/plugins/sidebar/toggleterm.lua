@@ -24,7 +24,7 @@ return {
     shell = os.getenv("SHELL") or vim.o.shell,
     direction = "float",
     -- direction = "horizontal",
-    shade_terminals = false,
+    -- shade_terminals = false,
     float_opts = {
       border = "rounded",
       width = function(term)
