@@ -79,11 +79,17 @@ local M = {
           dependencies = "nvim-treesitter/nvim-treesitter",
         },
       },
-      opts = {
-        sources = {
-          { name = "treesitter", group_index = 1, max_item_count = 8 },
-        },
-      },
+      opts = function(_, opts)
+        if not opts.sources then
+          opts.sources = {}
+        end
+
+        table.insert(
+          opts.sources,
+          1,
+          { name = "treesitter", group_index = 1, max_item_count = 8 }
+        )
+      end,
     },
   },
 }

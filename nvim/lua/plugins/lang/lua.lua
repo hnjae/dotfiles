@@ -66,6 +66,9 @@ return {
       { [1] = "hrsh7th/cmp-nvim-lua" }, -- auto complete neovim's Lua runtime API e.g.) vim.*
     },
     opts = function(_, opts)
+      if opts.sources == nil then
+        opts.sources = {}
+      end
       table.insert(opts.sources, { name = "nvim_lua", group_index = 1 })
     end,
   },
