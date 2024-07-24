@@ -34,9 +34,11 @@ return {
       [1] = "nvim-telescope/telescope.nvim",
       optional = true,
       keys = {
-          -- stylua: ignore start
-          { [1] = prefix .. "z", [2] = "<cmd>Telescope commands<CR>overseer ", desc = "list", },
-        -- stylua: ignore end
+        {
+          [1] = prefix .. "z",
+          [2] = "<cmd>Telescope commands<CR>overseer ",
+          desc = "list",
+        },
       },
     },
   },
