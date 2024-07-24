@@ -186,6 +186,7 @@ return {
         -- }}}
 
         StringSpecialUrl = icons.String,
+        StringSpecialPath = "", -- nf-oct-rel_file_path
         -- stylua: ignore end
 
         None = icons.Null,
