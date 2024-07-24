@@ -20,8 +20,8 @@
   ["al"] = { query = "@loop.outer",       desc = "@loop.outer" },
   ["il"] = { query = "@loop.inner",       desc = "@loop.inner" },
   ["in"] = { query = "@number.inner",     desc = "@number.inner" },
-  ["ip"] = { query = "@parameter.inner",  desc = "@parameter.inner" },
-  ["ap"] = { query = "@parameter.outer",  desc = "@parameter.outer" },
+  ["ir"] = { query = "@parameter.inner",  desc = "@parameter.inner" },
+  ["ar"] = { query = "@parameter.outer",  desc = "@parameter.outer" },
   --
   ["aC"] = { query = "@class.outer",      desc = "@class.outer" },
   ["iC"] = { query = "@class.inner",      desc = "@class.inner" },
@@ -30,8 +30,11 @@
   ["ix"] = { query = "@call.inner",       desc = "@call.inner" },
 
   -- go, js, tex, lua, py, rs, ts
-  ["ak"] = { query = "@block.outer",      desc = "@block.outer" },
-  ["ik"] = { query = "@block.inner",      desc = "@block.inner" },
+  ["ap"] = { query = "@block.outer",      desc = "@block.outer" },
+  ["ip"] = { query = "@block.inner",      desc = "@block.inner" },
+
+  ["ao"] = { query = "@conditional.outer", desc = "@conditional.outer" },
+  ["io"] = { query = "@conditional.inner", desc = "@conditional.inner" },
   ```
 
 #### Replace character

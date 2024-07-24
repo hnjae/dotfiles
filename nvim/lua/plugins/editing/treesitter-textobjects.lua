@@ -67,6 +67,19 @@ return {
           ]]
           --
 
+          -- Not in use
+          -- @attribute.inner
+          -- @attribute.outer
+          -- @frame.inner
+          -- @frame.outer
+          -- @scopename.inner
+
+          -- todo?
+          -- @regex.inner
+          -- @regex.outer
+          -- @return.inner
+          -- @return.outer
+
           -- stylua: ignore start
           -- sh, css, fish, go, js, lua, py, rs, ts, yaml
           ["as"] = { query = "@statement.outer",  desc = "@statement.outer" }, -- override sentence (won't override if not supported)
@@ -79,7 +92,7 @@ return {
           ["a/"] ={ query = "@comment.outer",  desc = "@comment.outer" },
           ["a*"] ={ query = "@comment.outer",  desc = "@comment.outer" },
           ["ac"] ={ query = "@comment.outer",  desc = "@comment.outer" },
-          -- ["ic"] ={ query = "@comment.inner",  desc = "@comment.inner" },
+          ["ic"] ={ query = "@comment.inner",  desc = "@comment.inner" },
 
           ["am"] = { query = "@function.outer",   desc = "@function.outer" },
           ["im"] = { query = "@function.inner",   desc = "@function.inner" },
@@ -87,8 +100,8 @@ return {
           ["al"] = { query = "@loop.outer",       desc = "@loop.outer" },
           ["il"] = { query = "@loop.inner",       desc = "@loop.inner" },
           ["in"] = { query = "@number.inner",     desc = "@number.inner" },
-          ["ip"] = { query = "@parameter.inner",  desc = "@parameter.inner" },
-          ["ap"] = { query = "@parameter.outer",  desc = "@parameter.outer" },
+          ["ir"] = { query = "@parameter.inner",  desc = "@parameter.inner" },
+          ["ar"] = { query = "@parameter.outer",  desc = "@parameter.outer" },
           --
           ["aC"] = { query = "@class.outer",      desc = "@class.outer" },
           ["iC"] = { query = "@class.inner",      desc = "@class.inner" },
@@ -97,12 +110,12 @@ return {
           ["ix"] = { query = "@call.inner",       desc = "@call.inner" },
 
           -- go, js, tex, lua, py, rs, ts
-          ["ak"] = { query = "@block.outer",      desc = "@block.outer" },
-          ["ik"] = { query = "@block.inner",      desc = "@block.inner" },
+          ["ap"] = { query = "@block.outer",      desc = "@block.outer" }, -- override paragraph
+          ["ip"] = { query = "@block.inner",      desc = "@block.inner" }, -- override paragraph
 
           -- stylua: ignore end
-          -- ["ao"] = { query = "@conditional.outer", desc = "@conditional.outer" },
-          -- ["io"] = { query = "@conditional.inner", desc = "@conditional.inner" },
+          ["ao"] = { query = "@conditional.outer", desc = "@conditional.outer" },
+          ["io"] = { query = "@conditional.inner", desc = "@conditional.inner" },
         },
         -- You can choose the select mode (default is charwise 'v')
         selection_modes = {
