@@ -303,6 +303,21 @@ return {
     })
   end,
   specs = {
+    -- / (search) 에서 사용 용도 @ + typing
+    {
+      [1] = "hrsh7th/nvim-cmp",
+      optional = true,
+      dependencies = { "hrsh7th/cmp-nvim-lsp-document-symbol" },
+      ---@param opts myCmpConfig
+      opts = function(_, opts)
+        opts.cmdline_search_sources = vim.list_extend(
+          opts.cmdline_search_sources or {},
+          require("cmp").config.sources({
+            { name = "nvim_lsp_document_symbol" }, -- @+typing
+          })
+        )
+      end,
+    },
     {
       [1] = "hrsh7th/cmp-nvim-lsp",
       optional = true,
@@ -339,6 +354,7 @@ return {
     {
       [1] = "nvim-lualine/lualine.nvim",
       optional = true,
+      ---@param opts myLualineOpts
       opts = function(_, opts)
         local utils = require("utils")
         local hide_width = 40

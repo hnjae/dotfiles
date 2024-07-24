@@ -79,7 +79,9 @@ local M = {
           dependencies = "nvim-treesitter/nvim-treesitter",
         },
       },
+      ---@param opts myCmpConfig
       opts = function(_, opts)
+        local cmp = require("cmp")
         if not opts.sources then
           opts.sources = {}
         end
@@ -88,6 +90,13 @@ local M = {
           opts.sources,
           1,
           { name = "treesitter", group_index = 1, max_item_count = 8 }
+        )
+
+        opts.cmdline_search_sources = vim.list_extend(
+          opts.cmdline_search_sources or {},
+          cmp.config.sources({
+            { name = "treesitter" },
+          })
         )
       end,
     },

@@ -1,3 +1,6 @@
+---@class myCmpConfig: cmp.ConfigSchema
+---@field cmdline_search_sources cmp.SourceConfig[]
+
 ---@type LazySpec
 return {
   [1] = "hrsh7th/nvim-cmp",
@@ -6,16 +9,13 @@ return {
   event = { "InsertEnter", "CmdlineEnter" },
   dependencies = {
     "onsails/lspkind.nvim",
-    -- / (search) 에서 사용 용도 @ + typing
-    { [1] = "hrsh7th/cmp-nvim-lsp-document-symbol" },
     -- { [1] = "hrsh7th/cmp-path" },
     { [1] = "https://codeberg.org/FelipeLema/cmp-async-path" },
-    { [1] = "hrsh7th/cmp-buffer" },
     { [1] = "hrsh7th/cmp-cmdline" },
     -- { [1] = "hrsh7th/cmp-omni" },
     { [1] = "hrsh7th/cmp-emoji" },
   },
-  ---@param opts cmp.ConfigSchema
+  ---@param opts myCmpConfig
   opts = function(_, opts)
     local cmp = require("cmp")
     local lspkind = require("lspkind")
@@ -81,27 +81,6 @@ return {
     opts.sources = vim.list_extend(
       opts.sources or {},
       cmp.config.sources({
-        {
-          name = "buffer",
-          priority = 0,
-          max_item_count = 8,
-          option = {
-            get_bufnrs = function()
-              -- use all visible buffers
-              local bufs = {}
-              for _, win in ipairs(vim.api.nvim_list_wins()) do
-                local buf = vim.api.nvim_win_get_buf(win)
-                if
-                  vim.bo[buf].buftype == ""
-                  or vim.bo[buf].buftype == "terminal"
-                then
-                  bufs[vim.api.nvim_win_get_buf(win)] = true
-                end
-              end
-              return vim.tbl_keys(bufs)
-            end,
-          },
-        },
         { name = "emoji" },
         { name = "async_path" },
       })
@@ -172,11 +151,7 @@ return {
     -- (if you enabled `native_menu`, this won't work anymore).
     cmp.setup.cmdline({ "/", "?" }, {
       mapping = cmp.mapping.preset.cmdline(),
-      sources = cmp.config.sources({
-        { name = "nvim_lsp_document_symbol" }, -- @+typing
-        { name = "treesitter" },
-        { name = "buffer" },
-      }),
+      sources = opts.cmdline_search_sources,
     })
 
     -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
@@ -190,6 +165,55 @@ return {
       }),
     })
   end,
-  specs = {},
+  specs = {
+    {
+      [1] = "hrsh7th/cmp-buffer",
+      optional = true,
+      specs = {
+        {
+          [1] = "hrsh7th/nvim-cmp",
+          optional = true,
+          dependencies = { "hrsh7th/cmp-buffer" },
+          ---@param opts myCmpConfig
+          opts = function(_, opts)
+            local cmp = require("cmp")
+            opts.sources = vim.list_extend(
+              opts.sources or {},
+              cmp.config.sources({
+                {
+                  name = "buffer",
+                  priority = 0,
+                  max_item_count = 8,
+                  option = {
+                    get_bufnrs = function()
+                      -- use all visible buffers
+                      local bufs = {}
+                      for _, win in ipairs(vim.api.nvim_list_wins()) do
+                        local buf = vim.api.nvim_win_get_buf(win)
+                        if
+                          vim.bo[buf].buftype == ""
+                          or vim.bo[buf].buftype == "terminal"
+                        then
+                          bufs[vim.api.nvim_win_get_buf(win)] = true
+                        end
+                      end
+                      return vim.tbl_keys(bufs)
+                    end,
+                  },
+                },
+              })
+            )
+
+            opts.cmdline_search_sources = vim.list_extend(
+              opts.cmdline_search_sources or {},
+              require("cmp").config.sources({
+                { name = "buffer" },
+              })
+            )
+          end,
+        },
+      },
+    },
+  },
 }
 -- vim:foldmethod=marker:foldenable:foldlevel=1:
