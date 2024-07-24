@@ -16,18 +16,24 @@ return {
   dependencies = {},
   ---@class PluginLspOpts
   opts = {
+    ---@type LspconfigSetupOptsSpec
     servers = {
       -- lua_ls = {
       --   settings = {},
       -- },
     },
+    ---@type { [string]: function }
     setup = {
       -- Specify * to use this function as a fallback for any server
       ["*"] = function(server, opts)
         require("lspconfig")[server].setup(opts)
       end,
     },
+    -- `runtime/lua/vim/lsp/_meta/protocol.lua`
+    ---@type lsp.ClientCapabilities
+    default_capabilities = {},
   },
+  ---@param opts PluginLspOpts
   config = function(_, opts)
     local lspconfig = require("lspconfig")
     local prefix = require("val.prefix")
@@ -36,19 +42,13 @@ return {
     -------------------------------------
     -- capabilities
     -------------------------------------
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    local status_cmp_nvim_lsp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-    if status_cmp_nvim_lsp then
-      capabilities = vim.tbl_deep_extend(
-        "force",
-        capabilities,
-        cmp_nvim_lsp.default_capabilities() -- includes snippet support
-      )
-    end
-
     lspconfig.util.default_config =
       vim.tbl_extend("force", lspconfig.util.default_config, {
-        capabilities = capabilities,
+        capabilities = vim.tbl_deep_extend(
+          "force",
+          vim.lsp.protocol.make_client_capabilities(),
+          opts.default_capabilities
+        ),
       })
 
     -------------------------------------
@@ -303,6 +303,39 @@ return {
     })
   end,
   specs = {
+    {
+      [1] = "hrsh7th/cmp-nvim-lsp",
+      optional = true,
+      specs = {
+        {
+          [1] = "hrsh7th/nvim-cmp",
+          optional = true,
+          dependencies = { "hrsh7th/cmp-nvim-lsp" },
+          ---@param opts cmp.ConfigSchema
+          opts = function(_, opts)
+            local cmp = require("cmp")
+            if not opts.sources then
+              opts.sources = {}
+            end
+            vim.list_extend(
+              opts.sources,
+              cmp.config.sources({
+                { name = "nvim_lsp", priority = 10 },
+              })
+            )
+          end,
+        },
+        {
+          [1] = "neovim/nvim-lspconfig",
+          optional = true,
+          ---@param opts PluginLspOpts
+          opts = function(_, opts)
+            local cmp_nvim_lsp = require("cmp_nvim_lsp")
+            opts.default_capabilities = cmp_nvim_lsp.default_capabilities() -- includes snippet support
+          end,
+        },
+      },
+    },
     {
       [1] = "nvim-lualine/lualine.nvim",
       optional = true,

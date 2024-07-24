@@ -6,7 +6,6 @@ return {
   event = { "InsertEnter", "CmdlineEnter" },
   dependencies = {
     "onsails/lspkind.nvim",
-    { [1] = "hrsh7th/cmp-nvim-lsp" },
     -- / (search) 에서 사용 용도 @ + typing
     { [1] = "hrsh7th/cmp-nvim-lsp-document-symbol" },
     -- { [1] = "hrsh7th/cmp-path" },
@@ -16,6 +15,7 @@ return {
     -- { [1] = "hrsh7th/cmp-omni" },
     { [1] = "hrsh7th/cmp-emoji" },
   },
+  ---@param opts cmp.ConfigSchema
   opts = function(_, opts)
     local cmp = require("cmp")
     local lspkind = require("lspkind")
@@ -75,14 +75,12 @@ return {
       opts.mapping or {}
     )
 
-    if not opts.sources then
-      opts.sources = {}
-    end
-
-    vim.list_extend(
-      opts.sources,
+    ----------------------------------------------------------------------------
+    -- Sources
+    ----------------------------------------------------------------------------
+    opts.sources = vim.list_extend(
+      opts.sources or {},
       cmp.config.sources({
-        { name = "nvim_lsp", priority = 10 },
         {
           name = "buffer",
           priority = 0,
@@ -106,15 +104,21 @@ return {
         },
         { name = "emoji" },
         { name = "async_path" },
-        -- { name = "month" },
       })
     )
 
     ----------------------------------------------------------------------------
-    -- {{{ formatting
+    -- formatting
+    ----------------------------------------------------------------------------
     -- NOTE: cmp formatting: https://github.com/hrsh7th/nvim-cmp/issues/511#issuecomment-1063014008 <2024-05-01>
+
     -- vim_item.dup 프로퍼티로 duplicate 부분 제어가 가능한 것 같다.
     opts.formatting = {}
+    -- opts.formatting.fields = {
+    --   cmp.ItemField.Abbr,
+    --   cmp.ItemField.Kind,
+    --   cmp.ItemField.Menu,
+    -- }
 
     local enable_icon = require("utils").enable_icon
     local format_menu = {
@@ -127,9 +131,9 @@ return {
       async_path = "[Path]",
       -- lsps
       nvim_lsp = "[LSP]",
-      nvim_lsp_document_symbol = "[DOCUMENT-SYMBOL]",
+      nvim_lsp_document_symbol = "[LSP-SYMBOL]",
       nvim_lsp_signature_help = "[SIGNATURE]",
-      nvim_lua = "[NVIM_LUA]",
+      nvim_lua = "[NVIM-LUA]",
       --
       cmdline = "[CMDLINE]",
     }
@@ -156,12 +160,9 @@ return {
           (lspkind.symbol_map[vim_item.kind] or " "),
           vim_item.kind
         )
-
         return vim_item
       end
     end
-    -- }}}
-    ----------------------------------------------------------------------------
   end,
   config = function(_, opts)
     local cmp = require("cmp")
@@ -189,5 +190,6 @@ return {
       }),
     })
   end,
+  specs = {},
 }
 -- vim:foldmethod=marker:foldenable:foldlevel=1:

@@ -12,6 +12,7 @@ return {
     opts = {
       servers = {
         jsonls = {
+          ---@class LspconfigSetupOptsSpec
           settings = {},
         },
       },
