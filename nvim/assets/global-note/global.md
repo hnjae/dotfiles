@@ -34,9 +34,10 @@
   ["ik"] = { query = "@block.inner",      desc = "@block.inner" },
   ```
 
-#### Replace character with new line
+#### Replace character
 
-\n 는 null character 을 입력하게 됨. \r 로 replace 하면 된다.
+* \n 는 null character 을 입력하게 됨. \r 로 replace 하면 된다.
+* `:%s/\<foo\>/bar/gc` 가 confirmation 하면서 바꾸기.
 
 #### Incremental 한 숫자 리스트 만들기
 
