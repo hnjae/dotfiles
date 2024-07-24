@@ -86,7 +86,7 @@ return {
         opts.snippet = {
           -- REQUIRED - you must specify a snippet engine
           expand = function(args)
-            luasnip.lsp_exapnd(args.body)
+            luasnip.lsp_expand(args.body)
           end,
         }
 
