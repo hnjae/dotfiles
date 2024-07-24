@@ -83,7 +83,30 @@ return {
     {
       [1] = "<LocalLeader>" .. map_keyword.ai .. "t",
       [2] = function()
-        -- local mode = vim.api.nvim_get_mode().mode
+        local winid = vim.fn.win_getid()
+        local bufnr = vim.fn.bufnr()
+
+        local ESC_FEEDKEY =
+          vim.api.nvim_replace_termcodes("<ESC>", true, false, true)
+
+        vim.api.nvim_feedkeys(ESC_FEEDKEY, "n", true)
+        vim.api.nvim_feedkeys("gv", "x", false)
+        vim.api.nvim_feedkeys(ESC_FEEDKEY, "n", true)
+
+        local start_row, start_col =
+          unpack(vim.api.nvim_buf_get_mark(bufnr, "<"))
+        local end_row, end_col = unpack(vim.api.nvim_buf_get_mark(bufnr, ">"))
+
+        if
+          start_row == 0
+          or (start_row == end_row and start_col == end_col)
+        then
+          local msg = "No visual selected: "
+            .. vim.inspect({ start_row, start_col, end_row, end_col })
+          vim.notify(msg, vim.log.levels.WARN)
+          return
+        end
+
         vim.ui.select({
           "English",
           "Korean",
@@ -92,6 +115,10 @@ return {
         }, {
           prompt = "Select language",
         }, function(lang)
+          if not lang then
+            return
+          end
+
           -- 이렇게 작성하면 버퍼 전체 전달
           --   vim.api.nvim_cmd({
           --     cmd = "ChatGPTRun",
@@ -102,8 +129,15 @@ return {
           -- require("chatgpt").run_action({
           --   fargs = { "translate", lang },
           -- })
-          local cmd = string.format("ChatGPTRun translate %s", lang)
-          vim.api.nvim_command(cmd)
+
+          -- vim.api.nvim_cmd({
+          --   cmd = "ChatGPTRun",
+          --   args = { "translate", lang },
+          --   range = { start_row, end_row, },
+          -- }, { output = false })
+
+          vim.api.nvim_set_current_win(winid)
+          vim.api.nvim_command(string.format("ChatGPTRun translate %s", lang))
         end)
       end,
       desc = "translate",
