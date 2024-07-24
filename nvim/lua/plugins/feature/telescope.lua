@@ -121,9 +121,9 @@ return {
             desc = "workspace-symbols (lsp)",
           },
         }
-        for method, specs in ipairs(mappings) do
+        for method, specs in pairs(mappings) do
           if client.supports_method(method) then
-            for _, spec in ipairs(specs.lhs_suffix and { specs } or specs) do
+            for _, spec in ipairs(specs.desc and { specs } or specs) do
               vim.keymap.set(
                 spec.mode and spec.mode or "n",
                 spec.lhs,
