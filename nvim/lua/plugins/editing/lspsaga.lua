@@ -237,9 +237,11 @@ local M = {
     vim.lsp.buf.hover = function()
       vim.api.nvim_command("Lspsaga hover_doc")
     end
-    vim.lsp.buf.rename = function()
-      vim.api.nvim_command("Lspsaga rename")
-    end
+    -- NOTE: 이렇게 하면 에러 발생. <2024-07-24>
+    -- deressing 플러그인의 input ui 로 대체 <2024-07-26>
+    -- vim.lsp.buf.rename = function()
+    --   vim.api.nvim_command("Lspsaga rename")
+    -- end
     vim.lsp.buf.code_action = function()
       vim.api.nvim_command("Lspsaga code_action")
     end

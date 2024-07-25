@@ -32,6 +32,7 @@ return {
     {
       -- replace vim.ui.select with telescope
       [1] = "nvim-telescope/telescope-ui-select.nvim",
+      enabled = false,
       config = function()
         require("utils.plugin").on_load("telescope.nvim", function()
           require("telescope").load_extension("ui-select")
