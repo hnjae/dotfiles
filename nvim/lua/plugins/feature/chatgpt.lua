@@ -15,7 +15,7 @@ return {
     "nvim-telescope/telescope.nvim",
   },
   lazy = true,
-  enabled = true,
+  enabled = use_freedesktop_secret_service,
   cmd = {
     "ChatGPT",
     "ChatGPTRun",
@@ -23,45 +23,39 @@ return {
     "ChatGPTCompleteCode",
     "ChatGPTEditWithInstructions",
   },
-  cond = vim.fn.executable("curl") == 1
-    and vim.fn.executable("op") == 1
-    and not require("utils").is_console,
-  opts = {
-    api_key_cmd = use_freedesktop_secret_service
-        and "secret-tool lookup api openapi"
-      or "op read op://Personal/OpenAI/api/editor --no-newline",
-    openai_params = {
-      model = "gpt-4o",
-    },
-    openai_edit_params = {
-      model = "gpt-4o",
-    },
-    chat = {
-      active_sign = "󰄵", -- nf-md-checkbox_marked_outline
-      in_active_sign = "󰄱", -- nf-md-checkbox_blank_outline
-      answer_sign = val.icons.ai,
-    },
-    actions_paths = {
-      require("plenary.path"):new(
-        vim.fn.stdpath("config"),
-        "assets",
-        "chatgpt",
-        "default-actions.json"
-      ).filename,
-      require("plenary.path"):new(
-        vim.fn.stdpath("config"),
-        "assets",
-        "chatgpt",
-        "default-actions-altered.json"
-      ).filename,
-      require("plenary.path"):new(
-        vim.fn.stdpath("config"),
-        "assets",
-        "chatgpt",
-        "custom-actions.json"
-      ).filename,
-    },
-  },
+  -- cond = vim.fn.executable("curl") == 1,
+  -- and vim.fn.executable("op") == 1,
+  -- and not require("utils").is_console,
+  opts = function()
+    local assets_path =
+      require("plenary.path"):new(vim.fn.stdpath("config"), "assets", "chatgpt")
+
+    return {
+      api_key_cmd = use_freedesktop_secret_service
+        and "secret-tool lookup api openapi",
+      -- or "op read op://Personal/OpenAI/api/editor --no-newline",
+      openai_params = {
+        model = "gpt-4o",
+      },
+      openai_edit_params = {
+        model = "gpt-4o",
+      },
+      chat = {
+        active_sign = "󰄵", -- nf-md-checkbox_marked_outline
+        in_active_sign = "󰄱", -- nf-md-checkbox_blank_outline
+        answer_sign = val.icons.ai,
+      },
+      predefined_chat_gpt_prompts = string.format(
+        "file://%s",
+        assets_path:joinpath("prompts.csv").filename
+      ),
+      actions_paths = {
+        assets_path:joinpath("default-actions.json").filename,
+        assets_path:joinpath("default-actions-altered.json").filename,
+        assets_path:joinpath("custom-actions.json").filename,
+      },
+    }
+  end,
   ---@type LazyKeysSpec[]
   keys = {
     -- stylua: ignore start

@@ -20,6 +20,7 @@ return {
       {
         [1] = "<Leader>S",
         [2] = "<cmd>SnipEdit<CR>",
+        desc = "snippet-edit",
       },
       {
         [1] = "<Tab>",
