@@ -1,3 +1,8 @@
+--[[
+왜?
+lualine opts 에 건내주고, 추후 활용하는 방법도 생각해보았는데,
+component 에서 활용하기가 까다로움.
+]]
 local M = {}
 
 local icons = require("val").icons

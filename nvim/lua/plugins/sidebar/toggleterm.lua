@@ -173,8 +173,9 @@ return {
     {
       [1] = "nvim-lualine/lualine.nvim",
       optional = true,
+      ---@param opts myLualineOpts
       opts = function(_, opts)
-        local get_icon = require("plugins.core.lualine.utils.get-icon")
+        local icons = require("val").icons
 
         local name = function()
           local tterm_msg = "#" .. vim.api.nvim_buf_get_var(0, "toggle_number")
@@ -188,14 +189,7 @@ return {
             return string.format("%s %s", tterm_msg, fname)
           end
 
-          -- return string.format("%s %s %s", tterm_msg, get_icon(fname), fname)
-          return string.format(
-            "%s  %s %s",
-            -- get_icon(nil, nil, vim.bo.buftype),
-            get_icon(nil, nil, vim.bo.buftype),
-            tterm_msg,
-            fname
-          )
+          return string.format("%s  %s %s", icons.terminal, tterm_msg, fname)
         end
 
         local extension = {
@@ -222,6 +216,10 @@ return {
             extension
           )
         )
+
+        require("state.lualine-ft-data"):add({
+          httpResult = { [1] = "ToggleTerm", [2] = icons.terminal },
+        })
       end,
     },
   },

@@ -1,6 +1,8 @@
 return {
-  directory = "", --nf-oct-file_directory
-  file = "", --nf-oct-file
+  -- directory = "", --nf-oct-file_directory
+  -- file = "", --nf-oct-file
+  directory = "",
+  file = "", -- nf-cod-file
   --
   signs = {
     -- codicons
@@ -60,4 +62,5 @@ return {
   --
   ai = "󱙺", -- nf-md-robot_outline
   toggle = "󱨦", -- nf-md-toggle_switch_variant_off
+  terminal = "", -- nf-oct-terminal
 }

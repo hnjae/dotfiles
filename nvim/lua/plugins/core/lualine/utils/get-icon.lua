@@ -18,7 +18,8 @@ local filename_icons = {
 }
 
 local buftype_icons = {
-  terminal = devicons.get_icon("terminal"),
+  -- terminal = devicons.get_icon("terminal"),
+  terminal = icons.terminal,
 }
 
 ---@param filename? string

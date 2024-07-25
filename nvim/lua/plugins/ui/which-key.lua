@@ -76,6 +76,7 @@ return {
       opts.icons.rules = {}
     end
     local icons = val.icons
+
     vim.list_extend(opts.icons.rules, {
       -- replace defaults
       { pattern = "buffer", icon = icons.file, color = "cyan" },
@@ -85,6 +86,7 @@ return {
       { pattern = "toggle", icon = icons.toggle, color = "yellow" },
       { pattern = "diagnostic", icon = icons.checklist, color = "green" },
       { pattern = "code", icon = icons.code, color = "orange" },
+      { pattern = "terminal", icon = icons.terminal, color = "red" },
 
       -- add
       -- { pattern = "finder", icon = icons.search, color = "green" },
@@ -97,11 +99,12 @@ return {
       { pattern = "task", icon = "", color = "grey" }, -- nf-oct-tasklist
       { pattern = "git", icon = icons.git, color = "orange" },
       { pattern = "new", icon = "󰏌", color = "grey" }, -- nf-md-open_in_new
+      { pattern = "edit", icon = "", color = "grey" }, -- nf-fa-edit
       --
       { pattern = "peek", icon = "󱀃", color = "grey" }, -- nf-md-newspaper_variant_multiple_outline
       { pattern = "sidebar", icon = "", color = "grey" }, -- nf-cod-layout_sidebar_right_off
       -- { pattern = "focus", icon = "󰽏", color = "grey" }, -- nf-md-focus_field
-      { pattern = "cmdline", icon = ":", color = "grey" },
+      { pattern = "cmdline", icon = "", color = "grey" }, -- nf-oct-command_palette
     })
   end,
   config = function(_, opts)

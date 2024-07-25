@@ -92,12 +92,17 @@ return {
     -- NOTE: cmp formatting: https://github.com/hrsh7th/nvim-cmp/issues/511#issuecomment-1063014008 <2024-05-01>
 
     -- vim_item.dup 프로퍼티로 duplicate 부분 제어가 가능한 것 같다.
-    opts.formatting = {}
-    -- opts.formatting.fields = {
-    --   cmp.ItemField.Abbr,
-    --   cmp.ItemField.Kind,
-    --   cmp.ItemField.Menu,
-    -- }
+    if not opts.formatting then
+      ---@diagnostic disable-next-line: missing-fields
+      opts.formatting = {}
+    end
+
+    opts.formatting.fields = {
+      cmp.ItemField.Abbr,
+      cmp.ItemField.Kind,
+      cmp.ItemField.Menu,
+      cmp.ItemField.soure,
+    }
 
     local enable_icon = require("utils").enable_icon
     local format_menu = {
@@ -116,6 +121,8 @@ return {
       snippy = (lspkind.symbol_map["Snippet"] or " "),
       luasnip = (lspkind.symbol_map["Snippet"] or " "),
       cmdline = "", -- nf-oct-command_palette
+      -- buffer = "", -- nf-cod-file_code
+      -- buffer = "", -- nf-cod-text_size
       buffer = "", -- nf-fa-buffer
     }
     local source_out_map = {
@@ -130,11 +137,10 @@ return {
         if source_icon_map[entry.source.name] then
           vim_item.kind = (source_out_map[entry.source.name] or "")
         else
-          vim_item.menu = (vim_item.menu or "")
-            .. (
-              format_menu[entry.source.name]
-              or string.format("[%s]", entry.source.name)
-            )
+          vim_item.menu = (
+            format_menu[entry.source.name]
+            or string.format("[%s]", entry.source.name)
+          ) .. (vim_item.menu or "")
         end
         return vim_item
       end
@@ -142,19 +148,18 @@ return {
       opts.formatting.format = function(entry, vim_item)
         if source_icon_map[entry.source.name] then
           vim_item.kind = string.format(
-            " %s %s",
+            "%s %s",
             source_icon_map[entry.source.name],
             (source_out_map[entry.source.name] or "")
           )
         else
-          vim_item.menu = (vim_item.menu or "")
-            .. (
-              format_menu[entry.source.name]
-              or string.format("[%s]", entry.source.name)
-            )
+          vim_item.menu = (
+            format_menu[entry.source.name]
+            or string.format("[%s]", entry.source.name)
+          ) .. (vim_item.menu or "")
 
           vim_item.kind = string.format(
-            " %s %s",
+            "%s %s",
             (lspkind.symbol_map[vim_item.kind] or " "),
             vim_item.kind
           )
@@ -205,22 +210,23 @@ return {
                   name = "buffer",
                   priority = 0,
                   max_item_count = 8,
-                  option = {
-                    get_bufnrs = function()
-                      -- use all visible buffers
-                      local bufs = {}
-                      for _, win in ipairs(vim.api.nvim_list_wins()) do
-                        local buf = vim.api.nvim_win_get_buf(win)
-                        if
-                          vim.bo[buf].buftype == ""
-                          or vim.bo[buf].buftype == "terminal"
-                        then
-                          bufs[vim.api.nvim_win_get_buf(win)] = true
-                        end
-                      end
-                      return vim.tbl_keys(bufs)
-                    end,
-                  },
+                  -- option = {
+                  --   get_bufnrs = function()
+                  --     -- use all visible buffers
+                  --     local bufs = {}
+                  --     for _, win in ipairs(vim.api.nvim_list_wins()) do
+                  --       local buf = vim.api.nvim_win_get_buf(win)
+                  --       if
+                  --         vim.bo[buf].buftype == ""
+                  --         -- or vim.bo[buf].buftype == "nofile"
+                  --         or vim.bo[buf].buftype == "terminal"
+                  --       then
+                  --         bufs[vim.api.nvim_win_get_buf(win)] = true
+                  --       end
+                  --     end
+                  --     return vim.tbl_keys(bufs)
+                  --   end,
+                  -- },
                 },
               })
             )

@@ -48,9 +48,7 @@ return {
     local lualine_components = {}
     lualine_components.sections = {
       lualine_a = {
-        -- "mode",
         require(package_path .. ".components.mode-enhanced"),
-        -- require("components.mode-enhanced"),
       },
       lualine_b = {
         require(package_path .. ".components.branch"),
@@ -59,14 +57,7 @@ return {
       lualine_c = {
         require(package_path .. ".components.filename"),
       },
-      lualine_x = {
-        -- {
-        --   component = require(package_path .. ".components.lsp-null-ls")(
-        --     opts.options
-        --   ),
-        --   priority = 99,
-        -- },
-      },
+      lualine_x = {},
       lualine_y = {
         {
           component = require(package_path .. ".components.spell"),

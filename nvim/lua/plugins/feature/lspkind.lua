@@ -12,8 +12,27 @@ return {
     --   for _, value in pairs(require("lspsaga.lspkind").kind) do
     --     icons[value[1]] = value[2]:sub(1, #value[2] - 1)
     --   end
+
+    local generic_icons = {
+      --------------------------------------------------------------------------
+      -- generic_icons for treesitter
+      --------------------------------------------------------------------------
+      comment = "", -- nf-cod-comment
+      comment_unresolved = "", -- nf-cod-comment_unresolved
+      markdown = "", -- nf-cod-markdown
+      quote = "", -- nf-cod-quote
+      link = "", -- nf-cod-link
+      tags = "", -- nf-cod-tags
+      spellcheck = "󰓆", -- nf-md-spellcheck
+      label = "󰌖", -- nf-md-label_outline
+      list = "", -- nf-cod-list_unordered
+      misc = "",
+    }
+
     local icons = {
-      -- based on lspkind's codicons
+      --------------------------------------------------------------------------
+      -- copy & paste of lspkind's codicons
+      --------------------------------------------------------------------------
       -- Text = "",
       Method = "",
       -- Function = "",
@@ -40,19 +59,23 @@ return {
       -- Operator = "",
       TypeParameter = "",
 
+      --------------------------------------------------------------------------
       -- Overrides defaults
+      --------------------------------------------------------------------------
       Function = "󰊕", -- nf-md-function
+      Snippet = "", -- nf-cod-code
+      Folder = "", -- nf-cod-folder
       --  nf-cod-primitive_square
       --  nf-cod-archive
       --  nf-cod-globe
       --  nf-cod-heart
       --  nf-cod-layout
 
-      --
-      File = "", -- nf-cod-file
-      Folder = "", -- nf-cod-folder
-
+      --------------------------------------------------------------------------
       -- for Outline.nvim & lspsaga.nvim
+      -- see `outline.nvim/lua/outline/symbols.lua`
+      --------------------------------------------------------------------------
+      File = "", -- nf-cod-file
       Object = "", -- nf-cod-circle
       Boolean = "", -- nf-cod-symbol_boolean
       Array = "", -- nf-cod-symbol-array
@@ -60,14 +83,14 @@ return {
       String = "", -- nf-cod-symbol_string,
       Namespace = "", -- nf-cod-symbol_namespace
       Package = "", -- nf-cod-package
-      TypeAlias = "", -- nf-cod-link
-      Parameter = "",
       Key = "", -- nf-cod-key
-      Macro = "", -- nf-cod-mention
       Null = "", -- nf-cod-circle_slash
-
-      --
-      -- Misc = "",
+      Component = "󰩦", -- nf-md-puzzle_outline
+      Fragment = "󰩦", -- nf-md-puzzle_outline
+      TypeAlias = "", -- same as TypeParameter
+      Parameter = "", -- same as type parameter
+      StaticMethod = "", -- same as method
+      Macro = "", -- nf-cod-mention
     }
 
     return {
@@ -75,43 +98,33 @@ return {
       -- preset = "default",
 
       symbol_map = vim.tbl_extend("keep", icons, {
-        Conceal = icons.Keyword,
-
         -- treesitter
         -- https://github.com/nvim-treesitter/nvim-treesitter/blob/master/CONTRIBUTING.md
 
-        -- {{{ identifier
+        -- identifier
         VariableParameter = icons.Parameter,
         VariableParameterBuiltin = icons.Parameter,
         VariableBuiltin = icons.Field,
         VariableMember = icons.Field,
-
         ConstantBuiltin = icons.Constant,
         ConstantMacro = icons.Constant,
-
         ModuleBuiltin = icons.Module,
-
         Label = "󰌖", -- nf-md-label_outline
-        -- }}}
 
-        -- {{{ types
+        -- types
         Type = icons.TypeParameter,
         TypeBuiltin = icons.TypeParameter,
         TypeDefinition = icons.TypeParameter,
-        -- }}}
 
         -- stylua: ignore start
-        -- {{{ Functions
+        -- Functions
         FunctionBuiltin = icons.Function,
         FunctionCall    = icons.Function,
-
-        FunctionMacro = icons.Macro,
-
+        FunctionMacro   = icons.Macro,
         FunctionMethod     = icons.Method,
         FunctionMethodCall = icons.Method,
-        -- }}}
 
-        -- {{{ Keywords
+        -- Keywords
         KeywordCoroutine = icons.Keyword,
         KeywordFunction  = icons.Keyword,
         KeywordOperator  = icons.Keyword,
@@ -122,78 +135,65 @@ return {
         KeywordReturn    = icons.Keyword,
         KeywordDebug     = icons.Keyword,
         KeywordException = icons.Keyword,
-
         KeywordConditional        = icons.Keyword,
         KeywordConditionalTernary = icons.Keyword,
-
         KeywordDirective       = icons.Keyword,
         KeywordDirectiveDefine = icons.Keyword,
-        -- }}}
 
-        -- {{{ punctuation
-        PunctuationSpecial   = "", -- nf-cod-quote
-        PunctuationBracket   = "", -- nf-cod-quote
-        PunctuationDelimiter = "", -- nf-cod-quote
-        -- }}}
+        -- punctuation
+        PunctuationSpecial   = generic_icons.quote,
+        PunctuationBracket   = generic_icons.quote,
+        PunctuationDelimiter = generic_icons.quote,
 
-        -- {{{ Comments
-        Comment              = "", -- nf-cod-comment
-        CommentDocumentation = "", -- nf-cod-comment
-        CommentError         = "", -- nf-cod-comment
-        CommentWarning       = "", -- nf-cod-comment
-        CommentTodo          = "", -- nf-cod-comment
-        CommentNote          = "", -- nf-cod-comment
-        -- }}}
-        -- {{{ Markup
-        MarkupHeading  = "", -- nf-cod-markdown
-        MarkupHeading1 = "", -- nf-cod-markdown
-        MarkupHeading2 = "", -- nf-cod-markdown
-        MarkupHeading3 = "", -- nf-cod-markdown
-        MarkupHeading4 = "", -- nf-cod-markdown
-        MarkupHeading5 = "", -- nf-cod-markdown
-        MarkupHeading6 = "", -- nf-cod-markdown
+        -- Comments
+        Comment              = generic_icons.comment,
+        CommentDocumentation = generic_icons.comment,
+        CommentNote          = generic_icons.comment,
+        CommentError         = generic_icons.comment_unresolved,
+        CommentWarning       = generic_icons.comment_unresolved,
+        CommentTodo          = generic_icons.comment_unresolved,
 
-        MarkupLink      = "", -- nf-cod-link
-        MarkupLinkLabel = "󰌖", -- nf-md-label_outline
-        MarkupLinkUrl   = "", -- nf-cod-link
+        -- Markup
+        MarkupHeading  = generic_icons.markdown,
+        MarkupHeading1 = generic_icons.markdown,
+        MarkupHeading2 = generic_icons.markdown,
+        MarkupHeading3 = generic_icons.markdown,
+        MarkupHeading4 = generic_icons.markdown,
+        MarkupHeading5 = generic_icons.markdown,
+        MarkupHeading6 = generic_icons.markdown,
 
-        MarkupList          = "", -- nf-cod-markdown
-        MarkupListChecked   = "", -- nf-cod-markdown
-        MarkupListUnchecked = "", -- nf-cod-markdown
+        MarkupLink      = generic_icons.link,
+        MarkupLinkUrl   = generic_icons.link,
+        MarkupLinkLabel = generic_icons.label,
 
-        MarkupRaw      = "", -- nf-cod-markdown
-        MarkupRawBlock = "", -- nf-cod-markdown
+        MarkupList          = generic_icons.markdown,
+        MarkupListChecked   = generic_icons.markdown,
+        MarkupListUnchecked = generic_icons.markdown,
+        MarkupRaw      = generic_icons.markdown,
+        MarkupRawBlock = generic_icons.markdown,
+        MarkupQuote = generic_icons.quote,
+        MarkupMath = generic_icons.markdown,
 
-        MarkupQuote = "", -- nf-cod-quote
-
-        MarkupMath = "", -- nf-cod-markdown
-        -- }}}
-
-        -- {{{ diff
+        -- diff
         DiffPlus  = "", -- nf-cod-diff_added
         DiffMinus = "", -- nf-cod-diff_removed
         DiffDelta = "", -- nf-cod-diff_modified
-        -- }}}
 
-        -- {{{ tag
-        Tag          = "", -- nf-cod-tags
+        -- tag
+        Tag          = generic_icons.tags,
         TagBuiltin   = icons.Method,
         TagAttribute = icons.Property,
         TagDelimiter = icons.Keyword,
-        -- }}}
 
         StringSpecial = icons.String,
         StringSpecialUrl = icons.String,
         StringSpecialPath = "", -- nf-oct-rel_file_path
+
+        Spell   = generic_icons.spellcheck,
+        Nospell = generic_icons.spellcheck,
         -- stylua: ignore end
 
         None = icons.Null,
-        Spell = "󰓆", -- nf-md-spellcheck
-
-        -- Outline.nvim
-        StaticMethod = icons.Method,
-        -- Component = "",
-        -- Fragment = "",
       }),
     }
   end,

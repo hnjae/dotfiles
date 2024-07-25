@@ -27,11 +27,6 @@ return {
   --   and require("utils").is_treesitter,
   ft = { "http" },
   opts = function()
-    local icons = require("val").icons
-    require("state.lualine-ft-data"):add({
-      httpResult = { [1] = "HTTP Result", [2] = icons.result },
-    })
-
     return {
       highlight = {
         enabled = true,
@@ -64,5 +59,18 @@ return {
       { [1] = prefix .. "R", [2] = "<Plug>RestNvimPreview", ft = "http", desc = "RestNvimPreview" },
       { [1] = prefix .. "g", [2] = "<cmd>RestLog<CR>",      ft = "http", desc = "RestLog" },
     -- stylua: ignore end
+  },
+  specs = {
+    {
+      [1] = "nvim-lualine/lualine.nvim",
+      optional = true,
+      ---@param opts myLualineOpts
+      opts = function(_, opts)
+        local icons = require("val").icons
+        require("state.lualine-ft-data"):add({
+          httpResult = { [1] = "HTTP Result", [2] = icons.result },
+        })
+      end,
+    },
   },
 }
