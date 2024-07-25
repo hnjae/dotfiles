@@ -13,7 +13,6 @@ return {
     { [1] = "https://codeberg.org/FelipeLema/cmp-async-path" },
     { [1] = "hrsh7th/cmp-cmdline" },
     -- { [1] = "hrsh7th/cmp-omni" },
-    { [1] = "hrsh7th/cmp-emoji" },
   },
   ---@param opts myCmpConfig
   opts = function(_, opts)
@@ -81,7 +80,6 @@ return {
     opts.sources = vim.list_extend(
       opts.sources or {},
       cmp.config.sources({
-        { name = "emoji" },
         { name = "async_path" },
       })
     )
@@ -124,12 +122,14 @@ return {
       -- buffer = "", -- nf-cod-file_code
       -- buffer = "", -- nf-cod-text_size
       buffer = "", -- nf-fa-buffer
+      emoji = "󰞅", -- nf-md-sticker_emoji
     }
     local source_out_map = {
       snippy = "Snippet",
       luasnip = "Snippet",
       cmdline = "Cmdline",
       buffer = "Buffer",
+      emoji = "Emoji",
     }
 
     if not enable_icon then
@@ -191,56 +191,6 @@ return {
       }),
     })
   end,
-  specs = {
-    {
-      [1] = "hrsh7th/cmp-buffer",
-      optional = true,
-      specs = {
-        {
-          [1] = "hrsh7th/nvim-cmp",
-          optional = true,
-          dependencies = { "hrsh7th/cmp-buffer" },
-          ---@param opts myCmpConfig
-          opts = function(_, opts)
-            local cmp = require("cmp")
-            opts.sources = vim.list_extend(
-              opts.sources or {},
-              cmp.config.sources({
-                {
-                  name = "buffer",
-                  priority = 0,
-                  max_item_count = 8,
-                  -- option = {
-                  --   get_bufnrs = function()
-                  --     -- use all visible buffers
-                  --     local bufs = {}
-                  --     for _, win in ipairs(vim.api.nvim_list_wins()) do
-                  --       local buf = vim.api.nvim_win_get_buf(win)
-                  --       if
-                  --         vim.bo[buf].buftype == ""
-                  --         -- or vim.bo[buf].buftype == "nofile"
-                  --         or vim.bo[buf].buftype == "terminal"
-                  --       then
-                  --         bufs[vim.api.nvim_win_get_buf(win)] = true
-                  --       end
-                  --     end
-                  --     return vim.tbl_keys(bufs)
-                  --   end,
-                  -- },
-                },
-              })
-            )
-
-            opts.cmdline_search_sources = vim.list_extend(
-              opts.cmdline_search_sources or {},
-              require("cmp").config.sources({
-                { name = "buffer" },
-              })
-            )
-          end,
-        },
-      },
-    },
-  },
+  specs = {},
 }
 -- vim:foldmethod=marker:foldenable:foldlevel=1:
