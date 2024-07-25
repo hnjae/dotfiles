@@ -17,7 +17,23 @@ return {
   keys = {
     {
       [1] = "-",
-      [2] = "<cmd>Oil<cr>",
+      -- [2] = "<cmd>Oil<cr>",
+      [2] = function()
+        if vim.bo.filetype ~= "oil" and vim.bo.buftype ~= "" then
+          local msg = "Can not open Oil from here: buftype is "
+            .. vim.bo.buftype
+          vim.notify(msg)
+          return
+        end
+        if vim.bo.filetype == "gitcommit" then
+          local msg = "Can not open Oil from here: filetype is "
+            .. vim.bo.filetype
+          vim.notify(msg)
+          return
+        end
+        return "<cmd>Oil<cr>"
+      end,
+      expr = true,
       desc = "oil-up",
     },
   },
