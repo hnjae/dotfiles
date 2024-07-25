@@ -298,6 +298,12 @@ local M = {
           end,
         }
 
+        if not opts.tabline then
+          opts.tabline = {}
+        end
+        if not opts.tabline.lualine_a then
+          opts.tabline.lualine_a = {}
+        end
         table.insert(opts.tabline.lualine_a, component)
       end,
     },
