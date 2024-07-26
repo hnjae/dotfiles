@@ -1,7 +1,11 @@
+-- NOTE: <2024-07-26>
+-- Outline 이 켜져 있는 버퍼가 꺼졌을때, outline 이 자동으로 꺼지지 않아
+-- 번거러움.
 ---@type LazySpec
 return {
   [1] = "hedyhli/outline.nvim",
   lazy = true,
+  enabled = false,
   cmd = {
     "Outline",
     "OutlineOpen",
@@ -65,7 +69,7 @@ return {
         icon_source = "lspkind",
       },
       outline_window = {
-        width = 20,
+        width = 16,
         focus_on_open = false,
         auto_close = true,
       },
