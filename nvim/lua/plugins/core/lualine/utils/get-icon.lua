@@ -31,8 +31,8 @@ return function(filename, filetype, buftype)
     return buftype_icons[buftype]
   end
 
-  if filetype and ft_data[filetype] and ft_data[filetype][2] then
-    return ft_data[filetype][2]
+  if filetype and ft_data[filetype] and ft_data[filetype].icon then
+    return ft_data[filetype].icon
   end
 
   if filename and filename_icons[filename] then

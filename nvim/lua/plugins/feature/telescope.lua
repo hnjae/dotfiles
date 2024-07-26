@@ -251,4 +251,16 @@ return {
     local telescope = require("telescope")
     telescope.setup(opts)
   end,
+  specs = {
+    {
+      [1] = "nvim-lualine/lualine.nvim",
+      optional = true,
+      opts = function()
+        local icons = require("val").icons
+        require("state.lualine-ft-data"):add({
+          TelescopePrompt = { icon = icons.search },
+        })
+      end,
+    },
+  },
 }

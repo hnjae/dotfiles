@@ -18,7 +18,10 @@ return {
       opts = function()
         local icons = require("val").icons
         require("state.lualine-ft-data"):add({
-          DressingInput = { [1] = "DressingInput", [2] = icons.textbox },
+          DressingInput = {
+            display_name = "DressingInput",
+            icon = icons.textbox,
+          },
         })
       end,
     },

@@ -19,4 +19,15 @@ return {
       cache = vim.fn.stdpath("cache") .. "/leetcode",
     },
   },
+  specs = {
+    {
+      [1] = "nvim-lualine/lualine.nvim",
+      optional = true,
+      opts = function()
+        require("state.lualine-ft-data"):add({
+          ["leetcode.nvim"] = { display_name = "LeetCode", icon = "" }, -- nf-oct-code_review
+        })
+      end,
+    },
+  },
 }

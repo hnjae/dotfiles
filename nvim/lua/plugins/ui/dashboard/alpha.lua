@@ -72,4 +72,16 @@ return {
       desc = "vsplit",
     },
   },
+  specs = {
+    {
+      [1] = "nvim-lualine/lualine.nvim",
+      optional = true,
+      opts = function()
+        local icons = require("val").icons
+        require("state.lualine-ft-data"):add({
+          alpha = { display_name = "Alpha", icon = icons.dashboard },
+        })
+      end,
+    },
+  },
 }

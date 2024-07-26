@@ -68,7 +68,7 @@ return {
       opts = function(_, opts)
         local icons = require("val").icons
         require("state.lualine-ft-data"):add({
-          httpResult = { [1] = "HTTP Result", [2] = icons.result },
+          httpResult = { display_name = "HTTP Result", icon = icons.result },
         })
       end,
     },

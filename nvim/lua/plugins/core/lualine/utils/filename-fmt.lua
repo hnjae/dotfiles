@@ -9,10 +9,12 @@ local ft_data = require("state.lualine-ft-data").data
 return function(name, context)
   local icon = nil
 
-  if ft_data[context.filetype] and ft_data[context.filetype][1] then
-    name = ft_data[context.filetype][1]
-    if ft_data[context.filetype][2] then
-      icon = ft_data[context.filetype][2]
+  if ft_data[context.filetype] then
+    if ft_data[context.filetype].display_name then
+      name = ft_data[context.filetype].display_name
+    end
+    if ft_data[context.filetype].icon then
+      icon = ft_data[context.filetype].icon
     end
   elseif
     context.filetype ~= ""

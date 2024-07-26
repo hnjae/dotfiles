@@ -174,6 +174,12 @@ return {
           opts.sections.lualine_b,
           { component = "overseer", priority = 60 }
         )
+
+        local icons = require("val").icons
+        require("state.lualine-ft-data"):add({
+          OverseerForm = { icon = icons.workflow },
+          OverseerList = { icon = "󰝖" }, -- nf-md-format_list_checks
+        })
       end,
     },
   },

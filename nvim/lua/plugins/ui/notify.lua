@@ -91,5 +91,15 @@ return {
         table.insert(keys, key)
       end,
     },
+    {
+      [1] = "nvim-lualine/lualine.nvim",
+      optional = true,
+      opts = function()
+        local icons = require("val").icons
+        require("state.lualine-ft-data"):add({
+          notify = { display_name = "Notify", icon = icons.message },
+        })
+      end,
+    },
   },
 }

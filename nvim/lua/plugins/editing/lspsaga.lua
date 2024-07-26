@@ -306,7 +306,19 @@ local M = {
         if not opts.tabline.lualine_a then
           opts.tabline.lualine_a = {}
         end
+
         table.insert(opts.tabline.lualine_a, component)
+
+        local icons = require("val").icons
+        require("state.lualine-ft-data"):add({
+          sagafinder = { display_name = "SagaFinder", icon = icons.search },
+          saga_codeaction = {
+            display_name = "Saga CodeAction",
+            icon = icons.lightbulb,
+          },
+          sagarename = { display_name = "SagaRename", icon = icons.textbox },
+          sagaoutline = { display_name = "SagaOutline", icon = icons.symbol },
+        })
       end,
     },
   },

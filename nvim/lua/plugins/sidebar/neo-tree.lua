@@ -41,4 +41,20 @@ return {
       -- },
     },
   },
+  specs = {
+    {
+      [1] = "nvim-lualine/lualine.nvim",
+      optional = true,
+      opts = function()
+        local icons = require("val").icons
+        require("state.lualine-ft-data"):add({
+          ["neo-tree"] = { display_name = "NeoTree", icon = icons.file_tree },
+          ["neo-tree-popup"] = {
+            display_name = "NeoTree Popup",
+            icon = icons.zap,
+          },
+        })
+      end,
+    },
+  },
 }

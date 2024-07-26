@@ -218,5 +218,18 @@ return {
         })
       end,
     },
+    {
+      [1] = "nvim-lualine/lualine.nvim",
+      optional = true,
+      opts = function()
+        local icons = require("val").icons
+        require("state.lualine-ft-data"):add({
+          ["chatgpt-input"] = {
+            display_name = "ChatGPT Input",
+            icon = icons.textbox,
+          },
+        })
+      end,
+    },
   },
 }

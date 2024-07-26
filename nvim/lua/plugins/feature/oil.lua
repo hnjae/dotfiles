@@ -137,6 +137,11 @@ return {
       [1] = "nvim-lualine/lualine.nvim",
       optional = true,
       opts = function(_, opts)
+        local icons = require("val").icons
+        require("state.lualine-ft-data"):add({
+          oil = { display_name = "Oil", icon = icons.directory },
+        })
+
         local modules = require("lualine_require").lazy_require({
           oil = "oil",
           lspconfig = "lspconfig",

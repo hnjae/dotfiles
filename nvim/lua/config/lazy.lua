@@ -47,6 +47,15 @@ M.setup = function()
       { import = "plugins.feature" },
       { import = "plugins.sidebar" },
       { import = "plugins.lang" },
+      {
+        [1] = "nvim-lualine/lualine.nvim",
+        optional = true,
+        opts = function()
+          require("state.lualine-ft-data"):add({
+            lazy = { display_name = "Lazy", icon = "󰒲" }, -- nf-md-sleep
+          })
+        end,
+      },
     },
     -- defaults = {
     --   lazy = true,

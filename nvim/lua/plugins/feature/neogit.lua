@@ -48,9 +48,10 @@ return {
     opts = function()
       local icons = require("val").icons
       require("state.lualine-ft-data"):add({
-        NeogitStatus = { [1] = "NeogitStatus", [2] = icons.git },
-        -- NeogitWorkTreePopup = { [1] = "NeogitStatus", [2] = icons.git },
-        -- NeogitCommitMessage = { [1] = "NeogitStatus", [2] = icons.git },
+        NeogitStatus = { display_name = "NeogitStatus", icon = icons.git },
+        -- NeogitWorkTreePopup
+        -- NeogitCommitMessage
+        -- NeogitPopUp
       })
     end,
   },

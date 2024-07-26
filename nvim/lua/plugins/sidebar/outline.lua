@@ -49,6 +49,16 @@ return {
     },
     outline_window = {
       width = 20,
+  specs = {
+    {
+      [1] = "nvim-lualine/lualine.nvim",
+      optional = true,
+      opts = function()
+        local icons = require("val").icons
+        require("state.lualine-ft-data"):add({
+          Outline = { icon = icons.symbol },
+        })
+      end,
     },
   },
 }

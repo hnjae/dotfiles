@@ -218,7 +218,7 @@ return {
         )
 
         require("state.lualine-ft-data"):add({
-          httpResult = { [1] = "ToggleTerm", [2] = icons.terminal },
+          toggleterm = { display_name = "ToggleTerm", icon = icons.terminal },
         })
       end,
     },

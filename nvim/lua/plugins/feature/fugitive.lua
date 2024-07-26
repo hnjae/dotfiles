@@ -71,7 +71,12 @@ return {
         local get_icon = require(
           require("val.plugins.lualine").__my_lualine_path .. ".utils.get-icon"
         )
+        local icons = require("val").icons
+
         local icon = get_icon(nil, "fugitive")
+        require("state.lualine-ft-data"):add({
+          fugitive = { display_name = "Fugitive", icon = icons.git },
+        })
 
         local name
         if require("utils").enable_icon then
