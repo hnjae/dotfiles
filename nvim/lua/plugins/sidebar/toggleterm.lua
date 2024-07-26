@@ -65,7 +65,7 @@ return {
         term:open()
       end,
       mode = { "n" },
-      desc = "v-split",
+      desc = "vsplit",
     },
     {
       [1] = prefix.new .. map_keyword.terminal .. map_keyword.split,
@@ -76,7 +76,7 @@ return {
         term:open()
       end,
       mode = { "n" },
-      desc = "h-split",
+      desc = "split",
     },
     {
       [1] = prefix.new .. map_keyword.terminal .. map_keyword.tab,
@@ -219,6 +219,25 @@ return {
 
         require("state.lualine-ft-data"):add({
           toggleterm = { display_name = "ToggleTerm", icon = icons.terminal },
+        })
+      end,
+    },
+    {
+      [1] = "folke/which-key.nvim",
+      optional = true,
+      ---@class opts wk.Opts
+      opts = function(_, opts)
+        if opts.spec == nil then
+          opts.spec = {}
+        end
+        local icon = { icon = require("val.icons").terminal, color = "red" }
+        vim.list_extend(opts.spec, {
+          {
+            [1] = prefix.new .. map_keyword.terminal,
+            group = "terminal",
+            ---@type wk.Icon
+            icon = icon,
+          },
         })
       end,
     },

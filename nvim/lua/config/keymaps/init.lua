@@ -97,19 +97,19 @@ M.setup = function()
     { "n" },
     prefix.new .. "c" .. map_keyword.vsplit,
     "<cmd>vsplit<CR>",
-    { desc = "current-buffer-vsplit" }
+    { desc = "vsplit" }
   )
   vim.keymap.set(
     { "n" },
     prefix.new .. "c" .. map_keyword.split,
     "<cmd>split<CR>",
-    { desc = "current-buffer-split" }
+    { desc = "split" }
   )
   vim.keymap.set(
     { "n" },
     prefix.new .. "c" .. map_keyword.tab,
     "<cmd>tabedit %<CR>",
-    { desc = "current-buffer-tab" }
+    { desc = "tab" }
   )
 
   -- open new page with an empty window
@@ -117,19 +117,19 @@ M.setup = function()
     { "n" },
     prefix.new .. "e" .. map_keyword.vsplit,
     "<cmd>vnew<CR>",
-    { desc = "empty-vsplit" }
+    { desc = "vsplit" }
   )
   vim.keymap.set(
     { "n" },
     prefix.new .. "e" .. map_keyword.split,
     "<cmd>new<CR>",
-    { desc = "empty-split" }
+    { desc = "split" }
   )
   vim.keymap.set(
     { "n" },
     prefix.new .. "e" .. map_keyword.tab,
     "<cmd>tabedit<CR>",
-    { desc = "empty-tab" }
+    { desc = "tab" }
   )
   -- }}}
   --------------------------------------------------------------------------------

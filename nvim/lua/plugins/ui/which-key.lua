@@ -42,8 +42,9 @@ return {
       { [1] = "[`", desc = "prev-mark" },
       { [1] = "]`", desc = "next-mark" },
       --
+      -- 내 맵핑 그룹
       { [1] = prefix.new .. "c", group = "current-buffer" },
-      { [1] = prefix.new .. "e", group = "empty" },
+      { [1] = prefix.new .. "e", group = "empty-buffer" },
       --
       {
         [1] = "<Leader>?",
@@ -100,6 +101,9 @@ return {
       { pattern = "git", icon = icons.git, color = "orange" },
       { pattern = "new", icon = "󰏌", color = "grey" }, -- nf-md-open_in_new
       { pattern = "edit", icon = "", color = "grey" }, -- nf-fa-edit
+      { pattern = "vsplit", icon = "", color = "grey" }, -- nf-cod-split_horizontal
+      { pattern = "split", icon = "", color = "grey" }, -- nf-cod-split_vertical
+      { pattern = "float", icon = "", color = "grey" }, -- nf-cod-multiple_windows
       --
       { pattern = "peek", icon = "󱀃", color = "grey" }, -- nf-md-newspaper_variant_multiple_outline
       { pattern = "sidebar", icon = "", color = "grey" }, -- nf-cod-layout_sidebar_right_off
