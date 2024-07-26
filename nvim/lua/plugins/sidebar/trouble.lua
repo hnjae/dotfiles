@@ -1,69 +1,70 @@
-local prefix = require("val").prefix
-local map_keyword = require("val").map_keyword
-
 ---@type LazySpec
 return {
   -- A pretty diagnostics, references, telescope results, quickfix and location list to help you solve all the trouble your code is causing.
   [1] = "folke/trouble.nvim",
   lazy = true,
   enabled = true,
+  version = "v3.*",
   dependencies = {
-    "nvim-tree/nvim-web-devicons",
+    { [1] = "nvim-tree/nvim-web-devicons", optional = true },
   },
   cmd = {
     "Trouble",
-    "TroubleClose",
-    "TroubleToggle",
   },
   opts = {
     icon = require("utils").enable_icon,
   },
-  keys = {
-    {
-      [1] = prefix.focus .. map_keyword.trouble,
-      [2] = "<cmd>Trouble<CR>",
-      desc = "focus-trouble",
-    },
-    {
-      [1] = prefix.trouble,
-      desc = "+trouble",
-    },
-    {
-      [1] = prefix.trouble .. map_keyword.trouble,
-      [2] = "<cmd>TroubleToggle<CR>",
-      desc = "trouble-toggle",
-    },
-    {
-      [1] = prefix.sidebar .. map_keyword.trouble,
-      [2] = "<cmd>TroubleToggle<CR>",
-      desc = "trouble-toggle",
-    },
-    {
-      [1] = prefix.trouble .. "w",
-      [2] = "<cmd>TroubleToggle workspace_diagnostics<CR>",
-      desc = "workspace-diagnostics",
-    },
-    {
-      [1] = prefix.trouble .. "d",
-      [2] = "<cmd>TroubleToggle document_diagnostics<CR>",
-      desc = "document-diagnostics",
-    },
-    {
-      [1] = prefix.trouble .. "q",
-      [2] = "<cmd>TroubleToggle quickfix<CR>",
-      desc = "quickfix",
-    },
-    {
-      [1] = prefix.trouble .. "l",
-      [2] = "<cmd>TroubleToggle loclist<CR>",
-      desc = "location-list",
-    },
-    {
-      [1] = prefix.trouble .. "r",
-      [2] = "<cmd>TroubleToggle lsp_references<CR>",
-      desc = "lsp-references",
-    },
-  },
+  keys = function()
+    local prefix = require("val").prefix
+    local map_keyword = require("val").map_keyword
+
+    return {
+      {
+        [1] = prefix.trouble,
+        desc = "+trouble",
+      },
+      {
+        [1] = prefix.trouble .. map_keyword.trouble,
+        [2] = "<cmd>Trouble<CR>",
+        desc = "open-selector",
+      },
+      {
+        [1] = prefix.trouble .. map_keyword.symbols,
+        [2] = "<cmd>Trouble symbols toggle<CR>",
+        desc = "symbols",
+      },
+      {
+        [1] = prefix.trouble .. map_keyword.diagnostics,
+        [2] = "<cmd>Trouble diagnostics toggle<CR>",
+        desc = "diagnostics",
+      },
+      {
+        [1] = prefix.trouble .. "w",
+        [2] = "<cmd>TroubleToggle workspace_diagnostics<CR>",
+        desc = "workspace-diagnostics",
+      },
+      {
+        [1] = prefix.trouble .. "d",
+        [2] = "<cmd>TroubleToggle document_diagnostics<CR>",
+        desc = "document-diagnostics",
+      },
+      {
+        [1] = prefix.trouble .. "q",
+        [2] = "<cmd>Trouble quickfix toggle<CR>",
+        desc = "quickfix",
+      },
+      {
+        [1] = prefix.trouble .. "L",
+        [2] = "<cmd>Trouble loclist toggle<CR>",
+        desc = "loclist",
+      },
+      {
+        [1] = prefix.trouble .. map_keyword.lsp,
+        [2] = "<cmd>Trouble lsp toggle<CR>",
+        desc = "lsp-references",
+      },
+    }
+  end,
   specs = {
     {
       [1] = "nvim-lualine/lualine.nvim",
@@ -112,6 +113,21 @@ return {
             extension
           )
         )
+      end,
+    },
+    {
+      [1] = "folke/which-key.nvim",
+      optional = true,
+      opts = function(_, opts)
+        if opts.icons == nil then
+          opts.icons = {}
+        end
+        if opts.icons.rules == nil then
+          opts.icons.rules = {}
+        end
+        vim.list_extend(opts.icons.rules, {
+          { pattern = "trouble", icon = "󱍼", color = "green" },
+        })
       end,
     },
   },

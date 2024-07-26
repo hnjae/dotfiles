@@ -40,6 +40,7 @@ return {
   -- snippet = "p",
   tag = "g",
   task = "t",
+  diagnostics = "d",
 
   --
   current = "e",
