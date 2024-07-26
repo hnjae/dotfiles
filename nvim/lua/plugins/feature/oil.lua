@@ -19,13 +19,17 @@ return {
       [1] = "-",
       -- [2] = "<cmd>Oil<cr>",
       [2] = function()
-        if vim.bo.filetype ~= "oil" and vim.bo.buftype ~= "" then
+        if vim.bo.filetype == "oil" then
+          return "<cmd>Oil<cr>"
+        end
+
+        if vim.bo.buftype ~= "" then
           local msg = "Can not open Oil from here: buftype is "
             .. vim.bo.buftype
           vim.notify(msg)
           return
         end
-        if vim.bo.filetype == "gitcommit" then
+        if vim.list_contains({ "gitcommit", "gitbase" }, vim.bo.filetype) then
           local msg = "Can not open Oil from here: filetype is "
             .. vim.bo.filetype
           vim.notify(msg)
