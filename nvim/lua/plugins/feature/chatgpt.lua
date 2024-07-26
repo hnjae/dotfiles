@@ -4,6 +4,28 @@ local val = require("val")
 
 local use_freedesktop_secret_service = vim.fn.executable("secret-tool") == 1
 
+-- TODO: does this working? <2024-07-26>
+local check_visual_and_run_cmd = function(cmd)
+  local bufnr = vim.fn.bufnr()
+
+  -- local ESC_FEEDKEY = vim.api.nvim_replace_termcodes("<ESC>", true, false, true)
+  -- vim.api.nvim_feedkeys(ESC_FEEDKEY, "n", true)
+  -- vim.api.nvim_feedkeys("gv", "x", false)
+  -- vim.api.nvim_feedkeys(ESC_FEEDKEY, "n", true)
+
+  local start_row, start_col = unpack(vim.api.nvim_buf_get_mark(bufnr, "<"))
+  local end_row, end_col = unpack(vim.api.nvim_buf_get_mark(bufnr, ">"))
+
+  if start_row == 0 or (start_row == end_row and start_col == end_col) then
+    local msg = "No visual selected: "
+      .. vim.inspect({ start_row, start_col, end_row, end_col })
+    vim.notify(msg, vim.log.levels.WARN)
+    return
+  end
+
+  vim.api.nvim_command(cmd)
+end
+
 ---@type LazySpec
 return {
   [1] = "jackMort/ChatGPT.nvim",
@@ -139,20 +161,27 @@ return {
     },
     {
       [1] = "<LocalLeader>" .. map_keyword.ai .. "g",
-      [2] = "<cmd>ChatGPTRun grammar_correction<CR>",
+      [2] = function()
+        check_visual_and_run_cmd("ChatGPTRun grammar_correction")
+      end,
       desc = "grammer-correction",
       mode = { "v" },
     },
     -- my actions
     {
       [1] = "<LocalLeader>" .. map_keyword.ai .. "v",
-      [2] = "<cmd>ChatGPTRun generate_variable_name<CR>",
+      [2] = function()
+        check_visual_and_run_cmd("ChatGPTRun generate_variable_name")
+      end,
       desc = "generate_variable_name",
       mode = { "v" },
     },
     {
       [1] = "<LocalLeader>" .. map_keyword.ai .. "c",
-      [2] = "<cmd>ChatGPTRun edit_commit_message<CR>",
+      -- [2] = "<cmd>ChatGPTRun edit_commit_message<CR>",
+      [2] = function()
+        check_visual_and_run_cmd("ChatGPTRun edit_commit_message")
+      end,
       desc = "edit_commit_message",
       mode = { "n", "v" },
     },
