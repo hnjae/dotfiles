@@ -4,8 +4,8 @@
 local M = {
   [1] = "windwp/nvim-autopairs",
   lazy = true,
-  event = { "InsertEnter" },
   enabled = true,
+  event = { "InsertEnter" },
   dependencies = {
     { [1] = "nvim-treesitter/nvim-treesitter", optional = true },
   },

@@ -3,7 +3,7 @@ return {
   [1] = "HiPhish/rainbow-delimiters.nvim",
   url = "https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
   lazy = true,
-  enabled = require("utils").is_treesitter,
+  enabled = true and require("utils").is_treesitter,
   -- NOTE: VeryLaze/VimEnter 은 너무 늦음 <2024-01-04>
   -- event = { "BufNewFile", "BufReadPost" },
   event = { "FileType" },
@@ -12,15 +12,19 @@ return {
   },
   opts = {
     highlight = {
-      "Normal",
-      "RainbowDelimiterYellow",
+      -- "Normal",
+      -- "RainbowDelimiterYellow",
       "RainbowDelimiterBlue",
-      "RainbowDelimiterOrange",
+      -- "RainbowDelimiterOrange",
       "RainbowDelimiterGreen",
       "RainbowDelimiterViolet",
       "RainbowDelimiterCyan",
       "RainbowDelimiterRed",
     },
+    -- query = {
+    --   [""] = "rainbow-delimiters",
+    --   lua = "rainbow-blocks",
+    -- },
   },
   main = "rainbow-delimiters.setup",
 }
