@@ -28,7 +28,7 @@ return {
         "s",
         enable_icon and string.format("%s  %s", "", "Load Sessions")
           or "Load Sessions",
-        "<cmd>Sload<CR>"
+        "<cmd>SessionLoad<CR>"
       ),
     }
 
