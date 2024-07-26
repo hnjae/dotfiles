@@ -8,7 +8,7 @@ snippet snip New snippet
 snippet ex "extends"
 	extends ${1:typescripts, html}
 snippet tm "TM_SELECTED_TEXT"
-	\${0:\$TM_SELECTED_TEXT}
+	\${${1:0}:\$TM_SELECTED_TEXT}$0
 snippet tf "transform"
 	\${${1:1}/<stop or variable (e.g. .*)>/<repalcement e.g. \U\0/<flags (g)>}
 snippet ev "eval"

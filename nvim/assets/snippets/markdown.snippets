@@ -1,10 +1,10 @@
 snippet sl insert link
-	[${2:link}](${1:https://example.com})$0
+	[${2:label}](${1:$TM_SELECTED_TEXT})$0
 snippet sthematic-break thematic break
 	---
 snippet scode "code block"
 	\`\`\`${1:lang}
-	${0:TM_SELECTED_TEXT}
+	${TM_SELECTED_TEXT}$0
 	\`\`\`
 snippet *** thematic break
 	---
