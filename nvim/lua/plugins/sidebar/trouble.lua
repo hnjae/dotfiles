@@ -116,7 +116,7 @@ return {
 
         local icons = require("val").icons
         require("state.lualine-ft-data"):add({
-          Trouble = { display_name = "Trouble", icon = icons.tools },
+          trouble = { display_name = "Trouble", icon = icons.tools },
         })
       end,
     },
