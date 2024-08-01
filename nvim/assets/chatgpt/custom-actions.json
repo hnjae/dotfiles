@@ -2,20 +2,18 @@
   "generate_variable_name": {
     "type": "chat",
     "opts": {
-      "template": "I want you to act as a variable name generator for a programming project I am working on. I will mention the type of function or data the variable pertains to, and you will generate a semantically appropriate and readable variable. The names should seek to explain the purpose of the variable without being excessively long. Keep in mind that variable names should adhere to naming conventions and must be perceptive to someone reading the code. For instance, {{input}} in {{filetype}}\n",
-      "strategy": "append",
+      "template": ">{{input}}\n\nI want you to act as a variable name generator for a programming project of {{filetype}}. The above text explains the variables I intend to create, and I would like you to generate two semantically appropriate and readable variable names. The names should seek to explain the purpose of the variable without being excessively long. Keep in mind that variable names should adhere to naming conventions and must be perceptive to someone reading the code. In your responses, provide a brief explanations for each name.\n",
+      "title": "Variable Name",
+      "strategy": "display",
       "params": {
-        "model": "gpt-4o",
-        "stop": [
-          "```"
-        ]
+        "model": "gpt-4o"
       }
     }
   },
   "edit_commit_message": {
     "type": "chat",
     "opts": {
-      "template": "```gitcommit\n{{input}}\n```\nI want you to act as a commit message generator. The above text is the commit message I roughly wrote, and I would like you to generate an appropriate commit message using the conventional commit format. The commit message must be in standard English. Do not write any explanations or other words, just reply with the commit message.",
+      "template": "```gitcommit\n{{input}}\n```\nI want you to act as a commit message generator. The above text is the commit message I roughly wrote, and I would like you to generate an appropriate commit message using the conventional commit format. The commit message must be in standard English and easy to understand for non-native English speakers. Do not write any explanations or other words, just reply with the commit message.",
       "strategy": "append",
       "params": {
         "model": "gpt-4o"

@@ -1,5 +1,5 @@
 {
-  "translate": {
+  "translate-simple": {
     "type": "chat",
     "opts": {
       "template": "Translate this into {{lang}}:\n\n{{input}}",
@@ -14,6 +14,22 @@
         "type": "string",
         "optional": "true",
         "default": "english"
+      }
+    }
+  },
+  "translate": {
+    "type": "chat",
+    "opts": {
+      "template": "```\n{{input}}```\n\nI want you to act as an {{lang}} translator, spelling corrector and improver. I would like you to make above text in the clear, concise, and grammatically correct version of {{lang}}. You should ensure the sentences are simple and easy to understand for non-native {{lang}} speakers. Hence, avoid complex vocabulary and sentence structures. Make sure your corrections preserve the original meaning of the sentences provided.",
+      "strategy": "append",
+      "params": {
+        "model": "gpt-4o"
+      }
+    },
+    "args": {
+      "lang": {
+        "type": "string",
+        "optional": "false"
       }
     }
   },

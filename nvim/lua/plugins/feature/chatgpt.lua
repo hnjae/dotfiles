@@ -58,14 +58,22 @@ return {
       -- or "op read op://Personal/OpenAI/api/editor --no-newline",
       openai_params = {
         model = "gpt-4o",
+        max_tokens = 600, -- default 300
       },
       openai_edit_params = {
         model = "gpt-4o",
       },
+      popup_input = {},
       chat = {
-        active_sign = "󰄵", -- nf-md-checkbox_marked_outline
-        in_active_sign = "󰄱", -- nf-md-checkbox_blank_outline
+        -- border_left_sign = "",
+        -- border_right_sign = "",
+        max_line_length = 100,
         answer_sign = val.icons.ai,
+        sessions_window = {
+          active_sign = "󰄵", -- nf-md-checkbox_marked_outline
+          in_active_sign = "󰄱", -- nf-md-checkbox_blank_outline
+          -- current_line_sign = "",
+        },
       },
       predefined_chat_gpt_prompts = string.format(
         "file://%s",
@@ -231,5 +239,18 @@ return {
         })
       end,
     },
+    -- {
+    --   [1] = "windwp/nvim-autopairs",
+    --   optional = true,
+    --   opts = function()
+    --     require("utils.plugin").on_load("nvim-autopairs", function()
+    --       local Rule = require("nvim-autopairs.rule")
+    --       require("nvim-autopairs").add_rules({
+    --         Rule("`", "`", "chatgpt-input"),
+    --         Rule("```", "```", "chatgpt-input"),
+    --       })
+    --     end)
+    --   end,
+    -- },
   },
 }
