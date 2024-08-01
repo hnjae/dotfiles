@@ -205,6 +205,9 @@ return {
     {
       [1] = "nvimdev/lspsaga.nvim",
       optional = true,
+      dependencies = {
+        { "onsails/lspkind.nvim" },
+      },
       opts = function(_, opts)
         local kind = {
           -- type, icon, hlgroup(maybe)
