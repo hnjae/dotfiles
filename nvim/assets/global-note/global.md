@@ -1,5 +1,10 @@
 ### tl;dr
 
+#### Surround
+
+* use `S` in visual mode.
+* 시작 pair 은 whitespace 를 insert, 끝 pair 은 생략한다.
+
 #### Textobjects
 
   ```lua
@@ -45,6 +50,14 @@
 #### Incremental 한 숫자 리스트 만들기
 
 Visual 로 숫자들 선택 후, `g<C-a>`
+
+#### 모든 라인 끝에 추가
+
+`:%norm A<추가할 string>`
+
+`%`: 모든 라인에
+`norm`: 다음의 normal command를 수행
+`A`: `Append`
 
 #### Chatgpt.nvim
 
