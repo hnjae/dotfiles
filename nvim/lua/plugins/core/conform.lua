@@ -92,16 +92,15 @@ return {
               return ""
             end
 
-            local formatters = modules.conform.list_formatters(0)
+            local formatters, will_fallback_lsp =
+              modules.conform.list_formatters_to_run(0)
 
             local names = {}
             for _, formatter in ipairs(formatters) do
-              if formatter.available then
-                table.insert(names, formatter.name)
-              end
+              table.insert(names, formatter.name)
             end
 
-            if #names == 0 and modules.conform.will_fallback_lsp() then
+            if #names == 0 and will_fallback_lsp then
               table.insert(names, "LSP")
             end
 
