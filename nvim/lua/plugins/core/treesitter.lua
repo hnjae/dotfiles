@@ -1,8 +1,5 @@
-if not require("utils").is_treesitter then
-  return {
-    [1] = "nvim-treesitter/nvim-treesitter",
-    enabled = false,
-  }
+local disable = function(lang, bufnr)
+  return vim.api.nvim_buf_line_count(bufnr) > 20000
 end
 
 ---@type LazySpec
@@ -10,7 +7,7 @@ local M = {
   [1] = "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
   lazy = false,
-  enabled = true,
+  enabled = require("utils").is_treesitter,
   event = { "VeryLazy" }, -- { "BufReadPost", "BufNewFile" },
   -- init = function() end,
   opts = {
@@ -19,9 +16,7 @@ local M = {
     ignore_install = {},
     highlight = {
       enable = true,
-      disable = function(lang, bufnr)
-        return vim.api.nvim_buf_line_count(bufnr) > 10000
-      end,
+      disable = disable,
       additional_vim_regex_highlighting = false,
       -- disable = function(lang, buf)
       --   vim.notify(lang)
@@ -34,9 +29,11 @@ local M = {
     },
     indent = {
       enable = true, -- NOTE: experimental features <2023-11-23>
+      disable = disable,
     },
     incremental_selection = {
       enale = false,
+      disable = disable,
     },
   },
   main = "nvim-treesitter.configs",

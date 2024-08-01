@@ -92,7 +92,7 @@ return {
         filetype = {
           "notify",
           "noice",
-          "TelescopePrompt",
+          -- "TelescopePrompt",
           "lazy",
           "minimap",
           "sagafinder",

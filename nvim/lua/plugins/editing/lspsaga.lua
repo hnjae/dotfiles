@@ -1,5 +1,3 @@
--- alternative: https://github.com/utilyre/barbecue.nvim
-
 ---@type LazySpec
 local M = {
   [1] = "nvimdev/lspsaga.nvim",
@@ -33,7 +31,10 @@ local M = {
         open_cmd = "!" .. utils.get_browser_cmd(),
       },
       symbol_in_winbar = {
-        -- alternatives https://github.com/utilyre/barbecue.nvim
+        -- alternatives <2024-07-26>:
+        -- https://github.com/utilyre/barbecue.nvim (uses nvim-navic inside)
+        -- https://github.com/SmiteshP/nvim-navic
+        -- https://github.com/Bekaboo/dropbar.nvim
         -- Breadcrumbs
         enable = not utils.is_plugin("lualine.nvim"),
         delay = 500, -- default: 300

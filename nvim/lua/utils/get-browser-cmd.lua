@@ -7,6 +7,7 @@ M.get_browser_cmd = function()
     return M._browser_memo
   end
 
+  -- xdg-settings get default-web-browser
   local browser = os.getenv("BROWSER")
   if browser == nil then
     if vim.fn.executable("firefox") == 1 then
