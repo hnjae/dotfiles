@@ -73,7 +73,7 @@ vim.opt.formatoptions:remove("o")
 -- defaults: tcqj (2022-05-15)
 
 -----------------------------
-vim.opt.mouse = ""
+-- vim.opt.mouse = ""
 
 ----
 vim.opt.splitbelow = true

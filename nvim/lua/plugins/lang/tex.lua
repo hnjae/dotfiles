@@ -11,6 +11,7 @@ return {
   {
     [1] = "lervag/vimtex",
     lazy = true,
+    enabled = false,
     ft = { "tex" },
     init = function()
       -- TODO: vimtex integration not finished <2022-04-22, Hyunjae Kim> --
@@ -54,38 +55,38 @@ return {
       -- vim.opt_local.conceallevel=2
     end,
     config = function()
-      local status_wk, wk = pcall(require, "which-key")
-      if not status_wk then
-        return
-      end
-
-      local wk_maps = {
-        ["i"] = { "<plug>(vimtex-info)", "info" },
-        ["I"] = { "<plug>(vimtex-info-full)", "info-full" },
-        ["t"] = { "<plug>(vimtex-toc-toggle)", "toc-toggle" },
-        ["q"] = { "<plug>(vimtex-log)", "log" },
-        ["v"] = { "<plug>(vimtex-view)", "view" },
-        ["r"] = { "<plug>(vimtex-reverse-search)", "reverse-search" },
-        ["s"] = { "<plug>(vimtex-compile)", "compile" },
-        -- ["sS"] = { "<plug>(vimtex-compile-selected)", "compile-selected", mode = "x", buffer = 0 },
-        -- ["sS"] = { "<plug>(vimtex-compile-selected)", "compile-selected", mode = "x", buffer = 0 },
-
-        ["w"] = { "<cmd>VimtexCountWords<CR>", "count-words" },
-        ["l"] = { "<cmd>VimtexCountLetters<CR>", "count-letters" },
-      }
-      local wk_opts = { buffer = 0, prefix = require("val").prefix.buffer }
-      vim.api.nvim_create_autocmd({
-        "BufRead",
-        "BufNewFile",
-      }, {
-        pattern = { "*.tex" },
-        callback = function()
-          wk.register(wk_maps, wk_opts)
-        end,
-      })
-
-      -- register maps to current buffer
-      wk.register(wk_maps, wk_opts)
+      -- local status_wk, wk = pcall(require, "which-key")
+      -- if not status_wk then
+      --   return
+      -- end
+      --
+      -- local wk_maps = {
+      --   ["i"] = { "<plug>(vimtex-info)", "info" },
+      --   ["I"] = { "<plug>(vimtex-info-full)", "info-full" },
+      --   ["t"] = { "<plug>(vimtex-toc-toggle)", "toc-toggle" },
+      --   ["q"] = { "<plug>(vimtex-log)", "log" },
+      --   ["v"] = { "<plug>(vimtex-view)", "view" },
+      --   ["r"] = { "<plug>(vimtex-reverse-search)", "reverse-search" },
+      --   ["s"] = { "<plug>(vimtex-compile)", "compile" },
+      --   -- ["sS"] = { "<plug>(vimtex-compile-selected)", "compile-selected", mode = "x", buffer = 0 },
+      --   -- ["sS"] = { "<plug>(vimtex-compile-selected)", "compile-selected", mode = "x", buffer = 0 },
+      --
+      --   ["w"] = { "<cmd>VimtexCountWords<CR>", "count-words" },
+      --   ["l"] = { "<cmd>VimtexCountLetters<CR>", "count-letters" },
+      -- }
+      -- local wk_opts = { buffer = 0, prefix = require("val").prefix.buffer }
+      -- vim.api.nvim_create_autocmd({
+      --   "BufRead",
+      --   "BufNewFile",
+      -- }, {
+      --   pattern = { "*.tex" },
+      --   callback = function()
+      --     wk.register(wk_maps, wk_opts)
+      --   end,
+      -- })
+      --
+      -- -- register maps to current buffer
+      -- wk.register(wk_maps, wk_opts)
     end,
   },
 }

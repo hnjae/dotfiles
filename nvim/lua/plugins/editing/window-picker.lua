@@ -97,6 +97,7 @@ return {
           "minimap",
           "sagafinder",
           "saga_codeaction",
+          "fidget",
         },
         buftype = {
           "picker",
