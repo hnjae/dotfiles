@@ -58,6 +58,7 @@ return {
   empty_set = "∅", -- unicode
 
   result = "", -- nf-oct-checklist
+  menu = "󰍜", -- nf-md-menu
 
   --
   ai = "󱙺", -- nf-md-robot_outline
