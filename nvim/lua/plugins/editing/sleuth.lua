@@ -14,6 +14,6 @@ return {
   },
   init = function()
     vim.g.slueth_text_heuristics = 0
-    vim.g.slueth_no_filetype_indint_on = 1
+    vim.g.slueth_no_filetype_indent_on = 1
   end,
 }
