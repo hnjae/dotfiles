@@ -6,7 +6,13 @@ local M = {
   enabled = true,
   dependencies = {
     { [1] = "nvim-tree/nvim-web-devicons", optional = true },
-    "nvim-treesitter/nvim-treesitter",
+    {
+      [1] = "nvim-treesitter/nvim-treesitter",
+      optional = true,
+      opts = function()
+        require("state.treesitter-langs"):add("markdown", "markdown_inline")
+      end,
+    },
   },
   opts = function(_, opts)
     local utils = require("utils")
