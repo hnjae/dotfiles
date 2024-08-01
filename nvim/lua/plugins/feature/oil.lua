@@ -188,7 +188,7 @@ return {
           opts.extensions = {}
         end
 
-        return table.insert(
+        table.insert(
           opts.extensions,
           vim.tbl_deep_extend(
             "keep",
