@@ -35,19 +35,19 @@ local M = {
     },
   },
   config = function(_, opts)
-    local nvim_autopairs = require("nvim-autopairs")
-    -- local rule = require("nvim-autopairs.rule")
-    nvim_autopairs.setup(opts)
-    nvim_autopairs.add_rules({
-      -- rule("`+", "+`", "asciidoctor"),
-      -- rule("`+", "+`", "asciidoc"),
-      -- rule("``", "``", "asciidoctor"),
-      -- rule("``", "``", "asciidoc"),
+    local npairs = require("nvim-autopairs")
+    npairs.setup(opts)
+
+    local Rule = require("nvim-autopairs.rule")
+    npairs.remove_rule("`")
+    npairs.add_rules({
+      Rule("`", "`", "markdown"),
+      Rule("`+", "+`", { "asciidoctor", "asciidoc" }),
+      Rule("``", "``", { "asciidoctor", "asciidoc" }),
       -- press % => %% only while inside a comment or string
       -- rule("%", "%", "lua"):with_pair(ts_conds.is_ts_node({'string','comment'})),
       -- rule("$", "$", "lua"):with_pair(ts_conds.is_not_ts_node({'function'}))
     })
-    -- nvim_autopairs.remove_rule("`")
   end,
   ---@type LazySpec[]
   specs = {
