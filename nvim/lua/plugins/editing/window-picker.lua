@@ -29,9 +29,9 @@ local filter_single_win = function(window_id, filters)
   end
 
   -- floating window
-  if vim.api.nvim_win_get_config(window_id).zindex then
-    return false
-  end
+  -- if vim.api.nvim_win_get_config(window_id).zindex then
+  --   return false
+  -- end
 
   if win_bo.buftype == "nofile" and win_bo.filetype == "" then
     -- nofile 통째로 filter 하면, 각종 sidebar 류 작동 안함
