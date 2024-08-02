@@ -7,6 +7,11 @@ return {
       require("state.treesitter-langs"):add("markdown")
     end,
   },
+  {
+    [1] = "preservim/tagbar",
+    optional = true,
+    ft = { "markdown" },
+  },
 
   {
     [1] = "neovim/nvim-lspconfig",

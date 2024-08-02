@@ -4,28 +4,33 @@ local map_keyword = require("val").map_keyword
 ---@type LazySpec
 return {
   [1] = "preservim/tagbar",
-  lazy = true,
+  lazy = true, -- will be lazy load on filetypes (check `lua/plugins/lang`)
   enabled = vim.fn.executable("ctags") == 1,
-  cmd = {
-    "TagbarToggle",
+  dependency = {
+    "ludovicchabant/vim-gutentags", -- to load gutentags when tagbar loads (not actually a dependency)
   },
-  keys = {
-    {
-      [1] = "[" .. map_keyword.tag,
-      [2] = "<cmd>TagbarJumpPrev<CR>",
-      desc = "prev-tag",
-    },
-    {
-      [1] = "]" .. map_keyword.tag,
-      [2] = "<cmd>TagbarJumpNext<CR>",
-      desc = "next-tag",
-    },
-    {
-      [1] = prefix.sidebar .. map_keyword.tag,
-      [2] = "<cmd>TagbarToggle<CR>",
-      desc = "tagbar",
-    },
-  },
+  keys = function(plugin, _)
+    return {
+      {
+        [1] = "[" .. map_keyword.tag,
+        [2] = "<cmd>TagbarJumpPrev<CR>",
+        desc = "prev-tag",
+        ft = plugin.ft,
+      },
+      {
+        [1] = "]" .. map_keyword.tag,
+        [2] = "<cmd>TagbarJumpNext<CR>",
+        desc = "next-tag",
+        ft = plugin.ft,
+      },
+      {
+        [1] = prefix.sidebar .. map_keyword.tag,
+        [2] = "<cmd>TagbarToggle<CR>",
+        desc = "tagbar",
+        ft = plugin.ft,
+      },
+    }
+  end,
   dependencies = {
     "nvim-lua/plenary.nvim",
   },
@@ -52,11 +57,17 @@ return {
     },
     {
       [1] = "ludovicchabant/vim-gutentags",
+      lazy = true, -- will be loaded by tagbar
+      enabled = false,
+      dependencies = {
+        "nvim-lua/plenary.nvim", -- using plenary in init function
+      },
       init = function()
         vim.g.gutentags_cache_dir = require("plenary.path"):new(
           vim.fn.stdpath("cache"),
           "gutentags"
         ).filename
+
         vim.g.gutentags_exclude_filetypes = {
           "",
           "fugitive",
