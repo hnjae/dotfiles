@@ -258,7 +258,10 @@ return {
       opts = function()
         local icons = require("val").icons
         require("state.lualine-ft-data"):add({
-          TelescopePrompt = { icon = icons.search },
+          TelescopePrompt = {
+            display_name = "TelescopePrompt",
+            icon = icons.search,
+          },
         })
       end,
     },

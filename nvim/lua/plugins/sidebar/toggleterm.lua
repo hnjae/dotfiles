@@ -26,16 +26,16 @@ return {
     -- direction = "horizontal",
     -- shade_terminals = false,
     float_opts = {
-      border = "rounded",
+      border = require("utils").is_console and "single" or "rounded",
       width = function(term)
-        if vim.o.columns >= 86 then
-          return 86
+        if vim.o.columns >= 90 then
+          return 90
         end
         return vim.o.columns
       end,
       height = function(term)
-        if vim.o.lines - 3 >= 26 then
-          return 26
+        if vim.o.lines - 3 >= 27 then
+          return 27
         end
         return vim.o.lines - 3
       end,
