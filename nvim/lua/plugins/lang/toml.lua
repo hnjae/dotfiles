@@ -17,7 +17,7 @@ return {
     optional = true,
     opts = function(_, opts)
       opts.formatters_by_ft.toml = {
-        { "taplo" },
+        "taplo",
       }
     end,
   },

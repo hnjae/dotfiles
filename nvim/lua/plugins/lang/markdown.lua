@@ -141,9 +141,9 @@ return {
           --[[
           NOTE:
           cbfmt: format codeblocks inside markdown
-          mdsf: format markdown ocde blocks
-            ]]
-          markdown = { { "cbfmt", "mdsf" }, "markdownlint" },
+          mdsf: format markdown code blocks
+          ]]
+          markdown = { "cbfmt", "markdownlint" },
         }
       end
 

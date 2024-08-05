@@ -22,7 +22,8 @@ return {
           or vim.fn.executable("prettier") == 1
         )
       then
-        formatter = { "prettierd", "prettier" }
+        formatter = vim.fn.executable("prettierd") == 1 and "prettierd"
+          or "prettier"
         formatters_by_ft = {
           typescript = { formatter },
           javascript = { formatter },
@@ -55,7 +56,7 @@ return {
           table.insert(opts.formatters.deno_fmt.append_args, "--single-quote")
         end
 
-        formatter = { "deno_fmt" }
+        formatter = "deno_fmt"
 
         formatters_by_ft = {
           typescript = { formatter },
