@@ -6,7 +6,10 @@ return {
   cmd = { "ConformInfo" },
   opts = function(_, opts)
     local ret = {
-      lsp_fallback = true,
+      default_format_opts = {
+        lsp_format = "never",
+      },
+      notify_no_formatters = false,
       -- Define your formatters
       formatters_by_ft = {},
       -- format_on_save = { timeout_ms = 1000 },
