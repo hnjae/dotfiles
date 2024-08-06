@@ -122,34 +122,37 @@ return {
     [1] = "stevearc/conform.nvim",
     optional = true,
     opts = function(_, opts)
-      local formatter = {}
-      local formatters_by_ft = {}
+      local markdown_formatter = {}
+
+      --[[
+        NOTE:
+        cbfmt: format codeblocks inside markdown
+        mdsf: format markdown code blocks
+      ]]
+
+      if
+        require("lspconfig.util").root_pattern(".cbfmt.toml")(vim.uv.cwd())
+      then
+        -- cbfmt 는 .cbfmt.toml 이 없을 경우 제대로 동작하지 않는다.
+        table.insert(markdown_formatter, "cbfmt")
+      end
 
       if require("utils").lsp.is_deno() then
-        formatter = { "deno_fmt" }
-        formatters_by_ft = {
-          markdown = { formatter },
-        }
+        table.insert(markdown_formatter, "deno_fmt")
       -- elseif require("utils").lsp.is_prettier() then
+      elseif vim.fn.executable("prettierd") == 1 then
+        table.insert(markdown_formatter, "prettierd")
       elseif vim.fn.executable("prettier") == 1 then
-        formatter = { "prettierd", "prettier" }
-        formatters_by_ft = {
-          markdown = { formatter },
-        }
+        table.insert(markdown_formatter, "prettier")
       else
-        formatters_by_ft = {
-          --[[
-          NOTE:
-          cbfmt: format codeblocks inside markdown
-          mdsf: format markdown code blocks
-          ]]
-          markdown = { "cbfmt", "markdownlint" },
-        }
+        table.insert(markdown_formatter, "markdownlint")
       end
 
-      for key, val in pairs(formatters_by_ft) do
-        opts.formatters_by_ft[key] = val
+      if opts.formatters_by_ft == nil then
+        opts.formatters_by_ft = {}
       end
+
+      opts.formatters_by_ft.markdown = markdown_formatter
     end,
   },
 }
