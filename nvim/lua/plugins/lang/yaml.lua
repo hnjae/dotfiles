@@ -12,11 +12,16 @@ return {
     optional = true,
     opts = function(_, opts)
       if require("utils").lsp.is_prettier() then
-        opts.formatters_by_ft.yaml = { { "prettierd", "prettier" } }
+        if vim.fn.executable("prettierd") == 1 then
+          opts.formatters_by_ft.yaml = { "prettierd" }
+        else
+          opts.formatters_by_ft.yaml = { "prettier" }
+        end
+
         return
       end
 
-      opts.formatters_by_ft.yaml = { { "yamlfmt" } }
+      opts.formatters_by_ft.yaml = { "yamlfmt" }
     end,
   },
   {
