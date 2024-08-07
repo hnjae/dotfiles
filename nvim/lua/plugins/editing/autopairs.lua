@@ -39,11 +39,17 @@ local M = {
     npairs.setup(opts)
 
     local Rule = require("nvim-autopairs.rule")
+
     npairs.remove_rule("`")
+    -- remove single quotes
+    npairs.get_rule("'")[1].not_filetypes = { "nix" }
+
     npairs.add_rules({
-      Rule("`", "`", "markdown"),
+      Rule("`", "`", { "markdown", "sh" }),
       Rule("`+", "+`", { "asciidoctor", "asciidoc" }),
       Rule("``", "``", { "asciidoctor", "asciidoc" }),
+      Rule("''", "''", { "nix" }),
+
       -- press % => %% only while inside a comment or string
       -- rule("%", "%", "lua"):with_pair(ts_conds.is_ts_node({'string','comment'})),
       -- rule("$", "$", "lua"):with_pair(ts_conds.is_not_ts_node({'function'}))
