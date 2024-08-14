@@ -7,22 +7,28 @@
 -- * inactive
 -- * terminal
 
-if vim.g.colors_name == nil then
-  return "auto"
+local M = {}
+
+M.get = function()
+  if vim.g.colors_name == nil then
+    return "auto"
+  end
+
+  local is_theme, theme = pcall(require, "lualine.themes." .. vim.g.colors_name)
+
+  if not is_theme then
+    return "auto"
+  end
+
+  -- terminal, command 가 없는 theme 이 많다.
+  if not theme.terminal then
+    theme.terminal = theme.insert
+  end
+  if not theme.command then
+    theme.command = theme.insert
+  end
+
+  return theme
 end
 
-local is_theme, theme = pcall(require, "lualine.themes." .. vim.g.colors_name)
-
-if not is_theme then
-  return "auto"
-end
-
--- terminal, command 가 없는 theme 이 많다.
-if not theme.terminal then
-  theme.terminal = theme.insert
-end
-if not theme.command then
-  theme.command = theme.insert
-end
-
-return theme
+return M

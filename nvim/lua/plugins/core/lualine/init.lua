@@ -8,8 +8,8 @@ return {
     "nvim-tree/nvim-web-devicons",
   },
   enabled = true,
-  lazy = false,
-  priority = 1, -- default 50
+  lazy = true,
+  event = "UiEnter",
   ---@param opts myLualineOpts
   opts = function(_, opts)
     -- NOTE: function 으로 랩핑해야, vim.g.colors_name 을 참조할 수 있음. <2023-12-12>
@@ -21,7 +21,7 @@ return {
       (opts.options and opts.options or {}),
       {
         icons_enabled = utils.enable_icon,
-        theme = require(package_path .. ".theme"),
+        theme = require(package_path .. ".theme").get(),
 
         -- NOTE: do not use something like   <2024-03-07>
         -- component_separators = utils.enable_icon
