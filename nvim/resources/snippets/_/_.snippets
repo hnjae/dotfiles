@@ -1,6 +1,6 @@
 # @comment.note
 snippet note note
-	`luaeval("string.format(vim.bo.commentstring, string.find(vim.bo.commentstring, ' ') and 'INFO:' or ' INFO:')")` $0 <`strftime("%Y-%m-%d")`>
+	`luaeval("string.format(vim.bo.commentstring, string.find(vim.bo.commentstring, ' ') and 'NOTE:' or ' NOTE:')")` $0 <`strftime("%Y-%m-%d")`>
 snippet info info
 	`luaeval("string.format(vim.bo.commentstring, string.find(vim.bo.commentstring, ' ') and 'INFO:' or ' INFO:')")` $0 <`strftime("%Y-%m-%d")`>
 

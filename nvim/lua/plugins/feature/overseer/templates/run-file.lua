@@ -35,9 +35,9 @@ return {
       },
     }
   end,
-  condition = {
-    filetype = { "sh", "python", "go", "zsh", "typescript" },
-  },
+  -- condition = {
+  --   filetype = { "sh", "python", "go", "zsh", "typescript" },
+  -- },
 }
 
 -- note: default:

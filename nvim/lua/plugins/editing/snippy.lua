@@ -16,7 +16,7 @@ return {
   opts = function(_, opts)
     opts.snippet_dirs = require("plenary.path"):new(
       vim.fn.stdpath("config"),
-      "assets",
+      "resources",
       "snippets"
     ).filename
 

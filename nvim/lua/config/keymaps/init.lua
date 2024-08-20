@@ -8,6 +8,11 @@ M.setup = function()
   local prefix = require("val").prefix
   local map_keyword = require("val").map_keyword
 
+  if vim.fn.has("gui_running") == 1 then
+    -- TODO: neovide 에서 아래가 잘 작동하는지 테스트, cmdline 에서도 동작해야함. <2024-08-02>
+    vim.keymap.set({ "n" }, "<C-S-v>", '"+p', { desc = "paste" })
+  end
+
   --------------------------------------------------------------------------------
   -- leader & localleader
   --------------------------------------------------------------------------------

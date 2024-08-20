@@ -35,6 +35,10 @@ return {
         if vim.api.nvim_buf_get_option(bufnr, "buftype") ~= "" then
           return false
         end
+        if vim.fn.buflisted(bufnr) == 0 then
+          return false
+        end
+
         return true
       end,
     })

@@ -1,0 +1,12 @@
+# snippets for `stdenv.mkDerivation`
+
+snippet inp "installPhase in stdenv.mkDerivation"
+	installPhase = ''
+		$0
+	'';
+
+snippet sbindbin "description"
+        pkgs.runCommand "${1:binname}" {} ''
+          mkdir -p "\$out/bin"
+          ln -s "\${pkgs.${2}}/bin/${2}" "\$out/bin/$1"
+        ''

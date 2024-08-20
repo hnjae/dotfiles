@@ -34,11 +34,11 @@ return {
           ---@class LspconfigSetupOptsSpec
           settings = {},
         },
-        nixd = {
-          -- https://github.com/nix-community/nixd/blob/main/nixd/docs/editors/nvim-lsp.nix
-          ---@class LspconfigSetupOptsSpec
-          settings = {},
-        },
+        -- nixd = {
+        --   -- https://github.com/nix-community/nixd/blob/main/nixd/docs/editors/nvim-lsp.nix
+        --   ---@class LspconfigSetupOptsSpec
+        --   settings = {},
+        -- },
       },
     },
   },
@@ -64,4 +64,24 @@ return {
       end
     end,
   },
+  -- {
+  --   [1] = "windwp/nvim-autopairs",
+  --   optional = true,
+  --   opts = function()
+  --     vim.api.nvim_create_autocmd({ "FileType" }, {
+  --       pattern = { "nix" },
+  --       callback = function()
+  --         local Rule = require("nvim-autopairs.rule")
+  --         local npairs = require("nvim-autopairs")
+  --         npairs.add_rules({
+  --           Rule("'", "'", { "nix" }),
+  --           Rule("``", "``", { "asciidoctor", "asciidoc" }),
+  --           -- press % => %% only while inside a comment or string
+  --           -- rule("%", "%", "lua"):with_pair(ts_conds.is_ts_node({'string','comment'})),
+  --           -- rule("$", "$", "lua"):with_pair(ts_conds.is_not_ts_node({'function'}))
+  --         })
+  --       end,
+  --     })
+  --   end,
+  -- },
 }

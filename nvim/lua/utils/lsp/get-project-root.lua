@@ -1,10 +1,6 @@
-local root = nil
+local fd =
+  require("lspconfig.util").root_pattern(unpack(require("val").root_patterns))
+
 return function()
-  if root then
-    return root
-  end
-  root = require("lspconfig.util").root_pattern(
-    unpack(require("val").root_patterns)
-  )(vim.uv.cwd())
-  return root
+  return fd(vim.uv.cwd())
 end

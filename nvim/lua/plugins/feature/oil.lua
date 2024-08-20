@@ -1,5 +1,7 @@
 local REPLACE_NETRW = true
 
+local find_project_root =
+  require("lspconfig").util.root_pattern(unpack(require("val").root_patterns))
 local map_keyword = require("val").map_keyword
 
 ---@type LazySpec
@@ -20,7 +22,18 @@ return {
       -- [2] = "<cmd>Oil<cr>",
       [2] = function()
         if vim.bo.filetype == "oil" then
-          return "<cmd>Oil<cr>"
+          local oil = require("oil")
+          local cur_dir = oil.get_current_dir()
+          local project_root = find_project_root(cur_dir)
+
+          if project_root ~= nil and project_root == cur_dir then
+            local msg = "This is the root of the project: " .. cur_dir
+            vim.notify(msg)
+            return
+          end
+
+          oil.open()
+          return
         end
 
         if vim.bo.buftype ~= "" then
@@ -29,15 +42,19 @@ return {
           vim.notify(msg)
           return
         end
-        if vim.list_contains({ "gitcommit", "gitbase" }, vim.bo.filetype) then
+
+        if
+          vim.list_contains({ "gitcommit", "gitbase", "git" }, vim.bo.filetype)
+        then
           local msg = "Can not open Oil from here: filetype is "
             .. vim.bo.filetype
           vim.notify(msg)
           return
         end
-        return "<cmd>Oil<cr>"
+
+        require("oil").open()
       end,
-      expr = true,
+      -- expr = true,
       desc = "oil-up",
     },
   },

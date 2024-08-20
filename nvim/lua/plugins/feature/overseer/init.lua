@@ -61,24 +61,20 @@ return {
     {
       [1] = prefix .. key_word_overseer,
       [2] = function()
+        vim.cmd("OverseerOpen!")
+
         local tasks = require("overseer.task_list").list_tasks()
         if next(tasks) == nil then
           vim.cmd("OverseerRun")
-          return
+        else
+          vim.cmd([[OverseerQuickAction restart]])
         end
-
-        vim.cmd([[OverseerQuickAction restart]])
       end,
       -- "<cmd>OverseerQuickAction restart<CR>",
       desc = "run-or-restart",
     },
     {
-      [1] = require("val").prefix.focus .. key_word_overseer,
-      [2] = "<cmd>OverseerOpen<CR>",
-      desc = "overseer (task-runner)",
-    },
-    {
-      [1] = require("val").prefix.sidebar .. key_word_overseer,
+      [1] = prefix .. "o",
       [2] = function()
         local tasks = require("overseer.task_list").list_tasks()
         if next(tasks) == nil then
@@ -96,6 +92,16 @@ return {
       end,
       desc = "overseer",
     },
+    {
+      [1] = require("val").prefix.sidebar .. key_word_overseer,
+      [2] = "<cmd>OverseerToggle!<CR>",
+      desc = "overseer",
+    },
+    {
+      [1] = require("val").prefix.sidebar .. key_word_overseer:upper(),
+      [2] = "<cmd>OverseerOpen<CR>",
+      desc = "overseer-focus",
+    },
       -- stylua: ignore start
       { [1] = prefix .. "a", [2] = "<cmd>OverseerTaskAction<CR>", desc = "actions" },
       { [1] = prefix .. "c", [2] = "<cmd>OverseerClearCache<CR>", desc = "clear-cache" },
@@ -104,20 +110,22 @@ return {
   },
   opts = function()
     local ret = {
-      -- strategy = {
-      --   [1] = "jobstart",
-      --   preserve_output = false,
-      --   use_terminal = true,
-      -- },
-      -- strategy = "terminal",
       strategy = {
-        [1] = "toggleterm",
-        use_shell = false,
-        direction = "float",
-        open_on_start = true,
-        close_on_exit = false,
-        hidden = false,
+        [1] = "jobstart",
+        preserve_output = false,
+        use_terminal = true,
       },
+
+      -- strategy = { [1] = "terminal" },
+
+      -- strategy = {
+      --   [1] = "toggleterm",
+      --   use_shell = false,
+      --   direction = "float",
+      --   open_on_start = true,
+      --   close_on_exit = false,
+      --   hidden = true, -- can not be toggled with normal ToggleTerm commands
+      -- },
 
       templates = {
         "builtin",
@@ -128,7 +136,6 @@ return {
   end,
 
   config = function(_, opts)
-    vim.notify("hi")
     local overseer = require("overseer")
     overseer.setup(opts)
 
@@ -171,8 +178,11 @@ return {
 
         local icons = require("val").icons
         require("state.lualine-ft-data"):add({
-          OverseerForm = { icon = icons.workflow },
-          OverseerList = { icon = "󰝖" }, -- nf-md-format_list_checks
+          OverseerForm = {
+            display_name = "Overseer Form",
+            icon = icons.workflow,
+          },
+          OverseerList = { display_name = "Overseer List", icon = "󰝖" }, -- nf-md-format_list_checks
         })
       end,
     },

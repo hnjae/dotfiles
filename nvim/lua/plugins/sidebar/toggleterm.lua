@@ -28,14 +28,14 @@ return {
     float_opts = {
       border = require("utils").is_console and "single" or "rounded",
       width = function(term)
-        if vim.o.columns >= 90 then
-          return 90
+        if vim.o.columns >= 100 then
+          return 100
         end
         return vim.o.columns
       end,
       height = function(term)
-        if vim.o.lines - 3 >= 27 then
-          return 27
+        if vim.o.lines - 3 >= 30 then
+          return 30
         end
         return vim.o.lines - 3
       end,

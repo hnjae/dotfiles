@@ -55,6 +55,7 @@ return {
             filetypes = { "markdown" },
           }),
         },
+
         -- markdownlint = { null_ls.builtins.diagnostics.markdownlint },
       }
 

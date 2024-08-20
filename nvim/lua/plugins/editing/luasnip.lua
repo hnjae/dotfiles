@@ -53,7 +53,7 @@ return {
 
     -- local snippet_path = Path:new( vim.fn.resolve( Path:new(vim.fn.stdpath("config"), "assets", "snippets").filename))
     local snippet_path =
-      Path:new(vim.fn.stdpath("config"), "assets", "snippets")
+      Path:new(vim.fn.stdpath("config"), "resources", "snippets")
 
     require("luasnip.loaders.from_snipmate").lazy_load({
       ---@diagnostic disable-next-line: assign-type-mismatch

@@ -3,10 +3,14 @@ local val = require("val")
 
 local use_freedesktop_secret_service = vim.fn.executable("secret-tool") == 1
 
+local api_key = vim
+  .system({ "secret-tool", "lookup", "api", "openapi" }, { text = true })
+  :wait().stdout
+
 ---@type LazySpec
 return {
   [1] = "jackMort/ChatGPT.nvim",
-  enabled = use_freedesktop_secret_service,
+  cond = api_key ~= "",
   main = "chatgpt",
   dependencies = {
     "MunifTanjim/nui.nvim",
@@ -15,6 +19,7 @@ return {
     "nvim-telescope/telescope.nvim",
   },
   lazy = true,
+  event = "VeryLazy",
   cmd = {
     "ChatGPT",
     "ChatGPTRun",
@@ -26,8 +31,11 @@ return {
   -- and vim.fn.executable("op") == 1,
   -- and not require("utils").is_console,
   opts = function()
-    local assets_path =
-      require("plenary.path"):new(vim.fn.stdpath("config"), "assets", "chatgpt")
+    local res_path = require("plenary.path"):new(
+      vim.fn.stdpath("config"),
+      "resources",
+      "chatgpt"
+    )
 
     return {
       api_key_cmd = use_freedesktop_secret_service
@@ -51,12 +59,12 @@ return {
       },
       predefined_chat_gpt_prompts = string.format(
         "file://%s",
-        assets_path:joinpath("prompts.csv").filename
+        res_path:joinpath("prompts.csv").filename
       ),
       actions_paths = {
-        assets_path:joinpath("default-actions.json").filename,
-        assets_path:joinpath("default-actions-altered.json").filename,
-        assets_path:joinpath("custom-actions.json").filename,
+        res_path:joinpath("default-actions.json").filename,
+        res_path:joinpath("default-actions-altered.json").filename,
+        res_path:joinpath("custom-actions.json").filename,
       },
     }
   end,
@@ -85,11 +93,13 @@ return {
 
     return {
     -- stylua: ignore start
-    { [1] = "<Leader>" .. map_keyword.ai, [2] = "<cmd>ChatGPT<CR>", desc = "chatgpt-toggle" },
+    -- use gp instead
+    -- { [1] = "<Leader>" .. map_keyword.ai, [2] = "<cmd>ChatGPT<CR>", desc = "chatgpt-toggle" },
+
     { [1] = "<Leader>" .. string.upper(map_keyword.ai), [2] = "<cmd>ChatGPTActAs<CR>", desc = "chatgpt-actas" },
     -- { [1] = "<LocalLeader>" .. map_keyword.ai, desc = "+ChatGPT" },
     --
-    { [1] = "<LocalLeader>" .. map_keyword.ai .. "e",            [2] = "<cmd>ChatGPTEditWithInstructions<CR>",          desc = "edit-with-instructions",   mode = { "n", "v" } },
+    { [1] = "<LocalLeader>" .. map_keyword.ai .. "i",            [2] = "<cmd>ChatGPTEditWithInstructions<CR>",          desc = "edit-with-instructions",   mode = { "n", "v" } },
     { [1] = "<LocalLeader>" .. map_keyword.ai .. map_keyword.ai, [2] = "<cmd>ChatGPTCompleteCode<CR>",                  desc = "complete-code", },
     --
     { [1] = "<LocalLeader>" .. map_keyword.ai .. "s", [2] = "<cmd>ChatGPTRun summarize<CR>",                 desc = "summarize",                mode = { "n", "v" } },

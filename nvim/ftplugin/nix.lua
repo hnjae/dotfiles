@@ -5,3 +5,6 @@ vim.opt_local.textwidth = 80
 vim.opt_local.cindent = false
 vim.opt_local.autoindent = true -- 여러줄 string 선언할때 필요
 vim.opt_local.smartindent = false
+
+-- vim.opt_local.matchpairs:remove([[':']])
+-- vim.opt_local.matchpairs:append([['':'']])

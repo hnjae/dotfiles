@@ -169,7 +169,8 @@ return {
     -- build = ":KanagawaCompile",
     opts = {
       compile = false,
-      terminalColors = vim.fn.has("gui_running") == 1,
+      -- terminalColors = vim.fn.has("gui_running") == 1,
+      terminalColors = true,
       overrides = function(colors)
         local theme = colors.theme
         return {

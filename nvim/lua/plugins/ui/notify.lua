@@ -5,7 +5,7 @@ return {
   -- alternative:  "vigoux/notifier.nvim",
   [1] = "rcarriga/nvim-notify",
   lazy = true,
-  enabled = false,
+  enabled = true,
   event = {
     "VeryLazy",
   },

@@ -51,6 +51,10 @@
 
 Visual 로 숫자들 선택 후, `g<C-a>`
 
+#### Sort lines
+
+`:'<,'>sort`
+
 #### 모든 라인 끝에 추가
 
 `:%norm A<추가할 string>`

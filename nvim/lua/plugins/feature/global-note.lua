@@ -7,7 +7,7 @@ return {
     return {
       directory = require("plenary.path"):new(
         vim.fn.stdpath("config"),
-        "assets",
+        "resources",
         "global-note"
       ).filename,
 

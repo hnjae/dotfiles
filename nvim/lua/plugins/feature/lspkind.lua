@@ -205,11 +205,10 @@ return {
     {
       [1] = "nvimdev/lspsaga.nvim",
       optional = true,
-      dependencies = {
-        { "onsails/lspkind.nvim" },
-      },
+      dependencies = { "onsails/lspkind.nvim" },
       opts = function(_, opts)
         local kind = {
+          -- from lspsaga.nvim/lua/lspsaga/lspkind.lua
           -- type, icon, hlgroup(maybe)
           { "File", " ", "Tag" },
           { "Module", " ", "Exception" },
@@ -248,7 +247,6 @@ return {
           [302] = { "Folder", " ", "Title" },
           [303] = { "Unit", "󰊱 ", "Number" },
           [304] = { "Value", " ", "@variable" },
-          [305] = { "Spell", " ", "@variable" },
         }
 
         if not opts.ui then
