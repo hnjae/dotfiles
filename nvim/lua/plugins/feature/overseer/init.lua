@@ -1,5 +1,8 @@
 -- https://code.visualstudio.com/Docs/editor/tasks
 
+-- local package_path = (...) -- "plugins.feature.overseer"
+local package_path = "plugins.feature.overseer"
+
 local val = require("val")
 local prefix = val.prefix.task
 local key_word_overseer = prefix:sub(-1, -1)
@@ -9,20 +12,20 @@ local map_keyword = require("val").map_keyword
 -- "jedrzejboczar/toggletasks.nvim",
 
 ---@return number|nil
-local function get_oversee_bufnr()
-  local len_winnr = vim.fn.winnr("$")
-
-  local bufnr, filetype
-  for winnr = 0, (len_winnr - 1) do
-    bufnr = vim.fn.winbufnr(winnr)
-    filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")
-    if filetype == "OverseerList" then
-      return winnr
-    end
-  end
-
-  return nil
-end
+-- local function get_oversee_bufnr()
+--   local len_winnr = vim.fn.winnr("$")
+--
+--   local bufnr, filetype
+--   for winnr = 0, (len_winnr - 1) do
+--     bufnr = vim.fn.winbufnr(winnr)
+--     filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")
+--     if filetype == "OverseerList" then
+--       return winnr
+--     end
+--   end
+--
+--   return nil
+-- end
 
 ---@type LazySpec
 return {
@@ -121,30 +124,21 @@ return {
       },
     }
 
-    local paths = vim.fn.uniq(
-      vim.fn.sort(
-        vim.fn.globpath(
-          vim.fn.stdpath("config"),
-          "lua/overseer/template/*.lua",
-          false,
-          true
-        )
-      )
-    )
-
-    for _, file in pairs(paths) do
-      table.insert(ret.templates, "user." .. file:match("[^/\\]+$"):sub(1, -5))
-    end
-
     return ret
   end,
 
   config = function(_, opts)
-    require("overseer").setup(opts)
+    vim.notify("hi")
+    local overseer = require("overseer")
+    overseer.setup(opts)
+
+    local templates =
+      require("utils").get_packages(package_path .. ".templates")
+    for _, template in ipairs(templates) do
+      overseer.register_template(template)
+    end
 
     vim.api.nvim_create_user_command("WatchRun", function()
-      local overseer = require("overseer")
-
       -- 2024-02-01 copied from https://github.com/stevearc/overseer.nvim/blob/master/doc/tutorials.md
       -- follows MIT license
       overseer.run_template({ name = "run file" }, function(task)
