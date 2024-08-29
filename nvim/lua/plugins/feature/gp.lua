@@ -40,6 +40,21 @@ return {
           local agent = gp.get_command_agent()
           gp.Prompt(params, gp.Target.vnew, agent, template)
         end,
+        EditCommitMsg = function(gp, params)
+          local template =
+            "```gitcommit\n{{selection}}\n```\nI want you to act as a commit message generator. The above text is the commit message I roughly wrote, and I would like you to generate an appropriate commit message using the conventional commit format. The commit message must be in standard English and easy to understand for non-native English speakers."
+          local agent = gp.get_command_agent()
+          gp.Prompt(params, gp.Target.prepend, agent, template)
+        end,
+        GrammarCheck = function(gp, params)
+          local template = [[
+> {{selection}}
+
+I want you to act as an expert proofreader capable of detecting and correcting grammatical issues in any language. The above text is sentences I wrote, and I would like you to correct any grammatical errors. In your responses, highlight the corrections clearly and provide a brief explanation for each correction if necessary. Your response should be in the same language as the input text. Do not alter the original meaning of the text.
+]]
+          local agent = gp.get_command_agent()
+          gp.Prompt(params, gp.Target.vnew, agent, template)
+        end,
       },
     }
   end,
