@@ -1,9 +1,9 @@
--- https://github.com/sontungexpt/url-open
-
 ---@type LazySpec
 return {
+  -- extend builtin gx and open various url (such as lazy.nvim's plugin)
   [1] = "sontungexpt/url-open",
   lazy = true,
+  enabled = true,
   cmd = {
     "URLOpenUnderCursor",
     "URLOpenHighlightAllClear",

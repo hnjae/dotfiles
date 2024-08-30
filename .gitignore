@@ -64,3 +64,7 @@ Thumbs.db
 __pycache__
 .ropeproject
 cacheDir
+
+#
+.gp.md
+.parrot.md
