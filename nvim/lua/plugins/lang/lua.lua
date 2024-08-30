@@ -1,4 +1,3 @@
--- IMPORTANT: make sure to setup neodev BEFORE lspconfig
 ---@type LazySpec[]
 return {
   {
@@ -55,9 +54,45 @@ return {
   },
   {
     [1] = "folke/neodev.nvim",
-    enabled = true,
     lazy = true,
+    enabled = false,
     opts = {},
+    specs = {
+      {
+        [1] = "neovim/nvim-lspconfig",
+        optional = true,
+        dependencies = {
+          "folke/neodev.nvim",
+        },
+      },
+    },
+  },
+  {
+    [1] = "folke/lazydev.nvim",
+    cond = true,
+    enabled = vim.fn.has("nvim-0.10") == 1,
+    ft = "lua",
+    opts = {
+      library = {
+        -- See the configuration section for more details
+        -- Load luvit types when the `vim.uv` word is found
+        { path = "luvit-meta/library", words = { "vim%.uv" } },
+      },
+    },
+    specs = {
+      { [1] = "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
+      {
+        [1] = "hrsh7th/nvim-cmp",
+        optional = true,
+        opts = function(_, opts)
+          opts.sources = opts.sources or {}
+          table.insert(opts.sources, {
+            name = "lazydev",
+            group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+          })
+        end,
+      },
+    },
   },
   {
     [1] = "hrsh7th/nvim-cmp",
