@@ -23,6 +23,11 @@
         {
           "rule": "*no-*",
           "severity": "info"
+        },
+        {
+          // [eslint-plugin-simple-import-sort](https://github.com/lydell/eslint-plugin-simple-import-sort)
+          "rule": "simple-import-sort/*",
+          "severity": "info"
         }
         // { "rule": "!no-*", "severity": "downgrade" },
       ]
