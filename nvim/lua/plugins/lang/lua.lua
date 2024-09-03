@@ -69,6 +69,7 @@ return {
   },
   {
     [1] = "folke/lazydev.nvim",
+    lazy = true,
     cond = true,
     enabled = vim.fn.has("nvim-0.10") == 1,
     ft = "lua",
