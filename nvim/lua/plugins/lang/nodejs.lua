@@ -95,7 +95,7 @@ return {
         ---@class LspconfigSetupOptsSpec
         settings = {
           commands = {
-            OrganizeImports = {
+            TsserverOrganizeImports = {
               [1] = function()
                 local params = {
                   command = "_typescript.organizeImports",
@@ -126,6 +126,26 @@ return {
           })),
         },
       }
+      vim.api.nvim_create_autocmd("LspAttach", {
+        callback = function(args)
+          local client = vim.lsp.get_client_by_id(args.data.client_id)
+          if client == nil or client.name ~= "eslint" then
+            return
+          end
+
+          vim.keymap.set("n", "++", function()
+            vim.cmd("EslintFixAll")
+            local msg = "EslintFixAll Done"
+
+            vim.notify(msg, nil, {
+              title = "lspconfig",
+              timeout = 350,
+              hide_from_history = true,
+              animate = false,
+            })
+          end, { desc = "EslintFixAll", buffer = args.buf })
+        end,
+      })
 
       return opts
     end,
