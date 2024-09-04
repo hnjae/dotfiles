@@ -29,7 +29,7 @@ return {
           local msg = "Format Done"
           vim.notify(msg, nil, {
             title = "Conform",
-            timeout = 300,
+            timeout = 350,
             hide_from_history = true,
             animate = false,
           })
