@@ -10,10 +10,12 @@ snippet __time hh:mm:ss
 	`strftime('%H:%M:%S')`
 snippet __time2 hh:mm
 	`strftime("%H:%M")`
-snippet __dt2 datetim
+snippet __dt2 datetime
 	`strftime("%Y-%m-%d %H:%M:%S")`
 snippet __dt datetime in ISO 8601 Format
 	`strftime("%Y-%m-%dT%H:%M:%S%z")`
+snippet __dtutc datetime in UTC
+	`strftime("%Y-%m-%dT%H:%M:%SZ")`
 snippet __date date
 	`strftime("%Y-%m-%d")`
 snippet date date
