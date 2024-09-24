@@ -15,7 +15,7 @@ return {
   cond = require("utils").is_treesitter,
   ft = "hurl",
   opts = {
-    show_notification = true,
+    show_notification = false,
   },
   keys = function()
     local prefix = "<LocalLeader>x"

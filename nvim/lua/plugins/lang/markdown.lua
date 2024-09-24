@@ -145,8 +145,12 @@ return {
         table.insert(markdown_formatter, "prettierd")
       elseif vim.fn.executable("prettier") == 1 then
         table.insert(markdown_formatter, "prettier")
-      else
-        table.insert(markdown_formatter, "markdownlint")
+        -- else
+        -- markdownlint does not provides consist indent
+        --   table.insert(markdown_formatter, "markdownlint")
+        -- else
+        -- mdformat force indentation to 2
+        -- table.insert(markdown_formatter, "mdformat")
       end
 
       if opts.formatters_by_ft == nil then

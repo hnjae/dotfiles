@@ -210,7 +210,7 @@ return {
           ["textDocument/rename"] = {
             lhs_suffix = "n",
             rhs = vim.lsp.buf.rename,
-            desc = "renaem",
+            desc = "rename",
           },
           -- ["textDocument/semanticTokens/full"] = {},
           -- ["textDocument/semanticTokens/full/delta"] = {},
