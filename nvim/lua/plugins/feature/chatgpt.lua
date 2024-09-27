@@ -190,15 +190,15 @@ return {
         desc = "generate_variable_name",
         mode = { "v" },
       },
-      {
-        [1] = "<LocalLeader>" .. map_keyword.ai .. "c",
-        -- [2] = "<cmd>ChatGPTRun edit_commit_message<CR>",
-        [2] = function()
-          check_visual_and_run_cmd("ChatGPTRun edit_commit_message")
-        end,
-        desc = "edit_commit_message",
-        mode = { "n", "v" },
-      },
+      -- {
+      --   [1] = "<LocalLeader>" .. map_keyword.ai .. "c",
+      --   -- [2] = "<cmd>ChatGPTRun edit_commit_message<CR>",
+      --   [2] = function()
+      --     check_visual_and_run_cmd("ChatGPTRun edit_commit_message")
+      --   end,
+      --   desc = "edit_commit_message",
+      --   mode = { "n", "v" },
+      -- },
     }
   end,
   specs = {
