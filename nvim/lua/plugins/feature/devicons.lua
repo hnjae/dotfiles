@@ -10,7 +10,6 @@ return {
   },
   config = function(_, opts)
     local devicons = require("nvim-web-devicons")
-    local val = require("val")
     devicons.setup(opts)
 
     local icon, color, cterm_color
@@ -34,6 +33,7 @@ return {
 
       kdl  = { base = "yaml",     overrides = { name = "Kdl" } }, -- https://kdl.dev/
       toml = { base = "yaml",     overrides = { name = "Toml" } },
+      norg = { base = "org",      overrides = { name = "Neorg" } }, -- https://github.com/nvim-neorg/neorg
       adoc = { base = "markdown", overrides = { name = "AsciiDoc", icon = "󱇗" }, }, -- nf-md-note_text_outline
 
       -- Type2: filenames
