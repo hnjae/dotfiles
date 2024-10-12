@@ -90,12 +90,11 @@ return {
         opts.servers = {}
       end
 
-      -- requires typescript-language-server
-      opts.servers.tsserver = {
+      opts.servers.ts_ls = {
         ---@class LspconfigSetupOptsSpec
         settings = {
           commands = {
-            TsserverOrganizeImports = {
+            TsLsOrganizeImports = {
               [1] = function()
                 local params = {
                   command = "_typescript.organizeImports",

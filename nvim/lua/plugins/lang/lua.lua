@@ -67,6 +67,7 @@ return {
       },
     },
   },
+  -- neodev.nvim replacement
   {
     [1] = "folke/lazydev.nvim",
     lazy = true,
