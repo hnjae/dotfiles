@@ -18,18 +18,19 @@ return {
     show_notification = false,
   },
   keys = function()
-    local prefix = "<LocalLeader>x"
+    local prefix = require("val.prefix").execute
+    local keyword = require("val.map-keyword").execute
 
     return {
       -- Run API request
       {
-        [1] = prefix .. "X",
+        [1] = prefix .. string.upper(keyword),
         [2] = "<cmd>HurlRunner<CR>",
         desc = "run-ALL-requests",
         ft = "hurl",
       },
       {
-        [1] = prefix .. "x",
+        [1] = prefix .. keyword,
         [2] = "<cmd>HurlRunnerAt<CR>",
         desc = "run-api-request",
         ft = "hurl",
@@ -62,4 +63,5 @@ return {
       },
     }
   end,
+  specs = {},
 }

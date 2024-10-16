@@ -11,6 +11,7 @@ return {
   task = "<LocalLeader>" .. map_keyword.task,
   repl = "<LocalLeader>" .. "p",
   peek = "<LocalLeader>" .. "k",
+  execute = "<LocalLeader>" .. map_keyword.execute,
 
   -- NOTE(close): 무언가를 닫거나, clear 하는 기능을 할당.
   -- close = "Z",
