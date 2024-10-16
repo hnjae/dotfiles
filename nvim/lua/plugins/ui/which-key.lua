@@ -89,15 +89,15 @@ return {
       { pattern = "code", icon = icons.code, color = "orange" },
       { pattern = "terminal", icon = icons.terminal, color = "red" },
 
-      -- add
-      -- { pattern = "finder", icon = icons.search, color = "green" },
-      -- generic
+      -- add generic
       { pattern = "help", icon = icons.help, color = "red" },
       { pattern = "fold", icon = "", color = "grey" }, -- nf-oct-fold
       { pattern = "prev", icon = "󰼨", color = "grey" }, -- nf-md-skip_previous_outline
       { pattern = "next", icon = "󰼧", color = "grey" }, -- nf-md-skip_next_outline
       { pattern = "history", icon = "󰋚", color = "grey" }, -- nf-md-history
       { pattern = "task", icon = "", color = "grey" }, -- nf-oct-tasklist
+      { pattern = "run", icon = "󰜎", color = "red" }, -- nf-md-run
+      { pattern = "execute", icon = "󰜎", color = "red" }, -- nf-md-run
       { pattern = "git", icon = icons.git, color = "orange" },
       { pattern = "new", icon = "󰏌", color = "grey" }, -- nf-md-open_in_new
       { pattern = "edit", icon = "", color = "grey" }, -- nf-fa-edit
