@@ -53,6 +53,7 @@ return {
     local map_keyword = val.map_keyword
     local t_builtin = require("telescope.builtin")
     local _, lspconfig = pcall(require, "lspconfig")
+    local prefix_search_in_buffer = "<LocalLeader>" .. map_keyword.find
 
     local find_project_root =
       lspconfig.util.root_pattern(unpack(val.root_patterns))
@@ -77,22 +78,22 @@ return {
       { [1] = "<F1>", [2] = t_builtin.help_tags, desc = "help-tags" },
       { [1] = "<F1>", [2] = t_builtin.help_tags, desc = "help-tags", ft= "netrw" },
 
-      { [1] = prefix.finder .. "0", [2] = "<cmd>Telescope<CR>", desc = "builtins" },
-      { [1] = prefix.finder .. "R", [2] = t_builtin.registers,  desc = "registers" },
-      { [1] = prefix.finder .. "q", [2] = t_builtin.quickfix,   desc = "quickfix" },
+      { [1] = prefix.find .. "0", [2] = "<cmd>Telescope<CR>", desc = "builtins" },
+      { [1] = prefix.find .. "R", [2] = t_builtin.registers,  desc = "registers" },
+      { [1] = prefix.find .. "q", [2] = t_builtin.quickfix,   desc = "quickfix" },
 
       -- +history
-      { [1] = prefix.finder .. "h",  [2] = nil,                       desc = "+history" },
-      { [1] = prefix.finder .. "hc", [2] = t_builtin.command_history, desc = "command-history" },
-      { [1] = prefix.finder .. "hs", [2] = t_builtin.search_history,  desc = "search-history" },
-      { [1] = prefix.finder .. "hk", [2] = t_builtin.keymaps,         desc = "keymaps-history" },
-      { [1] = prefix.finder .. "hf", [2] = t_builtin.oldfiles,        desc = "oldfiles-history" },
+      { [1] = prefix.find .. "h",  [2] = nil,                       desc = "+history" },
+      { [1] = prefix.find .. "hc", [2] = t_builtin.command_history, desc = "command-history" },
+      { [1] = prefix.find .. "hs", [2] = t_builtin.search_history,  desc = "search-history" },
+      { [1] = prefix.find .. "hk", [2] = t_builtin.keymaps,         desc = "keymaps-history" },
+      { [1] = prefix.find .. "hf", [2] = t_builtin.oldfiles,        desc = "oldfiles-history" },
       -- stylua: ignore end
 
 
       -- stylua: ignore start
-      { [1] = prefix.buffer_finder .. map_keyword.marks,   [2] = t_builtin.marks,                     desc = "marks" },
-      { [1] = prefix.buffer_finder .. map_keyword.line,    [2] = t_builtin.current_buffer_fuzzy_find, desc = "line" },
+      { [1] = prefix_search_in_buffer .. map_keyword.marks,   [2] = t_builtin.marks,                     desc = "marks" },
+      { [1] = prefix_search_in_buffer .. map_keyword.line,    [2] = t_builtin.current_buffer_fuzzy_find, desc = "line" },
 
       -- stylua: ignore end
     }
@@ -100,7 +101,7 @@ return {
 
     -- symbols
     table.insert(keys, {
-      [1] = prefix.buffer_finder .. map_keyword.symbols,
+      [1] = prefix_search_in_buffer .. map_keyword.symbols,
       [2] = t_builtin.treesitter,
       desc = "symbols (treesitter)",
     })
@@ -112,12 +113,12 @@ return {
         local keymap_opts = { buffer = args.buf }
         local mappings = {
           ["textDocument/documentSymbol"] = {
-            lhs = prefix.buffer_finder .. map_keyword.symbols,
+            lhs = prefix_search_in_buffer .. map_keyword.symbols,
             rhs = t_builtin.lsp_document_symbols,
             desc = "symbols (lsp)",
           },
           ["workspace/symbol"] = {
-            lhs = prefix.buffer_finder .. string.upper(map_keyword.symbols),
+            lhs = prefix_search_in_buffer .. string.upper(map_keyword.symbols),
             rhs = t_builtin.lsp_workspace_symbols,
             desc = "workspace-symbols (lsp)",
           },
@@ -191,7 +192,7 @@ return {
     for _, preset in pairs(new_win_presets) do
       local new_keysets = {
         {
-          [1] = prefix.finder .. preset.key,
+          [1] = prefix.find .. preset.key,
           [2] = preset.func,
           desc = preset.desc,
         },

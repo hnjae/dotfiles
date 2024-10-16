@@ -22,7 +22,8 @@ return {
   ai = "y",
 
   --
-  finder = "e", -- e.g. telescope
+  -- finder = "e", -- e.g. telescope, obsolate 2024-10-16, use find
+  find = "e", -- e.g. telescope
 
   --
   execute = "x",

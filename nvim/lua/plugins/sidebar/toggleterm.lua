@@ -115,7 +115,7 @@ return {
       desc = "terminal",
     },
     {
-      [1] = prefix.finder .. map_keyword.terminal,
+      [1] = prefix.find .. map_keyword.terminal,
       [2] = "<cmd>TermSelect<CR>",
       mode = { "n" },
       desc = "terminal",

@@ -6,7 +6,6 @@ return {
   -- NOTE(buffer): filetype 에 따라 달라지거나, buffer 와 interact 하는 기능 할당.
   buffer = "<LocalLeader>",
   toggleterm_send = "<LocalLeader>" .. map_keyword.terminal,
-  buffer_finder = "<LocalLeader>" .. map_keyword.finder,
   sniprun = "<LocalLeader>" .. "r",
   task = "<LocalLeader>" .. map_keyword.task,
   repl = "<LocalLeader>" .. "p",
@@ -18,7 +17,7 @@ return {
   close = "<F9>",
 
   -- NOTE(<Leader>): filetype 와 무관한 기능 할당
-  finder = "<Leader>" .. map_keyword.finder,
+  find = "<Leader>" .. map_keyword.find,
   focus = "<Leader>" .. map_keyword.focus,
   sidebar = "<Leader>b",
   trouble = "<Leader>" .. map_keyword.trouble,

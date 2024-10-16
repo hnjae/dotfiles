@@ -84,7 +84,7 @@ return {
         local prefix = require("val").prefix
 
         local key = {
-          [1] = prefix.finder .. "hn",
+          [1] = prefix.find .. "hn",
           [2] = require("telescope").extensions.notify.notify,
           desc = "notify-history",
         }
