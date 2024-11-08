@@ -46,9 +46,10 @@ return {
       {
         [1] = val.prefix.close .. "n",
         [2] = require(plugin.main).dismiss,
-        desc = "noti-dismiss",
+        desc = "notification-dismiss",
       },
     }
+
     return ret
   end,
   config = function(plugin, opts)

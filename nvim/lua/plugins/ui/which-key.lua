@@ -109,6 +109,11 @@ return {
       { pattern = "sidebar", icon = "", color = "grey" }, -- nf-cod-layout_sidebar_right_off
       -- { pattern = "focus", icon = "󰽏", color = "grey" }, -- nf-md-focus_field
       { pattern = "cmdline", icon = "", color = "grey" }, -- nf-oct-command_palette
+      {
+        pattern = "notification",
+        icon = require("val").message,
+        color = "blue",
+      },
     })
   end,
   config = function(_, opts)
