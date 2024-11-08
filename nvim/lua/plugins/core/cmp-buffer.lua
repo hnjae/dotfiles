@@ -7,7 +7,7 @@ return {
       [1] = "hrsh7th/nvim-cmp",
       optional = true,
       dependencies = { "hrsh7th/cmp-buffer" },
-      ---@param opts myCmpConfig
+      ---@param opts myCmpOpts
       opts = function(_, opts)
         local cmp = require("cmp")
         opts.sources = vim.list_extend(

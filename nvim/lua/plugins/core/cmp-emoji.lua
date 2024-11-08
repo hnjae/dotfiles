@@ -7,7 +7,7 @@ return {
       [1] = "hrsh7th/nvim-cmp",
       optional = true,
       dependencies = { "hrsh7th/cmp-emoji" },
-      ---@param opts myCmpConfig
+      ---@param opts myCmpOpts
       opts = function(_, opts)
         if not opts.sources then
           opts.sources = {}

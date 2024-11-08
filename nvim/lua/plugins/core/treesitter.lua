@@ -76,7 +76,7 @@ local M = {
           dependencies = "nvim-treesitter/nvim-treesitter",
         },
       },
-      ---@param opts myCmpConfig
+      ---@param opts myCmpOpts
       opts = function(_, opts)
         local cmp = require("cmp")
         if not opts.sources then

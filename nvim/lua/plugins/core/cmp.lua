@@ -1,4 +1,4 @@
----@class myCmpConfig: cmp.ConfigSchema
+---@class myCmpOpts: cmp.ConfigSchema
 ---@field cmdline_search_sources cmp.SourceConfig[]
 
 ---@type LazySpec
@@ -14,7 +14,7 @@ return {
     { [1] = "hrsh7th/cmp-cmdline" },
     -- { [1] = "hrsh7th/cmp-omni" },
   },
-  ---@param opts myCmpConfig
+  ---@param opts myCmpOpts
   opts = function(_, opts)
     local cmp = require("cmp")
     local lspkind = require("lspkind")

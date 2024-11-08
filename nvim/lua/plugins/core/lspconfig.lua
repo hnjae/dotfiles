@@ -14,7 +14,7 @@ return {
     -- { [1] = "K", [2] = vim.lsp.buf.hover, desc = "lsp-hover" },
   },
   dependencies = {},
-  ---@class PluginLspOpts
+  ---@class myLspconfigOpts
   opts = {
     ---@type LspconfigSetupOptsSpec
     servers = {
@@ -33,7 +33,7 @@ return {
     ---@type lsp.ClientCapabilities
     default_capabilities = {},
   },
-  ---@param opts PluginLspOpts
+  ---@param opts myLspconfigOpts
   config = function(_, opts)
     local lspconfig = require("lspconfig")
     local prefix = require("val.prefix")
@@ -308,7 +308,7 @@ return {
       [1] = "hrsh7th/nvim-cmp",
       optional = true,
       dependencies = { "hrsh7th/cmp-nvim-lsp-document-symbol" },
-      ---@param opts myCmpConfig
+      ---@param opts myCmpOpts
       opts = function(_, opts)
         opts.cmdline_search_sources = vim.list_extend(
           opts.cmdline_search_sources or {},
@@ -343,7 +343,7 @@ return {
         {
           [1] = "neovim/nvim-lspconfig",
           optional = true,
-          ---@param opts PluginLspOpts
+          ---@param opts myLspconfigOpts
           opts = function(_, opts)
             local cmp_nvim_lsp = require("cmp_nvim_lsp")
             opts.default_capabilities = cmp_nvim_lsp.default_capabilities() -- includes snippet support

@@ -26,7 +26,7 @@ return {
       [1] = "hrsh7th/nvim-cmp",
       optional = true,
       dependencies = { "tzachar/cmp-ai" },
-      ---@param opts myCmpConfig
+      ---@param opts myCmpOpts
       opts = function(_, opts)
         local cmp = require("cmp")
         opts.sources = vim.list_extend(

@@ -21,7 +21,7 @@ return {
     {
       [1] = "neovim/nvim-lspconfig",
       optional = true,
-      ---@param opts PluginLspOpts
+      ---@param opts myLspconfigOpts
       opts = function(_, opts)
         opts.default_capabilities =
           require("coq").lsp_ensure_capabilities().capabilities
