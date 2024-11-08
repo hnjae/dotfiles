@@ -65,22 +65,26 @@ I want you to act as an expert proofreader capable of detecting and correcting g
     local prefix = require("val.prefix")
 
     return {
-      { [1] = "<Leader>" .. keyword, [2] = "<cmd>GpChatToggle popup<CR>" },
+      {
+        [1] = "<Leader>" .. keyword,
+        [2] = "<cmd>GpChatToggle popup<CR>",
+        desc = "gp-chat-toggle",
+      },
       {
         [1] = bufprefix .. "e",
         [2] = ":<C-u>'<,'>GpNew<CR>",
-        desc = "edit-current-line-in-horizonotal-buffer",
+        desc = "gp-edit-current-line",
         mode = "v",
       },
       {
         [1] = bufprefix .. "E",
         [2] = "<cmd>%GpNew<CR>",
-        desc = "edit-current-buffer-in-horizonotal-buffer",
+        desc = "gp-edit-current-buffer",
       },
       {
         [1] = bufprefix .. "c",
         [2] = ":<C-u>'<,'>GpEditCommitMsg<CR>",
-        desc = "edit-commit-message",
+        desc = "gp-edit-commit-message",
         mode = { "v" },
       },
       {
@@ -90,4 +94,33 @@ I want you to act as an expert proofreader capable of detecting and correcting g
       },
     }
   end,
+  specs = {
+    {
+      [1] = "folke/which-key.nvim",
+      optional = true,
+      opts = function(_, opts)
+        if opts.icons == nil then
+          opts.icons = {}
+        end
+        if opts.icons.rules == nil then
+          opts.icons.rules = {}
+        end
+        vim.list_extend(opts.icons.rules, {
+          { pattern = "gp", icon = require("val.icons").ai, color = "purple" },
+        })
+
+        if opts.spec == nil then
+          opts.spec = {}
+        end
+        vim.list_extend(opts.spec, {
+          {
+            [1] = "<LocalLeader>" .. require("val.map-keyword").ai,
+            group = "gp",
+            ---@type wk.Icon
+            -- icon = icon,
+          },
+        })
+      end,
+    },
+  },
 }

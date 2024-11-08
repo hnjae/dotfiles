@@ -211,15 +211,15 @@ return {
           opts.spec = {}
         end
 
-        local icon = { icon = val.icons.ai, color = "green" }
-        vim.list_extend(opts.spec, {
-          {
-            [1] = "<LocalLeader>" .. map_keyword.ai,
-            group = "chatgpt",
-            ---@type wk.Icon
-            -- icon = icon,
-          },
-        })
+        local icon = { icon = val.icons.ai, color = "purple" }
+        -- vim.list_extend(opts.spec, {
+        --   {
+        --     [1] = "<LocalLeader>" .. map_keyword.ai,
+        --     group = "chatgpt",
+        --     ---@type wk.Icon
+        --     -- icon = icon,
+        --   },
+        -- })
 
         if opts.icons == nil then
           opts.icons = {}
