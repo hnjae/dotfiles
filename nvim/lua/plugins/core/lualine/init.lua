@@ -88,13 +88,13 @@ return {
       },
     }
     lualine_components.tabline = {
-      lualine_a = {},
+      lualine_a = {
+        require(package_path .. ".components.buffers"),
+      },
       lualine_b = {},
       lualine_c = {},
       lualine_x = {},
-      lualine_y = {
-        require(package_path .. ".components.buffers"),
-      },
+      lualine_y = {},
       lualine_z = {
         require(package_path .. ".components.tabs"),
       },
