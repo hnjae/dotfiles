@@ -2,7 +2,8 @@
 
 local M = {
   [1] = "tabs",
-  mode = 0, -- shows tab_nr
+  -- mode = 0, -- shows tab_nr
+  mode = 2, -- shows tab_nr + tab_name
   separator = { left = "", right = "" },
   draw_empty = false,
   -- use_mode_colors = true,
