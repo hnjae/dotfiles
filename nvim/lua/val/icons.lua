@@ -1,3 +1,4 @@
+-- https://www.nerdfonts.com/
 return {
   -- directory = "", --nf-oct-file_directory
   -- file = "", --nf-oct-file

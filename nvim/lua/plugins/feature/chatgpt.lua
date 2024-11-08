@@ -108,7 +108,7 @@ return {
     { [1] = "<LocalLeader>" .. map_keyword.ai .. "f", [2] = "<cmd>ChatGPTRun fix_bugs<CR>",                  desc = "fix-bugs",                 mode = { "n", "v" } },
     { [1] = "<LocalLeader>" .. map_keyword.ai .. "r", [2] = "<cmd>ChatGPTRun roxygen_edit<CR>",              desc = "roxygen-edit",             mode = { "n", "v" } },
     { [1] = "<LocalLeader>" .. map_keyword.ai .. "d", [2] = "<cmd>ChatGPTRun docstring<CR>",                 desc = "docstring",                mode = { "n", "v" } },
-    { [1] = "<LocalLeader>" .. map_keyword.ai .. "x", [2] = "<cmd>ChatGPTRun explain_code<CR>",              desc = "explain-code",             mode = { "n", "v" } },
+      -- { [1] = "<LocalLeader>" .. map_keyword.ai .. "x", [2] = "<cmd>ChatGPTRun explain_code<CR>",              desc = "explain-code",             mode = { "n", "v" } },
       -- stylua: ignore end
       {
         [1] = "<LocalLeader>" .. map_keyword.ai .. "t",

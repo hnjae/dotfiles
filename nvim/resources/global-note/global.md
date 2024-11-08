@@ -47,6 +47,10 @@
 * \n 는 null character 을 입력하게 됨. \r 로 replace 하면 된다.
 * `:%s/\<foo\>/bar/gc` 가 confirmation 하면서 바꾸기.
 
+#### Insert Mode Tips
+
+`<c-d>`, `<c-t>` 로 Insert 모드에서 인덴트를 조절할 수 있다.
+
 #### Incremental 한 숫자 리스트 만들기
 
 Visual 로 숫자들 선택 후, `g<C-a>`

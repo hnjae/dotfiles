@@ -1,0 +1,11 @@
+snippet lib.mkOptionDefault "lib.mkOverride 1500"
+	lib.mkOptionDefault "${0:value}"
+
+snippet lib.mkDefault "lib.mkOverride 1000"
+	lib.mkDefault "${0:value}"
+
+snippet lib.mkForce "lib.mkOverride 50"
+	lib.mkForce "${0:value}"
+
+snippet lib.mkOverride "lib.mkOverride"
+	lib.mkForce "${1: priority}" "${0: value}"

@@ -10,7 +10,9 @@ M.get_browser_cmd = function()
   -- xdg-settings get default-web-browser
   local browser = os.getenv("BROWSER")
   if browser == nil then
-    if vim.fn.executable("firefox") == 1 then
+    if vim.fn.executable("librewolf") == 1 then
+      browser = "librewolf --"
+    elseif vim.fn.executable("firefox") == 1 then
       browser = "firefox --"
     elseif vim.fn.executable("chromium") then
       browser = "chromium --"
