@@ -1,3 +1,4 @@
+-- vim.ui.input, vim.ui.select 대체
 ---@type LazySpec
 return {
   [1] = "stevearc/dressing.nvim",

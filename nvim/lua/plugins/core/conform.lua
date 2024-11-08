@@ -1,5 +1,6 @@
 ---@type LazySpec
 return {
+  -- formatter
   [1] = "stevearc/conform.nvim",
   lazy = true,
   enabled = true,

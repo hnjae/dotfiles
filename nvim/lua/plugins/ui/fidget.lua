@@ -1,3 +1,4 @@
+-- 우 하단, LSP 로딩하는것 알려주는 플러그인
 ---@type LazySpec
 return {
   [1] = "j-hui/fidget.nvim",
