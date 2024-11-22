@@ -9,3 +9,6 @@ snippet lib.mkForce "lib.mkOverride 50"
 
 snippet lib.mkOverride "lib.mkOverride"
 	lib.mkForce "${1: priority}" "${0: value}"
+
+snippet checkVersion "lib.mkIf (version)"
+	(lib.mkIf ((lib.versions.majorMinor lib.version) == "${0: 24.05}"))

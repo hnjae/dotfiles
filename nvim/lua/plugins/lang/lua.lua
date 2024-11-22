@@ -40,9 +40,7 @@ return {
   {
     [1] = "neovim/nvim-lspconfig",
     optional = true,
-    dependencies = {
-      "folke/neodev.nvim",
-    },
+    dependencies = {},
     opts = {
       servers = {
         lua_ls = {

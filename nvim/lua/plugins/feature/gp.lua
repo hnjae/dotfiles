@@ -43,7 +43,8 @@ return {
         EditCommitMsg = function(gp, params)
           local template =
             "```gitcommit\n{{selection}}\n```\nI want you to act as a commit message generator. The above text is the commit message I roughly wrote, and I would like you to generate an appropriate commit message using the conventional commit format. The commit message must be in standard English and easy to understand for non-native English speakers.Do not write any explanations or other words, just reply with the commit message."
-          local agent = gp.get_command_agent("CodeGPT4o")
+          -- local agent = gp.get_command_agent("CodeGPT4o")
+          local agent = gp.get_command_agent("CodeClaude-3-5-Sonnet")
           gp.Prompt(params, gp.Target.rewrite, agent, template)
         end,
         GrammarCheck = function(gp, params)

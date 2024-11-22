@@ -25,6 +25,7 @@ M.setup = function()
   end
 
   local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+
   -- bootstrap lazy.nvim
   if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({

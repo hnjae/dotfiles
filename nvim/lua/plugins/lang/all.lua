@@ -1,6 +1,19 @@
 ---@type LazySpec[]
 return {
   {
+    [1] = "neovim/nvim-lspconfig",
+    optional = true,
+    dependencies = {},
+    opts = {
+      servers = {
+        harper_ls = {
+          ---@class LspconfigSetupOptsSpec
+          settings = {},
+        },
+      },
+    },
+  },
+  {
     [1] = "nvimtools/none-ls.nvim",
     optional = true,
     opts = function(_, opts)
