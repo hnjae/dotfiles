@@ -9,6 +9,6 @@ snippet lamergeAttrsList "lib.attrsets.mergeAttrsList :: [ Attrs ] -> Attrs"
 snippet laoptionalAttrs "lib.attrsets.optionalAttrs :: Bool -> AttrSet -> AttrSet"
 	optionalAttrs ${1:bool} ${0:AttrSet}
 snippet lagenAttrs "lib.attrsets.genAttrs :: [ String ] -> (String -> Any) -> AttrSet"
-	genAttrs [ "foo" "bar" ] (name: "x_" + name)
+	genAttrs [ "foo" "bar" ] (${1:key}: ${2:val})
 snippet lamapAttrs "builtins.mapAttrs :: (String -> Any -> Any) -> AttrSet -> AttrSet"
 	mapAttrs (${2:key}: ${3:name}: ($2 + $3)) ${1:AttrSet}
