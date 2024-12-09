@@ -55,7 +55,7 @@ return {
         },
 
         -- misc
-        ruff_lsp = {
+        ruff = {
           -- linter and formatter
           ---@class LspconfigSetupOptsSpec
           settings = {},

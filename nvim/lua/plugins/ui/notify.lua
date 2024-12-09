@@ -72,7 +72,9 @@ return {
 
     -- replace default notify function
     if not require("utils").is_plugin("noice.nvim") then
-      vim.notify = notify.async
+      -- NOTE: notify.async occur 'attempt to yield across C-call boundary' error after update 2024-12-08
+      -- vim.notify = notify.async
+      vim.notify = notify.notify
     end
   end,
   ---@type LazySpec[]

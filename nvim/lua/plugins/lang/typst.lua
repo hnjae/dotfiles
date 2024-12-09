@@ -25,7 +25,7 @@ return {
     optional = true,
     opts = {
       servers = {
-        typst_lsp = {
+        tinymist = {
           ---@class LspconfigSetupOptsSpec
           settings = {},
         },
