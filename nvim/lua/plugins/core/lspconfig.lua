@@ -418,17 +418,17 @@ return {
               return (string.format("%s[%s]", lsp_icon, #names))
             end
 
-            if
-              #names > num_source_semi_limit
-              and (#names - num_source_semi_limit) > 1
-            then
-              return string.format(
-                "%s%s +[%s]",
-                lsp_icon,
-                table.concat({ unpack(names, 1, num_source_semi_limit) }, ", "),
-                #names - num_source_semi_limit
-              )
-            end
+            -- if
+            --   #names > num_source_semi_limit
+            --   and (#names - num_source_semi_limit) > 1
+            -- then
+            --   return string.format(
+            --     "%s%s +[%s]",
+            --     lsp_icon,
+            --     table.concat({ unpack(names, 1, num_source_semi_limit) }, ", "),
+            --     #names - num_source_semi_limit
+            --   )
+            -- end
 
             return string.format("%s%s", lsp_icon, table.concat(names, ", "))
           end,

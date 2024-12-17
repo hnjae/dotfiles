@@ -56,6 +56,15 @@ I want you to act as an expert proofreader capable of detecting and correcting g
           local agent = gp.get_command_agent("CodeClaude-3-5-Sonnet")
           gp.Prompt(params, gp.Target.vnew, agent, template)
         end,
+        EnglishTranslate = function(gp, params)
+          local template = [[
+> {{selection}}
+
+I want you to act as an English translator, spelling corrector and improver. The above text is sentences I roughly wrote, and I would like you to translate it and answer in the corrected and improved version of my text, in English. You should ensure the sentences are simple and easy to understand for non-native English speakers. Hence, avoid complex vocabulary and sentence structures. I want you to only reply the correction, the improvements and nothing else, do not write explanations.
+]]
+          local agent = gp.get_command_agent("CodeClaude-3-5-Sonnet")
+          gp.Prompt(params, gp.Target.vnew, agent, template)
+        end,
       },
     }
   end,
@@ -86,6 +95,18 @@ I want you to act as an expert proofreader capable of detecting and correcting g
         [1] = bufprefix .. "c",
         [2] = ":<C-u>'<,'>GpEditCommitMsg<CR>",
         desc = "gp-edit-commit-message",
+        mode = { "v" },
+      },
+      {
+        [1] = bufprefix .. "g",
+        [2] = ":<C-u>'<,'>GpGrammarCheck<CR>",
+        desc = "gp-grammer-check",
+        mode = { "v" },
+      },
+      {
+        [1] = bufprefix .. "t",
+        [2] = ":<C-u>'<,'>GpEnglishTranslate<CR>",
+        desc = "gp-english-translate",
         mode = { "v" },
       },
       {
