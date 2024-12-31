@@ -21,7 +21,9 @@ return {
         -- TODO: modifiable 이 off 일 때는 활성화 금지 <2023-12-28>
         marksman = {
           ---@class LspconfigSetupOptsSpec
-          settings = {},
+          settings = {
+            autostart = false,
+          },
         },
       },
     },
@@ -35,26 +37,28 @@ return {
 
       local mapping = {
         -- english prose linter
-        proselint = {
-          null_ls.builtins.diagnostics.proselint.with({
-            filetypes = { "markdown" },
-            diagnostics_postprocess = function(diagnostic)
-              diagnostic.severity = vim.diagnostic.severity.HINT
-            end,
-          }),
-        },
+        -- proselint = {
+        --   null_ls.builtins.diagnostics.proselint.with({
+        --     filetypes = { "markdown" },
+        --     diagnostics_postprocess = function(diagnostic)
+        --       diagnostic.severity = vim.diagnostic.severity.HINT
+        --     end,
+        --   }),
+        -- },
+
         -- english prose linter
-        wirte_good = {
-          null_ls.builtins.diagnostics.write_good.with({
-            filetypes = { "markdown" },
-          }),
-        },
+        -- wirte_good = {
+        --   null_ls.builtins.diagnostics.write_good.with({
+        --     filetypes = { "markdown" },
+        --   }),
+        -- },
+
         -- spelling, grammar
-        textidote = {
-          null_ls.builtins.diagnostics.textidote.with({
-            filetypes = { "markdown" },
-          }),
-        },
+        -- textidote = {
+        --   null_ls.builtins.diagnostics.textidote.with({
+        --     filetypes = { "markdown" },
+        --   }),
+        -- },
 
         -- markdownlint = { null_ls.builtins.diagnostics.markdownlint },
       }

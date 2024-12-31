@@ -63,7 +63,7 @@ Visual 로 숫자들 선택 후, `g<C-a>`
 
 `:%norm A<추가할 string>`
 
-`%`: 모든 라인에
+`%`: 모든 라인에 해당 명령 수행
 `norm`: 다음의 normal command를 수행
 `A`: `Append`
 

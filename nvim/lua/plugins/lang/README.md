@@ -4,3 +4,6 @@
 <https://www.spacemacs.org/layers/LAYERS.html>
 <http://www.lazyvim.org/>
 <https://github.com/mawww/kakoune#3-basic-interaction>
+
+Lsp configs:
+  <https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md>

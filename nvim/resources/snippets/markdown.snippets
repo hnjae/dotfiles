@@ -1,16 +1,16 @@
 snippet sl insert link
 	[${2:label}](${1:$TM_SELECTED_TEXT})$0
-snippet sthematic-break thematic break
-	---
 snippet scode "code block"
 	\`\`\`${1:lang}
 	${TM_SELECTED_TEXT}$0
 	\`\`\`
 snippet *** thematic break
 	---
-snippet --- thematic break
+snippet sthematic-break thematic break
 	---
 snippet stable
 	| $0name  | foo  |
 	| :------ | :--: |
 	| foobar  | bar  |
+snippet c "`` block"
+	`${1:$TM_SELECTED_TEXT}\` $0

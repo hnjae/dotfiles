@@ -1,14 +1,14 @@
 snippet la "lib.attrsets"
-	lib.attrsets.$0
+	(lib.attrsets.$0)
 snippet lahasAttr "builtins.hasAttr :: String -> AttrSet -> Bool"
-	builtins.hasAttr ${1:attr} ${0:attrset}
+	(builtins.hasAttr ${1:attr} ${0:attrset})
 snippet lafilter "lib.attrsets.filterAttrs :: (String -> Any -> Bool) -> AttrSet -> AttrSet"
-	filterAttrs (n: v: $1) ${0:AttrSets}
+	(filterAttrs (n: v: $1) ${0:AttrSets})
 snippet lamergeAttrsList "lib.attrsets.mergeAttrsList :: [ Attrs ] -> Attrs"
-	mergeAttrsList [ ${0:Attrs} ]
+	(mergeAttrsList [ ${0:Attrs} ])
 snippet laoptionalAttrs "lib.attrsets.optionalAttrs :: Bool -> AttrSet -> AttrSet"
-	optionalAttrs ${1:bool} ${0:AttrSet}
+	(optionalAttrs ${1:bool} ${0:AttrSet})
 snippet lagenAttrs "lib.attrsets.genAttrs :: [ String ] -> (String -> Any) -> AttrSet"
-	genAttrs [ "foo" "bar" ] (${1:key}: ${2:val})
+	(genAttrs [ "foo" "bar" ] (${1:key}: ${2:val}))
 snippet lamapAttrs "builtins.mapAttrs :: (String -> Any -> Any) -> AttrSet -> AttrSet"
-	mapAttrs (${2:key}: ${3:name}: ($2 + $3)) ${1:AttrSet}
+	(mapAttrs (${2:key}: ${3:name}: ($2 + $3)) ${1:AttrSet})

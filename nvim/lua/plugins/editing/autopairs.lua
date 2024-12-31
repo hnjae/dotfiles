@@ -45,10 +45,10 @@ local M = {
     npairs.get_rule("'")[1].not_filetypes = { "nix" }
 
     npairs.add_rules({
-      Rule("`", "`", { "markdown", "sh" }),
+      Rule("`", "`", { "sh" }),
       Rule("`+", "+`", { "asciidoctor", "asciidoc" }),
       Rule("``", "``", { "asciidoctor", "asciidoc" }),
-      Rule("''", "''", { "nix" }),
+      -- Rule("''", "''", { "nix" }),
 
       -- press % => %% only while inside a comment or string
       -- rule("%", "%", "lua"):with_pair(ts_conds.is_ts_node({'string','comment'})),

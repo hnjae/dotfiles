@@ -8,7 +8,16 @@ return {
       servers = {
         harper_ls = {
           ---@class LspconfigSetupOptsSpec
-          settings = {},
+          settings = {
+            settings = {
+              ["harper-ls"] = {
+                linters = {
+                  sentence_capitalization = false,
+                  matcher = false,
+                },
+              },
+            },
+          },
         },
       },
     },
@@ -20,7 +29,7 @@ return {
       local null_ls = require("null-ls")
 
       --[[
-        NOTE:  <2024-04-10>
+        NOTE: <2024-04-10>
         completion 관련은 cmp에 추가. 여기에 추가하면 LSP 가 제공한 소스로
         관주되어 우선순위 관리가 까다로움
 

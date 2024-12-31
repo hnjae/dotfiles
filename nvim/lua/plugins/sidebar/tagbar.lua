@@ -4,7 +4,8 @@ local map_keyword = require("val").map_keyword
 ---@type LazySpec
 return {
   [1] = "preservim/tagbar",
-  lazy = true, -- will be lazy load on filetypes (check `lua/plugins/lang`)
+  -- lazy = true, -- will be lazy load on filetypes (check `lua/plugins/lang`)
+  -- lazy = false,
   enabled = vim.fn.executable("ctags") == 1,
   dependency = {
     "ludovicchabant/vim-gutentags", -- to load gutentags when tagbar loads (not actually a dependency)

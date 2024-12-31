@@ -151,6 +151,9 @@ return {
     cond = colorscheme == colorschemes.gruvbox,
     opts = {
       -- dim_inactive = true,
+      overrides = {
+        NormalFloat = { bg = "none" },
+      },
     },
     config = function(_, opts)
       require("gruvbox").setup(opts)

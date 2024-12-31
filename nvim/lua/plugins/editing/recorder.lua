@@ -55,6 +55,13 @@ return {
           end
         end
 
+        if opts.tabline == nil then
+          opts.tabline = {}
+        end
+        if opts.tabline.lualine_x == nil then
+          opts.tabline.lualine_x = {}
+        end
+
         table.insert(opts.tabline.lualine_x, {
           component = component,
         })

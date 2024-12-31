@@ -22,9 +22,10 @@ return function(name, context)
     and context.buftype == "nofile"
     -- name == "[No Name]"
   then
-    -- e.g. preview pane of LspSaga's outline/hover
+    -- e.g. preview pane of LspSaga's outline/hover or hurl.nvim's result
     -- name = utils.enable_icon and "󱔘 " or "[DOCUMENT]" -- nf-md-file_document_multiple_outline
-    icon = "󱔘"
+    -- icon = "󱔘"
+    return name
   end
 
   if not icon then

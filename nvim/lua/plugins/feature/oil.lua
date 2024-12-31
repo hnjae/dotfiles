@@ -57,6 +57,13 @@ return {
       -- expr = true,
       desc = "oil-up",
     },
+    {
+      [1] = "_",
+      [2] = function()
+        require("oil").open()
+      end,
+      desc = "oil-up-force",
+    },
   },
   opts = {
     use_default_keymaps = false,

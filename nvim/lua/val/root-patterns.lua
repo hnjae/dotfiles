@@ -1,7 +1,7 @@
 return {
-  ".envrc",
-  ".editorconfig",
+  ".git",
   ".neoconf.json",
   ".nlsp-settings",
-  ".git",
+  -- ".envrc",
+  -- ".editorconfig",
 }

@@ -2,7 +2,7 @@
 ---@type LazySpec
 return {
   [1] = "stevearc/aerial.nvim",
-  enabled = false,
+  enabled = true,
   dependencies = {
     {
       [1] = "nvim-treesitter/nvim-treesitter",

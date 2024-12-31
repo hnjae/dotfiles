@@ -1,0 +1,30 @@
+# for auto complete (현재 자동완
+snippet ssystem "stdenv.system :: string (e.g. x86_64-linux)"
+	stdenv.system
+snippet sisAarch64 "stdenv.isAarch64 :: bool"
+	stdenv.isAarch64
+snippet sisx86_64 "stdenv.isx86_64 :: bool"
+	stdenv.isx86_64
+snippet sisLinux "stdenv.isLinux :: bool"
+	stdenv.isLinux
+snippet sisDarwin "stdenv.isDarwin :: bool"
+	stdenv.isDarwin
+snippet pwriteScriptBin "writeScriptBin"
+	(pkgs.writeScriptBin "${1:name}" ''
+		#!{pkgs.dash}/bin/dash
+		$0 "$@"
+	'')
+snippet pwriteScript "pkgs.writeScript"
+	(pkgs.writeScript "${1:name}" ''
+		#!{pkgs.dash}/bin/dash
+		$0 "$@"
+	'')
+snippet (prunCommandLocal "pkgs.runCommandLocal"
+	pkgs.runCommandLocal "${1:name}" ${2:{\}} ''
+		${0:script}
+	'')
+snippet pbindbin "use pkgs.runCommand to bindbin"
+        pkgs.runCommandLocal "${1:binname}" {} ''
+          mkdir -p "\$out/bin"
+          ln -s "\${pkgs.${2}}/bin/${2}" "\$out/bin/$1"
+        ''

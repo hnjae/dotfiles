@@ -8,3 +8,7 @@ snippet packpathi "package_path of init.lua"
 	local package_path = (...)
 snippet packpath "package_path of file"
 	local package_path = (...):match("(.-)[^%.]+$")
+snippet delcommand "delete user command"
+	vim.api.nvim_del_user_command($0)
+snippet getclioutput "get stdout from shell command"
+	vim.system({$0}, { text = true }):wait().stdout

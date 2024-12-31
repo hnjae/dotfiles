@@ -158,3 +158,7 @@ snippet forin for...in (iterate property(key) of object)
 	for (const ${2:property} in ${1:object}) {
 		$0console.log($2)
 	}
+snippet sleepfn "settimeout"
+	const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+snippet sleep "settimeout"
+	await new Promise((resolve) => setTimeout(resolve, ${milieseconds}));

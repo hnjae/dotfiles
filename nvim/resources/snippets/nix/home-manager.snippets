@@ -1,0 +1,31 @@
+snippet xdesktopentry "New desktop entries"
+	xdg.desktopEntries."${1:name}" = {
+		name = "$1";
+		icon = "$1";
+		comment = "";
+		exec = "";
+		terminal = false;
+		type = "Application";
+		startupNotify = true;
+		categories = [];
+		mimeType = [];
+		actions = {
+			"name" = {
+				name = "";
+				exec = "";
+			};
+		};
+	};
+snippet xdesktopentry-file "New desktop entries"
+	xdg.dataFile."applications/${1:name}.desktop".text = ''
+		[Desktop Entry]
+		Name=${1:name}
+		Type=Application
+		Comment=A terminal emulator
+		Exec=$2
+		Icon=${1:name}
+		Categories
+		Keywords=
+		StartupNotify=true
+		Terminal=false
+	'';

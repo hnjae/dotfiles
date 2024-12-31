@@ -1,36 +1,38 @@
 -- WIP
+-- TODO: use tabby instead of ollama <2024-12-26>
 
 ---@type LazySpec
 return {
   [1] = "tzachar/cmp-ai",
   lazy = true,
-  enabled = false,
-  -- cond = os.getenv("OPENAI_API_KEY") ~= nil,
+  enabled = true,
   dependencies = {
     "nvim-lua/plenary.nvim",
   },
   opts = {
-    max_lines = 100,
-    -- provider = "OpenAI",
-    -- provider_options = {
-    --   model = "gpt-4o-mini",
-    -- },
+    -- max_lines = 100,
+    notify = true,
+    run_on_every_keystroke = false,
+
     provider = "Ollama",
     provider_options = {
-      -- model = "codellama:7b-instruct-q4_K_M",
-      -- model = "qwen2.5-coder:0.5b",
-      model = "codegemma:2b-code-v1.1-q4_K_M",
+      model = "qwen2.5-coder:1.5b-base",
+      temperature = 0.7,
       prompt = function(lines_before, lines_after)
-        return lines_before
-      end,
-      suffix = function(lines_after)
-        return lines_after
+        return "<|fim_prefix|>"
+          .. lines_before
+          .. "\n"
+          .. "<|fim_suffix|>"
+          .. "\n"
+          .. lines_after
+          .. "<|fim_middle|>"
       end,
     },
 
-    notify = true,
-    run_on_every_keystroke = false,
-    -- run_on_every_keystroke = false,
+    -- provider = "Tabby",
+    -- provider_options = {
+    --   -- TABBY_API_KEY
+    -- },
   },
   config = function(_, opts)
     local cmp_ai = require("cmp_ai.config")
@@ -45,31 +47,31 @@ return {
       ---@param opts myCmpOpts
       opts = function(_, opts)
         local cmp = require("cmp")
+
+        -- Add cmp-ai to source
         -- if not opts.sources then
         --   opts.sources = {}
         -- end
-        -- vim.list_extend(
+        -- table.insert(
         --   opts.sources,
         --   cmp.config.sources({
         --     { name = "cmp_ai" },
         --   })
         -- )
 
-        opts.mapping = vim.tbl_extend(
-          "keep",
-          opts.mapping or {},
-          cmp.mapping.preset.insert({
-            ["<C-x>"] = cmp.mapping(
-              cmp.mapping.complete({
-                config = {
-                  sources = cmp.config.sources({
-                    { name = "cmp_ai" },
-                  }),
-                },
+        if not opts.mapping then
+          opts.mapping = {}
+        end
+
+        opts.mapping["<C-x>"] = cmp.mapping(
+          cmp.mapping.complete({
+            config = {
+              sources = cmp.config.sources({
+                { name = "cmp_ai" },
               }),
-              { "i" }
-            ),
-          })
+            },
+          }),
+          { "i" }
         )
       end,
     },

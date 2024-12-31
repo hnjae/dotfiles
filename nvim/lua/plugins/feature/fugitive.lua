@@ -34,13 +34,17 @@ return {
     "GRemove",
     "GUnlink",
     "GBrowse",
-    "Browse",
   },
   keys = {
     {
       [1] = val.prefix.git .. val.map_keyword.git,
-      [2] = "<cmd>tab G<CR>",
+      [2] = "<cmd>Git<CR>",
       desc = "open-fugitive",
+    },
+    {
+      [1] = val.prefix.git .. string.upper(val.map_keyword.git),
+      [2] = "<cmd>tab Git<CR>",
+      desc = "open-fugitive-in-new-tab",
     },
     { [1] = val.prefix.git .. "l", [2] = "<cmd>tab Gclog<CR>", desc = "log" },
     {

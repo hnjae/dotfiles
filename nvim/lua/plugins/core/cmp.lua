@@ -181,6 +181,7 @@ return {
     })
 
     -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+    -- NOTE:  이 것 때문이지 vim-select 한게 날라간다. <2024-12-26>
     cmp.setup.cmdline(":", {
       mapping = cmp.mapping.preset.cmdline(),
       sources = cmp.config.sources({
