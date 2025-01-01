@@ -101,5 +101,26 @@ return {
         ["*"] = true,
       },
     },
+    specs = {
+      {
+        [1] = "nvim-lualine/lualine.nvim",
+        dependencies = { "AndreM222/copilot-lualine" },
+        optional = true,
+        cond = require("utils").enable_icon,
+        ---@param opts myLualineOpts
+        opts = function(_, opts)
+          if not opts.sections then
+            opts.sections = {}
+          end
+          if not opts.sections.lualine_x then
+            opts.sections.lualine_x = {}
+          end
+          table.insert(
+            opts.sections.lualine_x,
+            { component = "copilot", priority = 100 }
+          )
+        end,
+      },
+    },
   },
 }
