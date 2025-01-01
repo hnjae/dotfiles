@@ -101,6 +101,18 @@ return {
         ["*"] = true,
       },
     },
+    config = function(_, opts)
+      require("copilot").setup(opts)
+      local rm_deprecated = {
+        "CopilotStop",
+        "CopilotAuth",
+        "CopilotPanel",
+        "CopilotDetach",
+      }
+      for _, command in ipairs(rm_deprecated) do
+        vim.api.nvim_del_user_command(command)
+      end
+    end,
     specs = {
       {
         [1] = "nvim-lualine/lualine.nvim",
