@@ -5,14 +5,19 @@ return {
     optional = true,
     keys = function(_, keys)
       local map_keyword = require("val.map-keyword")
-      local keyword = map_keyword.ai
-      local bufprefix = "<LocalLeader>" .. keyword
+      local bufprefix = "<LocalLeader>" .. map_keyword.ai
       local mykeys = {
         {
           [1] = bufprefix .. "c",
           [2] = ":<C-u>'<,'>GpEditCommitMsg<CR>",
           desc = "gp-edit-commit-message",
           mode = { "v" },
+        },
+        {
+          [1] = bufprefix .. "g",
+          [2] = "<cmd>GpGenerateCommit<CR>",
+          ft = "gitcommit",
+          desc = "generate-commit",
         },
       }
 
