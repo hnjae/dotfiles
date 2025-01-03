@@ -59,8 +59,8 @@ return {
     --   end,
     -- })
   end,
-  opts = function()
-    return {
+  opts = function(_, opts)
+    local myopts = {
       command_prompt_prefix_template = (
         require("utils").enable_icon and require("val.icons").ai or "LLM:"
       ) .. " {{agent}} ~ ",
@@ -83,7 +83,8 @@ return {
         shortcut = "<C-g>r",
       },
 
-      default_command_agent = "claude-3-5-haiku-command",
+      -- default_command_agent = "claude-3-5-haiku-command",
+      default_command_agent = "copilot-gpt-4o-mini-command",
       default_chat_agent = "claude-3-5-sonnet-chat",
 
       chat_template = [[
@@ -289,103 +290,6 @@ Chats are saved automatically.
           local agent = gp.get_command_agent("command-claude-3-5-sonnet")
           gp.Prompt(params, gp.Target.vnew, agent, template)
         end,
-        GenerateCommitMsg = function(gp, params)
-          local gitdiff = vim
-            .system({ "git", "diff", "--staged" }, { text = true })
-            :wait().stdout
-          local template = string.format(
-            [[```diff
-%s
-```]],
-            gitdiff
-          )
-
-          local agent = gp.get_chat_agent("copilot-gpt-4o-mini-command")
-          -- local agent = gp.get_chat_agent("gpt-4o-mini-chat")
-          -- local agent = gp.get_chat_agent("gemini-flash-8b")
-          -- local agent = gp.get_chat_agent("pplx-small")
-          agent.system_prompt =
-            [[Suggest a precise and informative commit message based on the following diff. Use markdown syntax in your response if needed.
-
-The commit message should follow the Angular commit message format:
-
-    <type>(<scope>): <short summary>
-    <BLANK LINE>
-    <body>
-    <BLANK LINE>
-    <footer>
-
-Where:
-
-*   `<type>` is one of: build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test
-*   `<scope>` is optional and represents the module affected (e.g., core, common, forms)
-*   `<short summary>` starts with lowercase, doesn't end with a period, and is limited to 50 characters
-*   `<body>` is optional, uses present tense, and wraps at 72 characters
-*   `<footer>` is optional and contains any breaking changes or closed issues
-
-Examples:
-
-    feat(user-profile): add ability to update user avatar
-
-    Implement a new feature allowing users to upload and update their profile avatar.
-    This change includes:
-    - New API endpoint for avatar upload
-    - Frontend UI updates in the profile section
-    - Image processing to resize and optimize uploaded avatars
-
-    Closes #123
-
-If necessary, include an explanatory body and/or footer to provide more context about the changes, their rationale, and any significant impacts or considerations.
-
-Diff:
-]]
-          gp.Prompt(params, gp.Target.rewrite, agent, template)
-        end,
-        EditCommitMsg2 = function(gp, params)
-          local template = [[```gitcommit
-{{selection}}
-```]]
-          local agent = gp.get_chat_agent("gpt-4o-mini-chat")
-          agent.system_prompt =
-            [[I want you to act as a commit message generator. The given text is the commit message I roughly wrote, and I would like you to generate an appropriate commit message using the conventional commit format. The commit message must be in standard English and easy to understand for non-native English speakers. Do not write any explanations or other words, just reply with the commit message.]]
-          gp.Prompt(params, gp.Target.rewrite, agent, template)
-        end,
-        EditCommitMsg = function(gp, params)
-          local template = [[```gitcommit
-{{selection}}
-```]]
-          local agent = gp.get_chat_agent("chat-gpt-4o-mini")
-          agent.system_prompt =
-            [[I want you to serve as a Git commit message optimizer that follows the Conventional Commits specification. Your task is to:
-
-1. Take my rough commit message as input
-2. Transform it into a well-structured commit message following this format:
-   <type>(<optional scope>): <description>
-
-   [optional body]
-
-   [optional footer(s)]
-
-Requirements:
-- Use clear, standard English vocabulary
-- Keep messages concise but descriptive
-- Make it understandable for non-native English speakers
-- Choose appropriate type prefixes (feat, fix, docs, style, refactor, test, chore)
-- Include scope when relevant
-- Break down complex changes into bullet points in the body if needed
-
-Please provide only the formatted commit message without any additional explanation or commentary.
-
-Example input: "added login button to homepage"
-Expected output format:
-feat(auth): add login button to homepage navigation
-
-- Implement responsive button component
-- Add basic click handler
-- Style according to design system
-]]
-          gp.Prompt(params, gp.Target.rewrite, agent, template)
-        end,
         Proofread2 = function(gp, params)
           local template = [[```
 {{selection}}
@@ -441,15 +345,18 @@ Primary Tasks:
         end,
       },
     }
+
+    vim.tbl_deep_extend("keep", myopts, opts)
+    return myopts
   end,
 
-  keys = function()
+  keys = function(_, keys)
     local map_keyword = require("val.map-keyword")
     local keyword = map_keyword.ai
     local bufprefix = "<LocalLeader>" .. keyword
     local prefix = require("val.prefix")
 
-    return {
+    local more_keys = {
       {
         [1] = "<Leader>" .. keyword,
         [2] = "<cmd>GpChatToggle popup<CR>",
@@ -472,12 +379,6 @@ Primary Tasks:
         desc = "gp-edit-entire-buffer",
       },
       {
-        [1] = bufprefix .. "c",
-        [2] = ":<C-u>'<,'>GpEditCommitMsg<CR>",
-        desc = "gp-edit-commit-message",
-        mode = { "v" },
-      },
-      {
         [1] = bufprefix .. "g",
         [2] = ":<C-u>'<,'>GpGrammarCheck<CR>",
         desc = "gp-grammer-check",
@@ -495,6 +396,7 @@ Primary Tasks:
         desc = "gp-stop",
       },
     }
+    vim.list_extend(keys, more_keys)
   end,
   specs = {
     {
