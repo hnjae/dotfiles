@@ -150,7 +150,9 @@ return {
     priority = 999999999,
     cond = colorscheme == colorschemes.gruvbox,
     opts = {
+      -- transparent_mode = true,
       -- dim_inactive = true,
+      -- terminal_colors = true,
       overrides = {
         NormalFloat = { bg = "none" },
       },

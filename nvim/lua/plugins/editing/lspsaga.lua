@@ -132,7 +132,7 @@ local M = {
               rhs = function()
                 require("lspsaga.diagnostic"):goto_prev()
               end,
-              desc = "prev-diagnostic",
+              desc = "prev-diagnostic (lspsaga)",
             },
             {
               -- overrides neovim's default keymap
@@ -140,43 +140,43 @@ local M = {
               rhs = function()
                 require("lspsaga.diagnostic"):goto_next()
               end,
-              desc = "next-diagnostic",
+              desc = "next-diagnostic (lspsaga)",
             },
             {
               lhs = "[r",
               rhs = function()
                 require("lspsaga.diagnostic"):goto_prev({
-                  severity = vim.diagnostic.severity["ERROR"],
+                  severity = vim.diagnostic.severity.ERROR,
                 })
               end,
-              desc = "prev-diagnostic-error",
+              desc = "prev-diagnostic-error (lspsaga)",
             },
             {
               lhs = "]r",
               rhs = function()
                 require("lspsaga.diagnostic"):goto_next({
-                  severity = vim.diagnostic.severity["ERROR"],
+                  severity = vim.diagnostic.severity.ERROR,
                 })
               end,
-              desc = "next-diagnostic-error",
+              desc = "next-diagnostic-error (lspsaga)",
             },
             {
               lhs = "[w",
               rhs = function()
                 require("lspsaga.diagnostic"):goto_prev({
-                  severity = vim.diagnostic.severity["WARN"],
+                  severity = vim.diagnostic.severity.WARN,
                 })
               end,
-              desc = "prev-diagnostic-warn",
+              desc = "prev-diagnostic-warn (lspsaga)",
             },
             {
               lhs = "]w",
               rhs = function()
                 require("lspsaga.diagnostic"):goto_next({
-                  severity = vim.diagnostic.severity["WARN"],
+                  severity = vim.diagnostic.severity.WARN,
                 })
               end,
-              desc = "next-diagnostic-warn",
+              desc = "next-diagnostic-warn (lspsaga)",
             },
           },
         }

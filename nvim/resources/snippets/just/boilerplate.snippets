@@ -1,10 +1,26 @@
 snippet sboilerplate "justfile boilerplate"
 	#!/usr/bin/env -S just --justfile
 
+	# set working-directory := 'bar'
+
 	alias fmt := format
+	host := `uname -a`
+
+	default:
+		@just --list
 
 	format:
-	  nix fmt
+		nix fmt
 
 	build:
-	  typst c *.typ
+		typst c *.typ
+
+	test-all: build
+		./test --all
+
+	test TEST: build
+		./test --test {{TEST}}
+
+	[working-directory: 'bar']
+	@foo:
+		pwd

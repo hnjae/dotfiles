@@ -147,6 +147,25 @@ return {
       end
     end
 
+    -- opts.tabline = {}
+    -- opts.inactive_winbar = {}
+    -- opts.extensions = {}
+    -- opts.sections = {}
+    -- opts.sections = {
+    --   -- lualine_a = { "mode" },
+    --   -- lualine_b = { "branch", "diff", "diagnostics" },
+    --   -- lualine_c = { "filename" },
+    --   -- lualine_x = { "encoding", "fileformat", "filetype" },
+    --   -- lualine_y = { "progress" },
+    --   lualine_z = { "location" },
+    -- }
+    -- opts.sections = {}
+    -- opts.sections.lualine_a = {}
+    -- opts.sections.lualine_b = {}
+    -- opts.sections.lualine_c = {}
+    -- opts.sections.lualine_x = {}
+    -- opts.sections.lualine_y = {}
+    -- opts.sections.lualine_z = {}
     require("lualine").setup(opts)
   end,
 }

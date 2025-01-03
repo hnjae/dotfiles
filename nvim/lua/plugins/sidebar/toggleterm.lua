@@ -24,7 +24,14 @@ return {
     shell = os.getenv("SHELL") or vim.o.shell,
     direction = "float",
     -- direction = "horizontal",
-    -- shade_terminals = false,
+
+    -- use darker/brighter background for terminal
+    -- ignores highlights.Normal.guibg
+    shade_terminals = false,
+    highlights = {
+      -- Normal = vim.api.nvim_get_hl(0, { name = "GruvboxBg4" }),
+    },
+
     float_opts = {
       border = require("utils").is_console and "single" or "rounded",
       width = function(term)
@@ -105,7 +112,11 @@ return {
       [2] = function()
         local terminals = require("toggleterm.terminal").get_all()
         if #terminals <= 0 then
-          vim.cmd("ToggleTerm")
+          -- vim.cmd("ToggleTerm")
+          local term = require("toggleterm.terminal").Terminal:new({
+            direction = "horizontal",
+          })
+          term:open()
         else
           -- vim.cmd("Telescope toggleterm_manager")
           vim.cmd("TermSelect")

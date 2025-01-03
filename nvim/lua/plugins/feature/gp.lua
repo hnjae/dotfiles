@@ -36,12 +36,28 @@ return {
 
     local icon = require("utils").enable_icon and require("val.icons").ai
       or "LLM"
+
     vim.api.nvim_create_autocmd({ "User" }, {
       pattern = { "GpDone" },
       callback = function(_)
         vim.notify(icon .. " : GpDone!", "info")
       end,
     })
+
+    -- local gp_file_regex = vim.regex(".*/gp/chats/.*")
+    -- vim.api.nvim_create_autocmd("BufWinEnter", {
+    --   -- pattern = { "markdown" },
+    --   callback = function(ev)
+    --     vim.notify(vim.inspect(ev))
+    --     -- local matches = gp_file_regex:match_str(ev.file)
+    --     -- if matches == nil then
+    --     --   -- not a gp chat file
+    --     --   return
+    --     -- end
+    --     -- vim.opt_local.number = true
+    --     -- vim.opt_local.relativenumber = true
+    --   end,
+    -- })
   end,
   opts = function()
     return {
@@ -101,6 +117,20 @@ Chats are saved automatically.
         openai = {
           disable = false,
         },
+        copilot = {
+          disable = false,
+          -- secret = {
+          --   "secret-tool",
+          --   "lookup",
+          --   "api",
+          --   "copilot",
+          -- },
+          secret = {
+            "bash",
+            "-c",
+            "cat ~/.config/github-copilot/apps.json | sed -e 's/.*oauth_token...//;s/\".*//'",
+          },
+        },
         anthropic = {
           disable = false,
           secret = {
@@ -142,7 +172,29 @@ Chats are saved automatically.
         { name = "CodeGemini", disable = true },
         { name = "ChatPerplexityLlama3.1-8B", disable = true },
         { name = "CodePerplexityLlama3.1-8B", disable = true },
+        { name = "ChatCopilot", disable = true },
+        { name = "CodeCopilot", disable = true },
         --
+        {
+          provider = "copilot",
+          name = "copilot-gpt-4o-mini-chat",
+          chat = true,
+          command = false,
+          -- string with model name or table with model name and parameters
+          model = { model = "gpt-4o-mini", temperature = 1.0, top_p = 1 },
+          -- system prompt (use this to specify the persona/role of the AI)
+          system_prompt = require("gp.defaults").chat_system_prompt,
+        },
+        {
+          provider = "copilot",
+          name = "copilot-gpt-4o-mini-command",
+          chat = false,
+          command = true,
+          -- string with model name or table with model name and parameters
+          model = { model = "gpt-4o-mini", temperature = 0.8, top_p = 1, n = 1 },
+          -- system prompt (use this to specify the persona/role of the AI)
+          system_prompt = require("gp.defaults").code_system_prompt,
+        },
         {
           provider = "openai",
           name = "gpt-4o-mini-chat",
@@ -248,7 +300,8 @@ Chats are saved automatically.
             gitdiff
           )
 
-          local agent = gp.get_chat_agent("gpt-4o-mini-chat")
+          local agent = gp.get_chat_agent("copilot-gpt-4o-mini-command")
+          -- local agent = gp.get_chat_agent("gpt-4o-mini-chat")
           -- local agent = gp.get_chat_agent("gemini-flash-8b")
           -- local agent = gp.get_chat_agent("pplx-small")
           agent.system_prompt =
@@ -372,6 +425,7 @@ Primary Tasks:
 Primary Tasks:
 - Analyze provided text for grammatical errors, syntax issues
 - Provide corrections in the same language as the source text
+- Reply the correction and nothing else, do not write explanations.
 ]]
           gp.Prompt(params, gp.Target.vnew, agent, template)
         end,
