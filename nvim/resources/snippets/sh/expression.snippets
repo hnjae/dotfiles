@@ -1,14 +1,20 @@
 snippet test
 	test ${1:expression}
+
 snippet s "[ expression ]"
 	[ ${1:expression} ]$0
-snippet compb "(bash)"
+
+snippet compair-bash "(bash)"
 	[[ "\$$1" == "\$$2"* ]]$0
+
 snippet isfile ""
 	[ -f "\$${1}" ]$0
+
 snippet isdir ""
 	[ -d "\$${1}" ]$0
+
 snippet isstring ""
 	[ -n "\$${1}" ]$0
+
 snippet isemptystring ""
 	[ -z "\$${1}" ]$0

@@ -1,14 +1,44 @@
+# Alias functions or declared functions in `lib.attrsets.xxx`
 snippet la "lib.attrsets"
 	(lib.attrsets.$0)
+
 snippet lahasAttr "builtins.hasAttr :: String -> AttrSet -> Bool"
 	(builtins.hasAttr ${1:attr} ${0:attrset})
-snippet lafilter "lib.attrsets.filterAttrs :: (String -> Any -> Bool) -> AttrSet -> AttrSet"
-	(filterAttrs (n: v: $1) ${0:AttrSets})
-snippet lamergeAttrsList "lib.attrsets.mergeAttrsList :: [ Attrs ] -> Attrs"
-	(mergeAttrsList [ ${0:Attrs} ])
-snippet laoptionalAttrs "lib.attrsets.optionalAttrs :: Bool -> AttrSet -> AttrSet"
-	(optionalAttrs ${1:bool} ${0:AttrSet})
-snippet lagenAttrs "lib.attrsets.genAttrs :: [ String ] -> (String -> Any) -> AttrSet"
-	(genAttrs [ "foo" "bar" ] (${1:key}: ${2:val}))
-snippet lamapAttrs "builtins.mapAttrs :: (String -> Any -> Any) -> AttrSet -> AttrSet"
-	(mapAttrs (${2:key}: ${3:name}: ($2 + $3)) ${1:AttrSet})
+
+snippet lamergeAttrsList "lib.mergeAttrsList :: [ Attrs ] -> Attrs"
+	(lib.mergeAttrsList [ ${0:Attrs} ])
+
+snippet laoptionalAttrs "lib.optionalAttrs :: Bool -> AttrSet -> AttrSet"
+	(lib.optionalAttrs ${1:bool} ${0:AttrSet})
+
+# Generate Attrs
+snippet lagenAttrs "lib.genAttrs :: Generate attrs from list, use element as key"
+	(lib.genAttrs [ "foo" "bar" ] (${1:key}: ${2:val}))
+
+snippet llistToAttrs "builtins.listToAttrs :: Convert list to attrs"
+	(builtins.listToAttrs [ ${0:List} ])"
+
+# Modify/Manipulate Attrs
+
+snippet lamapAttrs "builtins.mapAttrs :: Modify values of attrs (same key)"
+	(builtins.mapAttrs (${2:key}: ${3:val}: ($2 + $3)) ${1:AttrSet})
+
+snippet lamapAttrsp "lib.mapAttrs' :: Modify keys and values of attrs"
+	(lib.mapAttrs' (
+		${2:key}: ${3:val}: ${4:kvPair}
+		(${5:finalKeyExpression key + "_x"})
+		(${6:finalVarExpression val + "_x"})
+	) ${1:AttrSet} )
+
+snippet lafilter "lib.filterAttrs :: (String -> Any -> Bool) -> AttrSet -> AttrSet"
+	(lib.filterAttrs (n: v: $1) ${0:AttrSets})
+
+# Attrs to list
+snippet laattrsToList "builtins.attrsToList:: convert to `[ { name :: (key); value :: (value); } ]` list"
+	(builtins.attrsToList ${0:attrset})
+
+snippet lamapAttrsToList "lib.mapAttrsToList :: Make attrs to list"
+	(lib.mapAttrsToList ((name: value: name + value)))
+
+# snippet lamapAttrsFlatten "lib.mapAttrsToList :: Make attrs to list" # deprecated
+# 	(lib.mapAttrsFlatten (${2:key}: ${3:val}: ($2 + $3)) ${1:AttrSet})

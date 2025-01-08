@@ -1,6 +1,12 @@
 snippet contains obj in table
 	vim.tbl_contains($0)
 
+snippet extend-table "extend list-table"
+	vim.list_extend(${1:table-name}, ${2})$0
+
+snippet deep-extend "deep-extend table"
+	vim.tbl_deep_extend("keep", $1, $2)$0
+
 snippet getft get ft
 	vim.api.nvim_buf_get_option(bufid, "filetype"),
 
@@ -18,3 +24,11 @@ snippet getclioutput "get stdout from shell command"
 
 snippet get-highlight "get highlight group"
 	vim.api.nvim_get_hl_by_name(0, { name = "${0:PmenuSel}" })
+
+snippet autocmd-filetype "autocmd-filetype"
+	vim.api.nvim_create_autocmd("FileType", {
+		pattern = { "${1:gitcommit}" },
+		callback = function()
+			$0
+		end,
+	})

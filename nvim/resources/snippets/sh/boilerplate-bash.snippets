@@ -1,14 +1,17 @@
-snippet boilerplate_posix boilerplate of POSIX shell scripts
-	#!/bin/sh
-	
+snippet boilerplate-bash "boilerplate of Bash shell scripts"
+	#!/usr/bin/env bash
+
+	set -euo pipefail
+
 	input=""
 	all=false
-	
+	files=()
+
 	usage() {
-		echo "Usage: \$(basename -- "\${0}") [-i input] [-a] [--] [files...]"
+		echo "Usage: \$(basename -- "\${1:filename}") [-i input] [-a] [--] [files...]"
 		exit 1
 	}
-	
+
 	while getopts ":i:ha" opt; do
 		case \${opt} in
 		h)
@@ -31,19 +34,18 @@ snippet boilerplate_posix boilerplate of POSIX shell scripts
 		esac
 	done
 	shift \$((OPTIND - 1))
-	
+	# Remaining arguments
+	files=("\$@")
+
 	main() {
+		$0
 		echo "Input: \$input"
 		echo "All: \$all"
-		if [ \$# -eq 0 ]; then
-			echo "No files provided"
-			exit 0
-		fi
-	
-		for file; do
+		echo "Files: \${files[@]}"
+
+		for file in "\${files[@]}"; do
 			echo "Handling \$file"
 		done
 	}
-	
-	# Call main function with all remaining parameters
-	main "\$@"
+
+	main

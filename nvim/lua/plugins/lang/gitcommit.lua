@@ -39,8 +39,7 @@ return {
           gitdiff
         )
 
-        local agent = gp.get_chat_agent("copilot-gpt-4o-mini-command")
-        -- local agent = gp.get_chat_agent("gemini-flash-8b")
+        local agent = gp.get_command_agent()
         agent.system_prompt =
           [[Suggest a precise and informative commit message based on the following diff. Use markdown syntax in your response if needed.
 
@@ -83,7 +82,7 @@ Diff:
         local template = [[```gitcommit
 {{selection}}
 ```]]
-        local agent = gp.get_chat_agent("copilot-gpt-4o-mini-command")
+        local agent = gp.get_command_agent()
         agent.system_prompt =
           [[I want you to serve as a Git commit message optimizer that follows the Conventional Commits specification. Your task is to:
 
@@ -120,7 +119,7 @@ feat(auth): add login button to homepage navigation
         local template = [[```gitcommit
 {{selection}}
 ```]]
-        local agent = gp.get_chat_agent("copilot-gpt-4o-mini-command")
+        local agent = gp.get_command_agent()
         agent.system_prompt =
           [[I want you to act as a commit message generator. The given text is the commit message I roughly wrote, and I would like you to generate an appropriate commit message using the conventional commit format. The commit message must be in standard English and easy to understand for non-native English speakers. Do not write any explanations or other words, just reply with the commit message.]]
         gp.Prompt(params, gp.Target.rewrite, agent, template)

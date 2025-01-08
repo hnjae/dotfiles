@@ -152,7 +152,8 @@ return {
     opts = {
       -- transparent_mode = true,
       -- dim_inactive = true,
-      -- terminal_colors = true,
+      underline = false,
+      terminal_colors = os.getenv("BASE16_THEME") == nil,
       overrides = {
         NormalFloat = { bg = "none" },
       },

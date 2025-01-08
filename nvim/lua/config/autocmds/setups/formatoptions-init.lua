@@ -22,10 +22,7 @@ M.setup = function()
   })
 
   -- formatoptions 는 쉽게 override 된다.
-  -- vim.opt.formatoptions:remove("r")
-  -- vim.opt.formatoptions:remove("o")
   -- defaults: tcqj (2022-05-15)
-  -- jcroql -- override by something?
   -- vim.opt.formatoptions = "tcqjpn"
   -- t: auto-wrap text using textwidth
   -- c: auto-wrap comments using textwidth, inserting the current comment leader automatically

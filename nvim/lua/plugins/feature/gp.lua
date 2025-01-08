@@ -114,6 +114,7 @@ Chats are saved automatically.
         "api",
         "openai",
       },
+
       providers = {
         openai = {
           disable = false,
@@ -196,34 +197,22 @@ Chats are saved automatically.
           -- system prompt (use this to specify the persona/role of the AI)
           system_prompt = require("gp.defaults").code_system_prompt,
         },
-        {
-          provider = "openai",
-          name = "gpt-4o-mini-chat",
-          chat = true,
-          command = false,
-          model = { model = "gpt-4o-mini", temperature = 1.0 },
-          system_prompt = require("gp.defaults").chat_system_prompt,
-        },
-        {
-          provider = "openai",
-          name = "gpt-4o-mini-command",
-          chat = false,
-          command = true,
-          model = { model = "gpt-4o-mini", temperature = 0.7 },
-          system_prompt = require("gp.defaults").code_system_prompt,
-        },
-        {
-          provider = "anthropic",
-          name = "claude-3-5-sonnet-command",
-          chat = true,
-          command = true,
-          model = {
-            model = "claude-3-5-sonnet-latest",
-            temperature = 0.8,
-            max_token = 8192,
-          },
-          system_prompt = "",
-        },
+        -- {
+        --   provider = "openai",
+        --   name = "gpt-4o-mini-chat",
+        --   chat = true,
+        --   command = false,
+        --   model = { model = "gpt-4o-mini", temperature = 1.0 },
+        --   system_prompt = require("gp.defaults").chat_system_prompt,
+        -- },
+        -- {
+        --   provider = "openai",
+        --   name = "gpt-4o-mini-command",
+        --   chat = false,
+        --   command = true,
+        --   model = { model = "gpt-4o-mini", temperature = 0.7 },
+        --   system_prompt = require("gp.defaults").code_system_prompt,
+        -- },
         {
           provider = "anthropic",
           name = "claude-3-5-sonnet-chat",
@@ -263,7 +252,7 @@ Chats are saved automatically.
         {
           provider = "googleai",
           name = "gemini-flash-8b",
-          chat = true,
+          chat = false,
           command = true,
           model = {
             model = "gemini-1.5-flash-8b",
@@ -314,6 +303,12 @@ Primary Tasks:
 - Maintain the original meaning and intent while improving technical accuracy
 - Provide corrections in the same language as the source text
 - Ensure consistency in style and tone
+
+Specific Focus Areas:
+- Spelling and punctuation accuracy
+- Word choice and vocabulary appropriateness
+- Sentence structure and flow
+- Tense consistency
 ]]
           gp.Prompt(params, gp.Target.vnew, agent, template)
         end,
@@ -388,6 +383,12 @@ Primary Tasks:
         [1] = bufprefix .. "t",
         [2] = ":<C-u>'<,'>GpEnglishTranslate<CR>",
         desc = "gp-english-translate",
+        mode = { "v" },
+      },
+      {
+        [1] = bufprefix .. "p",
+        [2] = ":<C-u>'<,'>GpProofread<CR>",
+        desc = "gp-proofread",
         mode = { "v" },
       },
       {

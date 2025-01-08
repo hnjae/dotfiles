@@ -52,6 +52,11 @@ return {
       [2] = "<cmd>G commit<CR>",
       desc = "commit",
     },
+    {
+      [1] = val.prefix.git .. "C",
+      [2] = "<cmd>G commit --amend<CR>",
+      desc = "commit --amend",
+    },
   },
   init = function() end,
   config = function()
