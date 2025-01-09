@@ -21,12 +21,12 @@ return {
         --
         ["y"] = nil,
         ["Y"] = "ShowRefs",
-        popup = {
-          ["p"] = nil,
-          ["F"] = "PullPopup",
-          ["Z"] = nil,
-          ["z"] = "StashPopup",
-        },
+      },
+      popup = {
+        ["p"] = nil,
+        ["F"] = "PullPopup",
+        ["Z"] = nil,
+        ["z"] = "StashPopup",
       },
     },
   },
