@@ -7,7 +7,7 @@ return {
     { [1] = "tpope/vim-rhubarb" },
   },
   lazy = true,
-  enabled = true,
+  enabled = false,
   cmd = {
     "G",
     "Git",
@@ -48,12 +48,12 @@ return {
     },
     { [1] = val.prefix.git .. "l", [2] = "<cmd>tab Gclog<CR>", desc = "log" },
     {
-      [1] = val.prefix.git .. "c",
+      [1] = val.prefix.git .. "cc", -- match fugitive_c
       [2] = "<cmd>G commit<CR>",
       desc = "commit",
     },
     {
-      [1] = val.prefix.git .. "C",
+      [1] = val.prefix.git .. "ca", -- match fugitive_c
       [2] = "<cmd>G commit --amend<CR>",
       desc = "commit --amend",
     },
