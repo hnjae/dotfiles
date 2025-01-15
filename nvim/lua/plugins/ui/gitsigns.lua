@@ -30,8 +30,8 @@ return {
 
     local move_mapping = {
       -- stylua: ignore start
-      { [1] = "]" .. map_keyword.git, [2] = "<cmd>Gitsigns next_hunk<CR>", desc = "next-git-hunk" },
-      { [1] = "[" .. map_keyword.git, [2] = "<cmd>Gitsigns prev_hunk<CR>", desc = "prev-git-hunk" },
+      { [1] = "]h", [2] = "<cmd>Gitsigns next_hunk<CR>", desc = "next-git-hunk" },
+      { [1] = "[h", [2] = "<cmd>Gitsigns prev_hunk<CR>", desc = "prev-git-hunk" },
       -- stylua: ignore end
     }
     vim.list_extend(keys, move_mapping)

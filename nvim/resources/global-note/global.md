@@ -42,6 +42,15 @@
   ["io"] = { query = "@conditional.inner", desc = "@conditional.inner" },
   ```
 
+#### Macro
+`<C-r><C-r>b` 를 누르면 `b` 에 저장된 매크로가 출력됨.
+
+```vim
+let @w='wyw$a = #(^M    [^[pbg~w$a, "^[pa"],^M#^[pa^M);^[0xx$'
+```
+
+이후 식으로 사용하면 된다.
+
 #### Replace character
 
 * \n 는 null character 을 입력하게 됨. \r 로 replace 하면 된다.

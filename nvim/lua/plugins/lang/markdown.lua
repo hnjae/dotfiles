@@ -135,12 +135,12 @@ return {
         mdsf: format markdown code blocks
       ]]
 
-      if
-        require("lspconfig.util").root_pattern(".cbfmt.toml")(vim.uv.cwd())
-      then
-        -- cbfmt 는 .cbfmt.toml 이 없을 경우 제대로 동작하지 않는다.
-        table.insert(markdown_formatter, "cbfmt")
-      end
+      -- if
+      --   require("lspconfig.util").root_pattern(".cbfmt.toml")(vim.uv.cwd())
+      -- then
+      --   -- cbfmt 는 .cbfmt.toml 이 없을 경우 제대로 동작하지 않는다.
+      --   table.insert(markdown_formatter, "cbfmt")
+      -- end
 
       if require("utils").lsp.is_deno() then
         table.insert(markdown_formatter, "deno_fmt")

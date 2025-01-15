@@ -1,4 +1,4 @@
--- vim:foldmethod=marker:foldlevel=0:foldenable:
+-- vim:foldmethod=marker:foldlevel=0:
 
 -- docs: map-table
 
@@ -46,8 +46,8 @@ M.setup = function()
   --------------------------------------------------------------------------------
   -- {{{ buffer
   --------------------------------------------------------------------------------
-  vim.keymap.set({ "n" }, "[b", "<cmd>bprevious<CR>", { desc = "prev-buffer" })
-  vim.keymap.set({ "n" }, "]b", "<cmd>bnext<CR>", { desc = "next-buffer" })
+  vim.keymap.set({ "n" }, "gb", "<cmd>bnext<CR>", { desc = "next-buffer" })
+  vim.keymap.set({ "n" }, "gB", "<cmd>bprevious<CR>", { desc = "prev-buffer" })
 
   -- }}}
   --------------------------------------------------------------------------------

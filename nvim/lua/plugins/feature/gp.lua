@@ -363,6 +363,12 @@ Primary Tasks:
         desc = "gp-chat",
       },
       {
+        [1] = bufprefix .. "n",
+        [2] = ":<C-u>'<,'>GpChatNew<CR>",
+        desc = "gp-chat-with-selected",
+        mode = "v",
+      },
+      {
         [1] = bufprefix .. "e",
         [2] = ":<C-u>'<,'>GpNew<CR>",
         desc = "gp-edit-selected",

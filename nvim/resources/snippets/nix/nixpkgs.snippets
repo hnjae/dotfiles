@@ -9,20 +9,24 @@ snippet sisLinux "stdenv.isLinux :: bool"
 	stdenv.isLinux
 snippet sisDarwin "stdenv.isDarwin :: bool"
 	stdenv.isDarwin
+
 snippet pwriteScriptBin "writeScriptBin"
 	(pkgs.writeScriptBin "${1:name}" ''
-		#!{pkgs.dash}/bin/dash
+		#!${pkgs.dash}/bin/dash
 		$0 "$@"
 	'')
+
 snippet pwriteScript "pkgs.writeScript"
 	(pkgs.writeScript "${1:name}" ''
-		#!{pkgs.dash}/bin/dash
+		#!${pkgs.dash}/bin/dash
 		$0 "$@"
 	'')
+
 snippet (prunCommandLocal "pkgs.runCommandLocal"
 	pkgs.runCommandLocal "${1:name}" ${2:{\}} ''
 		${0:script}
 	'')
+
 snippet pbindbin "use pkgs.runCommand to bindbin"
         pkgs.runCommandLocal "${1:binname}" {} ''
           mkdir -p "\$out/bin"
