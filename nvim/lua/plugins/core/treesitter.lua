@@ -29,7 +29,7 @@ local M = {
     },
     indent = {
       enable = true, -- NOTE: experimental features <2023-11-23>
-      disable = disable,
+      disable = {},
     },
     incremental_selection = {
       enale = false,

@@ -8,7 +8,7 @@ return {
       local bufprefix = "<LocalLeader>" .. map_keyword.ai
       local mykeys = {
         {
-          [1] = bufprefix .. "c",
+          [1] = bufprefix .. "E",
           [2] = ":<C-u>'<,'>GpEditCommitMsg<CR>",
           desc = "gp-edit-commit-message",
           mode = { "v" },

@@ -13,7 +13,7 @@ local mapping = {
 return {
   [1] = "chrisgrieser/nvim-recorder",
   lazy = true,
-  enabled = true,
+  enabled = false,
   keys = {
     { [1] = mapping.startStopRecording, desc = "macro" },
     { [1] = mapping.playMacro, desc = "play-macry" },

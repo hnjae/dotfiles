@@ -25,7 +25,7 @@ snippet lamapAttrs "builtins.mapAttrs :: Modify values of attrs (same key)"
 
 snippet lamapAttrsp "lib.mapAttrs' :: Modify keys and values of attrs"
 	(lib.mapAttrs' (
-		${2:key}: ${3:val}: ${4:kvPair}
+		${2:key}: ${3:val}: lib.nameValuePair
 		(${5:finalKeyExpression key + "_x"})
 		(${6:finalVarExpression val + "_x"})
 	) ${1:AttrSet} )
@@ -38,7 +38,7 @@ snippet laattrsToList "builtins.attrsToList:: convert to `[ { name :: (key); val
 	(builtins.attrsToList ${0:attrset})
 
 snippet lamapAttrsToList "lib.mapAttrsToList :: Make attrs to list"
-	(lib.mapAttrsToList ((name: value: name + value)))
+	(lib.mapAttrsToList (name: value: name + value) ${1:attrset})
 
 # snippet lamapAttrsFlatten "lib.mapAttrsToList :: Make attrs to list" # deprecated
 # 	(lib.mapAttrsFlatten (${2:key}: ${3:val}: ($2 + $3)) ${1:AttrSet})

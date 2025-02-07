@@ -3,8 +3,12 @@ return {
   {
     [1] = "nvim-treesitter/nvim-treesitter",
     optional = true,
-    opts = function()
+    opts = function(_, opts)
       require("state.treesitter-langs"):add("nix")
+
+      opts.indent = opts.indent or {}
+      opts.indent.disable = opts.indent.diable or {}
+      table.insert(opts.indent.disable, "nix")
     end,
   },
   {
@@ -13,9 +17,18 @@ return {
     [1] = "stevearc/conform.nvim",
     optional = true,
     opts = function(_, opts)
-      -- nix = { { "alejandra", "nixpkgs_fmt", "nixfmt" } },
+      require("conform").formatters.nixfmt = {
+        prepend_args = function()
+          if vim.bo.textwidth ~= 0 then
+            return { "-w", tostring(vim.bo.textwidth) }
+          end
+
+          return {}
+        end,
+      }
+
       opts.formatters_by_ft.nix = {
-        "alejandra",
+        "nixfmt",
       }
     end,
   },

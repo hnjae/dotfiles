@@ -86,6 +86,7 @@ return {
       -- default_command_agent = "claude-3-5-haiku-command",
       default_command_agent = "copilot-gpt-4o-mini-command",
       default_chat_agent = "claude-3-5-sonnet-chat",
+      -- default_chat_agent = "copilot-o3-mini-chat",
 
       chat_template = [[
 # topic: ?
@@ -179,11 +180,11 @@ Chats are saved automatically.
         --
         {
           provider = "copilot",
-          name = "copilot-gpt-4o-mini-chat",
+          name = "copilot-o3-mini-chat",
           chat = true,
           command = false,
           -- string with model name or table with model name and parameters
-          model = { model = "gpt-4o-mini", temperature = 1.0, top_p = 1 },
+          model = { model = "o3-mini", temperature = 1.0, top_p = 1 },
           -- system prompt (use this to specify the persona/role of the AI)
           system_prompt = require("gp.defaults").chat_system_prompt,
         },
@@ -363,7 +364,7 @@ Primary Tasks:
         desc = "gp-chat",
       },
       {
-        [1] = bufprefix .. "n",
+        [1] = bufprefix .. "c",
         [2] = ":<C-u>'<,'>GpChatNew<CR>",
         desc = "gp-chat-with-selected",
         mode = "v",

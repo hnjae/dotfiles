@@ -3,8 +3,18 @@ snippet lt "lib.types"
 snippet ltlist "listOf"
 	listOf$0
 snippet ltstr "str"
-	str$0
+	types.str;
+snippet tnonemptystr "nonEmptyStr"
+	types.nonEmptyStr
 
+snippet newtype "new-type"
+	nonEmptyStr = mkOptionType {
+		name = "nonEmptyStr";
+		description = "non-empty string";
+		descriptionClass = "noun";
+		check = x: str.check x && builtins.match "[ \t\n]*" x == null;
+		inherit (str) merge;
+	};
 
 # snippet lt "description"
 # lib.types.__attrsFailEvaluation    lib.types.nonEmptyStr

@@ -1,9 +1,8 @@
-vim.opt_local.textwidth = 80
+vim.opt_local.textwidth = 100 -- nixfmt's default
 
--- indent
--- NOTE: treesitter of nix does not support indent <2024-04-25>
+-- NOTE: treesitter indent 가 별로이니, autoindent 쓰자. <2025-01-24>
 vim.opt_local.cindent = false
-vim.opt_local.autoindent = true -- 여러줄 string 선언할때 필요
+vim.opt_local.autoindent = true
 vim.opt_local.smartindent = false
 
 -- vim.opt_local.matchpairs:remove([[':']])
