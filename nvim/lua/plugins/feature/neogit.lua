@@ -9,25 +9,20 @@ return {
   cmd = {
     "Neogit",
     "NeogitResetState",
+    "NeogitCommit",
+    "NeogitLog",
   },
   opts = {
     notification_icon = utils.enable_icon and icons.git or "G",
+    graph_style = utils.enable_icon and "unicode" or "ascii",
+    disable_line_numbers = false,
+    disable_relative_line_numbers = false,
+
     mappings = {
-      status = {
-        ["x"] = nil, -- "Discard",
-        ["K"] = "Discard",
-        --
-        ["g"] = "RefreshBuffer",
-        --
-        ["y"] = nil,
-        ["Y"] = "ShowRefs",
-      },
-      popup = {
-        ["p"] = nil,
-        ["F"] = "PullPopup",
-        ["Z"] = nil,
-        ["z"] = "StashPopup",
-      },
+      -- popup = {
+      --   ["Z"] = nil,
+      --   ["z"] = "StashPopup",
+      -- },
     },
   },
   keys = {
@@ -35,6 +30,15 @@ return {
       [1] = val.prefix.git .. val.map_keyword.git,
       [2] = "<cmd>Neogit<CR>",
       desc = "open-neogit",
+    },
+    {
+      [1] = val.prefix.git .. "c",
+      [2] = "<cmd>Neogit commit<CR>",
+      desc = "commit",
+    },
+    {
+      [1] = "<LocalLeader>" .. val.map_keyword.git .. "l",
+      [2] = "<cmd>NeogitLog<CR>",
     },
   },
   config = function(_, opts)

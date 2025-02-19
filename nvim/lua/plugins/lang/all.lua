@@ -6,7 +6,7 @@ return {
     dependencies = {},
     opts = {
       servers = {
-        harper_ls = {
+        --[[ harper_ls = {
           ---@class LspconfigSetupOptsSpec
           settings = {
             settings = {
@@ -18,7 +18,7 @@ return {
               },
             },
           },
-        },
+        }, ]]
       },
     },
   },

@@ -70,3 +70,11 @@ snippet func
 	${1:function_name} () {
 		$0
 	}
+
+snippet read_char "read single character"
+	read_char() {
+	  stty -icanon -echo
+	  eval "$1=\$(dd bs=1 count=1 2>/dev/null)"
+	  stty icanon echo
+	}
+	# read_char char 로 사용. $char 에 1글자가 들어감.
