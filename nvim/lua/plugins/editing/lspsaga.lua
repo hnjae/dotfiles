@@ -256,12 +256,12 @@ local M = {
     vim.lsp.buf.definition = function()
       vim.api.nvim_command("Lspsaga goto_definition")
     end
-    vim.lsp.buf.incoming_calls = function()
-      vim.api.nvim_command("Lspsaga incoming_calls")
-    end
-    vim.lsp.buf.outgoing_calls = function()
-      vim.api.nvim_command("Lspsaga outgoing_calls")
-    end
+    -- vim.lsp.buf.incoming_calls = function()
+    --   vim.api.nvim_command("Lspsaga incoming_calls")
+    -- end
+    -- vim.lsp.buf.outgoing_calls = function()
+    --   vim.api.nvim_command("Lspsaga outgoing_calls")
+    -- end
     vim.lsp.buf.goto_type_definition = function()
       vim.api.nvim_command("Lspsaga goto_type_definition")
     end

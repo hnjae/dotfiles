@@ -17,9 +17,9 @@ return {
   trouble = "x",
   filemanager = "e", -- tree, filemanager
   window = "w",
-  terminal = "i",
+  terminal = "k",
   git = "g",
-  ai = "y",
+  ai = "i",
 
   --
   -- finder = "e", -- e.g. telescope, obsolate 2024-10-16, use find

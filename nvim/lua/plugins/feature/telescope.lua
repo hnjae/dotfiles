@@ -122,6 +122,31 @@ return {
             rhs = t_builtin.lsp_workspace_symbols,
             desc = "workspace-symbols (lsp)",
           },
+          ["textDocument/definition"] = {
+            lhs = prefix_search_in_buffer .. "d",
+            rhs = t_builtin.lsp_definitions,
+            desc = "definition (lsp)",
+          },
+          ["textDocument/implementation"] = {
+            lhs = prefix_search_in_buffer .. "m",
+            rhs = t_builtin.lsp_implementations,
+            desc = "implementation (lsp)",
+          },
+          ["callHierarchy/incomingCalls"] = {
+            lhs = prefix_search_in_buffer .. "i",
+            rhs = t_builtin.lsp_incoming_calls,
+            desc = "incoming-calls (lsp)",
+          },
+          ["callHierarchy/outgoingCalls"] = {
+            lhs = prefix_search_in_buffer .. "o",
+            rhs = t_builtin.lsp_outgoing_calls,
+            desc = "outgoing-calls (lsp)",
+          },
+          ["textDocument/typeDefinition"] = {
+            lhs = prefix_search_in_buffer .. "p",
+            rhs = t_builtin.lsp_type_definitions,
+            desc = "type-definition (lsp)",
+          },
         }
         for method, specs in pairs(mappings) do
           if client.supports_method(method) then

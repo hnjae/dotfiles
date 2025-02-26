@@ -17,7 +17,24 @@ snippet snix "use `shell.nix` or `default.nix`"
 	use nix
 snippet snixp "use package"
 	use nix -p "${1:hello}"
-#
+
+snippet srye "rye (python)"
+	if has rye; then
+		source_env "\${RYE_HOME:-\${HOME/.rye}}/env"
+	fi
+	if [ -d ".venv" ]; then
+		VIRTUAL_ENV="$(pwd)/.venv"
+	fi
+
+	if [ -z "$VIRTUAL_ENV" ] || [ ! -d "$VIRTUAL_ENV" ]; then
+		log_status "No virtual environment exists. Executing \`rye sync\` to create one."
+		rye sync
+		VIRTUAL_ENV="$(pwd)/.venv"
+	fi
+
+	PATH_add "$VIRTUAL_ENV/bin"
+	export VIRTUAL_ENV
+
 snippet ssource_up "Use parent's .envrc"
 	source_up ${0:optional-filename}
 # layouts

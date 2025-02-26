@@ -1,20 +1,39 @@
 ---@type LazySpec[]
 return {
   {
+    [1] = "nvimtools/none-ls.nvim",
+    optional = true,
+    opts = function(_, opts)
+      local null_ls = require("null-ls")
+
+      local mapping = {
+        -- TODO: 이거 nvim-lint 로 써보자. <2025-02-22>
+        -- commitlint = { null_ls.builtins.diagnostics.commitlint },
+      }
+
+      for exe, sources in pairs(mapping) do
+        if vim.fn.executable(exe) == 1 then
+          vim.list_extend(opts.sources, sources)
+        end
+      end
+    end,
+  },
+  {
     [1] = "Robitx/gp.nvim",
     optional = true,
     keys = function(_, keys)
       local map_keyword = require("val.map-keyword")
-      local bufprefix = "<LocalLeader>" .. map_keyword.ai
+      -- local bufprefix = "<LocalLeader>" ..
+      local bufprefix2 = "<LocalLeader>" .. string.upper(map_keyword.ai)
       local mykeys = {
         {
-          [1] = bufprefix .. "E",
+          [1] = bufprefix2 .. "e",
           [2] = ":<C-u>'<,'>GpEditCommitMsg<CR>",
           desc = "gp-edit-commit-message",
           mode = { "v" },
         },
         {
-          [1] = bufprefix .. "g",
+          [1] = bufprefix2 .. "g",
           [2] = "<cmd>GpGenerateCommit<CR>",
           ft = "gitcommit",
           desc = "generate-commit",

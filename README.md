@@ -21,9 +21,8 @@
 
 ### 내가 작성한 유용한 utils
 
-`require("utils").is_plugin("gitsigns.nvim")` 식으로 어느 플러그인이 사용되고 있는지 조회할 수 있음.
-
-`require("utils.plugin").on_load("nvim-cmp", <callback>)` 식으로 어느 플러그인 로드될때 콜백할 함수를 설정할 수 있음.
+- `require("utils").is_plugin("gitsigns.nvim")` 식으로 어느 플러그인이 사용되고 있는지 조회할 수 있음.
+- `require("utils.plugin").on_load("nvim-cmp", <callback>)` 식으로 어느 플러그인 로드될때 콜백할 함수를 설정할 수 있음.
 
 ### 특별한 플러그인 Spec
 

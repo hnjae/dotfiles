@@ -99,8 +99,8 @@ return {
         --     icon = require("val.icons").ai,
         --     color = "※",
         --   },
-        --[[ -- })
-]]
+        -- })
+
         vim.list_extend(opts.spec, {
           {
             [1] = prefix,

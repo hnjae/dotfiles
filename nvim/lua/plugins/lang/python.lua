@@ -16,61 +16,67 @@ return {
     optional = true,
     opts = function(_, opts)
       opts.formatters_by_ft.python = {
-        "black",
-        "isort",
-        "ruff",
+        "ruff_fix",
+        "ruff_organize_imports",
+        "ruff_format",
       }
     end,
   },
   {
-    -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+    -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
     [1] = "neovim/nvim-lspconfig",
     optional = true,
     opts = {
       servers = {
-        -- language-server
-        -- pylyzer = {
-        --   -- https://github.com/mtshiba/pylyzer
-        --   --  A fast static code analyzer & language server for Python
+        --[[
+          NOTE:
+            ## Comparison of LSPs for Python in 2025-02-23
+
+            - pylyzer:
+              - Fast static code analyzer & language server for Python
+              - https://langserver.org/ 에 기재 X <2025-02-23>
+              - 타입 추론 제공 X <2025-02-23>
+              - "textDocument/rename" 는 지원한다고 인식하나, 작동하지 않는다. 이건 lspconfig 쪽 이슈일지도. <2025-02-23>
+            - jedi_language_server: 매우 느리다 <2025-02-23>
+            - pylsp:
+            - pyright:
+            - basedpyright:
+        --]]
+
+        -- 다음 셋 중 하나만 사용할 것.
+        -- pylsp = {
+        --   --   document 없음
+        --   --   -- https://github.com/python-lsp/python-lsp-server
         --   ---@class LspconfigSetupOptsSpec
         --   settings = {},
         -- },
-
-        -- pyright = {
-        --   -- a static type checker and language server for python
-        --   ---@class LspconfigSetupOptsSpec
-        --   settings = {},
-        -- },
-
-        -- jedi_language_server = {
-        --   ---@class LspconfigSetupOptsSpec
-        --   settings = {},
-        -- },
-
-        pylsp = {
-          --   document 없음
-          --   -- https://github.com/python-lsp/python-lsp-server
-          ---@class LspconfigSetupOptsSpec
+        ---@class LspconfigSetupOptsSpec
+        pyright = {
+          settings = {},
+        },
+        ---@class LspconfigSetupOptsSpec
+        basedpyright = {
           settings = {},
         },
 
-        -- misc
+        -- 타입 추론 제공 X LSP:
+        ---@class LspconfigSetupOptsSpec
         ruff = {
           -- linter and formatter
-          ---@class LspconfigSetupOptsSpec
+          init_options = {
+            settings = {
+              configurationPreference = "filesystemFirst",
+              -- lineLength = 79,
+            },
+          },
           settings = {},
         },
 
-        -- misc
-        -- pyre = {
-        --   -- a static type checker for Python 3.
-        --   ---@class LspconfigSetupOptsSpec
-        --   settings = {},
-        -- },
-        -- basedpyright - {
-        --   ---@class LspconfigSetupOptsSpec
-        --   settings = {},
-        -- },
+        ---@class LspconfigSetupOptsSpec
+        pyre = {
+          -- a static type checker for Python 3.
+          settings = {},
+        },
       },
     },
   },
@@ -85,7 +91,6 @@ return {
 
       local mapping = {
         -- a static analysis tool for checking compliance with Python docstring conventions.
-        -- pydocstyle = { null_ls.builtins.diagnostics.pydocstyle },
         mypy = { -- static typing checker
           null_ls.builtins.diagnostics.mypy.with({
             -- diagnostics_format = "[#{s}] #{m}",

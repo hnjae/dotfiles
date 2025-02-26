@@ -143,7 +143,7 @@ return {
           },
           ["textDocument/definition"] = {
             lhs_suffix = "d",
-            rhs = vim.lsp.buf.definition, -- opens definition in current window
+            rhs = vim.lsp.buf.definition,
             desc = "open-definition",
           },
           ["textDocument/documentHighlight"] = {

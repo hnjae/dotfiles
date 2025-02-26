@@ -53,8 +53,8 @@ M.setup = function()
   --------------------------------------------------------------------------------
   -- {{{ fold
   --------------------------------------------------------------------------------
-  vim.keymap.set({ "n" }, "<Leader>d", "za", { desc = "fold-toggle" })
-  vim.keymap.set({ "n" }, "<Leader>D", "zO", { desc = "open-all-fold" })
+  vim.keymap.set({ "n" }, "<LocalLeader>d", "za", { desc = "fold-toggle" })
+  vim.keymap.set({ "n" }, "<LocalLeader>D", "zO", { desc = "open-all-fold" })
 
   vim.keymap.set({ "n" }, "za", "<Nop>")
   vim.keymap.set({ "n" }, "zA", "<Nop>")

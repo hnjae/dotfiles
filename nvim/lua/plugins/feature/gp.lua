@@ -83,10 +83,8 @@ return {
         shortcut = "<C-g>r",
       },
 
-      -- default_command_agent = "claude-3-5-haiku-command",
-      default_command_agent = "copilot-gpt-4o-mini-command",
-      default_chat_agent = "claude-3-5-sonnet-chat",
-      -- default_chat_agent = "copilot-o3-mini-chat",
+      default_command_agent = "gemini-flash",
+      default_chat_agent = "claude-3-7-sonnet",
 
       chat_template = [[
 # topic: ?
@@ -122,12 +120,6 @@ Chats are saved automatically.
         },
         copilot = {
           disable = false,
-          -- secret = {
-          --   "secret-tool",
-          --   "lookup",
-          --   "api",
-          --   "copilot",
-          -- },
           secret = {
             "bash",
             "-c",
@@ -178,33 +170,14 @@ Chats are saved automatically.
         { name = "ChatCopilot", disable = true },
         { name = "CodeCopilot", disable = true },
         --
-        {
-          provider = "copilot",
-          name = "copilot-o3-mini-chat",
-          chat = true,
-          command = false,
-          -- string with model name or table with model name and parameters
-          model = { model = "o3-mini", temperature = 1.0, top_p = 1 },
-          -- system prompt (use this to specify the persona/role of the AI)
-          system_prompt = require("gp.defaults").chat_system_prompt,
-        },
-        {
-          provider = "copilot",
-          name = "copilot-gpt-4o-mini-command",
-          chat = false,
-          command = true,
-          -- string with model name or table with model name and parameters
-          model = { model = "gpt-4o-mini", temperature = 0.8, top_p = 1, n = 1 },
-          -- system prompt (use this to specify the persona/role of the AI)
-          system_prompt = require("gp.defaults").code_system_prompt,
-        },
         -- {
-        --   provider = "openai",
-        --   name = "gpt-4o-mini-chat",
+        --   provider = "copilot",
+        --   name = "copilot-o3-mini",
         --   chat = true,
         --   command = false,
-        --   model = { model = "gpt-4o-mini", temperature = 1.0 },
-        --   system_prompt = require("gp.defaults").chat_system_prompt,
+        --   model = { model = "o3-mini", temperature = 1.0, top_p = 1 },
+        --   -- system_prompt = require("gp.defaults").chat_system_prompt,
+        --   system_prompt = "Formatting re-enabled ",
         -- },
         -- {
         --   provider = "openai",
@@ -216,11 +189,11 @@ Chats are saved automatically.
         -- },
         {
           provider = "anthropic",
-          name = "claude-3-5-sonnet-chat",
+          name = "claude-3-7-sonnet",
           chat = true,
           command = false,
           model = {
-            model = "claude-3-5-sonnet-latest",
+            model = "claude-3-7-sonnet-latest",
             temperature = 0.9,
             max_token = 8192,
           },
@@ -229,45 +202,25 @@ Chats are saved automatically.
         {
           provider = "anthropic",
           name = "claude-3-5-haiku",
-          chat = true,
-          command = true,
-          model = {
-            model = "claude-3-5-haiku-latest",
-            temperature = 0.8,
-            max_token = 8192,
-          },
-          system_prompt = "",
-        },
-        {
-          provider = "anthropic",
-          name = "claude-3-5-haiku-command",
           chat = false,
           command = true,
           model = {
             model = "claude-3-5-haiku-latest",
-            temperature = 0.8,
+            temperature = 0.9,
             max_token = 8192,
           },
           system_prompt = require("gp.defaults").code_system_prompt,
         },
         {
           provider = "googleai",
-          name = "gemini-flash-8b",
+          name = "gemini-flash",
           chat = false,
           command = true,
           model = {
-            model = "gemini-1.5-flash-8b",
+            model = "gemini-2.0-flash",
             temperature = 0.9,
             top_k = 40, -- range 0 -- 41
           },
-          system_prompt = "",
-        },
-        {
-          provider = "pplx",
-          name = "pplx-small",
-          chat = true,
-          command = true,
-          model = "llama-3.1-sonar-small-128k-online",
           system_prompt = "",
         },
       },
@@ -277,7 +230,7 @@ Chats are saved automatically.
           local template = "I have the following code from {{filename}}:\n\n"
             .. "```{{filetype}}\n{{selection}}\n```\n\n"
             .. "Please respond by writing table driven unit tests for the code above."
-          local agent = gp.get_command_agent("command-claude-3-5-sonnet")
+          local agent = gp.get_command_agent("claude-3-7-sonnet")
           gp.Prompt(params, gp.Target.vnew, agent, template)
         end,
         Proofread2 = function(gp, params)
@@ -295,7 +248,7 @@ Chats are saved automatically.
 {{selection}}
 ```
 ]]
-          local agent = gp.get_command_agent("claude-3-5-sonnet-chat")
+          local agent = gp.get_command_agent("claude-3-7-sonnet")
           agent.system_prompt =
             [[Act as a multilingual expert proofreader and grammar specialist with the following responsibilities:
 
@@ -350,9 +303,35 @@ Primary Tasks:
     local map_keyword = require("val.map-keyword")
     local keyword = map_keyword.ai
     local bufprefix = "<LocalLeader>" .. keyword
+    local bufprefix2 = "<LocalLeader>" .. string.upper(keyword)
     local prefix = require("val.prefix")
 
     local more_keys = {
+      {
+        [1] = prefix.new .. keyword,
+        [2] = nil,
+        desc = "+gp-chat",
+      },
+      {
+        [1] = prefix.new .. keyword .. "x",
+        [2] = "<cmd>GpChatNew split<CR>",
+        desc = "split",
+      },
+      {
+        [1] = prefix.new .. keyword .. "v",
+        [2] = "<cmd>GpChatNew vsplit<CR>",
+        desc = "vsplit",
+      },
+      {
+        [1] = prefix.new .. keyword .. "t",
+        [2] = "<cmd>GpChatNew tabnew<CR>",
+        desc = "tab",
+      },
+      {
+        [1] = prefix.new .. keyword .. "f",
+        [2] = "<cmd>GpChatNew popup<CR>",
+        desc = "float",
+      },
       {
         [1] = "<Leader>" .. keyword,
         [2] = "<cmd>GpChatToggle popup<CR>",
@@ -364,9 +343,21 @@ Primary Tasks:
         desc = "gp-chat",
       },
       {
-        [1] = bufprefix .. "c",
-        [2] = ":<C-u>'<,'>GpChatNew<CR>",
-        desc = "gp-chat-with-selected",
+        [1] = bufprefix .. "n",
+        [2] = ":<C-u>'<,'>GpChatNew split<CR>",
+        desc = "NEW-chat-with-selected",
+        mode = "v",
+      },
+      {
+        [1] = bufprefix .. "N",
+        [2] = "<cmd>%GpChatNew split<CR>",
+        desc = "NEW-chat-with-buffer",
+        mode = "n",
+      },
+      {
+        [1] = bufprefix .. "p",
+        [2] = ":<C-u>'<,'>GpChatPaste split<CR>",
+        desc = "paste-with-selected",
         mode = "v",
       },
       {
@@ -378,22 +369,23 @@ Primary Tasks:
       {
         [1] = bufprefix .. "E",
         [2] = "<cmd>%GpVnew<CR>",
-        desc = "gp-edit-entire-buffer",
+        desc = "gp-edit-buffer",
+        mode = "n",
       },
       {
-        [1] = bufprefix .. "g",
+        [1] = bufprefix2 .. "g",
         [2] = ":<C-u>'<,'>GpGrammarCheck<CR>",
         desc = "gp-grammer-check",
         mode = { "v" },
       },
       {
-        [1] = bufprefix .. "t",
+        [1] = bufprefix2 .. "t",
         [2] = ":<C-u>'<,'>GpEnglishTranslate<CR>",
         desc = "gp-english-translate",
         mode = { "v" },
       },
       {
-        [1] = bufprefix .. "p",
+        [1] = bufprefix2 .. "p",
         [2] = ":<C-u>'<,'>GpProofread<CR>",
         desc = "gp-proofread",
         mode = { "v" },
@@ -411,23 +403,28 @@ Primary Tasks:
       [1] = "folke/which-key.nvim",
       optional = true,
       opts = function(_, opts)
-        if opts.icons == nil then
-          opts.icons = {}
-        end
-        if opts.icons.rules == nil then
-          opts.icons.rules = {}
-        end
+        opts.icons = opts.icons or {}
+        opts.icons.rules = opts.icons.rules or {}
+        opts.spec = opts.spec or {}
+
         vim.list_extend(opts.icons.rules, {
           { pattern = "gp", icon = require("val.icons").ai, color = "purple" },
         })
 
-        if opts.spec == nil then
-          opts.spec = {}
-        end
+        local map_keyword = require("val.map-keyword")
+        local prefix = require("val.prefix")
+        local keyword = map_keyword.ai
+
         vim.list_extend(opts.spec, {
           {
             [1] = "<LocalLeader>" .. require("val.map-keyword").ai,
             group = "gp",
+            ---@type wk.Icon
+            -- icon = icon,
+          },
+          {
+            [1] = prefix.new .. keyword,
+            group = "gp-chat",
             ---@type wk.Icon
             -- icon = icon,
           },
