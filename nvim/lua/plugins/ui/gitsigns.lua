@@ -23,7 +23,9 @@ return {
       { desc = "stage-hunk",      [1] = bp .. "h", [2] = ":'<,'>Gitsigns stage_hunk<CR>", mode = {"v"} },
       { desc = "undo-stage-hunk", [1] = bp .. "u", [2] = "<cmd>Gitsigns undo_stage_hunk<CR>", mode = {"n"} },
       { desc = "undo-stage-hunk", [1] = bp .. "u", [2] = ":'<,'>Gitsigns undo_stage_hunk<CR>", mode = {"v"} },
-      { desc = "stage-buffer",    [1] = bp .. "b", [2] = function () gitsigns.stage_buffer({async=true}) end  },
+      { desc = "stage-buffer",    [1] = bp .. "H", [2] = function () gitsigns.stage_buffer({async=true}) end  },
+      { desc = "blame",    [1] = bp .. "b", [2] = "<cmd>Gitsigns blame_line<CR>" },
+      { desc = "blame",    [1] = bp .. "B", [2] = "<cmd>Gitsigns blame<CR>" },
       -- stylua: ignore end
     }
     vim.list_extend(keys, buffer_mapping)
