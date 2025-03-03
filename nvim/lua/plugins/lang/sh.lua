@@ -13,6 +13,12 @@ return {
     [1] = "stevearc/conform.nvim",
     optional = true,
     opts = function(_, opts)
+      --[[
+      NOTE:
+        "shellharden": for 문 안의 $() to double quote 해버림
+         beautysh: case 문 처리가 마음에 안듦. 과도한 indent
+      ]]
+
       require("conform").formatters.shfmt = {
         prepend_args = function()
           if vim.bo.expandtab then
@@ -23,12 +29,11 @@ return {
         end,
       }
 
-      -- "shellharden": for 문 안의 $() to double quote 해버림
-      -- beautysh: case 문 처리가 마음에 안듦. 과도한 indent
-      -- sh = { "shfmt" },
+      opts.formatters_by_ft = opts.formatters_by_ft or {}
       opts.formatters_by_ft.sh = {
-        "shellcheck",
-        "shfmt",
+        [1] = "shellcheck",
+        [2] = "shfmt",
+        stop_after_first = false,
       }
     end,
   },

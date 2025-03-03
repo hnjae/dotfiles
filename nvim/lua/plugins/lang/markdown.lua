@@ -127,8 +127,6 @@ return {
     [1] = "stevearc/conform.nvim",
     optional = true,
     opts = function(_, opts)
-      local markdown_formatter = {}
-
       --[[
         NOTE:
         cbfmt: format codeblocks inside markdown
@@ -142,6 +140,7 @@ return {
       --   table.insert(markdown_formatter, "cbfmt")
       -- end
 
+      local markdown_formatter = {}
       if require("utils").lsp.is_deno() then
         table.insert(markdown_formatter, "deno_fmt")
       -- elseif require("utils").lsp.is_prettier() then
@@ -157,10 +156,9 @@ return {
         -- table.insert(markdown_formatter, "mdformat")
       end
 
-      if opts.formatters_by_ft == nil then
-        opts.formatters_by_ft = {}
-      end
+      markdown_formatter["stop_after_first"] = false
 
+      opts.formatters_by_ft = opts.formatters_by_ft or {}
       opts.formatters_by_ft.markdown = markdown_formatter
     end,
   },

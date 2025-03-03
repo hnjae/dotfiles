@@ -4,7 +4,9 @@ return {
     [1] = "stevearc/conform.nvim",
     optional = true,
     opts = function(_, opts)
-      opts.formatters_by_ft.zsh = { "shellcheck", "beautysh" }
+      opts.formatters_by_ft = opts.formatters_by_ft or {}
+      opts.formatters_by_ft.zsh =
+        { [1] = "shellcheck", [2] = "beautysh", stop_after_first = false }
     end,
   },
   {

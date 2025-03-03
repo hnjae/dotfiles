@@ -15,7 +15,9 @@ return {
     opts = {
       formatters_by_ft = {
         xml = {
-          { "xmllint", "xmlformat" },
+          [1] = "xmllint",
+          [2] = "xmlformat",
+          stop_after_first = false,
         },
       },
     },

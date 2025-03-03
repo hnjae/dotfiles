@@ -10,6 +10,7 @@ return {
     local ret = {
       default_format_opts = {
         lsp_format = "never",
+        -- stop_after_first = false,
       },
       notify_no_formatters = false,
       -- Define your formatters

@@ -69,10 +69,7 @@ return {
         }
       end
 
-      if opts.formatters_by_ft == nil then
-        opts.formatters_by_ft = {}
-      end
-
+      opts.formatters_by_ft = opts.formatters_by_ft or {}
       for key, val in pairs(formatters_by_ft) do
         opts.formatters_by_ft[key] = val
       end

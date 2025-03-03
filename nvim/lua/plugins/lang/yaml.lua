@@ -11,13 +11,10 @@ return {
     [1] = "stevearc/conform.nvim",
     optional = true,
     opts = function(_, opts)
-      if require("utils").lsp.is_prettier() then
-        if vim.fn.executable("prettierd") == 1 then
-          opts.formatters_by_ft.yaml = { "prettierd" }
-        else
-          opts.formatters_by_ft.yaml = { "prettier" }
-        end
+      opts.formatters_by_ft = opts.formatters_by_ft or {}
 
+      if require("utils").lsp.is_prettier() then
+        opts.formatters_by_ft.yaml = { "prettier" }
         return
       end
 
