@@ -33,8 +33,15 @@ return {
     },
     {
       [1] = val.prefix.git .. "c",
-      [2] = "<cmd>Neogit commit<CR>",
+      [2] = function()
+        require("neogit").action("commit", "commit", {})
+      end,
       desc = "commit",
+    },
+    {
+      [1] = val.prefix.git .. "C",
+      [2] = "<cmd>Neogit commit<CR>",
+      desc = "commit-popup",
     },
     {
       [1] = "<LocalLeader>" .. val.map_keyword.git .. "l",
