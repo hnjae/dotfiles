@@ -308,11 +308,6 @@ Primary Tasks:
 
     local more_keys = {
       {
-        [1] = prefix.new .. keyword,
-        [2] = nil,
-        desc = "+gp-chat",
-      },
-      {
         [1] = prefix.new .. keyword .. "x",
         [2] = "<cmd>GpChatNew split<CR>",
         desc = "split",
@@ -338,9 +333,9 @@ Primary Tasks:
         desc = "gp-chat-toggle",
       },
       {
-        [1] = prefix.sidebar .. string.upper(keyword),
+        [1] = prefix.sidebar .. keyword,
         [2] = "<cmd>GpChatToggle vsplit<CR>",
-        desc = "gp-chat",
+        desc = "gp-chat-toggle",
       },
       {
         [1] = bufprefix .. "n",
@@ -395,6 +390,12 @@ Primary Tasks:
         [2] = "<cmd>GpStop<CR>",
         desc = "gp-stop",
       },
+      {
+        [1] = prefix.find .. keyword,
+        [2] = "<cmd>GpChatFinder<CR>",
+        mode = { "n" },
+        desc = "gp-chat",
+      },
     }
     vim.list_extend(keys, more_keys)
   end,
@@ -407,26 +408,31 @@ Primary Tasks:
         opts.icons.rules = opts.icons.rules or {}
         opts.spec = opts.spec or {}
 
-        vim.list_extend(opts.icons.rules, {
-          { pattern = "gp", icon = require("val.icons").ai, color = "purple" },
-        })
-
         local map_keyword = require("val.map-keyword")
         local prefix = require("val.prefix")
         local keyword = map_keyword.ai
+        local icon = require("val.icons").ai
+
+        vim.list_extend(opts.icons.rules, {
+          {
+            plugin = "gp.nvim",
+            icon = icon,
+            color = "purple",
+          },
+        })
 
         vim.list_extend(opts.spec, {
           {
             [1] = "<LocalLeader>" .. require("val.map-keyword").ai,
-            group = "gp",
+            group = "gp-chat",
             ---@type wk.Icon
-            -- icon = icon,
+            icon = icon,
           },
           {
             [1] = prefix.new .. keyword,
             group = "gp-chat",
             ---@type wk.Icon
-            -- icon = icon,
+            icon = icon,
           },
         })
       end,

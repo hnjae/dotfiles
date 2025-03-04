@@ -31,13 +31,14 @@ return {
       [2] = "<cmd>Neogit<CR>",
       desc = "open-neogit",
     },
-    {
-      [1] = val.prefix.git .. "c",
-      [2] = function()
-        require("neogit").action("commit", "commit", {})
-      end,
-      desc = "commit",
-    },
+    -- not working
+    -- {
+    --   [1] = val.prefix.git .. "c",
+    --   [2] = function()
+    --     require("neogit").action("commit", "commit", {})
+    --   end,
+    --   desc = "commit",
+    -- },
     {
       [1] = val.prefix.git .. "C",
       [2] = "<cmd>Neogit commit<CR>",
@@ -46,6 +47,7 @@ return {
     {
       [1] = "<LocalLeader>" .. val.map_keyword.git .. "l",
       [2] = "<cmd>NeogitLog<CR>",
+      [3] = "neogit-log",
     },
   },
   config = function(_, opts)
@@ -77,15 +79,36 @@ return {
     require("neogit").setup(opts)
   end,
   specs = {
-    [1] = "nvim-lualine/lualine.nvim",
-    optional = true,
-    opts = function()
-      require("state.lualine-ft-data"):add({
-        NeogitStatus = { display_name = "NeogitStatus", icon = icons.git },
-        -- NeogitWorkTreePopup
-        -- NeogitCommitMessage
-        -- NeogitPopUp
-      })
-    end,
+    {
+      [1] = "nvim-lualine/lualine.nvim",
+      optional = true,
+      opts = function()
+        require("state.lualine-ft-data"):add({
+          NeogitStatus = { display_name = "NeogitStatus", icon = icons.git },
+          -- NeogitWorkTreePopup
+          -- NeogitCommitMessage
+          -- NeogitPopUp
+        })
+      end,
+    },
+    {
+      [1] = "folke/which-key.nvim",
+      optional = true,
+      ---@class wk.Opts
+      opts = function(_, opts)
+        opts.spec = opts.spec or {}
+        opts.icons = opts.icons or {}
+        opts.icons.rules = opts.icons.rules or {}
+        local icon = require("val.icons").git
+
+        vim.list_extend(opts.icons.rules, {
+          {
+            plugin = "neogit",
+            icon = icon,
+            color = "orange",
+          },
+        })
+      end,
+    },
   },
 }

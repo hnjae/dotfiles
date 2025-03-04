@@ -44,9 +44,18 @@ return {
       optional = true,
       ---@class wk.Opts
       opts = function(_, opts)
-        if opts.spec == nil then
-          opts.spec = {}
-        end
+        opts.spec = opts.spec or {}
+        opts.icons = opts.icons or {}
+        opts.icons.rules = opts.icons.rules or {}
+        local icon = require("val.icons").git
+
+        vim.list_extend(opts.icons.rules, {
+          {
+            plugin = "gitsigns.nvim",
+            icon = icon,
+            color = "orange",
+          },
+        })
 
         table.insert(opts.spec, {
           [1] = prefix.buffer .. map_keyword.git,

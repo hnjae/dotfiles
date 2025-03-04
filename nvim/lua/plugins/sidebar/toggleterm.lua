@@ -215,9 +215,7 @@ return {
           },
         }
 
-        if not opts.extensions then
-          opts.extensions = {}
-        end
+        opts.extensions = opts.extensions or {}
 
         table.insert(
           opts.extensions,
@@ -238,9 +236,8 @@ return {
       optional = true,
       ---@class opts wk.Opts
       opts = function(_, opts)
-        if opts.spec == nil then
-          opts.spec = {}
-        end
+        opts.spec = opts.spec or {}
+
         local icon = { icon = require("val.icons").terminal, color = "red" }
         vim.list_extend(opts.spec, {
           {

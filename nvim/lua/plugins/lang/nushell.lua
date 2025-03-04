@@ -30,7 +30,8 @@ return {
     optional = true,
     opts = {
       formatters_by_ft = {
-        nu = { [1] = "nufmt" },
+        -- NOTE: nufmt 가 고장난듯? indent 를 전부 없애버린다. <2025-03-03>
+        -- nu = { [1] = "nufmt" },
       },
     },
   },

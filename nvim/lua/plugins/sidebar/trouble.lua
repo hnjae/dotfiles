@@ -124,14 +124,11 @@ return {
       [1] = "folke/which-key.nvim",
       optional = true,
       opts = function(_, opts)
-        if opts.icons == nil then
-          opts.icons = {}
-        end
-        if opts.icons.rules == nil then
-          opts.icons.rules = {}
-        end
+        opts.icons = opts.icons or {}
+        opts.icons.rules = opts.icons.rules or {}
+
         vim.list_extend(opts.icons.rules, {
-          { pattern = "trouble", icon = "󱍼", color = "green" },
+          { plugin = "trouble.nvim", icon = "󱍼", color = "green" },
         })
       end,
     },
