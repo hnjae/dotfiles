@@ -71,8 +71,9 @@ return {
         end
 
         -- NOTE: range에는 starts, end 전부 포함됨 <2023-12-11>
-        vim.opt_local.colorcolumn =
-          vim.fn.join(vim.fn.range(textwidth + 1, MAX_COLORCOLUMN), ",")
+        local columns = vim.fn.range(textwidth + 1, MAX_COLORCOLUMN)
+        table.insert(columns, 51)
+        vim.opt_local.colorcolumn = vim.fn.join(columns, ",")
       end,
     })
 
