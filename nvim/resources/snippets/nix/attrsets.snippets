@@ -15,7 +15,7 @@ snippet laoptionalAttrs "lib.optionalAttrs :: Bool -> AttrSet -> AttrSet"
 snippet lagenAttrs "lib.genAttrs :: Generate attrs from list, use element as key"
 	(lib.genAttrs [ "foo" "bar" ] (${1:key}: ${2:val}))
 
-snippet llistToAttrs "builtins.listToAttrs :: Convert list to attrs"
+snippet lalistToAttrs "builtins.listToAttrs :: Convert name-value pair list to attrs"
 	(builtins.listToAttrs [ ${0:List} ])"
 
 # Modify/Manipulate Attrs
@@ -32,13 +32,3 @@ snippet lamapAttrsp "lib.mapAttrs' :: Modify keys and values of attrs"
 
 snippet lafilter "lib.filterAttrs :: (String -> Any -> Bool) -> AttrSet -> AttrSet"
 	(lib.filterAttrs (n: v: $1) ${0:AttrSets})
-
-# Attrs to list
-snippet laattrsToList "builtins.attrsToList:: convert to `[ { name :: (key); value :: (value); } ]` list"
-	(builtins.attrsToList ${0:attrset})
-
-snippet lamapAttrsToList "lib.mapAttrsToList :: Make attrs to list"
-	(lib.mapAttrsToList (name: value: name + value) ${1:attrset})
-
-# snippet lamapAttrsFlatten "lib.mapAttrsToList :: Make attrs to list" # deprecated
-# 	(lib.mapAttrsFlatten (${2:key}: ${3:val}: ($2 + $3)) ${1:AttrSet})

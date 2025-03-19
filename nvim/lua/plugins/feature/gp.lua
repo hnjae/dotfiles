@@ -197,7 +197,8 @@ Chats are saved automatically.
             temperature = 0.9,
             max_token = 8192,
           },
-          system_prompt = require("gp.defaults").chat_system_prompt,
+          system_prompt = require("gp.defaults").chat_system_prompt
+            .. "\n\nAlways answer in English regardless of input language.",
         },
         {
           provider = "anthropic",

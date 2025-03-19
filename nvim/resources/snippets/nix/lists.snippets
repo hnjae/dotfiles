@@ -4,7 +4,6 @@ snippet ll "lib.lists"
 snippet llmap "builtins.map (x: "foo" + x) [ "bar" "bla" "abc" ]"
 	builtins.map (${2:element}: ${0:expression}) ${1:list}
 
-
 snippet llconcat "builtins.concatLists :: [List] -> []"
 	builtins.concatLists [$0]
 
@@ -19,3 +18,13 @@ snippet lloptionals "lib.lists.optionals :: bool -> [a] -> [a]"
 
 snippet llremove "lib.lists.remove :: a -> [a] -> [a]"
 	lib.lists.remove ${1:entry} [${0:list}]
+
+# Attrs to list
+snippet llattrsToList "builtins.attrsToList:: convert to `[ { name :: (key); value :: (value); } ]` list"
+	(builtins.attrsToList ${0:attrset})
+
+snippet llmapAttrsToList "lib.mapAttrsToList :: Make attrs to list"
+	(lib.mapAttrsToList (name: value: name + value) ${1:attrset})
+
+# snippet lamapAttrsFlatten "lib.mapAttrsToList :: Make attrs to list" # deprecated
+# 	(lib.mapAttrsFlatten (${2:key}: ${3:val}: ($2 + $3)) ${1:AttrSet})
