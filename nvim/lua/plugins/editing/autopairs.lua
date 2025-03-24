@@ -5,6 +5,7 @@ local M = {
   [1] = "windwp/nvim-autopairs",
   lazy = true,
   enabled = true,
+  cond = not vim.g.vscode,
   event = { "InsertEnter" },
   dependencies = {
     { [1] = "nvim-treesitter/nvim-treesitter", optional = true },

@@ -6,6 +6,7 @@ return {
   [1] = "tpope/vim-sleuth",
   lazy = true,
   enabled = true,
+  cond = not vim.g.vscode,
   event = {
     -- TODO: VeryLazy 해도 작동하는지 <2024-01-19>
     "BufNewFile",

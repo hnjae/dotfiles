@@ -1,3 +1,7 @@
+if vim.g.vscode then
+  return {}
+end
+
 -- TODO: terminal 색상 읽어서, 맞춰서 변경하기 <2024-06-11>
 -- vim.opt.background = "dark"
 

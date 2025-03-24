@@ -8,3 +8,5 @@
 Lsp configs:
   <https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md>
   <https://langserver.org/>
+
+vscode 에서 사용될때는 import 안됨.

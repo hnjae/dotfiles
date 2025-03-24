@@ -6,6 +6,7 @@ return {
   [1] = "hrsh7th/nvim-cmp",
   lazy = false,
   enabled = true,
+  cond = not vim.g.vscode,
   event = { "InsertEnter", "CmdlineEnter" },
   dependencies = {
     "onsails/lspkind.nvim",

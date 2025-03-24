@@ -38,8 +38,7 @@ M.setup = function()
     })
   end
   vim.opt.rtp:prepend(lazypath)
-
-  require("lazy").setup({
+  local opts = {
     ---@type LazySpec[]
     spec = {
       { import = "plugins.core" },
@@ -47,7 +46,6 @@ M.setup = function()
       { import = "plugins.editing" },
       { import = "plugins.feature" },
       { import = "plugins.sidebar" },
-      { import = "plugins.lang" },
       {
         [1] = "nvim-lualine/lualine.nvim",
         optional = true,
@@ -82,7 +80,13 @@ M.setup = function()
     },
     concurrency = 12,
     lockfile = vim.fn.stdpath("config") .. "/lazy-lock.json",
-  })
+  }
+
+  if not vim.g.vscode then
+    table.insert(opts.spec, { import = "plugins.lang" })
+  end
+
+  require("lazy").setup(opts)
 end
 
 return M

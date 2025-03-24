@@ -17,7 +17,7 @@ M.is_root = function()
   return is_root
 end
 
-M.is_treesitter = vim.fn.executable("cc") == 1
+M.is_treesitter = vim.fn.executable("cc") == 1 and not vim.g.vscode
 M.is_console = os.getenv("XDG_SESSION_TYPE") == "tty"
 M.enable_icon = not (os.getenv("XDG_SESSION_TYPE") == "tty" and os.getenv("SSH_TTY") == nil)
 
