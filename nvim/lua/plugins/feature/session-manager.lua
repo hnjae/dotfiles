@@ -8,6 +8,7 @@ return {
   },
   lazy = true,
   enabled = true,
+  cond = not vim.g.vscode,
   cmd = {
     "SessionManager",
     "SessionLoad",

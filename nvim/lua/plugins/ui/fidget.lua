@@ -3,6 +3,8 @@
 return {
   [1] = "j-hui/fidget.nvim",
   lazy = true,
+  cond = not vim.g.vscode,
+
   event = "VeryLazy",
   enabled = true,
   tag = "v1.4.5",

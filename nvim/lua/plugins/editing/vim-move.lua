@@ -6,10 +6,15 @@ return {
   lazy = true,
   ---@type LazyKeysSpec[]
   keys = {
-    { [1] = "<A-h>", [2] = nil, mode = { "n", "v" }, desc = "vim-move-left" },
-    { [1] = "<A-j>", [2] = nil, mode = { "n", "v" }, desc = "vim-move-down" },
-    { [1] = "<A-k>", [2] = nil, mode = { "n", "v" }, desc = "vim-move-up" },
-    { [1] = "<A-l>", [2] = nil, mode = { "n", "v" }, desc = "vim-move-right" },
+    { [1] = "<C-A-h>", [2] = nil, mode = { "n", "v" }, desc = "vim-move-left" },
+    { [1] = "<C-A-j>", [2] = nil, mode = { "n", "v" }, desc = "vim-move-down" },
+    { [1] = "<C-A-k>", [2] = nil, mode = { "n", "v" }, desc = "vim-move-up" },
+    {
+      [1] = "<C-A-l>",
+      [2] = nil,
+      mode = { "n", "v" },
+      desc = "vim-move-right",
+    },
   },
   opts = {},
 }

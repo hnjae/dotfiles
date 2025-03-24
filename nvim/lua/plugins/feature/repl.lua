@@ -2,6 +2,8 @@ return {
   [1] = "hkupty/iron.nvim",
   lazy = false,
   enabled = true,
+  cond = not vim.g.vscode,
+
   -- tag = "v3.0",
   -- commit = "76385183e0fe3ce09d138e10262d74ca2db0ebf5", -- 2022-06-06
   -- commit = "d50dc23331ab217b9e13f47c8d97ea60bd1ab1b7", -- 2022-05-24

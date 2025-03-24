@@ -8,6 +8,7 @@ return {
   [1] = "goolord/alpha-nvim",
   lazy = false,
   event = { "VeryLazy" },
+  cond = not vim.g.vscode,
   dependencies = { "nvim-tree/nvim-web-devicons" },
   main = "alpha",
   config = function(plugin, _)

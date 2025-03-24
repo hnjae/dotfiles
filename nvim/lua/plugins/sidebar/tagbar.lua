@@ -7,6 +7,7 @@ return {
   -- lazy = true, -- will be lazy load on filetypes (check `lua/plugins/lang`)
   -- lazy = false,
   enabled = vim.fn.executable("ctags") == 1,
+  cond = not vim.g.vscode,
   dependency = {
     "ludovicchabant/vim-gutentags", -- to load gutentags when tagbar loads (not actually a dependency)
   },

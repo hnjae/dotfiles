@@ -3,6 +3,7 @@ return {
   -- shows marks
   [1] = "chentoast/marks.nvim",
   lazy = true,
+  cond = not vim.g.vscode,
   enabled = true,
   event = { "VeryLazy" },
   opts = {

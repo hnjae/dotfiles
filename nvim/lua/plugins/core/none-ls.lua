@@ -13,6 +13,7 @@ return {
   [1] = "nvimtools/none-ls.nvim",
   lazy = true,
   enabled = true,
+  cond = not vim.g.vscode,
   event = { "VeryLazy" },
   cmd = { "NullLsInfo", "NullLsLog" },
   dependencies = {

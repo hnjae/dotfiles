@@ -4,6 +4,7 @@
 return {
   [1] = "kristijanhusak/vim-dadbod-ui",
   lazy = true,
+  cond = not vim.g.vscode,
   dependencies = {
     {
       -- database interface

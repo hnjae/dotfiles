@@ -9,6 +9,7 @@ return {
   [1] = "stevearc/oil.nvim",
   lazy = true,
   event = REPLACE_NETRW and "VimEnter" or nil,
+  cond = not vim.g.vscode,
   enabled = true,
   dependencies = {
     "nvim-tree/nvim-web-devicons",

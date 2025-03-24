@@ -12,11 +12,15 @@ snippet laoptionalAttrs "lib.optionalAttrs :: Bool -> AttrSet -> AttrSet"
 	(lib.optionalAttrs ${1:bool} ${0:AttrSet})
 
 # Generate Attrs
-snippet lagenAttrs "lib.genAttrs :: Generate attrs from list, use element as key"
-	(lib.genAttrs [ "foo" "bar" ] (${1:key}: ${2:val}))
+snippet lagenAttrs "lib.genAttrs :: Generate attrs from list, use element as name(key)"
+	(lib.genAttrs [ "foo" "bar" ] (${1:name}: ${2:val}))
 
 snippet lalistToAttrs "builtins.listToAttrs :: Convert name-value pair list to attrs"
 	(builtins.listToAttrs [ ${0:List} ])"
+
+snippet lagenATTRSP "Generate attrs from list"
+	(builtins.listToAttrs (map (${2:foo}: (lib.nameValuePair (${3:"will-eval-to-name"}) (${4:"will-eval-to-value"}) ) )) ${1:["foos(list)"]});
+
 
 # Modify/Manipulate Attrs
 

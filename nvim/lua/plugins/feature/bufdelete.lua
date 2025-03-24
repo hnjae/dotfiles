@@ -5,6 +5,7 @@ local val = require("val")
 return {
   [1] = "famiu/bufdelete.nvim",
   lazy = true,
+  cond = not vim.g.vscode,
   cmd = {
     "Bdelete",
     "Bwipeout",

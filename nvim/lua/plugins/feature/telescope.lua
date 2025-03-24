@@ -2,6 +2,7 @@
 return {
   [1] = "nvim-telescope/telescope.nvim",
   enabled = true,
+  cond = not vim.g.vscode,
   dependencies = {
     "nvim-lua/plenary.nvim",
     {

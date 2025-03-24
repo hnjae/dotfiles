@@ -4,8 +4,9 @@ local utils = require("utils")
 
 return {
   [1] = "TimUntersberger/neogit",
-  enabled = true,
   lazy = true,
+  enabled = true,
+  cond = not vim.g.vscode,
   cmd = {
     "Neogit",
     "NeogitResetState",

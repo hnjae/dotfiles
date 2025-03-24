@@ -62,7 +62,7 @@ end
 return {
   [1] = "s1n7ax/nvim-window-picker",
   lazy = true,
-  -- event = "VeryLazy",
+  cond = not vim.g.vscode,
   version = "2.*",
   main = "window-picker",
   opts = {

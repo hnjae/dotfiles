@@ -9,6 +9,7 @@
 return {
   [1] = "smjonas/snippet-converter.nvim",
   enabled = true,
+  cond = false and not vim.g.vscode,
   cmd = {
     "ConvertSnippets",
   },

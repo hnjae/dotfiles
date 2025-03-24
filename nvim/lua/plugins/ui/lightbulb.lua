@@ -6,6 +6,7 @@ local icon = require("utils").enable_icon and require("val").icons.lightbulb
 return {
   [1] = "kosayoda/nvim-lightbulb",
   lazy = true,
+  cond = not vim.g.vscode,
   event = { "LspAttach" },
   opts = {
     sign = {

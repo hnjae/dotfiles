@@ -2,6 +2,8 @@
 return {
   [1] = "backdround/global-note.nvim",
   lazy = true,
+  cond = not vim.g.vscode,
+
   cmd = { "GlobalNote" },
   opts = function()
     return {

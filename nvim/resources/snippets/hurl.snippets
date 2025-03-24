@@ -4,3 +4,20 @@ snippet spostjson "post json"
 	{
 		${0:json-body}
 	}
+
+snippet spostjsonopt "POST json body with options"
+	POST http://{{host}}
+	content-type: application/json
+	[Options]
+	variable: host = "${1:localhost:3000}"
+	{
+		"$0"
+		"name": "{{newUuid}}",
+		"order": 0
+	}
+
+snippet suuid "newUuid"
+	{{newUuid}}
+
+snippet sint "random-int-number"
+	{{random_int_number}}

@@ -4,6 +4,8 @@
 return {
   [1] = "AckslD/messages.nvim",
   lazy = true,
+  cond = not vim.g.vscode,
+
   cmd = {
     "Messages",
   },

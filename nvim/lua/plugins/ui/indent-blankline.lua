@@ -4,7 +4,7 @@ return {
   [1] = "lukas-reineke/indent-blankline.nvim",
   lazy = true,
   enabled = true,
-  cond = require("utils").enable_icon,
+  cond = not vim.g.vscode and require("utils").enable_icon,
   event = { "VeryLazy" },
   main = "ibl",
   opts = function()

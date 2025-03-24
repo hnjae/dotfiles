@@ -23,7 +23,7 @@ return {
 
   {
     [1] = "brenoprata10/nvim-highlight-colors",
-    cond = vim.opt.termguicolors:get(),
+    cond = not vim.g.vscode and vim.opt.termguicolors:get(),
     lazy = true,
     event = "VeryLazy",
     cmd = {

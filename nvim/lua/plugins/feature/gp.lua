@@ -14,6 +14,7 @@ run `secret-tool store --label=<api-anthropic> api anthropic` to save password
 return {
   [1] = "Robitx/gp.nvim",
   lazy = true,
+  cond = not vim.g.vscode,
   event = "VeryLazy",
   dependencies = {},
   config = function(_, opts)
@@ -177,15 +178,20 @@ Chats are saved automatically.
         --   command = false,
         --   model = { model = "o3-mini", temperature = 1.0, top_p = 1 },
         --   -- system_prompt = require("gp.defaults").chat_system_prompt,
-        --   system_prompt = "Formatting re-enabled ",
         -- },
         -- {
+        -- WIP
         --   provider = "openai",
-        --   name = "gpt-4o-mini-command",
-        --   chat = false,
-        --   command = true,
-        --   model = { model = "gpt-4o-mini", temperature = 0.7 },
-        --   system_prompt = require("gp.defaults").code_system_prompt,
+        --   name = "o3-mini",
+        --   chat = true,
+        --   command = false,
+        --   model = {
+        --     model = "o3-mini",
+        --     temperature = 0.9,
+        --   },
+        --   system_prompt = require("gp.defaults").chat_system_prompt
+        --     .. "\n\nAlways answer in English regardless of input language.",
+        --   --   system_prompt = "Formatting re-enabled ",
         -- },
         {
           provider = "anthropic",
@@ -215,7 +221,7 @@ Chats are saved automatically.
         {
           provider = "googleai",
           name = "gemini-flash",
-          chat = false,
+          chat = true,
           command = true,
           model = {
             model = "gemini-2.0-flash",
@@ -333,11 +339,11 @@ Primary Tasks:
         [2] = "<cmd>GpChatToggle popup<CR>",
         desc = "gp-chat-toggle",
       },
-      {
-        [1] = prefix.sidebar .. keyword,
-        [2] = "<cmd>GpChatToggle vsplit<CR>",
-        desc = "gp-chat-toggle",
-      },
+      -- {
+      --   [1] = prefix.sidebar .. keyword,
+      --   [2] = "<cmd>GpChatToggle vsplit<CR>",
+      --   desc = "gp-chat-toggle",
+      -- },
       {
         [1] = bufprefix .. "n",
         [2] = ":<C-u>'<,'>GpChatNew split<CR>",

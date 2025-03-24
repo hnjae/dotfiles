@@ -4,6 +4,7 @@ local icons = require("val").icons
 return {
   [1] = "sindrets/diffview.nvim",
   enabled = true,
+  cond = not vim.g.vscode,
   lazy = true,
   cmd = "DiffviewFileHistory",
   opts = {

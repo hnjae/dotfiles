@@ -3,6 +3,8 @@
 ---@type LazySpec
 return {
   [1] = "nvimdev/dashboard-nvim",
+  cond = not vim.g.vscode,
+
   lazy = false,
   -- event = { "VimEnter" },
   dependencies = { "nvim-tree/nvim-web-devicons" },

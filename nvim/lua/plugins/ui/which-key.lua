@@ -7,6 +7,7 @@ return {
   [1] = "folke/which-key.nvim",
   lazy = true,
   enabled = true,
+  cond = not vim.g.vscode,
   event = "VeryLazy",
   version = "v3.*",
   dependencies = {

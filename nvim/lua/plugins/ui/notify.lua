@@ -6,6 +6,8 @@ return {
   [1] = "rcarriga/nvim-notify",
   lazy = true,
   enabled = true,
+  cond = not vim.g.vscode,
+
   event = {
     "VeryLazy",
   },

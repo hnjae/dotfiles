@@ -3,6 +3,7 @@ return {
   -- A pretty diagnostics, references, telescope results, quickfix and location list to help you solve all the trouble your code is causing.
   [1] = "folke/trouble.nvim",
   lazy = true,
+  cond = not vim.g.vscode,
   enabled = true,
   version = "v3.*",
   dependencies = {
@@ -19,6 +20,21 @@ return {
     local map_keyword = require("val").map_keyword
 
     return {
+      {
+        [1] = prefix.sidebar .. map_keyword.symbols,
+        [2] = "<cmd>Trouble symbols<CR>",
+        desc = "trouble-symbol",
+      },
+      {
+        [1] = prefix.sidebar .. "D",
+        [2] = "<cmd>TroubleToggle workspace_diagnostics<CR>",
+        desc = "workspace-diagnostics",
+      },
+      {
+        [1] = prefix.sidebar .. "d",
+        [2] = "<cmd>TroubleToggle document_diagnostics<CR>",
+        desc = "document-diagnostics",
+      },
       {
         [1] = prefix.trouble,
         desc = "+trouble",
@@ -37,16 +53,6 @@ return {
         [1] = prefix.trouble .. map_keyword.diagnostics,
         [2] = "<cmd>Trouble diagnostics toggle<CR>",
         desc = "diagnostics",
-      },
-      {
-        [1] = prefix.trouble .. "w",
-        [2] = "<cmd>TroubleToggle workspace_diagnostics<CR>",
-        desc = "workspace-diagnostics",
-      },
-      {
-        [1] = prefix.trouble .. "d",
-        [2] = "<cmd>TroubleToggle document_diagnostics<CR>",
-        desc = "document-diagnostics",
       },
       {
         [1] = prefix.trouble .. "q",

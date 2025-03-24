@@ -5,7 +5,8 @@
 return {
   [1] = "tzachar/cmp-ai",
   lazy = true,
-  enabled = true,
+  enabled = false,
+  cond = not vim.g.vscode,
   dependencies = {
     "nvim-lua/plenary.nvim",
   },

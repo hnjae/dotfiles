@@ -8,6 +8,7 @@ return {
   lazy = true,
   -- event = { "VeryLazy" },
   enabled = true,
+  cond = not vim.g.vscode,
   event = { "BufRead", "BufNewFile" },
   keys = {
     -- nvim's default mapping:

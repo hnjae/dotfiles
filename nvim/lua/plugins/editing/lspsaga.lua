@@ -4,6 +4,7 @@ local M = {
   lazy = true,
   event = "LspAttach",
   enabled = true,
+  cond = not vim.g.vscode,
   dependencies = {
     { [1] = "nvim-tree/nvim-web-devicons", optional = true },
     {

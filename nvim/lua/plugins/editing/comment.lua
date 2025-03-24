@@ -6,6 +6,8 @@
 -- https://github.com/folke/which-key.nvim/issues/218#issuecomment-1890858022
 -- https://github.com/numToStr/Comment.nvim/issues/167
 
+-- TODO: replace this with neovim's builtin feature (if that support ts-context-commentstring) <2025-03-24>
+
 local is_treesitter = require("utils").is_treesitter
 
 ---@type LazySpec

@@ -1,9 +1,12 @@
+-- TODO: replace this with neovim's builtin feature <2025-03-24>
+
 ---@type LazySpec
 return {
   [1] = "L3MON4D3/LuaSnip",
   version = "v2.*",
   build = "make install_jsregexp",
   enabled = vim.fn.executable("make") == 1,
+  cond = not vim.g.vscode,
   -- enabled = true,
   lazy = false,
   event = { "InsertEnter" },

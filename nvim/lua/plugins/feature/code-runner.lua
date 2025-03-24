@@ -7,7 +7,7 @@ return {
     [1] = "michaelb/sniprun",
     enabled = true,
     lazy = false,
-    cond = vim.fn.executable("cargo") == 1,
+    cond = not vim.g.vscode and vim.fn.executable("cargo") == 1,
     build = "sh ./install.sh 1",
     dependencies = {
       { [1] = "rcarriga/nvim-notify", optional = true },

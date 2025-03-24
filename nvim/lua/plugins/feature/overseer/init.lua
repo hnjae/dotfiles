@@ -31,6 +31,7 @@ local map_keyword = require("val").map_keyword
 return {
   [1] = "stevearc/overseer.nvim",
   enabled = true,
+  cond = not vim.g.vscode,
   lazy = true,
   dependencies = {
     {

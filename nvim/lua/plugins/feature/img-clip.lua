@@ -2,6 +2,7 @@
 return {
   [1] = "HakonHarnes/img-clip.nvim",
   lazy = true,
+
   ft = {
     "markdown",
     "html",

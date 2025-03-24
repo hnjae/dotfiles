@@ -8,6 +8,8 @@ return {
   },
   lazy = true,
   enabled = false,
+  cond = not vim.g.vscode,
+
   cmd = {
     "G",
     "Git",

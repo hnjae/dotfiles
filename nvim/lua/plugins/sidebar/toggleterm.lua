@@ -7,7 +7,7 @@ return {
   [1] = "akinsho/toggleterm.nvim",
   version = "*",
   lazy = true,
-  cond = os.getenv("NVIM") == nil, -- toggleterm 안의 nvim 안의 toggerterm 금지.
+  cond = not vim.g.vscode and os.getenv("NVIM") == nil, -- toggleterm 안의 nvim 안의 toggerterm 금지.
   dependencies = {},
   cmd = {
     "ToggleTerm",

@@ -1,41 +1,5 @@
--- TODO: use copilot-cmp.lua instead of official version <2023-11-14>
-
 ---@type LazySpec[]
 return {
-  {
-    [1] = "github/copilot.vim",
-    lazy = true,
-    event = "VeryLazy",
-    enabled = false,
-    cond = vim.fn.executable("node") == 1,
-    init = function()
-      vim.g.copilot_no_tab_map = true
-      vim.g.copilot_filetypes = {
-        xml = false,
-        text = false,
-        yaml = false,
-        json = false,
-        jsonc = false,
-        toml = false,
-        ini = false,
-        markdown = false,
-        asciidoctor = false,
-        asciidoc = false,
-        rst = false,
-        help = false,
-        gitcommit = false,
-        gitrebase = false,
-        hgcommit = false,
-        svn = false,
-        cvs = false,
-      }
-    end,
-    config = function()
-      vim.cmd([[
-        imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
-    ]])
-    end,
-  },
   {
     [1] = "zbirenbaum/copilot-cmp",
     dependencies = { "zbirenbaum/copilot.lua" },
@@ -69,7 +33,7 @@ return {
     lazy = true,
     event = "VeryLazy",
     enabled = true,
-    cond = vim.fn.executable("node") == 1,
+    cond = not vim.g.vscode and vim.fn.executable("node") == 1,
     keys = function()
       local prefix = require("val.prefix")
       -- local map_keyword = require("val.map-keyword")

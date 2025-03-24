@@ -3,6 +3,8 @@
 return {
   [1] = "stevearc/dressing.nvim",
   lazy = true,
+  cond = not vim.g.vscode,
+
   event = { "VeryLazy" },
   opts = {
     input = {

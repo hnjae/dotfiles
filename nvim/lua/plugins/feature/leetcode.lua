@@ -1,6 +1,9 @@
 ---@type LazySpec
 return {
   [1] = "kawre/leetcode.nvim",
+  lazy = true,
+  cond = not vim.g.vscode,
+
   build = ":TSUpdate html",
   dependencies = {
     "nvim-telescope/telescope.nvim",

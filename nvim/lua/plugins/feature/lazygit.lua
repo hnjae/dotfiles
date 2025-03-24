@@ -3,6 +3,7 @@ return {
   [1] = "kdheepak/lazygit.nvim",
   lazy = true,
   enabled = false,
+  cond = not vim.g.vscode,
   cmd = {
     "LazyGit",
     "LazyGitConfig",
