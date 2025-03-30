@@ -393,7 +393,7 @@ return {
               return ""
             end
 
-            local clients = vim.lsp.get_active_clients({ bufnr = 0 })
+            local clients = vim.lsp.get_clients({ bufnr = 0 })
 
             local names = {}
             ---@type boolean

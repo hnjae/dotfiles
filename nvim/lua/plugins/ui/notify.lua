@@ -12,15 +12,16 @@ return {
     "VeryLazy",
   },
   opts = function()
-    local utils = require("utils")
+    local e = require("utils").enable_icon
+    local icons = require("val").icons.signs
 
     local ret = {
       icons = {
-        ERROR = vim.fn.sign_getdefined("DiagnosticSignError")[1].text[1],
-        WARN = vim.fn.sign_getdefined("DiagnosticSignWarn")[1].text[1],
-        INFO = vim.fn.sign_getdefined("DiagnosticSignInfo")[1].text[1],
-        TRACE = utils.enable_icon and val.icons.signs.trace or "T",
-        DEBUG = utils.enable_icon and val.icons.signs.debug or "D",
+        EROOR = e and icons.error or "E",
+        WARN = e and icons.warn or "W",
+        INFO = e and icons.info or "I",
+        TRACE = e and val.icons.signs.trace or "T",
+        DEBUG = e and val.icons.signs.debug or "D",
       },
       level = vim.log.levels.DEBUG,
       top_down = true,

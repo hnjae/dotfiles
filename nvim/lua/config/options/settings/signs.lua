@@ -1,24 +1,14 @@
-local signs
-if require("utils").enable_icon then
-  local icons = require("val").icons.signs
+local e = require("utils").enable_icon
+local icons = require("val").icons.signs
+local opts = {
   signs = {
-    { name = "DiagnosticSignError", text = icons.error .. " " },
-    { name = "DiagnosticSignWarn", text = icons.warn .. " " },
-    { name = "DiagnosticSignInfo", text = icons.info .. " " },
-    { name = "DiagnosticSignHint", text = icons.hint .. " " },
-  }
-else
-  signs = {
-    { name = "DiagnosticSignError", text = "E" },
-    { name = "DiagnosticSignWarn", text = "W" },
-    { name = "DiagnosticSignInfo", text = "I" },
-    { name = "DiagnosticSignHint", text = "H" },
-  }
-end
+    text = {
+      [vim.diagnostic.severity.ERROR] = e and icons.error .. " " or "E",
+      [vim.diagnostic.severity.WARN] = e and icons.warn .. " " or "W",
+      [vim.diagnostic.severity.INFO] = e and icons.info .. " " or "I",
+      [vim.diagnostic.severity.HINT] = e and icons.hint .. " " or "H",
+    },
+  },
+}
 
-for _, sign in ipairs(signs) do
-  vim.fn.sign_define(
-    sign.name,
-    { texthl = sign.name, text = sign.text, numhl = "" }
-  )
-end
+vim.diagnostic.config(opts)
