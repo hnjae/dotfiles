@@ -63,3 +63,8 @@ snippet slogConfig "logging"
 	logger = logging.getLogger(__name__)
 snippet log "log"
 	logger.info("${0:msg}: %s")
+snippet tpc "TYPE_CHECKING"
+	from typing import TYPE_CHECKING
+
+	if TYPE_CHECKING:
+		${0:pass}

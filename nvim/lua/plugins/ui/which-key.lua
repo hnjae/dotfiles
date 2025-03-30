@@ -69,6 +69,13 @@ return {
           color = "red",
         },
       },
+      {
+        [1] = "<Leader>w",
+        [2] = function()
+          require("which-key").show({ keys = "<C-w>", global = true })
+        end,
+        desc = "+windows",
+      },
     })
 
     if opts.icons == nil then

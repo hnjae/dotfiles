@@ -53,7 +53,7 @@ snippet lv "create a local variable"
 	local ${1:varName} = ${0:value}
 snippet lopca "Protect call a function as a variable"
 	local ${1:status}, ${2:err_or_value} = pcall(${3:function})
-snippet lopcareq "Protect call a function as a variable"
+snippet lopcar "Protect call a function as a variable"
 	local is_${1:module_name}, ${1:module_name} = pcall(require, "${1:module_name}")
 snippet loreq "Require module as a variable"
 	local ${1:var} = require("${2:module}")

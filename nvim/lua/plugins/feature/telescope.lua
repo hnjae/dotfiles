@@ -76,6 +76,8 @@ return {
     local lazykeys = {
       -- stylua: ignore start
       -- replace default behavior
+
+      -- NOTE: help is only available when plugin is loaded. 아니라면 E661 Sorry, no 'en' help ... 메시지 뜰 것. <2025-03-25>
       { [1] = "<F1>", [2] = t_builtin.help_tags, desc = "help-tags" },
       { [1] = "<F1>", [2] = t_builtin.help_tags, desc = "help-tags", ft= "netrw" },
 
@@ -197,20 +199,25 @@ return {
         key = "r",
         desc = "rg",
         func = function()
-          -- t_builtin.grep_string({ use_regex = true })
-          t_builtin.live_grep({
+          -- NOTE: live_grep does not uses fzf <https://github.com/nvim-telescope/telescope-fzf-native.nvim/issues/65> <2025-03-25>
+          t_builtin.grep_string({
             cwd = find_project_root(get_cwd(vim.bo.filetype)),
           })
+          -- t_builtin.live_grep({
+          --   cwd = find_project_root(get_cwd(vim.bo.filetype)),
+          -- })
         end,
       },
       {
         key = "R",
         desc = "rg-cwd",
         func = function()
-          -- t_builtin.grep_string({ use_regex = true })
-          t_builtin.live_grep({
+          t_builtin.grep_string({
             cwd = get_cwd(vim.bo.filetype),
           })
+          -- t_builtin.live_grep({
+          --   cwd = get_cwd(vim.bo.filetype),
+          -- })
         end,
       },
     }

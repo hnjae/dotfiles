@@ -8,66 +8,55 @@ return {
   version = "v3.*",
   dependencies = {
     { [1] = "nvim-tree/nvim-web-devicons", optional = true },
+    { [1] = "onsails/lspkind-nvim", optional = true }, -- my personal dependency
   },
   cmd = {
     "Trouble",
   },
-  opts = {
-    icon = require("utils").enable_icon,
-  },
+  opts = function()
+    local is_lspkind, lspkind = pcall(require, "lspkind")
+
+    local res = {
+      icon = require("utils").enable_icon,
+      icons = {},
+    }
+
+    if is_lspkind then
+      res.icons.kind = lspkind.symbol_map
+    end
+
+    return res
+  end,
   keys = function()
     local prefix = require("val").prefix
     local map_keyword = require("val").map_keyword
+    local prefix_ = "<Leader>t"
 
     return {
       {
         [1] = prefix.sidebar .. map_keyword.symbols,
-        [2] = "<cmd>Trouble symbols<CR>",
-        desc = "trouble-symbol",
-      },
-      {
-        [1] = prefix.sidebar .. "D",
-        [2] = "<cmd>TroubleToggle workspace_diagnostics<CR>",
-        desc = "workspace-diagnostics",
-      },
-      {
-        [1] = prefix.sidebar .. "d",
-        [2] = "<cmd>TroubleToggle document_diagnostics<CR>",
-        desc = "document-diagnostics",
-      },
-      {
-        [1] = prefix.trouble,
-        desc = "+trouble",
-      },
-      {
-        [1] = prefix.trouble .. map_keyword.trouble,
-        [2] = "<cmd>Trouble<CR>",
-        desc = "open-selector",
-      },
-      {
-        [1] = prefix.trouble .. map_keyword.symbols,
         [2] = "<cmd>Trouble symbols toggle<CR>",
-        desc = "symbols",
+        desc = "symbol (Trouble)",
       },
       {
-        [1] = prefix.trouble .. map_keyword.diagnostics,
+        [1] = prefix_ .. map_keyword.diagnostics,
         [2] = "<cmd>Trouble diagnostics toggle<CR>",
-        desc = "diagnostics",
+        desc = "diagnostics (Trouble)",
       },
       {
-        [1] = prefix.trouble .. "q",
+        [1] = prefix_ .. string.upper(map_keyword.diagnostics),
+        [2] = "<cmd>Trouble diagnostics toggle filter.severity=vim.diagnostics.severity.ERROR<CR>",
+        desc = "diagnostics-error (Trouble)",
+      },
+      {
+        [1] = prefix_ .. "q",
         [2] = "<cmd>Trouble quickfix toggle<CR>",
-        desc = "quickfix",
+        desc = "quickfix (Trouble)",
       },
       {
-        [1] = prefix.trouble .. "L",
-        [2] = "<cmd>Trouble loclist toggle<CR>",
-        desc = "loclist",
-      },
-      {
-        [1] = prefix.trouble .. map_keyword.lsp,
+        [1] = prefix_ .. map_keyword.lsp,
         [2] = "<cmd>Trouble lsp toggle<CR>",
-        desc = "lsp-references",
+        desc = "lsp definitions / references / ... (Trouble)",
       },
     }
   end,

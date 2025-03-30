@@ -52,8 +52,14 @@ return {
     end,
   },
   {
+    [1] = "ludovicchabant/vim-gutentags",
+    optional = true,
+    ft = { "asciidoc", "asciidoctor" },
+  },
+  {
     [1] = "preservim/tagbar",
     optional = true,
+    ft = { "asciidoc", "asciidoctor" },
     opts = function()
       vim.g.tagbar_type_asciidoctor = {
         ["sro"] = '""',

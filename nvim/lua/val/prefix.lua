@@ -21,7 +21,6 @@ return {
   find = "<Leader>" .. map_keyword.find,
   focus = "<Leader>" .. map_keyword.focus,
   sidebar = "<Leader>" .. "b",
-  trouble = "<Leader>" .. map_keyword.trouble,
   window = "<Leader>" .. map_keyword.window,
   git = "<Leader>" .. map_keyword.git,
   new = "<Leader>" .. "n",
