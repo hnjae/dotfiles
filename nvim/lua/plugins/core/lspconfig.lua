@@ -82,7 +82,7 @@ return {
         end
 
         vim.keymap.set("n", prefix.close .. map_keyword.lsp, function()
-          for _, buf_client in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
+          for _, buf_client in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
             buf_client.stop()
           end
         end, { desc = "stop-lsp", buffer = args.buf })

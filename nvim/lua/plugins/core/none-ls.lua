@@ -82,8 +82,7 @@ return {
               return ""
             end
 
-            local clients =
-              vim.lsp.get_active_clients({ bufnr = 0, name = "null-ls" })
+            local clients = vim.lsp.get_clients({ bufnr = 0, name = "null-ls" })
             local is_null_ls = #clients ~= 0
 
             local names = {}
