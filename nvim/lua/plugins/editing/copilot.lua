@@ -112,7 +112,7 @@ return {
       },
     },
     specs = {
-      {
+      --[[ {
         [1] = "nvim-lualine/lualine.nvim",
         dependencies = { "AndreM222/copilot-lualine" },
         optional = true,
@@ -176,7 +176,7 @@ return {
             priority = 100,
           })
         end,
-      },
+      } ]]
     },
   },
 }
