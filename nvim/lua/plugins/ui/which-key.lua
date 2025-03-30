@@ -16,19 +16,9 @@ return {
   },
   ---@class wk.Opts
   opts = function(_, opts)
-    -- opts = vim.tbl_deep_extend("keep", {
-    --   preset = "modern",
-    --   spec = {},
-    --   icons = {
-    --     rules = {},
-    --   },
-    -- }, opts or {})
-
     opts.preset = "modern"
 
-    if opts.spec == nil then
-      opts.spec = {}
-    end
+    opts.spec = opts.spec or {}
     vim.list_extend(opts.spec, {
       -- vim's builtin 인데 which-key.nvim 에 안뜨는 값
       { [1] = "g", group = "g (extra-cmd)" },

@@ -84,8 +84,9 @@ return {
         shortcut = "<C-g>r",
       },
 
-      default_command_agent = "gemini-flash",
-      default_chat_agent = "claude-3-7-sonnet",
+      default_command_agent = "gemini-command",
+      -- default_chat_agent = "claude-sonnet",
+      default_chat_agent = "gemini",
 
       chat_template = [[
 # topic: ?
@@ -195,7 +196,7 @@ Chats are saved automatically.
         -- },
         {
           provider = "anthropic",
-          name = "claude-3-7-sonnet",
+          name = "claude",
           chat = true,
           command = false,
           model = {
@@ -207,12 +208,24 @@ Chats are saved automatically.
             .. "\n\nAlways answer in English regardless of input language.",
         },
         {
+          provider = "googleai",
+          name = "gemini",
+          chat = true,
+          command = false,
+          model = {
+            model = "gemini-2.5-pro-exp-03-25",
+            temperature = 0.9,
+          },
+          system_prompt = require("gp.defaults").chat_system_prompt
+            .. "\n\nAlways answer in English regardless of input language.",
+        },
+        {
           provider = "anthropic",
-          name = "claude-3-5-haiku",
+          name = "claude-command",
           chat = false,
           command = true,
           model = {
-            model = "claude-3-5-haiku-latest",
+            model = "claude-3-7-sonnet-latest",
             temperature = 0.9,
             max_token = 8192,
           },
@@ -220,11 +233,12 @@ Chats are saved automatically.
         },
         {
           provider = "googleai",
-          name = "gemini-flash",
-          chat = true,
+          name = "gemini-command",
+          chat = false,
           command = true,
           model = {
             model = "gemini-2.0-flash",
+            -- model = "gemini-2.5-pro-exp-03-25",
             temperature = 0.9,
             top_k = 40, -- range 0 -- 41
           },

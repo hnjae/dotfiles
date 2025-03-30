@@ -59,6 +59,7 @@ return {
         )
 
         local agent = gp.get_command_agent()
+        -- local agent = gp.get_command_agent("claude-command")
         agent.system_prompt =
           [[Suggest a precise and informative commit message based on the following diff. Use markdown syntax in your response if needed.
 
