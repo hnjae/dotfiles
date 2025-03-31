@@ -202,10 +202,8 @@ return {
           -- NOTE: live_grep does not uses fzf <https://github.com/nvim-telescope/telescope-fzf-native.nvim/issues/65> <2025-03-25>
           t_builtin.grep_string({
             cwd = find_project_root(get_cwd(vim.bo.filetype)),
+            search = "", -- do not grep string from cursor/visual
           })
-          -- t_builtin.live_grep({
-          --   cwd = find_project_root(get_cwd(vim.bo.filetype)),
-          -- })
         end,
       },
       {
@@ -214,10 +212,8 @@ return {
         func = function()
           t_builtin.grep_string({
             cwd = get_cwd(vim.bo.filetype),
+            search = "", -- do not grep string from cursor/visual
           })
-          -- t_builtin.live_grep({
-          --   cwd = get_cwd(vim.bo.filetype),
-          -- })
         end,
       },
     }

@@ -23,7 +23,7 @@ M.setup = function()
   -- disable s/S, use c/0C instead
   -- NOTE: do not include selection mode here <2023-07-20>
   vim.keymap.set({ "n", "x", "o" }, "s", "<Nop>", { noremap = true })
-  vim.keymap.set({ "n", "x", "o" }, "S", "<Nop>", { noremap = true })
+  -- vim.keymap.set({ "n", "x", "o" }, "S", "<Nop>", { noremap = true })
 
   -- vim.g.maplocalleader = "\\"
   vim.g.maplocalleader = "s"

@@ -3,7 +3,7 @@ extends text
 snippet sl insert link
 	[${2:label}](${1:$TM_SELECTED_TEXT})$0
 
-snippet scode "code block"
+snippet sc "code block"
 	\`\`\`${1:lang}
 	${TM_SELECTED_TEXT}$0
 	\`\`\`
@@ -14,7 +14,10 @@ snippet *** thematic break
 snippet sthematic-break thematic break
 	---
 
-snippet stable
+snippet sb thematic break
+	---
+
+snippet st
 	| $0name  | foo  |
 	| :------ | :--: |
 	| foobar  | bar  |
