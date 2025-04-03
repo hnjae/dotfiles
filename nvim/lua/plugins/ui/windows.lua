@@ -1,3 +1,5 @@
+-- 다이나믹한 창 크기 조절
+
 ---@type LazySpec
 return {
   [1] = "anuvyklack/windows.nvim",

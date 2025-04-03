@@ -1,3 +1,23 @@
+-- WIP
+-- https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#adding-parsers
+local ts_asciidoc = {
+  [1] = "nvim-treesitter/nvim-treesitter",
+  optional = true,
+  opts = function(plugin, _)
+    require("utils.plugin").on_load(plugin.main, function()
+      local parser_config =
+        require("nvim-treesitter.parsers").get_parser_configs()
+
+      parser_config.asciidoc = {
+        install_info = {
+          url = "https://github.com/cathaysia/tree-sitter-asciidoc",
+        },
+        -- filetype = "asciidoctor",
+      }
+    end)
+  end,
+}
+
 ---@type LazySpec[]
 return {
   {

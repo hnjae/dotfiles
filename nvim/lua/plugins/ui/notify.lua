@@ -6,11 +6,8 @@ return {
   [1] = "rcarriga/nvim-notify",
   lazy = true,
   enabled = true,
-  cond = not vim.g.vscode,
-
-  event = {
-    "VeryLazy",
-  },
+  cond = not vim.g.vscode and not require("utils").is_console,
+  event = { "VeryLazy" },
   opts = function()
     local e = require("utils").enable_icon
     local icons = require("val").icons.signs

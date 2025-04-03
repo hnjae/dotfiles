@@ -14,9 +14,7 @@ return {
         opts = function(_, opts)
           local cmp = require("cmp")
 
-          if not opts.sources then
-            opts.sources = {}
-          end
+          opts.sources = opts.sources or {}
 
           table.insert(opts.sources, { name = "copilot", group_index = 2 })
         end,
@@ -84,22 +82,33 @@ return {
           end
           return true
         end,
-        text = false,
+
+        -- data-formats
         yaml = false,
         json = false,
         jsonc = false,
         toml = false,
         ini = false,
+
+        -- docs
+        text = false,
         markdown = false,
+        org = false,
+        norg = false,
         asciidoctor = false,
         asciidoc = false,
         rst = false,
         help = false,
+        [""] = false,
+
+        -- version-control
         gitcommit = false,
         gitrebase = false,
         hgcommit = false,
         svn = false,
         cvs = false,
+
+        --
         c = true,
         rust = true,
         java = true,
@@ -107,7 +116,6 @@ return {
         python = true,
         typescript = true,
         javascript = true,
-        [""] = false,
         ["*"] = true,
       },
     },

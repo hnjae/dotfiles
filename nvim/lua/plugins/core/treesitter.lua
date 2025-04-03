@@ -10,32 +10,36 @@ local M = {
   enabled = require("utils").is_treesitter,
   event = { "VeryLazy" }, -- { "BufReadPost", "BufNewFile" },
   -- init = function() end,
-  opts = {
-    sync_install = false,
-    auto_install = false,
-    ignore_install = {},
-    highlight = {
-      enable = true,
-      disable = disable,
-      additional_vim_regex_highlighting = false,
-      -- disable = function(lang, buf)
-      --   vim.notify(lang)
-      --   local max_filesize = 100 * 1024 -- 100 KB
-      --   local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-      --   if ok and stats and stats.size > max_filesize then
-      --     return true
-      --   end
-      -- end,
-    },
-    indent = {
-      enable = true, -- NOTE: experimental features <2023-11-23>
-      disable = {},
-    },
-    incremental_selection = {
-      enale = false,
-      disable = disable,
-    },
-  },
+  opts = function(_, opts)
+    local default = {
+      sync_install = false,
+      auto_install = false,
+      ignore_install = {},
+      highlight = {
+        enable = true,
+        disable = disable,
+        additional_vim_regex_highlighting = false,
+        -- disable = function(lang, buf)
+        --   vim.notify(lang)
+        --   local max_filesize = 100 * 1024 -- 100 KB
+        --   local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+        --   if ok and stats and stats.size > max_filesize then
+        --     return true
+        --   end
+        -- end,
+      },
+      indent = {
+        enable = true, -- NOTE: experimental features <2023-11-23>
+        disable = {},
+      },
+      incremental_selection = {
+        enale = false,
+        disable = disable,
+      },
+    }
+
+    return vim.tbl_deep_extend("keep", default, opts)
+  end,
   main = "nvim-treesitter.configs",
   config = function(plugin, opts)
     require("state.treesitter-langs"):add(
@@ -63,6 +67,7 @@ local M = {
       vim.api.nvim_del_user_command(command)
     end
 
+    -- TODO: fold 를 지원하는 filetype 만 아래를 바꾸기 <2025-04-02>
     vim.opt.foldmethod = "expr"
     vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
   end,
@@ -79,9 +84,7 @@ local M = {
       ---@param opts myCmpOpts
       opts = function(_, opts)
         local cmp = require("cmp")
-        if not opts.sources then
-          opts.sources = {}
-        end
+        opts.sources = opts.sources or {}
 
         table.insert(
           opts.sources,

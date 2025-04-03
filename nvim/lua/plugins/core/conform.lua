@@ -1,13 +1,14 @@
+-- Formatter
+
 ---@type LazySpec
 return {
-  -- formatter
   [1] = "stevearc/conform.nvim",
   lazy = true,
   enabled = true,
   event = { "BufWritePre" },
   cmd = { "ConformInfo" },
   opts = function(_, opts)
-    local ret = {
+    local default = {
       default_format_opts = {
         lsp_format = "never",
         -- stop_after_first = false,
@@ -18,7 +19,8 @@ return {
       -- format_on_save = { timeout_ms = 1000 },
       format_after_save = { lsp_fallback = true },
     }
-    return vim.tbl_deep_extend("keep", ret, opts)
+
+    return vim.tbl_deep_extend("keep", default, opts)
   end,
   keys = {
     {
@@ -41,33 +43,22 @@ return {
       desc = "Format",
       mode = "n",
     },
-    -- {
-    --   [1] = "==",
-    --   [2] = function()
-    --     require("conform").format({
-    --       async = false,
-    --       timeout_ms = 4000,
-    --       quiet = false,
-    --     }, function()
-    --       local msg = "Format Done"
-    --       vim.notify(msg, nil, {
-    --         title = "Conform",
-    --         timeout = 300,
-    --         hide_from_history = true,
-    --         animate = false,
-    --       })
-    --     end)
-    --   end,
-    --   desc = "Range-Format",
-    --   mode = "v",
-    -- },
   },
   config = function(_, opts)
     require("conform").setup(opts)
 
-    -- If you want the formatexpr, here is the place to set it
-    -- 이게 == 대체할 것 (아마도)
-    vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+    local filetypes = {}
+    for ft, _ in pairs(opts.formatters_by_ft) do
+      table.insert(filetypes, ft)
+    end
+
+    -- 이게 == (아마), `gq` 대체할 것
+    vim.api.nvim_create_autocmd({ "FileType" }, {
+      pattern = filetypes,
+      callback = function()
+        vim.opt_local.formatexpr = "v:lua.require'conform'.formatexpr()"
+      end,
+    })
   end,
   specs = {
     {
@@ -142,18 +133,12 @@ return {
           cond = nil,
         }
 
-        if not opts.sections then
-          opts.sections = {}
-        end
-        if not opts.sections.lualine_x then
-          opts.sections.lualine_x = {}
-        end
+        opts.sections = opts.sections or {}
+        opts.sections.lualine_x = opts.sections.lualine_x or {}
 
-        vim.list_extend(opts.sections.lualine_x, {
-          {
-            component = component,
-            priority = 92,
-          },
+        table.insert(opts.sections.lualine_x, {
+          component = component,
+          priority = 92,
         })
       end,
     },

@@ -8,6 +8,11 @@ local set_colorcolumn = function(obj)
     return
   end
 
+  -- skip gitcommit filetype
+  if vim.opt_local.filetype:get() == "gitcommit" then
+    return
+  end
+
   local textwidth = vim.opt_local.textwidth:get()
   if not textwidth or textwidth < 1 or (textwidth + 1) > MAX_COLORCOLUMN then
     if vim.opt_local.colorcolumn ~= "" then
@@ -23,6 +28,10 @@ local set_colorcolumn = function(obj)
 end
 
 M.setup = function()
+  if vim.g.vscode then
+    return
+  end
+
   local au_id = vim.api.nvim_create_augroup("colorcolumn-textwidth", {})
 
   vim.api.nvim_create_autocmd(

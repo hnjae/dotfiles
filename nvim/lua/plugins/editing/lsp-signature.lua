@@ -1,4 +1,4 @@
----@type LazySpec[]
+---@type LazySpec
 return {
   [1] = "neovim/nvim-lspconfig",
   optional = true,

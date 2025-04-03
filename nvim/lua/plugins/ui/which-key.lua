@@ -1,6 +1,3 @@
-local val = require("val")
-local prefix = val.prefix
-
 ---@type LazySpec
 return {
   -- set keymap / show keymap
@@ -16,6 +13,9 @@ return {
   },
   ---@class wk.Opts
   opts = function(_, opts)
+    local val = require("val")
+    local prefix = val.prefix
+
     opts.preset = "modern"
 
     opts.spec = opts.spec or {}
@@ -115,6 +115,9 @@ return {
     })
   end,
   config = function(_, opts)
+    local val = require("val")
+    local prefix = val.prefix
+
     local wk = require("which-key")
     wk.setup(opts)
 

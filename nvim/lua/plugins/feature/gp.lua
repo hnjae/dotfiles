@@ -8,6 +8,9 @@ run `secret-tool store --label=<api-anthropic> api anthropic` to save password
 같이 보기:
   * <https://ai.google.dev/pricing>
   * <https://docs.anthropic.com/en/api/messages>
+
+TODO:
+  - gp-chat 경로의 markdown 은 textwidth=0 으로 지정 <2025-04-02>
 ]]
 
 ---@type LazySpec

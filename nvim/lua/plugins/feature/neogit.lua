@@ -51,35 +51,6 @@ return {
       [3] = "neogit-log",
     },
   },
-  config = function(_, opts)
-    local MAX_COLORCOLUMN = 200
-
-    -- neogit 에서는 bufnolisted 로 gitcommit 이 열려, 별도로 설정하는 로직 추가 <2025-03-02>
-    vim.api.nvim_create_autocmd({ "FileType" }, {
-      pattern = { "gitcommit" },
-      callback = function()
-        local textwidth = vim.opt_local.textwidth:get()
-        if
-          not textwidth
-          or textwidth < 1
-          or (textwidth + 1) > MAX_COLORCOLUMN
-        then
-          if vim.opt_local.colorcolumn ~= "" then
-            vim.opt_local.colorcolumn = ""
-          end
-
-          return
-        end
-
-        -- NOTE: range에는 starts, end 전부 포함됨 <2023-12-11>
-        local columns = vim.fn.range(textwidth + 1, MAX_COLORCOLUMN)
-        table.insert(columns, 51)
-        vim.opt_local.colorcolumn = vim.fn.join(columns, ",")
-      end,
-    })
-
-    require("neogit").setup(opts)
-  end,
   specs = {
     {
       [1] = "nvim-lualine/lualine.nvim",
@@ -101,14 +72,13 @@ return {
         opts.spec = opts.spec or {}
         opts.icons = opts.icons or {}
         opts.icons.rules = opts.icons.rules or {}
+
         local icon = require("val.icons").git
 
-        vim.list_extend(opts.icons.rules, {
-          {
-            plugin = "neogit",
-            icon = icon,
-            color = "orange",
-          },
+        table.insert(opts.icons.rules, {
+          plugin = "neogit",
+          icon = icon,
+          color = "orange",
         })
       end,
     },
