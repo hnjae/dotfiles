@@ -16,7 +16,7 @@ return {
       },
     },
     opts = function()
-      require("state.treesitter-langs"):add("just")
+      require("plugins.core.treesitter.languages"):add("just")
     end,
   },
   {

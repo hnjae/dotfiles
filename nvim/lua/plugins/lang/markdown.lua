@@ -4,7 +4,7 @@ return {
     [1] = "nvim-treesitter/nvim-treesitter",
     optional = true,
     init = function()
-      require("state.treesitter-langs"):add("markdown")
+      require("plugins.core.treesitter.languages"):add("markdown")
     end,
   },
   {

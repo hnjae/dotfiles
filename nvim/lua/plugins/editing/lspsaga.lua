@@ -11,7 +11,7 @@ local M = {
       [1] = "nvim-treesitter/nvim-treesitter",
       optional = true,
       opts = function()
-        require("state.treesitter-langs"):add("markdown", "markdown_inline")
+        require("plugins.core.treesitter.languages"):add("markdown", "markdown_inline")
       end,
     },
   },

@@ -5,7 +5,7 @@ return {
     [1] = "nvim-treesitter/nvim-treesitter",
     optional = true,
     opts = function()
-      require("state.treesitter-langs"):add("kdl")
+      require("plugins.core.treesitter.languages"):add("kdl")
     end,
   },
 }

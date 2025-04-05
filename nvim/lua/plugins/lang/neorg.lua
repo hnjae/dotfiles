@@ -8,7 +8,7 @@ return {
   config = true,
   enabled = vim.fn.has("nvim-0.10") == 1 and vim.fn.executable("luarocks") == 1,
   opts = {
-    require("state.treesitter-langs"):add("norg"),
+    require("plugins.core.treesitter.languages"):add("norg"),
   },
   specs = {},
 }

@@ -4,7 +4,7 @@ return {
     [1] = "nvim-treesitter/nvim-treesitter",
     optional = true,
     opts = function()
-      require("state.treesitter-langs"):add("bash")
+      require("plugins.core.treesitter.languages"):add("bash")
     end,
   },
   {

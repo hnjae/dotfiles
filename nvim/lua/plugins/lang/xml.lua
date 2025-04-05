@@ -4,7 +4,7 @@ return {
     [1] = "nvim-treesitter/nvim-treesitter",
     optional = true,
     opts = function()
-      require("state.treesitter-langs"):add("xml")
+      require("plugins.core.treesitter.languages"):add("xml")
     end,
   },
   {
