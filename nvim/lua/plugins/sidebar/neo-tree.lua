@@ -1,4 +1,4 @@
-local val = require("val")
+local globals = require("globals")
 
 ---@type LazySpec
 return {
@@ -20,12 +20,12 @@ return {
   },
   keys = {
     {
-      [1] = val.prefix.sidebar .. val.map_keyword.filemanager,
+      [1] = globals.prefix.sidebar .. globals.map_keyword.filemanager,
       [2] = "<cmd>Neotree toggle<CR>",
       desc = "neotree-toggle",
     },
     {
-      [1] = val.prefix.focus .. val.map_keyword.filemanager,
+      [1] = globals.prefix.focus .. globals.map_keyword.filemanager,
       [2] = "<cmd>Neotree<CR>",
       desc = "focus-neotree",
     },
@@ -47,8 +47,8 @@ return {
       [1] = "nvim-lualine/lualine.nvim",
       optional = true,
       opts = function()
-        local icons = require("val").icons
-        require("state.lualine-ft-data"):add({
+        local icons = require("globals").icons
+        require("plugins.core.lualine.utils.buffer-attributes"):add({
           ["neo-tree"] = { display_name = "NeoTree", icon = icons.file_tree },
           ["neo-tree-popup"] = {
             display_name = "NeoTree Popup",

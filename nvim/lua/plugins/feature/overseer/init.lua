@@ -1,15 +1,18 @@
--- https://code.visualstudio.com/Docs/editor/tasks
+--[[
+
+  같이 보기:
+    - <https://code.visualstudio.com/Docs/editor/tasks>
+
+  Alternative:
+    - "jedrzejboczar/toggletasks.nvim",
+]]
 
 -- local package_path = (...) -- "plugins.feature.overseer"
 local package_path = "plugins.feature.overseer"
 
-local val = require("val")
-local prefix = val.prefix.task
+local globals = require("globals")
+local prefix = globals.prefix.task
 local key_word_overseer = prefix:sub(-1, -1)
-local map_keyword = require("val").map_keyword
-
--- or
--- "jedrzejboczar/toggletasks.nvim",
 
 ---@return number|nil
 -- local function get_oversee_bufnr()
@@ -94,12 +97,12 @@ return {
       desc = "overseer",
     },
     {
-      [1] = require("val").prefix.sidebar .. key_word_overseer,
+      [1] = require("globals").prefix.sidebar .. key_word_overseer,
       [2] = "<cmd>OverseerToggle!<CR>",
       desc = "overseer",
     },
     {
-      [1] = require("val").prefix.sidebar .. key_word_overseer:upper(),
+      [1] = require("globals").prefix.sidebar .. key_word_overseer:upper(),
       [2] = "<cmd>OverseerOpen<CR>",
       desc = "overseer-focus",
     },
@@ -177,8 +180,8 @@ return {
           { component = "overseer", priority = 60 }
         )
 
-        local icons = require("val").icons
-        require("state.lualine-ft-data"):add({
+        local icons = require("globals").icons
+        require("plugins.core.lualine.utils.buffer-attributes"):add({
           OverseerForm = {
             display_name = "Overseer Form",
             icon = icons.workflow,

@@ -1,4 +1,4 @@
-local val = require("val")
+local globals = require("globals")
 
 -- :help lsp-defaults
 
@@ -37,8 +37,8 @@ return {
   ---@param opts myLspconfigOpts
   config = function(_, opts)
     local lspconfig = require("lspconfig")
-    local prefix = require("val.prefix")
-    local map_keyword = require("val.map-keyword")
+    local prefix = require("globals").prefix
+    local map_keyword = require("globals").map_keyword
 
     -------------------------------------
     -- capabilities
@@ -57,7 +57,7 @@ return {
     -------------------------------------
 
     local server_global_opts = {
-      on_attach = val.on_attach,
+      on_attach = require("globals").on_attach,
     }
 
     for server, server_opts in pairs(opts.servers) do
@@ -366,7 +366,7 @@ return {
         }
 
         local lsp_icon = utils.enable_icon
-            and (require("val").icons.codicons.gear .. " ")
+            and (require("globals").icons.codicons.gear .. " ")
           or "L "
 
         local lsp_name_fmt = function(name)

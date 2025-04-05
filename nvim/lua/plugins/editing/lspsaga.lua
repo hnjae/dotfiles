@@ -11,13 +11,13 @@ local M = {
       [1] = "nvim-treesitter/nvim-treesitter",
       optional = true,
       opts = function()
-        require("state.treesitter-langs"):add("markdown", "markdown_inline")
+        require("plugins.core.treesitter.languages"):add("markdown", "markdown_inline")
       end,
     },
   },
   opts = function(_, opts)
     local utils = require("utils")
-    local map_keyword = require("val").map_keyword
+    local map_keyword = require("globals").map_keyword
 
     local default_opts = {
       scroll_preview = {
@@ -86,7 +86,7 @@ local M = {
           devicons = true,
           expand = "", -- nf-cod-expand_all
           collapse = "", -- nf-cod-collapse_all
-          code_action = require("val").icons.signs.code_action,
+          code_action = require("globals").icons.signs.code_action,
           actionfix = " ", -- nf-cod-lightbulb_autofix
           imp_sign = "", -- nf-cod-wand
         }
@@ -106,9 +106,9 @@ local M = {
   },
   ---@type fun(LazyPlugin, keys: LazyKeysSpec[]): nil
   keys = function(_, keys)
-    local val = require("val")
-    local map_keyword = val.map_keyword
-    local prefix = val.prefix
+    local globals = require("globals")
+    local map_keyword = globals.map_keyword
+    local prefix = globals.prefix
 
     vim.api.nvim_create_autocmd("LspAttach", {
       callback = function(args)
@@ -319,8 +319,8 @@ local M = {
         -- end
         -- table.insert(opts.tabline.lualine_a, component)
 
-        local icons = require("val").icons
-        require("state.lualine-ft-data"):add({
+        local icons = require("globals").icons
+        require("plugins.core.lualine.utils.buffer-attributes"):add({
           sagafinder = { display_name = "SagaFinder", icon = icons.search },
           saga_codeaction = {
             display_name = "Saga CodeAction",

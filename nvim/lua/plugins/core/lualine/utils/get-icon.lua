@@ -7,9 +7,10 @@ if not is_devicons then
   end
 end
 
-local icons = require("val").icons
+local icons = require("globals").icons
 
-local ft_data = require("state.lualine-ft-data").data
+local package_path = (...):match("(.-)[^%.]+$")
+local ft_data = require(package_path .. ".buffer-attributes")
 
 local buftype_icons = {
   -- terminal = devicons.get_icon("terminal"),

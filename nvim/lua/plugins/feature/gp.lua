@@ -38,7 +38,7 @@ return {
       vim.api.nvim_del_user_command(command)
     end
 
-    local icon = require("utils").enable_icon and require("val.icons").ai
+    local icon = require("utils").enable_icon and require("globals").icons.ai
       or "LLM"
 
     vim.api.nvim_create_autocmd({ "User" }, {
@@ -64,34 +64,36 @@ return {
     -- })
   end,
   opts = function(_, opts)
-    local myopts = {
-      command_prompt_prefix_template = (
-        require("utils").enable_icon and require("val.icons").ai or "LLM:"
-      ) .. " {{agent}} ~ ",
-      chat_assistant_prefix = {
-        (require("utils").enable_icon and require("val.icons").ai or "LLM:"),
-        " [{{agent}}]",
-      },
-      chat_user_prefix = (require("utils").enable_icon and (require(
-        "val.icons"
-      ).textbox .. " :") or "Prompt:"),
-      chat_conceal_model_params = false,
-      -- chat_topic_model = "";
+    local icon = require("globals").icons.ai
+    local myopts =
+      {
+        command_prompt_prefix_template = (
+          require("utils").enable_icon and icon or "LLM:"
+        ) .. " {{agent}} ~ ",
+        chat_assistant_prefix = {
+          (require("utils").enable_icon and icon or "LLM:"),
+          " [{{agent}}]",
+        },
+        chat_user_prefix = (require("utils").enable_icon and (require(
+          "globals"
+        ).icons.textbox .. " :") or "Prompt:"),
+        chat_conceal_model_params = false,
+        -- chat_topic_model = "";
 
-      chat_shortcut_new = {
-        modes = { "n", "i", "v", "x" },
-        shortcut = "<C-g>n",
-      },
-      chat_shortcut_respond = {
-        modes = { "n", "i", "v", "x" },
-        shortcut = "<C-g>r",
-      },
+        chat_shortcut_new = {
+          modes = { "n", "i", "v", "x" },
+          shortcut = "<C-g>n",
+        },
+        chat_shortcut_respond = {
+          modes = { "n", "i", "v", "x" },
+          shortcut = "<C-g>r",
+        },
 
-      default_command_agent = "gemini-command",
-      -- default_chat_agent = "claude-sonnet",
-      default_chat_agent = "gemini",
+        default_command_agent = "gemini-command",
+        -- default_chat_agent = "claude-sonnet",
+        default_chat_agent = "gemini",
 
-      chat_template = [[
+        chat_template = [[
 # topic: ?
 
 - file: {{filename}}
@@ -109,172 +111,172 @@ Chats are saved automatically.
 {{user_prefix}}
 ]],
 
-      style_popup_max_width = 120,
+        style_popup_max_width = 120,
 
-      -- Keys
-      openai_api_key = {
-        "secret-tool",
-        "lookup",
-        "api",
-        "openai",
-      },
+        -- Keys
+        openai_api_key = {
+          "secret-tool",
+          "lookup",
+          "api",
+          "openai",
+        },
 
-      providers = {
-        openai = {
-          disable = false,
-        },
-        copilot = {
-          disable = false,
-          secret = {
-            "bash",
-            "-c",
-            "cat ~/.config/github-copilot/apps.json | sed -e 's/.*oauth_token...//;s/\".*//'",
+        providers = {
+          openai = {
+            disable = false,
+          },
+          copilot = {
+            disable = false,
+            secret = {
+              "bash",
+              "-c",
+              "cat ~/.config/github-copilot/apps.json | sed -e 's/.*oauth_token...//;s/\".*//'",
+            },
+          },
+          anthropic = {
+            disable = false,
+            secret = {
+              "secret-tool",
+              "lookup",
+              "api",
+              "anthropic",
+            },
+          },
+          googleai = {
+            secret = {
+              "secret-tool",
+              "lookup",
+              "api",
+              "googleai",
+            },
+          },
+          pplx = {
+            secret = {
+              "secret-tool",
+              "lookup",
+              "api",
+              "pplx",
+            },
           },
         },
-        anthropic = {
-          disable = false,
-          secret = {
-            "secret-tool",
-            "lookup",
-            "api",
-            "anthropic",
-          },
-        },
-        googleai = {
-          secret = {
-            "secret-tool",
-            "lookup",
-            "api",
-            "googleai",
-          },
-        },
-        pplx = {
-          secret = {
-            "secret-tool",
-            "lookup",
-            "api",
-            "pplx",
-          },
-        },
-      },
 
-      agents = {
-        -- disable default agents
-        { name = "ChatGPT4o", disable = true },
-        { name = "CodeGPT4o", disable = true },
-        { name = "ChatGPT4o-mini", disable = true },
-        { name = "CodeGPT4o-mini", disable = true },
-        { name = "ChatClaude-3-5-Sonnet", disable = true },
-        { name = "CodeClaude-3-5-Sonnet", disable = true },
-        { name = "ChatClaude-3-Haiku", disable = true },
-        { name = "CodeClaude-3-Haiku", disable = true },
-        { name = "ChatGemini", disable = true },
-        { name = "CodeGemini", disable = true },
-        { name = "ChatPerplexityLlama3.1-8B", disable = true },
-        { name = "CodePerplexityLlama3.1-8B", disable = true },
-        { name = "ChatCopilot", disable = true },
-        { name = "CodeCopilot", disable = true },
-        --
-        -- {
-        --   provider = "copilot",
-        --   name = "copilot-o3-mini",
-        --   chat = true,
-        --   command = false,
-        --   model = { model = "o3-mini", temperature = 1.0, top_p = 1 },
-        --   -- system_prompt = require("gp.defaults").chat_system_prompt,
-        -- },
-        -- {
-        -- WIP
-        --   provider = "openai",
-        --   name = "o3-mini",
-        --   chat = true,
-        --   command = false,
-        --   model = {
-        --     model = "o3-mini",
-        --     temperature = 0.9,
-        --   },
-        --   system_prompt = require("gp.defaults").chat_system_prompt
-        --     .. "\n\nAlways answer in English regardless of input language.",
-        --   --   system_prompt = "Formatting re-enabled ",
-        -- },
-        {
-          provider = "anthropic",
-          name = "claude",
-          chat = true,
-          command = false,
-          model = {
-            model = "claude-3-7-sonnet-latest",
-            temperature = 0.9,
-            max_token = 8192,
+        agents = {
+          -- disable default agents
+          { name = "ChatGPT4o", disable = true },
+          { name = "CodeGPT4o", disable = true },
+          { name = "ChatGPT4o-mini", disable = true },
+          { name = "CodeGPT4o-mini", disable = true },
+          { name = "ChatClaude-3-5-Sonnet", disable = true },
+          { name = "CodeClaude-3-5-Sonnet", disable = true },
+          { name = "ChatClaude-3-Haiku", disable = true },
+          { name = "CodeClaude-3-Haiku", disable = true },
+          { name = "ChatGemini", disable = true },
+          { name = "CodeGemini", disable = true },
+          { name = "ChatPerplexityLlama3.1-8B", disable = true },
+          { name = "CodePerplexityLlama3.1-8B", disable = true },
+          { name = "ChatCopilot", disable = true },
+          { name = "CodeCopilot", disable = true },
+          --
+          -- {
+          --   provider = "copilot",
+          --   name = "copilot-o3-mini",
+          --   chat = true,
+          --   command = false,
+          --   model = { model = "o3-mini", temperature = 1.0, top_p = 1 },
+          --   -- system_prompt = require("gp.defaults").chat_system_prompt,
+          -- },
+          -- {
+          -- WIP
+          --   provider = "openai",
+          --   name = "o3-mini",
+          --   chat = true,
+          --   command = false,
+          --   model = {
+          --     model = "o3-mini",
+          --     temperature = 0.9,
+          --   },
+          --   system_prompt = require("gp.defaults").chat_system_prompt
+          --     .. "\n\nAlways answer in English regardless of input language.",
+          --   --   system_prompt = "Formatting re-enabled ",
+          -- },
+          {
+            provider = "anthropic",
+            name = "claude",
+            chat = true,
+            command = false,
+            model = {
+              model = "claude-3-7-sonnet-latest",
+              temperature = 0.9,
+              max_token = 8192,
+            },
+            system_prompt = require("gp.defaults").chat_system_prompt
+              .. "\n\nAlways answer in English regardless of input language.",
           },
-          system_prompt = require("gp.defaults").chat_system_prompt
-            .. "\n\nAlways answer in English regardless of input language.",
-        },
-        {
-          provider = "googleai",
-          name = "gemini",
-          chat = true,
-          command = false,
-          model = {
-            model = "gemini-2.5-pro-exp-03-25",
-            temperature = 0.9,
+          {
+            provider = "googleai",
+            name = "gemini",
+            chat = true,
+            command = false,
+            model = {
+              model = "gemini-2.5-pro-exp-03-25",
+              temperature = 0.9,
+            },
+            system_prompt = require("gp.defaults").chat_system_prompt
+              .. "\n\nAlways answer in English regardless of input language.",
           },
-          system_prompt = require("gp.defaults").chat_system_prompt
-            .. "\n\nAlways answer in English regardless of input language.",
-        },
-        {
-          provider = "anthropic",
-          name = "claude-command",
-          chat = false,
-          command = true,
-          model = {
-            model = "claude-3-7-sonnet-latest",
-            temperature = 0.9,
-            max_token = 8192,
+          {
+            provider = "anthropic",
+            name = "claude-command",
+            chat = false,
+            command = true,
+            model = {
+              model = "claude-3-7-sonnet-latest",
+              temperature = 0.9,
+              max_token = 8192,
+            },
+            system_prompt = require("gp.defaults").code_system_prompt,
           },
-          system_prompt = require("gp.defaults").code_system_prompt,
-        },
-        {
-          provider = "googleai",
-          name = "gemini-command",
-          chat = false,
-          command = true,
-          model = {
-            model = "gemini-2.0-flash",
-            -- model = "gemini-2.5-pro-exp-03-25",
-            temperature = 0.9,
-            top_k = 40, -- range 0 -- 41
+          {
+            provider = "googleai",
+            name = "gemini-command",
+            chat = false,
+            command = true,
+            model = {
+              model = "gemini-2.0-flash",
+              -- model = "gemini-2.5-pro-exp-03-25",
+              temperature = 0.9,
+              top_k = 40, -- range 0 -- 41
+            },
+            system_prompt = "",
           },
-          system_prompt = "",
         },
-      },
 
-      hooks = {
-        UnitTests = function(gp, params)
-          local template = "I have the following code from {{filename}}:\n\n"
-            .. "```{{filetype}}\n{{selection}}\n```\n\n"
-            .. "Please respond by writing table driven unit tests for the code above."
-          local agent = gp.get_command_agent("claude-3-7-sonnet")
-          gp.Prompt(params, gp.Target.vnew, agent, template)
-        end,
-        Proofread2 = function(gp, params)
-          local template = [[```
+        hooks = {
+          UnitTests = function(gp, params)
+            local template = "I have the following code from {{filename}}:\n\n"
+              .. "```{{filetype}}\n{{selection}}\n```\n\n"
+              .. "Please respond by writing table driven unit tests for the code above."
+            local agent = gp.get_command_agent("claude-3-7-sonnet")
+            gp.Prompt(params, gp.Target.vnew, agent, template)
+          end,
+          Proofread2 = function(gp, params)
+            local template = [[```
 {{selection}}
 ```
 ]]
-          local agent = gp.get_command_agent("claude-3-5-haiku")
-          agent.system_prompt =
-            [[I want you to act as an expert proofreader capable of detecting and correcting grammatical issues in any language. The text given is sentences I wrote, and I would like you to correct any grammatical errors. In your responses, highlight the corrections clearly and provide a brief explanation for each correction if necessary. Your response should be in the same language as the input text. Do not alter the original meaning of the text.]]
-          gp.Prompt(params, gp.Target.vnew, agent, template)
-        end,
-        Proofread = function(gp, params)
-          local template = [[```
+            local agent = gp.get_command_agent("claude-3-5-haiku")
+            agent.system_prompt =
+              [[I want you to act as an expert proofreader capable of detecting and correcting grammatical issues in any language. The text given is sentences I wrote, and I would like you to correct any grammatical errors. In your responses, highlight the corrections clearly and provide a brief explanation for each correction if necessary. Your response should be in the same language as the input text. Do not alter the original meaning of the text.]]
+            gp.Prompt(params, gp.Target.vnew, agent, template)
+          end,
+          Proofread = function(gp, params)
+            local template = [[```
 {{selection}}
 ```
 ]]
-          local agent = gp.get_command_agent("claude-3-7-sonnet")
-          agent.system_prompt =
-            [[Act as a multilingual expert proofreader and grammar specialist with the following responsibilities:
+            local agent = gp.get_command_agent("claude-3-7-sonnet")
+            agent.system_prompt =
+              [[Act as a multilingual expert proofreader and grammar specialist with the following responsibilities:
 
 Primary Tasks:
 - Analyze provided text for grammatical errors, syntax issues, and structural problems
@@ -288,47 +290,48 @@ Specific Focus Areas:
 - Sentence structure and flow
 - Tense consistency
 ]]
-          gp.Prompt(params, gp.Target.vnew, agent, template)
-        end,
-        GrammarCheck = function(gp, params)
-          local template = [[```
+            gp.Prompt(params, gp.Target.vnew, agent, template)
+          end,
+          GrammarCheck = function(gp, params)
+            local template = [[```
 {{selection}}
 ```
 ]]
-          local agent = gp.get_command_agent("claude-3-5-haiku")
-          agent.system_prompt =
-            [[Act as a multilingual grammar specialist with the following responsibilities:
+            local agent = gp.get_command_agent("claude-3-5-haiku")
+            agent.system_prompt =
+              [[Act as a multilingual grammar specialist with the following responsibilities:
 
 Primary Tasks:
 - Analyze provided text for grammatical errors, syntax issues
 - Provide corrections in the same language as the source text
 - Reply the correction and nothing else, do not write explanations.
 ]]
-          gp.Prompt(params, gp.Target.vnew, agent, template)
-        end,
-        EnglishTranslate = function(gp, params)
-          local template = [[```
+            gp.Prompt(params, gp.Target.vnew, agent, template)
+          end,
+          EnglishTranslate = function(gp, params)
+            local template = [[```
 {{selection}}
 ```
 ]]
-          local agent = gp.get_command_agent("claude-3-5-haiku")
-          agent.system_prompt =
-            [[I want you to act as an English translator, spelling corrector and improver. The given text is sentences I roughly wrote, and I would like you to translate it and answer in the corrected and improved version of my text, in English. You should ensure the sentences are simple and easy to understand for non-native English speakers. Hence, avoid complex vocabulary and sentence structures. I want you to only reply the correction, the improvements and nothing else, do not write explanations.]]
-          gp.Prompt(params, gp.Target.vnew, agent, template)
-        end,
-      },
-    }
+            local agent = gp.get_command_agent("claude-3-5-haiku")
+            agent.system_prompt =
+              [[I want you to act as an English translator, spelling corrector and improver. The given text is sentences I roughly wrote, and I would like you to translate it and answer in the corrected and improved version of my text, in English. You should ensure the sentences are simple and easy to understand for non-native English speakers. Hence, avoid complex vocabulary and sentence structures. I want you to only reply the correction, the improvements and nothing else, do not write explanations.]]
+            gp.Prompt(params, gp.Target.vnew, agent, template)
+          end,
+        },
+      }
 
     vim.tbl_deep_extend("keep", myopts, opts)
     return myopts
   end,
 
   keys = function(_, keys)
-    local map_keyword = require("val.map-keyword")
+    local map_keyword = require("globals").map_keyword
     local keyword = map_keyword.ai
+
     local bufprefix = "<LocalLeader>" .. keyword
     local bufprefix2 = "<LocalLeader>" .. string.upper(keyword)
-    local prefix = require("val.prefix")
+    local prefix = require("globals").prefix
 
     local more_keys = {
       {
@@ -432,10 +435,10 @@ Primary Tasks:
         opts.icons.rules = opts.icons.rules or {}
         opts.spec = opts.spec or {}
 
-        local map_keyword = require("val.map-keyword")
-        local prefix = require("val.prefix")
+        local map_keyword = require("globals").map_keyword
+        local prefix = require("globals").prefix
         local keyword = map_keyword.ai
-        local icon = require("val.icons").ai
+        local icon = require("globals").icons.ai
 
         vim.list_extend(opts.icons.rules, {
           {
@@ -447,7 +450,7 @@ Primary Tasks:
 
         vim.list_extend(opts.spec, {
           {
-            [1] = "<LocalLeader>" .. require("val.map-keyword").ai,
+            [1] = "<LocalLeader>" .. require("globals").map_keyword.ai,
             group = "gp-chat",
             ---@type wk.Icon
             icon = icon,

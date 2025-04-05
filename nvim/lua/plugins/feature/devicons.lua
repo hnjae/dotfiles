@@ -16,7 +16,7 @@ return {
 
     _, color, cterm_color =
       devicons.get_icon_colors(nil, nil, { default = true })
-    devicons.set_default_icon(require("val").icons.file, color, cterm_color)
+    devicons.set_default_icon(require("globals").icons.file, color, cterm_color)
 
     -- key= filename or extension (not filetype)
     local icons = {}

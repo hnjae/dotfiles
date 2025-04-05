@@ -22,7 +22,7 @@ return {
     [1] = "Robitx/gp.nvim",
     optional = true,
     keys = function(_, keys)
-      local map_keyword = require("val.map-keyword")
+      local map_keyword = require("globals").map_keyword
       -- local bufprefix = "<LocalLeader>" ..
       local bufprefix2 = "<LocalLeader>" .. string.upper(map_keyword.ai)
       local mykeys = {

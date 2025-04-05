@@ -1,5 +1,5 @@
 local utils = require("utils")
-local icons = require("val").icons
+local icons = require("globals").icons
 
 return {
   [1] = "sindrets/diffview.nvim",
@@ -27,7 +27,7 @@ return {
     [1] = "nvim-lualine/lualine.nvim",
     optional = true,
     opts = function()
-      require("state.lualine-ft-data"):add({
+      require("plugins.core.lualine.utils.buffer-attributes"):add({
         DiffviewFileHistory = {
           icon = "", -- nf-cod-diff
         },

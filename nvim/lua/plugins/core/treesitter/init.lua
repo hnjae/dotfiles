@@ -42,7 +42,7 @@ local M = {
   end,
   main = "nvim-treesitter.configs",
   config = function(plugin, opts)
-    require("state.treesitter-langs"):add(
+    require("plugins.core.treesitter.languages"):add(
       --
       "diff",
       "comment",
@@ -56,7 +56,7 @@ local M = {
       "gpg",
       "udev"
     )
-    opts.ensure_installed = require("state.treesitter-langs"):get_list()
+    opts.ensure_installed = require("plugins.core.treesitter.languages"):get_list()
     require(plugin.main).setup(opts)
 
     local del_commands = {

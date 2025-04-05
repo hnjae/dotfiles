@@ -18,7 +18,7 @@ return {
 
     opts.options = vim.tbl_deep_extend(
       "keep",
-      require("val.plugins.lualine").options,
+      require("globals.plugins.lualine").options,
       (opts.options and opts.options or {}),
       {
         icons_enabled = utils.enable_icon,

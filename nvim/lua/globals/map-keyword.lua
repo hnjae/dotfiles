@@ -1,16 +1,19 @@
--- Type Effort (colemak-dh):
--- 1.0 tn
--- 1.1 se
--- 1.3 ri
--- 1.6 ~ 1.8 aodh
--- 2.0 ~ 2.2 yflvk
--- 2.3 ~ 2.4 bycu,
--- 2.5~ 2.7 wbx.
--- 2.9 gm
--- 3.0 + l
--- 3+ bq;/j
-
 -- 설정 전역에서 각종 키워드 통일 위해 사용.
+
+--[[
+  Type Effort (colemak-dh):
+    - 1.0 tn
+    - 1.1 se
+    - 1.3 ri
+    - 1.6 ~ 1.8 aodh
+    - 2.0 ~ 2.2 yflvk
+    - 2.3 ~ 2.4 bycu,
+    - 2.5~ 2.7 wbx.
+    - 2.9 gm
+    - 3.0 + l
+    - 3+ bq;/j
+]]
+
 ---@type table<string, string>
 return {
   -- 보통 특정 목적의 윈도우를 여는 식의 작업에 사용되길 기대.

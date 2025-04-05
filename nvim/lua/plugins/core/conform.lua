@@ -72,7 +72,7 @@ return {
         local truc_width = 100
         local num_source_semi_limit = 2
 
-        local icon = utils.enable_icon and (require("val").icons.sort .. " ")
+        local icon = utils.enable_icon and (require("globals").icons.sort .. " ")
           or ""
 
         local modules = require("lualine_require").lazy_require({

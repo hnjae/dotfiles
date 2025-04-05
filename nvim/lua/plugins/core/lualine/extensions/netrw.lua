@@ -4,7 +4,7 @@ local modules = require("lualine_require").lazy_require({
 })
 
 local find_project_root =
-  modules.lspconfig.util.root_pattern(unpack(require("val").root_patterns))
+  modules.lspconfig.util.root_pattern(unpack(require("globals").root_patterns))
 
 local get_name = function()
   local cur_dir = vim.api.nvim_buf_get_var(0, "netrw_curdir")

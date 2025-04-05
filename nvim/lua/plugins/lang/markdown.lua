@@ -4,7 +4,7 @@ return {
     [1] = "nvim-treesitter/nvim-treesitter",
     optional = true,
     init = function()
-      require("state.treesitter-langs"):add("markdown")
+      require("plugins.core.treesitter.languages"):add("markdown")
     end,
   },
   {
@@ -91,13 +91,13 @@ return {
     ---@type LazyKeysSpec[]
     keys = {
       {
-        [1] = require("val").prefix.buffer .. "p",
+        [1] = require("globals").prefix.buffer .. "p",
         [2] = "<cmd>Preview<CR>",
         desc = "preview-using-peek",
         ft = "markdown",
       },
       {
-        [1] = require("val").prefix.buffer .. "P",
+        [1] = require("globals").prefix.buffer .. "P",
         [2] = "<cmd>PreviewClose<CR>",
         desc = "preview-close",
         ft = "markdown",

@@ -1,4 +1,4 @@
-local prefix = require("val").prefix
+local prefix = require("globals").prefix
 
 ---@type LazySpec[]
 return {
@@ -6,7 +6,7 @@ return {
     [1] = "nvim-treesitter/nvim-treesitter",
     optional = true,
     opts = function()
-      require("state.treesitter-langs"):add("python", "requirements")
+      require("plugins.core.treesitter.languages"):add("python", "requirements")
     end,
   },
   {

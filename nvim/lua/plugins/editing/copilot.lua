@@ -33,8 +33,7 @@ return {
     enabled = true,
     cond = not vim.g.vscode and vim.fn.executable("node") == 1,
     keys = function()
-      local prefix = require("val.prefix")
-      -- local map_keyword = require("val.map-keyword")
+      local prefix = require("globals").prefix
       local keyword = "c"
       return {
         {

@@ -1,4 +1,4 @@
-local prefix = require("val").prefix
+local prefix = require("globals").prefix
 
 ---@type LazySpec
 return {

@@ -39,8 +39,8 @@ return {
   end,
   keys = function()
     -- local gnote = require("global-note")
-    -- local prefix = require("val").prefix
-    -- local map_keyword = require("val").map_keyword
+    -- local prefix = require("globals").prefix
+    -- local map_keyword = require("globals").map_keyword
 
     return {
       { [1] = "<Leader>h", [2] = "<cmd>GlobalNote<CR>", desc = "nvim-help" },

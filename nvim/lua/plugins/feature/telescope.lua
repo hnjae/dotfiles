@@ -49,15 +49,15 @@ return {
   },
   ---@type fun(LazyPlugin, keys: LazyKeysSpec[]): nil
   keys = function(_, keys)
-    local val = require("val")
-    local prefix = val.prefix
-    local map_keyword = val.map_keyword
+    local globals = require("globals")
+    local prefix = globals.prefix
+    local map_keyword = globals.map_keyword
     local t_builtin = require("telescope.builtin")
     local _, lspconfig = pcall(require, "lspconfig")
     local prefix_search_in_buffer = "<LocalLeader>" .. map_keyword.find
 
     local find_project_root =
-      lspconfig.util.root_pattern(unpack(val.root_patterns))
+      lspconfig.util.root_pattern(unpack(globals.root_patterns))
 
     ---@param ft? string filtepye
     local get_cwd = function(ft)
@@ -230,7 +230,7 @@ return {
     end
   end,
   opts = function()
-    local map_keyword = require("val").map_keyword
+    local map_keyword = require("globals").map_keyword
 
     local ret = {
       defaults = {
@@ -286,8 +286,8 @@ return {
       [1] = "nvim-lualine/lualine.nvim",
       optional = true,
       opts = function()
-        local icons = require("val").icons
-        require("state.lualine-ft-data"):add({
+        local icons = require("globals").icons
+        require("plugins.core.lualine.utils.buffer-attributes"):add({
           TelescopePrompt = {
             display_name = "TelescopePrompt",
             icon = icons.search,

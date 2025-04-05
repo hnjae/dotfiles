@@ -1,5 +1,5 @@
-local val = require("val")
-local icons = val.icons
+local globals = require("globals")
+local icons = globals.icons
 local utils = require("utils")
 
 return {
@@ -28,25 +28,25 @@ return {
   },
   keys = {
     {
-      [1] = val.prefix.git .. val.map_keyword.git,
+      [1] = globals.prefix.git .. globals.map_keyword.git,
       [2] = "<cmd>Neogit<CR>",
       desc = "open-neogit",
     },
     -- not working
     -- {
-    --   [1] = val.prefix.git .. "c",
+    --   [1] = globals.prefix.git .. "c",
     --   [2] = function()
     --     require("neogit").action("commit", "commit", {})
     --   end,
     --   desc = "commit",
     -- },
     {
-      [1] = val.prefix.git .. "C",
+      [1] = globals.prefix.git .. "C",
       [2] = "<cmd>Neogit commit<CR>",
       desc = "commit-popup",
     },
     {
-      [1] = "<LocalLeader>" .. val.map_keyword.git .. "l",
+      [1] = "<LocalLeader>" .. globals.map_keyword.git .. "l",
       [2] = "<cmd>NeogitLog<CR>",
       [3] = "neogit-log",
     },
@@ -56,7 +56,7 @@ return {
       [1] = "nvim-lualine/lualine.nvim",
       optional = true,
       opts = function()
-        require("state.lualine-ft-data"):add({
+        require("plugins.core.lualine.utils.buffer-attributes"):add({
           NeogitStatus = { display_name = "NeogitStatus", icon = icons.git },
           -- NeogitWorkTreePopup
           -- NeogitCommitMessage
@@ -73,7 +73,7 @@ return {
         opts.icons = opts.icons or {}
         opts.icons.rules = opts.icons.rules or {}
 
-        local icon = require("val.icons").git
+        local icon = require("globals").icons.git
 
         table.insert(opts.icons.rules, {
           plugin = "neogit",

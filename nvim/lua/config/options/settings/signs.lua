@@ -1,5 +1,5 @@
 local e = require("utils").enable_icon
-local icons = require("val").icons.signs
+local icons = require("globals").icons.signs
 local opts = {
   signs = {
     text = {

@@ -4,7 +4,7 @@ return {
     [1] = "nvim-treesitter/nvim-treesitter",
     optional = true,
     opts = function()
-      require("state.treesitter-langs"):add(
+      require("plugins.core.treesitter.languages"):add(
         "lua",
         "luadoc",
         "luap", -- https://www.lua.org/pil/20.2.html

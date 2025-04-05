@@ -10,7 +10,7 @@ return {
       Parser/Features         H L F I J
       - nu                  ✓ . ✓ ✓ ✓
       ]]
-      require("state.treesitter-langs"):add("nu")
+      require("plugins.core.treesitter.languages"):add("nu")
     end,
   },
   {

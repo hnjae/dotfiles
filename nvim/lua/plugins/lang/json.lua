@@ -3,7 +3,7 @@ return {
     [1] = "nvim-treesitter/nvim-treesitter",
     optional = true,
     opts = function()
-      require("state.treesitter-langs"):add("json", "jsonc", "json5")
+      require("plugins.core.treesitter.languages"):add("json", "jsonc", "json5")
     end,
   },
   {

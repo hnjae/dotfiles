@@ -37,6 +37,7 @@ M.setup = function()
       lazypath,
     })
   end
+
   vim.opt.rtp:prepend(lazypath)
   local opts = {
     ---@type LazySpec[]
@@ -50,15 +51,13 @@ M.setup = function()
         [1] = "nvim-lualine/lualine.nvim",
         optional = true,
         opts = function()
-          require("state.lualine-ft-data"):add({
+          require("plugins.core.lualine.utils.buffer-attributes"):add({
             lazy = { display_name = "Lazy", icon = "󰒲" }, -- nf-md-sleep
           })
         end,
       },
     },
-    -- defaults = {
-    --   lazy = true,
-    -- },
+
     pills = require("utils").enable_icon,
     performance = {
       -- NOTE: nix를 사용할 경우, 시스템의 packpath를 사용할 것. <??>

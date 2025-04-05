@@ -1,4 +1,4 @@
-require("state.treesitter-langs"):add("java")
+require("plugins.core.treesitter.languages"):add("java")
 
 ---@type LazySpec
 return {
@@ -6,7 +6,7 @@ return {
     [1] = "nvim-treesitter/nvim-treesitter",
     optional = true,
     opts = function()
-      require("state.treesitter-langs"):add("java")
+      require("plugins.core.treesitter.languages"):add("java")
     end,
   },
   -- {

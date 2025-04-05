@@ -1,4 +1,4 @@
-local icon = require("utils").enable_icon and require("val").icons.lightbulb
+local icon = require("utils").enable_icon and require("globals").icons.lightbulb
   or "!"
 
 -- TODO: WIP <2024-07-26>

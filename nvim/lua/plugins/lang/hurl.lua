@@ -8,7 +8,7 @@ return {
       [1] = "nvim-treesitter/nvim-treesitter",
       optional = true,
       opts = function()
-        require("state.treesitter-langs"):add("hurl")
+        require("plugins.core.treesitter.languages"):add("hurl")
       end,
     },
   },
@@ -18,8 +18,8 @@ return {
     show_notification = false,
   },
   keys = function()
-    local prefix = require("val.prefix").execute
-    local keyword = require("val.map-keyword").execute
+    local prefix = require("globals").prefix.execute
+    local keyword = require("globals").map_keyword.execute
 
     return {
       -- Run API request

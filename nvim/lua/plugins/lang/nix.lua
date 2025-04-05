@@ -4,7 +4,7 @@ return {
     [1] = "nvim-treesitter/nvim-treesitter",
     optional = true,
     opts = function(_, opts)
-      require("state.treesitter-langs"):add("nix")
+      require("plugins.core.treesitter.languages"):add("nix")
 
       opts.indent = opts.indent or {}
       opts.indent.disable = opts.indent.diable or {}

@@ -1,5 +1,5 @@
-local val = require("val")
-local prefix = val.prefix.sniprun
+local globals = require("globals")
+local prefix = globals.prefix.sniprun
 
 ---@type LazySpec[]
 return {

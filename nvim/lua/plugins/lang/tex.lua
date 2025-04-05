@@ -5,7 +5,7 @@ return {
     [1] = "nvim-treesitter/nvim-treesitter",
     optional = true,
     opts = function()
-      require("state.treesitter-langs"):add("latex", "bibtex", "gnuplot")
+      require("plugins.core.treesitter.languages"):add("latex", "bibtex", "gnuplot")
     end,
   },
   {
@@ -74,7 +74,7 @@ return {
       --   ["w"] = { "<cmd>VimtexCountWords<CR>", "count-words" },
       --   ["l"] = { "<cmd>VimtexCountLetters<CR>", "count-letters" },
       -- }
-      -- local wk_opts = { buffer = 0, prefix = require("val").prefix.buffer }
+      -- local wk_opts = { buffer = 0, prefix = require("globals").prefix.buffer }
       -- vim.api.nvim_create_autocmd({
       --   "BufRead",
       --   "BufNewFile",

@@ -4,7 +4,7 @@ return {
     [1] = "nvim-treesitter/nvim-treesitter",
     optional = true,
     opts = function()
-      require("state.treesitter-langs"):add("tsx", "typescript", "javascript")
+      require("plugins.core.treesitter.languages"):add("tsx", "typescript", "javascript")
     end,
   },
   {

@@ -1,4 +1,4 @@
-local val = require("val")
+local globals = require("globals")
 
 ---@type LazySpec
 return {
@@ -10,15 +10,15 @@ return {
   event = { "VeryLazy" },
   opts = function()
     local e = require("utils").enable_icon
-    local icons = require("val").icons.signs
+    local icons = require("globals").icons.signs
 
     local ret = {
       icons = {
         EROOR = e and icons.error or "E",
         WARN = e and icons.warn or "W",
         INFO = e and icons.info or "I",
-        TRACE = e and val.icons.signs.trace or "T",
-        DEBUG = e and val.icons.signs.debug or "D",
+        TRACE = e and globals.icons.signs.trace or "T",
+        DEBUG = e and globals.icons.signs.debug or "D",
       },
       level = vim.log.levels.DEBUG,
       top_down = true,
@@ -44,7 +44,7 @@ return {
       -- NOTE:  여기서 require 를 작성한다고 해서, 자동으로 Load 되는 것이 아님
       -- <2024-01-02>
       {
-        [1] = val.prefix.close .. "n",
+        [1] = globals.prefix.close .. "n",
         [2] = require(plugin.main).dismiss,
         desc = "notification-dismiss",
       },
@@ -84,7 +84,7 @@ return {
       optional = true,
       ---@type fun(LazyPlugin, keys: LazyKeysSpec[]): nil
       keys = function(_, keys)
-        local prefix = require("val").prefix
+        local prefix = require("globals").prefix
 
         local key = {
           [1] = prefix.find .. "hn",
@@ -98,8 +98,8 @@ return {
       [1] = "nvim-lualine/lualine.nvim",
       optional = true,
       opts = function()
-        local icons = require("val").icons
-        require("state.lualine-ft-data"):add({
+        local icons = require("globals").icons
+        require("plugins.core.lualine.utils.buffer-attributes"):add({
           notify = { display_name = "Notify", icon = icons.message },
         })
       end,

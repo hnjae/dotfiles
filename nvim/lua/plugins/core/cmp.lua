@@ -19,7 +19,7 @@ return {
   opts = function(_, opts)
     local cmp = require("cmp")
     local lspkind = require("lspkind")
-    local val = require("val")
+    local globals = require("globals")
 
     -- opts.performance = {
     --   max_view_entries = 1,
@@ -44,8 +44,8 @@ return {
     opts.mapping = vim.tbl_extend(
       "keep",
       cmp.mapping.preset.insert({
-        [val.map_keyword.hover_scroll_up] = cmp.mapping.scroll_docs(-4),
-        [val.map_keyword.hover_scroll_down] = cmp.mapping.scroll_docs(4),
+        [globals.map_keyword.hover_scroll_up] = cmp.mapping.scroll_docs(-4),
+        [globals.map_keyword.hover_scroll_down] = cmp.mapping.scroll_docs(4),
         -- ["<C-S-l>"] = cmp.mapping.scroll_docs(4),
         -- ["<F3>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
         ["<C-n>"] = cmp.mapping(function()
