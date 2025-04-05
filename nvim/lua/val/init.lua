@@ -2,18 +2,6 @@ local package_path = (...)
 
 local M = {}
 
--- Type Effort (colemak-dh):
--- 1.0 tn
--- 1.1 se
--- 1.3 ri
--- 1.6 ~ 1.8 aodh
--- 2.0 ~ 2.2 yflvk
--- 2.3 ~ 2.4 bycu,
--- 2.5~ 2.7 wbx.
--- 2.9 gm
--- 3.0 + l
--- 3+ bq;/j
-
 -- 설정 전역서 각종 키워드
 M.map_keyword = require(package_path .. ".map-keyword")
 M.prefix = require(package_path .. ".prefix")
