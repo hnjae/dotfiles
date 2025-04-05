@@ -2,8 +2,6 @@
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
 
-vim.keymap.set({ "n", "v" }, "<Leader><Leader>", ":", { desc = "cmdline" })
-
 local package_path = (...)
 
 local path = package_path .. ".setups"
@@ -13,3 +11,16 @@ local paths = vim.fn.uniq(vim.fn.sort(vim.fn.globpath(vim.fn.stdpath("config"), 
 for _, path_ in pairs(paths) do
   require(path .. "." .. path_:match("[^/\\]+$"):sub(1, -5))
 end
+
+-- LazyVim
+
+vim.g.mapleader = " "
+vim.g.maplocalleader = "s"
+
+vim.g.snacks_animate = false
+
+-- select default plugins
+vim.g.lazyvim_picker = "fzf"
+
+-- lang
+vim.g.lazyvim_python_lsp = "basedpyright"

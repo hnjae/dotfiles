@@ -4,6 +4,7 @@ local REPLACE_NETRW = true
 return {
   [1] = "stevearc/oil.nvim",
   lazy = true,
+  version = "*",
   event = REPLACE_NETRW and "VimEnter" or nil,
   cond = not vim.g.vscode,
   enabled = true,
@@ -83,6 +84,9 @@ return {
       -- [string.format("<C-%s>", map_keyword.vsplit)] = "actions.select_vsplit",
       -- [string.format("<C-%s>", map_keyword.split)] = "actions.select_split",
       -- [string.format("<C-%s>", map_keyword.tab)] = "actions.select_tab",
+      [string.format("<C-%s>", "v")] = "actions.select_vsplit",
+      [string.format("<C-%s>", "x")] = "actions.select_split",
+      [string.format("<C-%s>", "t")] = "actions.select_tab",
 
       -- match netrw
       ["gh"] = "actions.toggle_hidden",

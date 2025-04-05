@@ -2,7 +2,8 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
-vim.keymap.set({ "n", "v" }, "<Leader><Leader>", ":", { desc = "cmdline" })
+-- vim.keymap.set({ "n", "v" }, "<LocalLeader><LocalLeader>", ":", { desc = "cmdline" })
+vim.keymap.set({ "n", "v" }, "<BS>", ":", { desc = "cmdline" })
 
 local M = {}
 

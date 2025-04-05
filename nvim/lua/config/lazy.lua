@@ -20,7 +20,7 @@ require("lazy").setup({
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     -- import/override with your plugins
     { import = "plugins" },
-    { import = "plugins-builtins" },
+    { import = "plugins.builtins" },
   },
   defaults = {
     -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
@@ -36,6 +36,14 @@ require("lazy").setup({
     enabled = false, -- check for plugin updates periodically
     notify = false, -- notify on update
   }, -- automatically check for plugin updates
+  news = {
+    -- When enabled, NEWS.md will be shown when changed.
+    -- This only contains big new features and breaking changes.
+    lazyvim = true,
+    -- Same but for Neovim's news.txt
+    neovim = true,
+  },
+
   performance = {
     rtp = {
       -- disable some rtp plugins
