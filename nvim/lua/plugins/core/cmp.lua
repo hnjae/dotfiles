@@ -89,12 +89,9 @@ return {
     -- formatting
     ----------------------------------------------------------------------------
     -- NOTE: cmp formatting: https://github.com/hrsh7th/nvim-cmp/issues/511#issuecomment-1063014008 <2024-05-01>
-
     -- vim_item.dup 프로퍼티로 duplicate 부분 제어가 가능한 것 같다.
-    if not opts.formatting then
-      ---@diagnostic disable-next-line: missing-fields
-      opts.formatting = {}
-    end
+
+    opts.formatting = opts.formatting or {}
 
     opts.formatting.fields = {
       cmp.ItemField.Abbr,

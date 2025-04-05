@@ -96,7 +96,6 @@ return {
         table.insert(opts.spec, {
           [1] = prefix,
           group = "neogen",
-          ---@type wk.Icon
           icon = "󰏩", -- nf-md-paw
         })
       end,

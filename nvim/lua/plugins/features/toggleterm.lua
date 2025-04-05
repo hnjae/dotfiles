@@ -239,13 +239,11 @@ return {
         opts.spec = opts.spec or {}
 
         local icon = { icon = require("globals").icons.terminal, color = "red" }
-        vim.list_extend(opts.spec, {
-          {
-            [1] = prefix.new .. map_keyword.terminal,
-            group = "terminal",
-            ---@type wk.Icon
-            icon = icon,
-          },
+        table.insert(opts.spec, {
+          [1] = prefix.new .. map_keyword.terminal,
+          group = "terminal",
+          ---@type wk.Icon
+          icon = icon,
         })
       end,
     },

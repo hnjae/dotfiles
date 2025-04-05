@@ -1,7 +1,9 @@
 local prefix = require("globals").prefix
 local map_keyword = require("globals").map_keyword
 
----@type LazySpec[
+local cond = not vim.g.vscode and vim.fn.executable("ctags") == 1
+
+---@type LazySpec[]
 return {
   {
     [1] = "preservim/tagbar",
@@ -9,11 +11,16 @@ return {
     -- lazy = false,
     lazy = true,
     enabled = true,
-    cond = not vim.g.vscode and vim.fn.executable("ctags") == 1,
-    dependency = {
+    cond = cond,
+    dependencies = {
       "ludovicchabant/vim-gutentags", -- to load gutentags when tagbar loads (not actually a dependency)
+      "nvim-lua/plenary.nvim",
     },
     keys = function(plugin, _)
+      if not plugin.ft then
+        return {}
+      end
+
       return {
         {
           [1] = "[" .. map_keyword.tag,
@@ -35,9 +42,6 @@ return {
         },
       }
     end,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
     init = function()
       vim.g.tagbar_width = 26 -- default: 40
       vim.g.tagbar_wrap = 0
@@ -103,8 +107,7 @@ return {
     [1] = "ludovicchabant/vim-gutentags",
     lazy = true,
     enabled = true,
-    cond = not vim.g.vscode and vim.fn.executable("ctags") == 1,
-    -- ft = {},
+    cond = cond,
     dependencies = {
       "nvim-lua/plenary.nvim", -- using plenary in init function
     },

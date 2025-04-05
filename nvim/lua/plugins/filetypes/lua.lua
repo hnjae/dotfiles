@@ -51,32 +51,19 @@ return {
     },
   },
   {
-    [1] = "folke/neodev.nvim",
-    lazy = true,
-    enabled = false,
-    opts = {},
-    specs = {
-      {
-        [1] = "neovim/nvim-lspconfig",
-        optional = true,
-        dependencies = {
-          "folke/neodev.nvim",
-        },
-      },
-    },
-  },
-  -- neodev.nvim replacement
-  {
+    -- neodev.nvim replacement
     [1] = "folke/lazydev.nvim",
     lazy = true,
     cond = true,
-    enabled = vim.fn.has("nvim-0.10") == 1,
+    enabled = true,
     ft = "lua",
     opts = {
       library = {
-        -- See the configuration section for more details
-        -- Load luvit types when the `vim.uv` word is found
-        { path = "luvit-meta/library", words = { "vim%.uv" } },
+        "lazy.nvim",
+        "which-key.nvim",
+
+        -- Only load luvit types when the `vim.uv` word is found
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
       },
     },
     specs = {
@@ -101,9 +88,7 @@ return {
       { [1] = "hrsh7th/cmp-nvim-lua" }, -- auto complete neovim's Lua runtime API e.g.) vim.*
     },
     opts = function(_, opts)
-      if opts.sources == nil then
-        opts.sources = {}
-      end
+      opts.sources = opts.sources or {}
       table.insert(opts.sources, { name = "nvim_lua", group_index = 1 })
     end,
   },

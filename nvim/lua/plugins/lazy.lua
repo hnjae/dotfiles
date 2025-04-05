@@ -45,8 +45,7 @@ M.setup = function()
       { import = "plugins.core" },
       { import = "plugins.ui" },
       { import = "plugins.editing" },
-      { import = "plugins.feature" },
-      { import = "plugins.sidebar" },
+      { import = "plugins.features" },
       {
         [1] = "nvim-lualine/lualine.nvim",
         optional = true,
@@ -82,7 +81,7 @@ M.setup = function()
   }
 
   if not vim.g.vscode then
-    table.insert(opts.spec, { import = "plugins.lang" })
+    table.insert(opts.spec, { import = "plugins.filetypes" })
   end
 
   require("lazy").setup(opts)

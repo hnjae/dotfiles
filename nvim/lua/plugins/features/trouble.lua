@@ -121,9 +121,10 @@ return {
         opts.icons = opts.icons or {}
         opts.icons.rules = opts.icons.rules or {}
 
-        vim.list_extend(opts.icons.rules, {
-          { plugin = "trouble.nvim", icon = "󱍼", color = "green" },
-        })
+        table.insert(
+          opts.icons.rules,
+          { plugin = "trouble.nvim", icon = "󱍼", color = "green" }
+        )
       end,
     },
   },

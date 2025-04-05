@@ -1,11 +1,9 @@
--- It's important that you set up neoconf.nvim BEFORE nvim-lspconfig.
-
----@type LazySpec
-return {
+---@type LazyPluginSpec
+local spec = {
   [1] = "folke/neoconf.nvim",
   lazy = true,
   event = { "VeryLazy" },
-  enabled = require("utils").is_treesitter,
+  cond = require("utils").is_treesitter,
   opts = {
     local_settings = ".neoconf.json",
     global_settings = "resources/neoconf.json",
@@ -18,13 +16,15 @@ return {
     -- requires treesitter's jsonc parser installed
     filetype_jsonc = true,
   },
-  specs = {
-    {
-      [1] = "neovim/nvim-lspconfig",
-      optional = true,
-      dependencies = {
-        "folke/neoconf.nvim",
-      },
-    },
+  specs = {},
+}
+
+---@type LazySpec
+return {
+  [1] = "neovim/nvim-lspconfig",
+  optional = true,
+  dependencies = {
+    -- It's important that you set up neoconf.nvim BEFORE nvim-lspconfig.
+    spec,
   },
 }

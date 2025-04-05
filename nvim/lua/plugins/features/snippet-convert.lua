@@ -9,7 +9,7 @@
 return {
   [1] = "smjonas/snippet-converter.nvim",
   enabled = true,
-  cond = false and not vim.g.vscode,
+  cond = true and not vim.g.vscode,
   cmd = {
     "ConvertSnippets",
   },
@@ -55,10 +55,24 @@ return {
         },
       },
     }
+
+    local t4 = {
+      name = "from_snipmate_to_vscode",
+      sources = {
+        snipmate = {
+          vim.fn.stdpath("config") .. "/resources/snippets",
+        },
+      },
+      output = {
+        vscode = {
+          vim.fn.stdpath("config") .. "/resources/vscode-snippets",
+        },
+      },
+    }
     -- code
     require("snippet_converter").setup({
       templates = {
-        t3,
+        t4,
       },
     })
   end,
