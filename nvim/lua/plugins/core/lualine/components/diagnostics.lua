@@ -1,4 +1,4 @@
-local e = require("utils").enable_icon
+local e = require("utils").use_icons
 local icons = require("globals").icons.signs
 
 return {

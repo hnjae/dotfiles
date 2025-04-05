@@ -8,7 +8,7 @@ return {
   lazy = true,
   cmd = "DiffviewFileHistory",
   opts = {
-    use_icons = utils.enable_icon,
+    use_icons = utils.use_icons,
     icons = { -- Only applies when use_icons is true.
       folder_closed = "", --nf-cod-folder
       folder_open = "", --nf-cod-folder_opened

@@ -65,7 +65,7 @@ return {
         local suppress_sources = {
           codespell = true,
         }
-        local icon = utils.enable_icon and (require("globals").icons.null .. " ")
+        local icon = utils.use_icons and (require("globals").icons.null .. " ")
           or ""
 
         local modules = require("lualine_require").lazy_require({
@@ -107,7 +107,7 @@ return {
               -- end
               --
               -- return (
-              --   require("utils").enable_icon and (icon .. val.icons.empty_set)
+              --   require("utils").use_icons and (icon .. val.icons.empty_set)
               --   or "No soures attached"
               -- )
             end

@@ -8,18 +8,10 @@ M.get_color = function(name)
   return vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID(name)), "fg")
 end
 
-local is_root
-M.is_root = function()
-  if is_root ~= nil then
-    return is_root
-  end
-  is_root = vim.loop.getuid() == 0
-  return is_root
-end
-
+M.is_root = vim.loop.getuid() == 0
 M.is_treesitter = vim.fn.executable("cc") == 1 and not vim.g.vscode
 M.is_console = os.getenv("XDG_SESSION_TYPE") == "tty"
-M.enable_icon = not (os.getenv("XDG_SESSION_TYPE") == "tty" and os.getenv("SSH_TTY") == nil)
+M.use_icons = not (os.getenv("XDG_SESSION_TYPE") == "tty" and os.getenv("SSH_TTY") == nil)
 
 
 M.lsp = {

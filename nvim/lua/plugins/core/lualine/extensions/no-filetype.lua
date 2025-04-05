@@ -1,5 +1,5 @@
 local name
-if require("utils").enable_icon then
+if require("utils").use_icons then
   name = function()
     local bname = vim.api.nvim_buf_get_name(0)
 

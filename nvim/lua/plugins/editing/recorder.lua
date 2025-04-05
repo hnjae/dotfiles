@@ -26,7 +26,7 @@ return {
   opts = {
     mapping = mapping,
     useNerdfontIcons = false, -- which-key description scope를 더럽힘
-    -- require("utils").enable_icon,
+    -- require("utils").use_icons,
     -- lessNotifications = true,
   },
   specs = {
@@ -43,7 +43,7 @@ return {
 
         if
           not require("lazy.core.config").plugins["nvim-recorder"].opts.useNerdfontIcons
-          and require("utils").enable_icon
+          and require("utils").use_icons
         then
           local icon = " " -- nf-cod-record
           component.fmt = function(str)

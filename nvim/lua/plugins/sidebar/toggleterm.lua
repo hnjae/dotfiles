@@ -196,7 +196,7 @@ return {
           local fname = match ~= nil and match
             or vim.fn.fnamemodify(vim.env.SHELL, ":t")
 
-          if not require("utils").enable_icon then
+          if not require("utils").use_icons then
             return string.format("%s %s", tterm_msg, fname)
           end
 

@@ -19,7 +19,7 @@ local M = {
   },
 }
 
-if not require("utils").enable_icon then
+if not require("utils").use_icons then
   M.symbols = nil
 end
 

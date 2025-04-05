@@ -72,7 +72,7 @@ return {
         local truc_width = 100
         local num_source_semi_limit = 2
 
-        local icon = utils.enable_icon and (require("globals").icons.sort .. " ")
+        local icon = utils.use_icons and (require("globals").icons.sort .. " ")
           or ""
 
         local modules = require("lualine_require").lazy_require({
@@ -107,7 +107,7 @@ return {
               -- end
               --
               -- return (
-              --   require("utils").enable_icon and (icon .. val.icons.empty_set)
+              --   require("utils").use_icons and (icon .. val.icons.empty_set)
               --   or "No formatter available"
               -- )
             end

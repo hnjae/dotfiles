@@ -9,7 +9,7 @@ return {
   cond = not vim.g.vscode and not require("utils").is_console,
   event = { "VeryLazy" },
   opts = function()
-    local e = require("utils").enable_icon
+    local e = require("utils").use_icons
     local icons = require("globals").icons.signs
 
     local ret = {

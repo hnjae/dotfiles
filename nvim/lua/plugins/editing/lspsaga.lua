@@ -80,7 +80,7 @@ local M = {
         },
       },
     }
-    default_opts.ui = require("utils").enable_icon
+    default_opts.ui = require("utils").use_icons
         and {
           border = "rounded",
           devicons = true,

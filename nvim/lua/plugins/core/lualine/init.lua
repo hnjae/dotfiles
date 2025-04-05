@@ -21,15 +21,15 @@ return {
       require("globals.plugins.lualine").options,
       (opts.options and opts.options or {}),
       {
-        icons_enabled = utils.enable_icon,
+        icons_enabled = utils.use_icons,
         theme = require(package_path .. ".theme").get(),
 
         -- NOTE: do not use something like   <2024-03-07>
-        -- component_separators = utils.enable_icon
+        -- component_separators = utils.use_icons
         --     and { left = "", right = "" }
         --   or { left = "❘", right = "❘" },
 
-        component_separators = utils.enable_icon
+        component_separators = utils.use_icons
             and { left = "|", right = "|" }
           or { left = "┃", right = "┃" },
         -- component_separators = { left = "", right = "" },

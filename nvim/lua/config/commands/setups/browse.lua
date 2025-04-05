@@ -7,7 +7,7 @@ local M = {}
 
 local utils = require("utils")
 local get_opener = function()
-  if utils.is_root() or utils.is_console then
+  if utils.is_root or utils.is_console then
     return nil
   end
 

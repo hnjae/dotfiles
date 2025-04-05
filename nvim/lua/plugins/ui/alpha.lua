@@ -13,13 +13,13 @@ return {
   main = "alpha",
   config = function(plugin, _)
     local startify = require("alpha.themes.startify")
-    local enable_icon = require("utils").enable_icon
+    local use_icons = require("utils").use_icons
 
-    startify.nvim_web_devicons.enabled = enable_icon
+    startify.nvim_web_devicons.enabled = use_icons
 
     startify.section.header.val = { "Hi!" }
     startify.section.top_buttons.val = {
-      startify.button("e", enable_icon and string.format(
+      startify.button("e", use_icons and string.format(
         "%s  %s",
         -- require("utils.get-icon")(nil, nil, "terminal"),
         require("globals").icons.file,
@@ -27,7 +27,7 @@ return {
       ) or "New File", "<cmd>enew<CR>"),
       startify.button(
         "s",
-        enable_icon and string.format("%s  %s", "", "Load Sessions")
+        use_icons and string.format("%s  %s", "", "Load Sessions")
           or "Load Sessions",
         "<cmd>SessionLoad<CR>"
       ),

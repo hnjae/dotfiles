@@ -17,7 +17,7 @@ return {
     local is_lspkind, lspkind = pcall(require, "lspkind")
 
     local res = {
-      icon = require("utils").enable_icon,
+      icon = require("utils").use_icons,
       icons = {},
     }
 
@@ -76,7 +76,7 @@ return {
         end
 
         local name
-        if require("utils").enable_icon then
+        if require("utils").use_icons then
           local icon = require("globals").icons.tools
           name = function()
             return string.format("%s %s", icon, get_name())

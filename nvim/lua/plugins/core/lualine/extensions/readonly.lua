@@ -13,7 +13,7 @@
 -- end
 --
 -- local name
--- if require("utils").enable_icon then
+-- if require("utils").use_icons then
 --   local get_icon = require("plugins.core.lualine.utils.get-icon")
 --   -- name = get_name
 --   name = function()

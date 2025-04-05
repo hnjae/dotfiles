@@ -1,7 +1,7 @@
 local M = {}
 
 M.setup = function()
-  if require("utils").is_root() then
+  if require("utils").is_root then
     return
   end
 
@@ -58,7 +58,7 @@ M.setup = function()
       },
     },
 
-    pills = require("utils").enable_icon,
+    pills = require("utils").use_icons,
     performance = {
       -- NOTE: nix를 사용할 경우, 시스템의 packpath를 사용할 것. <??>
       -- NOTE: -> treesitter 이슈로 더 이상 시스템의 packpath를 사용하지 않음 <2023-11-24>

@@ -68,7 +68,7 @@ return {
           end,
           -- floating_window_off_y = function()
           -- max_height = 24,
-          hint_prefix = require("utils").enable_icon and " " or "", -- nf-cod-beaker
+          hint_prefix = require("utils").use_icons and " " or "", -- nf-cod-beaker
           -- vim.fn.hlexists("LspSignatureActiveParameter"),
           -- hi_parameter = "LspSignatureActiveParameter", -- how your parameter will be highlight
           -- zindex = 999999,

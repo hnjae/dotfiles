@@ -190,7 +190,7 @@ return {
         end
 
         local name
-        if require("utils").enable_icon then
+        if require("utils").use_icons then
           local icon =
             require("plugins.core.lualine.utils.get-icon")(nil, "oil")
           name = function()

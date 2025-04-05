@@ -32,7 +32,7 @@ return function(name, context)
     )
   end
 
-  if not icon or not utils.enable_icon then
+  if not icon or not utils.use_icons then
     return name
   end
 

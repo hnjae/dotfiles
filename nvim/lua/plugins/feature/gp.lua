@@ -38,7 +38,7 @@ return {
       vim.api.nvim_del_user_command(command)
     end
 
-    local icon = require("utils").enable_icon and require("globals").icons.ai
+    local icon = require("utils").use_icons and require("globals").icons.ai
       or "LLM"
 
     vim.api.nvim_create_autocmd({ "User" }, {
@@ -68,13 +68,13 @@ return {
     local myopts =
       {
         command_prompt_prefix_template = (
-          require("utils").enable_icon and icon or "LLM:"
+          require("utils").use_icons and icon or "LLM:"
         ) .. " {{agent}} ~ ",
         chat_assistant_prefix = {
-          (require("utils").enable_icon and icon or "LLM:"),
+          (require("utils").use_icons and icon or "LLM:"),
           " [{{agent}}]",
         },
-        chat_user_prefix = (require("utils").enable_icon and (require(
+        chat_user_prefix = (require("utils").use_icons and (require(
           "globals"
         ).icons.textbox .. " :") or "Prompt:"),
         chat_conceal_model_params = false,

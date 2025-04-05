@@ -365,7 +365,7 @@ return {
           ["null-ls"] = true,
         }
 
-        local lsp_icon = utils.enable_icon
+        local lsp_icon = utils.use_icons
             and (require("globals").icons.codicons.gear .. " ")
           or "L "
 
@@ -410,7 +410,7 @@ return {
               -- end
               --
               -- return (
-              --   require("utils").enable_icon and (lsp_icon .. "∅")
+              --   require("utils").use_icons and (lsp_icon .. "∅")
               --   or "No active LSP"
               -- )
             end

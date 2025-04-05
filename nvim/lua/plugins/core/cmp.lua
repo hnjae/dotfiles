@@ -103,7 +103,7 @@ return {
       cmp.ItemField.soure,
     }
 
-    local enable_icon = require("utils").enable_icon
+    local use_icons = require("utils").use_icons
     local format_menu = {
       --key: cmp.Entry.source's name
       treesitter = "[TS]",
@@ -133,7 +133,7 @@ return {
       emoji = "Emoji",
     }
 
-    if not enable_icon then
+    if not use_icons then
       opts.formatting.format = function(entry, vim_item)
         if source_icon_map[entry.source.name] then
           vim_item.kind = (source_out_map[entry.source.name] or "")

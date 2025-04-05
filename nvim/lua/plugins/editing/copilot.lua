@@ -125,7 +125,7 @@ return {
         optional = true,
         ---@param opts myLualineOpts
         opts = function(_, opts)
-          if not require("utils").enable_icon then
+          if not require("utils").use_icons then
             return
           end
 

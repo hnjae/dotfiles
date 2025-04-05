@@ -21,7 +21,7 @@ local get_name = function()
 end
 
 local name
-if require("utils").enable_icon then
+if require("utils").use_icons then
   local icon = require("plugins.core.lualine.utils.get-icon")(nil, "netrw")
   name = function()
     return string.format("%s %s", icon, get_name())

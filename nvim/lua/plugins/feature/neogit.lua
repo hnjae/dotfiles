@@ -14,8 +14,8 @@ return {
     "NeogitLog",
   },
   opts = {
-    notification_icon = utils.enable_icon and icons.git or "G",
-    graph_style = utils.enable_icon and "unicode" or "ascii",
+    notification_icon = utils.use_icons and icons.git or "G",
+    graph_style = utils.use_icons and "unicode" or "ascii",
     disable_line_numbers = false,
     disable_relative_line_numbers = false,
 

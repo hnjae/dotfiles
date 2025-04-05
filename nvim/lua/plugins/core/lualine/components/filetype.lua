@@ -3,7 +3,7 @@ local M = {
   [1] = "filetype",
 }
 
-if require("utils").enable_icon then
+if require("utils").use_icons then
   M.icon_only = true
 end
 
