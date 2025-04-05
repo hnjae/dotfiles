@@ -1,5 +1,0 @@
--- return "kanagawa"
-return "gruvbox"
--- return "github"
--- return "kanagawa"
--- return "tokyonight"

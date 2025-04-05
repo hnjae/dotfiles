@@ -30,7 +30,6 @@ return {
   keys = function()
     local prefix = require("val").prefix
     local map_keyword = require("val").map_keyword
-    local prefix_ = "<Leader>t"
 
     return {
       {
@@ -39,22 +38,22 @@ return {
         desc = "symbol (Trouble)",
       },
       {
-        [1] = prefix_ .. map_keyword.diagnostics,
+        [1] = prefix.sidebar .. map_keyword.diagnostics,
         [2] = "<cmd>Trouble diagnostics toggle<CR>",
         desc = "diagnostics (Trouble)",
       },
       {
-        [1] = prefix_ .. string.upper(map_keyword.diagnostics),
+        [1] = prefix.sidebar .. string.upper(map_keyword.diagnostics),
         [2] = "<cmd>Trouble diagnostics toggle filter.severity=vim.diagnostics.severity.ERROR<CR>",
         desc = "diagnostics-error (Trouble)",
       },
       {
-        [1] = prefix_ .. "q",
+        [1] = prefix.sidebar .. "q",
         [2] = "<cmd>Trouble quickfix toggle<CR>",
         desc = "quickfix (Trouble)",
       },
       {
-        [1] = prefix_ .. map_keyword.lsp,
+        [1] = prefix.sidebar .. map_keyword.lsp,
         [2] = "<cmd>Trouble lsp toggle<CR>",
         desc = "lsp definitions / references / ... (Trouble)",
       },

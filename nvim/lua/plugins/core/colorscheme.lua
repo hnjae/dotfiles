@@ -2,10 +2,6 @@ if vim.g.vscode then
   return {}
 end
 
--- TODO: terminal 색상 읽어서, 맞춰서 변경하기 <2024-06-11>
--- vim.opt.background = "dark"
-
--- colorscheme
 ---@type table<string, integer>
 local colorschemes = {
   ansi = -1,
@@ -23,10 +19,7 @@ local colorschemes = {
   --
 }
 
-local colorscheme = colorschemes[require("val.colorscheme")]
-if colorscheme == nil then
-  colorscheme = -1
-end
+local colorscheme = colorschemes.gruvbox
 
 ---@type LazySpec[]
 return {
