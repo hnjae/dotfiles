@@ -18,8 +18,8 @@ return {
     show_notification = false,
   },
   keys = function()
-    local prefix = require("val.prefix").execute
-    local keyword = require("val.map-keyword").execute
+    local prefix = require("globals").prefix.execute
+    local keyword = require("globals").map_keyword.execute
 
     return {
       -- Run API request

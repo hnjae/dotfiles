@@ -1,5 +1,5 @@
-local prefix = require("val").prefix
-local map_keyword = require("val").map_keyword
+local prefix = require("globals").prefix
+local map_keyword = require("globals").map_keyword
 
 local keyword_alpha = "p"
 
@@ -22,7 +22,7 @@ return {
       startify.button("e", enable_icon and string.format(
         "%s  %s",
         -- require("utils.get-icon")(nil, nil, "terminal"),
-        require("val").icons.file,
+        require("globals").icons.file,
         "New File"
       ) or "New File", "<cmd>enew<CR>"),
       startify.button(
@@ -78,7 +78,7 @@ return {
       [1] = "nvim-lualine/lualine.nvim",
       optional = true,
       opts = function()
-        local icons = require("val").icons
+        local icons = require("globals").icons
         require("state.lualine-ft-data"):add({
           alpha = { display_name = "Alpha", icon = icons.dashboard },
         })
@@ -92,7 +92,8 @@ return {
         if opts.spec == nil then
           opts.spec = {}
         end
-        local icon = { icon = require("val.icons").dashboard, color = "azure" }
+        local icon =
+          { icon = require("globals").icons.dashboard, color = "azure" }
         vim.list_extend(opts.spec, {
           {
             [1] = prefix.new .. keyword_alpha,

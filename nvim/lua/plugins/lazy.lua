@@ -37,6 +37,7 @@ M.setup = function()
       lazypath,
     })
   end
+
   vim.opt.rtp:prepend(lazypath)
   local opts = {
     ---@type LazySpec[]
@@ -56,9 +57,7 @@ M.setup = function()
         end,
       },
     },
-    -- defaults = {
-    --   lazy = true,
-    -- },
+
     pills = require("utils").enable_icon,
     performance = {
       -- NOTE: nix를 사용할 경우, 시스템의 packpath를 사용할 것. <??>

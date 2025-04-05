@@ -1,5 +1,5 @@
-local prefix = require("val").prefix
-local map_keyword = require("val").map_keyword
+local prefix = require("globals").prefix
+local map_keyword = require("globals").map_keyword
 
 ---@type LazySpec[
 return {
@@ -53,7 +53,7 @@ return {
         [1] = "nvim-lualine/lualine.nvim",
         optional = true,
         opts = function()
-          local icons = require("val").icons
+          local icons = require("globals").icons
           require("state.lualine-ft-data"):add({
             tagbar = { display_name = "Tagbar", icon = icons.tag },
           })

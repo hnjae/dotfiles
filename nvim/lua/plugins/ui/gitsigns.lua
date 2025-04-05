@@ -1,5 +1,5 @@
-local prefix = require("val.prefix")
-local map_keyword = require("val.map-keyword")
+local prefix = require("globals").prefix
+local map_keyword = require("globals").map_keyword
 
 ---@type LazySpec
 return {
@@ -47,12 +47,11 @@ return {
         opts.spec = opts.spec or {}
         opts.icons = opts.icons or {}
         opts.icons.rules = opts.icons.rules or {}
-        local icon = require("val.icons").git
 
         vim.list_extend(opts.icons.rules, {
           {
             plugin = "gitsigns.nvim",
-            icon = icon,
+            icon = require("globals").icons.git,
             color = "orange",
           },
         })

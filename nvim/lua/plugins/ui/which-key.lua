@@ -13,8 +13,8 @@ return {
   },
   ---@class wk.Opts
   opts = function(_, opts)
-    local val = require("val")
-    local prefix = val.prefix
+    local globals = require("globals")
+    local prefix = globals.prefix
 
     opts.preset = "modern"
 
@@ -44,7 +44,7 @@ return {
         end,
         desc = "show-global-keymaps",
         icon = {
-          icon = val.icons.help,
+          icon = globals.icons.help,
           color = "red",
         },
       },
@@ -55,7 +55,7 @@ return {
         end,
         desc = "show-buffer-local-keymaps",
         icon = {
-          icon = val.icons.help,
+          icon = globals.icons.help,
           color = "red",
         },
       },
@@ -74,7 +74,7 @@ return {
     if opts.icons.rules == nil then
       opts.icons.rules = {}
     end
-    local icons = val.icons
+    local icons = globals.icons
 
     vim.list_extend(opts.icons.rules, {
       -- replace defaults
@@ -109,14 +109,14 @@ return {
       { pattern = "cmdline", icon = "", color = "grey" }, -- nf-oct-command_palette
       {
         pattern = "notification",
-        icon = require("val").message,
+        icon = require("globals").message,
         color = "blue",
       },
     })
   end,
   config = function(_, opts)
-    local val = require("val")
-    local prefix = val.prefix
+    local globals = require("globals")
+    local prefix = globals.prefix
 
     local wk = require("which-key")
     wk.setup(opts)

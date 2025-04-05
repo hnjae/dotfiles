@@ -74,7 +74,7 @@ return {
       --   ["w"] = { "<cmd>VimtexCountWords<CR>", "count-words" },
       --   ["l"] = { "<cmd>VimtexCountLetters<CR>", "count-letters" },
       -- }
-      -- local wk_opts = { buffer = 0, prefix = require("val").prefix.buffer }
+      -- local wk_opts = { buffer = 0, prefix = require("globals").prefix.buffer }
       -- vim.api.nvim_create_autocmd({
       --   "BufRead",
       --   "BufNewFile",

@@ -1,5 +1,5 @@
-local prefix = require("val").prefix
-local map_keyword = require("val").map_keyword
+local prefix = require("globals").prefix
+local map_keyword = require("globals").map_keyword
 local prefix_send = prefix.toggleterm_send
 
 ---@type LazySpec
@@ -186,7 +186,7 @@ return {
       optional = true,
       ---@param opts myLualineOpts
       opts = function(_, opts)
-        local icons = require("val").icons
+        local icons = require("globals").icons
 
         local name = function()
           local tterm_msg = "#" .. vim.api.nvim_buf_get_var(0, "toggle_number")
@@ -221,7 +221,7 @@ return {
           opts.extensions,
           vim.tbl_deep_extend(
             "keep",
-            require("val.plugins.lualine").__get_basic_layout(),
+            require("globals.plugins.lualine").__get_basic_layout(),
             extension
           )
         )
@@ -238,7 +238,7 @@ return {
       opts = function(_, opts)
         opts.spec = opts.spec or {}
 
-        local icon = { icon = require("val.icons").terminal, color = "red" }
+        local icon = { icon = require("globals").icons.terminal, color = "red" }
         vim.list_extend(opts.spec, {
           {
             [1] = prefix.new .. map_keyword.terminal,

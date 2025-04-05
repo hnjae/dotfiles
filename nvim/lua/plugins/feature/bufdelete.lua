@@ -1,5 +1,4 @@
 -- TODO: change BdeleteHidden name <2024-11-08>
-local val = require("val")
 
 ---@type LazySpec
 return {
@@ -12,14 +11,8 @@ return {
     "BdeleteHidden",
   },
   keys = {
-    -- {
-    --   [1] = val.prefix.close .. "b",
-    --   [2] = "<cmd>Bdelete<CR>",
-    --   desc = "Bdelete",
-
-    -- },
     {
-      [1] = val.prefix.close .. "b",
+      [1] = require("globals").prefix.close .. "b",
       [2] = "<cmd>BdeleteHidden<CR>",
       desc = "bdelete-hidden",
     },

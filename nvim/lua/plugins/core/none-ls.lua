@@ -5,7 +5,7 @@
 --   return string:sub(1, #prefix) == prefix
 -- end
 
-local val = require("val")
+local globals = require("globals")
 
 ---@type LazySpec
 return {
@@ -28,9 +28,9 @@ return {
 
       -- diagnostics_format = "#{m} (#{s})",
       diagnostics_format = "[#{c}] #{m} (#{s})",
-      -- root_dir = require("null-ls.utils").root_pattern(unpack(val.root_patterns)),
+      -- root_dir = require("null-ls.utils").root_pattern(unpack(globals.root_patterns)),
       sources = {},
-      on_attach = val.on_attach,
+      on_attach = globals.on_attach,
 
       should_attach = function(bufnr)
         if vim.api.nvim_buf_get_option(bufnr, "buftype") ~= "" then
@@ -65,7 +65,7 @@ return {
         local suppress_sources = {
           codespell = true,
         }
-        local icon = utils.enable_icon and (require("val").icons.null .. " ")
+        local icon = utils.enable_icon and (require("globals").icons.null .. " ")
           or ""
 
         local modules = require("lualine_require").lazy_require({

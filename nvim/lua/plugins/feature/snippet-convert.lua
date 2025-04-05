@@ -68,7 +68,7 @@ return {
       [1] = "nvim-lualine/lualine.nvim",
       optional = true,
       opts = function()
-        local icons = require("val").icons
+        local icons = require("globals").icons
         require("state.lualine-ft-data"):add({
           snippet_converter = {
             display_name = "Snippet Converter",

@@ -31,7 +31,7 @@ return {
     ---@type LazyKeysSpec[]
     keys = {
       {
-        [1] = require("val").prefix.buffer .. "p",
+        [1] = require("globals").prefix.buffer .. "p",
         [2] = "<cmd>AsciidoctorOpenRAW<CR>",
         desc = "preview-asciidoc",
         ft = {

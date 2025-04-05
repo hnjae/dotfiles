@@ -1,8 +1,9 @@
 local REPLACE_NETRW = true
 
-local find_project_root =
-  require("lspconfig").util.root_pattern(unpack(require("val").root_patterns))
-local map_keyword = require("val").map_keyword
+local find_project_root = require("lspconfig").util.root_pattern(
+  unpack(require("globals").root_patterns)
+)
+local map_keyword = require("globals").map_keyword
 
 ---@type LazySpec
 return {
@@ -73,7 +74,7 @@ return {
     columns = {
       {
         [1] = "icon",
-        directory = require("val").icons.directory,
+        directory = require("globals").icons.directory,
       },
       {
         [1] = "mtime",
@@ -162,7 +163,7 @@ return {
       [1] = "nvim-lualine/lualine.nvim",
       optional = true,
       opts = function(_, opts)
-        local icons = require("val").icons
+        local icons = require("globals").icons
         require("state.lualine-ft-data"):add({
           oil = { display_name = "Oil", icon = icons.directory },
         })
@@ -174,7 +175,7 @@ return {
         })
 
         local find_project_root = modules.lspconfig.util.root_pattern(
-          unpack(require("val").root_patterns)
+          unpack(require("globals").root_patterns)
         )
 
         local get_name = function()
@@ -217,7 +218,7 @@ return {
           opts.extensions,
           vim.tbl_deep_extend(
             "keep",
-            require("val.plugins.lualine").__get_basic_layout(),
+            require("globals.plugins.lualine").__get_basic_layout(),
             extension
           )
         )

@@ -28,8 +28,8 @@ return {
     return res
   end,
   keys = function()
-    local prefix = require("val").prefix
-    local map_keyword = require("val").map_keyword
+    local prefix = require("globals").prefix
+    local map_keyword = require("globals").map_keyword
 
     return {
       {
@@ -77,7 +77,7 @@ return {
 
         local name
         if require("utils").enable_icon then
-          local icon = require("val.icons").tools
+          local icon = require("globals").icons.tools
           name = function()
             return string.format("%s %s", icon, get_name())
           end
@@ -103,12 +103,12 @@ return {
           opts.extensions,
           vim.tbl_deep_extend(
             "keep",
-            require("val.plugins.lualine").__get_basic_layout(),
+            require("globals.plugins.lualine").__get_basic_layout(),
             extension
           )
         )
 
-        local icons = require("val").icons
+        local icons = require("globals").icons
         require("state.lualine-ft-data"):add({
           trouble = { display_name = "Trouble", icon = icons.tools },
         })

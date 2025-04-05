@@ -1,5 +1,5 @@
 local utils = require("utils")
-local icons = require("val").icons
+local icons = require("globals").icons
 
 return {
   [1] = "sindrets/diffview.nvim",

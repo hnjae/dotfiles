@@ -7,7 +7,7 @@ if not is_devicons then
   end
 end
 
-local icons = require("val").icons
+local icons = require("globals").icons
 
 local ft_data = require("state.lualine-ft-data").data
 

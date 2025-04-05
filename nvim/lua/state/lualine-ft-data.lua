@@ -5,7 +5,7 @@ component 에서 활용하기가 까다로움.
 ]]
 local M = {}
 
-local icons = require("val").icons
+local icons = require("globals").icons
 
 -- 일반적인 filetype 이면 devicons 설정에 추가.
 

@@ -93,21 +93,11 @@ return {
         opts.icons.rules = opts.icons.rules or {}
         opts.spec = opts.spec or {}
 
-        -- vim.list_extend(opts.icons.rules, {
-        --   {
-        --     pattern = "neogen",
-        --     icon = require("val.icons").ai,
-        --     color = "※",
-        --   },
-        -- })
-
-        vim.list_extend(opts.spec, {
-          {
-            [1] = prefix,
-            group = "neogen",
-            ---@type wk.Icon
-            icon = "󰏩", -- nf-md-paw
-          },
+        table.insert(opts.spec, {
+          [1] = prefix,
+          group = "neogen",
+          ---@type wk.Icon
+          icon = "󰏩", -- nf-md-paw
         })
       end,
     },

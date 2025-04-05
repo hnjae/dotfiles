@@ -3,7 +3,7 @@
 local mapping = {
   startStopRecording = "q",
   playMacro = "Q",
-  deleteAllMacros = require("val").prefix.close .. "q",
+  deleteAllMacros = require("globals").prefix.close .. "q",
   editMacro = "cq",
   yankMacro = "yq",
   addBreakPoint = "##",
