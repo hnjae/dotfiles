@@ -27,7 +27,7 @@ return {
       [1] = "nvim-lualine/lualine.nvim",
       optional = true,
       opts = function()
-        require("state.lualine-ft-data"):add({
+        require("plugins.core.lualine.utils.buffer-attributes"):add({
           ["leetcode.nvim"] = { display_name = "LeetCode", icon = "" }, -- nf-oct-code_review
         })
       end,

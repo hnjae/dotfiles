@@ -2,7 +2,7 @@ local package_path = (...):match("(.-)[^%.]+$") -- lualine.utils
 
 local utils = require("utils")
 local get_icon = require(package_path .. ".get-icon")
-local ft_data = require("state.lualine-ft-data").data
+local ft_data = require("plugins.core.lualine.utils.buffer-attributes").data
 
 ---@type fun(name: string, context: table): string
 return function(name, context)

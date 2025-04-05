@@ -226,7 +226,7 @@ return {
           )
         )
 
-        require("state.lualine-ft-data"):add({
+        require("plugins.core.lualine.utils.buffer-attributes"):add({
           toggleterm = { display_name = "ToggleTerm", icon = icons.terminal },
         })
       end,

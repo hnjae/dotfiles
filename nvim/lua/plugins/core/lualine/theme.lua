@@ -1,4 +1,5 @@
 -- NOTE: `theme` 에는 다음 항목이 있어야함. (2023-12-11)
+
 -- * command
 -- * visual
 -- * replace

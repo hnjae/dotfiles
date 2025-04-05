@@ -109,7 +109,7 @@ return {
         )
 
         local icons = require("globals").icons
-        require("state.lualine-ft-data"):add({
+        require("plugins.core.lualine.utils.buffer-attributes"):add({
           trouble = { display_name = "Trouble", icon = icons.tools },
         })
       end,

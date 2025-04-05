@@ -320,7 +320,7 @@ local M = {
         -- table.insert(opts.tabline.lualine_a, component)
 
         local icons = require("globals").icons
-        require("state.lualine-ft-data"):add({
+        require("plugins.core.lualine.utils.buffer-attributes"):add({
           sagafinder = { display_name = "SagaFinder", icon = icons.search },
           saga_codeaction = {
             display_name = "Saga CodeAction",

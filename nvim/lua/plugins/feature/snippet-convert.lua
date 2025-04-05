@@ -69,7 +69,7 @@ return {
       optional = true,
       opts = function()
         local icons = require("globals").icons
-        require("state.lualine-ft-data"):add({
+        require("plugins.core.lualine.utils.buffer-attributes"):add({
           snippet_converter = {
             display_name = "Snippet Converter",
             icon = icons.zap,

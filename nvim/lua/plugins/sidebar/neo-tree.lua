@@ -48,7 +48,7 @@ return {
       optional = true,
       opts = function()
         local icons = require("globals").icons
-        require("state.lualine-ft-data"):add({
+        require("plugins.core.lualine.utils.buffer-attributes"):add({
           ["neo-tree"] = { display_name = "NeoTree", icon = icons.file_tree },
           ["neo-tree-popup"] = {
             display_name = "NeoTree Popup",

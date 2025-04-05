@@ -99,7 +99,7 @@ return {
       optional = true,
       opts = function()
         local icons = require("globals").icons
-        require("state.lualine-ft-data"):add({
+        require("plugins.core.lualine.utils.buffer-attributes"):add({
           notify = { display_name = "Notify", icon = icons.message },
         })
       end,
