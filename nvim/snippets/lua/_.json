@@ -44,7 +44,7 @@
     "prefix": "while",
     "body": [
       "while ${1:true} do",
-      "\t${0:\\$TM_SELECTED_TEXT}",
+      "\t${0:$TM_SELECTED_TEXT}",
       "end"
     ]
   },
@@ -52,8 +52,8 @@
     "prefix": "fun",
     "description": "function without annotation",
     "body": [
-      "function ${1:name}($2)",
-      "\t${0:\\$TM_SELECTED_TEXT}",
+      "function ($2)",
+      "\t${0:$TM_SELECTED_TEXT}",
       "end"
     ]
   },
@@ -62,8 +62,8 @@
     "description": "function",
     "body": [
       "---@type fun(${2:<arg>}: ${3:<arg type>}): ${1:<return type>}",
-      "function ${1:name}($2)",
-      "\t${0:\\$TM_SELECTED_TEXT}",
+      "function ($2)",
+      "\t${0:$TM_SELECTED_TEXT}",
       "end"
     ]
   },
@@ -108,13 +108,13 @@
     "description": "\"create a local variable\"",
     "body": "local ${1:varName} = ${0:value}"
   },
-  "lopca": {
-    "prefix": "lopca",
+  "local foo bar = pcall(<>)": {
+    "prefix": "pca",
     "description": "\"Protect call a function as a variable\"",
     "body": "local ${1:status}, ${2:err_or_value} = pcall(${3:function})"
   },
-  "lopcar": {
-    "prefix": "lopcar",
+  "local is_foo foo = pcall(require, foo)": {
+    "prefix": "pcar",
     "description": "\"Protect call a function as a variable\"",
     "body": "local is_${1:module_name}, ${1:module_name} = pcall(require, \"${1:module_name}\")"
   },
