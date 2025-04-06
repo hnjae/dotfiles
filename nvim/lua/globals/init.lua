@@ -7,5 +7,6 @@ local package_path = (...)
 local M = {}
 
 M.root_patterns = require(package_path .. ".root-patterns")
+M.icons = require(package_path .. ".icons")
 
 return M
