@@ -1,0 +1,23 @@
+# snippet snip New snippet
+# 	snippet ${1:trigger_world} "${2:description}" ${3:ultisnips-snippet-options}
+# 	$0
+# 	`printf("endsnippet")`
+
+snippet snip "New snippet"
+	snippet ${1:trigger-word} "${2:description}"
+		$0
+
+snippet ex "extends"
+	extends ${1:typescripts, html}
+
+snippet tm "TM_SELECTED_TEXT"
+	\${${1:0}:\$TM_SELECTED_TEXT}$0
+
+snippet var "variable"
+	\${${1:num}:${2:$TM_SELECTED_TEXT}}$0
+
+snippet tf "transform"
+	\${${1:1}/<stop or variable (e.g. .*)>/<repalcement e.g. \U\0/<flags (g)>}
+
+snippet ev "luaeval"
+	\`luaeval("${0}")\`

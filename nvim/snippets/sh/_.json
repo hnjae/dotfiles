@@ -1,0 +1,161 @@
+{
+  "envp": {
+    "prefix": "envp",
+    "description": "This is POSIX script",
+    "body": [
+      "#!/bin/sh",
+      ""
+    ]
+  },
+  "envb": {
+    "prefix": "envb",
+    "description": "This is bash script",
+    "body": [
+      "#!/usr/bin/env bash",
+      ""
+    ]
+  },
+  "arrb": {
+    "prefix": "arrb",
+    "description": "\"array (bash)\"",
+    "body": [
+      "(",
+      "\t$0",
+      ")",
+      ""
+    ]
+  },
+  "forarrb": {
+    "prefix": "forarrb",
+    "description": "\"loop array (bash)\"",
+    "body": [
+      "for ${2:name} in \"\\${${1:array_name}[@]\\}\"; do",
+      "\t${0:echo} \"\\${$2\\}\"",
+      "done",
+      ""
+    ]
+  },
+  "for": {
+    "prefix": "for",
+    "description": "\"loop variable (POSIX)\"",
+    "body": [
+      "for ${2:name} in var1 var2 var3; do",
+      "\t${0:echo} \"\\${$2\\}\"",
+      "done",
+      ""
+    ]
+  },
+  "forc": {
+    "prefix": "forc",
+    "description": "\"loop output of command (POSIX)\"",
+    "body": [
+      "for ${2:name} in \\$(${3:echo a b c}); do",
+      "\t${0:echo} \"\\${$2\\}\"",
+      "done",
+      ""
+    ]
+  },
+  "forib": {
+    "prefix": "forib",
+    "description": "\"loop numbers (no variable in brace range expressions)(bash)\"",
+    "body": [
+      "for ${1:i} in {${2:start}..${3:end (included)}..${4:step (optional)}\\}; do",
+      "   $0echo \"Welcome \\$$1 times\"",
+      "done",
+      ""
+    ]
+  },
+  "forib2": {
+    "prefix": "forib2",
+    "description": "\"loop numbers with variables (bash)\"",
+    "body": [
+      "for ((${1:i} = 0; $1 < ${2:variable-name}; i++)); do",
+      "done",
+      ""
+    ]
+  },
+  "fori": {
+    "prefix": "fori",
+    "description": "\"loop numbers (POSIX)\"",
+    "body": [
+      "for ${1:i} in \\$(seq ${2:start} ${4:step(optional)} ${3:end (included)}\\}); do",
+      "   $0echo \"Welcome \\$$1 times\"",
+      "done",
+      ""
+    ]
+  },
+  "whilei": {
+    "prefix": "whilei",
+    "description": "\"loop numbers (POSIX)\"",
+    "body": [
+      "${1:i}=${2:start}",
+      "while [ \"\\$i\" -lt ${3:stop} ]; do",
+      "\t$0echo \"\\${$1\\}\"",
+      "\t$1=\\$((\\$$1 + ${4:step}))",
+      "done",
+      "unset \"$1\"",
+      ""
+    ]
+  },
+  "sete": {
+    "prefix": "sete",
+    "description": "exit when error occur",
+    "body": [
+      "set -e",
+      ""
+    ]
+  },
+  "if": {
+    "prefix": "if",
+    "description": "\"(POSIX)\"",
+    "body": [
+      "if ${1:command}; then",
+      "\t${0:echo \"hello\"}",
+      "fi",
+      ""
+    ]
+  },
+  "va": {
+    "prefix": "va",
+    "description": "use var",
+    "body": [
+      "\"\\${$1\\}\"",
+      ""
+    ]
+  },
+  "\"case\"": {
+    "prefix": "\"case\"",
+    "description": "\"case-in\"",
+    "body": [
+      "case \"$1\" in",
+      "${2:???})",
+      "\t$0",
+      "\t;;",
+      "*)",
+      "\t;;",
+      "esac",
+      ""
+    ]
+  },
+  "func": {
+    "prefix": "func",
+    "body": [
+      "${1:function_name} () {",
+      "\t$0",
+      "\\}",
+      ""
+    ]
+  },
+  "read_char": {
+    "prefix": "read_char",
+    "description": "\"read single character\"",
+    "body": [
+      "read_char() {",
+      "  stty -icanon -echo",
+      "  eval \"$1=\\$(dd bs=1 count=1 2>/dev/null)\"",
+      "  stty icanon echo",
+      "\\}",
+      "# read_char char 로 사용. \\$char 에 1글자가 들어감."
+    ]
+  }
+}

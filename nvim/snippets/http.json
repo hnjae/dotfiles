@@ -1,0 +1,89 @@
+{
+  "@": {
+    "prefix": "@",
+    "description": "\"server\"",
+    "body": "@server = http://${1:localhost}:${2:3000}"
+  },
+  "se": {
+    "prefix": "se",
+    "body": "{{server\\}\\}\\}$0"
+  },
+  "lo": {
+    "prefix": "lo",
+    "description": "localhost",
+    "body": "localhost:${0:3000}"
+  },
+  "cont": {
+    "prefix": "cont",
+    "body": "Content-Type: application/json"
+  },
+  "ctj": {
+    "prefix": "ctj",
+    "body": "Content-Type: application/json"
+  },
+  "ctm": {
+    "prefix": "ctm",
+    "body": "Content-Type: multipart/form-data"
+  },
+  "d": {
+    "prefix": "d",
+    "body": "DELETE"
+  },
+  "g": {
+    "prefix": "g",
+    "body": "GET"
+  },
+  "po": {
+    "prefix": "po",
+    "body": "POST"
+  },
+  "pu": {
+    "prefix": "pu",
+    "body": "PUT"
+  },
+  "ht": {
+    "prefix": "ht",
+    "description": "http protocol",
+    "body": "http://"
+  },
+  "cookie": {
+    "prefix": "cookie",
+    "description": "read cookie from file|data",
+    "body": "-b \"${0:filename|data}\""
+  },
+  "read": {
+    "prefix": "read",
+    "description": "read cookie from file|data",
+    "body": "-b \"${0:filename|data}\""
+  },
+  "rc": {
+    "prefix": "rc",
+    "description": "read cookie from file|data",
+    "body": "-b \"${0:filename|data}\""
+  },
+  "b": {
+    "prefix": "b",
+    "description": "read cookie from file|data",
+    "body": "-b \"${0:filename|data}\""
+  },
+  "cookie-jar": {
+    "prefix": "cookie-jar",
+    "description": "\"write cookie to file (use this flag after content-type indicator)\"",
+    "body": "-c \"${0:filename}\""
+  },
+  "sexample": {
+    "prefix": "sexample",
+    "body": [
+      "@server = http://${1:localhost}:${2:3000}",
+      "",
+      "POST {{server\\}\\}comments",
+      "content-type: application/json",
+      "",
+      "# NOTE: json comma 조심!",
+      "{",
+      "    \"name\": \"sample\",",
+      "    \"time\": \"Wed, 21 Oct 2015 18:27:50 GMT\"",
+      "\\}"
+    ]
+  }
+}

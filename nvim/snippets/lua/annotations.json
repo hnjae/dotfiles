@@ -1,0 +1,42 @@
+{
+  "analias": {
+    "prefix": "analias",
+    "description": "alias annotation",
+    "body": "---@alias ${1:<name>} ${2:<type>}"
+  },
+  "anparam": {
+    "prefix": "anparam",
+    "description": "param annotation",
+    "body": "---@param ${1:<name[?]>} ${2:<type[|type...]>} ${3:[description]}"
+  },
+  "anreturn": {
+    "prefix": "anreturn",
+    "description": "return annotation",
+    "body": "---@return ${1:<type>} ${2:[<name> [comment] | [name] #<comment>]}"
+  },
+  "anty": {
+    "prefix": "anty",
+    "description": "@type $0",
+    "body": "---@type $0"
+  },
+  "antyarr": {
+    "prefix": "antyarr",
+    "description": "type array",
+    "body": "---@type ${1:<type>}[]$0"
+  },
+  "antyfun": {
+    "prefix": "antyfun",
+    "description": "type function",
+    "body": "---@type fun(${2:<arg>}: ${3:<arg type>}): ${1:<return type>}"
+  },
+  "antytab": {
+    "prefix": "antytab",
+    "description": "type table",
+    "body": "---@type table<$1, $2>$0"
+  },
+  "antydic": {
+    "prefix": "antydic",
+    "description": "\"type dictionary\"",
+    "body": "---@type { [string]: VALUE_TYPE \\}"
+  }
+}

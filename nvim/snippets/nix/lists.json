@@ -1,0 +1,74 @@
+{
+  "ll": {
+    "prefix": "ll",
+    "description": "\"lib.lists\"",
+    "body": [
+      "lib.lists.",
+      ""
+    ]
+  },
+  "llmap": {
+    "prefix": "llmap",
+    "description": "\"builtins.map (x: \"foo\" + x) [ \"bar\" \"bla\" \"abc\" ]\"",
+    "body": [
+      "builtins.map (${2:element}: ${0:expression}) ${1:list}",
+      ""
+    ]
+  },
+  "llconcat": {
+    "prefix": "llconcat",
+    "description": "\"builtins.concatLists :: [List] -> []\"",
+    "body": [
+      "builtins.concatLists [$0]",
+      ""
+    ]
+  },
+  "llcount": {
+    "prefix": "llcount",
+    "description": "\"lib.lists.count :: (a -> bool) -> [a] -> int\"",
+    "body": [
+      "lib.list.count ${0:list}",
+      ""
+    ]
+  },
+  "lloptional": {
+    "prefix": "lloptional",
+    "description": "\"lib.lists.optional :: bool -> a -> [a]\"",
+    "body": [
+      "lib.lists.optional ${1:bool} ${0:single-entry}",
+      ""
+    ]
+  },
+  "lloptionals": {
+    "prefix": "lloptionals",
+    "description": "\"lib.lists.optionals :: bool -> [a] -> [a]\"",
+    "body": [
+      "lib.lists.optionals ${1:bool} [${0:list}]",
+      ""
+    ]
+  },
+  "llremove": {
+    "prefix": "llremove",
+    "description": "\"lib.lists.remove :: a -> [a] -> [a]\"",
+    "body": [
+      "lib.lists.remove ${1:entry} [${0:list}]",
+      ""
+    ]
+  },
+  "llattrsToList": {
+    "prefix": "llattrsToList",
+    "description": "\"builtins.attrsToList:: convert to `[ { name :: (key); value :: (value); } ]` list\"",
+    "body": [
+      "(builtins.attrsToList ${0:attrset})",
+      ""
+    ]
+  },
+  "llmapAttrsToList": {
+    "prefix": "llmapAttrsToList",
+    "description": "\"lib.mapAttrsToList :: Make attrs to list\"",
+    "body": [
+      "(lib.mapAttrsToList (name: value: name + value) ${1:attrset})",
+      ""
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "strsub": {
+    "prefix": "strsub",
+    "description": "slicing string",
+    "body": "string.sub(${1:obj}, ${2:start}, ${3:end})"
+  },
+  "strmatch": {
+    "prefix": "strmatch",
+    "description": "string match, return matched str",
+    "body": "string.match(${1:obj}, ${2:regex})"
+  },
+  "strformat": {
+    "prefix": "strformat",
+    "description": "\"string.format\"",
+    "body": "string.format(\"pi = %.4f\", PI)"
+  }
+}

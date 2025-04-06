@@ -1,0 +1,67 @@
+{
+  "ssystem": {
+    "prefix": "ssystem",
+    "description": "\"stdenv.system :: string (e.g. x86_64-linux)\"",
+    "body": "stdenv.system"
+  },
+  "sisAarch64": {
+    "prefix": "sisAarch64",
+    "description": "\"stdenv.isAarch64 :: bool\"",
+    "body": "stdenv.isAarch64"
+  },
+  "sisx86_64": {
+    "prefix": "sisx86_64",
+    "description": "\"stdenv.isx86_64 :: bool\"",
+    "body": "stdenv.isx86_64"
+  },
+  "sisLinux": {
+    "prefix": "sisLinux",
+    "description": "\"stdenv.isLinux :: bool\"",
+    "body": "stdenv.isLinux"
+  },
+  "sisDarwin": {
+    "prefix": "sisDarwin",
+    "description": "\"stdenv.isDarwin :: bool\"",
+    "body": [
+      "stdenv.isDarwin",
+      ""
+    ]
+  },
+  "pwriteScriptBin": {
+    "prefix": "pwriteScriptBin",
+    "description": "\"writeScriptBin\"",
+    "body": [
+      "(pkgs.writeScriptBin \"${1:name}\" ''",
+      "\t#!\\${pkgs.dash\\}/bin/dash",
+      "\t$0 \"\\$@\"",
+      "'')",
+      ""
+    ]
+  },
+  "pwriteScript": {
+    "prefix": "pwriteScript",
+    "description": "\"pkgs.writeScript\"",
+    "body": [
+      "(pkgs.writeScript \"${1:name}\" ''",
+      "\t#!\\${pkgs.dash\\}/bin/dash",
+      "\t$0 \"\\$@\"",
+      "'')",
+      ""
+    ]
+  },
+  "(prunCommandLocal": {
+    "prefix": "(prunCommandLocal",
+    "description": "\"pkgs.runCommandLocal\"",
+    "body": [
+      "pkgs.runCommandLocal \"${1:name}\" \\${2:{\\}\\} ''",
+      "\t${0:script}",
+      "'')",
+      ""
+    ]
+  },
+  "pbindbin": {
+    "prefix": "pbindbin",
+    "description": "\"use pkgs.runCommand to bindbin\"",
+    "body": ""
+  }
+}

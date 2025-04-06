@@ -1,0 +1,7 @@
+{
+  "__duration": {
+    "prefix": "__duration",
+    "description": "ISO 8601 duration format",
+    "body": "P${1:nYnMnD}T${2:nHnMnS}"
+  }
+}
