@@ -1,5 +1,6 @@
 {
   "extras": [
+    "lazyvim.plugins.extras.ai.copilot-chat",
     "lazyvim.plugins.extras.coding.neogen",
     "lazyvim.plugins.extras.editor.fzf",
     "lazyvim.plugins.extras.editor.overseer",
@@ -17,6 +18,7 @@
     "lazyvim.plugins.extras.lang.typescript",
     "lazyvim.plugins.extras.lang.yaml",
     "lazyvim.plugins.extras.lsp.neoconf",
+    "lazyvim.plugins.extras.test.core",
     "lazyvim.plugins.extras.util.dot",
     "lazyvim.plugins.extras.util.mini-hipatterns"
   ],

@@ -15,7 +15,7 @@ end
 -- LazyVim
 
 vim.g.mapleader = " "
--- vim.g.maplocalleader = ","
+vim.g.maplocalleader = "s"
 
 vim.g.snacks_animate = false
 
