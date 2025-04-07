@@ -33,6 +33,18 @@ return {
       overrides = {
         -- NormalFloat = { bg = "none" },
         -- NormalFloat = { link = "NormalNc" },
+
+        FzfLuaHeaderText = { link = "Title" },
+        FzfLuaHeaderBind = { link = "@punctuation.special" }, -- FzfLua 가 colorscheme 에서 자동으로 생성하지 않음.
+        FzfLuaPath = { link = "Directory" },
+        FzfLuaCursor = { link = "IncSearch" },
+        FzfLuaFzfCursorLine = { link = "Visual" },
+
+        -- from telescope
+        -- FzfLuaNormal = { link = "TelescopeNormal" },
+        FzfLuaBorder = { link = "TelescopeBorder" },
+        FzfLuaTitle = { link = "TelescopePromptTitle" },
+        FzfLuaFzfSeparator = { link = "TelescopePromptBorder" },
       },
     },
   },
