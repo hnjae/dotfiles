@@ -1,17 +1,19 @@
 --[[
--- NOTE:
+NOTE:
+  - run `:GpInspectPlugin` to debug
+  - run `secret-tool store --label=<api-anthropic> api anthropic` to save password
 
-run `:GpInspectPlugin` to debug
-
-run `secret-tool store --label=<api-anthropic> api anthropic` to save password
-
-같이 보기:
-  * <https://ai.google.dev/pricing>
-  * <https://docs.anthropic.com/en/api/messages>
+  - 같이 보기:
+    * <https://ai.google.dev/pricing>
+    * <https://docs.anthropic.com/en/api/messages>
 
 TODO:
   - gp-chat 경로의 markdown 은 textwidth=0 으로 지정 <2025-04-02>
 ]]
+
+local keyword = "i"
+local prefix = "<Leader>" .. keyword
+local vprefix = "<Leader>" .. keyword .. "t"
 
 ---@type LazySpec
 return {
@@ -38,7 +40,7 @@ return {
       vim.api.nvim_del_user_command(command)
     end
 
-    local icon = require("utils").use_icons and require("globals").icons.ai or "LLM"
+    local icon = require("globals").icons.ai
 
     vim.api.nvim_create_autocmd({ "User" }, {
       pattern = { "GpDone" },
@@ -108,12 +110,7 @@ Chats are saved automatically.
       style_popup_max_width = 120,
 
       -- Keys
-      openai_api_key = {
-        "secret-tool",
-        "lookup",
-        "api",
-        "openai",
-      },
+      openai_api_key = { "secret-tool", "lookup", "api", "openai" },
 
       providers = {
         openai = {
@@ -121,36 +118,17 @@ Chats are saved automatically.
         },
         copilot = {
           disable = false,
-          secret = {
-            "bash",
-            "-c",
-            "cat ~/.config/github-copilot/apps.json | sed -e 's/.*oauth_token...//;s/\".*//'",
-          },
+          secret = { "bash", "-c", "cat ~/.config/github-copilot/apps.json | sed -e 's/.*oauth_token...//;s/\".*//'" },
         },
         anthropic = {
           disable = false,
-          secret = {
-            "secret-tool",
-            "lookup",
-            "api",
-            "anthropic",
-          },
+          secret = { "secret-tool", "lookup", "api", "anthropic" },
         },
         googleai = {
-          secret = {
-            "secret-tool",
-            "lookup",
-            "api",
-            "googleai",
-          },
+          secret = { "secret-tool", "lookup", "api", "googleai" },
         },
         pplx = {
-          secret = {
-            "secret-tool",
-            "lookup",
-            "api",
-            "pplx",
-          },
+          secret = { "secret-tool", "lookup", "api", "pplx" },
         },
       },
 
@@ -170,29 +148,6 @@ Chats are saved automatically.
         { name = "CodePerplexityLlama3.1-8B", disable = true },
         { name = "ChatCopilot", disable = true },
         { name = "CodeCopilot", disable = true },
-        --
-        -- {
-        --   provider = "copilot",
-        --   name = "copilot-o3-mini",
-        --   chat = true,
-        --   command = false,
-        --   model = { model = "o3-mini", temperature = 1.0, top_p = 1 },
-        --   -- system_prompt = require("gp.defaults").chat_system_prompt,
-        -- },
-        -- {
-        -- WIP
-        --   provider = "openai",
-        --   name = "o3-mini",
-        --   chat = true,
-        --   command = false,
-        --   model = {
-        --     model = "o3-mini",
-        --     temperature = 0.9,
-        --   },
-        --   system_prompt = require("gp.defaults").chat_system_prompt
-        --     .. "\n\nAlways answer in English regardless of input language.",
-        --   --   system_prompt = "Formatting re-enabled ",
-        -- },
         {
           provider = "anthropic",
           name = "claude",
@@ -253,16 +208,6 @@ Chats are saved automatically.
           local agent = gp.get_command_agent("claude-3-7-sonnet")
           gp.Prompt(params, gp.Target.vnew, agent, template)
         end,
-        Proofread2 = function(gp, params)
-          local template = [[```
-{{selection}}
-```
-]]
-          local agent = gp.get_command_agent("claude-3-5-haiku")
-          agent.system_prompt =
-            [[I want you to act as an expert proofreader capable of detecting and correcting grammatical issues in any language. The text given is sentences I wrote, and I would like you to correct any grammatical errors. In your responses, highlight the corrections clearly and provide a brief explanation for each correction if necessary. Your response should be in the same language as the input text. Do not alter the original meaning of the text.]]
-          gp.Prompt(params, gp.Target.vnew, agent, template)
-        end,
         Proofread = function(gp, params)
           local template = [[```
 {{selection}}
@@ -318,102 +263,18 @@ Primary Tasks:
     return myopts
   end,
 
-  keys = function(_, keys)
-    local keyword = "i"
-    local prefix = "<Leader>" .. keyword
-
-    local bufprefix = "<LocalLeader>" .. keyword
-    local bufprefix2 = "<LocalLeader>" .. keyword .. "t"
-
-    local more_keys = {
-      --[[ {
-        [1] = prefix.new .. keyword .. "x",
-        [2] = "<cmd>GpChatNew split<CR>",
-        desc = "split",
-      },
-      {
-        [1] = prefix.new .. keyword .. "v",
-        [2] = "<cmd>GpChatNew vsplit<CR>",
-        desc = "vsplit",
-      },
-      {
-        [1] = prefix.new .. keyword .. "t",
-        [2] = "<cmd>GpChatNew tabnew<CR>",
-        desc = "tab",
-      },
-      {
-        [1] = prefix.new .. keyword .. "f",
-        [2] = "<cmd>GpChatNew popup<CR>",
-        desc = "float",
-      }, ]]
-      {
-        [1] = "<Leader>" .. keyword .. keyword,
-        [2] = "<cmd>GpChatToggle popup<CR>",
-        desc = "gp-chat-toggle",
-      },
-      {
-        [1] = bufprefix .. "n",
-        [2] = ":<C-u>'<,'>GpChatNew split<CR>",
-        desc = "NEW-chat-with-selected",
-        mode = "v",
-      },
-      {
-        [1] = bufprefix .. "N",
-        [2] = "<cmd>%GpChatNew split<CR>",
-        desc = "NEW-chat-with-buffer",
-        mode = "n",
-      },
-      {
-        [1] = bufprefix .. "p",
-        [2] = ":<C-u>'<,'>GpChatPaste split<CR>",
-        desc = "paste-with-selected",
-        mode = "v",
-      },
-      {
-        [1] = bufprefix .. "q",
-        [2] = ":<C-u>'<,'>GpNew<CR>",
-        desc = "gp-quich-chat (edit-selected)",
-        mode = "v",
-      },
-      {
-        [1] = bufprefix .. "E",
-        [2] = "<cmd>%GpVnew<CR>",
-        desc = "gp-edit-buffer",
-        mode = "n",
-      },
-      {
-        [1] = bufprefix2 .. "g",
-        [2] = ":<C-u>'<,'>GpGrammarCheck<CR>",
-        desc = "gp-grammer-check",
-        mode = { "v" },
-      },
-      {
-        [1] = bufprefix2 .. "t",
-        [2] = ":<C-u>'<,'>GpEnglishTranslate<CR>",
-        desc = "gp-english-translate",
-        mode = { "v" },
-      },
-      {
-        [1] = bufprefix2 .. "p",
-        [2] = ":<C-u>'<,'>GpProofread<CR>",
-        desc = "gp-proofread",
-        mode = { "v" },
-      },
-      --[[ {
-        [1] = prefix.close .. keyword,
-        [2] = "<cmd>GpStop<CR>",
-        desc = "gp-stop",
-      }, ]]
-      --[[ {
-        [1] = prefix.find .. keyword,
-        [2] = "<cmd>GpChatFinder<CR>",
-        mode = { "n" },
-        desc = "gp-chat",
-      }, ]]
-    }
-
-    return vim.list_extend(keys, more_keys)
-  end,
+  -- stylua: ignore
+  keys = {
+    { [1] = prefix .. keyword, mode = "n", [2] = "<cmd>GpChatToggle vsplit<CR>",      desc = "gp-chat-toggle" },
+    { [1] = prefix .. "n",     mode = "v", [2] = ":<C-u>'<,'>GpChatNew split<CR>",   desc = "NEW-chat-with-selected" },
+    { [1] = prefix .. "N",     mode = "n", [2] = "<cmd>%GpChatNew split<CR>",        desc = "NEW-chat-with-buffer", },
+    { [1] = prefix .. "p",     mode = "v", [2] = ":<C-u>'<,'>GpChatPaste split<CR>", desc = "paste-with-selected" },
+    { [1] = prefix .. "q",     mode = "v", [2] = ":<C-u>'<,'>GpNew<CR>",             desc = "gp-quich-chat (edit-selected)" },
+    { [1] = prefix .. "E",     mode = "n", [2] = "<cmd>%GpVnew<CR>", desc = "gp-edit-buffer", },
+    { [1] = vprefix .. "g",    mode = "v", [2] = ":<C-u>'<,'>GpGrammarCheck<CR>", desc = "gp-grammer-check" },
+    { [1] = vprefix .. "t",    mode = "v", [2] = ":<C-u>'<,'>GpEnglishTranslate<CR>", desc = "gp-english-translate" },
+    { [1] = vprefix .. "p",    mode = "v", [2] = ":<C-u>'<,'>GpProofread<CR>", desc = "gp-proofread" },
+  },
   specs = {
     {
       [1] = "folke/which-key.nvim",
@@ -423,7 +284,6 @@ Primary Tasks:
         opts.icons.rules = opts.icons.rules or {}
         opts.spec = opts.spec or {}
 
-        local keyword = "i"
         local icon = require("globals").icons.ai
 
         table.insert(opts.icons.rules, {
@@ -432,10 +292,17 @@ Primary Tasks:
           color = "purple",
         })
 
-        table.insert(opts.spec, {
-          [1] = "<LocalLeader>" .. keyword,
-          group = "gp-chat",
-          icon = icon,
+        vim.list_extend(opts.spec, {
+          {
+            [1] = prefix,
+            group = "gp-chat",
+            icon = icon,
+          },
+          {
+            [1] = vprefix,
+            group = "gp-chat",
+            icon = icon,
+          },
         })
       end,
     },

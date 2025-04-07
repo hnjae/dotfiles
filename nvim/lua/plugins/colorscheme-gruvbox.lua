@@ -31,7 +31,7 @@ return {
       underline = false,
       terminal_colors = os.getenv("BASE16_THEME") == nil,
       overrides = {
-        NormalFloat = { bg = "none" },
+        -- NormalFloat = { bg = "none" },
       },
     },
   },

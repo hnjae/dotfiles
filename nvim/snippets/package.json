@@ -264,6 +264,12 @@
           "license"
         ],
         "path": "./license.json"
+      },
+      {
+        "language": [
+          "all"
+        ],
+        "path": "./global.json"
       }
     ]
   }
