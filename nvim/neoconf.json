@@ -1,0 +1,46 @@
+// GLOBAL NEOCONF CONFIG
+// Schemas:
+// https://github.com/folke/neoconf.nvim/tree/main/schemas
+// https://github.com/tamago324/nlsp-settings.nvim/tree/main/schemas/_generated -- nlsp-settings 을 그대로 사용할 수 없음.
+// https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/server_configurations
+// https://gist.github.com/williamboman/a01c3ce1884d4b57cc93422e7eae7702
+// tsserver: https://github.com/microsoft/vscode/tree/main/extensions/typescript-language-features/package.json
+// vi:ft=jsonc:
+{
+  "lspconfig": {
+    "eslint": {
+      // https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/server_configurations/eslint.lua
+      // default_config.settings 부분
+      // https://github.com/Microsoft/vscode-eslint#settings-options
+      // severity: error, warn, info, hint, (downgrade, upgrade, default)
+      "rulesCustomizations": [
+        {
+          "rule": "*",
+          "severity": "downgrade"
+        },
+        {
+          "rule": "*/no-*",
+          "severity": "info"
+        },
+        {
+          "rule": "*no-*",
+          "severity": "info"
+        },
+        {
+          // [eslint-plugin-simple-import-sort](https://github.com/lydell/eslint-plugin-simple-import-sort)
+          "rule": "simple-import-sort/*",
+          "severity": "info"
+        }
+        // { "rule": "!no-*", "severity": "downgrade" },
+      ]
+    },
+    "cssls": {
+      "css.lint.unknownAtRules": "ignore"
+    },
+    "copilot": {
+      "telemetry": {
+        "telemetryLevel": "off"
+      }
+    }
+  }
+}
