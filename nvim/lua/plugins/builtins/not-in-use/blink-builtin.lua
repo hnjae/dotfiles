@@ -1,3 +1,5 @@
+-- WIP: 작동 안됨.
+
 local source_name_map = {
   Snippets = "",
 }
@@ -103,7 +105,7 @@ return {
     },
 
     signature = {
-      enabled = true,
+      enabled = false,
     },
   },
 }
