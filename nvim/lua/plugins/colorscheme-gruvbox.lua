@@ -34,6 +34,12 @@ return {
         -- NormalFloat = { bg = "none" },
         -- NormalFloat = { link = "NormalNc" },
 
+        -- Managed by todo-comments.nvim:
+        ["@comment.todo"] = { link = "@comment" },
+        ["@comment.note"] = { link = "@comment" },
+        ["@comment.warning"] = { link = "@comment" },
+        ["@comment.error"] = { link = "@comment" },
+
         FzfLuaHeaderText = { link = "Title" },
         FzfLuaHeaderBind = { link = "@punctuation.special" }, -- FzfLua 가 colorscheme 에서 자동으로 생성하지 않음.
         FzfLuaPath = { link = "Directory" },
