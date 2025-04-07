@@ -9,7 +9,7 @@ return {
   cond = not vim.g.vscode,
   enabled = true,
   dependencies = {
-    "nvim-tree/nvim-web-devicons",
+    -- mini.icons
   },
   cmd = {
     "Oil",

@@ -5,7 +5,7 @@
     "body": [
       "The AGPLv3 License (AGPLv3)",
       "",
-      "Copyright (c) \\${CURRENT_YEAR\\} ${0:Author}",
+      "Copyright (c) ${CURRENT_YEAR} ${0:Author}",
       "",
       "This program is free software: you can redistribute it and/or modify",
       "it under the terms of the GNU Affero General Public License as",

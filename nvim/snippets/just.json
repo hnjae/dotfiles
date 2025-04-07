@@ -1,51 +1,33 @@
 {
-  "dotenv-load": {
-    "prefix": "dotenv-load",
-    "description": "\"load dotenv\"",
-    "body": [
-      "set dotenv-load",
-      ""
-    ]
+  "set dotenv-load": {
+    "prefix": "sdotenvload",
+    "description": "load dotenv",
+    "body": ["set dotenv-load"]
   },
-  "fallback": {
-    "prefix": "fallback",
-    "description": "\"fallback\"",
-    "body": [
-      "set fallback",
-      ""
-    ]
+  "set fallback": {
+    "prefix": "sfallback",
+    "description": "fallback",
+    "body": ["set fallback"]
   },
-  "working-directory": {
-    "prefix": "working-directory",
-    "description": "\"working-directory\"",
-    "body": [
-      "set working-directory := '${0:dir}'",
-      ""
-    ]
+  "set working-directory": {
+    "prefix": "swdir",
+    "description": "working-directory",
+    "body": ["set working-directory := '${0:dir}'"]
   },
   "nodejs": {
     "prefix": "nodejs",
     "description": "\"add node_modules/.bin to PATH\"",
-    "body": [
-      "export PATH := \"./node_modules/.bin:\" + env_var('PATH')",
-      ""
-    ]
+    "body": ["export PATH := \"./node_modules/.bin:\" + env_var('PATH')"]
   },
   "env": {
     "prefix": "env",
-    "description": "\"load environment variable\"",
-    "body": [
-      "${2:bas} := env('${1:foo}')",
-      ""
-    ]
+    "description": "load environment variable",
+    "body": ["${2:bas} := env('${1:foo}')"]
   },
   "envd": {
     "prefix": "envd",
     "description": "\"load environment variable with default values\"",
-    "body": [
-      "${3:bas} := env('${1:foo}', ${2:default})",
-      ""
-    ]
+    "body": ["${3:bas} := env('${1:foo}', ${2:default})"]
   },
   "recipe": {
     "prefix": "recipe",
@@ -60,66 +42,42 @@
   "spwd": {
     "prefix": "spwd",
     "description": "\"absolute path of PWD\"",
-    "body": [
-      "{{invocation_directory()\\}\\}",
-      ""
-    ]
+    "body": ["{{invocation_directory()\\}\\}"]
   },
   "sjustfile": {
     "prefix": "sjustfile",
     "description": "\"absolute path of justfile\"",
-    "body": [
-      "{{justfile()\\}\\}",
-      ""
-    ]
+    "body": ["{{justfile()\\}\\}"]
   },
   "sjustfile_directory": {
     "prefix": "sjustfile_directory",
     "description": "\"absolute path of justfile\"",
-    "body": [
-      "{{justfile_directory()\\}\\}",
-      ""
-    ]
+    "body": ["{{justfile_directory()\\}\\}"]
   },
   "sdatetime": {
     "prefix": "sdatetime",
     "description": "\"UTC datetime\"",
-    "body": [
-      "{{datetime_utc(\"%Y-%m-%dT%H:%M:%SZ\")\\}\\}",
-      ""
-    ]
+    "body": ["{{datetime_utc(\"%Y-%m-%dT%H:%M:%SZ\")\\}\\}"]
   },
   "sweekdate": {
     "prefix": "sweekdate",
     "description": "\"ISO-8601 week date\"",
-    "body": [
-      "{{datetime(\"%G-W%V-%uT%H:%M:%S%Z\")\\}\\}",
-      ""
-    ]
+    "body": ["{{datetime(\"%G-W%V-%uT%H:%M:%S%Z\")\\}\\}"]
   },
   "sordinaldates": {
     "prefix": "sordinaldates",
     "description": "\"ISO-8601 ordinal date\"",
-    "body": [
-      "{{datetime(\"%G-%jT%H:%M:%S%Z\")\\}\\}",
-      ""
-    ]
+    "body": ["{{datetime(\"%G-%jT%H:%M:%S%Z\")\\}\\}"]
   },
   "slocaltime": {
     "prefix": "slocaltime",
     "description": "\"ISO-8601 localtime\"",
-    "body": [
-      "{{datetime(\"%Y-%m-%dT%H:%M:%S%Z\")\\}\\}",
-      ""
-    ]
+    "body": ["{{datetime(\"%Y-%m-%dT%H:%M:%S%Z\")\\}\\}"]
   },
   "srfc": {
     "prefix": "srfc",
     "description": "\"RFC 3339 localtime\"",
-    "body": [
-      "{{datetime(\"%Y-%m-%d %H:%M:%S%Z\")\\}\\}",
-      ""
-    ]
+    "body": ["{{datetime(\"%Y-%m-%d %H:%M:%S%Z\")\\}\\}"]
   },
   "boilerplate": {
     "prefix": "boilerplate",
@@ -153,9 +111,9 @@
       ""
     ]
   },
-  "stmux-devs": {
+  "Tmux Dev (Recipe)": {
     "prefix": "stmux-devs",
-    "description": "\"run multiple commands in tmux\"",
+    "description": "run multiple commands in tmux",
     "body": [
       "run-devs:",
       "\t#!/bin/sh",
@@ -179,31 +137,24 @@
       ""
     ]
   },
-  "srecipe-shell": {
+  "Shell Script Recipe": {
     "prefix": "srecipe-shell",
-    "description": "\"create shell-script recipe\"",
-    "body": [
-      "${1:foo}:",
-      "\t#!/bin/sh",
-      "\tset -eu",
-      "\t$0",
-      ""
-    ]
+    "description": "create shell-script recipe",
+    "body": ["${1:foo}:", "\t#!/bin/sh", "\tset -eu", "\t$0"]
   },
-  "srecipe-bash": {
+  "Bash Recipe": {
     "prefix": "srecipe-bash",
-    "description": "\"create bash-script recipe\"",
+    "description": "create bash-script recipe",
     "body": [
       "${1:foo}:",
       "\t#!/usr/bin/env bash",
       "\tset -euo pipefail",
-      "\t$0",
-      ""
+      "\t$0"
     ]
   },
-  "srecipe-python": {
+  "Python Recipe": {
     "prefix": "srecipe-python",
-    "description": "\"create python-script recipe\"",
+    "description": "create python-script recipe",
     "body": [
       "${1:foo}:",
       "\t#!/usr/bin/env python3",

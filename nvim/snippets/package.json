@@ -261,7 +261,8 @@
       },
       {
         "language": [
-          "license"
+          "license",
+          "text"
         ],
         "path": "./license.json"
       },

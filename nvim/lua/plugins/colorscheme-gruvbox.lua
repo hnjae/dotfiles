@@ -30,6 +30,7 @@ return {
       dim_inactive = true,
       underline = false,
       terminal_colors = os.getenv("BASE16_THEME") == nil,
+      -- terminal_colors = true,
       overrides = {
         NormalFloat = vim.opt.background:get() == "light" and { bg = "#f2e5bc" }, -- light0_soft
         NormalNc = vim.opt.background:get() == "light" and { bg = "#f2e5bc" } or { link = "Normal" }, -- light0_soft

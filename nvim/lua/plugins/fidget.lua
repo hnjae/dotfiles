@@ -14,7 +14,7 @@ return {
 
   opts = {
     logger = {
-      path = string.format("%s/fidget.nvim.log", vim.fn.stdpath("state")),
+      path = string.format("%s/fidget.nvim.log", vim.fn.stdpath("log")),
     },
   },
   specs = {
