@@ -13,7 +13,8 @@ TODO:
 
 local keyword = "i"
 local prefix = "<Leader>" .. keyword
-local vprefix = "<Leader>" .. keyword .. "t"
+local tprefix = "<Leader>" .. keyword .. "t" -- task
+local wk_icon = { icon = require("globals").icons.ai, color = "purple" }
 
 ---@type LazySpec
 return {
@@ -265,49 +266,40 @@ Primary Tasks:
 
   -- stylua: ignore
   keys = {
-    { [1] = prefix .. keyword, mode = "n", [2] = "<cmd>GpChatToggle vsplit<CR>",      desc = "gp-chat-toggle" },
-    { [1] = prefix .. "n",     mode = "v", [2] = ":<C-u>'<,'>GpChatNew split<CR>",   desc = "NEW-chat-with-selected" },
-    { [1] = prefix .. "N",     mode = "n", [2] = "<cmd>%GpChatNew split<CR>",        desc = "NEW-chat-with-buffer", },
-    { [1] = prefix .. "p",     mode = "v", [2] = ":<C-u>'<,'>GpChatPaste split<CR>", desc = "paste-with-selected" },
-    { [1] = prefix .. "q",     mode = "v", [2] = ":<C-u>'<,'>GpNew<CR>",             desc = "gp-quich-chat (edit-selected)" },
-    { [1] = prefix .. "E",     mode = "n", [2] = "<cmd>%GpVnew<CR>", desc = "gp-edit-buffer", },
-    { [1] = vprefix .. "g",    mode = "v", [2] = ":<C-u>'<,'>GpGrammarCheck<CR>", desc = "gp-grammer-check" },
-    { [1] = vprefix .. "t",    mode = "v", [2] = ":<C-u>'<,'>GpEnglishTranslate<CR>", desc = "gp-english-translate" },
-    { [1] = vprefix .. "p",    mode = "v", [2] = ":<C-u>'<,'>GpProofread<CR>", desc = "gp-proofread" },
+    { [1] = prefix .. keyword, mode = "n", [2] = "<cmd>GpChatToggle vsplit<CR>",      desc = "chat-toggle (Gp)" },
+
+    { [1] = prefix .. "p",     mode = "n", [2] = "<cmd>%GpChatPaste split<CR>",      desc = "Paste buffer (Gp)", },
+    { [1] = prefix .. "p",     mode = "v", [2] = ":<C-u>'<,'>GpChatPaste split<CR>", desc = "Paste selected (Gp)" },
+
+    { [1] = prefix .. "N",     mode = "n", [2] = "<cmd>%GpChatNew split<CR>",        desc = "NEW w. buffer (Gp)", },
+    { [1] = prefix .. "N",     mode = "v", [2] = ":<C-u>'<,'>GpChatNew split<CR>",   desc = "NEW w. selected (Gp)" },
+
+    { [1] = prefix .. "q",     mode = "n", [2] = "<cmd>%GpVnew<CR>",     desc = "Quick (edit-buffer; Gp)", },
+    { [1] = prefix .. "q",     mode = "v", [2] = ":<C-u>'<,'>GpNew<CR>", desc = "Quick (edit-selected; Gp)" },
+
+    { [1] = tprefix .. "g",    mode = "v", [2] = ":<C-u>'<,'>GpGrammarCheck<CR>", desc = "gp-grammer-check" },
+    { [1] = tprefix .. "t",    mode = "v", [2] = ":<C-u>'<,'>GpEnglishTranslate<CR>", desc = "gp-english-translate" },
+    { [1] = tprefix .. "p",    mode = "v", [2] = ":<C-u>'<,'>GpProofread<CR>", desc = "gp-proofread" },
 
     -- match LazyVim's key mappnig convention
-    { [1] = "<Leader>f" .. keyword, mode = "n", [2] = "<cmd>GpChatFinder", desc = "gp-chat (Gp)" },
+    { [1] = "<Leader>f" .. keyword, mode = "n", [2] = "<cmd>GpChatFinder<CR>", desc = "gp-chat (Gp)" },
   },
   specs = {
     {
       [1] = "folke/which-key.nvim",
       optional = true,
-      opts = function(_, opts)
-        opts.icons = opts.icons or {}
-        opts.icons.rules = opts.icons.rules or {}
-        opts.spec = opts.spec or {}
-
-        local icon = require("globals").icons.ai
-
-        table.insert(opts.icons.rules, {
-          plugin = "gp.nvim",
-          icon = icon,
-          color = "purple",
-        })
-
-        vim.list_extend(opts.spec, {
-          {
-            [1] = prefix,
-            group = "gp-chat",
-            icon = icon,
+      -- ---@type wk.Opts
+      opts = {
+        icons = {
+          rules = {
+            { plugin = "gp.nvim", icon = wk_icon.icon, color = wk_icon.color },
           },
-          {
-            [1] = vprefix,
-            group = "gp-chat",
-            icon = icon,
-          },
-        })
-      end,
+        },
+        spec = {
+          { [1] = prefix, mode = { "n", "v" }, group = "gp", icon = wk_icon },
+          { [1] = tprefix, mode = { "n", "v" }, group = "task", icon = wk_icon },
+        },
+      },
     },
   },
 }

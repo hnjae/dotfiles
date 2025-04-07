@@ -1,6 +1,7 @@
 ---@type LazySpec
 return {
   [1] = "folke/which-key.nvim",
+  opts_extend = { "spec", "icons.rules" },
   optional = true,
   opts = {
     -- preset = "helix",
