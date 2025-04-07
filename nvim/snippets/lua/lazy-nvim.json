@@ -1,0 +1,15 @@
+{
+  "lazykeys": {
+    "prefix": "lazykeys",
+    "description": "\"lazy-keys\"",
+    "body": [
+      "{",
+      "\t[1] = \"${0:<LocalLeader>foo}\",",
+      "\t[2] = \"<cmd>bar<CR>\",",
+      "\tft = { \"lua\" \\},",
+      "\tmode = { \"n\" \\},",
+      "\tdesc = \"foobar!\"",
+      "\\}"
+    ]
+  }
+}

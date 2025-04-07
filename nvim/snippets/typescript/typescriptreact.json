@@ -1,0 +1,7 @@
+{
+  "us": {
+    "prefix": "us",
+    "description": "\"React useState() hook\"",
+    "body": "const [${1:state}, set$1] = useState(${2:initValue})$0"
+  }
+}

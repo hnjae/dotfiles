@@ -1,9 +1,4 @@
--- $XDG_CONFIG_HOME/nvim/init.lua
+-- bootstrap lazy.nvim, LazyVim and your plugins
+require("config.lazy")
 
-require("config.options").setup()
-require("config.keymaps").setup()
-require("plugins.lazy").setup()
-require("config.commands").setup()
-require("config.autocmds").setup()
-
--- require("event-test").setup()
+-- foooo

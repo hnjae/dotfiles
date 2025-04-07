@@ -1,0 +1,16 @@
+{
+  "inp": {
+    "prefix": "inp",
+    "description": "\"installPhase in stdenv.mkDerivation\"",
+    "body": [
+      "installPhase = ''",
+      "\t$0",
+      "'';"
+    ]
+  },
+  "pbindbin": {
+    "prefix": "pbindbin",
+    "description": "\"pkgs.runCommand\"",
+    "body": ""
+  }
+}

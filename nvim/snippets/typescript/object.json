@@ -1,0 +1,17 @@
+{
+  "keys": {
+    "prefix": "keys",
+    "description": "\"Object.keys()\"",
+    "body": "Object.keys(${1:TM_SELECTED_TEXT}) $0"
+  },
+  "values": {
+    "prefix": "values",
+    "description": "\"Object.values()\"",
+    "body": "Object.values(${1:TM_SELECTED_TEXT}) $0"
+  },
+  "entries": {
+    "prefix": "entries",
+    "description": "\"Object.entries()\"",
+    "body": "Object.entries(${1:TM_SELECTED_TEXT}) $0"
+  }
+}

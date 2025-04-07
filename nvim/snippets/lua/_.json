@@ -1,0 +1,131 @@
+{
+  "for": {
+    "prefix": "for",
+    "description": "for loop range",
+    "body": ["for ${1:i}=${2:1},${3:10} do", "\t$0", "end"]
+  },
+  "fori": {
+    "prefix": "fori",
+    "description": "enumerate table",
+    "body": [
+      "for ${3:i}, ${2:x} in ipairs(${1:\\$TM_SELECTED_TEXT}) do",
+      "\t$0",
+      "end"
+    ]
+  },
+  "forp": {
+    "prefix": "forp",
+    "description": "iter table (key, val)",
+    "body": [
+      "for ${3:key}, ${2:val} in pairs(${1:\\$TM_SELECTED_TEXT}) do",
+      "\t$0",
+      "end"
+    ]
+  },
+  "forline": {
+    "prefix": "forline",
+    "description": "read file line by line",
+    "body": [
+      "f = io.open(${1:\"${2:filename}\"}, \"${3:r}\")",
+      "",
+      "while true do",
+      "\tline = f:read()",
+      "\tif line == nil then break end",
+      "",
+      "\t${0:-- code}",
+      "end"
+    ]
+  },
+  "while": {
+    "prefix": "while",
+    "body": ["while ${1:true} do", "\t${0:$TM_SELECTED_TEXT}", "end"]
+  },
+  "fun": {
+    "prefix": "fun",
+    "description": "function without annotation",
+    "body": ["function ($2)", "\t${0:$TM_SELECTED_TEXT}", "end"]
+  },
+  "funs": {
+    "prefix": "funs",
+    "description": "function",
+    "body": [
+      "---@type fun(${2:<arg>}: ${3:<arg type>}): ${1:<return type>}",
+      "function ($2)",
+      "\t${0:$TM_SELECTED_TEXT}",
+      "end"
+    ]
+  },
+  "funx": {
+    "prefix": "funx",
+    "description": "function",
+    "body": [
+      "---@param ${2:name[?]} ${3:type[|type...]} ${4:[description]}",
+      "---@return ${5:type} ${6:[name [comment] | [name] #<comment>]}",
+      "function ${1:name}($2)",
+      "\t${0:\\$TM_SELECTED_TEXT}",
+      "end"
+    ]
+  },
+  "if": {
+    "prefix": "if",
+    "body": ["if ${1:true} then", "\t${0:$TM_SELECTED_TEXT}", "end"]
+  },
+  "elseif": {
+    "prefix": "elseif",
+    "body": ["elseif ${1:true} then", "\t$0"]
+  },
+  "rt": {
+    "prefix": "rt",
+    "description": "return value",
+    "body": "return $0"
+  },
+  "lo": {
+    "prefix": "lo",
+    "description": "\"create a variable\"",
+    "body": "local $0"
+  },
+  "lv": {
+    "prefix": "lv",
+    "description": "\"create a local variable\"",
+    "body": "local ${1:varName} = ${0:value}"
+  },
+  "local foo bar = pcall(<>)": {
+    "prefix": "pca",
+    "description": "\"Protect call a function as a variable\"",
+    "body": "local ${1:status}, ${2:err_or_value} = pcall(${3:function})"
+  },
+  "local is_<foo> <foo> = pcall(require, \"<foo>\")": {
+    "prefix": "pcar",
+    "description": "Protect call a function as a variable",
+    "body": "local is_${1:module_name}, ${1:module_name} = pcall(require, \"${1:module_name}\")"
+  },
+  "local <foo> require(\"<foo>\")": {
+    "prefix": "loreq",
+    "description": "Require module as a variable",
+    "body": "local ${1:module} = require(\"${1:module}\")"
+  },
+  "pca": {
+    "prefix": "pca",
+    "description": "Protect call a function",
+    "body": "pcall(${1:function})"
+  },
+  "req": {
+    "prefix": "req",
+    "description": "\"Require module\"",
+    "body": "require(\"${1:module}\")"
+  },
+  "p": {
+    "prefix": "p",
+    "body": "print($0)"
+  },
+  "styluaib": {
+    "prefix": "styluaib",
+    "description": "\"stylua ignore block\"",
+    "body": ["-- stylua: ignore start", "$0", "-- stylua: ignore end"]
+  },
+  "styluas": {
+    "prefix": "styluas",
+    "description": "\"stylua ignore single line\"",
+    "body": "$0 -- style: ignore"
+  }
+}

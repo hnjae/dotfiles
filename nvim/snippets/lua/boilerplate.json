@@ -1,0 +1,25 @@
+{
+  "cl": {
+    "prefix": "cl",
+    "description": "Create a class",
+    "body": [
+      "${1:className} = {\\}",
+      "",
+      "$1.${2:new} = function($3)",
+      "\tlocal ${4:varName} = ${5:value}",
+      "",
+      "\t${6: --code}",
+      "",
+      "\treturn $4",
+      "end"
+    ]
+  },
+  "self:": {
+    "prefix": "self:",
+    "body": [
+      "function self:${1:methodName}($2)",
+      "\t$0",
+      "end"
+    ]
+  }
+}

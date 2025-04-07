@@ -1,0 +1,22 @@
+{
+  "range": {
+    "prefix": "range",
+    "description": "\"python's range-like\"",
+    "body": "[...Array(${1:number})].map((_, ${2:i}) => $0)"
+  },
+  "foreach": {
+    "prefix": "foreach",
+    "description": "Array.prototype.forEach",
+    "body": "forEach(${0:callable})"
+  },
+  "map": {
+    "prefix": "map",
+    "description": "Array.prototype.map()",
+    "body": "map(${0:callable})"
+  },
+  "reduce": {
+    "prefix": "reduce",
+    "description": "Array.prototype.reduce()",
+    "body": "reduce(${0:callback}, ${1:[, initialValue]})"
+  }
+}

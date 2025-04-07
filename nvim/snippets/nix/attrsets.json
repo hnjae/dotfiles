@@ -1,0 +1,85 @@
+{
+  "la": {
+    "prefix": "la",
+    "description": "\"lib.attrsets\"",
+    "body": [
+      "(lib.attrsets.$0)",
+      ""
+    ]
+  },
+  "lahasAttr": {
+    "prefix": "lahasAttr",
+    "description": "\"builtins.hasAttr :: String -> AttrSet -> Bool\"",
+    "body": [
+      "(builtins.hasAttr ${1:attr} ${0:attrset})",
+      ""
+    ]
+  },
+  "lamergeAttrsList": {
+    "prefix": "lamergeAttrsList",
+    "description": "\"lib.mergeAttrsList :: [ Attrs ] -> Attrs\"",
+    "body": [
+      "(lib.mergeAttrsList [ ${0:Attrs} ])",
+      ""
+    ]
+  },
+  "laoptionalAttrs": {
+    "prefix": "laoptionalAttrs",
+    "description": "\"lib.optionalAttrs :: Bool -> AttrSet -> AttrSet\"",
+    "body": [
+      "(lib.optionalAttrs ${1:bool} ${0:AttrSet})",
+      ""
+    ]
+  },
+  "lagenAttrs": {
+    "prefix": "lagenAttrs",
+    "description": "\"lib.genAttrs :: Generate attrs from list, use element as name(key)\"",
+    "body": [
+      "(lib.genAttrs [ \"foo\" \"bar\" ] (${1:name}: ${2:val}))",
+      ""
+    ]
+  },
+  "lalistToAttrs": {
+    "prefix": "lalistToAttrs",
+    "description": "\"builtins.listToAttrs :: Convert name-value pair list to attrs\"",
+    "body": [
+      "(builtins.listToAttrs [ ${0:List} ])\"",
+      ""
+    ]
+  },
+  "lagenATTRSP": {
+    "prefix": "lagenATTRSP",
+    "description": "\"Generate attrs from list\"",
+    "body": [
+      "(builtins.listToAttrs (map (${2:foo}: (lib.nameValuePair (${3:\"will-eval-to-name\"}) (${4:\"will-eval-to-value\"}) ) )) ${1:[\"foos(list)\"]});",
+      "",
+      "",
+      ""
+    ]
+  },
+  "lamapAttrs": {
+    "prefix": "lamapAttrs",
+    "description": "\"builtins.mapAttrs :: Modify values of attrs (same key)\"",
+    "body": [
+      "(builtins.mapAttrs (${2:key}: ${3:val}: ($2 + $3)) ${1:AttrSet})",
+      ""
+    ]
+  },
+  "lamapAttrsp": {
+    "prefix": "lamapAttrsp",
+    "description": "\"lib.mapAttrs' :: Modify keys and values of attrs\"",
+    "body": [
+      "(lib.mapAttrs' (",
+      "\t${2:key}: ${3:val}: lib.nameValuePair",
+      "\t(${5:finalKeyExpression key + \"_x\"})",
+      "\t(${6:finalVarExpression val + \"_x\"})",
+      ") ${1:AttrSet} )",
+      ""
+    ]
+  },
+  "lafilter": {
+    "prefix": "lafilter",
+    "description": "\"lib.filterAttrs :: (String -> Any -> Bool) -> AttrSet -> AttrSet\"",
+    "body": "(lib.filterAttrs (n: v: $1) ${0:AttrSets})"
+  }
+}

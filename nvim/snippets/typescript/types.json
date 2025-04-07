@@ -1,0 +1,72 @@
+{
+  "tybo": {
+    "prefix": "tybo",
+    "description": "boolean (primitives)",
+    "body": "boolean"
+  },
+  "tynu": {
+    "prefix": "tynu",
+    "description": "number (primitives)",
+    "body": "number"
+  },
+  "tyst": {
+    "prefix": "tyst",
+    "description": "string (primitives)",
+    "body": "string"
+  },
+  "tyar": {
+    "prefix": "tyar",
+    "description": "array",
+    "body": "${1:number}[]"
+  },
+  "tyarT": {
+    "prefix": "tyarT",
+    "description": "array - generic array type",
+    "body": "Array<${1:elemType}>"
+  },
+  "tytu": {
+    "prefix": "tytu",
+    "description": "tuple",
+    "body": "[${1:elemType}${2:, elemType}]"
+  },
+  "tyne": {
+    "prefix": "tyne",
+    "description": "never",
+    "body": "never"
+  },
+  "tyvo": {
+    "prefix": "tyvo",
+    "description": "void",
+    "body": "void"
+  },
+  "tyun": {
+    "prefix": "tyun",
+    "description": "unknown",
+    "body": "unknown"
+  },
+  "tyan": {
+    "prefix": "tyan",
+    "description": "any",
+    "body": "any"
+  },
+  "tyob": {
+    "prefix": "tyob",
+    "description": "object",
+    "body": "object"
+  },
+  "type_assertions": {
+    "prefix": "type_assertions",
+    "description": "syntax of type assertions",
+    "body": [
+      "let someValue: unknown = \"this is a string\";",
+      "let strLength: number = (someValue as string).length;",
+      "// or",
+      "let strLength: number = (<string>someValue).length;"
+    ]
+  },
+  "ternary": {
+    "prefix": "ternary",
+    "description": "\"1 ? 2 : 3\"",
+    "body": "$1 extends $2 ? $3 : $4"
+  }
+}

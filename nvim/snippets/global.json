@@ -1,0 +1,57 @@
+{
+  "__duration": {
+    "prefix": "__duration",
+    "description": "ISO 8601 duration format",
+    "body": "P${1:nYnMnD}T${2:nHnMnS}"
+  },
+  "vi-modeline": {
+    "prefix": "vim",
+    "body": "${LINE_COMMENT} vi:${0:filetype}:${1:tw=80}",
+    "description": "Vi's modeline"
+  },
+  "NOTE": {
+    "prefix": "note",
+    "body": "${LINE_COMMENT} NOTE: $0 <${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}>",
+    "description": "Write NOTE (@comment.note)"
+  },
+  "INFO": {
+    "prefix": "info",
+    "body": "${LINE_COMMENT} INFO: $0 <${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}>",
+    "description": "Write INFO (@comment.note)"
+  },
+  "TODO": {
+    "prefix": "todo",
+    "body": "${LINE_COMMENT} TODO: $0 <${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}>",
+    "description": "Write TODO (@comment.todo)"
+  },
+  "WIP": {
+    "prefix": "wip",
+    "body": "${LINE_COMMENT} WIP: $0 <${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}>",
+    "description": "Write WIP"
+  },
+  "FIXME": {
+    "prefix": "fixme",
+    "body": "${LINE_COMMENT} FIXME: $0 <${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}>",
+    "description": "Write FIXME"
+  },
+  "WARNING": {
+    "prefix": "warning",
+    "body": "${LINE_COMMENT} WARNING: $0 <${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}>",
+    "description": "Write WARNING (@comment.warning)"
+  },
+  "FIX": {
+    "prefix": "FIX",
+    "body": "${LINE_COMMENT} FIX: $0 <${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}>",
+    "description": "Write FIX (@comment.warning)"
+  },
+  "HACK": {
+    "prefix": "hack",
+    "body": "${LINE_COMMENT} HACK: $0 <${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}>",
+    "description": "Write HACK (@comment.warning)"
+  },
+  "DEPRECATED": {
+    "prefix": "deprecated",
+    "body": "${LINE_COMMENT} DEPRECATED: $0 <${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}>",
+    "description": "Write DEPRECATED (@comment.error)"
+  }
+}
