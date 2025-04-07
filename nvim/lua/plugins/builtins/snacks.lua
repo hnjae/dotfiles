@@ -3,9 +3,7 @@ return {
   [1] = "folke/snacks.nvim",
   optional = true,
   ---@type snacks.Config
-  opts = {
-    explorer = { replace_netrw = false },
-  },
+  opts = {},
   specs = {
     {
       [1] = "folke/lazydev.nvim",

@@ -113,15 +113,15 @@
     "description": "\"Protect call a function as a variable\"",
     "body": "local ${1:status}, ${2:err_or_value} = pcall(${3:function})"
   },
-  "local is_foo foo = pcall(require, foo)": {
+  "local is_<foo> <foo> = pcall(require, \"<foo>\")": {
     "prefix": "pcar",
-    "description": "\"Protect call a function as a variable\"",
+    "description": "Protect call a function as a variable",
     "body": "local is_${1:module_name}, ${1:module_name} = pcall(require, \"${1:module_name}\")"
   },
-  "loreq": {
+  "local <foo> require(\"<foo>\")": {
     "prefix": "loreq",
-    "description": "\"Require module as a variable\"",
-    "body": "local ${1:var} = require(\"${2:module}\")"
+    "description": "Require module as a variable",
+    "body": "local ${1:module} = require(\"${1:module}\")"
   },
   "pca": {
     "prefix": "pca",

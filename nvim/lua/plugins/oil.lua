@@ -106,5 +106,14 @@ return {
       ["g\\"] = "actions.toggle_trash",
     },
   },
-  specs = {},
+  specs = {
+    {
+      [1] = "folke/snacks.nvim",
+      optional = true,
+      ---@type snacks.Config
+      opts = {
+        explorer = { replace_netrw = not REPLACE_NETRW },
+      },
+    },
+  },
 }

@@ -3,7 +3,7 @@
 
   gruvbox.nvim 는 vim.opt.background 값에 맞춰서 알아서 설정됨.
 
-  Supports:
+  Supports (2025-04-06):
     - blink.nvim
     - gitsigns
     - treesitter
@@ -26,12 +26,13 @@ return {
     [1] = "ellisonleao/gruvbox.nvim",
     version = false, -- use the latest git commit
     opts = {
-      -- transparent_mode = true,
-      -- dim_inactive = true,
+      transparent_mode = false,
+      dim_inactive = true,
       underline = false,
       terminal_colors = os.getenv("BASE16_THEME") == nil,
       overrides = {
         -- NormalFloat = { bg = "none" },
+        -- NormalFloat = { link = "NormalNc" },
       },
     },
   },

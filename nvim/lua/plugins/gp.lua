@@ -274,6 +274,9 @@ Primary Tasks:
     { [1] = vprefix .. "g",    mode = "v", [2] = ":<C-u>'<,'>GpGrammarCheck<CR>", desc = "gp-grammer-check" },
     { [1] = vprefix .. "t",    mode = "v", [2] = ":<C-u>'<,'>GpEnglishTranslate<CR>", desc = "gp-english-translate" },
     { [1] = vprefix .. "p",    mode = "v", [2] = ":<C-u>'<,'>GpProofread<CR>", desc = "gp-proofread" },
+
+    -- match LazyVim's key mappnig convention
+    { [1] = "<Leader>f" .. keyword, mode = "n", [2] = "<cmd>GpChatFinder", desc = "gp-chat (Gp)" },
   },
   specs = {
     {

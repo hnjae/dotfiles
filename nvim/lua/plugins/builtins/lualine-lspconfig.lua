@@ -7,6 +7,7 @@ local spec = {
     local truc_width = 100
     local suppress_sources = {
       ["null-ls"] = true,
+      ["copilot"] = true,
     }
 
     local lsp_icon = (require("globals").icons.codicons.gear .. " ")
@@ -17,11 +18,7 @@ local spec = {
     end
 
     local lsp_filter = function(name)
-      if suppress_sources[name] then
-        return false
-      end
-
-      return true
+      return suppress_sources[name] == nil and true or false
     end
 
     local component = {
