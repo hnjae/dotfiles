@@ -58,7 +58,7 @@ return {
   },
   specs = {
     {
-      [1] = "folke/which-key.nvim",
+      [1] = "which-key.nvim",
       optional = true,
       dependencies = { "echasnovski/mini.icons" },
       ---@param opts wk.Opts
