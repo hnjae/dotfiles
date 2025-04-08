@@ -206,15 +206,16 @@ Chats are saved automatically.
           local template = "I have the following code from {{filename}}:\n\n"
             .. "```{{filetype}}\n{{selection}}\n```\n\n"
             .. "Please respond by writing table driven unit tests for the code above."
-          local agent = gp.get_command_agent("claude-3-7-sonnet")
+          local agent = gp.get_command_agent("claude-command")
           gp.Prompt(params, gp.Target.vnew, agent, template)
         end,
+
         Proofread = function(gp, params)
           local template = [[```
 {{selection}}
 ```
 ]]
-          local agent = gp.get_command_agent("claude-3-7-sonnet")
+          local agent = gp.get_command_agent("claude-command")
           agent.system_prompt =
             [[Act as a multilingual expert proofreader and grammar specialist with the following responsibilities:
 
@@ -232,12 +233,13 @@ Specific Focus Areas:
 ]]
           gp.Prompt(params, gp.Target.vnew, agent, template)
         end,
+
         GrammarCheck = function(gp, params)
           local template = [[```
 {{selection}}
 ```
 ]]
-          local agent = gp.get_command_agent("claude-3-5-haiku")
+          local agent = gp.get_command_agent("claude-command")
           agent.system_prompt = [[Act as a multilingual grammar specialist with the following responsibilities:
 
 Primary Tasks:
@@ -247,12 +249,13 @@ Primary Tasks:
 ]]
           gp.Prompt(params, gp.Target.vnew, agent, template)
         end,
+
         EnglishTranslate = function(gp, params)
           local template = [[```
 {{selection}}
 ```
 ]]
-          local agent = gp.get_command_agent("claude-3-5-haiku")
+          local agent = gp.get_command_agent("claude-command")
           agent.system_prompt =
             [[I want you to act as an English translator, spelling corrector and improver. The given text is sentences I roughly wrote, and I would like you to translate it and answer in the corrected and improved version of my text, in English. You should ensure the sentences are simple and easy to understand for non-native English speakers. Hence, avoid complex vocabulary and sentence structures. I want you to only reply the correction, the improvements and nothing else, do not write explanations.]]
           gp.Prompt(params, gp.Target.vnew, agent, template)

@@ -6,7 +6,7 @@
   },
   "vi-modeline": {
     "prefix": "vim",
-    "body": "${LINE_COMMENT} vi:${0:filetype}:${1:tw=80}",
+    "body": "${LINE_COMMENT} vi:ft=${0:filetype}:${1:tw=80}",
     "description": "Vi's modeline"
   },
   "NOTE": {

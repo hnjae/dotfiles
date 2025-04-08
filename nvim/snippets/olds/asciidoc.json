@@ -1,6 +1,6 @@
 {
-  "badmonition": {
-    "prefix": "badmonition",
+  "block admonition": {
+    "prefix": "blAdmonition",
     "description": "block - admonition",
     "body": [
       "[${1:NOTE,IMPORTANT,TIP,CAUTION,WARNING,IMPORTANT}]",
@@ -29,53 +29,27 @@
   "lst": {
     "prefix": "lst",
     "description": "insert source block",
-    "body": [
-      ".${2:name}",
-      "[source, ${1:lang}]",
-      "----",
-      "$0",
-      "----"
-    ]
+    "body": [".${2:name}", "[source, ${1:lang}]", "----", "$0", "----"]
   },
   "js": {
     "prefix": "js",
     "description": "insert source block",
-    "body": [
-      ".${2:name}",
-      "[source, javascript]",
-      "----",
-      "$0",
-      "----"
-    ]
+    "body": [".${2:name}", "[source, javascript]", "----", "$0", "----"]
   },
   "ts": {
     "prefix": "ts",
     "description": "insert source block",
-    "body": [
-      ".${2:name}",
-      "[source, typescript]",
-      "----",
-      "$0",
-      "----"
-    ]
+    "body": [".${2:name}", "[source, typescript]", "----", "$0", "----"]
   },
   "bsidebar": {
     "prefix": "bsidebar",
     "description": "block - sidebar",
-    "body": [
-      ".${1:Optional title}",
-      "****",
-      "$0",
-      "****"
-    ]
+    "body": [".${1:Optional title}", "****", "$0", "****"]
   },
   "attr-source-highlight": {
     "prefix": "attr-source-highlight",
     "description": "add highlighter attribute",
-    "body": [
-      ":source-highlighter: highlightjs",
-      ":highlightjs-languages: $0"
-    ]
+    "body": [":source-highlighter: highlightjs", ":highlightjs-languages: $0"]
   },
   "attr-stem": {
     "prefix": "attr-stem",
