@@ -9,11 +9,10 @@ return {
 
   lazy = true,
   event = {
-    -- TODO: VeryLazy 해도 작동하는지 <2024-01-19>
-    -- "BufNewFile",
-    -- "BufReadPost",
-    -- "BufFilePost",
-    "VeryLazy",
+    -- "VeryLazy" 는 늦다.
+    "BufNewFile",
+    "BufReadPost",
+    "BufFilePost",
   },
   init = function()
     vim.g.slueth_text_heuristics = 0
