@@ -60,7 +60,7 @@ local spec = {
 
 ---@type LazySpec
 return {
-  [1] = "nvim-lspconfig",
+  [1] = "conform.nvim",
   optional = true,
   specs = { spec },
 }

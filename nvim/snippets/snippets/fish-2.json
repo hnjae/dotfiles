@@ -1,0 +1,7 @@
+{
+  "function": {
+    "prefix": ["fun", "fn"],
+    "description": "function NAME [OPTIONS]; BODY; end",
+    "body": ["function ${1:name}", "\t${0:${TM_SELECTED_TEXT:# body}}", "end"]
+  }
+}

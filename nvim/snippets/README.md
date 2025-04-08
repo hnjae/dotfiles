@@ -14,6 +14,11 @@ friendly-snippets 의 [eff286 (2024-12-02)](https://github.com/rafamadriz/friend
 
 `.editorconfig`, `.sh` 등 어느 파일의 boilerplate 작성
 
+### 기타
+
+- 함수 선언 prefix 는 3글자로 통일 (`fun`,`de`, ...) (예외: `fn`)
+- `else if` 에는 반드시 `elif` prefix 도 추가할 것.
+
 ## 같이 보기
 
 - <https://code.visualstudio.com/docs/editing/userdefinedsnippets>

@@ -28,6 +28,11 @@
     "description": "The currently selected text or the empty string.",
     "body": "\\$TM_SELECTED_TEXT"
   },
+  "TM_SELECTED_TEXT w. fallback": {
+    "prefix": "tmstf",
+    "description": "The currently selected text or the FALLBACK string.",
+    "body": "\\${TM_SELECTED_TEXT:${0:FALLBACK}}"
+  },
   "CURRENT_YEAR": {
     "prefix": "curyear",
     "description": "The current year.",

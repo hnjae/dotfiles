@@ -1,19 +1,18 @@
 {
-  "spostjson": {
+  "POST json": {
     "prefix": "spostjson",
-    "description": "\"post json\"",
+    "description": "post json",
     "body": [
       "POST http://${1:url}",
       "content-type: application/json",
       "{",
       "\t${0:json-body}",
-      "\\}",
-      ""
+      "\\}"
     ]
   },
-  "spostjsonopt": {
+  "POST json w. options": {
     "prefix": "spostjsonopt",
-    "description": "\"POST json body with options\"",
+    "description": "POST json body with options",
     "body": [
       "POST http://{{host\\}\\}",
       "content-type: application/json",
@@ -23,21 +22,17 @@
       "\t\"$0\"",
       "\t\"name\": \"{{newUuid\\}\\}\",",
       "\t\"order\": 0",
-      "\\}",
-      ""
+      "\\}"
     ]
   },
-  "suuid": {
+  "UUID": {
     "prefix": "suuid",
-    "description": "\"newUuid\"",
-    "body": [
-      "{{newUuid\\}\\}",
-      ""
-    ]
+    "description": "newUuid",
+    "body": "{{newUuid\\}\\}"
   },
-  "sint": {
+  "Random int number": {
     "prefix": "sint",
-    "description": "\"random-int-number\"",
+    "description": "random-int-number (will be provided by neovim's hurl plugin)",
     "body": "{{random_int_number\\}\\}"
   }
 }

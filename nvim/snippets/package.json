@@ -125,8 +125,16 @@
         "path": "./snippets/liquid.json"
       },
       {
+        "language": "fish",
+        "path": "./snippets/fish-2.json"
+      },
+      {
         "language": "lua",
         "path": "./snippets/lua/lua.json"
+      },
+      {
+        "language": "lua",
+        "path": "./snippets/lua/lua-2.json"
       },
       {
         "language": "luadoc",

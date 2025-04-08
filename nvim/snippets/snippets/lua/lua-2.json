@@ -1,0 +1,22 @@
+{
+  "function": {
+    "prefix": ["fun", "fn"],
+    "body": ["function ($1)", "\t${0:$TM_SELECTED_TEXT}", "end"]
+  },
+  "function with name": {
+    "prefix": ["funn", "fnn"],
+    "body": ["function ${1:fn_name}($2)", "\t${0:$TM_SELECTED_TEXT}", "end"]
+  },
+  "inline-function": {
+    "prefix": "fn=",
+    "body": ["local ${1:name} = function($2)", "\t${0}", "end"]
+  },
+  "if": {
+    "prefix": "if",
+    "body": ["if ${1:true} then", "\t${0:$TM_SELECTED_TEXT}", "end"]
+  },
+  "elseif": {
+    "prefix": ["elseif", "elif"],
+    "body": ["elseif ${1:true} then", "\t${0:$TM_SELECTED_TEXT}"]
+  }
+}
