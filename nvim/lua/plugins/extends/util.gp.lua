@@ -19,9 +19,14 @@ local wk_icon = { icon = require("globals").icons.ai, color = "purple" }
 ---@type LazySpec
 return {
   [1] = "Robitx/gp.nvim",
-  lazy = true,
+  version = "*", -- NOTE: latest release 2024-08-12 (2025-04-08)
+  commit = "72f4b3a0bd8798afb5dedc9b56129808c890e68c", -- <https://github.com/Robitx/gp.nvim/pull/255>
+  pin = true,
   cond = not vim.g.vscode,
+
+  lazy = true,
   event = "VeryLazy",
+
   dependencies = {},
   config = function(_, opts)
     require("gp").setup(opts)
@@ -86,8 +91,9 @@ return {
         shortcut = "<C-g>r",
       },
 
-      default_command_agent = "gemini-command",
       -- default_chat_agent = "claude-sonnet",
+      -- default_command_agent = "openai-mini",
+      default_command_agent = "gemini-command",
       default_chat_agent = "gemini",
 
       chat_template = [[
@@ -116,6 +122,7 @@ Chats are saved automatically.
       providers = {
         openai = {
           disable = false,
+          secret = { "secret-tool", "lookup", "api", "openai" },
         },
         copilot = {
           disable = false,
@@ -149,6 +156,18 @@ Chats are saved automatically.
         { name = "CodePerplexityLlama3.1-8B", disable = true },
         { name = "ChatCopilot", disable = true },
         { name = "CodeCopilot", disable = true },
+        {
+          -- NOTE: can not use o3-mini until <https://github.com/Robitx/gp.nvim/pull/255> merges (2025-04-08)
+          provider = "openai",
+          name = "openai-mini",
+          chat = true,
+          command = true,
+          model = {
+            model = "o3-mini",
+          },
+          system_prompt = require("gp.defaults").chat_system_prompt
+            .. "\n\nAlways answer in English regardless of input language.",
+        },
         {
           provider = "anthropic",
           name = "claude",
@@ -193,11 +212,12 @@ Chats are saved automatically.
           command = true,
           model = {
             model = "gemini-2.0-flash",
+            -- top_k = 40, -- range 0 -- 41
             -- model = "gemini-2.5-pro-exp-03-25",
             temperature = 0.9,
-            top_k = 40, -- range 0 -- 41
           },
-          system_prompt = "",
+          system_prompt = require("gp.defaults").code_system_prompt
+            .. "\n\nAlways answer in English regardless of input language.",
         },
       },
 
@@ -206,7 +226,7 @@ Chats are saved automatically.
           local template = "I have the following code from {{filename}}:\n\n"
             .. "```{{filetype}}\n{{selection}}\n```\n\n"
             .. "Please respond by writing table driven unit tests for the code above."
-          local agent = gp.get_command_agent("claude-command")
+          local agent = gp.get_command_agent()
           gp.Prompt(params, gp.Target.vnew, agent, template)
         end,
 
@@ -215,7 +235,7 @@ Chats are saved automatically.
 {{selection}}
 ```
 ]]
-          local agent = gp.get_command_agent("claude-command")
+          local agent = gp.get_command_agent()
           agent.system_prompt =
             [[Act as a multilingual expert proofreader and grammar specialist with the following responsibilities:
 
@@ -239,12 +259,13 @@ Specific Focus Areas:
 {{selection}}
 ```
 ]]
-          local agent = gp.get_command_agent("claude-command")
+          local agent = gp.get_command_agent()
           agent.system_prompt = [[Act as a multilingual grammar specialist with the following responsibilities:
 
 Primary Tasks:
 - Analyze provided text for grammatical errors, syntax issues
 - Provide corrections in the same language as the source text
+- Ensure consistency in style and tone
 - Reply the correction and nothing else, do not write explanations.
 ]]
           gp.Prompt(params, gp.Target.vnew, agent, template)

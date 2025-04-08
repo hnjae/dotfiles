@@ -7,11 +7,11 @@
     "snippets": [
       {
         "language": "all",
-        "path": "./snippets/global.json"
+        "path": "./snippets/global-2.json"
       },
       {
         "language": "all",
-        "path": "./snippets/global-2.json"
+        "path": "./snippets/global.json"
       },
       {
         "language": "hurl",
@@ -68,11 +68,11 @@
       },
       {
         "language": "editorconfig",
-        "path": "./snippets/editorconfig.json"
+        "path": "./snippets/editorconfig-2.json"
       },
       {
         "language": "editorconfig",
-        "path": "./snippets/editorconfig-2.json"
+        "path": "./snippets/editorconfig.json"
       },
       {
         "language": [
@@ -114,6 +114,38 @@
       },
       {
         "language": "nix",
+        "path": "./snippets/nix-2/_.json"
+      },
+      {
+        "language": "nix",
+        "path": "./snippets/nix-2/home-manager.json"
+      },
+      {
+        "language": "nix",
+        "path": "./snippets/nix-2/lib.attrsets.json"
+      },
+      {
+        "language": "nix",
+        "path": "./snippets/nix-2/lib.lists.json"
+      },
+      {
+        "language": "nix",
+        "path": "./snippets/nix-2/lib.strings.json"
+      },
+      {
+        "language": "nix",
+        "path": "./snippets/nix-2/lib.json"
+      },
+      {
+        "language": "nix",
+        "path": "./snippets/nix-2/nixos.json"
+      },
+      {
+        "language": "nix",
+        "path": "./snippets/nix-2/pkgs.json"
+      },
+      {
+        "language": "nix",
         "path": "./snippets/nix.json"
       },
       {
@@ -130,11 +162,11 @@
       },
       {
         "language": "lua",
-        "path": "./snippets/lua/lua.json"
+        "path": "./snippets/lua/lua-2.json"
       },
       {
         "language": "lua",
-        "path": "./snippets/lua/lua-2.json"
+        "path": "./snippets/lua/lua.json"
       },
       {
         "language": "luadoc",
@@ -235,6 +267,42 @@
           "sh",
           "zsh"
         ],
+        "path": "./snippets/shell/expression-2.json"
+      },
+      {
+        "language": [
+          "shellscript",
+          "shell",
+          "sh",
+          "zsh"
+        ],
+        "path": "./snippets/shell/recipies-2.json"
+      },
+      {
+        "language": [
+          "shellscript",
+          "shell",
+          "sh",
+          "zsh"
+        ],
+        "path": "./snippets/shell/boilerplates-2.json"
+      },
+      {
+        "language": [
+          "shellscript",
+          "shell",
+          "sh",
+          "zsh"
+        ],
+        "path": "./snippets/shell/shell-2.json"
+      },
+      {
+        "language": [
+          "shellscript",
+          "shell",
+          "sh",
+          "zsh"
+        ],
         "path": "./snippets/shell/shell.json"
       },
       {
@@ -246,7 +314,28 @@
           "markdown",
           "rmd"
         ],
+        "path": "./snippets/markdown-2.json"
+      },
+      {
+        "language": [
+          "markdown",
+          "rmd"
+        ],
         "path": "./snippets/markdown.json"
+      },
+      {
+        "language": [
+          "plaintex",
+          "tex"
+        ],
+        "path": "./snippets/latex/recipies-2.json"
+      },
+      {
+        "language": [
+          "plaintex",
+          "tex"
+        ],
+        "path": "./snippets/latex-2.json"
       },
       {
         "language": [
@@ -320,11 +409,22 @@
           "typescript",
           "typescriptreact"
         ],
+        "path": "./snippets/javascript/typescript-2.json"
+      },
+      {
+        "language": [
+          "typescript",
+          "typescriptreact"
+        ],
         "path": "./snippets/javascript/typescript.json"
       },
       {
         "language": "javascriptreact",
         "path": "./snippets/javascript/next.json"
+      },
+      {
+        "language": "typescriptreact",
+        "path": "./snippets/javascript/react-ts-2.json"
       },
       {
         "language": "typescriptreact",
@@ -400,6 +500,14 @@
       {
         "language": "angular",
         "path": "./snippets/frameworks/angular/jsonc.json"
+      },
+      {
+        "language": "python",
+        "path": "./snippets/python/python-2.json"
+      },
+      {
+        "language": "python",
+        "path": "./snippets/python/datetime-2.json"
       },
       {
         "language": "python",
@@ -505,6 +613,13 @@
           "tex"
         ],
         "path": "./snippets/latex/vscode-latex-snippets.json"
+      },
+      {
+        "language": [
+          "bibtex",
+          "bib"
+        ],
+        "path": "./snippets/latex/bibtex-2.json"
       },
       {
         "language": [
@@ -655,6 +770,10 @@
         "path": "./snippets/gleam.json"
       },
       {
+        "language": "asciidoc-2",
+        "path": "./snippets/asciidoc-2.json"
+      },
+      {
         "language": "asciidoc",
         "path": "./snippets/asciidoc.json"
       },
@@ -684,6 +803,10 @@
           "jsonc"
         ],
         "path": "./snippets/json-snippet-2.json"
+      },
+      {
+        "language": "cheat",
+        "path": "./snippets/cheat-2.json"
       }
     ]
   }

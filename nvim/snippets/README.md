@@ -16,8 +16,12 @@ friendly-snippets 의 [eff286 (2024-12-02)](https://github.com/rafamadriz/friend
 
 ### 기타
 
-- 함수 선언 prefix 는 3글자로 통일 (`fun`,`de`, ...) (예외: `fn`)
+- 함수 선언 prefix 는 3글자로 통일 (`fun`,`def`, ...) (예외: `fn`)
+- `shebang` 의 prefix 는 `shebang` 과 `#env` (`env` 를 쓴다면)
 - `else if` 에는 반드시 `elif` prefix 도 추가할 것.
+- `import`: `im`, `from xxx import yyy`: `fim`
+
+- `prefix`, `description`, `body` 순으로 적을 것. cmp 등에서 description → body 순서로 보여지기 때문에.
 
 ## 같이 보기
 

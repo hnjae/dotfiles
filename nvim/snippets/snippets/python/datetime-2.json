@@ -1,0 +1,40 @@
+{
+  "UTC ISO-8601 datetime string": {
+    "prefix": "striso8601",
+    "description": "use this with strftime",
+    "body": "%Y%m%dT%H%M%S%z"
+  },
+  "import dateime": {
+    "prefix": ["fimdt", "imdt"],
+    "body": "from datetime import datetime\n$0"
+  },
+  "import timezone": {
+    "prefix": ["fimtz", "imtz"],
+    "body": "from datetime import timezone\n$0"
+  },
+  "now without microsecond (UTC)": {
+    "prefix": "nowm",
+    "description": "UTC now without microsecond (datetime)",
+    "body": "datetime.now(tz=timezone.utc).replace(microsecond=0)"
+  },
+  "now without microseconds (localtime zone)": {
+    "prefix": "nowlm",
+    "description": "localtime zone now without microseconds (datetime)",
+    "body": "datetime.now(tz=timezone.utc).replace(microsecond=0).astimezone()"
+  },
+  "now (localtime zone)": {
+    "prefix": "nowl",
+    "description": "localtime zone now (datetime)",
+    "body": "datetime.now(tz=timezone.utc).astimezone()"
+  },
+  "now (UTC)": {
+    "prefix": "now",
+    "description": "UTC now (datetime)",
+    "body": "datetime.now(tz=timezone.utc)"
+  },
+  "today": {
+    "prefix": "today",
+    "description": "UTC today (date)",
+    "body": "datetime.now(tz=datetime.UTC).date()"
+  }
+}

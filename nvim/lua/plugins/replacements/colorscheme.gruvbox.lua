@@ -27,7 +27,7 @@ return {
     version = false, -- use the latest git commit
     opts = {
       transparent_mode = false,
-      dim_inactive = true,
+      dim_inactive = false,
       underline = false,
       terminal_colors = os.getenv("BASE16_THEME") == nil,
       -- terminal_colors = true,

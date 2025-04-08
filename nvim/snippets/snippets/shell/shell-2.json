@@ -1,0 +1,166 @@
+{
+  "shebang (posix)": {
+    "prefix": ["shebang", "#sh"],
+    "description": "This is POSIX script",
+    "body": "#!/bin/sh\n$0"
+  },
+  "shebang (bash)": {
+    "prefix": ["shebangb", "#env"],
+    "description": "This is bash script",
+    "body": "#!/usr/bin/env bash\n$0"
+  },
+  "array (bash)": {
+    "prefix": "arrb",
+    "description": "array (bash)",
+    "body": ["(", "\t$0", ")"]
+  },
+  "for": {
+    "prefix": "for",
+    "description": "iterate variables (POSIX)",
+    "body": [
+      "for ${2:name} in var1 var2 var3; do",
+      "\t${0:echo} \"\\${$2\\}\"",
+      "done"
+    ]
+  },
+  "forc": {
+    "prefix": "forc",
+    "description": "iterate output of command (POSIX)",
+    "body": [
+      "for ${2:name} in \\$(${3:echo a b c}); do",
+      "\t${0:echo} \"\\${$2\\}\"",
+      "done"
+    ]
+  },
+  "fori": {
+    "prefix": "fori",
+    "description": "loop numbers (POSIX)",
+    "body": [
+      "for ${1:i} in \\$(seq ${2:start} ${4:step(optional)} ${3:end (included)}\\}); do",
+      "\t$0echo \"Welcome \\$$1 times\"",
+      "done",
+      ""
+    ]
+  },
+  "fori (bash)": {
+    "prefix": "forib",
+    "description": "loop numbers (no variable in brace range expressions)(bash)",
+    "body": [
+      "for ${1:i} in {${2:start}..${3:end (included)}..${4:step (optional)}\\}; do",
+      "\t$0echo \"Welcome \\$$1 times\"",
+      "done"
+    ]
+  },
+  "fori2 (bash)": {
+    "prefix": "forib2",
+    "description": "An index-based iteration for loop. (bash)",
+    "body": [
+      "for ((${1:i} = 0; $1 < ${2:variable}; i++)); do",
+      "\t$0echo \"Welcome \\$$1 times\"",
+      "done"
+    ]
+  },
+  "for array (bash)": {
+    "prefix": ["forarrb", "forarrayb"],
+    "description": "iterate array (bash)",
+    "body": [
+      "for ${2:name} in \"\\${${1:array_name}[@]\\}\"; do",
+      "\t${0:echo} \"\\${$2\\}\"",
+      "done"
+    ]
+  },
+  "whilei": {
+    "prefix": "whilei",
+    "description": "\"loop numbers (POSIX)\"",
+    "body": [
+      "${1:i}=${2:start}",
+      "while [ \"\\$i\" -lt ${3:stop} ]; do",
+      "\t$0echo \"\\${$1\\}\"",
+      "\t$1=\\$((\\$$1 + ${4:step}))",
+      "done",
+      "unset \"$1\"",
+      ""
+    ]
+  },
+  "sete": {
+    "prefix": "sete",
+    "description": "exit when error occur",
+    "body": ["set -e", ""]
+  },
+  "if (posix)": {
+    "prefix": "if",
+    "description": "if (POSIX)",
+    "body": [
+      "if ${1:command}; then",
+      "\t${0:${TM_SELECTED_TEXT:echo foo}}",
+      "fi"
+    ]
+  },
+  "if (bash)": {
+    "prefix": "ifb",
+    "description": "An IF statement. (bash)",
+    "body": [
+      "if [[ ${1:condition} ]]; then",
+      "\t${0:${TM_SELECTED_TEXT:echo foo}}",
+      "fi"
+    ]
+  },
+  "else": {
+    "prefix": "else",
+    "description": "else",
+    "body": ["else", "\t${0:${TM_SELECTED_TEXT:echo foo}}"]
+  },
+  "elif (posix)": {
+    "prefix": ["elseif", "elif"],
+    "description": "elif (POSIX)",
+    "body": ["elif ${1:command}; then", "\t${0:${TM_SELECTED_TEXT:echo foo}}"]
+  },
+  "elif (bash)": {
+    "prefix": ["elseifb", "elifb"],
+    "description": "Add an elseif to an if statement. (bash)",
+    "body": [
+      "elif [[ ${1:condition} ]]; then",
+      "\t${0:${TM_SELECTED_TEXT:echo foo}}"
+    ]
+  },
+  "case": {
+    "prefix": "case",
+    "description": "case-in syntax",
+    "body": [
+      "case \"$1\" in",
+      "${2:???})",
+      "\t$0",
+      "\t;;",
+      "*)",
+      "\t;;",
+      "esac",
+      ""
+    ]
+  },
+  "function": {
+    "prefix": ["function", "fun", "fn"],
+    "description": [
+      "This defines a function named name.\n",
+      "The reserved word function is optional.\n",
+      "If the function reserved word is supplied, the parentheses are optional.\n",
+      "1. Recommended way:\n",
+      "name() {}\n",
+      "2. C-like-way:\nfunction name [()] {}"
+    ],
+    "body": [
+      "${1:function_name} () {",
+      "\t${0:${TM_SELECTED_TEXT:echo foo}",
+      "\\}"
+    ]
+  },
+  "echo": {
+    "prefix": ["echo", "e"],
+    "description": "Echo a message. (`e`)",
+    "body": "echo \"${0:${TM_SELECTED_TEXT:foo}}\""
+  },
+  "cover variable": {
+    "prefix": ["cv"],
+    "description": "cover variable with {} (`cv`)",
+    "body": "\"\\${${1:${TM_SELECTED_TEXT:variable_name}}\\}\""
+  }
+}

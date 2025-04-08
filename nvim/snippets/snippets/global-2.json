@@ -1,57 +1,107 @@
 {
-  "__duration": {
-    "prefix": "__duration",
+  "vi-modeline": {
+    "prefix": "vim",
+    "description": "Vi's modeline (remove <> after inserting)",
+    "body": "${LINE_COMMENT} <vi>:ft=${1:filetype}:tw={2:textwidth<e.g.) 80>}"
+  },
+  "duration-str": {
+    "prefix": "durationstr",
     "description": "ISO 8601 duration format",
     "body": "P${1:nYnMnD}T${2:nHnMnS}"
   },
-  "vi-modeline": {
-    "prefix": "vim",
-    "body": "${LINE_COMMENT} vi:ft=${0:filetype}:${1:tw=80}",
-    "description": "Vi's modeline"
+  "date": {
+    "prefix": "date",
+    "description": "Put the date in (Y-m-D) format",
+    "body": "${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}"
+  },
+  "date-ko": {
+    "prefix": "dateko",
+    "description": "Put the date in Korean locale",
+    "body": "${CURRENT_YEAR}년 ${CURRENT_MONTH}월 ${CURRENT_DATE}일"
+  },
+  "time": {
+    "prefix": "time",
+    "description": "I give you back the time (H:M:S)",
+    "body": "${CURRENT_HOUR}:${CURRENT_MINUTE}:${CURRENT_SECOND}"
+  },
+  "time-ko": {
+    "prefix": "timeko",
+    "description": "Put the time in Korean locale",
+    "body": "${CURRENT_HOUR}시 ${CURRENT_MINUTE}분 ${CURRENT_SECOND}초"
+  },
+  "datetime": {
+    "prefix": "datetime",
+    "description": "I give you back the time and date (Y-m-d H:M:S)",
+    "body": "${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE} ${CURRENT_HOUR}:${CURRENT_MINUTE}:${CURRENT_SECOND}"
+  },
+  "datetime-ko": {
+    "prefix": "datetimeko",
+    "description": "Put the datetime in Korean locale",
+    "body": "${CURRENT_YEAR}년 ${CURRENT_MONTH}월 ${CURRENT_DATE}일 ${CURRENT_HOUR}시 ${CURRENT_MINUTE}분 ${CURRENT_SECOND}초"
+  },
+  "datetime-iso": {
+    "prefix": ["datetimeiso", "dt"],
+    "description": "ISO date time stamp (`dt`)",
+    "body": "$CURRENT_YEAR-$CURRENT_MONTH-${CURRENT_DATE}T$CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND$CURRENT_TIMEZONE_OFFSET"
+  },
+  "uuid": {
+    "prefix": "uuid",
+    "description": "A Version 4 UUID",
+    "body": "${UUID}"
+  },
+  "random int": {
+    "prefix": "rint",
+    "description": "6 random base-10 digits",
+    "body": "${RANDOM}"
+  },
+  "random hex int": {
+    "prefix": "rhex",
+    "description": " 6 random Base-16 digit",
+    "body": "${RANDOM_HEX}"
   },
   "NOTE": {
     "prefix": "note",
-    "body": "${LINE_COMMENT} NOTE: $0 <${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}>",
-    "description": "Write NOTE (@comment.note)"
+    "description": "Write NOTE (@comment.note)",
+    "body": "${LINE_COMMENT} NOTE: $0 <${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}>"
   },
   "INFO": {
     "prefix": "info",
-    "body": "${LINE_COMMENT} INFO: $0 <${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}>",
-    "description": "Write INFO (@comment.note)"
+    "description": "Write INFO (@comment.note)",
+    "body": "${LINE_COMMENT} INFO: $0 <${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}>"
   },
   "TODO": {
     "prefix": "todo",
-    "body": "${LINE_COMMENT} TODO: $0 <${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}>",
-    "description": "Write TODO (@comment.todo)"
+    "description": "Write TODO (@comment.todo)",
+    "body": "${LINE_COMMENT} TODO: $0 <${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}>"
   },
   "WIP": {
     "prefix": "wip",
-    "body": "${LINE_COMMENT} WIP: $0 <${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}>",
-    "description": "Write WIP"
+    "description": "Write WIP",
+    "body": "${LINE_COMMENT} WIP: $0 <${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}>"
   },
   "FIXME": {
     "prefix": "fixme",
-    "body": "${LINE_COMMENT} FIXME: $0 <${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}>",
-    "description": "Write FIXME"
+    "description": "Write FIXME",
+    "body": "${LINE_COMMENT} FIXME: $0 <${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}>"
   },
   "WARNING": {
     "prefix": "warning",
-    "body": "${LINE_COMMENT} WARNING: $0 <${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}>",
-    "description": "Write WARNING (@comment.warning)"
+    "description": "Write WARNING (@comment.warning)",
+    "body": "${LINE_COMMENT} WARNING: $0 <${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}>"
   },
   "FIX": {
-    "prefix": "FIX",
-    "body": "${LINE_COMMENT} FIX: $0 <${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}>",
-    "description": "Write FIX (@comment.warning)"
+    "prefix": "fix",
+    "description": "Write FIX (@comment.warning)",
+    "body": "${LINE_COMMENT} FIX: $0 <${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}>"
   },
   "HACK": {
     "prefix": "hack",
-    "body": "${LINE_COMMENT} HACK: $0 <${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}>",
-    "description": "Write HACK (@comment.warning)"
+    "description": "Write HACK (@comment.warning)",
+    "body": "${LINE_COMMENT} HACK: $0 <${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}>"
   },
   "DEPRECATED": {
     "prefix": "deprecated",
-    "body": "${LINE_COMMENT} DEPRECATED: $0 <${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}>",
-    "description": "Write DEPRECATED (@comment.error)"
+    "description": "Write DEPRECATED (@comment.error)",
+    "body": "${LINE_COMMENT} DEPRECATED: $0 <${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}>"
   }
 }

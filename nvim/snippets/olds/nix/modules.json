@@ -1,7 +1,0 @@
-{
-  "lmmkoverride": {
-    "prefix": "lmmkoverride",
-    "description": "\"lib.modules.mkOverride :: int -> a -> Attrs\"",
-    "body": "lib.mkOverride ${1:priority(1000)} ${0:value}"
-  }
-}

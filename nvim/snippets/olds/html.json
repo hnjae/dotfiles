@@ -1,7 +1,0 @@
-{
-  "doctype": {
-    "prefix": "doctype",
-    "description": "doctype html",
-    "body": "<!DOCTYPE html>"
-  }
-}

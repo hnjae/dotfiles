@@ -1,37 +1,37 @@
 {
-  "Snippet w. multi-lines": {
+  "Snippet w/ multi-lines": {
     "prefix": "snm",
     "description": "New luasnip entry",
     "body": [
       "\"${1:name}\": {",
       "\t\"prefix\": \"${2:prefix}\",",
-      "\t\"description\": \"${3:foo}\"",
+      "\t\"description\": \"${3:foo}\",",
       "\t\"body\": [",
       "\t\t\"$0\"",
       "\t]",
       "\\},"
     ]
   },
-  "Snippet w. single line": {
-    "prefix": "sns",
+  "Snippet w/ single line": {
+    "prefix": ["sns", "sn"],
     "description": "New luasnip entry",
     "body": [
       "\"${1:name}\": {",
       "\t\"prefix\": \"${2:prefix}\",",
-      "\t\"description\": \"${3:foo}\"",
-      "\t\"body\": \"${0:foo]\"",
+      "\t\"description\": \"${3:foo}\",",
+      "\t\"body\": \"${0:foo}\"",
       "\\},"
     ]
   },
   "TM_SELECTED_TEXT": {
     "prefix": "tmst",
     "description": "The currently selected text or the empty string.",
-    "body": "\\$TM_SELECTED_TEXT"
+    "body": "\\${${1:0}:\\$TM_SELECTED_TEXT}"
   },
-  "TM_SELECTED_TEXT w. fallback": {
-    "prefix": "tmstf",
-    "description": "The currently selected text or the FALLBACK string.",
-    "body": "\\${TM_SELECTED_TEXT:${0:FALLBACK}}"
+  "TM_SELECTED_TEXT w/ fallback": {
+    "prefix": ["TM_SELECTED_TEXT_WITH_FALLBACK", "tmstf", "tm"],
+    "description": "The currently selected text or the FALLBACK string. (`tm`)",
+    "body": "\\${${1:0}:\\${TM_SELECTED_TEXT:${0:FallbackStr}}}"
   },
   "CURRENT_YEAR": {
     "prefix": "curyear",
@@ -39,7 +39,7 @@
     "body": "\\$CURRENT_YEAR"
   },
   "Current ISO DATE": {
-    "prefix": "curisodate",
+    "prefix": ["curisodate", "cur"],
     "description": "The current date in ISO-8601.",
     "body": "\\$CURRENT_YEAR-\\$CURRENT_MONTH-\\$CURRENT_DATE"
   },

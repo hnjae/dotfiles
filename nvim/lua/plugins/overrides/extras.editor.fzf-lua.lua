@@ -1,38 +1,40 @@
--- copied from FzfLua' M.grep.grep_project
-local default_grep_opts = {
-  search = "",
-  fzf_opts = {
-    ["--delimiter"] = ":",
-    ["--nth"] = "3..",
-  },
-}
-
-local grep_project = function()
-  local opts = vim.deepcopy(default_grep_opts)
-  opts.search_paths = { LazyVim.root() }
-
-  require("fzf-lua").grep(opts)
-end
-
-local grep_cwd = function()
-  local opts = vim.deepcopy(default_grep_opts)
-  opts.search_paths = { vim.fn.getcwd() }
-
-  require("fzf-lua").grep(opts)
-end
-
 ---@type LazySpec
 return {
   [1] = "fzf-lua",
   optional = true,
-  keys = {
-    { [1] = "<F1>", [2] = "<cmd>FzfLua helptags<CR>", desc = "help-tags" },
+  keys = function(_, keys)
+    -- copied from FzfLua' M.grep.grep_project
+    local default_grep_opts = {
+      search = "",
+      fzf_opts = {
+        ["--delimiter"] = ":",
+        ["--nth"] = "3..",
+      },
+    }
 
-    -- default mapping does not uses fzf's syntax
-    { [1] = "<Leader>/", [2] = grep_project, desc = "Grep (Project)" },
-    { [1] = "<Leader>sg", [2] = grep_project, desc = "Grep (Project)" }, -- same as above
-    { [1] = "<Leader>sG", [2] = grep_cwd, desc = "Grep (CWD)" },
-  },
+    local grep_project = function()
+      local opts = vim.deepcopy(default_grep_opts)
+      opts.search_paths = { LazyVim.root() }
+
+      require("fzf-lua").grep(opts)
+    end
+
+    local grep_cwd = function()
+      local opts = vim.deepcopy(default_grep_opts)
+      opts.search_paths = { vim.fn.getcwd() }
+
+      require("fzf-lua").grep(opts)
+    end
+
+    return vim.list_extend(keys, {
+      { [1] = "<F1>", [2] = "<cmd>FzfLua helptags<CR>", desc = "help-tags" },
+
+      -- default mapping does not uses fzf's syntax
+      { [1] = "<Leader>/", [2] = grep_project, desc = "Grep (Project)" },
+      { [1] = "<Leader>sg", [2] = grep_project, desc = "Grep (Project)" }, -- same as above
+      { [1] = "<Leader>sG", [2] = grep_cwd, desc = "Grep (CWD)" },
+    })
+  end,
   opts = function()
     local fzf = require("fzf-lua")
     local config = fzf.config

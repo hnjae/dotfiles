@@ -98,68 +98,6 @@
     "body": ["<<<", "$0"],
     "description": "Insert page break"
   },
-
-  "bold text": {
-    "prefix": ["bold", "b"],
-    "body": "*${1}* $0",
-    "description": "Insert bold text"
-  },
-  "italic text": {
-    "prefix": ["italic", "i"],
-    "body": "_${1}_ $0",
-    "description": "Insert italic text"
-  },
-  "monospace text": {
-    "prefix": ["monospace", "code"],
-    "body": "`${1}` $0",
-    "description": "Insert monospace text"
-  },
-  "bold and italic text": {
-    "prefix": ["bold and italic", "bi"],
-    "body": "*_${1}_* $0",
-    "description": "Insert bold and italic text"
-  },
-  "marked text": {
-    "prefix": ["mark"],
-    "body": "#${1}# $0",
-    "description": "Insert marked text"
-  },
-  "strikethrough text": {
-    "prefix": "strikethrough",
-    "body": "[.line-through]#${1}# $0",
-    "description": "Insert strikethrough text"
-  },
-  "underline text": {
-    "prefix": "underline",
-    "body": "[.underline]#${1}# $0",
-    "description": "Insert underline text"
-  },
-  "overline text": {
-    "prefix": "overline",
-    "body": "[.overline]#${1}# $0",
-    "description": "Insert overline text"
-  },
-  "small text": {
-    "prefix": "small",
-    "body": "[.small]#${1}# $0",
-    "description": "Insert small text"
-  },
-  "big text": {
-    "prefix": "big",
-    "body": "[.big]#${1}# $0",
-    "description": "Insert big text"
-  },
-  "superscript text": {
-    "prefix": "superscript",
-    "body": "^${1}^$0",
-    "description": "Insert superscript text"
-  },
-  "subscript text": {
-    "prefix": "subscript",
-    "body": "~${1}~$0",
-    "description": "Insert subscript text"
-  },
-
   "unordered list": {
     "prefix": "unordered list",
     "body": ["* ${1:first}", "* ${2:second}", "* ${3:third}", "$0"],
@@ -190,7 +128,6 @@
     ],
     "description": "Insert description list"
   },
-
   "link simple": {
     "prefix": "link",
     "body": "${1:${TM_SELECTED_TEXT:link}}[${2:alt}]$0",
@@ -383,17 +320,6 @@
     "body": [".${1:title}", "[sidebar]", "21", "$0"],
     "description": "Insert sidebar block as paragraph with title"
   },
-  "sidebar block": {
-    "prefix": "sidebar",
-    "body": ["****", "$1", "****", "$0"],
-    "description": "Insert sidebar block"
-  },
-  "sidebar block 2": {
-    "prefix": "sidebar+",
-    "body": [".${1:title}", "****", "$2", "****", "$0"],
-    "description": "Insert sidebar block with title"
-  },
-
   "example paragraph": {
     "prefix": "example paragraph",
     "body": ["[example]", "$1", "$0"],
@@ -443,30 +369,6 @@
     ],
     "description": "Insert quote block as paragraph"
   },
-  "quote block": {
-    "prefix": "quote block",
-    "body": [
-      "[quote, ${2:attribution}, \"${3:citation title and information}\"]",
-      "----",
-      "$1",
-      "----",
-      "$0"
-    ],
-    "description": "Insert quote block"
-  },
-  "quote block 2": {
-    "prefix": "quote block+",
-    "body": [
-      ".${1:title}",
-      "[quote, ${3:attribution}, \"${4:citation title and information}\"]",
-      "----",
-      "$2",
-      "----",
-      "$0"
-    ],
-    "description": "Insert quote block with title"
-  },
-
   "verse paragraph": {
     "prefix": "verse paragraph",
     "body": [
@@ -487,37 +389,6 @@
     ],
     "description": "Insert verse block"
   },
-
-  "source code block": {
-    "prefix": "source code block",
-    "body": ["[source,${1:language}]", "----", "$2", "----", "$0"],
-    "description": "Insert source code block"
-  },
-  "source code block 2": {
-    "prefix": "source code block+",
-    "body": [
-      ".${1:title}",
-      "[source,${2:language}]",
-      "----",
-      "$3",
-      "----",
-      "$0"
-    ],
-    "description": "Insert source code block with title"
-  },
-  "source code block 3": {
-    "prefix": "source code block+",
-    "body": [
-      ".${1:title}",
-      "[source,${2:language}]",
-      "----",
-      "include::${3:filepath}[]",
-      "----",
-      "$0"
-    ],
-    "description": "Insert source code block with title via include"
-  },
-
   "listing paragraph": {
     "prefix": "listing paragraph",
     "body": ["[listing]", "$1", "$0"],
@@ -539,7 +410,6 @@
     "body": ["....", "$1", "....", "$0"],
     "description": "Insert literal block"
   },
-
   "table": {
     "prefix": "table",
     "body": [
@@ -580,13 +450,11 @@
     ],
     "description": "Insert 4x3 table with autowidth and header"
   },
-
   "open block": {
     "prefix": "open block",
     "body": ["--", "$1", "--", "$0"],
     "description": "Insert open block"
   },
-
   "collapsible paragraph": {
     "prefix": "collapsible paragraph",
     "body": ["[example%collapsible]", "$1", "$0"],

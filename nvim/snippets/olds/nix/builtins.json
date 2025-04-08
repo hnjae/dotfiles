@@ -1,7 +1,0 @@
-{
-  "belem": {
-    "prefix": "belem",
-    "description": "\"builtins.elem :: return `true` if a value ouccurs in the list.\"",
-    "body": "elem ${1:value} ${0:list}"
-  }
-}
