@@ -1,3 +1,7 @@
+--[[
+NOTE:
+  - Replacing LazyVim's terminal implementation with snacks.nvim.
+]]
 local prefix_send = "<Leader>r"
 local wk_icon = { icon = require("globals").icons.terminal, color = "red" }
 
@@ -12,21 +16,6 @@ local get_root_term = function()
 
   return root_term
 end
-
--- local gitui = nil
--- local get_gitui = function()
---   if gitui == nil then
---     gitui = require("toggleterm.terminal").Terminal:new({
---       cmd = "gitui",
---       display_name = "gitui",
---       direction = "float",
---       dir = LazyVim.root(),
---       close_on_exit = true,
---     })
---   end
---
---   return gitui
--- end
 
 ---@type LazySpec
 return {

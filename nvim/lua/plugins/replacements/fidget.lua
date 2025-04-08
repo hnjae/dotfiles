@@ -22,6 +22,7 @@ return {
       -- disable noice's lsp alerts
       [1] = "noice.nvim",
       optional = true,
+      ---@type NoiceConfig
       opts = {
         lsp = {
           progress = {

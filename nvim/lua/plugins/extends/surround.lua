@@ -8,11 +8,8 @@ return {
   event = { "VeryLazy" },
   opts = {},
   dependencies = {
-    {
-      -- to override keys of flash.nvim
-      [1] = "folke/flash.nvim",
-      optional = true,
-    },
+    -- to override keys of flash.nvim
+    { [1] = "flash.nvim", optional = true },
   },
   specs = {},
 }

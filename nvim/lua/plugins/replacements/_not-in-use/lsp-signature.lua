@@ -1,10 +1,15 @@
+--[[
+  **replace noice.nvim's signature feature**
+
+  Shows popup window about parameter/func
+
+  NOTE:
+    - activated when on_attach() happens / or call .setup() in init.lua
+    - Can be replaced by `noice` or `cmp-nvim-lsp-signature-help`; **neither** opens a popup permanently while typing.
+]]
+
 ---@type LazyPluginSpec
 local spec = {
-  -- shows popup window about parameter/func
-  -- NOTE: activated when on_attach() happens / or call .setup() in init.lua
-  -- can be replaced by noice (or cmp-nvim-lsp-signature-help)
-  -- either does not open popup permanently while typing
-
   [1] = "ray-x/lsp_signature.nvim",
   version = false,
 
@@ -68,28 +73,31 @@ local spec = {
 
         -- vim.o.columns
       end,
-      -- floating_window_off_y = function()
-      -- max_height = 24,
-      hint_prefix = require("utils").use_icons and " " or "", -- nf-cod-beaker
-      -- vim.fn.hlexists("LspSignatureActiveParameter"),
-      -- hi_parameter = "LspSignatureActiveParameter", -- how your parameter will be highlight
-      -- zindex = 999999,
+
+      hint_prefix = " ", -- nf-cod-beaker
+
       move_cursor_key = "<C-w>", -- imap
     }
   end,
 }
 
----@type LazySpec
+---@type LazySpec{}
 return {
-  [1] = "neovim/nvim-lspconfig",
-  optional = true,
-  dependencies = {
-    "ray-x/lsp_signature.nvim",
+  {
+    [1] = "neovim/nvim-lspconfig",
+    optional = true,
+    dependencies = { spec },
   },
-  -- opts = {
-  --   inlay_hints = {
-  --     enabled = true,
-  --   },
-  -- },
-  specs = { spec },
+  {
+    [1] = "noice.nvim",
+    optional = true,
+    ---@type NoiceConfig
+    opts = {
+      lsp = {
+        signature = {
+          enabled = false,
+        },
+      },
+    },
+  },
 }

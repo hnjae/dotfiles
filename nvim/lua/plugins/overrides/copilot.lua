@@ -1,7 +1,9 @@
 --[[
   NOTE:
+    - My own implementation of `ai.copilot` from LazyVim
     - DO NOT USE `ai.copilot` from LazyVim
 ]]
+
 ---@type LazySpec[]
 return {
   {

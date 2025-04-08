@@ -1,6 +1,7 @@
 --[[
   - NOTE:
     - <https://github.com/Bekaboo/dropbar.nvim>
+    - LazyVim 의 경우 lualine 에서 관련 내용을 제거 해야 중복되지 않는다.
 ]]
 
 ---@type LazySpec
