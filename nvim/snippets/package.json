@@ -276,7 +276,7 @@
           "sh",
           "zsh"
         ],
-        "path": "./snippets/shell/recipies-2.json"
+        "path": "./snippets/shell/recipes-2.json"
       },
       {
         "language": [
@@ -328,7 +328,7 @@
           "plaintex",
           "tex"
         ],
-        "path": "./snippets/latex/recipies-2.json"
+        "path": "./snippets/latex/recipes-2.json"
       },
       {
         "language": [
