@@ -1,6 +1,6 @@
 -- Run API request
 
--- util.rest 의 prefix와 동일하게 설정
+-- LazyVim 의 util.rest 의 prefix와 동일하게 설정
 local prefix = "<Leader>R"
 
 ---@type LazySpec

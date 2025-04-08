@@ -1,6 +1,6 @@
 ---@type LazySpec
 return {
-  [1] = "folke/which-key.nvim",
+  [1] = "which-key.nvim",
   opts_extend = { "spec", "icons.rules" },
   optional = true,
   opts = {
@@ -8,7 +8,7 @@ return {
   },
   specs = {
     {
-      [1] = "folke/lazydev.nvim",
+      [1] = "lazydev.nvim",
       optional = true,
       opts = {
         library = {

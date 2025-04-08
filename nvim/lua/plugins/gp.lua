@@ -286,7 +286,7 @@ Primary Tasks:
   },
   specs = {
     {
-      [1] = "folke/which-key.nvim",
+      [1] = "which-key.nvim",
       optional = true,
       -- ---@type wk.Opts
       opts = {

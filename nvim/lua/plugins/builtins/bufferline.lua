@@ -1,6 +1,6 @@
 ---@type LazySpec
 return {
-  [1] = "akinsho/bufferline.nvim",
+  [1] = "bufferline.nvim",
   optional = true,
 
   -- disable lazyvim's mapping

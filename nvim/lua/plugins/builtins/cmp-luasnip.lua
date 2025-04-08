@@ -2,7 +2,7 @@
 
 ---@type LazyPluginSpec
 local spec = {
-  [1] = "hrsh7th/nvim-cmp",
+  [1] = "nvim-cmp",
   optional = true,
   ---@param opts cmp.ConfigSchema
   opts = function(_, opts)
@@ -40,7 +40,7 @@ local spec = {
 
 ---@type LazySpec
 return {
-  [1] = "L3MON4D3/LuaSnip",
+  [1] = "LuaSnip",
   optional = true,
   specs = { spec },
 }

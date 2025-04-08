@@ -2,16 +2,17 @@
 
 ---@type LazySpec
 return {
-  [1] = "L3MON4D3/LuaSnip",
+  [1] = "LuaSnip",
   optional = true,
   opts = {
     store_selection_keys = "<Tab>",
   },
   dependencies = {
     {
-      "rafamadriz/friendly-snippets",
+      -- disable friendly-snippets
+      "friendly-snippets",
+      optional = true,
       enabled = false,
-      config = function() end,
     },
   },
   cmd = {

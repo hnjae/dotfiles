@@ -1,6 +1,6 @@
 ---@type LazySpec
 return {
-  [1] = "folke/lazydev.nvim",
+  [1] = "lazydev.nvim",
   optional = true,
   opts_extend = { "library" },
 }

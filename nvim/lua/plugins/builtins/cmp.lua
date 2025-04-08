@@ -3,7 +3,7 @@
 
 ---@type LazySpec
 return {
-  [1] = "hrsh7th/nvim-cmp",
+  [1] = "nvim-cmp",
   optional = true,
   ---@param opts cmp.ConfigSchema
   opts = function(_, opts)
@@ -46,7 +46,7 @@ return {
 
   specs = {
     {
-      [1] = "folke/lazydev.nvim",
+      [1] = "lazydev.nvim",
       optional = true,
       opts = {
         library = {

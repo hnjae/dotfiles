@@ -1,10 +1,10 @@
 ---@type LazySpec
 return {
-  [1] = "folke/lazy.nvim",
+  [1] = "lazy.nvim",
   optional = true,
   specs = {
     {
-      [1] = "folke/lazydev.nvim",
+      [1] = "lazydev.nvim",
       optional = true,
       opts = {
         library = {

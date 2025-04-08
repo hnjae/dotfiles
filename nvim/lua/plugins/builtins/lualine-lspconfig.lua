@@ -1,6 +1,6 @@
 ---@type LazyPluginSpec
 local spec = {
-  [1] = "nvim-lualine/lualine.nvim",
+  [1] = "lualine.nvim",
   optional = true,
   opts = function(_, opts)
     local hide_width = 40
@@ -58,7 +58,7 @@ local spec = {
 
 ---@type LazySpec
 return {
-  [1] = "neovim/nvim-lspconfig",
+  [1] = "nvim-lspconfig",
   optional = true,
   specs = { spec },
 }

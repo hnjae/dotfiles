@@ -110,7 +110,7 @@ return {
   },
   specs = {
     {
-      [1] = "folke/snacks.nvim",
+      [1] = "snacks.nvim",
       optional = true,
       ---@type snacks.Config
       opts = {

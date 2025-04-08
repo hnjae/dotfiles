@@ -14,11 +14,5 @@ return {
       optional = true,
     },
   },
-  specs = {
-    {
-      [1] = "folke/which-key.nvim",
-      optional = true,
-      opts = {},
-    },
-  },
+  specs = {},
 }

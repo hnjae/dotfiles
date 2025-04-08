@@ -1,11 +1,11 @@
 ---@type LazySpec
 return {
-  [1] = "folke/flash.nvim",
+  [1] = "flash.nvim",
   optional = true,
 
   -- stylua: ignore
   keys = {
-    -- lazyvim's default:
+    -- disable lazyvim's default:
     { "s", mode = { "n", "x", "o" }, "<Nop>", },
     { "S", mode = { "n", "o", "x" }, "<Nop>", },
 

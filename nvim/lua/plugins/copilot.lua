@@ -6,11 +6,14 @@
 return {
   {
     [1] = "zbirenbaum/copilot.lua",
+    version = false,
+    build = ":Copilot auth",
+
+    cond = not vim.g.vscode and vim.fn.executable("node") == 1,
+
     lazy = true,
     cmd = "Copilot",
-    build = ":Copilot auth",
     event = "BufReadPost",
-    cond = not vim.g.vscode and vim.fn.executable("node") == 1,
 
     --[[ keys = function()
       local prefix = require("globals").prefix
@@ -95,7 +98,7 @@ return {
     },
     specs = {
       {
-        [1] = "nvim-lualine/lualine.nvim",
+        [1] = "lualine.nvim",
         optional = true,
         dependencies = { "AndreM222/copilot-lualine" },
         opts = function(_, opts)

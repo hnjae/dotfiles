@@ -20,7 +20,7 @@ return {
   specs = {
     {
       -- disable noice's lsp alerts
-      [1] = "folke/noice.nvim",
+      [1] = "noice.nvim",
       optional = true,
       opts = {
         lsp = {

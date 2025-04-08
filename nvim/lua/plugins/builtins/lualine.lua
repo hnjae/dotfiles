@@ -32,7 +32,7 @@ end
 
 ---@type LazySpec
 return {
-  [1] = "nvim-lualine/lualine.nvim",
+  [1] = "lualine.nvim",
   optional = true,
   opts = function(_, opts)
     -- HACK: lualine_c 의 마지막 elements 가 LazyVim.lualine.pretty_path() 인지 어떻게 아나? <2025-04-07>

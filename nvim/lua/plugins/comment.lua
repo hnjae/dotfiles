@@ -28,8 +28,7 @@ return {
       mappings = false,
     }
 
-    local is_ts_context, ts_context =
-      pcall(require, "ts_context_commentstring.integrations.comment_nvim")
+    local is_ts_context, ts_context = pcall(require, "ts_context_commentstring.integrations.comment_nvim")
 
     if is_ts_context then
       res.pre_hook = ts_context.create_pre_hook()
@@ -54,8 +53,7 @@ return {
     {
       [1] = "gbc",
       [2] = function()
-        return vim.api.nvim_get_vvar("count") == 0
-            and "<Plug>(comment_toggle_blockwise_current)"
+        return vim.api.nvim_get_vvar("count") == 0 and "<Plug>(comment_toggle_blockwise_current)"
           or "<Plug>(comment_toggle_blockwise_count)"
       end,
       desc = "comment-toggle-current-block",
@@ -89,7 +87,7 @@ return {
   },
   specs = {
     {
-      [1] = "folke/which-key.nvim",
+      [1] = "which-key.nvim",
       optional = true,
       ---@class opts wk.Opts
       opts = function(_, opts)

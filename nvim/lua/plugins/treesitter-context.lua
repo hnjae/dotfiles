@@ -2,7 +2,7 @@
 
 ---@type LazySpec
 return {
-  [1] = "nvim-treesitter/nvim-treesitter",
+  [1] = "nvim-treesitter",
   optional = true,
   specs = {
     {
@@ -10,7 +10,7 @@ return {
       lazy = true,
       event = { "VeryLazy" },
       dependencies = {
-        [1] = "nvim-treesitter/nvim-treesitter",
+        [1] = "nvim-treesitter",
       },
       opts = {
         max_lines = 3,
