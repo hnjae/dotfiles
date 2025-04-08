@@ -1,86 +1,86 @@
 {
-  "sdotenv": {
-    "prefix": "sdotenv",
-    "description": "\"dotenv\"",
-    "body": "dotenv ${0:optional-dotenv-path}"
-  },
-  "sdotenvif": {
-    "prefix": "sdotenvif",
-    "description": "\"dotenv-if-exists\"",
-    "body": "doten_if_exists ${0:optional-dotenv-path}"
-  },
-  "spath": {
-    "prefix": "spath",
-    "description": "\"add bin to PATH\"",
-    "body": "PATH_add \"${1:}\""
-  },
-  "sman": {
-    "prefix": "sman",
-    "description": "\"MANPATH_add\"",
-    "body": "MANPATH_add \"$1\""
-  },
-  "sflake": {
-    "prefix": "sflake",
-    "description": "\"load flake.nix's `devShell` \"",
-    "body": "use flake"
-  },
-  "snix": {
-    "prefix": "snix",
-    "description": "\"use `shell.nix` or `default.nix`\"",
-    "body": "use nix"
-  },
-  "snixp": {
-    "prefix": "snixp",
-    "description": "\"use package\"",
-    "body": [
-      "use nix -p \"${1:hello}\"",
-      ""
-    ]
-  },
-  "srye": {
-    "prefix": "srye",
-    "description": "\"rye (python)\"",
-    "body": [
-      "if has rye; then",
-      "\tsource_env \"\\${RYE_HOME:-\\${HOME/.rye\\}\\}/env\"",
-      "fi",
-      "if [ -d \".venv\" ]; then",
-      "\tVIRTUAL_ENV=\"\\$(pwd)/.venv\"",
-      "fi",
-      "",
-      "if [ -z \"\\$VIRTUAL_ENV\" ] || [ ! -d \"\\$VIRTUAL_ENV\" ]; then",
-      "\tlog_status \"No virtual environment exists. Executing `rye sync` to create one.\"",
-      "\trye sync",
-      "\tVIRTUAL_ENV=\"\\$(pwd)/.venv\"",
-      "fi",
-      "",
-      "PATH_add \"\\$VIRTUAL_ENV/bin\"",
-      "export VIRTUAL_ENV",
-      ""
-    ]
-  },
-  "ssource_up": {
-    "prefix": "ssource_up",
-    "description": "\"Use parent's .envrc\"",
-    "body": "source_up ${0:optional-filename}"
-  },
-  "slnode": {
-    "prefix": "slnode",
-    "description": "\"add node_modules/.bin to path\"",
-    "body": "layout node"
-  },
-  "slgo": {
-    "prefix": "slgo",
-    "description": "\"Add $(direnv_layout_dir)/go to GOPATH and bin to PATH\"",
-    "body": "layout go"
-  },
-  "if": {
-    "prefix": "if",
-    "description": "\"if has <command>\"",
-    "body": [
-      "if has ${0:curl}; then",
-      "\techo \"hello\"",
-      "fi"
-    ]
-  }
+    "sdotenv": {
+        "prefix": "sdotenv",
+        "description": "dotenv",
+        "body": "dotenv ${0:optional-dotenv-path}"
+    },
+    "sdotenvif": {
+        "prefix": "sdotenvif",
+        "description": "dotenv-if-exists",
+        "body": "doten_if_exists ${0:optional-dotenv-path}"
+    },
+    "spath": {
+        "prefix": "spath",
+        "description": "add bin to PATH",
+        "body": "PATH_add \"${1:}\""
+    },
+    "sman": {
+        "prefix": "sman",
+        "description": "MANPATH_add",
+        "body": "MANPATH_add \"$1\""
+    },
+    "sflake": {
+        "prefix": "sflake",
+        "description": "load flake.nix's `devShell` ",
+        "body": "use flake"
+    },
+    "snix": {
+        "prefix": "snix",
+        "description": "use `shell.nix` or `default.nix`",
+        "body": "use nix"
+    },
+    "snixp": {
+        "prefix": "snixp",
+        "description": "use package",
+        "body": [
+            "use nix -p \"${1:hello}\"",
+            ""
+        ]
+    },
+    "srye": {
+        "prefix": "srye",
+        "description": "rye (python)",
+        "body": [
+            "if has rye; then",
+            "\tsource_env \"\\${RYE_HOME:-\\${HOME/.rye\\}\\}/env\"",
+            "fi",
+            "if [ -d \".venv\" ]; then",
+            "\tVIRTUAL_ENV=\"\\$(pwd)/.venv\"",
+            "fi",
+            "",
+            "if [ -z \"\\$VIRTUAL_ENV\" ] || [ ! -d \"\\$VIRTUAL_ENV\" ]; then",
+            "\tlog_status \"No virtual environment exists. Executing `rye sync` to create one.\"",
+            "\trye sync",
+            "\tVIRTUAL_ENV=\"\\$(pwd)/.venv\"",
+            "fi",
+            "",
+            "PATH_add \"\\$VIRTUAL_ENV/bin\"",
+            "export VIRTUAL_ENV",
+            ""
+        ]
+    },
+    "ssource_up": {
+        "prefix": "ssource_up",
+        "description": "Use parent's .envrc",
+        "body": "source_up ${0:optional-filename}"
+    },
+    "slnode": {
+        "prefix": "slnode",
+        "description": "add node_modules/.bin to path",
+        "body": "layout node"
+    },
+    "slgo": {
+        "prefix": "slgo",
+        "description": "Add $(direnv_layout_dir)/go to GOPATH and bin to PATH",
+        "body": "layout go"
+    },
+    "if": {
+        "prefix": "if",
+        "description": "if has <command>",
+        "body": [
+            "if has ${0:curl}; then",
+            "\techo \"hello\"",
+            "fi"
+        ]
+    }
 }

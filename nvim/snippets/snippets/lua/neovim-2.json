@@ -1,0 +1,92 @@
+{
+    "vim.notify - warning": {
+        "prefix": "warn",
+        "body": "vim.notify(${0:${TM_SELECTED_TEXT:msg}}, vim.log.levels.WARN)"
+    },
+    "tbl_contains": {
+        "prefix": [
+            "contains",
+            "tbl_contains",
+            "vim.tbl_contains"
+        ],
+        "description": "obj in table",
+        "body": "vim.tbl_contains(${1:table}, ${2:value})"
+    },
+    "vim.api.nvim_create_autocmd": {
+        "prefix": [
+            "vim.api.nvim_create_autocmd",
+            "create_autocmd",
+            "autocmd"
+        ],
+        "description": "create autocmd",
+        "body": [
+            "vim.api.nvim_creat_autocmd(\"${1:FileType}\", {",
+            "\tpattern = { ${2:\"asciidoc\"} },",
+            "\tcallback = function ()",
+            "\t\t${0:${TM_SELECTED_TEXT:-- do something}}",
+            "\tend,",
+            "})"
+        ]
+    },
+    "extend-table": {
+        "prefix": "extend-table",
+        "description": "extend list-table",
+        "body": [
+            "vim.list_extend(${1:table-name}, $2)$0",
+            ""
+        ]
+    },
+    "deep-extend": {
+        "prefix": "deep-extend",
+        "description": "deep-extend table",
+        "body": [
+            "vim.tbl_deep_extend(\"keep\", $1, $2)$0",
+            ""
+        ]
+    },
+    "getft": {
+        "prefix": "getft",
+        "description": "get ft (deprecated)",
+        "body": [
+            "vim.api.nvim_get_option_value(\"filetype\", { buf = bufid })"
+        ]
+    },
+    "packpath": {
+        "prefix": "packpath",
+        "description": "package_path of file",
+        "body": [
+            "local package_path = (...):match(\"(.-)[^%.]+\\$\")",
+            ""
+        ]
+    },
+    "vim.api.nvim_del_user_command": {
+        "prefix": "del_user_command",
+        "description": "delete user command",
+        "body": "vim.api.nvim_del_user_command($0)"
+    },
+    "get cli output": {
+        "prefix": "getclioutput",
+        "description": "get stdout from shell command",
+        "body": [
+            "vim.system({$0\\}, { text = true \\}):wait().stdout",
+            ""
+        ]
+    },
+    "get highlight": {
+        "prefix": "get-highlight",
+        "description": "get highlight group",
+        "body": "vim.api.nvim_get_hl(0, { name = \"${0:PmenuSel}\" \\})",
+    },
+    "autocmd-filetype": {
+        "prefix": "autocmd-filetype",
+        "description": "autocmd-filetype",
+        "body": [
+            "vim.api.nvim_create_autocmd(\"FileType\", {",
+            "\tpattern = { \"${1:gitcommit}\" \\},",
+            "\tcallback = function()",
+            "\t\t$0",
+            "\tend,",
+            "\\})"
+        ]
+    }
+}

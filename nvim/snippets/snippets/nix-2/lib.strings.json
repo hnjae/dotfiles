@@ -1,27 +1,39 @@
 {
-  "ls": {
-    "prefix": "ls",
-    "description": "lib.strings.",
-    "body": ["lib.strings.", ""]
-  },
-  "lsreadFile": {
-    "prefix": "lsreadFile",
-    "description": "builtins.readFile :: Path -> String",
-    "body": ["builtins.readFile ${0:path}", ""]
-  },
-  "lsconcatStringsSep": {
-    "prefix": "lsconcatStringsSep",
-    "description": "builtins.concatStringsSep :: string -> [string] -> string",
-    "body": ["builtins.concatStringsSep \"$1\" [$0]", ""]
-  },
-  "lsoptionalString": {
-    "prefix": "lsoptionalString",
-    "description": "optionalString :: bool -> string -> string",
-    "body": ["lib.optionalString (${1:bool}) (${0:\\$TM_SELECTED_TEXT})", ""]
-  },
-  "lsconcatLines": {
-    "prefix": "lsconcatLines",
-    "description": "concatLines :: [string] -> string",
-    "body": "lib.concatLines [$0]"
-  }
+    "ls": {
+        "prefix": "ls",
+        "description": "lib.strings.",
+        "body": [
+            "lib.strings.",
+            ""
+        ]
+    },
+    "lsreadFile": {
+        "prefix": "lsreadFile",
+        "description": "builtins.readFile :: Path -> String",
+        "body": [
+            "builtins.readFile ${0:path}",
+            ""
+        ]
+    },
+    "lsconcatStringsSep": {
+        "prefix": "lsconcatStringsSep",
+        "description": "builtins.concatStringsSep :: string -> [string] -> string",
+        "body": [
+            "builtins.concatStringsSep \"$1\" [$0]",
+            ""
+        ]
+    },
+    "lsoptionalString": {
+        "prefix": "lsoptionalString",
+        "description": "optionalString :: bool -> string -> string",
+        "body": [
+            "lib.optionalString (${1:bool}) (${0:\\$TM_SELECTED_TEXT})",
+            ""
+        ]
+    },
+    "lsconcatLines": {
+        "prefix": "lsconcatLines",
+        "description": "concatLines :: [string] -> string",
+        "body": "lib.concatLines [$0]"
+    }
 }

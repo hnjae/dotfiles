@@ -1,47 +1,57 @@
 {
-  "test": {
-    "prefix": "test",
-    "description": "evaluates expression and returns a 0 (true) or 1 (false)",
-    "body": "test ${1:${TM_SELECTED_TEXT:'echo foo'}}"
-  },
-  "cond": {
-    "prefix": ["cond", "c"],
-    "description": "[ expression ]",
-    "body": "[ ${1:$TM_SELECTED_TEXT} ] $0"
-  },
-  "compare string": {
-    "prefix": ["compares"],
-    "description": "compare string (POSIX)",
-    "body": "[ \"\\$$1\" = \"\\$$2\"* ] $0"
-  },
-  "compare integer": {
-    "prefix": ["comparei"],
-    "description": "compare integer (POSIX)",
-    "body": "[ \"\\$$1\" -eq \"\\$$2\"* ] $0"
-  },
-  "compare (bash)": {
-    "prefix": ["compare (bash)", "compareb"],
-    "description": "compare values (bash)",
-    "body": "[[ \"\\$$1\" == \"\\$$2\"* ]] $0"
-  },
-  "isfile": {
-    "prefix": "isfile",
-    "description": "check if path is a file",
-    "body": "[ -f \"\\$$1\" ] $0"
-  },
-  "isdir": {
-    "prefix": "isdir",
-    "description": "check if path is a directory",
-    "body": "[ -d \"\\$$1\" ]$0"
-  },
-  "isstring": {
-    "prefix": "isstring",
-    "description": "check if variable is a string",
-    "body": "[ -n \"\\$$1\" ] $0"
-  },
-  "isemptystring": {
-    "prefix": "isemptystring",
-    "description": "check if variable is a empty string",
-    "body": "[ -z \"\\$$1\" ] $0"
-  }
+    "test": {
+        "prefix": "test",
+        "description": "evaluates expression and returns a 0 (true) or 1 (false)",
+        "body": "test ${1:${TM_SELECTED_TEXT:'echo foo'}}"
+    },
+    "cond": {
+        "prefix": [
+            "cond",
+            "c"
+        ],
+        "description": "[ expression ]",
+        "body": "[ ${1:$TM_SELECTED_TEXT} ] $0"
+    },
+    "compare string": {
+        "prefix": [
+            "compares"
+        ],
+        "description": "compare string (POSIX)",
+        "body": "[ \"\\$$1\" = \"\\$$2\"* ] $0"
+    },
+    "compare integer": {
+        "prefix": [
+            "comparei"
+        ],
+        "description": "compare integer (POSIX)",
+        "body": "[ \"\\$$1\" -eq \"\\$$2\"* ] $0"
+    },
+    "compare (bash)": {
+        "prefix": [
+            "compare (bash)",
+            "compareb"
+        ],
+        "description": "compare values (bash)",
+        "body": "[[ \"\\$$1\" == \"\\$$2\"* ]] $0"
+    },
+    "isfile": {
+        "prefix": "isfile",
+        "description": "check if path is a file",
+        "body": "[ -f \"\\$$1\" ] $0"
+    },
+    "isdir": {
+        "prefix": "isdir",
+        "description": "check if path is a directory",
+        "body": "[ -d \"\\$$1\" ]$0"
+    },
+    "isstring": {
+        "prefix": "isstring",
+        "description": "check if variable is a string",
+        "body": "[ -n \"\\$$1\" ] $0"
+    },
+    "isemptystring": {
+        "prefix": "isemptystring",
+        "description": "check if variable is a empty string",
+        "body": "[ -z \"\\$$1\" ] $0"
+    }
 }

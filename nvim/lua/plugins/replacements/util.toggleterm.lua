@@ -1,6 +1,6 @@
 --[[
 NOTE:
-  - Replacing LazyVim's terminal implementation with snacks.nvim.
+  - Replace LazyVim's terminal implementation (snacks.nvim).
 ]]
 local prefix_send = "<Leader>r"
 local wk_icon = { icon = require("globals").icons.terminal, color = "red" }
@@ -15,6 +15,19 @@ local get_root_term = function()
   end
 
   return root_term
+end
+
+local term_dir_map = {}
+---@param cwd string
+local get_cwd_term = function(cwd)
+  if term_dir_map[cwd] == nil then
+    term_dir_map[cwd] = require("toggleterm.terminal").Terminal:new({
+      direction = "horizontal",
+      dir = cwd,
+    })
+  end
+
+  return term_dir_map[cwd]
 end
 
 ---@type LazySpec
@@ -44,22 +57,17 @@ return {
     { [1] = prefix_send .. "l", mode = { "x" }, [2] = ":<C-u>'<,'>ToggleTermSendVisualLines<CR>",                 desc = "send-visual-lines" },
     { [1] = prefix_send .. "s", mode = { "x" }, [2] = ":<C-u>'<,'>ToggleTermSendVisualSelection<CR>",             desc = "send-visual-selection" },
 
+    --[[
+      NOTE:
+        - In LazyVim, when the Terminal has focus and is in normal mode, it spawns a new terminal. Otherwise, it toggles the terminal. (v14.14.0; 2025-04-09)
+          - (When the terminal is focused and in terminal mode, it toggles terminal instead of spawning a new terminal.)
+        - The distinction between toggling and spawning seems odd, which makes we think this might not be the implementation the LazyVim developer intended.
+        - We configured it to always toggle using toggleterm.
+    --]]
     -- override LazyVim's terminal
     { [1] = "<C-/>", [2] = function () get_root_term():toggle(nil, "float") end, desc = "Terminal (ToggleTerm)" },
-    -- NOTE: LazyVim 은 항상 새 터미널을 spawn 하는데, 여기도 거기에 맞춰야하지 않을까? <2025-04-08>
     { [1] = "<Leader>ft", [2] = function () get_root_term():toggle(nil, "horizontal") end, desc = "Terminal (ToggleTerm)" },
-    {
-      [1] = "<Leader>fT",
-      [2] = function ()
-        local term = require("toggleterm.terminal").Terminal:new({
-          direction = "horizontal",
-          dir = vim.fn.getcwd(),
-        })
-        term:toggle()
-      end,
-      desc = "Spawn Terminal in CWD"
-    },
-    -- { [1] = "<Leader>gg", [2] = function () get_gitui():toggle(nil, "float") end, desc = "gitui (ToggleTerm)" }
+    { [1] = "<Leader>fT", [2] = function () get_cwd_term(vim.fn.getcwd()):toggle(nil, "horizontal") end, desc = "Spawn Terminal in CWD" },
   },
   opts = {
     shell = os.getenv("SHELL") or vim.o.shell,

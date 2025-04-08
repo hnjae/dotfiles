@@ -7,10 +7,6 @@ return {
   opts = {
     store_selection_keys = "<Tab>",
   },
-  dependencies = {
-    -- disable friendly-snippets
-    { [1] = "friendly-snippets", optional = true, enabled = false },
-  },
   cmd = {
     "EditSnippet",
     "LuaSnipListAvailable",
@@ -49,17 +45,18 @@ return {
       },
 
       {
+        -- ipe
         [1] = "<Leader>sp",
         mode = "n",
         [2] = "<cmd>LuaSnipListAvailable<CR>",
         desc = "Snippets (Luasnip)",
       },
-      {
-        [1] = "<Leader>sP",
-        mode = "n",
-        [2] = "<cmd>EditSnippet<CR>",
-        desc = "edit-snippet (Luasnip)",
-      },
+      -- {
+      --   [1] = "<Leader>sP",
+      --   mode = "n",
+      --   [2] = "<cmd>EditSnippet<CR>",
+      --   desc = "edit-snippet (Luasnip)",
+      -- },
     })
   end,
   config = function(_, opts)
@@ -82,4 +79,24 @@ return {
       paths = { vim.fn.stdpath("config") .. "/snippets" },
     })
   end,
+  specs = {
+    -- disable friendly-snippets
+    { [1] = "friendly-snippets", optional = true, enabled = false },
+    {
+      [1] = "which-key.nvim",
+      optional = true,
+      ---@type wk.Opts
+      opts = {
+        icons = {
+          rules = {
+            {
+              plugin = "LuaSnip",
+              icon = "", -- nf-cod-symbol_snippet
+              color = "green", -- in gruvbox.nvim, BlinkCmpKindSnippet is linked to green <2025-04-09>
+            },
+          },
+        },
+      },
+    },
+  },
 }

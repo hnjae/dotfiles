@@ -1,217 +1,257 @@
 {
-  "set dotenv-load": {
-    "prefix": "sdotenvload",
-    "description": "load dotenv",
-    "body": ["set dotenv-load"]
-  },
-  "set fallback": {
-    "prefix": "sfallback",
-    "description": "fallback",
-    "body": ["set fallback"]
-  },
-  "set working-directory": {
-    "prefix": "swdir",
-    "description": "working-directory",
-    "body": ["set working-directory := '${0:dir}'"]
-  },
-  "nodejs": {
-    "prefix": "nodejs",
-    "description": "\"add node_modules/.bin to PATH\"",
-    "body": ["export PATH := \"./node_modules/.bin:\" + env_var('PATH')"]
-  },
-  "env": {
-    "prefix": "env",
-    "description": "load environment variable",
-    "body": ["${2:bas} := env('${1:foo}')"]
-  },
-  "envd": {
-    "prefix": "envd",
-    "description": "\"load environment variable with default values\"",
-    "body": ["${3:bas} := env('${1:foo}', ${2:default})"]
-  },
-  "recipe": {
-    "prefix": "recipe",
-    "description": "\"create new recipe\"",
-    "body": [
-      "${1:foo} ${2:ARG}: ${3:pre-reipe}",
-      "\techo \"{{$2\\}\\}\"",
-      "\t$0",
-      ""
-    ]
-  },
-  "spwd": {
-    "prefix": "spwd",
-    "description": "\"absolute path of PWD\"",
-    "body": ["{{invocation_directory()\\}\\}"]
-  },
-  "sjustfile": {
-    "prefix": "sjustfile",
-    "description": "\"absolute path of justfile\"",
-    "body": ["{{justfile()\\}\\}"]
-  },
-  "sjustfile_directory": {
-    "prefix": "sjustfile_directory",
-    "description": "\"absolute path of justfile\"",
-    "body": ["{{justfile_directory()\\}\\}"]
-  },
-  "sdatetime": {
-    "prefix": "sdatetime",
-    "description": "\"UTC datetime\"",
-    "body": ["{{datetime_utc(\"%Y-%m-%dT%H:%M:%SZ\")\\}\\}"]
-  },
-  "sweekdate": {
-    "prefix": "sweekdate",
-    "description": "\"ISO-8601 week date\"",
-    "body": ["{{datetime(\"%G-W%V-%uT%H:%M:%S%Z\")\\}\\}"]
-  },
-  "sordinaldates": {
-    "prefix": "sordinaldates",
-    "description": "\"ISO-8601 ordinal date\"",
-    "body": ["{{datetime(\"%G-%jT%H:%M:%S%Z\")\\}\\}"]
-  },
-  "slocaltime": {
-    "prefix": "slocaltime",
-    "description": "\"ISO-8601 localtime\"",
-    "body": ["{{datetime(\"%Y-%m-%dT%H:%M:%S%Z\")\\}\\}"]
-  },
-  "srfc": {
-    "prefix": "srfc",
-    "description": "\"RFC 3339 localtime\"",
-    "body": ["{{datetime(\"%Y-%m-%d %H:%M:%S%Z\")\\}\\}"]
-  },
-  "while": {
-    "prefix": "while",
-    "description": "while-loop",
-    "body": [
-      "while:",
-      "\twhile `${1:condition}; do \\",
-      "\t\t${0:${TM_SELECTED_TEXT:ping -c 1 localhost}}; \\",
-      "done"
-    ]
-  },
-  "for": {
-    "prefix": "for",
-    "description": "for-loop",
-    "body": [
-      "for ${2:file} in `${1:ls .}`; do \\",
-      "\t${0:${TM_SELECTED_TEXT:echo \\$file}}; \\",
-      "done"
-    ]
-  },
-  "if": {
-    "prefix": "if",
-    "description": "if",
-    "body": [
-      "if ${1:condition}; then \\",
-      "\t${0:${TM_SELECTED_TEXT:echo 'true'}}; \\",
-      "fi"
-    ]
-  },
-  "if-else": {
-    "prefix": "ifelse",
-    "description": "if-else",
-    "body": [
-      "if ${1:condition}; then \\",
-      "\t${0:${TM_SELECTED_TEXT:echo 'true'}}; \\",
-      "else \\",
-      "\t${1:echo 'false'}}; \\",
-      "fi"
-    ]
-  },
-  "else": {
-    "prefix": "else",
-    "description": "else",
-    "body": ["else \\", "\t${0:${TM_SELECTED_TEXT:echo 'false'}}; \\", "fi"]
-  },
-  "elif": {
-    "prefix": ["elseif", "elif"],
-    "description": "elif",
-    "body": [
-      "elif ${1:condition}; then \\",
-      "\t${0:${TM_SELECTED_TEXT:echo 'true'}}; \\"
-    ]
-  },
-  "boilerplate": {
-    "prefix": "boilerplate",
-    "description": "\"justfile boilerplate\"",
-    "body": [
-      "#!/usr/bin/env -S just --justfile",
-      "",
-      "# set working-directory := 'bar'",
-      "",
-      "alias fmt := format",
-      "hostname := ``",
-      "",
-      "_:",
-      "\t@just --list",
-      "",
-      "format:",
-      "\tnix fmt",
-      "",
-      "build:",
-      "\ttypst c *.typ",
-      "",
-      "test-all: build",
-      "\t./test --all",
-      "",
-      "test TEST: build",
-      "\t./test --test {{TEST\\}\\}",
-      "",
-      "[working-directory: 'bar']",
-      "@foo:",
-      "\tpwd",
-      ""
-    ]
-  },
-  "Tmux Dev (Recipe)": {
-    "prefix": "stmux-devs",
-    "description": "run multiple commands in tmux",
-    "body": [
-      "run-devs:",
-      "\t#!/bin/sh",
-      "",
-      "\tset -e",
-      "\tsname=\"todo-dev\"",
-      "",
-      "\tif tmux has -t \"\\$sname\" > /dev/null 2>&1; then",
-      "\ttmux attach-session -t \"\\$sname\"",
-      "\texit 0",
-      "\tfi",
-      "",
-      "\ttmux new-session -n \"api\" -s \"\\$sname\" -d bash",
-      "\ttmux split-window -t \"\\$sname:0\" -v bash",
-      "\ttmux send -t \"\\$sname:0.0\" \"just run-db\" C-m",
-      "\ttmux send -t \"\\$sname:0.1\" \"just run-api-dev\" C-m",
-      "\ttmux new-window -n \"ui\" -t \"\\$sname:1\" -d bash",
-      "\ttmux send-keys -t \"\\$sname:1\" 'just run-ui-dev' C-m",
-      "\ttmux select-window -t \"\\$sname:0\"",
-      "\ttmux attach-session -t \"\\$sname\"",
-      ""
-    ]
-  },
-  "Shell Script Recipe": {
-    "prefix": "srecipe-shell",
-    "description": "create shell-script recipe",
-    "body": ["${1:foo}:", "\t#!/bin/sh", "\tset -eu", "\t$0"]
-  },
-  "Bash Recipe": {
-    "prefix": "srecipe-bash",
-    "description": "create bash-script recipe",
-    "body": [
-      "${1:foo}:",
-      "\t#!/usr/bin/env bash",
-      "\tset -euo pipefail",
-      "\t$0"
-    ]
-  },
-  "Python Recipe": {
-    "prefix": "srecipe-python",
-    "description": "create python-script recipe",
-    "body": [
-      "${1:foo}:",
-      "\t#!/usr/bin/env python3",
-      "\tprint(\"Hello, World!\")",
-      "\t$0"
-    ]
-  }
+    "set dotenv-load": {
+        "prefix": "sdotenvload",
+        "description": "load dotenv",
+        "body": [
+            "set dotenv-load"
+        ]
+    },
+    "set fallback": {
+        "prefix": "sfallback",
+        "description": "fallback",
+        "body": [
+            "set fallback"
+        ]
+    },
+    "set working-directory": {
+        "prefix": "swdir",
+        "description": "working-directory",
+        "body": [
+            "set working-directory := '${0:dir}'"
+        ]
+    },
+    "nodejs": {
+        "prefix": "nodejs",
+        "description": "\"add node_modules/.bin to PATH\"",
+        "body": [
+            "export PATH := \"./node_modules/.bin:\" + env_var('PATH')"
+        ]
+    },
+    "env": {
+        "prefix": "env",
+        "description": "load environment variable",
+        "body": [
+            "${2:bas} := env('${1:foo}')"
+        ]
+    },
+    "envd": {
+        "prefix": "envd",
+        "description": "\"load environment variable with default values\"",
+        "body": [
+            "${3:bas} := env('${1:foo}', ${2:default})"
+        ]
+    },
+    "recipe": {
+        "prefix": "recipe",
+        "description": "\"create new recipe\"",
+        "body": [
+            "${1:foo} ${2:ARG}: ${3:pre-reipe}",
+            "\techo \"{{$2\\}\\}\"",
+            "\t$0",
+            ""
+        ]
+    },
+    "spwd": {
+        "prefix": "spwd",
+        "description": "\"absolute path of PWD\"",
+        "body": [
+            "{{invocation_directory()\\}\\}"
+        ]
+    },
+    "sjustfile": {
+        "prefix": "sjustfile",
+        "description": "\"absolute path of justfile\"",
+        "body": [
+            "{{justfile()\\}\\}"
+        ]
+    },
+    "sjustfile_directory": {
+        "prefix": "sjustfile_directory",
+        "description": "\"absolute path of justfile\"",
+        "body": [
+            "{{justfile_directory()\\}\\}"
+        ]
+    },
+    "sdatetime": {
+        "prefix": "sdatetime",
+        "description": "\"UTC datetime\"",
+        "body": [
+            "{{datetime_utc(\"%Y-%m-%dT%H:%M:%SZ\")\\}\\}"
+        ]
+    },
+    "sweekdate": {
+        "prefix": "sweekdate",
+        "description": "\"ISO-8601 week date\"",
+        "body": [
+            "{{datetime(\"%G-W%V-%uT%H:%M:%S%Z\")\\}\\}"
+        ]
+    },
+    "sordinaldates": {
+        "prefix": "sordinaldates",
+        "description": "\"ISO-8601 ordinal date\"",
+        "body": [
+            "{{datetime(\"%G-%jT%H:%M:%S%Z\")\\}\\}"
+        ]
+    },
+    "slocaltime": {
+        "prefix": "slocaltime",
+        "description": "\"ISO-8601 localtime\"",
+        "body": [
+            "{{datetime(\"%Y-%m-%dT%H:%M:%S%Z\")\\}\\}"
+        ]
+    },
+    "srfc": {
+        "prefix": "srfc",
+        "description": "\"RFC 3339 localtime\"",
+        "body": [
+            "{{datetime(\"%Y-%m-%d %H:%M:%S%Z\")\\}\\}"
+        ]
+    },
+    "while": {
+        "prefix": "while",
+        "description": "while-loop",
+        "body": [
+            "while:",
+            "\twhile `${1:condition}; do \\",
+            "\t\t${0:${TM_SELECTED_TEXT:ping -c 1 localhost}}; \\",
+            "done"
+        ]
+    },
+    "for": {
+        "prefix": "for",
+        "description": "for-loop",
+        "body": [
+            "for ${2:file} in `${1:ls .}`; do \\",
+            "\t${0:${TM_SELECTED_TEXT:echo \\$file}}; \\",
+            "done"
+        ]
+    },
+    "if": {
+        "prefix": "if",
+        "description": "if",
+        "body": [
+            "if ${1:condition}; then \\",
+            "\t${0:${TM_SELECTED_TEXT:echo 'true'}}; \\",
+            "fi"
+        ]
+    },
+    "if-else": {
+        "prefix": "ifelse",
+        "description": "if-else",
+        "body": [
+            "if ${1:condition}; then \\",
+            "\t${0:${TM_SELECTED_TEXT:echo 'true'}}; \\",
+            "else \\",
+            "\t${1:echo 'false'}}; \\",
+            "fi"
+        ]
+    },
+    "else": {
+        "prefix": "else",
+        "description": "else",
+        "body": [
+            "else \\",
+            "\t${0:${TM_SELECTED_TEXT:echo 'false'}}; \\",
+            "fi"
+        ]
+    },
+    "elif": {
+        "prefix": [
+            "elseif",
+            "elif"
+        ],
+        "description": "elif",
+        "body": [
+            "elif ${1:condition}; then \\",
+            "\t${0:${TM_SELECTED_TEXT:echo 'true'}}; \\"
+        ]
+    },
+    "boilerplate": {
+        "prefix": "boilerplate",
+        "description": "\"justfile boilerplate\"",
+        "body": [
+            "#!/usr/bin/env -S just --justfile",
+            "",
+            "# set working-directory := 'bar'",
+            "",
+            "alias fmt := format",
+            "hostname := ``",
+            "",
+            "_:",
+            "\t@just --list",
+            "",
+            "format:",
+            "\tnix fmt",
+            "",
+            "build:",
+            "\ttypst c *.typ",
+            "",
+            "test-all: build",
+            "\t./test --all",
+            "",
+            "test TEST: build",
+            "\t./test --test {{TEST\\}\\}",
+            "",
+            "[working-directory: 'bar']",
+            "@foo:",
+            "\tpwd",
+            ""
+        ]
+    },
+    "Tmux Dev (Recipe)": {
+        "prefix": "stmux-devs",
+        "description": "run multiple commands in tmux",
+        "body": [
+            "run-devs:",
+            "\t#!/bin/sh",
+            "",
+            "\tset -e",
+            "\tsname=\"todo-dev\"",
+            "",
+            "\tif tmux has -t \"\\$sname\" > /dev/null 2>&1; then",
+            "\ttmux attach-session -t \"\\$sname\"",
+            "\texit 0",
+            "\tfi",
+            "",
+            "\ttmux new-session -n \"api\" -s \"\\$sname\" -d bash",
+            "\ttmux split-window -t \"\\$sname:0\" -v bash",
+            "\ttmux send -t \"\\$sname:0.0\" \"just run-db\" C-m",
+            "\ttmux send -t \"\\$sname:0.1\" \"just run-api-dev\" C-m",
+            "\ttmux new-window -n \"ui\" -t \"\\$sname:1\" -d bash",
+            "\ttmux send-keys -t \"\\$sname:1\" 'just run-ui-dev' C-m",
+            "\ttmux select-window -t \"\\$sname:0\"",
+            "\ttmux attach-session -t \"\\$sname\"",
+            ""
+        ]
+    },
+    "Shell Script Recipe": {
+        "prefix": "srecipe-shell",
+        "description": "create shell-script recipe",
+        "body": [
+            "${1:foo}:",
+            "\t#!/bin/sh",
+            "\tset -eu",
+            "\t$0"
+        ]
+    },
+    "Bash Recipe": {
+        "prefix": "srecipe-bash",
+        "description": "create bash-script recipe",
+        "body": [
+            "${1:foo}:",
+            "\t#!/usr/bin/env bash",
+            "\tset -euo pipefail",
+            "\t$0"
+        ]
+    },
+    "Python Recipe": {
+        "prefix": "srecipe-python",
+        "description": "create python-script recipe",
+        "body": [
+            "${1:foo}:",
+            "\t#!/usr/bin/env python3",
+            "\tprint(\"Hello, World!\")",
+            "\t$0"
+        ]
+    }
 }

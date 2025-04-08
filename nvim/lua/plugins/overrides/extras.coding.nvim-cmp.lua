@@ -1,4 +1,4 @@
--- LazyExtra's coding.cmp
+-- LazyExtra's coding.nvim-cmp
 -- cmdline 설정 별도로 안해도 path 자동완성 등 잘 됨.
 
 ---@type LazySpec

@@ -1,169 +1,240 @@
 {
-  "admonition block": {
-    "prefix": ["admonition block", "abk"],
-    "description": "admonition block (`abk`)",
-    "body": [
-      "[${1:NOTE,IMPORTANT,TIP,CAUTION,WARNING,IMPORTANT}]",
-      ".${2:optional-title}",
-      "====",
-      "${0:${TM_SELECTED_TEXT:foo}}",
-      "===="
-    ]
-  },
-  "quote block": {
-    "prefix": ["quoteblock", "qbk"],
-    "description": "quote block (`qbk`)",
-    "body": [
-      ".${1:optional-title}",
-      "[quote,${2:(optional) attribution,}${3:citation title and information}]",
-      "____",
-      "${0:${TM_SELECTED_TEXT:foo}}",
-      "____"
-    ]
-  },
-  "source code block": {
-    "prefix": ["lst", "sourceblock", "sbk"],
-    "description": "source code block (`sbk`, `lst`)",
-    "body": [
-      ".${2:optional-title}",
-      "[source, ${1:lang}]",
-      "----",
-      "${0:${TM_SELECTED_TEXT:foo}}",
-      "----"
-    ]
-  },
-  "source code block w/ source external file": {
-    "prefix": ["lst+", "sourceblock+", "sbk+"],
-    "description": "Insert source code block with title via include",
-    "body": [
-      ".${1:optional-title}",
-      "[source,${2:language}]",
-      "----",
-      "include::${0:filepath}[]",
-      "----"
-    ]
-  },
-  "sidebar block": {
-    "prefix": ["sidebarblock", "sbbk"],
-    "description": "sidebar block (`sbbk`)",
-    "body": [
-      ".${1:optional-title}",
-      "****",
-      "${0:${TM_SELECTED_TEXT:foo}}",
-      "****"
-    ]
-  },
-  "fo": {
-    "prefix": "footnote",
-    "description": "add stem attribute",
-    "body": "footnote:${1:id}[${2:text}]"
-  },
-  "strikethrough": {
-    "prefix": ["strikethrough", "s"],
-    "description": "strikethrough text (`s`)",
-    "body": "[.line-through]#${1:$TM_SELECTED_TEXT}# $0"
-  },
-  "bold text": {
-    "prefix": ["bold", "b", "*"],
-    "description": "Insert bold text (`b`)",
-    "body": "*${1}* $0"
-  },
-  "unconstrained bold": {
-    "prefix": ["ubold", "ub", "**"],
-    "description": "unconstrained bold (`ub`)",
-    "body": "**${1:$TM_SELECTED_TEXT}** $0"
-  },
-  "italic text": {
-    "prefix": ["italic", "i", "_"],
-    "description": "Insert italic text",
-    "body": "_${1:$TM_SELECTED_TEXT}_ $0"
-  },
-  "unconstrained italic text": {
-    "prefix": ["uitalic", "ui", "__"],
-    "description": "unconstrained italic (`ui`)",
-    "body": "__${1:$TM_SELECTED_TEXT}__$0"
-  },
-  "monospace text": {
-    "prefix": ["monospace", "m", "`"],
-    "description": "Insert monospace text (`m`)",
-    "body": "`${1:$TM_SELECTED_TEXT}` $0"
-  },
-  "unconstrained monospace text": {
-    "prefix": ["umonospace", "um", "``"],
-    "description": "unconstrained monospace (`um`)",
-    "body": "``${1:$TM_SELECTED_TEXT}``$0"
-  },
-  "bold and italic text": {
-    "prefix": ["bold and italic", "bi"],
-    "description": "Insert bold and italic text",
-    "body": "*_${1:$TM_SELECTED_TEXT}_* $0"
-  },
-  "marked text": {
-    "prefix": ["mark", "#"],
-    "description": "Insert marked text",
-    "body": "#${1:$TM_SELECTED_TEXT}# $0"
-  },
-  "underline text": {
-    "prefix": "underline",
-    "description": "Insert underline text",
-    "body": "[.underline]#${1:$TM_SELECTED_TEXT}# $0"
-  },
-  "overline text": {
-    "prefix": "overline",
-    "body": "[.overline]#${1:$TM_SELECTED_TEXT}# $0",
-    "description": "Insert overline text"
-  },
-  "small text": {
-    "prefix": "small",
-    "description": "Insert small text",
-    "body": "[.small]#${1:$TM_SELECTED_TEXT}# $0"
-  },
-  "big text": {
-    "prefix": "big",
-    "description": "Insert big text",
-    "body": "[.big]#${1:$TM_SELECTED_TEXT}# $0"
-  },
-  "superscript text": {
-    "prefix": ["superscript", "^"],
-    "description": "Insert superscript text (`^`)",
-    "body": "^${1:$TM_SELECTED_TEXT}^$0"
-  },
-  "subscript text": {
-    "prefix": ["subscript", "~"],
-    "description": "Insert subscript text (`~`)",
-    "body": "~${1:$TM_SELECTED_TEXT}~$0"
-  },
-  "table": {
-    "prefix": "tab",
-    "description": "draw table",
-    "body": [
-      ".${1:title}",
-      "|===",
-      "|.${1:Name of Column 1}",
-      "|Name of Column 2",
-      "|Cell in column 1, row 1",
-      "|Cell in column 2, row 1",
-      "|==="
-    ]
-  },
-  "attr-source-highlight": {
-    "prefix": "attr-source-highlight",
-    "description": "add highlighter attribute",
-    "body": [":source-highlighter: highlightjs", ":highlightjs-languages: $0"]
-  },
-  "attr-stem": {
-    "prefix": "attr-stem",
-    "description": "add stem attribute",
-    "body": ":stem: latexmath"
-  },
-  "js": {
-    "prefix": "js",
-    "description": "insert source block",
-    "body": [".${2:name}", "[source, javascript]", "----", "$0", "----"]
-  },
-  "ts": {
-    "prefix": "ts",
-    "description": "insert source block",
-    "body": [".${2:name}", "[source, typescript]", "----", "$0", "----"]
-  }
+    "admonition block": {
+        "prefix": [
+            "admonition block",
+            "abk"
+        ],
+        "description": "admonition block (`abk`)",
+        "body": [
+            "[${1:NOTE,IMPORTANT,TIP,CAUTION,WARNING,IMPORTANT}]",
+            ".${2:optional-title",
+            "====",
+            "${0:${TM_SELECTED_TEXT:foo}}",
+            "===="
+        ]
+    },
+    "quote block": {
+        "prefix": [
+            "quoteblock",
+            "qbk"
+        ],
+        "description": "quote block (`qbk`)",
+        "body": [
+            ".${1:optional-title}",
+            "[quote,${2:(optional) attribution,}${3:citation title and information}]",
+            "____",
+            "${0:${TM_SELECTED_TEXT:foo}}",
+            "____"
+        ]
+    },
+    "source code block": {
+        "prefix": [
+            "lst",
+            "sourceblock",
+            "sbk"
+        ],
+        "description": "source code block (`sbk`, `lst`)",
+        "body": [
+            ".${2:optional-title}",
+            "[source, ${1:lang}]",
+            "----",
+            "${0:${TM_SELECTED_TEXT:foo}}",
+            "----"
+        ]
+    },
+    "source code block w/ source external file": {
+        "prefix": [
+            "lst+",
+            "sourceblock+",
+            "sbk+"
+        ],
+        "description": "Insert source code block with title via include",
+        "body": [
+            ".${1:optional-title}",
+            "[source,${2:language}]",
+            "----",
+            "include::${0:filepath}[]",
+            "----"
+        ]
+    },
+    "sidebar block": {
+        "prefix": [
+            "sidebarblock",
+            "sbbk"
+        ],
+        "description": "sidebar block (`sbbk`)",
+        "body": [
+            ".${1:optional-title}",
+            "****",
+            "${0:${TM_SELECTED_TEXT:foo}}",
+            "****"
+        ]
+    },
+    "fo": {
+        "prefix": "footnote",
+        "description": "add stem attribute",
+        "body": "footnote:${1:id}[${2:text}]"
+    },
+    "strikethrough": {
+        "prefix": [
+            "strikethrough",
+            "s"
+        ],
+        "description": "strikethrough text (`s`)",
+        "body": "[.line-through]#${1:$TM_SELECTED_TEXT}# $0"
+    },
+    "bold text": {
+        "prefix": [
+            "bold",
+            "b",
+            "*"
+        ],
+        "description": "Insert bold text (`b`)",
+        "body": "*${1}* $0"
+    },
+    "unconstrained bold": {
+        "prefix": [
+            "ubold",
+            "ub",
+            "**"
+        ],
+        "description": "unconstrained bold (`ub`)",
+        "body": "**${1:$TM_SELECTED_TEXT}** $0"
+    },
+    "italic text": {
+        "prefix": [
+            "italic",
+            "i",
+            "_"
+        ],
+        "description": "Insert italic text",
+        "body": "_${1:$TM_SELECTED_TEXT}_ $0"
+    },
+    "unconstrained italic text": {
+        "prefix": [
+            "uitalic",
+            "ui",
+            "__"
+        ],
+        "description": "unconstrained italic (`ui`)",
+        "body": "__${1:$TM_SELECTED_TEXT}__$0"
+    },
+    "monospace text": {
+        "prefix": [
+            "monospace",
+            "m",
+            "`"
+        ],
+        "description": "Insert monospace text (`m`)",
+        "body": "`${1:$TM_SELECTED_TEXT}` $0"
+    },
+    "unconstrained monospace text": {
+        "prefix": [
+            "umonospace",
+            "um",
+            "``"
+        ],
+        "description": "unconstrained monospace (`um`)",
+        "body": "``${1:$TM_SELECTED_TEXT}``$0"
+    },
+    "bold and italic text": {
+        "prefix": [
+            "bold and italic",
+            "bi"
+        ],
+        "description": "Insert bold and italic text",
+        "body": "*_${1:$TM_SELECTED_TEXT}_* $0"
+    },
+    "marked text": {
+        "prefix": [
+            "mark",
+            "#"
+        ],
+        "description": "Insert marked text",
+        "body": "#${1:$TM_SELECTED_TEXT}# $0"
+    },
+    "underline text": {
+        "prefix": "underline",
+        "description": "Insert underline text",
+        "body": "[.underline]#${1:$TM_SELECTED_TEXT}# $0"
+    },
+    "overline text": {
+        "prefix": "overline",
+        "body": "[.overline]#${1:$TM_SELECTED_TEXT}# $0",
+        "description": "Insert overline text"
+    },
+    "small text": {
+        "prefix": "small",
+        "description": "Insert small text",
+        "body": "[.small]#${1:$TM_SELECTED_TEXT}# $0"
+    },
+    "big text": {
+        "prefix": "big",
+        "description": "Insert big text",
+        "body": "[.big]#${1:$TM_SELECTED_TEXT}# $0"
+    },
+    "superscript text": {
+        "prefix": [
+            "superscript",
+            "^"
+        ],
+        "description": "Insert superscript text (`^`)",
+        "body": "^${1:$TM_SELECTED_TEXT}^$0"
+    },
+    "subscript text": {
+        "prefix": [
+            "subscript",
+            "~"
+        ],
+        "description": "Insert subscript text (`~`)",
+        "body": "~${1:$TM_SELECTED_TEXT}~$0"
+    },
+    "table": {
+        "prefix": "tab",
+        "description": "draw table",
+        "body": [
+            ".${1:title}",
+            "|===",
+            "|.${1:Name of Column 1}",
+            "|Name of Column 2",
+            "|Cell in column 1, row 1",
+            "|Cell in column 2, row 1",
+            "|==="
+        ]
+    },
+    "attr-source-highlight": {
+        "prefix": "attr-source-highlight",
+        "description": "add highlighter attribute",
+        "body": [
+            ":source-highlighter: highlightjs",
+            ":highlightjs-languages: $0"
+        ]
+    },
+    "attr-stem": {
+        "prefix": "attr-stem",
+        "description": "add stem attribute",
+        "body": ":stem: latexmath"
+    },
+    "js": {
+        "prefix": "js",
+        "description": "insert source block",
+        "body": [
+            ".${2:name}",
+            "[source, javascript]",
+            "----",
+            "$0",
+            "----"
+        ]
+    },
+    "ts": {
+        "prefix": "ts",
+        "description": "insert source block",
+        "body": [
+            ".${2:name}",
+            "[source, typescript]",
+            "----",
+            "$0",
+            "----"
+        ]
+    }
 }

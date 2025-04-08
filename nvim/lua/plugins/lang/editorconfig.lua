@@ -8,10 +8,12 @@ return {
         editorconfig = { "editorconfig-checker" },
       },
     },
-  },
-  {
-    "mason.nvim",
-    optional = true,
-    opts = { ensure_installed = { "editorconfig-checker" } },
+    specs = {
+      {
+        [1] = "mason.nvim",
+        optional = true,
+        opts = { ensure_installed = { "editorconfig-checker" } },
+      },
+    },
   },
 }

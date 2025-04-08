@@ -166,6 +166,10 @@
       },
       {
         "language": "lua",
+        "path": "./snippets/lua/neovim-2.json"
+      },
+      {
+        "language": "lua",
         "path": "./snippets/lua/lua.json"
       },
       {
@@ -335,7 +339,7 @@
           "plaintex",
           "tex"
         ],
-        "path": "./snippets/latex-2.json"
+        "path": "./snippets/latex/tex-2.json"
       },
       {
         "language": [
@@ -661,6 +665,10 @@
       },
       {
         "language": "org",
+        "path": "./snippets/org-2.json"
+      },
+      {
+        "language": "org",
         "path": "./snippets/org.json"
       },
       {
@@ -770,7 +778,7 @@
         "path": "./snippets/gleam.json"
       },
       {
-        "language": "asciidoc-2",
+        "language": "asciidoc",
         "path": "./snippets/asciidoc-2.json"
       },
       {
@@ -803,6 +811,10 @@
           "jsonc"
         ],
         "path": "./snippets/json-snippet-2.json"
+      },
+      {
+        "language": "typst",
+        "path": "./snippets/typst-2.json"
       },
       {
         "language": "cheat",

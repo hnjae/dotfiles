@@ -12,7 +12,7 @@ return {
 
       formats = {
         key = function(item)
-          return { { "[", hl = "special" }, { item.key, hl = "key" }, { "]", hl = "special" } }
+          return { { [1] = "[", hl = "special" }, { [1] = item.key, hl = "key" }, { [1] = "]", hl = "special" } }
         end,
       },
 

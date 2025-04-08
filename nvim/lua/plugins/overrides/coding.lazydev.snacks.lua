@@ -7,9 +7,7 @@ return {
       [1] = "folke/lazydev.nvim",
       optional = true,
       opts = {
-        library = {
-          "snacks.nvim",
-        },
+        library = { "snacks.nvim" },
       },
     },
   },

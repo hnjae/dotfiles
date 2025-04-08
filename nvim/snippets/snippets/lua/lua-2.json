@@ -1,91 +1,146 @@
 {
-  "function": {
-    "prefix": ["fun", "fn"],
-    "body": [
-      "function ($1)",
-      "\t${0:${TM_SELECTED_TEXT:-- do something}}",
-      "end"
-    ]
-  },
-  "function with name": {
-    "prefix": ["funn", "fnn"],
-    "body": [
-      "function ${1:fn_name}($2)",
-      "\t${0:${TM_SELECTED_TEXT:-- do something}}",
-      "end"
-    ]
-  },
-  "inline-function": {
-    "prefix": ["fn=", "lfn"],
-    "body": ["local ${1:name} = function($2)", "\t${0}", "end"]
-  },
-  "if": {
-    "prefix": "if",
-    "body": ["if ${1:true} then", "\t${0:$TM_SELECTED_TEXT}", "end"]
-  },
-  "elseif": {
-    "prefix": ["elseif", "elif"],
-    "body": ["elseif ${1:true} then", "\t${0:$TM_SELECTED_TEXT}"]
-  },
-  "for": {
-    "prefix": "for",
-    "body": ["for ${1:i}=${2:1},${3:10} do", "\t$0", "end"],
-    "description": "for loop range"
-  },
-  "for (iterate table)": {
-    "prefix": "forp",
-    "description": "iterate table",
-    "body": [
-      "for ${2:key}, ${3:value} in pairs(${1:${TM_SELECTED_TEXT:table}}) do",
-      "\t${0:-- do something}",
-      "end"
-    ]
-  },
-  "for (iterate list)": {
-    "prefix": "fori",
-    "description": "iterate list",
-    "body": [
-      "for idx, ${2:x} in ipairs(${1:${TM_SELECTED_TEXT:list}}) do",
-      "\t${0:-- do something}",
-      "end"
-    ]
-  },
-  "while": {
-    "prefix": ["while", "whi"],
-    "body": [
-      "while ${1:true} do",
-      "\t${0:${TM_SELECTED_TEXT:-- do something}}",
-      "end"
-    ]
-  },
-  "require": {
-    "prefix": "req",
-    "description": "Require module",
-    "body": ["require(${1:module})"]
-  },
-  "local": {
-    "prefix": "l",
-    "description": "declare a variable",
-    "body": ["local ${0:$TM_SELECTED_TEXT}"]
-  },
-  "local foo = require(\"foo\")": {
-    "prefix": "lreq",
-    "description": "Require module as a variable",
-    "body": ["local ${1:module} = require(\"${1:module}\")"]
-  },
-  "pcall": {
-    "prefix": "pca",
-    "description": "Protect call a function",
-    "body": ["pcall(${1:function})"]
-  },
-  "local pcall": {
-    "prefix": "lpca",
-    "description": "Protect call a function as a variable",
-    "body": ["local ${1:status}, ${2:err_or_value} = pcall(${3:function})"]
-  },
-  "local is_foo foo = pcall(require, \"foo\")": {
-    "prefix": "lpcar",
-    "description": "Protect calling require",
-    "body": "local is_${1:module}, ${1:module} = pcall(require, \"${1:module}\")"
-  }
+    "function": {
+        "prefix": [
+            "fun",
+            "fn"
+        ],
+        "body": [
+            "function ($1)",
+            "\t${0:${TM_SELECTED_TEXT:-- do something}}",
+            "end"
+        ]
+    },
+    "function with name": {
+        "prefix": [
+            "funn",
+            "fnn"
+        ],
+        "body": [
+            "function ${1:fn_name}($2)",
+            "\t${0:${TM_SELECTED_TEXT:-- do something}}",
+            "end"
+        ]
+    },
+    "inline-function": {
+        "prefix": [
+            "fn=",
+            "lfn"
+        ],
+        "body": [
+            "local ${1:name} = function($2)",
+            "\t${0}",
+            "end"
+        ]
+    },
+    "if": {
+        "prefix": "if",
+        "body": [
+            "if ${1:true} then",
+            "\t${0:$TM_SELECTED_TEXT}",
+            "end"
+        ]
+    },
+    "elseif": {
+        "prefix": [
+            "elseif",
+            "elif"
+        ],
+        "body": [
+            "elseif ${1:true} then",
+            "\t${0:$TM_SELECTED_TEXT}"
+        ]
+    },
+    "for": {
+        "prefix": "for",
+        "body": [
+            "for ${1:i}=${2:1},${3:10} do",
+            "\t$0",
+            "end"
+        ],
+        "description": "for loop range"
+    },
+    "for (iterate table)": {
+        "prefix": "forp",
+        "description": "iterate table",
+        "body": [
+            "for ${2:key}, ${3:value} in pairs(${1:${TM_SELECTED_TEXT:table}}) do",
+            "\t${0:-- do something}",
+            "end"
+        ]
+    },
+    "for (iterate list)": {
+        "prefix": "fori",
+        "description": "iterate list",
+        "body": [
+            "for idx, ${2:x} in ipairs(${1:${TM_SELECTED_TEXT:list}}) do",
+            "\t${0:-- do something}",
+            "end"
+        ]
+    },
+    "while": {
+        "prefix": [
+            "while",
+            "whi"
+        ],
+        "body": [
+            "while ${1:true} do",
+            "\t${0:${TM_SELECTED_TEXT:-- do something}}",
+            "end"
+        ]
+    },
+    "require": {
+        "prefix": "req",
+        "description": "Require module",
+        "body": [
+            "require(${1:module})"
+        ]
+    },
+    "local": {
+        "prefix": "l",
+        "description": "declare a variable",
+        "body": [
+            "local ${0:$TM_SELECTED_TEXT}"
+        ]
+    },
+    "local foo = require(\"foo\")": {
+        "prefix": "lreq",
+        "description": "Require module as a variable",
+        "body": [
+            "local ${1:module} = require(\"${1:module}\")"
+        ]
+    },
+    "pcall": {
+        "prefix": "pca",
+        "description": "Protect call a function",
+        "body": [
+            "pcall(${1:function})"
+        ]
+    },
+    "local pcall": {
+        "prefix": "lpca",
+        "description": "Protect call a function as a variable",
+        "body": [
+            "local ${1:status}, ${2:err_or_value} = pcall(${3:function})"
+        ]
+    },
+    "local is_foo foo = pcall(require, \"foo\")": {
+        "prefix": "lpcar",
+        "description": "Protect calling require",
+        "body": "local is_${1:module}, ${1:module} = pcall(require, \"${1:module}\")"
+    },
+    "strsub": {
+        "prefix": "strsub",
+        "description": "slicing string",
+        "body": "string.sub(${1:obj}, ${2:start}, ${3:end})"
+    },
+    "strmatch": {
+        "prefix": "strmatch",
+        "description": "string match, return matched str",
+        "body": "string.match(${1:obj}, ${2:regex})"
+    },
+    "strformat": {
+        "prefix": "strformat",
+        "description": "\"string.format\"",
+        "body": "string.format(\"pi = %.4f\", PI)"
+    }
 }

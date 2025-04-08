@@ -1,37 +1,37 @@
 {
-  "s%": {
-    "prefix": "s%",
-    "description": "\"tags\"",
-    "body": "% ${1:tag1, tag2, tag3}"
-  },
-  "s#": {
-    "prefix": "s#",
-    "description": "\"description of commands\"",
-    "body": "# ${1:description of commands}"
-  },
-  "s$": {
-    "prefix": "s$",
-    "description": "\"commands that generate a list of possible values\"",
-    "body": "\\$ ${1:var}: ${2:command}"
-  },
-  "s@": {
-    "prefix": "s@",
-    "description": "\"reuse variable form other cheatsheets\"",
-    "body": "@ ${1:same, tags, from, other, cheatsheets}"
-  },
-  "s;": {
-    "prefix": "s;",
-    "description": "\"주석\"",
-    "body": "; ${1:}"
-  },
-  "boilerplate": {
-    "prefix": "boilerplate",
-    "description": "\"Boilerplate\"",
-    "body": [
-      "% ${1:tag1, tag2, tag3}",
-      "",
-      "# ${2:description of commands}",
-      "${0:echo hi}"
-    ]
-  }
+    "s%": {
+        "prefix": "s%",
+        "description": "tags",
+        "body": "% ${1:tag1, tag2, tag3}"
+    },
+    "s#": {
+        "prefix": "s#",
+        "description": "description of commands",
+        "body": "# ${1:description of commands}"
+    },
+    "s$": {
+        "prefix": "s$",
+        "description": "commands that generate a list of possible values",
+        "body": "\\$ ${1:var}: ${2:command}"
+    },
+    "s@": {
+        "prefix": "s@",
+        "description": "reuse variable form other cheatsheets",
+        "body": "@ ${1:same, tags, from, other, cheatsheets}"
+    },
+    "s;": {
+        "prefix": "s;",
+        "description": "주석",
+        "body": "; ${1:}"
+    },
+    "boilerplate": {
+        "prefix": "boilerplate",
+        "description": "Boilerplate",
+        "body": [
+            "% ${1:tag1, tag2, tag3}",
+            "",
+            "# ${2:description of commands}",
+            "${0:echo hi}"
+        ]
+    }
 }

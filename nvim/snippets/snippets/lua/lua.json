@@ -1,32 +1,45 @@
 {
-  "return": {
-    "prefix": "rt",
-    "body": ["return $0"],
-    "description": "return value"
-  },
-  "class": {
-    "prefix": "cl",
-    "body": ["${1:M} = {}\n", "$1.${2:new} = function($3)", "\t${6}", "end"],
-    "description": "Create a class"
-  },
-  "forline": {
-    "prefix": "forline",
-    "body": [
-      "local f = io.open(${1:${2:filename}}, \"${3:r}\")\n",
-      "while true do",
-      "\tline = f:read()",
-      "\tif line == nil then break end\n",
-      "\t${0}",
-      "end"
-    ],
-    "description": "read file line by line"
-  },
-  "print": {
-    "prefix": "p",
-    "body": ["print(${0})"]
-  },
-  "self": {
-    "prefix": "self:",
-    "body": ["function self:${1:methodName}($2)", "\t$0", "end"]
-  }
+    "return": {
+        "prefix": "rt",
+        "body": [
+            "return $0"
+        ],
+        "description": "return value"
+    },
+    "class": {
+        "prefix": "cl",
+        "body": [
+            "${1:M} = {}\n",
+            "$1.${2:new} = function($3)",
+            "\t${6}",
+            "end"
+        ],
+        "description": "Create a class"
+    },
+    "forline": {
+        "prefix": "forline",
+        "body": [
+            "local f = io.open(${1:${2:filename}}, \"${3:r}\")\n",
+            "while true do",
+            "\tline = f:read()",
+            "\tif line == nil then break end\n",
+            "\t${0}",
+            "end"
+        ],
+        "description": "read file line by line"
+    },
+    "print": {
+        "prefix": "p",
+        "body": [
+            "print(${0})"
+        ]
+    },
+    "self": {
+        "prefix": "self:",
+        "body": [
+            "function self:${1:methodName}($2)",
+            "\t$0",
+            "end"
+        ]
+    }
 }

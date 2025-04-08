@@ -1,71 +1,113 @@
 {
-  "header 1": {
-    "prefix": "h1",
-    "description": "Add header level 1",
-    "body": ["# ${0:$TM_SELECTED_TEXT}"]
-  },
-  "header 2": {
-    "prefix": "h2",
-    "description": "Add header level 2",
-    "body": ["## ${0:$TM_SELECTED_TEXT}"]
-  },
-  "header 3": {
-    "prefix": "h3",
-    "description": "Add header level 3"
-  },
-  "header 4": {
-    "prefix": "h4",
-    "description": "Add header level 4",
-    "body": ["#### ${0:$TM_SELECTED_TEXT}"]
-  },
-  "header 5": {
-    "prefix": "h5",
-    "description": "Add header level 5 (text is smaller than normal text)",
-    "body": ["##### ${0:$TM_SELECTED_TEXT}"]
-  },
-  "header 6": {
-    "prefix": "h6",
-    "description": "Add header level 6 (text is smaller than normal text)",
-    "body": ["###### ${0:$TM_SELECTED_TEXT}"]
-  },
-  "link": {
-    "prefix": ["link", "l"],
-    "description": "inline link (`l`)",
-    "body": ["[${1:label}](${2:${TM_SELECTED_TEXT:url}}) $0"]
-  },
-  "URL": {
-    "prefix": ["url", "u"],
-    "description": "inline url (`u`)",
-    "body": ["<${1:${TM_SELECTED_TEXT:url}}> ${0}"]
-  },
-  "code": {
-    "prefix": ["code", "c"],
-    "description": "inline code (`c`)",
-    "body": "`${1:$TM_SELECTED_TEXT}` $0"
-  },
-  "strikethrough": {
-    "prefix": ["strikethrough", "s"],
-    "description": "inline strikethrough (`s`)",
-    "body": "~~${1:$TM_SELECTED_TEXT}~~ ${0}"
-  },
-  "bold text": {
-    "prefix": ["bold", "b"],
-    "description": "inline bold text (`b`)",
-    "body": "**${1:$TM_SELECTED_TEXT}** $0"
-  },
-  "italic text": {
-    "prefix": ["i", "italic"],
-    "description": "inline italic text (`i`)",
-    "body": "*${1:$TM_SELECTED_TEXT}* $0"
-  },
-  "bold and italic text": {
-    "prefix": ["bold and italic", "bi"],
-    "description": "inline bold and italic text (`bi`)",
-    "body": "***${1:$TM_SELECTED_TEXT}*** $0"
-  },
-  "codeblock": {
-    "prefix": ["codeblock", "cb"],
-    "description": "fenced code block (`cb`)",
-    "body": ["```${1:lang}", "${0:${TM_SELECTED_TEXT:foo} ", "```"]
-  }
+    "header 1": {
+        "prefix": "h1",
+        "description": "Add header level 1",
+        "body": [
+            "# ${0:$TM_SELECTED_TEXT}"
+        ]
+    },
+    "header 2": {
+        "prefix": "h2",
+        "description": "Add header level 2",
+        "body": [
+            "## ${0:$TM_SELECTED_TEXT}"
+        ]
+    },
+    "header 3": {
+        "prefix": "h3",
+        "description": "Add header level 3"
+    },
+    "header 4": {
+        "prefix": "h4",
+        "description": "Add header level 4",
+        "body": [
+            "#### ${0:$TM_SELECTED_TEXT}"
+        ]
+    },
+    "header 5": {
+        "prefix": "h5",
+        "description": "Add header level 5 (text is smaller than normal text)",
+        "body": [
+            "##### ${0:$TM_SELECTED_TEXT}"
+        ]
+    },
+    "header 6": {
+        "prefix": "h6",
+        "description": "Add header level 6 (text is smaller than normal text)",
+        "body": [
+            "###### ${0:$TM_SELECTED_TEXT}"
+        ]
+    },
+    "link": {
+        "prefix": [
+            "link",
+            "l"
+        ],
+        "description": "inline link (`l`)",
+        "body": [
+            "[${1:label}](${2:${TM_SELECTED_TEXT:url}}) $0"
+        ]
+    },
+    "URL": {
+        "prefix": [
+            "url",
+            "u"
+        ],
+        "description": "inline url (`u`)",
+        "body": [
+            "<${1:${TM_SELECTED_TEXT:url}}> ${0}"
+        ]
+    },
+    "code": {
+        "prefix": [
+            "code",
+            "c"
+        ],
+        "description": "inline code (`c`)",
+        "body": "`${1:$TM_SELECTED_TEXT}` $0"
+    },
+    "strikethrough": {
+        "prefix": [
+            "strikethrough",
+            "s"
+        ],
+        "description": "inline strikethrough (`s`)",
+        "body": "~~${1:$TM_SELECTED_TEXT}~~ ${0}"
+    },
+    "bold text": {
+        "prefix": [
+            "bold",
+            "b"
+        ],
+        "description": "inline bold text (`b`)",
+        "body": "**${1:$TM_SELECTED_TEXT}** $0"
+    },
+    "italic text": {
+        "prefix": [
+            "i",
+            "italic"
+        ],
+        "description": "inline italic text (`i`)",
+        "body": "*${1:$TM_SELECTED_TEXT}* $0"
+    },
+    "bold and italic text": {
+        "prefix": [
+            "bold and italic",
+            "bi"
+        ],
+        "description": "inline bold and italic text (`bi`)",
+        "body": "***${1:$TM_SELECTED_TEXT}*** $0"
+    },
+    "codeblock": {
+        "prefix": [
+            "codeblock",
+            "cb"
+        ],
+        "description": "fenced code block (`cb`)",
+        "body": [
+            "```${1:lang}",
+            "${0:${TM_SELECTED_TEXT:foo} ",
+            "```"
+        ]
+    }
 }

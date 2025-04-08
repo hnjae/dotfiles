@@ -1,84 +1,84 @@
 {
-  "xdesktopentry-nix": {
-    "prefix": "xdesktopentry-nix",
-    "description": "\"New desktop entries (does not work on gnome)\"",
-    "body": [
-      "xdg.desktopEntries.\"${1:name}\" = {",
-      "\tname = \"$1\";",
-      "\ticon = \"$1\";",
-      "\tcomment = \"\";",
-      "\texec = \"\";",
-      "\tterminal = false;",
-      "\ttype = \"Application\";",
-      "\tstartupNotify = true;",
-      "\tcategories = [];",
-      "\tmimeType = [];",
-      "\tactions = {",
-      "\t\t\"name\" = {",
-      "\t\t\tname = \"\";",
-      "\t\t\texec = \"\";",
-      "\t\t\\};",
-      "\t\\};",
-      "\\};",
-      ""
-    ]
-  },
-  "xdesktopentry-file": {
-    "prefix": "xdesktopentry-file",
-    "description": "\"New desktop entries\"",
-    "body": [
-      "xdg.dataFile.\"applications/${1:name}.desktop\".text = ''",
-      "\t[Desktop Entry]",
-      "\tName=${1:name}",
-      "\tType=Application",
-      "\tComment=A terminal emulator",
-      "\tExec=$2",
-      "\tIcon=${1:name}",
-      "\tCategories",
-      "\tKeywords=",
-      "\tStartupNotify=true",
-      "\tTerminal=false",
-      "'';",
-      ""
-    ]
-  },
-  "xconfigfile": {
-    "prefix": "xconfigfile",
-    "description": "\"xdg.configFile\"",
-    "body": [
-      "xdg.configFile.\"${1:file}\".text = ''",
-      "\t${2:content}",
-      "'';",
-      ""
-    ]
-  },
-  "xconfighome": {
-    "prefix": "xconfighome",
-    "description": "\"xdg.configHome (~/.config)\"",
-    "body": [
-      "\"\\${config.xdg.configHome\\}\"",
-      ""
-    ]
-  },
-  "xdatahome": {
-    "prefix": "xdatahome",
-    "description": "\"xdg.dataHome (~/.local/share)\"",
-    "body": [
-      "\"\\${config.xdg.dataHome\\}\"",
-      ""
-    ]
-  },
-  "xstatehome": {
-    "prefix": "xstatehome",
-    "description": "\"xdg.stateHome (~/.local/state)\"",
-    "body": [
-      "\"\\${config.xdg.stateHome\\}",
-      ""
-    ]
-  },
-  "homedir": {
-    "prefix": "homedir",
-    "description": "\"~/\"",
-    "body": "\"\\${config.home.homeDirectory\\}\""
-  }
+    "xdesktopentry-nix": {
+        "prefix": "xdesktopentry-nix",
+        "description": "\"New desktop entries (does not work on gnome)\"",
+        "body": [
+            "xdg.desktopEntries.\"${1:name}\" = {",
+            "\tname = \"$1\";",
+            "\ticon = \"$1\";",
+            "\tcomment = \"\";",
+            "\texec = \"\";",
+            "\tterminal = false;",
+            "\ttype = \"Application\";",
+            "\tstartupNotify = true;",
+            "\tcategories = [];",
+            "\tmimeType = [];",
+            "\tactions = {",
+            "\t\t\"name\" = {",
+            "\t\t\tname = \"\";",
+            "\t\t\texec = \"\";",
+            "\t\t\\};",
+            "\t\\};",
+            "\\};",
+            ""
+        ]
+    },
+    "xdesktopentry-file": {
+        "prefix": "xdesktopentry-file",
+        "description": "\"New desktop entries\"",
+        "body": [
+            "xdg.dataFile.\"applications/${1:name}.desktop\".text = ''",
+            "\t[Desktop Entry]",
+            "\tName=${1:name}",
+            "\tType=Application",
+            "\tComment=A terminal emulator",
+            "\tExec=$2",
+            "\tIcon=${1:name}",
+            "\tCategories",
+            "\tKeywords=",
+            "\tStartupNotify=true",
+            "\tTerminal=false",
+            "'';",
+            ""
+        ]
+    },
+    "xconfigfile": {
+        "prefix": "xconfigfile",
+        "description": "\"xdg.configFile\"",
+        "body": [
+            "xdg.configFile.\"${1:file}\".text = ''",
+            "\t${2:content}",
+            "'';",
+            ""
+        ]
+    },
+    "xconfighome": {
+        "prefix": "xconfighome",
+        "description": "\"xdg.configHome (~/.config)\"",
+        "body": [
+            "\"\\${config.xdg.configHome\\}\"",
+            ""
+        ]
+    },
+    "xdatahome": {
+        "prefix": "xdatahome",
+        "description": "\"xdg.dataHome (~/.local/share)\"",
+        "body": [
+            "\"\\${config.xdg.dataHome\\}\"",
+            ""
+        ]
+    },
+    "xstatehome": {
+        "prefix": "xstatehome",
+        "description": "\"xdg.stateHome (~/.local/state)\"",
+        "body": [
+            "\"\\${config.xdg.stateHome\\}",
+            ""
+        ]
+    },
+    "homedir": {
+        "prefix": "homedir",
+        "description": "\"~/\"",
+        "body": "\"\\${config.home.homeDirectory\\}\""
+    }
 }

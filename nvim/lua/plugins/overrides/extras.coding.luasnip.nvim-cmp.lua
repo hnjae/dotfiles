@@ -1,4 +1,4 @@
--- LazyExtra's coding.luasnip and coding.cmp
+-- LazyExtra's coding.luasnip and coding.nvim-cmp
 
 ---@type LazyPluginSpec
 local spec = {

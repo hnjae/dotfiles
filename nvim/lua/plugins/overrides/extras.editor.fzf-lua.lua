@@ -3,7 +3,7 @@ return {
   [1] = "fzf-lua",
   optional = true,
   keys = function(_, keys)
-    -- copied from FzfLua' M.grep.grep_project
+    -- copied from FzfLua' M.grep.grep_project (2025-04-07)
     local default_grep_opts = {
       search = "",
       fzf_opts = {
@@ -14,14 +14,16 @@ return {
 
     local grep_project = function()
       local opts = vim.deepcopy(default_grep_opts)
-      opts.search_paths = { LazyVim.root() }
+      -- opts.search_paths = { LazyVim.root() }
+      opts.cwd = LazyVim.root()
 
       require("fzf-lua").grep(opts)
     end
 
     local grep_cwd = function()
       local opts = vim.deepcopy(default_grep_opts)
-      opts.search_paths = { vim.fn.getcwd() }
+      -- opts.search_paths = { vim.fn.getcwd() }
+      opts.cwd = vim.fn.getcwd()
 
       require("fzf-lua").grep(opts)
     end

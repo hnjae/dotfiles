@@ -1,71 +1,77 @@
 {
-  "Figure": {
-    "prefix": ["sfigure", "figure"],
-    "description": "Figure",
-    "body": [
-      "% file stem should not include \".\"",
-      "begin{figure\\} % option htbp / add ! to force it",
-      "\tcentering",
-      "\t% use natheight, natwidth for bounding box",
-      "\tincludegraphics[width=0.6textwidth]{\\}",
-      "\tcaption{\\}",
-      "\tlabel{\\}",
-      "end{figure\\}"
-    ]
-  },
-  "Multi Figure": {
-    "prefix": ["smultifigure", "multifigure"],
-    "description": "Add Multiple Figure",
-    "body": [
-      "begin{figure\\}",
-      "\tcentering",
-      "\tbegin{subfigure\\}[b]{0.3textwidth\\}",
-      "\t\tincludegraphics[width=textwidth]{\\}",
-      "\t\tcaption{\\}",
-      "\t\tlabel{fig:\\}",
-      "\tend{subfigure\\}",
-      "\t~ %add desired spacing between images, e. g. ~, quad, qquad, hfill etc.",
-      "\t%(or a blank line to force the subfigure onto a new line)",
-      "\tbegin{subfigure\\}[b]{0.3textwidth\\}",
-      "\t\tincludegraphics[width=textwidth]{\\}",
-      "\t\tcaption{\\}",
-      "\t\tlabel{fig:\\}",
-      "\tend{subfigure\\}",
-      "\t~ %add desired spacing between images, e. g. ~, quad, qquad, hfill etc.",
-      "\t%(or a blank line to force the subfigure onto a new line)",
-      "\tbegin{subfigure\\}[b]{0.3textwidth\\}",
-      "\t\tincludegraphics[width=textwidth]{\\}",
-      "\t\tcaption{\\}",
-      "\t\tlabel{fig:\\}",
-      "\tend{subfigure\\}",
-      "\tcaption{\\}label{fig:\\}",
-      "end{figure\\}"
-    ]
-  },
-  "sxelatex-set-font": {
-    "prefix": "sxelatex-set-font",
-    "description": "set font (XeLaTeX)",
-    "body": [
-      "usepackage{fontspec\\}",
-      "",
-      "setmainfont[",
-      "\tBoldFont={Hiragino Mincho ProN W6\\},",
-      "\tItalicFont={Hiragino Mincho ProN W3\\},",
-      "\tItalicFeatures={FakeSlant\\}",
-      "]{Hiragino Mincho ProN W3\\}\t% rmfamily",
-      "",
-      "setsansfont[",
-      "\tBoldFont={Hiragino Sans W6\\},",
-      "\tItalicFont={Hiragino Sans W3\\},",
-      "\tItalicFeatures={FakeSlant\\}",
-      "]",
-      "{Hiragino Sans W3\\}\t% sffamily",
-      "",
-      "setmonofont[",
-      "\t% Scale=0.9,",
-      "\tItalicFont={Noto Sans Mono CJK JP\\},",
-      "\tItalicFeatures={FakeSlant\\}",
-      "]{Noto Sans Mono CJK JP\\}"
-    ]
-  }
+    "Figure": {
+        "prefix": [
+            "sfigure",
+            "figure"
+        ],
+        "description": "Figure",
+        "body": [
+            "% file stem should not include \".\"",
+            "begin{figure\\} % option htbp / add ! to force it",
+            "\tcentering",
+            "\t% use natheight, natwidth for bounding box",
+            "\tincludegraphics[width=0.6textwidth]{\\}",
+            "\tcaption{\\}",
+            "\tlabel{\\}",
+            "end{figure\\}"
+        ]
+    },
+    "Multi Figure": {
+        "prefix": [
+            "smultifigure",
+            "multifigure"
+        ],
+        "description": "Add Multiple Figure",
+        "body": [
+            "begin{figure\\}",
+            "\tcentering",
+            "\tbegin{subfigure\\}[b]{0.3textwidth\\}",
+            "\t\tincludegraphics[width=textwidth]{\\}",
+            "\t\tcaption{\\}",
+            "\t\tlabel{fig:\\}",
+            "\tend{subfigure\\}",
+            "\t~ %add desired spacing between images, e. g. ~, quad, qquad, hfill etc.",
+            "\t%(or a blank line to force the subfigure onto a new line)",
+            "\tbegin{subfigure\\}[b]{0.3textwidth\\}",
+            "\t\tincludegraphics[width=textwidth]{\\}",
+            "\t\tcaption{\\}",
+            "\t\tlabel{fig:\\}",
+            "\tend{subfigure\\}",
+            "\t~ %add desired spacing between images, e. g. ~, quad, qquad, hfill etc.",
+            "\t%(or a blank line to force the subfigure onto a new line)",
+            "\tbegin{subfigure\\}[b]{0.3textwidth\\}",
+            "\t\tincludegraphics[width=textwidth]{\\}",
+            "\t\tcaption{\\}",
+            "\t\tlabel{fig:\\}",
+            "\tend{subfigure\\}",
+            "\tcaption{\\}label{fig:\\}",
+            "end{figure\\}"
+        ]
+    },
+    "sxelatex-set-font": {
+        "prefix": "sxelatex-set-font",
+        "description": "set font (XeLaTeX)",
+        "body": [
+            "usepackage{fontspec\\}",
+            "",
+            "setmainfont[",
+            "\tBoldFont={Hiragino Mincho ProN W6\\},",
+            "\tItalicFont={Hiragino Mincho ProN W3\\},",
+            "\tItalicFeatures={FakeSlant\\}",
+            "]{Hiragino Mincho ProN W3\\}\t% rmfamily",
+            "",
+            "setsansfont[",
+            "\tBoldFont={Hiragino Sans W6\\},",
+            "\tItalicFont={Hiragino Sans W3\\},",
+            "\tItalicFeatures={FakeSlant\\}",
+            "]",
+            "{Hiragino Sans W3\\}\t% sffamily",
+            "",
+            "setmonofont[",
+            "\t% Scale=0.9,",
+            "\tItalicFont={Noto Sans Mono CJK JP\\},",
+            "\tItalicFeatures={FakeSlant\\}",
+            "]{Noto Sans Mono CJK JP\\}"
+        ]
+    }
 }
