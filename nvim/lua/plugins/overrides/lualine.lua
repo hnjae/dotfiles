@@ -35,15 +35,11 @@ return {
   [1] = "lualine.nvim",
   optional = true,
   opts = function(_, opts)
-    -- HACK: lualine_c 의 마지막 elements 가 LazyVim.lualine.pretty_path() 인지 어떻게 아나? <2025-04-07>
-    table.remove(opts.sections.lualine_c)
-
     --  remove progress/location
     opts.sections.lualine_y = {}
 
     -- disable clock time
     opts.sections.lualine_z = {
-
       { "progress", separator = " ", padding = { left = 1, right = 0 } },
       { "location", padding = { left = 0, right = 1 } },
     }
