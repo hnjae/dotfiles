@@ -1,4 +1,4 @@
--- blink 호출 전에 snippet 이 없으면 작동이 되될 않는다.
+-- blink 가 preview pane 보여주기전에는 snippet 이 작동이 되질 않는다. <2025-04-07>
 
 local source_name_map = {
   Snippets = "",

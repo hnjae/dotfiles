@@ -1,5 +1,10 @@
-local get_theme = function()
-  --[[
+---@type LazySpec
+return {
+  [1] = "lualine.nvim",
+  optional = true,
+  opts = function(_, opts)
+    local get_theme = function()
+      --[[
   NOTE: `theme` 에는 다음 항목이 있어야함. <2023-12-11>
     - * command
     - * visual
@@ -9,32 +14,27 @@ local get_theme = function()
     - * inactive
     - * terminal
   ]]
-  if vim.g.colors_name == nil then
-    return "auto"
-  end
+      if vim.g.colors_name == nil then
+        return "auto"
+      end
 
-  local is_theme, theme = pcall(require, "lualine.themes." .. vim.g.colors_name)
+      local is_theme, theme = pcall(require, "lualine.themes." .. vim.g.colors_name)
 
-  if not is_theme then
-    return "auto"
-  end
+      if not is_theme then
+        return "auto"
+      end
 
-  -- terminal, command 가 없는 theme 이 많다.
-  if not theme.terminal then
-    theme.terminal = theme.insert
-  end
-  if not theme.command then
-    theme.command = theme.insert
-  end
+      -- terminal, command 가 없는 theme 이 많다.
+      if not theme.terminal then
+        theme.terminal = theme.insert
+      end
+      if not theme.command then
+        theme.command = theme.insert
+      end
 
-  return theme
-end
+      return theme
+    end
 
----@type LazySpec
-return {
-  [1] = "lualine.nvim",
-  optional = true,
-  opts = function(_, opts)
     --  remove progress/location
     opts.sections.lualine_y = {}
 

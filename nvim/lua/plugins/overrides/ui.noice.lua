@@ -2,8 +2,8 @@
 return {
   [1] = "noice.nvim",
   optional = true,
-  ---@type NoiceConfig
-  opts = {},
+  -- ---@type NoiceConfig
+  -- opts = {},
   specs = {
     {
       [1] = "folke/lazydev.nvim",

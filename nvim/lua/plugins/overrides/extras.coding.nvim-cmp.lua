@@ -18,6 +18,7 @@ return {
     opts.mapping["<S-CR>"] = nil
     opts.mapping["<C-CR>"] = nil
 
+    -- configure formatting
     local source_name_map = {
       nvim_lsp = "LSP",
     }
@@ -42,6 +43,9 @@ return {
 
       return item
     end
+
+    -- sorting
+    opts.sorting.priority_weight = 10
   end,
 
   specs = {

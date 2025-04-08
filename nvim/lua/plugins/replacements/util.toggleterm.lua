@@ -46,6 +46,7 @@ return {
 
     -- override LazyVim's terminal
     { [1] = "<C-/>", [2] = function () get_root_term():toggle(nil, "float") end, desc = "Terminal (ToggleTerm)" },
+    -- NOTE: LazyVim 은 항상 새 터미널을 spawn 하는데, 여기도 거기에 맞춰야하지 않을까? <2025-04-08>
     { [1] = "<Leader>ft", [2] = function () get_root_term():toggle(nil, "horizontal") end, desc = "Terminal (ToggleTerm)" },
     {
       [1] = "<Leader>fT",

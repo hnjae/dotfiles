@@ -5,7 +5,6 @@
 return {
   [1] = "tpope/vim-sleuth",
   version = false,
-  -- cond = not vim.g.vscode,
 
   lazy = true,
   event = {

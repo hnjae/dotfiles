@@ -3,8 +3,6 @@ local spec = {
   [1] = "lualine.nvim",
   optional = true,
   opts = function(_, opts)
-    local lint_icon = "lt "
-
     local lint = require("lint")
 
     local component = {
