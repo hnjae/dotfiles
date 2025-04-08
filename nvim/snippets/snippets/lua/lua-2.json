@@ -18,5 +18,36 @@
   "elseif": {
     "prefix": ["elseif", "elif"],
     "body": ["elseif ${1:true} then", "\t${0:$TM_SELECTED_TEXT}"]
+  },
+  "for": {
+    "prefix": "for",
+    "body": ["for ${1:i}=${2:1},${3:10} do", "\t$0", "end"],
+    "description": "for loop range"
+  },
+  "for (iterate table)": {
+    "prefix": "forp",
+    "description": "iterate table",
+    "body": [
+      "for ${2:key}, ${3:value} in pairs(${1:${TM_SELECTED_TEXT:table}}) do",
+      "\t${0:-- do something}",
+      "end"
+    ]
+  },
+  "for (iterate list)": {
+    "prefix": "fori",
+    "description": "iterate list",
+    "body": [
+      "for idx, ${2:x} in ipairs(${1:${TM_SELECTED_TEXT:list}}) do",
+      "\t${0:-- do something}",
+      "end"
+    ]
+  },
+  "while": {
+    "prefix": ["while", "whi"],
+    "body": [
+      "while ${1:true} do",
+      "\t${0:${TM_SELECTED_TEXT:-- do something}}",
+      "end"
+    ]
   }
 }

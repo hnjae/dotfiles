@@ -74,7 +74,7 @@ return {
       require("luasnip.loaders").edit_snippet_files({
         ---@param file string
         edit = function(file)
-          vim.api.nvim_command("split " .. file)
+          vim.api.nvim_command("vsplit " .. file)
         end,
         format = function(file, _)
           return vim.fn.fnamemodify(file, ":t")
