@@ -9,7 +9,7 @@ local root_term = nil
 local get_root_term = function()
   if root_term == nil then
     root_term = require("toggleterm.terminal").Terminal:new({
-      direction = "float",
+      direction = "horizontal",
       dir = LazyVim.root(),
     })
   end
@@ -63,11 +63,13 @@ return {
           - (When the terminal is focused and in terminal mode, it toggles terminal instead of spawning a new terminal.)
         - The distinction between toggling and spawning seems odd, which makes we think this might not be the implementation the LazyVim developer intended.
         - We configured it to always toggle using toggleterm.
+
+        - `<C-/>` and `<Leader>ft` share same terminal in LazyVim.
     --]]
     -- override LazyVim's terminal
     { [1] = "<C-/>", [2] = function () get_root_term():toggle(nil, "float") end, desc = "Terminal (ToggleTerm)" },
     { [1] = "<Leader>ft", [2] = function () get_root_term():toggle(nil, "horizontal") end, desc = "Terminal (ToggleTerm)" },
-    { [1] = "<Leader>fT", [2] = function () get_cwd_term(vim.fn.getcwd()):toggle(nil, "horizontal") end, desc = "Spawn Terminal in CWD" },
+    { [1] = "<Leader>fT", [2] = function () get_cwd_term(vim.fn.expand('%:h')):toggle(nil, "horizontal") end, desc = "Spawn Terminal in buffer's cwd" },
   },
   opts = {
     shell = os.getenv("SHELL") or vim.o.shell,

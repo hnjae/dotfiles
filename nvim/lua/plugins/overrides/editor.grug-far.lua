@@ -11,61 +11,68 @@ return {
     -- https://ast-grep.github.io/reference/languages.html
     -- last update: 2025-04-09
     local astgrep_fts = {
-      sh = true,
-      c = true,
-      cpp = true,
-      cs = true,
-      css = true,
-      elixir = true,
-      go = true,
-      haskell = true,
-      html = true,
-      java = true,
-      javascript = true,
-      javascriptreact = true,
-      kotlin = true,
-      lua = true,
-      php = true,
-      python = true,
-      ruby = true,
-      rust = true,
-      scala = true,
-      swift = true,
-      typescript = true,
-      typescriptreact = true,
-      yaml = true,
+      "sh",
+      "c",
+      "cpp",
+      "cs",
+      "css",
+      "elixir",
+      "go",
+      "haskell",
+      "html",
+      "java",
+      "javascript",
+      "javascriptreact",
+      "kotlin",
+      "lua",
+      "php",
+      "python",
+      "ruby",
+      "rust",
+      "scala",
+      "swift",
+      "typescript",
+      "typescriptreact",
+      "yaml",
     }
     -- or use vim.tbl_contains(require("lspconfig.configs.ast_grep").default_config, vim.bo.filetype)
 
-    return vim.list_extend(keys or {}, {
-      -- based on LazyVim v14.14.0
-      {
-        [1] = "<leader>se",
-        [2] = function()
-          if not astgrep_fts[vim.bo.filetype] then
-            vim.notify(
-              string.format(
-                "astgrep is not supported for: %s\nCheck <https://ast-grep.github.io/reference/languages.html>",
-                vim.bo.filetype
-              )
-            )
-            return
-          end
+    -- based on LazyVim v14.14.0
+    local key = {
+      [1] = "<leader>se",
+      [2] = function()
+        local grug = require("grug-far")
+        local ext = vim.bo.buftype == "" and vim.fn.expand("%:e")
+        -- based-on LazyVim's <leader>sr implementation
+        grug.open({
+          transient = true,
+          engine = "astgrep",
+          prefills = {
+            filesFilter = ext and ext ~= "" and "*." .. ext or nil,
+          },
+        })
+      end,
+      mode = { "n", "v" },
+      ft = astgrep_fts,
+      desc = "astgrep (grug-far)",
+    }
 
-          local grug = require("grug-far")
-          local ext = vim.bo.buftype == "" and vim.fn.expand("%:e")
-          -- based-on LazyVim's <leader>sr implementation
-          grug.open({
-            transient = true,
-            engine = astgrep_fts[vim.bo.filetype] and "astgrep" or nil,
-            prefills = {
-              filesFilter = ext and ext ~= "" and "*." .. ext or nil,
-            },
-          })
-        end,
-        mode = { "n", "v" },
-        desc = "astgerp (grug-far",
-      },
+    local key_not_supported_fts = vim.deepcopy(key)
+    key_not_supported_fts.ft = nil
+    key_not_supported_fts[2] = function()
+      local msg = string.format(
+        "astgrep is not supported for: %s\n",
+        vim.bo.filetype ~= "" and vim.bo.filetype or "<unknown filetype>"
+      )
+      local link_msg = "Check <https://ast-grep.github.io/reference/languages.html>"
+
+      vim.notify(msg .. link_msg)
+    end
+    key_not_supported_fts.desc = "(NOT SUPPORTED) astgrep"
+
+    return vim.list_extend(keys or {}, {
+      key_not_supported_fts,
+      key,
     })
   end,
   specs = {

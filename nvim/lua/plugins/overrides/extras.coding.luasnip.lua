@@ -51,12 +51,12 @@ return {
         [2] = "<cmd>LuaSnipListAvailable<CR>",
         desc = "Snippets (Luasnip)",
       },
-      -- {
-      --   [1] = "<Leader>sP",
-      --   mode = "n",
-      --   [2] = "<cmd>EditSnippet<CR>",
-      --   desc = "edit-snippet (Luasnip)",
-      -- },
+      {
+        [1] = "<F4>",
+        mode = "n",
+        [2] = "<cmd>EditSnippet<CR>",
+        desc = "edit-snippet (Luasnip)",
+      },
     })
   end,
   config = function(_, opts)

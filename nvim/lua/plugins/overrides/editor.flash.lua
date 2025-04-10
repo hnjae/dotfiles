@@ -13,4 +13,8 @@ return {
     -- { "<LocalLeader>s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
     -- { "<LocalLeader>S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
   },
+  ---@type Flash.Config
+  opts = {
+    labels = "setnriaodhfuplwyc,vkx.gmbq;/jz", -- sorted by colemak-dh typing effort
+  },
 }

@@ -48,6 +48,6 @@ return {
     -- When set to true, left sections i.e. 'a','b' and 'c'
     -- can't take over the entire statusline even
     -- if neither of 'x', 'y' or 'z' are present.
-    opts.options.always_devide_middle = true
+    opts.options.always_divide_middle = true
   end,
 }

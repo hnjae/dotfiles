@@ -22,8 +22,7 @@ return {
 
     local grep_cwd = function()
       local opts = vim.deepcopy(default_grep_opts)
-      -- opts.search_paths = { vim.fn.getcwd() }
-      opts.cwd = vim.fn.getcwd()
+      opts.cwd = vim.fn.expand("%:h")
 
       require("fzf-lua").grep(opts)
     end
@@ -34,7 +33,20 @@ return {
       -- default mapping does not uses fzf's syntax
       { [1] = "<Leader>/", [2] = grep_project, desc = "Grep (Project)" },
       { [1] = "<Leader>sg", [2] = grep_project, desc = "Grep (Project)" }, -- same as above
-      { [1] = "<Leader>sG", [2] = grep_cwd, desc = "Grep (CWD)" },
+      { [1] = "<Leader>sG", [2] = grep_cwd, desc = "Grep (buffer's cwd)" },
+
+      {
+        [1] = "<Leader>fF",
+        [2] = function()
+          local opts = {
+            ignore_current_file = false,
+            cwd = vim.fn.expand("%:h"),
+          }
+
+          require("fzf-lua").files(opts)
+        end,
+        desc = "Find Files (buffer's cwd)",
+      },
     })
   end,
   opts = function()
