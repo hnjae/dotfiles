@@ -6,7 +6,7 @@
         ],
         "body": [
             "function ($1)",
-            "\t${0:${TM_SELECTED_TEXT:-- do something}}",
+            "\t${0:$TM_SELECTED_TEXT}",
             "end"
         ]
     },
@@ -17,7 +17,7 @@
         ],
         "body": [
             "function ${1:fn_name}($2)",
-            "\t${0:${TM_SELECTED_TEXT:-- do something}}",
+            "\t${0:$TM_SELECTED_TEXT}",
             "end"
         ]
     },
@@ -64,7 +64,7 @@
         "description": "iterate table",
         "body": [
             "for ${2:key}, ${3:value} in pairs(${1:${TM_SELECTED_TEXT:table}}) do",
-            "\t${0:-- do something}",
+            "\t${0}",
             "end"
         ]
     },
@@ -73,7 +73,7 @@
         "description": "iterate list",
         "body": [
             "for idx, ${2:x} in ipairs(${1:${TM_SELECTED_TEXT:list}}) do",
-            "\t${0:-- do something}",
+            "\t${0}",
             "end"
         ]
     },
@@ -84,7 +84,7 @@
         ],
         "body": [
             "while ${1:true} do",
-            "\t${0:${TM_SELECTED_TEXT:-- do something}}",
+            "\t${0:$TM_SELECTED_TEXT}",
             "end"
         ]
     },

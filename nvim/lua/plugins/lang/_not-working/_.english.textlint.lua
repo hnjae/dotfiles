@@ -4,7 +4,9 @@ return {
     NOTE:
       - textlint is the pluggable linter for natural language text.
       - <https://github.com/textlint/textlint>
-      - text, markdown (2025-04-09)
+      - text, Markdown (2025-04-09)
+
+      - `nvim-lint` does not support textlint (2025-04-10)
   --]]
   [1] = "nvim-lint",
   optional = true,

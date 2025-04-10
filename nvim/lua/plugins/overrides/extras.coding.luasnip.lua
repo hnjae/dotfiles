@@ -12,22 +12,22 @@ return {
     "LuaSnipListAvailable",
     "LuaSnipUnlinkCurrent",
   },
-  ---@type fun(LazyPlugin, keys: string[]): LazyKeysSpec[]
   keys = function(_, keys)
     local luasnip = require("luasnip")
 
+    -- NOTE: `<Plug>luasnip-jump-next` 가 작동이 안됨. <2025-04-10>
     return vim.list_extend(keys, {
       {
         [1] = "<Tab>",
         mode = "n",
         [2] = function()
           if luasnip.locally_jumpable(1) then
-            return "<Plug>luasnip-jump-next"
+            luasnip.jump(1)
+            -- return "<Plug>luasnip-jump-next"
           end
-
-          return "<Tab>"
+          -- return "<Tab>"
         end,
-        expr = true,
+        -- expr = true,
         desc = "luasnip-next",
       },
       {
@@ -35,12 +35,12 @@ return {
         mode = "n",
         [2] = function()
           if luasnip.locally_jumpable(-1) then
-            return "<Plug>luasnip-jump-prev"
+            luasnip.jump(-1)
+            -- return "<Plug>luasnip-jump-prev"
           end
-
-          return "<S-Tab>"
+          -- return "<S-Tab>"
         end,
-        expr = true,
+        -- expr = true,
         desc = "luasnip-previous",
       },
 

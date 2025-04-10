@@ -38,6 +38,16 @@
             "###### ${0:$TM_SELECTED_TEXT}"
         ]
     },
+    "image": {
+        "prefix": [
+            "image",
+            "img"
+        ],
+        "body": [
+            "![${2:alt text}](${1:${TM_SELECTED_TEXT:path}}) ${0}"
+        ],
+        "description": "Add images"
+    },
     "link": {
         "prefix": [
             "link",

@@ -1,11 +1,4 @@
 {
-    "Images": {
-        "prefix": "img",
-        "body": [
-            "![${1:alt text}](${2:path}) ${0}"
-        ],
-        "description": "Add images"
-    },
     "Insert quoted text": {
         "prefix": "quote",
         "body": "> ${1}",

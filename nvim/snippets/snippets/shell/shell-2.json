@@ -70,6 +70,20 @@
             "done"
         ]
     },
+    "iterate multi-line variable": {
+        "prefix": [
+            "forarr",
+            "forarray",
+            "whilel",
+            "iter-multi-line-variable"
+        ],
+        "description": "iterate multi-line variable (IFS won't change)",
+        "body": [
+            "echo \"${1:variable}\" | while IFS=\"\" read -r \"${2:line}\"; do",
+            "\techo \"${2:line}$0",
+            "done"
+        ]
+    },
     "for array (bash)": {
         "prefix": [
             "forarrb",

@@ -1,3 +1,4 @@
+-- TODO: map preview at <leader>cp <2025-04-10>
 ---@type LazySpec[]
 return {
   {

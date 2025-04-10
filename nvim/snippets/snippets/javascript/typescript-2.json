@@ -1,1 +1,268 @@
-{}
+{
+    "c": {
+        "prefix": "c",
+        "body": "const ${1:name}"
+    },
+    "a": {
+        "prefix": "a",
+        "body": "await $0"
+    },
+    "function": {
+        "prefix": [
+            "fun",
+            "fn",
+            "cfn",
+            "cfun"
+        ],
+        "description": "\"function\"",
+        "body": [
+            "const ${1:name} = function (${2:arguments}) {",
+            "\t$0",
+            "}"
+        ]
+    },
+    "named function": {
+        "prefix": [
+            "funn",
+            "fnn"
+        ],
+        "description": "\"function\"",
+        "body": [
+            "function ${1:name}(${2:arguments}) {",
+            "\t$0",
+            "}"
+        ]
+    },
+    "async function": {
+        "prefix": [
+            "asfun",
+            "asfn",
+            "casfn",
+            "casfun"
+        ],
+        "body": [
+            "const ${1:name} = async function (${2:arguments}) {",
+            "\t${0:$TM_SELECTED_TEXT}",
+            "}"
+        ]
+    },
+    "async named function": {
+        "prefix": [
+            "asfunn",
+            "asfnn"
+        ],
+        "body": [
+            "async function ${1:name}(${2:arguments}) {",
+            "\t${0:$TM_SELECTED_TEXT}",
+            "}"
+        ]
+    },
+    "method": {
+        "prefix": "m",
+        "body": "${1:method} (${2:arguments}) {\n\t${0}\n}"
+    },
+    "async method": {
+        "prefix": "asm",
+        "body": [
+            "async ${1:name}(${2:arguments}) {",
+            "\t${0:$TM_SELECTED_TEXT}",
+            "}"
+        ]
+    },
+    "af": {
+        "prefix": "af",
+        "body": "(${1:arguments}) => $0"
+    },
+    "afr": {
+        "prefix": "afr",
+        "body": [
+            "(${1:arguments}) => {",
+            "\treturn $0",
+            "\\}"
+        ]
+    },
+    "asa": {
+        "prefix": "asa",
+        "body": [
+            "async (${1:arguments}) => {",
+            "\t$0",
+            "\\}"
+        ]
+    },
+    "asmt": {
+        "prefix": "asmt",
+        "body": [
+            "async ${1:name}(${2:arguments}): Promise<${3:returnType}> {",
+            "\t$0",
+            "\\}"
+        ]
+    },
+    "arrow function without body": {
+        "prefix": "afs",
+        "body": "(${1:arguments}) => ${2:statement}"
+    },
+    "arrow function with body": {
+        "prefix": "af",
+        "body": "(${1:arguments}) => {\n\t${0:$TM_SELECTED_TEXT}\n}"
+    },
+    "async arrow function": {
+        "prefix": "aaf",
+        "body": "async (${1:arguments}) => {\n\t${0}\n}"
+    },
+    "const arrow function assignment": {
+        "prefix": "caf",
+        "body": "const ${1:name} = (${2:arguments}) => {\n\t${0:$TM_SELECTED_TEXT}\n}"
+    },
+    "if": {
+        "prefix": "if",
+        "description": "If Statement",
+        "body": [
+            "if (${1:condition}) {",
+            "\t${0:$TM_SELECTED_TEXT}",
+            "}"
+        ]
+    },
+    "else": {
+        "prefix": [
+            "else",
+            "el"
+        ],
+        "description": "(If-)Else Statement",
+        "body": [
+            "else {",
+            "\t${0:$TM_SELECTED_TEXT}",
+            "}"
+        ]
+    },
+    "elif": {
+        "prefix": [
+            "else if",
+            "elif"
+        ],
+        "description": "Else-if Statement",
+        "body": [
+            "else if (${1:true}) {",
+            "\t${0:$TM_SELECTED_TEXT}",
+            "}"
+        ]
+    },
+    "ifelse": {
+        "prefix": "ifelse",
+        "description": "If-Else Statement",
+        "body": [
+            "if (${1:condition}) {",
+            "\t$0",
+            "} else {",
+            "",
+            "}"
+        ]
+    },
+    "im": {
+        "prefix": "im",
+        "description": "\"import\"",
+        "body": "import '${1:module}';$0"
+    },
+    "im*": {
+        "prefix": "im*",
+        "description": "\"import as\"",
+        "body": "import * as $2 from '${1:module}';$0"
+    },
+    "imc": {
+        "prefix": "imc",
+        "description": "\"import {}\"",
+        "body": "import { $2 \\} from '${1:module}';$3"
+    },
+    "imt": {
+        "prefix": "imt",
+        "description": "\"import type {}\"",
+        "body": "import type {$2\\} from '${1:module}';$3"
+    },
+    "trycatch": {
+        "prefix": "trycatch",
+        "description": "Try-Catch Statement",
+        "body": [
+            "try {",
+            "\t${0:\\$TM_SELECTED_TEXT}",
+            "\\} catch (${1:error}) {",
+            "",
+            "\\}"
+        ]
+    },
+    "catch": {
+        "prefix": "catch",
+        "description": "Catch Statement",
+        "body": [
+            "catch (${1:error}) {",
+            "\t$0",
+            "\\}"
+        ]
+    },
+    "Try-Catch Statement": {
+        "prefix": "trycatch",
+        "body": [
+            "try {",
+            "\t$0",
+            "} catch (${1:error}) {",
+            "\t",
+            "}"
+        ],
+        "description": "Try-Catch Statement"
+    },
+    "try/catch": {
+        "prefix": "tc",
+        "body": "try {\n\t${0}\n} catch (${1:err}) {\n\t\n}"
+    },
+    "try/finally": {
+        "prefix": "tf",
+        "body": "try {\n\t${0}\n} finally {\n\t\n}"
+    },
+    "try/catch/finally": {
+        "prefix": "tcf",
+        "body": "try {\n\t${0}\n} catch (${1:err}) {\n\t\n} finally {\n\t\n}"
+    },
+    "console.log with log": {
+        "prefix": "log",
+        "body": "console.log(${0})"
+    },
+    "console.log a variable": {
+        "prefix": "logv",
+        "body": "console.log('${1}:', ${1})"
+    },
+    "console.error": {
+        "prefix": "err",
+        "body": "console.error(${0})"
+    },
+    "console.warn": {
+        "prefix": "warn",
+        "body": "console.warn(${0})"
+    },
+    "import module": {
+        "prefix": "im",
+        "body": "import ${2:*} from '${1:module}'"
+    },
+    "import module as": {
+        "prefix": "ima",
+        "body": "import ${2:*} as ${3:name} from '${1:module}'"
+    },
+    "import module destructured": {
+        "prefix": "imd",
+        "body": "import {$2} from '${1:module}'"
+    },
+    "module default export": {
+        "prefix": "ed",
+        "body": "export default ${1:member}"
+    },
+    "sleep": {
+        "prefix": [
+            "sleep",
+            "ast"
+        ],
+        "description": "\"settimeout\"",
+        "body": "await new Promise((resolve) => setTimeout(resolve, ${1:milieseconds}));"
+    },
+    "sleep function": {
+        "prefix": "sleepfn",
+        "description": "sleep function",
+        "body": "const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));"
+    }
+}

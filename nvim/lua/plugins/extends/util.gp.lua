@@ -101,14 +101,14 @@ return {
 
 - file: {{filename}}
 {{optional_headers}}
-<!--
-Respond : `{{respond_shortcut}}` | :{{cmd_prefix}}ChatRespond
-Stop    : `{{stop_shortcut}}` | :{{cmd_prefix}}ChatStop
-Delete  : `{{delete_shortcut}}` | :{{cmd_prefix}}ChatDelete.
-New     : `{{new_shortcut}}` | :{{cmd_prefix}}ChatNew.
+| ------- | ---------------------- | ---------------------------- |
+| Respond | `{{respond_shortcut}}` | `:{{cmd_prefix}}ChatRespond` |
+| Stop    | `{{stop_shortcut}}`    | `:{{cmd_prefix}}ChatStop`    |
+| Delete  | `{{delete_shortcut}}`  | `:{{cmd_prefix}}ChatDelete.` |
+| New     | `{{new_shortcut}}`     | `:{{cmd_prefix}}ChatNew.`    |
+| ------- | ---------------------- | ---------------------------- |
 
 Chats are saved automatically.
--->
 ---
 
 {{user_prefix}}

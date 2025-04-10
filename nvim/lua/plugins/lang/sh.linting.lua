@@ -4,14 +4,14 @@ return {
   optional = true,
   opts = {
     linters_by_ft = {
-      sh = { "shellharden", "shellcheck" },
+      sh = { "shellcheck" },
     },
   },
   specs = {
     {
       [1] = "mason.nvim",
       optional = true,
-      opts = { ensure_installed = { "shellharden", "shellcheck" } },
+      opts = { ensure_installed = { "shellcheck" } },
     },
   },
 }

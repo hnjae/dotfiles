@@ -4,7 +4,6 @@ return {
     NOTE:
       - A linter for prose.
       - <https://github.com/amperser/proselint>
-      - text, markdown (2025-04-09)
     --]]
   [1] = "nvim-lint",
   optional = true,
@@ -12,6 +11,10 @@ return {
     linters_by_ft = {
       text = { "proselint" },
       markdown = { "proselint" },
+      asciidoc = { "proselint" },
+      org = { "proselint" },
+      rst = { "proselint" },
+      tex = { "proselint" },
     },
   },
   specs = {

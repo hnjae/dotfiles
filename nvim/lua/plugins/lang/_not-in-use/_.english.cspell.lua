@@ -1,3 +1,5 @@
+-- https://github.com/streetsidesoftware/cspell
+
 ---@type LazySpec
 return {
   [1] = "nvim-lint",

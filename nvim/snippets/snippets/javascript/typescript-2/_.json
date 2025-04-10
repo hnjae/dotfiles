@@ -1,347 +1,97 @@
 {
-  "fun": {
-    "prefix": "fun",
-    "description": "\"function\"",
-    "body": [
-      "function ${1:name}(${2:arguments}) {",
-      "\t$0",
-      "\\}"
-    ]
-  },
-  "asf": {
-    "prefix": "asf",
-    "body": [
-      "async function ${1:name}(${2:arguments}) {",
-      "\t$0",
-      "\\}"
-    ]
-  },
-  "af": {
-    "prefix": "af",
-    "body": "(${1:arguments}) => $0"
-  },
-  "afr": {
-    "prefix": "afr",
-    "body": [
-      "(${1:arguments}) => {",
-      "\treturn $0",
-      "\\}"
-    ]
-  },
-  "asa": {
-    "prefix": "asa",
-    "body": [
-      "async (${1:arguments}) => {",
-      "\t$0",
-      "\\}"
-    ]
-  },
-  "asm": {
-    "prefix": "asm",
-    "body": [
-      "async ${1:name}(${2:arguments}) {",
-      "\t$0",
-      "\\}"
-    ]
-  },
-  "asmt": {
-    "prefix": "asmt",
-    "body": [
-      "async ${1:name}(${2:arguments}): Promise<${3:returnType}> {",
-      "\t$0",
-      "\\}"
-    ]
-  },
-  "a": {
-    "prefix": "a",
-    "body": "await $0"
-  },
-  "catch": {
-    "prefix": "catch",
-    "description": "Catch Statement",
-    "body": [
-      "catch (${1:error}) {",
-      "\t$0",
-      "\\}"
-    ]
-  },
-  "cls": {
-    "prefix": "cls",
-    "description": "Class Definition",
-    "body": [
-      "class ${1:name} {",
-      "\t$0",
-      "\\}"
-    ]
-  },
-  "class": {
-    "prefix": "class",
-    "description": "Class Definition",
-    "body": [
-      "class ${1:name} {",
-      "\t$0",
-      "\\}"
-    ]
-  },
-  "else": {
-    "prefix": "else",
-    "description": "(If-)Else Statement",
-    "body": [
-      "else {",
-      "\t$0",
-      "\\}"
-    ]
-  },
-  "elif": {
-    "prefix": "elif",
-    "description": "Else-if Statement",
-    "body": [
-      "else if (${1:true}) {",
-      "\t$0",
-      "\\}"
-    ]
-  },
-  "if": {
-    "prefix": "if",
-    "description": "If Statement",
-    "body": [
-      "if (${1:condition}) {",
-      "\t$0",
-      "\\}"
-    ]
-  },
-  "ifelse": {
-    "prefix": "ifelse",
-    "description": "If-Else Statement",
-    "body": [
-      "if (${1:condition}) {",
-      "\t$0",
-      "\\} else {",
-      "",
-      "\\}"
-    ]
-  },
-  "im": {
-    "prefix": "im",
-    "description": "\"import\"",
-    "body": "import '${1:module}';$0"
-  },
-  "im*": {
-    "prefix": "im*",
-    "description": "\"import as\"",
-    "body": "import * as $2 from '${1:module}';$0"
-  },
-  "imc": {
-    "prefix": "imc",
-    "description": "\"import {}\"",
-    "body": "import { $2 \\} from '${1:module}';$3"
-  },
-  "imt": {
-    "prefix": "imt",
-    "description": "\"import type {}\"",
-    "body": "import type {$2\\} from '${1:module}';$3"
-  },
-  "iface": {
-    "prefix": "iface",
-    "description": "Interface Definition",
-    "body": [
-      "interface ${1:name} {",
-      "\t$0",
-      "\\}"
-    ]
-  },
-  "meth": {
-    "prefix": "meth",
-    "description": "Method Definition",
-    "body": [
-      "${1:name}(${2:arguments})${3:return type} {",
-      "\t$0",
-      "\\}"
-    ]
-  },
-  "method": {
-    "prefix": "method",
-    "description": "Method Definition",
-    "body": [
-      "${1:name}(${2:arguments})${3:return type} {",
-      "\t$0",
-      "\\}"
-    ]
-  },
-  "trycatch": {
-    "prefix": "trycatch",
-    "description": "Try-Catch Statement",
-    "body": [
-      "try {",
-      "\t${0:\\$TM_SELECTED_TEXT}",
-      "\\} catch (${1:error}) {",
-      "",
-      "\\}"
-    ]
-  },
-  "cas": {
-    "prefix": "cas",
-    "description": "case",
-    "body": [
-      "case ${1:'constant-expression'}: {",
-      "\t$0",
-      "\tbreak;",
-      "\\}"
-    ]
-  },
-  "err": {
-    "prefix": "err",
-    "description": "Log error to the console",
-    "body": [
-      "console.error($1);",
-      "$0"
-    ]
-  },
-  "log": {
-    "prefix": "log",
-    "description": "Log to the console",
-    "body": "console.log($1);$0"
-  },
-  "warn": {
-    "prefix": "warn",
-    "description": "Log warning to the console",
-    "body": [
-      "console.warn($1);",
-      "$0"
-    ]
-  },
-  "cf": {
-    "prefix": "cf",
-    "body": [
-      "const ${1:name} = (${2:arguments}) => {",
-      "\treturn $0",
-      "\\}"
-    ]
-  },
-  "ca": {
-    "prefix": "ca",
-    "body": "const ${1:name} = await ${2:value}"
-  },
-  "cda": {
-    "prefix": "cda",
-    "body": "const { ${1:name} \\} = await ${2:value}"
-  },
-  "c": {
-    "prefix": "c",
-    "body": "const ${1:name}"
-  },
-  "cad": {
-    "prefix": "cad",
-    "body": "const [ ${2:prop} ] = ${1:value}"
-  },
-  "cd": {
-    "prefix": "cd",
-    "body": "const { ${2:prop} \\} = ${1:value}"
-  },
-  "e": {
-    "prefix": "e",
-    "body": "export $0"
-  },
-  "newp": {
-    "prefix": "newp",
-    "description": "new Promise<type>()",
-    "body": [
-      "new Promise<${1:type}>((resolve, reject) => {",
-      "\t$0",
-      "\\})"
-    ]
-  },
-  "pro": {
-    "prefix": "pro",
-    "description": "new Promise<type>()",
-    "body": [
-      "new Promise<${1:type}>((resolve, reject) => {",
-      "\t$0",
-      "\\})"
-    ]
-  },
-  "req": {
-    "prefix": "req",
-    "body": "require($1)$0"
-  },
-  "swi": {
-    "prefix": "swi",
-    "description": "switch",
-    "body": [
-      "switch (${1:'expression'}) {",
-      "\t$0",
-      "\tdefault: {",
-      "\t\t${2:'statement'};",
-      "\t\tbreak;",
-      "\t\\}",
-      "\\}"
-    ]
-  },
-  "onsubm": {
-    "prefix": "onsubm",
-    "description": "onSubmit for <form>",
-    "body": [
-      "const onSubmit = useCallback(",
-      "\t(e: FormEvent<HTMLFormElement>) => {",
-      "\t\te.preventDefault()",
-      "\t\t$0",
-      "\t\\},",
-      "\t[$1],",
-      ")"
-    ]
-  },
-  "troot": {
-    "prefix": "troot",
-    "body": "const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)"
-  },
-  "usecallbac": {
-    "prefix": "usecallbac",
-    "description": "react - useCallback",
-    "body": [
-      "useCallback(($1) => {",
-      "\t$0",
-      "\\}, [$2])"
-    ]
-  },
-  "usestat": {
-    "prefix": "usestat",
-    "body": "const [$1, set$2] = useState<${3:type}>(${4:init value})$0"
-  },
-  "for": {
-    "prefix": "for",
-    "description": "for",
-    "body": [
-      "for (let i = 0; i < $1; i++) {",
-      "\t$0",
-      "\\}"
-    ]
-  },
-  "forof": {
-    "prefix": "forof",
-    "description": "for...of (iterate element(values) of object)",
-    "body": [
-      "for (const ${2:element} of ${1:object}) {",
-      "\t$0console.log($2) // prints values:",
-      "\\}"
-    ]
-  },
-  "forin": {
-    "prefix": "forin",
-    "description": "for...in (iterate property(key) of object)",
-    "body": [
-      "for (const ${2:property} in ${1:object}) {",
-      "\t$0console.log($2)",
-      "\\}"
-    ]
-  },
-  "sleepfn": {
-    "prefix": "sleepfn",
-    "description": "\"settimeout\"",
-    "body": "const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));"
-  },
-  "sleep": {
-    "prefix": "sleep",
-    "description": "\"settimeout\"",
-    "body": "await new Promise((resolve) => setTimeout(resolve, \\${milieseconds\\}));"
-  }
+    "iface": {
+        "prefix": "iface",
+        "description": "Interface Definition",
+        "body": [
+            "interface ${1:name} {",
+            "\t$0",
+            "\\}"
+        ]
+    },
+    "err": {
+        "prefix": "err",
+        "description": "Log error to the console",
+        "body": [
+            "console.error($1);",
+            "$0"
+        ]
+    },
+    "log": {
+        "prefix": "log",
+        "description": "Log to the console",
+        "body": "console.log($1);$0"
+    },
+    "warn": {
+        "prefix": "warn",
+        "description": "Log warning to the console",
+        "body": [
+            "console.warn($1);",
+            "$0"
+        ]
+    },
+    "cf": {
+        "prefix": "cf",
+        "body": [
+            "const ${1:name} = (${2:arguments}) => {",
+            "\treturn $0",
+            "\\}"
+        ]
+    },
+    "newp": {
+        "prefix": "newp",
+        "description": "new Promise<type>()",
+        "body": [
+            "new Promise<${1:type}>((resolve, reject) => {",
+            "\t$0",
+            "\\})"
+        ]
+    },
+    "pro": {
+        "prefix": "pro",
+        "description": "new Promise<type>()",
+        "body": [
+            "new Promise<${1:type}>((resolve, reject) => {",
+            "\t$0",
+            "\\})"
+        ]
+    },
+    "swi": {
+        "prefix": "swi",
+        "description": "switch",
+        "body": [
+            "switch (${1:'expression'}) {",
+            "\t$0",
+            "\tdefault: {",
+            "\t\t${2:'statement'};",
+            "\t\tbreak;",
+            "\t\\}",
+            "\\}"
+        ]
+    },
+    "onsubm": {
+        "prefix": "onsubm",
+        "description": "onSubmit for <form>",
+        "body": [
+            "const onSubmit = useCallback(",
+            "\t(e: FormEvent<HTMLFormElement>) => {",
+            "\t\te.preventDefault()",
+            "\t\t$0",
+            "\t\\},",
+            "\t[$1],",
+            ")"
+        ]
+    },
+    "troot": {
+        "prefix": "troot",
+        "body": "const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)"
+    },
+    "usecallbac": {
+        "prefix": "usecallbac",
+        "description": "react - useCallback",
+        "body": [
+            "useCallback(($1) => {",
+            "\t$0",
+            "\\}, [$2])"
+        ]
+    }
 }
