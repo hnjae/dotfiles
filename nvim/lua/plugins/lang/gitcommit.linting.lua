@@ -9,6 +9,10 @@ return {
   [1] = "nvim-lint",
   optional = true,
   opts = function(_, opts)
+    if vim.fn.executable("commitlint") ~= 1 then
+      return opts
+    end
+
     local config_dir = require("lspconfig.util").root_pattern({
       ".commitlintrc",
       ".commitlintrc.json",
@@ -25,6 +29,7 @@ return {
       "commitlint.config.ts",
       "commitlint.config.cts",
     })()
+
     if config_dir == nil then
       return opts
     end
@@ -35,11 +40,5 @@ return {
 
     return opts
   end,
-  specs = {
-    {
-      [1] = "mason.nvim",
-      optional = true,
-      opts = { ensure_installed = { "commitlint" } },
-    },
-  },
+  specs = {},
 }
