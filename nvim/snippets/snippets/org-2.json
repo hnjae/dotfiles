@@ -1,1 +1,45 @@
-{}
+{
+    "header 1": {
+        "prefix": "h1",
+        "description": "Add header level 1",
+        "body": "* ${0:$TM_SELECTED_TEXT}"
+    },
+    "header 2": {
+        "prefix": "h2",
+        "description": "Add header level 2",
+        "body": "** ${0:$TM_SELECTED_TEXT}"
+    },
+    "header 3": {
+        "prefix": "h3",
+        "description": "Add header level 3",
+        "body": "*** ${0:$TM_SELECTED_TEXT}"
+    },
+    "header 4": {
+        "prefix": "h4",
+        "description": "Add header level 4",
+        "body": "*** ${0:$TM_SELECTED_TEXT}"
+    },
+    "footnote": {
+        "prefix": [
+            "footnote",
+            "fn"
+        ],
+        "description": "footnote",
+        "body": "[fn: ${1:label}] ${0:$TM_SELECTED_TEXT}"
+    },
+    "src block": {
+        "prefix": [
+            "<s",
+            "srcblock",
+            "sc",
+            "codeblock",
+            "cb"
+        ],
+        "description": "#+BEGIN_SRC ... block",
+        "body": [
+            "#+BEGIN_SRC ${1:lang}",
+            "${0:$TM_SELECTED_TEXT}",
+            "#+END_SRC"
+        ]
+    }
+}

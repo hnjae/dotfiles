@@ -2,41 +2,32 @@
     "header 1": {
         "prefix": "h1",
         "description": "Add header level 1",
-        "body": [
-            "# ${0:$TM_SELECTED_TEXT}"
-        ]
+        "body": "# ${0:$TM_SELECTED_TEXT}"
     },
     "header 2": {
         "prefix": "h2",
         "description": "Add header level 2",
-        "body": [
-            "## ${0:$TM_SELECTED_TEXT}"
-        ]
+        "body": "## ${0:$TM_SELECTED_TEXT}"
     },
     "header 3": {
         "prefix": "h3",
-        "description": "Add header level 3"
+        "description": "Add header level 3",
+        "body": "### ${0:$TM_SELECTED_TEXT}"
     },
     "header 4": {
         "prefix": "h4",
         "description": "Add header level 4",
-        "body": [
-            "#### ${0:$TM_SELECTED_TEXT}"
-        ]
+        "body": "#### ${0:$TM_SELECTED_TEXT}"
     },
     "header 5": {
         "prefix": "h5",
         "description": "Add header level 5 (text is smaller than normal text)",
-        "body": [
-            "##### ${0:$TM_SELECTED_TEXT}"
-        ]
+        "body": "##### ${0:$TM_SELECTED_TEXT}"
     },
     "header 6": {
         "prefix": "h6",
         "description": "Add header level 6 (text is smaller than normal text)",
-        "body": [
-            "###### ${0:$TM_SELECTED_TEXT}"
-        ]
+        "body": "###### ${0:$TM_SELECTED_TEXT}"
     },
     "image": {
         "prefix": [
@@ -76,18 +67,11 @@
         "description": "inline code (`c`)",
         "body": "`${1:$TM_SELECTED_TEXT}` $0"
     },
-    "strikethrough": {
-        "prefix": [
-            "strikethrough",
-            "s"
-        ],
-        "description": "inline strikethrough (`s`)",
-        "body": "~~${1:$TM_SELECTED_TEXT}~~ ${0}"
-    },
-    "bold text": {
+    "bold (emphasis)": {
         "prefix": [
             "bold",
-            "b"
+            "b",
+            "e"
         ],
         "description": "inline bold text (`b`)",
         "body": "**${1:$TM_SELECTED_TEXT}** $0"
@@ -108,16 +92,84 @@
         "description": "inline bold and italic text (`bi`)",
         "body": "***${1:$TM_SELECTED_TEXT}*** $0"
     },
+    "reference": {
+        "prefix": [
+            "reference",
+            "ref"
+        ],
+        "description": "insert reference",
+        "body": "[${1:label}]: ${0:${TM_SELECTED_TEXT:link}}"
+    },
     "codeblock": {
         "prefix": [
             "codeblock",
-            "cb"
+            "cb",
+            "sb"
         ],
         "description": "fenced code block (`cb`)",
         "body": [
             "```${1:lang}",
-            "${0:${TM_SELECTED_TEXT:foo} ",
+            "${0:${TM_SELECTED_TEXT:foo}}",
             "```"
         ]
+    },
+    "superscript": {
+        "prefix": "sup",
+        "description": "Create a superscript.",
+        "body": "<sup>${0:$TM_SELECTED_TEXT}</sup>"
+    },
+    "superscript (commonmark_x)": {
+        "prefix": "supx",
+        "description": "Create a superscript. (not supported in gfm)",
+        "body": "^${0:$TM_SELECTED_TEXT}^"
+    },
+    "subscript": {
+        "prefix": "sub",
+        "description": "Create a subscript.",
+        "body": "<sub>${0:$TM_SELECTED_TEXT}</sub>"
+    },
+    "subscript (commonmark_x)": {
+        "prefix": "subx",
+        "description": "Create a subscript. (not supported in gfm)",
+        "body": "~${0:$TM_SELECTED_TEXT}~"
+    },
+    "strikethrough (delete)": {
+        "prefix": [
+            "strikethroughhtml",
+            "shtml",
+            "delhtml",
+        ],
+        "description": "Create a `<del>`",
+        "body": "<del>${0:$TM_SELECTED_TEXT}</del>"
+    },
+    "strikethrough (delete) (gfm; commonmark_x)": {
+        "prefix": [
+            "strikethrough",
+            "s",
+            "del",
+        ],
+        "description": "Create a `<del>`",
+        "body": "~~${0:$TM_SELECTED_TEXT}~~"
+    },
+    "Insert task list (gfm)": {
+        "prefix": "task",
+        "description": "Insert task list",
+        "body": "- [${1| ,x|}] ${0:${TM_SELECTED_TEXT}}"
+    },
+    "Inline math expression (gfm)": {
+        "prefix": [
+            "$",
+            "mathi"
+        ],
+        "description": "inline math Expression",
+        "body": "\\$${0:$TM_SELECTED_TEXT}\\$"
+    },
+    "Math Expression as block (gfm)": {
+        "prefix": [
+            "$$",
+            "math"
+        ],
+        "description": "Math Expression",
+        "body": "\\$\\$${0:$TM_SELECTED_TEXT}\\$\\$"
     }
 }
