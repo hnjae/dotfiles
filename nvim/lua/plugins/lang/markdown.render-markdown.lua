@@ -45,12 +45,13 @@ return {
       position = "right",
       border = "thick", -- ``` 부분도 색칠
       style = "full",
+      highlight_inline = "markdownCode",
     },
     win_options = {
       conceallevel = {
         -- default = vim.o.conceallevel,
         default = 0,
-        rendered = 2, -- 2: concleal line
+        rendered = 0, -- 2: concleal space, empty line
       },
     },
   },

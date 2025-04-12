@@ -40,15 +40,15 @@ return {
     -- NOTE: `gb` 맵핑만 사용.
     {
       [1] = "gb",
+      mode = "n",
       [2] = "<Plug>(comment_toggle_blockwise)",
       desc = "comment-toggle-blockwise",
-      mode = "n",
     },
     {
       [1] = "gb",
+      mode = "x",
       [2] = "<Plug>(comment_toggle_blockwise_visual)",
       desc = "comment-toggle-blockwise (visual)",
-      mode = "x",
     },
     {
       [1] = "gbc",

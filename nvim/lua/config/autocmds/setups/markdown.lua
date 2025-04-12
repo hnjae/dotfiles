@@ -24,13 +24,13 @@ local new_template = function()
   filename = filename:sub(1, ext_start - 2)
 
   local dateiso = vim.fn.strftime("%Y-%m-%dT%H:%M:%S%z")
+  -- "isCJKLanguage : true",
+  -- "draft         : true",
+  -- "title         : " .. filename,
   local template = {
     "---",
-    "title         : " .. filename,
-    "date          : " .. dateiso,
-    "lastmod       : " .. dateiso,
-    "isCJKLanguage : true",
-    "draft         : true",
+    "date: " .. dateiso,
+    "lastmod: " .. dateiso,
     "---",
     "",
     "## " .. "h2",
