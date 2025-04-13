@@ -25,9 +25,10 @@ return {
 
       if cwd ~= nil then
         opts.linters = opts.linters or {}
-        opts.linters["markdownlint-cli2"] = vim.tbl_deep_extend("keep", opts.linters["markdownlint-cli2"] or {}, {
-          cwd = root_pattern(cwd),
-        })
+        opts.linters["markdownlint-cli2"] =
+          vim.tbl_deep_extend("keep", opts.linters["markdownlint-cli2"] or {}, {
+            cwd = root_pattern(cwd),
+          })
       end
     end,
     specs = {

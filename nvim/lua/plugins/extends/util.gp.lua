@@ -126,7 +126,11 @@ Chats are saved automatically.
         },
         copilot = {
           disable = false,
-          secret = { "bash", "-c", "cat ~/.config/github-copilot/apps.json | sed -e 's/.*oauth_token...//;s/\".*//'" },
+          secret = {
+            "bash",
+            "-c",
+            "cat ~/.config/github-copilot/apps.json | sed -e 's/.*oauth_token...//;s/\".*//'",
+          },
         },
         anthropic = {
           disable = false,
@@ -260,7 +264,8 @@ Specific Focus Areas:
 ```
 ]]
           local agent = gp.get_command_agent()
-          agent.system_prompt = [[Act as a multilingual grammar specialist with the following responsibilities:
+          agent.system_prompt =
+            [[Act as a multilingual grammar specialist with the following responsibilities:
 
 Primary Tasks:
 - Analyze provided text for grammatical errors, syntax issues

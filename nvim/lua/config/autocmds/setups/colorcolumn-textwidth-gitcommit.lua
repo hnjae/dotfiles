@@ -19,11 +19,7 @@ M.setup = function()
     callback = function()
       local textwidth = vim.opt_local.textwidth:get()
 
-      if
-        not textwidth
-        or textwidth < 1
-        or (textwidth + 1) > MAX_COLORCOLUMN
-      then
+      if not textwidth or textwidth < 1 or (textwidth + 1) > MAX_COLORCOLUMN then
         if vim.opt_local.colorcolumn ~= "" then
           vim.opt_local.colorcolumn = ""
         end

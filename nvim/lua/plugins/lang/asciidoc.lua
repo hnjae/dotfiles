@@ -46,7 +46,10 @@ return {
           vim.defer_fn(function()
             local has_ts_attached = pcall(vim.treesitter.get_parser, args.buf, "asciidoc")
             if not has_ts_attached then
-              vim.notify("Treesitter parser didn't seem to attach for asciidoc even after delay.", vim.log.levels.WARN)
+              vim.notify(
+                "Treesitter parser didn't seem to attach for asciidoc even after delay.",
+                vim.log.levels.WARN
+              )
             end
 
             -- NOTE: syntax/asciidoc.vim 에 직접 작정한 syntax 파일이 있다.

@@ -28,7 +28,8 @@ return {
       mappings = false,
     }
 
-    local is_ts_context, ts_context = pcall(require, "ts_context_commentstring.integrations.comment_nvim")
+    local is_ts_context, ts_context =
+      pcall(require, "ts_context_commentstring.integrations.comment_nvim")
 
     if is_ts_context then
       res.pre_hook = ts_context.create_pre_hook()

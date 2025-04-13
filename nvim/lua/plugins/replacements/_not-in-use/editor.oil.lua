@@ -16,7 +16,8 @@ return {
   },
   keys = function()
     local oil = require("oil")
-    local find_project_root = require("lspconfig").util.root_pattern(unpack(require("globals").root_patterns))
+    local find_project_root =
+      require("lspconfig").util.root_pattern(unpack(require("globals").root_patterns))
 
     return {
       {

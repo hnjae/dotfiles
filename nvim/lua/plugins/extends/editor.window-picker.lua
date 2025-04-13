@@ -11,7 +11,11 @@ local filter_single_win = function(window_id, filters)
   end
 
   -- Check filetype against filter
-  if filters.bo and filters.bo.filetype and vim.tbl_contains(filters.bo.filetype, win_bo.filetype) then
+  if
+    filters.bo
+    and filters.bo.filetype
+    and vim.tbl_contains(filters.bo.filetype, win_bo.filetype)
+  then
     return false
   end
 

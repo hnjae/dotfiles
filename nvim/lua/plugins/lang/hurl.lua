@@ -68,10 +68,16 @@ return {
 
         opts.icons = opts.icons or {}
         opts.icons.rules = opts.icons.rules or {}
-        table.insert(opts.icons, { plugin = "hurl.nvim", icon = wk_icon.icon, color = wk_icon.color })
+        table.insert(
+          opts.icons,
+          { plugin = "hurl.nvim", icon = wk_icon.icon, color = wk_icon.color }
+        )
 
         opts.spec = opts.spec or {}
-        table.insert(opts.spec, { [1] = prefix, mode = { "n", "v" }, group = "hurl", icon = wk_icon })
+        table.insert(
+          opts.spec,
+          { [1] = prefix, mode = { "n", "v" }, group = "hurl", icon = wk_icon }
+        )
       end,
     },
   },

@@ -8,7 +8,9 @@ return {
     opts.sources = vim.tbl_filter(function(source)
       return not (
         (source.method == "NULL_LS_FORMATTING")
-        or (type(source.method) == "table" and vim.list_contains(source.method, "NULL_LS_FORMATTING"))
+        or (
+          type(source.method) == "table" and vim.list_contains(source.method, "NULL_LS_FORMATTING")
+        )
       )
     end, opts.sources or {})
 

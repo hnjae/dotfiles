@@ -54,7 +54,10 @@ return {
             return {
               -- cmd = { "go", "run", file }
               [1] = "shell",
-              cmd = string.format("nix eval --impure --expr '(import \"%s\" {})' | alejandra --quiet", filepath),
+              cmd = string.format(
+                "nix eval --impure --expr '(import \"%s\" {})' | alejandra --quiet",
+                filepath
+              ),
               components = {
                 "default",
                 "unique",
