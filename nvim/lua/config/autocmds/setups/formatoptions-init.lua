@@ -13,7 +13,7 @@ M.setup = function()
 
   vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile", "BufNew" }, {
     pattern = { "*" },
-    callback = function()
+    callback = function(event)
       vim.opt_local.formatoptions:remove("r")
       vim.opt_local.formatoptions:remove("o")
       vim.opt_local.formatoptions:remove("t")

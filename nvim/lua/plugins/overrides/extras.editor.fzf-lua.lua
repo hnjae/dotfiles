@@ -1,9 +1,12 @@
+if vim.g.lazyvim_picker and vim.g.lazyvim_picker ~= "fzf" then
+  return {}
+end
+
 ---@type LazySpec
 return {
   [1] = "fzf-lua",
   optional = true,
   keys = function(_, keys)
-    -- copied from FzfLua' M.grep.grep_project (2025-04-07)
     local default_grep_opts = {
       search = "",
       fzf_opts = {

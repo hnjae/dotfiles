@@ -34,8 +34,10 @@ return {
       overrides = {
         -- NormalFloat = vim.opt.background:get() == "light" and { bg = "#f2e5bc" }, -- light0_soft
         -- NormalNc = vim.opt.background:get() == "light" and { bg = "#f2e5bc" } or { link = "Normal" }, -- light0_soft
-        NormalFloat = { bg = "#f2e5bc" }, -- light0_soft
-        NormalNc = { bg = "#f2e5bc" },
+
+        NormalFloat = { link = "Normal" },
+        -- NormalFloat = { bg = "#f2e5bc" }, -- light0_soft
+        -- NormalNc = { bg = "#f2e5bc" },
 
         -- Managed by todo-comments.nvim:
         ["@comment.todo"] = { link = "@comment" },

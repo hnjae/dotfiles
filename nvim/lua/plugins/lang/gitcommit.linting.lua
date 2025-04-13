@@ -13,7 +13,7 @@ return {
       return opts
     end
 
-    local config_dir = require("lspconfig.util").root_pattern({
+    local config_dir = require("lspconfig").util.root_pattern({
       ".commitlintrc",
       ".commitlintrc.json",
       ".commitlintrc.yaml",
@@ -28,7 +28,7 @@ return {
       "commitlint.config.mjs",
       "commitlint.config.ts",
       "commitlint.config.cts",
-    })()
+    })(vim.uv.cwd())
 
     if config_dir == nil then
       return opts

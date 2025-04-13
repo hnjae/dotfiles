@@ -41,7 +41,8 @@ return {
         return opts
       end
 
-      local config_dir = require("lspconfig.util").root_pattern({ ".vale.ini" })()
+      local config_dir = require("lspconfig").util.root_pattern(".vale.ini")(vim.uv.cwd())
+
       if config_dir == nil then
         local global_config = vim.fn.expand("$XDG_CONFIG_HOME/vale/vale.ini")
 

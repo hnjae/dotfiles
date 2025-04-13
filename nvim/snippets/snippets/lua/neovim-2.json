@@ -1,4 +1,9 @@
 {
+    "cwd": {
+        "prefix": "cwd",
+        "description": "vim 이 실행된 cwd",
+        "body": "vim.uv.cwd()"
+    },
     "vim.notify - warning": {
         "prefix": "warn",
         "body": "vim.notify(${0:${TM_SELECTED_TEXT:msg}}, vim.log.levels.WARN)"

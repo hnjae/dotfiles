@@ -10,6 +10,10 @@ local spec = {
       ["copilot"] = true,
     }
 
+    local rename_sources = {
+      typos_lsp = "typos",
+    }
+
     local lsp_icon = (require("globals").icons.codicons.gear .. " ")
 
     local lsp_name_fmt = function(name)
