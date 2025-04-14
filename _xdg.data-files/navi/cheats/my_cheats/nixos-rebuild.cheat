@@ -1,0 +1,13 @@
+% nixos-rebuild
+
+# switch
+nixos-rebuild switch
+
+# build
+nixos-rebuild build --flake ".#example"
+
+# boot
+nixos-rebuild boot
+
+# remote-build
+nixos-rebuild switch --flake ".#<example>" --target-host <host> --use-remote-sudo

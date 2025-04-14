@@ -1,0 +1,7 @@
+% hdparm
+
+#  spindown
+hdparm -y "/device/<device>"
+
+# idle
+hdparm -S <0..255> "/device/<device>"

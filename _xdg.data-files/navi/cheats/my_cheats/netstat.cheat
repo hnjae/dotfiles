@@ -1,0 +1,6 @@
+% network, netstat
+
+; NOTE: netstat is deprecated use ss instead
+
+# list open port
+netstat -nlp

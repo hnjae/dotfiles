@@ -1,0 +1,7 @@
+% date
+
+# print utc datetime
+date --utc +%Y-%m-%dT%H:%M:%S%Z
+
+# print utc datetime in short-form
+date --utc +%Y%m%dT%H%M%S%Z

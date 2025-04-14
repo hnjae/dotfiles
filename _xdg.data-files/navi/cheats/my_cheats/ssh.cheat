@@ -1,0 +1,10 @@
+% ssh
+
+# run command
+ssh <dst> <command>
+
+# ssh tunnel
+ssh -L <[LOCAL_IP:]LOCAL_PORT>:<DESTINATION:DESTINATION_PORT> <dst>
+
+# ssh tunnel remote device's localhost port to localhost
+ssh -L <port-local>:localhost:<port-remote> <dst>

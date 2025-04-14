@@ -1,0 +1,8 @@
+% scrcpy, android
+
+# basic (av1은 기종에 따라 지원 여부 갈림)
+scrcpy --video-codec=h265 --render-driver=opengles2 --max-fps=60 --no-audio --keyboard uhid --always-on-top --stay-awake
+; --keyboard sdk: 시스템의 ime (fcitx) 를 걸쳐서 전달.
+
+# use system keyboard's and mouse as input (no display copy)
+scrcpy --otg

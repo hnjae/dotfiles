@@ -1,0 +1,4 @@
+% 7z, archive
+
+# create 7z archive
+7z -mx=<level> -m0=7zma2 -ms=off -mhc=off -stl -ssc -t7z a <output>.7z -- <files>

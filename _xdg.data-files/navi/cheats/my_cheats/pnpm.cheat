@@ -1,0 +1,46 @@
+% pnpm
+
+# create `pnpm-lock.yaml` from another package manager's lockfile
+pnpm import <lockfile>
+
+# npm ci
+pnpm install --frozen-lockfile
+
+# npm install
+pnpm install
+
+# npm i <pkg>
+pnpm add [-D] <pkg>
+
+# pnpm remove from `package.json` and `node_modules`
+pnpm remove [-D] <pkg>
+
+# pnpm prune
+pnpm prune
+
+# Run script from package.json `npm run <cmd>`
+pnpm run <cmd>
+
+# Run binaries from `node_modules/bin`
+pnpm exec <binary-name>
+
+# npm init
+pnpm init
+
+# npx @eslint/config https://pnpm.io/cli/dlx
+pnpm dlx <@eslint/create-config>
+
+# Create a project from a create-* or @foo/create-* starter kit. https://pnpm.io/cli/create
+pnpm create <react-app> <project-name>
+
+# pnpm-workspace install
+pnpm -w i
+
+# install eslint related packages
+pnpm add -w -D eslint eslint-config-prettier eslint-plugin-react typescript-eslint
+
+# install prettier related packages
+pnpm add -w -D prettier
+
+# run specific packages' package in workspace
+pnpm -F <package-name> exec <name>

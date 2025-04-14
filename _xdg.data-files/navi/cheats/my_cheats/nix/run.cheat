@@ -1,0 +1,14 @@
+% nix, run, flake
+
+; https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-run
+
+# run apps.<system>.default from flake
+nix run
+
+# run flake's app
+nix run .#<app>
+
+# run package from nixpkgs
+nix run nixpkgs#vim
+
+$ app: nix flake show --json 2>/dev/null | jq '[.apps | to_entries[] | .value | to_entries[] | .key] | unique[]' | sed 's/"//g'

@@ -1,0 +1,5 @@
+% nix
+
+; https://github.com/NixOS/nixpkgs/issues/97855
+# check options
+nixos-option -I nixos-config=$PWD/configuration.nix networking.hosts

@@ -1,0 +1,4 @@
+% trash-cli, trash, trash-empty, xdg
+
+# empty
+trash-empty --trash-dir <mountpoint>

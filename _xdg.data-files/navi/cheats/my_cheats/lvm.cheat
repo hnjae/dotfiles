@@ -1,0 +1,25 @@
+% lvm, pvcreate, vgcreate, lvcreate, vgchange, pvs, vgs, lvs
+
+# create
+sudo pvcreate -v <block-device>
+
+# print pv info
+sudo pvs
+
+# vg create
+vgcreate <vg_name> <blockdevice>
+
+# close vg
+vgchange -an <vg-name>
+
+# print vgs
+sudo vgs
+
+# print lvs
+sudo lvs
+
+# lv create with size
+sudo lvcreate -L "${SWAP_LV_SIZE}" -n "${SWAP_LV_NAME}" "${VG_NAME}"
+
+# lv create free
+sudo lvcreate -l "100%FREE" -n "${LV_NAME}" "${VG_NAME}"

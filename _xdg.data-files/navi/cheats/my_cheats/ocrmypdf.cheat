@@ -1,0 +1,4 @@
+% ocrmypdf
+
+# loosy
+ocrmypdf -l "eng+kor" --output-type "pdfa-3" -O 2 --jbig2-lossy in.pdf out.pdf

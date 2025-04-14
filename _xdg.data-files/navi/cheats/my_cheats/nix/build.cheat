@@ -1,0 +1,19 @@
+% nix, build, flake
+
+# build flake's default output - packages.${system}.default
+nix build
+
+# build without link
+nix build --no-link
+
+# build flake's output
+nix build ".#<package>"
+
+# build pkgs's package
+nix build nixpkgs#<package>
+
+# print out paths of packages
+nix build nixpkgs#<package> --print-out-paths
+
+
+$ package: nix flake show --json 2>/dev/null | jq '.packages | to_entries[] | .value | to_entries[] | select(.value.name != null) | .key' | sed 's/"//g'

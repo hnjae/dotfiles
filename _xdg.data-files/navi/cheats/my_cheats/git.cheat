@@ -1,0 +1,152 @@
+% git
+
+; function of git checkout is split to switch and restore
+
+$ branch: git branch | awk '{print $NF}'
+
+; git-checkout 의 기능이 switch 랑 restore 로 분할됨 <from git 2.23.0>
+; https://stackoverflow.com/questions/57265785/whats-the-difference-between-git-switch-and-git-checkout-branch
+
+;############################################################################
+; 파일 관련
+
+# git add file
+git add <path>
+
+# git add part of file interactively
+git add --patch <path>
+
+# git rm only in stage area (not in working directory)
+git rm --staged <file>
+
+# git diff staged
+git diff --staged
+
+# git diff specific file
+git diff HEAD <file>
+
+# 특정 브랜치/commit의 모든 내용을 현재 working directory, stage 에 덮어쓰기
+git reset --hard <commit>
+
+# show specific commit's specific file
+git show <commit>:<path>
+
+# git restore specific file from other commit (-s: --source)
+git restore -s <commit> -- <file>
+
+;############################################################################
+; creating commits; merge
+;############################################################################
+
+# remove specific commit
+git revert <commit>
+
+# merge commit
+git merge <commit>
+
+# merge unrelated commits
+git merge <commit> --allow-unrelated-histories
+
+# cancel merge
+git merge --abort
+
+# merge with strategy
+git merge -X <theirs|ours> <commit>
+
+;############################################################################
+; manipulating branch
+;############################################################################
+
+# switch branch
+git switch <branch>
+
+# switch to orphan branch (branch with no commit)
+git switch --orphan <branch-name>
+
+# switch to specific commit (== `git checkout <commit>`)
+git switch -d <commit>
+
+# switch to specific tag (== `git checkout <commit>`)
+git switch -d 'tag/<tag>'
+
+
+# make other branch to point commit (use `-f` to force) (or use `git reset --hard` on that branch)
+git branch <branch> <commit>
+
+# delete branch
+git branch -d <branch>
+
+# move/rename branch
+git branch -m <new-name>
+
+# make current branch to point specific commit
+git reset [--hard] <commit>
+
+;#############################################################################
+; rebase; cherry-pick
+;############################################################################
+# NOTE: don't forget to set export NO_VERIFY=1 while rebase
+
+# cherry-pick other commit's changes to `HEAD`
+git cherry-pick <commit> [--ff]
+
+# cherry-pick other commit's chagnes to `HEAD` but DO NOT commit (like restore all files in that commit)
+git cherry-pick -n <commit>
+
+# git rebase
+git rebase --interactive <commit>
+
+# git-rebase abort/cancle
+git rebase --abort
+
+# git-rebase contiune
+git rebase --continue
+
+;#############################################################################
+; log; reflog
+# pretty prints `.git/logs/HEAD`
+git reflog
+
+;#############################################################################
+; manipulating with remote repository
+; git-remote; git-clone; git-push; git-fetch
+;#############################################################################
+
+; git-remote 는 대충 git-fetch + git-merge
+
+# git fetch
+git fetch
+
+# remote add
+git remote add origin git@github.com:<owner>/<repository>.git
+
+# list remote
+git remote -v
+
+# delete (remove) remote
+git remote remove <origin>
+
+# change remote
+git remote set-url <origin> git@github.com:<owner>/<repository>.git
+
+# disable push on some remotes
+git remote set-url --push <origin> <DISABLE>
+
+# delete remote branch
+git push <origin> -d <branch>
+
+# disable push on some remotes
+git remote set-url --push <origin> <DISABLE (comment?)>
+
+# git clone latest
+git clone --recurse-submodules --depth 1 <repository>
+
+# git ssh clone
+git clone --recurse-submodules "git@<githubdotcom>:<owner>/<repo>"
+
+;#############################################################################
+; misc
+;#############################################################################
+; run `zstd -b3 -e19 <target-file>` to benchmark zstd
+# git-archive
+git archive --format=tar HEAD | zstd -12 -T0 -o HEAD.tar.zst

@@ -1,0 +1,15 @@
+% zfs, zpool-scrub
+
+$ pool: zpool list -H -o name
+
+# Start scrub
+sudo zpool scrub <pool>
+
+# Stop scrub
+sudo zpool scrub -s <pool>
+
+# Pause scrub
+sudo zpool scrub -p <pool>
+
+# Show scrubbing status
+sudo zpool status -v <pool>

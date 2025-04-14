@@ -1,0 +1,7 @@
+% dconf, gsetttings
+
+# dump
+dconf dump /
+
+# reset
+dconf reset <object>

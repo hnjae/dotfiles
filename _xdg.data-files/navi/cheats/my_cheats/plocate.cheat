@@ -1,0 +1,4 @@
+% plocate
+
+% db
+plocate -d /var/cache/<databse>

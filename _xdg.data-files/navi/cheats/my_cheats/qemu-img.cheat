@@ -1,0 +1,7 @@
+% qemu-img, qemu
+
+# create image
+qemu-img create -f qcow2 -o cluster_size=16K -o compression_type=zstd <name>.qcow2 <20G>
+
+# change cluster-size to 16K (qcow2 image)
+qemu-img convert -f qcow2 -O qcow2 -o preallocation=metadata -o cluster_size=16K -o compression_type=zstd <input-qcow2> <output-qcow2>

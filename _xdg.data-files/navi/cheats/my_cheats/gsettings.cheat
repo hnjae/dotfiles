@@ -1,0 +1,10 @@
+% gnome, gsettings
+
+# enable VRR (Gnome >= 46)
+gsettings set org.gnome.mutter experimental-features "['variable-refresh-rate']"
+
+# enable fractional scaling
+gsettings set org.gnome.mutter experimental-features "['scale-monitor-framebuffer']"
+
+# enable xwayland native scaling
+gsettings set org.gnome.mutter experimental-features "['xwayland-native-scaling']"

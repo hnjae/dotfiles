@@ -1,0 +1,4 @@
+% nix, develop, flake
+
+# run devShells.${system}.default
+nix develop

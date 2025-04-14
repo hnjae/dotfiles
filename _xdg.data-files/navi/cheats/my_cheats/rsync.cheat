@@ -1,0 +1,8 @@
+% rsync
+
+; -s: --secluded-args avoids letteing the remote shell modify filenames
+# 정확히 동일하게 복사 붙여넣기
+rsync -aHAXWEhs --numeric-ids --checksum --info=progress2 -- <src> <dst>
+
+# MTP, Windows Filesystem
+rsync -hrtW --safe-links --omit-dir-times --no-perms --inplace --info=progress2 -- <src> <dst>

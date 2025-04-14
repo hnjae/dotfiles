@@ -1,0 +1,4 @@
+% fzf
+
+# mutli select
+fzf -m

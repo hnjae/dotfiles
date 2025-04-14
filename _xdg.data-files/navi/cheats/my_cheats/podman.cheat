@@ -1,0 +1,24 @@
+% podman, docker, container
+
+#
+podman run -it "<image-name>" --mount=
+
+# podman device mount example
+sudo podman run --mount=type=bind,source=./centos-7_x86_64,destination=/mnt --device=/dev/<>:/dev/xvda:rwm -it "centos:7"
+
+# run bash in container (-it: interactive tty)
+podman exec -it <container-id> /bin/bash
+
+# podman pod list (ls)
+podman pod ls
+
+# podman pod create
+podman pod create --replace --ip <string> --label <string>
+
+# podman pod ps
+podman ps -a
+
+# get ip of container
+podman inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <container-id>
+
+$ container-id: podman ps --- --headers 1 --column 1

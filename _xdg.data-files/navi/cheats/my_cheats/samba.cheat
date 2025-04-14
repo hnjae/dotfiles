@@ -1,0 +1,19 @@
+% samba, pdbedit, smpasswd
+
+# list users
+sudo pdbedit -L -v
+
+# backup passdb
+sudo pdbedit -e smbpasswd:<path>
+
+# import passdb
+sudo pdbedit -i smbpasswd:<path>
+
+# Create user
+sudo pdbedit -a -u <username>
+
+# Create user without interacting tty
+(echo <password>; echo <password>) | sudo pdbedit -a -u <username> -t
+
+# Create user without interacting tty #2
+sudo pdbedit -a -u <username> -t < <password-file> < <password-file>

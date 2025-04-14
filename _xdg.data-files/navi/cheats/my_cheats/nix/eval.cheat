@@ -1,0 +1,10 @@
+% nix, eval, flake
+
+# locate specific packages path
+nix eval --raw nixpkgs-stable#<package-name>
+
+# cd to specific packages path
+nix copy --from 'https://cache.nixos.org' "$(nix eval --impure --raw 'nixpkgs#<package-name>')" && cd -- "$(nix eval --impure --raw 'nixpkgs#<package-name>')" || echo 'download failed'
+
+# apply
+nix eval --no-warn-dirty --json ".#homeConfigurations" --apply builtins.attrNames

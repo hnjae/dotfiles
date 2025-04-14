@@ -1,0 +1,4 @@
+% nix, shell, flake
+
+# Use package in your shell
+nix shell nixpkgs#<package-name>

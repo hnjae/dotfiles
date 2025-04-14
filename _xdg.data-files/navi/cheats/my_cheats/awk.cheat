@@ -1,0 +1,7 @@
+% awk
+
+# print `index` field (1-based)
+awk '{print $<index>}'
+
+# print last field
+awk '{print $NF}'

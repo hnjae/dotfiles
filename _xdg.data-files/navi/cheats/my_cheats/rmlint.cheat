@@ -1,0 +1,25 @@
+% rmlint
+
+# keep deepest
+rmlint --rank-by=D
+
+# keep oldest & deepest
+rmlint --rank-by=mD
+
+# keep oldest
+rmlint --rank-by=m
+
+# skip empty file
+rmlint -T "df"
+
+# skip empty file
+rmlint -T "df" --rank-by=m
+
+# directory (--merge-directories)
+rmlint -D
+
+# only png in last 24 hour something
+find ~ -iname '*.png' ! -mtime 0 | rmlint -
+
+# keep "ref" and remove from "dst"
+rmlint <dst> // <ref> --keep-all-tagged --must-match-tagged

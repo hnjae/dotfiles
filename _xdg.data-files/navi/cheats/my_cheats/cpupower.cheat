@@ -1,0 +1,4 @@
+% cpu, cpupower
+
+# show cpu frequency, governors info
+sudo cpupower frequency-info

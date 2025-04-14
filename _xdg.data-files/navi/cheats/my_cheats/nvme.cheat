@@ -1,0 +1,7 @@
+% NVMe, ssd
+
+# print NVMe's LBA Format
+nvme id-ns -H /dev/<path-to-nvme>
+
+# Change LBA Format
+nvme format --lbaf=<number> /dev/<path-to-nvme>

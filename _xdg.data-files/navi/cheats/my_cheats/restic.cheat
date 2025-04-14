@@ -1,0 +1,42 @@
+% restic
+
+# init repo
+restic --repo <path> --insecure-no-password init
+
+# init REST server repo
+restic -r rest:http://host:8000/ --insecure-no-password init
+
+# help
+restic help <command>
+
+# backup
+restic --repo <path> --insecure-no-password backup --pack-size 128 <path>
+
+# list snapshots
+restic --repo <path> --insecure-no-password snapshots
+
+# check
+restic --repo <path> --insecure-no-password check
+
+# mount
+restic --repo <path> --insecure-no-password mount
+
+# prune
+restic --repo <path> --insecure-no-password prune
+
+# check --read-data (check data integrity)
+restic --repo <path> --insecure-no-password check read-data
+
+# resolve pack errors (dont use forget flag)
+restic --repo <path> --insecure-no-password repair packs <pack-id>
+restic --repo <path> --insecure-no-password repiar snapshots [--forget]
+
+# reslove when data packs are missing (dont use forget flag)
+restic --repo <path> --insecure-no-password repair index
+restic --repo <path> --insecure-no-password repiar snapshots [--forget]
+
+# find
+restic find <file>
+
+# diff
+restic diff <snapshot-id> <snapshot-id>

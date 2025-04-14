@@ -1,0 +1,4 @@
+% nix, profile
+
+# list profile
+nix profile list

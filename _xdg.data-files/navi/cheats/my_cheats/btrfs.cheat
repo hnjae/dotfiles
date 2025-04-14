@@ -1,0 +1,49 @@
+% btrfs
+
+# show filesystem information
+btrfs filesystem show <mountpoint>
+
+# btrfs du --summarize
+btrfs filesystem du -s <mountpoint>
+
+# btrfs df
+btrfs filesystem df <mountpoint>
+
+# get error numbers
+btrfs device stats <mountpoint>
+
+# usage (filesystem)
+btrfs filesystem usage <mountpoint>
+
+# usage (device)
+btrfs device usage <mountpoint>
+
+# get block-group-tree info
+cat /sys/fs/btrfs/<uuid>/features/block_group_tree
+
+# get csum_type and nodesize, sectorsize
+btrfs inspect-internal dump-super <blockdevice>
+
+# enable quota
+btrfs quota --simple enable <path>
+
+# disable quota
+btrfs quota disable <path>
+
+# btrfs qgroup lmit
+btrfs qgroup limit <size> <path>
+
+# btrfs show quota limit
+btrfs qgroup show -pcre <path>
+
+# defrag
+btrfs -v fi defragment -czstd -t size <file>|<dir>
+
+# btrfs balance
+btrfs balance start -dusage=50 <path-to-mountpoints>
+
+# change label
+btrfs filesystem label <block-device-or-mountpoints> <new-label>
+
+# set nocow (RAID 볼륨에는 사용하지 말 것.)
+chattr +C -R <dir>

@@ -1,0 +1,5 @@
+% shell, bash, zsh, dash
+; shell built-in commands
+
+# fix previous command
+fc

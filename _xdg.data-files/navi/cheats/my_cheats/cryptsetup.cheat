@@ -1,0 +1,66 @@
+% cryptsetup, luks
+
+; NOTE: --use-urandom 같은 건 embedded 시스템과 같은 low-entropy 상황에서는 문제가 될수 있다고 한다.
+
+# open
+cryptsetup luksOpen --key-file "<keyfile>" "/dev/<device>" "<name>"
+
+# close
+cryptsetup close <name>
+
+# create using key-file (using aes-128)
+sudo cryptsetup \
+	--type luks2 \
+	--cipher "aes-xts-plain64" \
+	--hash sha256 \
+	--key-size "256" \
+	--sector-size "4096" \
+	--label "LUKS2_<label>" \
+	--use-urandom \
+	--key-file="$KEY_FILE" \
+	luksFormat \
+	"/dev/<path-to-block-device>"
+
+# create using passpharase (using aes-128)
+sudo cryptsetup \
+	--type luks2 \
+	--cipher "aes-xts-plain64" \
+	--hash sha256 \
+	--key-size "256" \
+	--sector-size "4096" \
+	--label "LUKS2_<label>" \
+	--use-urandom \
+	--verify-passphrase \
+	luksFormat \
+	"/dev/<path-to-block-device>"
+
+# create using opal
+sudo cryptsetup \
+	--type luks2 \
+	--hw-opal-only \
+	luksFormat \
+	"/dev/<path-to-block-device>"
+
+# for nvme. (for opened device)
+cryptsetup --allow-discards --persistent --perf-no_read_workqueue --perf-no_write_workqueue refresh <name>
+
+# luks header backup
+cryptsetup luksHeaderBackup /dev/<device> --header-backup-file "<header-name>.img"
+
+# add key
+cryptsetup luksAddKey /dev/<device> <keyfile>
+
+# view keyslot
+cryptsetup luksDump /dev/<device>
+
+# check keyslot (열려 있는 device 에도 쓸수 있음)
+cryptsetup -v luksOpen --test-passphrase /dev/<device>
+
+# check keyslot (열려 있는 device 에도 쓸수 있음)
+cryptsetup -v luksOpen --test-passphrase --key-file "<keyfile>" /dev/<device>
+
+# remove key
+cryptsetup -v luksRemoveKey /dev/<device> <optional-key-file>
+
+# change key
+cryptsetup -v luksChangeKey --key-file "<keyfile>"  "/dev/<device>" "<optional-key-file>"

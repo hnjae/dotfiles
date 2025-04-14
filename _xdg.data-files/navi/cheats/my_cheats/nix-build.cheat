@@ -1,0 +1,10 @@
+% nix
+
+# build default.nix
+nix-build
+
+# build default.nix using host machine (not using remote builds)
+nix-build --builders ""
+
+# build pkgs from nixpkgs
+nix-build "<nixpkgs>" -A hello

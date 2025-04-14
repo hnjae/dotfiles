@@ -1,0 +1,7 @@
+% ln, symbolic-link
+
+# create a symbolic link (<dst> points <src>)
+ln -s <src> <dst>
+
+# create a hard link
+ln <src> <dst>

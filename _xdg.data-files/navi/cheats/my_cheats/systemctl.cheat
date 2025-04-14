@@ -1,0 +1,28 @@
+% systemctl, systemd
+
+# list units failed
+systemctl <opt_user> list-units --failed
+
+# list dependencies
+systemctl <opt_user> list-dependencies
+
+# list dependencies --all
+systemctl <opt_user> list-dependencies
+
+# list targes
+systemctl list-units --type target
+
+# status
+systemctl <opt_user> status
+
+# queued jobs
+systemctl <opt_user> list-jobs
+
+# help (`[Unit]`의 `Documentation` 조회 )
+systemctl <opt_user> help <systemd_unit>
+
+# cat unit
+systemctl <opt_user> cat <systemd_unit>
+
+$ opt_user: echo 'false true' | tr ' ' '\n' --- --map "grep -q t && echo --user || echo ''"
+$ systemd_unit: systemctl $opt_user list-units -q --no-pager | awk '{print $1}' --- --header "systemd units" --preview 'systemctl cat {} | bat --color always --decorations never -l ini'

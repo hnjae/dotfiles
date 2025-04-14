@@ -6,19 +6,156 @@ _:
     @just --list
 
 stow:
+    #!/usr/bin/env bash
+
+    # Based on LLM generated code
+
+    set -eu
+
+    # --- Configuration ---
+
+    SOURCE_CONFIG_DIR="_xdg.config-files"
+    SOURCE_DATA_DIR="_xdg.data-files"
+
+    # --- Script Setup ---
+
+    script_dir="$(cd -- "$(dirname -- "")" && pwd -P)" >/dev/null 2>&1
+
+    XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+    XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+
+    fullSourceConfigDir="${script_dir}/${SOURCE_CONFIG_DIR}"
+    fullSourceDataDir="${script_dir}/${SOURCE_DATA_DIR}"
+
+    # Arguments:
+    #   $1: Full path to the source file/directory
+    #   $2: Full path to the target link location
+    link_item() {
+        local src_path="$1"
+        local target_path="$2"
+        local item_name
+
+        item_name=$(basename "$src_path")
+
+        echo "INFO: Processing: ${src_path}" >/dev/stderr
+
+        if [ -h "$target_path" ]; then
+            local current_link_target
+            current_link_target=$(readlink "$target_path")
+
+            if [ "$current_link_target" = "$src_path" ]; then
+                echo "INFO: Skipping: Link already exists and points correctly." >/dev/stderr
+                return 0
+            else
+                if rm "$target_path"; then
+                    echo "INFO: Removed existing symlink." >/dev/stderr
+                else
+                    echo "ERROR: Failed to remove existing symlink: ${target_path}" >/dev/stderr
+                    return 1
+                fi
+            fi
+        elif [ -e "$target_path" ]; then
+            local backup_path
+            backup_path="${target_path}.backup.$(date --utc '+%Y%m%dT%H%M%S%Z')"
+
+            echo "INFO: Existing file/directory found at ${target_path}. Backing up." >/dev/stderr
+
+            if ! mv -n "$target_path" "$backup_path"; then
+                echo "ERROR: Failed to move ${target_path} to ${backup_path}. Please check permissions or if the backup already exists." >/dev/stderr
+                return 1
+            fi
+        fi
+
+        echo "INFO: Creating symlink: ${target_path} -> ${src_path}" >/dev/stderr
+
+        if ! ln -v -s "$src_path" "$target_path"; then
+            echo "ERROR: Failed to create link for ${item_name}." >/dev/stderr
+            return 1
+        fi
+    }
+
+    if [ ! -d "$fullSourceConfigDir" ]; then
+        echo "ERROR: Source config directory does not exist: ${fullSourceConfigDir}" >/dev/stderr
+        exit 1
+    fi
+    if [ ! -d "$fullSourceDataDir" ]; then
+        echo "ERROR: Source data directory does not exist: ${fullSourceDataDir}" >/dev/stderr
+        exit 1
+    fi
+
+    if ! mkdir -p "$XDG_CONFIG_HOME"; then
+        echo "ERROR: Failed to create target config directory: ${XDG_CONFIG_HOME}" >/dev/stderr
+        exit 1
+    fi
+
+    if ! mkdir -p "$XDG_DATA_HOME"; then
+        echo "ERROR: Failed to create target data directory: ${XDG_DATA_HOME}" >/dev/stderr
+        exit 1
+    fi
+
+    echo ""
+
+    for item in "$fullSourceConfigDir"/*; do
+        # Check if the glob matched anything and the item actually exists
+        [ -e "$item" ] || [ -L "$item" ] || continue
+
+        item_name=$(basename "$item")
+        link_item "$item" "${XDG_CONFIG_HOME}/${item_name}"
+    done
+
+    # Loop through hidden files/dirs (e.g., .gitconfig), excluding . and ..
+    for item in "$fullSourceConfigDir"/.[!.]*; do
+        # Check if the glob matched anything and the item actually exists
+        [ -e "$item" ] || [ -L "$item" ] || continue
+        item_name=$(basename "$item")
+        link_item "$item" "${XDG_CONFIG_HOME}/${item_name}"
+    done
+
+    # 4. Process items in the data directory
+
+    # Loop through non-hidden files/dirs
+    for item in "$fullSourceDataDir"/*; do
+        # Check if the glob matched anything and the item actually exists
+        [ -e "$item" ] || [ -L "$item" ] || continue
+
+        item_name=$(basename "$item")
+        link_item "$item" "${XDG_DATA_HOME}/${item_name}"
+    done
+
+    # Loop through hidden files/dirs (e.g., .local_share_file), excluding . and ..
+    for item in "$fullSourceDataDir"/.[!.]*; do
+        # Check if the glob matched anything and the item actually exists
+        [ -e "$item" ] || [ -L "$item" ] || continue
+
+        item_name=$(basename "$item")
+        link_item "$item" "${XDG_DATA_HOME}/${item_name}"
+    done
+
+    exit 0
+
+stow-nvim:
     #!/bin/sh
 
+    set -eu
+
     CONFIG_NAME="nvim"
-    scriptDir="$(cd -- "$(dirname -- "")" && pwd -P)" >/dev/null 2>&1
+    script_dir="$(cd -- "$(dirname -- "")" && pwd -P)" >/dev/null 2>&1
     XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 
-    [ ! -d "${scriptDir}/${CONFIG_NAME}" ] && echo "${scriptDir}/${CONFIG_NAME} does not exists." && exit 1
+    [ ! -d "${script_dir}/${CONFIG_NAME}" ] && echo "${script_dir}/${CONFIG_NAME} does not exists." && exit 1
     [ ! -d "$XDG_CONFIG_HOME" ] && mkdir -p "$XDG_CONFIG_HOME"
 
-    [ -h "${XDG_CONFIG_HOME}/${CONFIG_NAME}" ] && rm "${XDG_CONFIG_HOME}/${CONFIG_NAME}" && echo "rm previous symlinks"
-    [ -d "${XDG_CONFIG_HOME}/${CONFIG_NAME}" ] && echo "Erase ${XDG_CONFIG_HOME}/${CONFIG_NAME} to continue." && exit 1
+    target="${XDG_CONFIG_HOME}/${CONFIG_NAME}"
 
-    ln -v -s "${scriptDir}/${CONFIG_NAME}" "${XDG_CONFIG_HOME}/${CONFIG_NAME}"
+    if [ -h "$target" ]; then
+        rm "$target" && echo "rm previous symlinks" >/dev/stderr
+    elif [ -e "$target" ]; then \
+        echo "${target} exists, moving." >/dev/stderr
+        backup_path="${target}.backup.$(date --utc '+%Y%m%dT%H%M%S%Z')"
+        mv -n "${target}" "${backup_path}" && echo "mv ${target} to ${backup_path}"; \
+    fi
+
+    ln -v -s "${script_dir}/${CONFIG_NAME}" "${target}"
 
 commit:
     #!/bin/sh

@@ -1,0 +1,10 @@
+% kernel, lsmod, sysctl
+
+# list loaded modules
+lsmod
+
+# show current boot kernel parameter
+sudo sysctl -a | bat
+
+# print kernel parameter
+bat /proc/cmdline

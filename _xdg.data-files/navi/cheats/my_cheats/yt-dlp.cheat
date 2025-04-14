@@ -1,0 +1,13 @@
+% yt-dlp, youtube
+
+# list streams
+yt-dlp -F '<link>'
+
+# extract audio
+yt-dlp --extract-audio --audio-format "best" --write-thumbnail --embed-thumbnail --embed-metadata --embed-chapters --embed-subs --embed-info-json --sub-langs "en.*,ko,ja,-live_chat" --windows-filenames -o '(%(upload_date,release_date,modified_date)s)[%(channel,uploader,channel_id,uploader_id,creator)s (%(extractor_key)s)] %(title.:80,fulltitle.:80,alt_title.:80)s (%(id)s).%(ext)s' '<link>'
+
+# download specific stream
+yt-dlp -f '<stream-number>' --extract-audio --audio-quality 0 --write-thumbnail --embed-thumbnail --embed-metadata --embed-chapters --embed-subs --embed-info-json --sub-langs "en.*,ko,ja,-live_chat" --windows-filenames -o '(%(upload_date,release_date,modified_date)s)[%(channel,uploader,channel_id,uploader_id,creator)s (%(extractor_key)s)] %(title.:80,fulltitle.:80,alt_title.:80)s (%(id)s).%(ext)s' '<link>'
+
+; yt-dlp -f <stream-number> '<link>'
+; extract audio with aac in mp4 container

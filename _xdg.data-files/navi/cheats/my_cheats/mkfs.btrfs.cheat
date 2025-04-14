@@ -1,0 +1,31 @@
+% btrfs, mkfs
+
+; block-group-tree requires kernel 6.1
+; squota requires kernel 6.7
+
+# nodesiez 크면 메타데이터 조각화 줄음, (require kernel 6.1)
+mkfs.btrfs --nodesize "64K" -O block-group-tree
+
+# mkfs.btrfs
+mkfs.btrfs -s 4096 [--csum "xxhash"] -L "<LABEL>_BTRFS" --nodesize "64K" -O block-group-tree "<disk>"
+
+
+# mkfs.btrfs metadata single
+mkfs.btrfs -s 4096 \
+  --csum "xxhash" \
+  --metadata "single" \
+  -L "<LABEL>" \
+  --nodesize "16k" \
+  -O block-group-tree \
+  -O squota \
+  "/dev/<disk>"
+
+# raid-stripe-tree
+mkfs.btrfs -s 4096 \
+  --csum "xxhash" \
+  --metadata "single" \
+  -L "<LABEL>_BTRFS" \
+  --nodesize "64K" \
+  -O raid-stripe-tree \
+  -O squota \
+  "/dev/<disk>"

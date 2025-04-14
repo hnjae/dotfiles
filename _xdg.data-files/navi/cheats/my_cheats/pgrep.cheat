@@ -1,0 +1,8 @@
+% pgrep, process
+
+
+# print PID
+pgrep -x <process_name>
+
+# grep process PID
+pgrep -x <process_name_part>

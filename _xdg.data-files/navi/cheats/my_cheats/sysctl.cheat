@@ -1,0 +1,10 @@
+% sysctl, kernel runtime variables
+
+# show current kernel parameter
+sudo sysctl -a | bat
+
+# show current system's variables
+sudo sysctl --system | bat
+
+# change kernel state varaiable; e.g. sysctl -w kernel.sysrq=1
+sysctl -w <section-tunable>=<value>

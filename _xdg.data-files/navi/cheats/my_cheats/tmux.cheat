@@ -1,0 +1,7 @@
+% tmux
+
+# attach session
+tmux attch -t <session>
+
+# rename-session
+tmux rename-session -t <session> <new-name>

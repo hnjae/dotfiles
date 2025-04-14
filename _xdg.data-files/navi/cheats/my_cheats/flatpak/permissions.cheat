@@ -1,0 +1,10 @@
+% flatpak, permission
+
+# Remove default app
+flatpak permission-remove desktop-used-apps <mime>
+
+# Set default app (run with out ".desktop" in app name)
+flatpak permission-set desktop-used-apps <mime> <fromapp> <defaultapp> 3 3
+
+# See current default apps
+flatpak permissions desktop-used-apps

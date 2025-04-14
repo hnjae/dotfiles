@@ -1,0 +1,4 @@
+% vi, vim, nvim
+
+# edit file over scp
+nvim scp://<username@ip>/</home/username/path>

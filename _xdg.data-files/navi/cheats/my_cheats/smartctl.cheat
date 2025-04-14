@@ -1,0 +1,19 @@
+% smartctl, smart
+
+# start short test
+smartctl -t short "/dev/<device>"
+
+# start long test
+smartctl -t long "/dev/<device>"
+
+# start conveyance test
+smartctl -t conveyance "/dev/<device>"
+
+# list ongoning/finished test
+smartctl -l selftest "/dev/<device>"
+
+# spindown
+smartctl -s standby,now "/dev/<device>"
+
+# query current status with out spin
+smartctl -i -n standby "/dev/<device>"

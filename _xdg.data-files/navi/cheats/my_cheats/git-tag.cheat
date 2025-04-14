@@ -1,0 +1,7 @@
+% git, git-tag
+
+# create tag of current commit
+git tag <tag-name>
+
+# push tag
+git push origin tag <tag-name>

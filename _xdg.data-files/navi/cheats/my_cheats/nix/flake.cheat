@@ -1,0 +1,26 @@
+% nix, flake
+
+# help (no man nix-flake)
+nix flake --help
+
+# init
+nix flake init
+
+# create a flake from a specific template
+nix flake init -t templates#<templateName>
+
+# list flake
+nix flake show
+
+# list templates
+nix flake show templates
+
+# update individual inputs (you can repeat --update-input)
+nix flake update <input>
+
+# update inputs
+nix flake update
+
+$ input: nix flake metadata --json 2>/dev/null | jq '.locks.nodes.root.inputs | keys[]' --- --header "flake inputs"
+
+; --preview 'nix flake metadata {-1}'

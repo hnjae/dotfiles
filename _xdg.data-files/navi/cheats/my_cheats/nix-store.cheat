@@ -1,0 +1,4 @@
+% nix, nix-store
+
+# prevent a store path from being garbage collected
+nix-store --add-root <some_path_here_for_symlink> --indirect --realise /nix/store/<path>

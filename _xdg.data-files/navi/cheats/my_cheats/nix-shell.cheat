@@ -1,0 +1,5 @@
+% nix, nix-shell
+
+; you can use `nix shell` (flake)
+# use specific package (or you can use `nix shell`)
+nix-shell -p <package name>

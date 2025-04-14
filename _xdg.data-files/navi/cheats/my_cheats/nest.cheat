@@ -1,0 +1,16 @@
+% nest, NestJS
+
+# create new project
+nest new <project-name>
+
+# generate element help
+nest generate --help
+
+# generate module
+nest g module <module-name>
+
+# generate controller
+nest g co
+
+# generate service
+nest g s

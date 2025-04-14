@@ -1,0 +1,7 @@
+% nix, repl, flake
+
+# run nix repl (and run `:l <nixpkgs> to load nixpkgs)
+nix repl
+
+# run nix repl with nixpkgs
+nix repl -f '\<nixpkgs>'

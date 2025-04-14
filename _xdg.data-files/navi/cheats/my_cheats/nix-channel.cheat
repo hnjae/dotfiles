@@ -1,0 +1,10 @@
+% nix, nix-channel
+
+# list
+nix-channel --list
+
+# add
+nix-channel --add https://nixos.org/channels/nixos-23.11 nixos
+
+# update
+nix-channel --update

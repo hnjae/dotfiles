@@ -1,0 +1,19 @@
+% snapper
+
+# list all configs
+snapper list-configs
+
+# list all snapshots from all configs
+snapper ls -a
+
+# man snapper configs
+man 5 snapper-configs
+
+# clenaup
+snapper -c <config> cleanup <cleanup-algorithm>
+
+# create
+snapper -c <config> create -c <cleanup-algorithm>
+
+$ config: snapper --jsonout list-configs | jq -r '.configs[].config'
+$ cleanup-algorithm: echo "number\ntimeline\nempty-pre-post"

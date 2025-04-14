@@ -1,0 +1,9 @@
+% zellij
+
+; https://zellij.dev/documentation/creating-a-layout
+
+# Create New Session With Name
+zellij -s <session-name>
+
+# Create and Attach New Session With Name
+zellij attach --create <session-name>

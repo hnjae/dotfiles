@@ -1,0 +1,4 @@
+% git, git-config
+
+# get git config
+git config get <name>

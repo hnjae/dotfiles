@@ -1,0 +1,4 @@
+% curl
+
+# send jwt-token
+curl http://<url> -H "Authorization: Bearer <token>"

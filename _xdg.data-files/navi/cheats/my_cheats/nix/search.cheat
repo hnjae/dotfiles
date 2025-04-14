@@ -1,0 +1,7 @@
+% nix, nix-search
+
+# nix search by package
+nix search nixpkgs <term>
+
+# search by path
+nix-locate '<bin/hello>'

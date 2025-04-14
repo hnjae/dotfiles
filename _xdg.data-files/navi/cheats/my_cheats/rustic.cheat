@@ -1,0 +1,10 @@
+% rustic
+
+# restoring
+rustic restore <snapshot-id> <path>
+
+# restoring specific-path
+rustic restore <snapshot-id>:<path> <path>
+
+# diff
+rustic diff <snapshot-id1> <snapshot-id2>

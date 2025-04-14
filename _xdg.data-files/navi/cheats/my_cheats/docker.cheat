@@ -1,0 +1,41 @@
+% docker
+
+# run and destroy container
+docker run --rm <image>
+
+# attach volume
+docker run --rm -v <path-in-host>:<path-in-container> <image>
+
+# List images
+docker image ls
+
+# Remove image
+docker image rm <image-id>
+
+$ image-id: docker images --- --headers 1 --column 3
+
+# stop all containers
+docker stop $(docker ps -a -q)
+
+# Stop a running container through SIGTERM
+docker stop <container-id>
+
+# Stop a running container through SIGKILL
+docker kill <container-id>
+
+# rm all containers
+docker rm $(docker ps -a -q)
+
+# list all running containers
+docker ps
+
+# list all containers
+docker ps -a
+
+# docker container prune (remove all stopped container)
+docker container prune
+
+# exec something from container
+docker exec -it <container-id> <something>
+
+$ container-id: docker ps --- --headers 1 --column 1

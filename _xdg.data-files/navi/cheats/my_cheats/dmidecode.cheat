@@ -1,0 +1,4 @@
+% dmidecode, system-information
+
+# print motherbord model
+sudo dmidecode -t system

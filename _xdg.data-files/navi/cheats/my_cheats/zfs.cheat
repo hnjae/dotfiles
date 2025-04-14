@@ -1,0 +1,111 @@
+% zpool, zfs
+
+; https://openzfs.github.io/
+
+# create hdd mirror pool
+sudo zpool create -f \
+	-o compatibility=off \
+	-o ashift=12 \
+	-O recordsize=4M \
+	-O acltype=off \
+	-O relatime=off \
+	-O atime=off \
+	-O dnodesize=auto \
+	-O xattr=sa \
+	-O mountpoint=none \
+	-O canmount=off \
+	-O compression=lz4 \
+	-O exec=off \
+	-O setuid=off \
+	-O devices=off \
+	-O normalization=none \
+	-O utf8only=off \
+	-O casesensitivity=sensitive \
+	-O encryption=aes-256-gcm \
+	-O keylocation=prompt \
+	-O keyformat=passphrase \
+	<pool-name> \
+	mirror \
+	/dev/disk/by-partlabel/<partlabel> /dev/disk/by-partlabel/<partlabel>
+
+# create hdd single pool
+sudo zpool create -f \
+	-o compatibility=off \
+	-o ashift=12 \
+	-O recordsize=4M \
+	-O acltype=off \
+	-O relatime=off \
+	-O atime=off \
+	-O dnodesize=auto \
+	-O xattr=sa \
+	-O mountpoint=none \
+	-O canmount=off \
+	-O compression=lz4 \
+	-O exec=off \
+	-O setuid=off \
+	-O devices=off \
+	-O normalization=none \
+	-O utf8only=off \
+	-O casesensitivity=sensitive \
+	-O encryption=aes-256-gcm \
+	-O keyformat=passphrase \
+	-O keylocation=file:///persist/@/storage-encryption-keys/default.key \
+	<pool-name> \
+	/dev/disk/by-partlabel/<partlabel>
+
+; -o failmode=continue (default: wait)
+
+# zfs zpool status
+zpool status -v
+
+# manually import a pool
+zpool import -d <block-device> -d <block-device> <zpool-name>
+
+# import a pool with different name (rename a pool)
+zpool import <zpool-name> <new-name>
+
+# import all pool
+zpool import -a
+
+# create dataset (no dash in dataset name)
+zfs create -o <property>=<value> <dataset-name>
+; mountpoint
+; recordsize
+
+# set quota
+zfs set quota=<이진접두어> <dataset-name>
+
+# rename dataset
+zfs rename <old-dataset> <new-dataset>
+
+# 특정 옵션을 inherit 하게 -r 변경
+zfs inherit -rS <eg-atime> <pool>/<dataset>
+
+# load all key
+zfs load-key -a
+
+# mount all datasets
+zfs mount -a
+
+# unload key
+zfs unload-key <filesystem>
+
+# change key
+zfs change-key -l -o keylocation=<keylocatin> <filesystem>
+
+# list zfs datasets
+zfs list
+
+# list all zfs datasets
+zfs list -t all
+
+# list zfs snapshots (datasets)
+zfs list -t snapshot
+
+# arc cache metadata only
+zfs set primarycache=metadata <filesystem>
+
+; # allow user to run command in dataset/volume
+; zfs allow <subcommad> -u <user> <filesystem|volume>
+# create zvol
+zfs create -b <blocksize> -V <size> <zpool>/<zvol-name>

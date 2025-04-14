@@ -1,0 +1,7 @@
+% lsblk, list block device
+
+# list all block devices
+lsblk -f
+
+# list 디바이스의 전송 방식(TRAN)
+lsblk -o NAME,MODEL,TRAN

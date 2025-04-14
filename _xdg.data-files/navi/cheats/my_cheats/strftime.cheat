@@ -1,0 +1,10 @@
+% strftime
+
+# hh:mm:ss
+strftime("%H:%M:%S")
+
+# datetime
+strftime("%Y-%m-%d %H:%M:%S")
+
+# week with weekday
+strftime("%G-W%V-%u")

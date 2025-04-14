@@ -1,0 +1,7 @@
+% fd
+
+# include ignored and hidden
+fd -H -I <pattern>
+
+# find empty directory
+fd -H -t d -t e

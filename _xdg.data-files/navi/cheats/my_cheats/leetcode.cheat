@@ -1,0 +1,10 @@
+% leetcode
+
+# submit
+leetcode x <problem-number>
+
+# test
+leetcode t <problem-number>
+
+# edit
+leetcode e <problem-number>

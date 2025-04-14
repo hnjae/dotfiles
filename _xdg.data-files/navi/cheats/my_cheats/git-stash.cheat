@@ -1,0 +1,22 @@
+% git, git-stash
+
+;#############################################################################
+; git-stash
+;#############################################################################
+# git stash list
+git stash list
+
+# pop (apply and drop)
+git stash pop
+
+# apply stash (but not drop)
+git stash apply
+
+# drop specific stash
+git stash drop <stash@{n}>
+
+# store hash that dropped
+git stash push -m "<description>" <hash>
+
+# store hash selectively
+git stash push -p -m "<description>"

@@ -1,0 +1,4 @@
+% just
+
+# list tasks
+just -l

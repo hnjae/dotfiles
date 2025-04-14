@@ -1,0 +1,6 @@
+% nix, registry, flake
+
+; manage the flake registry
+
+# list flake registry
+nix registry list
