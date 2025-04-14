@@ -142,5 +142,39 @@
         "prefix": "strformat",
         "description": "\"string.format\"",
         "body": "string.format(\"pi = %.4f\", PI)"
+    },
+    "function annotation": {
+        "prefix": [
+            "anfn",
+            "anfun",
+            "anfunction"
+        ],
+        "description": "function annotation",
+        "body": "---@type fun(param:MY_TYPE):RETURN_TYPE"
+    },
+    "parameter type annotation": {
+        "prefix": [
+            "anp",
+            "anparam",
+            "anparameter"
+        ],
+        "description": "parameter type annotation",
+        "body": "---@param ${1:foo}: ${2:string}"
+    },
+    "return type annotation": {
+        "prefix": [
+            "anrt",
+            "anreturn"
+        ],
+        "description": "return type annotation",
+        "body": "---@return ${1:TYPE}"
+    },
+    "type annotation": {
+        "prefix": [
+            "ant",
+            "antype"
+        ],
+        "description": "type annotation",
+        "body": "---@type ${1:TYPE}"
     }
 }

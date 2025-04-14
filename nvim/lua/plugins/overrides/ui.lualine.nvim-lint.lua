@@ -4,22 +4,23 @@ local spec = {
   optional = true,
   opts = function(_, opts)
     local lint = require("lint")
-    local num_source_light_imit = 2
-    local truc_width = 100
+
+    local hide_width = 65
+    local truc_width = 110
+    -- local lualine_width = vim.o.columns -- or vim.fn.winwidth(0) if not using globalstatus
+    local num_source_light_limit = 1
 
     local fmt = function(icon, linters)
-      local lualine_width = vim.o.columns -- or vim.fn.winwidth(0) if not using globalstatus
-
-      if lualine_width < truc_width then
+      if vim.o.columns < truc_width then
         return (string.format("%s[%s]", icon, #linters))
       end
 
-      if #linters > num_source_light_imit and (#linters - num_source_light_imit) > 1 then
+      if #linters > num_source_light_limit and (#linters - num_source_light_limit) > 1 then
         return string.format(
           "%s%s +[%s]",
           icon,
-          table.concat({ unpack(linters, 1, num_source_light_imit) }, ", "),
-          #linters - num_source_light_imit
+          table.concat({ unpack(linters, 1, num_source_light_limit) }, ", "),
+          #linters - num_source_light_limit
         )
       end
 
@@ -29,20 +30,26 @@ local spec = {
     local component = {
       [1] = function()
         local linters = lint.linters_by_ft[vim.bo.filetype]
-        if #linters == 0 then
-          return ""
-        end
+
+        -- if linters == nil or #linters == 0 then
+        --   return ""
+        -- end
 
         local is_running = #(require("lint").get_running()) > 0
         if is_running then
+          -- " " -- nf-oct-codescan
+          -- " " -- nf-cod-sync
           return fmt(" ", linters)
-          -- return " " .. table.concat(linters, ", ") -- nf-oct-codescan
-          -- return " " .. table.concat(linters, ", ") -- nf-cod-sync
         end
 
-        -- return " " .. table.concat(linters, ", ") -- nf-oct-check_circle
-        -- return " " .. table.concat(linters, ", ") -- nf-cod-issues
+        -- " " -- nf-oct-check_circle
+        -- " " -- nf-cod-issues
         return fmt(" ", linters)
+      end,
+      cond = function()
+        local linters = lint.linters_by_ft[vim.bo.filetype]
+
+        return (vim.o.columns > hide_width) and (linters ~= nil and #linters > 0)
       end,
     }
 

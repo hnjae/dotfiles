@@ -3,57 +3,66 @@ local spec = {
   [1] = "lualine.nvim",
   optional = true,
   opts = function(_, opts)
-    local hide_width = 40
-    local truc_width = 100
+    local lsp_icon = (require("globals").icons.codicons.gear .. " ")
+
+    local hide_width = 60
+    local truc_width = 105
+    -- local lualine_width = vim.o.columns -- or vim.fn.winwidth(0) if not using globalstatus
+    local num_source_light_limit = 2
+
     local suppress_sources = {
       ["null-ls"] = true,
       ["copilot"] = true,
     }
-
     local rename_sources = {
       typos_lsp = "typos",
     }
 
-    local lsp_icon = (require("globals").icons.codicons.gear .. " ")
+    ---@param icon string
+    ---@param sources string[]
+    local fmt = function(icon, sources)
+      sources = vim.tbl_filter(function(source)
+        return not suppress_sources[source]
+      end, sources)
 
-    local lsp_name_fmt = function(name)
-      return name:sub(-16, -1) == "_language_server" and name:sub(1, -17) .. "-ls"
-        or (name:sub(-3, -1) == "_ls" and name:sub(1, -4) .. "-ls" or name)
-    end
+      if #sources == 0 then
+        return ""
+      end
 
-    local lsp_filter = function(name)
-      return suppress_sources[name] == nil and true or false
+      sources = vim.tbl_map(function(source)
+        return rename_sources[source]
+          or (source:sub(-3, -1) == "_ls" and source:sub(1, -4) .. "-ls")
+          or source
+      end, sources)
+
+      if vim.o.columns < truc_width then
+        return (string.format("%s[%s]", icon, #sources))
+      end
+
+      if #sources > num_source_light_limit and (#sources - num_source_light_limit) > 1 then
+        return string.format(
+          "%s%s +[%s]",
+          icon,
+          table.concat({ unpack(sources, 1, num_source_light_limit) }, ", "),
+          #sources - num_source_light_limit
+        )
+      end
+
+      return string.format("%s%s", icon, table.concat(sources, ", "))
     end
 
     local component = {
       [1] = function()
-        local lualine_width = vim.o.columns -- or vim.fn.winwidth(0) if not using globalstatus
+        local sources = vim.tbl_map(function(lsp_client)
+          return lsp_client.name
+        end, vim.lsp.get_clients({ bufnr = 0 }))
 
-        if lualine_width < hide_width then
-          return ""
-        end
-
-        local clients = vim.lsp.get_clients({ bufnr = 0 })
-
-        local names = {}
-        ---@type boolean
-        for _, client in ipairs(clients) do
-          if lsp_filter(client.name) then
-            table.insert(names, lsp_name_fmt(client.name))
-          end
-        end
-
-        if next(names) == nil then
-          return ""
-        end
-
-        if lualine_width < truc_width then
-          return (string.format("%s[%s]", lsp_icon, #names))
-        end
-
-        return string.format("%s%s", lsp_icon, table.concat(names, ", "))
+        return fmt(lsp_icon, sources)
       end,
-      cond = nil,
+
+      cond = function()
+        return (vim.o.columns > hide_width) and #(vim.lsp.get_clients({ bufnr = 0 })) ~= 0
+      end,
     }
 
     table.insert(opts.sections.lualine_x, component)

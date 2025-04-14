@@ -25,10 +25,10 @@ return {
       }
     end,
 
-    filename = "CHEATSHEET.org",
-    title = "CHEATSHEET.org",
+    filename = "CHEATSHEET.md",
+    title = "CHEATSHEET.md",
 
-    -- TODO: project local CHEATSHEET.org 열게 하기. <2025-04-09>
+    -- TODO: project local CHEATSHEET.md 열게 하기. <2025-04-09>
   },
   keys = {
     { [1] = "<Leader>h", [2] = "<cmd>GlobalNote<CR>", desc = "nvim-help (GlobalNote)" },

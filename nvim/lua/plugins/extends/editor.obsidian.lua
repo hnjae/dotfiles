@@ -139,6 +139,148 @@ return {
         -- custom = {
         --     todo = { raw = '[-]', rendered = '󰥔 ', highlight = 'RenderMarkdownTodo', scope_highlight = nil },
         -- },
+        checkbox = {
+          enabled = true,
+          unchecked = {
+            icon = " 󰄱 ", -- nf-md -checkbox_blnak_outline
+          },
+          checked = {
+            icon = " 󰄲 ", -- nf-mdcheckbox_marked
+          },
+          custom = {
+            -- override defaults
+            todo = {
+              raw = "[☺]",
+              rendered = "[☺]",
+            },
+            in_progress = {
+              raw = "[/]",
+              rendered = " 󰄮 ", -- nf-md-checkbox-blank
+              highlight = "RenderMarkdownTodo",
+              scope_highlight = nil,
+            },
+            canceled = {
+              raw = "[-]",
+              rendered = " 󱋭 ",
+              highlight = "RenderMarkdownTodo",
+              scope_highlight = nil,
+            },
+            rescheduled = {
+              raw = "[<]",
+              rendered = " 󰃮 ", --nf-md-calendar
+              highlight = "RenderMarkdownTodo",
+              scope_highlight = nil,
+            },
+            scheduled = {
+              raw = "[>]",
+              rendered = "  ", --nf-fa_mail_forward
+              highlight = "RenderMarkdownTodo",
+              scope_highlight = nil,
+            },
+            important = {
+              raw = "[!]",
+              rendered = "  ",
+              highlight = "RenderMarkdownTodo",
+              scope_highlight = nil,
+            },
+            question = {
+              raw = "[?]",
+              rendered = "  ",
+              highlight = "RenderMarkdownTodo",
+              scope_highlight = nil,
+            },
+            star = {
+              raw = "[*]",
+              rendered = "  ",
+              highlight = "RenderMarkdownTodo",
+              scope_highlight = nil,
+            },
+            note = {
+              raw = "[n]",
+              rendered = " 󰐃 ",
+              highlight = "RenderMarkdownTodo",
+              scope_highlight = nil,
+            },
+            location = {
+              raw = "[l]",
+              rendered = "  ",
+              highlight = "RenderMarkdownTodo",
+              scope_highlight = nil,
+            },
+            information = {
+              raw = "[i]",
+              rendered = "  ",
+              highlight = "RenderMarkdownTodo",
+              scope_highlight = nil,
+            },
+            idea = {
+              raw = "[I]",
+              rendered = "  ",
+              highlight = "RenderMarkdownTodo",
+              scope_highlight = nil,
+            },
+            amount = {
+              raw = "[S]",
+              rendered = "  ",
+              highlight = "RenderMarkdownTodo",
+              scope_highlight = nil,
+            },
+            pro = {
+              raw = "[p]",
+              rendered = "  ",
+              highlight = "RenderMarkdownTodo",
+              scope_highlight = nil,
+            },
+            con = {
+              raw = "[c]",
+              rendered = "  ",
+              highlight = "RenderMarkdownTodo",
+              scope_highlight = nil,
+            },
+            bookmark = {
+              raw = "[b]",
+              rendered = "  ",
+              highlight = "RenderMarkdownTodo",
+              scope_highlight = nil,
+            },
+            quote = {
+              raw = '["]',
+              rendered = "  ",
+              highlight = "RenderMarkdownTodo",
+              scope_highlight = nil,
+            },
+            up = {
+              raw = "[u]",
+              rendered = " 󰔵 ",
+              highlight = "RenderMarkdownTodo",
+              scope_highlight = nil,
+            },
+            down = {
+              raw = "[d]",
+              rendered = " 󰔳 ",
+              highlight = "RenderMarkdownTodo",
+              scope_highlight = nil,
+            },
+            win = {
+              raw = "[w]",
+              rendered = "  ",
+              highlight = "RenderMarkdownTodo",
+              scope_highlight = nil,
+            },
+            key = {
+              raw = "[k]",
+              rendered = "  ",
+              highlight = "RenderMarkdownTodo",
+              scope_highlight = nil,
+            },
+            fire = {
+              raw = "[f]",
+              rendered = "  ",
+              highlight = "RenderMarkdownTodo",
+              scope_highlight = nil,
+            },
+          },
+        },
       },
     },
   },

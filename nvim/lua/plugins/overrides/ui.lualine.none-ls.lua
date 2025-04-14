@@ -3,58 +3,60 @@ local spec = {
   [1] = "lualine.nvim",
   optional = true,
   opts = function(_, opts)
-    local icon = "󰟢 " -- nf-md-null
+    local nil_icon = "󰟢 " -- nf-md-null
 
-    local hide_width = 40
-    local truc_width = 100
+    local hide_width = 65
+    local truc_width = 110
+    local suppress_sources = {}
+    local num_source_light_limit = 1
+    -- local lualine_width = vim.o.columns -- or vim.fn.winwidth(0) if not using globalstatus
+
+    ---@param icon string
+    ---@param sources string[]
+    local fmt = function(icon, sources)
+      sources = vim.tbl_filter(function(source)
+        return not vim.tbl_contains(suppress_sources, source)
+      end, sources)
+
+      if #sources == 0 then
+        return ""
+      end
+
+      if vim.o.columns < truc_width then
+        return (string.format("%s[%s]", icon, #sources))
+      end
+
+      if #sources > num_source_light_limit and (#sources - num_source_light_limit) > 1 then
+        return string.format(
+          "%s%s +[%s]",
+          icon,
+          table.concat({ unpack(sources, 1, num_source_light_limit) }, ", "),
+          #sources - num_source_light_limit
+        )
+      end
+
+      return string.format("%s%s", icon, table.concat(sources, ", "))
+    end
+
+    ------
+
     local modules = require("lualine_require").lazy_require({
       sources = "null-ls.sources",
     })
-    local suppress_sources = {}
-    local num_source_light_imit = 2
 
     local component = {
       [1] = function()
-        local lualine_width = vim.o.columns -- or vim.fn.winwidth(0) if not using globalstatus
+        local sources = vim.tbl_map(function(nil_source)
+          return nil_source.name
+        end, modules.sources.get_available(vim.bo.filetype))
 
-        if lualine_width < hide_width then
-          return ""
-        end
-
-        local clients = vim.lsp.get_clients({ bufnr = 0, name = "null-ls" })
-
-        local is_null_ls = #clients ~= 0
-
-        local names = {}
-        if is_null_ls then
-          for _, source in ipairs(modules.sources.get_available(vim.bo.filetype)) do
-            if not names[source.name] and not suppress_sources[source.name] then
-              table.insert(names, source.name)
-              names[source.name] = true
-            end
-          end
-        end
-
-        if next(names) == nil then
-          return ""
-        end
-
-        if lualine_width < truc_width then
-          return (string.format("%s[%s]", icon, #names))
-        end
-
-        if #names > num_source_light_imit and (#names - num_source_light_imit) > 1 then
-          return string.format(
-            "%s%s +[%s]",
-            icon,
-            table.concat({ unpack(names, 1, num_source_light_imit) }, ", "),
-            #names - num_source_light_imit
-          )
-        end
-
-        return string.format("%s%s", icon, table.concat(names, ", "))
+        return fmt(nil_icon, sources)
       end,
-      cond = nil,
+
+      cond = function()
+        return (vim.o.columns > hide_width)
+          and #(vim.lsp.get_clients({ bufnr = 0, name = "null-ls" })) ~= 0
+      end,
     }
 
     table.insert(opts.sections.lualine_x, component)

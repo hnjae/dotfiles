@@ -1,16 +1,33 @@
 local M = {}
 
-local last_modified = function()
+local update_lastmod = function()
   if vim.opt_local.modified:get() then
     local save_cur = vim.fn.getpos(".")
+    local bufnr = vim.api.nvim_get_current_buf()
 
-    vim.cmd([[
-      let n = min([10, line("$")])
-      keepjumps exe '1,' . n . 's#^\(.\{,10}lastmod\s*: \).*#\1' .
-                  \ strftime('%Y-%m-%dT%H:%M:%S%z') . '#e'
-    ]])
+    local original_undolevels = vim.opt_local.undolevels:get()
+
+    -- Temporarily disable undo for this buffer
+    vim.opt_local.undolevels = -1
+
+    -- vim.cmd([[
+    --   let n = min([10, line("$")])
+    --   keepjumps exe '1,' . n . 's#^\(.\{,10}lastmod\s*: \).*#\1' .
+    --               \ strftime('%Y-%m-%dT%H:%M:%S%z') . '#e'
+    -- ]])
+
+    vim.cmd(string.format(
+      [[silent! keepjumps %d,%ds#^\(.\{,10}lastmod\s*: \).*#\1%s#e]],
+      1, -- Start line
+      math.min(10, vim.fn.line("$")), -- End line
+      vim.fn.strftime("%Y-%m-%dT%H:%M:%S%z") -- Replacement string
+    ))
+
     vim.fn.histdel("search", -1)
     vim.fn.setpos(".", save_cur)
+
+    -- Restore the original undo levels
+    vim.opt_local.undolevels = original_undolevels
   end
 end
 
@@ -24,16 +41,13 @@ local new_template = function()
   filename = filename:sub(1, ext_start - 2)
 
   local dateiso = vim.fn.strftime("%Y-%m-%dT%H:%M:%S%z")
-  -- "isCJKLanguage : true",
-  -- "draft         : true",
-  -- "title         : " .. filename,
   local template = {
     "---",
+    "created: " .. vim.fn.strftime("%Y-%m-%dT%H:%M:%S%z"),
     "date: " .. dateiso,
     "lastmod: " .. dateiso,
     "---",
     "",
-    "## " .. "h2",
   }
   -- print(vim.inspect(template))
   vim.fn.call(vim.fn.setline, { 1, template })
@@ -60,7 +74,7 @@ function M.setup()
   }, {
     group = asciidoc_auto_id,
     pattern = { "*.md" },
-    callback = last_modified,
+    callback = update_lastmod,
   })
 end
 

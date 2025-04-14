@@ -12,7 +12,7 @@
         ]
     },
     "filename": {
-        "prefix": "filename",
+        "prefix": "sfilename",
         "description": "get filename without path",
         "body": [
             "\"\\$(basename -- \"\\${$1\\}\")\"",
@@ -20,7 +20,7 @@
         ]
     },
     "filestem": {
-        "prefix": "filestem",
+        "prefix": "sfilestem",
         "description": "get stem from path",
         "body": [
             "$0=\"\\${filename%.*\\}\"",
@@ -28,11 +28,11 @@
         ]
     },
     "confirm": {
-        "prefix": "confirm",
+        "prefix": "sconfirm",
         "description": "get confirm signal from tty (user)",
         "body": [
             "confirm() {",
-            "\techo \"Are you sure? [YES/Any]: \\c\"",
+            "\techo \"Are you sure? [YES/Any]:",
             "\tread -r response",
             "\tcase \"\\$response\" in",
             "\t\"YES\")",
@@ -46,7 +46,7 @@
         ]
     },
     "confirm (bash)": {
-        "prefix": "confirmb",
+        "prefix": "sconfirmb",
         "description": "get confirm signal frym tty (user)(bash)",
         "body": [
             "confirm() {",
@@ -72,7 +72,7 @@
         ]
     },
     "symlink reslove": {
-        "prefix": "symlinkreslove",
+        "prefix": "ssymlinkreslove",
         "description": "resolve symlink",
         "body": [
             "readlink -f -- <path>",
@@ -80,7 +80,7 @@
         ]
     },
     "datetime iso-8601": {
-        "prefix": "dateiso8601",
+        "prefix": "sdateiso8601",
         "description": "\"ISO-8601 date\"",
         "body": "date -u +\"%Y-%m-%dT%H:%M:%SZ\""
     }

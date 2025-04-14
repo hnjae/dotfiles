@@ -14,14 +14,15 @@ return {
       },
     },
     heading = {
-      border = "thin",
-    },
-    checkbox = {
-      enabled = false,
+      border = false,
     },
     bullet = {
-      enabled = true,
+      -- BUG?: checkbox and bullet can not be enabled at the same time <2025-04-13>
+      enabled = false,
       -- icons = { "●", "○", "◆", "◇" },
+    },
+    checkbox = {
+      enabled = true,
     },
     link = {
       custom = {

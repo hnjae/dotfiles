@@ -137,7 +137,7 @@
         "prefix": [
             "strikethroughhtml",
             "shtml",
-            "delhtml",
+            "delhtml"
         ],
         "description": "Create a `<del>`",
         "body": "<del>${0:$TM_SELECTED_TEXT}</del>"
@@ -146,7 +146,7 @@
         "prefix": [
             "strikethrough",
             "s",
-            "del",
+            "del"
         ],
         "description": "Create a `<del>`",
         "body": "~~${0:$TM_SELECTED_TEXT}~~"

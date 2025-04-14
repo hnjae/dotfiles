@@ -17,6 +17,10 @@
             "[*.{ts,js\\}]",
             "max_line_length = 100",
             "indent_size = 2",
+            "indent_style = space",
+            "",
+            "justfile",
+            "indent_size = 4",
             "indent_style = space"
         ]
     }
