@@ -1,0 +1,20 @@
+# https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
+gui:
+  language: en
+  timeFormat: 2006-01-02
+  shortTimeFormat: 15:04
+  showFileTree: true
+  nerdFontsVersion: "3"
+  expandFocusedSidePanel: false
+  showIcons: true
+git:
+  branchLogCmd: git log --graph --color=always --decorate --date=iso --oneline {{branchName}} --
+  # merging:
+  #   manualCommit: true
+  autoFetch: false
+  # autoRefresh: false
+  # parseEmoji: t w
+keybinding:
+  files:
+    commitChanges: ""
+    commitChangesWithEditor: c
