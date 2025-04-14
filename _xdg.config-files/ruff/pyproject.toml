@@ -1,0 +1,44 @@
+[tool.ruff]
+line-length = 79
+
+[tool.ruff.lint]
+fixable = ["ALL"]
+select = ["ALL"]
+ignore = [
+  # Things might be enabled for production code:
+  "ERA", # eradicate, e.g. ERA001 - commented-out-code
+  "D",   # pydocstyle
+  "FIX", # flake8-fixme
+  "TD",  # flake8-todos
+
+  # Things that conflicts with other rules
+  "S603", # subprocess-without-shell-equals-true", conflicts with S602
+
+  # Folloing rule should be fixed by formatter:
+  "COM", # flake8-commas
+  "Q",   # flake8-quotes
+  "E",   # pycodestyle
+  "I",   # isort
+
+  # Things can be fixed by formatter #2:
+  "W293", # blank-line-with-whitespace
+  "E501", # line-too-long
+  "Q000", # bad-quotes-inline-string
+  "Q001", # bad-quotes-multiline-string
+  "Q002", # bad-quotes-docstring
+  "D201", # no-blank-line-before-function
+  "D202", # no-blank-line-after-function
+  "D203", # one-blank-line-before-class
+  "D204", # one-blank-line-after-class
+  "D205", # blank-line-after-summary
+  "D206", # indent-with-spaces
+  "D209", # new-line-after-last-paragraph
+  "D210", # no-surrounding-whitespace
+  "D211", # no-blank-line-before-class
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "pep257"
+
+[tool.black]
+line-length = 79
