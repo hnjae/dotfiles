@@ -37,7 +37,16 @@ return {
 
         NormalFloat = { link = "Normal" },
         -- NormalFloat = { bg = "#f2e5bc" }, -- light0_soft
-        -- NormalNc = { bg = "#f2e5bc" },
+
+        -- ["RenderMarkdownH1Bg"] = { link = "ErrorMsg" },
+        -- ["RenderMarkdownH1Bg"] = { link = "PmenuSel" },
+        ["RenderMarkdownH1Bg"] = { link = "DiffAdd" },
+        ["RenderMarkdownH2Bg"] = { link = "DiffChange" },
+        ["RenderMarkdownH3Bg"] = { link = "CursorLine" },
+        ["RenderMarkdownH4Bg"] = { link = "markdownBold" },
+        -- ["RenderMarkdownH5Bg"] = { link = "markdownH5" },
+        ["RenderMarkdownH5Bg"] = { link = "markdownBold" },
+        ["RenderMarkdownH6Bg"] = { link = "markdownBold" },
 
         -- Managed by todo-comments.nvim:
         ["@comment.todo"] = { link = "@comment" },

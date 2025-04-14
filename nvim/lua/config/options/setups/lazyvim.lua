@@ -4,7 +4,7 @@ vim.g.maplocalleader = "s"
 -- restore to vim's default
 vim.opt.clipboard = ""
 vim.opt.conceallevel = 0
-vim.o.splitright = false
+-- vim.o.splitright = false
 vim.opt.tabstop = 8
 
 -- lazyvim config

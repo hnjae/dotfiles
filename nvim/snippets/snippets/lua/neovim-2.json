@@ -68,7 +68,7 @@
     "get highlight": {
         "prefix": "get-highlight",
         "description": "get highlight group",
-        "body": "vim.api.nvim_get_hl(0, { name = \"${0:PmenuSel}\" \\})",
+        "body": "vim.api.nvim_get_hl(0, { name = \"${0:PmenuSel}\" \\})"
     },
     "autocmd filetype": {
         "prefix": "autocmd-filetype",

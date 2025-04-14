@@ -17,9 +17,7 @@ return {
       border = false,
     },
     bullet = {
-      -- BUG?: checkbox and bullet can not be enabled at the same time <2025-04-13>
-      enabled = false,
-      -- icons = { "●", "○", "◆", "◇" },
+      enabled = true,
     },
     checkbox = {
       enabled = true,

@@ -12,7 +12,7 @@ indent_style = space
 indent_size = 2
 max_line_length = 100
 
-[*.{json,jsonc,md}]
+[*.{json,jsonc,yaml,yml,toml,conf,md}]
 indent_style = space
 indent_size = 2
 

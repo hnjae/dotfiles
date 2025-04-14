@@ -17,14 +17,30 @@ return {
     "fzf-lua", -- default picker
   },
   keys = {
+    {
+      [1] = "<C-A-CR>",
+      [2] = "<cmd>ObsidianFollowLink vsplit<CR>",
+      desc = "follow-link-vsplit",
+      ft = "markdown",
+    },
+    { [1] = "<CR>", [2] = "<cmd>ObsidianFollowLink<CR>", desc = "follow-link", ft = "markdown" },
+    {
+      [1] = "<A-CR>",
+      [2] = "<cmd>ObsidianFollowLink vsplit<CR>",
+      desc = "follow-link-vsplit",
+      ft = "markdown",
+    },
+    { [1] = "<C-CR>", [2] = "<cmd>ObsidianFollowLink<CR>", desc = "follow-link", ft = "markdown" },
     -- <leader>t: neotest
     { [1] = "<leader>tt", [2] = "<cmd>ObsidianToday<CR>", desc = "today", ft = "markdown" },
-    { [1] = "<leader>tT", [2] = "<cmd>ObsidianTomorrow<CR>", desc = "tomorrow", ft = "markdown" },
-    { [1] = "<leader>tY", [2] = "<cmd>ObsidianYesterday<CR>", desc = "yesterday", ft = "markdown" },
+    { [1] = "<leader>tr", [2] = "<cmd>ObsidianTomorrow<CR>", desc = "tomorrow", ft = "markdown" },
+    { [1] = "<leader>ty", [2] = "<cmd>ObsidianYesterday<CR>", desc = "yesterday", ft = "markdown" },
+    { [1] = "<leader>tT", [2] = "<cmd>ObsidianTemplate<CR>", desc = "template", ft = "markdown" },
+    { [1] = "<leader>tR", [2] = "<cmd>ObsidianRename<CR>", desc = "rename", ft = "markdown" },
     {
-      [1] = "<leader>td",
+      [1] = "<leader>tj",
       [2] = "<cmd>ObsidianDailies<CR>",
-      desc = "select-dailies",
+      desc = "select-journals (dailies)",
       ft = "markdown",
     },
     { [1] = "<leader>tg", [2] = "<cmd>ObsidianTags<CR>", desc = "select-tags", ft = "markdown" },
@@ -35,7 +51,13 @@ return {
       ft = "markdown",
     },
     {
-      [1] = "<leader>ts",
+      [1] = "<leader><leader>",
+      [2] = "<cmd>ObsidianQuickSwitch<CR>",
+      desc = "quick-switch",
+      ft = "markdown",
+    },
+    {
+      [1] = "<leader>ff",
       [2] = "<cmd>ObsidianQuickSwitch<CR>",
       desc = "quick-switch",
       ft = "markdown",
@@ -47,12 +69,17 @@ return {
       ft = "markdown",
     },
     {
-      [1] = "<leader>so",
-      [2] = "<cmd>ObsidianSearch<CR>",
-      desc = "obsidian-search",
+      [1] = "<leader>tk",
+      [2] = "<cmd>ObsidianToggleCheckbox<CR>",
+      desc = "toggle-checkbox",
       ft = "markdown",
     },
-    -- { [1] = "<leader>tx", [2] = "<cmd>ObsidianSearch<CR>", desc = "obsidian-search", ft = "markdown" },
+    {
+      [1] = "<leader>sg",
+      [2] = "<cmd>ObsidianSearch<CR>",
+      desc = "obsidian-search (ripgrep)",
+      ft = "markdown",
+    },
   },
 
   opts = {
@@ -66,16 +93,30 @@ return {
     daily_notes = {
       folder = "journals",
       date_format = "%Y-%m-%d",
-      template = nil,
+      template = "journal.md",
       alias_format = nil,
       -- default_tags = {},
     },
     new_notes_location = nil,
     notes_subdir = vim.NIL,
     templates = {
-      --   folder = vim.NIL,
+      folder = "templates",
       date_format = "%Y-%m-%d",
-      time_format = "%H:%M",
+      time_format = "%H:%M:%S",
+      substitutions = {
+        ["time:YYYY-MM-DD[T]HH:MM:SSZ"] = function()
+          return vim.fn.strftime("%Y-%m-%dT%H:%M:%S%z")
+        end,
+        ["time:GGGG-[W]WW-E"] = function()
+          return vim.fn.strftime("%G-W%V-%u")
+        end,
+        ["time:GGGG-[W]WW"] = function()
+          return vim.fn.strftime("%G-W%V")
+        end,
+        ["date:dddd"] = function()
+          return vim.fn.strftime("%A")
+        end,
+      },
     },
     disable_frontmatter = true,
     -- https://github.com/Vinzent03/obsidian-advanced-uri
@@ -94,6 +135,19 @@ return {
     },
     picker = {
       name = "fzf-lua", -- 그냥 vim.ui.select 사용하는 옵션은 없나?
+    },
+    follow_url_func = function(url)
+      -- vim.fn.jobstart({ "xdg-open", url })
+      vim.ui.open(url)
+    end,
+    follow_img_func = function(img)
+      -- vim.fn.jobstart({ "xdg-open", img })
+      vim.ui.open(img)
+    end,
+    attachments = {
+      -- img_name_func = function ()
+      --     return string.format("%s-", os.time())
+      -- end
     },
   },
   config = function(_, opts)
@@ -141,11 +195,15 @@ return {
         -- },
         checkbox = {
           enabled = true,
-          unchecked = {
-            icon = " 󰄱 ", -- nf-md -checkbox_blnak_outline
-          },
           checked = {
-            icon = " 󰄲 ", -- nf-mdcheckbox_marked
+            -- icon = " 󰄲 ", -- nf-mdcheckbox_marked
+            icon = "  ", -- nf-fa-check_circle
+            highlight = "markdownH1",
+          },
+          unchecked = {
+            -- icon = " 󰄱 ", -- nf-md -checkbox_blnak_outline
+            icon = "  ", -- nf-fa-circle
+            highlight = "markdownBold",
           },
           custom = {
             -- override defaults
@@ -155,8 +213,9 @@ return {
             },
             in_progress = {
               raw = "[/]",
-              rendered = " 󰄮 ", -- nf-md-checkbox-blank
-              highlight = "RenderMarkdownTodo",
+              -- rendered = " 󰄮 ", -- nf-md-checkbox-blank
+              rendered = "  ", -- nf-fa-circle_dot
+              highlight = "markdownBold",
               scope_highlight = nil,
             },
             canceled = {
@@ -168,79 +227,79 @@ return {
             rescheduled = {
               raw = "[<]",
               rendered = " 󰃮 ", --nf-md-calendar
-              highlight = "RenderMarkdownTodo",
+              highlight = "GitSignsAdd",
               scope_highlight = nil,
             },
             scheduled = {
               raw = "[>]",
               rendered = "  ", --nf-fa_mail_forward
-              highlight = "RenderMarkdownTodo",
+              highlight = "DiagnosticVirtualTextInfo",
               scope_highlight = nil,
             },
             important = {
               raw = "[!]",
               rendered = "  ",
-              highlight = "RenderMarkdownTodo",
+              highlight = "DiagnosticVirtualTextWarn",
               scope_highlight = nil,
             },
             question = {
               raw = "[?]",
               rendered = "  ",
-              highlight = "RenderMarkdownTodo",
+              highlight = "DiagnosticVirtualTextWarn",
               scope_highlight = nil,
             },
             star = {
               raw = "[*]",
               rendered = "  ",
-              highlight = "RenderMarkdownTodo",
+              highlight = "DiagnosticVirtualTextWarn",
               scope_highlight = nil,
             },
             note = {
               raw = "[n]",
               rendered = " 󰐃 ",
-              highlight = "RenderMarkdownTodo",
+              highlight = "DiagnosticVirtualTextError",
               scope_highlight = nil,
             },
             location = {
               raw = "[l]",
               rendered = "  ",
-              highlight = "RenderMarkdownTodo",
+              highlight = "CmpItemKindKeyword",
               scope_highlight = nil,
             },
             information = {
               raw = "[i]",
               rendered = "  ",
-              highlight = "RenderMarkdownTodo",
+              highlight = "DiagnosticVirtualTextInfo",
               scope_highlight = nil,
             },
             idea = {
               raw = "[I]",
               rendered = "  ",
-              highlight = "RenderMarkdownTodo",
+              highlight = "DiagnosticVirtualTextWarn",
               scope_highlight = nil,
             },
             amount = {
               raw = "[S]",
               rendered = "  ",
-              highlight = "RenderMarkdownTodo",
+              highlight = "GitSignsAdd",
               scope_highlight = nil,
             },
             pro = {
               raw = "[p]",
               rendered = "  ",
-              highlight = "RenderMarkdownTodo",
+              highlight = "DiagnosticVirtualTextInfo",
               scope_highlight = nil,
             },
             con = {
               raw = "[c]",
               rendered = "  ",
-              highlight = "RenderMarkdownTodo",
+              highlight = "DiagnosticVirtualTextError",
               scope_highlight = nil,
             },
             bookmark = {
               raw = "[b]",
               rendered = "  ",
-              highlight = "RenderMarkdownTodo",
+              highlight = "DiagnosticVirtualTextError",
               scope_highlight = nil,
             },
             quote = {
@@ -252,31 +311,31 @@ return {
             up = {
               raw = "[u]",
               rendered = " 󰔵 ",
-              highlight = "RenderMarkdownTodo",
+              highlight = "DiagnosticVirtualTextInfo",
               scope_highlight = nil,
             },
             down = {
               raw = "[d]",
               rendered = " 󰔳 ",
-              highlight = "RenderMarkdownTodo",
+              highlight = "DiagnosticVirtualTextError",
               scope_highlight = nil,
             },
             win = {
               raw = "[w]",
               rendered = "  ",
-              highlight = "RenderMarkdownTodo",
+              highlight = "CmpItemKindKeyword",
               scope_highlight = nil,
             },
             key = {
               raw = "[k]",
               rendered = "  ",
-              highlight = "RenderMarkdownTodo",
+              highlight = "DiagnosticVirtualTextWarn",
               scope_highlight = nil,
             },
             fire = {
               raw = "[f]",
               rendered = "  ",
-              highlight = "RenderMarkdownTodo",
+              highlight = "DiagnosticVirtualTextError",
               scope_highlight = nil,
             },
           },
