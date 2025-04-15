@@ -21,8 +21,8 @@ vim.keymap.set( { "n", "v", "s" }, "<S-F12>", [["+p]], { desc = "paste-from-clip
 -- stylua: ignore end
 
 -- vim.keymap.set({ "n", "v" }, "<LocalLeader><LocalLeader>", ":", { desc = "cmdline" })
+-- vim.keymap.set({ "n" }, "<LocalLeader>t", "<cmd>wall<CR>", { desc = "wall" })
 vim.keymap.set({ "n" }, "<BS>", ":", { desc = "cmdline" })
-vim.keymap.set({ "n" }, "<LocalLeader>t", "<cmd>wall<CR>", { desc = "wall" })
 
 --  escape teriminal/mapping (WIP)
 --------------------------------------------------------------------------------

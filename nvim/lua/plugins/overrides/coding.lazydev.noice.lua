@@ -4,7 +4,7 @@ return {
   optional = true,
   specs = {
     {
-      [1] = "folke/lazydev.nvim",
+      [1] = "lazydev.nvim",
       optional = true,
       opts = {
         library = { "noice.nvim" },

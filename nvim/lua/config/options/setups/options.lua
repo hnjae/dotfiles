@@ -33,9 +33,9 @@ vim.opt.foldlevel = 999 -- default 0 (fold-all)
 
 -------------------------------------------------------------------------------
 
-vim.opt.undofile = false
-vim.opt.swapfile = false
-vim.opt.backup = false
+-- vim.opt.undofile = false
+-- vim.opt.swapfile = false
+-- vim.opt.backup = false
 
 -------------------------------------------------------------------------------
 

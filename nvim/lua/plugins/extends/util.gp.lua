@@ -306,7 +306,7 @@ Primary Tasks:
     { [1] = prefix .. "q",     mode = "n", [2] = "<cmd>%GpVnew<CR>",     desc = "Quick (edit-buffer; Gp)", },
     { [1] = prefix .. "q",     mode = "v", [2] = ":<C-u>'<,'>GpNew<CR>", desc = "Quick (edit-selected; Gp)" },
 
-    { [1] = tprefix .. "g",    mode = "v", [2] = ":<C-u>'<,'>GpGrammarCheck<CR>", desc = "gp-grammer-check" },
+    { [1] = tprefix .. "g",    mode = "v", [2] = ":<C-u>'<,'>GpGrammarCheck<CR>", desc = "gp-grammar-check" },
     { [1] = tprefix .. "t",    mode = "v", [2] = ":<C-u>'<,'>GpEnglishTranslate<CR>", desc = "gp-english-translate" },
     { [1] = tprefix .. "p",    mode = "v", [2] = ":<C-u>'<,'>GpProofread<CR>", desc = "gp-proofread" },
 

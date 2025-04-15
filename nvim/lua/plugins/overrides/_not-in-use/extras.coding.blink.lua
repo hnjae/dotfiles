@@ -65,7 +65,7 @@ return {
         "fallback",
       },
 
-      -- NOTE: snippet backword not working
+      -- NOTE: snippet backward not working
       ["<S-Tab>"] = { "snippet_backward", "fallback" },
     },
 

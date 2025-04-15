@@ -1,0 +1,4 @@
+% sd, sed
+
+# replace string in file
+sd --preview before after file.txt

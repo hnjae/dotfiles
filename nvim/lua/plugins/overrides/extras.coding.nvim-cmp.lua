@@ -23,10 +23,10 @@ return {
       nvim_lsp = "LSP",
     }
 
+    local kind_icons = vim.deepcopy(LazyVim.config.icons.kinds)
     opts.formatting.format = function(entry, item)
-      local icons = LazyVim.config.icons.kinds
-      if icons[item.kind] then
-        item.kind = icons[item.kind] .. item.kind
+      if kind_icons[item.kind] then
+        item.kind = kind_icons[item.kind] .. item.kind
       end
       item.menu = string.format("[%s]", source_name_map[entry.source.name] or entry.source.name)
 

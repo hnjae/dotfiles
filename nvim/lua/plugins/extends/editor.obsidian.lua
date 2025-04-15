@@ -23,7 +23,16 @@ return {
       desc = "follow-link-vsplit",
       ft = "markdown",
     },
-    { [1] = "<CR>", [2] = "<cmd>ObsidianFollowLink<CR>", desc = "follow-link", ft = "markdown" },
+    -- { [1] = "<CR>", [2] = "<cmd>ObsidianFollowLink<CR>", desc = "follow-link", ft = "markdown" },
+    {
+      [1] = "<CR>",
+      [2] = function()
+        return require("obsidian").util.smart_action()
+      end,
+      desc = "smart-action",
+      ft = "markdown",
+      expr = true,
+    },
     {
       [1] = "<A-CR>",
       [2] = "<cmd>ObsidianFollowLink vsplit<CR>",
@@ -53,13 +62,13 @@ return {
     {
       [1] = "<leader><leader>",
       [2] = "<cmd>ObsidianQuickSwitch<CR>",
-      desc = "quick-switch",
+      desc = "obsidian-quick-switch",
       ft = "markdown",
     },
     {
       [1] = "<leader>ff",
       [2] = "<cmd>ObsidianQuickSwitch<CR>",
-      desc = "quick-switch",
+      desc = "obsidian-quick-switch",
       ft = "markdown",
     },
     {
@@ -68,10 +77,21 @@ return {
       desc = "open-in-obsidian",
       ft = "markdown",
     },
+    -- [2] = "<cmd>ObsidianToggleCheckbox<CR>",
     {
       [1] = "<leader>tk",
-      [2] = "<cmd>ObsidianToggleCheckbox<CR>",
+      [2] = function()
+        return require("obsidian").util.toggle_checkbox({ " ", "/", "x" })
+      end,
       desc = "toggle-checkbox",
+      ft = "markdown",
+    },
+    {
+      [1] = "<leader>tK",
+      [2] = function()
+        return require("obsidian").util.toggle_checkbox({ "x" })
+      end,
+      desc = "checkbox-done",
       ft = "markdown",
     },
     {
@@ -97,8 +117,9 @@ return {
       alias_format = nil,
       -- default_tags = {},
     },
-    new_notes_location = nil,
-    notes_subdir = vim.NIL,
+    new_notes_location = "notes_subdir",
+    -- notes_subdir = vim.NIL,
+    notes_subdir = "/",
     templates = {
       folder = "templates",
       date_format = "%Y-%m-%d",
@@ -109,6 +130,9 @@ return {
         end,
         ["time:GGGG-[W]WW-E"] = function()
           return vim.fn.strftime("%G-W%V-%u")
+        end,
+        ["time:GGGG-DDDD"] = function()
+          return vim.fn.strftime("%G-%j")
         end,
         ["time:GGGG-[W]WW"] = function()
           return vim.fn.strftime("%G-W%V")
@@ -124,15 +148,27 @@ return {
     note_id_func = function(title)
       return title
     end,
+    attachments = {
+      img_folder = "attachments/",
+      -- img_name_func = function ()
+      --     return string.format("%s-", os.time())
+      -- end
+    },
 
     -- neovim config
     ui = {
       enable = false,
+      -- checkoxes = {
+      --   [" "] = { char = "󰄱", hl_group = "ObsidianTodo" },
+      --   ["x"] = { char = "", hl_group = "ObsidianDone" },
+      --   ["/"] = { char = "", hl_group = "ObsidianRightArrow" },
+      -- },
     },
     completion = {
       nvim_cmp = true,
       blink = false,
     },
+    mappings = {}, -- disable builtin mappings
     picker = {
       name = "fzf-lua", -- 그냥 vim.ui.select 사용하는 옵션은 없나?
     },
@@ -144,11 +180,6 @@ return {
       -- vim.fn.jobstart({ "xdg-open", img })
       vim.ui.open(img)
     end,
-    attachments = {
-      -- img_name_func = function ()
-      --     return string.format("%s-", os.time())
-      -- end
-    },
   },
   config = function(_, opts)
     require("obsidian").setup(opts)
@@ -166,7 +197,13 @@ return {
           rules = {
             {
               plugin = "obsidian.nvim",
-              icon = "", -- nf-seti-markdown
+              -- icon = "", -- nf-seti-markdown
+              icon = "󰧑", -- nf-md-brain
+              color = "purple",
+            },
+            {
+              pattern = "obsidian",
+              icon = "󰧑", -- nf-md-brain
               color = "purple",
             },
           },
