@@ -8,8 +8,15 @@ return {
   [1] = "neovim/nvim-lspconfig",
   optional = true,
   opts = {
+    -- ---@type lspconfig.options
     servers = {
-      typos_lsp = { enabled = true },
+      typos_lsp = {
+        enabled = true,
+        init_options = {
+          config = vim.fn.stdpath("config") .. "typos.toml",
+          diagnosticSeverity = "Warning",
+        },
+      },
     },
   },
   specs = {

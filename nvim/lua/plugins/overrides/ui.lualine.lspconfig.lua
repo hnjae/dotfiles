@@ -13,9 +13,10 @@ local spec = {
     local suppress_sources = {
       ["null-ls"] = true,
       ["copilot"] = true,
+      ["typos_lsp"] = true,
     }
     local rename_sources = {
-      typos_lsp = "typos",
+      -- typos_lsp = "typos",
     }
 
     ---@param icon string

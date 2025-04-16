@@ -36,7 +36,7 @@ return {
     -- vim.notify(vim.inspect(opts.sections.lualine_x))
 
     -- HACK: LazyVim 14 기준 위치
-    table.remove(opts.sections.lualine_x, 3) --remove noice.api.statuse.mode
+    table.remove(opts.sections.lualine_x, 3) --remove noice.api.status.mode
 
     -- disable clock time
     opts.sections.lualine_z = {
@@ -48,6 +48,15 @@ return {
     opts.options.theme = get_theme()
     opts.options.component_separators = { left = "|", right = "|" }
     opts.options.section_separators = ""
+
+    -- opts.options.component_separators = { left = "", right = "" }
+    -- opts.options.section_separators = { left = "", right = "" }
+
+    -- opts.options.component_separators = { left = "", right = "" }
+    -- opts.options.section_separators = { left = "", right = "" }
+
+    -- opts.options.component_separators = { left = "", right = "" }
+    -- opts.options.section_separators = { left = "", right = "" }
 
     -- When set to true, left sections i.e. 'a','b' and 'c'
     -- can't take over the entire statusline even

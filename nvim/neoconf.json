@@ -37,10 +37,11 @@
     "cssls": {
       "css.lint.unknownAtRules": "ignore"
     },
+    // not working
     "copilot": {
       "telemetry": {
         "telemetryLevel": "off"
       }
-    }
+    },
   }
 }
