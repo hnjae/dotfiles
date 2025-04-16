@@ -47,7 +47,7 @@ return {
         preview = false,
         layout = {
           -- default 50:
-          width = 34,
+          width = 32,
         },
       },
     }

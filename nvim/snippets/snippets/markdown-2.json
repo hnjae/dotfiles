@@ -171,5 +171,30 @@
         ],
         "description": "Math Expression",
         "body": "\\$\\$${0:$TM_SELECTED_TEXT}\\$\\$"
+    },
+    "date_before2": {
+        "prefix": "dba",
+        "description": "date_before front matter",
+        "body": "date_before: 2023-10"
+    },
+    "date_before": {
+        "prefix": "dbl",
+        "description": "date_before front matter",
+        "body": "date_before: 2025-04-11"
+    },
+    "lastmod": {
+        "prefix": "lm",
+        "description": "lastmod front matter",
+        "body": "latmod: $CURRENT_YEAR-$CURRENT_MONTH-${CURRENT_DATE}T$CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND$CURRENT_TIMEZONE_OFFSET"
+    },
+    "frontmatter": {
+        "prefix": "fm",
+        "description": "front matter",
+        "body": [
+            "---",
+            "date_before: 2025-04-11",
+            "lastmod: $CURRENT_YEAR-$CURRENT_MONTH-${CURRENT_DATE}T$CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND$CURRENT_TIMEZONE_OFFSET",
+            "---"
+        ]
     }
 }

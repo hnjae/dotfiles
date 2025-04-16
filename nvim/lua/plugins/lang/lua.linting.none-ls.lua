@@ -10,6 +10,8 @@ return {
     opts.sources = vim.list_extend(opts.sources or {}, {
       nls.builtins.diagnostics.selene,
     })
+
+    return opts
   end,
 
   specs = {

@@ -38,6 +38,12 @@ git restore -s <commit> -- <file>
 ; creating commits; merge
 ;############################################################################
 
+# View "our" version of the file
+git show :1:<conflicted-file>
+
+# View "theirs" version of the file
+git show :3:<conflicted-file>
+
 # remove specific commit
 git revert <commit>
 

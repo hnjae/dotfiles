@@ -1,6 +1,6 @@
 ---@type LazySpec
 return {
-  [1] = "nvimtools/none-ls.nvim",
+  [1] = "none-ls.nvim",
   version = false,
   event = "LazyFile",
   dependencies = { "mason.nvim" },
