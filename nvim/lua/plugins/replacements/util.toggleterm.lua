@@ -85,15 +85,17 @@ return {
     float_opts = {
       border = "rounded",
       width = function()
-        if vim.o.columns >= 100 then
-          return 100
+        local max = 120
+        if vim.o.columns >= max then
+          return max
         end
 
         return vim.o.columns
       end,
       height = function()
-        if vim.o.lines - 3 >= 30 then
-          return 30
+        local max = 36
+        if vim.o.lines - 3 >= max then
+          return max
         end
 
         return vim.o.lines - 3

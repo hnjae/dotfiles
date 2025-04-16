@@ -120,14 +120,13 @@ return {
               spinner_color = colors.winbar,
               status = {
                 icons = {
-                  -- enabled = " ",
+                  -- enabled = " ", --nf-oct-copilot
                   -- sleep = " ", -- auto-trigger disabled
                   -- disabled = " ",
                   -- warning = " ",
+
                   -- NOTE: Use nf-oct variant to match icon size of above elements <2025-01-02>
                   unknown = " ", -- nf-oct-skip
-                  -- unknown = "󰅜 ",
-                  -- unknown = " ",
                 },
                 hl = {
                   enabled = colors.winbar,

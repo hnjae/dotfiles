@@ -30,7 +30,7 @@ return {
 
   extension = "", -- nf-oct-rocket
   workflow = "", --nf-oct-workflow
-  message = "󰍡", -- nf-md-message
+  message = "󰍡 ", -- nf-md-message
   zap = "⚡", --nf-oct-zap  (해치우다)
   -- 
   git = "", -- nf-oct-git_branch

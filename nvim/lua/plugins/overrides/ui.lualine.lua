@@ -33,6 +33,10 @@ return {
 
     --  remove progress/location
     opts.sections.lualine_y = {}
+    -- vim.notify(vim.inspect(opts.sections.lualine_x))
+
+    -- HACK: LazyVim 14 기준 위치
+    table.remove(opts.sections.lualine_x, 3) --remove noice.api.statuse.mode
 
     -- disable clock time
     opts.sections.lualine_z = {
