@@ -44,15 +44,20 @@ return {
         desc = "luasnip-previous",
       },
 
-      {
-        -- ipe
-        [1] = "<Leader>sp",
-        mode = "n",
-        [2] = "<cmd>LuaSnipListAvailable<CR>",
-        desc = "Snippets (Luasnip)",
-      },
+      -- {
+      --   [1] = "<Leader>sp",
+      --   mode = "n",
+      --   [2] = "<cmd>LuaSnipListAvailable<CR>",
+      --   desc = "Snippets (Luasnip)",
+      -- },
       {
         [1] = "<F4>",
+        mode = "n",
+        [2] = "<cmd>EditSnippet<CR>",
+        desc = "edit-snippet (Luasnip)",
+      },
+      {
+        [1] = "<Leader>fp",
         mode = "n",
         [2] = "<cmd>EditSnippet<CR>",
         desc = "edit-snippet (Luasnip)",

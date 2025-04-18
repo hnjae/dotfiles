@@ -101,12 +101,15 @@ return {
 
 - file: {{filename}}
 {{optional_headers}}
+
+```
 | ------- | ---------------------- | ---------------------------- |
 | Respond | `{{respond_shortcut}}` | `:{{cmd_prefix}}ChatRespond` |
 | Stop    | `{{stop_shortcut}}`    | `:{{cmd_prefix}}ChatStop`    |
 | Delete  | `{{delete_shortcut}}`  | `:{{cmd_prefix}}ChatDelete.` |
 | New     | `{{new_shortcut}}`     | `:{{cmd_prefix}}ChatNew.`    |
 | ------- | ---------------------- | ---------------------------- |
+```
 
 Chats are saved automatically.
 ---
@@ -311,7 +314,8 @@ Primary Tasks:
     { [1] = tprefix .. "p",    mode = "v", [2] = ":<C-u>'<,'>GpProofread<CR>", desc = "gp-proofread" },
 
     -- match LazyVim's key mappnig convention
-    { [1] = "<Leader>s" .. keyword, mode = "n", [2] = "<cmd>GpChatFinder<CR>", desc = "gp-chat (Gp)" },
+    -- { [1] = "<Leader>s" .. keyword, mode = "n", [2] = "<cmd>GpChatFinder<CR>", desc = "gp-chat (Gp)" },
+    { [1] = "<Leader>f" .. keyword, mode = "n", [2] = "<cmd>GpChatFinder<CR>", desc = "gp-chat (Gp)" },
   },
   specs = {
     {
