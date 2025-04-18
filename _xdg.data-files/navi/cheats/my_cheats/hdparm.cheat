@@ -1,7 +1,14 @@
 % hdparm
 
 #  spindown
-hdparm -y "/device/<device>"
+hdparm -y "/dev/<device>"
 
 # idle
-hdparm -S <0..255> "/device/<device>"
+hdparm -S <0..255> "/dev/<device>"
+
+# findout sector size
+hdparm -I "/dev/<device>" | grep 'Sector size:'
+
+# set native sector size (should reboot after this?)
+hdparm --set-sector-size 4096 "/dev/<device>"
+

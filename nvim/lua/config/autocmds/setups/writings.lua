@@ -10,10 +10,12 @@ M.setup = function()
       "vimwiki",
       "org",
       "tex",
+      "typst",
       "plaintex",
       "man",
       "asciidoc",
       "asciidoctor",
+      "rst",
     },
     callback = function()
       vim.cmd([[
@@ -169,6 +171,12 @@ M.setup = function()
           " Unicode
           iabbr <buffer> -> →
           iabbr <buffer> <- ←
+          iabbr <buffer> <-> ↔
+          iabbr <buffer> => ⇒
+          iabbr <buffer> <= ⇐
+          iabbr <buffer> ==> ⟹
+          iabbr <buffer> <== ⟸
+          iabbr <buffer> <==> ⟺
         ]])
     end,
   })
