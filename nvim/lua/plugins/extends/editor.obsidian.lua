@@ -60,18 +60,6 @@ return {
       ft = "markdown",
     },
     {
-      [1] = "<leader><leader>",
-      [2] = "<cmd>ObsidianQuickSwitch<CR>",
-      desc = "obsidian-quick-switch",
-      ft = "markdown",
-    },
-    {
-      [1] = "<leader>ff",
-      [2] = "<cmd>ObsidianQuickSwitch<CR>",
-      desc = "obsidian-quick-switch",
-      ft = "markdown",
-    },
-    {
       [1] = "<leader>tX",
       [2] = "<cmd>ObsidianOpen<CR>",
       desc = "open-in-obsidian",
@@ -92,12 +80,6 @@ return {
         return require("obsidian").util.toggle_checkbox({ "x" })
       end,
       desc = "checkbox-done",
-      ft = "markdown",
-    },
-    {
-      [1] = "<leader>sg",
-      [2] = "<cmd>ObsidianSearch<CR>",
-      desc = "obsidian-search (ripgrep)",
       ft = "markdown",
     },
   },
@@ -156,6 +138,27 @@ return {
     },
 
     -- neovim config
+    mappings = {
+      -- override lazyvim's mapping
+      ["<leader>sg"] = {
+        action = "<cmd>ObsidianSearch<CR>",
+        opts = {
+          desc = "obsidian-search (ripgrep)",
+        },
+      },
+      ["<leader><leader>"] = {
+        action = "<cmd>ObsidianQuickSwitch<CR>",
+        opts = {
+          desc = "obsidian-quick-switch",
+        },
+      },
+      ["<leader>ff"] = {
+        action = "<cmd>ObsidianQuickSwitch<CR>",
+        opts = {
+          desc = "obsidian-quick-switch",
+        },
+      },
+    },
     ui = {
       enable = false,
       -- checkoxes = {
@@ -168,7 +171,6 @@ return {
       nvim_cmp = true,
       blink = false,
     },
-    mappings = {}, -- disable builtin mappings
     picker = {
       name = "fzf-lua", -- 그냥 vim.ui.select 사용하는 옵션은 없나?
     },

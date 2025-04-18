@@ -311,7 +311,7 @@ Primary Tasks:
     { [1] = tprefix .. "p",    mode = "v", [2] = ":<C-u>'<,'>GpProofread<CR>", desc = "gp-proofread" },
 
     -- match LazyVim's key mappnig convention
-    { [1] = "<Leader>f" .. keyword, mode = "n", [2] = "<cmd>GpChatFinder<CR>", desc = "gp-chat (Gp)" },
+    { [1] = "<Leader>s" .. keyword, mode = "n", [2] = "<cmd>GpChatFinder<CR>", desc = "gp-chat (Gp)" },
   },
   specs = {
     {

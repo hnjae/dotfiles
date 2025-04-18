@@ -109,3 +109,6 @@ zfs set primarycache=metadata <filesystem>
 ; zfs allow <subcommad> -u <user> <filesystem|volume>
 # create zvol
 zfs create -b <blocksize> -V <size> <zpool>/<zvol-name>
+
+# attach existing disk to zpool to makey mirror v-dev
+sudo zpool attach <poolName> <diskName> <NewDiskPath>

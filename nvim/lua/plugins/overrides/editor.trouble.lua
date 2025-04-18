@@ -8,11 +8,11 @@ return {
     },
     modes = {
       symbols = {
-        auto_open = true,
+        auto_open = false,
         ---@type trouble.Window.opts
         win = {
           -- default: 30?
-          size = 28,
+          size = 26,
         },
       },
     },

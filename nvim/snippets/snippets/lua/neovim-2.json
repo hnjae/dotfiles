@@ -25,7 +25,7 @@
         ],
         "description": "create autocmd",
         "body": [
-            "vim.api.nvim_creat_autocmd(\"${1:FileType}\", {",
+            "vim.api.nvim_creatE_autocmd(\"${1:FileType}\", {",
             "\tpattern = { ${2:\"asciidoc\"} },",
             "\tcallback = function ()",
             "\t\t${0:${TM_SELECTED_TEXT:-- do something}}",

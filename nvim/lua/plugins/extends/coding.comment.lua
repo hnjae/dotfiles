@@ -19,7 +19,7 @@ return {
   enabled = true,
   dependencies = {
     {
-      [1] = "JoosepAlviste/nvim-ts-context-commentstring",
+      [1] = "nvim-ts-context-commentstring",
       optional = true,
     },
   },

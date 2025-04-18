@@ -7,16 +7,26 @@
         "prefix": "a",
         "body": "await $0"
     },
-    "function": {
+    "const xxx = function": {
         "prefix": [
-            "fun",
-            "fn",
-            "cfn",
-            "cfun"
+            "cfun",
+            "cfn"
         ],
         "description": "\"function\"",
         "body": [
             "const ${1:name} = function (${2:arguments}) {",
+            "\t$0",
+            "}"
+        ]
+    },
+    "function": {
+        "prefix": [
+            "fun",
+            "fn"
+        ],
+        "description": "\"function\"",
+        "body": [
+            "function (${2:arguments}) {",
             "\t$0",
             "}"
         ]
