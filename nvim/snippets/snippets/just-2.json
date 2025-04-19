@@ -1,20 +1,93 @@
 {
+    "shebang: #!/usr/bin/env -S just --justfile": {
+        "prefix": [
+            "shebang",
+            "#env"
+        ],
+        "description": "Adds shebang line",
+        "body": "#!/usr/bin/env -S just --justfile"
+    },
+    "boilerplate": {
+        "prefix": "boilerplate",
+        "description": "\"justfile boilerplate\"",
+        "body": [
+            "#!/usr/bin/env -S just --justfile",
+            "",
+            "# set working-directory := 'bar'",
+            "",
+            "alias fmt := format",
+            "hostname := ``",
+            "",
+            "_:",
+            "\t@just --list",
+            "",
+            "format:",
+            "\tnix fmt",
+            "",
+            "build:",
+            "\ttypst c *.typ",
+            "",
+            "test-all: build",
+            "\t./test --all",
+            "",
+            "test TEST: build",
+            "\t./test --test {{TEST\\}\\}",
+            "",
+            "[working-directory: 'bar']",
+            "@foo:",
+            "\tpwd",
+            ""
+        ]
+    },
+    "boilerplate-child": {
+        "prefix": "boilerplate-child",
+        "description": "justfile boilerplate for child",
+        "body": [
+            "#!/usr/bin/env -S just --justfile",
+            "",
+            "set fallback",
+            "",
+            "_:",
+            "\t@just --list",
+            "",
+            "build:",
+            "\ttypst c *.typ",
+            "",
+            "test-all: build",
+            "\t./test --all",
+            "",
+            "test TEST: build",
+            "\t./test --test {{TEST\\}\\}",
+            "",
+            "[working-directory: 'bar']",
+            "@foo:",
+            "\tpwd",
+            ""
+        ]
+    },
     "set dotenv-load": {
-        "prefix": "sdotenvload",
+        "prefix": [
+            "set-dotenv-load"
+        ],
         "description": "load dotenv",
         "body": [
             "set dotenv-load"
         ]
     },
     "set fallback": {
-        "prefix": "sfallback",
+        "prefix": [
+            "set-fallback"
+        ],
         "description": "fallback",
         "body": [
             "set fallback"
         ]
     },
     "set working-directory": {
-        "prefix": "swdir",
+        "prefix": [
+            "swd",
+            "set-working-directory"
+        ],
         "description": "working-directory",
         "body": [
             "set working-directory := '${0:dir}'"
@@ -166,38 +239,6 @@
             "\t${0:${TM_SELECTED_TEXT:echo 'true'}}; \\"
         ]
     },
-    "boilerplate": {
-        "prefix": "boilerplate",
-        "description": "\"justfile boilerplate\"",
-        "body": [
-            "#!/usr/bin/env -S just --justfile",
-            "",
-            "# set working-directory := 'bar'",
-            "",
-            "alias fmt := format",
-            "hostname := ``",
-            "",
-            "_:",
-            "\t@just --list",
-            "",
-            "format:",
-            "\tnix fmt",
-            "",
-            "build:",
-            "\ttypst c *.typ",
-            "",
-            "test-all: build",
-            "\t./test --all",
-            "",
-            "test TEST: build",
-            "\t./test --test {{TEST\\}\\}",
-            "",
-            "[working-directory: 'bar']",
-            "@foo:",
-            "\tpwd",
-            ""
-        ]
-    },
     "Tmux Dev (Recipe)": {
         "prefix": "stmux-devs",
         "description": "run multiple commands in tmux",
@@ -253,5 +294,47 @@
             "\tprint(\"Hello, World!\")",
             "\t$0"
         ]
+    },
+    "set working-directory for recipe": {
+        "prefix": [
+            "wd"
+        ],
+        "description": "working-directory for recipe",
+        "body": "[workinging-directory: '${0:$TM_SELECTED_TEXT}']"
+    },
+    "positional-arguments for recipe": {
+        "prefix": [
+            "pos",
+            "positional-arguments"
+        ],
+        "body": "[positional-arguments]"
+    },
+    "doc for recipe": {
+        "prefix": [
+            "doc"
+        ],
+        "body": "[doc('${0:$TM_SELECTED_TEXT}')]"
+    },
+    "confirm for recipe": {
+        "prefix": [
+            "confirm",
+            "con"
+        ],
+        "body": "[confirm('${0:$TM_SELECTED_TEXT}')]"
+    },
+    "group for recipe": {
+        "prefix": [
+            "group",
+            "gro"
+        ],
+        "body": "[group('${0:$TM_SELECTED_TEXT}')]"
+    },
+    "private": {
+        "prefix": [
+            "private",
+            "pri"
+        ],
+        "description": "make recipe, alias or variable private",
+        "body": "[private]"
     }
 }

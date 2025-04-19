@@ -42,10 +42,10 @@ return {
     { [1] = "<C-CR>", [2] = "<cmd>ObsidianFollowLink<CR>", desc = "follow-link", ft = "markdown" },
     -- <leader>t: neotest
     { [1] = "<leader>tt", [2] = "<cmd>ObsidianToday<CR>", desc = "today", ft = "markdown" },
-    { [1] = "<leader>tr", [2] = "<cmd>ObsidianTomorrow<CR>", desc = "tomorrow", ft = "markdown" },
+    { [1] = "<leader>tm", [2] = "<cmd>ObsidianTomorrow<CR>", desc = "tomorrow", ft = "markdown" },
     { [1] = "<leader>ty", [2] = "<cmd>ObsidianYesterday<CR>", desc = "yesterday", ft = "markdown" },
     { [1] = "<leader>tT", [2] = "<cmd>ObsidianTemplate<CR>", desc = "template", ft = "markdown" },
-    { [1] = "<leader>tR", [2] = "<cmd>ObsidianRename<CR>", desc = "rename", ft = "markdown" },
+    { [1] = "<leader>tr", [2] = "<cmd>ObsidianRename<CR>", desc = "rename", ft = "markdown" },
     {
       [1] = "<leader>tj",
       [2] = "<cmd>ObsidianDailies<CR>",

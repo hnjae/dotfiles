@@ -16,5 +16,14 @@ return {
   ---@type Flash.Config
   opts = {
     labels = "setnriaodhfuplwyc,vkx.gmbq;/jz", -- sorted by colemak-dh typing effort
+    label = {
+      rainbow = {
+        -- enabled = true,
+      },
+    },
+    char = {
+      enabled = false, -- disable f/F/t/T
+      -- autohide = true,
+    },
   },
 }

@@ -1,130 +1,175 @@
 {
-  "shebang: #!/usr/bin/env python3": {
-    "prefix": ["shebang", "#env"],
-    "description": "Adds shebang line for default python interpreter.",
-    "body": "#!/usr/bin/env python3\n$0"
-  },
-  "if __name__ == __main__": {
-    "prefix": ["ifm", "ifmain"],
-    "description": "Execute code if the file is executed directly",
-    "body": ["if __name__ == \"__main__\":", "\t${1:main()}$0"]
-  },
-  "import": {
-    "prefix": ["import", "im"],
-    "description": "Import a package or module (`im`)",
-    "body": "import ${1:datetime}"
-  },
-  "from ... import ...": {
-    "prefix": ["fromimport", "fim"],
-    "description": "Import individual objects directly into the caller’s symbol table (`fim`)",
-    "body": "from ${1:pathlib} import ${2:Path}"
-  },
-  "import annotion": {
-    "prefix": ["fima", "ima"],
-    "body": "from __future__ import annotations"
-  },
-  "import Path": {
-    "prefix": ["fimp", "imp"],
-    "body": "from pathlib import Path\n$0"
-  },
-  "import TYPE_CHEKING": {
-    "prefix": ["fimtc", "imtc"],
-    "body": "from typing import TYPE_CHECKING"
-  },
-  "ift": {
-    "prefix": "iftc",
-    "description": "import something under TYPE_CHEKING",
-    "body": ["if TYPE_CHECKING:", "\t${0:from pathlib import Path}"]
-  },
-  "def (function)": {
-    "prefix": ["def", "de", "fn"],
-    "description": "Function definition",
-    "body": [
-      "def ${1:function_name}($2) -> ${3:None}:",
-      "\t${0:${TM_SELECTED_TEXT:pass}}"
-    ]
-  },
-  "if": {
-    "prefix": "if",
-    "description": "if statement",
-    "body": ["if ${1:condition}:", "\t${0:${TM_SELECTED_TEXT:pass}}"]
-  },
-  "elif": {
-    "prefix": ["elif"],
-    "description": "elif statement",
-    "body": ["elif ${1:expression}:", "\t${2:${TM_SELECTED_TEXT:pass}}"]
-  },
-  "else": {
-    "prefix": "else",
-    "description": "else statement",
-    "body": ["else:", "\t${1:${TM_SELECTED_TEXT:pass}}"]
-  },
-  "if/else": {
-    "prefix": "ifelse",
-    "description": "if statement with else",
-    "body": [
-      "if ${1:condition}:",
-      "\t${2:${TM_SELECTED_TEXT:pass}}",
-      "else:",
-      "\t${3:pass}"
-    ]
-  },
-  "for": {
-    "prefix": "for",
-    "description": "for loop",
-    "body": [
-      "for ${1:value} in ${2:iterable}:",
-      "\t${3:${TM_SELECTED_TEXT:pas}}"
-    ]
-  },
-  "for w/ range": {
-    "prefix": "forr",
-    "description": "for loop that iterates over range of integers",
-    "body": ["for ${1:value} in range($2):", "\t${3:${TM_SELECTED_TEXT:pass}}"]
-  },
-  "logging.basicConfig": {
-    "prefix": "slogconfig",
-    "description": "recipe of logger configuration",
-    "body": [
-      "logging.basicConfig(",
-      "\tlevel=logging.INFO,",
-      "\tformat=\"%(asctime)s %(levelname)s: %(message)s\",",
-      "\tdatefmt=\"%Y-%m-%dT%H:%M:%S%z\",",
-      ")",
-      "logger = logging.getLogger(__name__)"
-    ]
-  },
-  "log": {
-    "prefix": "log",
-    "description": "log",
-    "body": "logger.info(\"${0:%s msg}\")"
-  },
-  "ter": {
-    "prefix": "ter",
-    "description": "ternary operator",
-    "body": "${1:true-value} if ${2:condition} else \"${3:false-value}\""
-  },
-  "docf": {
-    "prefix": "docf",
-    "description": "RST Style docstring",
-    "body": [
-      "\"\"\"",
-      "$0",
-      ":param arg1 int: description",
-      ":raises ValueError: description",
-      ":return: description",
-      ":rtype: bool",
-      "",
-      ":example:",
-      ">>> a=1",
-      ">>> fucn_name(a)",
-      "True",
-      "\"\"\""
-    ]
-  },
-  "doc": {
-    "prefix": "doc",
-    "description": "Oneline docstring",
-    "body": "\"\"\"$0.\"\"\""
-  }
+    "shebang: #!/usr/bin/env python3": {
+        "prefix": [
+            "shebang",
+            "#env"
+        ],
+        "description": "Adds shebang line for default python interpreter.",
+        "body": "#!/usr/bin/env python3\n$0"
+    },
+    "if __name__ == __main__": {
+        "prefix": [
+            "ifm",
+            "ifmain"
+        ],
+        "description": "Execute code if the file is executed directly",
+        "body": [
+            "if __name__ == \"__main__\":",
+            "\t${1:main()}$0"
+        ]
+    },
+    "import": {
+        "prefix": [
+            "import",
+            "im"
+        ],
+        "description": "Import a package or module (`im`)",
+        "body": "import ${1:datetime}"
+    },
+    "from ... import ...": {
+        "prefix": [
+            "fromimport",
+            "fim"
+        ],
+        "description": "Import individual objects directly into the caller’s symbol table (`fim`)",
+        "body": "from ${1:pathlib} import ${2:Path}"
+    },
+    "import annotation": {
+        "prefix": [
+            "fima",
+            "ima"
+        ],
+        "body": "from __future__ import annotations"
+    },
+    "import Path": {
+        "prefix": [
+            "fimp",
+            "imp"
+        ],
+        "body": "from pathlib import Path\n$0"
+    },
+    "import TYPE_CHECKING": {
+        "prefix": [
+            "fimtc",
+            "imtc"
+        ],
+        "body": "from typing import TYPE_CHECKING"
+    },
+    "ift": {
+        "prefix": "iftc",
+        "description": "import something under TYPE_CHECKING",
+        "body": [
+            "if TYPE_CHECKING:",
+            "\t${0:from pathlib import Path}"
+        ]
+    },
+    "def (function)": {
+        "prefix": [
+            "def",
+            "de",
+            "fn"
+        ],
+        "description": "Function definition",
+        "body": [
+            "def ${1:function_name}($2) -> ${3:None}:",
+            "\t${0:${TM_SELECTED_TEXT:pass}}"
+        ]
+    },
+    "if": {
+        "prefix": "if",
+        "description": "if statement",
+        "body": [
+            "if ${1:condition}:",
+            "\t${0:${TM_SELECTED_TEXT:pass}}"
+        ]
+    },
+    "elif": {
+        "prefix": [
+            "elif"
+        ],
+        "description": "elif statement",
+        "body": [
+            "elif ${1:expression}:",
+            "\t${2:${TM_SELECTED_TEXT:pass}}"
+        ]
+    },
+    "else": {
+        "prefix": "else",
+        "description": "else statement",
+        "body": [
+            "else:",
+            "\t${1:${TM_SELECTED_TEXT:pass}}"
+        ]
+    },
+    "if/else": {
+        "prefix": "ifelse",
+        "description": "if statement with else",
+        "body": [
+            "if ${1:condition}:",
+            "\t${2:${TM_SELECTED_TEXT:pass}}",
+            "else:",
+            "\t${3:pass}"
+        ]
+    },
+    "for": {
+        "prefix": "for",
+        "description": "for loop",
+        "body": [
+            "for ${1:value} in ${2:iterable}:",
+            "\t${3:${TM_SELECTED_TEXT:pas}}"
+        ]
+    },
+    "for w/ range": {
+        "prefix": "forr",
+        "description": "for loop that iterates over range of integers",
+        "body": [
+            "for ${1:value} in range($2):",
+            "\t${3:${TM_SELECTED_TEXT:pass}}"
+        ]
+    },
+    "logging.basicConfig": {
+        "prefix": "slogconfig",
+        "description": "recipe of logger configuration",
+        "body": [
+            "logging.basicConfig(",
+            "\tlevel=logging.INFO,",
+            "\tformat=\"%(asctime)s %(levelname)s: %(message)s\",",
+            "\tdatefmt=\"%Y-%m-%dT%H:%M:%S%z\",",
+            ")",
+            "logger = logging.getLogger(__name__)"
+        ]
+    },
+    "log": {
+        "prefix": "log",
+        "description": "log",
+        "body": "logger.info(\"${0:%s msg}\")"
+    },
+    "ter": {
+        "prefix": "ter",
+        "description": "ternary operator",
+        "body": "${1:true-value} if ${2:condition} else \"${3:false-value}\""
+    },
+    "docf": {
+        "prefix": "docf",
+        "description": "RST Style docstring",
+        "body": [
+            "\"\"\"",
+            "$0",
+            ":param arg1 int: description",
+            ":raises ValueError: description",
+            ":return: description",
+            ":rtype: bool",
+            "",
+            ":example:",
+            ">>> a=1",
+            ">>> fucn_name(a)",
+            "True",
+            "\"\"\""
+        ]
+    },
+    "doc": {
+        "prefix": "doc",
+        "description": "Oneline docstring",
+        "body": "\"\"\"$0.\"\"\""
+    }
 }

@@ -15,6 +15,14 @@
         "description": "This is bash script",
         "body": "#!/usr/bin/env bash\n$0"
     },
+    "set eu (posix)": {
+        "prefix": "seteu",
+        "body": "set -eu"
+    },
+    "set euo (bash)": {
+        "prefix": "seteuob",
+        "body": "set -euo pipefail"
+    },
     "array (bash)": {
         "prefix": "arrb",
         "description": "array (bash)",

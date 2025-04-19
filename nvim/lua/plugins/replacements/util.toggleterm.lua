@@ -93,12 +93,20 @@ return {
         return vim.o.columns
       end,
       height = function()
-        local max = 36
-        if vim.o.lines - 3 >= max then
+        local max, min = 36, 24
+        if vim.o.lines - 4 >= max then
           return max
         end
 
-        return vim.o.lines - 3
+        if vim.o.lines - 4 < min then
+          if vim.o.lines >= min then
+            return min
+          end
+
+          return vim.o.lines
+        end
+
+        return vim.o.lines - 4
       end,
     },
   },

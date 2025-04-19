@@ -36,7 +36,26 @@ return {
     -- vim.notify(vim.inspect(opts.sections.lualine_x))
 
     -- HACK: LazyVim 14 기준 위치
-    table.remove(opts.sections.lualine_x, 3) --remove noice.api.status.mode
+    -- table.remove(opts.sections.lualine_x, 3) --remove noice.api.status.mode
+    local noice_status_fmt = function(str)
+      if str == nil or str:match("^%-%-[^-]+%-%-$") ~= nil then
+        return ""
+      end
+
+      return str
+    end
+
+    opts.sections.lualine_x[3] = {
+      [1] = function()
+        return noice_status_fmt(require("noice").api.status.mode.get())
+      end,
+      cond = function()
+        return package.loaded["noice"] and require("noice").api.status.mode.has()
+      end,
+      color = function()
+        return { fg = Snacks.util.color("Constant") }
+      end,
+    }
 
     -- disable clock time
     opts.sections.lualine_z = {
