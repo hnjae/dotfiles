@@ -1,6 +1,5 @@
 local wk_icon = {
-  -- icon = " ", -- nf-cod-diff
-  icon = " ", -- nf-oct-diff
+  icon = "󰕛 ", -- nf-md-vector_difference_ab
   color = "orange",
 }
 
@@ -55,11 +54,13 @@ return {
       optional = true,
       -- ---@type wk.Opts
       opts = {
+        ---@type wk.IconRule[]
         icons = {
           rules = {
             { plugin = "diffview.nvim", icon = wk_icon.icon, color = wk_icon.color },
           },
         },
+        ---@type wk.Spec[]
         spec = {
           { [1] = "<Leader>gd", mode = { "n", "v" }, group = "diffview", icon = wk_icon },
         },

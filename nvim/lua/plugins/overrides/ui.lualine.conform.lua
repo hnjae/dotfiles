@@ -3,7 +3,7 @@ local spec = {
   [1] = "lualine.nvim",
   optional = true,
   opts = function(_, opts)
-    local formatter_icon = (require("globals").icons.sort .. " ")
+    local formatter_icon = require("globals").icons.sort
 
     local hide_width = 65
     local truc_width = 110

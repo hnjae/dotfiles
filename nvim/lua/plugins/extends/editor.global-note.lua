@@ -42,7 +42,7 @@ return {
           rules = {
             {
               plugin = "global-note.nvim",
-              icon = "", -- nf-fa-sticky_note_o
+              icon = " ", -- nf-fa-sticky_note_o
               color = "orange",
             },
           },

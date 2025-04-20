@@ -92,7 +92,8 @@ return {
       optional = true,
       ---@class opts wk.Opts
       opts = function(_, opts)
-        local icon = "" -- nf-oct-comment
+        -- local icon = "󰅺 " -- nf-md-comment
+        local icon = " " -- nf-cod-comment
         local color = "grey"
 
         opts.icons = opts.icons or {}

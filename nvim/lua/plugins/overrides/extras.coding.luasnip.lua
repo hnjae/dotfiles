@@ -96,7 +96,7 @@ return {
           rules = {
             {
               plugin = "LuaSnip",
-              icon = "", -- nf-cod-symbol_snippet
+              icon = " ", -- nf-cod-symbol_snippet
               color = "green", -- in gruvbox.nvim, BlinkCmpKindSnippet is linked to green <2025-04-09>
             },
           },

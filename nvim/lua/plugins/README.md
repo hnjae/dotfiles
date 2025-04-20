@@ -22,8 +22,8 @@
     -  : nf-fa-ban
     -  : nf-oct-skip
     -  : nf-seti-github
-    -  : nf-cod-circle_slash
-    -  : nf-cod-github
-    -  : nf-cod-error
     - 󰀚 : nf-md-adjust
     - 󰠆 : nf-md-basketball
+    -  : nf-cod-error
+    -  : nf-cod-circle_slash
+    -  : nf-cod-github

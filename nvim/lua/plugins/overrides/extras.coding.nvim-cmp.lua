@@ -7,6 +7,13 @@ return {
   optional = true,
   ---@param opts cmp.ConfigSchema
   opts = function(_, opts)
+    -- disable transparency
+    vim.opt.pumblend = 0
+    vim.cmd([[
+      hi Pmenu blend=0
+      hi PmenuSel blend=0
+    ]])
+
     local cmp = require("cmp")
 
     -- disable preselect
@@ -23,11 +30,13 @@ return {
       nvim_lsp = "LSP",
     }
 
-    local kind_icons = vim.deepcopy(LazyVim.config.icons.kinds)
     opts.formatting.format = function(entry, item)
-      if kind_icons[item.kind] then
-        item.kind = kind_icons[item.kind] .. item.kind
-      end
+      -- if kind_icons[item.kind] then
+      --   item.kind = kind_icons[item.kind] .. item.kind
+      -- end
+      -- if kind_icons[item.kind] then
+      -- end
+      item.kind = LazyVim.config.icons.kinds[item.kind] or item.kind
       item.menu = string.format("[%s]", source_name_map[entry.source.name] or entry.source.name)
 
       local widths = {

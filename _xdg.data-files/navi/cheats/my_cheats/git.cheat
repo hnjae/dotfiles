@@ -75,7 +75,6 @@ git switch -d <commit>
 # switch to specific tag (== `git checkout <commit>`)
 git switch -d 'tag/<tag>'
 
-
 # make other branch to point commit (use `-f` to force) (or use `git reset --hard` on that branch)
 git branch <branch> <commit>
 
@@ -149,6 +148,9 @@ git clone --recurse-submodules --depth 1 <repository>
 
 # git ssh clone
 git clone --recurse-submodules "git@<githubdotcom>:<owner>/<repo>"
+
+# git clone specific branch
+git clone --recurse-submodules --branch <branch-name> "git@<githubdotcom>:<owner>/<repo>"
 
 ;#############################################################################
 ; misc

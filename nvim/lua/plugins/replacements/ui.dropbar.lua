@@ -9,17 +9,22 @@ return {
   {
     [1] = "Bekaboo/dropbar.nvim",
     version = "*", -- follows sementaic versioning
+    dependencies = { { [1] = "LazyVim", optional = true } }, -- to load icons
 
     lazy = true,
     event = "LspAttach",
 
-    opts = {
-      icons = {
-        kinds = {
-          symbols = vim.deepcopy(LazyVim.config.icons.kinds),
+    opts = function(_, opts)
+      -- use function to get the current config
+      return vim.tbl_deep_extend("keep", opts, {
+        icons = {
+          kinds = {
+            -- symbols = vim.deepcopy(LazyVim.config.icons.kinds),
+            symbols = LazyVim.config.icons.kinds,
+          },
         },
-      },
-    },
+      })
+    end,
   },
   {
     [1] = "lualine.nvim",

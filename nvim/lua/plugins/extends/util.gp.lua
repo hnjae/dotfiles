@@ -14,7 +14,10 @@ TODO:
 local keyword = "i"
 local prefix = "<Leader>" .. keyword
 local tprefix = "<Leader>" .. keyword .. "t" -- task
-local wk_icon = { icon = require("globals").icons.ai, color = "purple" }
+local wk_icon = {
+  icon = require("globals").icons.ai,
+  color = "purple",
+}
 
 ---@type LazySpec
 return {
@@ -323,6 +326,7 @@ Primary Tasks:
       optional = true,
       -- ---@type wk.Opts
       opts = {
+        ---@type wk.IconRule[]
         icons = {
           rules = {
             { plugin = "gp.nvim", icon = wk_icon.icon, color = wk_icon.color },
