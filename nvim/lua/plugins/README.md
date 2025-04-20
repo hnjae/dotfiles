@@ -17,7 +17,7 @@
 
 #### `icons`
 
-- `nf-fa-` 종류는 아이콘이 비정상적으로 큰 것 같다. 가능하면 사용하지 말자.
+- `nf-fa-`, `nf-oct-` 종류는 아이콘이 비정상적으로 큰 것 같다. 가능하면 사용하지 말자.
   - e.g.:
     -  : nf-fa-ban
     -  : nf-oct-skip
@@ -27,3 +27,31 @@
     -  : nf-cod-error
     -  : nf-cod-circle_slash
     -  : nf-cod-github
+
+## Cheat Sheet
+
+#### `:map-table`
+
+```help
+       *map-table*
+         Mode  | Norm | Ins | Cmd | Vis | Sel | Opr | Term | Lang | ~
+Command        +------+-----+-----+-----+-----+-----+------+------+ ~
+[nore]map      | yes  |  -  |  -  | yes | yes | yes |  -   |  -   |
+n[nore]map     | yes  |  -  |  -  |  -  |  -  |  -  |  -   |  -   |
+[nore]map!     |  -   | yes | yes |  -  |  -  |  -  |  -   |  -   |
+i[nore]map     |  -   | yes |  -  |  -  |  -  |  -  |  -   |  -   |
+c[nore]map     |  -   |  -  | yes |  -  |  -  |  -  |  -   |  -   |
+v[nore]map     |  -   |  -  |  -  | yes | yes |  -  |  -   |  -   |
+x[nore]map     |  -   |  -  |  -  | yes |  -  |  -  |  -   |  -   |
+s[nore]map     |  -   |  -  |  -  |  -  | yes |  -  |  -   |  -   |
+o[nore]map     |  -   |  -  |  -  |  -  |  -  | yes |  -   |  -   |
+t[nore]map     |  -   |  -  |  -  |  -  |  -  |  -  | yes  |  -   |
+l[nore]map     |  -   | yes | yes |  -  |  -  |  -  |  -   | yes  |
+```
+
+#### 유용한 vim 함수
+
+- `vim.list_extends`
+- `vim.tbl_filter`
+- `vim.tbl_contains`
+- `vim.tbl_deep_extend`
