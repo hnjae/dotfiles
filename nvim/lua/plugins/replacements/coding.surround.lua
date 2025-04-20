@@ -11,8 +11,7 @@
 -- NOTE: use S in visual-mode <2024-05-09>
 
 local wk_icon = {
-  -- icon = "󰅲 "  -- nf-md-code_parentheses
-  icon = "󰅪 ", -- nf-md-code_brackets
+  icon = "󰨾 ", -- nf-md-contain
   color = "cyan",
 }
 
