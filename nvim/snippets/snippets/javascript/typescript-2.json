@@ -156,12 +156,12 @@
             "}"
         ]
     },
-    "ifelse": {
+    "if/else": {
         "prefix": "ifelse",
         "description": "If-Else Statement",
         "body": [
             "if (${1:condition}) {",
-            "\t$0",
+            "\t${0:$TM_SELECTED_TEXT}",
             "} else {",
             "",
             "}"
@@ -187,8 +187,11 @@
         "description": "\"import type {}\"",
         "body": "import type {$2\\} from '${1:module}';$3"
     },
-    "trycatch": {
-        "prefix": "trycatch",
+    "try/catch": {
+        "prefix": [
+            "trycatch",
+            "tc"
+        ],
         "description": "Try-Catch Statement",
         "body": [
             "try {",
@@ -203,24 +206,9 @@
         "description": "Catch Statement",
         "body": [
             "catch (${1:error}) {",
-            "\t$0",
+            "\t${0:$TM_SELECTED_TEXT}",
             "\\}"
         ]
-    },
-    "Try-Catch Statement": {
-        "prefix": "trycatch",
-        "body": [
-            "try {",
-            "\t$0",
-            "} catch (${1:error}) {",
-            "\t",
-            "}"
-        ],
-        "description": "Try-Catch Statement"
-    },
-    "try/catch": {
-        "prefix": "tc",
-        "body": "try {\n\t${0}\n} catch (${1:err}) {\n\t\n}"
     },
     "try/finally": {
         "prefix": "tf",

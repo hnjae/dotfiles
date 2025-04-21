@@ -112,3 +112,6 @@ zfs create -b <blocksize> -V <size> <zpool>/<zvol-name>
 
 # attach existing disk to zpool to makey mirror v-dev
 sudo zpool attach <poolName> <diskName> <NewDiskPath>
+
+# diff
+zfs diff <snapshot> <snapshot>

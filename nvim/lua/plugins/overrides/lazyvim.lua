@@ -54,8 +54,8 @@ return {
         -- my overrides
         -- Module = "󰆧 ", -- nf-md-cube_outline
         -- Module = "󰮄 ", -- nf-md-cube_scan
-        -- Property = " ", -- nf-oct-tag
-        Property = " ", -- nf-cod-tag
+        Property = "󰓼 ", -- nf-md-tag_outline
+        -- Property = " ", -- nf-cod-tag
         Constant = "󰏿 ", -- nf-md-pi
         Constructor = " ", -- nf-cod-gear
         Function = "󰊕 ", -- nf-md-function
