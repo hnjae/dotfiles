@@ -13,6 +13,8 @@ return {
   optional = true,
   opts = function()
     local groups = require("bufferline.groups")
-    groups.builtin.pinned.icon = " "
+    -- groups.builtin.pinned.icon = "📌" -- nf-oct-pin
+    -- groups.builtin.pinned.icon = "󰤱" -- nf-md-pin
+    groups.builtin.pinned.icon = "" -- nf-oct-pin
   end,
 }

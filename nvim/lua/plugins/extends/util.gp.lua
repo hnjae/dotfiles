@@ -6,9 +6,6 @@ NOTE:
   - 같이 보기:
     * <https://ai.google.dev/pricing>
     * <https://docs.anthropic.com/en/api/messages>
-
-TODO:
-  - gp-chat 경로의 markdown 은 textwidth=0 으로 지정 <2025-04-02>
 ]]
 
 local keyword = "i"
@@ -23,7 +20,7 @@ local wk_icon = {
 return {
   [1] = "Robitx/gp.nvim",
   version = "*", -- NOTE: latest release 2024-08-12 (2025-04-08)
-  commit = "72f4b3a0bd8798afb5dedc9b56129808c890e68c", -- <https://github.com/Robitx/gp.nvim/pull/255>
+  -- commit = "72f4b3a0bd8798afb5dedc9b56129808c890e68c", -- <https://github.com/Robitx/gp.nvim/pull/255>
   pin = true,
   cond = not vim.g.vscode,
 
@@ -105,16 +102,15 @@ return {
 - file: {{filename}}
 {{optional_headers}}
 
-```
-| ------- | ---------------------- | ---------------------------- |
+| Type    | Keyboard | Command          |
+| ------- | -------- | ---------------- |
 | Respond | `{{respond_shortcut}}` | `:{{cmd_prefix}}ChatRespond` |
-| Stop    | `{{stop_shortcut}}`    | `:{{cmd_prefix}}ChatStop`    |
-| Delete  | `{{delete_shortcut}}`  | `:{{cmd_prefix}}ChatDelete.` |
-| New     | `{{new_shortcut}}`     | `:{{cmd_prefix}}ChatNew.`    |
-| ------- | ---------------------- | ---------------------------- |
-```
+| Stop    | `{{stop_shortcut}}` | `:{{cmd_prefix}}ChatStop`    |
+| Delete  | `{{delete_shortcut}}` | `:{{cmd_prefix}}ChatDelete.` |
+| New     | `{{new_shortcut}}` | `:{{cmd_prefix}}ChatNew.`    |
 
 Chats are saved automatically.
+
 ---
 
 {{user_prefix}}
@@ -167,7 +163,6 @@ Chats are saved automatically.
         { name = "ChatCopilot", disable = true },
         { name = "CodeCopilot", disable = true },
         {
-          -- NOTE: can not use o3-mini until <https://github.com/Robitx/gp.nvim/pull/255> merges (2025-04-08)
           provider = "openai",
           name = "openai-mini",
           chat = true,
@@ -309,6 +304,8 @@ Primary Tasks:
     { [1] = prefix .. "N",     mode = "n", [2] = "<cmd>%GpChatNew split<CR>",        desc = "NEW w. buffer (Gp)", },
     { [1] = prefix .. "N",     mode = "v", [2] = ":<C-u>'<,'>GpChatNew split<CR>",   desc = "NEW w. selected (Gp)" },
 
+    { [1] = prefix .. "E",     mode = "n", [2] = "<cmd>GpChatNew<CR>",   desc = "empty-chat (Gp)" },
+
     { [1] = prefix .. "q",     mode = "n", [2] = "<cmd>%GpVnew<CR>",     desc = "Quick (edit-buffer; Gp)", },
     { [1] = prefix .. "q",     mode = "v", [2] = ":<C-u>'<,'>GpNew<CR>", desc = "Quick (edit-selected; Gp)" },
 
@@ -326,12 +323,13 @@ Primary Tasks:
       optional = true,
       -- ---@type wk.Opts
       opts = {
-        ---@type wk.IconRule[]
         icons = {
+          ---@type wk.IconRule[]
           rules = {
             { plugin = "gp.nvim", icon = wk_icon.icon, color = wk_icon.color },
           },
         },
+        ---@type wk.Spec
         spec = {
           { [1] = prefix, mode = { "n", "v" }, group = "gp", icon = wk_icon },
           { [1] = tprefix, mode = { "n", "v" }, group = "task", icon = wk_icon },

@@ -21,6 +21,28 @@ Examples of event:
 ```lua
 {
   buf = 1,
+  event = "WinNew",
+  file = "/home/hnjae/Projects/dotfiles/nvim/lua/config/autocmds/setups/colorcolumn-textwidth.lua",
+  group = 22,
+  id = 96,
+  match = "/home/hnjae/Projects/dotfiles/nvim/lua/config/autocmds/setups/colorcolumn-textwidth.lua"
+}
+```
+
+```lua
+{
+  buf = 1,
+  event = "VimEnter",
+  file = "/home/hnjae/Projects/dotfiles/nvim/lua/config/autocmds/setups/colorcolumn-textwidth.lua",
+  group = 22,
+  id = 96,
+  match = "/home/hnjae/Projects/dotfiles/nvim/lua/config/autocmds/setups/colorcolumn-textwidth.lua"
+}
+```
+
+```lua
+{
+  buf = 1,
   event = "WinResized",
   file = "1000",
   group = 22,
@@ -44,15 +66,10 @@ Examples of event:
 
 ---@param event vim.api.keyset.create_autocmd.callback_args
 local set_colorcolumn = function(event)
-  -- if not vim.bo[event.buf].buflisted then
-  --   return
-  -- end
-
   if not vim.api.nvim_get_option_value("buflisted", { buf = event.buf }) then
     return
   end
 
-  -- skip gitcommit, filetype
   if vim.api.nvim_get_option_value("filetype", { buf = event.buf }) == "gitcommit" then
     return
   end
@@ -79,7 +96,8 @@ local set_colorcolumn = function(event)
   end
 
   -- NOTE: range에는 starts, end 전부 포함됨 <2023-12-11>
-  vim.opt_local.colorcolumn = vim.fn.join(vim.fn.range(textwidth + 1, MAX_COLORCOLUMN), ",")
+  vim.opt_local.colorcolumn =
+    vim.fn.join(vim.fn.range(textwidth + 1, math.min(MAX_COLORCOLUMN, vim.fn.winwidth(winid))), ",")
 end
 
 M.setup = function()
@@ -92,7 +110,8 @@ M.setup = function()
   vim.api.nvim_create_autocmd(
     -- "BufReadPost" : before modeline
     -- { "BufReadPost", "BufNewFile" },
-    { "BufWinEnter" },
+    -- { "BufWinEnter" },
+    { "WinNew", "VimEnter" }, -- -- NOTE: WinNew does not includes first window <2025-04-22>
     { group = au_id, callback = set_colorcolumn }
   )
 
