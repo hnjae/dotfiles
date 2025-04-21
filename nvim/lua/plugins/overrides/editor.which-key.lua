@@ -30,8 +30,17 @@ return {
       { [1] = "g[", mode = { "n", "x", "o" }, icon = { icon = licons.prev } }, -- mini.ai
       { [1] = "g]", mode = { "n", "x", "o" }, icon = { icon = licons.next } }, -- mini.ai
 
+      { [1] = "<A-j>",    mode = { "n", "i", "v" }, icon = { icon = "󰖲 " }, },
+      { [1] = "<A-k>",    mode = { "n", "i", "v" }, icon = { icon = "󰖲 " }, },
+
       { [1] = "<Leader>-", mode = { "n" }, icon = { icon = " " } },
       { [1] = "<Leader>|", mode = { "n" }, icon = { icon = " " } },
+      { [1] = "<Leader>ur", mode = { "n" }, icon = { icon = "󰑐 ", color = "blue" } },
+
+      { [1] = "<C-a>",  mode = { "n", "v" }, icon = { icon = "󰔔 ", color = "green" } },
+      { [1] = "g<C-a>", mode = { "n", "v" }, icon = { icon = "󰔔 ", color = "green" } },
+      { [1] = "<C-x>",  mode = { "n", "v" }, icon = { icon = "󰔒 ", color = "green" } },
+      { [1] = "g<C-x>", mode = { "n", "v" }, icon = { icon = "󰔒 ", color = "green" } },
 
       ----------------------------------------------------------------------------------------------
       -- Add missing icon from neovim
@@ -125,7 +134,7 @@ return {
       { [1] = "[",  icon = { icon = licons.prev }, mode = { "n", "x", "o" }, desc = "+prev" },
       { [1] = "]",  icon = { icon = licons.next }, mode = { "n", "x", "o" }, desc = "+next" },
       { [1] = "g",  icon = { icon = "󱁤 "}, mode = { "n", "x", "o" }, desc = "+extra-cmds" },
-      { [1] = "z",  icon = { icon = "󱁤 "}, mode = { "n" }, desc = "+extra-cmds" },
+      { [1] = "z",  icon = { icon = "󱁤 "}, mode = { "n", "x" }, desc = "+extra-cmds" },
 
 
       { [1] = "%",  icon = { icon = "󰅪 " }, mode = { "n", "x", "o" }, desc = "forward-matching" }, -- nf-md-code_brackets

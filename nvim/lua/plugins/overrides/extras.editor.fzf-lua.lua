@@ -1,6 +1,6 @@
-if vim.g.lazyvim_picker and vim.g.lazyvim_picker ~= "fzf" then
-  return {}
-end
+-- if vim.g.lazyvim_picker and vim.g.lazyvim_picker ~= "fzf" then
+--   return {}
+-- end
 
 ---@type LazySpec
 return {

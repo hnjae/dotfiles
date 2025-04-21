@@ -93,9 +93,21 @@ return {
       ---@type wk.Opts
       opts = {
         icons = {
+          ---@type wk.IconRule[]
           rules = {
             {
               plugin = "LuaSnip",
+              icon = " ", -- nf-cod-symbol_snippet
+              color = "green", -- in gruvbox.nvim, BlinkCmpKindSnippet is linked to green <2025-04-09>
+            },
+          },
+        },
+        ---@type wk.Spec[]
+        spec = {
+          {
+            [1] = "<Tab>",
+            mode = { "x" },
+            icon = {
               icon = " ", -- nf-cod-symbol_snippet
               color = "green", -- in gruvbox.nvim, BlinkCmpKindSnippet is linked to green <2025-04-09>
             },

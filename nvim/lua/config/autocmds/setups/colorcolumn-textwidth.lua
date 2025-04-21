@@ -44,7 +44,11 @@ Examples of event:
 
 ---@param event vim.api.keyset.create_autocmd.callback_args
 local set_colorcolumn = function(event)
-  if not vim.bo[event.buf].buflisted then
+  -- if not vim.bo[event.buf].buflisted then
+  --   return
+  -- end
+
+  if not vim.api.nvim_get_option_value("buflisted", { buf = event.buf }) then
     return
   end
 
@@ -55,6 +59,11 @@ local set_colorcolumn = function(event)
 
   local textwidth = vim.api.nvim_get_option_value("textwidth", { buf = event.buf })
   local winid = vim.fn.bufwinid(event.buf)
+
+  if winid < 0 then
+    return
+  end
+
   if
     not textwidth
     or textwidth < 1
@@ -86,6 +95,7 @@ M.setup = function()
     { "BufWinEnter" },
     { group = au_id, callback = set_colorcolumn }
   )
+
   vim.api.nvim_create_autocmd(
     { "OptionSet" },
     { pattern = { "textwidth" }, group = au_id, callback = set_colorcolumn }
