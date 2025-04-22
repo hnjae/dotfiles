@@ -1,22 +1,5 @@
-local M = {}
-
--- NOTE: MAX_COLORCOLUMN 이 커지면 vim이 느려짐. <2023-12-11>
-local MAX_COLORCOLUMN = 300
-
 --[[
-
 Examples of event:
-
-```lua
-{
-  buf = 1,
-  event = "BufWinEnter",
-  file = "/home/hnjae/Projects/dotfiles/nvim/lua/config/autocmds/setups/colorcolumn-textwidth.lua",
-  group = 22,
-  id = 96,
-  match = "/home/hnjae/Projects/dotfiles/nvim/lua/config/autocmds/setups/colorcolumn-textwidth.lua"
-}
-```
 
 ```lua
 {
@@ -61,43 +44,55 @@ Examples of event:
   match = "textwidth"
 }
 ```
-
 ]]
 
----@param event vim.api.keyset.create_autocmd.callback_args
-local set_colorcolumn = function(event)
-  if not vim.api.nvim_get_option_value("buflisted", { buf = event.buf }) then
-    return
-  end
+local M = {}
 
-  if vim.api.nvim_get_option_value("filetype", { buf = event.buf }) == "gitcommit" then
-    return
-  end
+local get = vim.api.nvim_get_option_value
 
-  local textwidth = vim.api.nvim_get_option_value("textwidth", { buf = event.buf })
-  local winid = vim.fn.bufwinid(event.buf)
-
+---@param winid number
+---@param bufid number
+local win_set_colorcolumn = function(winid, bufid)
   if winid < 0 then
     return
   end
 
-  if
-    not textwidth
-    or textwidth < 1
-    or (textwidth + 1) > MAX_COLORCOLUMN
-    or vim.fn.winwidth(winid)
-        - vim.api.nvim_get_option_value("numberwidth", { win = winid })
-        - 2
-      < textwidth -- 2 = signcolumn + foldcolumn
-  then
-    vim.opt_local.colorcolumn = ""
+  local bufopts = { buf = bufid, scope = "local" }
+
+  if not get("buflisted", bufopts) then
+    return
+  end
+
+  if get("filetype", bufopts) == "gitcommit" then
+    return
+  end
+
+  local winopts = { win = winid, scope = "local" }
+  local textwidth = get("textwidth", bufopts)
+
+  -- local sidecolumnwidth = (get("signcolumn", winopts) ~= "no" and 2 or 0)
+  --   + (get("foldcolumn", winopts) ~= "0" and 1 or 0)
+  --   + math.max(
+  --     (get("number", winopts) and get("numberwidth", winopts) or 0),
+  --     string.len(tostring(vim.api.nvim_buf_line_count(bufid))) + 1
+  --     -- (get("relativenumber", winopts) and 2 or 0),
+  --   )
+
+  local sidecolumnwidth = 7
+  local visualwidth = vim.fn.winwidth(winid) - sidecolumnwidth
+
+  if textwidth < 1 or visualwidth < textwidth then
+    vim.api.nvim_set_option_value("colorcolumn", "", winopts)
 
     return
   end
 
-  -- NOTE: range에는 starts, end 전부 포함됨 <2023-12-11>
-  vim.opt_local.colorcolumn =
-    vim.fn.join(vim.fn.range(textwidth + 1, math.min(MAX_COLORCOLUMN, vim.fn.winwidth(winid))), ",")
+  -- NOTE: 여기서 visualwidth 이 커지면 vim이 느려짐. <2023-12-11>
+  vim.api.nvim_set_option_value(
+    "colorcolumn",
+    vim.fn.join(vim.fn.range(textwidth + 1, visualwidth), ","),
+    { scope = "local", win = winid }
+  )
 end
 
 M.setup = function()
@@ -107,19 +102,52 @@ M.setup = function()
 
   local au_id = vim.api.nvim_create_augroup("colorcolumn-textwidth", {})
 
-  vim.api.nvim_create_autocmd(
-    -- "BufReadPost" : before modeline
-    -- { "BufReadPost", "BufNewFile" },
-    -- { "BufWinEnter" },
-    { "WinNew", "VimEnter" }, -- -- NOTE: WinNew does not includes first window <2025-04-22>
-    { group = au_id, callback = set_colorcolumn }
-  )
+  -- vim.api.nvim_create_autocmd(
+  --   -- NOTE: `WinNew` 나 `WinResized` 이벤트만을 사용하면, 첫번째 윈도우에 대해서 colorcolumn 을 설정하지 못한다. <2025-04-22>
+  --   -- NOTE: WinResized 로 WinNew 를 커버가능한 듯. <2025-04-22>
+  --   { "VimEnter" },
+  --   {
+  --     group = au_id,
+  --     callback = function(ev)
+  --       local winid = vim.fn.bufwinid(ev.buf)
+  --       win_set_colorcolumn(winid, ev.buf)
+  --     end,
+  --   }
+  -- )
 
-  vim.api.nvim_create_autocmd(
-    { "OptionSet" },
-    { pattern = { "textwidth" }, group = au_id, callback = set_colorcolumn }
-  )
-  vim.api.nvim_create_autocmd({ "WinResized" }, { group = au_id, callback = set_colorcolumn })
+  -- 같은 윈도우에서 버퍼가 바뀌는 경우를 위해 `BufWinEnter` 사용.
+  vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+    group = au_id,
+    callback = function(ev)
+      local winid = vim.fn.bufwinid(ev.buf)
+      win_set_colorcolumn(winid, ev.buf)
+    end,
+  })
+
+  vim.api.nvim_create_autocmd({
+    "WinResized",
+  }, {
+    group = au_id,
+    callback = function()
+      -- NOTE: WinResized 이벤트는 Size 가 변한 모든 윈도우에 대해서 발생하는게 아니라, 포커스된 윈도우에 대해서만 발생한다. <2025-04-22>
+
+      -- 현재 윈도우 뿐만 아니라, 영향 받은 다른 모든 윈도우에 대해서 colorcolumn 을 설정.
+      for _, winid in ipairs(vim.v.event.windows) do
+        win_set_colorcolumn(winid, vim.api.nvim_win_get_buf(winid))
+      end
+    end,
+  })
+
+  vim.api.nvim_create_autocmd({ "OptionSet" }, {
+    pattern = { "textwidth" },
+    group = au_id,
+    callback = function()
+      local bufid = vim.fn.bufnr()
+      for _, winid in ipairs(vim.fn.win_findbuf(bufid)) do
+        win_set_colorcolumn(winid, bufid)
+      end
+    end,
+  })
 end
 
 return M
