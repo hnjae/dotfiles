@@ -6,13 +6,24 @@
 ---@type LazySpec
 return {
   [1] = "j-hui/fidget.nvim",
-  version = "*", -- uses sementic versioning
+  version = "*", -- uses semantic versioning
 
   lazy = true,
   event = "LspAttach",
   cond = not vim.g.vscode,
 
   opts = {
+    notification = {
+      window = {
+        -- normal_hl = "ColorColumn",
+        -- winblend = 0,
+        y_padding = 0, -- Padding from bottom edge of window boundary
+        x_padding = 0, -- Padding from right edge of window boundary
+        align = "bottom", -- How to align the notification window
+        relative = "win", -- What the notification window position is relative to
+        -- border = "single",
+      },
+    },
     logger = {
       path = string.format("%s/fidget.nvim.log", vim.fn.stdpath("log")),
     },

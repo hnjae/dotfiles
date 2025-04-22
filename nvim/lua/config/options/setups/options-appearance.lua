@@ -18,3 +18,9 @@ end
 -- vim.opt.guifont = "MesloLGM Nerd Font Mono:h11,monospace:h11"
 -- vim.opt.guifont = "D2Coding:h11"
 -- end
+
+-- vim.opt.numberwidth = 1 -- default 4 (line number 표기 width; padding 포함)
+-- vim.opt.sidescrolloff = 1 -- lazyvim 이 8 로 설정; 이거 적용되는거 맞음?
+
+-- vim.opt.signcolumn = "yes"
+-- vim.opt.statuscolumn = ""

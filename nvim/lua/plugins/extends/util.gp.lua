@@ -72,7 +72,8 @@ return {
   end,
   opts = function(_, opts)
     local icon = require("globals").icons.ai
-    local myopts = {
+
+    return vim.tbl_deep_extend("force", opts, {
       command_prompt_prefix_template = icon .. " {{agent}} ~ ",
 
       chat_assistant_prefix = { icon, " [{{agent}}]" },
@@ -288,10 +289,7 @@ Primary Tasks:
           gp.Prompt(params, gp.Target.vnew, agent, template)
         end,
       },
-    }
-
-    vim.tbl_deep_extend("keep", myopts, opts)
-    return myopts
+    })
   end,
 
   -- stylua: ignore
@@ -304,7 +302,7 @@ Primary Tasks:
     { [1] = prefix .. "N",     mode = "n", [2] = "<cmd>%GpChatNew split<CR>",        desc = "NEW w. buffer (Gp)", },
     { [1] = prefix .. "N",     mode = "v", [2] = ":<C-u>'<,'>GpChatNew split<CR>",   desc = "NEW w. selected (Gp)" },
 
-    { [1] = prefix .. "E",     mode = "n", [2] = "<cmd>GpChatNew<CR>",   desc = "empty-chat (Gp)" },
+    { [1] = prefix .. "T",     mode = "n", [2] = "<cmd>GpChatNew<CR>",   desc = "empTy-chat (Gp)" },
 
     { [1] = prefix .. "q",     mode = "n", [2] = "<cmd>%GpVnew<CR>",     desc = "Quick (edit-buffer; Gp)", },
     { [1] = prefix .. "q",     mode = "v", [2] = ":<C-u>'<,'>GpNew<CR>", desc = "Quick (edit-selected; Gp)" },

@@ -1,10 +1,3 @@
---[[
-NOTE:
-  - snacks.statuscolumn 이 조건 상관 없이 9 글자나 차치해서 대체 함.
---]]
-
-local gitsign_char = "┃"
-
 ---@type LazySpec[]
 return {
   {
@@ -12,7 +5,7 @@ return {
     lazy = false,
     version = false,
     event = { "VeryLazy" },
-    -- dependencies = { "LazyVim", "gruvbox.nvim" },
+    -- dependencies = { "marks.nvim" },
     opts = function(_, opts)
       local builtin = require("statuscol.builtin")
       return vim.tbl_deep_extend("force", opts or {}, {
@@ -25,15 +18,14 @@ return {
             click = "v:lua.ScFa",
           },
           {
+            text = { builtin.foldfunc },
+            click = "v:lua.ScFa",
+          },
+          {
             text = { builtin.lnumfunc },
             click = "v:lua.ScSa",
           },
-          -- { text = { " " } },
-          {
-            text = { builtin.foldfunc },
-            click = "v:lua.ScFa",
-            -- condition = { true, builtin.not_empty },
-          },
+          { text = { " " } },
         },
       })
     end,
@@ -42,39 +34,29 @@ return {
       vim.opt.signcolumn = "auto:1" -- NOTE: 1 이지만, column 은 2칸 차지.
       vim.opt.foldcolumn = "0"
 
-      vim.opt.numberwidth = 2 -- default 4
-      vim.opt.foldcolumn = "1"
-
-      vim.api.nvim_create_autocmd({ "ColorScheme" }, {
+      vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
         callback = function()
-          -- vim.api.nvim_set_hl(0, "SignColumn", { link = "Normal", force = true })
-          vim.api.nvim_set_hl(0, "FoldColumn", { link = "LineNr", force = true })
-          -- vim.api.nvim_set_hl(0, "FoldColumn", { link = "NonText", force = true })
+          vim.opt_local.foldcolumn = "auto:1"
         end,
       })
-
       vim.opt.fillchars = {
         -- foldopen = "·",
-        foldopen = " ",
-        -- foldclose = "⊕",
-        -- foldclose = "+",
-        foldclose = "▐",
-        -- foldclose = "▩",
+        foldopen = "",
         -- foldopen = "·",
         -- foldopen = "-",
+        foldclose = "+",
         -- foldsep = "│", -- open fold middle marker
         -- eob = "~", -- empty lines at the end of a buffer
         -- fold = '·', -- or '-' filling 'foldtext'
         -- diff = '-', -- deleted lines of the 'diff' option
-
-        -- foldopen = "",
-        -- foldclose = "",
 
         foldsep = " ",
         fold = " ",
         diff = "╱",
         eob = " ",
       }
+
+      vim.opt.numberwidth = 3 -- default 4
     end,
   },
   {
@@ -91,23 +73,6 @@ return {
       -- lsp: 12 (maybe)
       sign_priority = 13, -- default 10
       -- refresh_interval = 200, -- default 150
-    },
-  },
-  {
-    [1] = "gitsigns.nvim",
-    optional = true,
-    opts = {
-      diff_opts = {
-        vertical = true,
-      },
-      signs = {
-        add = { text = gitsign_char },
-        change = { text = gitsign_char },
-      },
-      signs_staged = {
-        add = { text = gitsign_char },
-        change = { text = gitsign_char },
-      },
     },
   },
 }

@@ -260,7 +260,7 @@ return {
         -- { pattern = "first", icon = "󰘀 " },
         -- { pattern = "last", icon = "󰘁 " },
         { pattern = "rename", icon = "󰏫 " },
-        { pattern = "delete", icon = "󰭜 " },
+        -- { pattern = "delete", icon = "󰭜 " },
         -- { pattern = "stop", icon = "󰓛 ", color = "red" },
 
         ----------------------------------------------------------------------------------------------

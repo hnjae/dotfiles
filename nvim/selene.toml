@@ -2,3 +2,6 @@ std = "vim"
 # NOTE: https://luajit.org/extensions.html <2024-01-03>
 # <https://kampfkarren.github.io/selene/usage/std.html>
 # neovim uses lua5.1: <https://neovim.io/doc/user/lua.html>
+
+[lints]
+mixed_table = "allow"

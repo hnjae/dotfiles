@@ -8,7 +8,7 @@ vim.opt.showcmd = true -- showcmd under status line. e.g.) 32j
 -- vim.opt.cmdheight = 1
 
 vim.opt.ruler = true -- display ruler on the right side of the *status line*
-vim.opt.number = true -- display number of lines left
+-- vim.opt.number = true -- display number of lines left
 -- relativenumber랑 사용하면 현재 줄 만 표기됨
 vim.opt.relativenumber = true --  display number of lines w/ relativenumber
 vim.opt.hlsearch = true --  highlight all search matches

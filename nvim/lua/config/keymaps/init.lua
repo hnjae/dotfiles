@@ -23,8 +23,12 @@ vim.keymap.set( { "n", "v", "s" }, "<S-F12>", [["+p]], { desc = "paste-from-clip
 -- vim.keymap.set({ "n", "v" }, "<LocalLeader><LocalLeader>", ":", { desc = "cmdline" })
 -- vim.keymap.set({ "n" }, "<LocalLeader>t", "<cmd>wall<CR>", { desc = "wall" })
 vim.keymap.set({ "n" }, "<BS>", ":", { desc = "cmdline" })
+vim.keymap.set({ "n" }, "<S-BS>", ":<C-u>lua ", { desc = "lua" })
 
 --  escape teriminal/mapping (WIP)
 --------------------------------------------------------------------------------
 vim.keymap.set({ "t" }, "<S-Esc>", "<C-\\><C-n>", { desc = "escape-terminal" })
 vim.keymap.set({ "i", "t" }, "<C-e>", "<C-\\><C-n>", { desc = "escape-terminal" })
+
+-- REMOVE LazyVim keymaps
+vim.keymap.del("n", "<leader>bo")

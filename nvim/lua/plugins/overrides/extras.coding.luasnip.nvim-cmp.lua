@@ -10,10 +10,10 @@ local spec = {
     local luasnip = require("luasnip")
 
     opts.mapping["<Tab>"] = cmp.mapping(function(fallback)
-      if cmp.get_active_entry() then
-        cmp.confirm()
-      elseif luasnip.expand_or_locally_jumpable() then
+      if luasnip.expand_or_locally_jumpable() then
         luasnip.expand_or_jump()
+      elseif cmp.get_active_entry() then
+        cmp.confirm()
       else
         fallback()
       end
@@ -27,13 +27,14 @@ local spec = {
     end, { "i", "s" })
 
     -- make this source first
-    local new_source = { { name = "luasnip" } }
-    for _, source in ipairs(opts.sources) do
-      if source.name ~= "luasnip" then
-        table.insert(new_source, source)
-      end
-    end
-    opts.sources = new_source
+    opts.sources = vim.list_extend(
+      { { name = "luasnip" } },
+      vim.tbl_filter(function(source)
+        return source.name ~= "luasnip"
+      end, opts.sources or {})
+    )
+
+    return opts
   end,
   specs = {},
 }

@@ -1,3 +1,4 @@
+local format = require("lazyvim.util.format")
 -- <https://github.com/obsidian-nvim/obsidian.nvim>
 
 ---@type LazySpec
@@ -13,7 +14,6 @@ return {
   ft = "markdown",
   dependencies = {
     "nvim-lua/plenary.nvim",
-
     "fzf-lua", -- default picker
   },
   keys = {
@@ -39,11 +39,44 @@ return {
       desc = "follow-link-vsplit",
       ft = "markdown",
     },
-    { [1] = "<C-CR>", [2] = "<cmd>ObsidianFollowLink<CR>", desc = "follow-link", ft = "markdown" },
+    {
+      [1] = "<C-CR>",
+      [2] = "<cmd>ObsidianFollowLink<CR>",
+      desc = "follow-link",
+      ft = "markdown",
+    },
+
+    -- {"<leader>t", "", desc = "+test"},
+    -- { "<leader>tt", function() require("neotest").run.run(vim.fn.expand("%")) end, desc = "Run File (Neotest)" },
+    -- { "<leader>tT", function() require("neotest").run.run(vim.uv.cwd()) end, desc = "Run All Test Files (Neotest)" },
+    -- { "<leader>tr", function() require("neotest").run.run() end, desc = "Run Nearest (Neotest)" },
+    -- { "<leader>tl", function() require("neotest").run.run_last() end, desc = "Run Last (Neotest)" },
+    -- { "<leader>ts", function() require("neotest").summary.toggle() end, desc = "Toggle Summary (Neotest)" },
+    -- { "<leader>to", function() require("neotest").output.open({ enter = true, auto_close = true }) end, desc = "Show Output (Neotest)" },
+    -- { "<leader>tO", function() require("neotest").output_panel.toggle() end, desc = "Toggle Output Panel (Neotest)" },
+    -- { "<leader>tS", function() require("neotest").run.stop() end, desc = "Stop (Neotest)" },
+    -- { "<leader>tw", function() require("neotest").watch.toggle(vim.fn.expand("%")) end, desc = "Toggle Watch (Neotest)" },
+
+    -- { "<leader>t", "", desc = "+obsidian" },
+    -- { "<leader>tt", false, ft = "markdown" },
+    -- { "<leader>tT", false, ft = "markdown" },
+    -- { "<leader>tr", false, ft = "markdown" },
+    -- { "<leader>tl", false, ft = "markdown" },
+    -- { "<leader>ts", false, ft = "markdown" },
+    -- { "<leader>to", false, ft = "markdown" },
+    -- { "<leader>tO", false, ft = "markdown" },
+    -- { "<leader>tS", false, ft = "markdown" },
+    -- { "<leader>tw", false, ft = "markdown" },
+
     -- <leader>t: neotest
     { [1] = "<leader>tt", [2] = "<cmd>ObsidianToday<CR>", desc = "today", ft = "markdown" },
     { [1] = "<leader>tm", [2] = "<cmd>ObsidianTomorrow<CR>", desc = "tomorrow", ft = "markdown" },
-    { [1] = "<leader>ty", [2] = "<cmd>ObsidianYesterday<CR>", desc = "yesterday", ft = "markdown" },
+    {
+      [1] = "<leader>ty",
+      [2] = "<cmd>ObsidianYesterday<CR>",
+      desc = "yesterday",
+      ft = "markdown",
+    },
     { [1] = "<leader>tT", [2] = "<cmd>ObsidianTemplate<CR>", desc = "template", ft = "markdown" },
     { [1] = "<leader>tr", [2] = "<cmd>ObsidianRename<CR>", desc = "rename", ft = "markdown" },
     {
@@ -67,7 +100,7 @@ return {
     },
     -- [2] = "<cmd>ObsidianToggleCheckbox<CR>",
     {
-      [1] = "<leader>tk",
+      [1] = "<leader>td",
       [2] = function()
         return require("obsidian").util.toggle_checkbox({ " ", "/", "x" })
       end,
@@ -75,7 +108,7 @@ return {
       ft = "markdown",
     },
     {
-      [1] = "<leader>tK",
+      [1] = "<leader>tD",
       [2] = function()
         return require("obsidian").util.toggle_checkbox({ "x" })
       end,

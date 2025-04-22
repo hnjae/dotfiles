@@ -1,9 +1,12 @@
+-- WIP
+
 local wk_icon = { icon = "󰩫 ", color = "red" }
 
 ---@type LazySpec
 return {
   [1] = "chrisgrieser/nvim-scissors",
   version = false,
+  cond = false, -- formatter 설정을 해야됨.
 
   lazy = true,
   cmd = {

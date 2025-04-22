@@ -78,8 +78,9 @@ local win_set_colorcolumn = function(winid, bufid)
   --     -- (get("relativenumber", winopts) and 2 or 0),
   --   )
 
-  local sidecolumnwidth = 7
-  local visualwidth = vim.fn.winwidth(winid) - sidecolumnwidth
+  local sidecolumnwidth = 8
+  local winwidth = vim.fn.winwidth(winid)
+  local visualwidth = winwidth - sidecolumnwidth
 
   if textwidth < 1 or visualwidth < textwidth then
     vim.api.nvim_set_option_value("colorcolumn", "", winopts)
@@ -90,7 +91,7 @@ local win_set_colorcolumn = function(winid, bufid)
   -- NOTE: 여기서 visualwidth 이 커지면 vim이 느려짐. <2023-12-11>
   vim.api.nvim_set_option_value(
     "colorcolumn",
-    vim.fn.join(vim.fn.range(textwidth + 1, visualwidth), ","),
+    vim.fn.join(vim.fn.range(textwidth + 1, winwidth), ","),
     { scope = "local", win = winid }
   )
 end

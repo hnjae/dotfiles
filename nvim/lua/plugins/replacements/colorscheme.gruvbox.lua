@@ -26,11 +26,17 @@ return {
     [1] = "ellisonleao/gruvbox.nvim",
     version = false, -- use the latest git commit
     opts = {
-      transparent_mode = false,
+      -- transparent_mode = true,
       dim_inactive = false,
       underline = false,
       terminal_colors = os.getenv("BASE16_THEME") == nil,
       -- terminal_colors = true,
+      palette_overrides = {
+        -- light0_soft = "#f2e5bc", -- 242, 229, 188 -- HSL: 46, 67.5, 84.3
+        -- light1 = "#ebdbb2", -- 235, 219, 178 -- HSL: 43, 58.8, 81.0
+        -- light1 = "#efe0b7", -- HSL: 44.5, 63.15, 82.65
+        light1 = "#F0E2B8", -- HSL: 45, 64.6, 83.2
+      },
       overrides = {
         -- NormalFloat = vim.opt.background:get() == "light" and { bg = "#f2e5bc" }, -- light0_soft
         -- NormalNc = vim.opt.background:get() == "light" and { bg = "#f2e5bc" } or { link = "Normal" }, -- light0_soft
@@ -71,7 +77,6 @@ return {
         FzfLuaBufFlagAlt = { link = "FzfLuaPathColNr" }, -- CadgetBlue1
         FzfLuaTabTitle = { link = "GruvBoxBlue" }, -- LightSkyBlue1
         FzfLuaTabMarker = { link = "FzfLuaHeaderBind" }, -- BlanchedAlmond
-        FzfLuaLiveSym = { link = "FzfLuaLivePrompt" }, -- PaleVioletRed1
       },
     },
   },

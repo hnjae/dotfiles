@@ -28,6 +28,9 @@ return {
     },
   },
   opts = {
+    autowidth = {
+      winwidth = 8, -- snacks.statuscolumn
+    },
     ignore = {
       buftype = {
         "picker",

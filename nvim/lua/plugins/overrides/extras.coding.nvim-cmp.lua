@@ -13,6 +13,8 @@ return {
       hi Pmenu blend=0
       hi PmenuSel blend=0
     ]])
+    -- vim.api.nvim_set_hl(0, "Pmenu", { blend = 0, default = true })
+    -- vim.api.nvim_set_hl(0, "PmenuSel", { blend = 0, default = true })
 
     local cmp = require("cmp")
 
