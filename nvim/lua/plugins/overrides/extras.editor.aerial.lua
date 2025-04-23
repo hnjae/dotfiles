@@ -34,12 +34,17 @@ return {
     },
     keys = {
       {
-        "<leader>cs",
-        function()
+        [1] = "<leader>cs",
+        [2] = function()
           require("aerial").toggle({ focus = false })
         end,
         desc = "Aerial (Symbols)",
       },
+
+      -- overrides default (wrong spell)
+      -- NOTE: `<cmd>Aeri` 이나 `:<C-u>Aeri` 로 맵핑하지 않는 이유는, `[count]AerialNext` 와 같이 사용하기 위함 <2025-04-23>
+      { [1] = "]s", [2] = ":AerialNext<CR>", desc = "symbol-next (aerial)", silent = true },
+      { [1] = "[s", [2] = ":AerialPrev<CR>", desc = "symbol-prev (aerial)", silent = true },
     },
   },
   {
@@ -62,37 +67,12 @@ return {
               return
             end
 
-            vim.cmd(":q")
+            vim.cmd("quit")
 
             -- 아래 두개로 제거하면 안됨
             -- require("snacks").bufdelete(buf)
             -- require("aerial").close()
           end, 1)
-
-          -- vim.notify("hi")
-
-          -- local tabid = vim.api.nvim_win_get_tabpage(tonumber(ev.match))
-          -- -- local tabid = vim.api.nvim_get_current_tabpage()
-          -- local winids = vim.api.nvim_tabpage_list_wins(tabid)
-          --
-          -- local is_aerial = false
-          -- for _, winid in ipairs(winids) do
-          --   local buf = vim.api.nvim_win_get_buf(winid)
-          --
-          --   if vim.api.nvim_get_option_value("buftype", { buf = buf }) ~= "nofile" then
-          --     vim.notify(vim.inspect(vim.fn.getbufinfo(buf)))
-          --     return
-          --   end
-          --
-          --   if vim.api.nvim_get_option_value("filetype", { buf = buf }) == "aerial" then
-          --     is_aerial = true
-          --   end
-          -- end
-          --
-          -- if is_aerial then
-          --   vim.notify("hello!")
-          --   -- require("aerial").close()
-          -- end
         end,
       })
     end,

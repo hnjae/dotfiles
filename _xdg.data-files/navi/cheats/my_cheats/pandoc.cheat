@@ -25,10 +25,10 @@ pandoc -f gfm -t asciidoc --strip-comments=false --wrap=preserve <foo>.md -o <fo
 pandoc -f org -t asciidoc --strip-comments=false --wrap=preserve <foo>.org -o <foo>.adoc
 
 # convert from asciidoc to markdown (through xml)
-asciidoctor -b docbook5 --doctype book --no-header-footer -o /tmp/0583e2b0.xml "<foo>.adoc" && pandoc -f docbook -t gfm --strip-comments=false --wrap=preserve /tmp/0583e2b0.xml -o "<foo>.md" && rm /tmp/0583e2b0.xml
+asciidoctor -b docbook5 --doctype article --no-header-footer -o /tmp/0583e2b0.xml "<foo>.adoc" && pandoc -f docbook -t gfm --strip-comments=false --wrap=preserve /tmp/0583e2b0.xml -o "<foo>.md" && rm /tmp/0583e2b0.xml
 
 # convert from asciidoc to markdown (through html)
-asciidoctor -b html --doctype book -o /tmp/7ec12acc.html "<foo>.adoc" && pandoc -f html -t gfm --strip-comments=false --wrap=preserve /tmp/7ec12acc.html -o "<foo>.md" && rm /tmp/7ec12acc.html
+asciidoctor -b html --doctype article -o /tmp/7ec12acc.html "<foo>.adoc" && pandoc -f html -t gfm --strip-comments=false --wrap=preserve /tmp/7ec12acc.html -o "<foo>.md" && rm /tmp/7ec12acc.html
 
 # convert from asciidoc to org (through xml)
 asciidoctor -b docbook5 -o /tmp/ad93d449.xml <foo>.adoc && pandoc -f docbook -t org --strip-comments=false --wrap=preserve /tmp/ad93d449.xml -o "<foo>.org" && rm /tmp/ad93d449.xml

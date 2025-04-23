@@ -7,6 +7,12 @@ end
 -- vim.opt.guicursor = ""
 vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:block,r-cr-o:block"
 
+-- show whitespace, tabs, etc
+vim.opt.list = true
+vim.opt.listchars = "tab:  ,nbsp:+"
+-- vim.opt.listchars = "tab:>-,nbsp:+"
+-- vim.opt.listchars = "tab:> ,nbsp:+,lead:␣"
+
 if vim.fn.has("termguicolors") == 1 and not require("utils").is_console then
   vim.opt.termguicolors = true
 end

@@ -1,11 +1,16 @@
 vim.g.mapleader = " "
-vim.g.maplocalleader = "s"
+vim.g.maplocalleader = "\\"
 
 -- restore to vim's default
 vim.opt.clipboard = "" -- do not sync with system clipboard
 vim.opt.conceallevel = 0
-vim.opt.tabstop = 8
+
+-- tab's and indent
 vim.opt.expandtab = false
+vim.opt.tabstop = 8
+vim.opt.shiftwidth = 8
+vim.opt.shiftround = false -- true: round indent
+-- vim.opt.list = false -- show whitespace, tabs, etc
 -- vim.o.splitright = false
 
 -- lazyvim config

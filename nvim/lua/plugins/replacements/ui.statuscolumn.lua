@@ -1,6 +1,6 @@
 --[[
 NOTE:
-  - snacks.statuscolumn 이 조건 상관 없이 9 글자나 차치해서 대체 함.
+  - snacks.statuscolumn 이 조건 상관 없이 8 글자나 차치해서 대체 함. <LazyVim 14.14.0; 2025-04-22>
 --]]
 
 local gitsign_char = "┃"
@@ -28,11 +28,10 @@ return {
             text = { builtin.lnumfunc },
             click = "v:lua.ScSa",
           },
-          -- { text = { " " } },
           {
+            -- foldmarker 표시 및 padding 으로 역할
             text = { builtin.foldfunc },
             click = "v:lua.ScFa",
-            -- condition = { true, builtin.not_empty },
           },
         },
       })
@@ -56,7 +55,6 @@ return {
       vim.opt.fillchars = {
         -- foldopen = "·",
         foldopen = " ",
-        -- foldclose = "⊕",
         -- foldclose = "+",
         foldclose = "▐",
         -- foldclose = "▩",
@@ -66,9 +64,6 @@ return {
         -- eob = "~", -- empty lines at the end of a buffer
         -- fold = '·', -- or '-' filling 'foldtext'
         -- diff = '-', -- deleted lines of the 'diff' option
-
-        -- foldopen = "",
-        -- foldclose = "",
 
         foldsep = " ",
         fold = " ",

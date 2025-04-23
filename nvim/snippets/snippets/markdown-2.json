@@ -42,6 +42,7 @@
     "link": {
         "prefix": [
             "link",
+            "lk",
             "l"
         ],
         "description": "inline link (`l`)",

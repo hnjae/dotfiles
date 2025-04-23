@@ -37,7 +37,6 @@ return {
       { [1] = "<Leader>/", [2] = grep_project, desc = "Grep (Project)" },
       { [1] = "<Leader>sg", [2] = grep_project, desc = "Grep (Project)" }, -- same as above
       { [1] = "<Leader>sG", [2] = grep_cwd, desc = "Grep (buffer's cwd)" },
-
       {
         [1] = "<Leader>fF",
         [2] = function()

@@ -1,4 +1,18 @@
 {
+    "link": {
+        "prefix": [
+            "link",
+            "lk",
+            "l"
+        ],
+        "body": "${1:${TM_SELECTED_TEXT:url}}[${2:label}]$0",
+        "description": "Insert link"
+    },
+    "mailto link": {
+        "prefix": "mailto",
+        "body": "mailto:${1:${TM_SELECTED_TEXT:mail}}[${2:label}]$0",
+        "description": "Insert mailto link"
+    },
     "admonition block": {
         "prefix": [
             "admonition block",
@@ -70,7 +84,7 @@
             "****"
         ]
     },
-    "fo": {
+    "footnote": {
         "prefix": "footnote",
         "description": "add stem attribute",
         "body": "footnote:${1:id}[${2:text}]"
@@ -215,7 +229,7 @@
         "description": "add stem attribute",
         "body": ":stem: latexmath"
     },
-    "js": {
+    "javascript block": {
         "prefix": "js",
         "description": "insert source block",
         "body": [
@@ -226,7 +240,7 @@
             "----"
         ]
     },
-    "ts": {
+    "typescript block": {
         "prefix": "ts",
         "description": "insert source block",
         "body": [

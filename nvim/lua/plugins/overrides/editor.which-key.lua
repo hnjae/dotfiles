@@ -140,8 +140,8 @@ return {
       { [1] = "%",  icon = { icon = "󰅪 " }, mode = { "n", "x", "o" }, desc = "forward-matching" }, -- nf-md-code_brackets
       { [1] = "g%", icon = { icon = "󰅪 " }, mode = { "n", "x", "o" }, desc = "backwords-matching" }, -- nf-md-code_brackets
 
-      { [1] = "[s", icon = { icon = "󰓆 " }, mode = { "n", "x", "o" }, desc = "prev-misspelled" }, -- nf-md-spellcheck
-      { [1] = "]s", icon = { icon = "󰓆 " }, mode = { "n", "x", "o" }, desc = "next-misspelled" }, -- nf-md-spellcheck
+      -- { [1] = "[s", icon = { icon = "󰓆 " }, mode = { "n", "x", "o" }, desc = "prev-misspelled" }, -- nf-md-spellcheck
+      -- { [1] = "]s", icon = { icon = "󰓆 " }, mode = { "n", "x", "o" }, desc = "next-misspelled" }, -- nf-md-spellcheck
       { [1] = "zg", icon = { icon = "󰓆 " }, mode = { "n" },           desc = "add-word-to-spell-list" }, -- nf-md-spellcheck
       { [1] = "zw", icon = { icon = "󰓆 " }, mode = { "n" },           desc = "make-word-as-bad/missspelling" }, -- nf-md-spellcheck
       { [1] = "z=", icon = { icon = "󰓆 " }, mode = { "n" },           desc = "spelling-suggestions" }, -- nf-md-spellcheck

@@ -16,8 +16,8 @@ M.setup = function()
 
   vim.api.nvim_create_autocmd({ "FileType" }, {
     pattern = { "gitcommit" },
-    callback = function()
-      local textwidth = vim.opt_local.textwidth:get()
+    callback = function(ev)
+      local textwidth = vim.api.nvim_get_option_value("textwidth", { buf = ev.buf })
 
       if not textwidth or textwidth < 1 or (textwidth + 1) > MAX_COLORCOLUMN then
         if vim.opt_local.colorcolumn ~= "" then

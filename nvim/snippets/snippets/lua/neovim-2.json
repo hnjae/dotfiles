@@ -8,22 +8,52 @@
         "description": "package_path of file",
         "prefix": "packpath"
     },
-    "getft": {
-        "body": "vim.api.nvim_get_option_value(\"filetype\", { buf = bufid })",
-        "description": "get ft (deprecated)",
-        "prefix": "getft"
+    "get option value": {
+        "prefix": "getopt",
+        "description": "get option value",
+        "body": "vim.api.nvim_get_option_value(\"${1:filetype}\", { buf = ${2:bufid} })"
+    },
+    "get current buffer's option value": {
+        "prefix": "getoptl",
+        "description": "get filetype",
+        "body": "vim.opt_local.${1:filetype}:get()"
+    },
+    "get filetype": {
+        "prefix": "getft",
+        "description": "get filetype",
+        "body": "vim.api.nvim_get_option_value(\"filetype\", { buf = ${1:bufid} })"
+    },
+    "get current buffer's filetype": {
+        "prefix": "getftl",
+        "description": "get filetype",
+        "body": "vim.opt_local.filetype:get()"
+    },
+    "autocmd": {
+        "prefix": [
+            "autocmd",
+            "ac"
+        ],
+        "description": "autocmd-filetype",
+        "body": [
+            "vim.api.nvim_create_autocmd({\"${1:FileType}\"}, {",
+            "\tpattern = { \"${2:gitcommit}\" \\},",
+            "\tcallback = function()",
+            "\t\t${0:$TM_SELECTED_TEXT}",
+            "\tend,",
+            "})"
+        ]
     },
     "autocmd filetype": {
         "prefix": [
             "autocmd-filetype",
-            "aft"
+            "acft"
         ],
         "description": "autocmd-filetype",
         "body": [
             "vim.api.nvim_create_autocmd(\"FileType\", {",
             "\tpattern = { \"${1:gitcommit}\" \\},",
             "\tcallback = function()",
-            "\t\t$0",
+            "\t\t${0:$TM_SELECTED_TEXT}",
             "\tend,",
             "})"
         ]
@@ -34,9 +64,11 @@
         "prefix": "cwd"
     },
     "vim.api.nvim_del_user_command": {
-        "body": "vim.api.nvim_del_user_command($0)",
+        "prefix": [
+            "del_user_command"
+        ],
         "description": "delete user command",
-        "prefix": "del_user_command"
+        "body": "vim.api.nvim_del_user_command($0)"
     },
     "get highlight": {
         "body": "vim.api.nvim_get_hl(0, { name = \"${0:PmenuSel}\" \\})",

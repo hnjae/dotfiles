@@ -13,7 +13,7 @@ return {
       typos_lsp = {
         enabled = true,
         init_options = {
-          config = vim.fn.stdpath("config") .. "typos.toml",
+          -- config = vim.fn.stdpath("config") .. "typos.toml",
           diagnosticSeverity = "Warning",
         },
       },

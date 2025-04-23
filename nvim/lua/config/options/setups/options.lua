@@ -7,7 +7,7 @@ vim.opt.cursorline = true -- cursorline = color cursorline
 vim.opt.showcmd = true -- showcmd under status line. e.g.) 32j
 -- vim.opt.cmdheight = 1
 
-vim.opt.ruler = true -- display ruler on the right side of the *status line*
+vim.opt.ruler = false -- true: display ruler on the right side of the *status line*
 -- vim.opt.number = true -- display number of lines left
 -- relativenumber랑 사용하면 현재 줄 만 표기됨
 vim.opt.relativenumber = true --  display number of lines w/ relativenumber
@@ -68,3 +68,7 @@ vim.opt.formatoptions:remove("r")
 vim.opt.formatoptions:remove("o")
 -- autocmd 로 처리
 -- defaults: tcqj (2022-05-15)
+
+-- set smartindent: automatically inserts one extra level of indentation in some case.
+-- set cindent    : is more customizable, but also more strict when it comes to syntax.
+-- set autoindent : does nothing more than copy the indentation from the previous line

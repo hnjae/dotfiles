@@ -46,6 +46,8 @@ Examples of event:
 ```
 ]]
 
+local STATUSCOLUMNWIDTH = 8
+
 local M = {}
 
 local get = vim.api.nvim_get_option_value
@@ -78,9 +80,8 @@ local win_set_colorcolumn = function(winid, bufid)
   --     -- (get("relativenumber", winopts) and 2 or 0),
   --   )
 
-  local sidecolumnwidth = 8
   local winwidth = vim.fn.winwidth(winid)
-  local visualwidth = winwidth - sidecolumnwidth
+  local visualwidth = winwidth - STATUSCOLUMNWIDTH
 
   if textwidth < 1 or visualwidth < textwidth then
     vim.api.nvim_set_option_value("colorcolumn", "", winopts)
@@ -143,7 +144,12 @@ M.setup = function()
     pattern = { "textwidth" },
     group = au_id,
     callback = function()
+      -- NOTE: ev.buf == 0 <v0.11.0; 2025-04-23>
       local bufid = vim.fn.bufnr()
+      if get("buftype", { buf = bufid }) ~= "" then
+        return
+      end
+
       for _, winid in ipairs(vim.fn.win_findbuf(bufid)) do
         win_set_colorcolumn(winid, bufid)
       end

@@ -4,10 +4,12 @@ return {
   optional = true,
   ---@param opts snacks.Config
   opts = function(_, opts)
+    vim.b.snacks_indent = true
+
     vim.api.nvim_create_autocmd("FileType", {
-      pattern = { "markdown", "help", "text" },
-      callback = function(event)
-        vim.b[event.buf].snacks_indent = false
+      pattern = { "markdown", "help", "diff", "text" },
+      callback = function(ev)
+        vim.b[ev.buf].snacks_indent = false
       end,
     })
 

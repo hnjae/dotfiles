@@ -6,7 +6,6 @@ local wk_icon = {
 ---@type LazySpec
 return {
   [1] = "sindrets/diffview.nvim",
-  enabled = true,
   cond = not vim.g.vscode,
   lazy = true,
   cmd = {
@@ -35,11 +34,11 @@ return {
     },
   },
   keys = {
-    { [1] = "<Leader>gdo", [2] = "<cmd>DiffviewOpen<CR>", desc = "diffview-open" },
-    { [1] = "<Leader>gdc", [2] = "<cmd>DiffviewClose<CR>", desc = "diffview-close" },
-    { [1] = "<Leader>gdl", [2] = "<cmd>DiffviewLog<CR>", desc = "diffview-log" },
-    { [1] = "<Leader>gdr", [2] = "<cmd>DiffviewRefresh<CR>", desc = "diffview-refresh" },
-    { [1] = "<Leader>gdf", [2] = "<cmd>DiffviewFocusFiles<CR>", desc = "diffview-focus-files" },
+    { [1] = "<Leader>gdo", [2] = "<cmd>DiffviewOpen<CR>",        desc = "diffview-open" },
+    { [1] = "<Leader>gdc", [2] = "<cmd>DiffviewClose<CR>",       desc = "diffview-close" },
+    { [1] = "<Leader>gdl", [2] = "<cmd>DiffviewLog<CR>",         desc = "diffview-log" },
+    { [1] = "<Leader>gdr", [2] = "<cmd>DiffviewRefresh<CR>",     desc = "diffview-refresh" },
+    { [1] = "<Leader>gdf", [2] = "<cmd>DiffviewFocusFiles<CR>",  desc = "diffview-focus-files" },
     { [1] = "<Leader>gdh", [2] = "<cmd>DiffviewFileHistory<CR>", desc = "diffview-file-history" },
     {
       [1] = "<Leader>gdh",

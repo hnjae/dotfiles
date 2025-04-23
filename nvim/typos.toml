@@ -1,1 +1,2 @@
-# GLOBAL typo config
+[default.extend-words]
+noice = "noice"

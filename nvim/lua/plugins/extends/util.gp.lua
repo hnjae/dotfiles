@@ -51,7 +51,7 @@ return {
     vim.api.nvim_create_autocmd({ "User" }, {
       pattern = { "GpDone" },
       callback = function(_)
-        vim.notify(icon .. " : GpDone!", "info")
+        vim.notify(icon .. ": GpDone!", "info")
       end,
     })
 
@@ -76,9 +76,10 @@ return {
     return vim.tbl_deep_extend("force", opts, {
       command_prompt_prefix_template = icon .. " {{agent}} ~ ",
 
-      chat_assistant_prefix = { icon, " [{{agent}}]" },
+      chat_assistant_prefix = { "LLM ", "[{{agent}}]:" },
 
-      chat_user_prefix = (require("globals").icons.textbox .. " :"),
+      -- chat_user_prefix = (require("globals").icons.textbox .. " :"),
+      chat_user_prefix = "USER:",
 
       chat_conceal_model_params = false,
       -- chat_topic_model = "";
@@ -101,7 +102,6 @@ return {
 # topic: ?
 
 - file: {{filename}}
-{{optional_headers}}
 
 | Type    | Keyboard | Command          |
 | ------- | -------- | ---------------- |
@@ -116,10 +116,13 @@ Chats are saved automatically.
 
 {{user_prefix}}
 ]],
+      -- {{optional_headers}}
 
       style_popup_max_width = 120,
 
+      ----------------------------------------------------------------------------------------------
       -- Keys
+      ----------------------------------------------------------------------------------------------
       openai_api_key = { "secret-tool", "lookup", "api", "openai" },
 
       providers = {
@@ -147,6 +150,9 @@ Chats are saved automatically.
         },
       },
 
+      ----------------------------------------------------------------------------------------------
+      -- Agents
+      ----------------------------------------------------------------------------------------------
       agents = {
         -- disable default agents
         { name = "ChatGPT4o", disable = true },
@@ -188,18 +194,6 @@ Chats are saved automatically.
             .. "\n\nAlways answer in English regardless of input language.",
         },
         {
-          provider = "googleai",
-          name = "gemini",
-          chat = true,
-          command = false,
-          model = {
-            model = "gemini-2.5-pro-exp-03-25",
-            temperature = 0.9,
-          },
-          system_prompt = require("gp.defaults").chat_system_prompt
-            .. "\n\nAlways answer in English regardless of input language.",
-        },
-        {
           provider = "anthropic",
           name = "claude-command",
           chat = false,
@@ -210,6 +204,18 @@ Chats are saved automatically.
             max_token = 8192,
           },
           system_prompt = require("gp.defaults").code_system_prompt,
+        },
+        {
+          provider = "googleai",
+          name = "gemini",
+          chat = true,
+          command = false,
+          model = {
+            model = "gemini-2.5-pro-exp-03-25",
+            temperature = 0.9,
+          },
+          system_prompt = require("gp.defaults").chat_system_prompt
+            .. "\n\nAlways answer in English regardless of input language.",
         },
         {
           provider = "googleai",
@@ -227,6 +233,9 @@ Chats are saved automatically.
         },
       },
 
+      ----------------------------------------------------------------------------------------------
+      -- Pre-defined tasks
+      ----------------------------------------------------------------------------------------------
       hooks = {
         UnitTests = function(gp, params)
           local template = "I have the following code from {{filename}}:\n\n"
