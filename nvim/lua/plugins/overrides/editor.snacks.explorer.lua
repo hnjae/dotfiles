@@ -32,25 +32,70 @@ return {
 }
 ```
 ]]
+
+local icons = require("globals").icons
+
+-- ---@type snacks.picker.explorer.Config
+local opts = {
+  -- auto_close = true,
+
+  layout = {
+    preset = "sidebar",
+    preview = false,
+    layout = {
+      -- default 50:
+      width = 32,
+    },
+  },
+
+  -- 이거 사용안되는 듯 <2025-04-24>
+  icon = {
+    files = {
+      enabled = false,
+      dir = icons.directory,
+      dir_open = icons.directory_open,
+      file = icons.file,
+    },
+  },
+
+  win = {
+    list = {
+      keys = {
+        -- file picker 랑 동작 통일:
+        ["<c-t>"] = "tab", -- default: terminal
+        ["<c-v>"] = "edit_vsplit",
+        ["<c-s>"] = "edit_split",
+
+        ["<c-s-t>"] = "terminal", -- terminal 맵핑 옮김
+        ["<c-o>"] = "edit_split", -- netrw 의 `o` 에서 따옴
+
+        -- NEW:
+        ["P"] = "edit_split", -- netrw alike; default: toggle_preview; netrw: browes-in-previously-used-window
+        ["p"] = "toggle_preview", -- netrw alike;
+        ["o"] = "edit_split", -- netrw 랑 동작 일치화; default: explorer_open <2025-04-24>
+        ["H"] = "list_top", -- netrw 랑 동작 일치화
+        ["v"] = "edit_vsplit", -- netrw 랑 동작 일치화
+        ["t"] = "tab", -- netrw 랑 동작 일치화
+        ["gx"] = "explorer_open",
+        ["gh"] = "toggle_hidden",
+        ["gi"] = "toggle_ignore",
+        ["I"] = "toggle_help_input", -- default: toggle_ignore; netrw: toggle banner
+      },
+    },
+  },
+}
+
 ---@type LazySpec
 return {
   [1] = "snacks.nvim",
   optional = true,
+  ---@type snacks.Config
+  opts = {
+    -- NOTE: 이거 왜 안먹지. <2025-04-24>
+    explorer = opts,
+  },
   keys = function(_, keys)
     local snacks = require("snacks")
-
-    -- ---@type snacks.picker.explorer.Config
-    local opts = {
-      -- auto_close = true,
-      layout = {
-        preset = "sidebar",
-        preview = false,
-        layout = {
-          -- default 50:
-          width = 32,
-        },
-      },
-    }
 
     vim.list_extend(keys, {
       {

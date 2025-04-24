@@ -72,6 +72,14 @@
         ["[e"] = "explorer_error_prev",
 ```
 
+### LazyVim
+
+#### Snacks
+
+- `<c-v>` vsplit
+- `<c-s>` split
+- `<c-t>` tab
+
 ### Macro
 
 `<C-r><C-r>b` 를 누르면 `b` 에 저장된 매크로가 출력됨.

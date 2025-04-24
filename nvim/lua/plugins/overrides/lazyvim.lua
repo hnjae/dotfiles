@@ -1,3 +1,4 @@
+local icons = require("globals").icons
 ---@type LazySpec
 return {
   [1] = "LazyVim",
@@ -5,10 +6,14 @@ return {
   opts = {
     icons = {
       diagnostics = {
-        Error = " ", -- nf-cod-error
-        Warn = " ", -- nf-cod-warning
-        Info = " ", -- nf-cod-info
-        Hint = " ", -- nf-cod-question
+        -- Error = " ", -- nf-cod-error
+        -- Warn = " ", -- nf-cod-warning
+        -- Info = " ", -- nf-cod-info
+        -- Hint = " ", -- nf-cod-question
+        Error = icons.severity.error,
+        Warn = icons.severity.warn,
+        Info = icons.severity.info,
+        Hint = icons.severity.hint,
       },
       git = {
         added = " ", -- nf-cod-diff_added
@@ -16,13 +21,17 @@ return {
         removed = " ", -- nf-cod-diff_renamed
       },
       kinds = {
+        ---------------------------------------------
         -- from lazyvim
+        ---------------------------------------------
         -- Codeium = "󰘦 ",
         -- Control = " ",
         -- Collapsed = " ",
         -- Copilot = " ",
 
+        ---------------------------------------------
         -- from codicons
+        ---------------------------------------------
         -- Operator = " ",
         Array = " ", -- nf-cod-symbol-array
         Boolean = " ", -- nf-cod-symbol_boolean
@@ -51,7 +60,9 @@ return {
         -- Constant = " ", -- nf-cod-symbol_constant
         Snippet = " ", -- nf-cod-symbol_snippet
 
-        -- my overrides
+        ---------------------------------------------
+        -- MY OVERRIDES & ADDS
+        ---------------------------------------------
         -- Module = "󰆧 ", -- nf-md-cube_outline
         -- Module = "󰮄 ", -- nf-md-cube_scan
         Property = "󰓼 ", -- nf-md-tag_outline

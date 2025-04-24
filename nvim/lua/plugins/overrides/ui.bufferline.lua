@@ -73,8 +73,10 @@ return {
     opts = function()
       local groups = require("bufferline.groups")
       -- groups.builtin.pinned.icon = "📌" -- nf-oct-pin
-      -- groups.builtin.pinned.icon = "󰤱" -- nf-md-pin
-      groups.builtin.pinned.icon = "" -- nf-oct-pin
+      groups.builtin.pinned.icon = "󰤱" -- nf-md-pin
+      -- groups.builtin.pinned.icon = "" -- nf-oct-pin
+      -- groups.builtin.pinned.icon = "󰍁" -- nf-md-lock_outline
+      -- groups.builtin.pinned.icon = "󰓒" -- nf-md-lock_outline
     end,
   },
 }

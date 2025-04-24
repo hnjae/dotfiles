@@ -1,11 +1,11 @@
--- if vim.g.lazyvim_picker and vim.g.lazyvim_picker ~= "fzf" then
---   return {}
--- end
+local icons = require("globals").icons
 
 ---@type LazySpec
 return {
   [1] = "fzf-lua",
-  optional = true,
+  enabled = false,
+  cond = true,
+  -- optional = true,
   keys = function(_, keys)
     local default_grep_opts = {
       search = "",
@@ -37,6 +37,7 @@ return {
       { [1] = "<Leader>/", [2] = grep_project, desc = "Grep (Project)" },
       { [1] = "<Leader>sg", [2] = grep_project, desc = "Grep (Project)" }, -- same as above
       { [1] = "<Leader>sG", [2] = grep_cwd, desc = "Grep (buffer's cwd)" },
+      -- { "<leader>ff", LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
       {
         [1] = "<Leader>fF",
         [2] = function()
@@ -57,11 +58,26 @@ return {
     local actions = fzf.actions
 
     -- restore fzf-lua's default mapping
+    -- ["ctrl-s"]      = actions.file_split,
+    -- ["ctrl-v"]      = actions.file_vsplit,
+    -- ["ctrl-t"]      = actions.file_tabedit,
     config.defaults.actions.files["ctrl-t"] = actions.file_tabedit
+    config.defaults.actions.files["ctrl-o"] = actions.file_split -- netrw의 o 에 서 따옴
 
     -- move trobule else where
     if LazyVim.has("trouble.nvim") then
       config.defaults.actions.files["ctrl-z"] = require("trouble.sources.fzf").actions.open
     end
   end,
+  specs = {
+    {
+      [1] = "mini.icons",
+      optional = true,
+      opts = {
+        filetype = {
+          fzf = { glyph = icons.filter, hl = "MiniIconsAzure" },
+        },
+      },
+    },
+  },
 }

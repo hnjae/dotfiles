@@ -23,10 +23,11 @@ return {
     spec = {
       -- Add missing icon from LazyVim v14.14.0 (2025-04-09)
       -- <https://neovim.io/doc/user/options.html#'keywordprg'>
-      { [1] = "<Leader>K", mode = { "n" }, icon = { icon = " ", color = "yellow" } }, -- nf-cod-question
-      { [1] = "[e", mode = { "n" }, icon = { icon = " ", color = "red" } },
-      { [1] = "]e", mode = { "n" }, icon = { icon = " ", color = "red" } },
-      { [1] = "[w", mode = { "n" }, icon = { icon = " ", color = "orange" } },
+      { [1] = "<Leader>K", mode = { "n" }, icon = { icon = icons.severity.hint, color = "yellow" } },
+      { [1] = "[e", mode = { "n" }, icon = { icon = icons.severity.error, color = "red" } },
+      { [1] = "]e", mode = { "n" }, icon = { icon = icons.severity.error, color = "red" } },
+      { [1] = "[w", mode = { "n" }, icon = { icon = icons.severity.warn, color = "orange" } },
+      { [1] = "]w", mode = { "n" }, icon = { icon = icons.severity.warn, color = "orange" } },
       { [1] = "g[", mode = { "n", "x", "o" }, icon = { icon = licons.prev } }, -- mini.ai
       { [1] = "g]", mode = { "n", "x", "o" }, icon = { icon = licons.next } }, -- mini.ai
 
@@ -79,6 +80,7 @@ return {
       -- change buffer
       { [1] = "[<Space>", icon = { icon = " ", color = "green" }, desc = "insert-empty-line-above-cursor" }, -- nf-cod-insert
       { [1] = "]<Space>", icon = { icon = " ", color = "green" }, desc = "insert-empty-line-below-cursor" }, -- nf-cod-insert
+
       { [1] = "<", icon = { icon = "󰉵 ", color = "green" }, desc = "+indent-left" },
       { [1] = ">", icon = { icon = "󰉶 ", color = "green" }, desc = "+indent-right" },  -- nf-md-format_indent_increase
       { [1] = "<", icon = { icon = "󰉵 ", color = "green" }, mode = { "x" }, desc = "indent-left" },
@@ -216,9 +218,9 @@ return {
 
       { [1] = "zd",    icon = { icon = " " }, desc = "delete-fold-under-cursor" }, -- nf-cod-fold
       { [1] = "zD",    icon = { icon = " " }, desc = "delete-all-folds-under-cursor" }, -- nf-cod-fold
-      { [1] = "zE",    icon = { icon = " " }, desc = "delete-all-folds-in-file" }, -- nf-cod-fold
+      -- { [1] = "zE",    icon = { icon = " " }, desc = "delete-all-folds-in-file" }, -- nf-cod-fold
       { [1] = "zx",    icon = { icon = " " }, desc = "update-folds" }, -- nf-cod-fold
-      { [1] = "zX",    icon = { icon = " " }, desc = "update-folds" }, -- nf-cod-fold
+      -- { [1] = "zX",    icon = { icon = " " }, desc = "update-folds" }, -- nf-cod-fold
 
       { [1] = "zo",    icon = { icon = "󰡏 " }, desc = "open-fold-under-cursor" },
       { [1] = "zO",    icon = { icon = "󰡏 " }, desc = "open-all-folds-under-cursor" },
@@ -241,7 +243,7 @@ return {
       rules = {
         -- NEW PATTERN
         { pattern = "word", icon = " " }, -- nf-cod-whole_word
-        { pattern = "symbol", icon = " " }, -- nf-cod-symbol_misc
+        { pattern = "symbol", icon = icons.symbol, color = "purple" }, -- nf-cod-symbol_misc
 
         { pattern = "function", icon = "󰊕 " },
         { pattern = "tag", icon = "󰓼 " },
@@ -250,9 +252,11 @@ return {
         { pattern = "string", icon = " " },
         { pattern = "call", icon = " " },
         { pattern = "quote", icon = "󰝗 " },
+        { pattern = "spell", icon = "󰓆 " },
+        { pattern = "register", icon = "󰓆 " },
         -- { pattern = "block", icon = "󰨾 " },
 
-        { pattern = "grep", icon = " " }, -- nf-cod-filter
+        { pattern = "grep", icon = icons.filter },
         { pattern = "new", icon = "󰐕 " },
         { pattern = "close", icon = "󰅖 " },
         -- { pattern = "previous", icon = licons.prev },
@@ -292,12 +296,12 @@ return {
         -- { pattern = "test", cat = "filetype", name = "neotest-summary" },
         -- { pattern = "lazy", cat = "filetype", name = "lazy" },
         { pattern = "buffer", icon = "󱇨 ", color = "cyan" },
-        { pattern = "file", icon = "󰈤 ", color = "cyan" }, -- nf-md-file_outline
+        { pattern = "file", icon = icons.file, color = "cyan" }, -- nf-md-file_outline
         { pattern = "window", icon = " ", color = "blue" }, -- DEFAULT
         { pattern = "diagnostic", icon = "󱖫 ", color = "green" }, -- DEFAULT
         { pattern = "format", icon = icons.sort, color = "cyan" },
         { pattern = "debug", icon = " ", color = "red" }, -- nf-cod-debug
-        { pattern = "code", icon = "󰅴 ", color = "orange" }, -- nf-md-code_tags
+        { pattern = "code", icon = icons.code, color = "orange" },
         { pattern = "notif", icon = "󱥂 ", color = "blue" }, -- nf-md-message_badge_outline
         { pattern = "toggle", icon = icons.toggle, color = "yellow" }, -- nf-md-toggle_switch_outline
         { pattern = "session", icon = " ", color = "azure" }, -- DEFAULT

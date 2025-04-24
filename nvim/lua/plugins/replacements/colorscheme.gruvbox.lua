@@ -40,9 +40,8 @@ return {
       overrides = {
         -- NormalFloat = vim.opt.background:get() == "light" and { bg = "#f2e5bc" }, -- light0_soft
         -- NormalNc = vim.opt.background:get() == "light" and { bg = "#f2e5bc" } or { link = "Normal" }, -- light0_soft
-
         NormalFloat = { link = "Normal" },
-        -- NormalFloat = { bg = "#f2e5bc" }, -- light0_soft
+        NonText = { link = "GruvBoxBg4" }, -- default: GruvBoxBg2
 
         -- ["RenderMarkdownH1Bg"] = { link = "ErrorMsg" },
         -- ["RenderMarkdownH1Bg"] = { link = "PmenuSel" },

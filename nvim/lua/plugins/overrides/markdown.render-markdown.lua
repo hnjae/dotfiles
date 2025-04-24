@@ -19,6 +19,10 @@ return {
     },
     bullet = {
       enabled = true,
+      -- icons = { "●", "○", "◆", "◇" },
+      icons = { "" },
+
+      -- nf-cod:     nf-fa:  nf-md: 󰧟 󰧞 , ascii: - *
     },
     checkbox = {
       enabled = true,
@@ -56,7 +60,7 @@ return {
       conceallevel = {
         -- default = vim.o.conceallevel,
         default = 0,
-        rendered = 0, -- 2: concleal space, empty line
+        rendered = 2, -- 2: concleal space, empty line
       },
     },
   },

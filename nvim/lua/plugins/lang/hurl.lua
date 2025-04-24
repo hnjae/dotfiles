@@ -69,7 +69,7 @@ return {
         opts.icons = opts.icons or {}
         opts.icons.rules = opts.icons.rules or {}
         table.insert(
-          opts.icons,
+          opts.icons.rules,
           { plugin = "hurl.nvim", icon = wk_icon.icon, color = wk_icon.color }
         )
 
@@ -79,6 +79,16 @@ return {
           { [1] = prefix, mode = { "n", "v" }, group = "hurl", icon = wk_icon }
         )
       end,
+    },
+    {
+      [1] = "mini.icons",
+      optional = true,
+      opts = {
+        filetype = {
+          -- 󰆨
+          hurl = { glyph = "󰓡 ", hl = "MiniIconsGreen" }, -- nf-md
+        },
+      },
     },
   },
 }

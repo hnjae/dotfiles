@@ -2,6 +2,7 @@ local M = {}
 
 local denylist = {
   diff = true,
+  help = true,
 }
 
 ---@param winid number

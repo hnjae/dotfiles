@@ -1,3 +1,6 @@
+local icons = require("globals").icons
+-- LazyVim's `editor.aerial`
+
 ---@type LazySpec[]
 return {
   {
@@ -46,7 +49,19 @@ return {
       { [1] = "]s", [2] = ":AerialNext<CR>", desc = "symbol-next (aerial)", silent = true },
       { [1] = "[s", [2] = ":AerialPrev<CR>", desc = "symbol-prev (aerial)", silent = true },
     },
+    specs = {
+      {
+        [1] = "mini.icons",
+        optional = true,
+        opts = {
+          filetype = {
+            aerial = { glyph = icons.symbol, hl = "MiniIconsPurple" }, -- default: 󱘎
+          },
+        },
+      },
+    },
   },
+
   {
     [1] = "aerial.nvim",
     optional = true,
@@ -56,7 +71,7 @@ return {
           -- NOTE:
           -- ev.buf: 닫힌 윈도우의 버퍼
 
-          if vim.api.nvim_get_option_value("buftype", { buf = ev.buf }) == "nofile" then
+          if vim.api.nvim_get_option_value("buftype", { buf = ev.buf }) ~= "" then
             return
           end
 

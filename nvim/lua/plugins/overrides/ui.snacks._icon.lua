@@ -1,3 +1,5 @@
+local icons = require("globals").icons
+
 ---@type LazySpec
 return {
   [1] = "snacks.nvim",
@@ -6,23 +8,8 @@ return {
   opts = {
     toggle = {
       icon = {
-        enabled = "󱨥 ",
-        disabled = "󱨦 ",
-      },
-    },
-    picker = {
-      icon = {
-        files = {
-          enabled = true, -- show file icons
-          dir = "󰉖 ",
-          dir_open = "󰷏 ",
-          file = " ",
-        },
-
-        lsp = {
-          enabled = "󱨥 ",
-          disabled = "󱨦 ",
-        },
+        enabled = icons.toggle_on,
+        disabled = icons.toggle,
       },
     },
   },

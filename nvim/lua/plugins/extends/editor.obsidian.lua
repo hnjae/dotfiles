@@ -102,7 +102,7 @@ return {
     {
       [1] = "<leader>td",
       [2] = function()
-        return require("obsidian").util.toggle_checkbox({ " ", "/", "x" })
+        return require("obsidian").util.toggle_checkbox({ " ", "x" })
       end,
       desc = "toggle-checkbox",
       ft = "markdown",
@@ -110,7 +110,7 @@ return {
     {
       [1] = "<leader>tD",
       [2] = function()
-        return require("obsidian").util.toggle_checkbox({ "x" })
+        return require("obsidian").util.toggle_checkbox({ "/" })
       end,
       desc = "checkbox-done",
       ft = "markdown",
@@ -205,7 +205,8 @@ return {
       blink = false,
     },
     picker = {
-      name = "fzf-lua", -- 그냥 vim.ui.select 사용하는 옵션은 없나?
+      -- name = "fzf-lua", -- 그냥 vim.ui.select 사용하는 옵션은 없나?
+      name = "snacks.pick",
     },
     follow_url_func = function(url)
       -- vim.fn.jobstart({ "xdg-open", url })
@@ -262,19 +263,20 @@ return {
       optional = true,
       opts = {
         preset = "obsidian",
-        -- custom = {
-        --     todo = { raw = '[-]', rendered = '󰥔 ', highlight = 'RenderMarkdownTodo', scope_highlight = nil },
-        -- },
         checkbox = {
+          -- use `nf-fa` variant
           enabled = true,
           checked = {
             -- icon = " 󰄲 ", -- nf-mdcheckbox_marked
-            icon = "  ", -- nf-fa-check_circle
+            -- icon = "  ", -- nf-fa-check_circle
+            -- icon = "  ", -- nf-fa-check_square
+            icon = "  ", -- nf-fa-check_square
             highlight = "markdownH1",
           },
           unchecked = {
             -- icon = " 󰄱 ", -- nf-md -checkbox_blnak_outline
-            icon = "  ", -- nf-fa-circle
+            -- icon = "  ", -- nf-fa-circle
+            icon = "  ", -- nf-fa-square_o
             highlight = "markdownBold",
           },
           custom = {
@@ -286,7 +288,7 @@ return {
             in_progress = {
               raw = "[/]",
               -- rendered = " 󰄮 ", -- nf-md-checkbox-blank
-              rendered = "  ", -- nf-fa-circle_dot
+              rendered = "  ", -- nf-fa-circle_dot
               highlight = "markdownBold",
               scope_highlight = nil,
             },

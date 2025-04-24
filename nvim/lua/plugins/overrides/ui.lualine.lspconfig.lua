@@ -3,7 +3,7 @@ local spec = {
   [1] = "lualine.nvim",
   optional = true,
   opts = function(_, opts)
-    local lsp_icon = (require("globals").icons.codicons.gear .. " ")
+    local lsp_icon = require("globals").icons.cog
 
     local hide_width = 60
     local truc_width = 105
