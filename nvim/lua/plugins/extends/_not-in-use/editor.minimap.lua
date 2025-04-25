@@ -64,26 +64,26 @@ return {
     -- vim.g.minimap_auto_start = 1
     -- vim.g.minimap_auto_start_win_enter = 1
 
-    vim.api.nvim_create_autocmd("WinClosed", {
-      callback = function(ev)
-        -- NOTE:
-        -- ev.buf: 닫힌 윈도우의 버퍼
-
-        if vim.api.nvim_get_option_value("buftype", { buf = ev.buf }) ~= "" then
-          return
-        end
-
-        -- HACK: 커서가 다른 윈도우에 포커스 되었다고 가정하기 위해 대기 <2025-04-22>
-        vim.defer_fn(function()
-          local buf = vim.api.nvim_get_current_buf()
-          if vim.api.nvim_get_option_value("filetype", { buf = buf }) ~= "minimap" then
-            return
-          end
-
-          vim.cmd("quit")
-        end, 1)
-      end,
-    })
+    -- vim.api.nvim_create_autocmd("WinClosed", {
+    --   callback = function(ev)
+    --     -- NOTE:
+    --     -- ev.buf: 닫힌 윈도우의 버퍼
+    --
+    --     if vim.api.nvim_get_option_value("buftype", { buf = ev.buf }) ~= "" then
+    --       return
+    --     end
+    --
+    --     -- HACK: 커서가 다른 윈도우에 포커스 되었다고 가정하기 위해 대기 <2025-04-22>
+    --     vim.defer_fn(function()
+    --       local buf = vim.api.nvim_get_current_buf()
+    --       if vim.api.nvim_get_option_value("filetype", { buf = buf }) ~= "minimap" then
+    --         return
+    --       end
+    --
+    --       vim.cmd("quit")
+    --     end, 1)
+    --   end,
+    -- })
 
     vim.api.nvim_create_autocmd({ "VimEnter", "TabEnter" }, {
       callback = function(ev)

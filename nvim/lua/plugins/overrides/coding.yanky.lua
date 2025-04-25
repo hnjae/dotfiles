@@ -13,15 +13,26 @@ return {
       desc = "Open Yank History",
     },
   },
-  opts = function()
-    -- replace built'in `YankyRingHistory` command
-    LazyVim.on_load("yanky.nvim", function()
-      vim.defer_fn(function()
-        vim.api.nvim_create_user_command("YankyRingHistory", function()
-          Snacks.picker.yanky()
-        end, {})
-      end, 1)
-    end)
-  end,
-  specs = {},
+  opts = {
+    system_clipboard = {
+      sync_with_ring = false,
+      -- clipboard_register = nil,
+    },
+  },
+  specs = {
+    {
+      [1] = "yanky.nvim",
+      optional = true,
+      opts = function()
+        -- replace built'in `YankyRingHistory` command
+        LazyVim.on_load("yanky.nvim", function()
+          vim.defer_fn(function()
+            vim.api.nvim_create_user_command("YankyRingHistory", function()
+              Snacks.picker.yanky()
+            end, {})
+          end, 1)
+        end)
+      end,
+    },
+  },
 }

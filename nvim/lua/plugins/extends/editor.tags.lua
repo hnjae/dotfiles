@@ -12,7 +12,7 @@ return {
     },
     init = function()
       vim.g.gutentags_cache_dir =
-          require("plenary.path"):new(vim.fn.stdpath("cache"), "gutentags").filename
+        require("plenary.path"):new(vim.fn.stdpath("cache"), "gutentags").filename
 
       vim.g.gutentags_exclude_filetypes = {
         "",
@@ -32,8 +32,10 @@ return {
         "noice",
         "qf",
         "snacks_notif",
+        "snacks_picker_input",
         "startify",
         "tagbar",
+        "toggleterm",
       }
     end,
   },
@@ -41,6 +43,24 @@ return {
     [1] = "preservim/tagbar",
     lazy = true,
     cond = cond,
+    cmd = {
+      "Tagbar",
+      "TagbarClose",
+      "TagbarCurrentTag",
+      "TagbarDebug",
+      "TagbarDebugEnd",
+      "TagbarForceUpdate",
+      "TagbarGetTypeConfig",
+      "TagbarJump",
+      "TagbarJumpNext",
+      "TagbarJumpPrev",
+      "TagbarOpen",
+      "TagbarOpenAutoClose",
+      "TagbarSetFoldlevel",
+      "TagbarShowTag",
+      "TagbarToggle",
+      "TagbarTogglePause",
+    },
     dependencies = {
       "vim-gutentags", -- to load gutentags when tagbar loads (not actually a dependency)
       "nvim-lua/plenary.nvim",
@@ -53,45 +73,48 @@ return {
       vim.g.tagbar_show_data_type = 0
       vim.g.tagbar_help_visibility = 0
       vim.g.tagbar_show_balloon = 1
+      vim.g.tagbar_sort = 0 -- 0: sort according to their order in the file
 
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = plugin.ft,
-        callback = function(ev)
-          if
+      if plugin.ft ~= nil and #plugin.ft > 0 then
+        vim.api.nvim_create_autocmd("FileType", {
+          pattern = plugin.ft,
+          callback = function(ev)
+            if
               vim.api.nvim_buf_line_count(ev.buf) > 80
               and (
                 vim.fn.winwidth(0)
-                - (vim.bo.textwidth ~= 0 and vim.bo.textwidth or 80) -- textwidth
-                - 8                                                  -- statuscolumn
-                - 30                                                 -- min aerial width
+                  - (vim.bo.textwidth ~= 0 and vim.bo.textwidth or 80) -- textwidth
+                  - 8 -- statuscolumn
+                  - 30 -- min aerial width
                 >= 0
               )
-          then
-            vim.cmd("TagbarOpen")
-          end
-        end,
-      })
+            then
+              vim.cmd("TagbarOpen")
+            end
+          end,
+        })
+      end
     end,
     keys = function(plugin, keys)
       return vim.list_extend(keys, {
         {
-          [1] = "<Leader>cs",
+          [1] = "<Leader>ct",
           [2] = "<cmd>TagbarToggle<CR>",
           desc = "tags (Tagbar)",
           ft = plugin.ft,
           silent = true,
         },
+        -- mimic neovim's `[t`
         {
-          [1] = "]s",
+          [1] = "]t",
           [2] = function()
             vim.fn["tagbar#jumpToNearbyTag"](vim.v.count1)
           end,
-          desc = "prev-tags",
           ft = plugin.ft,
-          silent = true,
+          desc = "prev-tags",
         },
         {
-          [1] = "[s",
+          [1] = "[t",
           [2] = function()
             vim.fn["tagbar#jumpToNearbyTag"](-vim.v.count1)
           end,

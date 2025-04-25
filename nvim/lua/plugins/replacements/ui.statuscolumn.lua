@@ -84,7 +84,7 @@ return {
       -- `:help `sign-priority`
       -- todo-comments: 8
       -- lsp: 12 (maybe)
-      sign_priority = 13, -- default 10
+      sign_priority = 13, -- default 10 (make this higher than diagnostics)
       -- refresh_interval = 200, -- default 150
     },
   },

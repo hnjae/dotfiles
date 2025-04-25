@@ -111,27 +111,14 @@ return {
       vim.g.asciidoctor_syntax_conceal = 1
     end,
   },
-  {
-    [1] = "tagbar",
-    optional = true,
-    ft = { "asciidoc", "asciidoctor" },
-    -- opts = function()
-    -- vim.g.tagbar_type_asciidoctor = {
-    --   ["sro"] = '""',
-    --   ["sort"] = 0,
-    --   ["ctagstype"] = "asciidoc",
-    --   ["regex"] = {
-    --     "/^(={1,6})[[:space:]\\t]+([^=]+)/\\1 \\2/h,header,AsciiDoctor Headers/",
-    --   },
-    --   ["kinds"] = {
-    --     "h:headings",
-    --   },
-    -- }
-    -- end,
-  },
-  {
-    [1] = "vim-gutentags",
-    optional = true,
-    ft = { "asciidoc", "asciidoctor" },
-  },
+  -- {
+  --   [1] = "tagbar",
+  --   optional = true,
+  --   ft = { "asciidoc", "asciidoctor" },
+  -- },
+  -- {
+  --   [1] = "vim-gutentags",
+  --   optional = true,
+  --   ft = { "asciidoc", "asciidoctor" },
+  -- },
 }

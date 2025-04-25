@@ -10,6 +10,12 @@ return {
     [1] = "aerial.nvim",
     optional = true,
     opts = {
+      backends = { "lsp", "treesitter", "markdown", "asciidoc", "man" },
+      lazy_load = false, -- lazy_load is being managed by lazy.nvim
+
+      highlight_on_hover = true,
+      autojump = true,
+
       layout = {
         max_width = { 30, 0.2 }, -- default: 40, 0.2
         -- min_width = 10,
@@ -47,10 +53,19 @@ return {
         desc = "Aerial (Symbols)",
       },
 
-      -- overrides default (wrong spell)
+      -- `gO` (vim.lsp.document_symbol)
+      {
+        [1] = "gO", -- default:
+        [2] = function()
+          require("aerial").open({ focus = true, direction = "float" })
+        end,
+        desc = "Aerial (Symbols)",
+      },
+
       -- NOTE: `<cmd>Aeri` 이나 `:<C-u>Aeri` 로 맵핑하지 않는 이유는, `[count]AerialNext` 와 같이 사용하기 위함 <2025-04-23>
-      { [1] = "]s", [2] = ":AerialNext<CR>", desc = "symbol-next (aerial)", silent = true },
-      { [1] = "[s", [2] = ":AerialPrev<CR>", desc = "symbol-prev (aerial)", silent = true },
+      -- mimic neovim's `[t`
+      { [1] = "]t", [2] = ":AerialNext<CR>", desc = "symbol-next (aerial)", silent = true },
+      { [1] = "[t", [2] = ":AerialPrev<CR>", desc = "symbol-prev (aerial)", silent = true },
     },
     specs = {
       {
@@ -65,34 +80,34 @@ return {
     },
   },
 
-  {
-    [1] = "aerial.nvim",
-    optional = true,
-    opts = function()
-      vim.api.nvim_create_autocmd("WinClosed", {
-        callback = function(ev)
-          -- NOTE:
-          -- ev.buf: 닫힌 윈도우의 버퍼
-
-          if vim.api.nvim_get_option_value("buftype", { buf = ev.buf }) ~= "" then
-            return
-          end
-
-          -- HACK: 커서가 다른 윈도우에 포커스 되었다고 가정하기 위해 대기 <2025-04-22>
-          vim.defer_fn(function()
-            local buf = vim.api.nvim_get_current_buf()
-            if vim.api.nvim_get_option_value("filetype", { buf = buf }) ~= "aerial" then
-              return
-            end
-
-            vim.cmd("quit")
-
-            -- 아래 두개로 제거하면 안됨
-            -- require("snacks").bufdelete(buf)
-            -- require("aerial").close()
-          end, 1)
-        end,
-      })
-    end,
-  },
+  -- {
+  --   [1] = "aerial.nvim",
+  --   optional = true,
+  --   opts = function()
+  --     vim.api.nvim_create_autocmd("WinClosed", {
+  --       callback = function(ev)
+  --         -- NOTE:
+  --         -- ev.buf: 닫힌 윈도우의 버퍼
+  --
+  --         if vim.api.nvim_get_option_value("buftype", { buf = ev.buf }) ~= "" then
+  --           return
+  --         end
+  --
+  --         -- HACK: 커서가 다른 윈도우에 포커스 되었다고 가정하기 위해 대기 <2025-04-22>
+  --         vim.defer_fn(function()
+  --           local buf = vim.api.nvim_get_current_buf()
+  --           if vim.api.nvim_get_option_value("filetype", { buf = buf }) ~= "aerial" then
+  --             return
+  --           end
+  --
+  --           vim.cmd("quit")
+  --
+  --           -- 아래 두개로 제거하면 안됨
+  --           -- require("snacks").bufdelete(buf)
+  --           -- require("aerial").close()
+  --         end, 5)
+  --       end,
+  --     })
+  --   end,
+  -- },
 }

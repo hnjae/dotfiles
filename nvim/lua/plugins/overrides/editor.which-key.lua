@@ -142,11 +142,6 @@ return {
       { [1] = "%",  icon = { icon = "󰅪 " }, mode = { "n", "x", "o" }, desc = "forward-matching" }, -- nf-md-code_brackets
       { [1] = "g%", icon = { icon = "󰅪 " }, mode = { "n", "x", "o" }, desc = "backwords-matching" }, -- nf-md-code_brackets
 
-      -- { [1] = "[s", icon = { icon = "󰓆 " }, mode = { "n", "x", "o" }, desc = "prev-misspelled" }, -- nf-md-spellcheck
-      -- { [1] = "]s", icon = { icon = "󰓆 " }, mode = { "n", "x", "o" }, desc = "next-misspelled" }, -- nf-md-spellcheck
-      { [1] = "zg", icon = { icon = "󰓆 " }, mode = { "n" },           desc = "add-word-to-spell-list" }, -- nf-md-spellcheck
-      { [1] = "zw", icon = { icon = "󰓆 " }, mode = { "n" },           desc = "make-word-as-bad/missspelling" }, -- nf-md-spellcheck
-      { [1] = "z=", icon = { icon = "󰓆 " }, mode = { "n" },           desc = "spelling-suggestions" }, -- nf-md-spellcheck
 
       { [1] = "[m", icon = { icon = licons.method }, mode = { "n", "x", "o" }, desc = "prev-method" },
       { [1] = "[M", icon = { icon = licons.method }, mode = { "n", "x", "o" }, desc = "prev-method-end" },
@@ -227,6 +222,19 @@ return {
       { [1] = "zv",    icon = { icon = "󰡏 " }, desc = "show-cursor-line (open-enough-folds)" },
       { [1] = "zr",    icon = { icon = "󰡏 " }, desc = "fold-less" },
       { [1] = "zR",    icon = { icon = "󰡏 " }, desc = "open-all-folds" },
+
+      -- SPELL
+      -- { [1] = "[s", icon = { icon = "󰓆 " }, mode = { "n", "x", "o" }, desc = "prev-misspelled" }, -- nf-md-spellcheck
+      -- { [1] = "]s", icon = { icon = "󰓆 " }, mode = { "n", "x", "o" }, desc = "next-misspelled" }, -- nf-md-spellcheck
+      { [1] = "zg", icon = { icon = "󰓆 " }, mode = { "n" },           desc = "make-word-good" }, -- nf-md-spellcheck
+      { [1] = "zG", icon = { icon = "󰓆 " }, mode = { "n" },           desc = "make-word-good (internal-wordlist)" }, -- nf-md-spellcheck
+      { [1] = "zw", icon = { icon = "󰓆 " }, mode = { "n" },           desc = "make-word-wrong" }, -- nf-md-spellcheck
+      { [1] = "zW", icon = { icon = "󰓆 " }, mode = { "n" },           desc = "make-word-wrong (internal-wordlist)" }, -- nf-md-spellcheck
+      { [1] = "z=", icon = { icon = "󰓆 " }, mode = { "n" },           desc = "spelling-suggestions" }, -- nf-md-spellcheck
+      { [1] = "zug", icon = { icon = "󰓆 " }, mode = { "n" },          desc = "undo zg" }, -- nf-md-spellcheck
+      { [1] = "zuG", icon = { icon = "󰓆 " }, mode = { "n" },          desc = "undo zG" }, -- nf-md-spellcheck
+      { [1] = "zuw", icon = { icon = "󰓆 " }, mode = { "n" },          desc = "undo zw" }, -- nf-md-spellcheck
+      { [1] = "zuW", icon = { icon = "󰓆 " }, mode = { "n" },          desc = "undo zW" }, -- nf-md-spellcheck
     },
 
     icons = {

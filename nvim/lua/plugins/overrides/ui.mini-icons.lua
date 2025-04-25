@@ -108,7 +108,7 @@ return {
       bash     = { glyph = '󰞷', hl = "MiniIconsGreen" }, -- default: nf-seti-shell
       csh      = { glyph = '󰞷', hl = 'MiniIconsGrey'   },
       elvish   = { glyph = '󰞷', hl = 'MiniIconsGreen'  },
-      fish     = { glyph = '󰞷', hl = "MiniIconsGrey" },
+      fish     = { glyph = '󰈺', hl = "MiniIconsGrey" },
       nu       = { glyph = '󰞷', hl = "MiniIconsPurple" },
       sh       = { glyph = '󰞷', hl = 'MiniIconsGrey'   },
       tcsh     = { glyph = '󰞷', hl = 'MiniIconsAzure'  },
@@ -118,7 +118,7 @@ return {
       asciidoc = { glyph = '󰧮', hl = 'MiniIconsYellow' },
       rst      = { glyph = '󰧮', hl = 'MiniIconsYellow' },
 
-      hurl     = { glyph = '󰓡', hl = "MiniIconsGreen" }, -- nf-md
+      hurl     = { glyph = "󰓡", hl = "MiniIconsGreen" }, -- nf-md
     },
 
     -- stylua: ignore

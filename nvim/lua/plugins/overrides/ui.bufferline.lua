@@ -2,7 +2,7 @@
 NOTE:
 
 Always show tab indicators:
-  - <https://github.com/akinsho/bufferline.nvim/pull/1008>
+  - <https://github.com/akinsho/bufferline.nvim/pull/1008> 2025-03-30
 ]]
 ---@type LazySpec[]
 return {
@@ -11,11 +11,16 @@ return {
     optional = true,
     opts = {
       options = {
+        style_preset = {
+          require("bufferline").style_preset.no_italic,
+          require("bufferline").style_preset.no_bold,
+          -- require("bufferline").style_preset.minimal,
+        },
         -- single buffer with multiple tabs won't show bufferline by default (2025-04-08)
         always_show_bufferline = true,
 
         modified_icon = "", --nf-cod-circle_filled
-        buffer_close_icon = "󰅖", -- nf-md-close
+        buffer_close_icon = "×", -- unicode (multiplication sign)
         close_icon = "󰅖", -- nf-md-close
         -- left_trunc_marker = " ",-- default
         -- right_trunc_marker = " ",-- default
@@ -44,6 +49,7 @@ return {
     },
 
     keys = {
+      { "<Leader>bs", "<cmd>BufferLineSortByTabs<CR>", desc = "sort-by-tabs" },
       -- new key map
       {
         [1] = "<Leader><Tab>r",

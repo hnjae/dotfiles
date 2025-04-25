@@ -36,3 +36,5 @@ vim.keymap.set({ "i", "t" }, "<C-e>", "<C-\\><C-n>", { desc = "escape-terminal" 
 vim.keymap.del("n", "<leader>bo")
 vim.keymap.del("n", "<S-h>")
 vim.keymap.del("n", "<S-l>")
+vim.keymap.del("i", "<C-s>") -- restore vim.lsp.buf.signature_help
+vim.keymap.set("i", "<C-s>", vim.lsp.buf.signature_help, { desc = "lsp-buf-signature-help" })
