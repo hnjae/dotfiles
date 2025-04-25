@@ -14,7 +14,6 @@ return {
   ft = "markdown",
   dependencies = {
     "nvim-lua/plenary.nvim",
-    "fzf-lua", -- default picker
   },
   keys = {
     {
@@ -205,7 +204,6 @@ return {
       blink = false,
     },
     picker = {
-      -- name = "fzf-lua", -- 그냥 vim.ui.select 사용하는 옵션은 없나?
       name = "snacks.pick",
     },
     follow_url_func = function(url)

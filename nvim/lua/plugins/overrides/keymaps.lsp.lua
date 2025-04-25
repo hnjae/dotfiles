@@ -20,7 +20,7 @@ return {
     -- keys[#keys + 1] = { "gD", false } -- { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
     -- keys[#keys + 1] = { "gy", false } -- { "gy", vim.lsp.buf.type_definition, desc = "Goto T[y]pe Definition" },
 
-    keys[#keys + 1] = { "grr", "<cmd>Trouble lsp_references<CR>" } -- default: opens quickfix
-    keys[#keys + 1] = { "gri", "<cmd>Trouble lsp_implementations<CR>" } -- default: opens quickfix
+    -- keys[#keys + 1] = { "grr", "<cmd>Trouble lsp_references<CR>" } -- default: opens quickfix
+    -- keys[#keys + 1] = { "gri", "<cmd>Trouble lsp_implementations<CR>" } -- default: opens quickfix
   end,
 }

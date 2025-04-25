@@ -47,7 +47,7 @@
         ],
         "description": "inline link (`l`)",
         "body": [
-            "[${1:label}](${2:${TM_SELECTED_TEXT:url}}) $0"
+            "[${2:label}](${1:${TM_SELECTED_TEXT:url}}) $0"
         ]
     },
     "URL": {
