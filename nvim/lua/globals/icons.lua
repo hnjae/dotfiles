@@ -30,38 +30,19 @@ return {
   -- 󰅴 󰅲 󰘦 󰅪 󰅩 󱒓
   -- 󰍁 󰊡 󱁎 󱞏 󱍨 󱍨 󰕕 󱟺 󰄗 󱑎 󰳾 󰮍 󱏵 󱆧 󰋱 󱠬 󱌿 󱨈 󰿭 󰼀 󰋲 󰋱 󱉍 󱗍 󰄗 󱤉 󱈹 󰥚 󰆥 󰾰 󰥋 󰇗 󰇞 󱥌 󰇦 󰨊 󰿃 󰎐 󰆌 󰍍 󱋼 󰆢
   -- 󰇧 󰇥 󰟆 󰽉 󰈏 󱀥 󰈈 󰈲 󰠟 󰈷 󰉁 󰵲 󰂓 󱥒 󱢇 󱌢 󱌣 󰀼 󰂥 󱉟 󰧑 󰘘 󱜠 󱐕 󰃤 󰃭 󰨾 󰆊 󰆋 󰆙 󰇞 󰈀 󱁉 󰚇 󰀘 󱀅 󰮴 󰏘 󰟣 󰐃
-  -- 󰂔 󰂖 󰧰 󱑪 󰽒 󱂕 󰟁 󱁖 󰿠 󱄕 󰤌 󰗐 󰼫 󰿇 󰍉 󰩊 󰭎 󰮬 󰠱 󰠲 󰒕
+  -- 󰂔 󰂖 󰧰 󱑪 󰽒 󱂕 󰟁 󱁖 󰿠 󱄕 󰤌 󰗐 󰼫 󰿇 󰍉 󰩊 󰭎 󰮬 󰠱 󰠲 󰒕 󰭤
   -- 󰢻 󰒓 󱤴 󱓗 cog,  puzzle
   -- 󰑃 󰑄
 
   -------------------------------------------------------------------------------------------------
   --
-  severity = { -- nf-md 󰮦 󰀪 󰋽 󰳧 󰳦 󰅝 󰏨 󰅜 󰀩 󰝧 󰀦  󰅙 󰅚 󰋗  󰗖
+  severity = { -- nf-md 󰮦 󰀪 󰋽 󰳧 󰳦 󰅝 󰏨 󰅜 󰀩 󰝧 󰀦  󰅙 󰅚 󰋗 󰘥 󰗖
     error = "󰅚 ",
     warn = "󰀪 ",
     info = "󰋽 ",
-    hint = " ",
+    hint = "󰘥 ",
     -- trace = "󰐍 ",
     -- debug = "󰃤 ",
-  },
-  signs = {
-
-    -- codicons
-    debug = "", -- nf-cod-debug
-    trace = "", -- nf-cod-play_circle
-    error = " ", -- nf-cod-error
-    warn = "", -- nf-cod-warning
-    info = "", -- nf-cod-info
-    hint = "", -- nf-cod-question
-    -- nf-seti & nf-fa
-    -- error= "" , -- nf-seti-error
-    -- warning = "" , -- nf-fa-warning
-    -- info = "" , -- nf-fa-info_circle
-    -- question = "" , -- nf-fa-question_circle
-    code_action = "", -- nf-cod-lightbulb
-  },
-  codicons = {
-    gear = "",
   },
 
   -- oct, md
@@ -87,9 +68,6 @@ return {
 
   check = "", --nf-oct-check
   checklist = "", -- nf-oct-checklist
-  log = "", --nf-oct-log
-  -- heart = "♥", --nf-oct-heart
-  -- "", -- nf-oct-rows
   empty_set = "∅", -- unicode
 
   result = "", -- nf-oct-checklist

@@ -2,31 +2,22 @@
 
 local icons = require("globals").icons
 
+local get_cwd = function()
+  if vim.bo.buftype ~= "" then
+    return vim.uv.cwd()
+  end
+  return vim.fn.expand("%:h")
+end
+
 ---@type LazySpec
 return {
   [1] = "snacks.nvim",
-  dir = "/home/hnjae/git/snacks.nvim",
   optional = true,
   ---@type snacks.Config
   opts = {
     picker = {
-      debug = {
-        explorer = true,
-      },
-      -- formatters = {
-      --   text = {
-      --     ft = nil, ---@type string? filetype for highlighting
-      --   },
-      --   file = {
-      --     icon_width = 2, -- width of the icon (in characters)
-      --   },
-      -- },
-
-      -- 이거 무시됨 <2025-04-24>
-      -- ---@type snacks.picker.icons
-      icon = {
+      icons = {
         files = {
-          enabled = false,
           dir = icons.directory,
           dir_open = icons.directory_open,
           file = icons.file,
@@ -52,6 +43,48 @@ return {
           },
         },
       },
+
+      sources = {
+        select = {
+          layout = {
+            preset = "select",
+            layout = {
+              -- width = 80,
+            },
+          },
+        },
+      },
+    },
+  },
+  keys = {
+    { [1] = "<F1>", [2] = "<leader>sh", remap = true },
+    {
+      [1] = "<leader>fF",
+      [2] = function()
+        Snacks.picker.files({
+          cwd = get_cwd(),
+        })
+      end,
+      desc = "Find Files (buffer's dir)",
+    },
+    {
+      [1] = "<leader>sG",
+      [2] = function()
+        Snacks.picker.grep({
+          cwd = get_cwd(),
+        })
+      end,
+      desc = "Grep (buffer's dir)",
+    },
+    {
+      "<leader>sW",
+      [2] = function()
+        Snacks.picker.grep_word({
+          cwd = get_cwd(),
+        })
+      end,
+      desc = "Visual selection or word (buffer's dir)",
+      mode = { "n", "x" },
     },
   },
 }

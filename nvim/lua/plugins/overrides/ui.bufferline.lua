@@ -43,11 +43,7 @@ return {
       },
     },
 
-    -- disable lazyvim's mapping
     keys = {
-      { "<S-h>", "<Nop>" },
-      { "<S-l>", "<Nop>" },
-
       -- new key map
       {
         [1] = "<Leader><Tab>r",
@@ -72,9 +68,7 @@ return {
     optional = true,
     opts = function()
       local groups = require("bufferline.groups")
-      -- groups.builtin.pinned.icon = "📌" -- nf-oct-pin
       groups.builtin.pinned.icon = "󰤱" -- nf-md-pin
-      -- groups.builtin.pinned.icon = "" -- nf-oct-pin
       -- groups.builtin.pinned.icon = "󰍁" -- nf-md-lock_outline
       -- groups.builtin.pinned.icon = "󰓒" -- nf-md-lock_outline
     end,

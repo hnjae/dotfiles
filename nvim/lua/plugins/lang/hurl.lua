@@ -80,15 +80,5 @@ return {
         )
       end,
     },
-    {
-      [1] = "mini.icons",
-      optional = true,
-      opts = {
-        filetype = {
-          -- 󰆨
-          hurl = { glyph = "󰓡 ", hl = "MiniIconsGreen" }, -- nf-md
-        },
-      },
-    },
   },
 }

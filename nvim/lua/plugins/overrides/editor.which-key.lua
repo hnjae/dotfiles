@@ -5,8 +5,8 @@ local licons = {
   next = "󰔰 ",
   close = "󰅖",
   move_cursor = "󰮴 ", -- nf-md-pan
-  method = " ", -- nf-cod-symbol_method
   word = " ",
+  method = " ", -- nf-cod-symbol_method
 }
 ---@type LazySpec
 return {
@@ -72,8 +72,8 @@ return {
       { [1] = "<C-w>k",       mode = { "n" }, icon = { icon = "󰆾 " }, desc = "go-to-the-up-window" },
       { [1] = "<C-w>l",       mode = { "n" }, icon = { icon = "󰆾 " }, desc = "go-to-the-right-window" },
       { [1] = "<C-w><Left>",  mode = { "n" }, icon = { icon = "󰆾 " }, desc = "go-to-the-left-window" },
-      { [1] = "<C-w><Down>",  mode = { "n" }, icon = { icon = "󰆾 " }, desc = "go-to-the-down-window" },
       { [1] = "<C-w><Up>",    mode = { "n" }, icon = { icon = "󰆾 " }, desc = "go-to-the-up-window" },
+      { [1] = "<C-w><Down>",  mode = { "n" }, icon = { icon = "󰆾 " }, desc = "go-to-the-down-window" },
       { [1] = "<C-w><Right>", mode = { "n" }, icon = { icon = "󰆾 " }, desc = "go-to-the-right-window" },
 
 
@@ -273,7 +273,7 @@ return {
         -- { plugin = "fzf-lua", cat = "filetype", name = "fzf" },
         -- { plugin = "neo-tree.nvim", cat = "filetype", name = "neo-tree" },
         -- { plugin = "octo.nvim", cat = "filetype", name = "git" },
-        -- { plugin = "yanky.nvim", icon = "󰅇", color = "yellow" },
+        { plugin = "yanky.nvim", icon = "󰅌 ", color = "yellow" },
         -- { plugin = "zen-mode.nvim", icon = "󱅻 ", color = "cyan" },
         -- { plugin = "telescope.nvim", pattern = "telescope", icon = "", color = "blue" },
         -- { plugin = "trouble.nvim", cat = "filetype", name = "trouble" },

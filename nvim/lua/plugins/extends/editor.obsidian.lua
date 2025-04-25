@@ -266,19 +266,6 @@ return {
         checkbox = {
           -- use `nf-fa` variant
           enabled = true,
-          checked = {
-            -- icon = " 󰄲 ", -- nf-mdcheckbox_marked
-            -- icon = "  ", -- nf-fa-check_circle
-            -- icon = "  ", -- nf-fa-check_square
-            icon = "  ", -- nf-fa-check_square
-            highlight = "markdownH1",
-          },
-          unchecked = {
-            -- icon = " 󰄱 ", -- nf-md -checkbox_blnak_outline
-            -- icon = "  ", -- nf-fa-circle
-            icon = "  ", -- nf-fa-square_o
-            highlight = "markdownBold",
-          },
           custom = {
             -- override defaults
             todo = {

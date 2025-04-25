@@ -38,10 +38,10 @@ return {
     end,
     init = function()
       vim.opt.sidescrolloff = 1
-      vim.opt.signcolumn = "auto:1" -- NOTE: 1 이지만, column 은 2칸 차지.
+      vim.opt.signcolumn = "auto:1" -- NOTE: 1 일때, column 은 2칸 차지.
       vim.opt.foldcolumn = "0"
 
-      vim.opt.numberwidth = 2 -- default 4
+      vim.opt.numberwidth = 3 -- default 4
       vim.opt.foldcolumn = "1"
 
       vim.api.nvim_create_autocmd({ "ColorScheme" }, {
@@ -92,6 +92,7 @@ return {
     [1] = "gitsigns.nvim",
     optional = true,
     opts = {
+      -- sign_priority = 100, -- use higher value since auto:2
       diff_opts = {
         vertical = true,
       },

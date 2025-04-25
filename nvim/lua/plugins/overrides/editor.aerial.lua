@@ -1,4 +1,7 @@
 local icons = require("globals").icons
+local strip = function(str)
+  return string.sub(str, 1, #str - 1)
+end
 -- LazyVim's `editor.aerial`
 
 ---@type LazySpec[]
@@ -55,7 +58,7 @@ return {
         optional = true,
         opts = {
           filetype = {
-            aerial = { glyph = icons.symbol, hl = "MiniIconsPurple" }, -- default: 󱘎
+            aerial = { glyph = strip(icons.symbol), hl = "MiniIconsPurple" }, -- default: 󱘎
           },
         },
       },

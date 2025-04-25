@@ -26,6 +26,17 @@ return {
     },
     checkbox = {
       enabled = true,
+      -- use `nf-fa` variant
+      checked = {
+        -- icon = "  ", -- nf-fa-check_square
+        icon = "  ", -- nf-fa-check_square
+        highlight = "markdownH1",
+      },
+      unchecked = {
+        -- icon = "  ", -- nf-fa-circle
+        icon = "  ", -- nf-fa-square_o
+        highlight = "markdownBold",
+      },
     },
     link = {
       custom = {

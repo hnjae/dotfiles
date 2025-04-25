@@ -1,11 +1,14 @@
 local icons = require("globals").icons
 
+if true then
+  return {}
+end
+
 ---@type LazySpec
 return {
   [1] = "fzf-lua",
-  enabled = false,
+  optional = true,
   cond = true,
-  -- optional = true,
   keys = function(_, keys)
     local default_grep_opts = {
       search = "",

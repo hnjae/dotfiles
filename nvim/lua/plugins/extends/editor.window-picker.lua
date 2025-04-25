@@ -83,7 +83,7 @@ return {
   },
   keys = {
     {
-      [1] = "<Leader>p",
+      [1] = "<Leader>k",
       [2] = function()
         local picked_window_id = require("window-picker").pick_window()
         if picked_window_id == nil then
@@ -99,7 +99,7 @@ return {
     },
     {
       [1] = "<F3>",
-      [2] = "<Leader>p",
+      [2] = "<Leader>k",
       mode = { "n", "i" },
       remap = true,
     },

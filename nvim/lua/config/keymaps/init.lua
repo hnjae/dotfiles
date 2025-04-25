@@ -34,3 +34,5 @@ vim.keymap.set({ "i", "t" }, "<C-e>", "<C-\\><C-n>", { desc = "escape-terminal" 
 
 -- REMOVE LazyVim keymaps
 vim.keymap.del("n", "<leader>bo")
+vim.keymap.del("n", "<S-h>")
+vim.keymap.del("n", "<S-l>")
