@@ -1,7 +1,7 @@
 ---
 title: NOTE
 date: 2025-04-07T17:30:03+0900
-lastmod: 2025-04-25T18:07:11+0900
+lastmod: 2025-04-28T16:44:37+0900
 isCJKLanguage: true
 ---
 
@@ -12,7 +12,8 @@ isCJKLanguage: true
 
 ## TODO
 
-- lualine 의 확장성이 너무 안좋다. <https://github.com/rebelot/heirline.nvim> 대체를 고민하자. 2025-04-08
+- [ ] lualine 의 확장성이 너무 안좋다. <https://github.com/rebelot/heirline.nvim> 대체를 고민하자. 2025-04-08
+- [ ] bufferline: 이름 없는 탭 닫기
 
 ### Neovim 0.11.0
 
