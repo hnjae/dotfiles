@@ -1,4 +1,3 @@
-local format = require("lazyvim.util.format")
 -- <https://github.com/obsidian-nvim/obsidian.nvim>
 
 ---@type LazySpec
@@ -125,9 +124,9 @@ return {
       },
     },
     daily_notes = {
-      folder = "journals",
+      folder = "dailies",
       date_format = "%Y-%m-%d",
-      template = "journal.md",
+      template = "daily.md",
       alias_format = nil,
       -- default_tags = {},
     },

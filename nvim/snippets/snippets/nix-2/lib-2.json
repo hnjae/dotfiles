@@ -125,5 +125,23 @@
             "\\};",
             ""
         ]
+    },
+    "lib.escapeShellArgs": {
+        "prefix": [
+            "lib.escapeShellArgs",
+            "lescape"
+        ],
+        "description": "escape shell args",
+        "body": "lib.escapeShellArgs [$0]"
+    },
+    "lib.makeBinPath": {
+        "prefix": [
+            "lib.string.makeBinPath",
+            "lib.makeBinPath",
+            "lmakebinpath",
+            "lpath"
+        ],
+        "description": "make bin path",
+        "body": "lib.makeBinPath [${0:packages}]"
     }
 }

@@ -37,40 +37,57 @@ return {
 
       local agent = gp.get_command_agent()
       agent.system_prompt =
-        [[Suggest a precise and informative commit message based on the following diff. Use markdown syntax in your response if needed.
+        [[Generate a commit message for the provided diff using the conventional commit format:
 
-The commit message should follow the Angular commit message format:
-
-    <type>(<scope>): <short summary>
-    <BLANK LINE>
-    <body>
-    <BLANK LINE>
-    <footer>
+type(optional scope): description
 
 Where:
+- type = feat, fix, docs, style, refactor, test, chore, etc.
+- scope = the area of code affected (optional)
+- description = what changed and why
 
-*   `<type>` is one of: build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test
-*   `<scope>` is optional and represents the module affected (e.g., core, common, forms)
-*   `<short summary>` starts with lowercase, doesn't end with a period, and is limited to 50 characters
-*   `<body>` is optional, uses present tense, and wraps at 72 characters
-*   `<footer>` is optional and contains any breaking changes or closed issues
+Use simple language (B1-B2 English level):
+- Short, clear sentences
+- Common vocabulary
+- No technical jargon unless necessary
 
-Examples:
+IMPORTANT: Return ONLY the commit message with no additional text, explanations, or commentary.
 
-    feat(user-profile): add ability to update user avatar
-
-    Implement a new feature allowing users to upload and update their profile avatar.
-    This change includes:
-    - New API endpoint for avatar upload
-    - Frontend UI updates in the profile section
-    - Image processing to resize and optimize uploaded avatars
-
-    Closes #123
-
-If necessary, include an explanatory body and/or footer to provide more context about the changes, their rationale, and any significant impacts or considerations.
-
-Diff:
 ]]
+      --         [[Suggest a precise and informative commit message based on the following diff. Use markdown syntax in your response if needed.
+      --
+      -- The commit message should follow the Angular commit message format:
+      --
+      --     <type>(<scope>): <short summary>
+      --     <BLANK LINE>
+      --     <body>
+      --     <BLANK LINE>
+      --     <footer>
+      --
+      -- Where:
+      --
+      -- *   `<type>` is one of: build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test
+      -- *   `<scope>` is optional and represents the module affected (e.g., core, common, forms)
+      -- *   `<short summary>` starts with lowercase, doesn't end with a period, and is limited to 50 characters
+      -- *   `<body>` is optional, uses present tense, and wraps at 72 characters
+      -- *   `<footer>` is optional and contains any breaking changes or closed issues
+      --
+      -- Examples:
+      --
+      --     feat(user-profile): add ability to update user avatar
+      --
+      --     Implement a new feature allowing users to upload and update their profile avatar.
+      --     This change includes:
+      --     - New API endpoint for avatar upload
+      --     - Frontend UI updates in the profile section
+      --     - Image processing to resize and optimize uploaded avatars
+      --
+      --     Closes #123
+      --
+      -- If necessary, include an explanatory body and/or footer to provide more context about the changes, their rationale, and any significant impacts or considerations.
+      --
+      -- Diff:
+      -- ]]
       gp.Prompt(params, gp.Target.rewrite, agent, template)
     end
 
@@ -80,33 +97,17 @@ Diff:
 ```]]
       local agent = gp.get_command_agent()
       agent.system_prompt =
-        [[I want you to serve as a Git commit message optimizer that follows the Conventional Commits specification. Your task is to:
+        [[Transform my rough git commit message into a conventional commit format that follows the pattern: type(optional scope): description
 
-1. Take my rough commit message as input
-2. Transform it into a well-structured commit message following this format:
-   <type>(<optional scope>): <description>
+Make the language simple and clear for non-native English speakers (B1-B2 level) by:
+- Using common vocabulary
+- Writing short, direct sentences
+- Avoiding idioms and complex phrases
+- Keeping technical terms when necessary
 
-   [optional body]
+Provide only the formatted commit message without any additional text.
 
-   [optional footer(s)]
-
-Requirements:
-- Use clear, standard English vocabulary
-- Keep messages concise but descriptive
-- Make it understandable for non-native English speakers
-- Choose appropriate type prefixes (feat, fix, docs, style, refactor, test, chore)
-- Include scope when relevant
-- Break down complex changes into bullet points in the body if needed
-
-Please provide only the formatted commit message without any additional explanation or commentary.
-
-Example input: "added login button to homepage"
-Expected output format:
-feat(auth): add login button to homepage navigation
-
-- Implement responsive button component
-- Add basic click handler
-- Style according to design system
+Paste your rough commit message below:
 ]]
       gp.Prompt(params, gp.Target.rewrite, agent, template)
     end

@@ -1,7 +1,10 @@
 % pwgen, password
 
-# pwgen
-pwgen -s "<size-in-number>" 1 | tr -d '\n' >"<file>"
+# pwgen to file
+pwgen --secure --ambiguous "<size-in-number>" 1 | tr -d '\n' >"<file>"
+
+# pwgen to clipboard
+pwgen --secure --ambiguous "<size-in-number>" 1 | wl-copy
 
 # include symbol + copy to clipboard
-pwgen -s -y -B "<size-in-number>" 1 | wl-copy
+pwgen --secure --symbols --ambiguous "<size-in-number>" 1 | wl-copy

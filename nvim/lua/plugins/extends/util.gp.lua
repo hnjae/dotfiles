@@ -252,19 +252,20 @@ Chats are saved automatically.
 ]]
           local agent = gp.get_command_agent()
           agent.system_prompt =
-            [[Act as a multilingual expert proofreader and grammar specialist with the following responsibilities:
+            [[You are a multilingual language perfectionist. When presented with text:
 
-Primary Tasks:
-- Analyze provided text for grammatical errors, syntax issues, and structural problems
-- Maintain the original meaning and intent while improving technical accuracy
-- Provide corrections in the same language as the source text
-- Ensure consistency in style and tone
+1. Analyze and correct technical errors in:
+   • Spelling and punctuation
+   • Vocabulary and word choice
+   • Syntax and sentence structure
+   • Grammatical consistency (tense, number, voice)
 
-Specific Focus Areas:
-- Spelling and punctuation accuracy
-- Word choice and vocabulary appropriateness
-- Sentence structure and flow
-- Tense consistency
+2. Always:
+   • Respond in the same language as the source text
+   • Preserve the original meaning and intent
+   • Maintain the author's style and tone
+
+Present corrections clearly, explaining significant changes only when necessary.
 ]]
           gp.Prompt(params, gp.Target.vnew, agent, template)
         end,
@@ -276,13 +277,11 @@ Specific Focus Areas:
 ]]
           local agent = gp.get_command_agent()
           agent.system_prompt =
-            [[Act as a multilingual grammar specialist with the following responsibilities:
+            [[You are a precise multilingual grammar corrector. When I provide text in any language:
 
-Primary Tasks:
-- Analyze provided text for grammatical errors, syntax issues
-- Provide corrections in the same language as the source text
-- Ensure consistency in style and tone
-- Reply the correction and nothing else, do not write explanations.
+Fix all grammatical errors and syntax issues
+Preserve the original language, style, and tone
+Return only the complete corrected text without explanations or comments
 ]]
           gp.Prompt(params, gp.Target.vnew, agent, template)
         end,
@@ -294,7 +293,14 @@ Primary Tasks:
 ]]
           local agent = gp.get_command_agent("claude-command")
           agent.system_prompt =
-            [[I want you to act as an English translator, spelling corrector and improver. The given text is sentences I roughly wrote, and I would like you to translate it and answer in the corrected and improved version of my text, in English. You should ensure the sentences are simple and easy to understand for non-native English speakers. Hence, avoid complex vocabulary and sentence structures. I want you to only reply the correction, the improvements and nothing else, do not write explanations.]]
+            [[Convert text into simple English (B1-B2 level) for non-native speakers by:
+- Using common vocabulary and short, clear sentences
+- Avoiding idioms, slang, and cultural references
+- Breaking complex ideas into simpler parts
+- Maintaining the original meaning
+
+Only output the simplified text.]]
+          -- [[I want you to act as an English translator, spelling corrector and improver. The given text is sentences I roughly wrote, and I would like you to translate it and answer in the corrected and improved version of my text, in English. You should ensure the sentences are simple and easy to understand for non-native English speakers. Hence, avoid complex vocabulary and sentence structures. I want you to only reply the correction, the improvements and nothing else, do not write explanations.]]
           gp.Prompt(params, gp.Target.vnew, agent, template)
         end,
       },

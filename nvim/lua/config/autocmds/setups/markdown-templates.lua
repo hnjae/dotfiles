@@ -3,18 +3,11 @@ local M = {}
 local update_lastmod = function()
   if vim.opt_local.modified:get() then
     local save_cur = vim.fn.getpos(".")
-    local bufnr = vim.api.nvim_get_current_buf()
 
     local original_undolevels = vim.opt_local.undolevels:get()
 
     -- Temporarily disable undo for this buffer
     vim.opt_local.undolevels = -1
-
-    -- vim.cmd([[
-    --   let n = min([10, line("$")])
-    --   keepjumps exe '1,' . n . 's#^\(.\{,10}lastmod\s*: \).*#\1' .
-    --               \ strftime('%Y-%m-%dT%H:%M:%S%z') . '#e'
-    -- ]])
 
     vim.cmd(string.format(
       [[silent! keepjumps %d,%ds#^\(.\{,10}lastmod\s*: \).*#\1%s#e]],
@@ -43,7 +36,6 @@ local new_template = function()
   local dateiso = vim.fn.strftime("%Y-%m-%dT%H:%M:%S%z")
   local template = {
     "---",
-    "created: " .. vim.fn.strftime("%Y-%m-%dT%H:%M:%S%z"),
     "date: " .. dateiso,
     "lastmod: " .. dateiso,
     "---",
@@ -58,21 +50,26 @@ local new_template = function()
 end
 
 function M.setup()
-  local asciidoc_auto_id = vim.api.nvim_create_augroup("asciidoc-auto", {})
+  local markdown_auto_id = vim.api.nvim_create_augroup("markdown-template", {})
   vim.api.nvim_create_autocmd({
     "BufRead",
     "BufNewFile",
   }, {
-    group = asciidoc_auto_id,
+    group = markdown_auto_id,
     pattern = { "*.md" },
-    callback = function()
+    callback = function(ev)
+      if string.find(ev.match, "/obsidian/") ~= nil then
+        return
+      end
+
       new_template()
     end,
   })
+
   vim.api.nvim_create_autocmd({
     "BufWritePre",
   }, {
-    group = asciidoc_auto_id,
+    group = markdown_auto_id,
     pattern = { "*.md" },
     callback = update_lastmod,
   })
