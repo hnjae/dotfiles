@@ -71,17 +71,27 @@
             ""
         ]
     },
-    "symlink reslove": {
-        "prefix": "ssymlinkreslove",
+    "symlink resolve": {
+        "prefix": "ssymlink-resolve",
         "description": "resolve symlink",
         "body": [
             "readlink -f -- <path>",
             ""
         ]
     },
-    "datetime iso-8601": {
-        "prefix": "sdateiso8601",
-        "description": "\"ISO-8601 date\"",
-        "body": "date -u +\"%Y-%m-%dT%H:%M:%SZ\""
+    "datetime UTC ISO-8601 alphabetic timezone": {
+        "prefix": "sdatetitme-utc-iso8601-alphabetic-timezone",
+        "description": "ISO-8601 date in alphabetic timezone",
+        "body": "date --utc '+%Y-%m-%dT%H:%M:%S%Z'"
+    },
+    "datetime UTC ISO-8601": {
+        "prefix": "sdatetime-utc-iso8601",
+        "description": "ISO-8601 date",
+        "body": "date --utc '+%Y-%m-%dT%H:%M:%SZ'"
+    },
+    "datetime UTC ISO-8601 ns": {
+        "prefix": "sdatetime-utc-iso8601-ns",
+        "description": "ISO-8601 date with ns",
+        "body": "date --utc '+%Y-%m-%dT%H:%M:%S.%NZ'"
     }
 }

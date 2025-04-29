@@ -1,4 +1,20 @@
 {
+    "with": {
+        "prefix": [
+            "with",
+            "wi"
+        ],
+        "description": "with expression",
+        "body": "with $1; $0;"
+    },
+    "inherit": {
+        "prefix": [
+            "inherit",
+            "in"
+        ],
+        "description": "inherit expression",
+        "body": "inherit $1;"
+    },
     "sdefault.nix": {
         "prefix": "sdefault.nix",
         "description": "default.nix",

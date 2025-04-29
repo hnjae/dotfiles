@@ -145,10 +145,6 @@
                 "path": "./snippets/nix-2/pkgs.json"
             },
             {
-                "language": "nix",
-                "path": "./snippets/nix.json"
-            },
-            {
                 "language": "kivy",
                 "path": "./snippets/kivy.json"
             },

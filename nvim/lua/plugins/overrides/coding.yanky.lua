@@ -12,6 +12,12 @@ return {
       mode = { "n", "x" },
       desc = "Open Yank History",
     },
+    {
+      [1] = "<F24>",
+      [2] = [["+]p]],
+      mode = { "n", "x" },
+      desc = "Put Indented After Cursor (clipboard)",
+    },
   },
   opts = {
     system_clipboard = {

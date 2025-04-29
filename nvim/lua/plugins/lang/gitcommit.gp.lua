@@ -54,40 +54,6 @@ Use simple language (B1-B2 English level):
 IMPORTANT: Return ONLY the commit message with no additional text, explanations, or commentary.
 
 ]]
-      --         [[Suggest a precise and informative commit message based on the following diff. Use markdown syntax in your response if needed.
-      --
-      -- The commit message should follow the Angular commit message format:
-      --
-      --     <type>(<scope>): <short summary>
-      --     <BLANK LINE>
-      --     <body>
-      --     <BLANK LINE>
-      --     <footer>
-      --
-      -- Where:
-      --
-      -- *   `<type>` is one of: build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test
-      -- *   `<scope>` is optional and represents the module affected (e.g., core, common, forms)
-      -- *   `<short summary>` starts with lowercase, doesn't end with a period, and is limited to 50 characters
-      -- *   `<body>` is optional, uses present tense, and wraps at 72 characters
-      -- *   `<footer>` is optional and contains any breaking changes or closed issues
-      --
-      -- Examples:
-      --
-      --     feat(user-profile): add ability to update user avatar
-      --
-      --     Implement a new feature allowing users to upload and update their profile avatar.
-      --     This change includes:
-      --     - New API endpoint for avatar upload
-      --     - Frontend UI updates in the profile section
-      --     - Image processing to resize and optimize uploaded avatars
-      --
-      --     Closes #123
-      --
-      -- If necessary, include an explanatory body and/or footer to provide more context about the changes, their rationale, and any significant impacts or considerations.
-      --
-      -- Diff:
-      -- ]]
       gp.Prompt(params, gp.Target.rewrite, agent, template)
     end
 
@@ -97,28 +63,12 @@ IMPORTANT: Return ONLY the commit message with no additional text, explanations,
 ```]]
       local agent = gp.get_command_agent()
       agent.system_prompt =
-        [[Transform my rough git commit message into a conventional commit format that follows the pattern: type(optional scope): description
+        [[Transform my rough commit text into a conventional commit message. Follow the format type(optional scope): description where type is one of: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert.
 
-Make the language simple and clear for non-native English speakers (B1-B2 level) by:
-- Using common vocabulary
-- Writing short, direct sentences
-- Avoiding idioms and complex phrases
-- Keeping technical terms when necessary
+If my text doesn't clearly indicate the type, infer it from context. Use clear, simple English accessible to non-native speakers. Keep the message concise (under 72 characters if possible).
 
-Provide only the formatted commit message without any additional text.
-
-Paste your rough commit message below:
+Return only the formatted commit message without explanations.
 ]]
-      gp.Prompt(params, gp.Target.rewrite, agent, template)
-    end
-
-    opts.hooks.EditCommitMsg2 = function(gp, params)
-      local template = [[```gitcommit
-{{selection}}
-```]]
-      local agent = gp.get_command_agent()
-      agent.system_prompt =
-        [[I want you to act as a commit message generator. The given text is the commit message I roughly wrote, and I would like you to generate an appropriate commit message using the conventional commit format. The commit message must be in standard English and easy to understand for non-native English speakers. Do not write any explanations or other words, just reply with the commit message.]]
       gp.Prompt(params, gp.Target.rewrite, agent, template)
     end
   end,

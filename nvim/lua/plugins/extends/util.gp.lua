@@ -16,6 +16,15 @@ local wk_icon = {
   color = "purple",
 }
 
+local chat_prompt =
+  [[Respond in English only. Prioritize analytical substance over politeness. Critically evaluate my ideas by questioning assumptions, identifying biases, and presenting counterarguments. Value intellectual honesty over agreement, and base all conclusions on sound reasoning and evidence.]]
+
+local code_prompt =
+  [[You are a code editor AI that modifies, optimizes, or fixes code snippets. When given code, respond with only the edited version without explanations, comments, or additional text.
+
+START AND END YOUR ANSWER WITH:
+]]
+
 ---@type LazySpec
 return {
   [1] = "Robitx/gp.nvim",
@@ -177,8 +186,7 @@ Chats are saved automatically.
           model = {
             model = "o3-mini",
           },
-          system_prompt = require("gp.defaults").chat_system_prompt
-            .. "\n\nAlways answer in English regardless of input language.",
+          system_prompt = chat_prompt,
         },
         {
           provider = "anthropic",
@@ -190,8 +198,7 @@ Chats are saved automatically.
             temperature = 0.9,
             max_token = 8192,
           },
-          system_prompt = require("gp.defaults").chat_system_prompt
-            .. "\n\nAlways answer in English regardless of input language.",
+          system_prompt = chat_prompt,
         },
         {
           provider = "anthropic",
@@ -203,7 +210,8 @@ Chats are saved automatically.
             temperature = 0.9,
             max_token = 8192,
           },
-          system_prompt = require("gp.defaults").code_system_prompt,
+          -- system_prompt = require("gp.defaults").code_system_prompt,
+          system_prompt = code_prompt,
         },
         {
           provider = "googleai",
@@ -214,8 +222,7 @@ Chats are saved automatically.
             model = "gemini-2.5-pro-exp-03-25",
             temperature = 0.9,
           },
-          system_prompt = require("gp.defaults").chat_system_prompt
-            .. "\n\nAlways answer in English regardless of input language.",
+          system_prompt = chat_prompt,
         },
         {
           provider = "googleai",
@@ -228,8 +235,8 @@ Chats are saved automatically.
             -- model = "gemini-2.5-pro-exp-03-25",
             temperature = 0.9,
           },
-          system_prompt = require("gp.defaults").code_system_prompt
-            .. "\n\nAlways answer in English regardless of input language.",
+          -- system_prompt = require("gp.defaults").code_system_prompt,
+          system_prompt = code_prompt,
         },
       },
 
