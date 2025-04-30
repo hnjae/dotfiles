@@ -76,7 +76,7 @@ return {
       ft = "markdown",
     },
     { [1] = "<leader>tT", [2] = "<cmd>ObsidianTemplate<CR>", desc = "template", ft = "markdown" },
-    { [1] = "<leader>tr", [2] = "<cmd>ObsidianRename<CR>", desc = "rename", ft = "markdown" },
+    { [1] = "<leader>tn", [2] = "<cmd>ObsidianRename<CR>", desc = "rename", ft = "markdown" },
     {
       [1] = "<leader>tj",
       [2] = "<cmd>ObsidianDailies<CR>",
