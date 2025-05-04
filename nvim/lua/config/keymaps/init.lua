@@ -16,10 +16,8 @@ end
 -- clipboard
 --------------------------------------------------------------------------------
 -- stylua: ignore start
-vim.keymap.set( { "x", "s" }, "<F12>",   [["+y]], { desc = "yank-to-clipboard" } )
-vim.keymap.set( { "v", "s" }, "<S-F12>", [["+p]], { desc = "paste-from-clipboard" })
--- vim.keymap.set( { "n" }, "<F24>", [["+p]], { desc = "paste-from-clipboard" }) -- S-F12
--- vim.keymap.set( { "n" }, "<S-F24>", [["+p]], { desc = "paste-from-clipboard" })
+vim.keymap.set( { "x", "s" }, "<F12>", [["+y]], { desc = "yank-to-clipboard" } )
+vim.keymap.set( { "n"," x" }, "<F24>", [["+p]], { desc = "paste-from-clipboard" }) -- S-F12
 -- stylua: ignore end
 
 -- vim.keymap.set({ "n", "v" }, "<LocalLeader><LocalLeader>", ":", { desc = "cmdline" })
@@ -38,3 +36,4 @@ vim.keymap.del("n", "<S-h>")
 vim.keymap.del("n", "<S-l>")
 vim.keymap.del("i", "<C-s>") -- restore vim.lsp.buf.signature_help
 vim.keymap.set("i", "<C-s>", vim.lsp.buf.signature_help, { desc = "lsp-buf-signature-help" })
+vim.keymap.del("n", "<leader>ua") -- toggle animation <LazyVim 14.14.0>

@@ -58,7 +58,7 @@ function M.setup()
     group = markdown_auto_id,
     pattern = { "*.md" },
     callback = function(ev)
-      if string.find(ev.match, "/obsidian/") ~= nil then
+      if string.find(ev.match, "/obsidian/home/dailies") ~= nil then
         return
       end
 

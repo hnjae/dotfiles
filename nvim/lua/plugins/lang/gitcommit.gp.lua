@@ -52,7 +52,6 @@ Use simple language (B1-B2 English level):
 - No technical jargon unless necessary
 
 IMPORTANT: Return ONLY the commit message with no additional text, explanations, or commentary.
-
 ]]
       gp.Prompt(params, gp.Target.rewrite, agent, template)
     end

@@ -33,6 +33,17 @@ return {
         },
       }
     end, ]]
+
+    keys = {
+      -- <Leader>ua default: Toggle Animation
+      -- TODO: 이거 안먹는데?? <2025-05-01>
+      -- Snacks.toggle.animate():map("<leader>ua") 가 먹고 있어서 그런가.
+      {
+        [1] = "<leader>ua",
+        [2] = "<cmd>Copilot toggle<CR>",
+        desc = "copilot-toggle",
+      },
+    },
     opts = {
       panel = {
         -- enabled = false,
