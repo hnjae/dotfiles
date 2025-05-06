@@ -458,7 +458,6 @@ bzip2
 fallback
 xfce4
 konsole
-tilda
 guake
 lilyterm
 fontforge
@@ -472,7 +471,6 @@ stderr
 stdin
 darwin
 Xorg
-conclution
 Xarchiver
 gtk3
 xprop
@@ -569,7 +567,6 @@ MP4
 x265
 VBUS
 MNIST
-hierarchichal
 sc
 RORE
 policykit
@@ -836,7 +833,7 @@ XF86OfficeHome
 XF86VendorHome
 XF86ToDoList
 XF86Travel
-XF86Suport
+XF86Support
 Symplon
 PaceBook
 XF86RotationPB
@@ -1207,7 +1204,6 @@ superclass
 TypeError
 mixin
 deleter
-Invaild
 ArrayList
 ADT
 AutoFakeSlant
@@ -1383,7 +1379,6 @@ Venu
 arraycopy
 DateTimeOriginal
 exif
-browseable
 acl
 smb
 unicode
@@ -1566,8 +1561,6 @@ syncthing
 nas
 hw
 traefik
-hass
-diy
 ToDo
 Todo
 GPT
@@ -1642,7 +1635,6 @@ ENTRYPOINT
 dockerfile
 IMS
 #
-Niether
 f/!
 hostname
 fqdn
@@ -1783,3 +1775,24 @@ getter
 vscode
 Zellij
 passthrough
+AirTag
+carabiner
+SwitchBot
+MagSafe
+Qi2
+Anker
+Chipolo
+ThinkPad
+EDC
+Aer
+RFID
+Bellroy
+Aukey
+MFW
+MagFusion
+Ugreen
+Rhinoshield
+X-Pac
+backlink
+Moft
+Artmu

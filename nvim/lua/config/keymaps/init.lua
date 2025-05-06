@@ -17,7 +17,7 @@ end
 --------------------------------------------------------------------------------
 -- stylua: ignore start
 vim.keymap.set( { "x", "s" }, "<F12>", [["+y]], { desc = "yank-to-clipboard" } )
-vim.keymap.set( { "n"," x" }, "<F24>", [["+p]], { desc = "paste-from-clipboard" }) -- S-F12
+vim.keymap.set( { "n", "x" }, "<F24>", [["+p]], { desc = "paste-from-clipboard" }) -- S-F12
 -- stylua: ignore end
 
 -- vim.keymap.set({ "n", "v" }, "<LocalLeader><LocalLeader>", ":", { desc = "cmdline" })
