@@ -1,0 +1,20 @@
+# git alias
+| `ga`     | `FORGIT_ADD_FZF_OPTS`             |
+| `glo`    | `FORGIT_LOG_FZF_OPTS`             |
+| `gi`     | `FORGIT_IGNORE_FZF_OPTS`          |
+| `gd`     | `FORGIT_DIFF_FZF_OPTS`            |
+| `grh`    | `FORGIT_RESET_HEAD_FZF_OPTS`      |
+| `gcf`    | `FORGIT_CHECKOUT_FILE_FZF_OPTS`   |
+| `gcb`    | `FORGIT_CHECKOUT_BRANCH_FZF_OPTS` |
+| `gbd`    | `FORGIT_BRANCH_DELETE_FZF_OPTS`   |
+| `gct`    | `FORGIT_CHECKOUT_TAG_FZF_OPTS`    |
+| `gco`    | `FORGIT_CHECKOUT_COMMIT_FZF_OPTS` |
+| `grc`    | `FORGIT_REVERT_COMMIT_FZF_OPTS`   |
+| `gss`    | `FORGIT_STASH_FZF_OPTS`           |
+| `gsp`    | `FORGIT_STASH_PUSH_FZF_OPTS`      |
+| `gclean` | `FORGIT_CLEAN_FZF_OPTS`           |
+| `grb`    | `FORGIT_REBASE_FZF_OPTS`          |
+| `gbl`    | `FORGIT_BLAME_FZF_OPTS`           |
+| `gfu`    | `FORGIT_FIXUP_FZF_OPTS`           |
+| `gcp`    | `FORGIT_CHERRY_PICK_FZF_OPTS`     |
+

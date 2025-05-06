@@ -1,0 +1,9 @@
+# escape chracter in string
+use `''`
+
+
+# docker-compose to nix
+use compose2nix
+
+# generate nix package from URLs(git)
+use nix-init

@@ -1,0 +1,40 @@
+# pin repo
+<https://nix.dev/manual/nix/2.24/command-ref/new-cli/nix3-flake.html#flake-inputs>
+```nix
+{
+  inputs = {
+    <input-name>.url = "github:nixos/nixpkgs/refs/tags/{tagname}";
+      # or
+    <input-name>.url = "github:gmodena/nix-flatpak/?ref=v0.5.2";
+    };
+  }
+}
+```
+
+# Use ssh in inputs
+```nix
+{
+  inputs = {
+    <input-name> = {
+      url = "git+ssh://git@github.com/<author>/<repo-name>";
+      # inputs = { };
+    };
+  }
+}
+```
+
+# Use system nix
+```nix
+{
+  inputs = {
+    <input-name> = {
+      url = "nixpkgs-unstable";
+      # inputs = { };
+    };
+  }
+}
+```
+
+<!--
+vi:sw=2:tw=80:ft=markdown:
+-->

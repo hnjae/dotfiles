@@ -1,0 +1,36 @@
+`ctrl` 이 움직이는 키
+
+## Focus
+meta+c: center
+meta+shift+c: focus mode change
+
+## Window manipulating
+meta+n: new window
+
+## Move Window
+meta+i: move nest window to sibling
+meta+o: out
+meta+shift+o: out other
+meta+t: move window
+
+## Resize window
+meta+f: full
+meta+r: resize
+
+## Scroll (`,`/`.` `arrow`)
+* meta + ,/. : focus next/previous
+* meta + `[`/`]`: scroll
+* meta + arrow: focus next/previous
+* meta + home/end: focus home/end
+
+## Workspace (PgUp/PgDn)
+* `super` + `PgUp/PgDn`: witch workspace
+
+## Scratch (`super+escape`)
+* `super-scape`: toggle scratch window
+* `super+escape` + `ctrl` : move current window to scratch
+<!-- * `super+escape` + `shift`: toggle-floating scratch layer -->
+
+## Monitor (`sufer+shift`)
+* `super+shift` + `r/l arrow`
+* `super+shift` + `ctrl` + `r/l arrow`

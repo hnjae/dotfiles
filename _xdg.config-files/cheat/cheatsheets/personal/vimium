@@ -1,0 +1,39 @@
+---
+syntax: docopt
+tags: [ vimium,browser ]
+---
+
+https://github.com/philc/vimium
+https://github.com/philc/vimium/blob/master/README.md
+https://github.com/philc/vimium/wiki
+https://keycombiner.com/collections/vimium/
+
+# Scroll down
+j, d, gg
+
+# Scroll up
+k, u, G
+
+# Enter visual mode
+v
+
+# follow the link labeled previous or next
+`[[` / `]]`
+
+# go back/forward in history
+H / l
+
+# Move tab to the left/right
+`<<` / `>>`
+
+# Omnibar / bookmark
+`o`, `b`
+Use `Shift` to open in new tab
+
+# Visual Mode
+<https://github.com/philc/vimium/wiki/Visual-Mode>
+
+* `/` 로 원하는 부분에 커서를 가져다 둔다
+* 드래그
+* `y` 으로 yank
+

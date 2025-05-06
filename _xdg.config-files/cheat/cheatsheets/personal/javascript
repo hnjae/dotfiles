@@ -1,0 +1,17 @@
+## Convert object into string
+
+```javascript
+JSON.stringify(obj);
+```
+
+## Convert object into string
+
+```javascript
+const new = foo + bar;
+const new = foo.concat(bar);
+const new = `${fool}${bar}`;
+```
+
+<!--
+vi:sw=2:tw=80:ft=markdown:
+-->

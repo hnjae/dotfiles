@@ -1,0 +1,40 @@
+---
+tags: [ vivaldi ]
+---
+
+# Break Mode
+`<C-.>`
+
+# Keboard cheat sheet
+`<C-F1>`
+
+# Toggle UI
+`<C-F11>`
+
+# Download Pannel
+`<C-S-D>` or `<C-J>`
+
+# Switch tab
+`<C-(number)>`
+: `Alt` 키 베이스로 변경함.
+
+# Tile Tabs (Untile, Grid, Horizontal, Vertical)
+`<C-F{6,7,8,9}>`
+
+# Save Page
+`<C-s>`
+: single file 로 변경
+: capture page to file (image) 를 `<C-S-s>` 에 할당.
+
+# delete browsing data
+`<C-S-Del>`
+
+# Create Bookmark
+- `<C-d>` 이나, unmap 함.
+
+# Save open tabs as session
+`<A-s>` : 할당함.
+
+# Workspace
+관련 단축키 전부 변경.
+`<C-{[1-9]}` 와 `<C-S-{[1-9]}>`

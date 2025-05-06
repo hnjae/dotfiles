@@ -1,0 +1,44 @@
+---
+lastmod: 2025-05-06T15:10:59+0900
+tags: [ lofree-flow-light, keyboard ]
+---
+
+## Key Mapper Download Link
+
+- <https://www.kickstarter.com/projects/lofree/flow-lite-smoothest-affordable-for-all-mechanical-keyboard/comments>
+- <https://mega.nz/file/sYQ1BRyY#wmSak4qYebyNEm6eslDNFj__0Zlo1lLWu8eANhzsiEM>
+- <https://www.dropbox.com/scl/fo/2581avtxvitvftsd7312f/AC-XHGb5oZKm3mPypP0pR10?rlkey=putg9j9gw9lou8mtwariog2xg&e=2&st=bds48004&dl=0>
+- <https://www.lofree.co/products/flow-lite84-mechanical-keyboard>
+
+## Toggle to Mac Mode
+
+Fn+M
+
+## Toggle to Window Mode
+
+Fn+N
+
+## Connects to wireless-dongle
+
+1. Turn off keyboard
+2. Insert dongle to PC
+3. 무선모드로 키보드 변경
+4. `Fn+4`
+5. Profit!
+
+## Bluetooth Pairing mode
+
+- 무선 모드 (Wi-fi 기호) 로 키보드 변경
+- Fn+{1,2,3} 을 인디케이터가 천천히 깜박일때까지 누름
+
+※ 여기서 인디케이터란 캡스락의 파란색 LED 를 말함. 우상단의 LED 바가 아님.
+
+## Fn lock
+
+```sh
+echo 2 | sudo tee /sys/module/hid_apple/parameters/fnmode
+```
+
+<!--
+vi:ft=markdown
+-->

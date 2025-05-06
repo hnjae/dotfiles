@@ -1,0 +1,46 @@
+---
+tags: [ zen,zen-browser ]
+---
+
+# Basic
+Sidebar Width
+: `[Alt]+B`
+
+Web Panel
+: `[Alt]+P`
+
+Toggle PiP
+: `<S-C-]>`
+
+Workspace Switch
+: `<M-C-q/e>`
+
+Focus Search
+: `<C-j>` / `<C-l>` / `<F6>`
+
+Focus Back to Page
+: `<F6>`
+
+Screenshot
+: `<S-C-s>`
+
+# Split View (`[Alt]+[Ctrl]`)
+
+Close
+: `[Alt]+[Ctrl]+U`
+: `<C-D-U>`
+
+Horizontal / Vertical / Grid
+: `+H` / `+V` / `+G`
+
+# Compact Mode (`[Alt]+[Ctrl]`)
+Toolbar / Sidebar / Compact
+: `+T` / `+S` / `+C`
+
+# Open `about:preference`
+`<S-Esc>`
+
+
+<!--
+vi:ft=markdown:
+-->

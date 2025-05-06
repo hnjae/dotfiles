@@ -1,0 +1,81 @@
+---
+tags: [ xkb ]
+---
+
+Microsoft Keyboard 맵핑
+Fn-F5: XF86AudioPlay
+Fn-F6: XF86Tools (네모난 상자에 재생버튼 기호)
+Fn-F7: XF86TouchpadToggle (검색 기호)
+Fn-F8: Shift - Super + r (스크린샷 기호; 아마 super + s 인데 colemak 이라 r 로 인식된듯?)
+emoji 버튼: Contol-Shift-Meta-Super-space
+
+
+Thinkpad T14s Gen 4 AMD 맵핑
+
+Fn-key: XF86WakeUp
+Fn-F4: XF86AudioMicMute
+Fn-F8: XF86WLAN (에어플레인 기호)
+Fn-F9: XF86NotificationCenter (문자 기호)
+Fn-F10: XF86PickupPhone (전화 기호)
+Fn-F11: XF86HangupPhone (전화 끊기 기호)
+Fn-F12: XF86Favorites (별표 기호)
+Fn-PrtSc: XF86SelectiveScreenshot
+
+Via 3.0 Media Keys 맵핑
+
+Vol-: XF86AudioLowerVolume
+Vol+: XF86AudioRaiseVolume
+Mute: XF86AudioMute
+Play: XF86AudioPlay
+Media Stop: XF86AudioStop
+Previous: XF86AudioPrev
+Next: XF86AudioNext
+Rewind: XF86AudioRewind
+Fast Forward: XF86AudioForward
+
+Select: XF86Tools (Gnome 에서는 Settings 앱 열림)
+Eject: NoSymbol (작동 안됨.)
+
+Via 3.0 Special Keys 맵핑
+Power: -
+Power OSX: -
+Sleep:  -
+Wake: XF86WakeUp
+Calc: XF86Calculator
+Mail: XF86Mail
+Help: Help
+Stop: Cancel
+Alt Erase: NoSymbol
+Again: Redo
+Menu: SunProps
+Undo: Undo
+select: SunFront
+Exec: XF86Open
+Cut: XF86Cut
+Copy: XF86Copy
+Paste: XF86Paste
+Find: Find
+My Computer: XF86Explorer (Gnome 에서는 nautilus 가 열림)
+
+Home: XF86HomePage
+Back: XF86Back
+Forward: XF86Forward
+Stop: Cancel
+Refresh: XF86Reload
+Favorites: XF86Favorites
+Search: (Gnome 에서는 Super key 를 누른것과 같음. XF86Search 같은데? )
+
+Screen+:  XF86MonBrightnessUp
+Screen-: XF86MonBrightnessDown
+F13: XF86Tools (Serial 6546)
+F14: XF86Launch5
+F15: XF86Launch6
+F16: XF86Launch7
+F17: XF86Launch8
+F18: XF86Launch9
+F19: NoSymbol (serial: 7250)
+F20: NoSymbol (serial: 7251)
+F20: XF86AudioMicMute (serial: 7252)
+F21: XF86TouchpadToggle (serial: 7253)
+F22: XF86TouchpadOn (serial: 7254)
+F23: XF86TouchpadOff (serial: 7255)

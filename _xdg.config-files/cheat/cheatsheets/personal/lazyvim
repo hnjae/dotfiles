@@ -1,0 +1,23 @@
+# Managing Buffer
+- HL -> switch buffer
+- <Leader>, -> pick buffer
+
+# Terminal
+- `<Leader>ft` -> spawn new terminal
+- `<Leader>fT` -> spawn new terminal
+- `<C-/>` -> toggle terminal
+
+# Grep
+- `<Leader>/` -> grep workspace
+- `<Leader>sb` -> grep current buffer
+- `<Leader>sb` -> grep current buffer
+
+# FzfLua
+- vsplit: `<C-v>`
+- split: `<C-s>`
+- tab: `<C-t>` (replaced)
+- current window: `<CR>`
+- `<Leader>sg` -> grep workspace
+
+# 맵핑 안되어 있는 키들
+- `p`, `j`, `;`, `[`, `]`, `m`, `i`, `v`, `z`, `k`, `h`

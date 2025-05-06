@@ -1,0 +1,57 @@
+# How to
+
+## Convert object into string
+NOTE: `response` 같은 특수 타입에서는 작동하지 않음. `Object.entires()` 해도 property 가 출력이 안된다.
+
+```javascript
+JSON.stringify(obj);
+```
+
+## Convert object into string
+
+```javascript
+const new = foo + bar;
+const new = foo.concat(bar);
+const new = `${fool}${bar}`;
+const new = [foo, bar].join(" ")
+
+# Primitive
+  string, number, bigint, boolean, undefined, symbol, null
+
+# `in` operator [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/in)
+
+> The **in** operator returns true if the specified property is in the specified object or its prototype chain.
+
+Object의 property/키의 해당 값이 있는지 확인. 그러므로 `Array` 에 사용하기에는 그름.
+
+```javascript
+const car = { make: 'Honda', model: 'Accord', year: 1998 };
+console.log('make' in car);
+```
+
+# Standard built-in objects
+<https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects>
+
+## Array [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
+```javascript
+const arr = new Array();
+// 객체 리터럴
+const arr2 = [];
+```
+
+여기서 `newᆯ Array(5)` 가 5개 `undefined`을 가지고 있는 배열을 만들어 내고. `new Array(5,6)` 은 `[5,6]` 을 만들어 낸다.
+그래서 객체 리터럴을 더 자주 쓴다고.
+
+## Type
+
+### Access element of array type
+```typescript
+// Suppose Boo[]
+type Foo = Boo[number]
+```
+
+## Set [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set)
+```
+<!--
+vi:sw=2:tw=80:ft=markdown:
+-->

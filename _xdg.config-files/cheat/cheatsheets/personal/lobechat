@@ -1,0 +1,32 @@
+---
+tags: [ LobeChat ]
+---
+
+<https://github.com/lobehub/lobe-chat>
+
+- New Chat:
+  - `<A-n>` or `<A-k>`
+
+- reGenerate:
+  - `<A-r>` ?
+
+- `<C-[>`, `<C-]>`
+- `<C-S-?>`
+- `<A-,>`
+
+```typescript
+export const ALT_KEY = 'alt';
+export const META_KEY = 'mod';
+export const SAVE_TOPIC_KEY = 'n';
+export const CLEAN_MESSAGE_KEY = 'backspace';
+
+export const HOTKEYS = {
+  regenerate: 'alt+r',
+  saveTopic: 'alt+n',
+  zenMode: 'mod+\\',
+};
+```
+
+<!--
+vi:ft=markdown
+-->
