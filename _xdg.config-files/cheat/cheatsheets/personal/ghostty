@@ -1,28 +1,29 @@
 ---
+syntax: markdown
 tags: [ ghostty ]
 ---
 
 Run `ghostty +list-keybinds` to list keybinding
 
-# Basic Usage
+## Basic Usage
 
-Reload Config:
+- Reload Config:
   `<C-S-,>`
 
-Font Resize:
+- Font resize:
   `<Ctrl>` + `+/-/0`
 
-# Manipulating a tab
+## Manipulating a tab
 
-Switch Tab:
-  * `<C-Tab>`/`<C-S-Tab>`
-  * `<C-Pg>`/`<C-PgDn>`
-  * `<C-S-Left>`/`</C-S-Right>`
+- Switch Tab:
+  - `<C-Tab>`/`<C-S-Tab>`
+  - `<C-Pg>`/`<C-PgDn>`
+  - `<C-S-Left>`/`</C-S-Right>`
 
-Go to tab:
-  * `<A>` + Numbers
+- Go to tab:
+  - `<A>` + Numbers
 
-# Manipulating a pane
+## Manipulating a pane
 
 Split Pane:
   `<C-S>` + `o/e`
@@ -38,7 +39,7 @@ Resizing Pane: (`D` stands for Meta)
 Zoom Pane:
   `<C-S-CR>` (default)
 
-# Viewport
+## Viewport
 
 Change:
   `<S>` + `Home/End/PgUp/PgDn`
@@ -46,11 +47,12 @@ Change:
 Scroll:
   `<C-S>` + `<PgUp/PgDn>`
 
-# Copy & Paste
+## Copy & Paste
+
 Paste:
   `<S-Insert>`
 
-# Debug
+## Debug
 
 Open Inspector:
   `<C-S-i>`

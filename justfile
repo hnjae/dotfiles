@@ -37,20 +37,20 @@ stow:
 
         item_name=$(basename "$src_path")
 
-        echo "INFO: Processing: ${src_path}" >/dev/stderr
+        # echo "DEBUG: ${item_name}: Processing" >/dev/stderr
 
         if [ -h "$target_path" ]; then
             local current_link_target
             current_link_target=$(readlink "$target_path")
 
             if [ "$current_link_target" = "$src_path" ]; then
-                echo "INFO: Skipping: Link already exists and points correctly." >/dev/stderr
+                echo "INFO: ${item_name}: Skipping: Link already exists and points correctly." >/dev/stderr
                 return 0
             else
                 if rm "$target_path"; then
-                    echo "INFO: Removed existing symlink." >/dev/stderr
+                    echo "INFO: ${item_name}: Removed existing symlink." >/dev/stderr
                 else
-                    echo "ERROR: Failed to remove existing symlink: ${target_path}" >/dev/stderr
+                    echo "ERROR: ${item_name}: Failed to remove existing symlink: ${target_path}" >/dev/stderr
                     return 1
                 fi
             fi
@@ -58,18 +58,18 @@ stow:
             local backup_path
             backup_path="${target_path}.backup.$(date --utc '+%Y%m%dT%H%M%S%Z')"
 
-            echo "INFO: Existing file/directory found at ${target_path}. Backing up." >/dev/stderr
+            echo "INFO: ${item_name}: Existing file/directory found at ${target_path}. Backing up." >/dev/stderr
 
             if ! mv -n "$target_path" "$backup_path"; then
-                echo "ERROR: Failed to move ${target_path} to ${backup_path}. Please check permissions or if the backup already exists." >/dev/stderr
+                echo "ERROR: ${item_name}: Failed to move ${target_path} to ${backup_path}. Please check permissions or if the backup already exists." >/dev/stderr
                 return 1
             fi
         fi
 
-        echo "INFO: Creating symlink: ${target_path} -> ${src_path}" >/dev/stderr
+        echo "INFO: ${item_name}: Creating symlink: ${target_path} -> ${src_path}" >/dev/stderr
 
         if ! ln -v -s "$src_path" "$target_path"; then
-            echo "ERROR: Failed to create link for ${item_name}." >/dev/stderr
+            echo "ERROR: ${item_name}: Failed to create link for ${item_name}." >/dev/stderr
             return 1
         fi
     }
