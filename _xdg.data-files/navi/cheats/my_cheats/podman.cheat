@@ -1,6 +1,6 @@
 % podman, docker, container
 
-#
+# podman -rnu
 podman run -it "<image-name>" --mount=
 
 # podman device mount example
@@ -17,6 +17,12 @@ podman pod create --replace --ip <string> --label <string>
 
 # podman pod ps
 podman ps -a
+
+# podman rm container
+podman rm <container-id>
+
+# remove dangling images
+poman image prune
 
 # get ip of container
 podman inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <container-id>

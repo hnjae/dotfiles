@@ -1,10 +1,13 @@
 % journalctl, log
 
-# print last boot systemd log
+# print last boot systemd log (-b: --boot[=ID])
 journalctl -b -1
 
-# print last boot systemd log (only kernel)
-journalctl -b -1 -k
+# print last boot systemd log (only kernel)(-k: --dmesg)
+journalctl --b -1 -k
 
-# print
+# print (-x: --catalog; -u: --unit=)
 journalctl --user -xu <systemd-units>
+
+# print log in realtime
+journalctl --follow --unit=<systemd-units>
