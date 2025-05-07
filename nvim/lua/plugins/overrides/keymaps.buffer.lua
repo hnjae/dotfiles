@@ -70,12 +70,8 @@ return {
       -- neovim 0.11.0 maps `[b`, `]b` by default
       -- { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
       -- { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
-      -- { "[B", "<cmd>BufferLineMovePrev<cr>", desc = "Move buffer prev" },
-      -- { "]B", "<cmd>BufferLineMoveNext<cr>", desc = "Move buffer next" },
       { "[b", false },
       { "]b", false },
-      -- { "[B", false },
-      -- { "]B", false },
     },
   },
 }

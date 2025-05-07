@@ -22,8 +22,6 @@ return {
         modified_icon = "", --nf-cod-circle_filled
         buffer_close_icon = "×", -- unicode (multiplication sign)
         close_icon = "󰅖", -- nf-md-close
-        -- left_trunc_marker = " ",-- default
-        -- right_trunc_marker = " ",-- default
 
         show_tab_indicators = true,
         pick = {
