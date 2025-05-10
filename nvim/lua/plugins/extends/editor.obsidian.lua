@@ -2,14 +2,18 @@
 
 ---@type LazySpec
 return {
-  [1] = "obsidian-nvim/obsidian.nvim",
-  version = false,
-  -- [1] = "epwalsh/obsidian.nvim",
-  -- version("*"),
+  -- [1] = "obsidian-nvim/obsidian.nvim",
+  -- version = "*",
+
+  dir = vim.fn.getenv("HOME") .. "/Projects/obsidian.nvim",
+  -- use my fork until <https://github.com/obsidian-nvim/obsidian.nvim/issues/136> resolved
 
   cond = not vim.g.vscode,
 
   lazy = true,
+  cmd = {
+    "Obsidian",
+  },
   ft = "markdown",
   dependencies = {
     "nvim-lua/plenary.nvim",
@@ -17,7 +21,7 @@ return {
   keys = {
     {
       [1] = "<C-A-CR>",
-      [2] = "<cmd>ObsidianFollowLink vsplit<CR>",
+      [2] = "<cmd>Obsidian follow_link vsplit<CR>",
       desc = "follow-link-vsplit",
       ft = "markdown",
     },
@@ -33,72 +37,50 @@ return {
     },
     {
       [1] = "<A-CR>",
-      [2] = "<cmd>ObsidianFollowLink vsplit<CR>",
+      [2] = "<cmd>Obsidian follow_link vsplit<CR>",
       desc = "follow-link-vsplit",
       ft = "markdown",
     },
     {
       [1] = "<C-CR>",
-      [2] = "<cmd>ObsidianFollowLink<CR>",
+      [2] = "<cmd>Obsidian follow_link<CR>",
       desc = "follow-link",
       ft = "markdown",
     },
 
-    -- {"<leader>t", "", desc = "+test"},
-    -- { "<leader>tt", function() require("neotest").run.run(vim.fn.expand("%")) end, desc = "Run File (Neotest)" },
-    -- { "<leader>tT", function() require("neotest").run.run(vim.uv.cwd()) end, desc = "Run All Test Files (Neotest)" },
-    -- { "<leader>tr", function() require("neotest").run.run() end, desc = "Run Nearest (Neotest)" },
-    -- { "<leader>tl", function() require("neotest").run.run_last() end, desc = "Run Last (Neotest)" },
-    -- { "<leader>ts", function() require("neotest").summary.toggle() end, desc = "Toggle Summary (Neotest)" },
-    -- { "<leader>to", function() require("neotest").output.open({ enter = true, auto_close = true }) end, desc = "Show Output (Neotest)" },
-    -- { "<leader>tO", function() require("neotest").output_panel.toggle() end, desc = "Toggle Output Panel (Neotest)" },
-    -- { "<leader>tS", function() require("neotest").run.stop() end, desc = "Stop (Neotest)" },
-    -- { "<leader>tw", function() require("neotest").watch.toggle(vim.fn.expand("%")) end, desc = "Toggle Watch (Neotest)" },
-
-    -- { "<leader>t", "", desc = "+obsidian" },
-    -- { "<leader>tt", false, ft = "markdown" },
-    -- { "<leader>tT", false, ft = "markdown" },
-    -- { "<leader>tr", false, ft = "markdown" },
-    -- { "<leader>tl", false, ft = "markdown" },
-    -- { "<leader>ts", false, ft = "markdown" },
-    -- { "<leader>to", false, ft = "markdown" },
-    -- { "<leader>tO", false, ft = "markdown" },
-    -- { "<leader>tS", false, ft = "markdown" },
-    -- { "<leader>tw", false, ft = "markdown" },
-
     -- <leader>t: neotest
-    { [1] = "<leader>tt", [2] = "<cmd>ObsidianToday<CR>", desc = "today", ft = "markdown" },
-    { [1] = "<leader>tm", [2] = "<cmd>ObsidianTomorrow<CR>", desc = "tomorrow", ft = "markdown" },
+    { [1] = "<leader>tt", [2] = "<cmd>Obsidian today<CR>", desc = "today", ft = "markdown" },
+    { [1] = "<leader>tm", [2] = "<cmd>Obsidian tomorrow<CR>", desc = "tomorrow", ft = "markdown" },
     {
       [1] = "<leader>ty",
-      [2] = "<cmd>ObsidianYesterday<CR>",
+      [2] = "<cmd>Obsidian yesterday<CR>",
       desc = "yesterday",
       ft = "markdown",
     },
-    { [1] = "<leader>tT", [2] = "<cmd>ObsidianTemplate<CR>", desc = "template", ft = "markdown" },
-    { [1] = "<leader>tn", [2] = "<cmd>ObsidianRename<CR>", desc = "rename", ft = "markdown" },
+    { [1] = "<leader>tT", [2] = "<cmd>Obsidian template<CR>", desc = "template", ft = "markdown" },
+    { [1] = "<leader>tn", [2] = "<cmd>Obsidian rename<CR>", desc = "rename", ft = "markdown" },
     {
-      [1] = "<leader>tj",
-      [2] = "<cmd>ObsidianDailies<CR>",
-      desc = "select-journals (dailies)",
+      [1] = "<leader>td",
+      [2] = "<cmd>Obsidian dailies<CR>",
+      desc = "select-dailies",
       ft = "markdown",
     },
-    { [1] = "<leader>tg", [2] = "<cmd>ObsidianTags<CR>", desc = "select-tags", ft = "markdown" },
+    { [1] = "<leader>tg", [2] = "<cmd>Obsidian tagsCR>", desc = "select-tags", ft = "markdown" },
     {
       [1] = "<leader>tb",
-      [2] = "<cmd>ObsidianBacklinks<CR>",
+      [2] = "<cmd>Obsidian backlinks<CR>",
       desc = "select-backlinks",
       ft = "markdown",
     },
     {
       [1] = "<leader>tX",
-      [2] = "<cmd>ObsidianOpen<CR>",
+      [2] = "<cmd>Obsidian open<CR>",
       desc = "open-in-obsidian",
       ft = "markdown",
     },
     -- [2] = "<cmd>ObsidianToggleCheckbox<CR>",
     {
-      [1] = "<leader>td",
+      [1] = "<leader>tv",
       [2] = function()
         return require("obsidian").util.toggle_checkbox({ " ", "x" })
       end,
@@ -106,7 +88,7 @@ return {
       ft = "markdown",
     },
     {
-      [1] = "<leader>tD",
+      [1] = "<leader>tV",
       [2] = function()
         return require("obsidian").util.toggle_checkbox({ "/" })
       end,
@@ -116,7 +98,9 @@ return {
   },
 
   opts = {
-    -- match obsidian
+    ---------------------------
+    -- MATCH OBSIDIAN
+    ---------------------------
     workspaces = {
       {
         name = "home",
@@ -128,10 +112,8 @@ return {
       date_format = "%Y-%m-%d",
       template = "daily.md",
       alias_format = nil,
-      -- default_tags = {},
     },
     new_notes_location = "notes_subdir",
-    -- notes_subdir = vim.NIL,
     notes_subdir = "/",
     templates = {
       folder = "templates",
@@ -168,7 +150,10 @@ return {
       -- end
     },
 
-    -- neovim config
+    -----------------
+    -- NEOVIM CONFIG
+    -----------------
+    legacy_command = false, -- e.g. ObsidianFollowLink
     mappings = {
       -- override lazyvim's mapping
       ["<leader>sg"] = {
@@ -192,11 +177,6 @@ return {
     },
     ui = {
       enable = false,
-      -- checkoxes = {
-      --   [" "] = { char = "󰄱", hl_group = "ObsidianTodo" },
-      --   ["x"] = { char = "", hl_group = "ObsidianDone" },
-      --   ["/"] = { char = "", hl_group = "ObsidianRightArrow" },
-      -- },
     },
     completion = {
       nvim_cmp = true,
@@ -206,11 +186,9 @@ return {
       name = "snacks.pick",
     },
     follow_url_func = function(url)
-      -- vim.fn.jobstart({ "xdg-open", url })
       vim.ui.open(url)
     end,
     follow_img_func = function(img)
-      -- vim.fn.jobstart({ "xdg-open", img })
       vim.ui.open(img)
     end,
   },
@@ -230,7 +208,6 @@ return {
           rules = {
             {
               plugin = "obsidian.nvim",
-              -- icon = "", -- nf-seti-markdown
               icon = "󰧑", -- nf-md-brain
               color = "purple",
             },
@@ -240,18 +217,6 @@ return {
               color = "purple",
             },
           },
-        },
-        spec = {
-          -- {
-          --   [1] = "<leader>t",
-          --   mode = { "n" },
-          --   group = "obsidian",
-          --   ft = "markdown",
-          --   icon = {
-          --     icon = "", -- nf-seti-markdown
-          --     color = "purple",
-          --   },
-          -- },
         },
       },
     },

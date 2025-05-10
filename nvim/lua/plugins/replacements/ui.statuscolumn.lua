@@ -12,7 +12,6 @@ return {
     lazy = false,
     version = false,
     event = { "VeryLazy" },
-    -- dependencies = { "LazyVim", "gruvbox.nvim" },
     opts = function(_, opts)
       local builtin = require("statuscol.builtin")
       return vim.tbl_deep_extend("force", opts or {}, {

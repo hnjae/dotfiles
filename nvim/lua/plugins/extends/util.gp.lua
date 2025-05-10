@@ -210,7 +210,6 @@ Chats are saved automatically.
             temperature = 0.9,
             max_token = 8192,
           },
-          -- system_prompt = require("gp.defaults").code_system_prompt,
           system_prompt = code_prompt,
         },
         {
@@ -231,7 +230,6 @@ Chats are saved automatically.
           command = true,
           model = {
             model = "gemini-2.0-flash",
-            -- top_k = 40, -- range 0 -- 41
             -- model = "gemini-2.5-pro-exp-03-25",
             temperature = 0.9,
           },
@@ -253,12 +251,7 @@ Chats are saved automatically.
         end,
 
         Proofread = function(gp, params)
-          local template = [[```
-{{selection}}
-```
-]]
-          local agent = gp.get_command_agent()
-          agent.system_prompt =
+          local template =
             [[You are a multilingual language perfectionist. When presented with text:
 
 1. Analyze and correct technical errors in:
@@ -273,41 +266,54 @@ Chats are saved automatically.
    • Maintain the author's style and tone
 
 Present corrections clearly, explaining significant changes only when necessary.
+
+Only process content between <text> and </text> tags
+
+<text>
+{{selection}}
+</text>
 ]]
+          local agent = gp.get_command_agent()
+          agent.system_prompt = ""
           gp.Prompt(params, gp.Target.vnew, agent, template)
         end,
 
         GrammarCheck = function(gp, params)
-          local template = [[```
+          local template =
+            [[You are a precise multilingual grammar corrector with linguistic expertise in multiple languages. When I provide text:
+
+1. Correct all grammatical errors, syntax issues, punctuation mistakes, and improve sentence structure while maintaining perfect adherence to the language's rules.
+2. Faithfully preserve the original:
+  - Language (never translate)
+  - Writing style and voice
+  - Terminology and technical vocabulary
+  - Meaning and intent of the message
+3. Return ONLY the corrected version of the text without explanations, comments, or formatting changes.
+
+Only process content between <text> and </text> tags
+
+<text>
 {{selection}}
-```
+</text>
 ]]
           local agent = gp.get_command_agent()
-          agent.system_prompt =
-            [[You are a precise multilingual grammar corrector. When I provide text in any language:
-
-Fix all grammatical errors and syntax issues
-Preserve the original language, style, and tone
-Return only the complete corrected text without explanations or comments
-]]
+          agent.system_prompt = ""
           gp.Prompt(params, gp.Target.vnew, agent, template)
         end,
 
         EnglishTranslate = function(gp, params)
-          local template = [[```
-{{selection}}
-```
-]]
-          local agent = gp.get_command_agent("claude-command")
-          agent.system_prompt =
-            [[Convert text into simple English (B1-B2 level) for non-native speakers by:
-- Using common vocabulary and short, clear sentences
-- Avoiding idioms, slang, and cultural references
-- Breaking complex ideas into simpler parts
-- Maintaining the original meaning
+          local template =
+            [[You are an English translator, spelling corrector and improver. Transform text between <text> tags into clear, correct English that's easily understood by non-native speakers. Fix spelling, grammar, and phrasing while simplifying complex language.
 
-Only output the simplified text.]]
-          -- [[I want you to act as an English translator, spelling corrector and improver. The given text is sentences I roughly wrote, and I would like you to translate it and answer in the corrected and improved version of my text, in English. You should ensure the sentences are simple and easy to understand for non-native English speakers. Hence, avoid complex vocabulary and sentence structures. I want you to only reply the correction, the improvements and nothing else, do not write explanations.]]
+Respond only with the improved text—no explanations, comments, or other text.
+
+<text>
+{{selection}}
+</text>
+]]
+          -- local agent = gp.get_command_agent("claude-command")
+          local agent = gp.get_command_agent("openai-mini")
+          agent.system_prompt = ""
           gp.Prompt(params, gp.Target.vnew, agent, template)
         end,
       },

@@ -15,11 +15,8 @@ vim.opt.shiftround = false -- true: round indent
 
 -- lazyvim config
 vim.g.snacks_animate = false
--- vim.g.lazyvim_picker = "fzf" -- default in v14.14.0
--- vim.g.trouble_lualine = true
--- vim.g.lazyvim_picker = "telescope"
 vim.g.lazyvim_picker = "snacks"
-
--- lang
+-- vim.g.trouble_lualine = true
 vim.g.lazyvim_python_lsp = "basedpyright"
 vim.g.lazyvim_prettier_needs_config = true
+-- vim.g.ai_cmp = true
