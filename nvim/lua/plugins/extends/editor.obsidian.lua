@@ -50,7 +50,7 @@ return {
 
     -- <leader>t: neotest
     { [1] = "<leader>tt", [2] = "<cmd>Obsidian today<CR>", desc = "today", ft = "markdown" },
-    { [1] = "<leader>tm", [2] = "<cmd>Obsidian tomorrow<CR>", desc = "tomorrow", ft = "markdown" },
+    -- { [1] = "<leader>tm", [2] = "<cmd>Obsidian tomorrow<CR>", desc = "tomorrow", ft = "markdown" },
     {
       [1] = "<leader>ty",
       [2] = "<cmd>Obsidian yesterday<CR>",

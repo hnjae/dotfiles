@@ -26,9 +26,8 @@ vim.opt.visualbell = true -- use visual bell
 vim.opt.history = 1000
 vim.opt.shell = "zsh"
 
--- vim.opt.foldmethod = "syntax"
 -- vim.opt.foldenable = false -- disable folding at startup
--- vim.opt.foldlevelstart = 10 -- default -1
+vim.opt.foldmethod = "expr"
 vim.opt.foldlevel = 999 -- default 0 (fold-all)
 
 -------------------------------------------------------------------------------

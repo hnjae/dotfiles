@@ -28,6 +28,9 @@ git diff HEAD <file>
 # 특정 브랜치/commit의 모든 내용을 현재 working directory, stage 에 덮어쓰기
 git reset --hard <commit>
 
+# upstream/main 을 가리키게 하기.
+git reset --hard upstream/main
+
 # show specific commit's specific file
 git show <commit>:<path>
 
@@ -135,7 +138,7 @@ git remote remove <origin>
 git remote set-url <origin> git@github.com:<owner>/<repository>.git
 
 # disable push on some remotes
-git remote set-url --push <origin> <DISABLE>
+git remote set-url --push <origin> "DISABLE"
 
 # delete remote branch
 git push <origin> -d <branch>
