@@ -50,7 +50,7 @@ return {
       { "<Leader>bs", "<cmd>BufferLineSortByTabs<CR>", desc = "sort-by-tabs" },
       -- new key map
       {
-        [1] = "<Leader><Tab>r",
+        [1] = "<Leader><Tab>n",
         [2] = function()
           vim.ui.input({ prompt = "Rename tab: " }, function(name)
             if name then

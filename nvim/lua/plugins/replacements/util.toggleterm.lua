@@ -85,28 +85,41 @@ return {
     float_opts = {
       border = "rounded",
       width = function()
-        local max = 126
-        if vim.o.columns >= max then
+        local max, min = 126, 84
+        local width = vim.o.columns - 4
+
+        if width >= max then
           return max
         end
 
-        return vim.o.columns
-      end,
-      height = function()
-        local max, min = 36, 24
-        if vim.o.lines - 4 >= max then
-          return max
-        end
-
-        if vim.o.lines - 4 < min then
-          if vim.o.lines >= min then
+        -- 숫자 2: neovide 대응
+        if width < min then
+          if vim.o.columns - 2 >= min then
             return min
           end
 
-          return vim.o.lines
+          return vim.o.columns - 2
         end
 
-        return vim.o.lines - 4
+        return width
+      end,
+      height = function()
+        local max, min = 36, 24
+        local height = vim.o.lines - 4
+        if height >= max then
+          return max
+        end
+
+        -- 숫자 2: neovide 대응
+        if height < min then
+          if vim.o.lines - 2 >= min then
+            return min
+          end
+
+          return vim.o.lines - 2
+        end
+
+        return height
       end,
     },
   },

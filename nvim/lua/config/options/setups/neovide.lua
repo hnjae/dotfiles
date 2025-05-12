@@ -2,7 +2,7 @@ if vim.g.neovide then
   -- vim.g.neovide_input_ime = true
   -- vim.g.neovide_input_ime = true
 
-  vim.o.guifont = "Monospace:h18"
+  vim.o.guifont = "Monospace:h19"
   -- vim.o.guifont = "MesloLGS Nerd Font:h18"
   -- vim.opt.linespace = -3
   -- vim.g.neovide_scroll_animation_length = 0
