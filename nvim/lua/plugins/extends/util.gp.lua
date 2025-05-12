@@ -17,7 +17,7 @@ local wk_icon = {
 }
 
 local chat_prompt =
-  [[Respond in English only. Prioritize analytical substance over politeness. Critically evaluate my ideas by questioning assumptions, identifying biases, and presenting counterarguments. Value intellectual honesty over agreement, and base all conclusions on sound reasoning and evidence.]]
+  [[Focus on substance over praise. Skip unnecessary compliments or praise that lacks depth. Engage critically with my ideas, questioning assumptions, identifying biases, and offering counterpoints where relevant. Don’t shy away from disagreement when it’s warranted, and ensure that any agreement is grounded in reason and evidence.]]
 
 local code_prompt =
   [[You are a code editor AI that modifies, optimizes, or fixes code snippets. When given code, respond with only the edited version without explanations, comments, or additional text.
@@ -28,7 +28,7 @@ START AND END YOUR ANSWER WITH:
 ---@type LazySpec
 return {
   [1] = "Robitx/gp.nvim",
-  version = "*", -- NOTE: latest release 2024-08-12 (2025-04-08)
+  version = false, -- NOTE: latest release 2024-08-12 (2025-04-08)
   -- commit = "72f4b3a0bd8798afb5dedc9b56129808c890e68c", -- <https://github.com/Robitx/gp.nvim/pull/255>
   pin = true,
   cond = not vim.g.vscode,
@@ -87,7 +87,6 @@ return {
 
       chat_assistant_prefix = { "LLM ", "[{{agent}}]:" },
 
-      -- chat_user_prefix = (require("globals").icons.textbox .. " :"),
       chat_user_prefix = "USER:",
 
       chat_conceal_model_params = false,
@@ -102,10 +101,8 @@ return {
         shortcut = "<C-g>r",
       },
 
-      -- default_chat_agent = "claude-sonnet",
-      -- default_command_agent = "openai-mini",
-      default_command_agent = "gemini-command",
-      default_chat_agent = "gemini",
+      default_command_agent = "openai-command",
+      default_chat_agent = "claude",
 
       chat_template = [[
 # topic: ?
@@ -125,7 +122,6 @@ Chats are saved automatically.
 
 {{user_prefix}}
 ]],
-      -- {{optional_headers}}
 
       style_popup_max_width = 120,
 
@@ -144,7 +140,7 @@ Chats are saved automatically.
           secret = {
             "bash",
             "-c",
-            "cat ~/.config/github-copilot/apps.json | sed -e 's/.*oauth_token...//;s/\".*//'",
+            [[cat ~/.config/github-copilot/apps.json | sed -e 's/.*oauth_token...//;s/".*//']],
           },
         },
         anthropic = {
@@ -180,11 +176,23 @@ Chats are saved automatically.
         { name = "CodeCopilot", disable = true },
         {
           provider = "openai",
-          name = "openai-mini",
-          chat = true,
+          name = "openai-command",
+          chat = false,
           command = true,
           model = {
-            model = "o3-mini",
+            model = "gpt-4.1-mini",
+            temperature = 0.8,
+          },
+          system_prompt = code_prompt,
+        },
+        {
+          provider = "openai",
+          name = "openai-chat",
+          chat = true,
+          command = false,
+          model = {
+            model = "gpt-4.1",
+            temperature = 0.8,
           },
           system_prompt = chat_prompt,
         },
@@ -195,7 +203,7 @@ Chats are saved automatically.
           command = false,
           model = {
             model = "claude-3-7-sonnet-latest",
-            temperature = 0.9,
+            temperature = 0.8,
             max_token = 8192,
           },
           system_prompt = chat_prompt,
@@ -207,7 +215,7 @@ Chats are saved automatically.
           command = true,
           model = {
             model = "claude-3-7-sonnet-latest",
-            temperature = 0.9,
+            temperature = 0.8,
             max_token = 8192,
           },
           system_prompt = code_prompt,
@@ -219,7 +227,7 @@ Chats are saved automatically.
           command = false,
           model = {
             model = "gemini-2.5-pro-exp-03-25",
-            temperature = 0.9,
+            temperature = 0.8,
           },
           system_prompt = chat_prompt,
         },
@@ -229,11 +237,9 @@ Chats are saved automatically.
           chat = false,
           command = true,
           model = {
-            model = "gemini-2.0-flash",
-            -- model = "gemini-2.5-pro-exp-03-25",
-            temperature = 0.9,
+            model = "gemini-2.5-flash-preview-04-17",
+            temperature = 0.8,
           },
-          -- system_prompt = require("gp.defaults").code_system_prompt,
           system_prompt = code_prompt,
         },
       },
@@ -311,8 +317,7 @@ Respond only with the improved text—no explanations, comments, or other text.
 {{selection}}
 </text>
 ]]
-          -- local agent = gp.get_command_agent("claude-command")
-          local agent = gp.get_command_agent("openai-mini")
+          local agent = gp.get_command_agent("openai-command")
           agent.system_prompt = ""
           gp.Prompt(params, gp.Target.vnew, agent, template)
         end,
@@ -322,6 +327,10 @@ Respond only with the improved text—no explanations, comments, or other text.
 
   -- stylua: ignore
   keys = {
+    { [1] = prefix .. "A",     mode = "n", [2] = "<cmd>GpAgent<CR>",      desc = "gp-agent", },
+    { [1] = prefix .. "C",     mode = "n", [2] = "<cmd>GpContext<CR>",      desc = "gp-context", },
+    { [1] = prefix .. "n",     mode = "n", [2] = "<cmd>GpNextAgent<CR>",      desc = "gp-next-agent", },
+
     { [1] = prefix .. keyword, mode = "n", [2] = "<cmd>GpChatToggle vsplit<CR>",      desc = "chat-toggle (Gp)" },
 
     { [1] = prefix .. "p",     mode = "n", [2] = "<cmd>%GpChatPaste split<CR>",      desc = "Paste buffer (Gp)", },
