@@ -1,4 +1,4 @@
-% git
+% git, VCS
 
 ; function of git checkout is split to switch and restore
 
@@ -98,7 +98,7 @@ git reset [--hard] <commit>
 # cherry-pick other commit's changes to `HEAD`
 git cherry-pick <commit> [--ff]
 
-# cherry-pick other commit's chagnes to `HEAD` but DO NOT commit (like restore all files in that commit)
+# cherry-pick other commit's changes to `HEAD` but DO NOT commit (like restore all files in that commit)
 git cherry-pick -n <commit>
 
 # git rebase
@@ -107,7 +107,7 @@ git rebase --interactive <commit>
 # git-rebase abort/cancle
 git rebase --abort
 
-# git-rebase contiune
+# git-rebase continue
 git rebase --continue
 
 ;#############################################################################
@@ -158,6 +158,8 @@ git clone --recurse-submodules --branch <branch-name> "git@<githubdotcom>:<owner
 ;#############################################################################
 ; misc
 ;#############################################################################
-; run `zstd -b3 -e19 <target-file>` to benchmark zstd
 # git-archive
 git archive --format=tar HEAD | zstd -12 -T0 -o HEAD.tar.zst
+
+# Display logs of a specific file (특정 파일의 로그를 출력)
+git log --diff-filter=A --follow --format="%ad %an" --date=iso -- <path>

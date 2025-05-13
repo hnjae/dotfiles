@@ -2,3 +2,6 @@
 
 # compress with zstd using multitheread
 zstd -T0 <file>
+
+# benchmark zstd
+zstd -b3 -e19 <target-file>
