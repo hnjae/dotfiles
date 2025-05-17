@@ -1,4 +1,7 @@
 % sd, sed
 
 # replace string in file
-sd --preview before after file.txt
+sd --preview <before> <after> file.txt
+
+# replace string in file (fixed-strings)
+sd --fixed-strings --preview <before> <after> file.txt

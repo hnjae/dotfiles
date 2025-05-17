@@ -7,6 +7,9 @@ $ branch: git branch | awk '{print $NF}'
 ; git-checkout 의 기능이 switch 랑 restore 로 분할됨 <from git 2.23.0>
 ; https://stackoverflow.com/questions/57265785/whats-the-difference-between-git-switch-and-git-checkout-branch
 
+
+; <https://git-scm.com/docs/pretty-formats>
+
 ;############################################################################
 ; 파일 관련
 
@@ -162,4 +165,4 @@ git clone --recurse-submodules --branch <branch-name> "git@<githubdotcom>:<owner
 git archive --format=tar HEAD | zstd -12 -T0 -o HEAD.tar.zst
 
 # Display logs of a specific file (특정 파일의 로그를 출력)
-git log --diff-filter=A --follow --format="%ad %an" --date=iso -- <path>
+git log --diff-filter=A --follow --format="%C(auto)%h %aI %s [%an]" -- <path>

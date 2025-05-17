@@ -10,7 +10,10 @@
         "body": "P${1:nYnMnD}T${2:nHnMnS}"
     },
     "date": {
-        "prefix": "date",
+        "prefix": [
+            "dt",
+            "date"
+        ],
         "description": "Put the date in (Y-m-D) format",
         "body": "${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}"
     },
@@ -30,19 +33,21 @@
         "body": "${CURRENT_HOUR}시 ${CURRENT_MINUTE}분 ${CURRENT_SECOND}초"
     },
     "datetime": {
-        "prefix": "datetime",
+        "prefix": [
+            "datetime-naive"
+        ],
         "description": "I give you back the time and date (Y-m-d H:M:S)",
         "body": "${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE} ${CURRENT_HOUR}:${CURRENT_MINUTE}:${CURRENT_SECOND}"
     },
     "datetime-ko": {
-        "prefix": "datetimeko",
+        "prefix": "datetime-naive-ko",
         "description": "Put the datetime in Korean locale",
         "body": "${CURRENT_YEAR}년 ${CURRENT_MONTH}월 ${CURRENT_DATE}일 ${CURRENT_HOUR}시 ${CURRENT_MINUTE}분 ${CURRENT_SECOND}초"
     },
     "datetime-iso": {
         "prefix": [
-            "datetimeiso",
-            "dt"
+            "datetime",
+            "dti"
         ],
         "description": "ISO date time stamp (`dt`)",
         "body": "$CURRENT_YEAR-$CURRENT_MONTH-${CURRENT_DATE}T$CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND$CURRENT_TIMEZONE_OFFSET"
