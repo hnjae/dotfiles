@@ -8,9 +8,8 @@ _:
 stow:
     #!/usr/bin/env bash
 
-    # Based on LLM generated code
-
-    set -eu
+    set -euo pipefail
+    # TODO: 여기 bashism 없지 않나?
 
     # --- Configuration ---
 
