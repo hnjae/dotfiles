@@ -1,0 +1,227 @@
+# { on = "R", run = "plugin vimv", desc = "vimv" },
+# TODO: wrap vimv <2024-12-28>
+"$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
+
+[manager]
+keymap = [
+  ######################################################################################
+  # DEFAULT KEY MAPPS
+  ######################################################################################
+  { on = "<C-[>", run = "escape", desc = "Exit visual mode, clear selection, or cancel search" },
+  { on = "<C-c>", run = "close", desc = "Close the current tab, or quit if it's last" },
+  { on = "<C-z>", run = "suspend", desc = "Suspend the process" },
+  { on = "<Esc>", run = "escape", desc = "Exit visual mode, clear selection, or cancel search" },
+  { on = "Q", run = "quit --no-cwd-file", desc = "Quit without outputting cwd-file" },
+  { on = "q", run = "quit", desc = "Quit the process" },
+
+  # Hopping
+  { on = "j", run = "arrow next", desc = "Next file" },
+  { on = "k", run = "arrow prev", desc = "Previous file" },
+
+  { on = "<Down>", run = "arrow next", desc = "Next file" },
+  { on = "<Up>", run = "arrow prev", desc = "Previous file" },
+
+  { on = "<C-b>", run = "arrow -100%", desc = "Move cursor up one page" },
+  { on = "<C-d>", run = "arrow 50%", desc = "Move cursor down half page" },
+  { on = "<C-f>", run = "arrow 100%", desc = "Move cursor down one page" },
+  { on = "<C-u>", run = "arrow -50%", desc = "Move cursor up half page" },
+
+  { on = "<PageDown>", run = "arrow 100%", desc = "Move cursor down one page" },
+  { on = "<PageUp>", run = "arrow -100%", desc = "Move cursor up one page" },
+  { on = "<S-PageDown>", run = "arrow 50%", desc = "Move cursor down half page" },
+  { on = "<S-PageUp>", run = "arrow -50%", desc = "Move cursor up half page" },
+
+  { on = "G", run = "arrow bot", desc = "Go to bottom" },
+  { on = ["g", "g"], run = "arrow top", desc = "Go to top" },
+
+  # Navigation
+  { on = "h", run = "leave", desc = "Back to the parent directory" },
+  { on = "l", run = "enter", desc = "Enter the child directory" },
+
+  { on = "<Left>", run = "leave", desc = "Back to the parent directory" },
+  { on = "<Right>", run = "enter", desc = "Enter the child directory" },
+
+  { on = "H", run = "back", desc = "Back to previous directory" },
+  { on = "L", run = "forward", desc = "Forward to next directory" },
+
+  # Toggle
+  { on = "<C-a>", run = "toggle_all --state=on", desc = "Select all files" },
+  { on = "<C-r>", run = "toggle_all", desc = "Invert selection of all files" },
+
+
+  # Seeking
+  { on = "J", run = "seek 5", desc = "Seek down 5 units in the preview" },
+  { on = "K", run = "seek -5", desc = "Seek up 5 units in the preview" },
+
+  # Spotting
+  { on = "<Tab>", run = "spot", desc = "Spot hovered file" },
+
+  # Operation
+  { on = "<C-s>", run = "escape --search", desc = "Cancel the ongoing search" },
+  { on = "o", run = "open", desc = "Open selected files" },
+  { on = "O", run = "open --interactive", desc = "Open selected files interactively" },
+
+  # Find
+  { on = "/", run = "find --smart", desc = "Find next file" },
+  { on = "?", run = "find --previous --smart", desc = "Find previous file" },
+  { on = "N", run = "find_arrow --previous", desc = "Previous found" },
+  { on = "n", run = "find_arrow", desc = "Next found" },
+
+  # Goto
+  { on = ["f", "g"], run = "follow", desc = "Follow hovered symlink" },
+
+  { on = "[", run = "tab_switch -1 --relative", desc = "Switch to previous tab" },
+  { on = "]", run = "tab_switch 1 --relative", desc = "Switch to next tab" },
+
+  { on = "{", run = "tab_swap -1", desc = "Swap current tab with previous tab" },
+  { on = "}", run = "tab_swap 1", desc = "Swap current tab with next tab" },
+
+  # Tasks
+  { on = "w", run = "tasks:show", desc = "Show task manager" },
+
+  # Help
+  { on = "<F1>", run = "help", desc = "Open help" },
+  { on = "~", run = "help", desc = "Open help" },
+
+  ####################
+  # Netrw-compatible #
+  ####################
+  { on = "%", run = "create", desc = "create a file" },
+  { on = "-", run = "leave", desc = "Back to the parent directory" },
+  # { on = "<Enter>", run = "open", desc = "Open selected files" },
+  { on = "<Enter>", run = "plugin smart-enter", desc = "Enter the child directory, or open the file" },
+  { on = "<S-Enter>", run = "open --interactive", desc = "Open selected files interactively" },
+  { on = "D", run = "remove", desc = "Trash selected files" },
+  { on = "R", run = '''shell --block --interactive 'vimv "$@"'''', desc = "vimv" },
+  { on = "d", run = "create --dir", desc = "Create a directories" },
+  { on = "t", run = "tab_create --current", desc = "Create a new tab with CWD" },
+  { on = ["g", "T"], run = "tab_switch -1 --relative", desc = "Switch to the previous tab" },
+  { on = ["g", "h"], run = "hidden toggle", desc = "Toggle the visibility of hidden files" },
+  { on = ["g", "p"], run = "plugin chmod", desc = "chmod on selected files" },
+  { on = ["g", "t"], run = "tab_switch 1 --relative", desc = "Switch to the next tab" },
+  { on = ["g", "x"], run = "open", desc = "Open selected files" },
+  { on = ["m", "F"], run = "toggle_all --state=off", desc = "Deselect all" },
+  { on = ["m", "X"], run = "shell '\"$@\"; sleep 1' --cursor=0 --block --interactive", desc = "Run a shell command" },
+  { on = ["m", "d"], run = "plugin diff", desc = "Diff the selected with the hovered file" },
+  { on = ["m", "f"], run = "toggle", desc = "Toggle the current selection state" },
+  { on = ["m", "g"], run = "search --via=rg", desc = "Search files by content via ripgrep" },
+  { on = ["m", "x"], run = "shell 'printf \"%s\\0\" \"$@\" | xargs --null --max-args=1 ; sleep 1' --cursor=47 --block --interactive", desc = "Run series of shell command" },
+  { on = ["q", "f"], run = "spot", desc = "Spot hovered file" },
+
+  # { on = ["m", "x"], run = "shell 'for arg in \"$@\"; do  \"$arg\"; done; sleep 1' --cursor=20 --block --interactive", desc = "Run series of shell command" },
+  # { on = "r", run = ["sort --reverse"], desc = "reverse" }, # can not toggle reverse on yazi
+
+  ####################
+  # Netrw-alike
+  ####################
+  { on = ["m", "C"], run = "unyank", desc = "Cancel the yank status" },
+  { on = ["m", "M"], run = "unyank", desc = "Cancel the yank status" },
+  { on = ["m", "c"], run = "yank", desc = "Yank selected files (copy)" },
+  { on = ["m", "m"], run = "yank --cut", desc = "Yank selected files (cut)" },
+  { on = ["m", "p"], run = "paste", desc = "Paste yanked files" },
+  { on = ["m", "r"], run = "plugin _rmdir", desc = "rmdir" },
+  { on = ["m", "l", "r"], run = "link --relative", desc = "Symlink the relative path of yanked files" },
+  { on = ["m", "l", "a"], run = "link", desc = "Symlink the absolute path of yanked files" },
+  { on = ["m", "l", "h"], run = "hardlink", desc = "Hardlink yanked files" },
+  { on = ["i", "b"], run = "linemode btime", desc = "Linemode: btime" },
+  { on = ["i", "i"], run = "linemode size_and_mtime", desc = "Linemode: size_and_mtime" },
+  { on = ["i", "m"], run = "linemode mtime", desc = "Linemode: mtime" },
+  { on = ["i", "n"], run = "linemode none", desc = "Linemode: none" },
+  { on = ["i", "o"], run = "linemode owner", desc = "Linemode: owner" },
+  { on = ["i", "p"], run = "linemode permissions", desc = "Linemode: permissions" },
+  { on = ["i", "s"], run = "linemode size", desc = "Linemode: size" },
+  { on = ["s", "B"], run = ["sort btime --reverse", "linemode btime"], desc = "ctime (reverse)" },
+  { on = ["s", "E"], run = "sort extension --reverse", desc = "extension (reverse)" },
+  { on = ["s", "M"], run = ["sort mtime --reverse", "linemode mtime"], desc = "mtime (reverse)" },
+  { on = ["s", "N"], run = ["sort natural --reverse", "linemode size_and_mtime"], desc = "naturally (reverse)" },
+  { on = ["s", "S"], run = ["sort size --reverse", "linemode size"], desc = "size (reverse)" },
+  { on = ["s", "b"], run = ["sort btime --reverse=no", "linemode btime"], desc = "ctime (birth-time)" },
+  { on = ["s", "e"], run = "sort extension --reverse=no", desc = "extension" },
+  { on = ["s", "m"], run = ["sort mtime --reverse=no", "linemode mtime"], desc = "mtime" },
+  { on = ["s", "n"], run = ["sort natural --reverse=no", "linemode size_and_mtime"], desc = "naturally" },
+  { on = ["s", "r"], run = ["sort random --reverse=no", "linemode size_and_mtime"], desc = "randomly" },
+  { on = ["s", "s"], run = ["sort size --reverse=no", "linemode size"], desc = "size" },
+
+  # C: Copy
+  { on = ["c", "p"], run = "copy path", desc = "Copy the file path" },
+  { on = ["c", "d"], run = "copy dirname", desc = "Copy the directory path" },
+  { on = ["c", "f"], run = "copy filename", desc = "Copy the filename" },
+  { on = ["c", "n"], run = "copy name_without_ext", desc = "Copy the filename without extension" },
+  # { on = ["c", "Y"], run = "plugin system-clipboard", desc = "copy-to-system-clipboard" },
+  { on = ["c", "c"], run = "plugin copy-file-contents", desc = "copy-contents-of-file" },
+
+
+  # G: Goto
+  ####################
+  { on = ["g", "s"], run = "plugin zoxide", desc = "jump-using-zoxide" },
+  { on = ["g", "f"], run = "plugin fzf", desc = "jump-using-fzf" },
+  { on = ["g", "j"], run = "cd --interactive", desc = "Jump interactively" },
+  { on = ["g", "b", "h"], run = "cd ~", desc = "Go home" },
+  { on = ["g", "b", "c"], run = "cd ~/.config", desc = "Go ~/.config" },
+  { on = ["g", "b", "d"], run = "cd ~/Downloads", desc = "Go ~/Downloads" },
+
+  # z: filter
+  ####################
+  { on = ["z", "f"], run = "search --via=fd", desc = "Search files by name via fd" },
+  { on = ["z", "r"], run = "search --via=rg", desc = "Search files by content via ripgrep" }, # filter
+  { on = ["z", "z"], run = "filter --smart", desc = "Filter files" },
+
+  ###############
+  # snacks-explorer alike
+  ###############
+  { on = "r", run = "rename --cursor=before_ext", desc = "Rename selected file(s)" },
+  { on = "<F2>", run = "rename --cursor=before_ext", desc = "Rename selected file(s)" },
+
+  ###############
+  # NEW
+  ###############
+  { on = "<F3>", run = "plugin trash-with-trace", desc = "Trash selected files" },
+
+  #
+  { on = "<Space>", run = ["toggle", "arrow next"], desc = "Toggle the current selection state" },
+  { on = "x", run = "yank --cut", desc = "Yank selected files (cut)" },
+  { on = "p", run = "paste", desc = "Paste yanked files" },
+
+  # Renaming / Mode
+  { on = "a", run = "rename --cursor=before_ext", desc = "Rename selected file(s)" },
+  { on = "A", run = "rename --cursor=end", desc = "Rename selected file(s)" },
+  { on = "I", run = "rename --cursor=start", desc = "Rename selected file(s)" },
+
+  # Visual mode
+  # { on = "V", run = "visual_mode --unset", desc = "Enter visual mode (unset mode)" },
+  { on = "v", run = "visual_mode", desc = "Enter visual mode (selection mode)" },
+  { on = "V", run = ["move -999", "visual", "move 999"], desc = "Enter visual mode and select all" },
+
+  { on = ":", run = "shell --block --interactive", desc = "Run a shell command (block until finishes)" },
+  { on = ";", run = "shell --interactive", desc = "Run a shell command" },
+
+  # Tabs
+  { on = ["g", "1"], run = "tab_switch 0", desc = "Switch to first tab" },
+  { on = ["g", "2"], run = "tab_switch 1", desc = "Switch to second tab" },
+  { on = ["g", "3"], run = "tab_switch 2", desc = "Switch to third tab" },
+  { on = ["g", "4"], run = "tab_switch 3", desc = "Switch to fourth tab" },
+  { on = ["g", "5"], run = "tab_switch 4", desc = "Switch to fifth tab" },
+  { on = ["g", "6"], run = "tab_switch 5", desc = "Switch to sixth tab" },
+  { on = ["g", "7"], run = "tab_switch 6", desc = "Switch to seventh tab" },
+  { on = ["g", "8"], run = "tab_switch 7", desc = "Switch to eighth tab" },
+  { on = ["g", "9"], run = "tab_switch 8", desc = "Switch to ninth tab" },
+
+  ##########################
+  # move-in-relative-steps
+  ##########################
+  { on = ["1"], run = "plugin relative-motions --args=1", desc = "move-in-relative-steps" },
+  { on = ["2"], run = "plugin relative-motions --args=2", desc = "move-in-relative-steps" },
+  { on = ["3"], run = "plugin relative-motions --args=3", desc = "move-in-relative-steps" },
+  { on = ["4"], run = "plugin relative-motions --args=4", desc = "move-in-relative-steps" },
+  { on = ["5"], run = "plugin relative-motions --args=5", desc = "move-in-relative-steps" },
+  { on = ["6"], run = "plugin relative-motions --args=6", desc = "move-in-relative-steps" },
+  { on = ["7"], run = "plugin relative-motions --args=7", desc = "move-in-relative-steps" },
+  { on = ["8"], run = "plugin relative-motions --args=8", desc = "move-in-relative-steps" },
+  { on = ["9"], run = "plugin relative-motions --args=9", desc = "move-in-relative-steps" },
+]
+
+[spot]
+keymap = [
+  { on = ["y", "y"], run = "copy cell", desc = "Copy selected cell" },
+  { on = "q", run = "close", desc = "close spot" },
+]

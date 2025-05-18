@@ -157,6 +157,30 @@ stow-nvim:
 
     ln -v -s "${script_dir}/${CONFIG_NAME}" "${target}"
 
+stow-yazi:
+    #!/bin/sh
+
+    set -eu
+
+    CONFIG_NAME="yazi"
+    script_dir="$(cd -- "$(dirname -- "")" && pwd -P)" >/dev/null 2>&1
+    XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+
+    [ ! -d "${script_dir}/${CONFIG_NAME}" ] && echo "${script_dir}/${CONFIG_NAME} does not exists." && exit 1
+    [ ! -d "$XDG_CONFIG_HOME" ] && mkdir -p "$XDG_CONFIG_HOME"
+
+    target="${XDG_CONFIG_HOME}/${CONFIG_NAME}"
+
+    if [ -h "$target" ]; then
+        rm "$target" && echo "rm previous symlinks" >/dev/stderr
+    elif [ -e "$target" ]; then \
+        echo "${target} exists, moving." >/dev/stderr
+        backup_path="${target}.backup.$(date --utc '+%Y%m%dT%H%M%S%Z')"
+        mv -n "${target}" "${backup_path}" && echo "mv ${target} to ${backup_path}"; \
+    fi
+
+    ln -v -s "${script_dir}/${CONFIG_NAME}" "${target}"
+
 commit:
     #!/bin/sh
 

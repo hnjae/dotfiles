@@ -1,6 +1,8 @@
 ____*
 
 /nvim/spell/*.add.spl
+/yazi/plugins/*
+!/yazi/plugins/_*
 
 /**/lazygit/state.yml
 /**/navi/navi.log

@@ -1,0 +1,52 @@
+[[plugin.deps]]
+use = "yazi-rs/plugins:smart-enter"
+rev = "864a021"
+hash = "7918aab6a71caf31b58411f789195677"
+
+[[plugin.deps]]
+use = "boydaihungst/mediainfo"
+rev = "9629b1e"
+hash = "5204b4e2bd238c40fa66cf0a0191f084"
+
+[[plugin.deps]]
+use = "AnirudhG07/plugins-yazi:copy-file-contents"
+rev = "524c52c"
+hash = "27c50e6bc15c09096505b805b238ade0"
+
+[[plugin.deps]]
+use = "orhnk/system-clipboard"
+rev = "efb8f03"
+hash = "9b8f2573da54334b04747e51556040cc"
+
+[[plugin.deps]]
+use = "dedukun/relative-motions"
+rev = "ce2e890"
+hash = "23915860e59348bf4166778bb0e606f7"
+
+[[plugin.deps]]
+use = "Reledia/glow"
+rev = "2da96e3"
+hash = "f9ee1436e3b853508d87f7d49dce56e6"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:chmod"
+rev = "864a021"
+hash = "2f1053f89d1a301a648ab181d0948e38"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:diff"
+rev = "864a021"
+hash = "7a08e303167d5b655c06da6d570f0333"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:git"
+rev = "864a021"
+hash = "e0ada736ea676c2bbb3ec705a49526ef"
+
+[[plugin.deps]]
+use = "boydaihungst/restore"
+rev = "539aad5"
+hash = "fd162085ec09fef4b4060c92bba31994"
+
+[flavor]
+deps = []

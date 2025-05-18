@@ -1,0 +1,32 @@
+"$schema" = "https://yazi-rs.github.io/schemas/yazi.json"
+[manager]
+linemode       = "size_and_mtime"
+sort_dir_first = false
+
+[preview]
+image_delay   = 20
+image_filter  = "nearest"
+image_quality = 50
+max_height    = 1024
+max_width     = 1024
+
+[open]
+prepend_rules = [
+  { mime = "text/*", use = "edit" },
+  { mime = "video/*", use = "play" },
+  { mime = "*", use = "open" },
+]
+
+[plugin]
+prepend_previewers = [
+  { name = "*.md", run = "glow" },
+  { mime = "{image,audio}/*", run = "mediainfo" },
+  { mime = "application/subrip", run = "mediainfo" },
+  { mime = "video/*", run = "_mediainfo" },
+]
+
+# ya pack -a yazi-rs/plugins:git
+prepend_fetchers = [
+  { id = "git", name = "*", run = "git" },
+  { id = "git", name = "*/", run = "git" },
+]
