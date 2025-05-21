@@ -2,10 +2,10 @@
 
 ---@type LazySpec
 return {
-  -- [1] = "obsidian-nvim/obsidian.nvim",
-  -- version = "*",
+  [1] = "obsidian-nvim/obsidian.nvim",
+  version = "*",
 
-  dir = vim.fn.getenv("HOME") .. "/Projects/obsidian.nvim",
+  -- dir = vim.fn.getenv("HOME") .. "/Projects/obsidian.nvim",
   -- use my fork until <https://github.com/obsidian-nvim/obsidian.nvim/issues/136> resolved
 
   cond = not vim.g.vscode,
