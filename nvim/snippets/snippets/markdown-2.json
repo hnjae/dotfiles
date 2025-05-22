@@ -1,21 +1,33 @@
 {
     "header 1": {
-        "prefix": "h1",
+        "prefix": [
+            "h1",
+            "1"
+        ],
         "description": "Add header level 1",
         "body": "# ${0:$TM_SELECTED_TEXT}"
     },
     "header 2": {
-        "prefix": "h2",
+        "prefix": [
+            "h2",
+            "2"
+        ],
         "description": "Add header level 2",
         "body": "## ${0:$TM_SELECTED_TEXT}"
     },
     "header 3": {
-        "prefix": "h3",
+        "prefix": [
+            "h3",
+            "3"
+        ],
         "description": "Add header level 3",
         "body": "### ${0:$TM_SELECTED_TEXT}"
     },
     "header 4": {
-        "prefix": "h4",
+        "prefix": [
+            "h4",
+            "4"
+        ],
         "description": "Add header level 4",
         "body": "#### ${0:$TM_SELECTED_TEXT}"
     },
@@ -196,6 +208,34 @@
             "date_before: 2025-04-11",
             "lastmod: $CURRENT_YEAR-$CURRENT_MONTH-${CURRENT_DATE}T$CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND$CURRENT_TIMEZONE_OFFSET",
             "---"
+        ]
+    },
+    "description block": {
+        "prefix": [
+            "dl",
+            "description-block"
+        ],
+        "description": "write description",
+        "body": [
+            "<dl>",
+            "\t<dt>$1</dt>",
+            "\t<dd>",
+            "\t\t$2",
+            "\t</dd>",
+            "</dl>"
+        ]
+    },
+    "description": {
+        "prefix": [
+            "dd",
+            "description"
+        ],
+        "description": "write description",
+        "body": [
+            "<dt>$1</dt>",
+            "<dd>",
+            "\t$2",
+            "</dd>"
         ]
     }
 }

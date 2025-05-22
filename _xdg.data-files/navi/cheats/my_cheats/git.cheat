@@ -93,6 +93,9 @@ git branch -m <new-name>
 # make current branch to point specific commit
 git reset [--hard] <commit>
 
+# Make current branch up-to-date
+git rebase upstream/main
+
 ;#############################################################################
 ; rebase; cherry-pick
 ;############################################################################

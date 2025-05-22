@@ -37,3 +37,7 @@ vim.keymap.del("n", "<S-l>")
 vim.keymap.del("i", "<C-s>") -- restore vim.lsp.buf.signature_help
 vim.keymap.set("i", "<C-s>", vim.lsp.buf.signature_help, { desc = "lsp-buf-signature-help" })
 vim.keymap.del("n", "<leader>ua") -- toggle animation <LazyVim 14.14.0>
+vim.keymap.del({ "n", "x" }, "j") -- j 가 gj 로 동작하는 것 삭제
+vim.keymap.del({ "n", "x" }, "<Down>")
+vim.keymap.del({ "n", "x" }, "k")
+vim.keymap.del({ "n", "x" }, "<Up>")

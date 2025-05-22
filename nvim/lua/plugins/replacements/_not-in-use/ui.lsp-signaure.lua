@@ -22,7 +22,8 @@ local spec = {
   opts = function()
     return {
       -- log dir when debug is on
-      log_path = require("plenary.path"):new(vim.fn.stdpath("log"), "/lsp_signature.log").filename,
+      -- log_path = require("plenary.path"):new(vim.fn.stdpath("log"), "/lsp_signature.log").filename,
+      log_path = vim.fs.joinpath(vim.fn.stdpath("log"), "/lsp_signature.log"),
 
       -- floating_window = true,
       -- floating_window_above_cur_line = true,

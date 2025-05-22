@@ -2,12 +2,9 @@
 
 ---@type LazySpec
 return {
-  [1] = "obsidian-nvim/obsidian.nvim",
-  version = "*",
-
-  -- dir = vim.fn.getenv("HOME") .. "/Projects/obsidian.nvim",
-  -- use my fork until <https://github.com/obsidian-nvim/obsidian.nvim/issues/136> resolved
-
+  -- [1] = "obsidian-nvim/obsidian.nvim",
+  -- version = false,
+  dir = vim.fn.getenv("HOME") .. "/Projects/obsidian.nvim",
   cond = not vim.g.vscode,
 
   lazy = true,
@@ -137,7 +134,6 @@ return {
         end,
       },
     },
-    disable_frontmatter = true,
     -- https://github.com/Vinzent03/obsidian-advanced-uri
     use_advanced_uri = false,
     note_id_func = function(title)
@@ -145,15 +141,16 @@ return {
     end,
     attachments = {
       img_folder = "attachments/",
-      -- img_name_func = function ()
-      --     return string.format("%s-", os.time())
-      -- end
+      img_name_func = function()
+        return vim.fn.system("uuid7")
+      end,
     },
+    disable_frontmatter = true, -- manage frontmatter myself
 
     -----------------
     -- NEOVIM CONFIG
     -----------------
-    legacy_command = false, -- e.g. ObsidianFollowLink
+    -- legacy_commands = false, -- e.g. ObsidianFollowLink
     mappings = {
       -- override lazyvim's mapping
       ["<leader>sg"] = {
@@ -194,10 +191,6 @@ return {
   },
   config = function(_, opts)
     require("obsidian").setup(opts)
-
-    for _, command in ipairs({ "ObsidianNew" }) do
-      vim.api.nvim_del_user_command(command)
-    end
   end,
   specs = {
     {

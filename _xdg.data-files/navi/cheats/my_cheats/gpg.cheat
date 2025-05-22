@@ -1,0 +1,7 @@
+% gpg
+
+# list keys
+gpg --list-secret-keys --keyid-format=long
+
+# delete key
+gpg --delete-secret-key <email>

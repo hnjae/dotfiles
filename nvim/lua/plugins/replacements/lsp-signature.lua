@@ -15,7 +15,7 @@ local spec = {
   opts = function()
     return {
       -- log dir when debug is on
-      log_path = require("plenary.path"):new(vim.fn.stdpath("state"), "/lsp_signature.log").filename,
+      log_path = vim.fs.joinpath(vim.fn.stdpath("state"), "lsp_signature.log"),
       max_width = 80,
 
       -- handler_opts = {

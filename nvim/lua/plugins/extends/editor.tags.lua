@@ -11,8 +11,7 @@ return {
       "nvim-lua/plenary.nvim", -- using plenary in init function
     },
     init = function()
-      vim.g.gutentags_cache_dir =
-        require("plenary.path"):new(vim.fn.stdpath("cache"), "gutentags").filename
+      vim.g.gutentags_cache_dir = vim.fs.joinpath(vim.fn.stdpath("cache"), "gutentags")
 
       vim.g.gutentags_exclude_filetypes = {
         "",
