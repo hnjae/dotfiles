@@ -12,7 +12,7 @@ return {
           layout = {
             preset = "sidebar",
             layout = {
-              width = 36, -- default 50
+              width = 31, -- default 50
             },
           },
           actions = {

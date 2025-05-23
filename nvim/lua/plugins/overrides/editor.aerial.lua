@@ -17,7 +17,7 @@ return {
       autojump = true,
 
       layout = {
-        max_width = { 30, 0.2 }, -- default: 40, 0.2
+        max_width = { 29 }, -- default: 40, 0.2
         -- min_width = 10,
 
         attach_mode = "global",
