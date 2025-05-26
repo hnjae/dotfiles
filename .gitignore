@@ -1,11 +1,14 @@
 ____*
 
 /nvim/spell/*.add.spl
+
 /yazi/plugins/*
 !/yazi/plugins/_*
 
 /**/lazygit/state.yml
 /**/navi/navi.log
 /**/cheat/cheatsheets/community
+/**/alacritty/base16.toml
+/**/qalculate/qalc.history
 
 tags
