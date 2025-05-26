@@ -1,0 +1,56 @@
+# [keyboard]
+# bindings = [{ <key>, <mods>, <mode>, <command> | <chars> | <action> },]
+#
+#   # command + t                      C-q c
+#   - { key: T, mods: Command, chars: "\x11c" } # tmux 새로운 window 생성
+
+
+[keyboard]
+bindings = [
+  { key = "-", mods = "Control|Shift", action = "DecreaseFontSize" },
+  { key = "+", mods = "Control|Shift", action = "IncreaseFontSize" },
+  { key = "_", mods = "Control|Shift", action = "DecreaseFontSize" },
+
+  ##############################################################################
+  # Tmux
+  ##############################################################################
+  # alt-n: \u001bn
+
+  # split
+  { chars = "\u001bn\u0025", key = "o", mods = "Control|Shift" },
+  { chars = "\u001bn\u0022", key = "e", mods = "Control|Shift" },
+
+  { chars = "\u001bn\u001b\u005b\u0044", key = "LBracket", mods = "Control|Shift" },
+  { chars = "\u001bno", key = "RBracket", mods = "Control|Shift" },
+  { chars = "\u001bn\u001b\u005b\u0041", key = "Up", mods = "Control|Alt" },
+  { chars = "\u001bn\u001b\u005b\u0042", key = "Down", mods = "Control|Alt" },
+  { chars = "\u001bn\u001b\u005b\u0043", key = "Right", mods = "Control|Alt" },
+  { chars = "\u001bn\u001b\u005b\u0044", key = "Left", mods = "Control|Alt" },
+
+  { chars = "\u001bnz", key = "Enter", mods = "Control|Shift" },
+
+  # tab-create
+  { chars = "\u001bnc", key = "t", mods = "Control|Shift" },
+
+  # tab-switch
+  { chars = "\u001bnn", key = "Tab", mods = "Control" },
+  { chars = "\u001bnp", key = "Tab", mods = "Control|Shift" },
+  { chars = "\u001bnn", key = "PageDown", mods = "Control" },
+  { chars = "\u001bnp", key = "PageUp", mods = "Control" },
+  { chars = "\u001bnn", key = "Left", mods = "Control|Shift" },
+  { chars = "\u001bnp", key = "Right", mods = "Control|Shift" },
+  { chars = "\u001bn0", key = "0", mods = "Alt" },
+  { chars = "\u001bn1", key = "1", mods = "Alt" },
+  { chars = "\u001bn2", key = "2", mods = "Alt" },
+  { chars = "\u001bn3", key = "3", mods = "Alt" },
+  { chars = "\u001bn4", key = "4", mods = "Alt" },
+  { chars = "\u001bn5", key = "5", mods = "Alt" },
+  { chars = "\u001bn6", key = "6", mods = "Alt" },
+  { chars = "\u001bn7", key = "7", mods = "Alt" },
+  { chars = "\u001bn8", key = "8", mods = "Alt" },
+]
+
+# [[keyboard.bindings]]
+# action = "SpawnNewInstance"
+# key = "Return"
+# mods = "Control|Shift"

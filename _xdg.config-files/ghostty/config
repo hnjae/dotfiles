@@ -1,0 +1,89 @@
+# https://ghostty.org/docs/config
+
+# NOTE: run `ghostty +show-config --default --docs` to get a list of all available options
+
+# default: xterm-ghostty
+# ssh server 가 ghostty.terminfo 를 지원하지 않는 경우에 대응
+term = "xterm-256color"
+
+################################################################################
+# Font
+################################################################################
+# run `ghostty +list-fonts` to get a list of available fonts
+# font-family = "Monospace"
+
+font-family = "MesloLGM Nerd Font"
+
+# font-family = "CommitMono Nerd Font"
+font-family = "Noto Sans Mono CJK JP"
+font-family = "Noto Sans Mono CJK KR"
+
+# font-family = "Inconsolata LGC Nerd Font Propo"
+# font-family = "CodeNewRoman Nerd Font Propo"
+# font-family = "RobotoMono Nerd Font Propo"
+# font-family = "Pretendard JP"
+# font-family = "Pretendard"
+
+# font-family-bold = "MesloLGM Nerd Font Bold"
+# font-family-bold = "D2Coding Bold"
+# font-family-bold = "Noto Sans Mono CJK JP Bold"
+
+font-size = 11
+window-inherit-font-size = true
+font-feature = "-calt" # disable ligature
+
+################################################################################
+# Style
+################################################################################
+# run `ghostty + list-themes` to get a list of available themes
+theme = GruvboxLight
+
+# default: 0.7 <version 1.0.1>
+unfocused-split-opacity=1.0
+
+cursor-style = block
+cursor-style-blink = false
+cursor-opacity = 0.8
+shell-integration-features = no-cursor
+
+# ghostty: only available on linux
+window-theme = ghostty
+
+# gtk-tabs-location = bottom
+gtk-titlebar = false
+window-padding-balance = true
+# window-padding-x = 5
+
+################################################################################
+# Key Binding / run `ghostty +list-keybinds`
+################################################################################
+
+# behave like normal terminal
+keybind = ctrl+shift+plus=increase_font_size:0.5
+keybind = ctrl+shift+minus=decrease_font_size:0.5
+keybind = ctrl+plus=unbind
+keybind = ctrl+minus=unbind
+
+# unbind toggle_fullscreen
+keybind = ctrl+enter=unbind
+# keybind = ctrl+shift+enter=toggle_split_zoom
+
+# default: ctrl-alt-(arrow)
+keybind = alt+shift+h=goto_split:previous
+keybind = alt+shift+l=goto_split:next
+keybind = alt+shift+j=goto_split:down
+keybind = alt+shift+k=goto_split:up
+keybind = alt+left=goto_split:left
+keybind = alt+down=goto_split:down
+keybind = alt+up=goto_split:up
+keybind = alt+right=goto_split:right
+
+# ctrl+hjkl: lazyvim 내부 윈도우 커서 이동
+keybind = ctrl+shift+h=goto_split:left
+keybind = ctrl+shift+j=goto_split:down
+keybind = ctrl+shift+k=goto_split:up
+keybind = ctrl+shift+l=goto_split:right
+
+# paste_from_clipboard
+keybind = shift+delete=copy_to_clipboard
+keybind = shift+insert=paste_from_clipboard
