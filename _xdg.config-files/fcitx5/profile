@@ -1,0 +1,44 @@
+[Groups/0]
+# Group Name
+Name=ko
+# Layout
+Default Layout=us-colemak_dh
+# Default Input Method
+DefaultIM=hangul
+
+[Groups/0/Items/0]
+# Name
+Name=keyboard-us-colemak_dh
+# Layout
+Layout=
+
+[Groups/0/Items/1]
+# Name
+Name=hangul
+# Layout
+Layout=us
+
+[Groups/1]
+# Group Name
+Name=ja
+# Layout
+Default Layout=us-colemak_dh
+# Default Input Method
+DefaultIM=mozc
+
+[Groups/1/Items/0]
+# Name
+Name=keyboard-us-colemak_dh
+# Layout
+Layout=
+
+[Groups/1/Items/1]
+# Name
+Name=mozc
+# Layout
+Layout=
+
+[GroupOrder]
+0=ko
+1=ja
+

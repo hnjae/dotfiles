@@ -1,0 +1,122 @@
+[user]
+	email = 42675338+hnjae@users.noreply.github.com
+	name = KIM Hyunjae
+	signingkey = /home/hnjae/.ssh/home_id_ed25519
+
+[init]
+	defaultBranch = main
+[gpg]
+	format = ssh
+
+; [gpg "ssh"]
+	# NOTE: pkgs 에서 참조하면, 시스템의 1password 가 아닐수도 있음. (home-manager 가 global pkgs 를 안쓰는 경우)
+	; program = "/run/current-system/sw/bin/op-ssh-sign"
+	; allowedSignersFile = /home/hnjae/.local/share/git-allowed-signers
+
+[commit]
+	gpgsign = true
+	template = /home/hnjae/.config/git/gitmessage.txt
+	verbose = true; -v 를 기본값으로, diff 를 gitcommit 에 넣어 줌.
+
+[core]
+	editor = "nvim"
+	pager = delta ; use delta so that we can view diff side-by-side
+	quotepath = false
+	; fsmonitor = true
+	; untrackedCache = true
+
+[color]
+	pager = true
+
+[interactive]
+	diffFilter = delta --color-only
+
+[log]
+	date = iso
+	abbrevCommit = true
+
+[push]
+	autoSetupRemote = true
+	default = simple ; https://news.hada.io/topic?id=19441
+	followTags = true ; https://news.hada.io/topic?id=19441
+
+
+[help]
+	autocorrect = prompt ; 명령어 입력 시 오타를 감지하고 제안하도록 설정하려면 다음을 사용
+
+
+[delta]
+	navigate = true	# use n and N to move between diff sections
+	; syntax-theme=base16
+	side-by-side = true
+	syntax-theme = gruvbox-light
+	; diff-so-fancy = true
+	; diff-highlight = true
+	minus-emph-style = "syntax #f9a5a5"
+	minus-style = "syntax #f6e5db"
+	minus-empty-line-marker-style = "syntax #f6e5db"
+	plus-emph-style = "syntax #c6f9a5"
+	plus-style ="syntax #f0f6db"
+	plus-empty-line-marker-style = "syntax #f0f6db"
+
+[pull]
+	ff = "only"
+
+[merge]
+	ff = false
+	defaultToUpstream = false
+	conflictstyle = zdiff3
+
+[diff]
+	; https://news.hada.io/topic?id=19441
+	colorMoved = plain
+	algorithm = histogram
+	mnemonicPrefix = true
+	renames = true
+
+[fetch]
+	prune = true
+
+[alias]
+	; o = "!git-open"
+	; up = "!git remote update -p; git merge --ff-only @{u}"
+
+	; sws = "!git branch | sed 's/^[[:space:]*]*//' | fzf --header=\"current: $(git branch --show-current)\" --preview='git l --color=always {}' | xargs git switch"
+	; a = "!git s | fzf -m --header='git add' --preview \"[ -f {-1} ] && bat --color=always --decorations=never --style=changes -- {-1}\" | cut -c 3- "
+
+	; from @alexanderaerdon from Twitter
+	; get-main-branch = !git symbolic-ref refs/remotes/origin/HEAD || echo "main" | cut -d'/' -f4
+	; fomo = !git fetch origin $(git get-main-branch) && git rebase origin/$(git get-main-branch) --autostash
+[pager]
+	log = false
+[merge]
+	tool = nvimdiff2
+
+; [column]
+; 	ui = auto   # commit 을 table 로 표기
+[branch]
+	sort = -committerdate
+[tag]
+	sort = version:refname
+
+[rebase]
+	autoSquash = true
+	autoStash = true
+	; updateRefs = true
+
+[tar.zst]
+	command = zstd -12 -T0
+
+; [rerere]   이전의 충돌 해결을 자동으로 재사용하려면 다음 설정을 사용
+; enabled = true
+; autoupdate = true
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+[url "git@github.com:"]
+	insteadOf = https://github.com/:
+# vi:ft=gitconfig
