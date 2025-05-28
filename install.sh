@@ -13,6 +13,7 @@ script_dir="$(cd -- "$(dirname -- "$0")" && pwd -P)"
 
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+XDG_STATE_HOME="${XDG_STATE_HOME:-${HOME}/.local/state}"
 
 fullSourceConfigDir="${script_dir}/${SOURCE_CONFIG_DIR}"
 fullSourceDataDir="${script_dir}/${SOURCE_DATA_DIR}"
@@ -51,44 +52,58 @@ log() {
 }
 
 # Arguments:
+#   $1: scope
+#   $2: Full path to the file/directory
+backup_path() {
+	scope="$1"
+	target_path="$2"
+
+	if [ ! -e "$target_path" ]; then
+		return
+	fi
+
+	backup_path_="${target_path}.backup.$(date --utc '+%Y%m%dT%H%M%S%Z')"
+	log info "$scope" "Existing file/directory found at ${target_path}. Backing up to ${backup_path_}."
+
+	if ! mv -n "$target_path" "$backup_path_"; then
+		log error "$scope" "Failed to move existing file/directory to backup location."
+		return 1
+	fi
+}
+
+# Arguments:
 #   $1: Full path to the source file/directory
 #   $2: Full path to the target link location
 link_item() {
 	src_path="$1"
 	target_path="$2"
-	item_name=$(basename "$src_path")
+	scope=$(basename "$src_path")
 
 	# echo "DEBUG: ${item_name}: Processing" >/dev/stderr
 
+	# -h: True if the file is a symbolic link
 	if [ -h "$target_path" ]; then
 		current_link_target=$(readlink "$target_path")
 
 		if [ "$current_link_target" = "$src_path" ]; then
-			log info "$item_name" "Link already exists and points correctly."
+			log info "$scope" "Link already exists and points correctly."
 			return 0
 		else
 			if rm "$target_path"; then
-				log info "$item_name" "Removed existing symlink."
+				log info "$scope" "Removed existing symlink."
 			else
-				log error "$item_name" "Failed to remove existing symlink: ${target_path}"
+				log error "$scope" "Failed to remove existing symlink: ${target_path}"
 				return 1
 			fi
 		fi
 	elif [ -e "$target_path" ]; then
-		backup_path="${target_path}.backup.$(date --utc '+%Y%m%dT%H%M%S%Z')"
-
-		log info "$item_name" "Existing file/directory found at ${target_path}. Backing up to ${backup_path}."
-
-		if ! mv -n "$target_path" "$backup_path"; then
-			log error "$item_name" "Failed to move existing file/directory to backup location."
-			return 1
-		fi
+		backup_path "$scope" "$target_path"
 	fi
 
 	if ln -v -s "$src_path" "$target_path" >/dev/null 2>&1; then
-		log info "$item_name" "Created symlink: ${target_path} -> ${src_path}"
+		log info "$scope" "Created symlink: ${target_path} -> ${src_path}"
 	else
-		log error "$item_name" "Failed to create symlink: ${target_path} -> ${src_path}"
+		log error "$scope" "Failed to create symlink: ${target_path} -> ${src_path}"
 		return 1
 	fi
 }
@@ -97,6 +112,7 @@ if [ ! -d "$fullSourceConfigDir" ]; then
 	log error "" "Source config directory does not exist: ${fullSourceConfigDir}"
 	exit 1
 fi
+
 if [ ! -d "$fullSourceDataDir" ]; then
 	log error "" "Source data directory does not exist: ${fullSourceDataDir}"
 	exit 1
@@ -120,16 +136,16 @@ for item in "$fullSourceConfigDir"/*; do
 	# Check if the glob matched anything and the item actually exists
 	[ -e "$item" ] || [ -L "$item" ] || continue
 
-	item_name=$(basename "$item")
-	link_item "$item" "${XDG_CONFIG_HOME}/${item_name}"
+	scope=$(basename "$item")
+	link_item "$item" "${XDG_CONFIG_HOME}/${scope}"
 done
 
 # Loop through hidden files/dirs (e.g., .gitconfig), excluding . and ..
 for item in "$fullSourceConfigDir"/.[!.]*; do
 	# Check if the glob matched anything and the item actually exists
 	[ -e "$item" ] || [ -L "$item" ] || continue
-	item_name=$(basename "$item")
-	link_item "$item" "${XDG_CONFIG_HOME}/${item_name}"
+	scope=$(basename "$item")
+	link_item "$item" "${XDG_CONFIG_HOME}/${scope}"
 done
 
 # Loop through non-hidden files/dirs
@@ -137,8 +153,8 @@ for item in "$fullSourceDataDir"/*; do
 	# Check if the glob matched anything and the item actually exists
 	[ -e "$item" ] || [ -L "$item" ] || continue
 
-	item_name=$(basename "$item")
-	link_item "$item" "${XDG_DATA_HOME}/${item_name}"
+	scope=$(basename "$item")
+	link_item "$item" "${XDG_DATA_HOME}/${scope}"
 done
 
 # Loop through hidden files/dirs (e.g., .local_share_file), excluding . and ..
@@ -146,11 +162,29 @@ for item in "$fullSourceDataDir"/.[!.]*; do
 	# Check if the glob matched anything and the item actually exists
 	[ -e "$item" ] || [ -L "$item" ] || continue
 
-	item_name=$(basename "$item")
-	link_item "$item" "${XDG_DATA_HOME}/${item_name}"
+	scope=$(basename "$item")
+	link_item "$item" "${XDG_DATA_HOME}/${scope}"
 done
 
+################################################################################
+# Neovim
+################################################################################
+
 link_item "$script_dir/nvim" "${XDG_CONFIG_HOME}/nvim"
+marker_file="${XDG_STATE_HOME}/nvim/dotfiles-bootstrapped"
+
+if command -v nvim >/dev/null 2>&1 && [ ! -f "$marker_file" ]; then
+	backup_path nvim "${XDG_STATE_HOME}/nvim"
+	backup_path nvim "${XDG_DATA_HOME}/nvim"
+	nvim --headless -c "autocmd User VeryLazy ++once Lazy install" -c "qa"
+	mkdir -p ~/.local/state/nvim && touch "$marker_file"
+fi
+
+################################################################################
+# Yazi
+################################################################################
+
+# TODO: install plugin <2025-05-28>
 link_item "$script_dir/yazi" "${XDG_CONFIG_HOME}/yazi"
 
 exit 0
