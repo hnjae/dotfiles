@@ -11,5 +11,6 @@ ____*
 /**/alacritty/base16.toml
 /**/qalculate/qalc.history
 /**/fcitx5/conf/cached_layouts
+/**/fcitx5/themes/*
 
 tags
