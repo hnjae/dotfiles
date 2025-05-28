@@ -1,0 +1,27 @@
+____*
+*_*
+
+# os
+.thumbnails
+.cache
+
+# MacOS
+.DS_Store
+
+# MS Windows
+Thumbs.db
+
+# KDE
+.directory
+
+# python
+.ropeproject
+__pycache__
+.mypy_cache
+.ruff_cache
+.pyc
+
+# nix-flake,
+.direnv
+
+# vi:ft=gitignore:

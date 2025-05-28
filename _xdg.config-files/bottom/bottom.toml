@@ -1,0 +1,127 @@
+# $schema=https://raw.githubusercontent.com/ClementTsang/bottom/refs/heads/main/schema/v0.10/bottom.json
+
+[flags]
+rate = 1500
+default_time_value = "60s"
+
+# type = "battery" panel
+battery = true
+
+# type = "net" panel
+network_use_log = true
+network_legend = "bottom-left"
+
+# type = "proc" panel
+# group_processes = true
+# process_command = true
+process_memory_as_value = true
+unnormalized_cpu = true
+enable_gpu = true
+enable_gpu_memory = true
+
+# type = "mem" panel
+memory_legend = "bottom-left"
+
+# type = "cpu" panel
+hide_avg_cpu = false
+
+[cpu]
+default = "average"
+
+[processes]
+columns = [
+  "PID",
+  "Name",
+  "CPU%",
+  "Mem%",
+  "R/s",
+  "W/s",
+  "T.Read",
+  "T.Write",
+  "User",
+  "State",
+  "GMem%",
+  "GPU%",
+]
+
+[temperature.sensor_filter]
+is_list_ignored = true
+list = [
+  # "k10temp" # AMD CPU Temp https://docs.kernel.org/hwmon/k10temp.html
+  ".*acpitz.*",       # near cpu
+  "thinkpad_hwmon.*",
+]
+regex = true
+case_sensitive = false
+whole_word = true
+
+[disk.name_filter]
+is_list_ignored = true
+list = [".*persist", ".*containers.*"]
+regex = true
+case_sensitive = false
+whole_word = true
+
+[disk.mount_filter]
+is_list_ignored = true
+list = [
+  "/run/media/.*",
+  "/nix.+",
+  "/home.+",
+  "/usr/local.+",
+  "/var/lib.+",
+  "/secrets",
+  "/persist",
+  "/steam",
+]
+regex = true
+case_sensitive = false
+whole_word = true
+
+[[row]]
+ratio = 1
+
+[[row.child]]
+ratio = 66
+type = "cpu"
+# NOTE: 6:1 ratio (Graph: CPU Table) <2025-03-06>
+
+# 1280px 에서 제대로 표기
+[[row.child]]
+ratio = 21
+type = "temp"
+
+# 1097px 에서 제대로 표기 ratio
+[[row.child]]
+ratio = 13
+type = "battery"
+
+[[row]]
+ratio = 2
+
+[[row.child]]
+ratio = 11
+
+[[row.child.child]]
+type = "mem"
+
+[[row.child.child]]
+type = "net"
+
+# 1920x1080 디스플레이에서 process의 모든 테이블 열 출력 ratio
+[[row.child]]
+ratio = 14
+
+[[row.child.child]]
+ratio = 3
+type = "proc"
+default = true
+
+[[row.child.child]]
+ratio = 1
+type = "disk"
+
+# [[row.child]]
+# ratio = 3
+# [[row.child.child]]
+# type = "temp"

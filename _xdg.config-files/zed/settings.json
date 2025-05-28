@@ -1,0 +1,36 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "assistant": {
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "o3-mini"
+    },
+    "version": "2"
+  },
+  "ui_font_size": 16,
+  "buffer_font_size": 13.4,
+  "buffer_font_family": "MesloLGM Nerd Font",
+  // "buffer_font_family": "IBM Plex Mono",
+  // "buffer_font_family": "D2Coding",
+  "buffer_font_fallbacks": [
+    "Noto Sans CJK KR",
+    "Noto Sans CJK JP"
+  ],
+  "buffer_font_weight": 500,
+  // "buffer_line_height": { "custom": 1.6 },
+  "theme": {
+    "mode": "system",
+    "light": "Gruvbox Light",
+    "dark": "Gruvbox Dark"
+  },
+  "cursor_blink": false,
+  "vim_mode": true
+}
+// vi:ft=jsonc

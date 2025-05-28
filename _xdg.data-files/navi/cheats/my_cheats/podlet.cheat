@@ -1,0 +1,7 @@
+% podlet, podman
+
+# generate from existing pod
+podlet generate pod <pod-id>
+
+# generate from compose
+podlet compose <path-to-compose-file>

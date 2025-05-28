@@ -1,0 +1,38 @@
+
+# <type>[<optionalscope>][!]: <subject>
+# BREAKING CHANGE: <description>
+# Reviewed-by: <author>
+# Refs: <676104e>, <a215868>
+#
+# [optional body]
+#
+# [optional footer(s)]
+#
+#
+# #### type
+#
+# * feat: a new feature
+# * fix: a bug fix
+# * docs: documentation only changes
+# * build: changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
+# * ci: changes of CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs)
+# * chore: a code change that external user won't see (eg: change to .gitignore file or .prettierrc file)
+# * perf: a code that improves performance
+# * refactor: a code that neither fix bug nor adds a feature. (eg: You can use this when there is semantic changes like renaming a variable/ function name)
+# * style: changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+# * test: adding new test or making changes to existing test
+# * revert: revert some commit (?)
+#
+# #### scope
+#
+# Scope must be noun and it represents the section of the section of the
+# codebase. Refer this link for example related to scope
+#
+# #### subject
+#
+# * Use imperative, present tense (eg: use "add" instead of "added" or "adds")
+# * Don't use dot(.) at end
+# * Don't capitalize first letter
+#
+# HELP: <https://www.conventionalcommits.org/en/v1.0.0/#specification>
+# vi:ft=gitcommit:
