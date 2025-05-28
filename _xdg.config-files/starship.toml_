@@ -1,0 +1,86 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = true
+follow_symlinks = false
+format = "$username$hostname$directory$git_branch$git_state$git_status$python$nix_shell$direnv$container$cmd_duration$line_break$character"
+
+[character]
+error_symbol = "[%](bold red)"
+success_symbol = "[%](bold purple)"
+vimcmd_replace_one_symbol = "[❮](purple)"
+vimcmd_replace_symbol = "[❮](purple)"
+vimcmd_visual_symbol = "[❮](yellow)"
+
+[cmd_duration]
+min_time_to_notify = 30000
+show_notifications = false
+
+[container]
+format = "via [$symbol \\[$name\\]]($style) "
+style = "bold red"
+symbol = "⬢ "
+
+[directory]
+read_only = " 󰍁"
+read_only_style = "bold red"
+style = "bold blue"
+truncation_length = 6
+
+[direnv]
+allowed_msg = " direnv"
+denied_msg = ""
+detect_files = []
+disabled = false
+format = "[([via](fg) $allowed)]($style) "
+loaded_msg = ""
+not_allowed_msg = ""
+style = "bold green"
+unloaded_msg = ""
+
+[git_branch]
+symbol = "󰘬 "
+
+[git_commit]
+tag_symbol = "󰓼"
+
+[git_status]
+ahead = "[↑${count}](yellow)"
+behind = "[↓${count}](yellow)"
+conflicted = "[=${count}](red)"
+deleted = "[×${count}](cyan)"
+diverged = "[↓${behind_count}↑${ahead_count}](yellow)"
+format = "(($conflicted)($renamed$staged)($modified$untracked)($deleted) )($ahead_behind$stashed )"
+modified = "[!${count}](blue)"
+renamed = "[»${count}](yellow)"
+staged = "[+${count}](yellow)"
+stashed = "[⚑${count}](yellow)"
+style = "cyan"
+untracked = "[?${count}](blue)"
+up_to_date = "[✔](bold green)"
+
+[hostname]
+format = "([@$hostname( $ssh_symbol)](bold yellow) in )"
+ssh_only = true
+ssh_symbol = "󰀂 "
+
+[nix_shell]
+format = "via [$symbol$state]($style) "
+heuristic = false
+impure_msg = "impure"
+pure_msg = "pure"
+style = "bold blue"
+symbol = "󱄅 "
+unknown_msg = "unknown"
+
+[python]
+detect_extensions = []
+detect_files = []
+detect_folders = []
+disabled = false
+format = "[[via](fg) 󰌠 venv]($style) "
+style = "bold yellow"
+
+[username]
+disabled = false
+format = "[$user](bold yellow)"
+style_user = "bold yellow"

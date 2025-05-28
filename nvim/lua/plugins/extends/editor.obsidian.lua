@@ -1,10 +1,13 @@
 -- <https://github.com/obsidian-nvim/obsidian.nvim>
 
+local dir_ = vim.fn.getenv("HOME") .. "/Projects/obsidian.nvim"
+
 ---@type LazySpec
 return {
   -- [1] = "obsidian-nvim/obsidian.nvim",
   -- version = false,
-  dir = vim.fn.getenv("HOME") .. "/Projects/obsidian.nvim",
+  dir = dir_,
+  enabled = vim.uv.fs_stat(dir_) ~= nil,
   cond = not vim.g.vscode,
 
   lazy = true,

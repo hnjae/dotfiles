@@ -20,9 +20,9 @@ fullSourceDataDir="${script_dir}/${SOURCE_DATA_DIR}"
 
 # --- Colors for better log readability ---
 RED='\033[0;31m'
-GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
+MAGENTA='\033[0;35m'
 NC='\033[0m' # No Color
 
 # Arguments:
@@ -43,12 +43,12 @@ log() {
 	fi
 
 	if [ "$2" != "" ]; then
-		scope="${GREEN}[$2]${NC} "
+		scope="${MAGENTA}$2${NC}: "
 	else
 		scope=""
 	fi
 
-	printf "%b%b%s\n" "$severity" "$scope" "$msg" >/dev/stderr
+	printf "%b%b%s\n" "$severity" "$scope" "$msg"
 }
 
 # Arguments:
