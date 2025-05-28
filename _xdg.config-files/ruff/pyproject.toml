@@ -39,6 +39,3 @@ ignore = [
 
 [tool.ruff.lint.pydocstyle]
 convention = "pep257"
-
-[tool.black]
-line-length = 79
