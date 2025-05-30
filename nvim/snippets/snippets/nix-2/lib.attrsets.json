@@ -43,8 +43,7 @@
         "prefix": "lalistToAttrs",
         "description": "builtins.listToAttrs :: Convert name-value pair list to attrs",
         "body": [
-            "(builtins.listToAttrs [ ${0:List} ])\"",
-            ""
+            "(builtins.listToAttrs [ ${0:List} ])"
         ]
     },
     "lagenATTRSP": {

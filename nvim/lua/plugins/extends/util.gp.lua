@@ -85,9 +85,10 @@ return {
     return vim.tbl_deep_extend("force", opts, {
       command_prompt_prefix_template = icon .. " {{agent}} ~ ",
 
-      chat_assistant_prefix = { "LLM ", "[{{agent}}]:" },
+      -- h1 은 하나만 가져야 하나, LLM 답변에 Markdown 이 들어가는 경우가 많아, 편의를 위해 h1 헤더를 여러번 사용.
+      chat_assistant_prefix = { "# LLM ", "({{agent}})" },
 
-      chat_user_prefix = "USER:",
+      chat_user_prefix = "# USER",
 
       chat_conceal_model_params = false,
       -- chat_topic_model = "";
@@ -109,6 +110,8 @@ return {
 
 - file: {{filename}}
 
+## tl;dr
+
 | Type    | Keyboard | Command          |
 | ------- | -------- | ---------------- |
 | Respond | `{{respond_shortcut}}` | `:{{cmd_prefix}}ChatRespond` |
@@ -121,6 +124,7 @@ Chats are saved automatically.
 ---
 
 {{user_prefix}}
+
 ]],
 
       style_popup_max_width = 120,
@@ -249,7 +253,7 @@ Chats are saved automatically.
       ----------------------------------------------------------------------------------------------
       hooks = {
         UnitTests = function(gp, params)
-          local template = "I have the following code from {{filename}}:\n\n"
+          local template = "I have the following code from `{{filename}}`:\n\n"
             .. "```{{filetype}}\n{{selection}}\n```\n\n"
             .. "Please respond by writing table driven unit tests for the code above."
           local agent = gp.get_command_agent()
