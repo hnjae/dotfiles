@@ -76,10 +76,10 @@ git switch <branch>
 git switch --orphan <branch-name>
 
 # switch to specific commit (== `git checkout <commit>`)
-git switch -d <commit>
+git switch --detach <commit>
 
 # switch to specific tag (== `git checkout <commit>`)
-git switch -d 'tag/<tag>'
+git switch --detach '<tag>'
 
 # make other branch to point commit (use `-f` to force) (or use `git reset --hard` on that branch)
 git branch <branch> <commit>
