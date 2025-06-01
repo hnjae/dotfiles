@@ -2,10 +2,15 @@
 
 set -eu
 
+if [ "$HOME" = "" ]; then
+	exit 0
+fi
+
 # --- Configuration ---
 
 SOURCE_CONFIG_DIR="_xdg.config-files"
 SOURCE_DATA_DIR="_xdg.data-files"
+SOURCE_HOME_DIR="_home"
 
 # --- Script Setup ---
 
@@ -17,6 +22,7 @@ XDG_STATE_HOME="${XDG_STATE_HOME:-${HOME}/.local/state}"
 
 fullSourceConfigDir="${script_dir}/${SOURCE_CONFIG_DIR}"
 fullSourceDataDir="${script_dir}/${SOURCE_DATA_DIR}"
+fullSourceHomeDir="${script_dir}/${SOURCE_HOME_DIR}"
 
 # --- Colors for better log readability ---
 RED='\033[0;31m'
@@ -49,6 +55,20 @@ log() {
 	fi
 
 	printf "%b%b%s\n" "$severity" "$scope" "$msg"
+}
+
+is_internet_connected() {
+	if [ "${_INTERNET_CONNECTED_CACHE+x}" != "" ]; then
+		return "$_INTERNET_CONNECTED_CACHE"
+	fi
+
+	if ping -c 1 1.1.1.1 >/dev/null 2>&1; then
+		_INTERNET_CONNECTED_CACHE=0 # connected
+	else
+		_INTERNET_CONNECTED_CACHE=1
+	fi
+
+	return "$_INTERNET_CONNECTED_CACHE"
 }
 
 # Arguments:
@@ -166,14 +186,31 @@ for item in "$fullSourceDataDir"/.[!.]*; do
 	link_item "$item" "${XDG_DATA_HOME}/${scope}"
 done
 
+# Loop through non-hidden files/dirs
+for item in "$fullSourceHomeDir"/*; do
+	# Check if the glob matched anything and the item actually exists
+	[ -e "$item" ] || [ -L "$item" ] || continue
+
+	scope=$(basename "$item")
+	link_item "$item" "${HOME}/${scope}"
+done
+
+# Loop through hidden files/dirs (e.g., .local_share_file), excluding . and ..
+for item in "$fullSourceHomeDir"/.[!.]*; do
+	# Check if the glob matched anything and the item actually exists
+	[ -e "$item" ] || [ -L "$item" ] || continue
+
+	scope=$(basename "$item")
+	link_item "$item" "${HOME}/${scope}"
+done
+
 ################################################################################
 # Neovim
 ################################################################################
-
 link_item "$script_dir/nvim" "${XDG_CONFIG_HOME}/nvim"
 marker_file="${XDG_STATE_HOME}/nvim/dotfiles-bootstrapped"
 
-if command -v nvim >/dev/null 2>&1 && [ ! -f "$marker_file" ]; then
+if command -v nvim >/dev/null 2>&1 && [ ! -f "$marker_file" ] && is_internet_connected; then
 	backup_path nvim "${XDG_STATE_HOME}/nvim"
 	backup_path nvim "${XDG_DATA_HOME}/nvim"
 	nvim --headless -c "autocmd User VeryLazy ++once Lazy install" -c "qa"
@@ -186,5 +223,23 @@ fi
 
 # TODO: install plugin <2025-05-28>
 link_item "$script_dir/yazi" "${XDG_CONFIG_HOME}/yazi"
+
+################################################################################
+# zsh
+################################################################################
+
+link_item "$script_dir/zsh/.zshenv" "$HOME/.zshenv"
+link_item "$script_dir/zsh/xdg.config.home" "$XDG_CONFIG_HOME/zsh"
+
+if hash zsh 2>/dev/null && is_internet_connected; then
+	log info "zsh" "initializing zmfw"
+	zsh --interactive -c "zimfw compile"
+
+	log info "zsh" "initializing zsh-abbr"
+	if [ "$ABBR_USER_ABBREVIATIONS_FILE" != "" ] && [ -f "$ABBR_USER_ABBREVIATIONS_FILE" ]; then
+		rm "$ABBR_USER_ABBREVIATIONS_FILE"
+	fi
+	zsh --interactive -c "abbr import-aliases"
+fi
 
 exit 0

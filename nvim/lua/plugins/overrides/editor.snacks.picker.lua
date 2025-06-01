@@ -16,6 +16,7 @@ return {
   ---@type snacks.Config
   opts = {
     picker = {
+      hidden = true,
       icons = {
         files = {
           dir = icons.directory,

@@ -6,6 +6,7 @@ return {
     picker = {
       sources = {
         explorer = {
+          hidden = true,
           -- auto_close = true,
 
           -- layout = { preset = "vscode" },
@@ -15,6 +16,7 @@ return {
               width = 31, -- default 50
             },
           },
+
           actions = {
             explorer_add_file = function(picker)
               local Tree = require("snacks.explorer.tree")
