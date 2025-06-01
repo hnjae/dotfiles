@@ -5,31 +5,33 @@ return {
     optional = true,
     opts = {
       linters_by_ft = {
-        zsh = { "shellcheck", "zsh", "shellharden" },
+        -- zsh = { "zsh", "shellharden" },
+        zsh = { "zsh" },
       },
     },
     specs = {
       {
         [1] = "mason.nvim",
         optional = true,
-        opts = { ensure_installed = { "shellcheck", "shellharden" } },
+        opts = { ensure_installed = { "shellharden" } },
       },
     },
   },
-  {
-    [1] = "conform.nvim",
-    optional = true,
-    opts = {
-      formatters_by_ft = {
-        zsh = { [1] = "shellcheck", [2] = "beautysh", stop_after_first = false },
-      },
-    },
-    specs = {
-      {
-        [1] = "mason.nvim",
-        optional = true,
-        opts = { ensure_installed = { "shellcheck", "beautysh" } },
-      },
-    },
-  },
+  -- TODO: set indent-size and tab option <2025-05-31>
+  -- {
+  --   [1] = "conform.nvim",
+  --   optional = true,
+  --   opts = {
+  --     formatters_by_ft = {
+  --       zsh = { "beautysh", stop_after_first = false },
+  --     },
+  --   },
+  --   specs = {
+  --     {
+  --       [1] = "mason.nvim",
+  --       optional = true,
+  --       opts = { ensure_installed = { "beautysh" } },
+  --     },
+  --   },
+  -- },
 }
