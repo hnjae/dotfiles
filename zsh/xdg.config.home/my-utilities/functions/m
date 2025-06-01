@@ -1,0 +1,8 @@
+# vi:ft=zsh
+
+# nvim -c 'execute "normal! :let no_man_maps = 1\<cr>:runtime ftplugin/man.vim\<cr>:Man '"$*"'\<cr>:wincmd o\<cr>"'
+
+nvim -c "let no_man_maps = 1" \
+  -c "runtime ftplugin/man.vim" \
+  -c "Man $*" \
+  -c "wincmd o"

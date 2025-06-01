@@ -1,0 +1,8 @@
+# vi:ft=zsh
+
+if [ -z "$*" ]; then
+  echo "Usage: git-todo <msg>"
+  return
+fi
+
+git commit --allow-empty --no-verify --no-gpg-sign -m "--wip-- TODO: $*"
