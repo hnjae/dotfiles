@@ -1,8 +1,5 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+if [[ "$TERM" != "dumb" ]] && (( $+commands[pfetch] )); then
+  PF_INFO="ascii title os host kernel uptime memory shell" pfetch
 fi
 
 #################################################
@@ -13,6 +10,10 @@ alias vi="nvim"
 case "$OSTYPE" in
   linux*)
     export LC_TIME="en_IE.UTF-8"
+
+    # temp
+    export DISABLE_LAYER_AMD_SWITCHABLE_GRAPHICS_1="1"
+    export VK_DRIVER_FILES="/run/current-system/sw/share/vulkan/icd.d/amd_icd64.json"
     ;;
   *)
     ;;
@@ -51,7 +52,15 @@ typeset -g ABBR_GET_AVAILABLE_ABBREVIATION=1
 typeset -g ABBR_LOG_AVAILABLE_ABBREVIATION=1
 
 # alias 에서 import 해서 사용할 예정이라 ~/.config 에 위치하지 않도록 한다.
-export ABBR_USER_ABBREVIATIONS_FILE="${XDG_STATE_HOME:-${HOME}/.local/state}/zsh-abbr-user"
+typeset -g ABBR_USER_ABBREVIATIONS_FILE="${XDG_STATE_HOME:-${HOME}/.local/state}/zsh-abbr-user"
+
+function abbr-update() {
+    if [[ "$ABBR_USER_ABBREVIATIONS_FILE" != "" && -f "$ABBR_USER_ABBREVIATIONS_FILE" ]]; then
+      rm "$ABBR_USER_ABBREVIATIONS_FILE"
+    fi
+
+    abbr import-aliases
+}
 
 ################################################################################
 # Bootstrap zimfw
@@ -85,7 +94,6 @@ if [[ ! "${ZIM_HOME}/init.zsh" -nt "${ZDOTDIR:-${HOME}}/.zimrc" ]]; then
     source "${ZIM_HOME}/zimfw.zsh" init -q
 fi
 
-
 # Initialize modules.
 source "${ZIM_HOME}/init.zsh"
 
@@ -95,7 +103,3 @@ source "${ZIM_HOME}/init.zsh"
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f "${ZDOTDIR:-${HOME}}/.p10k.zsh" ]] || source "${ZDOTDIR:-${HOME}}/.p10k.zsh"
-
-if (( $+commands[pfetch] )); then
-  PF_INFO="ascii title os host kernel uptime memory shell" pfetch
-fi
