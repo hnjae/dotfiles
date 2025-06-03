@@ -1,13 +1,13 @@
 ---@type LazySpec
 return {
-  [1] = "snacks.nvim",
+  [1] = "nvim-cmp",
   optional = true,
   specs = {
     {
-      [1] = "folke/lazydev.nvim",
+      [1] = "lazydev.nvim",
       optional = true,
       opts = {
-        library = { "snacks.nvim" },
+        library = { "nvim-cmp" },
       },
     },
   },

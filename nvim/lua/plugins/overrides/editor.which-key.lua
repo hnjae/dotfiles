@@ -86,7 +86,7 @@ return {
       { [1] = "<", icon = { icon = "󰉵 ", color = "green" }, mode = { "x" }, desc = "indent-left" },
       { [1] = ">", icon = { icon = "󰉶 ", color = "green" }, mode = { "x" }, desc = "indent-right" },  -- nf-md-format_indent_increase
 
-      { [1] = "gO", icon = { icon = " " }, desc = "quickfix-outline (lsp)" }, -- nf-cod-symbol_class
+      { [1] = "gO", icon = { icon = " " }, desc = "document-symbol" }, -- nf-cod-symbol_class
       { [1] = "gi", icon = { icon = "󰗧 " }, desc = "goto-last-insert" }, -- nf-md-cursor_text
       { [1] = "gx", icon = { icon = "󰏌 " }, desc = "Open with system app" }, -- nf-md-open_in_new:w
 

@@ -7,18 +7,5 @@ return {
   [1] = "LazyVim",
   optional = true,
   opts = {},
-  specs = {
-    {
-      -- https://github.com/mason-org/mason-lspconfig.nvim/releases
-      -- 14.14.0 에서 충돌 2025-05-07T09:29:03+09:00
-      [1] = "mason-lspconfig.nvim",
-      optional = true,
-      version = "1.*",
-    },
-    {
-      [1] = "mason.nvim",
-      optional = true,
-      version = "1.*",
-    },
-  },
+  specs = {},
 }
