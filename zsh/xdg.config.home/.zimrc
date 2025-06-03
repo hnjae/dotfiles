@@ -8,6 +8,10 @@
 ###############################################################################
 # Modules
 ###############################################################################
+
+zmodule direnv
+zmodule "$ZDOTDIR/my-p10k-instant-prompt" # direnv should be loaded before p10k-instant-prompt
+
 # 단순 환경변수 설정 또는 alias 설정만 있는 모듈들
 zmodule "$ZDOTDIR/my-bat"
 zmodule "$ZDOTDIR/my-cheat"
@@ -17,6 +21,7 @@ zmodule "$ZDOTDIR/my-flatpak"
 zmodule "$ZDOTDIR/my-jq"
 zmodule "$ZDOTDIR/my-nix"
 zmodule "$ZDOTDIR/my-pueue"
+zmodule "$ZDOTDIR/my-rsync"
 zmodule "$ZDOTDIR/my-systemd"
 zmodule "$ZDOTDIR/my-tmux"
 zmodule "$ZDOTDIR/my-zimfw"
@@ -25,9 +30,7 @@ zmodule "$ZDOTDIR/my-zimfw"
 zmodule environment
 zmodule input
 zmodule termtitle
-# zmodule "$ZDOTDIR/my-alacritty"
 zmodule utility
-zmodule direnv
 zmodule "$ZDOTDIR/my-lf"
 zmodule "$ZDOTDIR/my-yazi"
 zmodule "$ZDOTDIR/my-navi"
@@ -65,7 +68,6 @@ zmodule completion
 
 # > For completions to work, the above line must be added after compinit is called. You may have to rebuild your completions cache by running rm ~/.zcompdump*; compinit.
 zmodule "$ZDOTDIR/my-zoxide"
-
 
 ###############################################################################
 # Modules that must be initialized last

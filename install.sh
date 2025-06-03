@@ -233,13 +233,26 @@ link_item "$script_dir/zsh/xdg.config.home" "$XDG_CONFIG_HOME/zsh"
 
 if hash zsh 2>/dev/null && is_internet_connected; then
 	log info "zsh" "initializing zmfw"
-	zsh --interactive -c "zimfw compile"
-
-	log info "zsh" "initializing zsh-abbr"
-	if [ "$ABBR_USER_ABBREVIATIONS_FILE" != "" ] && [ -f "$ABBR_USER_ABBREVIATIONS_FILE" ]; then
-		rm "$ABBR_USER_ABBREVIATIONS_FILE"
+	TERM=dumb zsh --interactive -c '
+	if ! which zimfw >/dev/null 2>&1; then
+		return
 	fi
-	zsh --interactive -c "abbr import-aliases"
+
+	zimfw init
+	'
 fi
+
+log info "zsh" "initializing zsh-abbr"
+TERM=dumb zsh --interactive -c '
+if ! which abbr >/dev/null 2>&1; then
+	return
+fi
+
+if [[ "$ABBR_USER_ABBREVIATIONS_FILE" != "" && -f "$ABBR_USER_ABBREVIATIONS_FILE" ]]; then
+	rm "$ABBR_USER_ABBREVIATIONS_FILE"
+fi
+
+abbr import-aliases >/dev/null
+'
 
 exit 0
