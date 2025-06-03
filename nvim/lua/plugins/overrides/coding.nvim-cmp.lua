@@ -59,15 +59,5 @@ return {
     opts.sorting.priority_weight = 10
   end,
 
-  specs = {
-    {
-      [1] = "lazydev.nvim",
-      optional = true,
-      opts = {
-        library = {
-          "nvim-cmp",
-        },
-      },
-    },
-  },
+  specs = {},
 }

@@ -9,8 +9,10 @@ local fpath = string.format("lua/%s/*.lua", string.gsub(path, "%.", "/"))
 local paths =
   vim.fn.uniq(vim.fn.sort(vim.fn.globpath(vim.fn.stdpath("config"), fpath, false, true)))
 
-for _, path_ in pairs(paths) do
-  require(path .. "." .. path_:match("[^/\\]+$"):sub(1, -5))
+if type(paths) == "table" then
+  for _, path_ in pairs(paths) do
+    require(path .. "." .. path_:match("[^/\\]+$"):sub(1, -5))
+  end
 end
 
 function _G.pp(...)
@@ -23,3 +25,21 @@ function _G.pp(...)
   vim.notify(table.concat(objects, "\n"))
   return ...
 end
+
+------------------------------------------------------------------------------
+
+-- local package_path = (...)
+-- local path = package_path .. ".setups"
+-- local dir_path = vim.fs.joinpath(vim.fn.stdpath("config"), "lua", string.gsub(path, "%.", "/"))
+--
+-- local paths = vim.fs.find(function(name)
+--   return name:match("%.lua$")
+-- end, { path = dir_path, type = "file" })
+--
+-- table.sort(paths)
+--
+-- for _, file_path in ipairs(paths) do
+--   print(file_path)
+--   local module_name = vim.fs.basename(file_path):sub(1, -5)
+--   require(path .. "." .. module_name)
+-- end
