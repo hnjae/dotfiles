@@ -1,7 +1,5 @@
 -- <https://github.com/folke/snacks.nvim/blob/main/docs/picker.md#%EF%B8%8F-config>
 
-local icons = require("globals").icons
-
 local get_cwd = function()
   if vim.bo.buftype ~= "" then
     return vim.uv.cwd()
@@ -17,25 +15,6 @@ return {
   opts = {
     picker = {
       hidden = true,
-      icons = {
-        files = {
-          dir = icons.directory,
-          dir_open = icons.directory_open,
-          file = icons.file,
-        },
-
-        lsp = {
-          enabled = icons.toggle_on,
-          disabled = icons.toggle,
-        },
-
-        diagnostics = {
-          Error = icons.severity.error,
-          Warn = icons.severity.warn,
-          Info = icons.severity.info,
-          Hint = icons.severity.hint,
-        },
-      },
 
       win = {
         input = {

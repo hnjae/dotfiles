@@ -19,6 +19,7 @@ return {
           },
         },
         ---@type wk.Spec[]
+        -- <leader>o: LazyVim 14 기준 맵핑
         spec = {
           { [1] = "<Leader>o", group = "overseer", mode = { "n" }, icon = wk_icon },
         },

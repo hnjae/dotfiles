@@ -45,8 +45,7 @@ return {
 
     keys[#keys + 1] = { "<leader>cc", false }
     keys[#keys + 1] = { "<leader>cC", false }
-    keys[#keys + 1] =
-      { "grc", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "v" }, has = "codeLens" }
+    keys[#keys + 1] = { "grc", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "v" } }
     keys[#keys + 1] = {
       "grC",
       vim.lsp.codelens.refresh,
@@ -58,8 +57,7 @@ return {
     keys[#keys + 1] = { "gy", false }
     keys[#keys + 1] = { "gd", false }
     keys[#keys + 1] = { "gry", vim.lsp.buf.type_definition, desc = "Goto T[y]pe Definition" }
-    keys[#keys + 1] =
-      { "grd", vim.lsp.buf.definition, desc = "Goto Definition", has = "definition" }
+    keys[#keys + 1] = { "grd", vim.lsp.buf.definition, desc = "Goto Definition" }
 
     keys[#keys + 1] = { "gD", false }
     keys[#keys + 1] = { "grD", vim.lsp.buf.declaration, desc = "Goto Declaration" }

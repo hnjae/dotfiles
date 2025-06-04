@@ -13,10 +13,6 @@ return {
   [1] = "which-key.nvim",
   opts_extend = { "spec", "icons.rules" },
   optional = true,
-
-  dependencies = {
-    { [1] = "LazyVim", optional = true }, -- to use LazyVim's icons
-  },
   opts = {
     ---@type wk.Spec[]
     -- stylua: ignore
@@ -318,17 +314,6 @@ return {
         { pattern = "tab", icon = "󰓩 ", color = "purple" }, -- DEFAULT
         { pattern = "%f[%a]ai", icon = icons.ai, color = "green" }, -- nf-md-robot_outline
         { pattern = "ui", icon = "󰙵 ", color = "cyan" }, -- DEFAULT
-      },
-    },
-  },
-  specs = {
-    {
-      [1] = "lazydev.nvim",
-      optional = true,
-      opts = {
-        library = {
-          "which-key.nvim",
-        },
       },
     },
   },
