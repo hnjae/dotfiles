@@ -9,6 +9,8 @@ local spec = {
     local cmp = require("cmp")
     local luasnip = require("luasnip")
 
+    opts.mapping = opts.mapping or {}
+
     opts.mapping["<Tab>"] = cmp.mapping(function(fallback)
       if luasnip.expand_or_locally_jumpable() then
         luasnip.expand_or_jump()

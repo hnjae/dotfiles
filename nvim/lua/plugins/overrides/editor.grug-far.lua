@@ -77,13 +77,6 @@ return {
   end,
   specs = {
     {
-      [1] = "lazydev.nvim",
-      optional = true,
-      opts = {
-        library = { "grug-far.nvim" },
-      },
-    },
-    {
       -- provide binary
       [1] = "mason.nvim",
       optional = true,

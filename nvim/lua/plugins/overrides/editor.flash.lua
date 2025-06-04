@@ -30,18 +30,4 @@ return {
       -- autohide = true,
     },
   },
-  specs = {
-    {
-      [1] = "which-key.nvim",
-      optional = true,
-      opts = {
-        ---@type wk.IconRule[]
-        icons = {
-          rules = {
-            { plugin = "flash.nvim", icon = wk_icon.icon },
-          },
-        },
-      },
-    },
-  },
 }

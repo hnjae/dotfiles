@@ -6,10 +6,8 @@ return {
   optional = true,
   keys = {
     -- restore the default vim mappings by resetting any overrides.
-    { "[t", false },
+    { "[t", false }, -- next/previous todo comment
     { "]t", false },
-    -- { "]t", function() require("todo-comments").jump_next() end, desc = "Next Todo Comment" },
-    -- { "[t", function() require("todo-comments").jump_prev() end, desc = "Previous Todo Comment" },
   },
   opts = {
     -- follow <https://github.com/nvim-treesitter/nvim-treesitter/blob/master/queries/comment/highlights.scm>

@@ -5,11 +5,12 @@
 
 ```
 .
+├── visual/ # Tweaking aesthetic settings of default LazyVim plugins (e.g. icon)
 ├── overrides/ # Tweaking settings of default LazyVim plugins
+├── lazydev/ # Tweaking lazydev settings of default LazyVim plugins
 ├── replacements/ # Disabling LazyVim defaults and using alternatives
 └── extends/ # Adding NEW plugins/functionality not in LazyVim & not language-specific
 ├── lang/ # Language-specific settings & plugins
-└── lazydev/ # lazydev 설정 모음
 ```
 
 ### `lang`

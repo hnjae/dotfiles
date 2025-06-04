@@ -6,13 +6,5 @@ return {
   opts = {
     PATH = "append", -- Mason's bin location is put at the end of PATH
   },
-  specs = {
-    {
-      [1] = "lazydev.nvim",
-      optional = true,
-      opts = {
-        library = { "mason.nvim" },
-      },
-    },
-  },
+  specs = {},
 }
