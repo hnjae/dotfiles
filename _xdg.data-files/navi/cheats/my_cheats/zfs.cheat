@@ -115,3 +115,6 @@ sudo zpool attach <poolName> <diskName> <NewDiskPath>
 
 # diff
 zfs diff <snapshot> <snapshot>
+
+# snapshot
+sudo zfs snapshoot pool/dataset/@snapshot-name

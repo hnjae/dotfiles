@@ -16,11 +16,13 @@ return {
         insert = "<C-c>",
       },
       reset = {
-        normal = "<C-g-r>", -- default '<C-l>'
-        insert = "<C-g-r>", -- default '<C-l>'
+        -- normal = "<C-g>r", -- default '<C-l>'
+        -- insert = "<C-g>r", -- default '<C-l>'
+        normal = "<C-l>",
+        insert = "<C-l>",
       },
       submit_prompt = {
-        normal = "<CR>",
+        normal = "<Leader>as", -- default <CR>
         insert = "<C-s>",
       },
       toggle_sticky = {
