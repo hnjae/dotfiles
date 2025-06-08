@@ -4,8 +4,13 @@ tags: [ vcs ]
 ---
 
 ## git-pull vs git-fetch
+
 git-pull 은 git-fetch + git-merge 임
 git-fetch 는 `refs/remotes/<remote>` 를 업데이트.
+
+## tl;dr
+
+로컬저장소만의 `.gitignore` `.git/info/exclude`
 
 <!--
 vi:ft=markdown

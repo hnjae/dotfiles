@@ -1,6 +1,8 @@
 -- 자동으로 expandtab/shiftwidth 인식
 -- editorconfig 존중
 
+-- ftplugin/<foo>.lua 가 무시되는데?? 2025-06-08
+
 ---@type LazySpec
 return {
   [1] = "tpope/vim-sleuth",

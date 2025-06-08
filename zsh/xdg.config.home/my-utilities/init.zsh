@@ -6,6 +6,7 @@ alias sz="cd "$HOME/Projects/dotfiles/zsh/xdg.config.home""
 
 alias so="cd "${XDG_DOCUMENTS_DIR:-$HOME/Documents}/obsidian/home""
 alias et="vi "${XDG_DOCUMENTS_DIR:-$HOME/Documents}/obsidian/home/dailies/$(date +"%Y-%m-%d").md""
+alias ew="vi "${XDG_DOCUMENTS_DIR:-$HOME/Documents}/obsidian/home/weeklies/$(date +"%G-W%V").md""
 
 # cd to XDG directories
 alias sxc="cd "${XDG_CONFIG_HOME:-$HOME/.config}""

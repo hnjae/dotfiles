@@ -23,5 +23,4 @@ __pycache__
 
 # nix-flake,
 .direnv
-
 # vi:ft=gitignore:

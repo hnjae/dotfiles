@@ -1,0 +1,5 @@
+# https://github.com/JohnnyMorganz/StyLua
+# 기본값이 `noexpandtab` 에 `shiftwidth=4` <2025-06-08>
+
+indent_type = "Spaces"
+indent_width = 2

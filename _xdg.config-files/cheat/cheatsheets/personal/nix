@@ -1,9 +1,31 @@
-# escape chracter in string
+# escape character in string
+
 use `''`
 
-
 # docker-compose to nix
+
 use compose2nix
 
 # generate nix package from URLs(git)
+
 use nix-init
+
+# find specific file in nixpkgs
+
+nix-locate <file>
+
+# point specific branch in flake.nix
+
+```nix
+      url = "github:nix-community/home-manager/release-25.05";
+```
+
+# point specific tag in flake.nix
+
+```nix
+      url = "github:astro/microvm.nix/refs/tags/v0.5.0";
+```
+
+<!--
+vi:ft=markdown
+-->
