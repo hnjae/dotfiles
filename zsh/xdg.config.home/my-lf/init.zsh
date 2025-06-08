@@ -2,7 +2,7 @@ if (( ! $+commands[lf] )); then
   return
 fi
 
-function lfcd() {
+function lf() {
   local tmp
   tmp="${TMPDIR:-/tmp}/lfcd-$RANDOM"
 
@@ -17,5 +17,3 @@ function lfcd() {
     fi
   fi
 }
-
-alias lf=lfcd

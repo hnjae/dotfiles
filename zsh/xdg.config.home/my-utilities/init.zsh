@@ -3,7 +3,9 @@ alias sp="cd "$HOME/Projects""
 alias sn="cd "$HOME/Projects/nix-config""
 alias sv="cd "$HOME/Projects/dotfiles/nvim""
 alias sz="cd "$HOME/Projects/dotfiles/zsh/xdg.config.home""
+
 alias so="cd "${XDG_DOCUMENTS_DIR:-$HOME/Documents}/obsidian/home""
+alias et="vi "${XDG_DOCUMENTS_DIR:-$HOME/Documents}/obsidian/home/dailies/$(date +"%Y-%m-%d").md""
 
 # cd to XDG directories
 alias sxc="cd "${XDG_CONFIG_HOME:-$HOME/.config}""

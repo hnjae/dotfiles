@@ -2,8 +2,13 @@ if (( ! $+commands[navi] )); then
   return
 fi
 
-
 __CHEATS_DIR="${XDG_DATA_HOME:-${HOME}/.local/share}/navi/cheats/my_cheats"
+
+if [[ "$TERM" != "dumb" && $options[zle] = on ]]; then
+  $commands[navi] widget zsh >| "${0:A:h}/navi.zsh"
+  source "${0:A:h}/navi.zsh"
+fi
+
 
 function __ne_select() {
   local term="$1"
