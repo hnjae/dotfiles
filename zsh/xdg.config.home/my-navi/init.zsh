@@ -2,7 +2,7 @@ if (( ! $+commands[navi] )); then
   return
 fi
 
-__CHEATS_DIR="${XDG_DATA_HOME:-${HOME}/.local/share}/navi/cheats/my_cheats"
+__CHEATS_DIR="${XDG_DATA_HOME:-${HOME}/.local/share}/navi/cheats/my_cheats/"
 
 if [[ "$TERM" != "dumb" && $options[zle] = on ]]; then
   $commands[navi] widget zsh >| "${0:A:h}/navi.zsh"
@@ -10,7 +10,7 @@ if [[ "$TERM" != "dumb" && $options[zle] = on ]]; then
 fi
 
 
-function __ne_select() {
+function __navi_select() {
   local term="$1"
   local file
 
@@ -31,7 +31,7 @@ function navi-edit() {
   if [[ "$1" != "" ]]; then
     file="$__CHEATS_DIR/$1.cheat"
   else
-    file="$(__ne_select ".")"
+    file="$(__navi_select ".")"
     [[ "$file" == "" ]] && return
   fi
 
@@ -50,7 +50,7 @@ function navi-show() {
       term="."
     fi
 
-    file="$(__ne_select "$term")"
+    file="$(__navi_select "$term")"
     [[ "$file" == "" ]] && return
   fi
 
