@@ -1,5 +1,4 @@
 alias g='git'
-alias gaa="git add --all"
 
 typeset -g _lformat='%C(auto)%h␟%s␟%C(blue)%aI␟%C(green)%an␟%C(auto)%d␟'
 typeset -g _gformat='%C(auto)%h%C(auto)%d%s%C(blue)%aI%C(green)<%an>'
@@ -75,17 +74,18 @@ alias gbss="git bisect start"
 ######################################################
 # ga: git-add
 ######################################################
-typeset -g forgit_add="ga" # defaults
+alias ga="git add -v"
+typeset -g forgit_add="gaz" # defaults: `ga`
 alias gaa="git add --all"
 alias gapa="git add --patch"
 alias gau="git add --update"
-alias gav="git add --verbose"
+# alias gav="git add --verbose"
 
 ######################################################
 # grm: git-rm
 ######################################################
 alias grm="git rm"
-alias grmc="git rm --cached"
+alias grmc="git rm --cached" # cached: staged
 
 ######################################################
 # git-restore
@@ -162,14 +162,15 @@ typeset -g forgit_checkout_branch="gsw" # git-switch (default: `gcb`)
 alias gswc="git switch -c"
 
 ######################################################
-# git-reset (HEAD 조작)
+# git-reset (HEAD/working directory 조작)
 ######################################################
-typeset -g forgit_reset_head="grs" # default: `grh`
+typeset -g forgit_reset_head="grz" # default: `grh`
+alias gr="git reset"
 alias grhd="git reset HEAD"
 alias grH="git reset --hard"
 # forgit_checkout_tag = "grst"
 # forgit_checkout_commit = "grsco"
-      # groh                 git reset origin/$(git_current_branch) --hard
+# groh                 git reset origin/$(git_current_branch) --hard
 alias grHhd="git reset --hard HEAD"
 alias grHhd1="git reset --hard HEAD~1"
 

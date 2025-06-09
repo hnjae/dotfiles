@@ -340,10 +340,9 @@ Respond only with the improved text—no explanations, comments, or other text.
     { [1] = prefix .. "p",     mode = "n", [2] = "<cmd>%GpChatPaste split<CR>",      desc = "Paste buffer (Gp)", },
     { [1] = prefix .. "p",     mode = "v", [2] = ":<C-u>'<,'>GpChatPaste split<CR>", desc = "Paste selected (Gp)" },
 
-    { [1] = prefix .. "N",     mode = "n", [2] = "<cmd>%GpChatNew split<CR>",        desc = "NEW w. buffer (Gp)", },
+    { [1] = prefix .. "B",     mode = "n", [2] = "<cmd>%GpChatNew split<CR>",        desc = "NEW w. buffer (Gp)", },
     { [1] = prefix .. "N",     mode = "v", [2] = ":<C-u>'<,'>GpChatNew split<CR>",   desc = "NEW w. selected (Gp)" },
-
-    { [1] = prefix .. "T",     mode = "n", [2] = "<cmd>GpChatNew<CR>",   desc = "empTy-chat (Gp)" },
+    { [1] = prefix .. "N",     mode = "n", [2] = "<cmd>GpChatNew<CR>",   desc = "NEW empty-chat (Gp)" },
 
     { [1] = prefix .. "q",     mode = "n", [2] = "<cmd>%GpVnew<CR>",     desc = "Quick (edit-buffer; Gp)", },
     { [1] = prefix .. "q",     mode = "v", [2] = ":<C-u>'<,'>GpNew<CR>", desc = "Quick (edit-selected; Gp)" },

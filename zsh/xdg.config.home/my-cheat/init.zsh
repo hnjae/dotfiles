@@ -1,5 +1,8 @@
 # https://github.com/cheat/cheat
 
+# TODO: source "https://github.com/cheat/cheat/blob/master/scripts/cheat.zsh" <2025-06-08>
+# /nix/store/k1am50l3yxninsc05dgg13bs45l5x75a-cheat-4.4.2/share/zsh/site-functions/_cheat 에 위치.
+
 if (( ! $+commands[cheat] )); then
   return
 fi
