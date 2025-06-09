@@ -16,10 +16,8 @@ return {
         insert = "<C-c>",
       },
       reset = {
-        -- normal = "<C-g>r", -- default '<C-l>'
-        -- insert = "<C-g>r", -- default '<C-l>'
-        normal = "<C-l>",
-        insert = "<C-l>",
+        normal = "<Leader>aR", -- default '<C-l>'
+        insert = false, -- default '<C-l>'
       },
       submit_prompt = {
         normal = "<Leader>as", -- default <CR>
