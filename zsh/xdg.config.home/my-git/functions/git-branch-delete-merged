@@ -1,10 +1,29 @@
-# TODO: fix this <2024-12-31>
-# this does not deletes remote branch
+# this does not deletes remote branch?
 # https://gist.github.com/schacon/942899
 # https://gist.github.com/ryanc414/f7686d2c97808b41ed8518a5840e2d78
 
-echo "WIP"
-return
+# vi:ft=zsh
 
-git branch --no-color --merged | command grep -vE "^(\+|\*|\s*(master|main|develop|dev)\s*$)" | command xargs -n 1 git branch -d
+local branches=$(git branch --no-color --merged | command grep -vE "^(\+|\*|\s*(master|develop|dev)\s*$)")
 
+if [ -z "$branches" ]; then
+  echo "No merged branches to delete."
+  return 0
+fi
+
+echo "The following branches are merged and will be deleted:"
+echo "$branches"
+echo ""
+
+echo "> Delete these branches? (y/Any)"
+local ch
+read -sk 1 ch
+
+if [[ "$ch" != "y" ]]; then
+  echo "Aborted."
+  return 0
+fi
+
+echo ""
+echo "Deleting branches..."
+echo "$branches" | command xargs -n 1 git branch -d
