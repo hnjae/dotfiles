@@ -25,7 +25,7 @@ vim.keymap.del({ "n", "x" }, "<Up>")
 
 --------------------------------------------------------------------------------
 
-vim.keymap.set({ "i", "x", "n", "s" }, "<F2>", "<cmd>w<cr><C-\\><C-n>", { desc = "Save File" })
+vim.keymap.set({ "i", "x", "n", "s" }, "<F4>", "<cmd>w<cr><C-\\><C-n>", { desc = "Save File" })
 vim.keymap.set({ "n", "i", "c", "x", "s", "o", "t" }, "<F6>", function()
   vim.cmd("wincmd w")
 end, { desc = "move-cursor" })

@@ -98,7 +98,10 @@
         "body": "${LINE_COMMENT} DOCS: $0 <${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}>"
     },
     "TODO": {
-        "prefix": "todo",
+        "prefix": [
+            "tod",
+            "td"
+        ],
         "description": "Write TODO (@comment.todo)",
         "body": "${LINE_COMMENT} TODO: $0 <${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}>"
     },
@@ -121,7 +124,10 @@
         "body": "${LINE_COMMENT} HACK: $0 <${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}>"
     },
     "ERROR": {
-        "prefix": "error",
+        "prefix": [
+            "error",
+            "err"
+        ],
         "description": "Write ERROR (@comment.error)",
         "body": "${LINE_COMMENT} ERROR: $0 <${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}>"
     },

@@ -2,7 +2,7 @@
 # TODO: wrap vimv <2024-12-28>
 "$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
 
-[manager]
+[mgr]
 keymap = [
   ######################################################################################
   # DEFAULT KEY MAPPS

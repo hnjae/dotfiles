@@ -10,6 +10,12 @@ return {
     { "]t", false },
   },
   opts = {
+    highlight = {
+      before = "",
+      keyword = "fg",
+      after = "",
+    },
+
     -- follow <https://github.com/nvim-treesitter/nvim-treesitter/blob/master/queries/comment/highlights.scm>
     keywords = {
       -- @comment.note (예외: PERF, TEST - 별도 구분)
@@ -41,11 +47,6 @@ return {
       PERF = {
         icon = "󰅐 ", -- nf-md
       },
-    },
-    highlight = {
-      before = "",
-      keyword = "fg",
-      after = "",
     },
   },
 }

@@ -20,67 +20,71 @@ return {
   },
   keys = {
     {
-      [1] = "<C-A-CR>",
-      [2] = "<cmd>Obsidian follow_link vsplit<CR>",
-      desc = "follow-link-vsplit",
-      ft = "markdown",
-    },
-    -- { [1] = "<CR>", [2] = "<cmd>ObsidianFollowLink<CR>", desc = "follow-link", ft = "markdown" },
-    {
-      [1] = "<CR>",
-      [2] = function()
-        return require("obsidian").util.smart_action()
-      end,
-      desc = "smart-action",
-      ft = "markdown",
-      expr = true,
-    },
-    {
       [1] = "<A-CR>",
       [2] = "<cmd>Obsidian follow_link vsplit<CR>",
-      desc = "follow-link-vsplit",
+      desc = "follow-link-vsplit (obsidian.nvim)",
       ft = "markdown",
     },
     {
-      [1] = "<C-CR>",
+      [1] = "<C-A-CR>",
+      [2] = "<cmd>Obsidian follow_link hsplit<CR>",
+      desc = "follow-link-hsplit (obsidian.nvim)",
+      ft = "markdown",
+    },
+    {
+      [1] = "<CR>",
       [2] = "<cmd>Obsidian follow_link<CR>",
-      desc = "follow-link",
+      desc = "follow-link (obsidian.nvim)",
       ft = "markdown",
     },
-
-    -- <leader>t: neotest
-    { [1] = "<leader>tt", [2] = "<cmd>Obsidian today<CR>", desc = "today", ft = "markdown" },
-    { [1] = "<leader>tM", [2] = "<cmd>Obsidian tomorrow<CR>", desc = "tomorrow", ft = "markdown" },
     {
-      [1] = "<leader>ty",
+      -- HACK: Open in new tab, since obsidian.nvim does not support this, use defer_fn
+      [1] = "<C-CR>",
+      [2] = function()
+        vim.cmd("Obsidian follow_link hsplit")
+        vim.defer_fn(function()
+          -- tabedit % 등 시도해봤는데 안먹힘.
+          vim.api.nvim_feedkeys(
+            vim.api.nvim_replace_termcodes("<C-w><S-t>", true, false, true),
+            "n",
+            true
+          )
+        end, 100) -- at least 50 ms is required <2025-06-10>
+      end,
+      desc = "follow-link-tab-split (obsidian.nvim)",
+      ft = "markdown",
+    },
+    { [1] = "<leader>mt", [2] = "<cmd>Obsidian today<CR>", desc = "today", ft = "markdown" },
+    { [1] = "<leader>mM", [2] = "<cmd>Obsidian tomorrow<CR>", desc = "tomorrow", ft = "markdown" },
+    {
+      [1] = "<leader>my",
       [2] = "<cmd>Obsidian yesterday<CR>",
       desc = "yesterday",
       ft = "markdown",
     },
-    { [1] = "<leader>tT", [2] = "<cmd>Obsidian template<CR>", desc = "template", ft = "markdown" },
-    { [1] = "<leader>tn", [2] = "<cmd>Obsidian rename<CR>", desc = "rename", ft = "markdown" },
+    { [1] = "<leader>mT", [2] = "<cmd>Obsidian template<CR>", desc = "template", ft = "markdown" },
+    { [1] = "<leader>mn", [2] = "<cmd>Obsidian rename<CR>", desc = "rename", ft = "markdown" },
     {
-      [1] = "<leader>td",
+      [1] = "<leader>md",
       [2] = "<cmd>Obsidian dailies<CR>",
       desc = "select-dailies",
       ft = "markdown",
     },
-    { [1] = "<leader>tg", [2] = "<cmd>Obsidian tagsCR>", desc = "select-tags", ft = "markdown" },
+    { [1] = "<leader>mg", [2] = "<cmd>Obsidian tagsCR>", desc = "select-tags", ft = "markdown" },
     {
-      [1] = "<leader>tb",
+      [1] = "<leader>mb",
       [2] = "<cmd>Obsidian backlinks<CR>",
       desc = "select-backlinks",
       ft = "markdown",
     },
     {
-      [1] = "<leader>tX",
+      [1] = "<leader>mX",
       [2] = "<cmd>Obsidian open<CR>",
       desc = "open-in-obsidian",
       ft = "markdown",
     },
-    -- [2] = "<cmd>ObsidianToggleCheckbox<CR>",
     {
-      [1] = "<leader>tv",
+      [1] = "<leader>mv",
       [2] = function()
         return require("obsidian").util.toggle_checkbox({ " ", "x" })
       end,
@@ -88,7 +92,7 @@ return {
       ft = "markdown",
     },
     {
-      [1] = "<leader>tV",
+      [1] = "<leader>mV",
       [2] = function()
         return require("obsidian").util.toggle_checkbox({ "/" })
       end,
@@ -137,8 +141,10 @@ return {
         end,
       },
     },
-    -- https://github.com/Vinzent03/obsidian-advanced-uri
-    use_advanced_uri = false,
+    open = {
+      -- https://github.com/Vinzent03/obsidian-advanced-uri
+      use_advanced_uri = false,
+    },
     note_id_func = function(title)
       return title
     end,
@@ -153,25 +159,25 @@ return {
     -----------------
     -- NEOVIM CONFIG
     -----------------
-    -- legacy_commands = false, -- e.g. ObsidianFollowLink
+    legacy_commands = false, -- e.g. ObsidianFollowLink
     mappings = {
       -- override lazyvim's mapping
       ["<leader>sg"] = {
-        action = "<cmd>ObsidianSearch<CR>",
+        action = "<cmd>Obsidian search<CR>",
         opts = {
-          desc = "obsidian-search (ripgrep)",
-        },
-      },
-      ["<leader><leader>"] = {
-        action = "<cmd>ObsidianQuickSwitch<CR>",
-        opts = {
-          desc = "obsidian-quick-switch",
+          desc = "ripgrep-search (obsidian)",
         },
       },
       ["<leader>ff"] = {
-        action = "<cmd>ObsidianQuickSwitch<CR>",
+        action = "<cmd>Obsidian quick_switch<CR>",
         opts = {
-          desc = "obsidian-quick-switch",
+          desc = "quick-switch (obsidian)",
+        },
+      },
+      ["<leader><leader>"] = {
+        action = "<cmd>Obsidian quick_switch<CR>",
+        opts = {
+          desc = "quick-switch (obsidian)",
         },
       },
     },

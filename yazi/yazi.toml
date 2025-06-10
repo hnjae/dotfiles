@@ -1,5 +1,5 @@
 "$schema" = "https://yazi-rs.github.io/schemas/yazi.json"
-[manager]
+[mgr]
 linemode       = "size_and_mtime"
 sort_dir_first = false
 

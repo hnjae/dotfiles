@@ -2,6 +2,8 @@
 NOTE:
   - Replace LazyVim's terminal implementation (snacks.nvim).
 ]]
+
+-- Lazyvim 에서 "<Leader>r" 는 refactory 에 사용됨. <LazyVim 14>
 local prefix_send = "<Leader>r"
 local wk_icon = { icon = require("globals").icons.terminal, color = "red" }
 

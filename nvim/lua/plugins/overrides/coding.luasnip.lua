@@ -51,12 +51,6 @@ return {
       --   desc = "Snippets (Luasnip)",
       -- },
       {
-        [1] = "<F4>",
-        mode = "n",
-        [2] = "<cmd>EditSnippet<CR>",
-        desc = "edit-snippet (Luasnip)",
-      },
-      {
         [1] = "<Leader>fp",
         mode = "n",
         [2] = "<cmd>EditSnippet<CR>",

@@ -5,7 +5,7 @@ return {
   keys = {
     -- from <https://github.com/linkarzu/dotfiles-latest>
     {
-      "<Leader>thI",
+      "<Leader>mhI",
       function()
         -- Save the current cursor position
         local cursor_pos = vim.api.nvim_win_get_cursor(0)

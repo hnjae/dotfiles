@@ -1,7 +1,7 @@
 {
-    "Read char": {
+    "Read char (POSIX)": {
         "prefix": "sreadchar",
-        "description": "read single character from tty",
+        "description": "Read single character from tty (use read -sk in bash/zsh)",
         "body": [
             "read_char() {",
             "  stty -icanon -echo",
@@ -15,16 +15,14 @@
         "prefix": "sfilename",
         "description": "get filename without path",
         "body": [
-            "\"\\$(basename -- \"\\${$1\\}\")\"",
-            ""
+            "\"\\$(basename -- \"\\${$1\\}\")\""
         ]
     },
     "filestem": {
         "prefix": "sfilestem",
         "description": "get stem from path",
         "body": [
-            "$0=\"\\${filename%.*\\}\"",
-            ""
+            "$0=\"\\${filename%.*\\}\""
         ]
     },
     "confirm": {
@@ -59,24 +57,21 @@
             "\t\tfalse",
             "\t\t;;",
             "\tesac",
-            "\\}$0",
-            ""
+            "\\}$0"
         ]
     },
     "scriptdir": {
         "prefix": "scriptdir",
         "description": "This will NOT resolve path. This will NOT WORK if script is being sourced.",
         "body": [
-            "$0\"\\$(cd -- \"\\$(dirname -- \"$0\")\" && pwd -P)\" >/dev/null 2>&1",
-            ""
+            "$0\"\\$(cd -- \"\\$(dirname -- \"$0\")\" && pwd -P)\" >/dev/null 2>&1"
         ]
     },
     "symlink resolve": {
         "prefix": "ssymlink-resolve",
         "description": "resolve symlink",
         "body": [
-            "readlink -f -- <path>",
-            ""
+            "readlink -f -- <path>"
         ]
     },
     "datetime UTC ISO-8601 alphabetic timezone": {

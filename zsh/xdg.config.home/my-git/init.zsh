@@ -140,13 +140,15 @@ typeset -g forgit_revert_commit="grv" # default: `grc`
 ######################################################
 alias gb="git branch"
 alias gbm="git branch --move"
+
 alias gba="git branch --all"
 alias gbnm="git branch --no-merged"
 alias gbr="git branch --remote"
+alias gbdm="git-branch-delete-merged" # git-branch-delete-merged 에서 한번 더 삭제할지 물어봄.
+
 
 typeset -g forgit_branch_delete="gbd" # defaults
 alias gbd!="git branch --delete --force"
-# "gbdm" = "git-branch-delete-merged";
 
 ######################################################
 # git-tag
