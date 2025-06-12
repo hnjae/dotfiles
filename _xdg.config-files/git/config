@@ -8,10 +8,10 @@
 [gpg]
 	format = ssh
 
-; [gpg "ssh"]
+[gpg "ssh"]
+	allowedSignersFile = ~/.config/git/allowed_signers
 	# NOTE: pkgs 에서 참조하면, 시스템의 1password 가 아닐수도 있음. (home-manager 가 global pkgs 를 안쓰는 경우)
 	; program = "/run/current-system/sw/bin/op-ssh-sign"
-	; allowedSignersFile = /home/hnjae/.local/share/git-allowed-signers
 
 [commit]
 	gpgsign = true
@@ -152,4 +152,5 @@
 
 [url "git@github.com:"]
 	insteadOf = https://github.com/:
+
 # vi:ft=gitconfig
