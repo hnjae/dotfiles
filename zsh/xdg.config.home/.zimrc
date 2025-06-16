@@ -10,7 +10,7 @@
 ###############################################################################
 
 zmodule direnv
-zmodule "$ZDOTDIR/my-p10k-instant-prompt" # direnv should be loaded before p10k-instant-prompt
+# zmodule "$ZDOTDIR/my-p10k-instant-prompt" # direnv should be loaded before p10k-instant-prompt
 
 # 단순 환경변수 설정 또는 alias 설정만 있는 모듈들
 zmodule "$ZDOTDIR/my-bat"
@@ -28,9 +28,9 @@ zmodule "$ZDOTDIR/my-zimfw"
 
 # 자체 함수 선언이 있거나 복잡한 모듈
 zmodule environment
-zmodule input
+# zmodule input
 zmodule termtitle
-zmodule utility
+# zmodule utility
 zmodule "$ZDOTDIR/my-lf"
 zmodule "$ZDOTDIR/my-yazi"
 zmodule "$ZDOTDIR/my-navi"
@@ -44,13 +44,16 @@ zmodule fzf
 
 # 기타
 zmodule "$ZDOTDIR/my-utilities"
+zmodule jeffreytse/zsh-vi-mode
 
 ###############################################################################
 # Prompt
 ###############################################################################
 
 # zmodule sindresorhus/pure --source async.zsh --source pure.zsh # 내부에서 git 호출
-zmodule romkatv/powerlevel10k --use degit
+# zmodule romkatv/powerlevel10k --use degit
+# zmodule "$ZDOTDIR/my-omp"
+zmodule joke/zim-starship
 
 ###############################################################################
 # Completion

@@ -62,6 +62,13 @@ function abbr-update() {
     abbr import-aliases
 }
 
+#################################################
+# ZVM 설정
+#################################################
+ZVM_CURSOR_STYLE_ENABLED=false
+# ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+ZVM_INIT_MODE=sourcing
+
 ################################################################################
 # Bootstrap zimfw
 ################################################################################
@@ -102,4 +109,4 @@ source "${ZIM_HOME}/init.zsh"
 #################################################
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
-[[ ! -f "${ZDOTDIR:-${HOME}}/.p10k.zsh" ]] || source "${ZDOTDIR:-${HOME}}/.p10k.zsh"
+# [[ ! -f "${ZDOTDIR:-${HOME}}/.p10k.zsh" ]] || source "${ZDOTDIR:-${HOME}}/.p10k.zsh"

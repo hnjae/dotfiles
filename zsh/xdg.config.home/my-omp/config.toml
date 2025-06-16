@@ -1,0 +1,84 @@
+#:schema https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
+# console_title_template = '{{ .Shell }} in {{ .Folder }}'
+final_space = true
+version = 3
+
+[secondary_prompt]
+  background = 'transparent'
+  foreground = 'default'
+  template = '❯❯ '
+
+[transient_prompt]
+  background = 'transparent'
+  foreground_templates = ['{{if gt .Code 0}}red{{end}}', '{{if eq .Code 0}}default{{end}}']
+  template = '❯ '
+
+[[blocks]]
+  alignment = 'left'
+  newline = true
+  type = 'prompt'
+
+  [[blocks.segments]]
+    background = 'transparent'
+    foreground = 'blue'
+    style = 'plain'
+    template = '{{ .Path }}'
+    type = 'path'
+
+    [blocks.segments.properties]
+      cache_duration = 'none'
+      style = 'full'
+
+  [[blocks.segments]]
+    type = "git"
+    foreground = "magenta"
+    style = "plain"
+    template = " <default>on</> {{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}<yellow>  {{ .Working.String }}</>{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }}<yellow>  {{ .Staging.String }}</>{{ end }}{{ if gt .StashCount 0 }}<yellow>  {{ .StashCount }}</>{{ end }}"
+
+    [blocks.segments.properties]
+      fetch_status = true
+      fetch_upstream_icon = false
+      # HEAD Icon
+      branch_icon = "󰘬 "
+      no_commits_icon = "󰂕 "
+
+  [[blocks.segments]]
+    type = "nix-shell"
+    style = "text"
+    foreground = "blue"
+    background = "transparent"
+    # template = "{{ if ne .Type \"unknown\" }} <default>via</> 󱄅 {{ .Type }}{{ end }}"
+    template = " <default>via</> 󱄅 {{ .Type }}"
+
+[[blocks]]
+  overflow = 'hidden'
+  type = 'rprompt'
+
+  [[blocks.segments]]
+    background = 'transparent'
+    foreground = 'yellow'
+    style = 'plain'
+    template = '{{ .FormattedMs }}'
+    type = 'executiontime'
+
+    [blocks.segments.properties]
+      cache_duration = 'none'
+      threshold = 5000
+
+[[blocks]]
+  alignment = 'left'
+  newline = true
+  type = 'prompt'
+
+  [[blocks.segments]]
+    background = 'transparent'
+    foreground_templates = [
+      '{{if gt .Code 0}}red{{end}}',
+      '{{if eq .Code 0}}default{{end}}',
+    ]
+    style = 'plain'
+    template = "{{ if .Env._POSH_VI_MODE }}{{ .Env._POSH_VI_MODE }}{{ else }}❯{{ end }}"
+    type = 'text'
+
+    [blocks.segments.properties]
+      cache_duration = 'none'

@@ -2,11 +2,11 @@
 
 add_newline = true
 follow_symlinks = false
-format = "$username$hostname$directory$fossil_branch$fossil_metrics$git_branch$git_state$git_status$hg_branch$python$nix_shell$direnv$container$cmd_duration$line_break$character"
+format = "$username$hostname$directory$git_branch$git_state$git_status$python$nix_shell$direnv$container$cmd_duration$line_break$character"
 
 [character]
 error_symbol = "[%](bold red)"
-success_symbol = "[%](bold purple)"
+success_symbol = "[%](default)"
 vimcmd_replace_one_symbol = "[❮](purple)"
 vimcmd_replace_symbol = "[❮](purple)"
 vimcmd_visual_symbol = "[❮](yellow)"
@@ -56,7 +56,8 @@ staged = "[+${count}](yellow)"
 stashed = "[⚑${count}](yellow)"
 style = "cyan"
 untracked = "[?${count}](blue)"
-up_to_date = "[✔](bold green)"
+# up_to_date = "[✔](bold green)"
+up_to_date = "[≡](bold green)"
 
 [hostname]
 format = "([@$hostname( $ssh_symbol)](bold yellow) in )"
