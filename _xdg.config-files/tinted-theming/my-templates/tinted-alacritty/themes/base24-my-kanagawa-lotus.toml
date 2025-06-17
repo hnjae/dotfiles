@@ -1,0 +1,65 @@
+# Base24 my-kanagawa-lotus - alacritty color config
+# Scheme by rebelot
+# vi:ft=toml
+
+# COLORFGBG = if (config.base-home.base24.variant == "light") then "0;15" else "15;0";
+# [env]
+# COLORFGBG = "${COLORFGBG}"
+
+[colors]
+draw_bold_text_with_bright_colors = false
+
+# Default colors
+[colors.primary]
+background = '0xf2ecbc'
+foreground = '0x545464'
+
+# Colors the cursor will use if `custom_cursor_colors` is true
+[colors.cursor]
+text = '0xf2ecbc'
+cursor = '0x545464'
+
+[colors.normal]
+black = '0xe7dba0'
+red = '0xc84053'
+green = '0x6f894e'
+yellow = '0x77713f'
+blue = '0x4d699b'
+magenta = '0xb35b79'
+cyan = '0x597b75'
+white = '0x43436c'
+
+# Bright colors
+[colors.bright]
+black = '0x8a8980'
+red = '0xd7474b'
+green = '0x6e915f'
+yellow = '0x836f4a'
+blue = '0x6693bf'
+magenta = '0x624c83'
+cyan = '0x5e857a'
+white = '0x545464'
+
+[[colors.indexed_colors]]
+index = 16
+color = "0xde9800"
+
+[[colors.indexed_colors]]
+index = 17
+color = "0xc84053"
+
+[[colors.indexed_colors]]
+index = 18
+color = "0xe7dba0"
+
+[[colors.indexed_colors]]
+index = 19
+color = "0x8a8980"
+
+[[colors.indexed_colors]]
+index = 20
+color = "0x727169"
+
+[[colors.indexed_colors]]
+index = 21
+color = "0x43436c"

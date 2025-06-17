@@ -69,3 +69,23 @@ sync:
 
     git commit --no-verify -m '{{ hostname }}: {{ datetime("%Y-%m-%dT%H:%M:%S%Z") }}'
     git push
+
+build-tinted:
+    #!/usr/bin/env bash
+
+    # WIP: add tinted-builder-rust using nix. This is a temporary solution.
+    PATH="~/.local/state/cargo/bin:$PATH"
+
+    templates="./_xdg.config-files/tinted-theming/my-templates"
+    schemes="./_xdg.data-files/tinted-theming/tinty/custom-schemes"
+    for template in "$templates"/*; do
+        tinted-builder-rust build -s "$schemes" "$template"
+    done
+
+update-tinted:
+    #!/usr/bin/env bash
+
+    if hash tinty 2>/dev/null; then
+        tinty sync
+        tinty apply base24-my-gruvbox-light
+    fi

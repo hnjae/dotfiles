@@ -1,22 +1,11 @@
-default-scheme = "base24-gruvbox-light"
-preferred-schemes = ["base24-gruvbox-light"]
+shell = "bash -c '{}'"
+default-scheme = "base24-my-gruvbox-light"
+preferred-schemes = ["base24-my-gruvbox-light"]
+hooks = ["echo \"The current scheme is: $(tinty current)\""]
 
 [[items]]
-path = "https://github.com/tinted-theming/tinted-terminal"
-name = "tinted-terminal"
-themes-dir = "themes/alacritty"
-# hook = "cp -f %f \"${XDG_CONFIG_HOME:-$HOME/.config}\"/base16.toml"
-hook = "cp -f %f ~/.config/alacritty/base16.toml"
-
+path = "~/.config/tinted-theming/my-templates/tinted-alacritty"
+name = "alacritty"
+themes-dir = "themes"
+hook = "cp -f %f ~/.config/alacritty/_base16.toml && touch ~/.config/alacritty/alacritty.toml"
 supported-systems = ["base24"]
-
-# path = "https://github.com/aarowill/base16-alacritty"
-# themes-dir = "scripts"
-# hook = "source %f"
-
-
-# [[items]]
-# path = "https://github.com/tinted-theming/tinted-alacritty"
-# name = "tinted-alacritty"
-# themes-dir = "colors"
-# hook = "cp -f %f ~/.config/alacritty/colors.toml"

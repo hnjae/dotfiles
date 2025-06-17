@@ -1,0 +1,42 @@
+# https://github.com/tinted-theming/base24/blob/main/styling.md
+# following version 0.1.0 of base24 <2025-05-25>
+# bright-* 를 더 밝은 색으로 지정하였음. (ANSI 7/15 제외하고)
+#
+# Repository of original colorscheme: https://github.com/morhetz/gruvbox
+# Selection criteria for colors not defined by the gruvbox author (or that differ).
+# base01: gb.light1 (bg of status bar)
+# base03: gb.gray_245 (fg of comment)
+# base04: gb.dark4 (fg of status bar)
+# base10: gb.light0_soft
+# base11: gb.light0_hard
+# base09: faded_orange from gruvbox.nvim
+# base0F: dark_red from gruvbox.nvim
+system: "base24"
+name: "my-gruvbox-light"
+author: "hnjae (https://github.com/hnjae), morhetz (https://github.com/morhetz/gruvbox)"
+variant: "light"
+palette:
+  base00: "#fbf1c7" # background (gb.light0)
+  base01: "#ebdbb2" # ANSI  0 - black
+  base02: "#928374" # ANSI  8 - bright black
+  base03: "#928374" # comments
+  base04: "#7c6f64" # dark foreground
+  base05: "#3c3836" # Foreground
+  base06: "#3c3836" # ANSI 15 - bright white
+  base07: "#7c6f64" # ANSI  7 - White
+  base08: "#9d0006" # ANSI  1 - red
+  base09: "#d65d0e" # (ANSI ~3) (faded_orange)
+  base10: "#f2e5bc" # darker background
+  base11: "#f9f5d7" # darkest background
+  base0A: "#b57614" # ANSI  3 - Yellow
+  base0B: "#79740e" # ANSI  2 - green
+  base0C: "#427b58" # ANSI  6 - cyan
+  base0D: "#076678" # ANSI  4 - blue
+  base0E: "#8f3f71" # ANSI  5 - magenta
+  base0F: "#772529" # deprecated highlighting (dark red or brown)
+  base12: "#cc241d" # ANSI  9 - bright red
+  base13: "#d79921" # ANSI 11 - bright yellow
+  base14: "#98971a" # ANSI 10 - bright green
+  base15: "#689d6a" # ANSI 14 - bright cyan
+  base16: "#458588" # ANSI 12 - bright blue
+  base17: "#b16286" # ANSI 13 - bright magenta

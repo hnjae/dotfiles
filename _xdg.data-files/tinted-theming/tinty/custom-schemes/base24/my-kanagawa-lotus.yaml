@@ -1,0 +1,51 @@
+# Repository of original colorscheme: https://github.com/rebelot/kanagawa.nvim
+# MIT License
+#
+# Copyright (c) 2021 Tommaso Laurenzi
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+system: "base24"
+name: "my-kanagawa-lotus"
+author: "rebelot"
+variant: "light"
+palette:
+  base00: "#F2ECBC" # background  (lotusWhite3)
+  base01: "#E7DBA0" # ANSI  0 - black (**diff** lotusWhite4)
+  base02: "#8A8980" # ANSI  8 - bright black (lotusGray3) // will be used as comment colors in BAT_THEME=base16
+  base03: "#8A8980" # for comments (lotusGray3)
+  base04: "#727169" # (palette.fujiGray)
+  base05: "#545464" # Foreground (lotusInk1)
+  base06: "#43436C" # ANSI 15 - bright white (lotusInk2)
+  base07: "#545464" # ANSI  7 - White
+  base08: "#C84053" # ANSI  1 - red (lotusRed)
+  base09: "#DE9800" # (bright yellow) (ANSI ~11) (lotusYellow3)
+  base10: "#E5DDB0" # darker background (palette.lotusWhite2)
+  base11: "#DCD5AC" # darkest background (palette.lotusWhite1)
+  base0A: "#77713F" # ANSI  3 - yellow
+  base0B: "#6F894E" # ANSI  2 - green
+  base0C: "#597B75" # ANSI  6 - cyan
+  base0D: "#4D699B" # ANSI  4 - blue
+  base0E: "#B35B79" # ANSI  5 - purple
+  base0F: "#C84053" # (dark red/brown) (palette.lotusRed)
+  base12: "#D7474B" # ANSI  9 - bright red (lotusRed2)
+  base13: "#836F4A" # ANSI 11 - bright yellow (lotusYellow2)
+  base14: "#6E915F" # ANSI 10 - bright green
+  base15: "#5E857A" # ANSI 14 - bright cyan
+  base16: "#6693BF" # ANSI 12 - bright blue
+  base17: "#624C83" # ANSI 13 - bright purple
