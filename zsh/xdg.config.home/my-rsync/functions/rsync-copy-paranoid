@@ -1,0 +1,8 @@
+# vi:ft=zsh
+local exclude_file="${XDG_DATA_HOME:-$HOME/.local/share}/rsync-exclude"
+local exclude_opt=""
+if [[ -e "$exclude_file" ]]; then
+  exclude_opt="--exclude-from=$exclude_file"
+fi
+
+rsync --info=progress2 -h -s -aHAXWE --numeric-ids "$exclude_opt" --checksum --cc=xxh3 -- "$@"

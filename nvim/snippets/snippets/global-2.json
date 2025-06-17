@@ -2,7 +2,7 @@
     "vi-modeline": {
         "prefix": "vim",
         "description": "Vi's modeline (remove <> after inserting)",
-        "body": "${LINE_COMMENT} <vi>:ft=${1:filetype}:tw={2:textwidth<e.g.) 80>}"
+        "body": "${LINE_COMMENT} vi:ft=${1:filetype}:tw=80"
     },
     "duration-str": {
         "prefix": "durationstr",

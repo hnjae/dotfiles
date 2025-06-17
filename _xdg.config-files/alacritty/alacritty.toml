@@ -3,7 +3,7 @@
 
 [general]
 import = [
-  #  "~/.config/alacritty/base16.toml",
+  "~/.config/alacritty/base16.toml",
   "~/.config/alacritty/keybindings.toml",
 ]
 

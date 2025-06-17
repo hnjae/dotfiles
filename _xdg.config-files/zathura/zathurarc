@@ -1,0 +1,25 @@
+# vi: ft=conf
+# man 5 zathurarc
+
+map D set "first-page-column 1:1"
+
+map 0 adjust_window best-fit
+map = zoom in
+map 9 adjust_window width
+# map Down scroll page-bottom
+# map Up scroll page-top
+# map Left navigate page-top
+# map Right navigate page-top
+
+map f toggle_fullscreen
+
+# map k navigate previous
+# map h navigate next
+# map = zoom in
+# map - zoom out
+# map d toggle_page_mode
+
+set database sqlite
+
+set recolor                     "false"
+set recolor-keephue             "false"

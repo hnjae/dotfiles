@@ -3,9 +3,8 @@ if (( ! $+commands[oh-my-posh] )); then
 fi
 
 # $commands[oh-my-posh] init zsh >| ${0:A:h}/oh-my-posh.zsh
-$commands[oh-my-posh] --config ${0:A:h}/config.toml init zsh >| ${0:A:h}/oh-my-posh.zsh
-
-source ${0:A:h}/oh-my-posh.zsh
+$commands[oh-my-posh] --config ${0:A:h}/config.toml init zsh >| ${0:A:h}/_oh-my-posh.zsh
+source ${0:A:h}/_oh-my-posh.zsh
 
 # from https://github.com/JanDeDobbeleer/oh-my-posh/issues/5438
 _omp_redraw-prompt() {

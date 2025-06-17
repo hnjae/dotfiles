@@ -9,7 +9,7 @@ local denylist = {
 ---@param bufid number
 local win_set_listchars = function(winid, bufid)
   if vim.api.nvim_get_option_value("expandtab", { buf = bufid }) then
-    vim.api.nvim_set_option_value("listchars", "tab:>-,nbsp:+", { win = winid })
+    vim.api.nvim_set_option_value("listchars", "tab:⭾-,nbsp:+", { win = winid })
   else
     vim.api.nvim_set_option_value("listchars", "tab:  ,lead:_,nbsp:+", { win = winid })
   end

@@ -2,12 +2,20 @@ if (( ! $+commands[zoxide] )); then
   return
 fi
 
-$commands[zoxide] init zsh --no-cmd >| ${0:A:h}/zoxide.zsh
-
 export _ZO_EXCLUDE_DIRS="$HOME:/nix/*:/mnt/*:/proc/*:*/.git:*/.cache:*/.direnv"
 # `_ZO_FZF_OPTS` 없으면 fzf 의 extended-search 가 작동하지 않는다. fzf 를 안사용하게 되나? <2025-04-11>
 export _ZO_FZF_OPTS="${FZF_DEFAULT_OPTS} --scheme=path"
-source ${0:A:h}/zoxide.zsh
+
+local initfile="${0:A:h}/_zoxide.zsh"
+# if [[
+#   ! -e "$initfile" ||
+#   "$initfile" -ot "${commands[zoxide]}"
+# ]]; then
+#   $commands[zoxide] init zsh --no-cmd >| "$initfile"
+# fi
+$commands[zoxide] init zsh --no-cmd >| "$initfile"
+# zcompile -UR "$initfile"
+source "$initfile"
 
 function cd() {
   if [[ "$#" -gt 0 && "$1" == "--" ]]; then
