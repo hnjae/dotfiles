@@ -1,12 +1,32 @@
-# cd to commonly used directories
-alias sp='cd "$HOME/Projects"'
-alias sn='cd "$HOME/Projects/nix-config"'
-alias sv='cd "$HOME/Projects/dotfiles/nvim"'
-alias sz='cd "$HOME/Projects/dotfiles/zsh/xdg.config.home"'
+if (( ! ${+PAGER} )); then
+  if (( ${+commands[less]} )); then
+    export PAGER=less
+  else
+    export PAGER=more
+  fi
+fi
 
-alias so='cd "${XDG_DOCUMENTS_DIR:-$HOME/Documents}/obsidian/home"'
-alias et='vi "${XDG_DOCUMENTS_DIR:-$HOME/Documents}/obsidian/home/dailies/$(date +"%Y-%m-%d").md"'
-alias ew='vi "${XDG_DOCUMENTS_DIR:-$HOME/Documents}/obsidian/home/weeklies/$(date +"%G-W%V").md"'
+if (( ! ${+LESS} )); then
+  export LESS='--ignore-case --jump-target=4 --LONG-PROMPT --no-init --quit-if-one-screen --RAW-CONTROL-CHARS'
+fi
+
+# -s: file exists and is not empty
+if [[ -z "${NO_COLOR}" || "$TERM" != "dumb" || -s "${HOME}/.dir_colors" ]]; then
+  local initdircolors="${0:A:h}/_dircolors.zsh"
+
+  if [[ ! -e "$initdircolors" || "$initdircolors" -ot "${HOME}/.dir_colors" ]]; then
+    dircolors --sh "${HOME}/.dir_colors" >| "$initdircolors"
+    zcompile -UR "$initdircolors"
+  fi
+
+  source "$initdircolors"
+fi
+
+alias chmod='chmod --preserve-root -v'
+alias chown='chown --preserve-root -v'
+
+alias du="du -h"
+alias df="df -H"
 
 # cd to XDG directories
 alias sxc='cd "${XDG_CONFIG_HOME:-$HOME/.config}"'

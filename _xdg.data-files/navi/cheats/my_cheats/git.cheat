@@ -20,7 +20,7 @@ git add <path>
 git add --patch <path>
 
 # git rm only in stage area (not in working directory)
-git rm --staged <file>
+git rm --cached <file>
 
 # git diff staged
 git diff --staged

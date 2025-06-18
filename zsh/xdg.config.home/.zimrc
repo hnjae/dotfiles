@@ -20,6 +20,7 @@ zmodule "$ZDOTDIR/my-eza"
 zmodule "$ZDOTDIR/my-flatpak"
 zmodule "$ZDOTDIR/my-jq"
 zmodule "$ZDOTDIR/my-nix"
+zmodule "$ZDOTDIR/my-podman"
 zmodule "$ZDOTDIR/my-pueue"
 zmodule "$ZDOTDIR/my-rsync"
 zmodule "$ZDOTDIR/my-systemd"
@@ -30,10 +31,10 @@ zmodule "$ZDOTDIR/my-zimfw"
 zmodule environment
 # zmodule input
 zmodule termtitle
-zmodule utility
 zmodule "$ZDOTDIR/my-lf"
 zmodule "$ZDOTDIR/my-yazi"
 zmodule "$ZDOTDIR/my-navi"
+# zmodule "MichaelAquilina/zsh-you-should-use"
 zmodule olets/zsh-abbr --source zsh-abbr.plugin.zsh --use git  # it includes submodules
 
 zmodule "$ZDOTDIR/my-git" # forgit 보다 먼저 로드해야 한다.
@@ -88,4 +89,5 @@ zmodule zsh-users/zsh-history-substring-search
 # Fish-like autosuggestions for Zsh.
 zmodule zsh-users/zsh-autosuggestions
 
+##########################################################
 # vi:ft=zsh

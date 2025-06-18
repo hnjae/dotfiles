@@ -14,10 +14,12 @@ fi
 # alias -- lla='l -la'
 # alias -- lt='l --tree'
 
+# TODO: eza 는 설정파일로 관리가능한가? 너무 길어지는데. <2025-06-17>
 alias -- ls='eza'
-alias -- l='eza --long --git'
+alias -- l='eza --long --header --all --group --time-style="+%Y-%m-%d %H:%M:%S" --octal-permissions --no-permissions'
 alias -- ll='l --all'
-alias -- lt='eza --tree'
+# alias -- lt='eza --tree --all --git-ignore'
+alias -- lt=' eza -l --git -T --hyperlink --header'
 
 function _chpwd_ls() {
   timeout 0.1s eza || echo "ls timeout"

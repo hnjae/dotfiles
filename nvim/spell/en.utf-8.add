@@ -1953,3 +1953,6 @@ denylist
 allowlist
 Omnibar
 quadlet
+AWS
+Prisma
+prisma

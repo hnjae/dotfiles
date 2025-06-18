@@ -1,3 +1,5 @@
+# zmodload zsh/zprof
+
 if [[ "$TERM" != "dumb" ]] && (( $+commands[pfetch] )); then
   PF_INFO="ascii title os host kernel uptime memory shell" pfetch
 fi
@@ -10,14 +12,28 @@ alias vi="nvim"
 case "$OSTYPE" in
   linux*)
     export LC_TIME="en_IE.UTF-8"
-
-    # temp
-    export DISABLE_LAYER_AMD_SWITCHABLE_GRAPHICS_1="1"
-    export VK_DRIVER_FILES="/run/current-system/sw/share/vulkan/icd.d/amd_icd64.json"
     ;;
   *)
     ;;
 esac
+
+if [[ $(hostname) == "isis" ]]; then
+  # temp
+  export DISABLE_LAYER_AMD_SWITCHABLE_GRAPHICS_1="1"
+  export VK_DRIVER_FILES="/run/current-system/sw/share/vulkan/icd.d/amd_icd64.json"
+
+  # cd to commonly used directories
+  alias sp='cd "$HOME/Projects"'
+  alias sn='cd "$HOME/Projects/nix-config"'
+  alias st='cd "$HOME/Projects/dotfiles"'
+  alias sv='cd "$HOME/Projects/dotfiles/nvim"'
+  alias sz='cd "$HOME/Projects/dotfiles/zsh/xdg.config.home"'
+  alias so='cd "${XDG_DOCUMENTS_DIR:-$HOME/Documents}/obsidian/home"'
+
+  # det commonly used files
+  alias et='vi "${XDG_DOCUMENTS_DIR:-$HOME/Documents}/obsidian/home/dailies/$(date +"%Y-%m-%d").md"'
+  alias ew='vi "${XDG_DOCUMENTS_DIR:-$HOME/Documents}/obsidian/home/weeklies/$(date +"%G-W%V").md"'
+fi
 
 # EDITOR가 vi 이여도, ^A, ^E 같은 emacs 키는 사용할 수 있게 설정
 # https://github.com/simnalamburt/.dotfiles/blob/997d482/.zshrc
@@ -26,10 +42,13 @@ if (( $+commands[vim] )) || (( $+commands[nvim] )); then
   bindkey '^E' end-of-line
 fi
 
+#################################################
+# History 설정
+#################################################
 
 HISTSIZE="99999"
 SAVEHIST="99999"
-HISTORY_IGNORE='(cd *|s *|z *|zi *|si *|rm *|sudo rm *|trash *|trash-put *|trash-rm *|trash-empty|mv|rcp *|rmv *|pfkill *|exit|fg|bg|zfs destroy *|zpool destroy *|btrfs subvolume delete *|sudo zfs destroy *|sudo zpool destroy *|sudo btrfs subvolume delete *|* --please-destroy-my-drive *|reboot|shutdown|halt|kexec|systemctl reboot|systemctl halt|systemctl poweroff|systemctl kexec|systemctl soft-reboot|man *|just *|rg *|vi *|vim *|nvim *|nano *|which *|command *|stat *|xdg-open *|mpv *)'
+HISTORY_IGNORE='(cd *|s *|z *|zi *|si *|rm *|sudo rm *|trash *|trash-put *|trash-rm *|trash-empty|mv|pfkill *|exit|fg|bg|zfs destroy *|zpool destroy *|btrfs subvolume delete *|sudo zfs destroy *|sudo zpool destroy *|sudo btrfs subvolume delete *|* --please-destroy-my-drive *|reboot|shutdown|halt|kexec|systemctl reboot|systemctl halt|systemctl poweroff|systemctl kexec|systemctl soft-reboot|man *|just *|rg *|vi *|vim *|nvim *|nano *|which *|command *|stat *|xdg-open *|mpv *)'
 HISTFILE="${XDG_STATE_HOME:-$HOME/.local/state}/zsh_history"
 
 setopt HIST_FCNTL_LOCK
@@ -82,7 +101,7 @@ fi
 
 # Download zimfw plugin manager if missing.
 if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
-    echo "INFO: Installing ZIM."
+    echo "[INFO] Installing ZIM."
     if (( $+commands[curl] )); then
         curl -fsSL --create-dirs -o "${ZIM_HOME}/zimfw.zsh" \
             "https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh"
@@ -97,16 +116,11 @@ fi
 
 # Install missing modules, and update ${ZIM_HOME}/init.zsh if missing or outdated.
 if [[ ! "${ZIM_HOME}/init.zsh" -nt "${ZDOTDIR:-${HOME}}/.zimrc" ]]; then
-    echo "INFO: installing ZIM modules..."
+    echo "[INFO] Installing ZIM modules..."
     source "${ZIM_HOME}/zimfw.zsh" init -q
 fi
 
 # Initialize modules.
 source "${ZIM_HOME}/init.zsh"
 
-#################################################
-# Powerlevel10k
-#################################################
-
-# To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
-# [[ ! -f "${ZDOTDIR:-${HOME}}/.p10k.zsh" ]] || source "${ZDOTDIR:-${HOME}}/.p10k.zsh"
+# zprof | wl-copy
