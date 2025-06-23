@@ -29,7 +29,9 @@ return {
       -- transparent_mode = true,
       dim_inactive = false,
       underline = false,
-      terminal_colors = os.getenv("BASE16_THEME") == nil or vim.g.neovide,
+
+      -- terminal_colors = os.getenv("BASE16_THEME") == nil or vim.g.neovide,
+      terminal_colors = false,
       -- terminal_colors = true,
       palette_overrides = {
         -- light0_soft = "#f2e5bc", -- 242, 229, 188 -- HSL: 46, 67.5, 84.3
@@ -86,19 +88,6 @@ return {
     opts = {
       fzf_colors = {
         true,
-        -- ["fg"] = { "fg", "CursorLine" },
-        -- ["bg"] = { "bg", "Normal" },
-        -- ["hl"] = { "fg", "Comment" },
-        -- ["fg+"] = { "fg", "Normal", "underline" },
-        -- ["bg+"] = { "bg", { "CursorLine", "Normal" } },
-        -- ["hl+"] = { "fg", "Statement" },
-        -- ["info"] = { "fg", "PreProc" },
-        -- ["prompt"] = { "fg", "Conditional" },
-        -- ["pointer"] = { "fg", "Exception" },
-        -- ["marker"] = { "fg", "Keyword" },
-        -- ["spinner"] = { "fg", "Label" },
-        -- ["header"] = { "fg", "Comment" },
-        -- ["gutter"] = "-1",
       },
     },
   },

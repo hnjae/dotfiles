@@ -88,4 +88,5 @@ update-tinted:
     if hash tinty 2>/dev/null; then
         tinty sync
         tinty apply base24-my-gruvbox-light
+        # tinty apply base24-my-selenized-light
     fi

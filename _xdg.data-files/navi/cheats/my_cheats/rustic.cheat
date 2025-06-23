@@ -8,3 +8,6 @@ rustic restore <snapshot-id>:<path> <path>
 
 # diff
 rustic diff <snapshot-id1> <snapshot-id2>
+
+# scrub
+rustic check --read-data --read-data-subset '<n>/<m>'

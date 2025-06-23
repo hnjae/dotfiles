@@ -36,7 +36,7 @@ font-feature = "-calt" # disable ligature
 # Style
 ################################################################################
 # run `ghostty + list-themes` to get a list of available themes
-theme = GruvboxLight
+theme = _base16
 
 # default: 0.7 <version 1.0.1>
 unfocused-split-opacity=1.0

@@ -48,7 +48,7 @@ fi
 
 HISTSIZE="99999"
 SAVEHIST="99999"
-HISTORY_IGNORE='(cd *|s *|z *|zi *|si *|rm *|sudo rm *|trash *|trash-put *|trash-rm *|trash-empty|mv|pfkill *|exit|fg|bg|zfs destroy *|zpool destroy *|btrfs subvolume delete *|sudo zfs destroy *|sudo zpool destroy *|sudo btrfs subvolume delete *|* --please-destroy-my-drive *|reboot|shutdown|halt|kexec|systemctl reboot|systemctl halt|systemctl poweroff|systemctl kexec|systemctl soft-reboot|man *|just *|rg *|vi *|vim *|nvim *|nano *|which *|command *|stat *|xdg-open *|mpv *)'
+HISTORY_IGNORE='(cd *|s *|z *|zi *|si *|rm *|sudo rm *|trash *|trash-put *|trash-rm *|trash-empty|mv|pfkill *|exit|fg|bg|zfs destroy *|zpool destroy *|btrfs subvolume delete *|sudo zfs destroy *|sudo zpool destroy *|sudo btrfs subvolume delete *|* --please-destroy-my-drive *|reboot|shutdown|halt|kexec|systemctl reboot|systemctl halt|systemctl poweroff|systemctl kexec|systemctl soft-reboot|man *|just *|rg *|vi *|vim *|nvim *|nano *|which *|command *|stat *|xdg-open *|mpv *|psql *)'
 HISTFILE="${XDG_STATE_HOME:-$HOME/.local/state}/zsh_history"
 
 setopt HIST_FCNTL_LOCK

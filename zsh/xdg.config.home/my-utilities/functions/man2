@@ -1,5 +1,6 @@
 # vi:ft=zsh
 
+# TODO: manpage 가 없으면 vim 을 실행하지 말 것. <2025-06-18>
 # nvim -c 'execute "normal! :let no_man_maps = 1\<cr>:runtime ftplugin/man.vim\<cr>:Man '"$*"'\<cr>:wincmd o\<cr>"'
 
 nvim -c "let no_man_maps = 1" \

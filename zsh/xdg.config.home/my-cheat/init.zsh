@@ -22,13 +22,13 @@ if (( $+commands[fzf] )); then
 
     file="$(
       (
-        fd "$term" "$__CHEATPATH" -t f
+        fd "$term" "$__CHEATPATH" --type file
       ) |
         sed -e "s|^$__CHEATPATH||g" |
         fzf --select-1 --exit-0 --preview='bat -l sh --color=always --italic-text=always --paging=never --decorations=never '"$__CHEATPATH"'/{}'
     )"
 
-    echo "$file"
+    echo "$__CHEATPATH/$file"
   }
 
   function cheat-edit() {
