@@ -1,0 +1,62 @@
+---
+date: 2025-06-25T17:46:21+0900
+lastmod: 2025-06-25T17:46:21+0900
+syntax: markdown
+tags: []
+---
+
+#### 단축키
+
+- <https://support.mozilla.org/en-US/kb/keyboard-shortcuts-thunderbird>
+
+| Editing the message text and handling attachments |  |
+| --- | --- |
+| Copy | Ctrl + C |
+| Cut | Ctrl + X |
+| Paste | Ctrl + V |
+| Paste as quotation | Ctrl + Shift + O |
+| Paste without formatting | Ctrl + Shift + V |
+| Rewrap message text | Ctrl + R |
+| Delete selected text, attachment, table cell contents, or table | Del |
+| Delete word to the right (from cursor to end of word) | Ctrl + Del |
+| Delete word to the left (from cursor to start of word) | Ctrl + Backspace |
+| Select All (text in a message, or attachments) | Ctrl + A |
+| Select Table Cell | Ctrl + Click within cell |
+| Select Table Rows or Columns | Drag across cells of rows or columns |
+| Select Table | Ctrl + Click on table border |
+| Insert Link | Ctrl + K |
+| Discontinue Link, or Remove Links from selection | Ctrl + Shift + K |
+| Remove Named Anchors | Ctrl + Shift + R |
+| Undo | Ctrl + Z |
+| Redo | Ctrl + Y |
+| Find and Replace Text in Current Message | Ctrl + H |
+| Find Again in Current Message | Ctrl + G   F3 |
+| Find Previous in Current Message | Ctrl + Shift + G   Shift + F3 |
+| Check Spelling | Ctrl + Shift + P |
+| Attach File | Ctrl + Shift + A |
+| Rename Attachment | F2 |
+| Reorder Attachments | Alt + X *New in TB 60* |
+| Insert a line break instead of a new paragraph | Shift + Enter (Enter inserts a paragraph break in paragraph format mode.) |
+| Reorder Attachments |  |
+| Move to Top | Alt + Home |
+| Move Up | Alt + Up |
+| Move together | Alt + Left |
+| Move Down | Alt + Down |
+| Move to Bottom | Alt + End |
+| Sort (All attachments or selected attachments) | Alt + Y |
+
+| **Styling the message text**  | |
+| --- | --- |
+| Larger Font Size | Ctrl + \>   Ctrl + . |
+| Smaller Font Size | Ctrl + <   Ctrl + , |
+| Text Style **Bold** | Ctrl + B |
+| Text Style *Italics* | Ctrl + I |
+| Text Style Underline | Ctrl + U |
+| Text Style "<tt>Fixed Width</tt>" | Ctrl + T |
+| Discontinue or Remove Text Styles | Ctrl + Shift + Y   Ctrl + Space |
+| Increase Indent | Ctrl + \] |
+| Decrease Indent | Ctrl + \[ |
+
+<!--
+vi:ft=markdown:
+-->

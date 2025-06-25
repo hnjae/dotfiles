@@ -1,8 +1,10 @@
 ---
 tags: [ zen,zen-browser ]
+syntax: markdown
 ---
 
 # Basic
+
 Sidebar Width
 : `[Alt]+B`
 
@@ -34,12 +36,13 @@ Horizontal / Vertical / Grid
 : `+H` / `+V` / `+G`
 
 # Compact Mode (`[Alt]+[Ctrl]`)
+
 Toolbar / Sidebar / Compact
 : `+T` / `+S` / `+C`
 
 # Open `about:preference`
-`<S-Esc>`
 
+`<S-Esc>`
 
 <!--
 vi:ft=markdown:

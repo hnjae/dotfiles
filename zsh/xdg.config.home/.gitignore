@@ -1,3 +1,4 @@
+*.zwc
+.zcompcache
 .zcompdump
 .zcompdump.dat
-*.zwc

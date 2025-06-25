@@ -51,7 +51,7 @@
         ],
         "description": "Add images"
     },
-    "link": {
+    "link (replace URL)": {
         "prefix": [
             "link",
             "lk",
@@ -60,6 +60,15 @@
         "description": "inline link (`l`)",
         "body": [
             "[${2:label}](${1:${TM_SELECTED_TEXT:url}}) $0"
+        ]
+    },
+    "link (replace label)": {
+        "prefix": [
+            "la"
+        ],
+        "description": "inline link (`l`)",
+        "body": [
+            "[${1:${TM_SELECTED_TEXT:label}}](${2:url}) $0"
         ]
     },
     "URL": {
@@ -208,6 +217,61 @@
             "date_before: 2025-04-11",
             "lastmod: $CURRENT_YEAR-$CURRENT_MONTH-${CURRENT_DATE}T$CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND$CURRENT_TIMEZONE_OFFSET",
             "---"
+        ]
+    },
+    "!NOTE": {
+        "prefix": [
+            "note",
+            "snote"
+        ],
+        "description": "gfm syntax",
+        "body": [
+            "> [!NOTE]",
+            "> ${0:$TM_SELECTED_TEXT}"
+        ]
+    },
+    "!TIP": {
+        "prefix": [
+            "tip",
+            "stip"
+        ],
+        "description": "gfm syntax",
+        "body": [
+            "> [!TIP]",
+            "> ${0:$TM_SELECTED_TEXT}"
+        ]
+    },
+    "!IMPORTANT": {
+        "prefix": [
+            "important",
+            "simportant"
+        ],
+        "description": "gfm syntax",
+        "body": [
+            "> [!IMPORTANT]",
+            "> ${0:$TM_SELECTED_TEXT}"
+        ]
+    },
+    "!WARNING": {
+        "prefix": [
+            "warning",
+            "swarning"
+        ],
+        "description": "gfm syntax",
+        "body": [
+            "> [!WARNING]",
+            "> ${0:$TM_SELECTED_TEXT}"
+        ]
+    },
+    "!CAUTION": {
+        "prefix": [
+            "caution",
+            "scaution"
+        ],
+        "description": "gfm syntax",
+        "body": [
+            "> [!CAUTION]",
+            "> ${0:$TM_SELECTED_TEXT}"
         ]
     },
     "description block": {

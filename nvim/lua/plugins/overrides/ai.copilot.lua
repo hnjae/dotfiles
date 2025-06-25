@@ -22,6 +22,13 @@ return {
         return true
       end,
 
+      nix = function()
+        if string.match(vim.api.nvim_buf_get_name(0), "^.*-encrypted.nix") then
+          return false
+        end
+        return true
+      end,
+
       -- data-formats
       yaml = false,
       json = false,

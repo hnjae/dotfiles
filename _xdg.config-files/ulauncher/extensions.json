@@ -1,0 +1,44 @@
+{
+    "com.github.dhenriquearantes.ulauncher-string-utils": {
+        "id": "com.github.dhenriquearantes.ulauncher-string-utils",
+        "url": "https://github.com/dhenriquearantes/ulauncher-string-utils",
+        "updated_at": "2025-06-25T15:23:43.077197",
+        "last_commit": "96106a3533a099df4d5bbc567ec1871635204e58",
+        "last_commit_time": "2025-05-12T23:00:55"
+    },
+    "com.github.lazypolymath.ulauncher-fontawesome": {
+        "id": "com.github.lazypolymath.ulauncher-fontawesome",
+        "url": "https://github.com/lazypolymath/ulauncher-fontawesome",
+        "updated_at": "2025-06-25T15:23:59.035358",
+        "last_commit": "4f75f48cba8fe1f7ef78aa99d2d3a70cdab00a32",
+        "last_commit_time": "2025-04-29T06:58:49"
+    },
+    "com.github.paulocod.ulauncher-duck-tools": {
+        "id": "com.github.paulocod.ulauncher-duck-tools",
+        "url": "https://github.com/paulocod/ulauncher-duck-tools",
+        "updated_at": "2025-06-25T15:24:21.995832",
+        "last_commit": "d07c775f454eb042471ab90b6912af73a81b6df9",
+        "last_commit_time": "2025-04-15T17:08:37"
+    },
+    "com.github.balazsorban44.ulauncher-jwt-ext": {
+        "id": "com.github.balazsorban44.ulauncher-jwt-ext",
+        "url": "https://github.com/balazsorban44/ulauncher-jwt-ext",
+        "updated_at": "2025-06-25T15:25:09.123254",
+        "last_commit": "8697c5e277961ebac6eab47c955f432a62c41e23",
+        "last_commit_time": "2024-11-15T17:26:38"
+    },
+    "com.github.cyprienruffino.ulauncher-tex-to-unicode": {
+        "id": "com.github.cyprienruffino.ulauncher-tex-to-unicode",
+        "url": "https://github.com/cyprienruffino/ulauncher-tex-to-unicode",
+        "updated_at": "2025-06-25T15:26:45.852008",
+        "last_commit": "4b7508b3f68ada7539ade9d3dd42d789cf36e7f8",
+        "last_commit_time": "2023-04-12T21:12:02"
+    },
+    "com.github.ulauncher.ulauncher-emoji": {
+        "id": "com.github.ulauncher.ulauncher-emoji",
+        "url": "https://github.com/Ulauncher/ulauncher-emoji",
+        "updated_at": "2025-06-25T15:31:42.113629",
+        "last_commit": "af5806625e361ca4519b99755ccf0a557c1e894a",
+        "last_commit_time": "2025-06-03T19:05:58"
+    }
+}

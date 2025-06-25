@@ -5,10 +5,6 @@ syntax: markdown
 tags: [ vivaldi ]
 ---
 
-#### Break Mode
-
-`<C-.>`
-
 #### Keyboard cheat sheet
 
 `<C-F1>`
@@ -17,24 +13,31 @@ tags: [ vivaldi ]
 
 `<C-F11>`
 
-#### Download Panel
+#### Panel
 
-`<C-S-D>` or `<C-J>`
+Toggle Panel
+: `<F4>`
+
+Focus Panel
+: `<F7>`
+
+Download Panel
+: `<C-J>` (크롬과 같음. `<C-S-D>` 는 제거함)
 
 #### Switch tab
 
-`<C-(number)>`
-: `Alt` 키 베이스로 변경함.
+- `Alt` 키 베이스로 변경함.
+  - (기존 `<C-(number)>`)
 
 #### Tile Tabs (un-tile, Grid, Horizontal, Vertical)
 
-`<C-F{6,7,8,9}>`
+- `<C-F{6,7,8,9}>`
+- `<A-{R,G,H,V}>` 도 추가함
 
 #### Save Page
 
-- `<C-s>`
-  - : single file 로 변경
-  - : capture page to file (image) 를 `<C-S-s>` 에 할당.
+- `<C-S-s>`
+  - 위가 SingleFile
 
 #### delete browsing data
 
@@ -42,7 +45,7 @@ tags: [ vivaldi ]
 
 #### Create Bookmark
 
-- `<C-d>` 이나, unmap 함.
+- `<C-d>`
 
 #### Save open tabs as session
 

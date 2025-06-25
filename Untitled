@@ -1,0 +1,269 @@
+Keyboard shortcuts are quick key combinations that let you perform certain tasks in Thunderbird faster. For example, if you want to [archive a message](https://support.mozilla.org/en-US/kb/archived-messages), you can simply strike the "A" key rather than using the mouse to click the option in a menu. Some shortcuts can be customized or disabled with the use of an add-on.
+
+## About keyboard shortcuts
+
+In Thunderbird, keyboard shortcuts are context sensitive, which means that they vary according to the area of the Thunderbird interface that is currently "active". For example, when a message is selected in the message list, the Cut, Copy, and Paste keyboard shortcuts are disabled (because it doesn't make sense to cut and paste text into the message list). Similarly, if you select text while you are reading a message, the Copy shortcut is available, but not the Cut or Paste shortcuts (because while it makes sense to copy text from a message you are reading, it doesn't make sense to paste text into or cut text from a message you are reading).
+
+The keyboard shortcut functions themselves may vary depending on the part of the Thunderbird interface that is active. For example, if you are writing a message, the Ctrl + A keyboard shortcut selects all the text in the message. However, if a message is highlighted in the message list, Ctrl + A selects all the messages in the message list.
+
+## Shortcut keys and operating systems
+
+- On Windows and Linux, the shortcut accelerator key is usually the Ctrl key.
+- On macOS, the shortcut accelerator key is usually the Command key.
+- On macOS laptops, you must hold down the fn key to enable a function key.
+
+## List of keyboard shortcuts
+
+View Keyboard Shortcuts for:
+
+- [Message functions](https://support.mozilla.org/en-US/kb/#w_message-functions)
+- [Search and filter functions](https://support.mozilla.org/en-US/kb/#w_search-and-filter-functions)
+- [Moving around Thunderbird](https://support.mozilla.org/en-US/kb/#w_moving-around-thunderbird)
+- [Writing messages](https://support.mozilla.org/en-US/kb/#w_writing-messages)
+- [Address Book](https://support.mozilla.org/en-US/kb/#w_address-book)
+- [Calendar](https://support.mozilla.org/en-US/kb/#w_calendar)
+- [Miscellaneous](https://support.mozilla.org/en-US/kb/#w_miscellaneous)
+
+## Message functions
+
+[←](https://support.mozilla.org/en-US/kb/#w_list-of-keyboard-shortcuts) | [↑](https://support.mozilla.org/en-US/kb/#w_list-of-keyboard-shortcuts) | [→](https://support.mozilla.org/en-US/kb/#w_search-and-filter-functions)
+
+| Starting a new message |  |
+| --- | --- |
+| New message | Ctrl + N   Ctrl + M |
+| Reply to Message (sender only) | Ctrl + R |
+| Reply to All in Message (sender and all recipients) | Ctrl + Shift + R |
+| Reply to List | Ctrl + Shift + L |
+| Forward Message | Ctrl + L |
+| Edit Message as New | Ctrl + E |
+| Starting a new message in non-default format (Plain text vs. HTML) | Hold Shift while clicking any one of these buttons:   Write, Reply, Reply All, Reply List, or Forward;   ***or*** *Right-click* existing message, then hold Shift while choosing any one of the following from the context menu:   , , , or . |
+| *For keyboard shortcuts during message composition, see [Writing Messages](https://support.mozilla.org/en-US/kb/#w_writing-messages).* |  |
+| Receiving and reading messages |  |
+| Get New Messages for Current Account | F5   F9 |
+| Get New Messages for All Accounts | Shift + F5   Shift + F9 |
+| Open message (in new window or tab) | Ctrl + O   Enter |
+| Open message or folder in a new tab in the background | *Middle-click* the message or folder, ***or***   *Right-click* the message or folder, then choose or from the context menu |
+| Open message or folder in a new tab in the foreground | Shift + *Middle-click* the message or folder, ***or***   *Right-click* the message or folder, then hold Shift while choosing or from the context menu |
+| Open message in conversation | Ctrl + Shift + O |
+| Zoom In | Ctrl + +   Ctrl + \=   Ctrl + *scroll wheel up* |
+| Zoom Out | Ctrl + \-   Ctrl + *scroll wheel down* |
+| Reset Zoom | Ctrl + 0 (zero) |
+| Expand Collapsed Thread | → |
+| Collapse Expanded Thread | ← |
+| Expand All Threads | \* |
+| Collapse All Threads | \\ |
+| Newsgroups: Ignore or Unignore Thread | K |
+| Newsgroups: Ignore or Unignore Subthread | Shift + K |
+| Newsgroups: Watch Thread | W |
+| *For keyboard shortcuts to move between your messages, see [Moving around Thunderbird](https://support.mozilla.org/en-US/kb/#w_moving-around-thunderbird).* |  |
+| Managing your messages |  |
+| Print message or selected message text | Ctrl + P |
+| Save Message as File | Ctrl + S |
+| View Message Source | Ctrl + U |
+| Select All (messages, text, or attachments) | Ctrl + A |
+| Select Thread | Ctrl + Shift + A |
+| Toggle [Caret browsing](https://support.mozilla.org/en-US/kb/Unable%20to%20scroll%20with%20arrow%20keys) (select text with keyboard) | F7 |
+| Copy selected text | Ctrl + C |
+| Cut selected search text | Ctrl + X |
+| Paste text into search or filter fields | Ctrl + V |
+| Select multiple adjacent messages   (a continuous set of messages) | Select the **first** message of your intended selection, and then   ***either*** Shift + *Click* on the **last** message of your selection,   ***or*** hold Shift while using any of the following movement keys to expand your selection: ↓, ↑, Page Down, Page Up, End, or Home. |
+| Select multiple non-adjacent messages   (several separate messages) | Select any message of your intended selection and then   Ctrl + *Click* on each message that you want to add to your selection. |
+| Copy message to another folder | Hold Ctrl while *dragging* message to destination folder (release mouse button before releasing Ctrl). |
+| Move message to another folder | *Drag* message to destination folder. |
+| Move/Copy message to previous target folder Again | Ctrl + Shift + M |
+| [Archive Message](https://support.mozilla.org/en-US/kb/archived-messages) | A |
+| Delete message, folder, attachment, or selected search text | Del |
+| Delete message bypassing trash (no Undo!) | Shift + Del |
+| Undo | Ctrl + Z |
+| Redo | Ctrl + Y |
+| Rename Folder | F2 |
+| [Tagging](https://support.mozilla.org/en-US/kb/message-tags) and marking your messages |  |
+| Add/Remove Tag | 1 to 9 |
+| Remove All Tags from Message | 0 (zero) |
+| Mark Message as Read/Unread | M |
+| Mark Thread as Read | R |
+| Mark All Read | Shift + C |
+| Mark as Read By Date | C |
+| Mark as Junk | J |
+| Mark as Not Junk | Shift + J |
+| Add/Remove Star | S |
+
+[←](https://support.mozilla.org/en-US/kb/#w_message-functions) | [↑](https://support.mozilla.org/en-US/kb/#w_list-of-keyboard-shortcuts) | [→](https://support.mozilla.org/en-US/kb/#w_moving-around-thunderbird)
+
+| Finding messages |  |
+| --- | --- |
+| [Search All Messages](https://support.mozilla.org/en-US/kb/global-search) (global fulltext search in all accounts) | Ctrl + K |
+| [Quick Filter](https://support.mozilla.org/en-US/kb/quick-filter-toolbar) (search messages in current folder or view) | Ctrl + Shift + K |
+| Clear current Quick Filter; hide Quick Filter Bar | Esc (as often as needed) |
+| Search Messages (advanced search in folder) | Ctrl + Shift + F |
+| Finding text in the current message |  |
+| Find Text in Current Message | Ctrl + F |
+| Find Again in Current Message | Ctrl + G   F3 |
+| Find Previous in Current Message | Ctrl + Shift + G   Shift + F3 |
+| *For a history of search shortcuts across different versions   of Thunderbird, see [Keyboard Shortcuts for Searching](https://support.mozilla.org/en-US/kb/keyboard-shortcuts-searching).* |  |
+
+## Moving around Thunderbird
+
+[←](https://support.mozilla.org/en-US/kb/#w_search-and-filter-functions) | [↑](https://support.mozilla.org/en-US/kb/#w_list-of-keyboard-shortcuts) | [→](https://support.mozilla.org/en-US/kb/#w_writing-messages)
+
+| Moving between messages |  |
+| --- | --- |
+| Go to Mail Start Page | Alt + Home |
+| Scroll Down Current Message, then Go to Next Unread Message | Space |
+| Go to Next Message | F |
+| Go to Previous Message | B |
+| Go to Next Unread Message | N |
+| Go to Previous Unread Message | P |
+| Go to Next Unread Thread (and mark current thread as read) | T |
+| Go to Next Viewed Message | \] |
+| Go to Previous Viewed Message | \[ |
+| Controlling Thunderbird windows and tabs |  |
+| Move to next UI element | Tab |
+| Move to previous UI element | Shift + Tab |
+| Move to next main UI area   In the Mail tab, quickly switch between Folder Pane, Message List, Message Pane, and Spaces Toolbar (forwards). | F6 |
+| Move selected [Message List Pane](https://support.mozilla.org/en-US/kb/getting-started-thunderbird-main-window-supernova#w_7-message-list-pane) column e.g. Subject to the right   Applies to the Table View of the Mail Tab; does not apply to Card View. | Alt + Right |
+| Move selected [Message List Pane](https://support.mozilla.org/en-US/kb/getting-started-thunderbird-main-window-supernova#w_7-message-list-pane) column e.g. Subject to the left   Applies to the Table View of the Mail Tab; does not apply to Card View. | Alt + Left |
+| Move to previous main UI area   In the Mail tab, quickly switch between Folder Pane, Message List, Message Pane, and Spaces Toolbar (backwards). | Shift + F6 |
+| Next Tab | Ctrl + Tab   Ctrl + Page Down |
+| Previous Tab | Ctrl + Shift + Tab   Ctrl + Page Up |
+| Mail & Newsgroups Home Tab (Tab 1) | Alt + 1 |
+| Tab 2 to 8 | Alt + 2 to 8 |
+| Last Tab | Alt + 9 |
+| Address Book | Ctrl + Shift + B |
+| Saved Files | Ctrl + J |
+| Help | F1 |
+| Developer Tools | Ctrl + Shift + I |
+| Toggle Message Pane | F8 |
+| Toggle Menu Bar (if hidden) |  |
+| Show context menu |  |
+| Minimize current window |  |
+| Hide Thunderbird (Mac only) |  |
+| Hide Other Windows (Mac only) |  |
+| Close window or tab | Ctrl + W |
+| Undo close tab (restore and go to most recently closed tab) | Ctrl + Shift + T |
+| Quit Thunderbird (Exit Application) | Ctrl + Q |
+
+## Writing messages
+
+[←](https://support.mozilla.org/en-US/kb/#w_moving-around-thunderbird) | [↑](https://support.mozilla.org/en-US/kb/#w_list-of-keyboard-shortcuts) | [→](https://support.mozilla.org/en-US/kb/#w_address-book)
+
+| Creating, saving, and sending a message |  |
+| --- | --- |
+| New message (*see [Starting a new message](https://support.mozilla.org/en-US/kb/#w_message-functions)*) | Ctrl + N   Ctrl + M |
+| Save Draft | Ctrl + S |
+| Print Draft | Ctrl + P |
+| Send Message Now | Ctrl + Enter |
+| Send Message Later | Ctrl + Shift + Enter |
+| Controlling the compose window |  |
+| Toggle Contacts Sidebar | F9 |
+| Move to next main UI element | F6   Ctrl + Tab |
+| Move to previous main UI element | Shift + F6   Ctrl + Shift + Tab |
+| Zoom In | Ctrl + +   Ctrl + \=   Ctrl + *scroll wheel up* |
+| Zoom Out | Ctrl + \-   Ctrl + *scroll wheel down* |
+| Reset Zoom | Ctrl + 0 (zero) |
+| Toggle Attachment Pane | Alt + M *New in TB 60* |
+| Show Main Mail Window (Mail & Newsgroups) | Ctrl + 1 |
+| *Most of the common [keyboard shortcuts for   controlling a Thunderbird window](https://support.mozilla.org/en-US/kb/#w_moving-around-thunderbird) can also be used   in the compose window.* |
+| Editing the message text and handling attachments |  |
+| Copy | Ctrl + C |
+| Cut | Ctrl + X |
+| Paste | Ctrl + V |
+| Paste as quotation | Ctrl + Shift + O |
+| Paste without formatting | Ctrl + Shift + V |
+| Rewrap message text | Ctrl + R |
+| Delete selected text, attachment, table cell contents, or table | Del |
+| Delete word to the right (from cursor to end of word) | Ctrl + Del |
+| Delete word to the left (from cursor to start of word) | Ctrl + Backspace |
+| Select All (text in a message, or attachments) | Ctrl + A |
+| Select Table Cell | Ctrl + Click within cell |
+| Select Table Rows or Columns | Drag across cells of rows or columns |
+| Select Table | Ctrl + Click on table border |
+| Insert Link | Ctrl + K |
+| Discontinue Link, or Remove Links from selection | Ctrl + Shift + K |
+| Remove Named Anchors | Ctrl + Shift + R |
+| Undo | Ctrl + Z |
+| Redo | Ctrl + Y |
+| Find and Replace Text in Current Message | Ctrl + H |
+| Find Again in Current Message | Ctrl + G   F3 |
+| Find Previous in Current Message | Ctrl + Shift + G   Shift + F3 |
+| Check Spelling | Ctrl + Shift + P |
+| Attach File | Ctrl + Shift + A |
+| Rename Attachment | F2 |
+| Reorder Attachments | Alt + X *New in TB 60* |
+| Insert a line break instead of a new paragraph | Shift + Enter (Enter inserts a paragraph break in paragraph format mode.) |
+| Reorder Attachments |  |
+| Move to Top | Alt + Home |
+| Move Up | Alt + Up |
+| Move together | Alt + Left |
+| Move Down | Alt + Down |
+| Move to Bottom | Alt + End |
+| Sort (All attachments or selected attachments) | Alt + Y |
+| Styling the message text |  |
+| Larger Font Size | Ctrl + \>   Ctrl + . |
+| Smaller Font Size | Ctrl + <   Ctrl + , |
+| Text Style **Bold** | Ctrl + B |
+| Text Style *Italics* | Ctrl + I |
+| Text Style Underline | Ctrl + U |
+| Text Style "<tt>Fixed Width</tt>" | Ctrl + T |
+| Discontinue or Remove Text Styles | Ctrl + Shift + Y   Ctrl + Space |
+| Increase Indent | Ctrl + \] |
+| Decrease Indent | Ctrl + \[ |
+
+## Address Book
+
+[←](https://support.mozilla.org/en-US/kb/#w_writing-messages) | [↑](https://support.mozilla.org/en-US/kb/#w_list-of-keyboard-shortcuts) | [→](https://support.mozilla.org/en-US/kb/#w_calendar)
+
+| New Address Book Contact | Ctrl + N |
+| --- | --- |
+| Write new message to selected contact(s) | Ctrl + M |
+| Addressbook Quick Filter |  |
+| Addressbook Advanced Search | Ctrl + Shift + F |
+| Edit properties of selected contact or address book | Ctrl + I |
+| Select all (contacts, or search text) | Ctrl + A |
+| Print selected contacts | Ctrl + P |
+| Delete (selected text, contact, or address book) | Del |
+| Show Main Mail Window (Mail & Newsgroups) | Ctrl + 1 |
+
+## Calendar
+
+[←](https://support.mozilla.org/en-US/kb/#w_address-book) | [↑](https://support.mozilla.org/en-US/kb/#w_list-of-keyboard-shortcuts) | [→](https://support.mozilla.org/en-US/kb/#w_miscellaneous)
+
+| Get started |  |
+| --- | --- |
+| Show or hide Today Pane | F11 |
+| Calendar tab | Ctrl + 3 |
+| Tasks tab | Ctrl + 4 |
+| Mail & Newsgroups Home Tab (Tab 1) | Ctrl + 1   Alt + 1 |
+| New Event | Ctrl + I |
+| New Task | Ctrl + D |
+| Calendar Tab |  |
+| Show Events Filter bar |  |
+| Filter Events | ([Bug 449018](https://bugzilla.mozilla.org/show_bug.cgi?id=449018)) |
+| Clear current Events Filter | Esc |
+| Go to Today | Alt + End |
+| Go to Next Day/Week/Multiweek/Month | \] |
+| Go to Previous Day/Week/Multiweek/Month | \[ |
+| Tasks Tab |  |
+| Filter Tasks | Ctrl + Shift + K |
+| Clear current Tasks Filter | Esc |
+| General Functions |  |
+| Copy (selected events, tasks, or text) | Ctrl + C |
+| Cut (selected events, tasks, or text) | Ctrl + X |
+| Paste | Ctrl + V |
+| Delete (selected events, tasks, or text) | Del |
+| Undo | Ctrl + Z |
+| Redo | Ctrl + Y |
+| Print | Ctrl + P |
+| *Furthermore, most of the keyboard shortcuts for   [moving around Thunderbird](https://support.mozilla.org/en-US/kb/#w_moving-around-thunderbird) still apply.* |
+
+## Miscellaneous
+
+[←](https://support.mozilla.org/en-US/kb/#w_calendar) | [↑](https://support.mozilla.org/en-US/kb/#w_list-of-keyboard-shortcuts) |
+
+| Clear History | Ctrl + Shift + Del |
+| --- | --- |
+
+  
+Share this article: [https://mzl.la/3vRZryc](https://mzl.la/3vRZryc)
+
+These fine people helped write this article:

@@ -179,18 +179,27 @@ alias grHhd1="git reset --hard HEAD~1"
 ############################################################################
 # git-stash
 ############################################################################
-typeset -g forgit_stash_show="gss" # default: `gss`
-typeset -g forgit_stash_push="gsp" # default: `gsp`
-alias gsu="git stash --include-untracked" # -u: --include-untracked
-alias gsl="git stash list"
-alias gso="git stash pop"
 
-# gsta                 git stash save
-# gstaa                git stash apply
-# gstc                 git stash clear
-# gstd                 git stash drop
+alias gsp="git stash push --include-untracked --message" # -u: --include-untracked
+typeset -g forgit_stash_push="gspz" # default: `gsp`
+alias gsl="git stash list"
+alias gss="git stash show --include-untracked"
+alias gssp="git stash show --include-untracked --patch"
+typeset -g forgit_stash_show="gssz" # default: `gss`
+alias gsG="git stash pop" # match lazygit
+alias gsA="git stash apply"
+alias gsD="git stash drop"
+alias gsC="git stash clear"
+
+# git-stash save: deprecated, use push
 # gsts                 git stash show --text
 # gstall               git stash --all
+
+############################################################################
+# git-show
+############################################################################
+alias gsh="git show"
+typeset -g forgit_show="gshz" # default: `gso`
 
 ############################################################################
 # git-remote
