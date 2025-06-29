@@ -46,6 +46,8 @@ return {
       rst = false,
       help = false,
       [""] = false,
+      typst = false,
+      tex = false,
 
       -- version-control
       gitcommit = false,

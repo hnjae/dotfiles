@@ -57,4 +57,4 @@ function navi-show() {
 
 alias -- na="navi";
 alias -- ne="navi-edit";
-alias -- ns="navi-show";
+alias -- nsh="navi-show";

@@ -19,4 +19,12 @@ if (( $+commands[any-nix-shell] )); then
   source "$initfile"
 fi
 
-  # $commands[any-nix-shell] zsh --info-right >| "$initfile"
+alias n=nix
+
+alias nf="nix flake"
+alias nfsh="nix flake show"
+
+alias nsr="nix search nixpkgs"
+
+alias ns="nix shell --impure 'nixpkgs#"
+alias nr="nix run --impure 'nixpkgs#"

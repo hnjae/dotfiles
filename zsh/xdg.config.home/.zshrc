@@ -31,7 +31,7 @@ if [[ $(hostname) == "isis" ]]; then
   alias so='cd "${XDG_DOCUMENTS_DIR:-$HOME/Documents}/obsidian/home"'
 
   # det commonly used files
-  alias et='vi "${XDG_DOCUMENTS_DIR:-$HOME/Documents}/obsidian/home/dailies/$(date +"%Y-%m-%d").md"'
+  alias ed='vi "${XDG_DOCUMENTS_DIR:-$HOME/Documents}/obsidian/home/dailies/$(date +"%Y-%m-%d").md"'
   alias ew='vi "${XDG_DOCUMENTS_DIR:-$HOME/Documents}/obsidian/home/weeklies/$(date +"%G-W%V").md"'
 fi
 
