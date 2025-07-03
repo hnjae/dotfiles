@@ -19,7 +19,7 @@ prepend_rules = [
 
 [plugin]
 prepend_previewers = [
-  { name = "*.md", run = "glow" },
+  # { name = "*.md", run = "glow" },
   { mime = "{image,audio}/*", run = "mediainfo" },
   { mime = "application/subrip", run = "mediainfo" },
   { mime = "video/*", run = "_mediainfo" },

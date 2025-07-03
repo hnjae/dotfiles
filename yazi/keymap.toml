@@ -180,7 +180,8 @@ keymap = [
   #
   { on = "<Space>", run = ["toggle", "arrow next"], desc = "Toggle the current selection state" },
   { on = "x", run = "yank --cut", desc = "Yank selected files (cut)" },
-  { on = "p", run = "paste", desc = "Paste yanked files" },
+  { on = "y", run = "yank", desc = "Yank selected files" },
+  # { on = "p", run = "paste", desc = "Paste yanked files" },
 
   # Renaming / Mode
   { on = "a", run = "rename --cursor=before_ext", desc = "Rename selected file(s)" },

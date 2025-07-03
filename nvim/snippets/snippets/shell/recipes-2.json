@@ -25,6 +25,14 @@
             "$0=\"\\${filename%.*\\}\""
         ]
     },
+    "command -v": {
+        "prefix": [
+            "cmd",
+            "command"
+        ],
+        "description": "check if executable is available in $PATH",
+        "body": "command -v $1 >/dev/null 2>&1"
+    },
     "confirm": {
         "prefix": "sconfirm",
         "description": "get confirm signal from tty (user)",

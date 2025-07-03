@@ -12,7 +12,7 @@
             "files=()",
             "",
             "usage() {",
-            "\techo \"Usage: \\$(basename -- \"\\${1:filename\\}\") [-i input] [-a] [--] [files...]\"",
+            "\techo \"Usage: \\$(basename -- \"\\$0\") [-i input] [-a] [--] [files...]\"",
             "\texit 1",
             "\\}",
             "",

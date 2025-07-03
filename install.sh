@@ -221,10 +221,9 @@ fi
 # Yazi
 ################################################################################
 
-# TODO: install plugin <2025-05-28>
 link_item "$script_dir/yazi" "${XDG_CONFIG_HOME}/yazi"
 
-if command -v yazi >/dev/null 2>&1; then
+if command -v ya >/dev/null 2>&1; then
 	ya pkg install
 fi
 
@@ -235,28 +234,28 @@ fi
 link_item "$script_dir/zsh/.zshenv" "$HOME/.zshenv"
 link_item "$script_dir/zsh/xdg.config.home" "$XDG_CONFIG_HOME/zsh"
 
-if hash zsh 2>/dev/null && is_internet_connected; then
+if command -v zsh >/dev/null 2>&1 && is_internet_connected; then
 	log info "zsh" "initializing zmfw"
 	TERM=dumb zsh --interactive -c '
-	if ! which zimfw >/dev/null 2>&1; then
+	if ! command -v zimfw >/dev/null 2>&1; then
 		return
 	fi
 
 	zimfw init
 	'
-fi
 
-log info "zsh" "initializing zsh-abbr"
-TERM=dumb zsh --interactive -c '
-if ! which abbr >/dev/null 2>&1; then
-	return
-fi
+	log info "zsh" "initializing zsh-abbr"
+	TERM=dumb zsh --interactive -c '
+	if ! command -v abbr >/dev/null 2>&1; then
+		return
+	fi
 
-if [[ "$ABBR_USER_ABBREVIATIONS_FILE" != "" && -f "$ABBR_USER_ABBREVIATIONS_FILE" ]]; then
-	rm "$ABBR_USER_ABBREVIATIONS_FILE"
-fi
+	if [[ "$ABBR_USER_ABBREVIATIONS_FILE" != "" && -f "$ABBR_USER_ABBREVIATIONS_FILE" ]]; then
+		rm "$ABBR_USER_ABBREVIATIONS_FILE"
+	fi
 
-abbr import-aliases >/dev/null
-'
+	abbr import-aliases >/dev/null
+	'
+fi
 
 exit 0
