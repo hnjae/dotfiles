@@ -45,6 +45,9 @@ return {
     build = function()
       require("typst-preview").update()
     end,
+    keys = {
+      { "<leader>cp", "<cmd>TypstPreview<cr>", desc = "typst-preview", ft = "typst" },
+    },
 
     lazy = true,
     ft = { "typst" },

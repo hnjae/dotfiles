@@ -19,6 +19,8 @@ if (( $+commands[any-nix-shell] )); then
   source "$initfile"
 fi
 
+export NIXPKGS_ALLOW_UNFREE=1
+
 alias n=nix
 
 alias nf="nix flake"

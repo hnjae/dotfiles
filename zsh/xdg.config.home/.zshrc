@@ -25,7 +25,7 @@ if [[ $(hostname) == "isis" ]]; then
   # cd to commonly used directories
   alias sp='cd "$HOME/Projects"'
   alias sn='cd "$HOME/Projects/nix-config"'
-  alias st='cd "$HOME/Projects/dotfiles"'
+  alias sf='cd "$HOME/Projects/dotfiles"'
   alias sv='cd "$HOME/Projects/dotfiles/nvim"'
   alias sz='cd "$HOME/Projects/dotfiles/zsh/xdg.config.home"'
   alias so='cd "${XDG_DOCUMENTS_DIR:-$HOME/Documents}/obsidian/home"'
@@ -48,7 +48,7 @@ fi
 
 HISTSIZE="99999"
 SAVEHIST="99999"
-HISTORY_IGNORE='(cd *|s *|z *|zi *|si *|rm *|sudo rm *|trash *|trash-put *|trash-rm *|trash-empty|mv|pfkill *|exit|fg|bg|zfs destroy *|zpool destroy *|btrfs subvolume delete *|sudo zfs destroy *|sudo zpool destroy *|sudo btrfs subvolume delete *|* --please-destroy-my-drive *|reboot|shutdown|halt|kexec|systemctl reboot|systemctl halt|systemctl poweroff|systemctl kexec|systemctl soft-reboot|man *|just *|rg *|vi *|vim *|nvim *|nano *|which *|command *|stat *|xdg-open *|mpv *|psql *)'
+HISTORY_IGNORE='(cd *|s *|z *|zi *|si *|rm *|sudo rm *|trash *|trash-put *|trash-rm *|trash-empty|mv|pfkill *|exit|fg|bg|zfs destroy *|zpool destroy *|btrfs subvolume delete *|sudo zfs destroy *|sudo zpool destroy *|sudo btrfs subvolume delete *|* --please-destroy-my-drive *|reboot|shutdown|halt|kexec|systemctl reboot|systemctl halt|systemctl poweroff|systemctl kexec|systemctl soft-reboot|man *|just *|rg *|vi *|vim *|nvim *|nano *|which *|command *|stat *|xdg-open *|mpv *|psql *|git*--hard*)'
 HISTFILE="${XDG_STATE_HOME:-$HOME/.local/state}/zsh_history"
 
 setopt HIST_FCNTL_LOCK
@@ -73,7 +73,7 @@ typeset -g ABBR_LOG_AVAILABLE_ABBREVIATION=1
 # alias 에서 import 해서 사용할 예정이라 ~/.config 에 위치하지 않도록 한다.
 typeset -g ABBR_USER_ABBREVIATIONS_FILE="${XDG_STATE_HOME:-${HOME}/.local/state}/zsh-abbr-user"
 
-function abbr-update() {
+function update-abbr() {
     if [[ "$ABBR_USER_ABBREVIATIONS_FILE" != "" && -f "$ABBR_USER_ABBREVIATIONS_FILE" ]]; then
       rm "$ABBR_USER_ABBREVIATIONS_FILE"
     fi

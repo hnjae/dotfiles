@@ -83,10 +83,20 @@ build-tinted:
     done
 
 update-tinted:
-    #!/usr/bin/env bash
+    #!/bin/sh
 
-    if hash tinty 2>/dev/null; then
+    set -eu
+
+    theme="base24-my-gruvbox-light"
+    # theme="base24-my-selenized-light"
+
+    if command -v tinty >/dev/null 2>&1; then
         tinty sync
-        tinty apply base24-my-gruvbox-light
-        # tinty apply base24-my-selenized-light
+        tinty apply "$theme"
+    elif command -v nix >/dev/null 2>&1; then
+        nix run 'nixpkgs#tinty' -- sync
+        nix run 'nixpkgs#tinty' -- apply "$theme"
+    else
+        echo "Error: Neither tinty nor nix found in PATH" >/dev/stderr
+        exit 1
     fi

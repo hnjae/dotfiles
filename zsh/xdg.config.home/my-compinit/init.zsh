@@ -1,3 +1,4 @@
+# TODO: 대충 fork 해서 필요 없어보이는 코드 comment-out 한게 전부라, 코드 리뷰 필요.  <2025-06-30>
 #
 # Completion enhancements
 #

@@ -30,8 +30,8 @@
             ""
         ]
     },
-    "pwriteScriptBin": {
-        "prefix": "pwriteScriptBin",
+    "pkgs.writeScriptBin": {
+        "prefix": "spwriteScriptBin",
         "description": "writeScriptBin",
         "body": [
             "(pkgs.writeScriptBin \"${1:name}\" ''",
@@ -40,8 +40,8 @@
             "'')"
         ]
     },
-    "pwriteScript": {
-        "prefix": "pwriteScript",
+    "pkgs.writeScript": {
+        "prefix": "spwriteScript",
         "description": "pkgs.writeScript",
         "body": [
             "(pkgs.writeScript \"${1:name}\" ''",
@@ -50,8 +50,8 @@
             "'')"
         ]
     },
-    "(prunCommandLocal": {
-        "prefix": "(prunCommandLocal",
+    "pkgs.runCommandLocal": {
+        "prefix": "sprunCommandLocal",
         "description": "pkgs.runCommandLocal",
         "body": [
             "pkgs.runCommandLocal \"${1:name}\" \\${2:{\\}\\} ''",
@@ -61,12 +61,12 @@
         ]
     },
     "pbindbin": {
-        "prefix": "pbindbin",
+        "prefix": "spbindbin",
         "description": "use pkgs.runCommand to bindbin",
         "body": ""
     },
-    "inp": {
-        "prefix": "inp",
+    "installPhase (mkDerivation)": {
+        "prefix": "sinstallPhase",
         "description": "installPhase in stdenv.mkDerivation",
         "body": [
             "installPhase = ''",
@@ -77,28 +77,28 @@
     "Empty hash": {
         "prefix": "hash",
         "description": "Empty hash",
-        "body": "\"${1:sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=}\";",
+        "body": "\"${1:sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=}\";"
     },
-    "meta": {
-        "prefix": "meta",
+    "meta (mkDerivation)": {
+        "prefix": "smeta",
         "description": "Nixpkgs' minimal meta attribute set",
         "body": [
             "meta = {",
-            "  description = \"$1\";",
-            "  homepage = \"$2\";",
-            "  license = lib.licenses.$3;",
-            "  maintainers = with lib.maintainers; [ $0 ];",
+            "\tdescription = \"$1\";",
+            "\thomepage = \"$2\";",
+            "\tlicense = lib.licenses.$3;",
+            "\tmaintainers = with lib.maintainers; [ $0 ];",
             "};"
         ]
     },
-    "fetchFrom": {
-        "prefix": "fetchFrom",
+    "fetchFrom (mkDerivation)": {
+        "prefix": "sfetchFrom",
         "body": [
             "fetchFrom${1|GitHub,GitLab,Gitea,Gitiles,BitBucket,Savannah,RepoOrCz,SourceHut|} {",
-            "  owner = \"$2\";",
-            "  repo = \"$3\";",
-            "  rev = \"${4:v\\${version\\}}\";",
-            "  hash = \"${5:sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=}\";",
+            "\towner = \"$2\";",
+            "\trepo = \"$3\";",
+            "\trev = \"${4:v\\${version\\}}\";",
+            "\thash = \"${5:sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=}\";",
             "};"
         ],
         "description": "fetchFromGitHub, or any other common fetcher from Nixpkgs"
@@ -114,7 +114,7 @@
         "description": "fetchurl with default empty hash"
     },
     "package-arguments": {
-        "prefix": "pkg",
+        "prefix": "spkg",
         "body": [
             "{ lib",
             ", ${1:stdenv}",
@@ -126,29 +126,43 @@
         "description": "Package arguments, starting with { lib"
     },
     "stdenv.mkDerivation": {
-        "prefix": "mkd",
+        "prefix": "s-mk-derivation",
         "body": [
             "stdenv.mkDerivation (finalAttrs: {",
-            "  pname = \"$1\";",
-            "  version = \"$2\";",
+            "\tpname = \"$1\";",
+            "\tversion = \"$2\";",
             "",
-            "  src = $3",
+            "\tsrc = $3",
             "",
-            "  nativeBuildInputs = [",
-            "    $4",
-            "  ];",
-            "  buildInputs = [",
-            "    $0",
-            "  ];",
+            "\tnativeBuildInputs = [",
+            "\t\t$4",
+            "\t];",
+            "\tbuildInputs = [",
+            "\t\t$0",
+            "\t];",
             "",
-            "  meta = {",
-            "    description = \"$5\";",
-            "    homepage = \"$6\";",
-            "    license = lib.licenses.$7;",
-            "    maintainers = with lib.maintainers; [ $8 ];",
-            "  };",
+            "\tmeta = {",
+            "\t\tdescription = \"$5\";",
+            "\t\thomepage = \"$6\";",
+            "\t\tlicense = lib.licenses.$7;",
+            "\t\tmaintainers = with lib.maintainers; [ $8 ];",
+            "\t};",
             "})"
         ],
         "description": "Nixpkgs' stdenv.mkDerivation template"
+    },
+    "noDisplay XDG Desktop Item": {
+        "prefix": "s-no-display-xdg-desktop-item",
+        "description": "Hide desktop item",
+        "body": [
+            "(lib.hiPrio (",
+            "\tpkgs.makeDesktopItem {",
+            "\t\tname = \"${1:appId}\";",
+            "\t\tdesktopName = \"This should not be displayed.\";",
+            "\t\texec = \":\";",
+            "\t\tnoDisplay=true;",
+            "}",
+            "))"
+        ]
     }
 }

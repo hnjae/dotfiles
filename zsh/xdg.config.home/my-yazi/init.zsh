@@ -2,7 +2,7 @@ if (( ! $+commands[yazi] )); then
   return
 fi
 
-function yazicd() {
+function y() {
   local tmp
   # local tmpdir
   # tmpdir="${TMPDIR:-/tmp}/yazi-${UID:-"$(id -u)"}"
@@ -21,6 +21,3 @@ function yazicd() {
       rm -f -- "$tmp"
     fi
 }
-
-alias yazi="yazicd"
-alias y="yazi"
