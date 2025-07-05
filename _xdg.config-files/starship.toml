@@ -59,11 +59,6 @@ untracked = "[?${count}](blue)"
 # up_to_date = "[✔](bold green)"
 up_to_date = "[≡](bold green)"
 
-[hostname]
-format = "([@$hostname( $ssh_symbol)](bold yellow) in )"
-ssh_only = true
-ssh_symbol = "󰀂 "
-
 [nix_shell]
 format = "via [$symbol$state]($style) "
 heuristic = false
@@ -83,5 +78,10 @@ style = "bold yellow"
 
 [username]
 disabled = false
-format = "[$user](bold yellow)"
-style_user = "bold yellow"
+format = "[$user]($style)"
+style_user = "bold purple"
+
+[hostname]
+format = "[@$hostname]($style) in "
+ssh_only = true
+style = "bold purple"

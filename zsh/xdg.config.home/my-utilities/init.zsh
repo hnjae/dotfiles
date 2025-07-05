@@ -38,8 +38,8 @@ alias mv="mv -i"
 alias j="just"
 alias je="just --edit"
 
-alias fmime= "file --mime-type --brief --"
-alias xmime="xdg-mime query filetype"
-alias nfd2nfc-dryrun="convmv -r -f utf8 -t utf8 --nfc ."
-alias nfd2nfc-run="convmv -r -f utf8 -t utf8 --nfc --notest ."
+alias fmime='file --mime-type --brief --'
+alias xmime='xdg-mime query filetype'
+alias nfd2nfc-dryrun='convmv -r -f utf8 -t utf8 --nfc .'
+alias nfd2nfc-run='convmv -r -f utf8 -t utf8 --nfc --notest .'
 alias colorpattern="curl -s https://gist.githubusercontent.com/HaleTom/89ffe32783f89f403bba96bd7bcd1263/raw/e50a28ec54188d2413518788de6c6367ffcea4f7/print256colours.sh | bash"

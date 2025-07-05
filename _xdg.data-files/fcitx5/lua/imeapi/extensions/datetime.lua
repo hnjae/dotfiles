@@ -9,8 +9,8 @@ function LookupDate(input)
     fmt = "%Y-%m-%dT%H:%M:%S%z" -- iso8601
   elseif input == "w" then
     fmt = "%G-W%V-%u" -- weekday formats (iso 8601)
-  elseif input == "u" then
-    fmt = "%Y-%m-%dT%H:%M:%SZ" -- utc
+    -- elseif input == "u" then
+    --   fmt = "%Y-%m-%dT%H:%M:%SZ" -- utc -- UTC time 이 출력 안됨. `os.datae()`에서
   end
   return os.date(fmt)
 end

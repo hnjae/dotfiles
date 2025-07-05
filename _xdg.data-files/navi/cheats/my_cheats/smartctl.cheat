@@ -1,5 +1,11 @@
 % smartctl, smart
 
+# show smart
+smartctl -x "<device>"
+
+# show smart of USB-SATA Device
+sudo smartctl --device=sat -x "<device>"
+
 # start short test
 smartctl -t short "/dev/<device>"
 

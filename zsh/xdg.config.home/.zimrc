@@ -94,6 +94,7 @@ zmodule zsh-users/zsh-syntax-highlighting
 # zmodule zsh-users/zsh-history-substring-search # use fzf's ctrl-r instead
 
 # Fish-like autosuggestions for Zsh.
+ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion)
 zmodule zsh-users/zsh-autosuggestions
 
 ##########################################################

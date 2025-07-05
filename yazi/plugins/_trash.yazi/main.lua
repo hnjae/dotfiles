@@ -17,14 +17,12 @@ return {
 
     if #urls == 0 then
       return ya.notify({
-        title = "rmdir",
+        title = "trash2",
         content = "No file selected",
         level = "warn",
         timeout = 5,
       })
     end
-
-    -- ya.notify({ title = #urls, content = table.concat(urls, " "), level = "info", timeout = 5 })
 
     local status, err = Command("rmdir"):arg("--ignore-fail-on-non-empty"):arg(urls):spawn():wait()
 
