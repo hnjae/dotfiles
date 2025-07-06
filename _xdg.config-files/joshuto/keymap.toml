@@ -72,7 +72,8 @@ keymap = [
   { keys = ["R"], commands = ["bulk_rename"] },
   { keys = ["d"], commands = [":mkdir "] },
   { keys = ["t"], commands = ["new_tab --current"] },
-  { keys = ["%"], commands = [":shell sh -c '[ \"$*\" != \"\" ] && [ ! -e \"$*\" ] && touch \"$*\"' _ "] },
+  # { keys = ["%"], commands = [":shell sh -c '[ \"$*\" != \"\" ] && [ ! -e \"$*\" ] && touch \"$*\"' _ "] },
+  { keys = ["%"], commands = [":custom_search newfile "] },
   # { keys = ["%"], commands = ["newfile"] },
   # { keys = ["x"], commands = ["open"] },
 

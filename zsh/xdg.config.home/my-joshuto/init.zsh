@@ -2,7 +2,7 @@ if (( ! $+commands[joshuto] )); then
   return
 fi
 
-alias u=joshuto
+alias e=joshuto
 # function y() {
 #   local tmp
 #   # local tmpdir

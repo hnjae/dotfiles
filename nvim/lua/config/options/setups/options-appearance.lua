@@ -1,6 +1,6 @@
 -- nvim-qt 에서는 안먹는 것 같다.
 if vim.fn.has("gui_running") == 1 then
-  vim.o.guifont = "monospace:h10"
+  vim.o.guifont = "monospace:h11"
 end
 
 -- VIM Mode 에 따라 커서 Shape 바뀌는 옵션 해제

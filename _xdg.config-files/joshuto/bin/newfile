@@ -3,9 +3,15 @@
 main() {
   name=$(printf "%s" "$*" | tr '\n' ' ' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
 
-  if [ "$name" != "" ] && [ ! -e "$name" ]; then
+  if [ "$name" = "" ]; then
+    exit 1
+  fi
+
+  if [ ! -e "$name" ]; then
     touch -- "$name"
   fi
+
+  echo "$name"
 }
 
 main "$@"

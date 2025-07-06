@@ -1,12 +1,13 @@
 xdg_open      = true
 xdg_open_fork = true
-
-use_trash = true
+use_trash     = true
 
 # custom_commands = [
 #    { name = "rgfzf", command = "/home/<USER>/.config/joshuto/rgfzf '%text' %s" },
 #    { name = "rg", command = "/home/<USER>/.config/joshuto/rg '%text' %s" }
 # ]
+
+# TODO: $HOME 에 relative 하게 설정할 수는 없나? <2025-07-06>
 custom_commands = [
   { name = "newfile", command = "/home/hnjae/.config/joshuto/bin/newfile '%text'" },
   # { name = "rg", command = "/home/<USER>/.config/joshuto/rg '%text' %s" },
@@ -19,9 +20,8 @@ line_number_style = "relative"
 show_borders      = false
 show_hidden       = true
 
-
 [preview]
 max_preview_size = "128 MB"
 use_xdg_thumbs   = true
 xdg_thumb_size   = "xxlarge"
-preview_script   = "/home/hnjae/.nix-profile/bin/pistol"
+preview_script   = "/home/hnjae/.config/joshuto/bin/newfile '%text'"

@@ -13,6 +13,7 @@ if (( $+commands[any-nix-shell] )); then
   #   $commands[any-nix-shell] zsh >| "$initfile"
   #   zcompile -UR "$initfile"
   # fi
+
   $commands[any-nix-shell] zsh >| "$initfile"
   zcompile -UR "$initfile"
 
@@ -21,12 +22,12 @@ fi
 
 export NIXPKGS_ALLOW_UNFREE=1
 
-alias n=nix
+alias nx=nix
 
-alias nf="nix flake"
-alias nfsh="nix flake show"
+alias nxf="nix flake"
+alias nxfsh="nix flake show"
 
-alias nsr="nix search nixpkgs"
+alias nxsr="nix search nixpkgs"
 
-alias ns="nix shell --impure 'nixpkgs#"
-alias nr="nix run --impure 'nixpkgs#"
+alias nxs="nix shell --impure 'nixpkgs#"
+alias nxr="nix run --impure 'nixpkgs#"

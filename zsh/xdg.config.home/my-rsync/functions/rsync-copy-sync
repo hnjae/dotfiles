@@ -1,2 +1,3 @@
 # vi:ft=zsh
+
 rsync --info=progress2 -h -s -aHAXWE --numeric-ids --fuzzy --delete-after -- "$@"

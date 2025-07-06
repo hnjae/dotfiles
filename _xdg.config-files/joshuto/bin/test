@@ -1,0 +1,9 @@
+#!/bin/sh
+
+main() {
+  echo "foo"
+}
+
+main "$@"
+
+# vi:ft=sh:sw=2

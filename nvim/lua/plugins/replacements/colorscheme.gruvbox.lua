@@ -31,7 +31,7 @@ return {
       underline = false,
 
       -- terminal_colors = os.getenv("BASE16_THEME") == nil or vim.g.neovide,
-      terminal_colors = false,
+      terminal_colors = vim.fn.has("gui_running") == 1,
       -- terminal_colors = true,
       palette_overrides = {
         -- light0_soft = "#f2e5bc", -- 242, 229, 188 -- HSL: 46, 67.5, 84.3
