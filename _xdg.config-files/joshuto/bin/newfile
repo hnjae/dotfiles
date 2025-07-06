@@ -1,0 +1,13 @@
+#!/bin/sh
+
+main() {
+  name=$(printf "%s" "$*" | tr '\n' ' ' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+
+  if [ "$name" != "" ] && [ ! -e "$name" ]; then
+    touch -- "$name"
+  fi
+}
+
+main "$@"
+
+# vi:ft=sh:sw=2

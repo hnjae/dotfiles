@@ -9,15 +9,17 @@ local selected_or_hovered = ya.sync(function()
   return paths
 end)
 
+local plugin_name = "trash2"
+
 return {
-  entry = function()
+  entry = function(self, job)
     ya.manager_emit("escape", { visual = true })
 
     local urls = selected_or_hovered()
 
     if #urls == 0 then
       return ya.notify({
-        title = "trash2",
+        title = plugin_name,
         content = "No file selected",
         level = "warn",
         timeout = 5,
@@ -28,8 +30,8 @@ return {
 
     if status and status.success then
       ya.notify({
-        title = "rmdir",
-        content = "Successfully rmdir of dir(s)",
+        title = plugin_name,
+        content = "Successfully trash of file/dir(s)",
         level = "info",
         timeout = 5,
       })
@@ -37,8 +39,8 @@ return {
 
     if not status or not status.success then
       ya.notify({
-        title = "rmdir",
-        content = string.format("Could not rmdir selected dir(s) %s", status and status.code or err),
+        title = plugin_name,
+        content = string.format("Could not trash selected file/dir(s) %s", status and status.code or err),
         level = "error",
         timeout = 5,
       })

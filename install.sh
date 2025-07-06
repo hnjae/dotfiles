@@ -220,12 +220,12 @@ fi
 ################################################################################
 # Yazi
 ################################################################################
-
-link_item "$script_dir/yazi" "${XDG_CONFIG_HOME}/yazi"
-
-if command -v ya >/dev/null 2>&1; then
-	ya pkg install
-fi
+#
+# link_item "$script_dir/yazi" "${XDG_CONFIG_HOME}/yazi"
+#
+# if command -v ya >/dev/null 2>&1; then
+# 	ya pkg install
+# fi
 
 ################################################################################
 # zsh

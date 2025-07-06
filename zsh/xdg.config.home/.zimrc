@@ -31,9 +31,10 @@ zmodule "$ZDOTDIR/my-zimfw"
 zmodule environment
 # zmodule input
 zmodule termtitle
+zmodule "$ZDOTDIR/my-joshuto"
 zmodule "$ZDOTDIR/my-lf"
-zmodule "$ZDOTDIR/my-yazi"
 zmodule "$ZDOTDIR/my-navi"
+zmodule "$ZDOTDIR/my-yazi"
 # zmodule "MichaelAquilina/zsh-you-should-use"
 zmodule olets/zsh-abbr --source zsh-abbr.plugin.zsh --use git  # it includes submodules
 

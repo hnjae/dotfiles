@@ -1,0 +1,8 @@
+[formatting]
+align_comments        = false
+align_entries         = true
+array_auto_collapse   = false
+column_width          = 1024
+reorder_arrays        = false
+reorder_inline_tables = false
+reorder_keys          = false

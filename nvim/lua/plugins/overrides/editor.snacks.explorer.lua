@@ -18,7 +18,7 @@ return {
           },
 
           actions = {
-            explorer_add_file = function(picker)
+            explorer_mkfile = function(picker)
               local Tree = require("snacks.explorer.tree")
               local uv = vim.uv or vim.loop
 
@@ -42,7 +42,7 @@ return {
                 require("snacks.explorer.actions").update(picker, { target = path })
               end)
             end,
-            explorer_add_dir = function(picker)
+            explorer_mkdir = function(picker)
               local Tree = require("snacks.explorer.tree")
 
               Snacks.input({
@@ -87,8 +87,8 @@ return {
                 ["v"] = "edit_vsplit", -- netrw 랑 동작 일치화
                 ["t"] = "tab", -- netrw 랑 동작 일치화
 
-                ["%"] = "explorer_add_file", -- netrw 랑 동작 일치화
-                ["d"] = "explorer_add_dir", -- netrw 랑 동작 일치화 (netrw: create directory)
+                ["%"] = "explorer_mkfile", -- netrw 랑 동작 일치화
+                ["d"] = "explorer_mkdir", -- netrw 랑 동작 일치화 (netrw: create directory)
                 ["D"] = "explorer_del", -- netrw 랑 동작 일치화
 
                 ["gx"] = "explorer_open", -- netrw 랑 동작 일치화

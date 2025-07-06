@@ -8,7 +8,11 @@ return {
     local nls = require("null-ls")
 
     opts.sources = vim.list_extend(opts.sources or {}, {
-      nls.builtins.diagnostics.selene,
+      nls.builtins.diagnostics.selene.with({
+        condition = function(utils)
+          return utils.root_has_file({ "selene.toml" })
+        end,
+      }),
     })
 
     return opts

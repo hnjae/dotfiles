@@ -1,0 +1,218 @@
+# NOTE: joshuto's bulk_rename 은 cyclic rename 처리 못함.
+
+[default_view]
+
+keymap = [
+  { keys = ["escape"], commands = ["escape"] },
+  { keys = ["W"], commands = ["close_tab"] },
+  { keys = ["q"], commands = ["close_tab"] },
+  { keys = ["ctrl+c"], commands = ["quit"] },
+  { keys = ["ctrl+z"], commands = ["suspend"] },
+  { keys = ["Q"], commands = ["quit --output-current-directory"] },
+
+  { keys = ["\t"], commands = ["tab_switch 1"] },
+  { keys = ["backtab"], commands = ["tab_switch -1"] },
+
+  { keys = ["ctrl+1"], commands = ["tab_switch_index 1"] },
+  { keys = ["ctrl+2"], commands = ["tab_switch_index 2"] },
+  { keys = ["ctrl+3"], commands = ["tab_switch_index 3"] },
+  { keys = ["ctrl+4"], commands = ["tab_switch_index 4"] },
+  { keys = ["ctrl+5"], commands = ["tab_switch_index 5"] },
+
+  { keys = ["1"], commands = ["numbered_command 1"] },
+  { keys = ["2"], commands = ["numbered_command 2"] },
+  { keys = ["3"], commands = ["numbered_command 3"] },
+  { keys = ["4"], commands = ["numbered_command 4"] },
+  { keys = ["5"], commands = ["numbered_command 5"] },
+  { keys = ["6"], commands = ["numbered_command 6"] },
+  { keys = ["7"], commands = ["numbered_command 7"] },
+  { keys = ["8"], commands = ["numbered_command 8"] },
+  { keys = ["9"], commands = ["numbered_command 9"] },
+
+
+  { keys = ["="], commands = ["set_mode"] },
+
+
+  { keys = ["|"], commands = [":search_inc "] },
+  { keys = ["\\"], commands = [":search_glob "] },
+  { keys = ["S"], commands = ["search_fzf"] },
+  { keys = ["C"], commands = ["subdir_fzf"] },
+
+
+  { keys = ["n"], commands = ["search_next"] },
+  { keys = ["N"], commands = ["search_prev"] },
+
+  { keys = ["g", "r"], commands = ["cd /"] },
+  { keys = ["g", "c"], commands = ["cd ~/.config"] },
+  { keys = ["g", "d"], commands = ["cd ~/Downloads"] },
+  { keys = ["g", "e"], commands = ["cd /etc"] },
+  # { keys = ["g", "h"], commands = ["cd ~/"] },
+
+  { keys = ["x"], commands = ["cut_files"] },
+
+  ####################
+  # Netrw-alike
+  ####################
+  # Cursor
+  { keys = ["j"], commands = ["cursor_move_down"] },
+  { keys = ["k"], commands = ["cursor_move_up"] },
+
+  { keys = ["g", "g"], commands = ["cursor_move_home"] },
+  { keys = ["G"], commands = ["cursor_move_end"] },
+  # { keys = ["[", "["], commands = ["cursor_move_home"] },
+  # { keys = ["]", "]"], commands = ["cursor_move_end"] },
+
+  { keys = ["H"], commands = ["cursor_move_page_home"] },
+  { keys = ["M"], commands = ["cursor_move_page_middle"] },
+  { keys = ["L"], commands = ["cursor_move_page_end"] },
+
+  # Commands
+  { keys = ["r"], commands = ["sort reverse"] },
+  { keys = ["D"], commands = ["delete_files"] },
+  { keys = ["R"], commands = ["bulk_rename"] },
+  { keys = ["d"], commands = [":mkdir "] },
+  { keys = ["t"], commands = ["new_tab --current"] },
+  { keys = ["%"], commands = [":shell sh -c '[ \"$*\" != \"\" ] && [ ! -e \"$*\" ] && touch \"$*\"' _ "] },
+  # { keys = ["%"], commands = ["newfile"] },
+  # { keys = ["x"], commands = ["open"] },
+
+  { keys = ["g", "h"], commands = ["toggle_hidden"] },
+
+  ####################
+  # Netrw-inspired
+  ####################
+  { keys = ["m", "a"], commands = ["select --all=true --toggle=true"] },
+  { keys = ["m", "f"], commands = ["select_fzf"] },
+  { keys = ["m", "c"], commands = ["select --all=true --deselect=true"] },
+
+  { keys = ["m", "b"], commands = ["add_bookmark"] },
+  { keys = ["T", "b"], commands = ["cd_bookmark"] },
+
+  { keys = ["g", "s"], commands = ["zi"] },
+  { keys = ["g", "f"], commands = ["subdir_fzf"] },
+
+  { keys = ["i", "s"], commands = ["linemode size"] },
+  { keys = ["i", "m"], commands = ["linemode mtime"] },
+  { keys = ["i", "M"], commands = ["linemode size | mtime"] },
+  { keys = ["i", "u"], commands = ["linemode user"] },
+  { keys = ["i", "U"], commands = ["linemode user | group"] },
+  { keys = ["i", "p"], commands = ["linemode perm"] },
+
+  { keys = ["s", "r"], commands = ["sort reverse"] },
+  { keys = ["s", "l"], commands = ["sort lexical"] },
+  { keys = ["s", "m"], commands = ["sort mtime"] },
+  { keys = ["s", "n"], commands = ["sort natural"] },
+  { keys = ["s", "s"], commands = ["sort size"] },
+  { keys = ["s", "e"], commands = ["sort ext"] },
+
+
+  ##########
+  # vim-alike
+  ########
+  { keys = ["g", "x"], commands = ["open"] },
+
+  { keys = ["ctrl+u"], commands = ["cursor_move_page_up 0.5"] },
+  { keys = ["ctrl+d"], commands = ["cursor_move_page_down 0.5"] },
+  { keys = ["ctrl+b"], commands = ["cursor_move_page_up"] },
+  { keys = ["ctrl+f"], commands = ["cursor_move_page_down"] },
+
+  { keys = [":"], commands = [":"] },
+  { keys = [";"], commands = [":"] },
+  { keys = ["backspace"], commands = [":"] },
+
+  ######
+  # ranger alike
+  ####
+  { keys = ["c", "d"], commands = [":cd "] },
+  { keys = ["h"], commands = ["cd .."] },
+  { keys = ["l"], commands = ["open"] },
+  { keys = ["z", "z"], commands = [":filter "] },
+  { keys = ["z", "f"], commands = ["search_fzf"] },
+  { keys = ["ctrl+h"], commands = ["toggle_hidden"] },
+
+  { keys = ["!"], commands = [":shell "] },
+
+  { keys = ["w"], commands = ["show_tasks --exit-key=w"] },
+
+  { keys = ["p", "p"], commands = ["paste_files"] },
+  { keys = ["p", "o"], commands = ["paste_files --overwrite=true"] },
+  { keys = ["p", "l"], commands = ["symlink_files --relative=false"] },
+  { keys = ["p", "L"], commands = ["symlink_files --relative=true"] },
+
+  # { keys = ["d", "d"], commands = ["cut_files"] },
+  { keys = ["y", "y"], commands = ["copy_files"] },
+  { keys = ["y", "n"], commands = ["copy_filename"] },
+  { keys = ["y", "."], commands = ["copy_filename_without_extension"] },
+  { keys = ["y", "p"], commands = ["copy_filepath"] },
+  { keys = ["y", "a"], commands = ["copy_filepath --all-selected=true"] },
+  { keys = ["y", "d"], commands = ["copy_dirpath"] },
+
+  { keys = ["a"], commands = ["rename_append"] },
+  { keys = ["A"], commands = ["rename_prepend"] },
+  { keys = [" "], commands = ["select --toggle=true"] },
+  { keys = ["V"], commands = ["toggle_visual"] },
+
+  { keys = ["c", "w"], commands = [":rename "] },
+  { keys = ["/"], commands = [":search "] },
+
+  { keys = ["["], commands = ["parent_cursor_move_up"] },
+  { keys = ["]"], commands = ["parent_cursor_move_down"] },
+
+  ####################
+  # GUI-apps alike
+  ####################
+  { keys = ["ctrl+r"], commands = ["reload_dirlist"] },
+  { keys = ["ctrl+t"], commands = ["new_tab --cursor"] },
+  { keys = ["ctrl+w"], commands = ["close_tab"] },
+  { keys = ["?"], commands = ["help"] },
+  { keys = ["delete"], commands = ["delete_files"] },
+
+  # arrow keys
+  { keys = ["arrow_up"], commands = ["cursor_move_up"] },
+  { keys = ["arrow_down"], commands = ["cursor_move_down"] },
+  { keys = ["arrow_left"], commands = ["cd .."] },
+  { keys = ["arrow_right"], commands = ["open"] },
+  { keys = ["\n"], commands = ["open"] },
+  { keys = ["home"], commands = ["cursor_move_home"] },
+  { keys = ["end"], commands = ["cursor_move_end"] },
+  { keys = ["page_up"], commands = ["cursor_move_page_up"] },
+  { keys = ["page_down"], commands = ["cursor_move_page_down"] },
+]
+
+[task_view]
+
+keymap = [
+  # arrow keys
+  { keys = ["arrow_up"], commands = ["cursor_move_up"] },
+  { keys = ["arrow_down"], commands = ["cursor_move_down"] },
+  { keys = ["home"], commands = ["cursor_move_home"] },
+  { keys = ["end"], commands = ["cursor_move_end"] },
+
+  # vim-like keybindings
+  { keys = ["j"], commands = ["cursor_move_down"] },
+  { keys = ["k"], commands = ["cursor_move_up"] },
+  { keys = ["g", "g"], commands = ["cursor_move_home"] },
+  { keys = ["G"], commands = ["cursor_move_end"] },
+
+  { keys = ["w"], commands = ["show_tasks"] },
+  { keys = ["escape"], commands = ["show_tasks"] },
+]
+
+[help_view]
+
+keymap = [
+  # arrow keys
+  { keys = ["arrow_up"], commands = ["cursor_move_up"] },
+  { keys = ["arrow_down"], commands = ["cursor_move_down"] },
+  { keys = ["home"], commands = ["cursor_move_home"] },
+  { keys = ["end"], commands = ["cursor_move_end"] },
+
+  # vim-like keybindings
+  { keys = ["j"], commands = ["cursor_move_down"] },
+  { keys = ["k"], commands = ["cursor_move_up"] },
+  { keys = ["g", "g"], commands = ["cursor_move_home"] },
+  { keys = ["G"], commands = ["cursor_move_end"] },
+
+  { keys = ["w"], commands = ["show_tasks"] },
+  { keys = ["escape"], commands = ["show_tasks"] },
+]
