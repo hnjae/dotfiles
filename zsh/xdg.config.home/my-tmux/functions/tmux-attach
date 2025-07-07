@@ -1,0 +1,11 @@
+# vi:ft=zsh
+
+local session
+session="$(tmux ls | cut -d: -f1 | fzf)"
+
+if [ "$session" == "" ]; then
+  echo "No session selected." >&2
+  exit 0
+fi
+
+tmux attach -t "$session"

@@ -7,7 +7,7 @@ podman run -it "<image-name>" --mount=
 sudo podman run --mount=type=bind,source=./centos-7_x86_64,destination=/mnt --device=/dev/<>:/dev/xvda:rwm -it "centos:7"
 
 # run bash in container (-it: interactive tty)
-podman exec -it <container-id> /bin/bash
+podman exec -it <container_id> /bin/bash
 
 # podman pod list (ls)
 podman pod ls
@@ -27,4 +27,4 @@ poman image prune
 # get ip of container
 podman inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <container-id>
 
-$ container-id: podman ps --- --headers 1 --column 1
+$ container_id: podman ps --- --header-lines 1 --column 1

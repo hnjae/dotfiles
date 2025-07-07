@@ -4,8 +4,9 @@ fi
 
 alias -- t=tmux
 alias -- ta='tmux attach'
-alias -- tat='tmux attach -t'
-alias -- tc='tmux -c'
+# alias -- tat='tmux attach -t'
+# alias -- tat='tmux attach -t "$(tmux ls | cut -d: -f1 | fzf)"'
+alias -- tat='tmux-attach'
 alias -- tl='tmux ls'
-alias -- tn='tmux new-session -n'
-alias -- trn='tmux rename-session'
+alias -- tns='tmux new -s'
+alias -- trn='tmux rename'

@@ -5,8 +5,9 @@
         "body": [
             "read_char() {",
             "  stty -icanon -echo",
-            "  eval \"$1=\\$(dd bs=1 count=1 2>/dev/null)\"",
+            "  eval \"${1:char}=\\$(dd bs=1 count=1 2>/dev/null)\"",
             "  stty icanon echo",
+            "  echo \"\\$${1}\"",
             "\\}",
             "# read_char char 로 사용. \\$char 에 1글자가 들어감."
         ]

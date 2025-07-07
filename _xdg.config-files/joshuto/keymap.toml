@@ -3,11 +3,13 @@
 [default_view]
 
 keymap = [
+  # { keys = ["O"], commands = ["spawn alacritty --working-directory %d"] },
+
   { keys = ["escape"], commands = ["escape"] },
   { keys = ["W"], commands = ["close_tab"] },
-  { keys = ["q"], commands = ["close_tab"] },
-  { keys = ["ctrl+c"], commands = ["quit"] },
-  { keys = ["ctrl+z"], commands = ["suspend"] },
+  # { keys = ["q"], commands = ["close_tab"] },
+  # { keys = ["ctrl+c"], commands = ["quit"] },
+  # { keys = ["ctrl+z"], commands = ["suspend"] },
   { keys = ["Q"], commands = ["quit --output-current-directory"] },
 
   { keys = ["\t"], commands = ["tab_switch 1"] },
@@ -42,13 +44,12 @@ keymap = [
   { keys = ["n"], commands = ["search_next"] },
   { keys = ["N"], commands = ["search_prev"] },
 
-  { keys = ["g", "r"], commands = ["cd /"] },
-  { keys = ["g", "c"], commands = ["cd ~/.config"] },
-  { keys = ["g", "d"], commands = ["cd ~/Downloads"] },
-  { keys = ["g", "e"], commands = ["cd /etc"] },
+  # { keys = ["g", "r"], commands = ["cd /"] },
+  # { keys = ["g", "c"], commands = ["cd ~/.config"] },
+  # { keys = ["g", "d"], commands = ["cd ~/Downloads"] },
+  # { keys = ["g", "e"], commands = ["cd /etc"] },
   # { keys = ["g", "h"], commands = ["cd ~/"] },
 
-  { keys = ["x"], commands = ["cut_files"] },
 
   ####################
   # Netrw-alike
@@ -69,12 +70,11 @@ keymap = [
   # Commands
   { keys = ["r"], commands = ["sort reverse"] },
   { keys = ["D"], commands = ["delete_files"] },
-  { keys = ["R"], commands = ["bulk_rename"] },
+  { keys = ["R"], commands = ["shell vimv %s"] },
   { keys = ["d"], commands = [":mkdir "] },
   { keys = ["t"], commands = ["new_tab --current"] },
   # { keys = ["%"], commands = [":shell sh -c '[ \"$*\" != \"\" ] && [ ! -e \"$*\" ] && touch \"$*\"' _ "] },
   { keys = ["%"], commands = [":custom_search newfile "] },
-  # { keys = ["%"], commands = ["newfile"] },
   # { keys = ["x"], commands = ["open"] },
 
   { keys = ["g", "h"], commands = ["toggle_hidden"] },
@@ -82,11 +82,22 @@ keymap = [
   ####################
   # Netrw-inspired
   ####################
-  { keys = ["m", "a"], commands = ["select --all=true --toggle=true"] },
-  { keys = ["m", "f"], commands = ["select_fzf"] },
-  { keys = ["m", "c"], commands = ["select --all=true --deselect=true"] },
+  { keys = ["f", "x"], commands = ["cut_files"] },
+  { keys = ["f", "C"], commands = ["copy_files"] },
+  { keys = ["f", "p"], commands = ["paste_files"] },
+  { keys = ["f", "l"], commands = ["symlink_files --relative=false"] },
+  { keys = ["f", "L"], commands = ["symlink_files --relative=true"] },
 
+  { keys = ["m", "a"], commands = ["select --all=true --toggle=true"] }, # mark-all
+  { keys = ["m", "f"], commands = ["select_fzf"] },
+  { keys = ["m", "F"], commands = ["select --all=true --deselect=true"] },
   { keys = ["m", "b"], commands = ["add_bookmark"] },
+  { keys = ["m", "r"], commands = ["shell rmdir %s"] },
+
+  # { keys = ["p", "o"], commands = ["paste_files --overwrite=true"] },
+  # { keys = ["d", "d"], commands = ["cut_files"] },
+  # { keys = ["y", "y"], commands = ["copy_files"] },
+
   { keys = ["T", "b"], commands = ["cd_bookmark"] },
 
   { keys = ["g", "s"], commands = ["zi"] },
@@ -124,29 +135,23 @@ keymap = [
   ######
   # ranger alike
   ####
-  { keys = ["c", "d"], commands = [":cd "] },
+  { keys = ["c", "d"], commands = [":z "] },
   { keys = ["h"], commands = ["cd .."] },
   { keys = ["l"], commands = ["open"] },
   { keys = ["z", "z"], commands = [":filter "] },
   { keys = ["z", "f"], commands = ["search_fzf"] },
   { keys = ["ctrl+h"], commands = ["toggle_hidden"] },
 
-  { keys = ["!"], commands = [":shell "] },
-
-  { keys = ["w"], commands = ["show_tasks --exit-key=w"] },
-
-  { keys = ["p", "p"], commands = ["paste_files"] },
-  { keys = ["p", "o"], commands = ["paste_files --overwrite=true"] },
-  { keys = ["p", "l"], commands = ["symlink_files --relative=false"] },
-  { keys = ["p", "L"], commands = ["symlink_files --relative=true"] },
-
-  # { keys = ["d", "d"], commands = ["cut_files"] },
-  { keys = ["y", "y"], commands = ["copy_files"] },
   { keys = ["y", "n"], commands = ["copy_filename"] },
   { keys = ["y", "."], commands = ["copy_filename_without_extension"] },
   { keys = ["y", "p"], commands = ["copy_filepath"] },
   { keys = ["y", "a"], commands = ["copy_filepath --all-selected=true"] },
   { keys = ["y", "d"], commands = ["copy_dirpath"] },
+
+
+  { keys = ["!"], commands = [":shell "] },
+
+  { keys = ["w"], commands = ["show_tasks --exit-key=w"] },
 
   { keys = ["a"], commands = ["rename_append"] },
   { keys = ["A"], commands = ["rename_prepend"] },

@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+
+# Security measures:
+# * noclobber prevents you from overwriting a file with `>`
+# * noglob prevents expansion of wild cards
+# * nounset causes bash to fail if an undeclared variable is used (e.g. typos)
+# * pipefail causes a pipeline to fail also if a command other than the last one fails
+
+set -euo pipefail -o noclobber -o noglob
+
+## Meanings of exit codes:
+##
+## code | meaning    | action of ranger
+## -----+------------+-------------------------------------------
+## 0    | success    | Display stdout as preview
+## 1    | no preview | Display no preview at all
+
+IFS=$'\n'
+
+# Enable exiftool large file support
+# shopt -s expand_aliases
+# alias exiftool='exiftool -api largefilesupport=1'
+
+FILE_PATH=""
+PREVIEW_WIDTH=10
+PREVIEW_HEIGHT=10
+
+while [ "$#" -gt 0 ]; do
+    case "$1" in
+    "--path")
+        shift
+        FILE_PATH="$1"
+        ;;
+    "--preview-width")
+        shift
+        PREVIEW_WIDTH="$1"
+        ;;
+    "--preview-height")
+        shift
+        PREVIEW_HEIGHT="$1"
+        ;;
+    esac
+    shift
+done
+
+main () {
+  pistol "$FILE_PATH" && exit 0
+
+  exit 1
+}
+
+main
+
+# vi:ft=sh:sw=2

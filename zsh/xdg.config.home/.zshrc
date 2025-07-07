@@ -66,20 +66,20 @@ setopt EXTENDED_HISTORY
 #################################################
 # zsh-abbr 설정
 #################################################
-typeset -g ABBR_EXPAND_PUSH_ABBREVIATION_TO_HISTORY=1
-typeset -g ABBR_GET_AVAILABLE_ABBREVIATION=1
-typeset -g ABBR_LOG_AVAILABLE_ABBREVIATION=1
-
-# alias 에서 import 해서 사용할 예정이라 ~/.config 에 위치하지 않도록 한다.
-typeset -g ABBR_USER_ABBREVIATIONS_FILE="${XDG_STATE_HOME:-${HOME}/.local/state}/zsh-abbr-user"
-
-function sync-abbr() {
-    if [[ "$ABBR_USER_ABBREVIATIONS_FILE" != "" && -f "$ABBR_USER_ABBREVIATIONS_FILE" ]]; then
-      rm "$ABBR_USER_ABBREVIATIONS_FILE"
-    fi
-
-    abbr import-aliases
-}
+# typeset -g ABBR_EXPAND_PUSH_ABBREVIATION_TO_HISTORY=1
+# typeset -g ABBR_GET_AVAILABLE_ABBREVIATION=1
+# typeset -g ABBR_LOG_AVAILABLE_ABBREVIATION=1
+#
+# # alias 에서 import 해서 사용할 예정이라 ~/.config 에 위치하지 않도록 한다.
+# typeset -g ABBR_USER_ABBREVIATIONS_FILE="${XDG_STATE_HOME:-${HOME}/.local/state}/zsh-abbr-user"
+#
+# function sync-abbr() {
+#     if [[ "$ABBR_USER_ABBREVIATIONS_FILE" != "" && -f "$ABBR_USER_ABBREVIATIONS_FILE" ]]; then
+#       rm "$ABBR_USER_ABBREVIATIONS_FILE"
+#     fi
+#
+#     abbr import-aliases
+# }
 
 #################################################
 # ZVM 설정

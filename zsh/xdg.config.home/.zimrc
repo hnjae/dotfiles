@@ -1,16 +1,17 @@
 # NOTE:
 # zmodule 은 built-in module 과 이름이 겹치면 안된다! <2025-06-01>
-# NOTE: my- prefix 는 namespace 충돌을 피하기 위한 것.
+# `my-` prefix 는 namespace 충돌을 피하기 위한 것.
 
 # This is not sourced during shell startup, and it's only used to configure the
 # zimfw plugin manager.
+#
+# -> 근데 source 되는데?? <2025-07-07>
 
 ###############################################################################
 # Modules
 ###############################################################################
 
 zmodule direnv
-# zmodule "$ZDOTDIR/my-p10k-instant-prompt" # direnv should be loaded before p10k-instant-prompt
 
 # 단순 환경변수 설정 또는 alias 설정만 있는 모듈들
 zmodule "$ZDOTDIR/my-bat"
@@ -34,9 +35,9 @@ zmodule termtitle
 zmodule "$ZDOTDIR/my-joshuto"
 zmodule "$ZDOTDIR/my-lf"
 zmodule "$ZDOTDIR/my-navi"
-zmodule "$ZDOTDIR/my-yazi"
-# zmodule "MichaelAquilina/zsh-you-should-use"
-zmodule olets/zsh-abbr --source zsh-abbr.plugin.zsh --use git  # it includes submodules
+# zmodule "$ZDOTDIR/my-yazi"
+zmodule "MichaelAquilina/zsh-you-should-use"
+# zmodule olets/zsh-abbr --source zsh-abbr.plugin.zsh --use git  # it includes submodules # THIS IS FREAKING SLOW (2025-07-07)
 
 zmodule "$ZDOTDIR/my-git" # forgit 보다 먼저 로드해야 한다.
 zmodule wfxr/forgit --source forgit.plugin.zsh
@@ -72,7 +73,7 @@ zmodule zsh-users/zsh-completions --fpath src
 
 zmodule "$ZDOTDIR/my-compinit"
 zmodule Aloxaf/fzf-tab --source fzf-tab.plugin.zsh # source after compinit
-
+zstyle ':fzf-tab:*' use-fzf-default-opts yes
 
 ###############################################################################
 # Modules that must be initialized after compinit

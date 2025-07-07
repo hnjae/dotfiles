@@ -1,7 +1,21 @@
 % tmux
 
 # attach session
-tmux attch -t <session>
+tmux attach -t <session>
 
 # rename-session
 tmux rename-session -t <session> <new-name>
+
+# new-session
+tmux new -s <session-name>
+
+# list sessoin
+tmux ls
+
+# Source tmux.conf
+tmux source-file "${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf"
+
+;# popup window
+;<prefix>
+
+$ session: tmux ls | cut -d: -f1

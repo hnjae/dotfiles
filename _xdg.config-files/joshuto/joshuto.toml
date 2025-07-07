@@ -2,14 +2,11 @@ xdg_open      = true
 xdg_open_fork = true
 use_trash     = true
 
-# custom_commands = [
-#    { name = "rgfzf", command = "/home/<USER>/.config/joshuto/rgfzf '%text' %s" },
-#    { name = "rg", command = "/home/<USER>/.config/joshuto/rg '%text' %s" }
-# ]
-
 # TODO: $HOME 에 relative 하게 설정할 수는 없나? <2025-07-06>
 custom_commands = [
+  # { name = "newfile", command = "~/.config/joshuto/bin/newfile '%text'" },
   { name = "newfile", command = "/home/hnjae/.config/joshuto/bin/newfile '%text'" },
+  # { name = "rgfzf", command = "/home/hnjae/.config/joshuto/bin/rgfzf '%text' %s" },
   # { name = "rg", command = "/home/<USER>/.config/joshuto/rg '%text' %s" },
 ]
 
@@ -24,4 +21,4 @@ show_hidden       = true
 max_preview_size = "128 MB"
 use_xdg_thumbs   = true
 xdg_thumb_size   = "xxlarge"
-preview_script   = "/home/hnjae/.config/joshuto/bin/newfile '%text'"
+preview_script   = "~/.config/joshuto/bin/pistol-wrapper"
