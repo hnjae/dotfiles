@@ -244,18 +244,18 @@ if command -v zsh >/dev/null 2>&1 && is_internet_connected; then
 	zimfw init
 	'
 
-	log info "zsh" "initializing zsh-abbr"
-	TERM=dumb zsh --interactive -c '
-	if ! command -v abbr >/dev/null 2>&1; then
-		return
-	fi
-
-	if [[ "$ABBR_USER_ABBREVIATIONS_FILE" != "" && -f "$ABBR_USER_ABBREVIATIONS_FILE" ]]; then
-		rm "$ABBR_USER_ABBREVIATIONS_FILE"
-	fi
-
-	abbr import-aliases >/dev/null
-	'
+	# log info "zsh" "initializing zsh-abbr"
+	# TERM=dumb zsh --interactive -c '
+	# if ! command -v abbr >/dev/null 2>&1; then
+	# 	return
+	# fi
+	#
+	# if [[ "$ABBR_USER_ABBREVIATIONS_FILE" != "" && -f "$ABBR_USER_ABBREVIATIONS_FILE" ]]; then
+	# 	rm "$ABBR_USER_ABBREVIATIONS_FILE"
+	# fi
+	#
+	# abbr import-aliases >/dev/null
+	# '
 fi
 
 exit 0

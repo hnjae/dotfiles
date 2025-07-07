@@ -1,5 +1,8 @@
 % flatpak, permission
 
+# List default apps
+flatpak permissions desktop-used-apps
+
 # Remove default app
 flatpak permission-remove desktop-used-apps <mime>
 

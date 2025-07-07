@@ -7,14 +7,21 @@ hooks = ["echo \"The current scheme is: $(tinty current)\""]
 path = "~/.config/tinted-theming/my-templates/tinted-alacritty"
 name = "alacritty"
 themes-dir = "themes"
-hook = "cp -f %f ~/.config/alacritty/_base16.toml && touch ~/.config/alacritty/alacritty.toml"
+hook = "cp -f %f ~/.config/alacritty/_base24.toml && touch ~/.config/alacritty/alacritty.toml"
+supported-systems = ["base24"]
+
+[[items]]
+path = "~/.config/tinted-theming/my-templates/tinted-wezterm"
+name = "wezterm"
+themes-dir = "themes"
+hook = "cp -f %f ~/.config/wezterm/colors/_base24.toml"
 supported-systems = ["base24"]
 
 [[items]]
 path = "https://github.com/tinted-theming/tinted-terminal"
 name = "ghostty"
 themes-dir = "themes/ghostty"
-hook = "command cp -f %f ~/.config/ghostty/themes/_base16"
+hook = "command cp -f %f ~/.config/ghostty/themes/_base24"
 supported-systems = ["base24"]
 
 [[items]]

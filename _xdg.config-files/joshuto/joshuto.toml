@@ -12,7 +12,9 @@ custom_commands = [
 
 
 [display]
-mode              = "default"
+mode         = "default"
+column_ratio = [1, 10, 7]
+# mode              = "hsplit"
 line_number_style = "relative"
 show_borders      = false
 show_hidden       = true

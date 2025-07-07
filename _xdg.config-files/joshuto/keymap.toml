@@ -10,7 +10,8 @@ keymap = [
   # { keys = ["q"], commands = ["close_tab"] },
   # { keys = ["ctrl+c"], commands = ["quit"] },
   # { keys = ["ctrl+z"], commands = ["suspend"] },
-  { keys = ["Q"], commands = ["quit --output-current-directory"] },
+  # { keys = ["Q"], commands = ["quit --output-current-directory"] },
+  { keys = ["q"], commands = ["quit --output-current-directory"] },
 
   { keys = ["\t"], commands = ["tab_switch 1"] },
   { keys = ["backtab"], commands = ["tab_switch -1"] },
@@ -67,6 +68,9 @@ keymap = [
   { keys = ["M"], commands = ["cursor_move_page_middle"] },
   { keys = ["L"], commands = ["cursor_move_page_end"] },
 
+  { keys = ["g", "t"], commands = ["tab_switch 1"] },
+  { keys = ["g", "T"], commands = ["tab_switch -1"] },
+
   # Commands
   { keys = ["r"], commands = ["sort reverse"] },
   { keys = ["D"], commands = ["delete_files"] },
@@ -101,6 +105,7 @@ keymap = [
   { keys = ["T", "b"], commands = ["cd_bookmark"] },
 
   { keys = ["g", "s"], commands = ["zi"] },
+  # { keys = ["g", "s"], commands = [":z "] },
   { keys = ["g", "f"], commands = ["subdir_fzf"] },
 
   { keys = ["i", "s"], commands = ["linemode size"] },
@@ -135,7 +140,6 @@ keymap = [
   ######
   # ranger alike
   ####
-  { keys = ["c", "d"], commands = [":z "] },
   { keys = ["h"], commands = ["cd .."] },
   { keys = ["l"], commands = ["open"] },
   { keys = ["z", "z"], commands = [":filter "] },

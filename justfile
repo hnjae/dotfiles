@@ -73,7 +73,7 @@ sync:
 build-tinted:
     #!/usr/bin/env bash
 
-    # WIP: add tinted-builder-rust using nix. This is a temporary solution.
+    # WIP: add tinted-builder-rust using nix. This is a temporary impure solution.
     PATH="~/.local/state/cargo/bin:$PATH"
 
     templates="./_xdg.config-files/tinted-theming/my-templates"

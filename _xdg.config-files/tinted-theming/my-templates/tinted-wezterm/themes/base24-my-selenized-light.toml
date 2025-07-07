@@ -1,0 +1,36 @@
+# Base24: my-selenized-light
+# Scheme by hnjae (https://github.com/hnjae), jan-warchol (https://github.com/jan-warchol/selenized)
+
+[colors]
+foreground = "#53676d"
+background = "#fbf3db"
+selection_bg = "#53676d"
+selection_fg = "#fbf3db"
+cursor_bg = "#53676d"
+cursor_border = "#53676d"
+cursor_fg = "#fbf3db"
+
+
+ansi = [
+  "#ece3cc",
+  "#cc1729",
+  "#428b00",
+  "#ad8900",
+  "#006dce",
+  "#c44392",
+  "#00978a",
+  "#3a4d53",
+]
+
+brights = [
+  "#909995",
+  "#d2212d",
+  "#489100",
+  "#ad8900",
+  "#0072d4",
+  "#ca4898",
+  "#009c8f",
+  "#909995",
+]
+
+# vi:ft=toml

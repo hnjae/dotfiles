@@ -1,7 +1,7 @@
 % xdg, freedesktop
 
 # set default web browser
-xdg-settings set default-web-browser <org.mozilla.firefox.desktop>
+xdg-settings set default-web-browser <firefox.desktop>
 
 # get default web browser
 xdg-settings get default-web-browser

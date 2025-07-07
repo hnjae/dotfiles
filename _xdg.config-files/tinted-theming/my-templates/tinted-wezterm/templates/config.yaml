@@ -1,0 +1,3 @@
+default:
+  filename: themes/{{ scheme-system }}-{{ scheme-slug }}.toml
+  supported-systems: [base24]

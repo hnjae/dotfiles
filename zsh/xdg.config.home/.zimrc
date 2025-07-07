@@ -4,8 +4,6 @@
 
 # This is not sourced during shell startup, and it's only used to configure the
 # zimfw plugin manager.
-#
-# -> 근데 source 되는데?? <2025-07-07>
 
 ###############################################################################
 # Modules
@@ -48,7 +46,6 @@ zmodule "$ZDOTDIR/my-utilities"
 # TODO: c-r 맵핑 해제. fzf 랑 겹침 <2025-06-29>
 zmodule jeffreytse/zsh-vi-mode
 
-zmodule "$ZDOTDIR/my-fzf"
 zmodule fzf
 
 ###############################################################################
@@ -73,7 +70,6 @@ zmodule zsh-users/zsh-completions --fpath src
 
 zmodule "$ZDOTDIR/my-compinit"
 zmodule Aloxaf/fzf-tab --source fzf-tab.plugin.zsh # source after compinit
-zstyle ':fzf-tab:*' use-fzf-default-opts yes
 
 ###############################################################################
 # Modules that must be initialized after compinit
@@ -96,7 +92,6 @@ zmodule zsh-users/zsh-syntax-highlighting
 # zmodule zsh-users/zsh-history-substring-search # use fzf's ctrl-r instead
 
 # Fish-like autosuggestions for Zsh.
-ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion)
 zmodule zsh-users/zsh-autosuggestions
 
 ##########################################################
