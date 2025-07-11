@@ -78,6 +78,8 @@ keymap = [
   { keys = ["d"], commands = [":mkdir "] },
   { keys = ["t"], commands = ["new_tab --current"] },
   # { keys = ["%"], commands = [":shell sh -c '[ \"$*\" != \"\" ] && [ ! -e \"$*\" ] && touch \"$*\"' _ "] },
+  { keys = ["f3"], commands = ["shell /home/hnjae/.config/joshuto/bin/trash-with-trace %s"] },
+  { keys = ["f6"], commands = ["shell nvim %s"] },
   { keys = ["%"], commands = [":custom_search newfile "] },
   # { keys = ["x"], commands = ["open"] },
 
@@ -102,7 +104,7 @@ keymap = [
   # { keys = ["d", "d"], commands = ["cut_files"] },
   # { keys = ["y", "y"], commands = ["copy_files"] },
 
-  { keys = ["T", "b"], commands = ["cd_bookmark"] },
+  # { keys = ["T", "b"], commands = ["cd_bookmark"] },
 
   { keys = ["g", "s"], commands = ["zi"] },
   # { keys = ["g", "s"], commands = [":z "] },

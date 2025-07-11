@@ -10,8 +10,8 @@ term = "xterm-256color"
 # Font
 ################################################################################
 # run `ghostty +list-fonts` to get a list of available fonts
-# font-family = "Monospace"
 
+# ※ mono space 가 아닌 font 사용 가능
 font-family = "MesloLGM Nerd Font"
 font-family = "Noto Sans Mono CJK JP"
 font-family = "Noto Sans Mono CJK KR"
@@ -36,7 +36,9 @@ window-decoration = client
 # Style
 ################################################################################
 # run `ghostty + list-themes` to get a list of available themes
-theme = _base16
+theme = _base24
+# background-opacity = 1.0
+# background-blur = true
 
 # default: 0.7 <version 1.0.1>
 unfocused-split-opacity=1.0

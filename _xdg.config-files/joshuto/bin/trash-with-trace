@@ -1,0 +1,78 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+files=()
+
+usage() {
+  echo "Usage: $(basename -- "$0") [--] [files...]"
+  exit 1
+}
+
+while getopts ":h" opt; do
+  case ${opt} in
+  h)
+    usage
+    ;;
+  \?)
+    echo "Invalid Option: -$OPTARG" 1>&2
+    usage
+    ;;
+  :)
+    echo "Invalid Option: -$OPTARG requires an argument" 1>&2
+    usage
+    ;;
+  esac
+done
+shift $((OPTIND - 1))
+
+files=("$@")
+
+# confirm() {
+#   echo "Are you sure? [y/Any]:"
+#   read -r response
+#
+#   case "$response" in
+#   "y")
+#     true
+#     ;;
+#   *)
+#     false
+#     ;;
+#   esac
+# }
+
+main() {
+  for file in "${files[@]}"; do
+      echo "$file"
+  done
+
+  echo "Are you sure? [y/Any]:"
+  stty -icanon -echo
+  eval "char=$(dd bs=1 count=1 2>/dev/null)"
+  stty icanon echo
+  # read_char char 로 사용. $char 에 1글자가 들어감.
+
+  if [ "$char" != "y" ]; then
+    exit 0
+  fi
+
+  for file in "${files[@]}"; do
+    if [ ! -e "$file" ]; then
+      continue
+    fi
+
+    is_file=$([ -f "$file" ] && echo "true" || echo "false")
+    if trash-put -- "$file"; then
+      if "$is_file"; then
+        touch "${file%.*} DELETED"
+      else
+        touch "${file} DELETED"
+      fi
+    fi
+  done
+}
+
+main
+
+# vi:ft=sh:sw=2

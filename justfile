@@ -72,14 +72,19 @@ sync:
 
 build-tinted:
     #!/usr/bin/env bash
+    # Create ./_xdg.config-files/tinted-theming/my-templates/tinted-*/themes/base24-*
+
+    set -euo pipefail
 
     # WIP: add tinted-builder-rust using nix. This is a temporary impure solution.
     PATH="~/.local/state/cargo/bin:$PATH"
 
     templates="./_xdg.config-files/tinted-theming/my-templates"
-    schemes="./_xdg.data-files/tinted-theming/tinty/custom-schemes"
+    myschemes="./_xdg.data-files/tinted-theming/tinty/custom-schemes"
+    schemes="./_xdg.data-files/tinted-theming/tinty/repos/schemes/base24"
     for template in "$templates"/*; do
-        tinted-builder-rust build -s "$schemes" "$template"
+        tinted-builder-rust build -s "$myschemes" "$template"
+        [ -d "$schemes" ] &&  tinted-builder-rust build -s "$schemes" "$template"
     done
 
 update-tinted:
@@ -87,8 +92,9 @@ update-tinted:
 
     set -eu
 
-    theme="base24-my-gruvbox-light"
-    # theme="base24-my-selenized-light"
+    # theme="base24-my-gruvbox-light"
+    # theme="base24-my-kanagawa-dragon"
+    theme="base24-my-rose-pine"
 
     if command -v tinty >/dev/null 2>&1; then
         tinty sync

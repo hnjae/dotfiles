@@ -1,0 +1,12 @@
+default:
+  filename: themes/{{ scheme-system }}-{{ scheme-slug }}.colors
+  supported-systems: [base24]
+# default:
+#   filename: themes/{{ scheme-system }}-{{ scheme-slug }}.colors
+#   supported-systems: [base24]
+# default-blue:
+#   filename: themes/{{ scheme-system }}-{{ scheme-slug }}-blue.colors
+#   supported-systems: [base24]
+# default-green:
+#   filename: themes/{{ scheme-system }}-{{ scheme-slug }}-green.colors
+#   supported-systems: [base24]

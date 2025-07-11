@@ -1,4 +1,8 @@
-Copyright (c) 2024 Lauri Niskanen
+tinted-konsole is a modification of [base24-konsole](https://github.com/tinted-theming/base24-konsole). Which follows following license.
+
+# MIT License
+
+Copyright (c) 2020 Base24
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

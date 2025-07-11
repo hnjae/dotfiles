@@ -30,3 +30,17 @@ name = "nvim"
 themes-dir = "lua/colors"
 hook = "command cp -f %f ~/.config/nvim/lua/_base24.lua"
 supported-systems = ["base24"]
+
+[[items]]
+path = "~/.config/tinted-theming/my-templates/tinted-kdeplasma"
+name = "kdeplasma"
+themes-dir = "themes"
+hook = "command cp -f %f ~/.local/share/color-schemes/_base24.colors"
+supported-systems = ["base24"]
+
+[[items]]
+path = "~/.config/tinted-theming/my-templates/tinted-konsole"
+name = "konsole"
+themes-dir = "themes"
+hook = "command cp -f %f ~/.local/share/konsole/_base24.colorscheme"
+supported-systems = ["base24"]
