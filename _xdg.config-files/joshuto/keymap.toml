@@ -73,6 +73,7 @@ keymap = [
 
   # Commands
   { keys = ["r"], commands = ["sort reverse"] },
+  # { keys = ["D"], commands = ["delete_files --foreground=true"] },
   { keys = ["D"], commands = ["delete_files"] },
   { keys = ["R"], commands = ["shell vimv %s"] },
   { keys = ["d"], commands = [":mkdir "] },
@@ -88,8 +89,10 @@ keymap = [
   ####################
   # Netrw-inspired
   ####################
-  { keys = ["f", "x"], commands = ["cut_files"] },
-  { keys = ["f", "C"], commands = ["copy_files"] },
+  { keys = ["f", "d"], commands = ["cut_files"] },
+  { keys = ["f", "y"], commands = ["copy_files"] },
+  # { keys = ["f3"], commands = ["edit"] },
+  { keys = ["f4"], commands = ["copy_files"] },
   { keys = ["f", "p"], commands = ["paste_files"] },
   { keys = ["f", "l"], commands = ["symlink_files --relative=false"] },
   { keys = ["f", "L"], commands = ["symlink_files --relative=true"] },
@@ -113,22 +116,21 @@ keymap = [
   { keys = ["i", "s"], commands = ["linemode size"] },
   { keys = ["i", "m"], commands = ["linemode mtime"] },
   { keys = ["i", "M"], commands = ["linemode size | mtime"] },
-  { keys = ["i", "u"], commands = ["linemode user"] },
-  { keys = ["i", "U"], commands = ["linemode user | group"] },
+  { keys = ["i", "u"], commands = ["linemode user | group"] },
   { keys = ["i", "p"], commands = ["linemode perm"] },
 
   { keys = ["s", "r"], commands = ["sort reverse"] },
   { keys = ["s", "l"], commands = ["sort lexical"] },
-  { keys = ["s", "m"], commands = ["sort mtime"] },
+  { keys = ["s", "m"], commands = ["sort mtime", "linemode size | mtime"] },
   { keys = ["s", "n"], commands = ["sort natural"] },
-  { keys = ["s", "s"], commands = ["sort size"] },
+  { keys = ["s", "s"], commands = ["sort size", "linemode size"] },
   { keys = ["s", "e"], commands = ["sort ext"] },
 
 
   ##########
   # vim-alike
   ########
-  { keys = ["g", "x"], commands = ["open"] },
+  { keys = ["g", "x"], commands = ["shell xdg-open %s"] },
 
   { keys = ["ctrl+u"], commands = ["cursor_move_page_up 0.5"] },
   { keys = ["ctrl+d"], commands = ["cursor_move_page_down 0.5"] },
@@ -144,6 +146,10 @@ keymap = [
   ####
   { keys = ["h"], commands = ["cd .."] },
   { keys = ["l"], commands = ["open"] },
+
+  { keys = ["v"], commands = ["select --all=true"] },
+  { keys = ["V"], commands = ["toggle_visual"] },
+
   { keys = ["z", "z"], commands = [":filter "] },
   { keys = ["z", "f"], commands = ["search_fzf"] },
   { keys = ["ctrl+h"], commands = ["toggle_hidden"] },
@@ -162,7 +168,6 @@ keymap = [
   { keys = ["a"], commands = ["rename_append"] },
   { keys = ["A"], commands = ["rename_prepend"] },
   { keys = [" "], commands = ["select --toggle=true"] },
-  { keys = ["V"], commands = ["toggle_visual"] },
 
   { keys = ["c", "w"], commands = [":rename "] },
   { keys = ["/"], commands = [":search "] },
@@ -177,7 +182,7 @@ keymap = [
   { keys = ["ctrl+t"], commands = ["new_tab --cursor"] },
   { keys = ["ctrl+w"], commands = ["close_tab"] },
   { keys = ["?"], commands = ["help"] },
-  { keys = ["delete"], commands = ["delete_files"] },
+  { keys = ["delete"], commands = ["delete_files --foreground=true"] },
 
   # arrow keys
   { keys = ["arrow_up"], commands = ["cursor_move_up"] },

@@ -32,8 +32,8 @@ palette:
   base03: "#8A8980" # for comments (lotusGray3)
   base04: "#727169" # (palette.fujiGray)
   base05: "#545464" # Foreground (lotusInk1)
-  base06: "#43436C" # ANSI 15 - bright white (lotusInk2)
-  base07: "#545464" # ANSI  7 - White
+  base06: "#43436C" # ANSI 15 - bright white (lotusInk2) ???
+  base07: "#545464" # ANSI  7 - White ???
   base08: "#C84053" # ANSI  1 - red (lotusRed)
   base09: "#DE9800" # (bright yellow) (ANSI ~11) (lotusYellow3)
   base10: "#E5DDB0" # darker background (palette.lotusWhite2)

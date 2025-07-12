@@ -1,9 +1,17 @@
 # vi:ft=zsh
 
+local src="$1"
+local dst="$2"
+
+if [[ "$src" == "" || "$dst" == "" || "$3" != "" ]]; then
+  echo "Usage: (command) <source> <destination>"
+  return
+fi
+
 local exclude_file="${XDG_DATA_HOME:-$HOME/.local/share}/rsync-exclude"
 local exclude_opt=""
 if [[ -e "$exclude_file" ]]; then
   exclude_opt="--exclude-from=$exclude_file"
 fi
 
-rsync --info=progress2 -h -rt -W -s --safe-links --checksum --cc=xxh3 --omit-dir-times --no-perms --inplace "$exclude_opt" -- "$@"
+rsync --info=progress2 -h -rt -W -s --safe-links --checksum --cc=xxh3 --omit-dir-times --no-perms --inplace "$exclude_opt" -- "$src" "$dst"

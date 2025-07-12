@@ -62,15 +62,15 @@ return {
       { [1] = "<C-w>K",    mode = { "n" }, icon = { icon = "󰖲 " }, desc = "move-window-to-far-top" },
       { [1] = "<C-w>L",    mode = { "n" }, icon = { icon = "󰖲 " }, desc = "move-window-to-far-right" }, -- alts: nf-md-pan
 
-      { [1] = "<C-w>w",       mode = { "n" }, icon = { icon = "󰆾 " }, desc = "switch-windows" },
-      { [1] = "<C-w>h",       mode = { "n" }, icon = { icon = "󰆾 " }, desc = "go-to-the-left-window" }, -- 󰆾
-      { [1] = "<C-w>j",       mode = { "n" }, icon = { icon = "󰆾 " }, desc = "go-to-the-down-window" },
-      { [1] = "<C-w>k",       mode = { "n" }, icon = { icon = "󰆾 " }, desc = "go-to-the-up-window" },
-      { [1] = "<C-w>l",       mode = { "n" }, icon = { icon = "󰆾 " }, desc = "go-to-the-right-window" },
-      { [1] = "<C-w><Left>",  mode = { "n" }, icon = { icon = "󰆾 " }, desc = "go-to-the-left-window" },
-      { [1] = "<C-w><Up>",    mode = { "n" }, icon = { icon = "󰆾 " }, desc = "go-to-the-up-window" },
-      { [1] = "<C-w><Down>",  mode = { "n" }, icon = { icon = "󰆾 " }, desc = "go-to-the-down-window" },
-      { [1] = "<C-w><Right>", mode = { "n" }, icon = { icon = "󰆾 " }, desc = "go-to-the-right-window" },
+      { [1] = "<C-w>w",       mode = { "n" }, icon = { icon = "󰆾 " }, desc = "switch-windows",         hidden = true },
+      { [1] = "<C-w>h",       mode = { "n" }, icon = { icon = "󰆾 " }, desc = "go-to-the-left-window",  hidden = true }, -- 󰆾
+      { [1] = "<C-w>j",       mode = { "n" }, icon = { icon = "󰆾 " }, desc = "go-to-the-down-window",  hidden = true },
+      { [1] = "<C-w>k",       mode = { "n" }, icon = { icon = "󰆾 " }, desc = "go-to-the-up-window",    hidden = true },
+      { [1] = "<C-w>l",       mode = { "n" }, icon = { icon = "󰆾 " }, desc = "go-to-the-right-window", hidden = true },
+      { [1] = "<C-w><Left>",  mode = { "n" }, icon = { icon = "󰆾 " }, desc = "go-to-the-left-window",  hidden = true },
+      { [1] = "<C-w><Up>",    mode = { "n" }, icon = { icon = "󰆾 " }, desc = "go-to-the-up-window",    hidden = true },
+      { [1] = "<C-w><Down>",  mode = { "n" }, icon = { icon = "󰆾 " }, desc = "go-to-the-down-window",  hidden = true },
+      { [1] = "<C-w><Right>", mode = { "n" }, icon = { icon = "󰆾 " }, desc = "go-to-the-right-window", hidden = true },
 
 
       -- change buffer
@@ -84,18 +84,18 @@ return {
 
       { [1] = "gO", icon = { icon = " " }, desc = "document-symbol" }, -- nf-cod-symbol_class
       { [1] = "gi", icon = { icon = "󰗧 " }, desc = "goto-last-insert" }, -- nf-md-cursor_text
-      { [1] = "gx", icon = { icon = "󰏌 " }, desc = "Open with system app" }, -- nf-md-open_in_new:w
+      { [1] = "gx", icon = { icon = "󰏌 " }, desc = "Open with system app", hidden = true, }, -- nf-md-open_in_new:w
 
       { [1] = "g,", icon = { icon = "󰆾 " }, desc = "goto-[count]-newer-position-in-change-list", }, -- nf-md-cursor_move
       { [1] = "g;", icon = { icon = "󰆾 " }, desc = "goto-[count]-older-position-in-change-list", }, -- nf-md-cursor_move
       -- { [1] = "gd", icon = { icon = "󰆾 " }, desc = "goto-local-declaration", },
       -- { [1] = "gD", icon = { icon = "󰆾 " }, desc = "goto-global-declaration", },
 
-      { [1] = "gt", icon = { icon = "󱞫 " }, desc = "goto-next-tab" }, -- nf-md-arrow_right_top
-      { [1] = "gT", icon = { icon = "󱞧 " }, desc = "goto-prev-tab" },
+      { [1] = "gt", icon = { icon = "󱞫 " }, desc = "goto-next-tab", hidden = true, }, -- nf-md-arrow_right_top
+      { [1] = "gT", icon = { icon = "󱞧 " }, desc = "goto-prev-tab", hidden = true },
 
-      { [1] = "gU", icon = { icon = "󰬶 " }, desc = "uppercase" }, -- nf-md-format_letter_case_upper
-      { [1] = "gu", icon = { icon = "󰬵 " }, desc = "lowercase" }, -- nf-md-format_letter_case_lower
+      { [1] = "gU", icon = { icon = "󰬶 " }, desc = "uppercase", hidden = true }, -- nf-md-format_letter_case_upper
+      { [1] = "gu", icon = { icon = "󰬵 " }, desc = "lowercase", hidden =true }, -- nf-md-format_letter_case_lower
       { [1] = "g~", icon = { icon = "󰬵 " }, desc = "toggle-case" }, -- nf-md-format_letter_case_lower
 
 
@@ -144,8 +144,8 @@ return {
       { [1] = "]m", icon = { icon = licons.method }, mode = { "n", "x", "o" }, desc = "prev-method" },
       { [1] = "]M", icon = { icon = licons.method }, mode = { "n", "x", "o" }, desc = "prev-method-end" },
 
-      { [1] = "gg", icon = { icon = "󰞕 " }, mode = { "n", "x", "o" }, desc = "goto-first-line" }, -- nf-md-arrow_collapse_up
-      { [1] = "G",  icon = { icon = "󰞒 " }, mode = { "n", "x", "o" }, desc = "last-line" }, -- nf-md-page_first
+      { [1] = "gg", icon = { icon = "󰞕 " }, mode = { "n", "x", "o" }, desc = "goto-first-line", hidden = true }, -- nf-md-arrow_collapse_up
+      { [1] = "G",  icon = { icon = "󰞒 " }, mode = { "n", "x", "o" }, desc = "last-line", hidden = true }, -- nf-md-page_first
 
       { [1] = "0",      icon = { icon = "󰘀 " }, mode = { "n", "x", "o" }, desc = "start-of-line" }, -- nf-md-page_first
       { [1] = "<Home>", icon = { icon = "󰘀 " }, mode = { "n", "x", "o" }, desc = "start-of-line" }, -- nf-md-page_first
@@ -159,14 +159,14 @@ return {
       { [1] = "{",  icon = { icon = licons.prev }, mode = { "n", "x", "o" }, desc = "prev-empty-line (paragraph)" },
       { [1] = "}",  icon = { icon = licons.next }, mode = { "n", "x", "o" }, desc = "next-empty-line (paragraph)" },
 
-      { [1] = "h",       icon = { icon = "󰅁 " }, mode = { "n", "x", "o" }, desc = "left" },
-      { [1] = "j",       icon = { icon = "󰅀 " }, mode = { "n", "x", "o" }, desc = "down" },
-      { [1] = "k",       icon = { icon = "󰅃 " }, mode = { "n", "x", "o" }, desc = "up" },
-      { [1] = "l",       icon = { icon = "󰅂 " }, mode = { "n", "x", "o" }, desc = "right" },
-      { [1] = "<Left>",  icon = { icon = "󰅁 " }, mode = { "n", "x", "o" }, desc = "left" },
-      { [1] = "<Down>",  icon = { icon = "󰅀 " }, mode = { "n", "x", "o" }, desc = "down" },
-      { [1] = "<Up>",    icon = { icon = "󰅃 " }, mode = { "n", "x", "o" }, desc = "up" },
-      { [1] = "<Right>", icon = { icon = "󰅂 " }, mode = { "n", "x", "o" }, desc = "right" },
+      { [1] = "h",       icon = { icon = "󰅁 " }, mode = { "n", "x", "o" }, desc = "left",  hidden = true },
+      { [1] = "j",       icon = { icon = "󰅀 " }, mode = { "n", "x", "o" }, desc = "down",  hidden = true },
+      { [1] = "k",       icon = { icon = "󰅃 " }, mode = { "n", "x", "o" }, desc = "up",    hidden = true },
+      { [1] = "l",       icon = { icon = "󰅂 " }, mode = { "n", "x", "o" }, desc = "right", hidden = true },
+      { [1] = "<Left>",  icon = { icon = "󰅁 " }, mode = { "n", "x", "o" }, desc = "left",  hidden =true },
+      { [1] = "<Down>",  icon = { icon = "󰅀 " }, mode = { "n", "x", "o" }, desc = "down",  hidden =true },
+      { [1] = "<Up>",    icon = { icon = "󰅃 " }, mode = { "n", "x", "o" }, desc = "up",    hidden= true },
+      { [1] = "<Right>", icon = { icon = "󰅂 " }, mode = { "n", "x", "o" }, desc = "right", hidden= true },
 
       { [1] = ",",  icon = { icon = licons.prev }, mode = { "n", "x", "o" }, desc = "prev-ftFT" },
       { [1] = ";",  icon = { icon = licons.next }, mode = { "n", "x", "o" }, desc = "next-ftFT" },

@@ -11,3 +11,12 @@ rustic diff <snapshot-id1> <snapshot-id2>
 
 # scrub
 rustic check --read-data --read-data-subset '<n>/<m>'
+
+# set compression
+rustic config --set-compression 12
+
+# set datapack size
+rustic config --set-datapack-size "16 MiB"
+
+# set datapack size limit
+rustic config --set-datapack-size-limit "230 MiB"

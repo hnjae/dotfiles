@@ -169,3 +169,9 @@ git archive --format=tar HEAD | zstd -12 -T0 -o HEAD.tar.zst
 
 # Display logs of a specific file (특정 파일의 로그를 출력)
 git log --diff-filter=A --follow --format="%C(auto)%h %aI %s [%an]" -- <path>
+
+# Clean (-d: recursive)
+git clean -d --force
+
+# Clean (Remove all untracked files)
+git reset --hard && git clean --force -dx

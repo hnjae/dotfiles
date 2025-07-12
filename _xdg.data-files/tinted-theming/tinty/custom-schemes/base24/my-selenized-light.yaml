@@ -19,8 +19,8 @@ palette:
   base03: "#909995" # (grey) comments
   base04: "#6f8583" # (light grey) dark foreground
   base05: "#53676D" # Foreground
-  base06: "#3A4D53" # ANSI 15 - bright white
-  base07: "#909995" # ANSI  7 - White
+  base06: "#3A4D53" # ANSI  7 - White
+  base07: "#909995" # ANSI 15 - bright white
   base10: "#e9e4d0" # darker background
   base11: "#cfcebe" # darkest background
   base09: "#AD8900" # (orange) (ANSI ~3)

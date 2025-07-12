@@ -22,8 +22,8 @@ palette:
   base03: "#928374" # comments
   base04: "#7c6f64" # dark foreground
   base05: "#3c3836" # Foreground
-  base06: "#3c3836" # ANSI 15 - bright white
-  base07: "#7c6f64" # ANSI  7 - White
+  base06: "#3c3836" # ANSI  7 - White
+  base07: "#7c6f64" # ANSI 15 - bright white
   base08: "#9d0006" # ANSI  1 - red
   base09: "#d65d0e" # (ANSI ~3) (faded_orange)
   base10: "#f2e5bc" # darker background

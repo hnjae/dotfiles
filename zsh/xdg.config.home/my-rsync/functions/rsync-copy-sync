@@ -1,3 +1,11 @@
 # vi:ft=zsh
 
-rsync --info=progress2 -h -s -aHAXWE --numeric-ids --fuzzy --delete-after -- "$@"
+local src="$1"
+local dst="$2"
+
+if [[ "$src" == "" || "$dst" == "" || "$3" != "" ]]; then
+  echo "Usage: (command) <source> <destination>"
+  return
+fi
+
+rsync --info=progress2 -h -s -aHAXWE --numeric-ids --fuzzy --delete-after -- "$src" "$dst"
