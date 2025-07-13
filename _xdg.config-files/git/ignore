@@ -13,7 +13,7 @@ Thumbs.db
 # KDE
 .directory
 
-# python
+# Python
 .ropeproject
 __pycache__
 .mypy_cache
@@ -22,4 +22,8 @@ __pycache__
 
 # nix-flake,
 .direnv
+
+# Editors
+*~
+
 # vi:ft=gitignore:

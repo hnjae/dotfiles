@@ -1,0 +1,10 @@
+# vim: ft=gitconfig
+# Scheme System: base24
+# Scheme Name: my-rose-pine
+# Scheme Author: Original by [rose-pine](https://github.com/rose-pine), Ported by [hnjae](https://github.com/hnjae)
+# Template Author: Bez Hermoso
+
+# Configures difftool "delta" to ue light or dark mode based on the variant declared by the colorscheme.
+[delta]
+    syntax-theme = "ansi"
+    light = false

@@ -38,8 +38,9 @@ keymap = [
 
   { keys = ["|"], commands = [":search_inc "] },
   { keys = ["\\"], commands = [":search_glob "] },
-  { keys = ["S"], commands = ["search_fzf"] },
-  { keys = ["C"], commands = ["subdir_fzf"] },
+
+  { keys = ["T"], commands = ["search_fzf"] }, # C-t 에서 따옴
+  { keys = ["C"], commands = ["subdir_fzf"] }, # A-C 에서 따옴
 
 
   { keys = ["n"], commands = ["search_next"] },
@@ -99,6 +100,8 @@ keymap = [
 
   { keys = ["m", "a"], commands = ["select --all=true --toggle=true"] }, # mark-all
   { keys = ["m", "f"], commands = ["select_fzf"] },
+  # { keys = ["m", "g"], commands = ["select_glob"] },
+  # { keys = ["m", "x"], commands = ["select_regex"] },
   { keys = ["m", "F"], commands = ["select --all=true --deselect=true"] },
   { keys = ["m", "b"], commands = ["add_bookmark"] },
   { keys = ["m", "r"], commands = ["shell rmdir %s"] },
@@ -151,7 +154,9 @@ keymap = [
   { keys = ["V"], commands = ["toggle_visual"] },
 
   { keys = ["z", "z"], commands = [":filter "] },
-  { keys = ["z", "f"], commands = ["search_fzf"] },
+  { keys = ["z", "g"], commands = ["filter_glob"] },
+  { keys = ["z", "x"], commands = ["filter_regex"] },
+
   { keys = ["ctrl+h"], commands = ["toggle_hidden"] },
 
   { keys = ["y", "n"], commands = ["copy_filename"] },
@@ -165,11 +170,12 @@ keymap = [
 
   { keys = ["w"], commands = ["show_tasks --exit-key=w"] },
 
-  { keys = ["a"], commands = ["rename_append"] },
-  { keys = ["A"], commands = ["rename_prepend"] },
+  { keys = ["a"], commands = ["rename_append_base"] },
+  { keys = ["A"], commands = ["rename_append"] },
+  { keys = ["I"], commands = ["rename_prepend"] },
   { keys = [" "], commands = ["select --toggle=true"] },
 
-  { keys = ["c", "w"], commands = [":rename "] },
+  { keys = ["c", "w"], commands = ["rename_keep_ext"] },
   { keys = ["/"], commands = [":search "] },
 
   { keys = ["["], commands = ["parent_cursor_move_up"] },
@@ -179,10 +185,13 @@ keymap = [
   # GUI-apps alike
   ####################
   { keys = ["ctrl+r"], commands = ["reload_dirlist"] },
+  { keys = ["f5"], commands = ["reload_dirlist"] },
+  { keys = ["f2"], commands = ["rename_keep_ext"] },
   { keys = ["ctrl+t"], commands = ["new_tab --cursor"] },
   { keys = ["ctrl+w"], commands = ["close_tab"] },
   { keys = ["?"], commands = ["help"] },
-  { keys = ["delete"], commands = ["delete_files --foreground=true"] },
+  # { keys = ["delete"], commands = ["delete_files --foreground=true"] },
+  { keys = ["delete"], commands = ["delete_files"] },
 
   # arrow keys
   { keys = ["arrow_up"], commands = ["cursor_move_up"] },

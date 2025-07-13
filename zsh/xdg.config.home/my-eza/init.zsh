@@ -2,26 +2,25 @@ if (( ! ${+commands[eza]} )); then
   return
 fi
 
-# alias lx='ll -sextension'     # Long format, sort by extension
-# alias lk='ll -ssize'          # Long format, largest file size last
-# alias lt='ll -smodified'      # Long format, newest modification time last
-# alias lc='ll -schanged'       # Long format, newest status change (ctime) last
+# NOTE:
+# --long: display in table
+# --header: show header in table
+# --group: show file's group (if using `--long` option)
+# --all: show hidden and dotfiles
+# --binary: 파일 사이즈를 SI 접두어가 아니라 이진 접두어로 표기 (`--long` 옵션을 사용해야 함)
+# --git: list git status (if using `--long` option)
+# --mounts: show mount details
 
-# alias -- l='eza --group --links --time-style long-iso --color=always --icons=never --git --mounts --extended'
-# alias -- ls='eza --group --links --time-style long-iso --color=automatic --icons=never --mounts --extended'
-# alias -- la='l -a'
-# alias -- etr='eza --tree --git-ignore'
-# alias -- lla='l -la'
-# alias -- lt='l --tree'
+# `ls` alias 에 내가 기본값으로 사용하는 옵션을 추가
+# - use octal permissions to save horizontal space
 
-# TODO: eza 는 설정파일로 관리가능한가? 너무 길어지는데. <2025-06-17>
-alias -- ls='eza'
-alias -- l='eza --long --header --all --group --time-style="+%Y-%m-%d %H:%M:%S" --octal-permissions --no-permissions'
+alias -- ls='eza --group-directories-first --header --octal-permissions --no-permissions --time-style="+%Y-%m-%d %H:%M:%S" --group --binary --git --mounts'
+alias -- l='ls --long'
 alias -- ll='l --all'
-# alias -- lt='eza --tree --all --git-ignore'
-alias -- lt=' eza -l --git -T --hyperlink --header'
+alias -- lt='l --tree --level=3 --git-ignore --color=always | $PAGER'
 
-function _chpwd_ls() {
-  timeout 0.1s eza || echo "ls timeout"
-}
-chpwd_functions+=(_chpwd_ls)
+# function _chpwd_ls() {
+#   timeout 0.1s ls || echo "ls timeout"
+# }
+#
+# chpwd_functions+=(_chpwd_ls)

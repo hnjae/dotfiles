@@ -7,6 +7,7 @@ fi
 # -R: --RAW-CONTROL-CHARS
 
 export BAT_PAGER="less -iLR"
+
 if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then
   export BAT_THEME="base16"
 elif [[ "$TERM_PROGRAM" == "ghostty" ]]; then

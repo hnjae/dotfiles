@@ -44,3 +44,10 @@ name = "konsole"
 themes-dir = "themes"
 hook = "command cp -f %f ~/.local/share/konsole/_base24.colorscheme"
 supported-systems = ["base24"]
+
+[[items]]
+path = "https://github.com/tinted-theming/tinted-delta"
+name = "tinted-delta"
+themes-dir = "configs"
+hook = "command cp -f %f ~/.config/git/_base24-delta.gitconfig"
+supported-systems = ["base16", "base24"]

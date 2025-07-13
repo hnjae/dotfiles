@@ -1,7 +1,7 @@
 [user]
 	email = 42675338+hnjae@users.noreply.github.com
 	name = KIM Hyunjae
-	signingkey = /home/hnjae/.ssh/home_id_ed25519
+	signingkey = ~/.ssh/home_id_ed25519
 
 [init]
 	defaultBranch = main
@@ -15,7 +15,7 @@
 
 [commit]
 	gpgsign = true
-	template = /home/hnjae/.config/git/gitmessage.txt
+	template = ~/.config/git/gitmessage.txt
 	verbose = true; -v 를 기본값으로, diff 를 gitcommit 에 넣어 줌.
 
 [core]
@@ -44,20 +44,19 @@
 [help]
 	autocorrect = prompt ; 명령어 입력 시 오타를 감지하고 제안하도록 설정하려면 다음을 사용
 
-
-[delta]
-	navigate = true	# use n and N to move between diff sections
-	; syntax-theme=base16
-	side-by-side = true
-	syntax-theme = gruvbox-light
-	; diff-so-fancy = true
-	; diff-highlight = true
-	minus-emph-style = "syntax #f9a5a5"
-	minus-style = "syntax #f6e5db"
-	minus-empty-line-marker-style = "syntax #f6e5db"
-	plus-emph-style = "syntax #c6f9a5"
-	plus-style ="syntax #f0f6db"
-	plus-empty-line-marker-style = "syntax #f0f6db"
+; [delta]
+; 	navigate = true	# use n and N to move between diff sections
+; 	; syntax-theme=base16
+; 	side-by-side = true
+; 	syntax-theme = gruvbox-light
+; 	; diff-so-fancy = true
+; 	; diff-highlight = true
+; 	minus-emph-style = "syntax #f9a5a5"
+; 	minus-style = "syntax #f6e5db"
+; 	minus-empty-line-marker-style = "syntax #f6e5db"
+; 	plus-emph-style = "syntax #c6f9a5"
+; 	plus-style ="syntax #f0f6db"
+; 	plus-empty-line-marker-style = "syntax #f0f6db"
 
 [pull]
 	ff = "only"
@@ -153,4 +152,6 @@
 [url "git@github.com:"]
 	insteadOf = https://github.com/:
 
+[include]
+	path = ~/.config/git/_base24-delta.gitconfig
 # vi:ft=gitconfig
