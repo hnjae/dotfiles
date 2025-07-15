@@ -1,0 +1,59 @@
+#!/usr/bin/env python3
+
+# NOTE: LLM wroted this code.
+# ruff: noqa: T201
+
+from __future__ import annotations
+
+import subprocess
+import sys
+
+
+def extract_last_parentheses_content(filepath: str) -> str | None:
+    last_closing = filepath.rfind(")")
+
+    if last_closing == -1:
+        return None
+
+    # Find the opening parenthesis that matches the last closing one
+    open_count = 0
+    close_count = 1  # Starting from 1 as we've already found the last closing parenthesis
+
+    for i in range(last_closing - 1, -1, -1):
+        if filepath[i] == ")":
+            close_count += 1
+        elif filepath[i] == "(":
+            open_count += 1
+            if open_count == close_count:
+                # Found the matching opening parenthesis
+                return filepath[i + 1 : last_closing].strip()
+
+    return None
+
+
+def main() -> None:
+    if len(sys.argv) != 2:  # noqa: PLR2004
+        print("Usage: <script> <filepath>", file=sys.stderr)
+        sys.exit(1)
+
+    path = sys.argv[1]
+    content = extract_last_parentheses_content(path)
+
+    if content is None or content == "":
+        print("No parenthesis found.", file=sys.stderr)
+        sys.exit(1)
+
+    try:
+        _ = subprocess.run(
+            ["wl-copy"],  # noqa: S607
+            input=content.encode("utf-8"),
+            check=True,
+        )
+    except subprocess.CalledProcessError:
+        print(f"Copied to clipboard: {content}", file=sys.stderr)
+        print("Error: Failed to copy to clipboard.", file=sys.stderr)
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()

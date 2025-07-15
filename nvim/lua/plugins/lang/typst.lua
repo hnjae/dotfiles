@@ -42,16 +42,17 @@ return {
   {
     [1] = "chomosuke/typst-preview.nvim",
     version = "*",
-    build = function()
-      require("typst-preview").update()
-    end,
+    opts = {
+      invert_colors = vim.api.nvim_get_option_value("background", {}) == "dark",
+      dependencies_bin = {
+        ["tinymist"] = "tinymist", -- use mason installed tinymist
+      },
+    },
     keys = {
       { "<leader>cp", "<cmd>TypstPreview<cr>", desc = "typst-preview", ft = "typst" },
     },
 
     lazy = true,
     ft = { "typst" },
-
-    opts = {},
   },
 }

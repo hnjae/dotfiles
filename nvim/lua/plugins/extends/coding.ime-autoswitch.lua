@@ -4,7 +4,7 @@ return {
   -- enabled = vim.loop.fs_stat(dir_) ~= nil,
   [1] = "hnjae/fcitx.nvim",
   name = "fcitx",
-  opts = { sleep = 0.13 },
+  opts = { sleep = 0.18 },
   lazy = true,
   event = {
     "InsertEnter",

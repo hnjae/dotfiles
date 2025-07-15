@@ -10,6 +10,7 @@
     "packages",
     "shell",
     // "display",
+    "lm",
     "de",
     "wm",
     // "wmtheme",
@@ -24,11 +25,12 @@
     "memory",
     "swap",
     // "disk",
-    "localip",
+    // "localip",
     // "battery",
     // "poweradapter",
-    "locale",
+    // "locale",
     "break",
-    "colors"
+    "colors",
+    "bios"
   ]
 }

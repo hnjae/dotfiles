@@ -32,7 +32,6 @@ keymap = [
   { keys = ["8"], commands = ["numbered_command 8"] },
   { keys = ["9"], commands = ["numbered_command 9"] },
 
-
   { keys = ["="], commands = ["set_mode"] },
 
 
@@ -43,14 +42,13 @@ keymap = [
   { keys = ["C"], commands = ["subdir_fzf"] }, # A-C 에서 따옴
 
 
-  { keys = ["n"], commands = ["search_next"] },
-  { keys = ["N"], commands = ["search_prev"] },
-
   # { keys = ["g", "r"], commands = ["cd /"] },
   # { keys = ["g", "c"], commands = ["cd ~/.config"] },
   # { keys = ["g", "d"], commands = ["cd ~/Downloads"] },
   # { keys = ["g", "e"], commands = ["cd /etc"] },
   # { keys = ["g", "h"], commands = ["cd ~/"] },
+  { keys = ["f3"], commands = ["shell /home/hnjae/.config/joshuto/bin/trash-with-trace %s"] },
+  { keys = ["f6"], commands = ["shell nvim %s"] },
 
 
   ####################
@@ -80,10 +78,8 @@ keymap = [
   { keys = ["d"], commands = [":mkdir "] },
   { keys = ["t"], commands = ["new_tab --current"] },
   # { keys = ["%"], commands = [":shell sh -c '[ \"$*\" != \"\" ] && [ ! -e \"$*\" ] && touch \"$*\"' _ "] },
-  { keys = ["f3"], commands = ["shell /home/hnjae/.config/joshuto/bin/trash-with-trace %s"] },
-  { keys = ["f6"], commands = ["shell nvim %s"] },
   { keys = ["%"], commands = [":custom_search newfile "] },
-  # { keys = ["x"], commands = ["open"] },
+  { keys = ["x"], commands = ["shell xdg-open %s"] },
 
   { keys = ["g", "h"], commands = ["toggle_hidden"] },
 
@@ -133,7 +129,6 @@ keymap = [
   ##########
   # vim-alike
   ########
-  { keys = ["g", "x"], commands = ["shell xdg-open %s"] },
 
   { keys = ["ctrl+u"], commands = ["cursor_move_page_up 0.5"] },
   { keys = ["ctrl+d"], commands = ["cursor_move_page_down 0.5"] },
@@ -142,6 +137,10 @@ keymap = [
 
   { keys = [":"], commands = [":"] },
   { keys = [";"], commands = [":"] },
+
+  { keys = ["n"], commands = ["search_next"] },
+  { keys = ["N"], commands = ["search_prev"] },
+
   { keys = ["backspace"], commands = [":"] },
 
   ######
@@ -164,6 +163,7 @@ keymap = [
   { keys = ["y", "p"], commands = ["copy_filepath"] },
   { keys = ["y", "a"], commands = ["copy_filepath --all-selected=true"] },
   { keys = ["y", "d"], commands = ["copy_dirpath"] },
+  { keys = ["y", "l"], commands = ["shell /home/hnjae/.config/joshuto/bin/copy-parentheses %s"] },
 
 
   { keys = ["!"], commands = [":shell "] },
