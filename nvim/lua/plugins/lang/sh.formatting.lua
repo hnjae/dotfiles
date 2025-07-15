@@ -3,12 +3,12 @@ return {
   [1] = "conform.nvim",
   optional = true,
   opts = {
-    -- TODO: shfmt 가 sw 옵션을 따르게 하기 <2025-07-05>
     formatters_by_ft = {
+      -- NOTE: conform 에서 shfmt 는 .editorconfig 를 vi-modeline 보다 우선함. <2025-07-15>
       sh = {
         [1] = "shellharden",
         [2] = "shellcheck",
-        -- [3] = "shfmt",
+        [3] = "shfmt",
         stop_after_first = false,
       },
     },

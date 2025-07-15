@@ -3,6 +3,7 @@
   "modules": [
     "title",
     "separator",
+    // "bios",
     "os",
     "host",
     "kernel",
@@ -10,6 +11,7 @@
     "packages",
     "shell",
     // "display",
+    // "bootmgr",
     "lm",
     "de",
     "wm",
@@ -24,6 +26,8 @@
     "gpu",
     "memory",
     "swap",
+    // "physicaldisk",
+    // "loadavg",
     // "disk",
     // "localip",
     // "battery",
@@ -31,6 +35,16 @@
     // "locale",
     "break",
     "colors",
-    "bios"
+    // "separator",
+    // "bluetooth",
+    // "bluetoothradio",
+    // "btrfs",
+    // "chassis",
+    // "disk",
+    // "dns",
+    // "opengl"
+    // "tpm",
+    // "zpool"
+    // "initsystem",
   ]
 }
