@@ -3,7 +3,7 @@
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   pattern = "*.cheat",
   callback = function()
-    vim.opt_local.filetype = "cheat"
+    vim.opt_local.filetype = "navi"
+    vim.opt_local.commentstring = "; %s"
   end,
-  -- command = "set ft=sh",
 })

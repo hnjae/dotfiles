@@ -1,4 +1,12 @@
 % nix, profile
 
-# list profile
+# list nix profile
 nix profile list
+
+# install nix profile
+nix profile install '<repo>#<package>'
+
+# remove nix profile
+nix profile remove <profile>
+
+$ profile

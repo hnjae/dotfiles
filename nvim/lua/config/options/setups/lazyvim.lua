@@ -19,4 +19,8 @@ vim.g.lazyvim_picker = "snacks"
 -- vim.g.trouble_lualine = true
 vim.g.lazyvim_python_lsp = "basedpyright"
 vim.g.lazyvim_prettier_needs_config = true
+
 -- vim.g.ai_cmp = true
+
+-- vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" } -- lazyvim 14.14.0
+vim.g.root_spec = { "lsp", { ".envrc", ".gitignore" }, { ".git", "lua" }, "cwd" } -- lazyvim 14.14.0

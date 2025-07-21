@@ -1,4 +1,11 @@
 % fzf
 
-# mutli select
+# multi select
 fzf -m
+
+; NOTE: 파일명에 newline(`\n`) 이 들어가도 되는 filesystem 이 존재함. (e.g. Btrfs)
+# search and select file with fzf (--print0: print null-separated output; --null|-0: input items are terminated by a null character)
+fd --print0 -t f "<keyword>" | fzf --read0 --print0 | xargs --null xdg-open
+
+# search and select directory with fzf
+fd --print0 -t d "<keyword>" | fzf --read0 --print0 | xargs --null xdg-open

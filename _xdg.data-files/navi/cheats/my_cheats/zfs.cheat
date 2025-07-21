@@ -102,6 +102,15 @@ zfs list -t all
 # list zfs snapshots (datasets)
 zfs list -t snapshot
 
+# list all zfs datasets of specific dataset
+zfs list -t all -r <dataset>
+
+# list holds of dataset
+zfs holds -r <dataset>
+
+# Release hold of dataset
+zfs release <tag> <snapshot>
+
 # arc cache metadata only
 zfs set primarycache=metadata <filesystem>
 

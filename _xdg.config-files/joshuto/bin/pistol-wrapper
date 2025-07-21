@@ -14,6 +14,12 @@ set -euo pipefail -o noclobber -o noglob
 ## -----+------------+-------------------------------------------
 ## 0    | success    | Display stdout as preview
 ## 1    | no preview | Display no preview at all
+## 2    | plain text    | Display the plain content of the file
+## 3    | fix width     | Don't reload when width changes
+## 4    | fix height    | Don't reload when height changes
+## 5    | fix both        | Don't ever reload
+## 6    | images        | Display the image `$IMAGE_CACHE_PATH` points to as an image preview
+## 7    | images        | Display the file directly as an image
 
 IFS=$'\n'
 
@@ -26,29 +32,27 @@ PREVIEW_WIDTH=10
 PREVIEW_HEIGHT=10
 
 while [ "$#" -gt 0 ]; do
-    case "$1" in
-    "--path")
-        shift
-        FILE_PATH="$1"
-        ;;
-    "--preview-width")
-        shift
-        PREVIEW_WIDTH="$1"
-        ;;
-    "--preview-height")
-        shift
-        PREVIEW_HEIGHT="$1"
-        ;;
-    esac
+  case "$1" in
+  "--path")
     shift
+    FILE_PATH="$1"
+    ;;
+  "--preview-width")
+    shift
+    PREVIEW_WIDTH="$1"
+    ;;
+  "--preview-height")
+    shift
+    PREVIEW_HEIGHT="$1"
+    ;;
+  esac
+  shift
 done
 
-main () {
+main() {
   pistol "$FILE_PATH" && exit 0
 
   exit 1
 }
 
 main
-
-# vi:ft=sh:sw=2

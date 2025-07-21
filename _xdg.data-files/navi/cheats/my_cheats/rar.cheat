@@ -1,0 +1,7 @@
+% unrar, rar
+
+# list rar archive
+unrar l <archive>
+
+# list all informatsion from rar archive
+unrar lta <archive>

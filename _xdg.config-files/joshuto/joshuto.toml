@@ -20,7 +20,8 @@ show_borders      = false
 show_hidden       = true
 
 [preview]
-max_preview_size = "1 GB"
+max_preview_size = "10 GB"
 use_xdg_thumbs   = true
 xdg_thumb_size   = "xxlarge"
-preview_script   = "~/.config/joshuto/bin/pistol-wrapper"
+# preview_protocol = "kitty"
+preview_script = "~/.config/joshuto/bin/pistol-wrapper"

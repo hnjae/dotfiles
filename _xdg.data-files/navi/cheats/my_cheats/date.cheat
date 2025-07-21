@@ -1,13 +1,22 @@
 % date
 
 # print utc datetime
-date --utc +%Y-%m-%dT%H:%M:%S%Z
+date --utc '+%Y-%m-%dT%H:%M:%S%Z'
+
+# print utc datetime (in ms); busybox 등에서는 %N 지원 안함
+date --utc '+%Y-%m-%dT%H:%M:%S.%3N%Z'
+
+# print utc datetime (in ns); busybox 등에서는 %N 지원 안함
+date --utc '+%Y-%m-%dT%H:%M:%S.%N%Z'
 
 # print utc datetime in short-form
-date --utc +%Y%m%dT%H%M%S%Z
+date --utc '+%Y%m%dT%H%M%S%Z'
+
+# print local datetime
+date '+%Y-%m-%dT%H:%M:%S.%3N%z'
 
 # print current date
 date '+%Y-%m-%d'
 
 # print current date in weekday
-date +%Y-%m-%d
+date '+%Y-%m-%d'

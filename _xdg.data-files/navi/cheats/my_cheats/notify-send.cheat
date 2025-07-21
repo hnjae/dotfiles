@@ -1,0 +1,7 @@
+% notify-send, freedesktop
+
+# send notification
+notify-send "<msg>"
+
+# send critical notification
+notify-send --urgency=critical "<msg>"

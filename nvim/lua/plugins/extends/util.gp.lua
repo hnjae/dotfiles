@@ -147,15 +147,20 @@ Chats are saved automatically.
             [[cat ~/.config/github-copilot/apps.json | sed -e 's/.*oauth_token...//;s/".*//']],
           },
         },
-        anthropic = {
-          disable = false,
-          secret = { "secret-tool", "lookup", "api", "anthropic" },
-        },
+        -- anthropic = {
+        --   disable = false,
+        --   secret = { "secret-tool", "lookup", "api", "anthropic" },
+        -- },
         googleai = {
           secret = { "secret-tool", "lookup", "api", "googleai" },
         },
-        pplx = {
-          secret = { "secret-tool", "lookup", "api", "pplx" },
+        -- pplx = {
+        --   secret = { "secret-tool", "lookup", "api", "pplx" },
+        -- },
+        openrouter = {
+          secret = { "secret-tool", "lookup", "api", "openrouter" },
+          endpoint = "https://openrouter.ai/api/v1/chat/completions",
+          -- endpoint = "https://openrouter.ai/api/v1",
         },
       },
 
@@ -201,12 +206,13 @@ Chats are saved automatically.
           system_prompt = chat_prompt,
         },
         {
-          provider = "anthropic",
+          -- provider = "anthropic",
+          provider = "openrouter",
           name = "claude",
           chat = true,
           command = false,
           model = {
-            model = "claude-3-7-sonnet-latest",
+            model = "anthropic/claude-sonnet-4",
             temperature = 0.8,
             max_token = 8192,
           },

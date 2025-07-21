@@ -15,3 +15,7 @@ if [[ -e "$exclude_file" ]]; then
 fi
 
 rsync --info=progress2 -h -s -aHAXWE --numeric-ids "$exclude_opt" --checksum --cc=xxh3 -- "$src" "$dst"
+
+if (( $+commands[notify-send] )) && [[ "$DISPLAY" != "" ]]; then
+  $commands[notify-send] "rsync-copy $src done"
+fi
