@@ -31,7 +31,7 @@ restic --repo <path> --insecure-no-password check read-data
 restic --repo <path> --insecure-no-password repair packs <pack-id>
 restic --repo <path> --insecure-no-password repiar snapshots [--forget]
 
-# reslove when data packs are missing (dont use forget flag)
+# resolve when data packs are missing (dont use forget flag)
 restic --repo <path> --insecure-no-password repair index
 restic --repo <path> --insecure-no-password repiar snapshots [--forget]
 

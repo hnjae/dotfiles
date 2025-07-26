@@ -22,12 +22,10 @@ fi
 
 export NIXPKGS_ALLOW_UNFREE=1
 
-alias nx=nix
+# alias nx=nix
 
-alias nxf="nix flake"
-alias nxfsh="nix flake show"
-
-alias nxsr="nix search nixpkgs"
-
-alias nxs="nix shell --impure 'nixpkgs#"
-alias nxr="nix run --impure 'nixpkgs#"
+alias nixf="nix flake"
+alias nixfsh="nix flake show"
+alias nixsr="nix search nixpkgs"
+alias nixs="nix shell --impure 'nixpkgs#"
+alias nixr="nix run --impure 'nixpkgs#"

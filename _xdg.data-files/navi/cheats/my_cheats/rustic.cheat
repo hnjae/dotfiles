@@ -12,11 +12,26 @@ rustic diff <snapshot-id1> <snapshot-id2>
 # scrub
 rustic check --read-data --read-data-subset '<n>/<m>'
 
-# set compression
+# set compression to 12 (583.6 MB/s on Uncompressable data)
 rustic config --set-compression 12
 
-# set datapack size
+# set compression to 6 (1707.4 MB/s on Uncompressable data)
+rustic config --set-compression 6
+
+# set treepack size limit (default min 4 MiB)
+rustic config --set-treepack-size-limit "16 MiB"
+
+# set datapack size (default 32 MiB)
 rustic config --set-datapack-size "16 MiB"
 
-# set datapack size limit
-rustic config --set-datapack-size-limit "230 MiB"
+# set datapack size limit (default 4 GiB)
+rustic config --set-datapack-size-limit "128 MiB"
+
+# forget all snapshots with a specific label
+rustic snapshots --json --filter-label "<label>" |  jq '.[][1][].id' | xargs rustic forget --dry-run --
+
+# prune repack all
+rustic prune --max-unused 0 --keep-pack 0d --keep-delete 0d
+
+# forget
+rustic forget --prune --no-resize

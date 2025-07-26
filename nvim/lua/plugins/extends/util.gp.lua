@@ -102,7 +102,7 @@ return {
         shortcut = "<C-g>r",
       },
 
-      default_command_agent = "openai-command",
+      default_command_agent = "command",
       default_chat_agent = "claude",
 
       chat_template = [[
@@ -132,11 +132,9 @@ Chats are saved automatically.
       ----------------------------------------------------------------------------------------------
       -- Keys
       ----------------------------------------------------------------------------------------------
-      openai_api_key = { "secret-tool", "lookup", "api", "openai" },
-
       providers = {
         openai = {
-          disable = false,
+          disable = true,
           secret = { "secret-tool", "lookup", "api", "openai" },
         },
         copilot = {
@@ -183,30 +181,29 @@ Chats are saved automatically.
         { name = "CodePerplexityLlama3.1-8B", disable = true },
         { name = "ChatCopilot", disable = true },
         { name = "CodeCopilot", disable = true },
+        -- {
+        --   provider = "openai",
+        --   name = "openai-command",
+        --   chat = false,
+        --   command = true,
+        --   model = {
+        --     model = "gpt-4.1-mini",
+        --     temperature = 0.8,
+        --   },
+        --   system_prompt = code_prompt,
+        -- },
+        -- {
+        --   provider = "openai",
+        --   name = "openai-chat",
+        --   chat = true,
+        --   command = false,
+        --   model = {
+        --     model = "gpt-4.1",
+        --     temperature = 0.8,
+        --   },
+        --   system_prompt = chat_prompt,
+        -- },
         {
-          provider = "openai",
-          name = "openai-command",
-          chat = false,
-          command = true,
-          model = {
-            model = "gpt-4.1-mini",
-            temperature = 0.8,
-          },
-          system_prompt = code_prompt,
-        },
-        {
-          provider = "openai",
-          name = "openai-chat",
-          chat = true,
-          command = false,
-          model = {
-            model = "gpt-4.1",
-            temperature = 0.8,
-          },
-          system_prompt = chat_prompt,
-        },
-        {
-          -- provider = "anthropic",
           provider = "openrouter",
           name = "claude",
           chat = true,
@@ -219,12 +216,12 @@ Chats are saved automatically.
           system_prompt = chat_prompt,
         },
         {
-          provider = "anthropic",
-          name = "claude-command",
+          provider = "openrouter",
+          name = "command",
           chat = false,
           command = true,
           model = {
-            model = "claude-3-7-sonnet-latest",
+            model = "anthropic/claude-sonnet-4",
             temperature = 0.8,
             max_token = 8192,
           },
@@ -327,7 +324,7 @@ Respond only with the improved text—no explanations, comments, or other text.
 {{selection}}
 </text>
 ]]
-          local agent = gp.get_command_agent("openai-command")
+          local agent = gp.get_command_agent("command")
           agent.system_prompt = ""
           gp.Prompt(params, gp.Target.vnew, agent, template)
         end,

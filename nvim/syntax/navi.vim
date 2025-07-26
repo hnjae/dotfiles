@@ -1,3 +1,5 @@
+" https://github.com/denisidoro/navi/blob/master/docs/cheatsheet/syntax/README.md
+
 " Based on vim's syntax/sh.vim
 "
 " The Vim license follows:
@@ -96,6 +98,7 @@ if exists("b:current_syntax")
   finish
 endif
 
+" from `docs/widgets/howto/VIM.md`
 syntax match Comment "\v^;.*$"
 syntax match Statement "\v^\%.*$"
 syntax match Operator "\v^\#.*$"
@@ -701,6 +704,6 @@ delc ShFoldIfDoFor
 
 " Set Current Syntax: {{{1
 " ===================
-let b:current_syntax = "cheat"
+let b:current_syntax = "navi"
 
 " vim:tabstop=16:fdm=marker:shiftwidth=2:expandtab:nolist:

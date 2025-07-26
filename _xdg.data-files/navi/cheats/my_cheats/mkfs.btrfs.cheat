@@ -9,7 +9,6 @@ mkfs.btrfs --nodesize "64K" -O block-group-tree
 # mkfs.btrfs
 mkfs.btrfs -s 4096 [--csum "xxhash"] -L "<LABEL>_BTRFS" --nodesize "64K" -O block-group-tree "<disk>"
 
-
 # mkfs.btrfs metadata single
 mkfs.btrfs -s 4096 \
   --csum "xxhash" \

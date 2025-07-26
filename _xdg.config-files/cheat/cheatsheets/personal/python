@@ -1,0 +1,24 @@
+---
+date: 2025-07-23T21:20:58+0900
+lastmod: 2025-07-23T21:20:58+0900
+syntax: markdown
+tags: []
+---
+
+## [PEP-0008](https://peps.python.org/pep-0008)
+
+Class Names
+: `CapWords`
+
+Function and Variable Name
+: `snake_case`, `mixedCase` allowed in some contexts (e.g. threading.py)
+
+Type Variable Names
+: `CapWords`, e.g.) `T`, `AnyStr`, `Num`
+
+Global Variable
+: Same as functions
+
+<!--
+vi:ft=markdown
+-->

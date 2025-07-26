@@ -9,4 +9,4 @@ nix profile install '<repo>#<package>'
 # remove nix profile
 nix profile remove <profile>
 
-$ profile
+$ profile: nix profile list --json 2>/dev/null | jq -r '(["elementName","attrPath","storePaths"] | join("␟")), (.elements | to_entries[] | [ .key, (.value.attrPath // ""), (.value.storePaths | join(",")) ] | join("␟"))' | column --table --separator='␟' --- --column 1 --header-lines 1 --nth 1
