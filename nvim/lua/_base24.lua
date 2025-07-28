@@ -1,8 +1,8 @@
 return {
-    base00 = '#191724', base01 = '#26233a', base02 = '#6e6a86', base03 = '#908caa',
-    base04 = '#908caa', base05 = '#e0def4', base06 = '#e0def4', base07 = '#e0def4',
-    base08 = '#eb6f92', base09 = '#f6c177', base0A = '#f6c177', base0B = '#31748f',
-    base0C = '#ebbcba', base0D = '#9ccfd8', base0E = '#c4a7e7', base0F = '#b4637a',
-    base10 = '#14131b', base11 = '#0e0d12', base12 = '#eb6f92', base13 = '#f6c177',
-    base14 = '#31748f', base15 = '#ebbcba', base16 = '#9ccfd8', base17 = '#c4a7e7'
+    base00 = '#1f1f28', base01 = '#2a2a37', base02 = '#223249', base03 = '#727169',
+    base04 = '#c8c093', base05 = '#dcd7ba', base06 = '#dcd7ba', base07 = '#f2ecbc',
+    base08 = '#c34043', base09 = '#ffa066', base0A = '#c0a36e', base0B = '#76946a',
+    base0C = '#6a9589', base0D = '#7e9cd8', base0E = '#957fb8', base0F = '#43242b',
+    base10 = '#16161d', base11 = '#000000', base12 = '#e46876', base13 = '#e6c384',
+    base14 = '#98bb6c', base15 = '#7aa89f', base16 = '#7fb4ca', base17 = '#938aa9'
 }

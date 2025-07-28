@@ -54,15 +54,15 @@ return {
       desc = "follow-link-tab-split (obsidian.nvim)",
       ft = "markdown",
     },
-    { [1] = "<leader>mt", [2] = "<cmd>Obsidian today<CR>", desc = "today", ft = "markdown" },
+    { [1] = "<leader>mT", [2] = "<cmd>Obsidian today<CR>", desc = "today", ft = "markdown" },
     { [1] = "<leader>mM", [2] = "<cmd>Obsidian tomorrow<CR>", desc = "tomorrow", ft = "markdown" },
     {
-      [1] = "<leader>my",
+      [1] = "<leader>mY",
       [2] = "<cmd>Obsidian yesterday<CR>",
       desc = "yesterday",
       ft = "markdown",
     },
-    { [1] = "<leader>mT", [2] = "<cmd>Obsidian template<CR>", desc = "template", ft = "markdown" },
+    { [1] = "<leader>mt", [2] = "<cmd>Obsidian template<CR>", desc = "template", ft = "markdown" },
     { [1] = "<leader>mn", [2] = "<cmd>Obsidian rename<CR>", desc = "rename", ft = "markdown" },
     {
       [1] = "<leader>md",

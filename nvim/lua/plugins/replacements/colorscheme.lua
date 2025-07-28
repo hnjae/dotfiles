@@ -11,7 +11,7 @@ local colorschemes = {
   -- tokyonight = "tokyonight",
 }
 
-local COLORSCHEME = colorschemes.rose_pine
+local COLORSCHEME = colorschemes.kanagawa
 local color_terminal = (vim.fn.has("gui_running") == 1) or (os.getenv("TERM_PROGRAM") == nil)
 
 ---@type LazySpec[]
@@ -137,10 +137,10 @@ return {
     opts = {
       compile = false,
       theme = "wave",
-      background = {
-        dark = "wave",
-        light = "lotus",
-      },
+      -- background = {
+      --   dark = "wave",
+      --   light = "lotus",
+      -- },
     },
   },
   {
