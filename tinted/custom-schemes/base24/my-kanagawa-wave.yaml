@@ -1,0 +1,56 @@
+# NOTE:
+#   - following version 0.1.1 of base24 <2025-07-28>
+#   - <https://github.com/tinted-theming/base24/blob/main/styling.md>
+#   - `**` 붙은 건 color palette 에서 임의 선정한 값
+#
+# Repository of original colorscheme: https://github.com/rebelot/kanagawa.nvim
+# MIT License
+#
+# Copyright (c) 2021 Tommaso Laurenzi
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+system: "base24"
+name: "my-kanagawa-wave"
+author: "Original by rebelot (https://github.com/rebelot/kanagawa.nvim), Ported by hnjae (https://github.com/hnjae)"
+variant: "dark"
+palette:
+  base00: "#1F1F28" # ANSI  0 / background / sumiInk3 / ui.bg / OKHSL(285, 17, 14)
+  base01: "#2A2A37" # ANSI 18 / (darkest-gray) / lighter-background (status-bar) / sumiInk4 / ui.bg_gutter / OKHSL(285, 19, 19)
+  base02: "#223249" # ANSI 19 / (bright-black) / selection-bg / waveBlue1 / ui.bg_visual
+  base03: "#727169" # ANSI  8 / (grey) / comments / fujiGray / ui.syn.comment
+  base04: "#C8C093" # ANSI 20 / (light-grey) / dark-foreground (stautus-bas) / oldWhite
+  base05: "#DCD7BA" # ANSI 21 / foreground / fujiWhite / ui.fg / OKHSL(99, 33, 86)
+  base06: "#DCD7BA" # ** / ANSI  7 / light-foreground
+  base07: "#f2ecbc" # ** / ANSI 15 / lightest-foreground / lotusWhite3 / OKHSL(102, 67, 93)
+  base09: "#FFA066" # ANSI 16 / (orange) / surimiOrange
+  base0F: "#43242B" # ** / ANSI 17 / (dark red or brown) / winterRed
+  base10: "#16161D" # ** / ANSI  - / darker-black / sumiInk0 / OKHSL(285, 16, 10)
+  base11: "#000000" # ** / ANSI  - / darkest-black / BLACK
+  base08: "#C34043" # ANSI  1 / red / OKHSL(23, 79, 49)
+  base0B: "#76946a" # ANSI  2 / autunmnGreen
+  base0A: "#C0A36E" # ANSI  3 / boatYellow2
+  base0D: "#7E9CD8" # ANSI  4
+  base0E: "#957FB8" # ANSI  5
+  base0C: "#6A9589" # ANSI  6
+  base12: "#E46876" # ** / ANSI  9 / bright red / peachRed / OKHSL(15, 73, 62) (기존: samuraiRed: #E82424)
+  base14: "#98bb6C" # ANSI 10 / bright green
+  base13: "#E6C384" # ANSI 11 / bright yellow / carpYellow / OKHSL(82, 61, 81)
+  base16: "#7FB4CA" # ANSI 12 / bright blue / OKHSL(226, 41, 70)
+  base17: "#938AA9" # ANSI 13 / bright purple / springViolet1 / OKHSL(298, 23, 60)
+  base15: "#7AA89F" # ANSI 14 / bright cyan

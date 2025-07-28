@@ -1,43 +1,48 @@
+# NOTE:
+#   - following version 0.1.1 of base24 <2025-07-28>
+#   - <https://github.com/tinted-theming/base24/blob/main/styling.md>
+#
 # vim: ft=ghostty
-# my-rose-pine theme for Ghostty
-# Scheme Author: Original by [rose-pine](https://github.com/rose-pine), Ported by [hnjae](https://github.com/hnjae)
+#
+# my-kanagawa-wave theme for Ghostty
+# Scheme Author: Original by rebelot (https://github.com/rebelot/kanagawa.nvim), Ported by hnjae (https://github.com/hnjae)
 # Scheme System: base24
-# Template Author: Tinted Terminal (https://github.com/tinted-theming/tinted-terminal)
+# Template Author: Tinted Terminal (https://github.com/tinted-theming/tinted-terminal), forked by hnjae (https://github.com/hnjae)
 
 # Color palette
-palette = 0=#191724
-palette = 1=#eb6f92
-palette = 2=#31748f
-palette = 3=#f6c177
-palette = 4=#9ccfd8
-palette = 5=#c4a7e7
-palette = 6=#ebbcba
-palette = 7=#e0def4
-palette = 8=#6e6a86
-palette = 9=#eb6f92
-palette = 10=#31748f
-palette = 11=#f6c177
-palette = 12=#9ccfd8
-palette = 13=#c4a7e7
-palette = 14=#ebbcba
-palette = 15=#e0def4
-palette = 16=#f6c177
-palette = 17=#b4637a
-palette = 18=#26233a
-palette = 19=#6e6a86
-palette = 20=#908caa
-palette = 21=#e0def4
+palette = 0=#1f1f28
+palette = 1=#c34043
+palette = 2=#76946a
+palette = 3=#c0a36e
+palette = 4=#7e9cd8
+palette = 5=#957fb8
+palette = 6=#6a9589
+palette = 7=#dcd7ba
+palette = 8=#727169
+palette = 9=#e46876
+palette = 10=#98bb6c
+palette = 11=#e6c384
+palette = 12=#7fb4ca
+palette = 13=#938aa9
+palette = 14=#7aa89f
+palette = 15=#f2ecbc
+palette = 16=#ffa066
+palette = 17=#43242b
+palette = 18=#2a2a37
+palette = 19=#223249
+palette = 20=#c8c093
+palette = 21=#dcd7ba
 
 # Foreground & background colors
-background = #191724
-foreground = #e0def4
-cursor-color = #e0def4
-selection-background = #6e6a86
-selection-foreground = #e0def4
+background = #1f1f28
+foreground = #dcd7ba
+cursor-color = #dcd7ba
+selection-background = #223249
+selection-foreground = #dcd7ba
 
 # Set `macos-icon = custom-style` in your main configuration file to enable theming of the app icon.
 #
 # Set the ghost color to the lightest foreground:
-macos-icon-ghost-color = #e0def4
+macos-icon-ghost-color = #f2ecbc
 # Replace the official icon's blue background with the designated bright blue color:
-macos-icon-screen-color = #9ccfd8
+macos-icon-screen-color = #7fb4ca

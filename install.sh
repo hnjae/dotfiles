@@ -258,4 +258,15 @@ if command -v zsh >/dev/null 2>&1 && is_internet_connected; then
 	# '
 fi
 
+################################################################################
+# Tinted
+################################################################################
+
+[ ! -d "$XDG_CONFIG_HOME/tinted-theming/tinty" ] && mkdir -p "$XDG_CONFIG_HOME/tinted-theming/tinty"
+[ ! -d "$XDG_DATA_HOME/tinted-theming/tinty" ] && mkdir -p "$XDG_DATA_HOME/tinted-theming/tinty"
+
+link_item "$script_dir/tinted/my-templates" "$XDG_CONFIG_HOME/tinted-theming/my-templates"
+link_item "$script_dir/tinted/config.toml" "$XDG_CONFIG_HOME/tinted-theming/tinty/config.toml"
+link_item "$script_dir/tinted/custom-schemes" "$XDG_DATA_HOME/tinted-theming/tinty/custom-schemes"
+
 exit 0

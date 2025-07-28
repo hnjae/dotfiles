@@ -5,22 +5,29 @@ hooks = ["echo \"The current scheme is: $(tinty current)\""]
 
 [[items]]
 path = "~/.config/tinted-theming/my-templates/tinted-alacritty"
-name = "alacritty"
+name = "my-alacritty"
 themes-dir = "themes"
 hook = "cp -f %f ~/.config/alacritty/_base24.toml && touch ~/.config/alacritty/alacritty.toml"
 supported-systems = ["base24"]
 
 [[items]]
 path = "~/.config/tinted-theming/my-templates/tinted-wezterm"
-name = "wezterm"
+name = "my-wezterm"
 themes-dir = "themes"
 hook = "cp -f %f ~/.config/wezterm/colors/_base24.toml"
 supported-systems = ["base24"]
 
+# [[items]]
+# path = "https://github.com/tinted-theming/tinted-terminal"
+# name = "ghostty"
+# themes-dir = "themes/ghostty"
+# hook = "command cp -f %f ~/.config/ghostty/themes/_base24"
+# supported-systems = ["base24"]
+
 [[items]]
-path = "https://github.com/tinted-theming/tinted-terminal"
-name = "ghostty"
-themes-dir = "themes/ghostty"
+path = "~/.config/tinted-theming/my-templates/tinted-ghostty"
+name = "my-ghostty"
+themes-dir = "themes"
 hook = "command cp -f %f ~/.config/ghostty/themes/_base24"
 supported-systems = ["base24"]
 
@@ -33,14 +40,14 @@ supported-systems = ["base24"]
 
 [[items]]
 path = "~/.config/tinted-theming/my-templates/tinted-kdeplasma"
-name = "kdeplasma"
+name = "my-kdeplasma"
 themes-dir = "themes"
 hook = "command cp -f %f ~/.local/share/color-schemes/_base24.colors"
 supported-systems = ["base24"]
 
 [[items]]
 path = "~/.config/tinted-theming/my-templates/tinted-konsole"
-name = "konsole"
+name = "my-konsole"
 themes-dir = "themes"
 hook = "command cp -f %f ~/.local/share/konsole/_base24.colorscheme"
 supported-systems = ["base24"]

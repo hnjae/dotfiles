@@ -1,36 +1,41 @@
-# Base24: my-rose-pine
-# Scheme by Original by [rose-pine](https://github.com/rose-pine), Ported by [hnjae](https://github.com/hnjae)
+# NOTE:
+#   - following version 0.1.1 of base24 <2025-07-28>
+#   - <https://github.com/tinted-theming/base24/blob/main/styling.md>
+#
+# Base24: my-kanagawa-wave
+# Scheme by Original by rebelot (https://github.com/rebelot/kanagawa.nvim), Ported by hnjae (https://github.com/hnjae)
 
 [colors]
-foreground = "#e0def4"
-background = "#191724"
-selection_bg = "#e0def4"
-selection_fg = "#191724"
-cursor_bg = "#e0def4"
-cursor_border = "#e0def4"
-cursor_fg = "#191724"
+foreground = "#dcd7ba"
+background = "#1f1f28"
 
+selection_bg = "#223249"
+selection_fg = "#dcd7ba"
+
+cursor_bg = "#dcd7ba"
+cursor_border = "#dcd7ba"
+cursor_fg = "#1f1f28"
 
 ansi = [
-  "#26233a",
-  "#eb6f92",
-  "#31748f",
-  "#f6c177",
-  "#9ccfd8",
-  "#c4a7e7",
-  "#ebbcba",
-  "#e0def4",
+  "#1f1f28",
+  "#c34043",
+  "#76946a",
+  "#c0a36e",
+  "#7e9cd8",
+  "#957fb8",
+  "#6a9589",
+  "#dcd7ba",
 ]
 
 brights = [
-  "#6e6a86",
-  "#eb6f92",
-  "#31748f",
-  "#f6c177",
-  "#9ccfd8",
-  "#c4a7e7",
-  "#ebbcba",
-  "#e0def4",
+  "#727169",
+  "#e46876",
+  "#98bb6c",
+  "#e6c384",
+  "#7fb4ca",
+  "#938aa9",
+  "#7aa89f",
+  "#f2ecbc",
 ]
 
 # vi:ft=toml
