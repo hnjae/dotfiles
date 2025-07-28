@@ -31,7 +31,10 @@ rustic config --set-datapack-size-limit "128 MiB"
 rustic snapshots --json --filter-label "<label>" |  jq '.[][1][].id' | xargs rustic forget --dry-run --
 
 # prune repack all
-rustic prune --max-unused 0 --keep-pack 0d --keep-delete 0d
+rustic prune --max-unused 0 --keep-pack 0d --keep-delete 0d --max-repack 'unlimited'
+
+# prune repack some
+RCLONE_VERBOSE=1 rustic prune --max-unused '25 MiB' --keep-pack 0d --keep-delete 0d --max-repack '500 MiB'
 
 # forget
-rustic forget --prune --no-resize
+rustic forget

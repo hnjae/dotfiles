@@ -1,0 +1,27 @@
+# vi:ft=zsh
+
+git add --all
+
+echo ""
+git -c color.ui=always status --short --untracked-files=all --find-renames=y
+echo ""
+
+echo "> sync? [y/Any]: " > /dev/stderr
+
+stty -icanon -echo
+eval "response=$(dd bs=1 count=1 2>/dev/null)"
+stty icanon echo
+
+echo ""
+
+case "$response" in
+"y") ;; # catch
+*)
+        echo "O.k., not syncing."
+        exit 0
+        ;;
+esac
+
+git commit --no-verify -m '{{ hostname }}: {{ datetime("%Y-%m-%dT%H:%M:%S%Z") }}'
+git push
+
