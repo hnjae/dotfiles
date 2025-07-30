@@ -34,14 +34,14 @@ palette:
   base01: "#2A2A37" # ANSI 18 / (darkest-gray) / lighter-background (status-bar) / sumiInk4 / ui.bg_gutter / OKHSL(285, 19, 19)
   base02: "#223249" # ANSI 19 / (bright-black) / selection-bg / waveBlue1 / ui.bg_visual
   base03: "#727169" # ANSI  8 / (grey) / comments / fujiGray / ui.syn.comment
-  base04: "#C8C093" # ANSI 20 / (light-grey) / dark-foreground (stautus-bas) / oldWhite
+  base04: "#C8C093" # ANSI 20 / (light-grey) / dark-foreground (stautus-bar) / oldWhite
   base05: "#DCD7BA" # ANSI 21 / foreground / fujiWhite / ui.fg / OKHSL(99, 33, 86)
   base06: "#DCD7BA" # ** / ANSI  7 / light-foreground
   base07: "#f2ecbc" # ** / ANSI 15 / lightest-foreground / lotusWhite3 / OKHSL(102, 67, 93)
   base09: "#FFA066" # ANSI 16 / (orange) / surimiOrange
   base0F: "#43242B" # ** / ANSI 17 / (dark red or brown) / winterRed
-  base10: "#16161D" # ** / ANSI  - / darker-black / sumiInk0 / OKHSL(285, 16, 10)
-  base11: "#000000" # ** / ANSI  - / darkest-black / BLACK
+  base10: "#1a1a22" # ** / ANSI  - / darker-black / sumiInk2
+  base11: "#16161D" # ** / ANSI  - / darkest-black / sumiInk0 / OKHSL(285, 16, 10)
   base08: "#C34043" # ANSI  1 / red / OKHSL(23, 79, 49)
   base0B: "#76946a" # ANSI  2 / autunmnGreen
   base0A: "#C0A36E" # ANSI  3 / boatYellow2
