@@ -17,3 +17,6 @@ local paths =
 for _, path_ in pairs(paths) do
   require(path .. "." .. path_:match("[^/\\]+$"):sub(1, -5)).setup()
 end
+
+-- REMOVE LazyVim's autocmd
+vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
