@@ -1,0 +1,19 @@
+% konsave, kde
+
+# List profile
+konsave --list
+
+# Save profile
+konsave --save "<name>"
+
+# Remove profile
+konsave --remove "<name>"
+
+# Apply profile
+konsave --apply "<name>"
+
+# Import a ".knsv" file
+konsave --import-profile <path to the file>
+
+# Export to /tmp
+konsave --export-profile "<name>" --export-directory /tmp

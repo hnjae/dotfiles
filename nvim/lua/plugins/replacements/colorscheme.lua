@@ -6,9 +6,10 @@ local colorschemes = {
   gruvbox_material = "gruvbox-material",
   kanagawa = "kanagawa",
   rose_pine = "rose-pine",
-  -- catppuccin = "catppuccin",
-  -- cyberdream = "cyberdream",
-  -- tokyonight = "tokyonight",
+  --
+  catppuccin = "catppuccin",
+  cyberdream = "cyberdream",
+  tokyonight = "tokyonight",
 }
 
 local COLORSCHEME = colorschemes.kanagawa
@@ -23,6 +24,7 @@ return {
   },
   {
     [1] = "ellisonleao/gruvbox.nvim",
+    enabled = COLORSCHEME == "gruvbox",
     version = false, -- use the latest git commit
     opts = {
       -- contrast = "soft",
@@ -83,13 +85,14 @@ return {
     optional = true,
     enabled = COLORSCHEME == "tokyonight",
     opts = {
-      style = "night",
+      style = "moon",
     },
   },
   {
     [1] = "catppuccin/nvim",
     main = "catppuccin",
     lazy = false,
+    enabled = COLORSCHEME == "catppuccin",
     version = "*",
     opts = {
       flavour = "mocha",
@@ -125,8 +128,9 @@ return {
   {
     [1] = "rebelot/kanagawa.nvim",
     lazy = false,
+    version = false, -- no versioning, 2025-08-01
     enabled = COLORSCHEME == "kanagawa",
-    -- build = ":KanagawaCompile",
+    -- build = "<cmd>KanagawaCompile<cr>",
     --[[
       NOTE:
 
@@ -136,11 +140,71 @@ return {
       ]]
     opts = {
       compile = false,
-      theme = "wave",
-      -- background = {
-      --   dark = "wave",
-      --   light = "lotus",
-      -- },
+      background = {
+        dark = "wave",
+      },
+      colors = {
+        theme = {
+          all = {
+            ui = {
+              -- Remove the background of `LineNr`, `{Sign,Fold}Column` and friends
+              -- Snacks / Aerial / Noice 등에서 text 앞 여백 색상이 다른 문제 해결.
+              bg_gutter = "none",
+            },
+          },
+        },
+      },
+      terminalColors = color_terminal, -- define vim.g.terminal_color_{0,17}
+
+      overrides = function(colors)
+        local theme = colors.theme
+        return {
+          -- Dark completion (popup) menu // More uniform colors for the popup menu.
+          -- Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 }, -- add `blend = vim.o.pumblend` to enable transparency
+          -- PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
+          -- PmenuSbar = { bg = theme.ui.bg_m1 },
+          -- PmenuThumb = { bg = theme.ui.bg_p2 },
+
+          -- HACK: <https://github.com/rebelot/kanagawa.nvim/pull/268> 가 머지되기 전까지 사용 <2025-08-01>
+          -- SnacksDashboard
+          SnacksDashboardHeader = { fg = theme.vcs.removed },
+          SnacksDashboardFooter = { fg = theme.syn.comment },
+          SnacksDashboardDesc = { fg = theme.syn.identifier },
+          SnacksDashboardIcon = { fg = theme.ui.special },
+          SnacksDashboardKey = { fg = theme.syn.special1 },
+          SnacksDashboardSpecial = { fg = theme.syn.comment },
+          SnacksDashboardDir = { fg = theme.syn.identifier },
+
+          -- SnacksNotifier
+          SnacksNotifierBorderError = { link = "DiagnosticError" },
+          SnacksNotifierBorderWarn = { link = "DiagnosticWarn" },
+          SnacksNotifierBorderInfo = { link = "DiagnosticInfo" },
+          SnacksNotifierBorderDebug = { link = "Debug" },
+          SnacksNotifierBorderTrace = { link = "Comment" },
+          SnacksNotifierIconError = { link = "DiagnosticError" },
+          SnacksNotifierIconWarn = { link = "DiagnosticWarn" },
+          SnacksNotifierIconInfo = { link = "DiagnosticInfo" },
+          SnacksNotifierIconDebug = { link = "Debug" },
+          SnacksNotifierIconTrace = { link = "Comment" },
+          SnacksNotifierTitleError = { link = "DiagnosticError" },
+          SnacksNotifierTitleWarn = { link = "DiagnosticWarn" },
+          SnacksNotifierTitleInfo = { link = "DiagnosticInfo" },
+          SnacksNotifierTitleDebug = { link = "Debug" },
+          SnacksNotifierTitleTrace = { link = "Comment" },
+          SnacksNotifierError = { link = "DiagnosticError" },
+          SnacksNotifierWarn = { link = "DiagnosticWarn" },
+          SnacksNotifierInfo = { link = "DiagnosticInfo" },
+          SnacksNotifierDebug = { link = "Debug" },
+          SnacksNotifierTrace = { link = "Comment" },
+
+          ["RenderMarkdownH1Bg"] = { fg = theme.ui.fg, bg = theme.diag.info, bold = true },
+          ["RenderMarkdownH2Bg"] = { fg = theme.ui.fg, bg = theme.diff.text, bold = true },
+          ["RenderMarkdownH3Bg"] = { fg = theme.ui.fg, bg = theme.diff.add, bold = true },
+          ["RenderMarkdownH4Bg"] = { fg = theme.ui.fg, bg = "NONE", bold = true },
+          ["RenderMarkdownH5Bg"] = { fg = theme.syn.comment, bg = "NONE", bold = true },
+          ["RenderMarkdownH6Bg"] = { fg = theme.syn.comment, bg = "NONE", bold = false },
+        }
+      end,
     },
   },
   {

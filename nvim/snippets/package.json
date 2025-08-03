@@ -813,8 +813,8 @@
                 "path": "./snippets/typst-2.json"
             },
             {
-                "language": "cheat",
-                "path": "./snippets/cheat-2.json"
+                "language": "navi",
+                "path": "./snippets/navi-2.json"
             }
         ]
     }
