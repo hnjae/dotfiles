@@ -3,6 +3,7 @@
 if [[ "$TERM" != "dumb" ]] && (( $+commands[pfetch] )); then
   PF_INFO="ascii title os host kernel uptime memory shell" pfetch
 fi
+local hostname_="$(hostname)"
 
 #################################################
 # interactive shell 설정
@@ -17,10 +18,10 @@ case "$OSTYPE" in
     ;;
 esac
 
-if [[ $(hostname) == "isis" ]]; then
+if [[ "${hostname_}" == "isis" || "${hostname_}" == "osiris" ]]; then
   # temp
-  export DISABLE_LAYER_AMD_SWITCHABLE_GRAPHICS_1="1"
-  export VK_DRIVER_FILES="/run/current-system/sw/share/vulkan/icd.d/amd_icd64.json"
+  # export DISABLE_LAYER_AMD_SWITCHABLE_GRAPHICS_1="1"
+  # export VK_DRIVER_FILES="/run/current-system/sw/share/vulkan/icd.d/amd_icd64.json"
 
   # cd to commonly used directories
   alias sp='cd "$HOME/Projects"'
@@ -28,11 +29,11 @@ if [[ $(hostname) == "isis" ]]; then
   alias sf='cd "$HOME/Projects/dotfiles"'
   alias sv='cd "$HOME/Projects/dotfiles/nvim"'
   alias sz='cd "$HOME/Projects/dotfiles/zsh/xdg.config.home"'
-  alias so='cd "${XDG_DOCUMENTS_DIR:-$HOME/Documents}/obsidian/home"'
+  alias so='cd "$HOME/Projects/obsidian/home"'
 
-  # det commonly used files
-  alias ed='vi "${XDG_DOCUMENTS_DIR:-$HOME/Documents}/obsidian/home/dailies/$(date +"%Y-%m-%d").md"'
-  alias ew='vi "${XDG_DOCUMENTS_DIR:-$HOME/Documents}/obsidian/home/weeklies/$(date +"%G-W%V").md"'
+  # edit commonly used files
+  alias ed='vi "$HOME/Projects/obsidian/home/dailies/$(date +"%Y-%m-%d").md"'
+  alias ew='vi "$HOME/Projects/obsidian/home/weeklies/$(date +"%G-W%V").md"'
 fi
 
 # EDITOR가 vi 이여도, ^A, ^E 같은 emacs 키는 사용할 수 있게 설정

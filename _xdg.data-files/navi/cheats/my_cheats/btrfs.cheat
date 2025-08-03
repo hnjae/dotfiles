@@ -3,6 +3,12 @@
 # show filesystem information
 btrfs filesystem show <mountpoint>
 
+# show scrub status
+btrfs scrub status <mountpoint>
+
+# list subvolume
+btrfs subvolume list <mountpoint>
+
 # btrfs du --summarize
 btrfs filesystem du -s <mountpoint>
 
