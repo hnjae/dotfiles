@@ -61,6 +61,9 @@ zpool status -v
 # manually import a pool
 zpool import -d <block-device> -d <block-device> <zpool-name>
 
+# import a pool with altroot /mnt
+zpool import -R /mnt -- <zpool-name>
+
 # import a pool with different name (rename a pool)
 zpool import <zpool-name> <new-name>
 
@@ -80,6 +83,9 @@ zfs rename <old-dataset> <new-dataset>
 
 # 특정 옵션을 inherit 하게 -r 변경
 zfs inherit -rS <eg-atime> <pool>/<dataset>
+
+# Load zfs key
+zfs load-key -- <dataset>
 
 # load all key
 zfs load-key -a

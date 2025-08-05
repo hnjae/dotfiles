@@ -5,3 +5,6 @@ gpg --list-secret-keys --keyid-format=long
 
 # delete key
 gpg --delete-secret-key <email>
+
+# trust key (then type 'trust' and select the trust level)
+gpg --edit-key <key-id>
