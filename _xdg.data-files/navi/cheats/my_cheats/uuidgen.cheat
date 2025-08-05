@@ -1,0 +1,4 @@
+% uuidgen
+
+# Print UUID v7
+uuidgen -7

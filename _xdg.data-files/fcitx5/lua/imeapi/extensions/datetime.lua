@@ -7,6 +7,7 @@ function LookupDate(input)
     fmt = "%H:%M:%S" -- time
   elseif input == "i" then
     fmt = "%Y-%m-%dT%H:%M:%S%z" -- iso8601
+    return os.date(fmt):gsub("([+-]%d%d)(%d%d)$", "%1:%2")
   elseif input == "w" then
     fmt = "%G-W%V-%u" -- weekday formats (iso 8601)
     -- elseif input == "u" then

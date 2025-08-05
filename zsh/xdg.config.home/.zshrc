@@ -3,7 +3,6 @@
 if [[ "$TERM" != "dumb" ]] && (( $+commands[pfetch] )); then
   PF_INFO="ascii title os host kernel uptime memory shell" pfetch
 fi
-local hostname_="$(hostname)"
 
 #################################################
 # interactive shell 설정
@@ -18,7 +17,8 @@ case "$OSTYPE" in
     ;;
 esac
 
-if [[ "${hostname_}" == "isis" || "${hostname_}" == "osiris" ]]; then
+local _hostname="$(hostname)"
+if [[ "${_hostname}" == "isis" || "${_hostname}" == "osiris" ]]; then
   # temp
   # export DISABLE_LAYER_AMD_SWITCHABLE_GRAPHICS_1="1"
   # export VK_DRIVER_FILES="/run/current-system/sw/share/vulkan/icd.d/amd_icd64.json"
@@ -35,6 +35,7 @@ if [[ "${hostname_}" == "isis" || "${hostname_}" == "osiris" ]]; then
   alias ed='vi "$HOME/Projects/obsidian/home/dailies/$(date +"%Y-%m-%d").md"'
   alias ew='vi "$HOME/Projects/obsidian/home/weeklies/$(date +"%G-W%V").md"'
 fi
+unset _hostname
 
 # EDITOR가 vi 이여도, ^A, ^E 같은 emacs 키는 사용할 수 있게 설정
 # https://github.com/simnalamburt/.dotfiles/blob/997d482/.zshrc

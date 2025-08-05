@@ -125,6 +125,7 @@
     "codeblock": {
         "prefix": [
             "codeblock",
+            "cod",
             "cb",
             "sb"
         ],
@@ -279,27 +280,19 @@
             "dl",
             "description-block"
         ],
-        "description": "write description",
+        "description": "write description (GFM)",
         "body": [
-            "<dl>",
-            "\t<dt>$1</dt>",
-            "\t<dd>",
-            "\t\t$2",
-            "\t</dd>",
-            "</dl>"
+            "${1:word}",
+            ": ${2:description}"
         ]
     },
-    "description": {
-        "prefix": [
-            "dd",
-            "description"
-        ],
-        "description": "write description",
+    "console-codeblock": {
+        "prefix": "con",
+        "description": "fenced code block for console output",
         "body": [
-            "<dt>$1</dt>",
-            "<dd>",
-            "\t$2",
-            "</dd>"
+            "```console",
+            "$0",
+            "```"
         ]
     }
 }

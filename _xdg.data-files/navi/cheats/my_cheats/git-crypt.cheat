@@ -1,0 +1,4 @@
+% git-crypt, git
+
+# git-crypt unlock (requires gpg key)
+git-crypt unlock
