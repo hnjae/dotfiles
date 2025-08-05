@@ -1,0 +1,27 @@
+# vi:ft=zsh
+
+(
+  # Get git root directory
+  if ! gitdir="$(command git rev-parse --git-dir 2>/dev/null)"; then
+    return 0
+  fi
+
+  # Do nothing if auto-fetch is disabled or don't have permissions
+  if [[ ! -w "$gitdir" || -f "$gitdir/NO_AUTO_FETCH" ]] ||
+     [[ -f "$gitdir/FETCH_LOG" && ! -w "$gitdir/FETCH_LOG" ]]; then
+    return 0
+  fi
+
+  # Get time (seconds) when auto-fetch was last run
+  lastrun="$(zstat +mtime "$gitdir/FETCH_LOG" 2>/dev/null || echo 0)"
+  # Do nothing if not enough time has passed since last auto-fetch
+  if (( EPOCHSECONDS - lastrun < $GIT_AUTO_FETCH_INTERVAL )); then
+    return 0
+  fi
+
+  # Fetch all remotes (avoid ssh passphrase prompt)
+  date -R &>! "$gitdir/FETCH_LOG"
+  GIT_SSH_COMMAND="command ssh -o BatchMode=yes" \
+  GIT_TERMINAL_PROMPT=0 \
+    command git fetch --all --recurse-submodules=yes 2>/dev/null &>> "$gitdir/FETCH_LOG"
+) &|

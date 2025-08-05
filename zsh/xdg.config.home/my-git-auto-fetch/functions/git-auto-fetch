@@ -1,0 +1,12 @@
+# vi:ft=zsh
+
+# Do nothing if not in a git repository
+command git rev-parse --is-inside-work-tree &>/dev/null || return 0
+
+# Remove or create guard file depending on its existence
+local guard="$(command git rev-parse --git-dir)/NO_AUTO_FETCH"
+if [[ -f "$guard" ]]; then
+  command rm "$guard" && echo "${fg_bold[green]}enabled${reset_color}"
+else
+  command touch "$guard" && echo "${fg_bold[red]}disabled${reset_color}"
+fi
