@@ -1,0 +1,30 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+- link:
+    ~/.config:
+      glob: true
+      path: "@xdg-config-home/*"
+    ~/.local/share:
+      glob: true
+      path: "@xdg-data-home/*"
+    ~/.config/nvim:
+      path: "nvim"
+    ~/.config/zsh:
+      path: "zsh"
+    ~/.zshenv:
+      path: "zsh/.zshenv"
+    ~/.local/share/navi:
+      path: "navi/data"
+    ~/.config/navi:
+      path: "navi/config"
+    ~/.config/tinted-theming/my-templates:
+      glob: true
+      path: "tinted/my-templates"
+    ~/.config/tinted-theming/tinty/config.toml:
+      glob: true
+      path: "tinted/config.toml"
+    ~/.local/share/tinted-theming/tinty/custom-schemes:
+      glob: true
+      path: "tinted/custom-schemes"
