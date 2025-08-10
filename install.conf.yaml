@@ -2,6 +2,9 @@
     link:
       create: true
       relink: true
+- clean:
+    - '~'
+    - '~/.config'
 - link:
     ~/.config:
       glob: true
@@ -28,3 +31,5 @@
     ~/.local/share/tinted-theming/tinty/custom-schemes:
       glob: true
       path: "tinted/custom-schemes"
+- shell:
+    - [git submodule update --init --recursive, Updating/Installing submodules]
