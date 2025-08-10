@@ -1,0 +1,24 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+      force: true
+- clean:
+    - '~'
+    - '~/.config'
+    - '~/.local/share'
+- link:
+    ~/:
+      glob: true
+      path: "@home/.*"
+    ~/.config:
+      glob: true
+      path: "@xdg-config-home/*"
+    ~/.local/share:
+      glob: true
+      path: "@xdg-data-home/*"
+    ~/.zshenv:
+      path: "@xdg-config-home/zsh/.zshenv"
+
+# - shell:
+#     - [git submodule update --init --recursive, Updating/Installing submodules]

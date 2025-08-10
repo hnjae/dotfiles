@@ -77,10 +77,10 @@ build-tinted:
     set -euo pipefail
 
     # WIP: add tinted-builder-rust using nix. This is a temporary impure solution.
-    PATH="~/.local/state/cargo/bin:$PATH"
+    PATH="~/.local/share/cargo/bin:$PATH"
 
-    templates="./tinted/my-templates"
-    myschemes="./tinted/custom-schemes"
+    templates="~/.config/tinted-theming/my-templates"
+    myschemes="~/.config/tinted-theming/custom-schemes"
     # schemes="./_xdg.data-files/tinted-theming/tinty/repos/schemes/base24"
     for template in "$templates"/*; do
         tinted-builder-rust build -s "$myschemes" "$template"
