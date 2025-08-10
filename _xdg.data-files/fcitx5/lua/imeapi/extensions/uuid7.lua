@@ -1,5 +1,5 @@
 function Uuid()
-  local handle = io.popen("uuid7")
+  local handle = io.popen("uuidgen -7")
   if handle then
     local result = handle:read("*a") -- Read all output
     handle:close()
