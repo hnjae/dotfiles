@@ -1,5 +1,5 @@
 -- obsidian
-vim.opt_local.shiftwidth = 2
+vim.opt_local.shiftwidth = 4 -- sw=4 가 되어야지, ordered list 와 unordered list 가 제대로 indent 됨.
 vim.opt_local.expandtab = true
 
 vim.opt_local.conceallevel = 1

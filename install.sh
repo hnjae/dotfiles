@@ -37,24 +37,30 @@ main() {
   dotbot_cmd="$(get_dotbot)"
 
   cd "$BASE_DIR"
+
+  echo "[INFO] Running dotbot" >/dev/stderr
   "$dotbot_cmd" -d "$BASE_DIR" -c "$CONFIG" "${@}"
 
   local hostname_
   hostname_="$(hostname)"
 
+  local profile_dir
   if [ "$hostname_" = "osiris" ] || [ "$hostname_" = "isis" ]; then
-    local profile_dir="$BASE_DIR/profiles.linux-desktop"
+    profile_dir="$BASE_DIR/profiles.linux-desktop"
 
     cd "$profile_dir"
+    echo "[INFO] Running dotbot with profile: linux-desktop" >/dev/stderr
     "$dotbot_cmd" -d "$profile_dir" -c "${profile_dir}/${CONFIG}" "${@}"
 
     profile_dir="$BASE_DIR/profiles.kde"
+    echo "[INFO] Running dotbot with profile: kde" >/dev/stderr
     "$dotbot_cmd" -d "$profile_dir" -c "${profile_dir}/${CONFIG}" "${@}"
   fi
 
   # Bootstrap
   marker_file="${XDG_STATE_HOME}/dotfiles-bootstrapped"
   if [[ ! -e "$marker_file" || "$marker_file" -ot "$BASE_DIR/bootstrap.sh" ]]; then
+    echo "[INFO] Running bootstrap.sh" >/dev/stderr
     "$BASE_DIR/bootstrap.sh"
   fi
 }

@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -eu
+
 # script_dir="$(cd -- "$(dirname -- "$0")" && pwd -P)"
 
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
@@ -13,6 +15,8 @@ BLUE='\033[0;34m'
 MAGENTA='\033[0;35m'
 NC='\033[0m' # No Color
 
+hostname_="$(hostname)"
+
 # Arguments:
 #   $1: Severity level
 #   $2: scope
@@ -22,8 +26,8 @@ log() {
 
   if [ "$1" = "info" ]; then
     severity="${BLUE}[INFO]${NC} "
-  elif [ "$1" = "warning" ]; then
-    severity="${YELLOW}[WARNING]${NC} "
+  elif [ "$1" = "warn" ]; then
+    severity="${YELLOW}[WARN]${NC} "
   elif [ "$1" = "error" ]; then
     severity="${RED}[ERROR]${NC} "
   else
@@ -73,6 +77,39 @@ backup_path() {
   fi
 }
 
+write_secrets() {
+  op_list="$(op account list)"
+
+  if [ "$op_list" = "" ]; then
+    log "warn" "op" "No 1Password account found. Please log in to your account first."
+    return 1
+  fi
+
+  log info "op" "Writing secrets: age"
+
+  mkdir -p "$XDG_CONFIG_HOME/sops/age"
+
+  chmod 700 "$XDG_CONFIG_HOME/sops"
+  chmod 700 "$XDG_CONFIG_HOME/sops/age"
+  age_key_path="$XDG_CONFIG_HOME/sops/age/keys.txt"
+  op read 'op://Secrets/ssh-home/age/private key' >"$age_key_path"
+  chmod 600 "$age_key_path"
+
+  # log info "op" "Writing SSH Key"
+  # TODO: gnupg 키 <2025-08-11>
+  # TODO: ssh 키 <2025-08-11>
+
+  return 0
+}
+
+configure_default_app() {
+  log info "xdg" "Configuring default applications"
+
+  xdg-settings set default-web-browser brave-desktop.desktop
+
+  return 0
+}
+
 main() {
   marker_file="${XDG_STATE_HOME}/dotfiles-bootstrapped"
   is_bootstrapped=1
@@ -106,8 +143,25 @@ main() {
     is_bootstrapped=0
   fi
 
+  if [ "$hostname_" = "osiris" ] || [ "$hostname_" = "isis" ]; then
+    if ! configure_default_app; then
+      is_bootstrapped=0
+    fi
+
+    if ! write_secrets; then
+      is_bootstrapped=0
+    fi
+  fi
+
   if [ "$is_bootstrapped" -eq 1 ]; then
+    echo ""
+    echo "Bootstrapping completed successfully." >/dev/stderr
     mkdir -p "$XDG_STATE_HOME" && touch "$marker_file"
+  else
+    echo ""
+    echo "THERE WAS ERROR WHILE BOOTSTRAPPING" >/dev/stderr
+    echo "Please check the logs above for more details." >/dev/stderr
+    echo "You can try running this script again after fixing the issues." >/dev/stderr
   fi
 }
 
