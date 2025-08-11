@@ -2,7 +2,7 @@ if (( ! $+commands[navi] )) || [[ "$TERM" == "dumb" || $options[zle] != on ]]; t
   return
 fi
 
-__CHEATS_DIR="${XDG_DATA_HOME:-${HOME}/.local/share}/navi/cheats/my_cheats/"
+__CHEATS_DIR="${XDG_DATA_HOME:-${HOME}/.local/share}/navi/cheats"
 
 $commands[navi] widget zsh >| "${0:A:h}/_navi.zsh"
 source "${0:A:h}/_navi.zsh"

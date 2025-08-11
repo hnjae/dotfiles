@@ -27,8 +27,8 @@ if [[ "${_hostname}" == "isis" || "${_hostname}" == "osiris" ]]; then
   alias sp='cd "$HOME/Projects"'
   alias sn='cd "$HOME/Projects/nix-config"'
   alias sf='cd "$HOME/Projects/dotfiles"'
-  alias sv='cd "$HOME/Projects/dotfiles/nvim"'
-  alias sz='cd "$HOME/Projects/dotfiles/zsh/xdg.config.home"'
+  alias sv='cd "${XDG_CONFIG_HOME:-$HOME/.config}/nvim"'
+  alias sz='cd "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}"'
   alias so='cd "$HOME/Projects/obsidian/home"'
 
   # edit commonly used files

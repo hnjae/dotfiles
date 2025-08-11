@@ -226,7 +226,7 @@ alias gPoat="git push origin --all && git push origin --tags"
 ############################################################################
 # git-fetch
 ############################################################################
-alias gf="git fetch"
+alias gf="git fetch --all --recurse-submodules=yes"
 alias gfa="git fetch --all --prune"
 alias gfo="git fetch origin"
 

@@ -31,6 +31,7 @@ return {
 
       -- data-formats
       yaml = false,
+      csv = false,
       json = false,
       jsonc = false,
       toml = false,

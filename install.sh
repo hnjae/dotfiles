@@ -18,11 +18,6 @@ get_dotbot() {
     return
   fi
 
-  if command -v nix >/dev/null 2>&1; then
-    echo "nix run 'nixpkgs#dotbot' --"
-    return
-  fi
-
   local dotbot_dir=".lib/dotbot"
   local dotbot_bin="bin/dotbot"
   local dotbot_bin_abs="${BASE_DIR}/${dotbot_dir}/${dotbot_bin}"
