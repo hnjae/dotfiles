@@ -1,0 +1,6 @@
+[Plugins]
+baloosearchEnabled=true
+krunner_appstreamEnabled=false
+
+[Plugins][Favorites]
+plugins=krunner_services,krunner_systemsettings

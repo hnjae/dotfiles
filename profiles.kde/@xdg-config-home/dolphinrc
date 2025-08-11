@@ -1,0 +1,38 @@
+[CompactMode]
+MaximumTextWidthIndex=3
+PreviewSize=16
+UseSystemFont=false
+ViewFont=Monospace,11,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+
+[ContentDisplay]
+UsePermissionsFormat=NumericFormat
+
+[DetailsMode]
+PreviewSize=16
+UseSystemFont=false
+ViewFont=Monospace,11,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+
+[General]
+FilterBar=true
+GlobalViewProps=false
+ShowFullPath=true
+ShowFullPathInTitlebar=true
+UseTabForSwitchingSplitView=true
+Version=202
+ViewPropsTimestamp=2025,7,5,18,27,32.664
+
+[IconsMode]
+PreviewSize=256
+
+[InformationPanel]
+dateFormat=ShortFormat
+
+[KFileDialog Settings]
+Places Icons Auto-resize=false
+Places Icons Static Size=22
+
+[PreviewSettings]
+Plugins=appimagethumbnail,audiothumbnail,blenderthumbnail,comicbookthumbnail,cursorthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,directorythumbnail,fontthumbnail,imagethumbnail,jpegthumbnail,kraorathumbnail,windowsexethumbnail,windowsimagethumbnail,mobithumbnail,opendocumentthumbnail,gsthumbnail,rawthumbnail,svgthumbnail
+
+[Search]
+Location=Everywhere

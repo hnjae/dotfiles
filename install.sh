@@ -47,6 +47,9 @@ main() {
 
     cd "$profile_dir"
     "$dotbot_cmd" -d "$profile_dir" -c "${profile_dir}/${CONFIG}" "${@}"
+
+    profile_dir="$BASE_DIR/profiles.kde"
+    "$dotbot_cmd" -d "$profile_dir" -c "${profile_dir}/${CONFIG}" "${@}"
   fi
 
   # Bootstrap
