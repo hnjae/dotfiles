@@ -23,6 +23,9 @@ get_dotbot() {
   local dotbot_bin_abs="${BASE_DIR}/${dotbot_dir}/${dotbot_bin}"
 
   if [ ! -x "$dotbot_bin_abs" ]; then
+    git submodule sync --quiet --recursive  # URL Update
+    git submodule update --init --recursive # 실제 코드 가져오기
+
     git -C "$dotbot_dir" submodule sync --quiet --recursive >/dev/stderr
   fi
 
@@ -44,6 +47,12 @@ main() {
 
     cd "$profile_dir"
     "$dotbot_cmd" -d "$profile_dir" -c "${profile_dir}/${CONFIG}" "${@}"
+  fi
+
+  # Bootstrap
+  marker_file="${XDG_STATE_HOME}/dotfiles-bootstrapped"
+  if [[ ! -e "$marker_file" || "$marker_file" -ot "$BASE_DIR/bootstrap.sh" ]]; then
+    "$BASE_DIR/bootstrap.sh"
   fi
 }
 
