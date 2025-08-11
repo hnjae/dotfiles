@@ -43,7 +43,7 @@ main() {
   hostname_="$(hostname)"
 
   if [ "$hostname_" = "osiris" ] || [ "$hostname_" = "isis" ]; then
-    local profile_dir="$BASE_DIR/profiles.desktop"
+    local profile_dir="$BASE_DIR/profiles.linux-desktop"
 
     cd "$profile_dir"
     "$dotbot_cmd" -d "$profile_dir" -c "${profile_dir}/${CONFIG}" "${@}"

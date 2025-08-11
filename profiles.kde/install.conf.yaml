@@ -7,3 +7,6 @@
     ~/.config:
       glob: true
       path: "@xdg-config-home/*"
+    ~/.local/share:
+      glob: true
+      path: "@xdg-data-home/*"

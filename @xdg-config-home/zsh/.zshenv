@@ -1,6 +1,6 @@
 # README:
 #   이 파일은 $ZDOTDIR/.zshenv, $HOME/.zshenv 두 곳에 존재해야한다.
-#   관찰 결과, 위 두 파일을 동시에 읽는 경우는 없으나, 한 파일만 읽는 경우는 잦은 듯.
+#   관찰 결과, 위 두 파일을 모두 읽는 경우는 없는 듯.
 
 setopt no_global_rcs # do not source global zshrc/zprofile files
 

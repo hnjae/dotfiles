@@ -20,4 +20,4 @@
       glob: true
       path: "@xdg-data-home/*"
     ~/.zshenv:
-      path: "@xdg-config-home/zsh/.zshenv"
+      path: "~/.config/zsh/.zshenv"
