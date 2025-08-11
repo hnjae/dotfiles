@@ -7,6 +7,8 @@
     - '~'
     - '~/.config'
     - '~/.local/share'
+- shell:
+    - [git submodule update --init --recursive, Installing submodules if not]
 - link:
     ~/:
       glob: true
@@ -19,6 +21,3 @@
       path: "@xdg-data-home/*"
     ~/.zshenv:
       path: "@xdg-config-home/zsh/.zshenv"
-
-# - shell:
-#     - [git submodule update --init --recursive, Updating/Installing submodules]
