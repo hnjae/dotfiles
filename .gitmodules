@@ -1,3 +1,6 @@
 [submodule ".lib/dotbot"]
 	path = .lib/dotbot
 	url = https://github.com/anishathalye/dotbot
+[submodule "@xdg-data-home/zimfw"]
+	path = @xdg-data-home/zimfw
+	url = https://github.com/zimfw/zimfw.git

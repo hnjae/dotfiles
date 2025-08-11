@@ -109,7 +109,7 @@ zstyle ':fzf-tab:*' use-fzf-default-opts yes
 # Bootstrap zimfw
 ################################################################################
 zstyle ':zim:zmodule' use 'degit'
-typeset -g ZIM_HOME="${XDG_STATE_HOME:-${HOME}/.local/state}/zim"
+typeset -g ZIM_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zimfw"
 
 if [[ ! -f "${ZDOTDIR:-${HOME}}/.zimrc" ]]; then
     echo "ERROR: .zimrc not found."
