@@ -25,6 +25,7 @@ zmodule "$ZDOTDIR/my-rsync"
 zmodule "$ZDOTDIR/my-systemd"
 zmodule "$ZDOTDIR/my-tmux"
 zmodule "$ZDOTDIR/my-zimfw"
+zmodule "$ZDOTDIR/my-mani"
 
 # 자체 함수 선언이 있거나 복잡한 모듈
 zmodule environment

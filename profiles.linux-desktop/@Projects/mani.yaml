@@ -1,0 +1,44 @@
+projects:
+  archive:
+    url: git@github.com:hnjae/archive
+  dotfiles:
+    url: git@github.com:hnjae/dotfiles
+  full-stack-todo:
+    url: git@github.com:hnjae/full-stack-todo
+  hnjae.github.io:
+    url: git@github.com:hnjae/hnjae.github.io
+  nix-config:
+    url: git@github.com:hnjae/nix-config
+  nix-flatpak:
+    url: git@github.com:hnjae/nix-flatpak.git
+  obsidian:
+    url: git@github.com:hnjae/obsidian.git
+  obsidian.nvim:
+    url: git@github.com:hnjae/obsidian.nvim
+  published-articles:
+    url: git@github.com:hnjae/published-articles
+  py-utils:
+    url: git@github.com:hnjae/py-utils
+  resume:
+    url: git@github.com:hnjae/resume.git
+  type-challenges:
+    url: git@github.com:hnjae/type-challenges.git
+targets:
+  home:
+    projects:
+      - archive
+      - dotfiles
+      - obsidian
+      - nix-config
+  all:
+    all: true
+tasks:
+  fetch:
+    target: home
+    cmd: git fetch --all
+  status:
+    target: all
+    cmd: git status --short --untracked-files=all
+  fetch-all:
+    target: all
+    cmd: git fetch --all

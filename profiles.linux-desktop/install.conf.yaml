@@ -10,3 +10,5 @@
     ~/.local/share:
       glob: true
       path: "@xdg-data-home/*"
+    ~/Projects/mani.yaml:
+      path: "@Projects/mani.yaml"
