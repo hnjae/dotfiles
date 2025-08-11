@@ -23,6 +23,11 @@ projects:
     url: git@github.com:hnjae/resume.git
   type-challenges:
     url: git@github.com:hnjae/type-challenges.git
+specs:
+  default:
+    output: markdown
+    parallel: true
+    forks: 2
 targets:
   home:
     projects:
@@ -38,7 +43,16 @@ tasks:
     cmd: git fetch --all
   status:
     target: all
-    cmd: git status --short --untracked-files=all
+    cmd: git status --short --branch --untracked-files=all
+    # branch=$(git rev-parse --abbrev-ref HEAD)
+    # ahead_behind=$(git rev-list --count --left-right origin/$branch..$branch) >/dev/null
+    #
+    # if [ "$ahead_behind" != "0       0" ] || [ -z "$(git status --porcelain)" ]; then
+    # fi
+    #       branch=$(git rev-parse --abbrev-ref HEAD)
+    # ahead=$(git rev-list --count origin/$branch..$branch)
+    # behind=$(git rev-list --count $branch..origin/$branch)
+    # echo "$ahead commits ahead, $behind commits behind"
   fetch-all:
     target: all
     cmd: git fetch --all

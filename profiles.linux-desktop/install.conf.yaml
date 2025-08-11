@@ -12,3 +12,5 @@
       path: "@xdg-data-home/*"
     ~/Projects/mani.yaml:
       path: "@Projects/mani.yaml"
+    ~/Projects/justfile:
+      path: "@Projects/justfile"
