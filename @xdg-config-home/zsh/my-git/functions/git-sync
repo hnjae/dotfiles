@@ -2,6 +2,10 @@
 
 git add --all
 
+if [ "$(git status --porcelain --untracked-files=all)" = "" ]; then
+  echo "No changes to commit.">/dev/stderr
+fi
+
 echo ""
 git -c color.ui=always status --short --untracked-files=all --find-renames=y
 echo ""
@@ -22,6 +26,8 @@ case "$response" in
         ;;
 esac
 
-git commit --no-verify -m '{{ hostname }}: {{ datetime("%Y-%m-%dT%H:%M:%S%Z") }}'
-git push
+hostname="$(hostname)"
+datetime="$(date '+%Y-%m-%dT%H:%M:%S%:z')"
 
+git commit --no-verify -m "${hostname}: ${datetime}"
+git push

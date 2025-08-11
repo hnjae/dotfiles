@@ -13,7 +13,10 @@ date --utc '+%Y-%m-%dT%H:%M:%S.%N%Z'
 date --utc '+%Y%m%dT%H%M%S%Z'
 
 # print local datetime
-date '+%Y-%m-%dT%H:%M:%S.%3N%z'
+date '+%Y-%m-%dT%H:%M:%S.%3N%:z'
+
+# print local datetime with alphabetic time zone abrv (e.g. KST)
+date '+%Y-%m-%dT%H:%M:%S.%3N%Z'
 
 # print current date
 date '+%Y-%m-%d'
