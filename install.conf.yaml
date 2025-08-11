@@ -7,8 +7,8 @@
     - '~'
     - '~/.config'
     - '~/.local/share'
-- shell:
-    - [git submodule update --init --recursive, Installing submodules if not]
+# - shell:
+#     - [git submodule update --init --recursive, Installing submodules if not]
 - link:
     ~/:
       glob: true

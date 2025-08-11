@@ -1,6 +1,6 @@
 [Groups/0]
 # Group Name
-Name=ko
+Name=Default
 # Layout
 Default Layout=us-colemak_dh
 # Default Input Method
@@ -36,9 +36,9 @@ Layout=
 # Name
 Name=mozc
 # Layout
-Layout=
+Layout=us-colemak_dh
 
 [GroupOrder]
-0=ko
+0=Default
 1=ja
 
