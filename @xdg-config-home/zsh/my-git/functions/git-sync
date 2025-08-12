@@ -1,5 +1,7 @@
 # vi:ft=zsh
 
+set -euf
+
 git add --all
 
 if [ "$(git status --porcelain --untracked-files=all)" = "" ]; then

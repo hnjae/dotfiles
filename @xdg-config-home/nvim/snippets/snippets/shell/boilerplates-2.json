@@ -120,8 +120,7 @@
         "prefix": "boilerplate-env",
         "description": "\".env file\"",
         "body": [
-            "#!/bin/sh",
-            "# shellcheck disable=2034"
+            "# shellcheck shell=sh"
         ]
     }
 }

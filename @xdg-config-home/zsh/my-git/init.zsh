@@ -13,17 +13,17 @@ alias gl="git log --oneline --decorate -19"
 alias gll="git log --oneline --decorate"
 typeset -g forgit_log="glz" # default: glo
 
-alias gld="git log --color=always --pretty='${lFormat}' -19 | column --table --separator '␟'"
-alias gldd="git log --color=always --pretty='${lFormat}' | column --table --separator '␟'"
+alias gld="git log --color=always --pretty='${_lformat}' -19 | column --table --separator '␟'"
+alias gldd="git log --color=always --pretty='${_lformat}' | column --table --separator '␟'"
 
 # git-log with graph
 alias glg="git log --oneline --decorate --graph -19"
 alias glgg="git log --oneline --decorate --graph"
 alias glgf="git log --graph --decorate"
 alias glgp="git log --graph --decorate --oneline --show-pulls --"
-alias glgd="git log --graph --pretty='${gFormat}' -19"
-alias glgdd="git log --graph --pretty='${gFormat}'"
-alias glgds="git log --graph --pretty='${gFormat}' --stat"
+alias glgd="git log --graph --pretty='${_gformat}' -19"
+alias glgdd="git log --graph --pretty='${_gformat}'"
+alias glgds="git log --graph --pretty='${_gformat}' --stat"
 
 # git-log misc
 alias gls="git log --stat | bat --style=plain"
