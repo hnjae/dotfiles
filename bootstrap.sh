@@ -115,8 +115,8 @@ main() {
   is_bootstrapped=1
 
   neovim_marker_file="${XDG_STATE_HOME}/nvim/lazyvim-initialized"
-  if [ ! -f "$neovim_marker_file" ]; then
-    if command -v nvim >/dev/null 2>&1 && is_internet_connected; then
+  if [ ! -f "$neovim_marker_file" ] && command -v nvim >/dev/null 2>&1; then
+    if is_internet_connected; then
       log info "nvim" "Initializing LazyVim"
 
       backup_path nvim "${XDG_STATE_HOME}/nvim"
