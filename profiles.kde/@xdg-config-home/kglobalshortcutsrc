@@ -88,7 +88,7 @@ F161F44635633C7AA91251100BD9987E-c380-quality-tiny=none,none,Select the playback
 F161F44635633C7AA91251100BD9987E-c390-quality-auto=none,none,Select the playback quality “Auto”
 F161F44635633C7AA91251100BD9987E-c400-comments-visibility=none,none,Toggle comments visibility
 F161F44635633C7AA91251100BD9987E-c410-related-videos-visibility=none,none,Toggle related videos visibility
-_k_friendly_name=Brave Web Browser
+_k_friendly_name=brave-browser
 
 [chromium-browser]
 71C5D7E3A3DA5E16D58C729CE74DE17C-createTab=none,none,Create new tab

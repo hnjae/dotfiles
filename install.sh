@@ -4,6 +4,7 @@ set -euf
 
 CONFIG="install.conf.yaml"
 BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+XDG_STATE_HOME="${XDG_STATE_HOME:-${HOME}/.local/state}"
 
 check_cond() {
   if ! command -v python3 >/dev/null 2>&1; then

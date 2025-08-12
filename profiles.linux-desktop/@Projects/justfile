@@ -3,5 +3,8 @@
 _:
     @just --list
 
+clone:
+    mani sync
+
 status:
     mani run status | nix run 'nixpkgs#glow'
