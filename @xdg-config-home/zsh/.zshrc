@@ -7,7 +7,6 @@ fi
 #################################################
 # interactive shell 설정
 #################################################
-alias vi="nvim"
 
 case "$OSTYPE" in
   linux*)
@@ -16,26 +15,6 @@ case "$OSTYPE" in
   *)
     ;;
 esac
-
-local _hostname="$(hostname)"
-if [[ "${_hostname}" == "isis" || "${_hostname}" == "osiris" ]]; then
-  # temp
-  # export DISABLE_LAYER_AMD_SWITCHABLE_GRAPHICS_1="1"
-  # export VK_DRIVER_FILES="/run/current-system/sw/share/vulkan/icd.d/amd_icd64.json"
-
-  # cd to commonly used directories
-  alias sp='cd "$HOME/Projects"'
-  alias sn='cd "$HOME/Projects/nix-config"'
-  alias sf='cd "$HOME/Projects/dotfiles"'
-  alias sv='cd "${XDG_CONFIG_HOME:-$HOME/.config}/nvim"'
-  alias sz='cd "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}"'
-  alias so='cd "$HOME/Projects/obsidian/home"'
-
-  # edit commonly used files
-  alias ed='vi "$HOME/Projects/obsidian/home/dailies/$(date +"%Y-%m-%d").md"'
-  alias ew='vi "$HOME/Projects/obsidian/home/weeklies/$(date +"%G-W%V").md"'
-fi
-unset _hostname
 
 # EDITOR가 vi 이여도, ^A, ^E 같은 emacs 키는 사용할 수 있게 설정
 # https://github.com/simnalamburt/.dotfiles/blob/997d482/.zshrc
@@ -116,20 +95,21 @@ if [[ ! -f "${ZDOTDIR:-${HOME}}/.zimrc" ]]; then
     return
 fi
 
+# NOTE: git-submodule 을 사용하므로 아 과정 필요 없음 <2025-08-13>
 # Download zimfw plugin manager if missing.
-if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
-    echo "[INFO] Installing ZIM."
-    if (( $+commands[curl] )); then
-        curl -fsSL --create-dirs -o "${ZIM_HOME}/zimfw.zsh" \
-            "https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh"
-    elif (( $+commands[wget] )); then
-        mkdir -p "${ZIM_HOME}" && wget -nv -O "${ZIM_HOME}/zimfw.zsh" \
-            "https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh"
-    else
-        echo "ERROR: Neither curl nor wget is available to download ZIM."
-        return
-    fi
-fi
+# if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
+#     echo "[INFO] Installing ZIM."
+#     if (( $+commands[curl] )); then
+#         curl -fsSL --create-dirs -o "${ZIM_HOME}/zimfw.zsh" \
+#             "https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh"
+#     elif (( $+commands[wget] )); then
+#         mkdir -p "${ZIM_HOME}" && wget -nv -O "${ZIM_HOME}/zimfw.zsh" \
+#             "https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh"
+#     else
+#         echo "ERROR: Neither curl nor wget is available to download ZIM."
+#         return
+#     fi
+# fi
 
 # Install missing modules, and update ${ZIM_HOME}/init.zsh if missing or outdated.
 if [[ ! "${ZIM_HOME}/init.zsh" -nt "${ZDOTDIR:-${HOME}}/.zimrc" ]]; then

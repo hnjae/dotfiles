@@ -175,3 +175,12 @@ git clean -d --force
 
 # Clean (Remove all untracked files)
 git reset --hard && git clean --force -dx
+
+;################
+; submodule
+;##################
+# Update the URL of submodules in `.git/config` from what's in `.gitmodules`
+git submodule sync --quiet --recursive
+
+# Updates/initialize and fetch git submodules
+git submodule update --init --recursive

@@ -33,6 +33,13 @@ alias sxc='cd "${XDG_CONFIG_HOME:-$HOME/.config}"'
 alias sxd='cd "${XDG_DATA_HOME:-$HOME/.local/share}"'
 alias sxs='cd "${XDG_STATE_HOME:-$HOME/.local/state}"'
 
+
+if (( ${+commands[nvim]} )); then
+  alias vi="nvim"
+else
+  alias vi="vim"
+fi
+
 alias cp="cp -i --preserve=all --reflink=auto"
 alias mv="mv -i"
 alias j="just"
