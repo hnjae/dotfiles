@@ -233,6 +233,7 @@ alias gfo="git fetch origin"
 ############################################################################
 # git-pull
 ############################################################################
+alias gpl="git pull --rebase --autostash -v"
 alias gplf="git pull --ff-only"
 alias gplr="git pull --rebase -v"
 alias gplra="git pull --rebase --autostash -v"

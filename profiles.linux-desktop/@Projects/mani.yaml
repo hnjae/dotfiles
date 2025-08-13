@@ -38,7 +38,7 @@ targets:
   all:
     all: true
 tasks:
-  fetch:
+  fetch-home:
     target: home
     cmd: git fetch --all
   status:
@@ -53,6 +53,6 @@ tasks:
     # ahead=$(git rev-list --count origin/$branch..$branch)
     # behind=$(git rev-list --count $branch..origin/$branch)
     # echo "$ahead commits ahead, $behind commits behind"
-  fetch-all:
+  fetch:
     target: all
     cmd: git fetch --all
