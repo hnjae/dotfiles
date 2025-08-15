@@ -26,10 +26,13 @@ M.setup = function()
 
         vim.cmd("quit")
 
-        -- 아래 두개로 제거하면 안됨
+        -- NOTE: 아래 두개로 제거하면 안됨
         -- require("snacks").bufdelete(buf)
         -- require("aerial").close()
-      end, 5)
+
+        -- NOTE:
+        -- `5 ms` 는 너무 짧음.
+      end, 10)
     end,
   })
 end

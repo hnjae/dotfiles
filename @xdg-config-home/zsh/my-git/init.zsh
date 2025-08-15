@@ -233,10 +233,8 @@ alias gfo="git fetch origin"
 ############################################################################
 # git-pull
 ############################################################################
-alias gpl="git pull --rebase --autostash -v"
-alias gplf="git pull --ff-only"
-alias gplr="git pull --rebase -v"
-alias gplra="git pull --rebase --autostash -v"
+alias gpl="git pull --ff-only -v"
+alias gplr="git pull --rebase --autostash -v"
 # glum                 git pull upstream master
 # ggpull               git pull origin "$(git_current_branch)"
 # ggpush               git push origin "$(git_current_branch)"

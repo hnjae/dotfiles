@@ -7,6 +7,8 @@ projects:
     url: git@github.com:hnjae/full-stack-todo
   hnjae.github.io:
     url: git@github.com:hnjae/hnjae.github.io
+  logseq-home:
+    url: git@github.com:hnjae/logseq-home
   nix-config:
     url: git@github.com:hnjae/nix-config
   nix-flatpak:
@@ -27,7 +29,7 @@ specs:
   default:
     output: markdown
     parallel: true
-    forks: 2
+    forks: 4
 targets:
   home:
     projects:

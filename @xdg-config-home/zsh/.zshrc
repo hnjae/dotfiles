@@ -72,7 +72,10 @@ ZVM_INIT_MODE=sourcing
 #################################################
 # 기타 플러그인 설정
 #################################################
-export FZF_DEFAULT_OPTS="--color=16,border:8 --layout=reverse --height=22 --marker=░"
+export FZF_DEFAULT_OPTS="--color=16,border:8 --layout=reverse --smart-case --height=22 --marker=░"
+# if (( $+commands[fd] )); then
+#   export FZF_CTRL_T_COMMAND="command fd -H --no-ignore-vcs -E .git -td -tf"
+# fi
 # if (( $+commands[fd] )); then
 #   # export FZF_ALT_C_COMMAND="command fd -H --no-ignore-vcs -E .git -td"
 #   # export FZF_CTRL_T_COMMAND="command fd -H --no-ignore-vcs -E .git -td -tf"

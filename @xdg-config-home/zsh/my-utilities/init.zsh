@@ -36,8 +36,10 @@ alias sxs='cd "${XDG_STATE_HOME:-$HOME/.local/state}"'
 
 if (( ${+commands[nvim]} )); then
   alias vi="nvim"
+  alias vimdiff='nvim -d'
 else
   alias vi="vim"
+  alias nvim="vim"
 fi
 
 alias cp="cp -i --preserve=all --reflink=auto"
