@@ -176,6 +176,9 @@ git clean -d --force
 # Clean (Remove all untracked files)
 git reset --hard && git clean --force -dx
 
+; # Make HEAD to point something
+; git checkout <commit-alike>
+
 ;################
 ; submodule
 ;##################
