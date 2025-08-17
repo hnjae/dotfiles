@@ -1,0 +1,19 @@
+% minio, mc
+
+; https://github.com/minio/mc
+; https://docs.min.io/community/minio-object-store/reference/minio-mc.html
+
+# Create bucket
+mc mb <bucket-name>
+
+# List bucket and object
+mc ls
+
+# list alias
+mc alias list
+
+# Create alias
+mc alias set <alias-name> <url> --api "s3v4"
+
+# Create alias
+mc alias set <alias-name> <url> "$MINIO_ROOT_USER" "$MINIO_ROOT_PASSWORD"

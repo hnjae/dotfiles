@@ -4,6 +4,7 @@ local FILETYPES = {
   aerial = true,
   minimap = true,
   ["copilot-chat"] = true,
+  -- ["snacks_picker_list"] = true,
 }
 
 M.setup = function()

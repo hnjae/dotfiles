@@ -81,7 +81,7 @@ write_secrets() {
   op_list="$(op account list)"
 
   if [ "$op_list" = "" ]; then
-    log "warn" "op" "No 1Password account found. Please log in to your account first."
+    log warn "op" "No 1Password account found. Please log in to your account first."
     return 1
   fi
 
@@ -122,7 +122,8 @@ main() {
       backup_path nvim "${XDG_STATE_HOME}/nvim"
       backup_path nvim "${XDG_DATA_HOME}/nvim"
       nvim --headless -c "autocmd User VeryLazy ++once Lazy install" -c "qa"
-      mkdir -p "${XDG_STATE_HOME}/nvim" && touch "$marker_file"
+      mkdir -p "${XDG_STATE_HOME}/nvim" && touch "$neovim_marker_file"
+
       # TODO: install mason headlessly <2025-08-11>
     else
       is_bootstrapped=0
