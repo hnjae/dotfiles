@@ -1,13 +1,19 @@
 % podman, docker, container
 
-# podman -rnu
-podman run -it "<image-name>" --mount=
+# podman run
+podman run -it "<image>" --mount=
+
+# Podman run executable
+podamn run --interactive --tty --rm "<image>" "</bin/sh>"
+
+# Podman run executable detach
+podamn run --interactive --tty --detach --rm "<image>"
 
 # podman device mount example
 sudo podman run --mount=type=bind,source=./centos-7_x86_64,destination=/mnt --device=/dev/<>:/dev/xvda:rwm -it "centos:7"
 
 # run bash in container (-it: interactive tty)
-podman exec -it <container_id> /bin/bash
+podman exec -it <container-id> /bin/bash
 
 # podman pod list (ls)
 podman pod ls
@@ -27,4 +33,10 @@ poman image prune
 # get ip of container
 podman inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <container-id>
 
-$ container_id: podman ps --- --header-lines 1 --column 1
+# Create Network
+sudo podman network create
+
+# Test Network (add NET_RAW to use `ping`)
+sudo podman run -it --rm --cap-add=NET_RAW --network <podman-network> -- 'nicolaka/netshoot' /bin/sh
+
+$ container-id: podman ps --- --header-lines 1 --column 1

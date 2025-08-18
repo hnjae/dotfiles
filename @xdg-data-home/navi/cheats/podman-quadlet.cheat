@@ -1,0 +1,4 @@
+% quadlet, podman
+
+# Debug generator
+journalctl -b | grep -i "quadlet\|podman.*generator"
