@@ -85,15 +85,17 @@ write_secrets() {
     return 1
   fi
 
-  log info "op" "Writing secrets: age"
-
-  mkdir -p "$XDG_CONFIG_HOME/sops/age"
-
-  chmod 700 "$XDG_CONFIG_HOME/sops"
-  chmod 700 "$XDG_CONFIG_HOME/sops/age"
   age_key_path="$XDG_CONFIG_HOME/sops/age/keys.txt"
-  op read 'op://Secrets/ssh-home/age/private key' >"$age_key_path"
-  chmod 600 "$age_key_path"
+
+  if [ ! -r "$age_key_path" ]; then
+    log info "op" "Writing secrets: age"
+
+    mkdir -p "$XDG_CONFIG_HOME/sops/age"
+    chmod 700 "$XDG_CONFIG_HOME/sops"
+    chmod 700 "$XDG_CONFIG_HOME/sops/age"
+    op read 'op://Secrets/ssh-home/age/private key' >"$age_key_path"
+    chmod 600 "$age_key_path"
+  fi
 
   # log info "op" "Writing SSH Key"
   # TODO: gnupg 키 <2025-08-11>
@@ -106,6 +108,10 @@ configure_default_app() {
   log info "xdg" "Configuring default applications"
 
   xdg-settings set default-web-browser brave-desktop.desktop
+  xdg-mime default 'org.kde.okular.desktop' 'applications/pdf'
+  handlr set -- 'text/*' 'nvim.desktop'
+  handlr set -- 'video/*' 'mpv.desktop'
+  handlr set -- 'audio/*' 'mpv.desktop'
 
   return 0
 }

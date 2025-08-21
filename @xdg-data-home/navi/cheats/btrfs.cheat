@@ -53,3 +53,7 @@ btrfs filesystem label <block-device-or-mountpoints> <new-label>
 
 # set nocow (RAID 볼륨에는 사용하지 말 것.)
 chattr +C -R <dir>
+
+# increase partition
+btrfs filesystem resize max <mountpoint>
+

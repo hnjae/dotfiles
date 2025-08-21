@@ -2,9 +2,10 @@ if (( ! $+commands[zoxide] )); then
   return
 fi
 
-export _ZO_EXCLUDE_DIRS="$HOME:/nix/*:/mnt/*:/proc/*:*/.git:*/.cache:*/.direnv"
+export _ZO_EXCLUDE_DIRS="$HOME:/nix/*:/mnt/*:/media/*:/run/mount/*:/run/media/*:/proc/*:*/.git:*/.git/*:*/.cache:*/.cache/*:*/.direnv:*/.direnv/*:*/dist:*/dist/*:*/.venv:*/.venv/*"
 # `_ZO_FZF_OPTS` 없으면 fzf 의 extended-search 가 작동하지 않는다. fzf 를 안사용하게 되나? <2025-04-11>
 export _ZO_FZF_OPTS="${FZF_DEFAULT_OPTS} --scheme=path"
+export _ZO_MAXAGE="2500" # default 10000
 
 local initfile="${0:A:h}/_zoxide.zsh"
 # if [[

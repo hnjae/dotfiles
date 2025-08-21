@@ -47,7 +47,7 @@ zmodule "$ZDOTDIR/my-utilities"
 
 # TODO: c-r 맵핑 해제. fzf 랑 겹침 <2025-06-29>
 zmodule jeffreytse/zsh-vi-mode
-zmodule fzf
+zmodule "$ZDOTDIR/my-fzf"
 
 ###############################################################################
 # Prompt

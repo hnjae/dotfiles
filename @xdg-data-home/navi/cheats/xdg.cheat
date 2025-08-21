@@ -5,3 +5,8 @@ xdg-settings set default-web-browser <firefox.desktop>
 
 # get default web browser
 xdg-settings get default-web-browser
+
+# set default
+xdg-mime default <org.kde.okular.desktop> <application/pdf>
+# query default
+xdg-mime query default <application/pdf>

@@ -61,7 +61,7 @@ main() {
   # Bootstrap
   marker_file="${XDG_STATE_HOME}/dotfiles-bootstrapped"
   if [[ ! -e "$marker_file" || "$marker_file" -ot "$BASE_DIR/bootstrap.sh" ]]; then
-    echo "[INFO] Running bootstrap.sh" >/dev/stderr
+    echo "[INFO] RUNNING bootstrap.sh" >/dev/stderr
     "$BASE_DIR/bootstrap.sh"
   fi
 }
