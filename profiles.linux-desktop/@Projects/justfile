@@ -7,7 +7,7 @@ clone:
     mani sync
 
 fetch:
-    mani run fetch | nix run 'nixpkgs#glow'
+    mani run fetch | glow
 
 status:
-    mani run status | nix run 'nixpkgs#glow'
+    mani run status | glow

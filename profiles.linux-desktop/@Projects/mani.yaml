@@ -27,7 +27,7 @@ projects:
     url: git@github.com:hnjae/type-challenges.git
 specs:
   default:
-    # output: markdown
+    output: markdown
     parallel: true
     forks: 4
 targets:
@@ -45,7 +45,6 @@ tasks:
     cmd: git fetch --all
   status:
     target: all
-    output: markdown
     cmd: git status --short --branch --untracked-files=all
     # branch=$(git rev-parse --abbrev-ref HEAD)
     # ahead_behind=$(git rev-list --count --left-right origin/$branch..$branch) >/dev/null
