@@ -33,6 +33,14 @@ get_dotbot() {
   echo "$dotbot_bin_abs"
 }
 
+install_profile() {
+  local profile="$1"
+  local profile_dir="$BASE_DIR/profiles.$profile"
+
+  echo "[INFO] Running dotbot with profile: $profile" >/dev/stderr
+  "$dotbot_cmd" -d "$profile_dir" -c "${profile_dir}/${CONFIG}"
+}
+
 main() {
   check_cond
   dotbot_cmd="$(get_dotbot)"
@@ -44,18 +52,18 @@ main() {
 
   local hostname_
   hostname_="$(hostname)"
+  local uname_
+  uname_="$(uname)"
 
   local profile_dir
+  if [ "$uname_" = "Linux" ] && [ "$HOME" = "/home/hnjae" ]; then
+    install_profile "home-linux"
+  fi
+
   if [ "$hostname_" = "osiris" ] || [ "$hostname_" = "isis" ]; then
-    profile_dir="$BASE_DIR/profiles.linux-desktop"
-
-    cd "$profile_dir"
-    echo "[INFO] Running dotbot with profile: linux-desktop" >/dev/stderr
-    "$dotbot_cmd" -d "$profile_dir" -c "${profile_dir}/${CONFIG}" "${@}"
-
-    profile_dir="$BASE_DIR/profiles.kde"
-    echo "[INFO] Running dotbot with profile: kde" >/dev/stderr
-    "$dotbot_cmd" -d "$profile_dir" -c "${profile_dir}/${CONFIG}" "${@}"
+    install_profile "home-desktop"
+    install_profile "linux-desktop"
+    install_profile "kde"
   fi
 
   # Bootstrap

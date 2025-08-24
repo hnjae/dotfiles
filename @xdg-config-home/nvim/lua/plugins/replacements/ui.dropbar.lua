@@ -45,6 +45,9 @@ local symbols = {
 return {
   {
     [1] = "Bekaboo/dropbar.nvim",
+    -- TODO: 이슈 있음. 고칠것. <2025-08-23>
+    enabled = false,
+
     version = "*", -- follows sementaic versioning
     dependencies = { "echasnovski/mini.icons" },
 

@@ -1,0 +1,9 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+      force: true
+- link:
+    ~/.config/user-tmpfiles.d:
+      glob: true
+      path: "@xdg-config-home.user-tmpfiles.d/*"

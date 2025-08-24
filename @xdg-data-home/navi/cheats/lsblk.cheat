@@ -1,5 +1,7 @@
 % lsblk, list block device
 
+; lsblk  는 이진 접두어 사용.
+
 # list all block devices
 lsblk -f
 

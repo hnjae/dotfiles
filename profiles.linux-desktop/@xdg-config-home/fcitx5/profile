@@ -39,6 +39,6 @@ Name=mozc
 Layout=us-colemak_dh
 
 [GroupOrder]
-0=Default
-1=ja
+0=ja
+1=Default
 
