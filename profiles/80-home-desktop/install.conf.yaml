@@ -6,4 +6,7 @@
 - link:
     ~/.ssh:
       glob: true
-      path: "@ssh/*"
+      path: "ssh/*"
+    ~/Projects:
+      glob: true
+      path: "ssh/*"

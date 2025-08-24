@@ -6,7 +6,7 @@
 - link:
     ~/.config:
       glob: true
-      path: "@xdg-config-home/*"
+      path: "xdg-config/*"
     ~/.local/share:
       glob: true
-      path: "@xdg-data-home/*"
+      path: "xdg-data/*"

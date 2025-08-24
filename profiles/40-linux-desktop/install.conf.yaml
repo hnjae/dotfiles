@@ -1,0 +1,12 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+      force: true
+- link:
+    ~/.config:
+      glob: true
+      path: "xdg-config/*"
+    ~/.local/share:
+      glob: true
+      path: "xdg-data/*"
