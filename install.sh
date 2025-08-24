@@ -35,7 +35,7 @@ get_dotbot() {
 
 install_profile() {
   local profile="$1"
-  local profile_dir="$BASE_DIR/profiles.$profile"
+  local profile_dir="$BASE_DIR/profiles/$profile"
 
   echo "[INFO] Running dotbot with profile: $profile" >/dev/stderr
   "$dotbot_cmd" -d "$profile_dir" -c "${profile_dir}/${CONFIG}"
@@ -44,27 +44,32 @@ install_profile() {
 main() {
   check_cond
   dotbot_cmd="$(get_dotbot)"
-
-  cd "$BASE_DIR"
-
-  echo "[INFO] Running dotbot" >/dev/stderr
-  "$dotbot_cmd" -d "$BASE_DIR" -c "$CONFIG" "${@}"
-
   local hostname_
   hostname_="$(hostname)"
   local uname_
   uname_="$(uname)"
 
-  local profile_dir
-  if [ "$uname_" = "Linux" ] && [ "$HOME" = "/home/hnjae" ]; then
-    install_profile "home-linux"
-  fi
+  cd "$BASE_DIR"
 
-  if [ "$hostname_" = "osiris" ] || [ "$hostname_" = "isis" ]; then
-    install_profile "home-desktop"
-    install_profile "linux-desktop"
-    install_profile "kde"
-  fi
+  install_profile "00-default"
+
+  case "$uname_" in
+  Linux)
+    if [ "$HOME" = "/home/hnjae" ]; then
+      install_profile "80-home-linux"
+    fi
+    ;;
+  *) ;;
+  esac
+
+  case "$hostname_" in
+  osiris | isis)
+    install_profile "40-linux-desktop"
+    install_profile "40-kde"
+    install_profile "80-home-desktop"
+    ;;
+  *) ;;
+  esac
 
   # Bootstrap
   marker_file="${XDG_STATE_HOME}/dotfiles-bootstrapped"

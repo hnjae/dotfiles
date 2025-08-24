@@ -150,7 +150,8 @@ main() {
     is_bootstrapped=0
   fi
 
-  if [ "$hostname_" = "osiris" ] || [ "$hostname_" = "isis" ]; then
+  case "$hostname_" in
+  osiris | isis)
     if ! configure_default_app; then
       is_bootstrapped=0
     fi
@@ -158,7 +159,9 @@ main() {
     if ! write_secrets; then
       is_bootstrapped=0
     fi
-  fi
+    ;;
+  *) ;;
+  esac
 
   if [ "$is_bootstrapped" -eq 1 ]; then
     echo ""
