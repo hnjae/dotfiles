@@ -1,0 +1,4 @@
+% linux-console, setfont
+
+# set larger font
+setfont /etc/static/kbd/consolefonts/latarcyrheb-sun32.psfu.gz

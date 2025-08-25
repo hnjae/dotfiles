@@ -6,8 +6,14 @@ systemctl <opt_user> list-units --failed
 # list dependencies
 systemctl <opt_user> list-dependencies
 
+# list dependencies of unit
+systemctl <opt_user> list-dependencies -- <unit>
+
 # list dependencies --all
-systemctl <opt_user> list-dependencies
+systemctl <opt_user> list-dependencies --all
+
+# list dependencies --all of unit
+systemctl <opt_user> list-dependencies --all -- <unit>
 
 # list targes
 systemctl list-units --type target
