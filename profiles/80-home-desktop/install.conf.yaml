@@ -9,4 +9,4 @@
       path: "ssh/*"
     ~/Projects:
       glob: true
-      path: "ssh/*"
+      path: "Projects/*"
