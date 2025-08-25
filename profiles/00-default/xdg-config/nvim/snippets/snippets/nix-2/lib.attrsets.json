@@ -50,7 +50,15 @@
         "prefix": "lagenATTRSP",
         "description": "Generate attrs from list",
         "body": [
-            "(builtins.listToAttrs (map (${2:foo}: (lib.nameValuePair (${3:\"will-eval-to-name\"}) (${4:\"will-eval-to-value\"}) ) )) ${1:[\"foos(list)\"]});"
+            "(",
+            "builtins.listToAttrs (",
+            "\tmap (",
+            "\t\t${2:foo}: (",
+            "\t\t\tlib.nameValuePair (${3:\"will-eval-to-name\"}) (${4:\"will-eval-to-value\"})",
+            "\t\t)",
+            "\t) ${1:[\"foos(list)\"]}",
+            ")",
+            ");"
         ]
     },
     "lamapAttrs": {

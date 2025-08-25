@@ -59,16 +59,19 @@ sudo zpool create -f \
 zpool status -v
 
 # manually import a pool
-zpool import -d <block-device> -d <block-device> <zpool-name>
+zpool import -d <block-device> -d <block-device> <poolname>
 
 # import a pool with altroot /mnt
-zpool import -R /mnt -- <zpool-name>
+zpool import -R /mnt -- <poolname>
 
 # import a pool with different name (rename a pool)
-zpool import <zpool-name> <new-name>
+zpool import <poolname> <new-name>
 
 # import all pool
 zpool import -a
+
+# import and load-key
+zpool import -l -- <poolname>
 
 # create dataset (no dash in dataset name)
 zfs create -o <property>=<value> <dataset-name>
@@ -126,10 +129,19 @@ zfs set primarycache=metadata <filesystem>
 zfs create -b <blocksize> -V <size> <zpool>/<zvol-name>
 
 # attach existing disk to zpool to makey mirror v-dev
-sudo zpool attach <poolName> <diskName> <NewDiskPath>
+sudo zpool attach <poolname> <diskName> <NewDiskPath>
 
 # diff
 zfs diff <snapshot> <snapshot>
 
 # snapshot
 sudo zfs snapshoot pool/dataset/@snapshot-name
+
+; ;;;;;;;;;;;;;;;;;;
+; L2ARC
+; ;;;;;;;;;;;;;;;;;;
+# add l2arc to zfs pool (DONT FORGET TO ADD `cache`. THERE IS NO WAY TO ROLLBACK IF NOT PROVIDED.)
+sudo zpool add <poolname> cache <block-device>
+
+# remove l2arc from zfs pool
+sudo zpool remove <poolname> <block-device>

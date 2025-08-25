@@ -1,0 +1,10 @@
+% nix
+
+# List system generations
+sudo nix-env -p /nix/var/nix/profiles/system --list-generations
+
+# Remove all other NixOS Generations
+sudo nix-collect-garbage -d
+
+# Prints garbage collection-roots
+nix-store --gc --print-roots
