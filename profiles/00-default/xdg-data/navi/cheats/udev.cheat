@@ -1,0 +1,4 @@
+% udev
+
+# print device info
+udevadm info -a -n "/dev/<device>"

@@ -13,6 +13,8 @@ check_cond() {
   fi
 }
 
+# TODO: clone git submodule if zimfw doesnot exists <2025-08-25>
+
 get_dotbot() {
   if command -v dotbot >/dev/null 2>&1; then
     echo "dotbot"
@@ -27,7 +29,7 @@ get_dotbot() {
     git submodule sync --quiet --recursive  # URL Update
     git submodule update --init --recursive # 실제 코드 가져오기
 
-    git -C "$dotbot_dir" submodule sync --quiet --recursive >/dev/stderr
+    git -C "$dotbot_dir" submodule sync --quiet --recursive >/dev/stderr # DO I need this?
   fi
 
   echo "$dotbot_bin_abs"
