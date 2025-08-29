@@ -14,7 +14,7 @@ fi
 # `ls` alias 에 내가 기본값으로 사용하는 옵션을 추가
 # - use octal permissions to save horizontal space
 
-alias -- ls='eza --group-directories-first --header --octal-permissions --no-permissions --time-style="+%Y-%m-%d %H:%M:%S" --group --binary --git --mounts'
+alias -- ls='eza --group-directories-first --header --octal-permissions --no-permissions --time-style="+%Y-%m-%d %H:%M:%S" --group --binary --git --mounts --numeric'
 alias -- l='ls --long'
 alias -- ll='l --all'
 alias -- lt='l --tree --level=3 --git-ignore --color=always | $PAGER'

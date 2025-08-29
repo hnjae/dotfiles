@@ -1,0 +1,25 @@
+% ffmpeg
+
+; https://ffmpeg.org/ffmpeg-all.html
+
+; https://notes.zacholland.net/av1_encoding/
+# av1 encode (libaom)
+ffmpeg -c:a copy -pix_fmt yuv420p10le -c:v libaom-av1 -crf 23 -cpu-used:v 4  -movflags +faststart -i input.mp4 output.mp4
+
+; https://gitlab.com/AOMediaCodec/SVT-AV1/-/blob/master/Docs/svt-av1_encoder_user_guide.md
+; https://gist.github.com/dvaupel/716598fc9e7c2d436b54ae00f7a34b95
+; https://www.reddit.com/r/AV1/comments/z8rlso/findings_on_vmaf_and_different_svtav1_encoding/
+# AV1 encode (svt-av1)
+ffmpeg -c:a copy -pix_fmt yuv420p10le -c:v libsvtav1 -preset 6 -crf 27 -movflags +faststart -i input.mp4 output.mp4
+
+# add metadata
+ffmpeg -metadata "comment=<hello>"
+
+# encode low-bitrate opus
+ffmpeg -c:a libopus -vbr:a on -b:a 24k -compression_level:a 10 -application:a voip
+
+# encode high-bitrate opus (use 480k/672k for 6/8 channel)
+ffmpeg -c:a libopus -vbr:a on -b:a 192k -compression_level:a 10 -application:a audio
+
+# encode flac
+ffmpeg -c:a flac -compression_level:a 12

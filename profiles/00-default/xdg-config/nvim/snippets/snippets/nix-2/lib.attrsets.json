@@ -73,11 +73,16 @@
         "prefix": "lamapAttrsp",
         "description": "lib.mapAttrs' :: Modify keys and values of attrs",
         "body": [
-            "(lib.mapAttrs' (",
-            "\t${2:key}: ${3:val}: lib.nameValuePair",
-            "\t(${5:finalKeyExpression key + \"_x\"})",
-            "\t(${6:finalVarExpression val + \"_x\"})",
-            ") ${1:AttrSet} )"
+            "(",
+            "lib.mapAttrs' (",
+            "\t${2:name}: ${3:value}:",
+            "\t\t(",
+            "lib.nameValuePair",
+            "\t\t\t(${5:\"will-eval-to-name\"})",
+            "\t\t\t(${6:\"will-eval-to-val\"})",
+            "\t\t)",
+            ") ${1:AttrSet}",
+            ")"
         ]
     },
     "lafilter": {

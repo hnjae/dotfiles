@@ -31,7 +31,7 @@ podman rm <container-id>
 poman image prune
 
 # get ip of container
-podman inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <container-id>
+sudo podman inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <container-name>
 
 # Create Network
 sudo podman network create
@@ -39,4 +39,11 @@ sudo podman network create
 # Test Network (add NET_RAW to use `ping`)
 sudo podman run -it --rm --cap-add=NET_RAW --network <podman-network> -- 'nicolaka/netshoot' /bin/sh
 
+# show stats
+sudo podman stats
+
+# show top
+sudo podman top <container-name>
+
 $ container-id: podman ps --- --header-lines 1 --column 1
+$ container-name: podman ps --- --header-lines 1 --column 7

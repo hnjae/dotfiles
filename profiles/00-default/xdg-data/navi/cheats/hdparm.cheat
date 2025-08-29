@@ -11,4 +11,3 @@ hdparm -I "/dev/<device>" | grep 'Sector size:'
 
 # set native sector size (should reboot after this?)
 hdparm --set-sector-size 4096 "/dev/<device>"
-
