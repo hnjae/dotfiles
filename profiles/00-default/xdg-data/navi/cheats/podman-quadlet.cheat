@@ -2,3 +2,9 @@
 
 # Debug generator
 journalctl -b | grep -i "quadlet\|podman.*generator"
+
+# Generate quadlet from docker-compose (tags: convert)
+podlet compose <docker-compose.yml>
+
+# Generate quadlet from podman(docker) command
+podlet podman

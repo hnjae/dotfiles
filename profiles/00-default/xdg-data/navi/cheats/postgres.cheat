@@ -5,12 +5,12 @@ pg_dump -U <user> <db> >out.sql
 
 ; https://www.postgresql.org/docs/current/app-pg-dumpall.html
 # dumpall
-pg_dump -U postgres >db.out
+pg_dumpall -U postgres >db.out
 
 ; `db.out` 내용으로 초기화하는 거랑 같은 것.
 ; It is not important which database you connect to here since the script file created by pg_dumpall will contain the appropriate commands to create and connect to the saved databases.
 # restore from dumpall
-psql -X -f db.out -d postgres
+psql -X -f db.out -U postgres -d postgres
 
 # list db (in psql)
 \l

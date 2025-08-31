@@ -3,6 +3,9 @@
 # list units failed
 systemctl <opt_user> list-units --failed
 
+# list queued jobs
+systemctl <opt_user> list-jobs
+
 # list dependencies
 systemctl <opt_user> list-dependencies
 
