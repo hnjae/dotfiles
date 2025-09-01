@@ -4,54 +4,54 @@
 
 # create hdd mirror pool
 sudo zpool create -f \
-	-o compatibility=off \
-	-o ashift=12 \
-	-O recordsize=4M \
-	-O acltype=off \
-	-O relatime=off \
-	-O atime=off \
-	-O dnodesize=auto \
-	-O xattr=sa \
-	-O mountpoint=none \
-	-O canmount=off \
-	-O compression=lz4 \
-	-O exec=off \
-	-O setuid=off \
-	-O devices=off \
-	-O normalization=none \
-	-O utf8only=off \
-	-O casesensitivity=sensitive \
-	-O encryption=aes-256-gcm \
-	-O keylocation=prompt \
-	-O keyformat=passphrase \
-	<pool-name> \
-	mirror \
-	/dev/disk/by-partlabel/<partlabel> /dev/disk/by-partlabel/<partlabel>
+  -o compatibility=off \
+  -o ashift=12 \
+  -O recordsize=4M \
+  -O acltype=off \
+  -O relatime=off \
+  -O atime=off \
+  -O dnodesize=auto \
+  -O xattr=sa \
+  -O mountpoint=none \
+  -O canmount=off \
+  -O compression=lz4 \
+  -O exec=off \
+  -O setuid=off \
+  -O devices=off \
+  -O normalization=none \
+  -O utf8only=off \
+  -O casesensitivity=sensitive \
+  -O encryption=aes-256-gcm \
+  -O keylocation=prompt \
+  -O keyformat=passphrase \
+  <pool-name> \
+  mirror \
+  /dev/disk/by-partlabel/<partlabel> /dev/disk/by-partlabel/<partlabel>
 
 # create hdd single pool
 sudo zpool create -f \
-	-o compatibility=off \
-	-o ashift=12 \
-	-O recordsize=4M \
-	-O acltype=off \
-	-O relatime=off \
-	-O atime=off \
-	-O dnodesize=auto \
-	-O xattr=sa \
-	-O mountpoint=none \
-	-O canmount=off \
-	-O compression=lz4 \
-	-O exec=off \
-	-O setuid=off \
-	-O devices=off \
-	-O normalization=none \
-	-O utf8only=off \
-	-O casesensitivity=sensitive \
-	-O encryption=aes-256-gcm \
-	-O keyformat=passphrase \
-	-O keylocation=file:///persist/@/storage-encryption-keys/default.key \
-	<pool-name> \
-	/dev/disk/by-partlabel/<partlabel>
+  -o compatibility=off \
+  -o ashift=12 \
+  -O recordsize=4M \
+  -O acltype=off \
+  -O relatime=off \
+  -O atime=off \
+  -O dnodesize=auto \
+  -O xattr=sa \
+  -O mountpoint=none \
+  -O canmount=off \
+  -O compression=lz4 \
+  -O exec=off \
+  -O setuid=off \
+  -O devices=off \
+  -O normalization=none \
+  -O utf8only=off \
+  -O casesensitivity=sensitive \
+  -O encryption=aes-256-gcm \
+  -O keyformat=passphrase \
+  -O keylocation=file:///secrets/storage-encryption-key \
+  <pool-name> \
+  /dev/disk/by-partlabel/<partlabel>
 
 ; -o failmode=continue (default: wait)
 
@@ -132,7 +132,7 @@ zfs create -b <blocksize> -V <size> <zpool>/<zvol-name>
 sudo zpool attach <poolname> <diskName> <NewDiskPath>
 
 # diff
-zfs diff <snapshot> <snapshot>
+zfs diff <oldsnapshot> <newsnapshot>
 
 # snapshot
 sudo zfs snapshoot pool/dataset/@snapshot-name
@@ -145,3 +145,18 @@ sudo zpool add <poolname> cache <block-device>
 
 # remove l2arc from zfs pool
 sudo zpool remove <poolname> <block-device>
+
+# use l2arc as metadata cache
+sudo zpool set secondarycache=metadata tan
+
+# use l2arc as general cache (metadata and data)
+sudo zpool set secondarycache=all tan
+
+; ;;;;;;;;;;;;;;;;;;
+; stats
+; ;;;;;;;;;;;;;;;;;;
+# cat(list) vdev usage
+zpool iostat -v <poolname>
+
+# cat(list) raw disk size
+zpool list -p <poolname>

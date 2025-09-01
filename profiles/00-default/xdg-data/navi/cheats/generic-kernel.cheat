@@ -1,10 +1,21 @@
-% kernel, lsmod, sysctl
+% kernel, lsmod, sysctl, modproble
 
-# list loaded modules
-lsmod
-
+; kernel parameter
 # show current boot kernel parameter
 sudo sysctl -a | bat
 
 # print kernel parameter
 bat /proc/cmdline
+
+# permanently edit kernel parameter
+EDIT-BOOTLOADER
+
+; kernel module
+# list loaded kernel modules
+lsmod
+
+# load kernel module
+sudo modprobe <module-name>
+
+# un-load kernel module
+sudo modprobe -r <module-name>

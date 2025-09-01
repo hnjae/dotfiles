@@ -1,0 +1,8 @@
+% traefik
+
+# genrate basicauth password using bcrypt with 12 salt rounds (use `apacheHttpd` package)
+htpasswd -B -C 12 -c passwordfile <username>
+
+; use basicauth with https instead
+; # genrate digestauth password (use `apacheHttpd` package)
+; htdigest -c <file> <realm> <username>
