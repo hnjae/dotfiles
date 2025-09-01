@@ -12,10 +12,10 @@ rustic diff <snapshot-id1> <snapshot-id2>
 # scrub
 rustic check --read-data --read-data-subset '<n>/<m>'
 
-# set compression to 12 (583.6 MB/s on Uncompressable data)
+# set compression to 12 (583.6 MB/s on Uncompressable data (AMD 2700))
 rustic config --set-compression 12
 
-# set compression to 6 (1707.4 MB/s on Uncompressable data)
+# set compression to 6 (1707.4 MB/s on Uncompressable data (AMD 2700))
 rustic config --set-compression 6
 
 # set treepack size limit (default min 4 MiB)
