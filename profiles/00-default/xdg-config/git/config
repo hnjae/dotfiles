@@ -1,7 +1,7 @@
 [user]
 	email = 42675338+hnjae@users.noreply.github.com
 	name = KIM Hyunjae
-	signingkey = ~/.ssh/home_id_ed25519
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMJzpwZFnwPxTF4TU7IX5AI+Nwpu9VvjI4A9Jlh3P0pu
 
 [init]
 	defaultBranch = main
@@ -10,8 +10,7 @@
 
 [gpg "ssh"]
 	allowedSignersFile = ~/.config/git/allowed_signers
-	# NOTE: pkgs 에서 참조하면, 시스템의 1password 가 아닐수도 있음. (home-manager 가 global pkgs 를 안쓰는 경우)
-	; program = "/run/current-system/sw/bin/op-ssh-sign"
+	program = "/run/current-system/sw/bin/op-ssh-sign"
 
 [commit]
 	gpgsign = true
@@ -154,4 +153,5 @@
 
 [include]
 	path = ~/.config/git/_base24-delta.gitconfig
-# vi:ft=gitconfig
+
+# vi:ft=gitconfig:noexpandtab:sw=8
