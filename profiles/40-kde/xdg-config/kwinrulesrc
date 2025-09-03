@@ -19,14 +19,6 @@ desktopsrule=2
 wmclass=org.kde.bluedevilwizard
 wmclassmatch=1
 
-[483438cf-e6cb-49d4-8b7f-58f143579041]
-Description=portal-window
-above=true
-aboverule=5
-wmclass=org.freedesktop.impl.portal.desktop.kde
-wmclasscomplete=true
-wmclassmatch=1
-
 [50cf73c0-af57-44fe-80f4-9572225f9d1e]
 Description=1password-unlock-window
 above=true
@@ -43,5 +35,5 @@ wmclass=1Password
 wmclassmatch=1
 
 [General]
-count=4
-rules=50cf73c0-af57-44fe-80f4-9572225f9d1e,1b689687-7529-4d77-a1db-29e39175ace2,483438cf-e6cb-49d4-8b7f-58f143579041,1d2b1ebc-f2fb-4909-91ba-e50f240f6baf
+count=3
+rules=50cf73c0-af57-44fe-80f4-9572225f9d1e,1b689687-7529-4d77-a1db-29e39175ace2,1d2b1ebc-f2fb-4909-91ba-e50f240f6baf

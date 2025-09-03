@@ -39,6 +39,7 @@ stop=none,none,Stop
 A201059058E6D952383EB973EBAD08BA-addSite=none,none,Toggle current site
 A201059058E6D952383EB973EBAD08BA-switchEngine=none,none,Theme generation mode
 A201059058E6D952383EB973EBAD08BA-toggle=none,none,Toggle extension
+A496401FECFE8218B83B972CB72D4716-save=none,none,Save the current page to Readeck
 A8F35CD4A6540AE2586A78144BE07497-toggle-all-tabs=none,none,Toggle tab numbering for all tabs
 A8F35CD4A6540AE2586A78144BE07497-toggle-current-tab=none,none,Toggle tab numbering for current tab
 AA4449DF3EF2E554B2C30686236C4D78-quick_clip=none,none,Quick clip
