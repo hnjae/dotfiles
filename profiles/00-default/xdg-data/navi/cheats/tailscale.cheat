@@ -1,0 +1,7 @@
+% tailscale
+
+# tailscale status
+tailscale status
+
+# tailscale login
+sudo tailscale login
