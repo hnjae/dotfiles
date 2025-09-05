@@ -16,13 +16,13 @@ return {
 
             return {
               cmd = { "typst" },
-              args = { "compile", "--", "main.py" },
+              args = { "compile", "--", "main.typ" },
               cwd = vim.fn.expand("%:p:h"),
               components = {
-                -- { [1] = "on_output_quickfix", open = true },
-                { "on_result_diagnostics", open = true },
+                { "on_exit_set_status", success_codes = { 0 } },
+                -- "restart_on_save",
+                { "on_complete_dispose", require_view = { "SUCCESS", "FAILURE" } },
                 "unique",
-                -- "default",
               },
             }
           end,

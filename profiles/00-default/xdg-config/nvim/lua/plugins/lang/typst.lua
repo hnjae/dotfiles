@@ -22,12 +22,15 @@ return {
     },
   },
   {
-    [1] = "neovim/nvim-lspconfig",
+    [1] = "nvim-lspconfig",
     optional = true,
     opts = {
       servers = {
         tinymist = {
           enabled = true,
+          -- TODO: root_dir 말고 lspconfig 에서 정의된, root_marker 자체를 override 할수는 없나?  <2025-09-05>
+          -- snacks 등에서 Lazyvim.root() 처리를 더 용이하게 하기 위해서.
+          root_dir = require("lspconfig").util.root_pattern("main.typ", ".git"),
         },
       },
     },
