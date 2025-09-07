@@ -9,5 +9,8 @@ clone:
 fetch:
     mani run fetch | glow
 
+pull:
+    mani run pull | glow
+
 status:
     mani run status | glow
