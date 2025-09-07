@@ -1,0 +1,4 @@
+% resolvectl
+
+# flush dns caches
+sudo resolvectl flush-caches

@@ -1,7 +1,17 @@
 % tailscale
 
+; HELP:
+;   - https://tailscale.com/kb/1103/exit-nodes
+
 # tailscale status
 tailscale status
 
 # tailscale login
 sudo tailscale login
+
+# Make one tailscale node as exit node (NOTE: `--advertise-exit-node`, `sysctl`, `firewall` 설정을 exit-node 에서 해주어야 함. / +Admin Console 에서 허락해야 함.)
+sudo tailscale set --exit-node=<exit-node-ip> --exit-node-allow-lan-access=true
+
+# Stop using exit node
+sudo tailscale set --exit-node=
+

@@ -73,7 +73,7 @@
         "prefix": "scriptdir",
         "description": "This will NOT resolve path. This will NOT WORK if script is being sourced.",
         "body": [
-            "$0\"\\$(cd -- \"\\$(dirname -- \"$0\")\" && pwd -P)\" >/dev/null 2>&1"
+            "SCRIPT_DIR=\"\\$(cd -- \"\\$(dirname -- \"\\$0\")\" && pwd -P)\" >/dev/null 2>&1"
         ]
     },
     "symlink resolve": {

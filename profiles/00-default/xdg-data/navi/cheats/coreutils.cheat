@@ -1,0 +1,4 @@
+% coreutils, head
+
+# capture firt few lines of a file/stdout
+head -n <count> <file>

@@ -161,6 +161,15 @@ git clone --recurse-submodules "git@<githubdotcom>:<owner>/<repo>"
 # git clone specific branch
 git clone --recurse-submodules --branch <branch-name> "git@<githubdotcom>:<owner>/<repo>"
 
+;################
+; submodule
+;##################
+# Update the URL of submodules in `.git/config` from what's in `.gitmodules`
+git submodule sync --quiet --recursive
+
+# Updates/initialize and fetch git submodules
+git submodule update --init --recursive
+
 ;#############################################################################
 ; misc
 ;#############################################################################
@@ -176,14 +185,14 @@ git clean -d --force
 # Clean (Remove all untracked files)
 git reset --hard && git clean --force -dx
 
+# fetch unshallow (`--depth` 옵션으로 clone 했을 경우, 전체 history 를 fetch)
+git fetch --unshallow
+
+# fetch shallow-since (`--depth` 옵션으로 clone 했을 경우, 특정 시점 부터의 history 를 fetch)
+git fetch --shallow-since="<2025-05-01>"
+
+# fetch specific commit (`--depth` 옵션으로 clone 했을 경우, 특정 시점 부터의 commit 부터 fetch)
+git fetch origin <commit-id>
+
 ; # Make HEAD to point something
 ; git checkout <commit-alike>
-
-;################
-; submodule
-;##################
-# Update the URL of submodules in `.git/config` from what's in `.gitmodules`
-git submodule sync --quiet --recursive
-
-# Updates/initialize and fetch git submodules
-git submodule update --init --recursive

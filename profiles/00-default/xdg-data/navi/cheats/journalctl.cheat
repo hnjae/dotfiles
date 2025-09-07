@@ -1,4 +1,4 @@
-% journalctl, log
+% journalctl, log, systemd
 
 # print last boot systemd log (-b: --boot[=ID])
 journalctl -b -1
@@ -9,5 +9,8 @@ journalctl --b -1 -k
 # print (-x: --catalog; -u: --unit=)
 journalctl --user -xu <systemd-units>
 
-# print log in realtime
-journalctl --follow --unit=<systemd-units>
+# print log in realtime (-f: --follow)
+journalctl -f  --unit=<systemd-units>
+
+# show log size
+journalctl --log-size
