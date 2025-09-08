@@ -1,0 +1,4 @@
+% typst
+
+# list fonts with variant
+typst fonts --variants
