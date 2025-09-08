@@ -18,13 +18,16 @@ systemctl <opt_user> list-dependencies --all
 # list dependencies --all of unit
 systemctl <opt_user> list-dependencies --all -- <unit>
 
+# list reverse dependencies of unit
+systemctl <opt_user> list-dependencies --reverse --all -- <unit>
+
 # list targes
 systemctl list-units --type target
 
 # status
 systemctl <opt_user> status
 
-# queued jobs
+# list queued jobs
 systemctl <opt_user> list-jobs
 
 # help (`[Unit]`의 `Documentation` 조회 )

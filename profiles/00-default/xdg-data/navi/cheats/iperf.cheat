@@ -1,0 +1,13 @@
+% iperf, network
+
+# Run iperf3 Server
+iperf3 -s
+
+# Run iperf3 Server via container (podman)
+sudo podman run -it --rm --network <vlan> --name iperf3 -p 5201:5201 -- 'docker.io/networkstatic/iperf3' -s
+
+# Get ip of iper3 Server running in container (podman)
+sudo podman inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' iperf3
+
+# Run stress test (UDP Bandwidth MAX 500M / Parallel 16 / Run 300s / Report every 30s)
+iperf3 -c <host> -u -b 500M -P 16 -t 300 -i 30

@@ -1,4 +1,6 @@
 % htdigest
 
+# generate password (Bcrypt/salt-round 12)
+htpasswd -n -B -C 12 <username>
 ; nix-shell -p apacheHttpd
-htdigest -c <file> <realm> <username>
+; htdigest -c <file> <realm> <username>
