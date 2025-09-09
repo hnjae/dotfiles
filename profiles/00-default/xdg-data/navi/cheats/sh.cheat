@@ -1,4 +1,0 @@
-% sh
-
-# execute command (POSIX)
-nohup <command> >/dev/null 2>&1 & disown

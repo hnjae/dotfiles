@@ -1,5 +1,8 @@
-% shell, bash, zsh, dash
-; shell built-in commands
+% shell, bash, zsh, dash, sh
 
+; shell built-in commands
 # fix previous command
 fc
+
+# execute command (POSIX)
+nohup <command> >/dev/null 2>&1 & disown
