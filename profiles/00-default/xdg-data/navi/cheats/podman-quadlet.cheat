@@ -8,3 +8,5 @@ podlet compose <docker-compose.yml>
 
 # Generate quadlet from podman(docker) command
 podlet podman
+
+; subnes 이 한개라면 ipRanges 에 2개 적는 건 불가능.

@@ -48,27 +48,22 @@ main() {
   dotbot_cmd="$(get_dotbot)"
   local hostname_
   hostname_="$(hostname)"
-  local uname_
-  uname_="$(uname)"
+  # local uname_
+  # uname_="$(uname)"
 
   cd "$BASE_DIR"
 
   install_profile "00-default"
-
-  case "$uname_" in
-  Linux)
-    if [ "$HOME" = "/home/hnjae" ]; then
-      install_profile "80-home-linux"
-    fi
-    ;;
-  *) ;;
-  esac
 
   case "$hostname_" in
   osiris | isis)
     install_profile "40-linux-desktop"
     install_profile "40-kde"
     install_profile "80-home-desktop"
+    install_profile "80-home-linux"
+    ;;
+  eris)
+    install_profile "80-home-linux"
     ;;
   *) ;;
   esac

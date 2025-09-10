@@ -77,11 +77,16 @@ backup_path() {
   fi
 }
 
-write_secrets() {
+home_write_secrets() {
+  if ! command -v op >/dev/null 2>&1; then
+    log error "op" "op is not installed."
+    return 1
+  fi
+
   op_list="$(op account list)"
 
   if [ "$op_list" = "" ]; then
-    log warn "op" "No 1Password account found. Please log in to your account first."
+    log error "op" "No 1Password account found. Please log in to your account first."
     return 1
   fi
 
@@ -93,9 +98,12 @@ write_secrets() {
     mkdir -p "$XDG_CONFIG_HOME/sops/age"
     chmod 700 "$XDG_CONFIG_HOME/sops"
     chmod 700 "$XDG_CONFIG_HOME/sops/age"
-    op read 'op://Secrets/ssh-home/age/private key' >"$age_key_path"
+    op read 'op://Personal/ssh-home/age/private-key' >"$age_key_path"
     chmod 600 "$age_key_path"
   fi
+
+  log info "op" "Writing secrets: openrouter"
+  op read "op://Personal/openrouter-local/credential" | secret-tool store --label=openrouter-local api openrouter
 
   # log info "op" "Writing SSH Key"
   # TODO: gnupg 키 <2025-08-11>
@@ -156,7 +164,7 @@ main() {
       is_bootstrapped=0
     fi
 
-    if ! write_secrets; then
+    if ! home_write_secrets; then
       is_bootstrapped=0
     fi
     ;;
