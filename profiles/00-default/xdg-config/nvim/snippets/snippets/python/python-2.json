@@ -7,6 +7,13 @@
         "description": "Adds shebang line for default python interpreter.",
         "body": "#!/usr/bin/env python3\n$0"
     },
+    "sruffnoqa": {
+        "prefix": [
+            "sruff"
+        ],
+        "description": "Adds shebang line for default python interpreter.",
+        "body": "# ruff: noqa: xxx, yyy"
+    },
     "if __name__ == __main__": {
         "prefix": [
             "ifm",
