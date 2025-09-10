@@ -2,7 +2,7 @@
 
 set -eu
 
-# script_dir="$(cd -- "$(dirname -- "$0")" && pwd -P)"
+script_dir="$(cd -- "$(dirname -- "$0")" && pwd -P)"
 
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
@@ -165,6 +165,11 @@ main() {
     fi
 
     if ! home_write_secrets; then
+      is_bootstrapped=0
+    fi
+
+    log info "AccountsService" "Updating profile picture"
+    if ! sudo "${script_dir}/scripts/home-linux-profile-picture/run"; then
       is_bootstrapped=0
     fi
     ;;
