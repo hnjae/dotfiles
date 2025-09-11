@@ -2,6 +2,7 @@
 # 다음 코드를 수정하여 작성: https://gist.github.com/artu-hnrq/bfe1df326b3ac70287961d8b54e0e904
 
 import configparser
+import filecmp
 import os
 import shutil
 import sys
@@ -33,6 +34,15 @@ def update_icon():
 
 
 def check_cond():
+    # check if image are same
+    if (
+        image_path.exists()
+        and icon_path.exists()
+        and filecmp.cmp(image_path, icon_path)
+    ):
+        print("Profile picture is up to date.", file=sys.stderr)
+        sys.exit(0)
+
     if os.geteuid() != 0:
         msg = "This action requires root privileges"
         raise PermissionError(msg)
