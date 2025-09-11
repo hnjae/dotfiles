@@ -1,0 +1,27 @@
+# handlr set -- 'video/*' 'mpv.desktop'
+# handlr set -- 'audio/*' 'mpv.desktop'
+- name: Setup default app
+  hosts: localhost
+  become: false
+  tasks:
+    - name: Set Okular
+      community.general.xdg_mime:
+        mime_types:
+          - applications/pdf
+        handler: org.kde.okular.desktop
+    - name: Set Onlyoffice
+      community.general.xdg_mime:
+        mime_types:
+          - application/vnd.openxmlformats-officedocument.presentationml.presentation
+          - application/vnd.openxmlformats-officedocument.presentationml.template
+          - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+          - application/vnd.openxmlformats-officedocument.spreadsheetml.template
+          - application/vnd.openxmlformats-officedocument.wordprocessingml.document
+          - application/vnd.openxmlformats-officedocument.wordprocessingml.template
+        handler: org.onlyoffice.desktopeditors.desktop
+    - name: Set GIMP
+      community.general.xdg_mime:
+        mime_types:
+          - image/x-xcf # *.xcf
+          - image/vnd.adobe.photoshop # .psd
+        handler: org.gimp.GIMP.desktop
