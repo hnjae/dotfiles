@@ -1,0 +1,34 @@
+# WIP: LLM 이 작성. 검증 안함.
+- name: Setup SOPS age key using 1Password lookup
+  hosts: localhost
+  become: false
+  gather_facts: true
+  vars:
+    age_key_path: "{{ ansible_env.XDG_CONFIG_HOME | default(ansible_env.HOME + '/.config') }}/sops/age/keys.txt"
+  tasks:
+    - name: Check if age key file is readable
+      stat:
+        path: "{{ age_key_path }}"
+      register: age_key_stat
+    - name: Setup age key when not readable
+      block:
+        - name: Display message about writing secrets
+          debug:
+            msg: "Writing secrets: {{ age_key_path }}"
+        - name: Create SOPS directory
+          file:
+            path: "{{ ansible_env.XDG_CONFIG_HOME | default(ansible_env.HOME + '/.config') }}/sops"
+            state: directory
+            mode: '0700'
+        - name: Create SOPS age directory
+          file:
+            path: "{{ ansible_env.XDG_CONFIG_HOME | default(ansible_env.HOME + '/.config') }}/sops/age"
+            state: directory
+            mode: '0700'
+        - name: Retrieve age private key from 1Password and write to file
+          copy:
+            content: "{{ lookup('community.general.onepassword', 'ssh-home', field='age.private-key', vault='Personal') }}"
+            dest: "{{ age_key_path }}"
+            mode: '0600'
+          no_log: true
+      when: not age_key_stat.stat.exists or not age_key_stat.stat.readable
