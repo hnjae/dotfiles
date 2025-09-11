@@ -1,0 +1,42 @@
+- name: Install Bruno and writes .desktop
+  hosts: localhost
+  become: false
+  tasks:
+    - name: Install Bruno with flatpak
+      community.general.flatpak:
+        method: user
+        state: present
+        remote: flathub
+        name:
+          - com.usebruno.Bruno # Proprietary in flathub but MIT license in repo <https://github.com/usebruno/bruno>
+    # - name: Check current flatpak overrides
+    #   shell: flatpak override --user --show com.usebruno.Bruno
+    #   register: current_overrides
+    #   changed_when: false
+    #   failed_when: false
+    # - name: Set flatpak override for Bruno
+    #   command: flatpak override --user --nosocket=wayland com.usebruno.Bruno
+    #   when: "'sockets=!wayland' not in current_overrides.stdout"
+    # Use xwayland <2024-12-11>
+    - name: Write Bruno overrides
+      copy:
+        dest: "{{ ansible_env.HOME }}/.local/share/flatpak/overrides/com.usebruno.Bruno"
+        content: |
+          [Context]
+          sockets=!wayland
+        mode: '0644'
+    - name: Write Bruno desktop entry
+      copy:
+        dest: "{{ ansible_env.HOME }}/.local/share/applications/com.usebruno.Bruno.desktop"
+        content: |
+          [Desktop Entry]
+          Name=Bruno
+          Exec=flatpak run --branch=stable --command=bruno --file-forwarding com.usebruno.Bruno --ozone-platform-hint=x11 @@u %U @@
+          Terminal=false
+          Type=Application
+          Icon=com.usebruno.Bruno
+          StartupWMClass=Bruno
+          MimeType=x-scheme-handler/bruno;
+          Categories=Development;
+          X-Flatpak=com.usebruno.Bruno
+        mode: '0600'

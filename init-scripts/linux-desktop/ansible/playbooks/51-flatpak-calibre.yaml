@@ -1,0 +1,28 @@
+- name: Install calibre and writes .desktop
+  hosts: localhost
+  become: false
+  vars:
+    desktop_file_content: |
+      [Desktop Entry]
+      NoDisplay=true
+      Exec=:
+      Name=This should not be displayed
+      Type=Application
+    calibre_hidden_desktop_files:
+      - com.calibre_ebook.calibre.ebook-edit.desktop
+      - com.calibre_ebook.calibre.ebook-viewer.desktop
+      - com.calibre_ebook.calibre.lrfviewer.desktop
+  tasks:
+    - name: Install Calibre with flatpak
+      community.general.flatpak:
+        method: user
+        state: present
+        remote: flathub
+        name:
+          - com.calibre_ebook.calibre
+    - name: Ensure calibre desktop entries are set
+      copy:
+        dest: "{{ ansible_env.HOME }}/.local/share/applications/{{ item }}"
+        content: "{{ desktop_file_content }}"
+        mode: '0600'
+      loop: "{{ calibre_hidden_desktop_files }}"

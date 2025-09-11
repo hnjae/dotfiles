@@ -1,0 +1,110 @@
+- name: Setup Flatpak remotes and applications
+  hosts: localhost
+  become: false
+  tasks:
+    - name: Add the flathub flatpak repository remote to the user installation
+      community.general.flatpak_remote:
+        method: user
+        state: present
+        flatpakrepo_url: "https://dl.flathub.org/repo/flathub.flatpakrepo"
+        name: flathub
+    - name: Install packages
+      community.general.flatpak:
+        method: user
+        state: present
+        remote: flathub
+        name:
+          - com.discordapp.Discord # Proprietary
+          - com.github.PintaProject.Pinta # image editor
+          - com.github.marhkb.Pods
+          - com.github.tchx84.Flatseal # edit permission of wayland apps
+          - com.jeffser.Alpaca
+          - com.obsproject.Studio
+          - com.opera.Opera # for netflix
+          - com.ticktick.TickTick # Proprietary
+          - com.usebottles.bottles
+          - io.github.alescdb.mailviewer # .eml, .msg viewer
+          - io.github.finefindus.Hieroglyphic # latex symbols
+          - io.github.flattool.Warehouse # flatpak managing
+          - io.github.giantpinkrobots.flatsweep # remove leftover of flatpak apps
+          - md.obsidian.Obsidian
+          - net.ankiweb.Anki
+          - net.puddletag.puddletag
+          - org.gimp.GIMP
+          - org.inkscape.Inkscape
+          - org.localsend.localsend_app
+          - org.telegram.desktop
+          - page.codeberg.libre_menu_editor.LibreMenuEditor
+          # Office / PIM
+          - org.libreoffice.LibreOffice
+          - org.onlyoffice.desktopeditors
+          - org.mozilla.Thunderbird
+          - org.zotero.Zotero
+          # Image
+          - org.darktable.Darktable
+          # Dev
+          - io.gitlab.liferooter.TextPieces # Developer's scratchpad
+          - me.iepure.devtoolbox # https://flathub.org/apps/me.iepure.devtoolbox
+          - com.mongodb.Compass # unfree
+          - io.dbeaver.DBeaverCommunity # apache-2
+          - org.pgadmin.pgadmin4
+          # Desktop apps
+          - org.strawberrymusicplayer.strawberry
+          - org.kde.ark
+          - org.kde.digikam
+          - org.kde.gwenview
+          - org.kde.kdenlive
+          - org.kde.kontact
+          - org.kde.krita
+          - org.kde.kwrite
+          - org.kde.okular
+          - org.gnome.Characters
+          - org.gnome.Connections
+          - org.gnome.Logs
+          - org.gnome.Maps
+          - org.gnome.Papers
+          - org.gnome.Snapshot
+          - org.gnome.SoundRecorder
+          - org.gnome.font-viewer
+    - name: Install testing packages
+      community.general.flatpak:
+        method: user
+        state: present
+        remote: flathub
+        name:
+          - fr.romainvigier.MetadataCleaner
+          - org.gnome.Fractal # matrix client
+          - com.github.flxzt.rnote
+          - io.gitlab.news_flash.NewsFlash # rss, supports freshrss
+          - com.github.qarmin.czkawka # <https://github.com/qarmin/czkawka> deduplication
+          - com.github.ahrm.sioyek # pdf viewer
+          - com.github.jeromerobert.pdfarranger
+          - com.github.johnfactotum.Foliate # ebook viewer
+          - com.rafaelmardojai.Blanket # asmr sound
+          - dev.serebit.Waycheck # displays the list of Wayland protocols
+          - xyz.tytanium.DoorKnocker # check availability of all portals provided by xdg-desktop-portal.
+          # Dev
+          - io.github.nokse22.asciidraw
+          - io.beekeeperstudio.Studio # db, GPL3
+          - org.gaphor.Gaphor # apache2, modeling tool (UML)
+          - org.gnome.design.Emblem # draw icon
+          - com.jgraph.drawio.desktop # apache2, draw UML, topology, diagram
+          - org.freedesktop.Bustle # debug dbus, gpl2
+          - org.gnome.dspy #debug d-bus, gpl3
+    - name: Remove not-in-use packages
+      community.general.flatpak:
+        name:
+          - com.logseq.Logseq
+          - org.gnome.gitlab.YaLTeR.Identity
+          - org.gnome.gitlab.YaLTeR.VideoTrimmer
+          - fyi.zoey.TeX-Match # find latex symbols, uses end-of-life library (org.freedesktop.Platform 22.08) (2024-11-06)
+          - io.github.celluloid_player.Celluloid # NOTE: celluloid is very slow  <2024-12-15>
+          - info.smplayer.SMPlayer
+          # Dev
+          - io.httpie.Httpie # Proprietary
+          - rest.insomnia.Insomnia # mit
+          - com.getpostman.Postman # Proprietary
+          - org.gnome.gitlab.cheywood.Buffer # empty editor
+          - dev.pulsar_edit.Pulsar # editor, mit
+        state: absent
+        method: user
