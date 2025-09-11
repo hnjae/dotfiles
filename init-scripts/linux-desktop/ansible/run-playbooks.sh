@@ -22,7 +22,7 @@ main() {
     --search-path \
     "$playbook_dir" |
     sort -z |
-    xargs -0 -r ansible-playbook -i inventory.ini --
+    xargs -0 -r ansible-playbook -i "${scriptdir}/inventory.ini" --
 }
 
 main

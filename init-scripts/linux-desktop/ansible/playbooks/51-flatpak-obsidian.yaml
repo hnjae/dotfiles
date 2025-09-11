@@ -1,0 +1,42 @@
+# <https://flathub.org/apps/md.obsidian.Obsidian>
+#
+# LICENSE:
+#   - <https://help.obsidian.md/teams/license>
+#   - <https://obsidian.md/blog/free-for-work/?ref=creativerly.com>
+- name: Install Obsidian and writes .desktop
+  hosts: localhost
+  become: false
+  vars:
+    app_id: md.obsidian.Obsidian
+  tasks:
+    - name: Install Obsidian with flatpak
+      community.general.flatpak:
+        method: user
+        state: present
+        remote: flathub
+        name:
+          - "{{ app_id }}"
+    - name: Set Obsidian overrides
+      copy:
+        dest: "{{ ansible_env.HOME }}/.local/share/flatpak/overrides/{{ app_id }}"
+        content: |
+          [Context]
+          sockets=wayland
+        mode: '0644'
+    - name: Write Obsidian desktop entry
+      copy:
+        dest: "{{ ansible_env.HOME }}/.local/share/applications/{{ app_id }}.desktop"
+        content: |
+          [Desktop Entry]
+          Name=Obsidian
+          Exec=flatpak run --branch=stable --arch=x86_64 --command=obsidian.sh --file-forwarding md.obsidian.Obsidian --ozone-platform-hint=auto --enable-features=UseOzonePlatform --enable-wayland-ime --wayland-text-input-version=3 @@u %U @@
+          Terminal=false
+          Type=Application
+          Icon=md.obsidian.Obsidian
+          StartupWMClass=obsidian
+          Comment=Obsidian
+          MimeType=x-scheme-handler/obsidian;
+          Categories=Office;
+          X-Flatpak-Tags=proprietary;
+          X-Flatpak=md.obsidian.Obsidian
+        mode: '0600'

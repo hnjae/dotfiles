@@ -10,3 +10,6 @@
     ~/.local/share:
       glob: true
       path: "xdg-data/*"
+    ~/.local/share/applications:
+      glob: true
+      path: "xdg-data.applications/*"
