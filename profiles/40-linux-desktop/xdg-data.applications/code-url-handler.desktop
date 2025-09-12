@@ -1,0 +1,14 @@
+[Desktop Entry]
+Categories=Utility;TextEditor;Development;IDE
+Comment=Code Editing. Redefined.
+Exec=code --wayland-text-input-version=3 --open-url %U
+GenericName=Text Editor
+Icon=vscode
+Keywords=vscode
+MimeType=x-scheme-handler/vscode
+Name=Visual Studio Code - URL Handler
+NoDisplay=true
+StartupNotify=true
+StartupWMClass=Code
+Type=Application
+Version=1.4

@@ -103,7 +103,7 @@ return {
       },
 
       default_command_agent = "command",
-      default_chat_agent = "claude",
+      default_chat_agent = "chat",
 
       chat_template = [[
 # topic: ?
@@ -181,37 +181,25 @@ Chats are saved automatically.
         { name = "CodePerplexityLlama3.1-8B", disable = true },
         { name = "ChatCopilot", disable = true },
         { name = "CodeCopilot", disable = true },
-        -- {
-        --   provider = "openai",
-        --   name = "openai-command",
-        --   chat = false,
-        --   command = true,
-        --   model = {
-        --     model = "gpt-4.1-mini",
-        --     temperature = 0.8,
-        --   },
-        --   system_prompt = code_prompt,
-        -- },
-        -- {
-        --   provider = "openai",
-        --   name = "openai-chat",
-        --   chat = true,
-        --   command = false,
-        --   model = {
-        --     model = "gpt-4.1",
-        --     temperature = 0.8,
-        --   },
-        --   system_prompt = chat_prompt,
-        -- },
         {
           provider = "openrouter",
-          name = "claude",
+          name = "chat",
           chat = true,
           command = false,
           model = {
-            model = "anthropic/claude-sonnet-4",
-            temperature = 0.8,
-            max_token = 8192,
+            --[[
+              Price:
+
+              cluade-sonnet-4
+              : USD 3/15 (input/output)
+
+              gpt-5
+              : 1.25/10 (input/output)
+
+            ]]
+            -- model = "anthropic/claude-sonnet-4",
+            model = "openai/gpt-5-chat",
+            -- temperature = 0.9,
           },
           system_prompt = chat_prompt,
         },
@@ -221,9 +209,9 @@ Chats are saved automatically.
           chat = false,
           command = true,
           model = {
-            model = "anthropic/claude-sonnet-4",
-            temperature = 0.8,
-            max_token = 8192,
+            -- model = "anthropic/claude-sonnet-4",
+            model = "openai/gpt-5",
+            -- temperature = 0.9,
           },
           system_prompt = code_prompt,
         },
@@ -233,21 +221,11 @@ Chats are saved automatically.
           chat = true,
           command = false,
           model = {
-            model = "gemini-2.5-pro-exp-03-25",
-            temperature = 0.8,
+            -- Price: USD 1.25/10
+            model = "google/gemini-2.5-pro",
+            temperature = 0.9,
           },
           system_prompt = chat_prompt,
-        },
-        {
-          provider = "googleai",
-          name = "gemini-command",
-          chat = false,
-          command = true,
-          model = {
-            model = "gemini-2.5-flash-preview-04-17",
-            temperature = 0.8,
-          },
-          system_prompt = code_prompt,
         },
       },
 

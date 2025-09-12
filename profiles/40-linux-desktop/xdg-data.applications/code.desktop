@@ -1,0 +1,18 @@
+[Desktop Entry]
+Actions=new-empty-window
+Categories=Utility;TextEditor;Development;IDE
+Comment=Code Editing. Redefined.
+Exec=code --wayland-text-input-version=3 %F
+GenericName=Text Editor
+Icon=vscode
+Keywords=vscode
+Name=Visual Studio Code
+StartupNotify=true
+StartupWMClass=Code
+Type=Application
+Version=1.4
+
+[Desktop Action new-empty-window]
+Exec=code --wayland-text-input-version=3 --new-window %F
+Icon=vscode
+Name=New Empty Window
