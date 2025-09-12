@@ -8,6 +8,7 @@
     icon_path: "/var/lib/AccountsService/icons/{{ target_user }}"
   tasks:
     - name: Copy profile image to icon path
+      become: true
       copy:
         src: "{{ image_path }}"
         dest: "{{ icon_path }}"

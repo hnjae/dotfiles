@@ -2,9 +2,10 @@
   hosts: localhost
   become: false
   tasks:
-    - name: Set default text editor
+    - name: Setup default text editor
       community.general.xdg_mime:
         mime_types:
+          - application/x-zerosize # empty file
           - text/plain # {'*,v', '*.txt', '*.asc'}
           # keys
           - application/x-x509-ca-cert # .crt
@@ -100,9 +101,10 @@
           - text/x-gettext-translation # {'*.po'}
           - text/x-gettext-translation-template # {'*.pot'}
           - application/x-designer # {'*.ui'}
-          # tex / typst
+          # tex
           - text/x-tex # {'*.dtx', '*.tex', '*.sty', '*.cls', '*.ltx', '*.latex', '*.ins'}
           - text/x-bibtex # {'*.bib'}
           - application/postscript # {'*.ps'}
+          # typst
           - text/x-typst # {'*.typ'}
         handler: nvim.desktop

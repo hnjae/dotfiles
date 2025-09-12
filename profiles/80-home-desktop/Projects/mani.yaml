@@ -11,8 +11,6 @@ projects:
     url: git@github.com:hnjae/logseq-home
   nix-config:
     url: git@github.com:hnjae/nix-config
-  nix-flatpak:
-    url: git@github.com:hnjae/nix-flatpak.git
   obsidian:
     url: git@github.com:hnjae/obsidian.git
   obsidian.nvim:

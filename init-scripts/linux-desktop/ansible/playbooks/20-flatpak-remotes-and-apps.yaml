@@ -1,6 +1,8 @@
 - name: Setup Flatpak remotes and applications
   hosts: localhost
   become: false
+  vars:
+    xdg_data_home: "{{ ansible_env.XDG_DATA_HOME | default(ansible_env.HOME + '/.local/share') }}"
   tasks:
     - name: Add the flathub flatpak repository remote to the user installation
       community.general.flatpak_remote:
@@ -14,32 +16,24 @@
         state: present
         remote: flathub
         name:
-          - com.discordapp.Discord # Proprietary
           - com.github.PintaProject.Pinta # image editor
           - com.github.marhkb.Pods
           - com.github.tchx84.Flatseal # edit permission of wayland apps
           - com.jeffser.Alpaca
           - com.obsproject.Studio
-          - com.opera.Opera # for netflix
           - com.ticktick.TickTick # Proprietary
-          - com.usebottles.bottles
           - io.github.alescdb.mailviewer # .eml, .msg viewer
           - io.github.finefindus.Hieroglyphic # latex symbols
           - io.github.flattool.Warehouse # flatpak managing
           - io.github.giantpinkrobots.flatsweep # remove leftover of flatpak apps
           - md.obsidian.Obsidian
-          - net.ankiweb.Anki
           - net.puddletag.puddletag
           - org.gimp.GIMP
           - org.inkscape.Inkscape
           - org.localsend.localsend_app
-          - org.telegram.desktop
           - page.codeberg.libre_menu_editor.LibreMenuEditor
           # Office / PIM
           - org.libreoffice.LibreOffice
-          - org.mozilla.Thunderbird
-          # Image
-          - org.darktable.Darktable
           # Dev
           - io.gitlab.liferooter.TextPieces # Developer's scratchpad
           - me.iepure.devtoolbox # https://flathub.org/apps/me.iepure.devtoolbox
@@ -49,7 +43,6 @@
           # Desktop apps
           - org.strawberrymusicplayer.strawberry
           - org.kde.ark
-          - org.kde.digikam
           - org.kde.gwenview
           - org.kde.kdenlive
           - org.kde.kontact
@@ -106,3 +99,23 @@
           - dev.pulsar_edit.Pulsar # editor, mit
         state: absent
         method: user
+    # - name: Configure Global flatpak overrides
+    #   copy:
+    #     dest: "{{ xdg_data_home }}/flatpak/overrides/global"
+    #     content: |
+    #       [Context]
+    #       filesystems=/nix/store:ro
+    #     mode: '0644'
+    #     backup: false
+    #   when: "'/nix/store' is directory"
+    - name: Configure Global flatpak overrides
+      block:
+        - name: "Configure Flatpak access to Nix store"
+          become: false
+          when: "'/nix/store' is directory"
+          ini_file:
+            path: "{{ xdg_data_home }}/flatpak/overrides/global"
+            section: Context
+            option: filesystems
+            value: "/nix/store:ro"
+            mode: '0644'
