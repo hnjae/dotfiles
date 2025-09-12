@@ -38,7 +38,6 @@
           # Office / PIM
           - org.libreoffice.LibreOffice
           - org.mozilla.Thunderbird
-          - org.zotero.Zotero
           # Image
           - org.darktable.Darktable
           # Dev
