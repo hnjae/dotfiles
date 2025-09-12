@@ -1,0 +1,27 @@
+- name: Setup profile picture
+  hosts: localhost
+  become: false
+  vars:
+    target_user: "{{ ansible_user_id }}"
+    image_path: "{{ playbook_dir }}/assets/profile.png"
+    config_path: "/var/lib/AccountsService/users/{{ target_user }}"
+    icon_path: "/var/lib/AccountsService/icons/{{ target_user }}"
+  tasks:
+    - name: Copy profile image to icon path
+      copy:
+        src: "{{ image_path }}"
+        dest: "{{ icon_path }}"
+        owner: root
+        group: root
+        mode: '0644'
+    - name: Update AccountsService config
+      become: true
+      ini_file:
+        path: "{{ config_path }}"
+        section: User
+        option: icon
+        value: "{{ icon_path }}"
+        create: yes
+        owner: root
+        group: root
+        mode: '0600'
