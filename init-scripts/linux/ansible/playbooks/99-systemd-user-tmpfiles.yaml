@@ -1,0 +1,22 @@
+- name: Setup systemd user tmpfiles
+  hosts: localhost
+  become: false
+  tasks:
+    - name: mkdir user-tmpfiles.d directory
+      file:
+        path: "{{ ansible_env.HOME }}/.config/user-tmpfiles.d"
+        state: directory
+        mode: '0755'
+    - name: Create cleanup tmpfile
+      copy:
+        content: |
+          R {{ ansible_env.HOME }}/.bash_history - - - -
+          R {{ ansible_env.HOME }}/.mypy_cache - - - -
+          R {{ ansible_env.HOME }}/.psql_history - - - -
+          R {{ ansible_env.HOME }}/.python_history - - - -
+          R {{ ansible_env.HOME }}/.vim - - - -
+          R {{ ansible_env.HOME }}/.viminfo - - - -
+          R {{ ansible_env.HOME }}/.wget-hsts - - - -
+          R {{ ansible_env.HOME }}/.zsh_history - - - -
+        dest: "{{ ansible_env.HOME }}/.config/user-tmpfiles.d/10-cleanup.conf"
+        mode: '0644'

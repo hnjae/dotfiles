@@ -83,26 +83,27 @@ main() {
   dotbot_cmd="$(get_dotbot)"
   local hostname_
   hostname_="$(hostname)"
-  # local uname_
-  # uname_="$(uname)"
+  local uname_
+  uname_="$(uname)"
 
   cd "$BASE_DIR"
 
   install_profile "00-default"
   run_inits "default"
 
+  if [ "$uname_" = "Linux" ]; then
+    run_inits "linux"
+  fi
+
   case "$hostname_" in
   osiris | isis)
     install_profile "40-linux-desktop"
     install_profile "40-kde"
     install_profile "80-home-desktop"
-    install_profile "80-home-linux"
     run_inits "linux-desktop"
     run_inits "home-linux-desktop"
     ;;
-  eris)
-    install_profile "80-home-linux"
-    ;;
+  eris) ;;
   *) ;;
   esac
 }
