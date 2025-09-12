@@ -1,28 +1,30 @@
-- name: Install calibre and writes .desktop
+- name: Setup Calibre with flatpak
   hosts: localhost
   become: false
   vars:
-    desktop_file_content: |
-      [Desktop Entry]
-      NoDisplay=true
-      Exec=:
-      Name=This should not be displayed
-      Type=Application
-    calibre_hidden_desktop_files:
-      - com.calibre_ebook.calibre.ebook-edit.desktop
-      - com.calibre_ebook.calibre.ebook-viewer.desktop
-      - com.calibre_ebook.calibre.lrfviewer.desktop
+    app_id: com.calibre_ebook.calibre
+    xdg_data_home: "{{ ansible_env.XDG_DATA_HOME | default(ansible_env.HOME + '/.local/share') }}"
   tasks:
-    - name: Install Calibre with flatpak
+    - name: Install {{ app_id }} with flatpak
       community.general.flatpak:
         method: user
         state: present
         remote: flathub
         name:
-          - com.calibre_ebook.calibre
-    - name: Ensure calibre desktop entries are set
+          - "{{ app_id }}"
+    - name: Create Calibre related desktop entries
       copy:
-        dest: "{{ ansible_env.HOME }}/.local/share/applications/{{ item }}"
-        content: "{{ desktop_file_content }}"
+        # dest: "{{ ansible_env.HOME }}/.local/share/applications/{{ item }}"
+        dest: "{{ xdg_data_home }}/applications/{{ item }}.desktop"
+        content: |
+          [Desktop Entry]
+          NoDisplay=true
+          Exec=:
+          Name=This should not be displayed
+          Type=Application
         mode: '0600'
-      loop: "{{ calibre_hidden_desktop_files }}"
+        backup: false
+      loop:
+        - com.calibre_ebook.calibre.ebook-edit
+        - com.calibre_ebook.calibre.ebook-viewer
+        - com.calibre_ebook.calibre.lrfviewer

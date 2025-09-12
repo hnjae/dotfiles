@@ -1,0 +1,81 @@
+# WIP 작동 안함.
+- name: LazyVim 초기화 및 설정
+  hosts: localhost
+  connection: local
+  gather_facts: true
+  become: false
+  vars:
+    xdg_config_home: "{{ ansible_env.XDG_CONFIG_HOME | default(ansible_env.HOME + '/.config') }}"
+    xdg_data_home: "{{ ansible_env.XDG_DATA_HOME | default(ansible_env.HOME + '/.local/share') }}"
+    xdg_state_home: "{{ ansible_env.XDG_STATE_HOME | default(ansible_env.HOME + '/.local/state') }}"
+    lazynvim_marker_file: "{{ xdg_state_home }}/nvim/lazy-nvim-initialized"
+  tasks:
+    - name: nvim이 설치되어 있는지 확인
+      command: which nvim
+      register: nvim_check
+      failed_when: false
+      changed_when: false
+    - name: nvim이 설치되지 않은 경우 종료
+      fail:
+        msg: "Error: nvim is not installed"
+      when: nvim_check.rc != 0
+    - name: 인터넷 연결 확인
+      uri:
+        url: "http://1.1.1.1"
+        method: HEAD
+        timeout: 5
+      register: internet_check
+      failed_when: false
+      changed_when: false
+    - name: 인터넷 연결되지 않은 경우 경고
+      debug:
+        msg: "Warning: Internet is not connected"
+      when: internet_check.status is not defined or internet_check.status != 200
+    - name: LazyVim 마커 파일 존재 확인
+      stat:
+        path: "{{ lazynvim_marker_file }}"
+      register: marker_file_stat
+    - name: LazyVim 초기화 블록
+      block:
+        - name: 기존 nvim state 디렉터리 백업
+          command: >
+            mv "{{ xdg_state_home }}/nvim" "{{ xdg_state_home }}/nvim.backup.{{ ansible_date_time.iso8601_basic_short }}"
+
+          when:
+            - not marker_file_stat.stat.exists
+            - xdg_state_nvim_stat.stat.exists
+            - "{{ xdg_state_home }}/nvim" is exists
+
+          vars:
+            xdg_state_nvim_stat: "{{ ansible_stat(path=xdg_state_home + '/nvim') }}"
+        - name: 기존 nvim data 디렉터리 백업
+          command: >
+            mv "{{ xdg_data_home }}/nvim" "{{ xdg_data_home }}/nvim.backup.{{ ansible_date_time.iso8601_basic_short }}"
+
+          when:
+            - not marker_file_stat.stat.exists
+            - xdg_data_nvim_stat.stat.exists
+          vars:
+            xdg_data_nvim_stat: "{{ ansible_stat(path=xdg_data_home + '/nvim') }}"
+        - name: LazyVim 초기화 실행
+          command: >
+            nvim --headless -c "autocmd User VeryLazy ++once Lazy install" -c "qa"
+
+          when: not marker_file_stat.stat.exists
+        - name: nvim state 디렉터리 생성
+          file:
+            path: "{{ xdg_state_home }}/nvim"
+            state: directory
+            mode: '0755'
+          when: not marker_file_stat.stat.exists
+        - name: LazyVim 마커 파일 생성
+          file:
+            path: "{{ lazynvim_marker_file }}"
+            state: touch
+            mode: '0644'
+          when: not marker_file_stat.stat.exists
+      when: not marker_file_stat.stat.exists
+    - name: LazyVim 이미 초기화됨 메시지
+      debug:
+        msg: "LazyVim is already initialized"
+      when: marker_file_stat.stat.exists

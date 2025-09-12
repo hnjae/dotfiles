@@ -37,7 +37,6 @@
           - page.codeberg.libre_menu_editor.LibreMenuEditor
           # Office / PIM
           - org.libreoffice.LibreOffice
-          - org.onlyoffice.desktopeditors
           - org.mozilla.Thunderbird
           - org.zotero.Zotero
           # Image
