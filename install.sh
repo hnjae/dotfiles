@@ -91,10 +91,6 @@ main() {
   install_profile "00-default"
   run_inits "default"
 
-  if [ "$uname_" = "Linux" ]; then
-    run_inits "linux"
-  fi
-
   case "$hostname_" in
   osiris | isis)
     install_profile "40-linux-desktop"

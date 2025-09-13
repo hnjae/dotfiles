@@ -15,7 +15,12 @@
     - name: Set nix_bin fact
       set_fact:
         nix_bin: "{{ nix_check.stdout }}"
-    - block:
+    - name: Setup systemd service and timer
+      when:
+        - ansible_system == "Linux"
+        - ansible_service_mgr == "systemd"
+        - nix_check.rc == 0 and (nix_check.stdout | length > 0)
+      block:
         - name: Ensure systemd user directory exists
           file:
             path: "{{ systemd_path }}"
@@ -49,14 +54,14 @@
               WantedBy=timers.target
             mode: '0644'
           notify: Reload systemd user daemon
-        - meta: flush_handlers
+        - name: Flash handlers
+          meta: flush_handlers
         - name: Enable & start timer
           systemd:
             name: "{{ service_name }}.timer"
             enabled: true
             state: started
             scope: user
-      when: nix_check.rc == 0 and (nix_check.stdout | length > 0)
   handlers:
     - name: Reload systemd user daemon
       systemd:

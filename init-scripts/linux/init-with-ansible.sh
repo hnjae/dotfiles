@@ -1,1 +1,0 @@
-../linux-desktop/init-with-ansible.sh

@@ -1,6 +1,6 @@
 ---
 date: 2025-06-30T00:04:00+0900
-lastmod: 2025-09-13T14:25:20+0900
+lastmod: 2025-09-13T16:30:55+0900
 ---
 
 # README
@@ -48,3 +48,5 @@ git clone --recurse-submodules git@github.com:hnjae/dotfiles ~/Projects/dotfiles
         - Ask approval for each new **application** 으로 설정하기
         - `$HOME/.config/1Password/ssh/agent.toml` 수정
 3. `install.sh` 재실행.
+4. Copilot 인증 하기
+    - `nvim` 로 Copilot 이 활성화되는 filetype 의 파일을 열고, `Copilot auth` 실행
