@@ -1,6 +1,6 @@
 ---
 date: 2025-06-30T00:04:00+0900
-lastmod: 2025-09-13T11:15:22+0900
+lastmod: 2025-09-13T14:25:20+0900
 ---
 
 # README
@@ -10,11 +10,13 @@ lastmod: 2025-09-13T11:15:22+0900
 
 ## Install
 
-### 필요한 패키지
+### 의존성 패키지
 
-- git-lfs
-- python3
-- ansible
+- `ansible`
+- `python3`
+- `git-lfs`
+- `fd`
+- `which`
 
 ### 실행
 
