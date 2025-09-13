@@ -65,6 +65,7 @@ return {
       python = true,
       typescript = true,
       javascript = true,
+      ["yaml.ansible"] = true,
       ["*"] = true,
     },
   },

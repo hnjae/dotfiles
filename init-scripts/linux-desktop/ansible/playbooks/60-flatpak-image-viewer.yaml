@@ -1,8 +1,17 @@
-- name: Setup default image viewer
+- name: Install and set default image viewer
   hosts: localhost
   become: false
+  vars:
+    app_id: org.kde.gwenview
   tasks:
-    - name: Setup default image viewer
+    - name: Install {{ app_id }} with flatpak
+      community.general.flatpak:
+        method: user
+        state: present
+        remote: flathub
+        name:
+          - "{{ app_id }}"
+    - name: Set {{ app_id }} as default image viewer
       community.general.xdg_mime:
         mime_types:
           # vector

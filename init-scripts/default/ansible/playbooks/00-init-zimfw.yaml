@@ -1,4 +1,4 @@
-- name: Setup lazy.nvim
+- name: Init zimfw
   hosts: localhost
   become: false
   vars:

@@ -1,4 +1,4 @@
-- name: Setup zimfw
+- name: Setup lazy.nvim
   hosts: localhost
   become: false
   vars:
@@ -6,9 +6,9 @@
     xdg_state_home: "{{ ansible_env.'XDG_STATE_HOME' | default(ansible_env.HOME + '/.local/state') }}"
     xdg_data_home: "{{ ansible_env.XDG_DATA_HOME | default(ansible_env.HOME + '/.local/share') }}"
   tasks:
-    - name: Check if zsh exists in PATH
-      ansible.builtin.command: "which zsh"
-      register: zsh_check
+    - name: Check if nvim exists in PATH
+      ansible.builtin.command: "which nvim"
+      register: nvim_check
       failed_when: false
       changed_when: false
     - name: Check internet connectivity
@@ -16,8 +16,8 @@
       register: ping_result
       failed_when: false
       changed_when: false
-    - name: Ensure zimfw submodule and init zimfw if required
-      when: zsh_check.rc == 0  and ping_result.rc == 0
+    - name: init lazy.nvim if required
+      when: nvim_check.rc == 0  and ping_result.rc == 0
       block:
         - name: Ensure zimfw submodule
           ansible.builtin.shell: |

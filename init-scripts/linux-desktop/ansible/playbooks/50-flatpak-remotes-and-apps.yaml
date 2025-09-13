@@ -32,8 +32,6 @@
           - org.inkscape.Inkscape
           - org.localsend.localsend_app
           - page.codeberg.libre_menu_editor.LibreMenuEditor
-          # Office / PIM
-          - org.libreoffice.LibreOffice
           # Dev
           - io.gitlab.liferooter.TextPieces # Developer's scratchpad
           - me.iepure.devtoolbox # https://flathub.org/apps/me.iepure.devtoolbox
@@ -43,7 +41,6 @@
           # Desktop apps
           - org.strawberrymusicplayer.strawberry
           - org.kde.ark
-          - org.kde.gwenview
           - org.kde.kdenlive
           - org.kde.kontact
           - org.kde.krita

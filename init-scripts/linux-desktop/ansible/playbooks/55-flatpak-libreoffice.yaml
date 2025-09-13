@@ -1,0 +1,60 @@
+- name: Setup LibreOffice
+  hosts: localhost
+  become: false
+  vars:
+    app_id: org.libreoffice.LibreOffice
+    xdg_data_home: "{{ ansible_env.XDG_DATA_HOME | default(ansible_env.HOME + '/.local/share') }}"
+  tasks:
+    - name: Install {{ app_id }} with flatpak
+      community.general.flatpak:
+        method: user
+        state: present
+        remote: flathub
+        name:
+          - "{{ app_id }}"
+    - name: Set {{ app_id }} as default app
+      block:
+        - name: Set LibreOffice Writer
+          community.general.xdg_mime:
+            mime_types:
+              - application/vnd.oasis.opendocument.text
+              - application/vnd.oasis.opendocument.text-template
+              - application/vnd.oasis.opendocument.text-flat-xml
+              - application/vnd.oasis.opendocument.text-master
+              - application/vnd.oasis.opendocument.text-master-template
+              - application/vnd.oasis.opendocument.text-web
+            handler: org.libreoffice.LibreOffice.writer.desktop
+        - name: Set LibreOffice Calc
+          community.general.xdg_mime:
+            mime_types:
+              - application/vnd.oasis.opendocument.chart
+              - application/vnd.oasis.opendocument.chart-template
+              - application/vnd.oasis.opendocument.spreadsheet
+              - application/vnd.oasis.opendocument.spreadsheet-flat-xml
+              - application/vnd.oasis.opendocument.spreadsheet-template
+            handler: org.libreoffice.LibreOffice.calc.desktop
+        - name: Set LibreOffice Impress
+          community.general.xdg_mime:
+            mime_types:
+              - application/vnd.oasis.opendocument.presentation
+              - application/vnd.oasis.opendocument.presentation-template
+              - application/vnd.oasis.opendocument.presentation-flat-xml
+            handler: org.libreoffice.LibreOffice.impress.desktop
+        - name: Set LibreOffice Base
+          community.general.xdg_mime:
+            mime_types:
+              - application/vnd.oasis.opendocument.base
+            handler: org.libreoffice.LibreOffice.base.desktop
+        - name: Set LibreOffice Draw
+          community.general.xdg_mime:
+            mime_types:
+              - application/vnd.oasis.opendocument.graphics
+              - application/vnd.oasis.opendocument.graphics-flat-xml
+              - application/vnd.oasis.opendocument.graphics-template
+            handler: org.libreoffice.LibreOffice.draw.desktop
+        - name: Set LibreOffice Math
+          community.general.xdg_mime:
+            mime_types:
+              - application/vnd.oasis.opendocument.formula
+              - application/vnd.oasis.opendocument.formula-template
+            handler: org.libreoffice.LibreOffice.math.desktop

@@ -1,0 +1,22 @@
+- name: Setup YACReader
+  hosts: localhost
+  become: false
+  vars:
+    app_id: com.yacreader.YACReader
+    xdg_data_home: "{{ ansible_env.XDG_DATA_HOME | default(ansible_env.HOME + '/.local/share') }}"
+  tasks:
+    - name: Install {{ app_id }} with flatpak
+      community.general.flatpak:
+        method: user
+        state: present
+        remote: flathub
+        name:
+          - "{{ app_id }}"
+    - name: Set {{ app_id }} as default app
+      community.general.xdg_mime:
+        mime_types:
+          - application/vnd.comicbook+zip
+          - application/vnd.comicbook-rar
+          - application/x-cb7
+          - application/x-cbt
+        handler: "{{ app_id }}.desktop"
