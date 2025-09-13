@@ -16,7 +16,6 @@
         name:
           - com.discordapp.Discord # Proprietary
           - net.ankiweb.Anki
-          - com.opera.Opera # for netflix
           # Image
           - org.kde.digikam
           - org.darktable.Darktable
