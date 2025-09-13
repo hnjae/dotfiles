@@ -49,6 +49,7 @@
               WantedBy=timers.target
             mode: '0644'
           notify: Reload systemd user daemon
+        - meta: flush_handlers
         - name: Enable & start timer
           systemd:
             name: "{{ service_name }}.timer"
