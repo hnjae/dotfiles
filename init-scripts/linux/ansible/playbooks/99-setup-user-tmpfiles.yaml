@@ -1,13 +1,15 @@
 - name: Setup systemd user tmpfiles
   hosts: localhost
   become: false
+  vars:
+    xdg_config_home: "{{ ansible_env.XDG_CONFIG_HOME | default(ansible_env.HOME + '/.config') }}"
   tasks:
-    - name: mkdir user-tmpfiles.d directory
+    - name: Ensure user-tmpfiles.d directory exists
       file:
-        path: "{{ ansible_env.HOME }}/.config/user-tmpfiles.d"
+        path: "{{ xdg_config_home }}/user-tmpfiles.d"
         state: directory
         mode: '0755'
-    - name: Create cleanup tmpfile
+    - name: Deploy tmpfile 10-cleanup.conf
       copy:
         content: |
           R {{ ansible_env.HOME }}/.bash_history - - - -

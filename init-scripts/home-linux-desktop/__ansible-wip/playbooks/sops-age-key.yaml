@@ -4,25 +4,22 @@
   become: false
   gather_facts: true
   vars:
-    age_key_path: "{{ ansible_env.XDG_CONFIG_HOME | default(ansible_env.HOME + '/.config') }}/sops/age/keys.txt"
+    xdg_config_home: "{{ ansible_env.XDG_CONFIG_HOME | default(ansible_env.HOME + '/.config') }}"
+    age_key_path: "{{ xdg_config_home }}/sops/age/keys.txt"
   tasks:
-    - name: Check if age key file is readable
-      stat:
-        path: "{{ age_key_path }}"
-      register: age_key_stat
-    - name: Setup age key when not readable
+    # - name: Check if age key file is readable
+    #   stat:
+    #     path: "{{ age_key_path }}"
+    #   register: age_key_stat
+    # - name: Setup age key when not readable
+    - name: Setup age key
       block:
         - name: Display message about writing secrets
           debug:
             msg: "Writing secrets: {{ age_key_path }}"
-        - name: Create SOPS directory
+        - name: Create sops/age directory
           file:
-            path: "{{ ansible_env.XDG_CONFIG_HOME | default(ansible_env.HOME + '/.config') }}/sops"
-            state: directory
-            mode: '0700'
-        - name: Create SOPS age directory
-          file:
-            path: "{{ ansible_env.XDG_CONFIG_HOME | default(ansible_env.HOME + '/.config') }}/sops/age"
+            path: "{{ xdg_config_home }}/sops/age"
             state: directory
             mode: '0700'
         - name: Retrieve age private key from 1Password and write to file

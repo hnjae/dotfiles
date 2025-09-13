@@ -1,6 +1,6 @@
 ---
 date: 2025-06-30T00:04:00+0900
-lastmod: 2025-08-24T16:12:33+0900
+lastmod: 2025-09-13T11:15:22+0900
 ---
 
 # README
@@ -10,19 +10,30 @@ lastmod: 2025-08-24T16:12:33+0900
 
 ## Install
 
-```sh
-git clone --recurse-submodules git@github.com:hnjae/dotfiles ~/dotfiles
-~/dotfiles/install.sh
-```
+### 필요한 패키지
 
-`dotfiles` 수정을 하지 않을 기기라면:
+- git-lfs
+- python3
+- ansible
+
+### 실행
+
+#### `dotfiles` 수정을 하지 않을 기기
 
 ```sh
-git clone --depth 1 --recurse-submodules git@github.com:hnjae/dotfiles "${XDG_DATA_HOME:-${HOME}/.local/share}/dotfiles"
+git clone --depth 1 --recurse-submodules 'https://github.com/hnjae/dotfiles' "${XDG_DATA_HOME:-${HOME}/.local/share}/dotfiles"
+
 "${XDG_DATA_HOME:-${HOME}/.local/share}/dotfiles/install.sh"
 
 # TODO: write following
 # systemctl --user enable --now update-dotfiles.timer
+```
+
+#### `dotfiles` 에 수정을 가할 기기
+
+```sh
+git clone --recurse-submodules git@github.com:hnjae/dotfiles ~/Projects/dotfiles
+~/Projects/dotfiles/install.sh
 ```
 
 ## 데스크톱 가이드
