@@ -11,3 +11,6 @@
     ~/Projects:
       glob: true
       path: Projects/*
+    ~/.config:
+      glob: true
+      path: xdg-config/*
