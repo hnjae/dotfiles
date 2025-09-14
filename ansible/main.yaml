@@ -18,6 +18,8 @@
       include_tasks: tasks/51-manage-flatpak.yaml
     - name: Set default apps which are installed via system package manager
       include_tasks: tasks/52-default-app.yaml
+    - name: Deploy systemd user services
+      include_tasks: tasks/60-deploy-systemd-user-services.yaml
   handlers:
     - name: Reload systemd user daemon (`systemd --user daemon-reload`)
       listen: reload-systemd-user-daemon
