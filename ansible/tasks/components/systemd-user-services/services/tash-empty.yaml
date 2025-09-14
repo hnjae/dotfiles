@@ -37,8 +37,6 @@
               WantedBy=timers.target
             mode: '0644'
           notify: reload-systemd-user-daemon
-        - name: Flash handlers
-          meta: flush_handlers
         - name: Enable & start timer
           systemd:
             name: '{{ service_name }}.timer'

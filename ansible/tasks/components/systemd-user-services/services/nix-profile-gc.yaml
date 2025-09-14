@@ -30,8 +30,9 @@
           WantedBy=timers.target
         mode: '0644'
       notify: reload-systemd-user-daemon
-    - name: Flash handlers
-      meta: flush_handlers
+    # reload-systemd-user-daemon 안해도 systemd 에서 enable & start 가능. 그래서 flush 는 당장 할 필요 없음.
+    # - name: Flash handlers
+    #   meta: flush_handlers
     - name: Enable & start timer
       systemd:
         name: '{{ service_name }}.timer'
