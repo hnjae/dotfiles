@@ -210,7 +210,9 @@ Chats are saved automatically.
           command = true,
           model = {
             -- model = "anthropic/claude-sonnet-4",
-            model = "openai/gpt-5",
+            -- model = "openai/gpt-5-mini",
+            -- model = "qwen/qwen3-coder:free",
+            model = "qwen/qwen3-235b-a22b",
             -- temperature = 0.9,
           },
           system_prompt = code_prompt,
