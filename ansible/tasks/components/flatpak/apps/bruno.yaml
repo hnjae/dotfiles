@@ -1,3 +1,4 @@
+---
 # NOTE: Proprietary in flathub but MIT license in repo <https://github.com/usebruno/bruno>
 - name: Install and setup Bruno
   vars:
@@ -8,11 +9,10 @@
         method: user
         state: present
         remote: flathub
-        name:
-          - "{{ app_id }}"
+        name: ['{{ app_id }}']
     - name: Configure {{ app_id }} flatpak overrides
       copy:
-        dest: "{{ xdg_data_home }}/flatpak/overrides/{{ app_id }}"
+        dest: '{{ xdg_data_home }}/flatpak/overrides/{{ app_id }}'
         # Use xwayland <2024-12-11>
         content: |
           [Context]
@@ -21,7 +21,7 @@
         backup: false
     - name: Create {{ app_id }} desktop entry
       copy:
-        dest: "{{ xdg_data_home }}/applications/{{ app_id }}.desktop"
+        dest: '{{ xdg_data_home }}/applications/{{ app_id }}.desktop'
         content: |
           [Desktop Entry]
           Name=Bruno

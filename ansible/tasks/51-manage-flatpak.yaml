@@ -1,12 +1,11 @@
+---
 - name: Manage flatpak
-  when:
-    - is_flatpak
+  when: [is_flatpak]
   block:
     - name: Add flathub repo
       include_tasks: components/flatpak/00-add-flathub-repo.yaml
     - name: Install and setup applications
-      include_tasks: "{{ task }}"
-      with_fileglob:
-        - "components/flatpak/apps/*.yaml"
+      include_tasks: '{{ task }}'
+      with_fileglob: [components/flatpak/apps/*.yaml]
       loop_control:
         loop_var: task

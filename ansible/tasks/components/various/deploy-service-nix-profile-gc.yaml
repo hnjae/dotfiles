@@ -1,25 +1,25 @@
+---
 - name: Deploy nix-profile-gc service & timer
   when:
     - ansible_system == "Linux"
     - ansible_service_mgr == "systemd"
     - is_nix
   vars:
-    systemd_path: "{{ xdg_config_home }}/systemd/user"
+    systemd_path: '{{ xdg_config_home }}/systemd/user'
     service_name: nix-profile-gc
     gc_age: 1d
   block:
     - name: Ensure systemd user directory exists
       file:
-        path: "{{ systemd_path }}"
+        path: '{{ systemd_path }}'
         state: directory
         mode: '0755'
     - name: Deploy service unit
       copy:
-        dest: "{{ systemd_path }}/{{ service_name }}.service"
+        dest: '{{ systemd_path }}/{{ service_name }}.service'
         content: |
           [Unit]
           Description=Wipe old Nix profiles
-
           [Service]
           Type=oneshot
           ExecStart={{ nix_bin }} profile wipe-history --older-than {{ gc_age }}
@@ -27,16 +27,14 @@
       notify: reload-systemd-user-daemon
     - name: Deploy timer unit
       copy:
-        dest: "{{ systemd_path }}/{{ service_name }}.timer"
+        dest: '{{ systemd_path }}/{{ service_name }}.timer'
         content: |
           [Unit]
           Description=Wipe old Nix profiles
-
           [Timer]
           OnCalendar=*-*-* 04:00:00
           Persistent=true
           RandomizedDelaySec=1h
-
           [Install]
           WantedBy=timers.target
         mode: '0644'
@@ -45,7 +43,7 @@
       meta: flush_handlers
     - name: Enable & start timer
       systemd:
-        name: "{{ service_name }}.timer"
+        name: '{{ service_name }}.timer'
         enabled: true
         state: started
         scope: user

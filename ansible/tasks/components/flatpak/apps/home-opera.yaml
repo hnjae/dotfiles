@@ -1,3 +1,4 @@
+---
 - name: Install and setup Opera (for Netflix)
   vars:
     app_id: com.opera.Opera
@@ -7,21 +8,15 @@
         method: user
         state: present
         remote: flathub
-        name:
-          - "{{ app_id }}"
+        name: ['{{ app_id }}']
     - name: Ensure {{ app_id }} is removed from association
       ini_file:
-        path: "{{ mimeapps_path }}"
-        section: "Removed Associations"
-        option: "{{ item }}" # mime
+        path: '{{ mimeapps_path }}'
+        section: Removed Associations
+        option: '{{ item }}'  # mime
         mode: '0644'
         value: >-
           {{ (
-
-
-
-
-
               lookup('ansible.builtin.ini', item,
                      section='Removed Associations',
                      file=mimeapps_path,

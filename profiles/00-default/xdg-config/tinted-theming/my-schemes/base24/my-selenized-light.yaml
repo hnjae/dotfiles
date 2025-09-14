@@ -1,39 +1,40 @@
+---
 # https://github.com/tinted-theming/base24/blob/main/styling.md
 # following version 0.1.0 of base24 <2025-06-22>
 # NOTE:
 # selenized 기본값과 다르게 muted/bright color 를 swap 했음
-# base02: 는 원래 #D5CDB6 이나, base03과 일치화 시킴
+#  base02: 는 원래  # D5CDB6 이나, base03과 일치화 시킴
 # base09: base0A  참조
 # base0F: base08 참조
 # base10: bg_1
 # base11: bg_2
-# base04: #909995(hsl(153 4% 58%)), #53676D(hsl(194 14% 38%)) 중간 값 #6f8583(hsl(173.5 9% 48%))
-system: "base24"
-name: "my-selenized-light"
-author: "hnjae (https://github.com/hnjae), jan-warchol (https://github.com/jan-warchol/selenized)"
-variant: "light"
+#  base04: # 909995(hsl(153 4% 58%)), # 53676D(hsl(194 14% 38%)) 중간 값  # 6f8583(hsl(173.5 9% 48%))
+system: base24
+name: my-selenized-light
+author: hnjae (https://github.com/hnjae), jan-warchol (https://github.com/jan-warchol/selenized)
+variant: light
 palette:
-  base00: "#FBF3DB" # background
-  base01: "#ECE3CC" # ANSI  0 - black
-  base02: "#909995" # ANSI  8 - bright black
-  base03: "#909995" # (grey) comments
-  base04: "#6f8583" # (light grey) dark foreground
-  base05: "#53676D" # Foreground
-  base06: "#3A4D53" # ANSI  7 - White
-  base07: "#909995" # ANSI 15 - bright white
-  base10: "#e9e4d0" # darker background
-  base11: "#cfcebe" # darkest background
-  base09: "#AD8900" # (orange) (ANSI ~3)
-  base0F: "#D2212D" # (dark red or brown) deprecated highlighting
-  base08: "#CC1729"
-  base0B: "#428b00"
-  base0A: "#A78300"
-  base0D: "#006DCE"
-  base0E: "#C44392"
-  base0C: "#00978A"
-  base12: "#D2212D"
-  base14: "#489100"
-  base13: "#AD8900"
-  base16: "#0072D4"
-  base17: "#CA4898"
-  base15: "#009C8F"
+  base00: '#FBF3DB'  # background
+  base01: '#ECE3CC'  # ANSI  0 - black
+  base02: '#909995'  # ANSI  8 - bright black
+  base03: '#909995'  # (grey) comments
+  base04: '#6f8583'  # (light grey) dark foreground
+  base05: '#53676D'  # Foreground
+  base06: '#3A4D53'  # ANSI  7 - White
+  base07: '#909995'  # ANSI 15 - bright white
+  base10: '#e9e4d0'  # darker background
+  base11: '#cfcebe'  # darkest background
+  base09: '#AD8900'  # (orange) (ANSI ~3)
+  base0F: '#D2212D'  # (dark red or brown) deprecated highlighting
+  base08: '#CC1729'
+  base0B: '#428b00'
+  base0A: '#A78300'
+  base0D: '#006DCE'
+  base0E: '#C44392'
+  base0C: '#00978A'
+  base12: '#D2212D'
+  base14: '#489100'
+  base13: '#AD8900'
+  base16: '#0072D4'
+  base17: '#CA4898'
+  base15: '#009C8F'

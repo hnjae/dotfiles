@@ -1,30 +1,31 @@
+---
 - name: Install flatpak packages
   community.general.flatpak:
     method: user
     state: present
     remote: flathub
     name:
-      - com.github.PintaProject.Pinta # image editor
+      - com.github.PintaProject.Pinta  # image editor
       - com.obsproject.Studio
-      - com.ticktick.TickTick # Proprietary
-      - io.github.alescdb.mailviewer # .eml, .msg viewer
-      - io.github.finefindus.Hieroglyphic # latex symbols
+      - com.ticktick.TickTick  # Proprietary
+      - io.github.alescdb.mailviewer  # .eml, .msg viewer
+      - io.github.finefindus.Hieroglyphic  # latex symbols
       - md.obsidian.Obsidian
       - org.inkscape.Inkscape
       - org.localsend.localsend_app
       - page.codeberg.libre_menu_editor.LibreMenuEditor
       # Flatpak related
-      - com.github.tchx84.Flatseal # edit permission of wayland apps
-      - dev.serebit.Waycheck # displays the list of Wayland protocols
-      - io.github.flattool.Warehouse # flatpak managing
-      - io.github.giantpinkrobots.flatsweep # remove leftover of flatpak apps
-      - xyz.tytanium.DoorKnocker # check availability of all portals provided by xdg-desktop-portal.
+      - com.github.tchx84.Flatseal  # edit permission of wayland apps
+      - dev.serebit.Waycheck  # displays the list of Wayland protocols
+      - io.github.flattool.Warehouse  # flatpak managing
+      - io.github.giantpinkrobots.flatsweep  # remove leftover of flatpak apps
+      - xyz.tytanium.DoorKnocker  # check availability of all portals provided by xdg-desktop-portal.
       # Dev
       - com.github.marhkb.Pods
-      - com.mongodb.Compass # unfree
-      - io.dbeaver.DBeaverCommunity # apache-2
-      - io.gitlab.liferooter.TextPieces # Developer's scratchpad
-      - me.iepure.devtoolbox # https://flathub.org/apps/me.iepure.devtoolbox
+      - com.mongodb.Compass  # unfree
+      - io.dbeaver.DBeaverCommunity  # apache-2
+      - io.gitlab.liferooter.TextPieces  # Developer's scratchpad
+      - me.iepure.devtoolbox  # https://flathub.org/apps/me.iepure.devtoolbox
       - org.pgadmin.pgadmin4
       # Desktop apps
       - org.strawberrymusicplayer.strawberry

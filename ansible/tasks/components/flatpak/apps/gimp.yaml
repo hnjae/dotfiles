@@ -1,3 +1,4 @@
+---
 - name: Install and setup GIMP
   vars:
     app_id: org.gimp.GIMP
@@ -7,11 +8,10 @@
         method: user
         state: present
         remote: flathub
-        name:
-          - "{{ app_id }}"
+        name: ['{{ app_id }}']
     - name: Make {{ app_id }} as default app
       community.general.xdg_mime:
         mime_types:
-          - image/x-xcf # *.xcf
-          - image/vnd.adobe.photoshop # .psd
-        handler: "{{ app_id }}.desktop"
+          - image/x-xcf  # *.xcf
+          - image/vnd.adobe.photoshop  # .psd
+        handler: '{{ app_id }}.desktop'

@@ -1,6 +1,6 @@
+---
 - name: Install flatpak packages
-  when:
-    - is_home
+  when: [is_home]
   block:
     - name: Install packages
       community.general.flatpak:
@@ -8,7 +8,7 @@
         state: present
         remote: flathub
         name:
-          - com.discordapp.Discord # Proprietary
+          - com.discordapp.Discord  # Proprietary
           - net.ankiweb.Anki
           # Image
           - org.kde.digikam
@@ -25,19 +25,19 @@
         remote: flathub
         name:
           - fr.romainvigier.MetadataCleaner
-          - org.gnome.Fractal # matrix client
+          - org.gnome.Fractal  # matrix client
           - com.github.flxzt.rnote
-          - io.gitlab.news_flash.NewsFlash # rss, supports freshrss
-          - com.github.qarmin.czkawka # <https://github.com/qarmin/czkawka> deduplication
-          - com.github.ahrm.sioyek # pdf viewer
+          - io.gitlab.news_flash.NewsFlash  # rss, supports freshrss
+          - com.github.qarmin.czkawka  # <https://github.com/qarmin/czkawka> deduplication
+          - com.github.ahrm.sioyek  # pdf viewer
           - com.github.jeromerobert.pdfarranger
-          - com.github.johnfactotum.Foliate # ebook viewer
-          - com.rafaelmardojai.Blanket # asmr sound
+          - com.github.johnfactotum.Foliate  # ebook viewer
+          - com.rafaelmardojai.Blanket  # asmr sound
           # Dev
-          - io.beekeeperstudio.Studio # db, GPL3
-          - org.gnome.design.Emblem # draw icon
-          - org.freedesktop.Bustle # debug dbus, gpl2
-          - org.gnome.dspy # debug d-bus, gpl3
-          - io.github.nokse22.asciidraw # modeling
-          - org.gaphor.Gaphor # apache2, modeling tool (UML)
-          - com.jgraph.drawio.desktop # apache2, draw UML, topology, diagram
+          - io.beekeeperstudio.Studio  # db, GPL3
+          - org.gnome.design.Emblem  # draw icon
+          - org.freedesktop.Bustle  # debug dbus, gpl2
+          - org.gnome.dspy  # debug d-bus, gpl3
+          - io.github.nokse22.asciidraw  # modeling
+          - org.gaphor.Gaphor  # apache2, modeling tool (UML)
+          - com.jgraph.drawio.desktop  # apache2, draw UML, topology, diagram

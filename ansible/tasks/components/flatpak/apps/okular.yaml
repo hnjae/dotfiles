@@ -1,3 +1,4 @@
+---
 - name: Install and setup Okular
   vars:
     app_id: org.kde.okular
@@ -7,25 +8,18 @@
         method: user
         state: present
         remote: flathub
-        name:
-          - "{{ app_id }}"
+        name: ['{{ app_id }}']
     - name: Make {{ app_id }} as default app
       community.general.xdg_mime:
-        mime_types:
-          - application/epub+zip
-          - applications/pdf
-        handler: "{{ app_id }}.desktop"
+        mime_types: [application/epub+zip, applications/pdf]
+        handler: '{{ app_id }}.desktop'
     - name: Ensure {{ app_id }} is removed from mime type association
       ini_file:
-        path: "{{ mimeapps_path }}"
-        section: "Removed Associations"
-        option: "{{ item }}" # mime
+        path: '{{ mimeapps_path }}'
+        section: Removed Associations
+        option: '{{ item }}'  # mime
         value: >-
           {{ (
-
-
-
-
               lookup('ansible.builtin.ini', item,
                      section='Removed Associations',
                      file=mimeapps_path,

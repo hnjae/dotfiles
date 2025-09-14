@@ -1,17 +1,17 @@
+---
 - name: Install and setup Telegram
   vars:
-    app_id: org.telegram.desktop # GPL3
+    app_id: org.telegram.desktop  # GPL3
   block:
     - name: Install {{ app_id }} with flatpak
       community.general.flatpak:
         method: user
         state: present
         remote: flathub
-        name:
-          - "{{ app_id }}"
+        name: ['{{ app_id }}']
     - name: Configure {{ app_id }} flatpak overrides
       copy:
-        dest: "{{ xdg_data_home }}/flatpak/overrides/{{ app_id }}"
+        dest: '{{ xdg_data_home }}/flatpak/overrides/{{ app_id }}'
         content: |
           [Context]
           filesystems=xdg-download
@@ -19,7 +19,7 @@
         backup: false
     - name: Create {{ app_id }} desktop entry
       copy:
-        dest: "{{ xdg_data_home }}/applications/{{ app_id }}.desktop"
+        dest: '{{ xdg_data_home }}/applications/{{ app_id }}.desktop'
         content: |
           [Desktop Entry]
           Name=Telegram Desktop
@@ -33,13 +33,11 @@
           MimeType=x-scheme-handler/tg;
           Keywords=tg;chat;im;messaging;messenger;sms;tdesktop;
           Actions=quit;
-          # DBusActivatable=true
-
+            # DBusActivatable=true
           SingleMainWindow=true
           X-GNOME-UsesNotifications=true
           X-GNOME-SingleWindow=true
           X-Flatpak=org.telegram.desktop
-
           [Desktop Action quit]
           Exec=flatpak run --branch=stable --command=telegram-desktop org.telegram.desktop -quit
           Name=Quit Telegram

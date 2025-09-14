@@ -1,3 +1,4 @@
+---
 # Repository of original colorscheme: https://github.com/rebelot/kanagawa.nvim
 # MIT License
 #
@@ -23,32 +24,33 @@
 #
 # NOTE:
 #   following version 0.1.0 of base24 <2025-07-11>
-system: "base24"
-name: "my-kanagawa-dragon"
-author: "Original by rebelot (https://github.com/rebelot/kanagawa.nvim), Ported by hnjae (https://github.com/hnjae)"
-variant: "dark"
+system: base24
+name: my-kanagawa-dragon
+author: Original by rebelot (https://github.com/rebelot/kanagawa.nvim), Ported by
+  hnjae (https://github.com/hnjae)
+variant: dark
 palette:
-  base00: "#181616" # background (palette.dragonBlack3)
-  base01: "#0D0C0C" # ANSI  0 - black (dragonBlack0)
-  base02: "#A6A69C" # ANSI  8 - bright black (dragonGray)
-  base03: "#737C73" # comments (dragonAsh)
-  base04: "#7A8382" # dragonGray3
-  base05: "#C5C9C5" # Foreground
-  base06: "#C8C093" # ANSI  7 - White
-  base07: "#DCD7BA" # ANSI 15 - bright white (fujiWhite)[diff]
-  base08: "#C4746E" # ANSI  1 - red
-  base09: "#b6927b" # (ANSI ~3) dragonOrange (Color of Constant)
-  base10: "#12120F" # darker background (palette.dragonBlack2)
-  base11: "#0D0C0C" # darkest background (palette.dragonBlack1)
-  base0A: "#C4B28A" # ANSI  3 - yellow  (dragonYellow)
-  base0B: "#8A9A7B" # ANSI  2 - green
-  base0C: "#8EA4A2" # ANSI  6 - cyan
-  base0D: "#8BA4B0" # ANSI  4 - blue
-  base0E: "#A292A3" # ANSI  5 - purple
-  base0F: "#43242B" # deprecated highlighting (dark red/brown) (palette.winterRed) katanaGrey 도 괜찮을 듯.
-  base12: "#E46876" # ANSI  9 - bright red
-  base13: "#E6C384" # ANSI 11 - bright yellow
-  base14: "#87A987" # ANSI 10 - bright green
-  base15: "#7AA89F" # ANSI 14 - bright cyan
-  base16: "#7FB4CA" # ANSI 12 - bright blue
-  base17: "#938AA9" # ANSI 13 - bright purple
+  base00: '#181616'  # background (palette.dragonBlack3)
+  base01: '#0D0C0C'  # ANSI  0 - black (dragonBlack0)
+  base02: '#A6A69C'  # ANSI  8 - bright black (dragonGray)
+  base03: '#737C73'  # comments (dragonAsh)
+  base04: '#7A8382'  # dragonGray3
+  base05: '#C5C9C5'  # Foreground
+  base06: '#C8C093'  # ANSI  7 - White
+  base07: '#DCD7BA'  # ANSI 15 - bright white (fujiWhite)[diff]
+  base08: '#C4746E'  # ANSI  1 - red
+  base09: '#b6927b'  # (ANSI ~3) dragonOrange (Color of Constant)
+  base10: '#12120F'  # darker background (palette.dragonBlack2)
+  base11: '#0D0C0C'  # darkest background (palette.dragonBlack1)
+  base0A: '#C4B28A'  # ANSI  3 - yellow  (dragonYellow)
+  base0B: '#8A9A7B'  # ANSI  2 - green
+  base0C: '#8EA4A2'  # ANSI  6 - cyan
+  base0D: '#8BA4B0'  # ANSI  4 - blue
+  base0E: '#A292A3'  # ANSI  5 - purple
+  base0F: '#43242B'  # deprecated highlighting (dark red/brown) (palette.winterRed) katanaGrey 도 괜찮을 듯.
+  base12: '#E46876'  # ANSI  9 - bright red
+  base13: '#E6C384'  # ANSI 11 - bright yellow
+  base14: '#87A987'  # ANSI 10 - bright green
+  base15: '#7AA89F'  # ANSI 14 - bright cyan
+  base16: '#7FB4CA'  # ANSI 12 - bright blue
+  base17: '#938AA9'  # ANSI 13 - bright purple

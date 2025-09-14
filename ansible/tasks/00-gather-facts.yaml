@@ -1,19 +1,20 @@
+---
 - name: Check if nix exists in PATH
-  command: "which nix"
+  command: which nix
   register: nix_check
   failed_when: false
   changed_when: false
 - name: Set nix related fact
   set_fact:
-    is_nix: "{{ nix_check.rc == 0 }}"
-    nix_bin: "{{ nix_check.stdout }}"
+    is_nix: '{{ nix_check.rc == 0 }}'
+    nix_bin: '{{ nix_check.stdout }}'
 - name: Gather service facts
   ansible.builtin.service_facts:
 - name: Check if flatpak exists in PATH
-  command: "which flatpak"
+  command: which flatpak
   register: flatpak_check
   failed_when: false
   changed_when: false
 - name: Set flatpak related fact
   set_fact:
-    is_flatpak: "{{ flatpak_check.rc == 0 }}"
+    is_flatpak: '{{ flatpak_check.rc == 0 }}'

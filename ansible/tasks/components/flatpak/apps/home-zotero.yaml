@@ -1,6 +1,6 @@
+---
 - name: Install and setup Zotero
-  when:
-    - is_home
+  when: [is_home]
   vars:
     app_id: org.zotero.Zotero
   block:
@@ -9,11 +9,10 @@
         method: user
         state: present
         remote: flathub
-        name:
-          - "{{ app_id }}"
+        name: ['{{ app_id }}']
     - name: Configure {{ app_id }} flatpak overrides
       copy:
-        dest: "{{ xdg_data_home }}/flatpak/overrides/{{ app_id }}"
+        dest: '{{ xdg_data_home }}/flatpak/overrides/{{ app_id }}'
         content: |
           [Context]
           filesystems=!home
@@ -21,23 +20,12 @@
         backup: false
     - name: Ensure {{ app_id }} is removed from association
       ini_file:
-        path: "{{ mimeapps_path }}"
-        section: "Removed Associations"
-        mode: "0644"
-        option: "{{ item }}" # mime
+        path: '{{ mimeapps_path }}'
+        section: Removed Associations
+        mode: '0644'
+        option: '{{ item }}'  # mime
         value: >-
           {{ (
-
-
-
-
-
-
-
-
-
-
-
               lookup('ansible.builtin.ini', item,
                      section='Removed Associations',
                      file=mimeapps_path,

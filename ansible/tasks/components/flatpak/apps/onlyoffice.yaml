@@ -1,3 +1,4 @@
+---
 - name: Install and setup OnlyOffice
   vars:
     app_id: org.onlyoffice.desktopeditors
@@ -7,11 +8,10 @@
         method: user
         state: present
         remote: flathub
-        name:
-          - "{{ app_id }}"
+        name: ['{{ app_id }}']
     - name: Configure {{ app_id }} flatpak overrides
       copy:
-        dest: "{{ xdg_data_home }}/flatpak/overrides/{{ app_id }}"
+        dest: '{{ xdg_data_home }}/flatpak/overrides/{{ app_id }}'
         # INFO: 기본으로 host 파일을 전부 읽을 수 있게 설정되어 있음. <2025-03-21>
         content: |
           [Context]
@@ -20,7 +20,7 @@
         backup: false
     - name: Make {{ app_id }} as default app
       community.general.xdg_mime:
-        handler: "{{ app_id }}.desktop"
+        handler: '{{ app_id }}.desktop'
         mime_types:
           - application/vnd.openxmlformats-officedocument.presentationml.presentation
           - application/vnd.openxmlformats-officedocument.presentationml.slide

@@ -1,3 +1,4 @@
+---
 projects:
   archive:
     url: git@github.com:hnjae/archive
@@ -30,11 +31,7 @@ specs:
     forks: 4
 targets:
   home:
-    projects:
-      - archive
-      - dotfiles
-      - obsidian
-      - nix-config
+    projects: [archive, dotfiles, obsidian, nix-config]
   all:
     all: true
 tasks:

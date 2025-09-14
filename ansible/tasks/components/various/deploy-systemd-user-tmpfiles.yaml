@@ -1,18 +1,17 @@
+---
 - name: Deploy systemd user tmpfiles
-  when:
-    - ansible_system == "Linux"
-    - ansible_service_mgr == "systemd"
+  when: [ansible_system == "Linux", ansible_service_mgr == "systemd"]
   block:
     - name: Ensure user-tmpfiles.d directory exists
       file:
-        path: "{{ xdg_config_home }}/user-tmpfiles.d"
+        path: '{{ xdg_config_home }}/user-tmpfiles.d'
         state: directory
         mode: '0755'
     - name: Deploy tmpfile 10-cleanup.conf
       copy:
         mode: '0644'
-        dest: "{{ ansible_env.HOME }}/.config/user-tmpfiles.d/10-cleanup.conf"
-        content: |
+        dest: '{{ ansible_env.HOME }}/.config/user-tmpfiles.d/10-cleanup.conf'
+        content: |-
           R {{ ansible_env.HOME }}/.ansible - - - -
           R {{ ansible_env.HOME }}/.bash_history - - - -
           R {{ ansible_env.HOME }}/.mypy_cache - - - -

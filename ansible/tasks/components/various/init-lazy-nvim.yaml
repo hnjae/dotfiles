@@ -1,44 +1,37 @@
+---
 - name: Initialize lazy.nvim
   vars:
-    lazynvim_marker_file: "{{ xdg_state_home }}/nvim/lazy-nvim-initialized"
+    lazynvim_marker_file: '{{ xdg_state_home }}/nvim/lazy-nvim-initialized'
   block:
     - name: Check if nvim exists in PATH
-      ansible.builtin.command: "which nvim"
+      ansible.builtin.command: which nvim
       register: nvim_check
       failed_when: false
       changed_when: false
     - name: Initialize lazy.nvim
-      when:
-        - nvim_check.rc == 0
+      when: [nvim_check.rc == 0]
       ansible.builtin.shell: |
         set -eu
-
         backup_path() {
           target_path="$1"
-
           if [ ! -e "$target_path" ]; then
             return
           fi
-
           backup_path_="${target_path}.backup.$(date --utc '+%Y%m%dT%H%M%S%Z')"
           echo "Existing file/directory found at ${target_path}. Backing up to ${backup_path_}." >&2
-
           if ! mv -n "$target_path" "$backup_path_"; then
             echo "Failed to move existing file/directory to backup location." >&2
             return 1
           fi
         }
-
         if ! ping -c 1 -W 5 -- 1.1.1.1 >/dev/null 2>&1; then
           echo "ERROR: Internet is not connected" >&2
           exit 1
         fi
-
         backup_path "{{ xdg_state_home }}/nvim"
         backup_path "{{ xdg_data_home }}/nvim"
-
         nvim --headless -c "autocmd User VeryLazy ++once Lazy install" -c "qa"
         mkdir -p "{{ xdg_state_home }}/nvim" && touch "{{ lazynvim_marker_file }}"
       args:
         executable: /bin/sh
-        creates: "{{ lazynvim_marker_file }}"
+        creates: '{{ lazynvim_marker_file }}'

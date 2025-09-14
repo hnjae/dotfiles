@@ -1,32 +1,33 @@
+---
 # https://github.com/tinted-theming/base24/blob/main/styling.md
 # following version 0.1.0 of base24 <2025-07-11>
-system: "base24"
-name: "my-rose-pine"
-author: "Original by [rose-pine](https://github.com/rose-pine), Ported by [hnjae](https://github.com/hnjae)"
-variant: "dark"
+system: base24
+name: my-rose-pine
+author: Original by [rose-pine](https://github.com/rose-pine), Ported by [hnjae](https://github.com/hnjae)
+variant: dark
 palette:
-  base00: "#191724" # background
-  # base01: "#1f1d2e" # ANSI  0 - black
-  base01: "#26233a" # ANSI  0 - black (`Overlay`; 임의선정)
-  base02: "#6e6a86" # ANSI  8 - bright black (`Muted`; 임의선정)
-  base03: "#908caa" # comments (`Subtle`; 임의선정)
-  base04: "#908caa" # dark foreground (`Subtle`; 임의선정) L61
-  base05: "#e0def4" # Foreground
-  base06: "#e0def4" # ANSI  7 - White
-  base07: "#e0def4" # ANSI 15 - bright white
-  base08: "#eb6f92" # ANSI  1 - red
-  base09: "#f6c177" # (ANSI ~3) (임의 선정)
-  base0A: "#f6c177" # ANSI  3 - Yellow
-  base0B: "#31748f" # ANSI  2 - green
-  base0C: "#ebbcba" # ANSI  6 - cyan
-  base0D: "#9ccfd8" # ANSI  4 - blue
-  base0E: "#c4a7e7" # ANSI  5 - magenta
-  base0F: "#b4637a" # deprecated highlighting (dark red or brown) (`Love-done`; 임의 선정)
-  base10: "#14131b" # darker background (hsl(249 19% 9%); 임의 선정)
-  base11: "#0e0d12" # darkest background (hsl(249 16% 6%); 임의 선정)
-  base12: "#eb6f92" # ANSI  9 - bright red
-  base13: "#f6c177" # ANSI 11 - bright yellow
-  base14: "#31748f" # ANSI 10 - bright green
-  base15: "#ebbcba" # ANSI 14 - bright cyan
-  base16: "#9ccfd8" # ANSI 12 - bright blue
-  base17: "#c4a7e7" # ANSI 13 - bright magenta
+  base00: '#191724'  # background
+  # base01: "#1f1d2e"  # ANSI  0 - black
+  base01: '#26233a'  # ANSI  0 - black (`Overlay`; 임의선정)
+  base02: '#6e6a86'  # ANSI  8 - bright black (`Muted`; 임의선정)
+  base03: '#908caa'  # comments (`Subtle`; 임의선정)
+  base04: '#908caa'  # dark foreground (`Subtle`; 임의선정) L61
+  base05: '#e0def4'  # Foreground
+  base06: '#e0def4'  # ANSI  7 - White
+  base07: '#e0def4'  # ANSI 15 - bright white
+  base08: '#eb6f92'  # ANSI  1 - red
+  base09: '#f6c177'  # (ANSI ~3) (임의 선정)
+  base0A: '#f6c177'  # ANSI  3 - Yellow
+  base0B: '#31748f'  # ANSI  2 - green
+  base0C: '#ebbcba'  # ANSI  6 - cyan
+  base0D: '#9ccfd8'  # ANSI  4 - blue
+  base0E: '#c4a7e7'  # ANSI  5 - magenta
+  base0F: '#b4637a'  # deprecated highlighting (dark red or brown) (`Love-done`; 임의 선정)
+  base10: '#14131b'  # darker background (hsl(249 19% 9%); 임의 선정)
+  base11: '#0e0d12'  # darkest background (hsl(249 16% 6%); 임의 선정)
+  base12: '#eb6f92'  # ANSI  9 - bright red
+  base13: '#f6c177'  # ANSI 11 - bright yellow
+  base14: '#31748f'  # ANSI 10 - bright green
+  base15: '#ebbcba'  # ANSI 14 - bright cyan
+  base16: '#9ccfd8'  # ANSI 12 - bright blue
+  base17: '#c4a7e7'  # ANSI 13 - bright magenta

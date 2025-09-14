@@ -1,3 +1,4 @@
+---
 - name: Install and setup Thunderbird
   vars:
     app_id: org.mozilla.Thunderbird
@@ -7,11 +8,10 @@
         method: user
         state: present
         remote: flathub
-        name:
-          - "{{ app_id }}"
+        name: ['{{ app_id }}']
     - name: Configure {{ app_id }} flatpak overrides
       copy:
-        dest: "{{ xdg_data_home }}/flatpak/overrides/{{ app_id }}"
+        dest: '{{ xdg_data_home }}/flatpak/overrides/{{ app_id }}'
         content: |
           [Context]
           sockets=!x11
@@ -19,20 +19,19 @@
         backup: false
     - name: Make {{ app_id }} as default app
       community.general.xdg_mime:
-        handler: "{{ app_id }}.desktop"
+        handler: '{{ app_id }}.desktop'
         mime_types:
           - x-scheme-handler/mailto
           - x-scheme-handler/webcal
           - x-scheme-handler/webcals
     - name: Ensure {{ app_id }} is removed from association
       ini_file:
-        path: "{{ mimeapps_path }}"
-        section: "Removed Associations"
-        option: "{{ item }}" # mime
+        path: '{{ mimeapps_path }}'
+        section: Removed Associations
+        option: '{{ item }}'  # mime
         mode: '0644'
         value: >-
           {{ (
-
               lookup('ansible.builtin.ini', item,
                      section='Removed Associations',
                      file=mimeapps_path,
@@ -50,7 +49,4 @@
                         file=mimeapps_path,
                         errors='ignore') | default('', true))
           }}
-      loop:
-        - message/rfc822
-        - text/calendar
-        - text/vcard
+      loop: [message/rfc822, text/calendar, text/vcard]

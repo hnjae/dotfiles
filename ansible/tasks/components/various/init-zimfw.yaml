@@ -1,15 +1,11 @@
+---
 - name: Check if zsh exists in PATH
-  ansible.builtin.command: "which zsh"
+  ansible.builtin.command: which zsh
   register: zsh_check
   failed_when: false
   changed_when: false
-- name: Check internet connectivity
-  ansible.builtin.command: ping -c 1 1.1.1.1
-  register: ping_result
-  failed_when: false
-  changed_when: false
 - name: Ensure zimfw submodule and init zimfw if required
-  when: zsh_check.rc == 0  and ping_result.rc == 0
+  when: zsh_check.rc == 0
   block:
     - name: Ensure zimfw submodule
       ansible.builtin.shell: |
@@ -21,14 +17,20 @@
         fi
       args:
         executable: /bin/sh
-        chdir: "{{ playbook_dir }}"
+        chdir: '{{ playbook_dir }}'
       register: zimfw_submodule
-      changed_when: zimfw_submodule.rc == 0 and ( "a3c82368-dd25-4d62-ae58-4550ca5ecde8" not in zimfw_submodule.stdout )
+      changed_when: zimfw_submodule.rc == 0 and ( "a3c82368-dd25-4d62-ae58-4550ca5ecde8"
+        not in zimfw_submodule.stdout )
     - name: Initialize zimfw modules
       ansible.builtin.shell: |
+        set -eu
+        if ! ping -c 1 -W 5 -- 1.1.1.1 >/dev/null 2>&1; then
+          echo "ERROR: Internet is not connected" >&2
+          exit 1
+        fi
         zsh --interactive -c 'zimfw init'
       args:
         executable: /bin/sh
-        creates: "{{ xdg_data_home }}/zimfw/modules" # 이미 creates 되어 있으면 changed 취급 X
+        creates: '{{ xdg_data_home }}/zimfw/modules'  # 이미 creates 되어 있으면 changed 취급 X
       environment:
         TERM: dumb

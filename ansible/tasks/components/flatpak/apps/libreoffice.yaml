@@ -1,3 +1,4 @@
+---
 - name: Install and setup LibreOffice
   vars:
     app_id: org.libreoffice.LibreOffice
@@ -7,8 +8,7 @@
         method: user
         state: present
         remote: flathub
-        name:
-          - "{{ app_id }}"
+        name: ['{{ app_id }}']
     - name: Make {{ app_id }} as default app
       block:
         - name: Make LibreOffice Writer as default app
@@ -39,8 +39,7 @@
             handler: org.libreoffice.LibreOffice.impress.desktop
         - name: Make LibreOffice Base as default app
           community.general.xdg_mime:
-            mime_types:
-              - application/vnd.oasis.opendocument.base
+            mime_types: [application/vnd.oasis.opendocument.base]
             handler: org.libreoffice.LibreOffice.base.desktop
         - name: Make LibreOffice Draw as default app
           community.general.xdg_mime:

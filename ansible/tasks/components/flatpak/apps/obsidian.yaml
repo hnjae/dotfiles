@@ -1,3 +1,4 @@
+---
 # <https://flathub.org/apps/md.obsidian.Obsidian>
 #
 # LICENSE:
@@ -12,11 +13,10 @@
         method: user
         state: present
         remote: flathub
-        name:
-          - "{{ app_id }}"
+        name: ['{{ app_id }}']
     - name: Configure {{ app_id }} flatpak overrides
       copy:
-        dest: "{{ xdg_data_home }}/flatpak/overrides/{{ app_id }}"
+        dest: '{{ xdg_data_home }}/flatpak/overrides/{{ app_id }}'
         content: |
           [Context]
           sockets=wayland
@@ -24,7 +24,7 @@
         backup: false
     - name: Create {{ app_id }} desktop entry
       copy:
-        dest: "{{ xdg_data_home }}/applications/{{ app_id }}.desktop"
+        dest: '{{ xdg_data_home }}/applications/{{ app_id }}.desktop'
         content: |
           [Desktop Entry]
           Name=Obsidian

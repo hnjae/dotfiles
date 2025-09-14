@@ -1,6 +1,6 @@
+---
 - name: Install and setup Calibre
-  when:
-    - is_home
+  when: [is_home]
   vars:
     app_id: com.calibre_ebook.calibre
   block:
@@ -9,12 +9,11 @@
         method: user
         state: present
         remote: flathub
-        name:
-          - "{{ app_id }}"
+        name: ['{{ app_id }}']
     - name: Create Calibre related desktop entries
       copy:
         # dest: "{{ ansible_env.HOME }}/.local/share/applications/{{ item }}"
-        dest: "{{ xdg_data_home }}/applications/{{ item }}.desktop"
+        dest: '{{ xdg_data_home }}/applications/{{ item }}.desktop'
         content: |
           [Desktop Entry]
           NoDisplay=true
@@ -30,17 +29,12 @@
     # NOTE: https://specifications.freedesktop.org/mime-apps-spec/1.0.1/associations.html
     - name: Ensure {{ app_id }} is removed from association
       ini_file:
-        path: "{{ mimeapps_path }}"
-        section: "Removed Associations"
+        path: '{{ mimeapps_path }}'
+        section: Removed Associations
         mode: '0644'
-        option: "{{ item }}" # mime
+        option: '{{ item }}'  # mime
         value: >-
           {{ (
-
-
-
-
-
               lookup('ansible.builtin.ini', item,
                      section='Removed Associations',
                      file=mimeapps_path,

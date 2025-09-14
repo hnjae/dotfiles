@@ -1,3 +1,4 @@
+---
 - defaults:
     link:
       create: true
@@ -5,19 +6,19 @@
       force: true
 - clean:
     - '~'
-    - '~/.config'
-    - '~/.local/share'
+    - ~/.config
+    - ~/.local/share
 # - shell:
 #     - [git submodule update --init --recursive, Installing submodules if not]
 - link:
     ~/:
       glob: true
-      path: "home/.*"
+      path: home/.*
     ~/.config:
       glob: true
-      path: "xdg-config/*"
+      path: xdg-config/*
     ~/.local/share:
       glob: true
-      path: "xdg-data/*"
+      path: xdg-data/*
     ~/.zshenv:
-      path: "~/.config/zsh/.zshenv"
+      path: ~/.config/zsh/.zshenv

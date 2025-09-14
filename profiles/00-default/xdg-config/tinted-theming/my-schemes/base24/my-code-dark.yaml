@@ -1,31 +1,33 @@
+---
 # https://github.com/tinted-theming/base24/blob/main/styling.md
 # following version 0.1.0 of base24 <2025-07-11>
-system: "base24"
-name: "my-code-dark"
-author: "Original by tomasiser (https://github.com/tomasiser/vim-code-dark), Ported by hnjae (https://github.com/hnjae)"
-variant: "dark"
+system: base24
+name: my-code-dark
+author: Original by tomasiser (https://github.com/tomasiser/vim-code-dark), Ported
+  by hnjae (https://github.com/hnjae)
+variant: dark
 palette:
-  base00: "#1E1E1E" # background
-  base01: "#262626" # ANSI  0 - black
-  base02: "#808080" # ANSI  8 - bright black  (기존 색이 contrast 가 너무 낮아, base04 색상 사용)
-  base03: "#808080" # comments (기존 색이 contrast 가 너무 낮아, base04 색상 사용)
-  base04: "#808080" # dark foreground
-  base05: "#D4D4D4" # Foreground
-  base06: "#E9E9E9" # ANSI  7 - White
-  base07: "#FFFFFF" # ANSI 15 - bright white
-  base08: "#D16969" # ANSI  1 - red
-  base09: "#B5CEA8" # (ANSI ~3) (faded_orange)
-  base0A: "#D7BA7D" # ANSI  3 - Yellow
-  base0B: "#608B4E" # ANSI  2 - green
-  base0C: "#9CDCFE" # ANSI  6 - cyan
-  base0D: "#569CD6" # ANSI  4 - blue
-  base0E: "#C586C0" # ANSI  5 - magenta
-  base0F: "#CE9178" # deprecated highlighting (dark red or brown)
-  base10: "#0F0F0F" # darker background
-  base11: "#000000" # darkest background
-  base12: "#D16969" # ANSI  9 - bright red
-  base13: "#D7BA7D" # ANSI 11 - bright yellow
-  base14: "#608B4E" # ANSI 10 - bright green
-  base15: "#9CDCFE" # ANSI 14 - bright cyan
-  base16: "#569CD6" # ANSI 12 - bright blue
-  base17: "#C586C0" # ANSI 13 - bright magenta
+  base00: '#1E1E1E'  # background
+  base01: '#262626'  # ANSI  0 - black
+  base02: '#808080'  # ANSI  8 - bright black  (기존 색이 contrast 가 너무 낮아, base04 색상 사용)
+  base03: '#808080'  # comments (기존 색이 contrast 가 너무 낮아, base04 색상 사용)
+  base04: '#808080'  # dark foreground
+  base05: '#D4D4D4'  # Foreground
+  base06: '#E9E9E9'  # ANSI  7 - White
+  base07: '#FFFFFF'  # ANSI 15 - bright white
+  base08: '#D16969'  # ANSI  1 - red
+  base09: '#B5CEA8'  # (ANSI ~3) (faded_orange)
+  base0A: '#D7BA7D'  # ANSI  3 - Yellow
+  base0B: '#608B4E'  # ANSI  2 - green
+  base0C: '#9CDCFE'  # ANSI  6 - cyan
+  base0D: '#569CD6'  # ANSI  4 - blue
+  base0E: '#C586C0'  # ANSI  5 - magenta
+  base0F: '#CE9178'  # deprecated highlighting (dark red or brown)
+  base10: '#0F0F0F'  # darker background
+  base11: '#000000'  # darkest background
+  base12: '#D16969'  # ANSI  9 - bright red
+  base13: '#D7BA7D'  # ANSI 11 - bright yellow
+  base14: '#608B4E'  # ANSI 10 - bright green
+  base15: '#9CDCFE'  # ANSI 14 - bright cyan
+  base16: '#569CD6'  # ANSI 12 - bright blue
+  base17: '#C586C0'  # ANSI 13 - bright magenta

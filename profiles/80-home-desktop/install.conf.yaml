@@ -1,3 +1,4 @@
+---
 - defaults:
     link:
       create: true
@@ -6,7 +7,7 @@
 - link:
     ~/.ssh:
       glob: true
-      path: "ssh/*"
+      path: ssh/*
     ~/Projects:
       glob: true
-      path: "Projects/*"
+      path: Projects/*
