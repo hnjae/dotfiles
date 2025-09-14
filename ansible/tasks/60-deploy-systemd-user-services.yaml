@@ -1,0 +1,13 @@
+---
+- name: Deploy systemd user services
+  when: [ansible_system == "Linux", ansible_service_mgr == "systemd"]
+  vars:
+    systemd_path: '{{ xdg_config_home }}/systemd/user'
+  block:
+    - name: Ensure systemd user directory to exists
+      include_tasks: components/systemd-user-services/00-ensure-directory.yaml
+    - name: Deploy services
+      include_tasks: '{{ task }}'
+      with_fileglob: [components/systemd-user-services/services/*.yaml]
+      loop_control:
+        loop_var: task

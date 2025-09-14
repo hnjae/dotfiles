@@ -1,8 +1,6 @@
 ---
 - name: Deploy trash-empty service & timer
-  when: [ansible_system == "Linux", ansible_service_mgr == "systemd"]
   vars:
-    systemd_path: '{{ xdg_config_home }}/systemd/user'
     service_name: trash-empty
     days: 4
   block:
@@ -14,11 +12,6 @@
     - name: Deploy trash-empty service & timer
       when: check_trash_empty.rc == 0
       block:
-        - name: Ensure systemd user directory exists
-          file:
-            path: '{{ systemd_path }}'
-            state: directory
-            mode: '0755'
         - name: Deploy service unit
           copy:
             dest: '{{ systemd_path }}/{{ service_name }}.service'
