@@ -20,7 +20,7 @@
               Description=Empty trash older than {{ days }} days
               [Service]
               Type=oneshot
-              ExecStart={{ check_trash_empty.stdout }} -f {{ days }}
+              ExecStart={{ check_trash_empty.stdout }} --trash-dir "{{ xdg_data_home }}/Trash" -f {{ days }}
             mode: '0644'
           notify: reload-systemd-user-daemon
         - name: Deploy timer unit
