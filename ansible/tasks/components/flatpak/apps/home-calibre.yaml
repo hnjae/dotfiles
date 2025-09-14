@@ -1,0 +1,86 @@
+- name: Install and setup Calibre
+  when:
+    - is_home
+  vars:
+    app_id: com.calibre_ebook.calibre
+  block:
+    - name: Install {{ app_id }} with flatpak
+      community.general.flatpak:
+        method: user
+        state: present
+        remote: flathub
+        name:
+          - "{{ app_id }}"
+    - name: Create Calibre related desktop entries
+      copy:
+        # dest: "{{ ansible_env.HOME }}/.local/share/applications/{{ item }}"
+        dest: "{{ xdg_data_home }}/applications/{{ item }}.desktop"
+        content: |
+          [Desktop Entry]
+          NoDisplay=true
+          Exec=:
+          Name=This should not be displayed
+          Type=Application
+        mode: '0600'
+        backup: false
+      loop:
+        - com.calibre_ebook.calibre.ebook-edit
+        - com.calibre_ebook.calibre.ebook-viewer
+        - com.calibre_ebook.calibre.lrfviewer
+    # NOTE: https://specifications.freedesktop.org/mime-apps-spec/1.0.1/associations.html
+    - name: Ensure {{ app_id }} is removed from association
+      ini_file:
+        path: "{{ mimeapps_path }}"
+        section: "Removed Associations"
+        mode: '0644'
+        option: "{{ item }}" # mime
+        value: >-
+          {{ (
+
+
+
+
+
+              lookup('ansible.builtin.ini', item,
+                     section='Removed Associations',
+                     file=mimeapps_path,
+                     errors='ignore') | default('', true)
+             )
+             + app_id + '.desktop;'
+             if (app_id + '.desktop;') not in
+                (lookup('ansible.builtin.ini', item,
+                        section='Removed Associations',
+                        file=mimeapps_path,
+                        errors='ignore') | default('', true))
+             else
+                (lookup('ansible.builtin.ini', item,
+                        section='Removed Associations',
+                        file=mimeapps_path,
+                        errors='ignore') | default('', true))
+          }}
+      loop:
+        - application/epub+zip
+        - application/ereader
+        - application/oebps-package+xml
+        - application/pdf
+        - application/vnd.comicbook+zip
+        - application/vnd.comicbook-rar
+        - application/vnd.ms-word.document.macroenabled.12
+        - application/vnd.oasis.opendocument.text
+        - application/vnd.openxmlformats-officedocument.wordprocessingml.document
+        - application/x-cb7
+        - application/x-cbc
+        - application/x-cbr
+        - application/x-cbz
+        - application/x-mobi8-ebook
+        - application/x-mobipocket-ebook
+        - application/x-mobipocket-subscription
+        - application/x-sony-bbeb
+        - application/xhtml+xml
+        - image/vnd.djvu
+        - text/fb2+xml
+        - text/html
+        - text/plain
+        - text/rtf
+        - text/x-markdown
+        - text/markdown

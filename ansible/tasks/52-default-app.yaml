@@ -1,0 +1,8 @@
+- name: Set default app (Apps installed as system package)
+  when:
+    - is_flatpak # is_flatpak 을 desktop 인지 아닌지 판단하는 용도로 사용
+  include_tasks: "{{ task }}"
+  with_fileglob:
+    - "components/default-app/*.yaml"
+  loop_control:
+    loop_var: task

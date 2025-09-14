@@ -1,0 +1,57 @@
+- name: Install and setup LibreOffice
+  vars:
+    app_id: org.libreoffice.LibreOffice
+  block:
+    - name: Install {{ app_id }} with flatpak
+      community.general.flatpak:
+        method: user
+        state: present
+        remote: flathub
+        name:
+          - "{{ app_id }}"
+    - name: Make {{ app_id }} as default app
+      block:
+        - name: Make LibreOffice Writer as default app
+          community.general.xdg_mime:
+            mime_types:
+              - application/vnd.oasis.opendocument.text
+              - application/vnd.oasis.opendocument.text-template
+              - application/vnd.oasis.opendocument.text-flat-xml
+              - application/vnd.oasis.opendocument.text-master
+              - application/vnd.oasis.opendocument.text-master-template
+              - application/vnd.oasis.opendocument.text-web
+            handler: org.libreoffice.LibreOffice.writer.desktop
+        - name: Make LibreOffice Calc as default app
+          community.general.xdg_mime:
+            mime_types:
+              - application/vnd.oasis.opendocument.chart
+              - application/vnd.oasis.opendocument.chart-template
+              - application/vnd.oasis.opendocument.spreadsheet
+              - application/vnd.oasis.opendocument.spreadsheet-flat-xml
+              - application/vnd.oasis.opendocument.spreadsheet-template
+            handler: org.libreoffice.LibreOffice.calc.desktop
+        - name: Make LibreOffice Impress as default app
+          community.general.xdg_mime:
+            mime_types:
+              - application/vnd.oasis.opendocument.presentation
+              - application/vnd.oasis.opendocument.presentation-template
+              - application/vnd.oasis.opendocument.presentation-flat-xml
+            handler: org.libreoffice.LibreOffice.impress.desktop
+        - name: Make LibreOffice Base as default app
+          community.general.xdg_mime:
+            mime_types:
+              - application/vnd.oasis.opendocument.base
+            handler: org.libreoffice.LibreOffice.base.desktop
+        - name: Make LibreOffice Draw as default app
+          community.general.xdg_mime:
+            mime_types:
+              - application/vnd.oasis.opendocument.graphics
+              - application/vnd.oasis.opendocument.graphics-flat-xml
+              - application/vnd.oasis.opendocument.graphics-template
+            handler: org.libreoffice.LibreOffice.draw.desktop
+        - name: Make LibreOffice Math as default app
+          community.general.xdg_mime:
+            mime_types:
+              - application/vnd.oasis.opendocument.formula
+              - application/vnd.oasis.opendocument.formula-template
+            handler: org.libreoffice.LibreOffice.math.desktop

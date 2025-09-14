@@ -1,0 +1,28 @@
+- name: Set default audio player
+  vars:
+    app_id: mpv
+  community.general.xdg_mime:
+    handler: "{{ app_id }}.desktop"
+    mime_types:
+      # ogg Container
+      - audio/x-opus+ogg # .opus
+      - audio/x-vorbis+ogg # .ogg
+      - audio/x-speex+ogg # {'*.spx', '*.oga', '*.ogg'}
+      - audio/flac # .flac
+      # generic container
+      - audio/mp4 # .m4a
+      - audio/x-matroska # .mka
+      # lossless
+      - audio/x-tak # {'*.tak'}
+      - audio/x-tta # {'*.tta'}
+      - audio/x-ape # {'*.ape'}
+      # pcm
+      - audio/vnd.wave # {'*.wav'}
+      - audio/x-aiff # {'*.aiff', '*.aif'}
+      # ISO base media file format
+      - video/mp4 # {'*.mp4', '*.f4v', '*.m4v', '*.lrv'}
+      - video/quicktime # {'*.qtvr', '*.qt', '*.moov', '*.mov'}
+      - video/x-flv # {'*.flv'}
+      # Others
+      - audio/x-ms-wma # {'*.wma'}
+      - audio/mpeg # .mp3

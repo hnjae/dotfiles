@@ -1,0 +1,9 @@
+- name: "Allow Flatpak applications to access the /nix/store directory."
+  become: false
+  when: "'/nix/store' is directory"
+  ini_file:
+    path: "{{ xdg_data_home }}/flatpak/overrides/global"
+    section: Context
+    option: filesystems
+    value: "/nix/store:ro"
+    mode: '0644'

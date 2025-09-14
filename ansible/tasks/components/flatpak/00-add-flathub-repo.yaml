@@ -1,0 +1,8 @@
+- name: Add the flathub flatpak repository remote to the user installation
+  when:
+    - is_flatpak
+  community.general.flatpak_remote:
+    method: user
+    state: present
+    flatpakrepo_url: "https://dl.flathub.org/repo/flathub.flatpakrepo"
+    name: flathub

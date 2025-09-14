@@ -1,0 +1,26 @@
+- name: Configure localhost user environment
+  hosts: localhost
+  connection: local
+  become: false
+  vars:
+    xdg_config_home: "{{ ansible_env.XDG_CONFIG_HOME | default(ansible_env.HOME + '/.config') }}"
+    xdg_state_home: "{{ ansible_env.XDG_STATE_HOME | default(ansible_env.HOME + '/.local/state') }}"
+    xdg_data_home: "{{ ansible_env.XDG_DATA_HOME | default(ansible_env.HOME + '/.local/share') }}"
+    mimeapps_path: "{{ xdg_config_home }}/mimeapps.list"
+    is_home: "{{ (ansible_env.ANSIBLE_HOST_TYPE | default('')) == 'home' }}"
+  tasks:
+    - name: Gather facts
+      include_tasks: tasks/00-gather-facts.yaml
+    - name: Run various
+      include_tasks: "{{ task }}"
+      with_fileglob:
+        - "tasks/globs/*.yaml"
+      loop_control:
+        loop_var: task
+  handlers:
+    - name: Reload systemd user daemon (`systemd --user daemon-reload`)
+      listen: 'reload-systemd-user-daemon'
+      when: ansible_service_mgr == "systemd"
+      systemd:
+        daemon_reload: true
+        scope: user

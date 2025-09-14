@@ -1,0 +1,17 @@
+- name: Remove not-in-use packages
+  community.general.flatpak:
+    name:
+      - com.logseq.Logseq
+      - fyi.zoey.TeX-Match # find latex symbols, uses end-of-life library (org.freedesktop.Platform 22.08) (2024-11-06)
+      - info.smplayer.SMPlayer
+      - io.github.celluloid_player.Celluloid # NOTE: celluloid is very slow  <2024-12-15>
+      - org.gnome.gitlab.YaLTeR.Identity
+      - org.gnome.gitlab.YaLTeR.VideoTrimmer
+      # Dev
+      - com.getpostman.Postman # Proprietary
+      - dev.pulsar_edit.Pulsar # editor, mit
+      - io.httpie.Httpie # Proprietary
+      - org.gnome.gitlab.cheywood.Buffer # empty editor
+      - rest.insomnia.Insomnia # mit
+    state: absent
+    method: user

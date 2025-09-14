@@ -1,0 +1,75 @@
+- name: Install and setup Okular
+  vars:
+    app_id: org.kde.okular
+  block:
+    - name: Install {{ app_id }} with flatpak
+      community.general.flatpak:
+        method: user
+        state: present
+        remote: flathub
+        name:
+          - "{{ app_id }}"
+    - name: Make {{ app_id }} as default app
+      community.general.xdg_mime:
+        mime_types:
+          - application/epub+zip
+          - applications/pdf
+        handler: "{{ app_id }}.desktop"
+    - name: Ensure {{ app_id }} is removed from mime type association
+      ini_file:
+        path: "{{ mimeapps_path }}"
+        section: "Removed Associations"
+        option: "{{ item }}" # mime
+        value: >-
+          {{ (
+
+
+
+
+              lookup('ansible.builtin.ini', item,
+                     section='Removed Associations',
+                     file=mimeapps_path,
+                     errors='ignore') | default('', true)
+             )
+             + app_id + '.desktop;'
+             if (app_id + '.desktop;') not in
+                (lookup('ansible.builtin.ini', item,
+                        section='Removed Associations',
+                        file=mimeapps_path,
+                        errors='ignore') | default('', true))
+             else
+                (lookup('ansible.builtin.ini', item,
+                        section='Removed Associations',
+                        file=mimeapps_path,
+                        errors='ignore') | default('', true))
+          }}
+      loop:
+        - text/plain
+        - image/jpeg
+        - image/jp2
+        - image/png
+        - image/bmp
+        - image/gif
+        - image/tiff
+        - application/postscript
+        # - image/x-portable-bitmap
+        # - image/x-portable-graymap
+        # - image/x-portable-pixmap
+        # - image/x-psd
+        # - image/x-ico
+        # - image/fax-g3
+        # - image/g3fax
+        # - image/vnd.djvu
+        # - image/x-bzeps
+        # - image/x-dds
+        # - image/x-eps
+        # - image/x-exr
+        # - image/x-gzeps
+        # - image/x-hdr
+        # - image/x-pcx
+        # - image/x-rgb
+        # - image/x-tga
+        # - image/x-xbitmap
+        # - image/x-xcf
+        # - image/x-xpixmap
+        # - video/x-mng

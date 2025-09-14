@@ -1,0 +1,6 @@
+- name: Run various tasks
+  include_tasks: "{{ task }}"
+  with_fileglob:
+    - "components/various/*.yaml"
+  loop_control:
+    loop_var: task

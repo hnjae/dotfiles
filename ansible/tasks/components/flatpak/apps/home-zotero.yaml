@@ -1,0 +1,71 @@
+- name: Install and setup Zotero
+  when:
+    - is_home
+  vars:
+    app_id: org.zotero.Zotero
+  block:
+    - name: Install {{ app_id }} with flatpak
+      community.general.flatpak:
+        method: user
+        state: present
+        remote: flathub
+        name:
+          - "{{ app_id }}"
+    - name: Configure {{ app_id }} flatpak overrides
+      copy:
+        dest: "{{ xdg_data_home }}/flatpak/overrides/{{ app_id }}"
+        content: |
+          [Context]
+          filesystems=!home
+        mode: '0644'
+        backup: false
+    - name: Ensure {{ app_id }} is removed from association
+      ini_file:
+        path: "{{ mimeapps_path }}"
+        section: "Removed Associations"
+        mode: "0644"
+        option: "{{ item }}" # mime
+        value: >-
+          {{ (
+
+
+
+
+
+
+
+
+
+
+
+              lookup('ansible.builtin.ini', item,
+                     section='Removed Associations',
+                     file=mimeapps_path,
+                     errors='ignore') | default('', true)
+             )
+             + app_id + '.desktop;'
+             if (app_id + '.desktop;') not in
+                (lookup('ansible.builtin.ini', item,
+                        section='Removed Associations',
+                        file=mimeapps_path,
+                        errors='ignore') | default('', true))
+             else
+                (lookup('ansible.builtin.ini', item,
+                        section='Removed Associations',
+                        file=mimeapps_path,
+                        errors='ignore') | default('', true))
+          }}
+      loop:
+        - application/marc
+        - application/mods+xml
+        - application/rdf+xml
+        - application/vnd.citationstyles.style+xml
+        - application/x-bibtex
+        - application/x-endnote-refer
+        - application/x-inst-for-Scientific-info
+        - application/x-research-info-systems
+        - text/plain
+        - text/ris
+        - text/x-bibtex
+        - text/x-research-info-systems
+        # - x-scheme-handler/zotero
