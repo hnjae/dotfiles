@@ -1,0 +1,31 @@
+---
+- name: Remove association of pdf
+  vars:
+    mime_type: application/pdf
+  ini_file:
+    path: '{{ mimeapps_path }}'
+    section: Removed Associations
+    mode: '0644'
+    option: '{{ mime_type }}'  # mime
+    value: >-
+      {{ (
+          lookup('ansible.builtin.ini', mime_type,
+                 section='Removed Associations',
+                 file=mimeapps_path,
+                 errors='ignore') | default('', true)
+         )
+         + app_id + '.desktop;'
+         if (app_id + '.desktop;') not in
+            (lookup('ansible.builtin.ini', mime_type,
+                    section='Removed Associations',
+                    file=mimeapps_path,
+                    errors='ignore') | default('', true))
+         else
+            (lookup('ansible.builtin.ini', mime_type,
+                    section='Removed Associations',
+                    file=mimeapps_path,
+                    errors='ignore') | default('', true))
+      }}
+  loop: [brave-browser, chromium-browser]
+  loop_control:
+    loop_var: app_id

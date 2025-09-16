@@ -81,7 +81,7 @@
       - application/x-perl  # {'*.pl', '*.PL', '*.t', '*.pod', '*.al', '*.pm', '*.perl'}
       - text/x-lua  # {'*.lua'}
       # web
-      - text/html  # {'*.html', '*.htm'}
+      # - text/html  # {'*.html', '*.htm'}
       - text/x-scss  # {'*.scss'}
       - text/css  # {'*.css'}
       - application/x-php  # {'*.php4', '*.php5', '*.php', '*.php3', '*.phps'}
