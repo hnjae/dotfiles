@@ -45,12 +45,6 @@
           }
         }
       }
-    },
-    // not working
-    "copilot": {
-      "telemetry": {
-        "telemetryLevel": "off",
-      }
     }
   }
 }
