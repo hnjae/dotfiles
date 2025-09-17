@@ -27,6 +27,23 @@ return {
     opts.mapping["<S-CR>"] = nil
     opts.mapping["<C-CR>"] = nil
 
+    -- do not fallback to default behavior of <C-n> when cmp menu is not visible
+    opts.mapping["<C-n>"] = function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      else
+        cmp.complete()
+      end
+    end
+
+    opts.mapping["<C-p>"] = function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      else
+        cmp.complete()
+      end
+    end
+
     -- configure formatting
     local source_name_map = {
       nvim_lsp = "LSP",

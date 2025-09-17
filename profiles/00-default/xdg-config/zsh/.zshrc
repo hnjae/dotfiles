@@ -23,6 +23,14 @@ if (( $+commands[vim] )) || (( $+commands[nvim] )); then
   bindkey '^E' end-of-line
 fi
 
+# NOTE: 2025-09-16
+# tmux 에서는 HOME/END 를 눌렀을때 아래 키를 전달. (`cat -v` 로 확인 가능)
+# bash/nvim 에서는 이 키로도 잘 작동함. 왜지?
+# https://stackoverflow.com/a/58842892/30570492
+bindkey "\E[1~" beginning-of-line
+bindkey "\E[4~" end-of-line
+
+
 #################################################
 # History 설정
 #################################################
@@ -88,7 +96,7 @@ if [[ ! -f "${ZDOTDIR:-${HOME}}/.zimrc" ]]; then
     return
 fi
 
-# NOTE: git-submodule 을 사용하므로 아 과정 필요 없음 <2025-08-13>
+# NOTE: git-submodule 을 사용하므로 아래 과정 필요 없음 <2025-08-13>
 # Download zimfw plugin manager if missing.
 # if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
 #     echo "[INFO] Installing ZIM."

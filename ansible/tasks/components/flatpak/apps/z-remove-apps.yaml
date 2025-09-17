@@ -8,6 +8,7 @@
       - io.github.celluloid_player.Celluloid  # NOTE: celluloid is very slow  <2024-12-15>
       - org.gnome.gitlab.YaLTeR.Identity
       - org.gnome.gitlab.YaLTeR.VideoTrimmer
+      - org.kde.kontact
       # Dev
       - com.getpostman.Postman  # Proprietary
       - dev.pulsar_edit.Pulsar  # editor, mit

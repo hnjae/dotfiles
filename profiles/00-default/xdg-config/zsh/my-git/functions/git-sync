@@ -2,6 +2,8 @@
 
 set -euf
 
+git pull --ff-only
+
 git add --all
 
 if [ "$(git status --porcelain --untracked-files=all)" = "" ]; then

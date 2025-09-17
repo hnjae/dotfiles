@@ -2,7 +2,7 @@
 
 add_newline = true
 follow_symlinks = false
-format = "$username$hostname$directory$git_branch$git_state$git_status$python$nix_shell$direnv$container$cmd_duration$line_break$shell$character"
+format = "$username$hostname$directory$git_branch$git_state$git_status$python$nix_shell$direnv$cmd_duration$line_break$shell$character"
 
 [character]
 error_symbol = "[%](bold red)"
@@ -23,10 +23,10 @@ disabled = false
 min_time_to_notify = 30000
 show_notifications = false
 
-[container]
-format = "via [$symbol \\[$name\\]]($style) "
-style = "bold red"
-symbol = "⬢ "
+# [container]
+# format = "via [$symbol \\[$name\\]]($style) "
+# style = "bold red"
+# symbol = "⬢ "
 
 [directory]
 read_only = " 󰍁"
