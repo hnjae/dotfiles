@@ -261,6 +261,7 @@ alias gg="git gui citool"
 alias ggA="git gui citool --amend"
 alias ghp="git help"
 alias gop="git open"
+alias gy="git-sync"
 
 alias gwch="git whatchanged -p --abbrev-commit --pretty=medium"
 alias gignore="git update-index --assume-unchanged"
