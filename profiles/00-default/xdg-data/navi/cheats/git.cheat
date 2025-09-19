@@ -16,7 +16,7 @@ $ branch: git branch | awk '{print $NF}'
 # git add file
 git add <path>
 
-# git add part of file interactively
+# git add part (hunk) of file interactively
 git add --patch <path>
 
 # git rm only in stage area (not in working directory)
@@ -87,8 +87,14 @@ git branch <branch> <commit>
 # delete branch
 git branch -d <branch>
 
-# move/rename branch
+# move/rename branch (CANNOT RENAME REMOTE BRANCH)
 git branch -m <new-name>
+
+# Unset upstream branch (local branch 와 remote branch 의 연결을 끊음)
+git branch --unset-upstream
+
+# Set upstream branch (local branch 와 remote branch 의 연결을 설정)
+git branch --set-upstream-to=origin/<branch-name>
 
 # make current branch to point specific commit
 git reset [--hard] <commit>

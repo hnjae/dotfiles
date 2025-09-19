@@ -36,23 +36,45 @@ return {
       )
 
       local agent = gp.get_command_agent()
-      agent.system_prompt =
-        [[Generate a commit message for the provided diff using the conventional commit format:
+      agent.system_prompt = [[Generate a conventional commit message from the provided diff.
 
-type(optional scope): description
+**Requirements:**
+- Use type: feat, fix, build, chore, ci, docs, style, refactor, perf, or test
+- Add scope if helpful: `type(scope): description`
+- For breaking changes: add `!` after type/scope or `BREAKING CHANGE:` footer
+- First line: max 50 characters
+- Body lines: max 72 characters
+- Use simple, clear English (B2 level)
 
-Where:
-- type = feat, fix, docs, style, refactor, test, chore, etc.
-- scope = the area of code affected (optional)
-- description = what changed and why
-
-Use simple language (B1-B2 English level):
-- Short, clear sentences
-- Common vocabulary
-- No technical jargon unless necessary
-
-IMPORTANT: Return ONLY the commit message with no additional text, explanations, or commentary.
+Return only the commit message.
 ]]
+      --       agent.system_prompt =
+      --         [[Generate a commit message for the provided diff using the conventional commit format:
+      --
+      --
+      -- <type>[optional scope]: <description>
+      --
+      -- [optional body]
+      --
+      -- [optional footer(s)]
+      --
+      -- Where:
+      -- - type = feat, fix, build, chore, ci, docs, style, refactor, perf, test
+      -- - scope = the area of code affected (optional)
+      -- - description = what changed and why
+      --
+      -- Use simple language (B2 English level):
+      -- - Short, clear sentences
+      -- - Common vocabulary
+      -- - No technical jargon unless necessary
+      --
+      -- - First line should be a concise summary (max 50 characters).
+      -- - Each line in the body should be 72 characters or less.
+      -- - BREAKING CHANGE: a commit that has a footer BREAKING CHANGE:, or appends a ! after the type/scope, introduces a breaking API change (correlating with MAJOR in Semantic Versioning). A BREAKING CHANGE can be part of commits of any type.
+      --
+      --
+      -- IMPORTANT: Return ONLY the commit message with no additional text, explanations, or commentary.
+      -- ]]
       gp.Prompt(params, gp.Target.rewrite, agent, template)
     end
 

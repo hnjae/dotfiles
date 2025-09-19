@@ -1,0 +1,12 @@
+% zfs, syncoid
+
+# Basic usage
+syncoid --compress=none --recursive --no-rollback --sendoptions="L" --recvoptions="u" --use-hold --delete-target-snapshots -- <src> <dst>
+
+; NOTE:
+; readonly properties:
+; - encryptionroot
+;
+; properties 를 보내도록하면, receive 시에 직접 지정하는 방식임.
+
+; syncoid --compress=none --recursive --no-rollback --sendoptions="L" --recvoptions="ux recordsize x keylocation x encryption x keyformat x compression x copies x checksum x 'nixos:shutdown-time' x sharesmb x sharenfs o canmount=off" -- <src> <dst>

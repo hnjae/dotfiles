@@ -13,12 +13,19 @@ return {
 
       -- neovim 0.11
       virtual_lines = {
-        severity = vim.diagnostic.severity.ERROR,
+        -- severity = vim.diagnostic.severity.ERROR,
+        -- severity = { max = vim.diagnostic.severity.WARN, min = vim.diagnostic.severity.INFO },
+        severity = {},
+        -- format = function(diagnostic)
+        --   return vim.inspect(diagnostic)
+        -- end,
       },
 
       -- 라인 끝에 표시되는 메시지
       virtual_text = {
-        severity = { max = vim.diagnostic.severity.WARN, min = vim.diagnostic.severity.INFO },
+        -- severity = {},
+        severity = vim.diagnostic.severity.ERROR,
+        -- severity = { max = vim.diagnostic.severity.WARN, min = vim.diagnostic.severity.INFO },
 
         -- following is LazyVim 14's default
         source = "if_many",
