@@ -34,10 +34,13 @@ rustic config --set-datapack-size "16 MiB"
 rustic config --set-datapack-size-limit "128 MiB"
 
 ;
-; Check health
+; Check health / Repair
 ;
 # Check repository
 rustic --check-index check
+
+# Repair index
+rustic repair index
 
 ;
 ; Special Maintenance
@@ -51,5 +54,5 @@ rustic prune --max-unused 0 --keep-pack 0d --keep-delete 0d --max-repack 'unlimi
 # prune repack some
 RCLONE_VERBOSE=1 rustic prune --max-unused '25 MiB' --keep-pack 0d --keep-delete 0d --max-repack '500 MiB'
 
-# keep only last snapshots
+# Keep only last snapshots
 rustic forget --keep-last=1 --keep-within-daily="0s" --keep-within="0s" --keep-delete="0s" --keep-within-weekly="0s" --keep-within-hourly="0s" --keep-within-minutely="0s"

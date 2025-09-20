@@ -45,5 +45,8 @@ sudo podman stats
 # show top
 sudo podman top <container-name>
 
+# show history of image ()
+sudo podman history <image>
+
 $ container-id: podman ps --- --header-lines 1 --column 1
 $ container-name: podman ps --- --header-lines 1 --column 7
