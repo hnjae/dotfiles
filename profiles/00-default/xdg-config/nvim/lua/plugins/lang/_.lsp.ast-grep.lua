@@ -1,6 +1,6 @@
 ---@type LazySpec
 return {
-  [1] = "neovim/nvim-lspconfig",
+  [1] = "nvim-lspconfig",
   optional = true,
   opts = {
     servers = {

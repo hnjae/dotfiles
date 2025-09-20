@@ -9,6 +9,7 @@ return {
         basedpyright = {
           mason = false, -- mason 이 venv 안에 설치하는데, 이것이 이슈가 있음. <2025-05-07>
         },
+        -- ty = {},
       },
     },
   },

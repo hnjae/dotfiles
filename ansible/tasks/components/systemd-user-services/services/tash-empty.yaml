@@ -2,7 +2,7 @@
 - name: Deploy trash-empty service & timer
   vars:
     service_name: trash-empty
-    days: 4
+    days: 7
   block:
     - name: Gather trash-empty location
       command: which trash-empty

@@ -21,7 +21,7 @@ podman pod ls
 # podman pod create
 podman pod create --replace --ip <string> --label <string>
 
-# podman pod ps
+# podman pod ps (ps: process)
 podman ps -a
 
 # podman rm container

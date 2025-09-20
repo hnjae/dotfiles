@@ -1,0 +1,46 @@
+---
+- name: Check if nix-env exists in PATH
+  command: which nix-env
+  register: nix_env_check
+  failed_when: false
+  changed_when: false
+- name: Deploy nix-env-gc service & timer
+  when: [nix_env_check.rc == 0]
+  vars:
+    service_name: nix-env-gc
+    nix_env_bin: '{{ nix_env_check.stdout }}'
+  block:
+    - name: Deploy service unit
+      copy:
+        dest: '{{ systemd_path }}/{{ service_name }}.service'
+        content: |
+          [Unit]
+          Description=Wipe old nix-env profile generations
+          [Service]
+          Type=oneshot
+          ExecStart={{ nix_env_bin }}
+        mode: '0644'
+      notify: reload-systemd-user-daemon
+    - name: Deploy timer unit
+      copy:
+        dest: '{{ systemd_path }}/{{ service_name }}.timer'
+        content: |
+          [Unit]
+          Description=Wipe old Nix profiles
+          [Timer]
+          OnCalendar=*-*-* 04:00:00
+          Persistent=true
+          RandomizedDelaySec=1h
+          [Install]
+          WantedBy=timers.target
+        mode: '0644'
+      notify: reload-systemd-user-daemon
+    # reload-systemd-user-daemon 안해도 systemd 에서 enable & start 가능. 그래서 flush 는 당장 할 필요 없음.
+    # - name: Flash handlers
+    #   meta: flush_handlers
+    - name: Enable & start timer
+      systemd:
+        name: '{{ service_name }}.timer'
+        enabled: true
+        state: started
+        scope: user
