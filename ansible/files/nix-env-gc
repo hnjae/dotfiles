@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+XDG_STATE_HOME="${XDG_STATE_HOME:-${HOME}/.local/state}"
+PROFILE_DIR="${XDG_STATE_HOME}/nix/profiles"
+
+delete_profile() {
+  local profile="$1"
+  local profile_path="$PROFILE_DIR/$profile"
+
+  local generations_to_delete
+  # Get generations to delete for this profile
+  readarray -t generations_to_delete < <(nix-env --list-generations --profile "$profile_path" | grep -v "(current)" | awk '{print $1}')
+
+  if [ "${#generations_to_delete[@]}" -eq 0 ]; then
+    echo "INFO: { profile: $profile }: No generations to delete" >&2
+    return
+  fi
+
+  echo "INFO: { profile: $profile }: Deleting generations: ${generations_to_delete[*]}\`" >&2
+  nix-env --delete-generations --profile "$profile_path" -- "${generations_to_delete[@]}"
+}
+
+main() {
+  readarray -t -d '' profiles < <(find "$PROFILE_DIR" -maxdepth 1 -type l -name "*" ! -name "*-link" -printf '%f\0')
+
+  if [ ${#profiles[@]} -eq 0 ]; then
+    echo "INFO: No profiles found" >&2
+    return
+  fi
+
+  for profile in "${profiles[@]}"; do
+    delete_profile "$profile"
+  done
+}
+
+main

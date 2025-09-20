@@ -9,7 +9,18 @@
   vars:
     service_name: nix-env-gc
     nix_env_bin: '{{ nix_env_check.stdout }}'
+    nix_env_gc_path: '{{ ansible_user_dir }}/.local/libexec/nix-env-gc'
   block:
+    - name: Create .local/libexec directory
+      file:
+        path: '{{ ansible_user_dir }}/.local/libexec'
+        state: directory
+        mode: '0700'
+    - name: Deploy nix-env-gc script
+      copy:
+        src: '{{ playbook_dir }}/files/nix-env-gc'
+        dest: '{{nix_env_gc_path}}'
+        mode: '0700'
     - name: Deploy service unit
       copy:
         dest: '{{ systemd_path }}/{{ service_name }}.service'
@@ -18,7 +29,7 @@
           Description=Wipe old nix-env profile generations
           [Service]
           Type=oneshot
-          ExecStart={{ nix_env_bin }}
+          ExecStart='{{ nix_env_gc_path }}'
         mode: '0644'
       notify: reload-systemd-user-daemon
     - name: Deploy timer unit
