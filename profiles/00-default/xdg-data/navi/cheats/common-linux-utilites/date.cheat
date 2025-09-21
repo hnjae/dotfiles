@@ -1,25 +1,31 @@
-% date
+% date, coreutils
 
 # print utc datetime
-date --utc -- '+%Y-%m-%dT%H:%M:%S%Z'
+date --utc -- '+%Y-%m-%dT%H:%M:%SZ'
 
 # print utc datetime (in ms); busybox 등에서는 %N 지원 안함
-date --utc -- '+%Y-%m-%dT%H:%M:%S.%3N%Z'
+date --utc -- '+%Y-%m-%dT%H:%M:%S.%3NZ'
 
 # print utc datetime (in ns); busybox 등에서는 %N 지원 안함
-date --utc -- '+%Y-%m-%dT%H:%M:%S.%N%Z'
+date --utc -- '+%Y-%m-%dT%H:%M:%S.%NZ'
 
 # print utc datetime in short-form
-date --utc -- '+%Y%m%dT%H%M%S%Z'
+date --utc -- '+%Y%m%dT%H%M%SZ'
 
-# print local datetime
+# print datetime in local timezone (ISO-8601)
+date --iso-8601=seconds
+
+# print datetime in microseconds precision in local timezone (ISO-8601)
 date -- '+%Y-%m-%dT%H:%M:%S.%3N%:z'
 
-# print local datetime with alphabetic time zone abrv (e.g. KST)
+# print datetime in nanoseconds precision in local timezone (ISO-8601)
+date --iso-8601=ns
+
+# print local datetime with alphabetic time zone abrv (e.g. KST) (NOT ISO-8601 compliant)
 date -- '+%Y-%m-%dT%H:%M:%S.%3N%Z'
 
 # print current date
 date -- '+%Y-%m-%d'
 
-# print current date in weekday
-date -- '+%Y-%m-%d'
+# print current date (same as `+%Y-%m-%d`)
+date --iso-8601=date

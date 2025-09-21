@@ -9,9 +9,6 @@ rustic restore <snapshot-id>:<path> <path>
 # diff
 rustic diff <snapshot-id1> <snapshot-id2>
 
-# scrub
-rustic check --read-data --read-data-subset '<n>/<m>'
-
 # forget
 rustic forget
 
@@ -35,12 +32,19 @@ rustic config --set-datapack-size-limit "128 MiB"
 
 ;
 ; Check health / Repair
+; `rustic repari` 로 문제 해결 경험 전무. <https://restic.readthedocs.io/en/stable/077_troubleshooting.html> 를 따라 restic 커맨드를 사용하자. obsidian 페이지에 잘 정리해두었음. <2025-09-21>
 ;
 # Check repository
 rustic --check-index check
 
 # Repair index
 rustic repair index
+
+# Repair Snapshots
+rustic repair snapshots
+
+# Scrub <https://rustic.cli.rs/docs/commands/misc/check.html>
+rustic check --read-data --read-data-subset '<n>/<m>'
 
 ;
 ; Special Maintenance

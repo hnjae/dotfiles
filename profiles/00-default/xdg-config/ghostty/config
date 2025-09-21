@@ -13,8 +13,11 @@ term = "xterm-256color"
 
 # ※ mono space 가 아닌 font 사용 가능
 font-family = "MesloLGM Nerd Font"
-font-family = "Noto Sans Mono CJK JP"
-font-family = "Noto Sans Mono CJK KR"
+font-family = "Pretendard JP"
+font-family = "Pretendard"
+# font-family = "Noto Sans Mono CJK JP"
+# font-family = "Noto Sans Mono CJK KR"
+
 # font-family = "CommitMono Nerd Font"
 
 # font-family = "Inconsolata LGC Nerd Font Propo"

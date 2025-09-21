@@ -26,19 +26,19 @@
     "now without microseconds (localtime zone)": {
         "prefix": "snowlm",
         "description": "localtime zone now without microseconds (datetime)",
-        "body": "datetime.now(tz=UTC).replace(microsecond=0).astimezone()"
+        "body": "datetime.now().replace(microsecond=0).astimezone()"
     },
     "now (localtime zone)": {
         "prefix": "snowl",
         "description": "localtime zone now (datetime)",
-        "body": "datetime.now(tz=UTC).astimezone()"
+        "body": "datetime.now().astimezone()"
     },
     "now (UTC)": {
         "prefix": "snow",
         "description": "UTC now (datetime)",
         "body": "datetime.now(tz=UTC)"
     },
-    "today": {
+    "today (utc)": {
         "prefix": "stoday",
         "description": "UTC today (date)",
         "body": "datetime.now(tz=UTC).date()"
