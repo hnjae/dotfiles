@@ -10,6 +10,7 @@
     service_name: nix-env-gc
     nix_env_bin: '{{ nix_env_check.stdout }}'
     nix_env_gc_path: '{{ ansible_user_dir }}/.local/libexec/nix-env-gc'
+    description: Wipe old nix-env profile generations
   block:
     - name: Create .local/libexec directory
       file:
@@ -26,7 +27,7 @@
         dest: '{{ systemd_path }}/{{ service_name }}.service'
         content: |
           [Unit]
-          Description=Wipe old nix-env profile generations
+          Description={{ description }}
           [Service]
           Type=oneshot
           ExecStart='{{ nix_env_gc_path }}'
@@ -37,7 +38,7 @@
         dest: '{{ systemd_path }}/{{ service_name }}.timer'
         content: |
           [Unit]
-          Description=Wipe old Nix profiles
+          Description={{ description }}
           [Timer]
           OnCalendar=*-*-* 04:00:00
           Persistent=true
