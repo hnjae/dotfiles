@@ -1,7 +1,12 @@
+---
+lastmod:
+---
+
 # How to
 
 ## Convert object into string
-NOTE: `response` 같은 특수 타입에서는 작동하지 않음. `Object.entires()` 해도 property 가 출력이 안된다.
+
+NOTE: `response` 같은 특수 타입에서는 작동하지 않음. `Object.entries()` 해도 property 가 출력이 안된다.
 
 ```javascript
 JSON.stringify(obj);
@@ -29,28 +34,111 @@ const car = { make: 'Honda', model: 'Accord', year: 1998 };
 console.log('make' in car);
 ```
 
-# Standard built-in objects
+## 기초적 문법
+
+```
+console.log("--- for...of (Array) ---");
+for (const num of numbers) {
+    if (num === 3) {
+        console.log("Found 3, stopping.");
+        break; // 루프를 중단할 수 있습니다.
+    }
+    console.log(num);
+}
+
+// 인덱스와 함께 순회하는 경우, Map, Set 도 해당 `.entries` method 존재
+// 이는 사실은 Array 가 index 를 key 로 삼는 object 이기 때문.
+for (const [index, num] of numbers.entries()) {
+    console.log(`Index ${index}: ${num}`);
+}
+
+// Set, Map 도 Iterable 객체라 그냥 const x of foo 식으로 순회 가능.
+```
+
+## Standard built-in objects
+
 <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects>
 
-## Array [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
+#### Array [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
+
 ```javascript
 const arr = new Array();
+
 // 객체 리터럴
 const arr2 = [];
+
+// Properties
+arr2.entries() // Iterator
+
 ```
 
 여기서 `newᆯ Array(5)` 가 5개 `undefined`을 가지고 있는 배열을 만들어 내고. `new Array(5,6)` 은 `[5,6]` 을 만들어 낸다.
-그래서 객체 리터럴을 더 자주 쓴다고.
+이러한 언어의 비일관성 때문에 그래서 객체 리터럴을 더 자주 쓴다고.
+
+#### Map [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)
+
+```typescript
+const map: Map<String, Number> = new Map();
+
+// 값 할당
+map.set("a", 1);
+map.set("b", 2);
+map.set("c", 3);
+
+// 읽기
+console.log(map.get("a"));
+
+// 크기
+console.log(map.size);
+
+// 제거
+map.delete("b");
+
+// 값을 할당하면서 선언.
+const b = new Map([
+  [1, "one"],
+  [2, "two"],
+  [4, "four"],
+]);
+
+// Method:
+// .entries() # return key, val
+```
+
+## Set [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set)
+
+```typescript
+const a: Set<number> = new Set([1, 2, 3]);
+
+// Map 과의 공존
+const b: Map<Number, String> = new Map([
+  [1, "one"],
+  [2, "two"],
+  [4, "four"],
+]);
+
+console.log(a.union(b)); // Set(4) {1, 2, 3, 4}
+
+// Method:
+// .add
+// .clear
+// .delete
+// .entries() # return key, val (but key==val)
+
+// .difference
+// .union
+// .intersection
+```
 
 ## Type
 
 ### Access element of array type
+
 ```typescript
 // Suppose Boo[]
 type Foo = Boo[number]
 ```
 
-## Set [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set)
 ```
 <!--
 vi:sw=2:tw=80:ft=markdown:
