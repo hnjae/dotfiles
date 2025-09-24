@@ -1,0 +1,8 @@
+% pipewire, linux, sound
+
+# status
+wpctls status
+
+# list source
+pactl list sources short
+

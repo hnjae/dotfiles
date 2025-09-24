@@ -2,3 +2,6 @@
 
 # show cpu frequency, governors info
 sudo cpupower frequency-info
+
+# limit frequency
+sudo cpupower frequency-set --max <foo>

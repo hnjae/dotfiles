@@ -6,6 +6,7 @@
       - fyi.zoey.TeX-Match  # find latex symbols, uses end-of-life library (org.freedesktop.Platform 22.08) (2024-11-06)
       - info.smplayer.SMPlayer
       - io.github.celluloid_player.Celluloid  # NOTE: celluloid is very slow  <2024-12-15>
+      - org.kde.kamoso  # theora 로 녹화하는데, 코덱 선택을 할수가 없음. <2025-09-22>
       - org.gnome.gitlab.YaLTeR.Identity
       - org.gnome.gitlab.YaLTeR.VideoTrimmer
       - org.kde.kontact
