@@ -12,17 +12,6 @@
         ],
         "description": "Constructor"
     },
-    "Class Definition": {
-        "prefix": "class",
-        "body": [
-            "class ${1:name} {",
-            "\tconstructor(${2:parameters}) {",
-            "\t\t$0",
-            "\t}",
-            "}"
-        ],
-        "description": "Class Definition"
-    },
     "Interface Definition": {
         "prefix": "iface",
         "body": [
@@ -33,7 +22,9 @@
         "description": "Interface Definition"
     },
     "Public Method Definition": {
-        "prefix": "public method",
+        "prefix": [
+            "public method"
+        ],
         "body": [
             "/**",
             " * ${1:name}",

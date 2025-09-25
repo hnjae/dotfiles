@@ -1,4 +1,18 @@
 {
+    "Class Definition": {
+        "prefix": [
+            "class",
+            "cls"
+        ],
+        "body": [
+            "class ${1:name} {",
+            "\tconstructor(${2:parameters}) {",
+            "\t\t$0",
+            "\t}",
+            "}"
+        ],
+        "description": "Class Definition"
+    },
     "For Loop": {
         "prefix": "for",
         "description": "For Loop (iterate arary)",
