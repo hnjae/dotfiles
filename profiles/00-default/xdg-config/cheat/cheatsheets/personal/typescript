@@ -64,6 +64,9 @@ for (const [index, num] of numbers.entries()) {
 ```javascript
 const arr = new Array();
 
+// slicing
+arr.slice(startIdx[, endIdex])
+
 // 객체 리터럴
 const arr2 = [1, 2, 3];
 
@@ -83,6 +86,7 @@ Array.from({ length: 9 })
 
 // Properties
 arr2.entries() // Iterator
+
 
 ```
 

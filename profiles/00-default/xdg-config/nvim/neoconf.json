@@ -33,6 +33,28 @@
         // { "rule": "!no-*", "severity": "downgrade" },
       ]
     },
+    // 아래 값들은 pyproject.toml 에서 override 됨.
+    "basedpyright": {
+      "basedpyright.disableOrganizeImports": true,
+      "basedpyright.analysis.diagnosticSeverityOverrides": {
+        // decrease severity
+        "reportAny": "information",
+        "reportMissingTypeStubs": "hint",
+        "reportUnknownArgumentType": "information",
+        "reportUnknownMemberType": "information",
+        "reportUnknownParameterType": "information", // ruff ANN001 으로 어느 정도 해결 가능.
+        "reportUnknownVariableType": "information",
+        "reportUnnecessaryTypeIgnoreComment": "information",
+        //
+        "reportExplicitAny": false, // Any 로 선언했으면 그 이유가 있겠지?
+        // linter(ruff) 가 잡는 것 들.
+        "reportMissingParameterType": false, // ruff ANN001
+        "reportPrivateUsage": false, // ruff SLF001
+        "reportUndefinedVariable": false, // ruff F821
+        "reportUnusedImport": false, // ruff F401
+        "reportUnusedVariable": false // ruff F841
+      }
+    },
     "cssls": {
       "css.lint.unknownAtRules": "ignore"
     },

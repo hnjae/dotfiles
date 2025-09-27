@@ -2,6 +2,7 @@
 return {
   [1] = "copilot.lua",
   optional = true,
+  enabled = true,
   keys = {
     -- <Leader>ua default: Toggle Animation
     -- TODO: 이거 안먹는데?? <2025-05-01>

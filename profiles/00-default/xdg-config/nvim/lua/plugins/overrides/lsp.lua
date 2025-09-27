@@ -32,6 +32,12 @@ return {
         spacing = 4,
         prefix = "●",
       },
+
+      underline = {
+        -- severity = vim.diagnostic.severity.WARN,
+        -- severity = { max = vim.diagnostic.severity.ERROR, min = vim.diagnostic.severity.WARN },
+        severity = { min = vim.diagnostic.severity.WARN },
+      },
     },
   },
 }

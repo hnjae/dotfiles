@@ -9,7 +9,9 @@
     },
     "sruffnoqa": {
         "prefix": [
-            "sruff"
+            "sruff",
+            "noqa",
+            "snoqa"
         ],
         "description": "Adds shebang line for default python interpreter.",
         "body": "# ruff: noqa: xxx, yyy"
@@ -41,7 +43,7 @@
         "description": "Import individual objects directly into the caller’s symbol table (`fim`)",
         "body": "from ${1:pathlib} import ${2:Path}"
     },
-    "import annotation": {
+    "from __future__ import annotation": {
         "prefix": [
             "fima",
             "ima"
@@ -74,7 +76,8 @@
         "prefix": [
             "def",
             "de",
-            "fn"
+            "fn",
+            "fun"
         ],
         "description": "Function definition",
         "body": [
@@ -178,5 +181,20 @@
         "prefix": "doc",
         "description": "Oneline docstring",
         "body": "\"\"\"$0.\"\"\""
+    },
+    "boilerplate": {
+        "prefix": "boilerplate",
+        "description": "Import frequent used modules",
+        "body": [
+            "from __future__ import annotations",
+            "",
+            "from collections import defaultdict",
+            "from datetime import UTC, datetime, timedelta, timezone",
+            "from pathlib import Path",
+            "from typing import TYPE_CHECKING, cast, final, override",
+            "",
+            "if TYPE_CHECKING:",
+            "\tfrom collections.abc import Iterable, Mapping"
+        ]
     }
 }

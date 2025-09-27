@@ -1,7 +1,7 @@
 % uv, python
 
-# add depencies
+# add dependencies
 uv add <dependencies>
 
-# add dev depencies
+# add dev dependencies
 uv add --dev <dependencies>

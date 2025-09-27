@@ -19,6 +19,10 @@ Type Variable Names
 Global Variable
 : Same as functions
 
+## Types
+
+`types-` prefix 나 `-stub` suffix 로 제공 (e.g. `tabulate`, `pytest`)
+
 <!--
 vi:ft=markdown
 -->

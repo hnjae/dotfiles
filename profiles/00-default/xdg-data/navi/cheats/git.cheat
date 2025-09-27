@@ -200,5 +200,15 @@ git fetch --shallow-since="<2025-05-01>"
 # fetch specific commit (`--depth` 옵션으로 clone 했을 경우, 특정 시점 부터의 commit 부터 fetch)
 git fetch origin <commit-id>
 
+;#############################################################################
+; git-worktree
+;#############################################################################
+
+# Create new branch and add
+git worktree add <path> -b <new-branch-name>
+
+# Existing branch add
+git worktree add <path> <branch>
+
 ; # Make HEAD to point something
 ; git checkout <commit-alike>

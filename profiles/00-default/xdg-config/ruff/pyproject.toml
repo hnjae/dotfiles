@@ -45,3 +45,10 @@ ignore = [
 
 [tool.ruff.lint.pydocstyle]
 convention = "pep257"
+
+[tool.basedpyright]
+"reportMissingParameterType" = false # ruff ANN001
+"reportUnusedImport" = false         # ruff F401
+"reportUndefinedVariable" = false    # ruff F821
+"reportUnusedVariable" = false       # ruff F841
+"reportPrivateUsage" = false         # ruff SLF001
