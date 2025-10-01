@@ -31,11 +31,12 @@
     "calt": 0
   },
   "ui_font_family": "Pretendard",
-  "agent": {
+  "assistant": {
     "default_model": {
       "provider": "copilot_chat",
       "model": "o3-mini"
     },
+    "version": "2"
   },
   "ui_font_size": 16,
   "buffer_font_size": 13.4,
