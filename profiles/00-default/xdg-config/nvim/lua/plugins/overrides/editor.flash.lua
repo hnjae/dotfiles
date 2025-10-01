@@ -1,7 +1,3 @@
-local wk_icon = {
-  icon = "󰛕 ", -- nf-md-flash_outline
-}
-
 ---@type LazySpec
 return {
   [1] = "flash.nvim",
@@ -19,15 +15,11 @@ return {
   },
   ---@type Flash.Config
   opts = {
-    labels = "setnriaodhfuplwyc,vkx.gmbq;/jz", -- sorted by colemak-dh typing effort
-    label = {
-      rainbow = {
-        -- enabled = true,
+    labels = "setnriaodhfuplwycvkxgmbqjz", -- sorted by colemak-dh typing effort
+    modes = {
+      char = {
+        -- enabled = false, -- disable f/F/t/T
       },
-    },
-    char = {
-      enabled = false, -- disable f/F/t/T
-      -- autohide = true,
     },
   },
 }

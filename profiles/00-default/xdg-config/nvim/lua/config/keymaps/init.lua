@@ -23,6 +23,14 @@ vim.keymap.del({ "n", "x" }, "<Down>")
 vim.keymap.del({ "n", "x" }, "k")
 vim.keymap.del({ "n", "x" }, "<Up>")
 
+if vim.g.vscode or os.getenv("NVIM") ~= nil then
+  -- remove terminal mapping in vscode neovim
+  vim.keymap.del({ "n" }, "<Leader>ft")
+  vim.keymap.del({ "n" }, "<Leader>fT")
+  vim.keymap.del("n", "<c-/>")
+  vim.keymap.del("n", "<c-_>")
+end
+
 --------------------------------------------------------------------------------
 -- New Keymaps
 --------------------------------------------------------------------------------

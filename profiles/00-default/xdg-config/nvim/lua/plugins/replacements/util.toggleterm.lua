@@ -38,10 +38,6 @@ return {
   version = "*",
   lazy = true,
   cond = not vim.g.vscode and os.getenv("NVIM") == nil, -- toggleterm 안의 nvim 안의 toggerterm 금지.
-  dependencies = {
-    -- to override snacks's terminal mapping
-    { [1] = "folke/snacks.nvim", optional = true },
-  },
   cmd = {
     "ToggleTerm",
     "ToggleTermToggleAll",
@@ -68,7 +64,8 @@ return {
 
         - `<C-/>` and `<Leader>ft` share same terminal in LazyVim.
     --]]
-    -- override LazyVim's terminal
+
+    -- LazyVim's terminal (snack) 은 다른 설정에서 이미 disabled 되었음.
     { [1] = "<C-/>", [2] = function () get_root_term():toggle(nil, "float") end, desc = "Terminal (ToggleTerm)" },
     { [1] = "<Leader>ft", [2] = function () get_root_term():toggle(nil, "horizontal") end, desc = "Terminal (ToggleTerm)" },
     { [1] = "<Leader>fT", [2] = function () get_cwd_term(vim.fn.expand('%:h')):toggle(nil, "horizontal") end, desc = "Spawn Terminal in buffer's cwd" },
