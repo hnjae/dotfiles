@@ -1,64 +1,14 @@
 -- TODO: map preview at <leader>cp <2025-04-10>
 ---@type LazySpec[]
 return {
-  {
-    [1] = "nvim-treesitter",
-    optional = true,
-    opts = function(_, opts)
-      opts.ensure_installed = opts.ensure_installed or {}
-      table.insert(opts.ensure_installed, "asciidoc")
-      -- opts.highlight = opts.highlight or {}
-      -- opts.highlight.additional_vim_regex_highlighting = true
-
-      --[[
-      ```
-      <2025-04-09>
-
-      Parser/Features         H L F I J
-        - asciidoc            . . . . .
-      ```
-      ]]
-
-      LazyVim.on_load("nvim-treesitter", function()
-        require("nvim-treesitter.parsers").get_parser_configs().asciidoc = {
-          install_info = {
-            url = "https://github.com/cpkio/tree-sitter-asciidoc",
-            files = {
-              "src/parser.c",
-              "src/scanner.c",
-            },
-            branch = "master",
-            generate_requires_npm = false,
-            requires_generate_from_grammar = false,
-          },
-          ft = { "asciidoc" },
-          maintainers = { "@cpkio" },
-        }
-      end)
-
-      -- NOTE: 위 treesitter 설치 후, syntax 가 자동으로 로드되질 않는다. <2025-04-09>
-
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = { "asciidoc" },
-        callback = function(args)
-          -- HACK: 여기서 바로 syntax 설정을 해도 적용이 되질 않아, defer_fn 으로 딜레이 해서 syntax 로드 <2025-04-09>
-
-          vim.defer_fn(function()
-            local has_ts_attached = pcall(vim.treesitter.get_parser, args.buf, "asciidoc")
-            if not has_ts_attached then
-              vim.notify(
-                "Treesitter parser didn't seem to attach for asciidoc even after delay.",
-                vim.log.levels.WARN
-              )
-            end
-
-            -- NOTE: syntax/asciidoc.vim 에 직접 작정한 syntax 파일이 있다.
-            vim.bo.syntax = "asciidoc"
-          end, 10)
-        end,
-      })
-    end,
-  },
+  -- TODO: add asciidoc parser to treesitter (treesitter 가 버전업 하면서 기존 설정이 망가짐. nvim 설정이 아니라 tree-sitter cli 툴로 파서를 설치해야하는 것 같은데...) <2025-10-01>
+  -- {
+  --   "nvim-treesitter",
+  --   optional = true,
+  --   opts = function(_, opts)
+  --     opts.ensure_installed = opts.ensure_installed or {}
+  --   end,
+  -- },
   {
     [1] = "habamax/vim-asciidoctor",
     version = false,
