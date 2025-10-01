@@ -49,7 +49,7 @@ return {
     enabled = false,
 
     version = "*", -- follows sementaic versioning
-    dependencies = { "echasnovski/mini.icons" },
+    dependencies = { "mini.icons" },
 
     lazy = true,
     event = "LspAttach",

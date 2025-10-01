@@ -60,7 +60,7 @@ return {
     {
       [1] = "which-key.nvim",
       optional = true,
-      dependencies = { "echasnovski/mini.icons" },
+      dependencies = { "mini.icons" },
       ---@param opts wk.Opts
       opts = function(_, opts)
         local icon = require("mini.icons").get("extension", "hurl")
