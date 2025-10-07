@@ -15,7 +15,6 @@
           - org.darktable.Darktable
           #
           - com.jeffser.Alpaca
-          - net.puddletag.puddletag
           - org.kde.kdenlive
     - name: 실험적, 덜 사용하는 패키지 설치
       community.general.flatpak:

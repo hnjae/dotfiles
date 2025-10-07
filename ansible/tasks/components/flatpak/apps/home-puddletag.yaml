@@ -1,0 +1,20 @@
+---
+- name: Install and setup puddletag
+  when: [is_home]
+  vars:
+    app_id: net.puddletag.puddletag
+  block:
+    - name: Install {{ app_id }} with flatpak
+      community.general.flatpak:
+        method: user
+        state: present
+        remote: flathub
+        name: ['{{ app_id }}']
+    - name: Configure {{ app_id }} flatpak overrides
+      copy:
+        dest: '{{ xdg_data_home }}/flatpak/overrides/{{ app_id }}'
+        content: |
+          [Context]
+          filesystems=/media;home
+        mode: '0644'
+        backup: false

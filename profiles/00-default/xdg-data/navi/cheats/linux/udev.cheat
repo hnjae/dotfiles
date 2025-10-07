@@ -2,3 +2,10 @@
 
 # print device info
 udevadm info -a -n "/dev/<device>"
+
+# reload & trigger
+sudo udevadm control --reload-rules && sudo udevadm trigge
+
+# Print and follow log
+journalctl -f -u systemd-udevd
+
