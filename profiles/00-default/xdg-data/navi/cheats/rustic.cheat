@@ -60,3 +60,6 @@ RCLONE_VERBOSE=1 rustic prune --max-unused '25 MiB' --keep-pack 0d --keep-delete
 
 # Keep only last snapshots
 rustic forget --keep-last=1 --keep-within-daily="0s" --keep-within="0s" --keep-delete="0s" --keep-within-weekly="0s" --keep-within-hourly="0s" --keep-within-minutely="0s"
+
+# PRUNE WITH INSTANT DELETE (BE CAREFUL NOT TO ABORT/RUN PARALLEL)
+false && rustic prune --max-repack=0MiB --instant-delete --early-delete-index --keep-delete 0h

@@ -1,8 +1,8 @@
 ---
-- name: Install and setup Bottles
+- name: Install and setup Fooyin
   when: [is_home]
   vars:
-    app_id: com.usebottles.bottles
+    app_id: org.fooyin.fooyin
   block:
     - name: Install {{ app_id }} with flatpak
       community.general.flatpak:
@@ -15,6 +15,6 @@
         dest: '{{ xdg_data_home }}/flatpak/overrides/{{ app_id }}'
         content: |
           [Context]
-          filesystems=home
+          filesystems=/media;home
         mode: '0644'
         backup: false

@@ -1,5 +1,6 @@
 ---
 - name: Install and setup Opera (for Netflix)
+  when: [is_home]
   vars:
     app_id: com.opera.Opera
   block:

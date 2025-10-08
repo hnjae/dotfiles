@@ -1,5 +1,6 @@
 ---
 - name: Install and setup Telegram
+  when: [is_home]
   vars:
     app_id: org.telegram.desktop  # GPL3
   block:
@@ -33,7 +34,7 @@
           MimeType=x-scheme-handler/tg;
           Keywords=tg;chat;im;messaging;messenger;sms;tdesktop;
           Actions=quit;
-            # DBusActivatable=true
+              # DBusActivatable=true
           SingleMainWindow=true
           X-GNOME-UsesNotifications=true
           X-GNOME-SingleWindow=true
