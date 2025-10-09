@@ -48,6 +48,7 @@ vim.o.splitbelow = true
 vim.opt.wrap = true
 vim.opt.textwidth = 0
 vim.opt.linebreak = false -- true 면 단어 중간에 wrap 금지
+vim.opt.smoothscroll = true -- handle wrapped text much better
 
 -------------------------------------------------------------------------------
 -- complete: set the matches for insert mode completion

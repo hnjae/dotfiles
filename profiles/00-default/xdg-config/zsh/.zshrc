@@ -121,4 +121,7 @@ fi
 # Initialize modules.
 source "${ZIM_HOME}/init.zsh"
 
+alias mdream="podman run -it ghcr.io/harlan-zw/mdream:latest"
+alias mdreamp="podman run -it ghcr.io/harlan-zw/mdream:latest -driver playwright"
+
 # zprof | wl-copy
