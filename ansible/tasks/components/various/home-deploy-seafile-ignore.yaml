@@ -1,0 +1,33 @@
+---
+- name: Deploy seafile-ignoretxt to seafile-synced directories
+  when: [is_home]
+  vars:
+    source: '{{ playbook_dir }}/files/seafile-ignore.txt'
+    # NOTE: 2025-10-10
+    # 아래 값들은 환경변수로 설정하는 건 아닌 것 같다?
+    # ~/.config/user-dirs.dirs 파일에서 설정.
+    # 일단 기본값이 아닌 경우는 대응 X
+    xdg_desktop_dir: '{{ ansible_env.HOME }}/Desktop'
+    xdg_download_dir: '{{ ansible_env.HOME }}/Downloads'
+    xdg_documents_dir: '{{ ansible_env.HOME }}/Documents'
+    xdg_templates_dir: '{{ ansible_env.HOME }}/Templates'
+    xdg_pictures_dir: '{{ ansible_env.HOME }}/Pictures'
+    xdg_videos_dir: '{{ ansible_env.HOME }}/Videos'
+    synced_dir: '{{ ansible_env.HOME }}/Synced'
+    dests:
+      - '{{ xdg_desktop_dir }}'
+      - '{{ xdg_download_dir }}'
+      - '{{ xdg_documents_dir }}'
+      - '{{ xdg_templates_dir }}'
+      - '{{ xdg_pictures_dir }}'
+      - '{{ xdg_videos_dir }}'
+      - '{{ synced_dir }}'
+  block:
+    - name: Deploy seafile-ignore.txt (hard link from dotfiles)
+      file:
+        src: '{{ source }}'
+        path: '{{ item }}/seafile-ignore.txt'
+        state: hard
+        mode: '0644'
+        force: true
+      loop: '{{ dests }}'
