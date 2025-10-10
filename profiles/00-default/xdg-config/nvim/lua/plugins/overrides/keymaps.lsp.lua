@@ -13,6 +13,7 @@ return {
     -- - "gra" is mapped in Normal and Visual mode to |vim.lsp.buf.code_action()|
     -- - "grr" is mapped in Normal mode to |vim.lsp.buf.references()|
     -- - "gri" is mapped in Normal mode to |vim.lsp.buf.implementation()|
+    -- - "gO" `vim.lsp.buf.document_symbol()` or `Man` or table of contents
 
     -- neovim 빌트인 바인딩과 중복되는 키맵 제거.
     keys[#keys + 1] = { "<Leader>cr", false } -- use `grn` instead (LazyVim 14)
@@ -20,6 +21,7 @@ return {
     keys[#keys + 1] = { "gI", false } -- use `gri` instead (LazyVim 14)
     keys[#keys + 1] = { "<Leader>ca", false } -- use `gra` instead (LazyVim 14)
     keys[#keys + 1] = { "<c-k>", false } -- use `<c-s>` instead (LazyVim 14)
+    keys[#keys + 1] = { "gK", false } -- use `<c-s>` instead (signature help)
 
     -- neovim 빌트인 바인딩과 유사하게 키맵 설정.
     keys[#keys + 1] = {
@@ -32,16 +34,6 @@ return {
     keys[#keys + 1] = { "<Leader>cR", false } -- use `grN` instead
     keys[#keys + 1] = { "grA", LazyVim.lsp.action.source, desc = "Source Action" }
     keys[#keys + 1] = { "<Leader>cA", false } -- use `grA` instead
-
-    keys[#keys + 1] = {
-      "gS",
-      function()
-        return vim.lsp.buf.signature_help()
-      end,
-      desc = "Signature Help",
-      has = "signatureHelp",
-    }
-    keys[#keys + 1] = { "gK", false } -- use `gS` instead
 
     keys[#keys + 1] = { "<leader>cc", false }
     keys[#keys + 1] = { "<leader>cC", false }

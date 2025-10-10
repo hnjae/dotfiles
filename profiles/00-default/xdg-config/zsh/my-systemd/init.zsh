@@ -11,6 +11,7 @@ up="scu"
 alias $gp="systemctl"
 alias $up="systemctl --user"
 
+alias ${gp}z="sysz"
 alias ${gp}lu="systemctl list-units"
 alias ${up}lu="systemctl --user list-units"
 alias ${gp}lam="systemctl list-automounts"

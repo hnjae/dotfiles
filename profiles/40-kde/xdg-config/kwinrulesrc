@@ -35,8 +35,12 @@ wmclass=1Password
 wmclassmatch=1
 
 [99ec1073-2981-42c5-8371-90867cf9e2ba]
-Description=Settings for seafile-applet com.seafile.
+Description=Settings for seafile-applet
 aboverule=2
+placement=6
+placementrule=2
+skiptaskbar=true
+skiptaskbarrule=2
 wmclass=seafile-applet com.seafile.
 wmclasscomplete=true
 wmclassmatch=1

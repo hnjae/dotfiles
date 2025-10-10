@@ -4,9 +4,6 @@ lastmod: 2025-05-06T16:24:04+0900
 syntax: markdown
 ---
 
-## Split View
-
-좌측의 리스트 우 클릭, show calendar
 
 ## 단축키 정리
 
@@ -42,6 +39,19 @@ syntax: markdown
 * `!<priority>`
 * `*<date>`: 요일명 또는 `Jul 5` 식으로 입력
 * `~<list>` 또는 `^<list>`: 특정 리스트에 추가 (※ 단 기존 리스트는 이렇게 편집 불가능.)
+
+## 모드 변경
+
+* Split View
+    * 좌측의 리스트 우 클릭, show calendar
+
+* Timeline View
+    * <https://help.ticktick.com/articles/7055780375439605760>
+    * 오른쪽 상단 `···` 햄버거 메뉴. 그리고 Timeline View 아이콘 클릭
+
+* [[Time Blocking]]
+    * <https://blog.ticktick.com/2020/07/24/time-blocking-take-control-of-your-time/>
+    * 좌측에서 캘린더 탭
 
 <!--
 vi:ft=markdown
