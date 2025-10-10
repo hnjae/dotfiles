@@ -197,9 +197,9 @@ Chats are saved automatically.
               : 1.25/10 (input/output)
 
             ]]
-            -- model = "anthropic/claude-sonnet-4",
+            -- model = "anthropic/claude-sonnet-4.5",
             model = "openai/gpt-5-chat",
-            -- temperature = 0.9,
+            think = false,
           },
           system_prompt = chat_prompt,
         },
@@ -209,15 +209,7 @@ Chats are saved automatically.
           chat = false,
           command = true,
           model = {
-            -- model = "anthropic/claude-sonnet-4",
-            -- model = "openai/gpt-5-mini",
-            -- model = "qwen/qwen3-coder:free",
-            -- model = "qwen/qwen3-235b-a22b",
-            -- model = "qwen/qwen3-235b-a22b:free",
-            -- model = "qwen/qwen3-30b-a3b:free",
-            -- model = "qwen/qwen3-30b-a3b-instruct-2507",
-            model = "deepseek/deepseek-chat-v3.1:free",
-            -- temperature = 0.9,
+            model = "google/gemini-2.0-flash-exp:free",
             think = false,
           },
           system_prompt = code_prompt,

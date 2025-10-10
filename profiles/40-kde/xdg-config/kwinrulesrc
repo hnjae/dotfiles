@@ -46,5 +46,13 @@ wmclasscomplete=true
 wmclassmatch=1
 
 [General]
-count=4
-rules=50cf73c0-af57-44fe-80f4-9572225f9d1e,1b689687-7529-4d77-a1db-29e39175ace2,1d2b1ebc-f2fb-4909-91ba-e50f240f6baf,99ec1073-2981-42c5-8371-90867cf9e2ba
+count=5
+rules=50cf73c0-af57-44fe-80f4-9572225f9d1e,1b689687-7529-4d77-a1db-29e39175ace2,1d2b1ebc-f2fb-4909-91ba-e50f240f6baf,99ec1073-2981-42c5-8371-90867cf9e2ba,c8f2c14b-0693-41c4-8b4f-458b978d9c10
+
+[c8f2c14b-0693-41c4-8b4f-458b978d9c10]
+Description=ticktick
+minsize=100,600
+minsizerule=2
+wmclass=ticktick
+wmclasscomplete=true
+wmclassmatch=2
