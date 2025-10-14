@@ -209,7 +209,8 @@ Chats are saved automatically.
           chat = false,
           command = true,
           model = {
-            model = "google/gemini-2.0-flash-exp:free",
+            -- model = "google/gemini-2.5-flash",
+            model = "mistralai/mistral-small",
             think = false,
           },
           system_prompt = code_prompt,

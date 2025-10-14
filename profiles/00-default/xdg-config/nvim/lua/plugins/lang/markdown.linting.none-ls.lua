@@ -12,22 +12,30 @@ return {
       local h = require("null-ls.helpers")
       local u = require("null-ls.utils")
 
+      local config_file_patterns = {
+        ".markdownlint-cli2.jsonc",
+        ".markdownlint-cli2.yaml",
+        ".markdownlint-cli2.cjs",
+        ".markdownlint-cli2.mjs",
+        ".markdownlint.jsonc",
+        ".markdownlint.json",
+        ".markdownlint.yaml",
+        ".markdownlint.yml",
+        ".markdownlint.cjs",
+        ".markdownlint.mjs",
+      }
+
       table.insert(
         opts.sources,
         nls.builtins.diagnostics.markdownlint_cli2.with({
+          -- diagnostics_postprocess = function(diagnostic)
+          --   diagnostic.severity = vim.diagnostic.severity.HINT
+          -- end,
+          condition = function(utils)
+            return utils.root_has_file(unpack(config_file_patterns))
+          end,
           cwd = h.cache.by_bufnr(function(params)
-            return u.root_pattern(
-              ".markdownlint-cli2.jsonc",
-              ".markdownlint-cli2.yaml",
-              ".markdownlint-cli2.cjs",
-              ".markdownlint-cli2.mjs",
-              ".markdownlint.jsonc",
-              ".markdownlint.json",
-              ".markdownlint.yaml",
-              ".markdownlint.yml",
-              ".markdownlint.cjs",
-              ".markdownlint.mjs"
-            )(params.bufname)
+            return u.root_pattern(unpack(config_file_patterns))(params.bufname)
           end),
         })
       )
