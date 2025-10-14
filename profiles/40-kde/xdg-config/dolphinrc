@@ -14,8 +14,11 @@ ViewFont=Monospace,11,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
 
 [General]
 FilterBar=true
+OpenExternallyCalledFolderInNewTab=true
+RememberOpenedTabs=false
 ShowFullPath=true
 ShowFullPathInTitlebar=true
+ShowStatusBar=FullWidth
 UseTabForSwitchingSplitView=true
 Version=202
 ViewPropsTimestamp=2025,7,5,18,27,32.664

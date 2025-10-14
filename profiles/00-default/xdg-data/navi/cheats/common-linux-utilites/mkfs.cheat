@@ -3,8 +3,8 @@
 # mkfs.fat
 mkfs.fat -F 32 -n "<label>" -S 4096 -v "<disk>"
 
-# mkfs.exfat
-mkfs.exfat -L "<label>" --cluster-size "4M" -v "<disk>"
+# mkfs.exfat (windows 에서 인식이 안되니, ms-windows 에서 포맷할 것.)
+mkfs.exfat -L "<label>" --sector-size 4096 --cluster-size "128KiB" -v "<disk>"
 
 # mkfs.ext4
 mkfs.ext4 -b <block-siz> -T "default/small/big/huge" -L "<label>" "<blockdevice>"

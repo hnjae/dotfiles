@@ -124,7 +124,7 @@ return {
       date_format = "%Y-%m-%d",
       time_format = "%H:%M:%S",
       substitutions = {
-        ["time:YYYY-MM-DD[T]HH:MM:SSZ"] = function()
+        ["time:YYYY-MM-DD[T]HH:mm:ssZ"] = function()
           return vim.fn.strftime("%Y-%m-%dT%H:%M:%S%z")
         end,
         ["time:GGGG-[W]WW-E"] = function()
