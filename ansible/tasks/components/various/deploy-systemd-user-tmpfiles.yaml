@@ -17,6 +17,7 @@
           R {{ ansible_env.HOME }}/.mypy_cache - - - -
           R {{ ansible_env.HOME }}/.psql_history - - - -
           R {{ ansible_env.HOME }}/.python_history - - - -
+          R {{ ansible_env.HOME }}/.node_repl_history - - - -
           R {{ ansible_env.HOME }}/.vim - - - -
           R {{ ansible_env.HOME }}/.viminfo - - - -
           R {{ ansible_env.HOME }}/.wget-hsts - - - -
