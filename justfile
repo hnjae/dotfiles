@@ -107,3 +107,6 @@ update-tinted: build-tinted
         echo "Error: Neither tinty nor nix found in PATH" >/dev/stderr
         exit 1
     fi
+
+nvim-sync:
+    nvim --headless -c "autocmd User VeryLazy ++once Lazy sync" -c "qa"
