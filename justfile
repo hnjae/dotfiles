@@ -110,3 +110,6 @@ update-tinted: build-tinted
 
 nvim-sync:
     nvim --headless -c "autocmd User VeryLazy ++once Lazy sync" -c "qa"
+
+GIT-FCITX5-PROFILE:
+    git update-index --skip-worktree "profiles/40-linux-desktop/xdg-config/fcitx5/profile"

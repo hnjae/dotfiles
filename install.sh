@@ -7,7 +7,7 @@ XDG_STATE_HOME="${XDG_STATE_HOME:-${HOME}/.local/state}"
 
 check_cond() {
   if ! command -v python3 >/dev/null 2>&1; then
-    echo "[ERROR] python3 is not installed on your system" >&2
+    echo "ERROR: python3 is not installed on your system" >&2
     exit 1
   fi
 }
@@ -38,7 +38,7 @@ install_profile() {
   local profile="$1"
   local profile_dir="$scriptdir/profiles/$profile"
 
-  echo "[INFO] Running dotbot with profile: $profile" >&2
+  echo "INFO: Running dotbot with profile: $profile" >&2
   "$dotbot_cmd" -d "$profile_dir" -c "${profile_dir}/${CONFIG}"
 }
 

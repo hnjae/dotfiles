@@ -133,10 +133,6 @@ Chats are saved automatically.
       -- Keys
       ----------------------------------------------------------------------------------------------
       providers = {
-        openai = {
-          disable = true,
-          secret = { "secret-tool", "lookup", "api", "openai" },
-        },
         copilot = {
           disable = false,
           secret = {
@@ -152,13 +148,9 @@ Chats are saved automatically.
         googleai = {
           secret = { "secret-tool", "lookup", "api", "googleai" },
         },
-        -- pplx = {
-        --   secret = { "secret-tool", "lookup", "api", "pplx" },
-        -- },
         openrouter = {
           secret = { "secret-tool", "lookup", "api", "openrouter" },
           endpoint = "https://openrouter.ai/api/v1/chat/completions",
-          -- endpoint = "https://openrouter.ai/api/v1",
         },
       },
 
@@ -187,18 +179,7 @@ Chats are saved automatically.
           chat = true,
           command = false,
           model = {
-            --[[
-              Price:
-
-              cluade-sonnet-4
-              : USD 3/15 (input/output)
-
-              gpt-5
-              : 1.25/10 (input/output)
-
-            ]]
-            -- model = "anthropic/claude-sonnet-4.5",
-            model = "openai/gpt-5-chat",
+            model = "anthropic/claude-haiku-4.5",
             think = false,
           },
           system_prompt = chat_prompt,
@@ -210,7 +191,8 @@ Chats are saved automatically.
           command = true,
           model = {
             -- model = "google/gemini-2.5-flash",
-            model = "mistralai/mistral-small",
+            -- model = "mistralai/mistral-small",
+            model = "anthropic/claude-haiku-4.5",
             think = false,
           },
           system_prompt = code_prompt,
@@ -221,9 +203,7 @@ Chats are saved automatically.
           chat = true,
           command = false,
           model = {
-            -- Price: USD 1.25/10
-            model = "google/gemini-2.5-pro",
-            temperature = 0.9,
+            model = "gemini-2.5-flash",
           },
           system_prompt = chat_prompt,
         },
