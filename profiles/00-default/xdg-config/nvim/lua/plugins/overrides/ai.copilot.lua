@@ -38,6 +38,10 @@ return {
       toml = false,
       ini = false,
 
+      -- plain text accounting (ledger)
+      ledger = false,
+      beancount = false,
+
       -- docs
       text = false,
       markdown = false,
