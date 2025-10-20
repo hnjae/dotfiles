@@ -7,18 +7,24 @@ git pull --ff-only
 git add --all
 
 if [ "$(git status --porcelain --untracked-files=all)" = "" ]; then
-  echo "No changes to commit.">/dev/stderr
+  echo "No changes to commit." >&2
 fi
 
 echo ""
 git -c color.ui=always status --short --untracked-files=all --find-renames=y
 echo ""
 
-echo "> sync? [y/Any]: " > /dev/stderr
+echo "> sync? [y/Any]: " >&2
 
 stty -icanon -echo
-eval "response=$(dd bs=1 count=1 2>/dev/null)"
-stty icanon echo
+
+# eval "response=$(dd bs=1 count=1 2>/dev/null)"
+# stty icanon echo
+
+response="$(dd bs=1 count=1 2>/dev/null)"
+stty icanon; stty echo
+# stty sane # 터미널을 완전히 기본 상태로 리셋
+
 
 echo ""
 
