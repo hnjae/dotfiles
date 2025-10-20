@@ -10,6 +10,8 @@ projects:
     url: git@github.com:hnjae/hnjae.github.io
   logseq-home:
     url: git@github.com:hnjae/logseq-home
+  my-ledger:
+    url: git@github.com:hnjae/my-ledger
   nix-config:
     url: git@github.com:hnjae/nix-config
   obsidian:

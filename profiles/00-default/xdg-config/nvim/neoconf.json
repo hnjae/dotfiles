@@ -67,6 +67,13 @@
           }
         }
       }
-    }
+    },
+    // not working (:Neoconf lsp)
+    // https://github.com/folke/neoconf.nvim?tab=readme-ov-file#-supported-language-servers 에 있는 것 말고는 동작 안하는 듯?
+    // "copilot": {
+    //   "telemetry": {
+    //     "telemetryLevel": "off"
+    //   }
+    // }
   }
 }

@@ -29,6 +29,9 @@ return {
       servers = {
         beancount = {
           enabled = true,
+          init_options = {
+            journal_file = os.getenv("HOME") .. "/Projects/ledger/main.beancount",
+          },
         },
       },
     },
@@ -40,17 +43,18 @@ return {
       },
     },
   },
-  {
-    [1] = "none-ls.nvim",
-    optional = true,
-    opts = function(_, opts)
-      local nls = require("null-ls")
-
-      if vim.fn.executable("bean-check") == 1 then
-        opts.sources = vim.list_extend(opts.sources or {}, {
-          nls.builtins.diagnostics.bean_check,
-        })
-      end
-    end,
-  },
+  -- beancount-language-server 가 bean-check 를 수행함.
+  -- {
+  --   [1] = "none-ls.nvim",
+  --   optional = true,
+  --   opts = function(_, opts)
+  --     local nls = require("null-ls")
+  --
+  --     if vim.fn.executable("bean-check") == 1 then
+  --       opts.sources = vim.list_extend(opts.sources or {}, {
+  --         nls.builtins.diagnostics.bean_check,
+  --       })
+  --     end
+  --   end,
+  -- },
 }
