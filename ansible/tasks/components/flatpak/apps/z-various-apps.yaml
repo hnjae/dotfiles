@@ -29,7 +29,7 @@
       - me.iepure.devtoolbox  # https://flathub.org/apps/me.iepure.devtoolbox
       - org.pgadmin.pgadmin4
       # Desktop apps
-      - com.github.wwmm.easyeffects  # denoise mic, etc
+      # - com.github.wwmm.easyeffects  # denoise mic, etc, 2025-10-23 mono input 처리가 안됨.
       - org.gnome.Characters
       - org.gnome.Connections
       - org.gnome.Logs

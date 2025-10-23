@@ -1,0 +1,7 @@
+% CUPS, SANE, AirPrint, AirScan, IPP,
+
+# Add printer
+lpadmin -p <printer-name> -E -v "ipp://<ip>/ipp/print" -m everywhere
+
+# List Scanner
+scanimage -L
