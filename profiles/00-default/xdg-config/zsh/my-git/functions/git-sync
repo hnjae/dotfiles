@@ -1,5 +1,7 @@
 # vi:ft=zsh
 
+# TODO: 현재 실행 후 쉘이 종료됨. <2025-10-23>
+
 set -euf
 
 git pull --ff-only
@@ -18,10 +20,10 @@ echo "> sync? [y/Any]: " >&2
 
 stty -icanon -echo
 
-eval "response=$(dd bs=1 count=1 2>/dev/null)"
+# eval "response=$(dd bs=1 count=1 2>/dev/null)"
 # stty icanon echo
 
-# response="$(dd bs=1 count=1 2>/dev/null)"
+response="$(dd bs=1 count=1 2>/dev/null)"
 stty icanon; stty echo
 # stty sane # 터미널을 완전히 기본 상태로 리셋
 
@@ -32,7 +34,7 @@ case "$response" in
 "y") ;; # catch
 *)
         echo "O.k., not syncing."
-        exit 0
+        return
         ;;
 esac
 
