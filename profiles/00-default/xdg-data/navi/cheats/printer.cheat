@@ -1,4 +1,4 @@
-% CUPS, SANE, AirPrint, AirScan, IPP,
+% CUPS, SANE, AirPrint, AirScan, IPP, eSCL, WDS
 
 # Add printer
 lpadmin -p <printer-name> -E -v "ipp://<ip>/ipp/print" -m everywhere
