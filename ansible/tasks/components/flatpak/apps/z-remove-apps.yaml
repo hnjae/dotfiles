@@ -16,5 +16,7 @@
       - io.httpie.Httpie  # Proprietary
       - org.gnome.gitlab.cheywood.Buffer  # empty editor
       - rest.insomnia.Insomnia  # mit
+      #
+      - md.obsidian.Obsidian  # flatpak 패키지를 사용하면 ime autoswitch 가 작동 하지 않음. <2025-10>
     state: absent
     method: user

@@ -1,8 +1,7 @@
 # vi:ft=zsh
 
 # TODO: 현재 실행 후 쉘이 종료됨. <2025-10-23>
-
-set -euf
+# set -euf
 
 git pull --ff-only
 

@@ -1,4 +1,7 @@
 % coreutils, head
 
-# capture firt few lines of a file/stdout
+# capture first few lines of a file/stdout
 head -n <count> <file>
+
+# reads from stdin and writes to stdout and files
+echo foo | tee <path>

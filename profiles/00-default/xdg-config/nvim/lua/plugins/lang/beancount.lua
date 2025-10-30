@@ -30,7 +30,7 @@ return {
         beancount = {
           enabled = true,
           init_options = {
-            journal_file = os.getenv("HOME") .. "/Projects/ledger/main.beancount",
+            journal_file = os.getenv("HOME") .. "/Projects/my-ledger/main.beancount",
           },
         },
       },

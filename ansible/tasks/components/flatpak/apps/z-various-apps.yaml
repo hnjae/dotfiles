@@ -10,7 +10,6 @@
       - com.ticktick.TickTick  # Proprietary
       - io.github.alescdb.mailviewer  # .eml, .msg viewer
       - io.github.finefindus.Hieroglyphic  # latex symbols
-      - md.obsidian.Obsidian
       - org.inkscape.Inkscape
       - org.localsend.localsend_app
       - page.codeberg.libre_menu_editor.LibreMenuEditor
