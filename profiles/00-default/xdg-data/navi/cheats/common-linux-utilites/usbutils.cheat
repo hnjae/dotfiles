@@ -1,0 +1,4 @@
+% lsusb
+
+# List usb devices
+sudo lsusb --tree

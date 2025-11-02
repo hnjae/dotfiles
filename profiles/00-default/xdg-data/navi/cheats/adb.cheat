@@ -1,0 +1,7 @@
+% adb, fastboot
+
+# reboot to bootloader
+adb reboot bootloader
+
+# list fastboot devices
+fastboot devices
