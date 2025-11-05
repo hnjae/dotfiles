@@ -1,0 +1,9 @@
+% imagemagick, magick
+
+# encode webp
+magick <src> -quality 93 -define webp:method=6 -define webp:use-sharp-yuv=true -define webp:thread-level=1 -define webp:image-hint=drawing <dst>
+
+# encode lossless webp
+magick <src> -quality 100 -define webp:method=6 -define webp:lossless=true -define webp:thread-level=1 -define webp:image-hint=drawing <dst>
+
+; image-hint: photo, picture, drawing, icon, text

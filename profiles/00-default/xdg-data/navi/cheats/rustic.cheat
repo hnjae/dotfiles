@@ -32,7 +32,7 @@ rustic config --set-datapack-size-limit "128 MiB"
 
 ;
 ; Check health / Repair
-; `rustic repari` 로 문제 해결 경험 전무. <https://restic.readthedocs.io/en/stable/077_troubleshooting.html> 를 따라 restic 커맨드를 사용하자. obsidian 페이지에 잘 정리해두었음. <2025-09-21>
+; `rustic repair` 로 문제 해결 경험 전무. <https://restic.readthedocs.io/en/stable/077_troubleshooting.html> 를 따라 restic 커맨드를 사용하자. obsidian 페이지에 잘 정리해두었음. <2025-09-21>
 ;
 # Check repository
 rustic --check-index check

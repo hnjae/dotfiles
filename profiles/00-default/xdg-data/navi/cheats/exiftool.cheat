@@ -1,0 +1,4 @@
+% exiftool, exif
+
+# Rotate image
+exiftool -Orientation="Rotate 180" <path>
