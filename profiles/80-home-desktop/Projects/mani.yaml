@@ -24,6 +24,8 @@ projects:
     url: git@github.com:hnjae/py-utils
   resume:
     url: git@github.com:hnjae/resume.git
+  backend-interview-question:
+    url: git@github.com:hnjae/backend-interview-question'
   type-challenges:
     url: git@github.com:hnjae/type-challenges.git
 specs:
