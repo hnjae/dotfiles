@@ -11,7 +11,7 @@ keymap = [
   # { keys = ["ctrl+c"], commands = ["quit"] },
   # { keys = ["ctrl+z"], commands = ["suspend"] },
   # { keys = ["Q"], commands = ["quit --output-current-directory"] },
-  { keys = ["q"], commands = ["quit --output-current-directory"] },
+  { keys = ["Q"], commands = ["quit --output-current-directory"] },
 
   { keys = ["\t"], commands = ["tab_switch 1"] },
   { keys = ["backtab"], commands = ["tab_switch -1"] },
