@@ -1,0 +1,4 @@
+% sudo
+
+# Execute a command with environment variables
+sudo VAR=value VAR2=value2 command
