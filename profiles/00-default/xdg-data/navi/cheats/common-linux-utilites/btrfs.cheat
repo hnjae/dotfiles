@@ -36,7 +36,7 @@ btrfs quota --simple enable <path>
 # disable quota
 btrfs quota disable <path>
 
-# btrfs qgroup lmit
+# btrfs qgroup limit
 btrfs qgroup limit <size> <path>
 
 # btrfs show quota limit
