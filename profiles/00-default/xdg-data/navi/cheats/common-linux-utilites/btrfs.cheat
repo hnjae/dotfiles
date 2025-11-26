@@ -18,6 +18,9 @@ btrfs filesystem df <mountpoint>
 # get error numbers
 btrfs device stats <mountpoint>
 
+# clear error numbers
+btrfs device stats --reset <mountpoint>
+
 # usage (filesystem)
 btrfs filesystem usage <mountpoint>
 
@@ -56,4 +59,3 @@ chattr +C -R <dir>
 
 # increase partition
 btrfs filesystem resize max <mountpoint>
-

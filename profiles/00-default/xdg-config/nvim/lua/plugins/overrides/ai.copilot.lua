@@ -19,6 +19,8 @@ return {
         if string.match(vim.fs.basename(vim.api.nvim_buf_get_name(0)), "^%.env.*") then
           -- Disable for `.env` files
           return false
+        elseif string.match(vim.fs.basename(vim.api.nvim_buf_get_name(0)), "env") then
+          return false
         end
         return true
       end,
