@@ -16,12 +16,16 @@ return {
   opts = {
     filetypes = {
       sh = function()
-        if string.match(vim.fs.basename(vim.api.nvim_buf_get_name(0)), "^%.env.*") then
-          -- Disable for `.env` files
+        local bufname = vim.api.nvim_buf_get_name(0)
+        local basename = vim.fs.basename(bufname)
+
+        -- Disable for `.env` files
+        if string.match(basename, "^%.env.*") or string.match(basename, "env") then
           return false
-        elseif string.match(vim.fs.basename(vim.api.nvim_buf_get_name(0)), "env") then
+        elseif vim.startswith(bufname, "/tmp/") then
           return false
         end
+
         return true
       end,
 
