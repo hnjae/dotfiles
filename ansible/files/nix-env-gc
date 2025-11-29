@@ -18,7 +18,7 @@ delete_profile() {
     return
   fi
 
-  echo "INFO: { profile: $profile }: Deleting generations: ${generations_to_delete[*]}\`" >&2
+  echo "INFO: { profile: $profile }: Deleting generations: ${generations_to_delete[*]}" >&2
   nix-env --delete-generations --profile "$profile_path" -- "${generations_to_delete[@]}"
 }
 

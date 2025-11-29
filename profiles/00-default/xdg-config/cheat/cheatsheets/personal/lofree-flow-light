@@ -3,6 +3,8 @@ lastmod: 2025-05-06T15:10:59+0900
 tags: [ lofree-flow-light, keyboard ]
 ---
 
+※ F1 이 아니라, 숫자키로 모드 변경함에 유의
+
 ## Key Mapper Download Link
 
 - <https://www.kickstarter.com/projects/lofree/flow-lite-smoothest-affordable-for-all-mechanical-keyboard/comments>
@@ -32,6 +34,18 @@ Fn+N
 - Fn+{1,2,3} 을 인디케이터가 천천히 깜박일때까지 누름
 
 ※ 여기서 인디케이터란 캡스락의 파란색 LED 를 말함. 우상단의 LED 바가 아님.
+
+### Manual Pairing
+
+```console
+bluetoothctl
+> remove [키보드_MAC_주소]
+> scan on
+# 키보드를 페어링 모드로 전환
+> pair [키보드_MAC_주소]
+> trust [키보드_MAC_주소]
+> connect [키보드_MAC_주소]
+```
 
 ## Fn lock
 

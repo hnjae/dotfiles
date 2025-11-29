@@ -9,7 +9,7 @@ snapper ls -a
 # man snapper configs
 man 5 snapper-configs
 
-# clenaup
+# cleanup
 snapper -c <config> cleanup <cleanup-algorithm>
 
 # create
