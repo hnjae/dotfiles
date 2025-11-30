@@ -64,6 +64,9 @@ zpool import -d <block-device> -d <block-device> <poolname>
 # import a pool with altroot /mnt
 zpool import -R /mnt -- <poolname>
 
+# import a pool with altroot /mnt and readonly (YOU SHOULD LOAD-KEY AFTER IMPORTING THE POOL)
+zpool import -R /mnt -o readonly=on -- <poolname>
+
 # import a pool with different name (rename a pool)
 zpool import <poolname> <new-name>
 

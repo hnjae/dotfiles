@@ -1,4 +1,13 @@
 % lsusb
 
-# List usb devices
-sudo lsusb --tree
+# List usb devices as a tree with detailed information
+sudo lsusb --tree -vv
+
+# List detailed information about a specific usb device
+sudo lsusb --verbose -s {{bus}}:{{device number}}
+
+# List usb devices from a specific vendor and product ID
+lsusb -d {{vendor}}:{{product}}
+
+; # List usb devices with a specific device {bus: 5, device number: 1}
+; udevadm info -p /sys/bus/usb/devices/5-1
