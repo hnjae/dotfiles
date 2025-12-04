@@ -5,3 +5,6 @@ uv add <dependencies>
 
 # add dev dependencies
 uv add --dev <dependencies>
+
+# sync pyproject.toml
+uv sync

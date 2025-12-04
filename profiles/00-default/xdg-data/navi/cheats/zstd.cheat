@@ -5,3 +5,6 @@ zstd -T0 <file>
 
 # benchmark zstd
 zstd -b3 -e19 <target-file>
+
+# benchmark minus level of zstd
+zstd -b --fast=15 <target-file>
