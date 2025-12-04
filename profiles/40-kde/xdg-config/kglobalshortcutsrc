@@ -325,6 +325,16 @@ stopmedia=Media Stop,Media Stop,Stop media playback
 28A96724C466D6A7ACCAC386E2E73603-lb-override=none,none,Activate override
 28A96724C466D6A7ACCAC386E2E73603-lb-reset-rollover=none,none,Reset rollover time
 28A96724C466D6A7ACCAC386E2E73603-lb-statistics=none,none,Open the statistics page
+2EF0F9F388E054FD85C4FDC0AFE4C266-custom-command-0=none,none,Custom shortcut #1
+2EF0F9F388E054FD85C4FDC0AFE4C266-custom-command-1=none,none,Custom shortcut #2
+2EF0F9F388E054FD85C4FDC0AFE4C266-custom-command-2=none,none,Custom shortcut #3
+2EF0F9F388E054FD85C4FDC0AFE4C266-custom-command-3=none,none,Custom shortcut #4
+2EF0F9F388E054FD85C4FDC0AFE4C266-custom-command-4=none,none,Custom shortcut #5
+2EF0F9F388E054FD85C4FDC0AFE4C266-custom-command-5=none,none,Custom shortcut #6
+2EF0F9F388E054FD85C4FDC0AFE4C266-custom-command-6=none,none,Custom shortcut #7
+2EF0F9F388E054FD85C4FDC0AFE4C266-custom-command-7=none,none,Custom shortcut #8
+2EF0F9F388E054FD85C4FDC0AFE4C266-custom-command-8=none,none,Custom shortcut #9
+2EF0F9F388E054FD85C4FDC0AFE4C266-custom-command-9=none,none,Custom shortcut #10
 2EF0F9F388E054FD85C4FDC0AFE4C266-save-all-tabs=none,none,Save all tabs
 2EF0F9F388E054FD85C4FDC0AFE4C266-save-selected-tabs=none,none,Save the selected tabs or their selected contents
 31624D2742058CB9312527482C739E82-lock=none,none,Lock the extension
@@ -567,7 +577,12 @@ _k_friendly_name=Power Management
 powerProfile=Battery\tMeta+B,Battery\tMeta+B,Switch Power Profile
 
 [plasmashell]
+<<<<<<< HEAD
 Slideshow Wallpaper Next Image=none,,Next Wallpaper Image
+||||||| parent of f0fd03e (osiris: 2025-12-05T03:33:49+09:00)
+=======
+Slideshow Wallpaper Next Image=,,Next Wallpaper Image
+>>>>>>> f0fd03e (osiris: 2025-12-05T03:33:49+09:00)
 _k_friendly_name=plasmashell
 activate application launcher=Meta\tAlt+F1,Meta\tAlt+F1,Activate Application Launcher
 activate task manager entry 1=Meta+N\tMeta+1,Meta+1,Activate Task Manager Entry 1
@@ -588,7 +603,6 @@ clipboard_action=Meta+Ctrl+X,Meta+Ctrl+X,Automatic Action Popup Menu
 cycle-panels=Meta+Alt+P,Meta+Alt+P,Move keyboard focus between panels
 cycleNextAction=none,,Next History Item
 cyclePrevAction=none,,Previous History Item
-edit_clipboard=none,,Edit Contents…
 manage activities=Meta+Q,Meta+Q,Show Activity Switcher
 next activity=Meta+A,none,Walk through activities
 previous activity=Meta+Shift+A,none,Walk through activities (Reverse)

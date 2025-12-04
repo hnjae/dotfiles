@@ -1,0 +1,10 @@
+% nice, chrt, ionice
+
+# launch command with specific nice value
+nice -n<value> command
+
+# launch command with specific ionice value
+ionice -c <class> -n <priority> command
+
+# chrt change scheduilg priority idle
+chrt --idle <pid>
