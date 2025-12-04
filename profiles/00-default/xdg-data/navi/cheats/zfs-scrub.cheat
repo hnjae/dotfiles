@@ -5,6 +5,9 @@ $ pool: zpool list -H -o name
 # Start scrub
 sudo zpool scrub <pool>
 
+# Start scrub and waits
+sudo zpool scrub -w -- <pool>
+
 # Stop scrub
 sudo zpool scrub -s <pool>
 
@@ -13,3 +16,9 @@ sudo zpool scrub -p <pool>
 
 # Show scrubbing status
 sudo zpool status -v <pool>
+
+# Only scrub files with known data errors as reported by 'zpool status -v'
+sudo zpool scrub -e <pool>
+
+# Wait until scrub ends
+zpool wait -t scrub -- <pool>

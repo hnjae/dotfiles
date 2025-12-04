@@ -163,3 +163,7 @@ zpool iostat -v <poolname>
 
 # cat(list) raw disk size
 zpool list -p <poolname>
+
+; misc
+# Wait for all operations in the pool to complete (discard, replace, remove, resilver, scrub, trim, ...)
+zpool wait -- <poolname>
