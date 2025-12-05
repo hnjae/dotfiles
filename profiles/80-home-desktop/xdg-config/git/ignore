@@ -27,3 +27,5 @@ __pycache__
 *~
 
 # vi:ft=gitignore:
+
+**/.claude/settings.local.json

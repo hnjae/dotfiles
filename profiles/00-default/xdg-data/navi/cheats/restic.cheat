@@ -1,5 +1,11 @@
 % restic
 
+; The "Fastest" compression ratio is roughly equivalent to zstd level 1.
+; The "Default" compression ratio is roughly equivalent to zstd level 3 (default).
+; The "Better" compression ratio is roughly equivalent to zstd level 7.
+; The "Best" compression ratio is roughly equivalent to zstd level 11.
+; https://github.com/klauspost/compress/blob/master/zstd/README.md
+
 # init repo
 restic --repo <path> --insecure-no-password init
 

@@ -7,3 +7,6 @@ lsblk -f
 
 # list 디바이스의 전송 방식(TRAN)
 lsblk -o NAME,MODEL,TRAN
+
+# list 디바이스의 전송 방식(TRAN)
+lsblk -o NAME,MODEL,SERIAL,TRAN,HCTL
