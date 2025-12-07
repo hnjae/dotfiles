@@ -7,4 +7,7 @@ badblocks -wsv /dev/<device>
 badblocks -wsv -b 4096 /dev/<device>
 
 # run first half for big drive
-badblocks -wsv -b 4096 /dev/sdb 2197291008 0
+badblocks -wsv -b 4096 /dev/<device> 2197291008 0
+
+# Wipe first 4GiB of a drive with random data
+dd if=/dev/urandom of=/dev/<device> bs=1M count=4096 status=progress

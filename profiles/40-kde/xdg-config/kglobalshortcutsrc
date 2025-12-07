@@ -577,12 +577,7 @@ _k_friendly_name=Power Management
 powerProfile=Battery\tMeta+B,Battery\tMeta+B,Switch Power Profile
 
 [plasmashell]
-<<<<<<< HEAD
 Slideshow Wallpaper Next Image=none,,Next Wallpaper Image
-||||||| parent of f0fd03e (osiris: 2025-12-05T03:33:49+09:00)
-=======
-Slideshow Wallpaper Next Image=,,Next Wallpaper Image
->>>>>>> f0fd03e (osiris: 2025-12-05T03:33:49+09:00)
 _k_friendly_name=plasmashell
 activate application launcher=Meta\tAlt+F1,Meta\tAlt+F1,Activate Application Launcher
 activate task manager entry 1=Meta+N\tMeta+1,Meta+1,Activate Task Manager Entry 1
@@ -603,6 +598,7 @@ clipboard_action=Meta+Ctrl+X,Meta+Ctrl+X,Automatic Action Popup Menu
 cycle-panels=Meta+Alt+P,Meta+Alt+P,Move keyboard focus between panels
 cycleNextAction=none,,Next History Item
 cyclePrevAction=none,,Previous History Item
+edit_clipboard=none,,Edit Contents…
 manage activities=Meta+Q,Meta+Q,Show Activity Switcher
 next activity=Meta+A,none,Walk through activities
 previous activity=Meta+Shift+A,none,Walk through activities (Reverse)
