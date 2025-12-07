@@ -15,7 +15,7 @@ if [[ -e "$exclude_file" ]]; then
 fi
 
 
-rsync --info=progress2 -h -s -aHAXWE --numeric-ids "$exclude_opt" --remove-source-files -z --zc=zstd --zl=4 -e "ssh -T -c aes128-gcm@openssh.com -o Compression=no -x" -- "$src" "$dst"
+rsync --info=progress2 -h -aHAXWEs --numeric-ids --no-inc-recursive "$exclude_opt" --remove-source-files -z --zc=zstd --zl=4 -e "ssh -T -c aes128-gcm@openssh.com -o Compression=no -x" -- "$src" "$dst"
 
 if (( $+commands[notify-send] )) && [[ "$DISPLAY" != "" ]]; then
   $commands[notify-send] "rsync-move $src done"

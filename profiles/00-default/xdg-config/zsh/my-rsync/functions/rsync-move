@@ -15,7 +15,7 @@ if [[ -e "$exclude_file" ]]; then
   exclude_opt="--exclude-from=$exclude_file"
 fi
 
-rsync --info=progress2 -h -s -aHAXWE --numeric-ids "$exclude_opt" --remove-source-files -- "$src" "$dst"
+rsync --info=progress2 -h -aHAXWEs --numeric-ids --no-inc-recursive "$exclude_opt" --remove-source-files -- "$src" "$dst"
 
 if (( $+commands[notify-send] )) && [[ "$DISPLAY" != "" ]]; then
   $commands[notify-send] "rsync-move $src done"

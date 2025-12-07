@@ -8,7 +8,7 @@ if [[ "$src" == "" || "$dst" == "" || "$3" != "" ]]; then
   return
 fi
 
-rsync --info=progress2 -h -s -aHAXWE --numeric-ids --fuzzy --delete-after -- "$src" "$dst"
+rsync --info=progress2 -h -aHAXWEs --numeric-ids --no-inc-recursive --fuzzy --delete-after -- "$src" "$dst"
 
 if (( $+commands[notify-send] )) && [[ "$DISPLAY" != "" ]]; then
   $commands[notify-send] "rsync-copy $src done"
