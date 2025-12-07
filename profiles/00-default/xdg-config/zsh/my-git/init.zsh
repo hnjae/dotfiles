@@ -170,11 +170,13 @@ typeset -g forgit_reset_head="grz" # default: `grh`
 alias gr="git reset"
 alias grhd="git reset HEAD"
 alias grH="git reset --hard"
+
 # forgit_checkout_tag = "grst"
 # forgit_checkout_commit = "grsco"
 # groh                 git reset origin/$(git_current_branch) --hard
 alias grHhd="git reset --hard HEAD"
 alias grHhd1="git reset --hard HEAD~1"
+alias grHom="git reset --hard origin/main"
 
 ############################################################################
 # git-stash

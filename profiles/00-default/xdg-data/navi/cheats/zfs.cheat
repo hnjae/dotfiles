@@ -1,12 +1,15 @@
 % zpool, zfs
 
 ; https://openzfs.github.io/
+; zpoolprops(7)
 
-# create hdd mirror pool
+# create hdd mirror pool (-n: dry-run)
 sudo zpool create -f \
+  -n \
   -o compatibility=off \
   -o ashift=12 \
-  -O recordsize=4M \
+  -o failmode=continue \
+  -O recordsize=1M \
   -O acltype=off \
   -O relatime=off \
   -O atime=off \
@@ -22,17 +25,20 @@ sudo zpool create -f \
   -O utf8only=off \
   -O casesensitivity=sensitive \
   -O encryption=aes-256-gcm \
-  -O keylocation=prompt \
   -O keyformat=passphrase \
+  -O keylocation=prompt \
+  -O keylocation=file:///secrets/storage-encryption-key \
   <pool-name> \
   mirror \
   /dev/disk/by-partlabel/<partlabel> /dev/disk/by-partlabel/<partlabel>
 
-# create hdd single pool
+# create hdd single pool (-n: dry-run)
 sudo zpool create -f \
+  -n \
   -o compatibility=off \
   -o ashift=12 \
-  -O recordsize=4M \
+  -o failmode=continue \
+  -O recordsize=1M \
   -O acltype=off \
   -O relatime=off \
   -O atime=off \
@@ -167,3 +173,6 @@ zpool list -p <poolname>
 ; misc
 # Wait for all operations in the pool to complete (discard, replace, remove, resilver, scrub, trim, ...)
 zpool wait -- <poolname>
+
+# iostate (refresh every 30 seconds)
+zpool iostate -v -- <poolname> 30
