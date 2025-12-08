@@ -7,7 +7,7 @@
 mkfs.btrfs --nodesize "64K" -O block-group-tree
 
 # mkfs.btrfs
-mkfs.btrfs -s 4096 -L "<LABEL>_BTRFS" -O block-group-tree "<disk>"
+mkfs.btrfs -s 4096 -L "<LABEL>-BTRFS" -O block-group-tree "<disk>"
 
 # mkfs.btrfs metadata single
 mkfs.btrfs -s 4096 \

@@ -15,7 +15,7 @@ sudo cryptsetup \
     --hash sha512 \
     --key-size "256" \
     --sector-size "4096" \
-    --label "LUKS2_<label>" \
+    --label "<label>-LUKS" \
     --use-urandom \
     --key-file="$KEY_FILE" \
     luksFormat \
@@ -28,7 +28,7 @@ sudo cryptsetup \
     --hash sha512 \
     --key-size "256" \
     --sector-size "4096" \
-    --label "LUKS2_<label>" \
+    --label "<label>-LUKS" \
     --use-urandom \
     --verify-passphrase \
     luksFormat \

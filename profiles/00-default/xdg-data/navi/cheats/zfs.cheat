@@ -4,7 +4,7 @@
 ; zpoolprops(7)
 
 # create hdd mirror pool (-n: dry-run)
-sudo zpool create -f \
+sudo zpool create \
   -n \
   -o compatibility=off \
   -o ashift=12 \
@@ -33,7 +33,7 @@ sudo zpool create -f \
   /dev/disk/by-partlabel/<partlabel> /dev/disk/by-partlabel/<partlabel>
 
 # create hdd single pool (-n: dry-run)
-sudo zpool create -f \
+sudo zpool create \
   -n \
   -o compatibility=off \
   -o ashift=12 \

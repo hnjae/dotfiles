@@ -19,7 +19,10 @@ sudo vgs
 sudo lvs
 
 # lv create with size
-sudo lvcreate -L "${SWAP_LV_SIZE}" -n "${SWAP_LV_NAME}" "${VG_NAME}"
+sudo lvcreate -L "${SWAP_LV_SIZE}" -n "${LV_LABEL}" "${VG_NAME}"
 
 # lv create free
 sudo lvcreate -l "100%FREE" -n "${LV_NAME}" "${VG_NAME}"
+
+# remove lv
+sudo lvremove /dev/mapper/<vg-name>-<lv-name>
