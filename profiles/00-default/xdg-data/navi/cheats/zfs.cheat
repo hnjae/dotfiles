@@ -99,6 +99,9 @@ zfs inherit -rS <eg-atime> <pool>/<dataset>
 # Load zfs key
 zfs load-key -- <dataset>
 
+# keylocation을 prompt로 오버라이드해서 키 로드
+zfs load-key -L prompt <dataset>
+
 # load all key
 zfs load-key -a
 
