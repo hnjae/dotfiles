@@ -140,8 +140,8 @@ zfs create -b <blocksize> -V <size> <zpool>/<zvol-name>
 # attach existing disk to zpool to makey mirror v-dev
 sudo zpool attach <poolname> <diskName> <NewDiskPath>
 
-# diff
-zfs diff <oldsnapshot> <newsnapshot>
+# diff (`-h`: Do not `\0ooo-` escape non-ASCII paths)
+zfs diff -h <oldsnapshot> <newsnapshot>
 
 # snapshot
 sudo zfs snapshoot pool/dataset/@snapshot-name
