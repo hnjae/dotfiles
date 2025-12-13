@@ -9,7 +9,7 @@
   block:
     - name: Check if accounts-daemon service exists
       set_fact:
-        is_accounts_daemon: "'accounts-daemon.service' in ansible_facts.services"
+        is_accounts_daemon: "{{ 'accounts-daemon.service' in ansible_facts.services }}"
     - name: Set profile picture
       when: [is_accounts_daemon]
       block:
