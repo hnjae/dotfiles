@@ -1,0 +1,16 @@
+% cargo
+
+# run formatter
+cargo fmt
+
+# run lintter (clippy)
+cargo clippy
+
+# run lintter with pedantic category (clippy)
+cargo clippy -- -W clippy::pedantic
+
+# run lintter with restriction category (clippy)
+cargo clippy -- -W clippy::restriction
+
+# run lintter with nursery category (clippy)
+cargo clippy -- -W clippy::nursery

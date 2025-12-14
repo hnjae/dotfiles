@@ -16,6 +16,7 @@
 	gpgsign = true
 	template = ~/.config/git/gitmessage.txt
 	verbose = true; -v 를 기본값으로, diff 를 gitcommit 에 넣어 줌.
+	allowEmpty = true
 
 [core]
 	editor = "nvim"
