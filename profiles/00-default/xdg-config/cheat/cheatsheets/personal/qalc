@@ -1,0 +1,16 @@
+---
+date: 2025-12-14T13:32:43+0900
+lastmod: 2025-12-14T13:32:43+0900
+syntax: markdown
+tags: []
+---
+
+- <https://qalculate.github.io/manual/qalc.html>
+
+Ctrl+E switches between approximation modes (exact, try exact, auto)
+Ctrl+F switches between fraction modes (simple, decimal, auto)
+
+
+<!--
+vi:ft=markdown:
+-->
