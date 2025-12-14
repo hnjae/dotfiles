@@ -9,6 +9,7 @@ sudo zpool create \
   -o compatibility=off \
   -o ashift=12 \
   -o failmode=continue \
+  -o cachefile=none \
   -O recordsize=1M \
   -O acltype=off \
   -O relatime=off \
@@ -38,6 +39,7 @@ sudo zpool create \
   -o compatibility=off \
   -o ashift=12 \
   -o failmode=continue \
+  -o cachefile=none \
   -O recordsize=1M \
   -O acltype=off \
   -O relatime=off \
@@ -177,5 +179,18 @@ zpool list -p <poolname>
 # Wait for all operations in the pool to complete (discard, replace, remove, resilver, scrub, trim, ...)
 zpool wait -- <poolname>
 
+; ;;;;;;;;;;;;;;;;;;
+; debug
+; ;;;;;;;;;;;;;;;;;;
+
 # iostate (refresh every 30 seconds)
 zpool iostate -v -- <poolname> 30
+
+# arc summary
+arc_summary
+
+# list zpool with verbose
+zpool list -v <poolname>
+
+# List block stats of zpool
+zdb -bb <poolname>
