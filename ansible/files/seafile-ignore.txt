@@ -25,6 +25,7 @@ __pycache__
 
 # Chromium-based
 *.crdownload
+.org.chromium.Chromium.*
 
 # firefox
 *.part

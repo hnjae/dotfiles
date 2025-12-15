@@ -3,6 +3,12 @@
 ; https://openzfs.github.io/
 ; zpoolprops(7)
 
+# zpool(zfs) properties manual
+man zpoolprops
+
+# zfs(zpool) properties manual
+man zfsprops
+
 # create hdd mirror pool (-n: dry-run)
 sudo zpool create \
   -n \
@@ -182,6 +188,9 @@ zpool wait -- <poolname>
 ; ;;;;;;;;;;;;;;;;;;
 ; debug
 ; ;;;;;;;;;;;;;;;;;;
+# Print wait status every <interval> seconds with datetime
+zpool wait -T d -- <poolname> <interval>
+>>>>>>> 0596540 (osiris: 2025-12-15T21:37:51+09:00)
 
 # iostate (refresh every 30 seconds)
 zpool iostate -v -- <poolname> 30
