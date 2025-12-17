@@ -51,8 +51,8 @@ elif fd_cmd=${(k)commands[fd]-${(k)commands[fdfind]}}; [[ -n ${fd_cmd} ]]; then
     '\*~'
   )
 
-  export FZF_CTRL_T_COMMAND="command ${fd_cmd} --hidden --one-file-system --no-ignore-vcs --follow ${fd_excludes[@]/#/--exclude } --type f --type d . 2>/dev/null"
-  export FZF_ALT_C_COMMAND="command ${fd_cmd} --hidden --one-file-system --no-ignore-vcs --follow ${fd_excludes[@]/#/--exclude } --type d . 2>/dev/null"
+  export FZF_CTRL_T_COMMAND="command ${fd_cmd} --hidden --one-file-system --follow ${fd_excludes[@]/#/--exclude } --type f --type d . 2>/dev/null"
+  export FZF_ALT_C_COMMAND="command ${fd_cmd} --hidden --one-file-system --follow ${fd_excludes[@]/#/--exclude } --type d . 2>/dev/null"
   # export FZF_DEFAULT_COMMAND="command ${fd_cmd} -H --no-ignore-vcs -E .git -td -tf"
   # export FZF_ALT_C_COMMAND="command ${fd_cmd} -H --no-ignore-vcs -E .git -td"
   eval "_fzf_compgen_path() {
