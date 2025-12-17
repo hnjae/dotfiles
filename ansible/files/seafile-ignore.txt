@@ -13,6 +13,9 @@ __pycache__
 .pytest_cache
 .ruff_cache
 
+# Node.js
+node_modules
+
 # direnv
 .direnv
 
@@ -32,5 +35,8 @@ __pycache__
 
 # LibreOffice
 .~lock.*
+
+# https://github.com/serokell/deploy-rs
+.deploy-gc
 
 # vi:ft=gitignore

@@ -23,8 +23,7 @@
         state: present
         remote: flathub
         name:
-          - fr.romainvigier.MetadataCleaner
-          - org.gnome.Fractal  # matrix client
+          - org.gnome.Fractal  # matrix clientcom.dz4k.FruitCredits
           - com.github.flxzt.rnote
           - io.gitlab.news_flash.NewsFlash  # rss, supports freshrss
           - com.github.qarmin.czkawka  # <https://github.com/qarmin/czkawka> deduplication

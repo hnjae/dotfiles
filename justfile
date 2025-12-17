@@ -108,8 +108,11 @@ update-tinted: build-tinted
         exit 1
     fi
 
+# NOTE: 아래는 lazy-lock.json 과 sync 를 하는게 아니라 업데이트하는 명령임.
+# nvim --headless -c "autocmd User VeryLazy ++once Lazy! sync" -c "qa"
+
 nvim-sync:
-    nvim --headless -c "autocmd User VeryLazy ++once Lazy sync" -c "qa"
+    nvim --headless -c 'autocmd User VeryLazy ++once lua require("lazy").restore({wait=true}) vim.cmd("qall")'
 
 GIT-FCITX5-PROFILE:
     git update-index --skip-worktree "profiles/40-linux-desktop/xdg-config/fcitx5/profile"
