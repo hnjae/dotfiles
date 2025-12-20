@@ -122,5 +122,12 @@
         "body": [
             "# shellcheck shell=sh disable=SC2034"
         ]
+    },
+    "boilerplate-envrc": {
+        "prefix": "boilerplate-envrc",
+        "description": "\".envrc file\"",
+        "body": [
+            "# shellcheck shell=sh"
+        ]
     }
 }
