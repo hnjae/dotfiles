@@ -1,0 +1,4 @@
+% mdraid
+
+# stop raid
+sudo mdadm --stop /dev/md/nixos:eris_ESP

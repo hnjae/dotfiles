@@ -137,6 +137,9 @@ git reflog
 # git fetch
 git fetch
 
+# git fetch tags
+git fetch --tags
+
 # remote add
 git remote add origin git@github.com:<owner>/<repository>.git
 
