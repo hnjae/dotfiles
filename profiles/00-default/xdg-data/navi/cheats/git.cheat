@@ -59,6 +59,9 @@ git merge <commit>
 # merge unrelated commits
 git merge <commit> --allow-unrelated-histories
 
+# merge unrelated commits with no changes
+git merge autoaspm/main --allow-unrelated-histories --no-commit -s ours
+
 # cancel merge
 git merge --abort
 

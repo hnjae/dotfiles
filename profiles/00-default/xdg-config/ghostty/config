@@ -15,6 +15,7 @@ term = "xterm-256color"
 font-family = "MesloLGM Nerd Font"
 font-family = "Pretendard JP"
 font-family = "Pretendard"
+font-family = "Noto Color Emoji"
 # font-family = "Noto Sans Mono CJK JP"
 # font-family = "Noto Sans Mono CJK KR"
 

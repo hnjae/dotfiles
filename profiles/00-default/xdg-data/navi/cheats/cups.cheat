@@ -1,0 +1,5 @@
+# list printer
+lpstat -p -d -v
+
+# delete printer
+lpadmin -x <printername>
