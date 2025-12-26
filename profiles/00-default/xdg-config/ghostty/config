@@ -100,3 +100,6 @@ keybind = shift+insert=paste_from_clipboard
 
 keybind = performable:ctrl+c=copy_to_clipboard
 # keybind = performable:ctrl+v=copy_to_clipboard
+
+# claude-code
+keybind = shift+enter=text:\x1b\r

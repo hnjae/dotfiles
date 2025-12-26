@@ -46,6 +46,14 @@ ignore = [
 [tool.ruff.lint.pydocstyle]
 convention = "pep257"
 
+[tool.ruff.lint.per-file-ignores]
+"test_*.py" = [
+  "S101",   # assert-used: assert statements are required in tests
+  "ANN001", # missing-type-function-argument: mock parameters are self-documenting in tests
+  "SLF001", # private-member-access: necessary to test internal state of objects
+  "ARG002", # unused-argument: mock parameters required by patch decorators
+]
+
 [tool.basedpyright]
 "reportMissingParameterType" = false # ruff ANN001
 "reportUnusedImport" = false         # ruff F401

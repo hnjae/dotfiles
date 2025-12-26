@@ -1,0 +1,20 @@
+% cups, lp, lpadmin, SANE, AirPrint, AirScan, IPP, eSCL, WDS
+
+# Add printer
+lpadmin -p <printer-name> -E -v "ipp://<ip>/ipp/print" -m everywhere
+
+# List Scanner
+scanimage -L
+
+
+# list printer
+lpstat -p -d -v
+
+# delete printer
+lpadmin -x <printername>
+
+# print pdf
+lp -d <printername> -o media=A4 <target>.pdf
+
+# Add printer (use IPP (AirPrint) protocol)
+lpadmin -p <printername> -E -v "ipp://<fqdn>/ipp/print" -m everywhere
