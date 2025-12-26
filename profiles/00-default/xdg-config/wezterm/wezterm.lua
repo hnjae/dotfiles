@@ -61,6 +61,12 @@ config.keys = {
     mods = "CTRL|SHIFT",
     action = wezterm.action.QuitApplication,
   },
+  {
+    -- claude code newline
+    key = "Enter",
+    mods = "SHIFT",
+    action = wezterm.action({ SendString = "\x1b\r" }),
+  },
   -- WIP
   -- {
   --   key = "C",

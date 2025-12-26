@@ -101,5 +101,5 @@ keybind = shift+insert=paste_from_clipboard
 keybind = performable:ctrl+c=copy_to_clipboard
 # keybind = performable:ctrl+v=copy_to_clipboard
 
-# claude-code
+# claude-code 에서 newline insert
 keybind = shift+enter=text:\x1b\r

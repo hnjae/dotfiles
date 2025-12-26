@@ -54,9 +54,14 @@ convention = "pep257"
   "ARG002", # unused-argument: mock parameters required by patch decorators
 ]
 
+[tool.ty.src]
+exclude = ["test_*.py"]
+
 [tool.basedpyright]
-"reportMissingParameterType" = false # ruff ANN001
-"reportUnusedImport" = false         # ruff F401
-"reportUndefinedVariable" = false    # ruff F821
-"reportUnusedVariable" = false       # ruff F841
-"reportPrivateUsage" = false         # ruff SLF001
+"reportMissingParameterType" = false        # ruff ANN001
+"reportUnusedImport" = false                # ruff F401
+"reportUndefinedVariable" = false           # ruff F821
+"reportUnusedVariable" = false              # ruff F841
+"reportPrivateUsage" = false                # ruff SLF001
+"reportImplicitStringConcatenation" = false # conflicts with ruff ISC003 (explicit-string-concatenation)
+exclude = ["test_*.py"]                     # exclude test files from type checking
