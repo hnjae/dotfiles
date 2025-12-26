@@ -59,3 +59,19 @@ chattr +C -R <dir>
 
 # increase partition
 btrfs filesystem resize max <mountpoint>
+
+# disable compression on pre-compressed files
+fd -H -t f \
+  -e zip -e zipx -e rar -e 7z -e zpaq \
+  -e rpm -e deb -e apk -e jar -e xpi -e appimage -e dmg \
+  -e epub -e mobi -e azw3 -e cbr -e cbz -e cb7 -e pdf \
+  -e gz -e zst -e lz4 -e lzma -e bz -e bz2 -e bz3 \
+  -e tgz -e tzst -e tbz -e tb2 -e tbz3 \
+  -e flac -e ogg -e opus -e m4a -e m4b -e mp3 -e wma \
+  -e png -e apng -e webp -e gif -e heic -e heif -e avif -e avifs -e jpg -e jpeg -e jp2 -e jxl \
+  -e mp4 -e mov -e webm -e mkv -e mk3d -e wmv -e avi -e ogv -e rmvb \
+  -e mpg -e mpeg -e vob -e ts -e m2ts -e mjpg \
+  --exec chattr +m {}
+
+# disable compression on pre-compressed 분할 압축 파일 (.7z.001, .z.02 등)
+fd -H '\.(7z|z)\.\d+$' --exec chattr +m {}
