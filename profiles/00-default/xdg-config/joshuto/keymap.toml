@@ -80,6 +80,8 @@ keymap = [
   # { keys = ["%"], commands = [":shell sh -c '[ \"$*\" != \"\" ] && [ ! -e \"$*\" ] && touch \"$*\"' _ "] },
   { keys = ["%"], commands = [":custom_search newfile "] },
   { keys = ["x"], commands = ["shell xdg-open %s"] },
+  # preview
+  { keys = ["p"], commands = ["shell timg %s"] },
 
   { keys = ["g", "h"], commands = ["toggle_hidden"] },
 

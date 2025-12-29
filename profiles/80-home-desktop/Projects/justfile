@@ -9,10 +9,10 @@ clone:
 # mdcat 은 pipe 로 받았을때 처리가 잘 안됨. 2025-09-10
 
 fetch:
-    mani run fetch | nix run 'nixpkgs#glow'
+    mani run fetch | glow
 
 pull:
-    mani run pull | nix run 'nixpkgs#glow'
+    mani run pull | glow
 
 status:
-    mani run status | nix run 'nixpkgs#glow'
+    mani run status | glow
