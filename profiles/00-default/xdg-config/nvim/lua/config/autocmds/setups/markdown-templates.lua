@@ -58,6 +58,10 @@ function M.setup()
     group = markdown_auto_id,
     pattern = { "*.md" },
     callback = function(ev)
+      if vim.startswith(ev.match, "/tmp") then
+        return
+      end
+
       if string.find(ev.match, "/obsidian/home/dailies") ~= nil then
         return
       end
