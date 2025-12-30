@@ -26,3 +26,9 @@ smartctl -i -n standby "/dev/<device>"
 
 # query current status (exit with 1 when in standby)
 smartctl --info --nocheck=standby,1 "/dev/<device>"
+
+# Query attributes and selftest log
+smartctl --attributes --format=brief --log=selftest "/dev/<device>"
+
+# Query attributes and selftest log, show only errors
+smartctl --attributes --format=brief --log=selftest --quietmode=errorsonly "/dev/<device>"
