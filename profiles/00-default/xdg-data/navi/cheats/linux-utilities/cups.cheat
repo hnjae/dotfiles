@@ -6,7 +6,6 @@ lpadmin -p <printer-name> -E -v "ipp://<ip>/ipp/print" -m everywhere
 # List Scanner
 scanimage -L
 
-
 # list printer
 lpstat -p -d -v
 
@@ -18,3 +17,6 @@ lp -d <printername> -o media=A4 <target>.pdf
 
 # Add printer (use IPP (AirPrint) protocol)
 lpadmin -p <printername> -E -v "ipp://<fqdn>/ipp/print" -m everywhere
+
+# list printer options
+lpoptions -p <printername> -l
