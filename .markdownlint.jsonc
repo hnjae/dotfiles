@@ -1,0 +1,34 @@
+// markdownlint-is formatter?
+{
+	"MD001": false, // heading-increment
+	"MD007": {
+		// ui-indent
+		"indent": 4
+	},
+	"MD009": false, // no-trailing-spaces (use formatter)
+	"MD012": false, // no-multiple-blanks (use formatter)
+	"MD013": false, // line-length
+	"MD014": false, // commands-show-output ($ foo 식으로 code block 에 적는 것)
+	// "MD018": false, // no-missing-space-atx (use formatter)
+	// "MD019": false, // no-multiple-space-atx (use formatter)
+	// "MD020": false, // no-missing-space-closed-atx (use formatter)
+	// "MD021": false, // no-multiple-space-closed-atx (use formatter)
+	// "MD022": false, // blanks-around-headings (use formatter)
+	"MD024": {
+		// no-duplicate-heading
+		"siblings_only": true
+	},
+	// "MD027": false, // no-multiple-space-blockquote (use formatter)
+	"MD033": {
+		// no-inline-html
+		"allowed_elements": ["div"]
+	},
+	"MD036": false, // no-emphasis-as-heading
+	"MD040": false, // fenced-code-language
+	"MD041": false, // first-line-heading
+	"MD046": {
+		// code-block-style
+		"style": "fenced"
+	},
+	"MD047": false // Files should end with a single newline character
+}

@@ -28,9 +28,13 @@ indent_style = space
 indent_size = 2
 max_line_length = 80
 
-[*.{json,jsonc,yaml,yml,toml,conf,md}]
+[*.{json,jsonc,yaml,yml,toml,conf}]
 indent_style = space
 indent_size = 2
+
+[*.{md}]
+indent_style = space
+indent_size = 4
 
 [*.snippets]
 indent_style = tab

@@ -16,3 +16,6 @@ pull:
 
 status:
     mani run status | glow
+
+sync:
+    mani sync

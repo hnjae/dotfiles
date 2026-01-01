@@ -45,5 +45,7 @@ systemctl --user import-environment PATH
 # show user environment
 systemctl --user show-environment
 
+# prohibit suspend
+systemd-inhibit <command>
 $ opt_user: echo 'false true' | tr ' ' '\n' --- --map "grep -q t && echo --user || echo ''"
 $ systemd_unit: systemctl $opt_user list-units -q --no-pager | awk '{print $1}' --- --header "systemd units" --preview 'systemctl cat {} | bat --color always --decorations never -l ini'

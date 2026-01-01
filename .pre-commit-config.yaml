@@ -1,0 +1,62 @@
+---
+# See: https://pre-commit.com/
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: detect-private-key
+        fail_fast: true
+      - id: check-added-large-files
+      - id: check-json
+      - id: check-yaml
+      - id: check-toml
+      - id: check-xml
+  - repo: local
+    hooks:
+      - id: shellharden
+        name: harden shell
+        entry: shellharden --replace
+        language: system
+        files: \.(sh|bash|envrc|envrc.*)$
+      - id: shellcheck
+        name: check shell
+        entry: shellcheck
+        language: system
+        files: \.(sh|bash|envrc|envrc.*)$
+      - id: shfmt
+        name: format shell
+        entry: shfmt --indent 2 --simplify --write
+        language: system
+        files: \.(sh|bash|envrc|envrc.*)$
+  - repo: local
+    hooks:
+      - id: just-fmt
+        name: format just
+        entry: bash -c 'just --fmt --unstable --justfile "$1"' --
+        language: system
+        files: (^|/)(\.)?justfile$
+      - id: fish-indent
+        name: format fish
+        entry: fish_indent --write
+        language: system
+        types: [fish]
+      - id: yamlfix
+        name: format yaml
+        entry: yamlfix
+        language: system
+        types: [yaml]
+      - id: taplo
+        name: format toml
+        entry: taplo format
+        language: system
+        types: [toml]
+      - id: biome
+        name: format json(c)
+        entry: biome format --write
+        language: system
+        files: \.(json|jsonc)$
+      - id: markdownlint
+        name: format markdown
+        entry: markdownlint-cli2 --fix
+        language: system
+        types: [markdown]
