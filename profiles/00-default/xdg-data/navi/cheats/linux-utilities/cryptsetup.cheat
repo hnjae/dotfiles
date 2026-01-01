@@ -64,3 +64,18 @@ cryptsetup -v luksRemoveKey /dev/<device> <optional-key-file>
 
 # change key
 cryptsetup -v luksChangeKey --key-file "<keyfile>"  "/dev/<device>" "<optional-key-file>"
+
+; USING TPM
+# list tpm devices
+systemd-cryptenroll --tpm2-device=list
+
+; READ: https://wiki.archlinux.org/title/Trusted_Platform_Module#Accessing_PCR_registers
+# enroll tpm2 with pcr7
+systemd-cryptenroll --tpm2-device=auto --tpm2-pcrs=0,2,7,12 /dev/sdX
+
+# view enrolled slot
+systemd-cryptenroll /dev/sdX
+
+# remove slot
+systemd-cryptenroll --wipe-slot=<num> /dev/sdX
+

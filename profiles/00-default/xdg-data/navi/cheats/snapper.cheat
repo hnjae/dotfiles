@@ -9,6 +9,9 @@ snapper ls -a
 # man snapper configs
 man 5 snapper-configs
 
+# delete
+snapper -c <config> delete <snapshot-number>
+
 # cleanup
 snapper -c <config> cleanup <cleanup-algorithm>
 

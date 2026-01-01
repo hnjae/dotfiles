@@ -37,12 +37,14 @@ return {
       end,
 
       -- data-formats
-      yaml = false,
+      conf = false,
       csv = false,
+      ini = false,
       json = false,
       jsonc = false,
       toml = false,
-      ini = false,
+      xml = false,
+      yaml = false,
 
       -- plain text accounting (ledger)
       ledger = false,
