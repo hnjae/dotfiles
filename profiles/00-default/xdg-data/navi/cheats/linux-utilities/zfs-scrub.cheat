@@ -22,3 +22,9 @@ sudo zpool scrub -e <pool>
 
 # Wait until scrub ends
 zpool wait -t scrub -- <pool>
+
+# Scrub recent scrubbed/written data (start from date)
+zpool scrub -S <date> --  <pool>
+
+# Scrub old scrubbed/written data (until end of date)
+zpool scrub -E <date> --  <pool>
