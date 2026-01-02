@@ -7,18 +7,24 @@
         path: '{{ xdg_config_home }}/user-tmpfiles.d'
         state: directory
         mode: '0755'
+    - name: Deploy tmpfile 10-remove.conf
+      copy:
+        mode: '0644'
+        dest: '{{ ansible_env.HOME }}/.config/user-tmpfiles.d/10-remove.conf'
+        content: |-
+          r {{ ansible_env.HOME }}/.bash_history - - - -
+          r {{ ansible_env.HOME }}/.node_repl_history - - - -
+          r {{ ansible_env.HOME }}/.psql_history - - - -
+          r {{ ansible_env.HOME }}/.python_history - - - -
+          r {{ ansible_env.HOME }}/.viminfo - - - -
+          r {{ ansible_env.HOME }}/.wget-hsts - - - -
+          r {{ ansible_env.HOME }}/.zsh_history - - - -
+          R {{ ansible_env.HOME }}/.ansible - - - -
+          R {{ ansible_env.HOME }}/.mypy_cache - - - -
+          R {{ ansible_env.HOME }}/.vim - - - -
     - name: Deploy tmpfile 10-cleanup.conf
       copy:
         mode: '0644'
         dest: '{{ ansible_env.HOME }}/.config/user-tmpfiles.d/10-cleanup.conf'
         content: |-
-          R {{ ansible_env.HOME }}/.ansible - - - -
-          R {{ ansible_env.HOME }}/.bash_history - - - -
-          R {{ ansible_env.HOME }}/.mypy_cache - - - -
-          R {{ ansible_env.HOME }}/.psql_history - - - -
-          R {{ ansible_env.HOME }}/.python_history - - - -
-          R {{ ansible_env.HOME }}/.node_repl_history - - - -
-          R {{ ansible_env.HOME }}/.vim - - - -
-          R {{ ansible_env.HOME }}/.viminfo - - - -
-          R {{ ansible_env.HOME }}/.wget-hsts - - - -
-          R {{ ansible_env.HOME }}/.zsh_history - - - -
+          v {{ xdg_cache_home }}/thumbnails 0700 - - 3d
