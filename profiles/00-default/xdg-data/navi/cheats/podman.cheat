@@ -48,5 +48,8 @@ sudo podman top <container-name>
 # show history of image ()
 sudo podman history <image>
 
+# get tags of image
+skopeo list-tags docker://<uri>
+
 $ container-id: podman ps --- --header-lines 1 --column 1
 $ container-name: podman ps --- --header-lines 1 --column 7

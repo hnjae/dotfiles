@@ -160,8 +160,8 @@ sudo zfs snapshoot pool/dataset/@snapshot-name
 ; ;;;;;;;;;;;;;;;;;;
 ; L2ARC
 ; ;;;;;;;;;;;;;;;;;;
-# add l2arc to zfs pool (DONT FORGET TO ADD `cache`. THERE IS NO WAY TO ROLLBACK IF NOT PROVIDED.)
-sudo zpool add <poolname> cache <block-device>
+# add l2arc to zfs pool with 16KiB ashift (DONT FORGET TO ADD `cache`. THERE IS NO WAY TO ROLLBACK IF NOT PROVIDED.)
+sudo zpool add -o ashift=14 <poolname> cache <block-device>
 
 # remove l2arc from zfs pool
 sudo zpool remove <poolname> <block-device>

@@ -9,6 +9,9 @@ badblocks -wsv -b 4096 /dev/<device>
 # run first half for big drive
 badblocks -wsv -b 4096 /dev/<device> 2197291008 0
 
+# run test with bigger block size (32 bit limit 을 우회 가능)
+badblocks -wsv -b 16384 /dev/<device>
+
 # run with random pattern
 badblocks -wsv -b 4096 -t random /dev/<device>
 
