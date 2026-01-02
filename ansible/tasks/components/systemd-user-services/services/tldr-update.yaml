@@ -1,0 +1,44 @@
+---
+- name: Check if tldr exists in PATH
+  command: which tldr
+  register: tldr_check
+  failed_when: false
+  changed_when: false
+- name: Deploy tldr update service & timer
+  when: [tldr_check.rc == 0]
+  vars:
+    service_name: tldr-update
+    tldr_bin: '{{ tldr_check.stdout }}'
+    description: Update tldr documents
+  block:
+    - name: Deploy service unit
+      copy:
+        dest: '{{ systemd_path }}/{{ service_name }}.service'
+        content: |
+          [Unit]
+          Description={{ description }}
+          [Service]
+          Type=oneshot
+          ExecStart="{{ tldr_bin }}" --update
+        mode: '0644'
+      notify: reload-systemd-user-daemon
+    - name: Deploy timer unit
+      copy:
+        dest: '{{ systemd_path }}/{{ service_name }}.timer'
+        content: |
+          [Unit]
+          Description={{ description }}
+          [Timer]
+          OnCalendar=*-*-* 04:00:00
+          Persistent=true
+          RandomizedDelaySec=1h
+          [Install]
+          WantedBy=timers.target
+        mode: '0644'
+      notify: reload-systemd-user-daemon
+    - name: Enable & start timer
+      systemd:
+        name: '{{ service_name }}.timer'
+        enabled: true
+        state: started
+        scope: user
