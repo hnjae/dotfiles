@@ -1,0 +1,8 @@
+% gpac mp4box
+
+# concat mp4
+MP4Box -cat <video1> -cat <video2> out.mp4
+
+# split mp4 without re-encoding
+MP4Box -splitx 0:1991 input.mp4 -out output.mp4
+
