@@ -46,7 +46,7 @@ btrfs qgroup limit <size> <path>
 btrfs qgroup show -pcre <path>
 
 # defrag
-btrfs -v fi defragment -czstd -t size <file>|<dir>
+btrfs -v fi defragment -czstd --level 15 -t size <file>|<dir>
 
 # btrfs balance
 btrfs balance start -dusage=50 <path-to-mountpoints>

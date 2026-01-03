@@ -1,7 +1,10 @@
 % lvm, pvcreate, vgcreate, lvcreate, vgchange, pvs, vgs, lvs
 
-# create
+# create (기본 dataalignment 는 1MiB 인듯?)
 sudo pvcreate -v <block-device>
+
+# list pv alignment
+sudo pvs -o pv_name,pe_start --units k
 
 # print pv info
 sudo pvs
