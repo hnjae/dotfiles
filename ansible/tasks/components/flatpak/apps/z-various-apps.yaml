@@ -21,7 +21,6 @@
       - xyz.tytanium.DoorKnocker  # check availability of all portals provided by xdg-desktop-portal.
       # Dev
       - com.github.marhkb.Pods
-      - com.google.Chrome
       - com.mongodb.Compass  # unfree
       - io.dbeaver.DBeaverCommunity  # apache-2
       - io.gitlab.liferooter.TextPieces  # Developer's scratchpad
