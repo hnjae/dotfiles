@@ -1,0 +1,10 @@
+---
+# See: https://pre-commit.com/
+repos:
+  - repo: local
+    hooks:
+      - id: stylua
+        name: format lua
+        entry: stylua
+        language: system
+        types: [lua]
