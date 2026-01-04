@@ -146,7 +146,6 @@ alias gbnm="git branch --no-merged"
 alias gbr="git branch --remote"
 alias gbdm="git-branch-delete-merged" # git-branch-delete-merged 에서 한번 더 삭제할지 물어봄.
 
-
 typeset -g forgit_branch_delete="gbd" # defaults
 alias gbd!="git branch --delete --force"
 
@@ -183,12 +182,12 @@ alias grHom="git reset --hard origin/main"
 ############################################################################
 
 alias gsp="git stash push --include-untracked --message" # -u: --include-untracked
-typeset -g forgit_stash_push="gspz" # default: `gsp`
+typeset -g forgit_stash_push="gspz"                      # default: `gsp`
 alias gsl="git stash list"
 alias gss="git stash show --include-untracked"
 alias gssp="git stash show --include-untracked --patch"
 typeset -g forgit_stash_show="gssz" # default: `gss`
-alias gsG="git stash pop" # match lazygit
+alias gsG="git stash pop"           # match lazygit
 alias gsA="git stash apply"
 alias gsD="git stash drop"
 alias gsC="git stash clear"

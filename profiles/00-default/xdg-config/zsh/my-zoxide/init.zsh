@@ -1,5 +1,5 @@
 if (( ! $+commands[zoxide] )); then
-  return
+    return
 fi
 
 export _ZO_EXCLUDE_DIRS="$HOME:/nix/*:/mnt/*:/media/*:/run/mount/*:/run/media/*:/proc/*:*/.git:*/.git/*:*/.cache:*/.cache/*:*/.direnv:*/.direnv/*:*/dist:*/dist/*:*/.venv:*/.venv/*"
@@ -14,47 +14,46 @@ local initfile="${0:A:h}/_zoxide.zsh"
 # ]]; then
 #   $commands[zoxide] init zsh --no-cmd >| "$initfile"
 # fi
-$commands[zoxide] init zsh --no-cmd >| "$initfile"
+$commands[zoxide] init zsh --no-cmd >|"$initfile"
 # zcompile -UR "$initfile"
 source "$initfile"
 
 function cd() {
-  if [[ "$#" -gt 0 && "$1" == "--" ]]; then
-    shift
-  fi
+    if [[ $# -gt 0 && $1 == "--" ]]; then
+        shift
+    fi
 
-  if [[ "$#" -eq 0 ]]; then
-    return 0
-  fi
+    if [[ $# -eq 0 ]]; then
+        return 0
+    fi
 
-  if [[ "$#" -gt 1 ]]; then
-    print -u2 "cd: too many arguments"
-    return 1
-  fi
+    if [[ $# -gt 1 ]]; then
+        print -u2 "cd: too many arguments"
+        return 1
+    fi
 
-
-  if [[ -f "$1" ]]; then
-    __zoxide_z "$(dirname "$1")"
-  elif [[ -d "$1" ]]; then
-    __zoxide_z "$1"
-  else
-    print -u2 "cd: $1: No such file or directory"
-    return 1
-  fi
+    if [[ -f $1 ]]; then
+        __zoxide_z "$(dirname "$1")"
+    elif [[ -d $1 ]]; then
+        __zoxide_z "$1"
+    else
+        print -u2 "cd: $1: No such file or directory"
+        return 1
+    fi
 }
 
 function s() {
-  if [[ "$#" -gt 0 && "$1" == "--" ]]; then
-    shift
-  fi
+    if [[ $# -gt 0 && $1 == "--" ]]; then
+        shift
+    fi
 
-  if [[ -f "$*" ]]; then
-    __zoxide_z "$(dirname "$*")"
-  else
-    __zoxide_z "$@"
-  fi
+    if [[ -f $* ]]; then
+        __zoxide_z "$(dirname "$*")"
+    else
+        __zoxide_z "$@"
+    fi
 }
 
 function si() {
-  __zoxide_zi "$@"
+    __zoxide_zi "$@"
 }

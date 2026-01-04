@@ -1,6 +1,5 @@
 if (( ! $+commands[joshuto] )); then
-  return
+    return
 fi
-
 
 alias -- e="joshuto-cd"

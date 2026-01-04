@@ -1,5 +1,5 @@
-if (( ! $+commands[starship] )) || [[ "$TERM" == "dumb" ]]; then
-  return
+if (( ! $+commands[starship] )) || [[ $TERM == "dumb" ]]; then
+    return
 fi
 
 local starship_conf="${XDG_CONFIG_HOME:-$HOME/.config}/starship.toml"
@@ -16,5 +16,5 @@ local initfile="${0:A:h}/_starship.zsh"
 #   zcompile -UR $initfile
 # fi
 
-$commands[starship] init zsh --print-full-init >| "$initfile"
+$commands[starship] init zsh --print-full-init >|"$initfile"
 source "$initfile"

@@ -1,5 +1,5 @@
 if (( ! $+commands[rsync] )); then
-  return
+    return
 fi
 
 # alias -- rcp='rsync --info=progress2 -h -s -aHAXWE --numeric-ids --exclude-from="${XDG_DATA_HOME:-$HOME/.local/share}/rsync-exclude"'

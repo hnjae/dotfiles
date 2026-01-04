@@ -1,5 +1,5 @@
-if (( ! $+commands[podman] )) ; then
-  return
+if (( ! $+commands[podman] )); then
+    return
 fi
 
 # alias pm='podman'

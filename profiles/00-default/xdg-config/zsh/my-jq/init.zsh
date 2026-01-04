@@ -1,5 +1,5 @@
 if (( ! $+commands[jq] )); then
-  return
+    return
 fi
 
 # # NOTE: https://gist.github.com/rene-d/9e584a7dd2935d0f461904b9f2950007

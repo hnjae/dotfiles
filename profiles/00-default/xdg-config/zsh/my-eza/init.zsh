@@ -1,5 +1,5 @@
 if (( ! ${+commands[eza]} )); then
-  return
+    return
 fi
 
 # NOTE:

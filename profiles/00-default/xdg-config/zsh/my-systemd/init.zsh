@@ -1,5 +1,5 @@
 if (( ! $+commands[systemctl] )); then
-  return
+    return
 fi
 
 local gp # global prefix

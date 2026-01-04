@@ -1,7 +1,7 @@
 # https://github.com/Nukesor/pueue
 
-if (( ! $+commands[pueue] )); then
-  return
+if ((!$ + commands[pueue])); then
+    return
 fi
 
 alias -- pu=pueue

@@ -1,5 +1,5 @@
 if (( ! $+commands[mani] )); then
-  return
+    return
 fi
 
 alias -- mnr="mani run"

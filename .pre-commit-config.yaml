@@ -21,17 +21,17 @@ repos:
         name: harden shell
         entry: shellharden --replace
         language: system
-        files: \.(sh|bash|envrc|envrc.*)$
+        files: \.(sh|bash|envrc|envrc.*|env|env.*)$
       - id: shellcheck
         name: check shell
         entry: shellcheck
         language: system
-        files: \.(sh|bash|envrc|envrc.*)$
+        files: \.(sh|bash|envrc|envrc.*|env|env.*)$
       - id: shfmt
         name: format shell
-        entry: shfmt --indent 2 --simplify --write
+        entry: shfmt --indent 4 --simplify --write
         language: system
-        files: \.(sh|bash|envrc|envrc.*)$
+        files: \.(sh|bash|envrc|envrc.*|env|env.*)$
   - repo: local
     hooks:
       - id: just-fmt

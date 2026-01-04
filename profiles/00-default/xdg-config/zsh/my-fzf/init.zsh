@@ -1,101 +1,102 @@
 export FZF_DEFAULT_OPTS="--color=16,border:8 --layout=reverse --smart-case --height=22 --marker=░"
 
 () {
-  local -r target=${1}
-  shift
-  (( ${+commands[${1}]} )) || return 1
-  if [[ ! ( -s ${target} && ${target} -nt ${commands[${1}]} ) ]]; then
-    "${@}" >! ${target} || return 1
-    zcompile -UR ${target}
-  fi
-  source ${target}
+    local -r target=${1}
+    shift
+    (( ${+commands[${1}]} )) || return 1
+    if [[ ! ( -s ${target} && ${target} -nt ${commands[${1}]} ) ]]; then
+        "${@}" >! ${target} || return 1
+        zcompile -UR ${target}
+    fi
+    source ${target}
 } ${0:h}/_fzf---zsh.zsh fzf --zsh || return 1
 
 local fd_cmd bat_cmd=${(k)commands[bat]-${(k)commands[batcat]}} ls_cmd
 if (( ${+commands[bfs]} )); then
-  export FZF_DEFAULT_COMMAND="command bfs -mindepth 1 -exclude -name .git -type d,f -printf '%P\n' 2>/dev/null"
-  export FZF_ALT_C_COMMAND="command bfs -mindepth 1 -exclude -name .git -type d -printf '%P\n' 2>/dev/null"
-  _fzf_compgen_path() {
-    command bfs ${1} -exclude -name .git -type d,f -a -not -path ${1} -print
-  }
-  _fzf_compgen_dir() {
+    export FZF_DEFAULT_COMMAND="command bfs -mindepth 1 -exclude -name .git -type d,f -printf '%P\n' 2>/dev/null"
+    export FZF_ALT_C_COMMAND="command bfs -mindepth 1 -exclude -name .git -type d -printf '%P\n' 2>/dev/null"
+    _fzf_compgen_path() {
+        command bfs ${1} -exclude -name .git -type d,f -a -not -path ${1} -print
+    }
+_fzf_compgen_dir() {
     command bfs ${1} -exclude -name .git -type d -a -not -path ${1} -print
-  }
+}
 elif fd_cmd=${(k)commands[fd]-${(k)commands[fdfind]}}; [[ -n ${fd_cmd} ]]; then
-  local fd_excludes=(
-    ".cache"
-    ".direnv"
-    ".git"
-    ".git-crypt"
 
-    ".husky/_"
-    ".venv"
-    "dist"
-    "node_modules"
+    local fd_excludes=(
+        ".cache"
+        ".direnv"
+        ".git"
+        ".git-crypt"
 
-    ".idea"
-    ".vscode"
-    ".vscode-server"
-    ".zed"
+        ".husky/_"
+        ".venv"
+        "dist"
+        "node_modules"
 
-    ".DS_Store"
-    ".Thumbs.db"
-    ".directory"
+        ".idea"
+        ".vscode"
+        ".vscode-server"
+        ".zed"
 
-    ".__pycache__"
-    ".mypy_cache"
-    ".ruff_cache"
-    '\*.pyc'
-    '\*.swp'
-    '\*.zwc'
-    '\*~'
-  )
+        ".DS_Store"
+        ".Thumbs.db"
+        ".directory"
 
-  export FZF_CTRL_T_COMMAND="command ${fd_cmd} --hidden --one-file-system --follow ${fd_excludes[@]/#/--exclude } --type f --type d . 2>/dev/null"
-  export FZF_ALT_C_COMMAND="command ${fd_cmd} --hidden --one-file-system --follow ${fd_excludes[@]/#/--exclude } --type d . 2>/dev/null"
-  # export FZF_DEFAULT_COMMAND="command ${fd_cmd} -H --no-ignore-vcs -E .git -td -tf"
-  # export FZF_ALT_C_COMMAND="command ${fd_cmd} -H --no-ignore-vcs -E .git -td"
-  eval "_fzf_compgen_path() {
-    # command ${fd_cmd} -H --no-ignore-vcs -E .git -td -tf . \${1}
-    command ${fd_cmd} --hidden --one-file-system --no-ignore-vcs --follow ${fd_excludes[@]/#/--exclude } --type f --type d . \${1}
-  }"
-  eval "_fzf_compgen_dir() {
+        ".__pycache__"
+        ".mypy_cache"
+        ".ruff_cache"
+        '\*.pyc'
+        '\*.swp'
+        '\*.zwc'
+        '\*~'
+    )
+
+    export FZF_CTRL_T_COMMAND="command ${fd_cmd} --hidden --one-file-system --follow ${fd_excludes[@]/#/--exclude } --type f --type d . 2>/dev/null"
+    export FZF_ALT_C_COMMAND="command ${fd_cmd} --hidden --one-file-system --follow ${fd_excludes[@]/#/--exclude } --type d . 2>/dev/null"
+    # export FZF_DEFAULT_COMMAND="command ${fd_cmd} -H --no-ignore-vcs -E .git -td -tf"
+    # export FZF_ALT_C_COMMAND="command ${fd_cmd} -H --no-ignore-vcs -E .git -td"
+    eval "_fzf_compgen_path() {
+        # command ${fd_cmd} -H --no-ignore-vcs -E .git -td -tf . \${1}
+        command ${fd_cmd} --hidden --one-file-system --no-ignore-vcs --follow ${fd_excludes[@]/#/--exclude } --type f --type d . \${1}
+    }"
+eval "_fzf_compgen_dir() {
     # command ${fd_cmd} -H --no-ignore-vcs -E .git -td . \${1}
     command ${fd_cmd} --hidden --one-file-system --no-ignore-vcs --follow ${fd_excludes[@]/#/--exclude } --type d . \${1}
-  }"
+}"
 elif (( ${+commands[rg]} )); then
-  export FZF_DEFAULT_COMMAND="command rg -uu -g '!.git' --files --no-messages"
-  _fzf_compgen_path() {
-    command rg -uu -g '!.git' --files ${1}
-  }
+    export FZF_DEFAULT_COMMAND="command rg -uu -g '!.git' --files --no-messages"
+    _fzf_compgen_path() {
+        command rg -uu -g '!.git' --files ${1}
+    }
 elif (( ${+commands[ug]} )); then
-  export FZF_DEFAULT_COMMAND="command ug -lrs. --exclude-dir=.git --no-tree ''"
-  _fzf_compgen_path() {
-    command ug -lrs. --exclude-dir=.git --no-tree '' ${1}
-  }
+    export FZF_DEFAULT_COMMAND="command ug -lrs. --exclude-dir=.git --no-tree ''"
+    _fzf_compgen_path() {
+        command ug -lrs. --exclude-dir=.git --no-tree '' ${1}
+    }
 fi
 
 if (( ${+commands[eza]} )); then
-  ls_cmd='eza --group-directories-first --color=always'
+    ls_cmd='eza --group-directories-first --color=always'
 elif (( ${+commands[lsd]} )); then
-  ls_cmd='lsd --group-directories-first --color=always'
+    ls_cmd='lsd --group-directories-first --color=always'
 elif command ls --version &>/dev/null; then
-  # GNU
-  ls_cmd='ls --group-directories-first --color=always'
+    # GNU
+    ls_cmd='ls --group-directories-first --color=always'
 else
-  # Stock OpenBSD ls does not support colors at all, but colorls does.
-  if [[ ${OSTYPE} == openbsd* ]]; then
-    if (( ${+commands[colorls]} )); then
-      ls_cmd='colorls --color=always'
+    # Stock OpenBSD ls does not support colors at all, but colorls does.
+    if [[ ${OSTYPE} == openbsd* ]]; then
+        if (( ${+commands[colorls]} )); then
+            ls_cmd='colorls --color=always'
+        else
+            ls_cmd=ls
+        fi
     else
-      ls_cmd=ls
+        ls_cmd='ls --color=always'
     fi
-  else
-    ls_cmd='ls --color=always'
-  fi
 fi
 if [[ -n ${bat_cmd} ]]; then
-  export FZF_CTRL_T_OPTS="--bind ctrl-/:toggle-preview --preview 'if [[ -d {} ]]; then command ${ls_cmd} -1F {}; else command ${bat_cmd} --color=always --line-range :500 {}; fi' ${FZF_CTRL_T_OPTS}"
+    export FZF_CTRL_T_OPTS="--bind ctrl-/:toggle-preview --preview 'if [[ -d {} ]]; then command ${ls_cmd} -1F {}; else command ${bat_cmd} --color=always --line-range :500 {}; fi' ${FZF_CTRL_T_OPTS}"
 fi
 export FZF_ALT_C_OPTS="--bind ctrl-/:toggle-preview --preview 'command ${ls_cmd} -1F {}' ${FZF_ALT_C_OPTS}"
 unset fd_cmd bat_cmd ls_cmd

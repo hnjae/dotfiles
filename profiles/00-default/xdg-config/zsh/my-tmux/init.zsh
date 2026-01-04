@@ -1,5 +1,5 @@
 if (( ! $+commands[tmux] )); then
-  return
+    return
 fi
 
 alias -- t=tmux
