@@ -18,3 +18,29 @@
           filesystems=/media;home
         mode: '0644'
         backup: false
+    - name: Ensure {{ app_id }} is removed from association
+      ini_file:
+        path: '{{ mimeapps_path }}'
+        section: Removed Associations
+        option: '{{ item }}' # mime
+        mode: '0644'
+        value: >-
+          {{ (
+              lookup('ansible.builtin.ini', item,
+                     section='Removed Associations',
+                     file=mimeapps_path,
+                     errors='ignore') | default('', true)
+             )
+             + app_id + '.desktop;'
+             if (app_id + '.desktop;') not in
+                (lookup('ansible.builtin.ini', item,
+                        section='Removed Associations',
+                        file=mimeapps_path,
+                        errors='ignore') | default('', true))
+             else
+                (lookup('ansible.builtin.ini', item,
+                        section='Removed Associations',
+                        file=mimeapps_path,
+                        errors='ignore') | default('', true))
+          }}
+      loop: [video/ogg]
