@@ -1,0 +1,10 @@
+---
+# See: https://pre-commit.com/
+repos:
+  - repo: local
+    hooks:
+      - id: taplo
+        name: format toml
+        entry: taplo format
+        language: system
+        types: [toml]
