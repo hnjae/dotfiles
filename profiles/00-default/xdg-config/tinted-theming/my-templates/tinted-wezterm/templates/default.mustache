@@ -1,5 +1,5 @@
 # NOTE:
-#   - following version 0.1.1 of base24 <2025-07-28>
+#   - following version 0.1.2 of base24 <2026-01-05>
 #   - <https://github.com/tinted-theming/base24/blob/main/styling.md>
 #
 # Base24: {{scheme-name}}
@@ -13,8 +13,11 @@ selection_bg = "#{{base02-hex}}"
 selection_fg = "#{{base05-hex}}"
 
 cursor_bg = "#{{base05-hex}}"
-cursor_border = "#{{base05-hex}}"
 cursor_fg = "#{{base00-hex}}"
+cursor_border = "#{{base05-hex}}"
+
+scrollbar_thumb = "#{{base01-hex}}"
+split = "#{{base03-hex}}"           # or use base02 if too bright
 
 ansi = [
   "#{{base00-hex}}",
@@ -37,5 +40,52 @@ brights = [
   "#{{base15-hex}}",
   "#{{base07-hex}}",
 ]
+
+# Since: 20220319-142410-0fcdea07
+# When the IME, a dead key or a leader key are being processed and are effectively
+# holding input pending the result of input composition, change the cursor
+# to this color to give a visual cue about the compose state.
+compose_cursor = "#{{base09-hex}}" # orange
+
+# Colors for copy_mode and quick_select
+# available since: 20220807-113146-c2fee766
+# In copy_mode, the color of the active text is:
+# 1. copy_mode_active_highlight_* if additional text was selected using the mouse
+# 2. selection_* otherwise
+[colors.copy_mode_active_highlight_bg]
+Color = "#{{base0A-hex}}" # search-text-background
+[colors.copy_mode_active_highlight_fg]
+Color = "#{{base00-hex}}"
+[colors.copy_mode_inactive_highlight_bg]
+Color = "#{{base02-hex}}" # selection-background
+[colors.copy_mode_inactive_highlight_fg]
+Color = "#{{base05-hex}}"
+
+[colors.quick_select_label_bg]
+Color = "#{{base0D-hex}}" # blue
+[colors.quick_select_label_fg]
+Color = "#{{base00-hex}}"
+[colors.quick_select_match_bg]
+Color = "#{{base0A-hex}}"
+[colors.quick_select_match_fg]
+Color = "#{{base00-hex}}" # search-text-background
+
+[colors.input_selector_label_bg]
+Color = "#{{base01-hex}}"
+[colors.input_selector_label_fg]
+Color = "#{{base05-hex}}"
+
+[colors.launcher_label_bg]
+Color = "#{{base01-hex}}"
+[colors.launcher_label_fg]
+Color = "#{{base05-hex}}"
+
+[colors.indexed]
+16 = "#{{base09-hex}}"
+17 = "#{{base0F-hex}}"
+18 = "#{{base01-hex}}"
+19 = "#{{base02-hex}}"
+20 = "#{{base04-hex}}"
+21 = "#{{base05-hex}}"
 
 # vi:ft=toml

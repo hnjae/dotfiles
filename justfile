@@ -90,6 +90,7 @@ build-tinted:
         .lib/tinted-builder-rust/bin/tinted-builder-rust build -s "$myschemes" "$template"
     done
 
+# NOTE: this recipe is broken due to tinty update
 update-tinted:
     #!/bin/sh
 

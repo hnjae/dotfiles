@@ -1,5 +1,5 @@
 # NOTE:
-#   - following version 0.1.1 of base24 <2025-07-28>
+#   - following version 0.1.2 of base24 <2026-01-05>
 #   - <https://github.com/tinted-theming/base24/blob/main/styling.md>
 #
 # vim: ft=ghostty
@@ -17,7 +17,7 @@ palette = 3=#c0a36e
 palette = 4=#7e9cd8
 palette = 5=#957fb8
 palette = 6=#6a9589
-palette = 7=#dcd7ba
+palette = 7=#e5ddb0
 palette = 8=#727169
 palette = 9=#e46876
 palette = 10=#98bb6c
@@ -31,7 +31,7 @@ palette = 17=#43242b
 palette = 18=#2a2a37
 palette = 19=#223249
 palette = 20=#c8c093
-palette = 21=#dcd7ba
+palette = 21=#e5ddb0
 
 # Foreground & background colors
 background = #1f1f28

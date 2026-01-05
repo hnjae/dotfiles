@@ -1,5 +1,5 @@
 # NOTE:
-#   - following version 0.1.1 of base24 <2025-07-28>
+#   - following version 0.1.2 of base24 <2026-01-05>
 #   - <https://github.com/tinted-theming/base24/blob/main/styling.md>
 #
 # Base24: my-kanagawa-wave
@@ -13,8 +13,11 @@ selection_bg = "#223249"
 selection_fg = "#dcd7ba"
 
 cursor_bg = "#dcd7ba"
-cursor_border = "#dcd7ba"
 cursor_fg = "#1f1f28"
+cursor_border = "#dcd7ba"
+
+scrollbar_thumb = "#2a2a37"
+split = "#727169"           # or use base02 if too bright
 
 ansi = [
   "#1f1f28",
@@ -24,7 +27,7 @@ ansi = [
   "#7e9cd8",
   "#957fb8",
   "#6a9589",
-  "#dcd7ba",
+  "#e5ddb0",
 ]
 
 brights = [
@@ -37,5 +40,52 @@ brights = [
   "#7aa89f",
   "#f2ecbc",
 ]
+
+# Since: 20220319-142410-0fcdea07
+# When the IME, a dead key or a leader key are being processed and are effectively
+# holding input pending the result of input composition, change the cursor
+# to this color to give a visual cue about the compose state.
+compose_cursor = "#ffa066" # orange
+
+# Colors for copy_mode and quick_select
+# available since: 20220807-113146-c2fee766
+# In copy_mode, the color of the active text is:
+# 1. copy_mode_active_highlight_* if additional text was selected using the mouse
+# 2. selection_* otherwise
+[colors.copy_mode_active_highlight_bg]
+Color = "#c0a36e" # search-text-background
+[colors.copy_mode_active_highlight_fg]
+Color = "#1f1f28"
+[colors.copy_mode_inactive_highlight_bg]
+Color = "#223249" # selection-background
+[colors.copy_mode_inactive_highlight_fg]
+Color = "#dcd7ba"
+
+[colors.quick_select_label_bg]
+Color = "#7e9cd8" # blue
+[colors.quick_select_label_fg]
+Color = "#1f1f28"
+[colors.quick_select_match_bg]
+Color = "#c0a36e"
+[colors.quick_select_match_fg]
+Color = "#1f1f28" # search-text-background
+
+[colors.input_selector_label_bg]
+Color = "#2a2a37"
+[colors.input_selector_label_fg]
+Color = "#dcd7ba"
+
+[colors.launcher_label_bg]
+Color = "#2a2a37"
+[colors.launcher_label_fg]
+Color = "#dcd7ba"
+
+[colors.indexed]
+16 = "#ffa066"
+17 = "#43242b"
+18 = "#2a2a37"
+19 = "#223249"
+20 = "#c8c093"
+21 = "#dcd7ba"
 
 # vi:ft=toml

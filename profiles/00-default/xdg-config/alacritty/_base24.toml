@@ -1,10 +1,9 @@
 # NOTE:
-#   - following version 0.1.1 of base24 <2025-07-28>
+#   - following version 0.1.2 of base24 <2025-07-28>
 #   - <https://github.com/tinted-theming/base24/blob/main/styling.md>
 #
 # Base24 my-kanagawa-wave - alacritty color config
 # Scheme by Original by rebelot (https://github.com/rebelot/kanagawa.nvim), Ported by hnjae (https://github.com/hnjae)
-# vi:ft=toml
 
 # COLORFGBG = if (config.base-home.base24.variant == "light") then "0;15" else "15;0";
 # [env]
@@ -31,7 +30,7 @@ yellow = '0xc0a36e'
 blue = '0x7e9cd8'
 magenta = '0x957fb8'
 cyan = '0x6a9589'
-white = '0xdcd7ba'
+white = '0xe5ddb0'
 
 # Bright colors
 [colors.bright]
@@ -42,7 +41,7 @@ yellow = '0xe6c384'
 blue = '0x7fb4ca'
 magenta = '0x938aa9'
 cyan = '0x7aa89f'
-white = '0x7aa89f'
+white = '0xf2ecbc'
 
 [[colors.indexed_colors]]
 index = 16
@@ -66,4 +65,6 @@ color = "0xc8c093"
 
 [[colors.indexed_colors]]
 index = 21
-color = "0xdcd7ba"
+color = "0xe5ddb0"
+
+# vi:ft=toml
