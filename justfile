@@ -72,29 +72,39 @@ sync:
 
 build-tinted:
     #!/usr/bin/env bash
-    # Create ./_xdg.config-files/tinted-theming/my-templates/tinted-*/themes/base24-*
+    # Creates tinted-theming/my-templates/tinted-*/themes/base24-*
 
     set -euo pipefail
 
-    # WIP: add tinted-builder-rust using nix. This is a temporary impure solution.
-    PATH="~/.local/share/cargo/bin:$PATH"
+    XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}"
 
-    templates="~/.config/tinted-theming/my-templates"
-    myschemes="~/.config/tinted-theming/custom-schemes"
-    # schemes="./_xdg.data-files/tinted-theming/tinty/repos/schemes/base24"
+    templates="${XDG_CONFIG_HOME}/tinted-theming/my-templates"
+    myschemes="${XDG_CONFIG_HOME}/tinted-theming/my-schemes"
+
+    if [ ! -d "$templates" ] || [ ! -d "$myschemes" ]; then
+        echo "ERROR: $templates or $myschemes is not installed" >&2
+        exit 1
+    fi
+
     for template in "$templates"/*; do
-        tinted-builder-rust build -s "$myschemes" "$template"
-        # [ -d "$schemes" ] &&  tinted-builder-rust build -s "$schemes" "$template"
+        .lib/tinted-builder-rust/bin/tinted-builder-rust build -s "$myschemes" "$template"
     done
 
-update-tinted: build-tinted
+update-tinted:
     #!/bin/sh
 
     set -eu
 
-    # theme="base24-my-gruvbox-light"
-    # theme="base24-my-kanagawa-dragon"
-    # theme="base24-my-rose-pine"
+    XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}"
+
+    templates="${XDG_CONFIG_HOME}/tinted-theming/my-templates"
+    myschemes="${XDG_CONFIG_HOME}/tinted-theming/my-schemes"
+
+    if [ ! -d "$templates" ] || [ ! -d "$myschemes" ]; then
+        echo "ERROR: $templates or $myschemes is not installed" >&2
+        exit 1
+    fi
+
     theme="base24-my-kanagawa-wave"
 
     if command -v tinty >/dev/null 2>&1; then

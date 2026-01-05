@@ -1,0 +1,5 @@
+#!/bin/sh
+
+scriptdir="$(cd -- "$(dirname -- "$0")" && pwd -P)" >/dev/null 2>&1
+
+exec nix shell --file "${scriptdir}/../" --command tinted-builder-rust "$@"
