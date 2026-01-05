@@ -1,14 +1,10 @@
 local wezterm = require("wezterm")
 
 local config = wezterm.config_builder()
-
 config.bold_brightens_ansi_colors = "No"
-config.color_scheme = "_base24"
 
 require("fonts").apply_to_config(config)
 require("ui").apply_to_config(config)
-
--- require("disable-tab").apply_to_config(config)
 
 config.webgpu_power_preference = "LowPower"
 
@@ -52,11 +48,6 @@ config.mouse_bindings = {
 -----------------
 config.keys = {
   {
-    key = "T",
-    mods = "CTRL|SHIFT",
-    action = wezterm.action.Nop,
-  },
-  {
     key = "Q",
     mods = "CTRL|SHIFT",
     action = wezterm.action.QuitApplication,
@@ -67,6 +58,14 @@ config.keys = {
     mods = "SHIFT",
     action = wezterm.action({ SendString = "\x1b\r" }),
   },
+
+  -- Tab handling (disable creating tab)
+  -- {
+  --   key = "T",
+  --   mods = "CTRL|SHIFT",
+  --   action = wezterm.action.Nop,
+  -- },
+
   -- WIP
   -- {
   --   key = "C",
