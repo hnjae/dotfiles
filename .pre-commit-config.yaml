@@ -2,7 +2,8 @@
 # See: https://pre-commit.com/
 exclude: |
   (?x)^(
-    .*/lazy-lock.json
+    .*/lazy-lock.json|
+    .*/zed/.*.json
   )$
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -49,11 +50,6 @@ repos:
         entry: yamlfix
         language: system
         types: [yaml]
-      - id: taplo
-        name: format toml
-        entry: taplo format
-        language: system
-        types: [toml]
       - id: biome
         name: format json(c)
         entry: biome format --write
