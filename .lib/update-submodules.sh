@@ -25,7 +25,7 @@ update_module_by_tag() {
     local latest_tag
 
     git -C "$module" fetch --tags --quiet
-    latest_tag="$(git -C "$module" describe --tags --abbrev=0)"
+    latest_tag="$(git -C "$module" tag -l --sort=-version:refname | head -n1)"
 
     if [ "$latest_tag" = "" ]; then
         echo "[ERROR] No tags found in $module" >&2
