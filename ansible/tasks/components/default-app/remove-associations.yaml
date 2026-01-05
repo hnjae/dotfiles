@@ -6,7 +6,7 @@
     path: '{{ mimeapps_path }}'
     section: Removed Associations
     mode: '0644'
-    option: '{{ mime_type }}'  # mime
+    option: '{{ mime_type }}' # mime
     value: >-
       {{ (
           lookup('ansible.builtin.ini', mime_type,

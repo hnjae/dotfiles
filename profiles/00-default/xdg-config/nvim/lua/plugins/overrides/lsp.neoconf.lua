@@ -5,7 +5,7 @@ return {
   optional = true,
   -- enabled = true,
   opts = {
-    global_settings = "neoconf.json",
+    global_settings = "neoconf.jsonc",
     import = {
       -- vscode = false, -- local .vscode/settings.json
       -- coc = false, -- global/local coc-settings.json

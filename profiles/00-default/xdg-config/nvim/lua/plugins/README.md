@@ -26,15 +26,15 @@
 #### `icons`
 
 - `nf-fa-`, `nf-oct-` 종류는 아이콘이 비정상적으로 큰 것 같다. 가능하면 사용하지 말자.
-  - e.g.:
-    -  : nf-fa-ban
-    -  : nf-oct-skip
-    -  : nf-seti-github
-    - 󰀚 : nf-md-adjust
-    - 󰠆 : nf-md-basketball
-    -  : nf-cod-error
-    -  : nf-cod-circle_slash
-    -  : nf-cod-github
+    - e.g.:
+        -  : nf-fa-ban
+        -  : nf-oct-skip
+        -  : nf-seti-github
+        - 󰀚 : nf-md-adjust
+        - 󰠆 : nf-md-basketball
+        -  : nf-cod-error
+        -  : nf-cod-circle_slash
+        -  : nf-cod-github
 
 ## Cheat Sheet
 

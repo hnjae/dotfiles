@@ -1,168 +1,151 @@
 {
-    "stdenv.system": {
-        "prefix": [
-            "stdenv.system",
-            "ssystem"
-        ],
-        "description": "current system :: string (e.g. x86_64-linux)",
-        "body": "stdenv.system"
-    },
-    "sisAarch64": {
-        "prefix": "sisAarch64",
-        "description": "stdenv.isAarch64 :: bool",
-        "body": "stdenv.isAarch64"
-    },
-    "sisx86_64": {
-        "prefix": "sisx86_64",
-        "description": "stdenv.isx86_64 :: bool",
-        "body": "stdenv.isx86_64"
-    },
-    "sisLinux": {
-        "prefix": "sisLinux",
-        "description": "stdenv.isLinux :: bool",
-        "body": "stdenv.isLinux"
-    },
-    "sisDarwin": {
-        "prefix": "sisDarwin",
-        "description": "stdenv.isDarwin :: bool",
-        "body": [
-            "stdenv.isDarwin",
-            ""
-        ]
-    },
-    "pkgs.writeScriptBin": {
-        "prefix": "spwriteScriptBin",
-        "description": "writeScriptBin",
-        "body": [
-            "(pkgs.writeScriptBin \"${1:name}\" ''",
-            "\t#!\\${pkgs.dash\\}/bin/dash",
-            "\t$0 \"\\$@\"",
-            "'')"
-        ]
-    },
-    "pkgs.writeScript": {
-        "prefix": "spwriteScript",
-        "description": "pkgs.writeScript",
-        "body": [
-            "(pkgs.writeScript \"${1:name}\" ''",
-            "\t#!\\${pkgs.dash\\}/bin/dash",
-            "\t$0 \"\\$@\"",
-            "'')"
-        ]
-    },
-    "pkgs.runCommandLocal": {
-        "prefix": "sprunCommandLocal",
-        "description": "pkgs.runCommandLocal",
-        "body": [
-            "pkgs.runCommandLocal \"${1:name}\" \\${2:{\\}\\} ''",
-            "\t${0:script}",
-            "'')",
-            ""
-        ]
-    },
-    "pbindbin": {
-        "prefix": "spbindbin",
-        "description": "use pkgs.runCommand to bindbin",
-        "body": ""
-    },
-    "installPhase (mkDerivation)": {
-        "prefix": "sinstallPhase",
-        "description": "installPhase in stdenv.mkDerivation",
-        "body": [
-            "installPhase = ''",
-            "\t$0",
-            "'';"
-        ]
-    },
-    "Empty hash": {
-        "prefix": "hash",
-        "description": "Empty hash",
-        "body": "\"${1:sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=}\";"
-    },
-    "meta (mkDerivation)": {
-        "prefix": "smeta",
-        "description": "Nixpkgs' minimal meta attribute set",
-        "body": [
-            "meta = {",
-            "\tdescription = \"$1\";",
-            "\thomepage = \"$2\";",
-            "\tlicense = lib.licenses.$3;",
-            "\tmaintainers = with lib.maintainers; [ $0 ];",
-            "};"
-        ]
-    },
-    "fetchFrom (mkDerivation)": {
-        "prefix": "sfetchFrom",
-        "body": [
-            "fetchFrom${1|GitHub,GitLab,Gitea,Gitiles,BitBucket,Savannah,RepoOrCz,SourceHut|} {",
-            "\towner = \"$2\";",
-            "\trepo = \"$3\";",
-            "\trev = \"${4:v\\${version\\}}\";",
-            "\thash = \"${5:sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=}\";",
-            "};"
-        ],
-        "description": "fetchFromGitHub, or any other common fetcher from Nixpkgs"
-    },
-    "fetchurl": {
-        "prefix": "fetchurl",
-        "body": [
-            "fetchurl {",
-            "  url = \"$1\";",
-            "  hash = \"${2:sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=}\";",
-            "};"
-        ],
-        "description": "fetchurl with default empty hash"
-    },
-    "package-arguments": {
-        "prefix": "spkg",
-        "body": [
-            "{ lib",
-            ", ${1:stdenv}",
-            ", $2",
-            "}:",
-            "",
-            "$0"
-        ],
-        "description": "Package arguments, starting with { lib"
-    },
-    "stdenv.mkDerivation": {
-        "prefix": "s-mk-derivation",
-        "body": [
-            "stdenv.mkDerivation (finalAttrs: {",
-            "\tpname = \"$1\";",
-            "\tversion = \"$2\";",
-            "",
-            "\tsrc = $3",
-            "",
-            "\tnativeBuildInputs = [",
-            "\t\t$4",
-            "\t];",
-            "\tbuildInputs = [",
-            "\t\t$0",
-            "\t];",
-            "",
-            "\tmeta = {",
-            "\t\tdescription = \"$5\";",
-            "\t\thomepage = \"$6\";",
-            "\t\tlicense = lib.licenses.$7;",
-            "\t\tmaintainers = with lib.maintainers; [ $8 ];",
-            "\t};",
-            "})"
-        ],
-        "description": "Nixpkgs' stdenv.mkDerivation template"
-    },
-    "noDisplay XDG Desktop Item": {
-        "prefix": "s-no-display-xdg-desktop-item",
-        "description": "Hide desktop item",
-        "body": [
-            "(lib.hiPrio (",
-            "\tpkgs.makeDesktopItem {",
-            "\t\tname = \"${1:appId}\";",
-            "\t\tdesktopName = \"This should not be displayed.\";",
-            "\t\texec = \":\";",
-            "\t\tnoDisplay=true;",
-            "}",
-            "))"
-        ]
-    }
+  "stdenv.system": {
+    "prefix": ["stdenv.system", "ssystem"],
+    "description": "current system :: string (e.g. x86_64-linux)",
+    "body": "stdenv.system"
+  },
+  "sisAarch64": {
+    "prefix": "sisAarch64",
+    "description": "stdenv.isAarch64 :: bool",
+    "body": "stdenv.isAarch64"
+  },
+  "sisx86_64": {
+    "prefix": "sisx86_64",
+    "description": "stdenv.isx86_64 :: bool",
+    "body": "stdenv.isx86_64"
+  },
+  "sisLinux": {
+    "prefix": "sisLinux",
+    "description": "stdenv.isLinux :: bool",
+    "body": "stdenv.isLinux"
+  },
+  "sisDarwin": {
+    "prefix": "sisDarwin",
+    "description": "stdenv.isDarwin :: bool",
+    "body": ["stdenv.isDarwin", ""]
+  },
+  "pkgs.writeScriptBin": {
+    "prefix": "spwriteScriptBin",
+    "description": "writeScriptBin",
+    "body": [
+      "(pkgs.writeScriptBin \"${1:name}\" ''",
+      "\t#!\\${pkgs.dash\\}/bin/dash",
+      "\t$0 \"\\$@\"",
+      "'')"
+    ]
+  },
+  "pkgs.writeScript": {
+    "prefix": "spwriteScript",
+    "description": "pkgs.writeScript",
+    "body": [
+      "(pkgs.writeScript \"${1:name}\" ''",
+      "\t#!\\${pkgs.dash\\}/bin/dash",
+      "\t$0 \"\\$@\"",
+      "'')"
+    ]
+  },
+  "pkgs.runCommandLocal": {
+    "prefix": "sprunCommandLocal",
+    "description": "pkgs.runCommandLocal",
+    "body": [
+      "pkgs.runCommandLocal \"${1:name}\" \\${2:{\\}\\} ''",
+      "\t${0:script}",
+      "'')",
+      ""
+    ]
+  },
+  "pbindbin": {
+    "prefix": "spbindbin",
+    "description": "use pkgs.runCommand to bindbin",
+    "body": ""
+  },
+  "installPhase (mkDerivation)": {
+    "prefix": "sinstallPhase",
+    "description": "installPhase in stdenv.mkDerivation",
+    "body": ["installPhase = ''", "\t$0", "'';"]
+  },
+  "Empty hash": {
+    "prefix": "hash",
+    "description": "Empty hash",
+    "body": "\"${1:sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=}\";"
+  },
+  "meta (mkDerivation)": {
+    "prefix": "smeta",
+    "description": "Nixpkgs' minimal meta attribute set",
+    "body": [
+      "meta = {",
+      "\tdescription = \"$1\";",
+      "\thomepage = \"$2\";",
+      "\tlicense = lib.licenses.$3;",
+      "\tmaintainers = with lib.maintainers; [ $0 ];",
+      "};"
+    ]
+  },
+  "fetchFrom (mkDerivation)": {
+    "prefix": "sfetchFrom",
+    "body": [
+      "fetchFrom${1|GitHub,GitLab,Gitea,Gitiles,BitBucket,Savannah,RepoOrCz,SourceHut|} {",
+      "\towner = \"$2\";",
+      "\trepo = \"$3\";",
+      "\trev = \"${4:v\\${version\\}}\";",
+      "\thash = \"${5:sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=}\";",
+      "};"
+    ],
+    "description": "fetchFromGitHub, or any other common fetcher from Nixpkgs"
+  },
+  "fetchurl": {
+    "prefix": "fetchurl",
+    "body": [
+      "fetchurl {",
+      "  url = \"$1\";",
+      "  hash = \"${2:sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=}\";",
+      "};"
+    ],
+    "description": "fetchurl with default empty hash"
+  },
+  "package-arguments": {
+    "prefix": "spkg",
+    "body": ["{ lib", ", ${1:stdenv}", ", $2", "}:", "", "$0"],
+    "description": "Package arguments, starting with { lib"
+  },
+  "stdenv.mkDerivation": {
+    "prefix": "s-mk-derivation",
+    "body": [
+      "stdenv.mkDerivation (finalAttrs: {",
+      "\tpname = \"$1\";",
+      "\tversion = \"$2\";",
+      "",
+      "\tsrc = $3",
+      "",
+      "\tnativeBuildInputs = [",
+      "\t\t$4",
+      "\t];",
+      "\tbuildInputs = [",
+      "\t\t$0",
+      "\t];",
+      "",
+      "\tmeta = {",
+      "\t\tdescription = \"$5\";",
+      "\t\thomepage = \"$6\";",
+      "\t\tlicense = lib.licenses.$7;",
+      "\t\tmaintainers = with lib.maintainers; [ $8 ];",
+      "\t};",
+      "})"
+    ],
+    "description": "Nixpkgs' stdenv.mkDerivation template"
+  },
+  "noDisplay XDG Desktop Item": {
+    "prefix": "s-no-display-xdg-desktop-item",
+    "description": "Hide desktop item",
+    "body": [
+      "(lib.hiPrio (",
+      "\tpkgs.makeDesktopItem {",
+      "\t\tname = \"${1:appId}\";",
+      "\t\tdesktopName = \"This should not be displayed.\";",
+      "\t\texec = \":\";",
+      "\t\tnoDisplay=true;",
+      "}",
+      "))"
+    ]
+  }
 }

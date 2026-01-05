@@ -1,120 +1,102 @@
 {
-    "vim.notify - warning": {
-        "body": "vim.notify(${0:${TM_SELECTED_TEXT:msg}}, vim.log.levels.WARN)",
-        "prefix": "warn"
-    },
-    "packpath": {
-        "body": "local package_path = (...):match(\"(.-)[^%.]+\\$\")",
-        "description": "package_path of file",
-        "prefix": "packpath"
-    },
-    "get option value": {
-        "prefix": "getopt",
-        "description": "get option value",
-        "body": "vim.api.nvim_get_option_value(\"${1:filetype}\", { buf = ${2:bufid} })"
-    },
-    "get current buffer's option value": {
-        "prefix": "getoptl",
-        "description": "get filetype",
-        "body": "vim.opt_local.${1:filetype}:get()"
-    },
-    "get filetype": {
-        "prefix": "getft",
-        "description": "get filetype",
-        "body": "vim.api.nvim_get_option_value(\"filetype\", { buf = ${1:bufid} })"
-    },
-    "get current buffer's filetype": {
-        "prefix": "getftl",
-        "description": "get filetype",
-        "body": "vim.opt_local.filetype:get()"
-    },
-    "autocmd": {
-        "prefix": [
-            "autocmd",
-            "ac"
-        ],
-        "description": "autocmd-filetype",
-        "body": [
-            "vim.api.nvim_create_autocmd({\"${1:FileType}\"}, {",
-            "\tpattern = { \"${2:gitcommit}\" \\},",
-            "\tcallback = function()",
-            "\t\t${0:$TM_SELECTED_TEXT}",
-            "\tend,",
-            "})"
-        ]
-    },
-    "autocmd filetype": {
-        "prefix": [
-            "autocmd-filetype",
-            "acft"
-        ],
-        "description": "autocmd-filetype",
-        "body": [
-            "vim.api.nvim_create_autocmd(\"FileType\", {",
-            "\tpattern = { \"${1:gitcommit}\" \\},",
-            "\tcallback = function()",
-            "\t\t${0:$TM_SELECTED_TEXT}",
-            "\tend,",
-            "})"
-        ]
-    },
-    "cwd": {
-        "body": "vim.uv.cwd()",
-        "description": "vim 이 실행된 cwd",
-        "prefix": "cwd"
-    },
-    "vim.api.nvim_del_user_command": {
-        "prefix": [
-            "del_user_command"
-        ],
-        "description": "delete user command",
-        "body": "vim.api.nvim_del_user_command($0)"
-    },
-    "get highlight": {
-        "body": "vim.api.nvim_get_hl(0, { name = \"${0:PmenuSel}\" \\})",
-        "description": "get highlight group",
-        "prefix": "get-highlight"
-    },
-    "get cli output": {
-        "body": "vim.system({$0\\}, { text = true \\}):wait().stdout",
-        "description": "get stdout from shell command",
-        "prefix": "getclioutput"
-    },
-    "extend (insert) table (list)": {
-        "body": "vim.list_extend(${1:table-name}, $2)$0",
-        "description": "extend list-table",
-        "prefix": [
-            "extend-table"
-        ]
-    },
-    "tbl_contains": {
-        "body": "vim.tbl_contains(${1:table}, ${2:value})",
-        "description": "obj in table",
-        "prefix": [
-            "contains",
-            "tbl_contains",
-            "vim.tbl_contains"
-        ]
-    },
-    "vim.api.nvim_create_autocmd": {
-        "body": [
-            "vim.api.nvim_create_autocmd(\"${1:FileType}\", {",
-            "\tpattern = { ${2:\"asciidoc\"} },",
-            "\tcallback = function ()",
-            "\t\t${0:${TM_SELECTED_TEXT:-- do something}}",
-            "\tend,",
-            "})"
-        ],
-        "description": "create autocmd",
-        "prefix": [
-            "vim.api.nvim_create_autocmd",
-            "create_autocmd",
-            "autocmd"
-        ]
-    },
-    "deep-extend": {
-        "body": "vim.tbl_deep_extend(\"keep\", $1, $2)$0",
-        "description": "deep-extend table",
-        "prefix": "deep-extend"
-    }
+  "vim.notify - warning": {
+    "body": "vim.notify(${0:${TM_SELECTED_TEXT:msg}}, vim.log.levels.WARN)",
+    "prefix": "warn"
+  },
+  "packpath": {
+    "body": "local package_path = (...):match(\"(.-)[^%.]+\\$\")",
+    "description": "package_path of file",
+    "prefix": "packpath"
+  },
+  "get option value": {
+    "prefix": "getopt",
+    "description": "get option value",
+    "body": "vim.api.nvim_get_option_value(\"${1:filetype}\", { buf = ${2:bufid} })"
+  },
+  "get current buffer's option value": {
+    "prefix": "getoptl",
+    "description": "get filetype",
+    "body": "vim.opt_local.${1:filetype}:get()"
+  },
+  "get filetype": {
+    "prefix": "getft",
+    "description": "get filetype",
+    "body": "vim.api.nvim_get_option_value(\"filetype\", { buf = ${1:bufid} })"
+  },
+  "get current buffer's filetype": {
+    "prefix": "getftl",
+    "description": "get filetype",
+    "body": "vim.opt_local.filetype:get()"
+  },
+  "autocmd": {
+    "prefix": ["autocmd", "ac"],
+    "description": "autocmd-filetype",
+    "body": [
+      "vim.api.nvim_create_autocmd({\"${1:FileType}\"}, {",
+      "\tpattern = { \"${2:gitcommit}\" \\},",
+      "\tcallback = function()",
+      "\t\t${0:$TM_SELECTED_TEXT}",
+      "\tend,",
+      "})"
+    ]
+  },
+  "autocmd filetype": {
+    "prefix": ["autocmd-filetype", "acft"],
+    "description": "autocmd-filetype",
+    "body": [
+      "vim.api.nvim_create_autocmd(\"FileType\", {",
+      "\tpattern = { \"${1:gitcommit}\" \\},",
+      "\tcallback = function()",
+      "\t\t${0:$TM_SELECTED_TEXT}",
+      "\tend,",
+      "})"
+    ]
+  },
+  "cwd": {
+    "body": "vim.uv.cwd()",
+    "description": "vim 이 실행된 cwd",
+    "prefix": "cwd"
+  },
+  "vim.api.nvim_del_user_command": {
+    "prefix": ["del_user_command"],
+    "description": "delete user command",
+    "body": "vim.api.nvim_del_user_command($0)"
+  },
+  "get highlight": {
+    "body": "vim.api.nvim_get_hl(0, { name = \"${0:PmenuSel}\" \\})",
+    "description": "get highlight group",
+    "prefix": "get-highlight"
+  },
+  "get cli output": {
+    "body": "vim.system({$0\\}, { text = true \\}):wait().stdout",
+    "description": "get stdout from shell command",
+    "prefix": "getclioutput"
+  },
+  "extend (insert) table (list)": {
+    "body": "vim.list_extend(${1:table-name}, $2)$0",
+    "description": "extend list-table",
+    "prefix": ["extend-table"]
+  },
+  "tbl_contains": {
+    "body": "vim.tbl_contains(${1:table}, ${2:value})",
+    "description": "obj in table",
+    "prefix": ["contains", "tbl_contains", "vim.tbl_contains"]
+  },
+  "vim.api.nvim_create_autocmd": {
+    "body": [
+      "vim.api.nvim_create_autocmd(\"${1:FileType}\", {",
+      "\tpattern = { ${2:\"asciidoc\"} },",
+      "\tcallback = function ()",
+      "\t\t${0:${TM_SELECTED_TEXT:-- do something}}",
+      "\tend,",
+      "})"
+    ],
+    "description": "create autocmd",
+    "prefix": ["vim.api.nvim_create_autocmd", "create_autocmd", "autocmd"]
+  },
+  "deep-extend": {
+    "body": "vim.tbl_deep_extend(\"keep\", $1, $2)$0",
+    "description": "deep-extend table",
+    "prefix": "deep-extend"
+  }
 }

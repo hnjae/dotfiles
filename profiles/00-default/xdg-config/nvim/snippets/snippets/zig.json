@@ -21,5 +21,5 @@
       "b.installArtifact(exe);"
     ],
     "description": "Building an exe"
-  }     
+  }
 }

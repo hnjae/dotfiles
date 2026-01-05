@@ -1,297 +1,187 @@
 {
-    "header 1": {
-        "prefix": [
-            "h1",
-            "1"
-        ],
-        "description": "Add header level 1",
-        "body": "# ${0:$TM_SELECTED_TEXT}"
-    },
-    "header 2": {
-        "prefix": [
-            "h2",
-            "2"
-        ],
-        "description": "Add header level 2",
-        "body": "## ${0:$TM_SELECTED_TEXT}"
-    },
-    "header 3": {
-        "prefix": [
-            "h3",
-            "3"
-        ],
-        "description": "Add header level 3",
-        "body": "### ${0:$TM_SELECTED_TEXT}"
-    },
-    "header 4": {
-        "prefix": [
-            "h4",
-            "4"
-        ],
-        "description": "Add header level 4",
-        "body": "#### ${0:$TM_SELECTED_TEXT}"
-    },
-    "header 5": {
-        "prefix": "h5",
-        "description": "Add header level 5 (text is smaller than normal text)",
-        "body": "##### ${0:$TM_SELECTED_TEXT}"
-    },
-    "header 6": {
-        "prefix": "h6",
-        "description": "Add header level 6 (text is smaller than normal text)",
-        "body": "###### ${0:$TM_SELECTED_TEXT}"
-    },
-    "image": {
-        "prefix": [
-            "image",
-            "img"
-        ],
-        "body": [
-            "![${2:alt text}](${1:${TM_SELECTED_TEXT:path}}) ${0}"
-        ],
-        "description": "Add images"
-    },
-    "link (replace URL)": {
-        "prefix": [
-            "lk"
-        ],
-        "description": "inline link (`l`)",
-        "body": [
-            "[${2:label}](${1:${TM_SELECTED_TEXT:url}}) $0"
-        ]
-    },
-    "link (replace label(text))": {
-        "prefix": [
-            "lt",
-            "ll"
-        ],
-        "description": "inline link (`l`)",
-        "body": [
-            "[${1:${TM_SELECTED_TEXT:label}}](${2:url}) $0"
-        ]
-    },
-    "URL": {
-        "prefix": [
-            "url",
-            "u"
-        ],
-        "description": "inline url (`u`)",
-        "body": [
-            "<${1:${TM_SELECTED_TEXT:url}}> ${0}"
-        ]
-    },
-    "code": {
-        "prefix": [
-            "code",
-            "c"
-        ],
-        "description": "inline code (`c`)",
-        "body": "`${1:$TM_SELECTED_TEXT}` $0"
-    },
-    "bold (emphasis)": {
-        "prefix": [
-            "bold",
-            "b",
-            "e"
-        ],
-        "description": "inline bold text (`b`)",
-        "body": "**${1:$TM_SELECTED_TEXT}** $0"
-    },
-    "italic text": {
-        "prefix": [
-            "i",
-            "italic"
-        ],
-        "description": "inline italic text (`i`)",
-        "body": "*${1:$TM_SELECTED_TEXT}* $0"
-    },
-    "bold and italic text": {
-        "prefix": [
-            "bold and italic",
-            "bi"
-        ],
-        "description": "inline bold and italic text (`bi`)",
-        "body": "***${1:$TM_SELECTED_TEXT}*** $0"
-    },
-    "reference": {
-        "prefix": [
-            "reference",
-            "ref"
-        ],
-        "description": "insert reference",
-        "body": "[${1:label}]: ${0:${TM_SELECTED_TEXT:link}}"
-    },
-    "codeblock": {
-        "prefix": [
-            "codeblock",
-            "cod",
-            "cb",
-            "sb"
-        ],
-        "description": "fenced code block (`cb`)",
-        "body": [
-            "```${1:lang}",
-            "${0:${TM_SELECTED_TEXT:foo}}",
-            "```"
-        ]
-    },
-    "superscript": {
-        "prefix": "sup",
-        "description": "Create a superscript.",
-        "body": "<sup>${0:$TM_SELECTED_TEXT}</sup>"
-    },
-    "superscript (commonmark_x)": {
-        "prefix": "supx",
-        "description": "Create a superscript. (not supported in gfm)",
-        "body": "^${0:$TM_SELECTED_TEXT}^"
-    },
-    "subscript": {
-        "prefix": "sub",
-        "description": "Create a subscript.",
-        "body": "<sub>${0:$TM_SELECTED_TEXT}</sub>"
-    },
-    "subscript (commonmark_x)": {
-        "prefix": "subx",
-        "description": "Create a subscript. (not supported in gfm)",
-        "body": "~${0:$TM_SELECTED_TEXT}~"
-    },
-    "strikethrough (delete)": {
-        "prefix": [
-            "strikethroughhtml",
-            "shtml",
-            "delhtml"
-        ],
-        "description": "Create a `<del>`",
-        "body": "<del>${0:$TM_SELECTED_TEXT}</del>"
-    },
-    "strikethrough (delete) (gfm; commonmark_x)": {
-        "prefix": [
-            "strikethrough",
-            "s",
-            "del"
-        ],
-        "description": "Create a `<del>`",
-        "body": "~~${0:$TM_SELECTED_TEXT}~~"
-    },
-    "Insert task list (gfm)": {
-        "prefix": "task",
-        "description": "Insert task list",
-        "body": "- [${1| ,x|}] ${0:${TM_SELECTED_TEXT}}"
-    },
-    "Inline math expression (gfm)": {
-        "prefix": [
-            "$",
-            "mathi"
-        ],
-        "description": "inline math Expression",
-        "body": "\\$${0:$TM_SELECTED_TEXT}\\$"
-    },
-    "Math Expression as block (gfm)": {
-        "prefix": [
-            "$$",
-            "math"
-        ],
-        "description": "Math Expression",
-        "body": "\\$\\$${0:$TM_SELECTED_TEXT}\\$\\$"
-    },
-    "date_before2": {
-        "prefix": "dba",
-        "description": "date_before front matter",
-        "body": "date_before: 2023-10"
-    },
-    "date_before": {
-        "prefix": "dbl",
-        "description": "date_before front matter",
-        "body": "date_before: 2025-04-11"
-    },
-    "lastmod": {
-        "prefix": "lm",
-        "description": "lastmod front matter",
-        "body": "latmod: $CURRENT_YEAR-$CURRENT_MONTH-${CURRENT_DATE}T$CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND$CURRENT_TIMEZONE_OFFSET"
-    },
-    "frontmatter": {
-        "prefix": "fm",
-        "description": "front matter",
-        "body": [
-            "---",
-            "date_before: 2025-04-11",
-            "lastmod: $CURRENT_YEAR-$CURRENT_MONTH-${CURRENT_DATE}T$CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND$CURRENT_TIMEZONE_OFFSET",
-            "---"
-        ]
-    },
-    "!NOTE": {
-        "prefix": [
-            "note",
-            "snote"
-        ],
-        "description": "gfm syntax",
-        "body": [
-            "> [!NOTE]",
-            "> ${0:$TM_SELECTED_TEXT}"
-        ]
-    },
-    "!TIP": {
-        "prefix": [
-            "tip",
-            "stip"
-        ],
-        "description": "gfm syntax",
-        "body": [
-            "> [!TIP]",
-            "> ${0:$TM_SELECTED_TEXT}"
-        ]
-    },
-    "!IMPORTANT": {
-        "prefix": [
-            "important",
-            "simportant"
-        ],
-        "description": "gfm syntax",
-        "body": [
-            "> [!IMPORTANT]",
-            "> ${0:$TM_SELECTED_TEXT}"
-        ]
-    },
-    "!WARNING": {
-        "prefix": [
-            "warning",
-            "swarning"
-        ],
-        "description": "gfm syntax",
-        "body": [
-            "> [!WARNING]",
-            "> ${0:$TM_SELECTED_TEXT}"
-        ]
-    },
-    "!CAUTION": {
-        "prefix": [
-            "caution",
-            "scaution"
-        ],
-        "description": "gfm syntax",
-        "body": [
-            "> [!CAUTION]",
-            "> ${0:$TM_SELECTED_TEXT}"
-        ]
-    },
-    "description block": {
-        "prefix": [
-            "dl",
-            "description-block"
-        ],
-        "description": "write description (GFM)",
-        "body": [
-            "${1:word}",
-            ": ${2:description}"
-        ]
-    },
-    "console-codeblock": {
-        "prefix": "con",
-        "description": "fenced code block for console output",
-        "body": [
-            "```console",
-            "$0",
-            "```"
-        ]
-    }
+  "header 1": {
+    "prefix": ["h1", "1"],
+    "description": "Add header level 1",
+    "body": "# ${0:$TM_SELECTED_TEXT}"
+  },
+  "header 2": {
+    "prefix": ["h2", "2"],
+    "description": "Add header level 2",
+    "body": "## ${0:$TM_SELECTED_TEXT}"
+  },
+  "header 3": {
+    "prefix": ["h3", "3"],
+    "description": "Add header level 3",
+    "body": "### ${0:$TM_SELECTED_TEXT}"
+  },
+  "header 4": {
+    "prefix": ["h4", "4"],
+    "description": "Add header level 4",
+    "body": "#### ${0:$TM_SELECTED_TEXT}"
+  },
+  "header 5": {
+    "prefix": "h5",
+    "description": "Add header level 5 (text is smaller than normal text)",
+    "body": "##### ${0:$TM_SELECTED_TEXT}"
+  },
+  "header 6": {
+    "prefix": "h6",
+    "description": "Add header level 6 (text is smaller than normal text)",
+    "body": "###### ${0:$TM_SELECTED_TEXT}"
+  },
+  "image": {
+    "prefix": ["image", "img"],
+    "body": ["![${2:alt text}](${1:${TM_SELECTED_TEXT:path}}) ${0}"],
+    "description": "Add images"
+  },
+  "link (replace URL)": {
+    "prefix": ["lk"],
+    "description": "inline link (`l`)",
+    "body": ["[${2:label}](${1:${TM_SELECTED_TEXT:url}}) $0"]
+  },
+  "link (replace label(text))": {
+    "prefix": ["lt", "ll"],
+    "description": "inline link (`l`)",
+    "body": ["[${1:${TM_SELECTED_TEXT:label}}](${2:url}) $0"]
+  },
+  "URL": {
+    "prefix": ["url", "u"],
+    "description": "inline url (`u`)",
+    "body": ["<${1:${TM_SELECTED_TEXT:url}}> ${0}"]
+  },
+  "code": {
+    "prefix": ["code", "c"],
+    "description": "inline code (`c`)",
+    "body": "`${1:$TM_SELECTED_TEXT}` $0"
+  },
+  "bold (emphasis)": {
+    "prefix": ["bold", "b", "e"],
+    "description": "inline bold text (`b`)",
+    "body": "**${1:$TM_SELECTED_TEXT}** $0"
+  },
+  "italic text": {
+    "prefix": ["i", "italic"],
+    "description": "inline italic text (`i`)",
+    "body": "*${1:$TM_SELECTED_TEXT}* $0"
+  },
+  "bold and italic text": {
+    "prefix": ["bold and italic", "bi"],
+    "description": "inline bold and italic text (`bi`)",
+    "body": "***${1:$TM_SELECTED_TEXT}*** $0"
+  },
+  "reference": {
+    "prefix": ["reference", "ref"],
+    "description": "insert reference",
+    "body": "[${1:label}]: ${0:${TM_SELECTED_TEXT:link}}"
+  },
+  "codeblock": {
+    "prefix": ["codeblock", "cod", "cb", "sb"],
+    "description": "fenced code block (`cb`)",
+    "body": ["```${1:lang}", "${0:${TM_SELECTED_TEXT:foo}}", "```"]
+  },
+  "superscript": {
+    "prefix": "sup",
+    "description": "Create a superscript.",
+    "body": "<sup>${0:$TM_SELECTED_TEXT}</sup>"
+  },
+  "superscript (commonmark_x)": {
+    "prefix": "supx",
+    "description": "Create a superscript. (not supported in gfm)",
+    "body": "^${0:$TM_SELECTED_TEXT}^"
+  },
+  "subscript": {
+    "prefix": "sub",
+    "description": "Create a subscript.",
+    "body": "<sub>${0:$TM_SELECTED_TEXT}</sub>"
+  },
+  "subscript (commonmark_x)": {
+    "prefix": "subx",
+    "description": "Create a subscript. (not supported in gfm)",
+    "body": "~${0:$TM_SELECTED_TEXT}~"
+  },
+  "strikethrough (delete)": {
+    "prefix": ["strikethroughhtml", "shtml", "delhtml"],
+    "description": "Create a `<del>`",
+    "body": "<del>${0:$TM_SELECTED_TEXT}</del>"
+  },
+  "strikethrough (delete) (gfm; commonmark_x)": {
+    "prefix": ["strikethrough", "s", "del"],
+    "description": "Create a `<del>`",
+    "body": "~~${0:$TM_SELECTED_TEXT}~~"
+  },
+  "Insert task list (gfm)": {
+    "prefix": "task",
+    "description": "Insert task list",
+    "body": "- [${1| ,x|}] ${0:${TM_SELECTED_TEXT}}"
+  },
+  "Inline math expression (gfm)": {
+    "prefix": ["$", "mathi"],
+    "description": "inline math Expression",
+    "body": "\\$${0:$TM_SELECTED_TEXT}\\$"
+  },
+  "Math Expression as block (gfm)": {
+    "prefix": ["$$", "math"],
+    "description": "Math Expression",
+    "body": "\\$\\$${0:$TM_SELECTED_TEXT}\\$\\$"
+  },
+  "date_before2": {
+    "prefix": "dba",
+    "description": "date_before front matter",
+    "body": "date_before: 2023-10"
+  },
+  "date_before": {
+    "prefix": "dbl",
+    "description": "date_before front matter",
+    "body": "date_before: 2025-04-11"
+  },
+  "lastmod": {
+    "prefix": "lm",
+    "description": "lastmod front matter",
+    "body": "latmod: $CURRENT_YEAR-$CURRENT_MONTH-${CURRENT_DATE}T$CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND$CURRENT_TIMEZONE_OFFSET"
+  },
+  "frontmatter": {
+    "prefix": "fm",
+    "description": "front matter",
+    "body": [
+      "---",
+      "date_before: 2025-04-11",
+      "lastmod: $CURRENT_YEAR-$CURRENT_MONTH-${CURRENT_DATE}T$CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND$CURRENT_TIMEZONE_OFFSET",
+      "---"
+    ]
+  },
+  "!NOTE": {
+    "prefix": ["note", "snote"],
+    "description": "gfm syntax",
+    "body": ["> [!NOTE]", "> ${0:$TM_SELECTED_TEXT}"]
+  },
+  "!TIP": {
+    "prefix": ["tip", "stip"],
+    "description": "gfm syntax",
+    "body": ["> [!TIP]", "> ${0:$TM_SELECTED_TEXT}"]
+  },
+  "!IMPORTANT": {
+    "prefix": ["important", "simportant"],
+    "description": "gfm syntax",
+    "body": ["> [!IMPORTANT]", "> ${0:$TM_SELECTED_TEXT}"]
+  },
+  "!WARNING": {
+    "prefix": ["warning", "swarning"],
+    "description": "gfm syntax",
+    "body": ["> [!WARNING]", "> ${0:$TM_SELECTED_TEXT}"]
+  },
+  "!CAUTION": {
+    "prefix": ["caution", "scaution"],
+    "description": "gfm syntax",
+    "body": ["> [!CAUTION]", "> ${0:$TM_SELECTED_TEXT}"]
+  },
+  "description block": {
+    "prefix": ["dl", "description-block"],
+    "description": "write description (GFM)",
+    "body": ["${1:word}", ": ${2:description}"]
+  },
+  "console-codeblock": {
+    "prefix": "con",
+    "description": "fenced code block for console output",
+    "body": ["```console", "$0", "```"]
+  }
 }

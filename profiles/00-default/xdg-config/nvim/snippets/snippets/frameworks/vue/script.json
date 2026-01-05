@@ -1,48 +1,32 @@
 {
   "import": {
     "prefix": "import",
-    "body": [
-      "import $1 from '$2'"
-    ],
+    "body": ["import $1 from '$2'"],
     "description": "import ... from ..."
   },
   "import-type": {
     "prefix": "importType",
-    "body": [
-      "import type {$1} from '$2'"
-    ],
+    "body": ["import type {$1} from '$2'"],
     "description": "import type ... from ..."
   },
   "nextTick": {
     "prefix": "nextTick",
-    "body": [
-      "nextTick()"
-    ],
+    "body": ["nextTick()"],
     "description": "A utility for waiting for the next DOM update flush."
   },
   "defineProps": {
     "prefix": "defineProps",
-    "body": [
-      "const props = defineProps({",
-      "\t$0",
-      "});"
-    ],
+    "body": ["const props = defineProps({", "\t$0", "});"],
     "description": "A list/hash of attributes that are exposed to accept data from the parent component. "
   },
   "defineProps-TS": {
     "prefix": "definePropsTS",
-    "body": [
-      "const props = defineProps<{",
-      "\t$0",
-      "}>()"
-    ],
+    "body": ["const props = defineProps<{", "\t$0", "}>()"],
     "description": "A list/hash of attributes that are exposed to accept data from the parent component. "
   },
   "defineEmits": {
     "prefix": "defineEmits",
-    "body": [
-      "const ${1:emit} = defineEmits([ $0 ]);"
-    ],
+    "body": ["const ${1:emit} = defineEmits([ $0 ]);"],
     "description": "A list of events that componetnt can emits to the parent component. "
   },
   "defineEmits-TS": {
@@ -67,76 +51,42 @@
   },
   "defineComponent": {
     "prefix": "defineComponent",
-    "body": [
-      "const $1 = defineComponent({",
-      "\t$0",
-      "})"
-    ],
+    "body": ["const $1 = defineComponent({", "\t$0", "})"],
     "description": "create a component vue component"
   },
   "defineAsyncComponent": {
     "prefix": "defineAsyncComponent",
-    "body": [
-      "const $1 = defineAsyncComponent(() =>",
-      "\timport('$0')",
-      ");"
-    ],
+    "body": ["const $1 = defineAsyncComponent(() =>", "\timport('$0')", ");"],
     "description": "create a async vue component"
   },
   "defineCustomElement": {
     "prefix": "defineCustomElement",
-    "body": [
-      "const $1 = defineCustomElement({",
-      "\t$0",
-      "})"
-    ],
+    "body": ["const $1 = defineCustomElement({", "\t$0", "})"],
     "description": "create a custom element vue"
   },
   "data-options": {
     "prefix": "data",
-    "body": [
-      "data() {",
-      "\treturn {",
-      "\t\t$1",
-      "\t}",
-      "},$0"
-    ],
+    "body": ["data() {", "\treturn {", "\t\t$1", "\t}", "},$0"],
     "description": "The data object for the Vue instance."
   },
   "computed-options": {
     "prefix": "computed",
-    "body": [
-      "computed: {",
-      "\t$1",
-      "},$0"
-    ],
+    "body": ["computed: {", "\t$1", "},$0"],
     "description": "Computed properties to be mixed into the Vue instance. "
   },
   "computed-composition": {
     "prefix": "computedVue",
-    "body": [
-      "const $1 = computed(() => {",
-      "\t$0",
-      "});"
-    ],
+    "body": ["const $1 = computed(() => {", "\t$0", "});"],
     "description": "Computed properties to be mixed into the Vue instance. "
   },
   "computed-composition-ts": {
     "prefix": "computedVueTS",
-    "body": [
-      "const $1 = computed<${2:type}>(() => {",
-      "\t$0",
-      "});"
-    ],
+    "body": ["const $1 = computed<${2:type}>(() => {", "\t$0", "});"],
     "description": "Computed properties to be mixed into the Vue instance. "
   },
   "reactive-composition": {
     "prefix": "reactiveVue",
-    "body": [
-      "const $1 = reactive({",
-      "\t$0",
-      "})"
-    ],
+    "body": ["const $1 = reactive({", "\t$0", "})"],
     "description": "Reactive properties to be mixed into the Vue instance. "
   },
   "reactive-composition-ts": {
@@ -154,117 +104,72 @@
   },
   "shallow-reactive-composition": {
     "prefix": "shallowReactive",
-    "body": [
-      "const ${1:state} = shallowReactive({",
-      "\t$0",
-      "})"
-    ],
+    "body": ["const ${1:state} = shallowReactive({", "\t$0", "})"],
     "description": "Shallow version of reactive(). Use with Caution !! Shallow data structures should only be used for root level state in a component. Avoid nesting it inside a deep reactive object as it creates a tree with inconsistent reactivity behavior which can be difficult to understand and debug."
   },
   "shallowReadonly": {
     "prefix": "shallowReadonly",
-    "body": [
-      "const ${1:state} = shallowReadonly({",
-      "\t$0",
-      "})"
-    ],
+    "body": ["const ${1:state} = shallowReadonly({", "\t$0", "})"],
     "description": "Shallow version of readonly(). Use with Caution !! Shallow data structures should only be used for root level state in a component. Avoid nesting it inside a deep reactive object as it creates a tree with inconsistent reactivity behavior which can be difficult to understand and debug."
   },
   "toRaw": {
     "prefix": "toRaw()",
-    "body": [
-      "toRaw($0)"
-    ],
+    "body": ["toRaw($0)"],
     "description": "Returns the raw, original object of a Vue-created proxy."
   },
   "effectScope": {
     "prefix": "effectScope()",
-    "body": [
-      "const $1 = effectScope()",
-      "$0"
-    ],
+    "body": ["const $1 = effectScope()", "$0"],
     "description": "Returns the current active effect scope if there is one."
   },
   "getCurrentScope": {
     "prefix": "getCurrentScope",
-    "body": [
-      "const $1 = getCurrentScope()",
-      "$0"
-    ],
+    "body": ["const $1 = getCurrentScope()", "$0"],
     "description": "Returns the current active effect scope if there is one."
   },
   "onScopeDispose": {
     "prefix": "onScopeDispose()",
-    "body": [
-      "const $1 = onScopeDispose()",
-      "$0"
-    ],
+    "body": ["const $1 = onScopeDispose()", "$0"],
     "description": "Registers a dispose callback on the current active effect scope. The callback will be invoked when the associated effect scope is stopped."
   },
   "ref-composition": {
     "prefix": "refVue",
-    "body": [
-      "const $1 = ref($2)",
-      "$0"
-    ],
+    "body": ["const $1 = ref($2)", "$0"],
     "description": "Ref properties to be mixed into the Vue instance. "
   },
   "ref-composition-ts": {
     "prefix": "refVueTS",
-    "body": [
-      "const $3 = ref<${2:type}>($1)",
-      "$0"
-    ],
+    "body": ["const $3 = ref<${2:type}>($1)", "$0"],
     "description": "Ref properties to be mixed into the Vue instance. "
   },
   "template-ref-ts-composition": {
     "prefix": "trfVue",
-    "body": [
-      "const $0 = ref<HTMLInputElement | null>(null)"
-    ],
+    "body": ["const $0 = ref<HTMLInputElement | null>(null)"],
     "description": "Template ref to be mixed into the Vue instance. "
   },
   "component-ref-ts-composition": {
     "prefix": "crfVue",
-    "body": [
-      "const $1 = ref<InstanceType<typeof $0> | null>(null)"
-    ],
+    "body": ["const $1 = ref<InstanceType<typeof $0> | null>(null)"],
     "description": "Template ref to be mixed into the Vue instance. "
   },
   "methods-options": {
     "prefix": "methods",
-    "body": [
-      "methods: {",
-      "\t$1",
-      "},$0"
-    ],
+    "body": ["methods: {", "\t$1", "},$0"],
     "description": "Methods to be mixed into the Vue instance."
   },
   "function": {
     "prefix": "functionVue3",
-    "body": [
-      "const $1 = ($2) => {",
-      "$0",
-      "};"
-    ],
+    "body": ["const $1 = ($2) => {", "$0", "};"],
     "description": "Method composition properties to be mixed into the Vue instance. "
   },
   "watch": {
     "prefix": "watch",
-    "body": [
-      "watch($1, ($2, $3) => {",
-      "$0",
-      "});"
-    ],
+    "body": ["watch($1, ($2, $3) => {", "$0", "});"],
     "description": "Watch over a reactive source and call a function in reaction to state changes "
   },
   "watchEffect-composition": {
     "prefix": "watchEffect",
-    "body": [
-      "watchEffect($1, ($2, $3) => {",
-      "$0",
-      "});"
-    ],
+    "body": ["watchEffect($1, ($2, $3) => {", "$0", "});"],
     "description": "watchEffect from vue composition "
   },
   "stoppingWatcher": {
@@ -279,167 +184,107 @@
   },
   "onBeforeMount": {
     "prefix": "onBeforeMount",
-    "body": [
-      "onBeforeMount(() => {$0})"
-    ],
+    "body": ["onBeforeMount(() => {$0})"],
     "description": "Vue before mount composition lifecycle hook"
   },
   "onMounted": {
     "prefix": "onmounted",
-    "body": [
-      "onMounted(() => {$0})"
-    ],
+    "body": ["onMounted(() => {$0})"],
     "description": "Vue mounted lifecycle hook"
   },
   "onBeforeUnmount": {
     "prefix": "onBeforeUnmount",
-    "body": [
-      "onBeforeUnmount(() => {$0})"
-    ],
+    "body": ["onBeforeUnmount(() => {$0})"],
     "description": "Vue before unmount composition lifecycle hook"
   },
   "onUnmounted": {
     "prefix": "onunmounted",
-    "body": [
-      "onUnmounted(() => {$0})"
-    ],
+    "body": ["onUnmounted(() => {$0})"],
     "description": "Vue unMounted lifecycle hook"
   },
   "beforeUpdate": {
     "prefix": "beforeUpdate",
-    "body": [
-      "beforeUpdate() {",
-      "\t$1",
-      "},"
-    ],
+    "body": ["beforeUpdate() {", "\t$1", "},"],
     "description": "Type: Function."
   },
   "updated": {
     "prefix": "updated",
-    "body": [
-      "updated() {",
-      "\t$1",
-      "},"
-    ],
+    "body": ["updated() {", "\t$1", "},"],
     "description": "Type: Function."
   },
   "onBeforeUpdate": {
     "prefix": "onBeforeUpdate",
-    "body": [
-      "onBeforeUpdate(() => {$0})"
-    ],
+    "body": ["onBeforeUpdate(() => {$0})"],
     "description": "Vue before update composition lifecycle hook"
   },
   "onUpdated-composition": {
     "prefix": "onupdated",
-    "body": [
-      "onUpdated(() => {$0})"
-    ],
+    "body": ["onUpdated(() => {$0})"],
     "description": "Vue updated lifecycle hook"
   },
   "activated": {
     "prefix": "activated",
-    "body": [
-      "activated() {",
-      "\t$1",
-      "},"
-    ],
+    "body": ["activated() {", "\t$1", "},"],
     "description": "Type: Function."
   },
   "deactivated": {
     "prefix": "deactivated",
-    "body": [
-      "deactivated() {",
-      "\t$1",
-      "},"
-    ],
+    "body": ["deactivated() {", "\t$1", "},"],
     "description": "Type: Function."
   },
   "onActivated-composition": {
     "prefix": "onActivated",
-    "body": [
-      "onActivated(() => {$0})"
-    ],
+    "body": ["onActivated(() => {$0})"],
     "description": "Vue activated composition lifecycle hook"
   },
   "onDeactivated-composition": {
     "prefix": "onDeactivated",
-    "body": [
-      "onDeactivated(() => {$0})"
-    ],
+    "body": ["onDeactivated(() => {$0})"],
     "description": "Vue deactivated composition lifecycle hook"
   },
   "beforeDestroy": {
     "prefix": "beforeDestroy",
-    "body": [
-      "beforeDestroy() {",
-      "\t$1",
-      "},"
-    ],
+    "body": ["beforeDestroy() {", "\t$1", "},"],
     "description": "Type: Function."
   },
   "destroyed": {
     "prefix": "destroyed",
-    "body": [
-      "destroyed() {",
-      "\t$1",
-      "},"
-    ],
+    "body": ["destroyed() {", "\t$1", "},"],
     "description": "Type: Function."
   },
   "errorCaptured": {
     "prefix": "errorCaptured",
-    "body": [
-      "errorCaptured: (err, vm, info) => {",
-      "\t$1",
-      "},"
-    ],
+    "body": ["errorCaptured: (err, vm, info) => {", "\t$1", "},"],
     "description": "Type: (err: Error, vm: Component, info: string) => ?boolean"
   },
   "createRenderer": {
     "prefix": "createRenderer",
-    "body": [
-      "createRenderer({",
-      "\t$1",
-      "})"
-    ],
+    "body": ["createRenderer({", "\t$1", "})"],
     "description": "createRenderer({ })"
   },
   "importVueRouter": {
     "prefix": "importVueRouter",
-    "body": [
-      "import VueRouter from 'vue-router'"
-    ],
+    "body": ["import VueRouter from 'vue-router'"],
     "description": "import VueRouter from 'vue-router'"
   },
   "importuseRouter-composition": {
     "prefix": "importuseRouter",
-    "body": [
-      "import useRouter from 'vue-router'"
-    ],
+    "body": ["import useRouter from 'vue-router'"],
     "description": "import useRouter from 'vue-router'"
   },
   "newVueRouter": {
     "prefix": "newVueRouter",
-    "body": [
-      "const ${1:router} = new VueRouter({",
-      "\t$2",
-      "})$0"
-    ],
+    "body": ["const ${1:router} = new VueRouter({", "\t$2", "})$0"],
     "description": "const router = newVueRouter({ })"
   },
   "useRouter-composition": {
     "prefix": "useRouter",
-    "body": [
-      "const ${1:router} = useRouter()"
-    ],
+    "body": ["const ${1:router} = useRouter()"],
     "description": "const router = useRouter()"
   },
   "useRoute-composition": {
     "prefix": "useRoute",
-    "body": [
-      "const ${1:route} = useRoute()"
-    ],
+    "body": ["const ${1:route} = useRoute()"],
     "description": "const route = useRoute()"
   },
   "routerBeforeEach": {
@@ -471,106 +316,72 @@
   },
   "routerPush": {
     "prefix": "routerPush",
-    "body": [
-      "${1:router}.push($2)$0"
-    ],
+    "body": ["${1:router}.push($2)$0"],
     "description": "router.push()"
   },
   "routerReplace": {
     "prefix": "routerReplace",
-    "body": [
-      "${1:router}.replace($2)$0"
-    ],
+    "body": ["${1:router}.replace($2)$0"],
     "description": "router.replace()"
   },
   "routerGo": {
     "prefix": "routerGo",
-    "body": [
-      "${1:router}.go($2)$0"
-    ],
+    "body": ["${1:router}.go($2)$0"],
     "description": "router.go()"
   },
   "routerBack": {
     "prefix": "routerBack",
-    "body": [
-      "${1:router}.back($2)$0"
-    ],
+    "body": ["${1:router}.back($2)$0"],
     "description": "router.back()"
   },
   "routerForward": {
     "prefix": "routerForward",
-    "body": [
-      "${1:router}.forward($2)$0"
-    ],
+    "body": ["${1:router}.forward($2)$0"],
     "description": "router.forward()"
   },
   "routerGetMatchedComponents": {
     "prefix": "routerGetMatchedComponents",
-    "body": [
-      "${1:router}.getMatchedComponents($2)$0"
-    ],
+    "body": ["${1:router}.getMatchedComponents($2)$0"],
     "description": "router.getMatchedComponents()"
   },
   "routerResolve": {
     "prefix": "routerResolve",
-    "body": [
-      "${1:router}.resolve($2)$0"
-    ],
+    "body": ["${1:router}.resolve($2)$0"],
     "description": "router.resolve()"
   },
   "routerAddRoutes": {
     "prefix": "routerAddRoutes",
-    "body": [
-      "${1:router}.addRoutes($2)$0"
-    ],
+    "body": ["${1:router}.addRoutes($2)$0"],
     "description": "router.addRoutes()"
   },
   "routerOnReady": {
     "prefix": "routerOnReady",
-    "body": [
-      "${1:router}.onReady($2)$0"
-    ],
+    "body": ["${1:router}.onReady($2)$0"],
     "description": "router.onReady()"
   },
   "routerOnError": {
     "prefix": "routerOnError",
-    "body": [
-      "${1:router}.onError($2)$0"
-    ],
+    "body": ["${1:router}.onError($2)$0"],
     "description": "router.onError()"
   },
   "routes": {
     "prefix": "routes",
-    "body": [
-      "routes: [$1]$0"
-    ],
+    "body": ["routes: [$1]$0"],
     "description": "routes: []"
   },
   "beforeEnter": {
     "prefix": "beforeEnter",
-    "body": [
-      "beforeEnter: (to, from, next) => {",
-      "\t${0:// ...}",
-      "}"
-    ],
+    "body": ["beforeEnter: (to, from, next) => {", "\t${0:// ...}", "}"],
     "description": "beforeEnter: (to, from, next) => { }"
   },
   "beforeRouteEnter": {
     "prefix": "beforeRouteEnter",
-    "body": [
-      "beforeRouteEnter (to, from, next) {",
-      "\t${0:// ...}",
-      "}"
-    ],
+    "body": ["beforeRouteEnter (to, from, next) {", "\t${0:// ...}", "}"],
     "description": "beforeRouteEnter (to, from, next) { }"
   },
   "beforeRouteLeave": {
     "prefix": "beforeRouteLeave",
-    "body": [
-      "beforeRouteLeave (to, from, next) {",
-      "\t${0:// ...}",
-      "}"
-    ],
+    "body": ["beforeRouteLeave (to, from, next) {", "\t${0:// ...}", "}"],
     "description": "beforeRouteLeave (to, from, next) { }"
   },
   "scrollBehavior": {
@@ -584,30 +395,22 @@
   },
   "onRenderTriggered-composition": {
     "prefix": "onRenderTriggered",
-    "body": [
-      "onRenderTriggered(() => {$0})"
-    ],
+    "body": ["onRenderTriggered(() => {$0})"],
     "description": "Vue onRenderTriggered lifecycle hook"
   },
   "onErrorCaptured-composition": {
     "prefix": "onErrorCaptured",
-    "body": [
-      "onErrorCaptured(() => {$0})"
-    ],
+    "body": ["onErrorCaptured(() => {$0})"],
     "description": "Vue oneErrorCaptured lifecycle hook"
   },
   "onRenderTracked-composition": {
     "prefix": "onRenderTracked",
-    "body": [
-      "onRenderTracked(() => {$0})"
-    ],
+    "body": ["onRenderTracked(() => {$0})"],
     "description": "Vue onRenderTracked lifecycle hook"
   },
   "onServerPrefetch-compositionSSR": {
     "prefix": "onServerPrefetch",
-    "body": [
-      "onServerPrefetch(() => {$0})"
-    ],
+    "body": ["onServerPrefetch(() => {$0})"],
     "description": "Vue onServerPrefetch lifecycle hook SSR Only"
   }
 }

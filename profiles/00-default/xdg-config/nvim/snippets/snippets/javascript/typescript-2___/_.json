@@ -1,97 +1,71 @@
 {
-    "iface": {
-        "prefix": "iface",
-        "description": "Interface Definition",
-        "body": [
-            "interface ${1:name} {",
-            "\t$0",
-            "\\}"
-        ]
-    },
-    "err": {
-        "prefix": "err",
-        "description": "Log error to the console",
-        "body": [
-            "console.error($1);",
-            "$0"
-        ]
-    },
-    "log": {
-        "prefix": "log",
-        "description": "Log to the console",
-        "body": "console.log($1);$0"
-    },
-    "warn": {
-        "prefix": "warn",
-        "description": "Log warning to the console",
-        "body": [
-            "console.warn($1);",
-            "$0"
-        ]
-    },
-    "cf": {
-        "prefix": "cf",
-        "body": [
-            "const ${1:name} = (${2:arguments}) => {",
-            "\treturn $0",
-            "\\}"
-        ]
-    },
-    "newp": {
-        "prefix": "newp",
-        "description": "new Promise<type>()",
-        "body": [
-            "new Promise<${1:type}>((resolve, reject) => {",
-            "\t$0",
-            "\\})"
-        ]
-    },
-    "pro": {
-        "prefix": "pro",
-        "description": "new Promise<type>()",
-        "body": [
-            "new Promise<${1:type}>((resolve, reject) => {",
-            "\t$0",
-            "\\})"
-        ]
-    },
-    "swi": {
-        "prefix": "swi",
-        "description": "switch",
-        "body": [
-            "switch (${1:'expression'}) {",
-            "\t$0",
-            "\tdefault: {",
-            "\t\t${2:'statement'};",
-            "\t\tbreak;",
-            "\t\\}",
-            "\\}"
-        ]
-    },
-    "onsubm": {
-        "prefix": "onsubm",
-        "description": "onSubmit for <form>",
-        "body": [
-            "const onSubmit = useCallback(",
-            "\t(e: FormEvent<HTMLFormElement>) => {",
-            "\t\te.preventDefault()",
-            "\t\t$0",
-            "\t\\},",
-            "\t[$1],",
-            ")"
-        ]
-    },
-    "troot": {
-        "prefix": "troot",
-        "body": "const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)"
-    },
-    "usecallbac": {
-        "prefix": "usecallbac",
-        "description": "react - useCallback",
-        "body": [
-            "useCallback(($1) => {",
-            "\t$0",
-            "\\}, [$2])"
-        ]
-    }
+  "iface": {
+    "prefix": "iface",
+    "description": "Interface Definition",
+    "body": ["interface ${1:name} {", "\t$0", "\\}"]
+  },
+  "err": {
+    "prefix": "err",
+    "description": "Log error to the console",
+    "body": ["console.error($1);", "$0"]
+  },
+  "log": {
+    "prefix": "log",
+    "description": "Log to the console",
+    "body": "console.log($1);$0"
+  },
+  "warn": {
+    "prefix": "warn",
+    "description": "Log warning to the console",
+    "body": ["console.warn($1);", "$0"]
+  },
+  "cf": {
+    "prefix": "cf",
+    "body": ["const ${1:name} = (${2:arguments}) => {", "\treturn $0", "\\}"]
+  },
+  "newp": {
+    "prefix": "newp",
+    "description": "new Promise<type>()",
+    "body": ["new Promise<${1:type}>((resolve, reject) => {", "\t$0", "\\})"]
+  },
+  "pro": {
+    "prefix": "pro",
+    "description": "new Promise<type>()",
+    "body": ["new Promise<${1:type}>((resolve, reject) => {", "\t$0", "\\})"]
+  },
+  "swi": {
+    "prefix": "swi",
+    "description": "switch",
+    "body": [
+      "switch (${1:'expression'}) {",
+      "\t$0",
+      "\tdefault: {",
+      "\t\t${2:'statement'};",
+      "\t\tbreak;",
+      "\t\\}",
+      "\\}"
+    ]
+  },
+  "onsubm": {
+    "prefix": "onsubm",
+    "description": "onSubmit for <form>",
+    "body": [
+      "const onSubmit = useCallback(",
+      "\t(e: FormEvent<HTMLFormElement>) => {",
+      "\t\te.preventDefault()",
+      "\t\t$0",
+      "\t\\},",
+      "\t[$1],",
+      ")"
+    ]
+  },
+  "troot": {
+    "prefix": "troot",
+    "body": "const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)"
+  },
+  "usecallbac": {
+    "prefix": "usecallbac",
+    "description": "react - useCallback",
+    "body": ["useCallback(($1) => {", "\t$0", "\\}, [$2])"]
+  }
 }

@@ -34,7 +34,6 @@
           MimeType=x-scheme-handler/tg;
           Keywords=tg;chat;im;messaging;messenger;sms;tdesktop;
           Actions=quit;
-              # DBusActivatable=true
           SingleMainWindow=true
           X-GNOME-UsesNotifications=true
           X-GNOME-SingleWindow=true

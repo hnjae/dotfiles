@@ -9,4 +9,4 @@ lastmod : 2025-06-09T20:09:14+0900
 ## tl;dr
 
 - 현재 파일의 Filetype 보기 위한 방법
-  - `:set filetype?` or `:set ft?`
+    - `:set filetype?` or `:set ft?`

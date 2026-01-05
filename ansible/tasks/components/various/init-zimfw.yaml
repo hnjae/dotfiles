@@ -31,6 +31,6 @@
         zsh --interactive -c 'zimfw init'
       args:
         executable: /bin/sh
-        creates: '{{ xdg_data_home }}/zimfw/modules'  # 이미 creates 되어 있으면 changed 취급 X
+        creates: '{{ xdg_data_home }}/zimfw/modules' # 이미 creates 되어 있으면 changed 취급 X
       environment:
         TERM: dumb

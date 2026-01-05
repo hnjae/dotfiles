@@ -6971,13 +6971,12 @@
     ]
   },
   "resource": {
-    "prefix": [ "resource", "res" ],
+    "prefix": ["resource", "res"],
     "description": "basic resource definition",
     "body": [
-	    "resource \"${resource_type}\" \"${resource_name}\" {",
-		    "   ${field} = \"${value}\"",
-		    "}"
-
+      "resource \"${resource_type}\" \"${resource_name}\" {",
+      "   ${field} = \"${value}\"",
+      "}"
     ]
   }
 }

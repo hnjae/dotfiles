@@ -1,8 +1,7 @@
 ---
 title: NOTE
 date: 2025-04-07T17:30:03+0900
-lastmod: 2025-04-28T16:44:37+0900
-isCJKLanguage: true
+lastmod: 2026-01-05T15:20:25+0900
 ---
 
 ## 같이 보기
@@ -20,6 +19,7 @@ isCJKLanguage: true
 <https://www.youtube.com/watch?v=ZiH59zg59kg>
 
 - <https://x.com/Neovim/status/1898016686097187266>
+
   > Use ]] / [[ in :terminal to jump to next/previous shell prompt. ":help terminal-osc133" shows how to create signs, too.
 
 ### Neovim 0.12.0

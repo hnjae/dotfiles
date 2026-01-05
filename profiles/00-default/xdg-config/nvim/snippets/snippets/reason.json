@@ -32,12 +32,12 @@
   "module": {
     "prefix": "module",
     "body": ["module ${1:M} = ${2:{}};$0"],
-    "description":"Snippet for a module declaration"
+    "description": "Snippet for a module declaration"
   },
   "module (block)": {
     "prefix": "module",
     "body": ["module ${1:M} = {", "\t$0", "};"],
-    "description":"Snippet for a block module declaration"
+    "description": "Snippet for a block module declaration"
   },
   "module function": {
     "prefix": "module",
@@ -46,12 +46,21 @@
   },
   "module function (block)": {
     "prefix": "module",
-    "body": ["module ${1:M} = (${2:X}: $3{:{}}) => {", "\t${4:include ${2:X}}", "\t$0", "};"],
+    "body": [
+      "module ${1:M} = (${2:X}: $3{:{}}) => {",
+      "\t${4:include ${2:X}}",
+      "\t$0",
+      "};"
+    ],
     "description": "Snippet for a functor block declaration"
   },
   "switch": {
     "prefix": "switch",
-    "body": ["switch ${1:scrutinee} {", "| ${2:pattern} => ${3:${2:pattern}}", "};"],
+    "body": [
+      "switch ${1:scrutinee} {",
+      "| ${2:pattern} => ${3:${2:pattern}}",
+      "};"
+    ],
     "description": "Snippet for a pattern matching declaration"
   },
   "type (alias or abstract)": {
@@ -61,8 +70,11 @@
   },
   "type": {
     "prefix": "type",
-    "body": ["type ${1:name} ${2:'${3:arg} }=", "\t| ${4:Con${2: '${3:arg}}}", "\t;"],
+    "body": [
+      "type ${1:name} ${2:'${3:arg} }=",
+      "\t| ${4:Con${2: '${3:arg}}}",
+      "\t;"
+    ],
     "description": "Snippet for a variants declaration"
   }
 }
-

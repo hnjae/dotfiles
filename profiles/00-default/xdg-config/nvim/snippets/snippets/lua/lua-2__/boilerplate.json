@@ -16,10 +16,6 @@
   },
   "self:": {
     "prefix": "self:",
-    "body": [
-      "function self:${1:methodName}($2)",
-      "\t$0",
-      "end"
-    ]
+    "body": ["function self:${1:methodName}($2)", "\t$0", "end"]
   }
 }

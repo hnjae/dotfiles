@@ -2,8 +2,8 @@
 # See: https://pre-commit.com/
 exclude: |
   (?x)^(
-    .*/lazy-lock.json|
-    .*/zed/.*.json
+    .*/lazy-lock\.json|
+    .*/zed/.*\.json
   )$
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -60,3 +60,7 @@ repos:
         entry: markdownlint-cli2 --fix
         language: system
         types: [markdown]
+        exclude: |-
+          (?x)^(
+            .*/zimfw/.*\.md
+          )$

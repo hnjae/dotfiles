@@ -14,7 +14,7 @@
       ini_file:
         path: '{{ mimeapps_path }}'
         section: Removed Associations
-        option: '{{ item }}'  # mime
+        option: '{{ item }}' # mime
         mode: '0644'
         value: >-
           {{ (
