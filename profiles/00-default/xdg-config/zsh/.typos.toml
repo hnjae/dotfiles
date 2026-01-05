@@ -1,0 +1,3 @@
+[default.extend-words]
+# `print -Pn` 맥락에서:
+Pn = "Pn"
