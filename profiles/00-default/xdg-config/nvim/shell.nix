@@ -1,7 +1,7 @@
 {
   pkgs ? import <nixpkgs-unstable> { },
 }:
-pkgs.mkShell {
+pkgs.mkShellNoCC {
   packages = with pkgs; [
     selene
     stylua

@@ -4,5 +4,8 @@ DefaultProfile=Default.profile
 [General]
 ConfigVersion=1
 
+[MemorySettings]
+EnableMemoryMonitoring=true
+
 [UiSettings]
 ColorScheme=
