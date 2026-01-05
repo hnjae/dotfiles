@@ -12,6 +12,16 @@ update_module_by_tag() {
         # This will fetch main/master branch
     fi
 
+    if ! git -C "$module" diff --quiet HEAD; then
+        echo "[INFO] Resetting local changes in $module" >&2
+        git -C "$module" reset --hard HEAD
+    fi
+
+    if [ "$(git -C "$module" ls-files --others --exclude-standard)" != "" ]; then
+        echo "[INFO] Cleaning untracked files in $module" >&2
+        git -C "$module" clean -fd
+    fi
+
     local latest_tag
 
     git -C "$module" fetch --tags --quiet
@@ -48,6 +58,16 @@ update_module_by_default_branch() {
         git submodule update --init --recursive "$module"
         # This will fetch main/master branch
         return 0
+    fi
+
+    if ! git -C "$module" diff --quiet HEAD; then
+        echo "[INFO] Resetting local changes in $module" >&2
+        git -C "$module" reset --hard HEAD
+    fi
+
+    if [ "$(git -C "$module" ls-files --others --exclude-standard)" != "" ]; then
+        echo "[INFO] Cleaning untracked files in $module" >&2
+        git -C "$module" clean -fd
     fi
 
     # TODO: git fetch -v --porcelain 으로 default_branch 명 캡쳐 <2025-08-13>
