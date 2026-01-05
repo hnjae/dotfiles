@@ -79,14 +79,18 @@ keybind = ctrl+enter=unbind
 # keybind = ctrl+shift+enter=toggle_split_zoom
 
 # default: ctrl-alt-(arrow)
-keybind = alt+shift+h=goto_split:previous
-keybind = alt+shift+l=goto_split:next
-keybind = alt+shift+j=goto_split:down
-keybind = alt+shift+k=goto_split:up
+keybind = alt+h=goto_split:previous
+keybind = alt+l=goto_split:next
+keybind = alt+j=goto_split:down
+keybind = alt+k=goto_split:up
 keybind = alt+left=goto_split:left
 keybind = alt+down=goto_split:down
 keybind = alt+up=goto_split:up
 keybind = alt+right=goto_split:right
+
+# Move tab (like other terminals/browser)
+keybind = ctrl+shift+page_up=move_tab:-1
+keybind = ctrl+shift+page_down=move_tab:1
 
 # ctrl+hjkl: lazyvim 내부 윈도우 커서 이동
 keybind = ctrl+shift+h=goto_split:left
