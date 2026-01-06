@@ -35,37 +35,11 @@ sudo zpool create \
   -O keyformat=passphrase \
   -O keylocation=prompt \
   -O keylocation=file:///secrets/storage-encryption-key \
+  -O snapdir=visible \
+  -O special_small_blocks=16384 \
   <pool-name> \
   mirror \
   /dev/disk/by-partlabel/<partlabel> /dev/disk/by-partlabel/<partlabel>
-
-# create hdd single pool (-n: dry-run)
-sudo zpool create \
-  -n \
-  -o compatibility=off \
-  -o ashift=12 \
-  -o failmode=continue \
-  -o cachefile=none \
-  -O recordsize=1M \
-  -O acltype=off \
-  -O relatime=off \
-  -O atime=off \
-  -O dnodesize=auto \
-  -O xattr=sa \
-  -O mountpoint=none \
-  -O canmount=off \
-  -O compression=lz4 \
-  -O exec=off \
-  -O setuid=off \
-  -O devices=off \
-  -O normalization=none \
-  -O utf8only=off \
-  -O casesensitivity=sensitive \
-  -O encryption=aes-256-gcm \
-  -O keyformat=passphrase \
-  -O keylocation=file:///secrets/storage-encryption-key \
-  <pool-name> \
-  /dev/disk/by-partlabel/<partlabel>
 
 ; -o failmode=continue (default: wait)
 
