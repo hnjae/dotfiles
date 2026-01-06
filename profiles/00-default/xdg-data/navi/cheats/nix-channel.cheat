@@ -7,4 +7,7 @@ nix-channel --list
 nix-channel --add https://nixos.org/channels/nixos-23.11 nixos
 
 # update
-nix-channel --update
+nix-channel --update [<names...>]
+
+# remove
+nix-channel --remove <name>

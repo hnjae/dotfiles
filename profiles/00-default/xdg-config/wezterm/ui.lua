@@ -6,6 +6,7 @@ M.apply_to_config = function(config)
   -- or
   -- local config_home = os.getenv("XDG_CONFIG_HOME") or os.getenv("HOME") .. "/.config"
   -- config.colors = wezterm.color.load_scheme(config_home .. "/wezterm/colors/_base24.toml")
+  -- print(config.colors)
 
   config.window_padding = {
     left = "0.5cell",
@@ -28,8 +29,8 @@ M.apply_to_config = function(config)
   config.use_fancy_tab_bar = true
 
   -- init attributes
-  config.window_frame = config.window_frame or {}
-  config.colors = config.colors or {}
+  -- config.window_frame = config.window_frame or {}
+  -- config.colors = config.colors or {}
 
   -- Get colors from the configured color scheme
   -- if scheme ~= nil then

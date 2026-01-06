@@ -6,10 +6,17 @@ config.bold_brightens_ansi_colors = "No"
 require("fonts").apply_to_config(config)
 require("ui").apply_to_config(config)
 
-config.webgpu_power_preference = "LowPower"
+config.front_end = "WebGpu" -- use Vulkan/Metal/Direct12
+config.webgpu_power_preference = "LowPower" -- use integrated gpu if available
 
 config.use_ime = true
 config.audible_bell = "Disabled"
+config.visual_bell = {
+  fade_in_function = "EaseIn",
+  fade_in_duration_ms = 100,
+  fade_out_function = "EaseOut",
+  fade_out_duration_ms = 100,
+}
 
 -----------------
 -- MOUSE Bindings

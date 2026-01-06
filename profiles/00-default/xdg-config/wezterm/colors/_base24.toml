@@ -8,6 +8,7 @@
 [colors]
 foreground = "#dcd7ba"
 background = "#1f1f28"
+visual_bell = "#223249"
 
 selection_bg = "#223249"
 selection_fg = "#dcd7ba"
