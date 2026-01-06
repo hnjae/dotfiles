@@ -3,7 +3,9 @@
 exclude: |
   (?x)^(
     .*/lazy-lock\.json|
-    .*/zed/.*\.json
+    .*/zed/.*\.json|
+    /profiles/00-default/xdg-data/zimfw/.*|
+    /.lib/dotbot/.*
   )$
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -22,17 +24,17 @@ repos:
         name: harden shell
         entry: shellharden --replace
         language: system
-        files: \.(sh|bash|envrc|envrc.*|env|env.*)$
+        files: \.(sh|bash|envrc|envrc.*|profile|env|env.*)$
       - id: shellcheck
         name: check shell
         entry: shellcheck
         language: system
-        files: \.(sh|bash|envrc|envrc.*|env|env.*)$
+        files: \.(sh|bash|envrc|envrc.*|profile|env|env.*)$
       - id: shfmt
         name: format shell
         entry: shfmt --indent 4 --simplify --write
         language: system
-        files: \.(sh|bash|envrc|envrc.*|env|env.*)$
+        files: \.(sh|bash|envrc|envrc.*|profile|env|env.*)$
   - repo: local
     hooks:
       - id: just-fmt
@@ -60,7 +62,4 @@ repos:
         entry: markdownlint-cli2 --fix
         language: system
         types: [markdown]
-        exclude: |-
-          (?x)^(
-            .*/zimfw/.*\.md
-          )$
+        exclude: |

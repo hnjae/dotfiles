@@ -4,8 +4,6 @@ root = true
 end_of_line = lf
 charset = utf-8
 tab_width = 8
-indent_size = 2
-indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
 
@@ -23,7 +21,7 @@ indent_style = space
 indent_size = 4
 max_line_length = 80
 
-[*.{fish,zsh,sh}]
+[*.{fish,zsh,sh,profile,env,envrc}]
 indent_style = space
 indent_size = 4
 max_line_length = 80
