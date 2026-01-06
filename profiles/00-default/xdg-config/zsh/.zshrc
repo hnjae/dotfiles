@@ -1,7 +1,7 @@
 # zmodload zsh/zprof
 
 if [[ "$TERM" != "dumb" ]] && (( $+commands[pfetch] )); then
-  PF_INFO="ascii title os host kernel uptime memory shell" pfetch
+    PF_INFO="ascii title os host kernel uptime memory shell" pfetch
 fi
 
 #################################################
@@ -9,18 +9,18 @@ fi
 #################################################
 
 case "$OSTYPE" in
-  linux*)
-    export LC_TIME="en_IE.UTF-8"
-    ;;
-  *)
-    ;;
+    linux*)
+        export LC_TIME="en_IE.UTF-8"
+        ;;
+    *)
+        ;;
 esac
 
 # EDITOR가 vi 이여도, ^A, ^E 같은 emacs 키는 사용할 수 있게 설정
 # https://github.com/simnalamburt/.dotfiles/blob/997d482/.zshrc
 if (( $+commands[vim] )) || (( $+commands[nvim] )); then
-  bindkey '^A' beginning-of-line
-  bindkey '^E' end-of-line
+    bindkey '^A' beginning-of-line
+    bindkey '^E' end-of-line
 fi
 
 # NOTE: 2025-09-16
