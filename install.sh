@@ -1,9 +1,9 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-set -euo pipefail
+set -eu
 
-scriptdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 XDG_STATE_HOME="${XDG_STATE_HOME:-${HOME}/.local/state}"
+script_dir="$(cd -- "$(dirname -- "$0")" && pwd -P)" >/dev/null 2>&1
 
 check_cond() {
     if ! command -v python3 >/dev/null 2>&1; then
@@ -13,57 +13,50 @@ check_cond() {
 }
 
 get_dotbot() {
-    if command -v dotbot >/dev/null 2>&1; then
-        echo "dotbot"
-        return
-    fi
+    _dotbot_dir=".lib/dotbot"
+    _dotbot_bin="bin/dotbot"
+    _dotbot_bin_abs="${script_dir}/${_dotbot_dir}/${_dotbot_bin}"
 
-    local dotbot_dir=".lib/dotbot"
-    local dotbot_bin="bin/dotbot"
-    local dotbot_bin_abs="${scriptdir}/${dotbot_dir}/${dotbot_bin}"
+    if [ ! -x "$_dotbot_bin_abs" ]; then
+        echo "INFO: dotbot module not found, initializing submodules" >&2
 
-    if [ ! -x "$dotbot_bin_abs" ]; then
+        # submodule reset & clean
+        git submodule foreach --recursive 'git reset --hard && git clean -fd'
         git submodule sync --quiet --recursive  # URL Update
         git submodule update --init --recursive # 실제 코드 가져오기
-        git -C "$dotbot_dir" submodule sync --quiet --recursive >&2
-        # dotbot 의 submodule url 업데이트.
     fi
 
-    echo "$dotbot_bin_abs"
+    echo "$_dotbot_bin_abs"
 }
 
 install_profile() {
-    CONFIG="install.conf.yaml"
+    _profile="$1"
+    _configfile="install.conf.yaml"
+    _profile_dir="$script_dir/profiles/$_profile"
 
-    local profile="$1"
-    local profile_dir="$scriptdir/profiles/$profile"
-
-    echo "INFO: Running dotbot with profile: $profile" >&2
-    "$dotbot_cmd" -d "$profile_dir" -c "${profile_dir}/${CONFIG}"
+    echo "INFO: Running dotbot with profile: $_profile" >&2
+    "$dotbot_cmd" -d "$_profile_dir" -c "${_profile_dir}/${_configfile}"
 }
 
 main() {
     check_cond
 
     dotbot_cmd="$(get_dotbot)"
-    local hostname_
-    hostname_="$(hostname)"
-    # local uname_
-    # uname_="$(uname)"
+    _hostname="$(uname --nodename)"
 
-    cd "$scriptdir"
+    cd "$script_dir"
 
     install_profile "00-default"
 
-    case "$hostname_" in
+    case "$_hostname" in
     osiris | isis)
         install_profile "40-linux-desktop"
         install_profile "40-kde"
         install_profile "80-home-desktop"
-        ANSIBLE_HOST_TYPE="home" "${scriptdir}/ansible/run.sh"
+        ANSIBLE_HOST_TYPE="home" "${script_dir}/ansible/run.sh"
         ;;
     *)
-        "${scriptdir}/ansible/run.sh"
+        "${script_dir}/ansible/run.sh"
         ;;
     esac
 }
