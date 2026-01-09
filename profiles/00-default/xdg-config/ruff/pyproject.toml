@@ -2,31 +2,102 @@
 line-length = 79
 
 [tool.ruff.lint]
+preview = true
 fixable = ["ALL"]
-select = ["ALL"]
+select = [
+  # ruff default:
+  "E", # pycodestyle - error
+  "F", # Pyflakes
+
+  # Addons #flake8
+  "YTT",   # flake8-2020
+  "ASYNC", # flake8-async
+  "B",     # flake8-bugbear
+  "BLE",   # flake8-blind-except
+  "FBT",   # flake8-boolean-trap
+  "A",     # flake8-builtins (e.g. builtin-variable-shadowing)
+  "C4",    # flake8-comprehensions
+  "CPY",   # flake8-copyright
+  "DTZ",   # flake8-datetimez
+  "T",     # flake8-debugger
+  "DJ",    # flake8-django
+  "EM",    # flake8-errmsg
+  "FA",    # flake8-future-annotations
+  "INT",   # flake8-gettext
+  "ISC",   # flake8-implicit-str-concat
+  "ICN",   # flake8-import-conventions
+  "LOG",   # flake8-logging
+  "G",     # flake8-logging-format
+  "INP",   # flake8-no-pep420
+  "PIE",   # flake8-pie
+  "PYI",   # flake8-pyi
+  "PT",    # flake8-pytest-style
+  "SLF",   # flake8-self
+  "SIM",   # flake8-simplify
+  "SLOT",  # flake8-slots
+  "TID",   # flake8-tidy-imports
+  "PTH",   # flake8-use-pathlib
+  "AIR",   # Airflow
+  "FAST",  # FastAPI
+  "PERF",  # Perflint
+  "NPY",   # NumPy-specific rules
+  "PD",    # pandas-vet
+  "N",     # pep8-naming
+  "PGH",   # pygrep-hooks
+  "PLC",   # pylint-convention
+  "PLE",   # pylint-error
+  "PLR",   # pylint-refactor
+  "PLW",   # pylint-warning
+  "UP",    # pyupgrade
+  "FURB",  # refurb
+  "RUF",   # Ruff-specific rules
+
+  # Things that bother me in simple Python scripts #1:
+  # "TD",  # flake8-todos
+  # "FIX", # flake8-fixme
+  # "ANN", # flake8-annotations
+  # "EXE", # flake8-executable (e.g. shebang-not-executable)
+  # "ARG", # flake8-unused-arguments
+
+  # Things that might be used in production code:
+  # "C90", # mccabe
+  # "W",   # pycodestyle - warning
+  # "D",   # pydocstyle
+  # "DOC", # pydoclint
+  # "TRY", # tryceratops (e.g. raise-vanilla-class)
+  # "ANN", # flake8-annotations (간단한 스크립트에서는 자동 추론 사용)
+  # "T20", # flake8-print
+  # "S",   # flake8-bandit
+  # "BLE", # flake8-blind-except
+  # "ERA", # eradicate (e.g. commented-out-code)
+  # "CPY", # flake8-copyright
+
+  # Use autofix feature only:
+  # "I",     # isort
+  # "COM",   # flake8-commas
+  "COM818", # trailing-commaa-on-bare-tuple
+  # "Q",     # flake8-quotes
+  # "RSE",   # flake8-raise
+  # "RET",   # flake8-return
+  # "TC",    # flake8-type-checking
+  "TC010", # runtime-string-union (autofix not available)
+  # "FLY",   # flynt
+]
+
 ignore = [
-  # Things that bother me in simple python scripts #1:
-  "D",   # pydocstyle
-  "ERA", # eradicate, e.g. ERA001 - commented-out-code
-  "FIX", # flake8-fixme
-  "TD",  # flake8-todos
-  "T20", # flake8-print
-
-  # Things that bother me in simple python scripts #2:
-  "ANN201", # missing-return-type-undocumented-public-function (간단한 스크립트에서는 자동 추론 사용)
-  "RUF100", # unused-noqa
-  "TRY003", # raise-vanilla-args
-
-  # Things that conflicts with other rules
+  # Rules that are necessary in specific situations:
   "S603", # subprocess-without-shell-equals-true", conflicts with S602
+  "S607", # start-process-with-partial-path
 
-  # Folloing rule should be fixed by formatter:
-  "COM", # flake8-commas
-  "E",   # pycodestyle
-  "I",   # isort
-  "Q",   # flake8-quotes
+  # Things that bother me in simple Python scripts:
+  "RUF100", # unused-noqa
 
-  # Things can be fixed by formatter #2:
+  # Things can be fixed by formatter #flake8-commas:
+  "COM812", # missing-trailing-comma
+  "COM819", # prohibited-trailing-comma
+
+  # Things can be fixed by formatter #pydocstyle:
+  "D200", # unnecessary-multiline-docstring
   "D201", # no-blank-line-before-function
   "D202", # no-blank-line-after-function
   "D203", # one-blank-line-before-class
@@ -36,22 +107,69 @@ ignore = [
   "D209", # new-line-after-last-paragraph
   "D210", # no-surrounding-whitespace
   "D211", # no-blank-line-before-class
-  "E501", # line-too-long
-  "Q000", # bad-quotes-inline-string
-  "Q001", # bad-quotes-multiline-string
-  "Q002", # bad-quotes-docstring
+
+  # Things can be fixed by formatter #pycodestyle-error:
+  "E201", # whitespace-after-open-bracket
+  "E202", # whitespace-before-close-bracket
+  "E203", # whitespace-before-punctuation
+  "E204", # whitespace-after-decorator
+  "E211", # whitespace-before-parameters
+  "E221", # multiple-spaces-before-operator
+  "E222", # multiple-spaces-after-operator
+  "E223", # tab-before-operator
+  "E224", # tab-after-operator
+  "E225", # missing-whitespace-around-operator
+  "E226", # missing-whitespace-around-arithmetic-operator
+  "E227", # missing-whitespace-around-bitwise-or-shift-operator
+  "E228", # missing-whitespace-around-modulo-operator
+  "E231", # missing-whitespace
+  "E241", # multiple-spaces-after-comma
+  "E242", # tab-after-comma
+  "E251", # unexpected-spaces-around-keyword-parameter-equals
+  "E252", # missing-whitespace-around-parameter-equals
+  "E261", # too-few-spaces-before-inline-comment
+  "E262", # no-space-after-inline-comment
+  "E265", # no-space-after-block-comment
+  "E266", # multiple-leading-hashes-for-block-comment
+  "E271", # multiple-spaces-after-keyword
+  "E272", # multiple-spaces-before-keyword
+  "E273", # tab-after-keyword
+  "E274", # tab-before-keyword
+  "E275", # missing-whitespace-after-keyword
+  "E301", # blank-line-between-methods
+  "E302", # blank-lines-top-level
+  "E303", # too-many-blank-lines
+  "E304", # blank-line-after-decorator
+  "E305", # blank-lines-after-function-or-class
+  "E306", # blank-lines-before-nested-definition
+  "E502", # redundant-backslash
+  "E703", # useless-semicolon
+  "E711", # none-comparison
+
+  # Things can be fixed by formatter #pycodestyle-warning:
+  "W291", # trailing-whitespace
+  "W292", # missing-newline-at-end-of-file
   "W293", # blank-line-with-whitespace
+  "W391", # too-many-newlines-at-end-of-file
 ]
+
+[tool.ruff.format]
+docstring-code-format = true
 
 [tool.ruff.lint.pydocstyle]
 convention = "pep257"
 
 [tool.ruff.lint.per-file-ignores]
-"test_*.py" = [
-  "S101",   # assert-used: assert statements are required in tests
-  "ANN001", # missing-type-function-argument: mock parameters are self-documenting in tests
-  "SLF001", # private-member-access: necessary to test internal state of objects
-  "ARG002", # unused-argument: mock parameters required by patch decorators
+"test/*.py" = [
+  "S101",    # assert-used: assert statements are required in tests
+  "ANN001",  # missing-type-function-argument: mock parameters are self-documenting in tests
+  "SLF001",  # private-member-access: necessary to test internal state of objects
+  "ARG002",  # unused-argument: mock parameters required by patch decorators
+  "TRY",     # tryceratops
+  "DOC201",  # docstring-missing-returns
+  "FBT001",  # boolean-type-hint-positional-argument
+  "F841",    # unused-variable
+  "PLR6301", # no-self-use
 ]
 
 [tool.ty.src]

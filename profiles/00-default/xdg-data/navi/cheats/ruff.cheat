@@ -1,0 +1,10 @@
+% ruff, python
+
+# list fixable linter rules
+ruff rule --all --output-format=json | jq -r '.[] | select(.fix_availability == "Always") | "\"\(.code)\", # \(.name)"'
+
+# list semi-fixable linter rules
+ruff rule --all --output-format=json | jq -r '.[] | select(.fix_availability | IN("Always", "Sometimes")) | "\"\(.code)\", # \(.name)"'
+
+# list non-fixable linter rules
+ruff rule --all --output-format=json | jq -r '.[] | select(.fix_availability != "Always") | "\(.code), # \(.name)"'

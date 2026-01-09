@@ -1,0 +1,77 @@
+[tool.ruff]
+line-length = 79
+
+[tool.ruff.lint]
+fixable = ["ALL"]
+select = ["ALL"]
+ignore = [
+  # Things that bother me in simple Python scripts #1:
+  "D",   # pydocstyle
+  "C90", # mccabe
+  "ANN", # flake8-annotations (간단한 스크립트에서는 자동 추론 사용)
+  "FIX", # flake8-fixme
+  "T20", # flake8-print
+  "TD",  # flake8-todos
+
+  # Things that bother me in simple Python scripts #2:
+  "BLE001", # blind-except
+  "ERA001", # commented-out-code
+  "RUF100", # unused-noqa
+  "S101",   # assert-used: assert statements are required in tests
+  "TRY002", # raise-vanilla-class
+  "TRY003", # raise-vanilla-args
+
+  # Things that conflict with other rules:
+  "S603", # subprocess-without-shell-equals-true", conflicts with S602
+
+  # Things that I don't think are a problem:
+  "S607", # start-process-with-partial-path
+
+  # Things can be fixed by formatter #1:
+  "I",   # isort
+  "COM", # flake8-commas
+  "Q",   # flake8-quotes
+  "E",   # pycodestyle
+  "W",   # pycodestyle
+
+  # Things can be fixed by formatter #2:
+  "D201", # no-blank-line-before-function
+  "D202", # no-blank-line-after-function
+  "D203", # one-blank-line-before-class
+  "D204", # one-blank-line-after-class
+  "D205", # blank-line-after-summary
+  "D206", # indent-with-spaces
+  "D209", # new-line-after-last-paragraph
+  "D210", # no-surrounding-whitespace
+  "D211", # no-blank-line-before-class
+  "E501", # line-too-long
+  "Q000", # bad-quotes-inline-string
+  "Q001", # bad-quotes-multiline-string
+  "Q002", # bad-quotes-docstring
+]
+
+[tool.ruff.format]
+docstring-code-format = true
+
+[tool.ruff.lint.pydocstyle]
+convention = "pep257"
+
+[tool.ruff.lint.per-file-ignores]
+"test_*.py" = [
+  "S101",   # assert-used: assert statements are required in tests
+  "ANN001", # missing-type-function-argument: mock parameters are self-documenting in tests
+  "SLF001", # private-member-access: necessary to test internal state of objects
+  "ARG002", # unused-argument: mock parameters required by patch decorators
+]
+
+[tool.ty.src]
+exclude = ["test_*.py"]
+
+[tool.basedpyright]
+"reportMissingParameterType" = false        # ruff ANN001
+"reportUnusedImport" = false                # ruff F401
+"reportUndefinedVariable" = false           # ruff F821
+"reportUnusedVariable" = false              # ruff F841
+"reportPrivateUsage" = false                # ruff SLF001
+"reportImplicitStringConcatenation" = false # conflicts with ruff ISC003 (explicit-string-concatenation)
+exclude = ["test_*.py"]                     # exclude test files from type checking

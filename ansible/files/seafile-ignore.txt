@@ -1,9 +1,10 @@
 # https://help.seafile.com/syncing_client/excluding_files/
 
 # OS
-.directory
 .DS_Store
+.directory
 Thumbs.db
+desktop.ini
 
 # Python
 __pycache__/
