@@ -244,7 +244,7 @@ alias gplr="git pull --rebase --autostash -v"
 # git-clone
 ############################################################################
 alias gcl="git clone --recurse-submodules"
-alias gclm="git clone --depth 1 --recurse-submodules --shallow-submodules"
+alias gcls="git clone --depth 1 --recurse-submodules --shallow-submodules"
 
 ############################################################################
 # git-submodule
