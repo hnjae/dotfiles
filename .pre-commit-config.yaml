@@ -24,17 +24,23 @@ repos:
         name: harden shell
         entry: shellharden --replace
         language: system
-        files: \.(sh|bash|envrc|envrc.*|profile|env|env.*)$
+        files: &shell_files |
+          (?x)^(
+            .*\.(sh|bash)$|
+            \.envrc(\..+)?$|
+            \.env(\..+)?$|
+            \.profile$
+          )
       - id: shellcheck
         name: check shell
         entry: shellcheck
         language: system
-        files: \.(sh|bash|envrc|envrc.*|profile|env|env.*)$
+        files: *shell_files
       - id: shfmt
         name: format shell
         entry: shfmt --indent 4 --simplify --write
         language: system
-        files: \.(sh|bash|envrc|envrc.*|profile|env|env.*)$
+        files: *shell_files
   - repo: local
     hooks:
       - id: just-fmt
@@ -62,4 +68,3 @@ repos:
         entry: markdownlint-cli2 --fix
         language: system
         types: [markdown]
-        exclude: |

@@ -21,7 +21,17 @@ indent_style = space
 indent_size = 4
 max_line_length = 80
 
-[*.{fish,zsh,sh,profile,env,envrc}]
+[*.{sh,bash,fish,zsh}]
+indent_style = space
+indent_size = 4
+max_line_length = 80
+
+[.{env,envrc,profile}]
+indent_style = space
+indent_size = 4
+max_line_length = 80
+
+[.{env,envrc}.*]
 indent_style = space
 indent_size = 4
 max_line_length = 80
