@@ -18,12 +18,8 @@ local FONTS = {
   { family = "Noto Color Emoji" },
 }
 
-M.get_font = function(wezterm)
-  return wezterm.font_with_fallback(FONTS)
-end
-
 M.apply_to_config = function(opts)
-  opts.font = M.get_font(wezterm)
+  opts.font = wezterm.font_with_fallback(FONTS)
   opts.font_size = 11
   opts.warn_about_missing_glyphs = true
 end

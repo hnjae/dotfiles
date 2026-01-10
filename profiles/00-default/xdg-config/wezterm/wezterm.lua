@@ -13,9 +13,9 @@ config.use_ime = true
 config.audible_bell = "Disabled"
 config.visual_bell = {
   fade_in_function = "EaseIn",
-  fade_in_duration_ms = 100,
+  fade_in_duration_ms = 80,
   fade_out_function = "EaseOut",
-  fade_out_duration_ms = 100,
+  fade_out_duration_ms = 80,
 }
 
 -----------------
@@ -72,24 +72,6 @@ config.keys = {
   --   mods = "CTRL|SHIFT",
   --   action = wezterm.action.Nop,
   -- },
-
-  -- WIP
-  -- {
-  --   key = "C",
-  --   mods = "CTRL",
-  --   action = wezterm.action_callback(function(window, pane)
-  --     local sel = window:get_selection_text_for_pane(pane) or ""
-  --     if #sel > 0 then
-  --       wezterm.clipboard.copy_text(sel)
-  --       window:perform_action(wezterm.action.ClearSelection, pane)
-  --     else
-  --       window:perform_action(wezterm.action.SendKey({ key = "C", mods = "CTRL" }), pane)
-  --     end
-  --   end),
-  -- },
 }
-
--- config.send_composed_key_when_left_alt_is_pressed = false
--- config.send_composed_key_when_right_alt_is_pressed = false
 
 return config
