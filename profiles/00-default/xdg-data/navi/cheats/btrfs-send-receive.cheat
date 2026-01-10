@@ -1,0 +1,7 @@
+% btrfs, btrfs-send, btrfs-receive
+
+# send and receive (<DEST_PATH>/<snapshot-dirname> 으로 전송됨.)
+btrfs send "<SOURCE_SNAPSHOT>" | btrfs receive "<DEST_PATH>"
+
+# check received subvolume (Receive transid, Received UUID 등의 정보과 있어야함.)
+btrfs subvolume show <RECEIVED_SNAPSHOT>

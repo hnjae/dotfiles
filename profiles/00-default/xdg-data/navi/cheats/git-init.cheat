@@ -1,0 +1,4 @@
+% git
+
+# init bare repo
+git init --bare </srv/git/name.git>
