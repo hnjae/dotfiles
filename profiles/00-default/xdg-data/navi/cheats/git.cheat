@@ -209,6 +209,11 @@ git fetch origin <commit-id>
 # Ignore local modification(updates) of file. --skip-worktree: 로컬에서 의도적으로 파일을 수정했다는 것을 명시합니다.
 git update-index --skip-worktree <path>
 
+# Get superproject root working tree (toplevel)
+git rev-parse --show-superproject-working-tree
+
+# Get project root working tree (toplevel)
+git rev-parse --show-toplevel
 ;#############################################################################
 ; git-worktree
 ;#############################################################################
