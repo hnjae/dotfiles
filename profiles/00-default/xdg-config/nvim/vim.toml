@@ -1,5 +1,5 @@
 [selene]
-base = "lua51"
+base = "lua52"
 name = "vim"
 
 [vim]
@@ -12,4 +12,7 @@ any = true
 any = true
 
 [MiniIcons]
+any = true
+
+[svim]
 any = true

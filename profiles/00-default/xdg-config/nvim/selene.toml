@@ -3,5 +3,7 @@ std = "vim"
 # <https://kampfkarren.github.io/selene/usage/std.html>
 # neovim uses lua5.1: <https://neovim.io/doc/user/lua.html>
 
+exclude = ["**/_not-in-use/**", "**/_testing/**"]
+
 [lints]
 mixed_table = "allow"

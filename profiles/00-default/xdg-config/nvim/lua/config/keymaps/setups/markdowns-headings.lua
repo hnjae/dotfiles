@@ -1,21 +1,22 @@
 -- WIP
 
-local A = {}
+-- local A = {}
+--
+-- A.adjust = function()
+--   local bufid = vim.api.nvim_get_current_buf()
+--   local parser = vim.treesitter.get_parser(bufid, "markdown", {})
+--   local ts_utils = require("nvim-treesitter.ts_utils")
+--   local node = ts_utils.get_node_at_cursor()
+--
+--   if node == nil then
+--     vim.notify("No Treesitter node found at cursor.", "warn")
+--     return
+--   end
+--
+--   -- local a = parser:parse(range)
+--   -- vim.notify(vim.inspect(a))
+-- end
 
-A.adjust = function()
-  local bufid = vim.api.nvim_get_current_buf()
-  local parser = vim.treesitter.get_parser(bufid, "markdown", {})
-  local ts_utils = require("nvim-treesitter.ts_utils")
-  local node = ts_utils.get_node_at_cursor()
-
-  if node == nil then
-    vim.notify("No Treesitter node found at cursor.", "warn")
-    return
-  end
-
-  -- local a = parser:parse(range)
-  -- vim.notify(vim.inspect(a))
-end
 -- Place this function definition in your Neovim configuration
 -- e.g., in init.lua or a separate lua file that gets required.
 

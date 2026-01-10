@@ -8,3 +8,8 @@ repos:
         entry: stylua
         language: system
         types: [lua]
+      - id: selene
+        name: check lua
+        entry: selene --allow-warnings
+        language: system
+        types: [lua]
