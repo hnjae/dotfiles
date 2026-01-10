@@ -66,6 +66,62 @@ config.keys = {
     action = wezterm.action({ SendString = "\x1b\r" }),
   },
 
+  -- Pane splitting
+  {
+    key = "O",
+    mods = "CTRL|SHIFT",
+    action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+  },
+  {
+    key = "E",
+    mods = "CTRL|SHIFT",
+    action = act.SplitVertical({ domain = "CurrentPaneDomain" }),
+  },
+
+  -- Pane navigation (vim-style)
+  {
+    key = "h",
+    mods = "ALT",
+    action = act.ActivatePaneDirection("Left"),
+  },
+  {
+    key = "l",
+    mods = "ALT",
+    action = act.ActivatePaneDirection("Right"),
+  },
+  {
+    key = "j",
+    mods = "ALT",
+    action = act.ActivatePaneDirection("Down"),
+  },
+  {
+    key = "k",
+    mods = "ALT",
+    action = act.ActivatePaneDirection("Up"),
+  },
+
+  -- Pane navigation (arrow keys)
+  {
+    key = "LeftArrow",
+    mods = "ALT",
+    action = act.ActivatePaneDirection("Left"),
+  },
+  {
+    key = "RightArrow",
+    mods = "ALT",
+    action = act.ActivatePaneDirection("Right"),
+  },
+  {
+    key = "DownArrow",
+    mods = "ALT",
+    action = act.ActivatePaneDirection("Down"),
+  },
+  {
+    key = "UpArrow",
+    mods = "ALT",
+    action = act.ActivatePaneDirection("Up"),
+  },
+
   -- Tab handling (disable creating tab)
   -- {
   --   key = "T",

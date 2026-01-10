@@ -107,3 +107,7 @@ keybind = performable:ctrl+c=copy_to_clipboard
 
 # claude-code 에서 newline insert
 keybind = shift+enter=text:\x1b\r
+
+gtk-single-instance = false
+# linux-cgroup = "always"
+# linux-cgroup-memory-limit = 23622320128
