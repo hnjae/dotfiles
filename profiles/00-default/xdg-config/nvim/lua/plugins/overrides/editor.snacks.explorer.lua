@@ -112,38 +112,21 @@ return {
       },
     },
   },
-  keys = function(_, keys)
-    local snacks = require("snacks")
-
-    vim.list_extend(keys, {
-      {
-        [1] = "<leader>fe",
-        [2] = function()
-          -- snacks.explorer(vim.tbl_extend("force", opts, {
-          --   cwd = LazyVim.root(),
-          -- }))
-          snacks.explorer({
-            cwd = LazyVim.root(),
-          })
-        end,
-        desc = "Explorer Snacks (root dir)",
-      },
-      {
-        [1] = "<leader>fE",
-        [2] = function()
-          -- snacks.explorer(vim.tbl_extend("force", opts, {
-          --   cwd = vim.fn.expand("%:h"),
-          -- }))
-          snacks.explorer({
-            cwd = vim.fn.expand("%:h"),
-          })
-        end,
-        desc = "Explorer Snacks (buffer's dir)",
-      },
-      { [1] = "<leader>e", [2] = "<leader>fe", desc = "Explorer Snacks (root dir)", remap = true },
-      { [1] = "<leader>E", [2] = "<leader>fE", desc = "Explorer Snacks (cwd)", remap = true },
-    })
-
-    return keys
-  end,
+  -- NOTE: cwd 로 작동하는게 더 편한 것 같음.
+  -- keys = function(_, keys)
+  --   vim.list_extend(keys, {
+  --     {
+  --       [1] = "<leader>fE",
+  --       [2] = function()
+  --         Snacks.explorer({
+  --           cwd = vim.fn.expand("%:h"),
+  --         })
+  --       end,
+  --       desc = "Explorer Snacks (buffer's dir)",
+  --     },
+  --     { [1] = "<leader>E", [2] = "<leader>fE", desc = "Explorer Snacks (cwd)", remap = true },
+  --   })
+  --
+  --   return keys
+  -- end,
 }
