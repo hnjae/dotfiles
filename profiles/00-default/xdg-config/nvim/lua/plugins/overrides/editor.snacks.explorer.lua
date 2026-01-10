@@ -13,7 +13,7 @@ return {
           layout = {
             preset = "sidebar",
             layout = {
-              width = 31, -- default 50
+              width = 40, -- default 50
             },
           },
 
@@ -64,11 +64,11 @@ return {
             list = {
               keys = {
                 -- disable defaults:
-                ["a"] = function() end, -- "explorer_add",
-                ["<leader>/"] = function() end, -- "picker_grep",
-                ["y"] = function() end, -- "explorer_yank",
-                ["m"] = function() end, -- "explorer_move",
-                ["c"] = function() end, -- "explorer_copy",
+                ["a"] = false, -- "explorer_add",
+                ["<leader>/"] = false, -- "picker_grep",
+                ["y"] = false, -- "explorer_yank",
+                ["m"] = false, -- "explorer_move",
+                ["c"] = false, -- "explorer_copy",
 
                 -- file picker 랑 동작 통일:
                 ["<c-t>"] = "tab", -- default: terminal
@@ -98,7 +98,7 @@ return {
                 ["mg"] = "picker_grep", -- netrw 랑 동작 일치화
 
                 --
-                ["mc"] = { "explorer_yank", mode = { "n", "x" } }, -- netrw-alike
+                ["mc"] = { [1] = "explorer_yank", mode = { "n", "x" } }, -- netrw-alike
                 ["mp"] = "explorer_paste",
                 ["gm"] = "explorer_move",
                 ["gc"] = "explorer_copy",
@@ -138,7 +138,7 @@ return {
             cwd = vim.fn.expand("%:h"),
           })
         end,
-        desc = "Explorer Snacks (cwd)",
+        desc = "Explorer Snacks (buffer's dir)",
       },
       { [1] = "<leader>e", [2] = "<leader>fe", desc = "Explorer Snacks (root dir)", remap = true },
       { [1] = "<leader>E", [2] = "<leader>fE", desc = "Explorer Snacks (cwd)", remap = true },

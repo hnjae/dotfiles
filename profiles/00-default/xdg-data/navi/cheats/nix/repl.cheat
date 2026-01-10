@@ -4,4 +4,4 @@
 nix repl
 
 # run nix repl with nixpkgs
-nix repl -f '\<nixpkgs>'
+nix repl -f '<nixpkgs>'

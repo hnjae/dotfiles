@@ -19,30 +19,10 @@
     "description": "lib.optionalAttrs :: Bool -> AttrSet -> AttrSet",
     "body": ["(lib.optionalAttrs ${1:bool} ${0:AttrSet})", ""]
   },
-  "lagenAttrs": {
-    "prefix": "lagenAttrs",
-    "description": "lib.genAttrs :: Generate attrs from list, use element as name(key)",
-    "body": ["(lib.genAttrs [ \"foo\" \"bar\" ] (${1:name}: ${2:val}))", ""]
-  },
   "lalistToAttrs": {
     "prefix": "lalistToAttrs",
     "description": "builtins.listToAttrs :: Convert name-value pair list to attrs",
     "body": ["(builtins.listToAttrs [ ${0:List} ])"]
-  },
-  "lagenATTRSP": {
-    "prefix": "lagenATTRSP",
-    "description": "Generate attrs from list",
-    "body": [
-      "(",
-      "builtins.listToAttrs (",
-      "\tmap (",
-      "\t\t${2:foo}: (",
-      "\t\t\tlib.nameValuePair (${3:\"will-eval-to-name\"}) (${4:\"will-eval-to-value\"})",
-      "\t\t)",
-      "\t) ${1:[\"foos(list)\"]}",
-      ")",
-      ");"
-    ]
   },
   "lamapAttrs": {
     "prefix": "lamapAttrs",
@@ -65,6 +45,27 @@
       "\t\t\t(${6:\"will-eval-to-val\"})",
       "\t\t)",
       ") ${1:AttrSet}",
+      ")"
+    ]
+  },
+  "lagenAttrs": {
+    "prefix": "lagenAttrs",
+    "description": "lib.genAttrs :: Generate attrs from list, use element as name(key)",
+    "body": ["(lib.genAttrs [ \"foo\" \"bar\" ] (${1:name}: ${2:val}))", ""]
+  },
+  "lagenAttrsp": {
+    "prefix": "lagenAttrsp",
+    "description": "Generate attrs from list",
+    "body": [
+      "(",
+      "\tbuiltins.listToAttrs (",
+      "\t\tmap (",
+      "\t\t\t${2:element}: {",
+      "\t\t\t\tname = ${3:\"will-eval-to-name\"};",
+      "\t\t\t\tvalue = (${4:\"will-eval-to-name\"});",
+      "\t\t\t}",
+      "\t\t) ${1:[\"foos(list)\"]}",
+      "\t)",
       ")"
     ]
   },
