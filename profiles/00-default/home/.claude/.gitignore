@@ -1,2 +1,12 @@
 /debug
+/file-history
 /plans
+/projects
+/session-env
+/shell-snapshots
+/statsig
+/todos
+
+# files
+/.credentials.json
+/history.jsonl
