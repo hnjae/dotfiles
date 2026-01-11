@@ -270,5 +270,10 @@
     "prefix": ["private", "pri"],
     "description": "make recipe, alias or variable private",
     "body": "[private]"
+  },
+  "sunstable": {
+    "prefix": ["sunstable"],
+    "description": "enable unstable features",
+    "body": "set unstable := true"
   }
 }

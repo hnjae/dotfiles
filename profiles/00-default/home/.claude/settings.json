@@ -5,8 +5,8 @@
       "Bash(git commit:*)",
       "Bash(git status:*)",
       "Bash(git diff:*)",
-      "Bash(ty:*)",
-      "Bash(basedpyright:*)"
+      "Bash(mkdir:*)",
+      "Bash(tree:*)"
     ]
   }
 }

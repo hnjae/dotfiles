@@ -6,5 +6,18 @@ uv add <dependencies>
 # add dev dependencies
 uv add --dev <dependencies>
 
-# sync pyproject.toml
+# Update(sync) project's environment (pyproject.toml & uv.lock)
 uv sync
+
+# Sync with uv.lock (Install package described in uv.lock)
+uv sync --frozen
+
+# Update uv.lock
+uv lock
+
+# run command/scirpt in venv
+uv run <toolname>
+
+; uvx: alias of uv tool run
+# Run command/script/tool in separate environment
+uvx <toolname>
