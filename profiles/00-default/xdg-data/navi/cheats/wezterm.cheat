@@ -3,6 +3,9 @@
 # ssh login using wezterm
 wezterm ssh <target>
 
+# connects to pre-defined target
+wezterm connect <target>
+
 # set tab name
 wezterm cli set-tab-title <name>
 

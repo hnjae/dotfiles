@@ -1,6 +1,6 @@
 ---
 date_before: 2023-08-10
-lastmod: 2025-04-30T15:58:40+0900
+lastmod: 2026-01-11T21:59:17+0900
 ---
 
 
@@ -38,9 +38,9 @@ lastmod: 2025-04-30T15:58:40+0900
 
 - Unicode Font
     - 한자 (일본식 자형)
-        - ttf-hanazono (sans-serief)(확장 A~F 영역 폰트)
-        - [cutra_AppendingToHanaMin (확장 G 영역 폰트)](http://ko.glyphwiki.org/wiki/Group:cutra_AppendingToHanaMin)
-        - ttf-plangothic (serif)(가나 보충, 가나 확장 A)
+        - `Jigmo{,2,3}` (hanazo 후속 / serif)
+    - 한자 (중국식 자형)
+        - `Plangothic {P1,P2}` (serif)(가나 보충, 가나 확장 A)
     - others
         - ttf-tibetan-machine (Tibetan Font)
         - ttf-jomolhari (Tibetan 종카 문자)

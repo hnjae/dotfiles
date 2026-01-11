@@ -1,0 +1,4 @@
+% fontconfig
+
+# read(scan) font file
+fc-scan <fontfile>
