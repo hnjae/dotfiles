@@ -16,12 +16,15 @@ Run `ghostty +list-keybinds` to list keybinding
 ## Manipulating a tab
 
 - Switch Tab:
-  - `<C-Tab>`/`<C-S-Tab>`
-  - `<C-Pg>`/`<C-PgDn>`
-  - `<C-S-Left>`/`</C-S-Right>`
+    - `<C-Tab>`/`<C-S-Tab>`
+    - `<C-Pg>`/`<C-PgDn>`
+    - `<C-S-Left>`/`</C-S-Right>`
+
+- Move Tab (**mapped manually**):
+    - `<C-S-Pg>`/`<C-S-PgDn>` (not-default)
 
 - Go to tab:
-  - `<A>` + Numbers
+    - `<A>` + Numbers
 
 ## Manipulating a pane
 
@@ -39,13 +42,22 @@ Resizing Pane: (`D` stands for Meta)
 Zoom Pane:
   `<C-S-CR>` (default)
 
+## Selecting
+
+- Select All:
+    - `<C-S-a>`
+- Drag (when something was dragged);
+    - `<S+[ARROW]>`
+
+
+
 ## Viewport
 
 Change:
   `<S>` + `Home/End/PgUp/PgDn`
 
 Scroll:
-  `<C-S>` + `<PgUp/PgDn>`
+  `<C-S>` + `<PgUp/PgDn>` (unmapped)
 
 ## Copy & Paste
 

@@ -1,0 +1,28 @@
+---
+date: 2026-01-11T15:17:06+0900
+lastmod: 2026-01-11T15:17:06+0900
+syntax: markdown
+tags: []
+---
+
+## Entering Mode
+
+### Enter Search mode (scrollback)
+
+- <https://wezterm.org/scrollback.html#scrolling-without-a-scrollbar>
+- `<C-S-f>` or Command-F
+
+### Enter Yank(Copy) mode
+
+- <https://wezterm.org/copymode.html#key-assignments>
+- `<C-S-x>`
+
+### Enter Quick Select Mode
+
+- https://wezterm.org/quickselect.html
+- `<C-S-SPC>`
+- Alacritty 의 Vi 모드 진입과 동등.
+
+<!--
+vi:ft=markdown
+-->

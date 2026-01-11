@@ -20,6 +20,7 @@ cursor_border = "#dcd7ba"
 scrollbar_thumb = "#2a2a37"
 split = "#727169"           # or use base02 if too bright
 
+
 ansi = [
   "#1f1f28",
   "#c34043",
@@ -46,7 +47,7 @@ brights = [
 # When the IME, a dead key or a leader key are being processed and are effectively
 # holding input pending the result of input composition, change the cursor
 # to this color to give a visual cue about the compose state.
-compose_cursor = "#ffa066" # orange
+# compose_cursor = "#FFA066"
 
 # Colors for copy_mode and quick_select
 # available since: 20220807-113146-c2fee766

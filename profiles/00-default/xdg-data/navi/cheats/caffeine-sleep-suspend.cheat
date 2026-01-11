@@ -1,0 +1,5 @@
+% systemd-inhibit
+
+
+# inhibit sleep 1h
+systemd-inhibit [--what=sleep] sleep 1h
