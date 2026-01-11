@@ -1,27 +1,22 @@
--- NOTE: wezterm ignores fontconfig  <2024-11-28>
-
 local wezterm = require("wezterm")
+
+local cjkscale = 1.16
 
 local M = {}
 local FONTS = {
-  { family = "MesloLGM Nerd Font" },
-  {
-    family = "Noto Sans Mono CJK JP",
-    -- scale = 0.98,
-    weight = "Medium",
-  },
-  {
-    family = "Noto Sans Mono CJK KR",
-    -- scale = 0.98,
-    weight = "Medium",
-  },
+  { family = "MesloLGL Nerd Font" },
+  { family = "Pretendard JP", scale = cjkscale },
   { family = "Noto Color Emoji" },
+  { family = "Jigmo", scale = cjkscale },
+  { family = "Jigmo2", scale = cjkscale },
+  { family = "Jigmo3", scale = cjkscale },
 }
 
-M.apply_to_config = function(opts)
-  opts.font = wezterm.font_with_fallback(FONTS)
-  opts.font_size = 11
-  opts.warn_about_missing_glyphs = true
+M.apply_to_config = function(config)
+  -- config.line_height = 1.2
+  config.font = wezterm.font_with_fallback(FONTS)
+  config.font_size = 11
+  config.warn_about_missing_glyphs = false
 end
 
 return M

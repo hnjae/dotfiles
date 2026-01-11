@@ -1,0 +1,59 @@
+[colors]
+foreground = '#c0c0c0'
+background = '#1a1a1a'
+
+ansi = [
+  '#000000',
+  '#cd0000',
+  '#00cd00',
+  '#cdcd00',
+  '#0000ee',
+  '#cd00cd',
+  '#00cdcd',
+  '#e5e5e5',
+]
+
+brights = [
+  '#7f7f7f',
+  '#ff0000',
+  '#00ff00',
+  '#ffff00',
+  '#5c5cff',
+  '#ff00ff',
+  '#00ffff',
+  '#ffffff',
+]
+
+# tab_bar 색상 정의
+[colors.tab_bar]
+background = '#1a1a1a'
+
+[colors.tab_bar.active_tab]
+bg_color = '#2b2b2b'
+fg_color = '#ffffff'
+intensity = 'Bold'
+italic = false
+
+[colors.tab_bar.inactive_tab]
+bg_color = '#1a1a1a'
+fg_color = '#808080'
+
+[colors.tab_bar.inactive_tab_hover]
+bg_color = '#3a3a3a'
+fg_color = '#909090'
+italic = true
+
+[colors.tab_bar.new_tab]
+bg_color = '#1a1a1a'
+fg_color = '#808080'
+
+[colors.tab_bar.new_tab_hover]
+bg_color = '#3a3a3a'
+fg_color = '#909090'
+
+inactive_tab_edge = '#444444'
+
+[metadata]
+name = 'My Custom Theme'
+author = 'Your Name'
+origin_url = 'https://example.com'
