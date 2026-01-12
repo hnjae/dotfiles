@@ -1,7 +1,7 @@
 ---
 - name: Install and setup Image Viewer
   vars:
-    app_id: org.kde.koko
+    app_id: org.kde.gwenview
   block:
     - name: Install {{ app_id }} with flatpak
       community.general.flatpak:
@@ -17,25 +17,23 @@
           # lossless
           - image/bmp  # {'*.dib', '*.bmp'}
           - image/png  # {'*.png'}
-          # - image/apng  # {'*.png', '*.apng'}
+          - image/apng  # {'*.png', '*.apng'}
           - image/gif  # {'*.gif'}
           # mkv container
           - image/webp  # {'*.webp'}
           # mp4 container
-          # - image/heif  # {'*.heic', '*.heif', '*.hif'}
+          - image/heif  # {'*.heic', '*.heif', '*.hif'}
           - image/avif  # {'*.avif', '*.avifs'}
-          - image/avif-sequence
           # jpeg's
           - image/jpeg  # {'*.jpg', '*.jpeg', '*.jpe', '*.jfif'}
-          # - image/x-jpeg
-          # - image/jp2  # {'*.jp2', '*.jpg2'}
-          # - image/jxl  # {'*.jxl'}
-          # - image/jxr  # {'*.wdp', '*.hdp', '*.jxr'}
+          - image/jp2  # {'*.jp2', '*.jpg2'}
+          - image/jxl  # {'*.jxl'}
+          - image/jxr  # {'*.wdp', '*.hdp', '*.jxr'}
           # raw
-          # - image/x-adobe-dng  # {'*.dng'}
+          - image/x-adobe-dng  # {'*.dng'}
           # scan
-          # - image/tiff  # {'*.tif', '*.tiff'}
+          - image/tiff  # {'*.tif', '*.tiff'}
           # icon
-          # - image/vnd.microsoft.icon  # {'*.ico'}
-          # - image/x-icns  # {'*.icns'}
+          - image/vnd.microsoft.icon  # {'*.ico'}
+          - image/x-icns  # {'*.icns'}
         handler: '{{ app_id }}.desktop'

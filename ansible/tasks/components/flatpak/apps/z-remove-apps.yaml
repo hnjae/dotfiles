@@ -11,6 +11,7 @@
       - org.gnome.gitlab.YaLTeR.VideoTrimmer
       - org.kde.kamoso  # theora 로 녹화하는데, 코덱 선택을 할수가 없음. <2025-09-22>
       - org.kde.kontact
+      - org.kde.gwenview  # use org.kde.koko instead <2026-01-13>
       # Dev
       - com.getpostman.Postman  # Proprietary
       - dev.pulsar_edit.Pulsar  # editor, mit
