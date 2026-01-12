@@ -105,6 +105,12 @@ git reset [--hard] <commit>
 # Make current branch up-to-date
 git rebase upstream/main
 
+# origin 의 어떤 source 만 fetch 하고 있는지 확인
+git config --get remote.origin.fetch
+
+# origin 의 모든 것을 fetch 하도록 설정.
+git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+
 ;#############################################################################
 ; rebase; cherry-pick
 ;############################################################################
