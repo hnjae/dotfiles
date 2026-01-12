@@ -10,3 +10,4 @@
 # files
 /.credentials.json
 /history.jsonl
+/stats-cache.json

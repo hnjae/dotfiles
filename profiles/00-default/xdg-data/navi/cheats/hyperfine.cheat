@@ -1,0 +1,4 @@
+% hyperfine
+
+# compare commands
+hyperfine --shell=none '<command>' '<command>'
