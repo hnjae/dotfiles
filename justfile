@@ -127,6 +127,3 @@ update-submodules:
 
 nvim-sync-frozen:
     nvim --headless -c 'autocmd User VeryLazy ++once lua require("lazy").restore({wait=true}) vim.cmd("qall")'
-
-GIT-FCITX5-PROFILE:
-    git update-index --skip-worktree "profiles/40-linux-desktop/xdg-config/fcitx5/profile"
