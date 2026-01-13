@@ -4,7 +4,7 @@ local cjkscale = 1.16
 
 local M = {}
 local FONTS = {
-  { family = "MesloLGL Nerd Font" },
+  { family = "MesloLGM Nerd Font" },
   { family = "Pretendard JP", scale = cjkscale },
   { family = "Noto Color Emoji" },
   { family = "Jigmo", scale = cjkscale },

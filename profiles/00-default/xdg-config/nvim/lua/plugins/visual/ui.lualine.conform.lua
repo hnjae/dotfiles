@@ -36,24 +36,23 @@ local spec = {
       conform = "conform",
     })
 
-    local component = {
-      [1] = function()
-        local formatters, will_fallback_lsp = modules.conform.list_formatters_to_run(0)
+    local component = function()
+      if vim.o.columns <= hide_width then
+        return ""
+      end
 
-        local sources = vim.tbl_map(function(formatter)
-          return formatter.name
-        end, formatters)
+      local formatters, will_fallback_lsp = modules.conform.list_formatters_to_run(0)
 
-        if #sources == 0 and will_fallback_lsp then
-          table.insert(sources, "LSP")
-        end
+      local sources = vim.tbl_map(function(formatter)
+        return formatter.name
+      end, formatters)
 
-        return fmt(formatter_icon, sources)
-      end,
-      cond = function()
-        return (vim.o.columns > hide_width)
-      end,
-    }
+      if #sources == 0 and will_fallback_lsp then
+        table.insert(sources, "LSP")
+      end
+
+      return fmt(formatter_icon, sources)
+    end
 
     table.insert(opts.sections.lualine_x, component)
   end,

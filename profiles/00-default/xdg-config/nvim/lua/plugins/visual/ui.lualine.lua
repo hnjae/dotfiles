@@ -39,21 +39,21 @@ return {
     -- vim.notify(vim.inspect(opts.sections.lualine_x))
 
     -- HACK: LazyVim 14 기준 작동 / noice.api.status.mode overriding 하기
-    for _, section in ipairs(opts.sections.lualine_x) do
-      if
-        type(section.color) == "function" and section.color().fg == Snacks.util.color("Constant")
-      then
-        section.fmt = function(str)
-          if str == nil or str:match("^%-%-[^-]+%-%-$") ~= nil then
-            return ""
-          end
-
-          return str
-        end
-
-        break
-      end
-    end
+    -- for _, section in ipairs(opts.sections.lualine_x) do
+    --   if
+    --     type(section.color) == "function" and section.color().fg == Snacks.util.color("Constant")
+    --   then
+    --     section.fmt = function(str)
+    --       if str == nil or str:match("^%-%-[^-]+%-%-$") ~= nil then
+    --         return ""
+    --       end
+    --
+    --       return str
+    --     end
+    --
+    --     break
+    --   end
+    -- end
 
     -- disable clock time
     opts.sections.lualine_z = {
