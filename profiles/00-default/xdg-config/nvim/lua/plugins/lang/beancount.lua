@@ -3,6 +3,7 @@
 NOTE: 2025-10-19
 
   - `bean-check` 나 `bean-format` 은 `beancount` 패키지에 포함되어 있다.
+  -- beancount-language-server 가 bean-check 를 수행함.
 ]]
 
 ---@type LazySpec[]
@@ -28,33 +29,14 @@ return {
     opts = {
       servers = {
         beancount = {
-          enabled = true,
+          -- 빌드에 cargo 필요, rustc 버전 mismatch 발생. 2026-01-13
+          mason = false,
+          enabled = vim.fn.executable("beancount-language-server") == 1,
           init_options = {
             journal_file = os.getenv("HOME") .. "/Projects/my-ledger/main.beancount",
           },
         },
       },
     },
-    specs = {
-      {
-        [1] = "mason.nvim",
-        optional = true,
-        opts = { ensure_installed = { "beancount-language-server" } },
-      },
-    },
   },
-  -- beancount-language-server 가 bean-check 를 수행함.
-  -- {
-  --   [1] = "none-ls.nvim",
-  --   optional = true,
-  --   opts = function(_, opts)
-  --     local nls = require("null-ls")
-  --
-  --     if vim.fn.executable("bean-check") == 1 then
-  --       opts.sources = vim.list_extend(opts.sources or {}, {
-  --         nls.builtins.diagnostics.bean_check,
-  --       })
-  --     end
-  --   end,
-  -- },
 }
