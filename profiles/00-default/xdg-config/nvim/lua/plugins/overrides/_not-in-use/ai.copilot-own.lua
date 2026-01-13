@@ -10,30 +10,10 @@ return {
     [1] = "zbirenbaum/copilot.lua",
     version = false,
     build = ":Copilot auth",
-
     cond = not vim.g.vscode and vim.fn.executable("node") == 1,
-
     lazy = true,
     cmd = "Copilot",
     event = "BufReadPost",
-
-    --[[ keys = function()
-      local prefix = require("globals").prefix
-      local keyword = "c"
-      return {
-        {
-          [1] = prefix.sidebar .. keyword,
-          [2] = "<cmd>Copilot panel<CR>",
-          desc = "copilot-panel",
-        },
-        {
-          [1] = prefix.close .. keyword,
-          [2] = "<cmd>Copilot disable<CR>",
-          desc = "copilot-disable",
-        },
-      }
-    end, ]]
-
     keys = {
       -- <Leader>ua default: Toggle Animation
       -- TODO: 이거 안먹는데?? <2025-05-01>
@@ -47,7 +27,7 @@ return {
     opts = {
       panel = {
         -- enabled = false,
-        auto_refresh = true,
+        auto_refresh = false,
       },
       suggestion = {
         -- enabled = false,

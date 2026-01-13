@@ -5,8 +5,11 @@
       "Bash(git commit:*)",
       "Bash(git status:*)",
       "Bash(git diff:*)",
+      "Bash(ls:*)",
       "Bash(mkdir:*)",
-      "Bash(tree:*)"
+      "Bash(tree:*)",
+      "Bash(nix-build:*)",
+      "Bash(nix build:*)"
     ]
   }
 }
