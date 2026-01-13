@@ -52,5 +52,9 @@
   "fun": {
     "prefix": "fun",
     "body": ["{${1:...}\\}: {", "\t$0", "\\}"]
+  },
+  "boilerplate": {
+    "prefix": "boilerplate",
+    "body": "{ pkgs ? import <nixpkgs> {} }:"
   }
 }

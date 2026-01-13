@@ -14,35 +14,39 @@ return {
   },
   keys = function(_, keys)
     local luasnip = require("luasnip")
-
-    -- NOTE: `<Plug>luasnip-jump-next` 가 작동이 안됨. <2025-04-10>
     return vim.list_extend(keys, {
-      {
-        [1] = "<Tab>",
-        mode = "n",
-        [2] = function()
-          if luasnip.locally_jumpable(1) then
-            luasnip.jump(1)
-            -- return "<Plug>luasnip-jump-next"
-          end
-          -- return "<Tab>"
-        end,
-        -- expr = true,
-        desc = "luasnip-next",
-      },
-      {
-        [1] = "<S-Tab>",
-        mode = "n",
-        [2] = function()
-          if luasnip.locally_jumpable(-1) then
-            luasnip.jump(-1)
-            -- return "<Plug>luasnip-jump-prev"
-          end
-          -- return "<S-Tab>"
-        end,
-        -- expr = true,
-        desc = "luasnip-previous",
-      },
+
+      -- NOTE: <TAB> 을 nvim.sidekick 이 가져감 <2026-01-13>
+
+      -- NOTE: `<Plug>luasnip-jump-next` 가 작동이 안됨. <2025-04-10>
+      --   {
+      --     [1] = "<Tab>",
+      --     mode = "n",
+      --     [2] = function()
+      --       if luasnip.locally_jumpable(1) then
+      --         luasnip.jump(1)
+      --         -- return "<Plug>luasnip-jump-next"
+      --       end
+      --
+      --       vim.notify("Hi!")
+      --       -- return "<Tab>"
+      --     end,
+      --     -- expr = true,
+      --     desc = "luasnip-next",
+      --   },
+      --   {
+      --     [1] = "<S-Tab>",
+      --     mode = "n",
+      --     [2] = function()
+      --       if luasnip.locally_jumpable(-1) then
+      --         luasnip.jump(-1)
+      --         -- return "<Plug>luasnip-jump-prev"
+      --       end
+      --       return "<S-Tab>"
+      --     end,
+      --     -- expr = true,
+      --     desc = "luasnip-previous",
+      --   },
 
       -- {
       --   [1] = "<Leader>sp",
@@ -50,6 +54,7 @@ return {
       --   [2] = "<cmd>LuaSnipListAvailable<CR>",
       --   desc = "Snippets (Luasnip)",
       -- },
+
       {
         [1] = "<Leader>fp",
         mode = "n",
