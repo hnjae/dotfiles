@@ -14,5 +14,5 @@ any = true
 [MiniIcons]
 any = true
 
-[svim]
+[svim] # Snacks.nvim 플러그인의 내부 유틸리티 모듈
 any = true

@@ -1,6 +1,13 @@
 ---@type LazySpec[]
 return {
   {
+    [1] = "lazy.nvim",
+    optional = true,
+    opts = function()
+      vim.g.lazyvim_python_lsp = "ty"
+    end,
+  },
+  {
     [1] = "nvim-lspconfig",
     optional = true,
     -- ---@type lspconfig.options
@@ -10,7 +17,6 @@ return {
           mason = false,
         },
         basedpyright = {
-          enabled = false,
           mason = false, -- mason 이 venv 안에 설치하는데, 이것이 이슈가 있음. <2025-05-07>
         },
       },

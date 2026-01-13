@@ -24,6 +24,10 @@ M.apply_to_config = function(config)
     bg_color = "#16161D",
     fg_color = "#F2ECBC",
     -- fg_color = "#E6C384",
+    -- bg_color = "#7e9cd8",
+    -- fg_color = "#1f1f28",
+    intensity = "Bold",
+    -- intensity = "Half",
     --     -- Specify whether you want "Half", "Normal" or "Bold" intensity for the
     --     -- label shown for this tab.
     --     -- The default is "Normal"
@@ -36,7 +40,7 @@ M.apply_to_config = function(config)
     --
     --     -- Specify whether you want the text to be italic (true) or not (false)
     --     -- for this tab.  The default is false.
-    --     italic = false,
+    -- italic = true,
     --
     --     -- Specify whether you want the text to be rendered with strikethrough (true)
     --     -- or not for this tab.  The default is false.

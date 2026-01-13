@@ -26,4 +26,9 @@ return {
     optional = true,
     enabled = have_cc,
   },
+  {
+    [1] = "none-ls.nvim",
+    optional = true,
+    enabled = false,
+  },
 }
