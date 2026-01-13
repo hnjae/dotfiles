@@ -9,9 +9,4 @@ return {
     },
     specs = {},
   },
-  {
-    [1] = "mason-lspconfig.nvim",
-    optional = true,
-    enabled = vim.fn.executable("cc") == 1 or vim.fn.executable("clang") == 1,
-  },
 }
