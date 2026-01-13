@@ -5,8 +5,11 @@ hostname := `hostname`
 _:
     @just --list
 
-install:
+install-all:
     ./install.sh
+
+install-dotfiles:
+    SKIP_ANSIBLE=1 ./install.sh
 
 commit:
     #!/bin/sh
