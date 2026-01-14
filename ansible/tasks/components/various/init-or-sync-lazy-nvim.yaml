@@ -36,7 +36,7 @@
           fi
           backup_path "{{ xdg_state_home }}/nvim"
           backup_path "{{ xdg_data_home }}/nvim"
-          nvim --headless -c "autocmd User VeryLazy ++once Lazy install" -c "qa"
+          "{{ playbook_dir }}/../.lib/nvim-plugin-restore.sh"
           mkdir -p "{{ xdg_state_home }}/nvim" && touch "{{ lazynvim_marker_file }}"
           exit 65
         fi
@@ -48,8 +48,8 @@
             echo "ERROR: Internet is not connected" >&2
             exit 1
           fi
-          echo "INFO: lazy-lock.json is newer than marker file. Syncing..." >&2
-          nvim --headless -c "autocmd User VeryLazy ++once Lazy sync" -c "qa"
+          echo "INFO: lazy-lock.json is newer than marker file. Restoring plugins..." >&2
+          "{{ playbook_dir }}/../.lib/nvim-plugin-restore.sh"
           touch "{{ lazynvim_marker_file }}"
           exit 64
         fi
