@@ -2,6 +2,6 @@
 ColorScheme=_base24
 
 [General]
-Command=/usr/bin/env zsh
-Name=Default
+Command=/usr/bin/env bash
+Name=bash
 Parent=FALLBACK/
