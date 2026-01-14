@@ -1,0 +1,11 @@
+[Defaults]
+Profile=Default
+
+[PROFILE_Default]
+EmailAddress=
+EmailClient[$e]=org.mozilla.Thunderbird.desktop
+FullName=KIM Hyunjae
+Organization=
+ReplyAddr=
+ServerType=
+TerminalClient=false
