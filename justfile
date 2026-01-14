@@ -125,9 +125,15 @@ update-tinted:
 update-submodules:
     .lib/update-submodules.sh
 
-# NOTE: 아래는 lazy-lock.json 과 sync 를 하는게 아니라 업데이트하는 명령임.
-# nvim --headless -c "autocmd User VeryLazy ++once Lazy! sync" -c "qa"
-
 # nvim --headless -c 'autocmd User VeryLazy ++once lua require("lazy").restore({wait=true}) vim.cmd("qall")'
-nvim-sync-frozen:
-    nvim --headless -c 'autocmd User VeryLazy ++once lua require("lazy").restore({wait=true})' -c "qa"
+
+[group('nvim')]
+nvim-plugin-restore:
+    .lib/nvim-plugin-restore.sh
+
+[group('nvim')]
+nvim-plugin-sync:
+    .lib/nvim-plugin-sync.sh
+    git reset
+    git add -- profiles/00-default/xdg-config/nvim/lazy-lock.json
+    git commit -m "build(nvim): update lazy-lock.json"
