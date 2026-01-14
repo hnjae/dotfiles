@@ -50,7 +50,7 @@ unfocused-split-opacity=1.0
 cursor-style = block
 cursor-style-blink = false
 cursor-opacity = 0.8
-# shell-integration-features = no-cursor
+shell-integration-features = no-cursor
 
 # ghostty: only available on linux
 window-theme = ghostty

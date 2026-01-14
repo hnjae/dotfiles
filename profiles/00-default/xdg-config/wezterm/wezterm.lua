@@ -16,6 +16,13 @@ config.use_resize_increments = true
 config.adjust_window_size_when_changing_font_size = false
 config.animation_fps = 60 -- default: 10, visual_bell 에서 사용됨.
 
+-- Inactive pane dimming
+-- https://wezterm.org/config/appearance.html#styling-inactive-panes
+config.inactive_pane_hsb = {
+  saturation = 0.7, -- default: 0.9
+  brightness = 0.9, -- default: 0.8
+}
+
 require("fonts").apply_to_config(config)
 require("tabline").apply_to_config(config)
 
