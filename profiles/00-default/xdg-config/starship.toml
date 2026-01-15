@@ -91,5 +91,11 @@ style_user = "bold purple"
 
 [hostname]
 format = "[@$hostname]($style) in "
-ssh_only = true
+ssh_only = false
 style = "bold purple"
+detect_env_vars = [
+  "SSH_CONNECTION",
+  "SSH_CLIENT",
+  "SSH_TTY",
+  "SSH_AUTHSOCK",   # WezTerm 을 통해 연결할 때 생김.
+]
