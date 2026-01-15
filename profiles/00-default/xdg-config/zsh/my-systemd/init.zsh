@@ -31,7 +31,7 @@ alias ${up}c="systemctl --user cat"
 alias ${gp}h="systemctl help"
 alias ${up}h="systemctl --user help"
 
-# Requires previleges
+# Requires privileges
 alias ${gp}x="sudo systemctl start"
 alias ${up}x="systemctl --user start"
 alias ${gp}rx="sudo systemctl restart"
@@ -56,3 +56,33 @@ alias ${gp}x="journalctl -xeu"
 alias ${up}x="journalctl --user -xeu"
 
 unset gp up
+
+########################################################################
+# MISC
+########################################################################
+
+# NOTE: NOT TESTED
+scxl() {
+    local unit="${1:?unit name required}"
+
+    [[ $unit == *.service ]] || unit="${unit}.service"
+
+    # Unit 존재 여부 확인
+    if ! systemctl list-unit-files --type service | grep -q "^${unit}"; then
+        echo "ERROR: Service '$unit' not found" >&2
+        return 1
+    fi
+
+    echo "INFO: Starting $unit..." >&2
+    nohup sudo systemctl start  "$unit" >/dev/null 2>&1 &
+
+    exec journalctl --follow --since "12s ago" --output=short-full --unit "$unit"
+}
+
+# _sysstart_completion() {
+#     local -a units
+#     units=($(systemctl list-unit-files --type service --no-pager 2>/dev/null | awk 'NR>1 {print $1}' | sed 's/\.service$//'))
+#     _describe 'systemd service' units
+# }
+#
+# compdef _sysstart_completion sysstart

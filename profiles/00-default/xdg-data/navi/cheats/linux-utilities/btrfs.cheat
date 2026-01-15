@@ -51,6 +51,12 @@ btrfs -v filesystem defragment -czstd --level 15 -t size <file>|<dir>
 # btrfs balance
 btrfs balance start -dusage=50 <path-to-mountpoints>
 
+# btrfs balance status
+btrfs balance status <path-to-mountpoints>
+
+# btrfs balance cancel
+btrfs balance cancel <path-to-mountpoints>
+
 # change label
 btrfs filesystem label <block-device-or-mountpoints> <new-label>
 
