@@ -2,6 +2,7 @@
 - name: Remove not-in-use packages
   community.general.flatpak:
     name:
+      - com.google.Chrome  # use system package instead
       - com.logseq.Logseq
       - fyi.zoey.TeX-Match  # find latex symbols, uses end-of-life library (org.freedesktop.Platform 22.08) (2024-11-06)
       - info.smplayer.SMPlayer
