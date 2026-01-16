@@ -15,3 +15,6 @@ Seen=true
 
 [Applications][vivaldi-stable]
 Seen=true
+
+[DoNotDisturb]
+NotificationSoundsMuted=false
