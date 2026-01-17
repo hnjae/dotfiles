@@ -4,11 +4,18 @@
       "WebFetch(domain:github.com)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(git status:*)",
       "Bash(git diff:*)",
+      "Bash(git mv:*)",
+      "Bash(git rm:*)",
+      "Bash(git status:*)",
+      "Bash(grep:*)",
       "Bash(ls:*)",
       "Bash(mkdir:*)",
-      "Bash(tree:*)"
+      "Bash(tree:*)",
+      "Bash(wc:*)",
+      "Bash(uv run ruff:*)",
+      "Bash(uv run ty:*)",
+      "Bash(podman build:*)"
     ],
     "deny": [
       "Read(.env*)",
@@ -16,6 +23,5 @@
       "Read(**/*.key)",
       "Write(.env*)"
     ]
-  },
-  "model": "claude-sonnet-4-5"
+  }
 }

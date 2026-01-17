@@ -10,47 +10,46 @@ select = [
   "F", # Pyflakes
 
   # Addons #flake8
-  "YTT",   # flake8-2020
+  "A",     # flake8-builtins (e.g. builtin-variable-shadowing)
+  "AIR",   # Airflow
   "ASYNC", # flake8-async
   "B",     # flake8-bugbear
   "BLE",   # flake8-blind-except
-  "FBT",   # flake8-boolean-trap
-  "A",     # flake8-builtins (e.g. builtin-variable-shadowing)
   "C4",    # flake8-comprehensions
-  "CPY",   # flake8-copyright
-  "DTZ",   # flake8-datetimez
-  "T",     # flake8-debugger
   "DJ",    # flake8-django
+  "DTZ",   # flake8-datetimez
   "EM",    # flake8-errmsg
   "FA",    # flake8-future-annotations
+  "FAST",  # FastAPI
+  "FBT",   # flake8-boolean-trap
+  "FURB",  # refurb
+  "G",     # flake8-logging-format
+  "ICN",   # flake8-import-conventions
+  "INP",   # flake8-no-pep420
   "INT",   # flake8-gettext
   "ISC",   # flake8-implicit-str-concat
-  "ICN",   # flake8-import-conventions
   "LOG",   # flake8-logging
-  "G",     # flake8-logging-format
-  "INP",   # flake8-no-pep420
-  "PIE",   # flake8-pie
-  "PYI",   # flake8-pyi
-  "PT",    # flake8-pytest-style
-  "SLF",   # flake8-self
-  "SIM",   # flake8-simplify
-  "SLOT",  # flake8-slots
-  "TID",   # flake8-tidy-imports
-  "PTH",   # flake8-use-pathlib
-  "AIR",   # Airflow
-  "FAST",  # FastAPI
-  "PERF",  # Perflint
+  "N",     # pep8-naming
   "NPY",   # NumPy-specific rules
   "PD",    # pandas-vet
-  "N",     # pep8-naming
+  "PERF",  # Perflint
   "PGH",   # pygrep-hooks
+  "PIE",   # flake8-pie
   "PLC",   # pylint-convention
   "PLE",   # pylint-error
   "PLR",   # pylint-refactor
   "PLW",   # pylint-warning
-  "UP",    # pyupgrade
-  "FURB",  # refurb
+  "PT",    # flake8-pytest-style
+  "PTH",   # flake8-use-pathlib
+  "PYI",   # flake8-pyi
   "RUF",   # Ruff-specific rules
+  "SIM",   # flake8-simplify
+  "SLF",   # flake8-self
+  "SLOT",  # flake8-slots
+  "T",     # flake8-debugger
+  "TID",   # flake8-tidy-imports
+  "UP",    # pyupgrade
+  "YTT",   # flake8-2020
 
   # Things that bother me in simple Python scripts #1:
   # "TD",  # flake8-todos
@@ -142,6 +141,7 @@ ignore = [
   "E304", # blank-line-after-decorator
   "E305", # blank-lines-after-function-or-class
   "E306", # blank-lines-before-nested-definition
+  "E501", # line-too-long
   "E502", # redundant-backslash
   "E703", # useless-semicolon
   "E711", # none-comparison
@@ -160,16 +160,17 @@ docstring-code-format = true
 convention = "pep257"
 
 [tool.ruff.lint.per-file-ignores]
-"test/*.py" = [
-  "S101",    # assert-used: assert statements are required in tests
+"tests/*.py" = [
   "ANN001",  # missing-type-function-argument: mock parameters are self-documenting in tests
-  "SLF001",  # private-member-access: necessary to test internal state of objects
   "ARG002",  # unused-argument: mock parameters required by patch decorators
-  "TRY",     # tryceratops
   "DOC201",  # docstring-missing-returns
-  "FBT001",  # boolean-type-hint-positional-argument
   "F841",    # unused-variable
+  "FBT001",  # boolean-type-hint-positional-argument
+  "PLR2004", # magic-value-comparison
   "PLR6301", # no-self-use
+  "S101",    # assert-used: assert statements are required in tests
+  "SLF001",  # private-member-access: necessary to test internal state of objects
+  "TRY",     # tryceratops
 ]
 
 [tool.ty.src]
