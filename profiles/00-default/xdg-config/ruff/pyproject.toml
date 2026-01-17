@@ -10,53 +10,50 @@ select = [
   "F", # Pyflakes
 
   # Addons #flake8
-  "A",     # flake8-builtins (e.g. builtin-variable-shadowing)
   "AIR",   # Airflow
+  "FAST",  # FastAPI
+  "FURB",  # refurb
+  "N",     # pep8-naming
+  "NPY",   # NumPy-specific rules
+  "PD",    # pandas-vet
+  "PERF",  # Perflint
+  "PGH",   # pygrep-hooks
+  "RUF",   # Ruff-specific rules
+  "UP",    # pyupgrade
+  "PLC",   # pylint-convention
+  "PLE",   # pylint-error
+  "PLR",   # pylint-refactor
+  "PLW",   # pylint-warning
+  "A",     # flake8-builtins (e.g. builtin-variable-shadowing)
   "ASYNC", # flake8-async
   "B",     # flake8-bugbear
-  "BLE",   # flake8-blind-except
   "C4",    # flake8-comprehensions
   "DJ",    # flake8-django
   "DTZ",   # flake8-datetimez
   "EM",    # flake8-errmsg
   "FA",    # flake8-future-annotations
-  "FAST",  # FastAPI
+  "PIE",   # flake8-pie
   "FBT",   # flake8-boolean-trap
-  "FURB",  # refurb
   "G",     # flake8-logging-format
   "ICN",   # flake8-import-conventions
   "INP",   # flake8-no-pep420
   "INT",   # flake8-gettext
   "ISC",   # flake8-implicit-str-concat
   "LOG",   # flake8-logging
-  "N",     # pep8-naming
-  "NPY",   # NumPy-specific rules
-  "PD",    # pandas-vet
-  "PERF",  # Perflint
-  "PGH",   # pygrep-hooks
-  "PIE",   # flake8-pie
-  "PLC",   # pylint-convention
-  "PLE",   # pylint-error
-  "PLR",   # pylint-refactor
-  "PLW",   # pylint-warning
   "PT",    # flake8-pytest-style
   "PTH",   # flake8-use-pathlib
   "PYI",   # flake8-pyi
-  "RUF",   # Ruff-specific rules
   "SIM",   # flake8-simplify
   "SLF",   # flake8-self
   "SLOT",  # flake8-slots
   "T",     # flake8-debugger
   "TID",   # flake8-tidy-imports
-  "UP",    # pyupgrade
   "YTT",   # flake8-2020
 
-  # Things that bother me in simple Python scripts #1:
+  # Things that bother me in simple Python scripts:
   # "TD",  # flake8-todos
   # "FIX", # flake8-fixme
-  # "ANN", # flake8-annotations
   # "EXE", # flake8-executable (e.g. shebang-not-executable)
-  # "ARG", # flake8-unused-arguments
 
   # Things that might be used in production code:
   # "C90", # mccabe
@@ -65,11 +62,12 @@ select = [
   # "DOC", # pydoclint
   # "TRY", # tryceratops (e.g. raise-vanilla-class)
   # "ANN", # flake8-annotations (간단한 스크립트에서는 자동 추론 사용)
-  # "T20", # flake8-print
-  # "S",   # flake8-bandit
+  # "ARG", # flake8-unused-arguments
   # "BLE", # flake8-blind-except
-  # "ERA", # eradicate (e.g. commented-out-code)
   # "CPY", # flake8-copyright
+  # "S",   # flake8-bandit
+  # "T20", # flake8-print
+  # "ERA", # eradicate (e.g. commented-out-code)
 
   # Use autofix feature only:
   # "I",     # isort
@@ -91,11 +89,16 @@ ignore = [
   # Things that bother me in simple Python scripts:
   "RUF100", # unused-noqa
 
-  # Things can be fixed by formatter #flake8-commas:
+  # Things I don't think are necessary:
+  "RUF001", # ambiguous-unicode-character-string
+  "RUF002", # ambiguous-unicode-character-docstring
+  "RUF003", # ambiguous-unicode-character-comment
+
+  # Things that can be fixed by formatter (#flake8-commas):
   "COM812", # missing-trailing-comma
   "COM819", # prohibited-trailing-comma
 
-  # Things can be fixed by formatter #pydocstyle:
+  # Things that can be fixed by formatter (#pydocstyle):
   "D200", # unnecessary-multiline-docstring
   "D201", # no-blank-line-before-function
   "D202", # no-blank-line-after-function
@@ -107,7 +110,7 @@ ignore = [
   "D210", # no-surrounding-whitespace
   "D211", # no-blank-line-before-class
 
-  # Things can be fixed by formatter #pycodestyle-error:
+  # Things that can be fixed by formatter (#pycodestyle-error):
   "E201", # whitespace-after-open-bracket
   "E202", # whitespace-before-close-bracket
   "E203", # whitespace-before-punctuation
@@ -146,7 +149,7 @@ ignore = [
   "E703", # useless-semicolon
   "E711", # none-comparison
 
-  # Things can be fixed by formatter #pycodestyle-warning:
+  # Things that can be fixed by formatter (#pycodestyle-warning):
   "W291", # trailing-whitespace
   "W292", # missing-newline-at-end-of-file
   "W293", # blank-line-with-whitespace
@@ -166,11 +169,15 @@ convention = "pep257"
   "DOC201",  # docstring-missing-returns
   "F841",    # unused-variable
   "FBT001",  # boolean-type-hint-positional-argument
+  "PGH003",  # blanket-type-ignore
+  "PLC1901", # compare-to-empty-string
   "PLR2004", # magic-value-comparison
   "PLR6301", # no-self-use
+  "RUF059",  # unused-unpacked-variable
   "S101",    # assert-used: assert statements are required in tests
   "SLF001",  # private-member-access: necessary to test internal state of objects
   "TRY",     # tryceratops
+
 ]
 
 [tool.ty.src]
