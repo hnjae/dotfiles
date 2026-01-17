@@ -111,9 +111,9 @@ FC8BE085C528F244BF6658B711AE542F-enter-zapper-mode=none,none,Enter element zappe
 _k_friendly_name=chromium-browser
 
 [com.google.Chrome]
-3A6CDA62F503E012E3C6A0D96C90CC4B-enter-picker-mode=,none,Create a custom filter
-3A6CDA62F503E012E3C6A0D96C90CC4B-enter-zapper-mode=,none,Remove an element
-7A1AC3087B4AF9D2DD655B8417247861-lock=,none,Lock the extension
+3A6CDA62F503E012E3C6A0D96C90CC4B-enter-picker-mode=none,none,Create a custom filter
+3A6CDA62F503E012E3C6A0D96C90CC4B-enter-zapper-mode=none,none,Remove an element
+7A1AC3087B4AF9D2DD655B8417247861-lock=none,none,Lock the extension
 _k_friendly_name=Google Chrome
 
 [kaccess]
