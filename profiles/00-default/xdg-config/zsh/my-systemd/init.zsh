@@ -52,8 +52,10 @@ up="jcu"
 
 alias ${gp}="journalctl"
 alias ${up}="journalctl --user"
-alias ${gp}x="journalctl -xeu"
-alias ${up}x="journalctl --user -xeu"
+alias ${gp}f="journalctl --output=short-full --boot=0 --follow --unit="
+alias ${up}f="journalctl --output=short-full --user --boot=0 --follow --unit="
+alias ${gp}x="journalctl --output=short-full --boot=0 --catalog --follow --unit="
+alias ${up}x="journalctl --output=short-full --user --boot=0 --catalog --follow --unit="
 
 unset gp up
 
