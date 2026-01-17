@@ -8,9 +8,14 @@
       "Bash(git diff:*)",
       "Bash(ls:*)",
       "Bash(mkdir:*)",
-      "Bash(tree:*)",
-      "Bash(nix-build:*)",
-      "Bash(nix build:*)"
+      "Bash(tree:*)"
+    ],
+    "deny": [
+      "Read(.env*)",
+      "Read(./secrets/**)",
+      "Read(**/*.key)",
+      "Write(.env*)"
     ]
-  }
+  },
+  "model": "claude-sonnet-4-5"
 }
