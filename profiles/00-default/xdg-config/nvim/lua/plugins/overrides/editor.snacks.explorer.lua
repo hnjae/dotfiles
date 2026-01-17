@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
   [1] = "snacks.nvim",
   optional = true,
@@ -112,21 +113,45 @@ return {
       },
     },
   },
-  -- NOTE: cwd 로 작동하는게 더 편한 것 같음.
-  -- keys = function(_, keys)
-  --   vim.list_extend(keys, {
-  --     {
-  --       [1] = "<leader>fE",
-  --       [2] = function()
-  --         Snacks.explorer({
-  --           cwd = vim.fn.expand("%:h"),
-  --         })
-  --       end,
-  --       desc = "Explorer Snacks (buffer's dir)",
-  --     },
-  --     { [1] = "<leader>E", [2] = "<leader>fE", desc = "Explorer Snacks (cwd)", remap = true },
-  --   })
-  --
-  --   return keys
-  -- end,
+  -- NOTE: default: `cwd` 의 PATH open
+  keys = function(_, keys)
+    local desc = "Explorer Snacks (parent dir)"
+
+    vim.list_extend(keys, {
+      {
+        [1] = "<leader>fE",
+        [2] = function()
+          local root = LazyVim.root()
+          local bufname = vim.fn.expand("%:p")
+
+          -- If buffer has no file, fallback to root
+          if bufname == "" or not vim.loop.fs_stat(bufname) then
+            Snacks.explorer({ cwd = root })
+            return
+          end
+
+          local current_dir = vim.fn.expand("%:p:h")
+          local parent_dir = vim.fn.fnamemodify(current_dir, ":h")
+
+          -- Use parent_dir if it's within root, otherwise use root
+          local target_dir = (vim.startswith(parent_dir, root) and #parent_dir >= #root)
+              and parent_dir
+            or root
+
+          Snacks.explorer({
+            cwd = target_dir,
+          })
+        end,
+        desc = desc,
+      },
+      {
+        [1] = "<leader>E",
+        [2] = "<leader>fE",
+        desc = desc,
+        remap = true,
+      },
+    })
+
+    return keys
+  end,
 }
