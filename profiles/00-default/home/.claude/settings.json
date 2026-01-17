@@ -5,6 +5,7 @@
       "Bash(git add:*)",
       "Bash(git commit:*)",
       "Bash(git diff:*)",
+      "Bash(git log:*)",
       "Bash(git mv:*)",
       "Bash(git rm:*)",
       "Bash(git status:*)",

@@ -1,7 +1,8 @@
 ---
 - name: Install and setup Image Viewer
   vars:
-    app_id: org.kde.koko
+    app_id: com.interversehq.qView
+    # app_id: org.kde.koko
   block:
     - name: Install {{ app_id }} with flatpak
       community.general.flatpak:
@@ -9,6 +10,14 @@
         state: present
         remote: flathub
         name: ['{{ app_id }}']
+    - name: Configure {{ app_id }} flatpak overrides
+      copy:
+        dest: '{{ xdg_data_home }}/flatpak/overrides/{{ app_id }}'
+        content: |
+          [Context]
+          shared=!network
+        mode: '0644'
+        backup: false
     - name: Make {{ app_id }} as default image viewer
       community.general.xdg_mime:
         mime_types:
