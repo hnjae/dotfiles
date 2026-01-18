@@ -2,7 +2,7 @@
 
 ; -s: --secluded-args avoids letteing the remote shell modify filenames
 # 정확히 동일하게 복사 붙여넣기
-rsync -aHAXWEhs --numeric-ids --checksum --human-readable --info=progress2 -- <src> <dst>
+rsync --info=progress2 -h -aHAXWEs --numeric-ids --no-inc-recursive -- <src> <dst>
 
 # MTP, Windows Filesystem
 rsync -hrtW --safe-links --omit-dir-times --no-perms --inplace --info=progress2 -- <src> <dst>

@@ -7,7 +7,7 @@
 # nodesiez 크면 메타데이터 조각화 줄음, (require kernel 6.1)
 mkfs.btrfs --nodesize "64K" -O block-group-tree
 
-# mkfs.btrfs
+# mkfs.btrfs with uuidv7
 mkfs.btrfs -s 4096 -L "<LABEL>_BTRFS" -O block-group-tree --uuid "$(uuid --time-v7)" "<disk>"
 
 # mkfs.btrfs metadata single

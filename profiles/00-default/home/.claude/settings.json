@@ -26,5 +26,6 @@
       "Read(**/*.key)",
       "Write(.env*)"
     ]
-  }
+  },
+  "model": "opus"
 }

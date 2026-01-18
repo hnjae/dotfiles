@@ -1,4 +1,4 @@
-% hdparm
+% hdparm,
 
 #  spindown
 hdparm -y "/dev/<device>"
@@ -9,5 +9,14 @@ hdparm -S <0..255> "/dev/<device>"
 # findout sector size
 hdparm -I "/dev/<device>" | grep 'Sector size:'
 
-# set native sector size (should reboot after this?)
+# set native sector size (should reboot after this?) (DOES NOT WORK FOR SOME SEAGATE DRIVE)
 hdparm --set-sector-size 4096 "/dev/<device>"
+
+; # set sector size to 4096 (sg3_utils)
+; sg_format --format --size=4096 /dev/sdh
+
+# list available sector size of seagate drive
+openSeaChest_Format -d /dev/sd<X> --showSupportedFormats
+
+# set native sector size of seagate drive
+openSeaChest_Format -d /dev/sdZ --setSectorSize=4096 --confirm this-will-erase-data-and-may-render-the-drive-inoperable
