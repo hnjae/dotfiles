@@ -13,3 +13,4 @@
 /.credentials.json
 /history.jsonl
 /stats-cache.json
+/config/notification_states.json
