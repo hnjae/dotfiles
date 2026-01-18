@@ -10,4 +10,4 @@ udevadm info -a -n "/dev/<device>"
 sudo udevadm control --reload-rules && sudo udevadm trigger
 
 # Print and follow log
-journalctl -f -u systemd-udevd
+journalctl --output=short-full --boot=0  -f -u systemd-udevd
