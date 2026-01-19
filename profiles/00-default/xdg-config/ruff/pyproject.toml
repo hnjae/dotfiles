@@ -20,10 +20,7 @@ select = [
   "PGH",   # pygrep-hooks
   "RUF",   # Ruff-specific rules
   "UP",    # pyupgrade
-  "PLC",   # pylint-convention
   "PLE",   # pylint-error
-  "PLR",   # pylint-refactor
-  "PLW",   # pylint-warning
   "A",     # flake8-builtins (e.g. builtin-variable-shadowing)
   "ASYNC", # flake8-async
   "B",     # flake8-bugbear
@@ -49,6 +46,11 @@ select = [
   "T",     # flake8-debugger
   "TID",   # flake8-tidy-imports
   "YTT",   # flake8-2020
+
+  # Things that might be too noisy:
+  "PLC", # pylint-convention
+  "PLR", # pylint-refactor
+  "PLW", # pylint-warning
 
   # Things that bother me in simple Python scripts:
   # "TD",  # flake8-todos
@@ -87,7 +89,7 @@ ignore = [
   "S607", # start-process-with-partial-path
 
   # Things that bother me in simple Python scripts:
-  "RUF100", # unused-noqa
+  # "RUF100", # unused-noqa
 
   # Things I don't think are necessary:
   "RUF001", # ambiguous-unicode-character-string
@@ -164,19 +166,21 @@ convention = "pep257"
 
 [tool.ruff.lint.per-file-ignores]
 "tests/*.py" = [
-  "ANN001",  # missing-type-function-argument: mock parameters are self-documenting in tests
-  "ARG002",  # unused-argument: mock parameters required by patch decorators
-  "DOC201",  # docstring-missing-returns
-  "F841",    # unused-variable
-  "FBT001",  # boolean-type-hint-positional-argument
-  "PGH003",  # blanket-type-ignore
-  "PLC1901", # compare-to-empty-string
-  "PLR2004", # magic-value-comparison
-  "PLR6301", # no-self-use
-  "RUF059",  # unused-unpacked-variable
-  "S101",    # assert-used: assert statements are required in tests
-  "SLF001",  # private-member-access: necessary to test internal state of objects
-  "TRY",     # tryceratops
+  "ANN001",   # missing-type-function-argument: mock parameters are self-documenting in tests
+  "ARG002",   # unused-argument: mock parameters required by patch decorators
+  "ASYNC109", # async-function-with-timeout
+  "DOC201",   # docstring-missing-returns
+  "FBT001",   # boolean-type-hint-positional-argument
+  "INP001",   # implicit-namespace-package
+  "PGH003",   # blanket-type-ignore
+  "PLC0415",  # import-outside-top-level
+  "PLC1901",  # compare-to-empty-string
+  "PLR2004",  # magic-value-comparison
+  "PLR6301",  # no-self-use
+  "RUF059",   # unused-unpacked-variable
+  "S101",     # assert-used: assert statements are required in tests
+  "SLF001",   # private-member-access: necessary to test internal state of objects
+  "TRY",      # tryceratops
 
 ]
 

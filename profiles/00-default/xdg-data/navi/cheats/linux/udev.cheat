@@ -1,10 +1,13 @@
 % udev
 
-# Walk device attributes
+# Walk device attributes (includes parents)
 udevadm info --attribute-walk  <device>
 
-# print device info
-udevadm info -a -n "/dev/<device>"
+# query all device info (P: Path; N: Name (KERNEL), E: Environment, S: Symbolic Link)
+udevadm info --query=all --name="/dev/<device>"
+
+# query all device properties (Environment)
+udevadm info --query=property --name="/dev/<device>"
 
 # reload & trigger
 sudo udevadm control --reload-rules && sudo udevadm trigger
