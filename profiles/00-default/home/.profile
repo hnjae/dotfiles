@@ -20,9 +20,6 @@ export IPYTHONDIR="${XDG_STATE_HOME}/ipython"
 export PYTHON_COLORS="1"
 export PYTHON_HISTORY="${XDG_STATE_HOME}/python_history"
 
-export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npmrc"
-export NPM_CONFIG_CACHE="${XDG_CACHE_HOME}/npm"
-
 # XDG Base Directory Specification 에 맞춰 정리할 수 없는 것들:
 
 # https://github.com/rust-lang/cargo/issues/1734#issuecomment-2607411878
@@ -31,7 +28,19 @@ export NPM_CONFIG_CACHE="${XDG_CACHE_HOME}/npm"
 export CARGO_HOME="${XDG_DATA_HOME}/cargo"   # default: $HOME/.cargo
 export RUSTUP_HOME="${XDG_DATA_HOME}/rustup" # default: $HOME/.rustup
 
+# GO
 export GOPATH="${XDG_DATA_HOME}/go"              # default: $HOME/go
 export GOMODCACHE="${XDG_CACHE_HOME}/go/pkg_mod" # default: $GOPATH/pkg/mod
 export GOTELEMETRY="off"
 export GOTELEMETRYDIR="${XDG_STATE_HOME}/go/telemetry" # default: $HOME/.config/go/telemetry
+
+# Nodejs
+export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npmrc"
+export NPM_CONFIG_CACHE="${XDG_CACHE_HOME}/npm"
+
+# Bun
+# https://bun.com/docs/runtime/environment-variables
+# export DO_NOT_TRACK=1
+# if [ -d "${XDG_CACHE_HOME}/.bun/bin" ]; then
+#     export PATH="${XDG_CACHE_HOME}/.bun/bin:$PATH"
+# fi

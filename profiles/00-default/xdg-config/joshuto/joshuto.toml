@@ -23,5 +23,5 @@ show_hidden       = true
 max_preview_size = "10 GB"
 use_xdg_thumbs   = true
 xdg_thumb_size   = "xxlarge"
-preview_protocol = "auto"
+preview_protocol = "sixel"
 preview_script   = "~/.config/joshuto/bin/pistol-wrapper"
