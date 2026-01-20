@@ -149,3 +149,6 @@ source "${ZIM_HOME}/init.zsh"
 
 # alias mdream="podman run -it ghcr.io/harlan-zw/mdream:latest"
 # alias mdreamp="podman run -it ghcr.io/harlan-zw/mdream:latest -driver playwright"
+
+# opencode
+export PATH=/home/hnjae/.opencode/bin:$PATH
