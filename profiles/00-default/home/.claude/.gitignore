@@ -8,6 +8,7 @@
 /statsig
 /telemetry
 /todos
+/transcripts
 
 # files
 /.credentials.json
