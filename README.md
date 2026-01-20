@@ -1,6 +1,6 @@
 ---
 date: 2025-06-30T00:04:00+0900
-lastmod: 2026-01-05T15:23:18+0900
+lastmod: 2026-01-20T20:35:20+0900
 ---
 
 # README
@@ -50,3 +50,24 @@ git clone --recurse-submodules git@github.com:hnjae/dotfiles ~/Projects/dotfiles
 1. `install.sh` 재실행.
 1. Copilot 인증 하기 (사용한다면)
     - `nvim` 로 Copilot 이 활성화되는 filetype 의 파일을 열고, `Copilot auth` 실행
+
+## 패키지 설치
+
+#### claude-code
+
+<https://github.com/anthropics/claude-code>
+
+```sh
+curl -fsSL https://claude.ai/install.sh | bash
+```
+
+#### opencode
+
+<https://github.com/anomalyco/opencode>
+
+```
+XDG_BIN_DIR=$HOME/.local/bin curl -fsSL https://opencode.ai/install | bash
+```
+
+
+2026-01-20 기준 위 명령어는 opencode 를 .local/bin/opencode 에 설치 X
