@@ -4,6 +4,41 @@ add_newline = true
 follow_symlinks = false
 format = "$username$hostname$directory$git_branch$git_state$git_status$python$nix_shell$direnv$cmd_duration$line_break$shell$character"
 
+[username]
+disabled = false
+format = "[$user]($style)"
+style_user = "bold purple"
+detect_env_vars = [
+  # Remote connection (such as wezterm)
+  "SESSION_MANAGER",
+
+  # SSH Connection
+  "SSH_CONNECTION",
+  "SSH_CLIENT",
+  "SSH_TTY",
+]
+
+[hostname]
+format = "[@$hostname]($style) in "
+ssh_only = false
+trim_at = ""
+style = "bold purple"
+detect_env_vars = [
+  # Remote connection (such as wezterm)
+  "SESSION_MANAGER",
+
+  # SSH Connection
+  "SSH_CONNECTION",
+  "SSH_CLIENT",
+  "SSH_TTY",
+]
+
+[directory]
+read_only = " 󰍁"
+read_only_style = "bold red"
+style = "bold blue"
+truncation_length = 6
+
 [character]
 error_symbol = "[%](bold red)"
 success_symbol = "[%](default)"
@@ -23,27 +58,9 @@ disabled = false
 min_time_to_notify = 30000
 show_notifications = false
 
-# [container]
-# format = "via [$symbol \\[$name\\]]($style) "
-# style = "bold red"
-# symbol = "⬢ "
-
-[directory]
-read_only = " 󰍁"
-read_only_style = "bold red"
-style = "bold blue"
-truncation_length = 6
-
-[direnv]
-allowed_msg = " direnv"
-denied_msg = ""
-detect_files = []
-disabled = false
-format = "[([via](fg) $allowed)]($style) "
-loaded_msg = ""
-not_allowed_msg = ""
-style = "bold green"
-unloaded_msg = ""
+#########
+# git #
+########
 
 [git_branch]
 symbol = "󰘬 "
@@ -67,6 +84,10 @@ untracked = "[?${count}](blue)"
 # up_to_date = "[✔](bold green)"
 up_to_date = "[≡](bold green)"
 
+#########
+# venv #
+########
+
 [nix_shell]
 format = "via [$symbol$state]($style) "
 heuristic = false
@@ -84,18 +105,18 @@ disabled = false
 format = "[[via](fg) 󰌠 venv]($style) "
 style = "bold yellow"
 
-[username]
-disabled = false
-format = "[$user]($style)"
-style_user = "bold purple"
+# [container]
+# format = "via [$symbol \\[$name\\]]($style) "
+# style = "bold red"
+# symbol = "⬢ "
 
-[hostname]
-format = "[@$hostname]($style) in "
-ssh_only = false
-style = "bold purple"
-detect_env_vars = [
-  "SSH_CONNECTION",
-  "SSH_CLIENT",
-  "SSH_TTY",
-  "SSH_AUTHSOCK",   # WezTerm 을 통해 연결할 때 생김.
-]
+[direnv]
+allowed_msg = " direnv"
+denied_msg = ""
+detect_files = []
+disabled = false
+format = "[([via](fg) $allowed)]($style) "
+loaded_msg = ""
+not_allowed_msg = ""
+style = "bold green"
+unloaded_msg = ""
