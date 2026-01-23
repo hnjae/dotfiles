@@ -1,34 +1,123 @@
+/*
+
+https://artificialanalysis.ai/
+https://artificialanalysis.ai/leaderboards/models
+
+점수는
+
+
+https://livebench.ai/#/?sort=Agentic+Coding+Average
+
+에서 따옴.
+
+| model                | input | output | context | average | agent-coding | coding-average |
+| -------------------- | ----- | ------ | ------- | ------- | ------------ | -------------- |
+| qwen3-coder          |  0.22 |   0.95 |    262k |   49.34 |         6.67 |          69.61 |
+| grok-code-fast       |  0.20 |   1.50 |    256k |   48.83 |        33.33 |          64.44 |
+| deepseek-v3.2        |  0.25 |   0.38 |    163k |   62.20 |        40.00 |          64.62 |
+| glm-4.7              |  0.40 |   1.50 |    202k |   58.80 |        41.67 |          73.13 |
+| kimi-k2-thinking     |  0.40 |   1.75 |    262k |   56.13 |        38.33 |          67.44 |
+| gpt-5.1-codex-mini   |  0.25 |   2.00 |    400k |   55.66 |        40.00 |          69.93 |
+| gemini-3-flash       |  0.50 |   3.00 |   1048k |   68.31 |        43.33 |          78.57 |
+| claude-haiku-4.5     |  1.00 |   5.00 |    200k |   60.06 |        41.67 |          72.17 |
+| -------------------- | ----- | ------ | ------- | ------- | ------------ | -------------- |
+| gpt-5.2-codex        |  1.75 |  14.00 |    400k |   71.79 |        51.67 |          83.62 |
+| gemini-3-pro         |  2.00 |  12.00 |   1048k |   72.15 |        55.00 |          74.60 |
+| claude-sonnet-4.5    |  3.00 |  15.00 |   1000k |   66.78 |        53.33 |          80.36 |
+| -------------------- | ----- | ------ | ------- | ------- | ------------ | -------------- |
+| claude-opus-4.5-mid  |  5.00 |  25.00 |    200k |   66.51 |        53.33 |          78.51 |
+| claude-opus-4.5-high |  5.00 |  25.00 |    200k |   74.67 |        63.33 |          79.65 |
+*/
 {
   "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/master/assets/oh-my-opencode.schema.json",
+  // https://github.com/code-yeongyu/oh-my-opencode/blob/dev/docs/configurations.md
   "agents": {
+    ////////////////
+    // CORE AGENT //
+    ////////////////
+
+    // The default orchestrator. Plans, delegates, and executes complex tasks using specialized subagents with aggressive parallel execution. Todo-driven workflow with extended thinking (32k budget).
     "Sisyphus": {
-      "model": "opencode/claude-sonnet-4-5"
+      "model": "opencode/gemini-3-flash"
+      // 2026-01-23 기준 gpt-5.2-codex 는 todo 가 안됨.
     },
+    // Architecture decisions, code review, debugging. Read-only consultation - stellar logical reasoning and deep analysis. Inspired by AmpCode.
     "oracle": {
-      "model": "opencode/gpt-5.2"
+      "model": "opencode/gemini-3-flash"
     },
+    // Multi-repo analysis, documentation lookup, OSS implementation examples. Deep codebase understanding with evidence-based answers. Inspired by AmpCode.
     "librarian": {
-      "model": "opencode/gpt-5.2-codex"
+      "model": "opencode/gemini-3-flash"
     },
+    // Fast codebase exploration and contextual grep. Uses Gemini 3 Flash when Antigravity auth is configured, Haiku when Claude max20 is available, otherwise Grok. Inspired by Claude Code.
     "explore": {
       "model": "opencode/grok-code"
     },
+    // Visual content specialist. Analyzes PDFs, images, diagrams to extract information. Saves tokens by having another agent process media.
     "multimodal-looker": {
-      "model": "google/gemini-3-flash"
+      "model": "opencode/gemini-3-flash"
     },
-    "frontend-ui-ux-engineer": {
-      "model": "opencode/gpt-5.2-codex"
+
+    ///////////////////
+    // Planing Agent //
+    //////////////////
+
+    // 🔮 Prometheus (The Planner)
+    // Model: anthropic/claude-opus-4-5
+    // Role: Strategic planning, requirements interviews, work plan creation
+    // Constraint: READ-ONLY. Can only create/modify markdown files within .sisyphus/ directory.
+    // Characteristic: Never writes code directly, focuses solely on "how to do it".
+    // Strategic planner with interview mode. Creates detailed work plans through iterative questioning.
+    // default opus
+    "Prometheus (Planner)": {
+      "model": "opencode/gemini-3-pro",
+      "variant": "high"
     },
-    "document-writer": {
-      "model": "opencode/claude-sonnet-4.5"
+    // 🦉 Metis (The Plan Consultant)
+    // Role: Pre-analysis and gap detection
+    // Function: Identifies hidden user intent, prevents AI over-engineering, eliminates ambiguity.
+    // Workflow: Metis consultation is mandatory before plan creation.
+
+    // Plan consultant - pre-planning analysis. Identifies hidden intentions, ambiguities, and AI failure points.
+    // default: sonnet
+    "Metis (Plan Consultant)": {
+      "model": "opencode/gemini-3-flash"
     },
+    // ⚖️ Momus (The Plan Reviewer)
+    // Role: High-precision plan validation (High Accuracy Mode)
+    // Function: Rejects and demands revisions until the plan is perfect.
+    // Trigger: Activated when user requests "high accuracy".
+    // Plan reviewer - validates plans against clarity, verifiability, and completeness standards.
+    // default: sonnet
+    "Momus (Plan Reviewer)": {
+      "model": "opencode/gemini-3-flash"
+    },
+    // ⚡ Atlas (The Plan Executor)
+    // default: opus
+    // Role: Execution and delegation
+    // Characteristic: Doesn't do everything directly, actively delegates to specialized agents (Frontend, Librarian, etc.).
     "Atlas": {
-      "model": "opencode/claude-sonnet-4-5"
+      "model": "opencode/gemini-3-pro",
+      "variant": "high"
     }
   },
   "categories": {
     "ultrabrain": {
-      "model": "openai/gpt-5.2-codex"
+      "model": "opencode/gpt-5.2-codex",
+      "variant": "xhigh"
+    },
+    "quick": {
+      "model": "opencode/gemini-3-flash"
+    },
+    "unspecified-low": {
+      "model": "opencode/gemini-3-flash"
+    },
+    "unspecified-high": {
+      "model": "opencode/gemini-3-pro",
+      "variant": "high"
+    },
+    "writing": {
+      "model": "opencode/claude-sonnet-4-5"
     }
   },
   "lsp": {
@@ -43,5 +132,12 @@
     "basedpyright": {
       "disabled": true
     }
+  },
+  "git_master": {
+    "commit_footer": true,
+    "include_co_authored_by": true
+  },
+  "experimental": {
+    "auto_resume": true
   }
 }

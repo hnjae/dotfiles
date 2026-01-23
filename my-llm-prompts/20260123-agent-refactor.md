@@ -1,6 +1,8 @@
+/refactor
+
 # Refactor for Idiomatic Excellence
 
-Refactor the code following the target language's conventions, best practices, and paradigm-appropriate patterns (OOP, functional, etc.). Achieve clean, idiomatic code that exemplifies the language's philosophy.
+Achieve clean code and OOP excellence through comprehensive refactoring. Refactor the code following the target language's conventions, best practices, and paradigm-appropriate patterns (OOP, functional, etc.). Achieve clean, idiomatic code that exemplifies the language's philosophy.
 
 ## Decision Authority
 
@@ -12,7 +14,7 @@ Refactor the code following the target language's conventions, best practices, a
 ## Workflow
 
 1. Create a plan with specific todos
-2. Commit after completing each todo (not just at the end)
+2. Commit after completing each todo with skill git-master (not just at the end)
 3. Use conventional commit format, noting any breaking changes
 4. Add this footer to all commit messages:
 
