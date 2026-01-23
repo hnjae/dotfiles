@@ -3,6 +3,23 @@
 https://artificialanalysis.ai/
 https://artificialanalysis.ai/leaderboards/models
 
+| model                | price | context | AAII | agent-coding | coding-average |
+| -------------------- | ----- | ------- | ---- | ------------ | -------------- |
+| grok-code-fast       |  0.20 |    256k |   48 |        33.33 |          64.44 |
+| deepseek-v3.2        |  0.25 |    163k |   62 |        40.00 |          64.62 |
+| glm-4.7              |  0.40 |    202k |   58 |        41.67 |          73.13 |
+| kimi-k2-thinking     |  0.40 |    262k |   56 |        38.33 |          67.44 |
+| -------------------- | ----- | ------- | ---- | ------------ | -------------- |
+| gpt-5.1-codex-mini   |  0.25 |    400k |   55 |        40.00 |          69.93 |
+| gemini-3-flash       |  0.50 |   1048k |   68 |        43.33 |          78.57 |
+| claude-haiku-4.5     |  1.00 |    200k |   60 |        41.67 |          72.17 |
+| -------------------- | ----- | ------- | ---- | ------------ | -------------- |
+| gpt-5.2-codex        |  1.75 |    400k |   71 |        51.67 |          83.62 |
+| gemini-3-pro         |  2.00 |   1048k |   72 |        55.00 |          74.60 |
+| claude-sonnet-4.5    |  3.00 |   1000k |   66 |        53.33 |          80.36 |
+| -------------------- | ----- | ------- | ---- | ------------ | -------------- |
+| claude-opus-4.5      | 10.00 |    200k |   51 |        63.33 |          79.65 |
+
 점수는
 
 
@@ -17,6 +34,7 @@ https://livebench.ai/#/?sort=Agentic+Coding+Average
 | deepseek-v3.2        |  0.25 |   0.38 |    163k |   62.20 |        40.00 |          64.62 |
 | glm-4.7              |  0.40 |   1.50 |    202k |   58.80 |        41.67 |          73.13 |
 | kimi-k2-thinking     |  0.40 |   1.75 |    262k |   56.13 |        38.33 |          67.44 |
+| -------------------- | ----- | ------ | ------- | ------- | ------------ | -------------- |
 | gpt-5.1-codex-mini   |  0.25 |   2.00 |    400k |   55.66 |        40.00 |          69.93 |
 | gemini-3-flash       |  0.50 |   3.00 |   1048k |   68.31 |        43.33 |          78.57 |
 | claude-haiku-4.5     |  1.00 |   5.00 |    200k |   60.06 |        41.67 |          72.17 |
@@ -37,22 +55,29 @@ https://livebench.ai/#/?sort=Agentic+Coding+Average
     ////////////////
 
     // The default orchestrator. Plans, delegates, and executes complex tasks using specialized subagents with aggressive parallel execution. Todo-driven workflow with extended thinking (32k budget).
+    // default: opus
     "Sisyphus": {
       "model": "opencode/gemini-3-flash"
+      // "model": "opencode/glm-4.7"
       // 2026-01-23 기준 gpt-5.2-codex 는 todo 가 안됨.
     },
+
     // Architecture decisions, code review, debugging. Read-only consultation - stellar logical reasoning and deep analysis. Inspired by AmpCode.
     "oracle": {
-      "model": "opencode/gemini-3-flash"
+      "model": "opencode/gpt-5.2", // Use GPT for debugging
+      "variant": "xhigh"
     },
+
     // Multi-repo analysis, documentation lookup, OSS implementation examples. Deep codebase understanding with evidence-based answers. Inspired by AmpCode.
     "librarian": {
-      "model": "opencode/gemini-3-flash"
+      "model": "opencode/glm-4.7-free" // Cheap model for research
     },
+
     // Fast codebase exploration and contextual grep. Uses Gemini 3 Flash when Antigravity auth is configured, Haiku when Claude max20 is available, otherwise Grok. Inspired by Claude Code.
     "explore": {
-      "model": "opencode/grok-code"
+      "model": "openrouter/deepseek/deepseek-v3.2" // cheap model to grep
     },
+
     // Visual content specialist. Analyzes PDFs, images, diagrams to extract information. Saves tokens by having another agent process media.
     "multimodal-looker": {
       "model": "opencode/gemini-3-flash"
@@ -70,9 +95,12 @@ https://livebench.ai/#/?sort=Agentic+Coding+Average
     // Strategic planner with interview mode. Creates detailed work plans through iterative questioning.
     // default opus
     "Prometheus (Planner)": {
-      "model": "opencode/gemini-3-pro",
-      "variant": "high"
+      "model": "opencode/gpt-5.2-codex",
+      "variant": "xhigh"
+      // "model": "opencode/gemini-3-pro",
+      // "variant": "high"
     },
+
     // 🦉 Metis (The Plan Consultant)
     // Role: Pre-analysis and gap detection
     // Function: Identifies hidden user intent, prevents AI over-engineering, eliminates ambiguity.
@@ -83,6 +111,7 @@ https://livebench.ai/#/?sort=Agentic+Coding+Average
     "Metis (Plan Consultant)": {
       "model": "opencode/gemini-3-flash"
     },
+
     // ⚖️ Momus (The Plan Reviewer)
     // Role: High-precision plan validation (High Accuracy Mode)
     // Function: Rejects and demands revisions until the plan is perfect.
@@ -92,30 +121,44 @@ https://livebench.ai/#/?sort=Agentic+Coding+Average
     "Momus (Plan Reviewer)": {
       "model": "opencode/gemini-3-flash"
     },
+
     // ⚡ Atlas (The Plan Executor)
     // default: opus
     // Role: Execution and delegation
     // Characteristic: Doesn't do everything directly, actively delegates to specialized agents (Frontend, Librarian, etc.).
     "Atlas": {
-      "model": "opencode/gemini-3-pro",
-      "variant": "high"
+      "model": "opencode/gpt-5.2",
+      "variant": "xhigh"
+      // "model": "opencode/gemini-3-pro",
+      // "variant": "high"
     }
   },
+
+  // https://github.com/code-yeongyu/oh-my-opencode/blob/dev/docs/category-skill-guide.md
   "categories": {
+    // Deep logical reasoning, complex architecture decisions requiring extensive analysis
+    // default: gpt-5.2-codex
     "ultrabrain": {
       "model": "opencode/gpt-5.2-codex",
       "variant": "xhigh"
     },
+    // Trivial tasks - single file changes, typo fixes, simple modifications
+    // default: haiku
     "quick": {
-      "model": "opencode/gemini-3-flash"
+      "model": "openrouter/deepseek/deepseek-v3.2"
     },
+    // Tasks that don't fit other categories, low effort required
+    // default: sonnet
     "unspecified-low": {
       "model": "opencode/gemini-3-flash"
     },
+    // Tasks that don't fit other categories, high effort required
+    // default: opus
     "unspecified-high": {
-      "model": "opencode/gemini-3-pro",
-      "variant": "high"
+      "model": "opencode/gpt-5.2",
+      "variant": "xhigh"
     },
+    // Documentation, prose, technical writing
     "writing": {
       "model": "opencode/claude-sonnet-4-5"
     }

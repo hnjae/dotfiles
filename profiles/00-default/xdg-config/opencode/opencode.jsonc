@@ -6,5 +6,9 @@
     "todowrite": "allow",
     "todoread": "allow",
     "webfetch": "allow"
+  },
+  "keybinds": {
+    "leader": "ctrl+g",
+    "app_exit": ""
   }
 }
