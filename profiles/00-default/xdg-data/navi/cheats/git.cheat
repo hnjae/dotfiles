@@ -131,6 +131,9 @@ git rebase --abort
 # git-rebase continue
 git rebase --continue
 
+# git rebase main with keeping main branch
+git rebase -X ours main
+
 ;#############################################################################
 ; log; reflog
 # pretty prints `.git/logs/HEAD`
