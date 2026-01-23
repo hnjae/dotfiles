@@ -1,0 +1,4 @@
+% git, git-merge
+
+# merge other branch with unrelated-histories and no changes to working directory
+git merge -s ours --allow-unrelated-histories <branch>

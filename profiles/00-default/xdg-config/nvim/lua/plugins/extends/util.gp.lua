@@ -25,6 +25,19 @@ local code_prompt =
 START AND END YOUR ANSWER WITH:
 ]]
 
+local agents = {
+  language = {
+    provider = "openrouter",
+    name = "language",
+    chat = false,
+    command = true,
+    model = {
+      model = "anthropic/claude-sonnet-4.5",
+      think = true,
+    },
+  },
+}
+
 ---@type LazySpec
 return {
   [1] = "Robitx/gp.nvim",
@@ -174,13 +187,13 @@ Chats are saved automatically.
         { name = "ChatCopilot", disable = true },
         { name = "CodeCopilot", disable = true },
         {
-          provider = "openrouter",
+          provider = "googleai",
           name = "chat",
           chat = true,
           command = false,
           model = {
-            model = "anthropic/claude-haiku-4.5",
-            think = false,
+            model = "google/gemini-3-flash",
+            think = true,
           },
           system_prompt = chat_prompt,
         },
@@ -190,22 +203,10 @@ Chats are saved automatically.
           chat = false,
           command = true,
           model = {
-            -- model = "google/gemini-2.5-flash",
-            -- model = "mistralai/mistral-small",
-            model = "anthropic/claude-haiku-4.5",
-            think = false,
+            model = "deepseek/deepseek-v3.2",
+            think = true,
           },
           system_prompt = code_prompt,
-        },
-        {
-          provider = "googleai",
-          name = "gemini",
-          chat = true,
-          command = false,
-          model = {
-            model = "gemini-2.5-flash",
-          },
-          system_prompt = chat_prompt,
         },
       },
 
@@ -244,8 +245,7 @@ Only process content between <text> and </text> tags
 {{selection}}
 </text>
 ]]
-          local agent = gp.get_command_agent()
-          agent.system_prompt = ""
+          local agent = agents.language
           gp.Prompt(params, gp.Target.vnew, agent, template)
         end,
 
@@ -267,8 +267,7 @@ Only process content between <text> and </text> tags
 {{selection}}
 </text>
 ]]
-          local agent = gp.get_command_agent()
-          agent.system_prompt = ""
+          local agent = agents.language
           gp.Prompt(params, gp.Target.vnew, agent, template)
         end,
 
@@ -282,8 +281,7 @@ Respond only with the improved text—no explanations, comments, or other text.
 {{selection}}
 </text>
 ]]
-          local agent = gp.get_command_agent("command")
-          agent.system_prompt = ""
+          local agent = agents.language
           gp.Prompt(params, gp.Target.vnew, agent, template)
         end,
       },
