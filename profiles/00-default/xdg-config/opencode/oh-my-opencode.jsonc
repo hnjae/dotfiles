@@ -3,48 +3,6 @@
 https://artificialanalysis.ai/
 https://artificialanalysis.ai/leaderboards/models
 
-| model                | price | context | AAII | agent-coding | coding-average |
-| -------------------- | ----- | ------- | ---- | ------------ | -------------- |
-| grok-code-fast       |  0.20 |    256k |   48 |        33.33 |          64.44 |
-| deepseek-v3.2        |  0.25 |    163k |   62 |        40.00 |          64.62 |
-| glm-4.7              |  0.40 |    202k |   58 |        41.67 |          73.13 |
-| kimi-k2-thinking     |  0.40 |    262k |   56 |        38.33 |          67.44 |
-| -------------------- | ----- | ------- | ---- | ------------ | -------------- |
-| gpt-5.1-codex-mini   |  0.25 |    400k |   55 |        40.00 |          69.93 |
-| gemini-3-flash       |  0.50 |   1048k |   68 |        43.33 |          78.57 |
-| claude-haiku-4.5     |  1.00 |    200k |   60 |        41.67 |          72.17 |
-| -------------------- | ----- | ------- | ---- | ------------ | -------------- |
-| gpt-5.2-codex        |  1.75 |    400k |   71 |        51.67 |          83.62 |
-| gemini-3-pro         |  2.00 |   1048k |   72 |        55.00 |          74.60 |
-| claude-sonnet-4.5    |  3.00 |   1000k |   66 |        53.33 |          80.36 |
-| -------------------- | ----- | ------- | ---- | ------------ | -------------- |
-| claude-opus-4.5      | 10.00 |    200k |   51 |        63.33 |          79.65 |
-
-점수는
-
-
-https://livebench.ai/#/?sort=Agentic+Coding+Average
-
-에서 따옴.
-
-| model                | input | output | context | average | agent-coding | coding-average |
-| -------------------- | ----- | ------ | ------- | ------- | ------------ | -------------- |
-| qwen3-coder          |  0.22 |   0.95 |    262k |   49.34 |         6.67 |          69.61 |
-| grok-code-fast       |  0.20 |   1.50 |    256k |   48.83 |        33.33 |          64.44 |
-| deepseek-v3.2        |  0.25 |   0.38 |    163k |   62.20 |        40.00 |          64.62 |
-| glm-4.7              |  0.40 |   1.50 |    202k |   58.80 |        41.67 |          73.13 |
-| kimi-k2-thinking     |  0.40 |   1.75 |    262k |   56.13 |        38.33 |          67.44 |
-| -------------------- | ----- | ------ | ------- | ------- | ------------ | -------------- |
-| gpt-5.1-codex-mini   |  0.25 |   2.00 |    400k |   55.66 |        40.00 |          69.93 |
-| gemini-3-flash       |  0.50 |   3.00 |   1048k |   68.31 |        43.33 |          78.57 |
-| claude-haiku-4.5     |  1.00 |   5.00 |    200k |   60.06 |        41.67 |          72.17 |
-| -------------------- | ----- | ------ | ------- | ------- | ------------ | -------------- |
-| gpt-5.2-codex        |  1.75 |  14.00 |    400k |   71.79 |        51.67 |          83.62 |
-| gemini-3-pro         |  2.00 |  12.00 |   1048k |   72.15 |        55.00 |          74.60 |
-| claude-sonnet-4.5    |  3.00 |  15.00 |   1000k |   66.78 |        53.33 |          80.36 |
-| -------------------- | ----- | ------ | ------- | ------- | ------------ | -------------- |
-| claude-opus-4.5-mid  |  5.00 |  25.00 |    200k |   66.51 |        53.33 |          78.51 |
-| claude-opus-4.5-high |  5.00 |  25.00 |    200k |   74.67 |        63.33 |          79.65 |
 */
 {
   "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/master/assets/oh-my-opencode.schema.json",
@@ -58,7 +16,6 @@ https://livebench.ai/#/?sort=Agentic+Coding+Average
     // default: opus
     "Sisyphus": {
       "model": "opencode/gemini-3-flash"
-      // "model": "opencode/glm-4.7"
       // 2026-01-23 기준 gpt-5.2-codex 는 todo 가 안됨.
     },
 
@@ -70,7 +27,7 @@ https://livebench.ai/#/?sort=Agentic+Coding+Average
 
     // Multi-repo analysis, documentation lookup, OSS implementation examples. Deep codebase understanding with evidence-based answers. Inspired by AmpCode.
     "librarian": {
-      "model": "opencode/glm-4.7-free" // Cheap model for research
+      "model": "opencode/glm-4.7" // Cheap model for research
     },
 
     // Fast codebase exploration and contextual grep. Uses Gemini 3 Flash when Antigravity auth is configured, Haiku when Claude max20 is available, otherwise Grok. Inspired by Claude Code.
@@ -95,10 +52,8 @@ https://livebench.ai/#/?sort=Agentic+Coding+Average
     // Strategic planner with interview mode. Creates detailed work plans through iterative questioning.
     // default opus
     "Prometheus (Planner)": {
-      "model": "opencode/gpt-5.2-codex",
+      "model": "opencode/gpt-5.2",
       "variant": "xhigh"
-      // "model": "opencode/gemini-3-pro",
-      // "variant": "high"
     },
 
     // 🦉 Metis (The Plan Consultant)
@@ -128,9 +83,7 @@ https://livebench.ai/#/?sort=Agentic+Coding+Average
     // Characteristic: Doesn't do everything directly, actively delegates to specialized agents (Frontend, Librarian, etc.).
     "Atlas": {
       "model": "opencode/gpt-5.2",
-      "variant": "xhigh"
-      // "model": "opencode/gemini-3-pro",
-      // "variant": "high"
+      "variant": "high"
     }
   },
 
@@ -156,7 +109,7 @@ https://livebench.ai/#/?sort=Agentic+Coding+Average
     // default: opus
     "unspecified-high": {
       "model": "opencode/gpt-5.2",
-      "variant": "xhigh"
+      "variant": "high"
     },
     // Documentation, prose, technical writing
     "writing": {
@@ -179,8 +132,5 @@ https://livebench.ai/#/?sort=Agentic+Coding+Average
   "git_master": {
     "commit_footer": true,
     "include_co_authored_by": true
-  },
-  "experimental": {
-    "auto_resume": true
   }
 }
