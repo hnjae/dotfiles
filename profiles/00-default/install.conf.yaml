@@ -1,4 +1,3 @@
----
 - defaults:
     link:
       create: true
@@ -20,5 +19,8 @@
     ~/.local/share:
       glob: true
       path: xdg-data/*
+    ~/.local/bin:
+      glob: true
+      path: xdg-bin/*
     ~/.zshenv:
       path: ~/.config/zsh/.zshenv

@@ -10,7 +10,7 @@ journalctl --b -1 -k
 journalctl --user -xu <systemd-units>
 
 # print log in realtime (-f: --follow)
-journalctl -f  --unit=<systemd-units>
+journalctl -f --boot=0 --output=short-full --unit=<systemd-units>
 
 # show log size
 journalctl --log-size

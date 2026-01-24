@@ -1,4 +1,3 @@
----
 projects:
   archive:
     url: git@github.com:hnjae/archive
@@ -30,8 +29,6 @@ projects:
     url: git@github.com:hnjae/type-challenges.git
   zfs-prune:
     url: hnjae@eris:/srv/git/zfs-prune
-  mtime-sync:
-    url: hnjae@eris:/srv/git/mtime-sync
   restic-scrub:
     url: hnjae@eris:/srv/git/restic-scrub
 specs:
