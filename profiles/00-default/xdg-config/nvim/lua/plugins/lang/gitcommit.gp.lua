@@ -35,7 +35,7 @@ return {
         gitdiff
       )
 
-      local agent = gp.get_command_agent()
+      local agent = gp.get_command_agent("light-think")
       agent.system_prompt = [[Generate a conventional commit message from the provided diff.
 
 **Requirements:**
@@ -82,7 +82,7 @@ Return only the commit message.
       local template = [[```gitcommit
 {{selection}}
 ```]]
-      local agent = gp.get_command_agent()
+      local agent = gp.get_command_agent("light")
       agent.system_prompt =
         [[Transform my rough commit text into a conventional commit message. Follow the format type(optional scope): description where type is one of: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert.
 

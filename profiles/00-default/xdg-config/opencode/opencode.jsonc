@@ -1,13 +1,67 @@
 {
+  // "provider": {
+  //   "opencode": {
+  //     "models": {
+  //       "gpt-5.2": {
+  //         "variants": {
+  //           "xhigh-custom": {
+  //             "reasoningEffort": "xhigh",
+  //             "textVerbosity": "medium",
+  //             "reasoningSummary": "auto"
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // },
   "$schema": "https://opencode.ai/config.json",
-  "model": "opencode/gpt-5.2-codex",
+  "model": "opencode/gemini-3-flash",
+  "small_model": "opencode/gemini-3-flash",
+  "default_agent": "plan",
+  "agent": {
+    // "build": {
+    //   "model": "opencode/gpt-5.2-codex",
+    //   "variant": "xhigh"
+    // },
+    "plan": {
+      "model": "opencode/gpt-5.2-codex",
+      "variant": "xhigh"
+    }
+  },
   "permission": {
     "todowrite": "allow",
     "todoread": "allow",
-    "webfetch": "allow"
+    "webfetch": "allow",
+    "skill": {
+      "git-commit": "allow"
+    }
   },
   "keybinds": {
-    "leader": "ctrl+g",
-    "app_exit": ""
+    // "leader": "ctrl+g", // default: ctrl+x 2026-01-24
+    "editor_open": "ctrl+g,<leader>e", // c-g 를 추가
+
+    "session_compact": "", // 직접 /compact 를 치자.
+    "app_exit": "", // 직접 exit 를 치자.
+
+    // DON'T USE ALT
+    "input_word_forward": "ctrl+right", // default: alt binding 도 있었음. 2026-01-24
+    "input_word_backward": "ctrl+left", // default: alt binding 도 있었음. 2026-01-24
+    "input_select_word_forward": "", // default: alt binding 도 있었음. 2026-01-24
+    "input_select_word_backward": "", // default: alt binding 도 있었음. 2026-01-24
+    "input_delete_word_forward": "", // default: alt binding 도 있었음. 2026-01-24
+    "input_delete_word_backward": "ctrl+w,ctrl+backspace", // default: alt binding 도 있었음. 2026-01-24
+    "input_visual_line_home": "", // default: alt binding 도 있었음. 2026-01-24
+    "input_visual_line_end": "", // default: alt binding 도 있었음. 2026-01-24
+    "input_select_visual_line_home": "", // default: alt binding 도 있었음. 2026-01-24
+    "input_select_visual_line_end": "" // default: alt binding 도 있었음. 2026-01-24
+  },
+  "lsp": {
+    "pyright": {
+      "disabled": true
+    },
+    "ty": {
+      "command": ["ty", "server"],
+      "extensions": [".py", ".pyi"]
+    }
   }
 }

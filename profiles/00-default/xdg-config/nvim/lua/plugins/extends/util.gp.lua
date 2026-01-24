@@ -25,19 +25,6 @@ local code_prompt =
 START AND END YOUR ANSWER WITH:
 ]]
 
-local agents = {
-  language = {
-    provider = "openrouter",
-    name = "language",
-    chat = false,
-    command = true,
-    model = {
-      model = "anthropic/claude-sonnet-4.5",
-      think = true,
-    },
-  },
-}
-
 ---@type LazySpec
 return {
   [1] = "Robitx/gp.nvim",
@@ -115,7 +102,7 @@ return {
         shortcut = "<C-g>r",
       },
 
-      default_command_agent = "command",
+      default_command_agent = "light-think",
       default_chat_agent = "chat",
 
       chat_template = [[
@@ -199,7 +186,7 @@ Chats are saved automatically.
         },
         {
           provider = "openrouter",
-          name = "command",
+          name = "light-think",
           chat = false,
           command = true,
           model = {
@@ -207,6 +194,28 @@ Chats are saved automatically.
             think = true,
           },
           system_prompt = code_prompt,
+        },
+        {
+          provider = "openrouter",
+          name = "light",
+          chat = false,
+          command = true,
+          model = {
+            model = "deepseek/deepseek-v3.2",
+            think = false,
+          },
+          system_prompt = code_prompt,
+        },
+        {
+          provider = "openrouter",
+          name = "language",
+          chat = false,
+          command = true,
+          model = {
+            model = "anthropic/claude-sonnet-4.5",
+            think = false,
+          },
+          system_prompt = "",
         },
       },
 
@@ -218,7 +227,7 @@ Chats are saved automatically.
           local template = "I have the following code from `{{filename}}`:\n\n"
             .. "```{{filetype}}\n{{selection}}\n```\n\n"
             .. "Please respond by writing table driven unit tests for the code above."
-          local agent = gp.get_command_agent()
+          local agent = gp.get_command_agent("light-think")
           gp.Prompt(params, gp.Target.vnew, agent, template)
         end,
 
@@ -245,7 +254,7 @@ Only process content between <text> and </text> tags
 {{selection}}
 </text>
 ]]
-          local agent = agents.language
+          local agent = gp.get_command_agent("language")
           gp.Prompt(params, gp.Target.vnew, agent, template)
         end,
 
@@ -267,7 +276,7 @@ Only process content between <text> and </text> tags
 {{selection}}
 </text>
 ]]
-          local agent = agents.language
+          local agent = gp.get_command_agent("language")
           gp.Prompt(params, gp.Target.vnew, agent, template)
         end,
 
@@ -281,7 +290,7 @@ Respond only with the improved text—no explanations, comments, or other text.
 {{selection}}
 </text>
 ]]
-          local agent = agents.language
+          local agent = gp.get_command_agent("language")
           gp.Prompt(params, gp.Target.vnew, agent, template)
         end,
       },
