@@ -21,8 +21,8 @@ https://artificialanalysis.ai/leaderboards/models
 
     // Architecture decisions, code review, debugging. Read-only consultation - stellar logical reasoning and deep analysis. Inspired by AmpCode.
     "oracle": {
-      "model": "opencode/gpt-5.2", // Use GPT for debugging
-      "variant": "xhigh"
+      "model": "opencode/gpt-5.2" // Use GPT for debugging
+      // "variant": "xhigh"
     },
 
     // Multi-repo analysis, documentation lookup, OSS implementation examples. Deep codebase understanding with evidence-based answers. Inspired by AmpCode.
@@ -52,8 +52,8 @@ https://artificialanalysis.ai/leaderboards/models
     // Strategic planner with interview mode. Creates detailed work plans through iterative questioning.
     // default opus
     "Prometheus (Planner)": {
-      "model": "opencode/gpt-5.2",
-      "variant": "xhigh"
+      "model": "opencode/gpt-5.2"
+      // "variant": "xhigh"
     },
 
     // 🦉 Metis (The Plan Consultant)
@@ -92,8 +92,8 @@ https://artificialanalysis.ai/leaderboards/models
     // Deep logical reasoning, complex architecture decisions requiring extensive analysis
     // default: gpt-5.2-codex
     "ultrabrain": {
-      "model": "opencode/gpt-5.2-codex",
-      "variant": "xhigh"
+      "model": "opencode/gpt-5.2-codex"
+      // "variant": "xhigh"
     },
     // Trivial tasks - single file changes, typo fixes, simple modifications
     // default: haiku
@@ -108,8 +108,8 @@ https://artificialanalysis.ai/leaderboards/models
     // Tasks that don't fit other categories, high effort required
     // default: opus
     "unspecified-high": {
-      "model": "opencode/gpt-5.2",
-      "variant": "high"
+      "model": "opencode/gpt-5.2"
+      // "variant": "high"
     },
     // Documentation, prose, technical writing
     "writing": {
