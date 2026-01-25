@@ -33,9 +33,14 @@ Fn+N
 - 무선 모드 (Wi-fi 기호) 로 키보드 변경
 - Fn+{1,2,3} 을 인디케이터가 천천히 깜박일때까지 누름
 
+> [!NOTE]
+> `Fn+1`: `E5:C8:95:2A:0F:0B`
+
 ※ 여기서 인디케이터란 캡스락의 파란색 LED 를 말함. 우상단의 LED 바가 아님.
 
 ### Manual Pairing
+
+NixOS 25.11 , can not connect with GUI
 
 ```console
 bluetoothctl

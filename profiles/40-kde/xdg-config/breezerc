@@ -1,10 +1,36 @@
 [Common]
+OutlineCloseButton=true
+OutlineIntensity=OutlineLow
 ShadowSize=ShadowMedium
 
 [Windeco Exception 0]
 BorderSize=1
 Enabled=true
-ExceptionPattern=Brave-browser
+ExceptionPattern=brave-browser
 ExceptionType=0
-HideTitleBar=true
+HideTitleBar=false
+Mask=16
+
+[Windeco Exception 1]
+BorderSize=1
+Enabled=true
+ExceptionPattern=obsidian
+ExceptionType=0
+HideTitleBar=false
+Mask=16
+
+[Windeco Exception 2]
+BorderSize=1
+Enabled=true
+ExceptionPattern=google-chrome
+ExceptionType=0
+HideTitleBar=false
+Mask=16
+
+[Windeco Exception 3]
+BorderSize=1
+Enabled=true
+ExceptionPattern=firefox
+ExceptionType=0
+HideTitleBar=false
 Mask=16
