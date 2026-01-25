@@ -49,7 +49,7 @@ main() {
     install_profile "00-default"
 
     case "$_hostname" in
-    osiris | isis)
+    osiris | hemera)
         install_profile "40-linux-desktop"
         install_profile "40-kde"
         install_profile "80-home-desktop"
