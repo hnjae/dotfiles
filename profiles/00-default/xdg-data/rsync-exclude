@@ -20,3 +20,4 @@ node_modules
 npm-cache
 .vscode-server
 .stversions
+.deploy-gc
