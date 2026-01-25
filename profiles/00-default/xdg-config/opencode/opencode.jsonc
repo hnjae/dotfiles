@@ -1,16 +1,16 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "opencode/gemini-3-flash",
-  "small_model": "opencode/gemini-3-flash",
+  // "model": "opencode/gemini-3-flash",
+  // "small_model": "opencode/gemini-3-flash",
   "default_agent": "plan",
   "agent": {
     // "build": {
-    //   "model": "opencode/gpt-5.2-codex",
-    //   "variant": "xhigh"
+    // "model": "openrouter/z-ai/glm-4.7-flash"
+    // "variant": "xhigh"
     // },
     "plan": {
-      "model": "opencode/gpt-5.2-codex",
-      "variant": "xhigh"
+      "model": "opencode/gpt-5.2",
+      "variant": "high"
     }
   },
   "permission": {

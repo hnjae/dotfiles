@@ -1,5 +1,5 @@
 ---
-name: git-commit
+name: commit
 description: Standardize Git commits using Conventional Commits specification.
 ---
 

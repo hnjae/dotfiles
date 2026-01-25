@@ -8,5 +8,8 @@ sd --preview <before> <after> file.txt
 # replace string in file (fixed-strings)
 sd --fixed-strings --preview <before> <after> file.txt
 
+# replace string in files (fixed-strings)
+fd -t f --exec sd --fixed-strings --preview <before> <after> {}
+
 # rg and sd
 rg -l --type <filetype> <before> | xargs sd --fixed-strings --preview <before> <after>
