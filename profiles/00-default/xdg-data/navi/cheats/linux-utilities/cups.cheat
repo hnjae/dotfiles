@@ -1,5 +1,7 @@
 % cups, lp, lpadmin, SANE, AirPrint, AirScan, IPP, eSCL, WDS
 
+; reverse 는 반드시 키고 인쇄해라. 그래야지 인쇄 결과 정렬이 올바름.
+
 # Add printer
 lpadmin -p <printer-name> -E -v "ipp://<ip>/ipp/print" -m everywhere
 
