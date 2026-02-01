@@ -26,6 +26,5 @@
       "Read(**/*.key)",
       "Write(.env*)"
     ]
-  },
-  "model": "sonnet"
+  }
 }

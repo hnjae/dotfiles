@@ -1,6 +1,9 @@
-% nix, shell, flake
+% nix3, nix3-shell, nix-shell, flake
 
 # Use package in your shell
-nix shell nixpkgs#<package-name>
+nix shell 'nixpkgs#<package-name>'
 
 $ nixpkgs-package: nix flake show --json 2>/dev/null | jq '.packages | to_entries[] | .value | to_entries[] | select(.value.name != null) | .key' | sed 's/"//g'
+
+# Use specific package in your shell (or you can use `nix shell`)
+nix-shell -p <package-name>

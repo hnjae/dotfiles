@@ -9,8 +9,8 @@ disabled = false
 format = "[$user]($style)"
 style_user = "bold purple"
 detect_env_vars = [
-  # Remote connection (such as wezterm)
-  "SESSION_MANAGER",
+  # WezTerm connection
+  "WEZTERM_UNIX_SOCKET",
 
   # SSH Connection
   "SSH_CONNECTION",
@@ -24,8 +24,8 @@ ssh_only = false
 trim_at = ""
 style = "bold purple"
 detect_env_vars = [
-  # Remote connection (such as wezterm)
-  "SESSION_MANAGER",
+  # WezTerm connection
+  "WEZTERM_UNIX_SOCKET",
 
   # SSH Connection
   "SSH_CONNECTION",

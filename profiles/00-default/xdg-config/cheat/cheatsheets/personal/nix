@@ -1,3 +1,8 @@
+---
+syntax: markdown
+tags: [ nix ]
+---
+
 # escape character in string
 
 use `''`
@@ -14,16 +19,33 @@ use nix-init
 
 nix-locate <file>
 
-# point specific branch in flake.nix
+## flake
+
+### point specific branch in flake.nix
 
 ```nix
       url = "github:nix-community/home-manager/release-25.05";
 ```
 
-# point specific tag in flake.nix
+### point specific tag in flake.nix
 
 ```nix
       url = "github:astro/microvm.nix/refs/tags/v0.5.0";
+```
+
+## nixpkgs
+
+### prefer local build
+
+```nix
+    (lib.customisation.overrideDerivation
+      (pkgs.writeShellApplication {
+
+      })
+      (_: {
+        preferLocalBuild = true;
+      })
+    )
 ```
 
 <!--
