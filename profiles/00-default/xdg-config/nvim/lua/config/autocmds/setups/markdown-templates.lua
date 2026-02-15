@@ -70,13 +70,13 @@ function M.setup()
     end,
   })
 
-  vim.api.nvim_create_autocmd({
-    "BufWritePre",
-  }, {
-    group = markdown_auto_id,
-    pattern = { "*.md" },
-    callback = update_lastmod,
-  })
+  -- vim.api.nvim_create_autocmd({
+  --   "BufWritePre",
+  -- }, {
+  --   group = markdown_auto_id,
+  --   pattern = { "*.md" },
+  --   callback = update_lastmod,
+  -- })
 end
 
 return M

@@ -6,7 +6,7 @@ pnpm import <lockfile>
 # npm ci
 pnpm install --frozen-lockfile
 
-# npm install
+# npm install (fix pnpm-lock.yaml conflict)
 pnpm install
 
 # npm i <pkg>

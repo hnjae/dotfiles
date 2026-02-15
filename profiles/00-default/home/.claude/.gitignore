@@ -9,6 +9,7 @@
 /telemetry
 /todos
 /transcripts
+/plugins/marketplaces
 
 # files
 /.credentials.json

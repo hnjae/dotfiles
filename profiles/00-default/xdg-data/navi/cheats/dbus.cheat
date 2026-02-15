@@ -1,0 +1,8 @@
+% dbus, dbus-send
+
+# Get Property
+dbus-send --system --dest=$BUS_NAME --print-reply $OBJECT_PATH org.freedesktop.DBus.Properties.Get string:com.pgaur.GDBUS string:Status
+
+# Set Property
+dbus-send --system --dest=$BUS_NAME --print-reply $OBJECT_PATH org.freedesktop.DBus.Properties.Set string:com.pgaur.GDBUS string:Status variant:uint32:10
+```
