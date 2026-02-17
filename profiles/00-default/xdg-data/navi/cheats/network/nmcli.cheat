@@ -1,0 +1,16 @@
+% nmcli, NetworkManager
+
+# list scan wifi
+nmcli dev wifi rescan
+
+# list wifi
+nmcli dev wifi list
+
+# list wifi
+nmcli -f SSID,BSSID,SIGNAL,FREQ,CHAN dev wifi list
+
+# scan with iw
+sudo iw dev wlp1s0 scan
+
+# get current AP's BSID
+nmcli -t -f active,bssid dev wifi | grep '^yes'
