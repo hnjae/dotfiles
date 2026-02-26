@@ -1,7 +1,9 @@
+/backups
 /cache
 /debug
 /file-history
 /plans
+/plugins/marketplaces
 /projects
 /session-env
 /shell-snapshots
@@ -10,10 +12,10 @@
 /telemetry
 /todos
 /transcripts
-/plugins/marketplaces
 
 # files
 /.credentials.json
-/history.jsonl
-/stats-cache.json
 /config/notification_states.json
+/history.jsonl
+/mcp-needs-auth-cache.json
+/stats-cache.json
