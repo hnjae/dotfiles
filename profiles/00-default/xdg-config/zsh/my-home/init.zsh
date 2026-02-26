@@ -10,11 +10,11 @@ if [[ ${_hostname} == "hemera" || ${_hostname} == "osiris" ]]; then
     alias sf='cd "$HOME/Projects/dotfiles"'
     alias sv='cd "${XDG_CONFIG_HOME:-$HOME/.config}/nvim"'
     alias sz='cd "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}"'
-    alias so='cd "$HOME/Projects/obsidian/home"'
+    alias so='cd "$HOME/Projects/notes"'
 
     # edit commonly used files
-    alias ed='vi "$HOME/Projects/obsidian/home/dailies/$(date +"%Y-%m-%d").md"'
-    alias ew='vi "$HOME/Projects/obsidian/home/weeklies/$(date +"%G-W%V").md"'
+    # alias ed='vi "$HOME/Projects/obsidian/home/dailies/$(date +"%Y-%m-%d").md"'
+    # alias ew='vi "$HOME/Projects/obsidian/home/weeklies/$(date +"%G-W%V").md"'
 fi
 
 unset _hostname
