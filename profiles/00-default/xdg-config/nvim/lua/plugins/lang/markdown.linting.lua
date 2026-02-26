@@ -43,16 +43,16 @@ return {
       return opts
     end,
   },
-  {
-    [1] = "nvim-lint",
-    optional = true,
-    opts = function(_, opts)
-      opts.linters_by_ft = opts.linters_by_ft or {}
-      opts.linters_by_ft.markdown = vim.tbl_filter(function(linter)
-        return linter ~= "markdownlint-cli2"
-      end, opts.linters_by_ft.markdown or {})
-
-      return opts
-    end,
-  },
+  -- {
+  --   [1] = "nvim-lint",
+  --   optional = true,
+  --   opts = function(_, opts)
+  --     opts.linters_by_ft = opts.linters_by_ft or {}
+  --     opts.linters_by_ft.markdown = vim.tbl_filter(function(linter)
+  --       return linter ~= "markdownlint-cli2"
+  --     end, opts.linters_by_ft.markdown or {})
+  --
+  --     return opts
+  --   end,
+  -- },
 }

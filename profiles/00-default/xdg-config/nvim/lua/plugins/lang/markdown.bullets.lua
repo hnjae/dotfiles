@@ -9,7 +9,7 @@ return {
   lazy = false,
   cond = false,
   ft = { "markdown", "text", "gitcommit" },
-  init = function(plugin)
+  init = function()
     vim.g.bullets_line_spacing = 0
     -- vim.g.bullets_checkbox_markers = " /x"
 

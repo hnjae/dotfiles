@@ -5,7 +5,7 @@
     - `mdformat`
       indent 를 조정하는 옵션을 제공하지 않음.
     - `deno`
-      markdown 의 경우 indent 를 2로 고정. 조정할 수 없음.
+      - markdown 의 경우 indent 를 2로 고정. 조정할 수 없음.
     - `markdownlint-cli2`
       `.markdownlint-cli2.jsonc` 파일을 통해 indent 를 조정할 수 있음.
 ]]
@@ -30,7 +30,7 @@ return {
           ".markdownlint.cjs",
           ".markdownlint.mjs",
         }),
-        require_cwd = false,
+        require_cwd = true,
         condition = function(_, _)
           return true
         end,
