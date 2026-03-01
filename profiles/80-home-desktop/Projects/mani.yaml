@@ -13,8 +13,10 @@ projects:
     url: git@github.com:hnjae/my-ledger
   nix-config:
     url: git@github.com:hnjae/nix-config
-  obsidian:
-    url: git@github.com:hnjae/obsidian.git
+  notes:
+    url: git@github.com:hnjae/notes.git
+  obsidian-archived:
+    url: git@github.com:hnjae/obsidian-archived.git
   obsidian.nvim:
     url: git@github.com:hnjae/obsidian.nvim
   published-articles:
