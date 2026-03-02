@@ -19,13 +19,18 @@
       "Bash(wc:*)",
       "Bash(uv run ruff:*)",
       "Bash(uv run ty:*)",
-      "Bash(podman build:*)"
+      "Bash(ruff:*)",
+      "Bash(ty:*)",
+      "Bash(podman build:*)",
+      "Bash(nix build:*)"
     ],
     "deny": [
       "Read(.env*)",
       "Read(./secrets/**)",
       "Read(**/*.key)",
-      "Write(.env*)"
+      "Write(.env*)",
+      "Bash(npm:*)",
+      "Bash(pip:*)"
     ]
   },
   "effortLevel": "medium"
