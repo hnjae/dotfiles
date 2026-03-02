@@ -33,5 +33,5 @@
       "Bash(pip:*)"
     ]
   },
-  "effortLevel": "medium"
+  "model": "opus"
 }
