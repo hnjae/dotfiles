@@ -15,7 +15,7 @@ size = 11.0
 builtin_box_drawing = true #
 
 [font.normal]
-family = "Monospace"
+family = "Sarasa Fixed K"
 style = "Regular"
 
 [font.offset]

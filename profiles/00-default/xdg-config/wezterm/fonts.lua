@@ -4,12 +4,21 @@ local cjkscale = 1.16
 
 local M = {}
 local FONTS = {
-  { family = "MesloLGM Nerd Font" },
-  { family = "Pretendard JP", scale = cjkscale },
-  { family = "Noto Color Emoji" },
-  { family = "Jigmo", scale = cjkscale },
-  { family = "Jigmo2", scale = cjkscale },
-  { family = "Jigmo3", scale = cjkscale },
+  {
+    -- family = "Sarasa Fixed K",
+    family = "Sarasa Mono K",
+    -- family = "Sarasa Mono Slab K", -- gothic
+
+    -- disable ligatures
+    harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
+  },
+  -- { family = "Sarasa Fixed K" },
+  -- { family = "MesloLGM Nerd Font" },
+  -- { family = "Pretendard JP", scale = cjkscale },
+  -- { family = "Noto Color Emoji" },
+  -- { family = "Jigmo", scale = cjkscale },
+  -- { family = "Jigmo2", scale = cjkscale },
+  -- { family = "Jigmo3", scale = cjkscale },
 }
 
 M.apply_to_config = function(config)
