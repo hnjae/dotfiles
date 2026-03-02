@@ -28,5 +28,5 @@
       "Write(.env*)"
     ]
   },
-  "model": "sonnet"
+  "effortLevel": "medium"
 }
