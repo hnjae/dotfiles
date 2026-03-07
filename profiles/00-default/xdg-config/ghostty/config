@@ -12,7 +12,8 @@ term = "xterm-256color"
 # run `ghostty +list-fonts` to get a list of available fonts
 
 # ※ mono space 가 아닌 font 사용 가능
-font-family = "Sarasa Mono K",
+font-family = "Sarasa Mono K"
+font-family = "Symbols Nerd Font Mono"
 # font-family = "MesloLGM Nerd Font"
 # font-family = "Pretendard JP"
 # font-family = "Pretendard"
