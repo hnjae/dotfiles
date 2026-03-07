@@ -33,7 +33,7 @@ font-family = "Sarasa Mono K",
 # font-family-bold = "D2Coding Bold"
 # font-family-bold = "Noto Sans Mono CJK JP Bold"
 
-font-size = 11
+font-size = 11.5
 window-inherit-font-size = true
 font-feature = "-calt, -liga, -dlig" # disable ligature
 window-decoration = client
