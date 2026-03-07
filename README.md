@@ -8,6 +8,10 @@ lastmod: 2026-01-20T20:35:20+0900
 > [!NOTE]
 > `dotbot` 의 한계로 [XDG Base Directory Specification](https://specifications.freedesktop.org/basedir-spec/latest/)에서 정의한 XDG 경로의 기본값만을 사용한다. 예로 환경변수 `$XDG_CONFIG_HOME`를 조작해도 dotfiles에서는 대응하지 않는다.
 
+## TODO
+
+- [ ] <https://ghostty.org/docs/linux/systemd> 에 따라 ghostty 가 설치되어 있으면, `systemctl enable --user app-com.mitchellh.ghostty.service` 를 할 것.
+
 ## Install
 
 ### 의존성 패키지
