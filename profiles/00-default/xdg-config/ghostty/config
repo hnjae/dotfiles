@@ -113,3 +113,7 @@ keybind = shift+enter=text:\x1b\r
 gtk-single-instance = false
 # linux-cgroup = "always"
 # linux-cgroup-memory-limit = 23622320128
+
+# https://ghostty.org/docs/linux/systemd
+# systemctl enable --user app-com.mitchellh.ghostty.service
+quit-after-last-window-closed = false
