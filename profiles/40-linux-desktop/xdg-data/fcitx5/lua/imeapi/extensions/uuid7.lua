@@ -1,4 +1,4 @@
-function Uuid()
+function uuid7()
   local handle = io.popen("uuidgen -7")
   if handle then
     local result = handle:read("*a") -- Read all output
@@ -9,4 +9,4 @@ function Uuid()
   return nil -- Command failed or not found
 end
 
-ime.register_command("ud", "uuid", "UUID")
+ime.register_command("ud", "uuid7", "UUID")

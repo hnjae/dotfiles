@@ -1,4 +1,4 @@
-function Uuid()
+function uuid4()
   local handle = io.popen("uuidgen")
   if handle then
     local result = handle:read("*a") -- Read all output
