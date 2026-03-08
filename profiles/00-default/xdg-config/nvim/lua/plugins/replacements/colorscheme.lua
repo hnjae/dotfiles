@@ -130,7 +130,7 @@ return {
     lazy = false,
     version = false, -- no versioning, 2025-08-01
     enabled = COLORSCHEME == "kanagawa",
-    -- build = "<cmd>KanagawaCompile<cr>",
+    build = ":Command KanagawaCompile",
     --[[
       NOTE:
 
@@ -139,7 +139,7 @@ return {
       - kanagawa-lotus: light theme
       ]]
     opts = {
-      compile = false,
+      compile = true,
       background = {
         dark = "wave",
       },
