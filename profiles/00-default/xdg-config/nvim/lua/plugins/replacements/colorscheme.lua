@@ -155,16 +155,9 @@ return {
         },
       },
       terminalColors = color_terminal, -- define vim.g.terminal_color_{0,17}
-
       overrides = function(colors)
         local theme = colors.theme
         return {
-          -- Dark completion (popup) menu // More uniform colors for the popup menu.
-          -- Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 }, -- add `blend = vim.o.pumblend` to enable transparency
-          -- PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
-          -- PmenuSbar = { bg = theme.ui.bg_m1 },
-          -- PmenuThumb = { bg = theme.ui.bg_p2 },
-
           -- HACK: <https://github.com/rebelot/kanagawa.nvim/pull/268> 가 머지되기 전까지 사용 <2025-08-01>
           -- SnacksDashboard
           SnacksDashboardHeader = { fg = theme.vcs.removed },
