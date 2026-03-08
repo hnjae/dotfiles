@@ -3,6 +3,8 @@ if vim.fn.has("gui_running") == 1 then
   vim.o.guifont = "monospace:h11"
 end
 
+vim.api.nvim_set_option_value("background", "light", {})
+
 -- VIM Mode 에 따라 커서 Shape 바뀌는 옵션 해제
 -- vim.opt.guicursor = ""
 vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:block,r-cr-o:block"

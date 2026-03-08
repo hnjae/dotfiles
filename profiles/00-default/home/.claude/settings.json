@@ -32,5 +32,6 @@
       "Bash(npm:*)",
       "Bash(pip:*)"
     ]
-  }
+  },
+  "model": "haiku"
 }
