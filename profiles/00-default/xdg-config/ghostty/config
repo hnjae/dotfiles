@@ -118,4 +118,4 @@ keybind = shift+enter=text:\x1b\r
 
 # https://ghostty.org/docs/linux/systemd
 # systemctl enable --user app-com.mitchellh.ghostty.service
-quit-after-last-window-closed = false
+# quit-after-last-window-closed = false

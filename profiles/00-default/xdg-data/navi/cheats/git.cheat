@@ -7,6 +7,8 @@ $ branch: git branch | awk '{print $NF}'
 ; git-checkout 의 기능이 switch 랑 restore 로 분할됨 <from git 2.23.0>
 ; https://stackoverflow.com/questions/57265785/whats-the-difference-between-git-switch-and-git-checkout-branch
 
+# run ssh agent
+eval "$(ssh-agent -s)"; ssh-add ~/.ssh/id_ed25519
 
 ; <https://git-scm.com/docs/pretty-formats>
 
