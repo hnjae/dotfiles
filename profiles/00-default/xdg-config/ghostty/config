@@ -34,7 +34,7 @@ font-family = "Symbols Nerd Font Mono"
 # font-family-bold = "D2Coding Bold"
 # font-family-bold = "Noto Sans Mono CJK JP Bold"
 
-font-size = 11.5
+font-size = 12
 window-inherit-font-size = true
 font-feature = "-calt, -liga, -dlig" # disable ligature
 window-decoration = client
@@ -43,7 +43,8 @@ window-decoration = client
 # Style
 ################################################################################
 # run `ghostty + list-themes` to get a list of available themes
-theme = _base24
+# theme = _base24
+theme = dark:_base24,light:Gruvbox Material Light
 # background-opacity = 1.0
 # background-blur = true
 
