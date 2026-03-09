@@ -1,4 +1,6 @@
----
+# https://github.com/NixOS/nixpkgs/issues/373521#issuecomment-2588163165
+# 2026-03-09
+# onlyoffice does not handle symlink of fonts
 - name: Install and setup OnlyOffice
   vars:
     app_id: org.onlyoffice.desktopeditors
