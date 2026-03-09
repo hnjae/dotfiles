@@ -1,0 +1,6 @@
+---
+- name: Ensure systemd user directory exists
+  file:
+    path: '{{ systemd_path }}'
+    state: directory
+    mode: '0755'

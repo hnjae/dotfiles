@@ -1,0 +1,13 @@
+---
+- name: Deploy secrets
+  include_tasks: deploy-secrets.yaml
+- name: Deploy systemd user tmpfiles
+  include_tasks: deploy-systemd-user-tmpfiles.yaml
+- name: Deploy seafile-ignore
+  include_tasks: home-deploy-seafile-ignore.yaml
+- name: Set profile picture
+  include_tasks: home-set-profile-picture.yaml
+- name: Initialize or sync lazy.nvim
+  include_tasks: init-or-sync-lazy-nvim.yaml
+- name: Initialize zimfw
+  include_tasks: init-zimfw.yaml

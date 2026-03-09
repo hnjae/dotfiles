@@ -1,0 +1,45 @@
+---
+- name: Deploy trash-empty service & timer
+  vars:
+    service_name: trash-empty
+    days: 7
+  block:
+    - name: Gather trash-empty location
+      command: which trash-empty
+      register: check_trash_empty
+      failed_when: false
+      changed_when: false
+    - name: Deploy trash-empty service & timer
+      when: check_trash_empty.rc == 0
+      block:
+        - name: Deploy service unit
+          copy:
+            dest: '{{ systemd_path }}/{{ service_name }}.service'
+            content: |
+              [Unit]
+              Description=Empty trash older than {{ days }} days
+              [Service]
+              Type=oneshot
+              ExecStart={{ check_trash_empty.stdout }} --trash-dir "{{ xdg_data_home }}/Trash" -f {{ days }}
+            mode: '0644'
+          notify: reload-systemd-user-daemon
+        - name: Deploy timer unit
+          copy:
+            dest: '{{ systemd_path }}/{{ service_name }}.timer'
+            content: |
+              [Unit]
+              Description=Empty trash older than {{ days }} days
+              [Timer]
+              OnCalendar=*-*-* 04:00:00
+              Persistent=true
+              RandomizedDelaySec=1h
+              [Install]
+              WantedBy=timers.target
+            mode: '0644'
+          notify: reload-systemd-user-daemon
+        - name: Enable & start timer
+          systemd:
+            name: '{{ service_name }}.timer'
+            enabled: true
+            state: started
+            scope: user

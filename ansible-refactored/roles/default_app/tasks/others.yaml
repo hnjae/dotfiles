@@ -1,0 +1,7 @@
+---
+- name: Set default file manager
+  vars:
+    app_id: org.kde.dolphin
+  community.general.xdg_mime:
+    handler: '{{ app_id }}.desktop'
+    mime_types: [inode/directory]

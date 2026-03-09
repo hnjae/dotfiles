@@ -1,0 +1,38 @@
+---
+- name: Install and setup TickTick
+  when: [is_home]
+  vars:
+    app_id: com.ticktick.TickTick
+  block:
+    - name: Install {{ app_id }} with flatpak
+      community.general.flatpak:
+        method: user
+        state: present
+        remote: flathub
+        name: ['{{ app_id }}']
+    - name: Configure {{ app_id }} flatpak overrides
+      copy:
+        dest: '{{ xdg_data_home }}/flatpak/overrides/{{ app_id }}'
+        content: |
+          [Context]
+          sockets=wayland;!x11
+        mode: '0644'
+        backup: false
+    # --ozone-platform=auto 로는 작동 안됨. 그러니 x11 disable 2025-10-10
+    - name: Create {{ app_id }} desktop entry
+      copy:
+        dest: '{{ xdg_data_home }}/applications/{{ app_id }}.desktop'
+        content: |
+          [Desktop Entry]
+          Name=TickTick
+          Exec=flatpak run --branch=stable --command=ticktick --file-forwarding com.ticktick.TickTick --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime --wayland-text-input-version=3 @@u %U @@
+          Terminal=false
+          Type=Application
+          Icon=com.ticktick.TickTick
+          StartupWMClass=TickTick
+          Comment=TickTick is a powerful to-do & task management app with seamless cloud synchronization across all your devices. Whether you need to schedule an agenda, make memos, share shopping lists, collaborate in a team, or even develop a new habit, TickTick is always here to help you get stuff done and keep life on track.
+          Categories=Office;
+          X-Flatpak-Tags=proprietary;
+          X-Flatpak=com.ticktick.TickTick
+        mode: '0600'
+        backup: false
