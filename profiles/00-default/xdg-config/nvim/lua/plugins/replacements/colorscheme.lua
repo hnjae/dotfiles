@@ -12,7 +12,7 @@ local colorschemes = {
   tokyonight = "tokyonight",
 }
 
-local COLORSCHEME = colorschemes.kanagawa
+local COLORSCHEME = colorschemes.gruvbox_material
 local color_terminal = (vim.fn.has("gui_running") == 1) or (os.getenv("TERM_PROGRAM") == nil)
 
 ---@type LazySpec[]
@@ -104,9 +104,9 @@ return {
     version = false, -- use the latest git commit
     enabled = COLORSCHEME == "gruvbox-material",
     init = function()
-      vim.g.gruvbox_material_background = "hard"
+      -- vim.g.gruvbox_material_background = "hard"
       vim.g.gruvbox_material_better_performance = 1
-      vim.g.gruvbox_material_ui_contrast = "high"
+      -- vim.g.gruvbox_material_ui_contrast = "high"
     end,
   },
   {

@@ -1,5 +1,10 @@
 # tl;dr
 
+## 익숙치 않은 명령어
+
+`gO`
+: outline 호출
+
 ### Surround
 
 - use `S` in visual mode.
