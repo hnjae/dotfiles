@@ -1,9 +1,4 @@
 {
-  "emdash": {
-    "prefix": "--",
-    "description": "em dash",
-    "body": "—"
-  },
   "header 1": {
     "prefix": ["h1", "1"],
     "description": "Add header level 1",

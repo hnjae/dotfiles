@@ -1,4 +1,14 @@
 {
+  "endash": {
+    "prefix": ["--", "end"],
+    "description": "en dash",
+    "body": "–"
+  },
+  "emdash": {
+    "prefix": ["---", "emd"],
+    "description": "em dash",
+    "body": "—"
+  },
   "vi-modeline": {
     "prefix": "vim",
     "description": "Vi's modeline (remove <> after inserting)",

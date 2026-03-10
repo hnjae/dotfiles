@@ -6,7 +6,7 @@
 return {
   [1] = "render-markdown.nvim",
   optional = true,
-  enabled = true,
+  enabled = false,
   opts_extend = { "file_types" },
   ---@type render.md.UserConfig
   opts = {

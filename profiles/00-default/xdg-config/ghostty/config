@@ -19,33 +19,21 @@ font-family = "Symbols Nerd Font Mono"
 # font-family = "Pretendard"
 # font-family = "Noto Color Emoji"
 
-# font-family = "Noto Sans Mono CJK JP"
-# font-family = "Noto Sans Mono CJK KR"
-
-# font-family = "CommitMono Nerd Font"
-
-# font-family = "Inconsolata LGC Nerd Font Propo"
-# font-family = "CodeNewRoman Nerd Font Propo"
-# font-family = "RobotoMono Nerd Font Propo"
-# font-family = "Pretendard JP"
-# font-family = "Pretendard"
-
-# font-family-bold = "MesloLGM Nerd Font Bold"
-# font-family-bold = "D2Coding Bold"
-# font-family-bold = "Noto Sans Mono CJK JP Bold"
-
-font-size = 12
-window-inherit-font-size = true
+font-size = 11
+window-inherit-font-size = false
 font-feature = "-calt, -liga, -dlig" # disable ligature
 window-decoration = client
+
+# ghostty: only available on linux
+window-theme = ghostty
 
 ################################################################################
 # Style
 ################################################################################
 # run `ghostty + list-themes` to get a list of available themes
 # theme = _base24
-theme = dark:Gruvbox Material Dark,light:Gruvbox Material Light
-# theme = dark:kanagawa-wave,light:kanagawa-lotus
+# theme = dark:Gruvbox Material Dark,light:Gruvbox Material Light
+theme = dark:kanagawa-wave,light:Gruvbox Light
 # background-opacity = 1.0
 # background-blur = true
 
@@ -56,9 +44,8 @@ cursor-style = block
 cursor-style-blink = false
 cursor-opacity = 0.8
 shell-integration-features = no-cursor
+shell-integration = none
 
-# ghostty: only available on linux
-window-theme = ghostty
 
 # gtk-tabs-location = bottom
 gtk-titlebar = false
