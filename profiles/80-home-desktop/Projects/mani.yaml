@@ -3,30 +3,26 @@ projects:
     url: git@github.com:hnjae/archive
   dotfiles:
     url: git@github.com:hnjae/dotfiles
-  full-stack-todo:
-    url: git@github.com:hnjae/full-stack-todo
+  dotfiles-private:
+    url: hnjae@eris:/srv/git/dotfiles-private.git
   hnjae.github.io:
     url: git@github.com:hnjae/hnjae.github.io
-  logseq-home:
-    url: git@github.com:hnjae/logseq-home
+  ledger:
+    url: git@github.com:hnjae/my-ledger
   my-ledger:
     url: git@github.com:hnjae/my-ledger
+  my-python-utils:
+    url: git@github.com:hnjae/my-python-utils
   nix-config:
     url: git@github.com:hnjae/nix-config
   notes:
     url: git@github.com:hnjae/notes.git
   obsidian-archived:
     url: git@github.com:hnjae/obsidian-archived.git
-  obsidian.nvim:
-    url: git@github.com:hnjae/obsidian.nvim
   published-articles:
     url: git@github.com:hnjae/published-articles
   py-utils:
     url: git@github.com:hnjae/py-utils
-  resume:
-    url: git@github.com:hnjae/resume.git
-  type-challenges:
-    url: git@github.com:hnjae/type-challenges.git
   restic-scrub:
     url: hnjae@eris:/srv/git/restic-scrub
 specs:
