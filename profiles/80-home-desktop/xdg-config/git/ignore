@@ -16,16 +16,20 @@ Thumbs.db
 # Python
 .ropeproject
 __pycache__
-.mypy_cache
-.ruff_cache
 .pyc
 
-# nix-flake,
+# nix-flake
 .direnv
+
+# Cache directory
+.mypy_cache
+.ruff_cache
+.rumdl_cache
 
 # Editors
 *~
 
-# vi:ft=gitignore:
-
+# Claude
 **/.claude/settings.local.json
+
+# vi:ft=gitignore:
