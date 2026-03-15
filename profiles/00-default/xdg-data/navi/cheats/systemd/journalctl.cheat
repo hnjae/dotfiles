@@ -14,3 +14,6 @@ journalctl -f --boot=0 --output=short-full --unit=<systemd-units>
 
 # show log size
 journalctl --log-size
+
+# print error log of current boot
+journalctl -b 0 -k -p err --no-pager

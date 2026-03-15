@@ -69,8 +69,15 @@ curl -fsSL https://claude.ai/install.sh | bash
 
 <https://github.com/anomalyco/opencode>
 
-```
+```sh
 XDG_BIN_DIR=$HOME/.local/bin curl -fsSL https://opencode.ai/install | bash
+```
+
+#### zed-editor
+
+```sh
+# Linux or macOS
+curl -f https://zed.dev/install.sh | sh
 ```
 
 
