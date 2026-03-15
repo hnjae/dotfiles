@@ -4,24 +4,29 @@
 
 # default: xterm-ghostty
 # ssh server 가 ghostty.terminfo 를 지원하지 않는 경우에 대응
-term = "xterm-256color"
+# term = "xterm-256color"
+
+################################################################################
+# Terminal Features
+################################################################################
+
+# obey OSC 133 escape sequence
+notify-on-command-finish = "unfocused"
+notify-on-command-finish-action = "bell,notify"
 
 ################################################################################
 # Font
 ################################################################################
 # run `ghostty +list-fonts` to get a list of available fonts
 
-# ※ mono space 가 아닌 font 사용 가능
-font-family = "Sarasa Mono K"
+# NOTE: mono space 가 아닌 font 사용 가능
+# font-family = "Sarasa Mono K"
+font-family = "Sarasa Term K"
 font-family = "Symbols Nerd Font Mono"
-# font-family = "MesloLGM Nerd Font"
-# font-family = "Pretendard JP"
-# font-family = "Pretendard"
-# font-family = "Noto Color Emoji"
 
 font-size = 11
 window-inherit-font-size = false
-font-feature = "-calt, -liga, -dlig" # disable ligature
+# font-feature = "-calt" # disable ligature
 window-decoration = client
 
 # ghostty: only available on linux
@@ -40,8 +45,8 @@ theme = dark:Gruvbox Dark,light:Gruvbox Light
 unfocused-split-opacity=1.0
 
 cursor-style = block
+# but DECSCUSR will still be respected.
 cursor-style-blink = false
-cursor-opacity = 0.8
 shell-integration = none
 # shell-integration-features = no-cursor
 
@@ -50,6 +55,9 @@ shell-integration = none
 gtk-titlebar = false
 window-padding-balance = true
 # window-padding-x = 5
+
+# background-opacity = 0.95
+# background-blur = true
 
 ################################################################################
 # Key Binding / run `ghostty +list-keybinds`

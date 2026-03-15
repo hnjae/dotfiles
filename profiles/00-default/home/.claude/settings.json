@@ -33,5 +33,6 @@
       "Bash(pip:*)"
     ]
   },
-  "syntaxHighlightingDisabled": false
+  "syntaxHighlightingDisabled": false,
+  "model": "opus"
 }
