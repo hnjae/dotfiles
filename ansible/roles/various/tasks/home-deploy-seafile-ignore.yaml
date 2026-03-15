@@ -1,5 +1,5 @@
 - name: Deploy seafile-ignoretxt to seafile-synced directories
-  when: [is_home]
+  when: [is_home, is_desktop]
   vars:
     source: '{{ role_path }}/files/seafile-ignore.txt'
     # NOTE: 2025-10-10
@@ -22,11 +22,11 @@
       - '{{ xdg_videos_dir }}'
       - '{{ synced_dir }}'
   block:
-    - name: Deploy seafile-ignore.txt (hard link from dotfiles)
+    - name: Deploy seafile-ignore.txt
       file:
         src: '{{ source }}'
         path: '{{ item }}/seafile-ignore.txt'
-        state: hard
         mode: '0644'
         force: true
+        # state: hard
       loop: '{{ dests }}'
