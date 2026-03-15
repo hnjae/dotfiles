@@ -2,4 +2,4 @@
   when: is_desktop
   ansible.builtin.shell: curl -f https://zed.dev/install.sh | sh
   args:
-    creates: "{{ ansible_env.HOME }}/.local/bin/zed"
+    creates: "{{ xdg_bin_home }}/zed"

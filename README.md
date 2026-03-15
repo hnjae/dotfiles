@@ -73,11 +73,4 @@ curl -fsSL https://claude.ai/install.sh | bash
 XDG_BIN_DIR=$HOME/.local/bin curl -fsSL https://opencode.ai/install | bash
 ```
 
-#### zed-editor
-
-```sh
-# Linux or macOS
-curl -f https://zed.dev/install.sh | sh
-```
-
 2026-01-20 기준 위 명령어는 opencode 를 .local/bin/opencode 에 설치 X
