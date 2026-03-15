@@ -3,4 +3,5 @@ xdg_state_home: "{{ ansible_env.XDG_STATE_HOME | default(ansible_env.HOME + '/.l
 xdg_data_home: "{{ ansible_env.XDG_DATA_HOME | default(ansible_env.HOME + '/.local/share') }}"
 xdg_cache_home: "{{ ansible_env.XDG_CACHE_HOME | default(ansible_env.HOME + '/.cache') }}"
 mimeapps_path: '{{ xdg_config_home }}/mimeapps.list'
-is_home: "{{ (ansible_env.ANSIBLE_HOST_TYPE | default('')) == 'home' }}"
+is_home: "{{ (ansible_env.ANSIBLE_HOST_IS_HOME | default('')) == '1' }}"
+is_desktop: "{{ (ansible_env.ANSIBLE_HOST_IS_DESKTOP | default('')) == '1' }}"

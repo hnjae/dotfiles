@@ -54,7 +54,7 @@ main() {
         install_profile "40-kde"
         install_profile "80-home-desktop"
         if [ "${SKIP_ANSIBLE:-}" = "" ]; then
-            ANSIBLE_HOST_TYPE="home" "${script_dir}/ansible/run.sh"
+            ANSIBLE_HOST_IS_HOME=1 ANSIBLE_HOST_IS_DESKTOP=1 "${script_dir}/ansible/run.sh"
         fi
         ;;
     *)
