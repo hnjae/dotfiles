@@ -1,7 +1,10 @@
 [Common]
-OutlineCloseButton=true
-OutlineIntensity=OutlineLow
-ShadowSize=ShadowMedium
+OutlineIntensity=OutlineOff
+ShadowSize=ShadowSmall
+ShadowStrength=128
+
+[Style]
+MenuOpacity=80
 
 [Windeco Exception 0]
 BorderSize=1

@@ -116,7 +116,7 @@ update-tinted:
     myschemes="${XDG_CONFIG_HOME}/tinted-theming/my-schemes"
 
     if [ ! -d "$templates" ] || [ ! -d "$myschemes" ]; then
-        echo "ERROR: $templates or $myschemes is not installed" >&2
+        echo "ERR: $templates or $myschemes is not installed" >&2
         exit 1
     fi
 
@@ -129,7 +129,7 @@ update-tinted:
         nix run 'nixpkgs#tinty' -- sync
         nix run 'nixpkgs#tinty' -- apply "$theme"
     else
-        echo "Error: Neither tinty nor nix found in PATH" >/dev/stderr
+        echo "ERR: Neither tinty nor nix found in PATH" >/dev/stderr
         exit 1
     fi
 
