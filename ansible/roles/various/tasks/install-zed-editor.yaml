@@ -1,0 +1,5 @@
+- name: Install Zed editor
+  when: is_flatpak or ansible_system == "Darwin"
+  ansible.builtin.shell: curl -f https://zed.dev/install.sh | sh
+  args:
+    creates: "{{ ansible_env.HOME }}/.local/bin/zed"
