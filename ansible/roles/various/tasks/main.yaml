@@ -1,4 +1,3 @@
----
 - name: Deploy secrets
   include_tasks: deploy-secrets.yaml
 - name: Deploy systemd user tmpfiles

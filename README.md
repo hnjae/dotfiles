@@ -46,14 +46,14 @@ git clone --recurse-submodules git@github.com:hnjae/dotfiles ~/Projects/dotfiles
 
 1. `install.sh` 실행.
 1. 1Password 로그인 및 설정
-    - `Unlock using system authentication service` 키기
-    - `Integrate with 1Password CLI` 키기
-    - SSH Agent 설정
+   - `Unlock using system authentication service` 키기
+   - `Integrate with 1Password CLI` 키기
+   - SSH Agent 설정
         - Ask approval for each new **application** 으로 설정하기
         - `$HOME/.config/1Password/ssh/agent.toml` 수정
 1. `install.sh` 재실행.
 1. Copilot 인증 하기 (사용한다면)
-    - `nvim` 로 Copilot 이 활성화되는 filetype 의 파일을 열고, `Copilot auth` 실행
+   - `nvim` 로 Copilot 이 활성화되는 filetype 의 파일을 열고, `Copilot auth` 실행
 
 ## 패키지 설치
 
@@ -79,6 +79,5 @@ XDG_BIN_DIR=$HOME/.local/bin curl -fsSL https://opencode.ai/install | bash
 # Linux or macOS
 curl -f https://zed.dev/install.sh | sh
 ```
-
 
 2026-01-20 기준 위 명령어는 opencode 를 .local/bin/opencode 에 설치 X

@@ -3,7 +3,6 @@ date_before: 2023-08-10
 lastmod: 2026-01-11T21:59:17+0900
 ---
 
-
 ## tl;dr
 
 - run `fc-cache -vf` to refresh cache

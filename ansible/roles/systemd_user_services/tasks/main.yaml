@@ -1,4 +1,3 @@
----
 - name: Ensure systemd user directory exists
   include_tasks: ensure-directory.yaml
 - name: Deploy flatpak-update service

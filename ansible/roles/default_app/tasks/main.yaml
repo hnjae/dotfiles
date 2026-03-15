@@ -1,4 +1,3 @@
----
 - name: Set audio player
   include_tasks: audio-player.yaml
 - name: Set browser

@@ -1,4 +1,3 @@
----
 - name: Install and setup GIMP
   vars:
     app_id: org.gimp.GIMP
@@ -12,6 +11,6 @@
     - name: Make {{ app_id }} as default app
       community.general.xdg_mime:
         mime_types:
-          - image/x-xcf  # *.xcf
-          - image/vnd.adobe.photoshop  # .psd
+          - image/x-xcf # *.xcf
+          - image/vnd.adobe.photoshop # .psd
         handler: '{{ app_id }}.desktop'

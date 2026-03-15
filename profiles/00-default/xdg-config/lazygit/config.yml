@@ -1,4 +1,3 @@
----
 # https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
 gui:
   language: en
@@ -9,8 +8,7 @@ gui:
   expandFocusedSidePanel: false
   showIcons: true
 git:
-  branchLogCmd: git log --graph --color=always --decorate --date=iso --oneline {{branchName}}
-    --
+  branchLogCmd: git log --graph --color=always --decorate --date=iso --oneline {{branchName}} --
   # merging:
   #   manualCommit: true
   autoFetch: false

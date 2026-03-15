@@ -1,4 +1,3 @@
----
 xdg_config_home: "{{ ansible_env.XDG_CONFIG_HOME | default(ansible_env.HOME + '/.config') }}"
 xdg_state_home: "{{ ansible_env.XDG_STATE_HOME | default(ansible_env.HOME + '/.local/state') }}"
 xdg_data_home: "{{ ansible_env.XDG_DATA_HOME | default(ansible_env.HOME + '/.local/share') }}"

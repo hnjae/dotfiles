@@ -1,4 +1,3 @@
----
 - name: Check if tldr exists in PATH
   command: which tldr
   register: tldr_check

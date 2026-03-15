@@ -1,4 +1,3 @@
----
 # NOTE: Proprietary in flathub but MIT license in repo <https://github.com/usebruno/bruno>
 - name: Install and setup Bruno
   vars:

@@ -1,4 +1,3 @@
----
 - name: Set default browser
   vars:
     app_id: brave-browser

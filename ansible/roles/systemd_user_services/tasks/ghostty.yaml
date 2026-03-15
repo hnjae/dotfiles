@@ -1,4 +1,3 @@
----
 - name: Check if app-com.mitchellh.ghostty.service exists
   command: systemctl --user cat app-com.mitchellh.ghostty.service
   register: ghostty_service_check

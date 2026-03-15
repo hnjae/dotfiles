@@ -1,4 +1,3 @@
----
 - name: Allow Flatpak applications to access the /nix/store directory.
   become: false
   when: "'/nix/store' is directory"

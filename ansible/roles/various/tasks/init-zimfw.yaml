@@ -1,4 +1,3 @@
----
 - name: Check if zsh exists in PATH
   ansible.builtin.command: which zsh
   register: zsh_check
@@ -19,8 +18,7 @@
         executable: /bin/sh
         chdir: '{{ playbook_dir }}'
       register: zimfw_submodule
-      changed_when: zimfw_submodule.rc == 0 and ( "a3c82368-dd25-4d62-ae58-4550ca5ecde8"
-        not in zimfw_submodule.stdout )
+      changed_when: zimfw_submodule.rc == 0 and ( "a3c82368-dd25-4d62-ae58-4550ca5ecde8" not in zimfw_submodule.stdout )
     - name: Initialize zimfw modules
       ansible.builtin.shell: |
         set -eu

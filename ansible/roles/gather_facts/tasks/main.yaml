@@ -1,4 +1,3 @@
----
 - name: Check if nix exists in PATH
   command: which nix
   register: nix_check

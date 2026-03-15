@@ -1,4 +1,3 @@
----
 - name: Add flathub repo
   include_tasks: add-flathub-repo.yaml
 - name: Install bruno

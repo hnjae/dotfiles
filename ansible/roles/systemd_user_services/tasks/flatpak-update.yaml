@@ -1,4 +1,3 @@
----
 - name: Check if flatpak exists in PATH
   command: which flatpak
   register: flatpak_check

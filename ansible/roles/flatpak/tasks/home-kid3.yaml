@@ -1,4 +1,3 @@
----
 - name: Install and setup Kid3 (tag editor)
   when: [is_home]
   vars:

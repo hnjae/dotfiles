@@ -1,4 +1,3 @@
----
 - name: Install and setup LibreOffice
   vars:
     app_id: org.libreoffice.LibreOffice

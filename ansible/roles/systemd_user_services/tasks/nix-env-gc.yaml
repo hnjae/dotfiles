@@ -1,4 +1,3 @@
----
 - name: Check if nix-env exists in PATH
   command: which nix-env
   register: nix_env_check

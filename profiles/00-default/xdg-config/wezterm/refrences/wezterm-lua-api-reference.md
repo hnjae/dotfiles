@@ -59,6 +59,7 @@ config.serial_ports = {
 ```
 
 **접속 방법**:
+
 ```bash
 wezterm connect my-server   # SSH domain
 wezterm connect 'Sensor 1'  # Serial domain
@@ -494,6 +495,7 @@ color:delta_e(other_color)  -- 색 차이 (Delta E)
 ## 유용한 API 레퍼런스
 
 ### 색상 관련
+
 - `wezterm.color.parse(spec)` - 색상 문자열 파싱
 - `wezterm.color.get_builtin_schemes()` - 빌트인 color scheme 목록
 - `wezterm.color.get_default_colors()` - 기본 색상 팔레트
@@ -501,6 +503,7 @@ color:delta_e(other_color)  -- 색 차이 (Delta E)
 - `wezterm.color.save_scheme(colors, metadata, file)` - TOML로 저장
 
 ### Pane 관련
+
 - `pane:get_domain_name()` - domain 이름
 - `pane:get_title()` - pane 제목
 - `pane:get_foreground_process_name()` - 실행 중인 프로세스
@@ -509,6 +512,7 @@ color:delta_e(other_color)  -- 색 차이 (Delta E)
 - `pane:get_metadata()` - 메타데이터
 
 ### Window 관련
+
 - `window:effective_config()` - 적용된 설정 (resolved_palette 포함)
 - `window:get_config_overrides()` - 설정 오버라이드
 - `window:set_config_overrides(overrides)` - 설정 오버라이드 설정
@@ -518,12 +522,14 @@ color:delta_e(other_color)  -- 색 차이 (Delta E)
 ## 참고 자료
 
 ### 공식 문서
+
 - [PaneInformation](https://wezfurlong.org/wezterm/config/lua/PaneInformation.html)
 - [Colors & Appearance](https://wezfurlong.org/wezterm/config/appearance.html)
 - [SSH Domains](https://wezfurlong.org/wezterm/multiplexing.html#ssh-domains)
 - [Serial Ports](https://wezfurlong.org/wezterm/config/lua/config/serial_ports.html)
 
 ### 소스 코드 위치
+
 - Pane Lua API: `lua-api-crates/mux/src/pane.rs`
 - Color Lua API: `lua-api-crates/color-funcs/src/lib.rs`
 - Color Config: `config/src/color.rs`

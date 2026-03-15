@@ -1,4 +1,3 @@
----
 - name: Deploy systemd user tmpfiles
   when: [ansible_system == "Linux", ansible_service_mgr == "systemd"]
   block:

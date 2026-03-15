@@ -19,7 +19,6 @@ lastmod: 2026-01-12T16:31:53+0900
 | rename | r/n |
 | show | sh/s |
 
-
 ## zsh
 
 ### 변수 선언 방법
@@ -31,7 +30,6 @@ lastmod: 2026-01-12T16:31:53+0900
 
 `export VAR="value"`
 : `typeset` 자식 프로세스에 전달 되는 환경 변수 설정
-
 
 ## zimfw
 

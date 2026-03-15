@@ -280,6 +280,7 @@ local text = pane:get_lines_as_text(10)
 ```
 
 **매개변수**:
+
 - `nlines` (선택): 읽을 줄 수. 생략 시 viewport 전체.
 
 ### `pane:get_lines_as_escapes([nlines])`
@@ -294,6 +295,7 @@ local text_with_colors = pane:get_lines_as_escapes(20)
 ```
 
 **매개변수**:
+
 - `nlines` (선택): 읽을 줄 수.
 
 ### `pane:get_logical_lines_as_text([nlines])`
@@ -308,6 +310,7 @@ local text = pane:get_logical_lines_as_text()
 ```
 
 **매개변수**:
+
 - `nlines` (선택): 읽을 줄 수.
 
 ---
@@ -349,10 +352,11 @@ end
 ```
 
 **매개변수**:
+
 - `of_type` (선택): 필터링할 타입
-  - `"Output"` - 명령 출력
-  - `"Prompt"` - 프롬프트
-  - `"Input"` - 사용자 입력
+    - `"Output"` - 명령 출력
+    - `"Prompt"` - 프롬프트
+    - `"Input"` - 사용자 입력
 
 **참고**: Shell integration 설정 필요 (OSC 133 시퀀스).
 
@@ -371,6 +375,7 @@ end
 ```
 
 **매개변수**:
+
 - `x`: X 좌표 (0부터 시작)
 - `y`: Y 좌표 (StableRowIndex)
 
@@ -390,6 +395,7 @@ end
 ```
 
 **매개변수**:
+
 - `zone`: semantic zone 테이블
 
 ### `pane:get_text_from_region(start_x, start_y, end_x, end_y)`
@@ -405,6 +411,7 @@ local text = pane:get_text_from_region(0, 10, 80, 15)
 ```
 
 **매개변수**:
+
 - `start_x`, `start_y`: 시작 좌표
 - `end_x`, `end_y`: 끝 좌표
 
@@ -465,6 +472,7 @@ pane:split {
 ```
 
 **매개변수** (테이블):
+
 - `direction`: `'Right'`, `'Left'`, `'Top'`, `'Bottom'`
 - `size`: 0-1 사이 (비율) 또는 1 이상 (셀 수). 기본값: 0.5
 - `args`: 실행할 명령어 배열 (선택)
@@ -510,6 +518,7 @@ local new_tab, new_window = pane:move_to_new_window('workspace-name')
 ```
 
 **매개변수**:
+
 - `workspace` (선택): workspace 이름
 
 ---

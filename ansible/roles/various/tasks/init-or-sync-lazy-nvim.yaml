@@ -1,4 +1,3 @@
----
 - name: Initialize or sync lazy.nvim
   vars:
     lazynvim_marker_file: '{{ xdg_state_home }}/nvim/lazy-nvim-initialized'
