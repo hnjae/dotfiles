@@ -1,5 +1,5 @@
----
 # See: https://pre-commit.com/
+default_stages: [pre-commit]
 exclude: |
   (?x)^(
     .*/lazy-lock\.json|
@@ -53,9 +53,9 @@ repos:
         entry: fish_indent --write
         language: system
         types: [fish]
-      - id: yamlfix
+      - id: yamlfmt
         name: format yaml
-        entry: yamlfix
+        entry: yamlfmt
         language: system
         types: [yaml]
       - id: biome
@@ -63,8 +63,14 @@ repos:
         entry: biome format --write
         language: system
         files: \.(json|jsonc)$
-      - id: markdownlint
+      - id: rumdl-fmt
         name: format markdown
-        entry: markdownlint-cli2 --fix
+        entry: rumdl fmt
         language: system
         types: [markdown]
+      - id: rumdl-check
+        name: check markdown
+        entry: rumdl check --check
+        language: system
+        types: [markdown]
+        stages: [pre-merge-commit]

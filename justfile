@@ -1,5 +1,8 @@
 #!/usr/bin/env -S just --justfile
 
+alias fmt := format
+alias lint := check
+
 hostname := `hostname`
 
 _:
@@ -10,6 +13,14 @@ install-all:
 
 install-dotfiles:
     SKIP_ANSIBLE=1 ./install.sh
+
+[group('ci')]
+check:
+    prek run --all-files --hook-stage pre-merge-commit
+
+[group('ci')]
+format:
+    prek run --all-files
 
 commit:
     #!/bin/sh

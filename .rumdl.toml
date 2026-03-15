@@ -1,0 +1,12 @@
+[global]
+flavor = "standard"
+disable = [
+  "MD001", # heading-increment
+  "MD013", # line-length
+  "MD036", # no-emphasis-as-heading
+  "MD040", # fenced-code-language
+  "MD041", # first-line-heading
+]
+
+[MD007] # ul-indent
+indent = 4
