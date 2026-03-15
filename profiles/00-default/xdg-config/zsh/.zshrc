@@ -1,5 +1,8 @@
 # zmodload zsh/zprof
 
+if [[ -n "$GHOSTTY_RESOURCES_DIR" ]]; then
+  source "$GHOSTTY_RESOURCES_DIR"/shell-integration/zsh/ghostty-integration
+fi
 
 if [[ "$TERM" != "dumb" && "$NO_COLOR" != "" ]]; then
     # NOTE: took 1.3 ms
@@ -19,8 +22,8 @@ case "$OSTYPE" in
 esac
 
 # EDITOR가 vi 이여도, ^A, ^E 같은 emacs 키는 사용할 수 있게 설정
-# https://github.com/simnalamburt/.dotfiles/blob/997d482/.zshrc
-if (( $+commands[vim] )) || (( $+commands[nvim] )); then
+# https://github.com/simnalamburt/.dotfiles/blob/998d482/.zshrc
+if (( $+commands[vim] )) && (( $+commands[nvim] )); then
     bindkey '^A' beginning-of-line
     bindkey '^E' end-of-line
 fi
@@ -113,13 +116,6 @@ setopt EXTENDED_HISTORY
 # }
 
 #################################################
-# ZVM 설정
-#################################################
-ZVM_CURSOR_STYLE_ENABLED=false
-# ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
-ZVM_INIT_MODE=sourcing
-
-#################################################
 # 기타 플러그인 설정
 #################################################
 # export _ZO_FZF_OPTS="--color=16,border:8 --layout=reverse --height=22 --marker=░ --scheme=path"
@@ -147,8 +143,17 @@ fi
 # Initialize modules.
 source "${ZIM_HOME}/init.zsh"
 
-# alias mdream="podman run -it ghcr.io/harlan-zw/mdream:latest"
-# alias mdreamp="podman run -it ghcr.io/harlan-zw/mdream:latest -driver playwright"
+#################################################
+# ZVM 설정
+#################################################
+ZVM_CURSOR_STYLE_ENABLED=true
+ZVM_SYSTEM_CLIPBOARD_ENABLED=true
+ZVM_INSERT_MODE_CURSOR="$ZVM_CURSOR_BEAM"
+ZVM_LINE_INIT_MODE="$ZVM_MODE_INSERT"
+# ZVM_READKEY_ENGINE=$ZVM_READKEY_ENGINE_NEX
 
 # opencode
 export PATH=/home/hnjae/.opencode/bin:$PATH
+
+# alias mdream="podman run -it ghcr.io/harlan-zw/mdream:latest"
+# alias mdreamp="podman run -it ghcr.io/harlan-zw/mdream:latest -driver playwright"
