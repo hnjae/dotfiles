@@ -4,7 +4,7 @@
     days: 7
   block:
     - name: Gather trash-empty location
-      command: which trash-empty
+      command: command -v trash-empty
       register: check_trash_empty
       failed_when: false
       changed_when: false

@@ -1,5 +1,5 @@
 - name: Check if google-chrome exists in PATH
-  command: which google-chrome-stable
+  command: command -v google-chrome-stable
   register: chrome_check
   failed_when: false
   changed_when: false

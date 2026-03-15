@@ -1,5 +1,5 @@
 - name: Check if brave exists in PATH
-  command: which brave
+  command: command -v brave
   register: brave_check
   failed_when: false
   changed_when: false

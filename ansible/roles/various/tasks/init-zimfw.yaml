@@ -1,5 +1,5 @@
 - name: Check if zsh exists in PATH
-  ansible.builtin.command: which zsh
+  ansible.builtin.command: command -v zsh
   register: zsh_check
   failed_when: false
   changed_when: false

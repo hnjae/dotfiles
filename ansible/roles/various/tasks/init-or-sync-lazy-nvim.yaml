@@ -4,7 +4,7 @@
     lazy_lock_file: '{{ xdg_config_home }}/nvim/lazy-lock.json'
   block:
     - name: Check if nvim exists in PATH
-      ansible.builtin.command: which nvim
+      ansible.builtin.command: command -v nvim
       register: nvim_check
       failed_when: false
       changed_when: false

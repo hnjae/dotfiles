@@ -1,5 +1,5 @@
 - name: Check if tldr exists in PATH
-  command: which tldr
+  command: command -v tldr
   register: tldr_check
   failed_when: false
   changed_when: false

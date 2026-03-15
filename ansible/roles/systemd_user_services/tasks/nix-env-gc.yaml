@@ -1,5 +1,5 @@
 - name: Check if nix-env exists in PATH
-  command: which nix-env
+  command: command -v nix-env
   register: nix_env_check
   failed_when: false
   changed_when: false
