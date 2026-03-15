@@ -1,0 +1,70 @@
+# NOTE:
+#   - following version 0.1.3 of base24 <2026-03-15>
+#   - <https://github.com/tinted-theming/base24/blob/main/styling.md>
+#
+# Base24 my-rose-pine - alacritty color config
+# Scheme by Original by [rose-pine](https://github.com/rose-pine), Ported by [hnjae](https://github.com/hnjae)
+
+# COLORFGBG = if (config.base-home.base24.variant == "light") then "0;15" else "15;0";
+# [env]
+# COLORFGBG = "${COLORFGBG}"
+
+[colors]
+draw_bold_text_with_bright_colors = false
+
+# Default colors
+[colors.primary]
+background = '0x191724'
+foreground = '0xe0def4'
+
+# Colors the cursor will use if `custom_cursor_colors` is true
+[colors.cursor]
+text = '0x191724'
+cursor = '0xe0def4'
+
+[colors.normal]
+black = '0x191724'
+red = '0xeb6f92'
+green = '0x31748f'
+yellow = '0xf6c177'
+blue = '0x9ccfd8'
+magenta = '0xc4a7e7'
+cyan = '0xebbcba'
+white = '0xe0def4'
+
+# Bright colors
+[colors.bright]
+black = '0x908caa'
+red = '0xeb6f92'
+green = '0x31748f'
+yellow = '0xf6c177'
+blue = '0x9ccfd8'
+magenta = '0xc4a7e7'
+cyan = '0xebbcba'
+white = '0xe0def4'
+
+[[colors.indexed_colors]]
+index = 16
+color = "0xf6c177"
+
+[[colors.indexed_colors]]
+index = 17
+color = "0xb4637a"
+
+[[colors.indexed_colors]]
+index = 18
+color = "0x26233a"
+
+[[colors.indexed_colors]]
+index = 19
+color = "0x6e6a86"
+
+[[colors.indexed_colors]]
+index = 20
+color = "0x908caa"
+
+[[colors.indexed_colors]]
+index = 21
+color = "0xe0def4"
+
+# vi:ft=toml

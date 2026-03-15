@@ -84,41 +84,10 @@ sync:
     git commit --no-verify -m '{{ hostname }}: {{ datetime("%Y-%m-%dT%H:%M:%S%Z") }}'
     git push
 
-build-tinted:
-    #!/usr/bin/env bash
-    # Creates tinted-theming/my-templates/tinted-*/themes/base24-*
-
-    set -euo pipefail
-
-    XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}"
-
-    templates="${XDG_CONFIG_HOME}/tinted-theming/my-templates"
-    myschemes="${XDG_CONFIG_HOME}/tinted-theming/my-schemes"
-
-    if [ ! -d "$templates" ] || [ ! -d "$myschemes" ]; then
-        echo "ERROR: $templates or $myschemes is not installed" >&2
-        exit 1
-    fi
-
-    for template in "$templates"/*; do
-        .lib/tinted-builder-rust/bin/tinted-builder-rust build -s "$myschemes" "$template"
-    done
-
-# NOTE: this recipe is broken due to tinty update
 update-tinted:
     #!/bin/sh
 
     set -eu
-
-    XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}"
-
-    templates="${XDG_CONFIG_HOME}/tinted-theming/my-templates"
-    myschemes="${XDG_CONFIG_HOME}/tinted-theming/my-schemes"
-
-    if [ ! -d "$templates" ] || [ ! -d "$myschemes" ]; then
-        echo "ERR: $templates or $myschemes is not installed" >&2
-        exit 1
-    fi
 
     theme="base24-my-kanagawa-wave"
 

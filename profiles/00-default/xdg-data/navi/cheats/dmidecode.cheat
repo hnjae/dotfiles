@@ -1,4 +1,4 @@
 % dmidecode, system-information
 
-# print motherbord model
+# print motherboard model
 sudo dmidecode -t system

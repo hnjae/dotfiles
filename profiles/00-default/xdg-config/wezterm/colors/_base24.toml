@@ -2,52 +2,51 @@
 #   - following version 0.1.2 of base24 <2026-01-05>
 #   - <https://github.com/tinted-theming/base24/blob/main/styling.md>
 #
-# Base24: my-kanagawa-wave
-# Scheme by Original by rebelot (https://github.com/rebelot/kanagawa.nvim), Ported by hnjae (https://github.com/hnjae)
+# Base24: Gruvbox Light
+# Scheme by Tinted Theming (https://github.com/tinted-theming), morhetz (https://github.com/morhetz/gruvbox)
 
 [colors]
-foreground = "#dcd7ba"
-background = "#1f1f28"
-visual_bell = "#223249"
+foreground = "#3c3836"
+background = "#fbf1c7"
+visual_bell = "#d5c4a1"
 
-selection_bg = "#223249"
-selection_fg = "#dcd7ba"
+selection_bg = "#d5c4a1"
+selection_fg = "#3c3836"
 
-cursor_bg = "#dcd7ba"
-cursor_fg = "#1f1f28"
-cursor_border = "#dcd7ba"
+cursor_bg = "#3c3836"
+cursor_fg = "#fbf1c7"
+cursor_border = "#3c3836"
 
-scrollbar_thumb = "#2a2a37"
-split = "#727169"           # or use base02 if too bright
-
+scrollbar_thumb = "#ebdbb2"
+split = "#bdae93"           # or use base02 if too bright
 
 ansi = [
-  "#1f1f28",
-  "#c34043",
-  "#76946a",
-  "#c0a36e",
-  "#7e9cd8",
-  "#957fb8",
-  "#6a9589",
-  "#e5ddb0",
+  "#fbf1c7",
+  "#cc241d",
+  "#98971a",
+  "#d79921",
+  "#458588",
+  "#b16286",
+  "#689d6a",
+  "#282828",
 ]
 
 brights = [
-  "#727169",
-  "#e46876",
-  "#98bb6c",
-  "#e6c384",
-  "#7fb4ca",
-  "#938aa9",
-  "#7aa89f",
-  "#f2ecbc",
+  "#bdae93",
+  "#9d0006",
+  "#79740e",
+  "#b57614",
+  "#076678",
+  "#8f3f71",
+  "#427b58",
+  "#1d2021",
 ]
 
 # Since: 20220319-142410-0fcdea07
 # When the IME, a dead key or a leader key are being processed and are effectively
 # holding input pending the result of input composition, change the cursor
 # to this color to give a visual cue about the compose state.
-# compose_cursor = "#FFA066"
+compose_cursor = "#d65d0e" # orange
 
 # Colors for copy_mode and quick_select
 # available since: 20220807-113146-c2fee766
@@ -55,39 +54,39 @@ brights = [
 # 1. copy_mode_active_highlight_* if additional text was selected using the mouse
 # 2. selection_* otherwise
 [colors.copy_mode_active_highlight_bg]
-Color = "#c0a36e" # search-text-background
+Color = "#d79921" # search-text-background
 [colors.copy_mode_active_highlight_fg]
-Color = "#1f1f28"
+Color = "#fbf1c7"
 [colors.copy_mode_inactive_highlight_bg]
-Color = "#223249" # selection-background
+Color = "#d5c4a1" # selection-background
 [colors.copy_mode_inactive_highlight_fg]
-Color = "#dcd7ba"
+Color = "#3c3836"
 
 [colors.quick_select_label_bg]
-Color = "#7e9cd8" # blue
+Color = "#458588" # blue
 [colors.quick_select_label_fg]
-Color = "#1f1f28"
+Color = "#fbf1c7"
 [colors.quick_select_match_bg]
-Color = "#c0a36e"
+Color = "#d79921"
 [colors.quick_select_match_fg]
-Color = "#1f1f28" # search-text-background
+Color = "#fbf1c7" # search-text-background
 
 [colors.input_selector_label_bg]
-Color = "#2a2a37"
+Color = "#ebdbb2"
 [colors.input_selector_label_fg]
-Color = "#dcd7ba"
+Color = "#3c3836"
 
 [colors.launcher_label_bg]
-Color = "#2a2a37"
+Color = "#ebdbb2"
 [colors.launcher_label_fg]
-Color = "#dcd7ba"
+Color = "#3c3836"
 
 [colors.indexed]
-16 = "#ffa066"
-17 = "#43242b"
-18 = "#2a2a37"
-19 = "#223249"
-20 = "#c8c093"
-21 = "#dcd7ba"
+16 = "#d65d0e"
+17 = "#9d0006"
+18 = "#ebdbb2"
+19 = "#d5c4a1"
+20 = "#7c6f64"
+21 = "#3c3836"
 
 # vi:ft=toml

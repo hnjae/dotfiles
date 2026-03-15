@@ -1,0 +1,10 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+      force: true
+- link:
+    ~/.config/tinted-theming:
+      path: config
+    ~/.local/share/tinted-theming/tinty/custom-schemes:
+      path: custom-schemes

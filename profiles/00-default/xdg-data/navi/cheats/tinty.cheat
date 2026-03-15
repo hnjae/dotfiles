@@ -1,0 +1,9 @@
+% tinty, base24, base16
+
+# apply theme
+tinty apply <theme>
+
+# list themes
+tinty list
+
+$ <theme>: tinty list

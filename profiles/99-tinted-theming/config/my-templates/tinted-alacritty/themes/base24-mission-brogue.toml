@@ -1,0 +1,70 @@
+# NOTE:
+#   - following version 0.1.3 of base24 <2026-03-15>
+#   - <https://github.com/tinted-theming/base24/blob/main/styling.md>
+#
+# Base24 Mission Brogue - alacritty color config
+# Scheme by Thomas Leon Highbaugh
+
+# COLORFGBG = if (config.base-home.base24.variant == "light") then "0;15" else "15;0";
+# [env]
+# COLORFGBG = "${COLORFGBG}"
+
+[colors]
+draw_bold_text_with_bright_colors = false
+
+# Default colors
+[colors.primary]
+background = '0x283139'
+foreground = '0x93a5b4'
+
+# Colors the cursor will use if `custom_cursor_colors` is true
+[colors.cursor]
+text = '0x283139'
+cursor = '0x93a5b4'
+
+[colors.normal]
+black = '0x283139'
+red = '0xefa9a9'
+green = '0x8cd4b0'
+yellow = '0xe0b88a'
+blue = '0xa2c5fd'
+magenta = '0xccb7db'
+cyan = '0x93dfec'
+white = '0x93a5b4'
+
+# Bright colors
+[colors.bright]
+black = '0x60778a'
+red = '0xf6bfbf'
+green = '0xb5e090'
+yellow = '0xfff0b2'
+blue = '0xc3d9fd'
+magenta = '0xe3c3e6'
+cyan = '0xb2f0fd'
+white = '0xe7ebee'
+
+[[colors.indexed_colors]]
+index = 16
+color = "0xf2db78"
+
+[[colors.indexed_colors]]
+index = 17
+color = "0x8e9ecb"
+
+[[colors.indexed_colors]]
+index = 18
+color = "0x3b4954"
+
+[[colors.indexed_colors]]
+index = 19
+color = "0x4d606f"
+
+[[colors.indexed_colors]]
+index = 20
+color = "0x788ea1"
+
+[[colors.indexed_colors]]
+index = 21
+color = "0xabb9c4"
+
+# vi:ft=toml

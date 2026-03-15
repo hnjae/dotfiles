@@ -1,0 +1,70 @@
+# NOTE:
+#   - following version 0.1.3 of base24 <2026-03-15>
+#   - <https://github.com/tinted-theming/base24/blob/main/styling.md>
+#
+# Base24 Pro Light - alacritty color config
+# Scheme by FredHappyface (https://github.com/fredHappyface)
+
+# COLORFGBG = if (config.base-home.base24.variant == "light") then "0;15" else "15;0";
+# [env]
+# COLORFGBG = "${COLORFGBG}"
+
+[colors]
+draw_bold_text_with_bright_colors = false
+
+# Default colors
+[colors.primary]
+background = '0xfeffff'
+foreground = '0x4f4f4f'
+
+# Colors the cursor will use if `custom_cursor_colors` is true
+[colors.cursor]
+text = '0xfeffff'
+cursor = '0x4f4f4f'
+
+[colors.normal]
+black = '0xfeffff'
+red = '0xe4492b'
+green = '0x50d048'
+yellow = '0xc5c340'
+blue = '0x3a75ff'
+magenta = '0xec65e7'
+cyan = '0x4ed1dd'
+white = '0x4f4f4f'
+
+# Bright colors
+[colors.bright]
+black = '0xcccccc'
+red = '0xff6640'
+green = '0x61ee56'
+yellow = '0xf2f055'
+blue = '0x0081ff'
+magenta = '0xff7dfe'
+cyan = '0x60f6f8'
+white = '0x000000'
+
+[[colors.indexed_colors]]
+index = 16
+color = "0xc58e40"
+
+[[colors.indexed_colors]]
+index = 17
+color = "0x722415"
+
+[[colors.indexed_colors]]
+index = 18
+color = "0xf1f1f1"
+
+[[colors.indexed_colors]]
+index = 19
+color = "0xdcdcdc"
+
+[[colors.indexed_colors]]
+index = 20
+color = "0x757575"
+
+[[colors.indexed_colors]]
+index = 21
+color = "0x323232"
+
+# vi:ft=toml

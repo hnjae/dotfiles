@@ -1,0 +1,57 @@
+# NOTE:
+#   following version 0.1.2 of base24 <2026-01-05>
+#   <https://github.com/tinted-theming/base24/blob/main/styling.md>
+#
+# Repository of original colorscheme: https://github.com/rebelot/kanagawa.nvim
+# MIT License
+#
+# Copyright (c) 2021 Tommaso Laurenzi
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+system: base24
+name: my-kanagawa-dragon
+author: Original by rebelot (https://github.com/rebelot/kanagawa.nvim), Ported by hnjae (https://github.com/hnjae)
+variant: dark
+palette:
+  base00: '#181616' # ANSI  0 - background (dragonBlack3)
+  base01: '#282727' # ANSI 18 - (darkest gray) (dragonBlack4; Color of ColorColumn, Folded)
+  base02: '#393836' # ANSI 19 - bright black (dragonBlack5; Color of selection_bg)
+  base03: '#737C73' # ANSI  8 - (gray) (dragonAsh; Color of comment)
+  base04: '#7A8382' # ANSI 20 - (light gray) (dragonGray3)
+  base05: '#C5C9C5' # ANSI 21 - foreground (dragonWhite) (OKHSL 146,5,80)
+  base06: '#D5CEA3' # ANSI  7 - White (lotusWhite0) (OKHSL 100, 41, 82)
+  base07: '#DCD7BA' # ANSI 15 - bright white (fujiWhite [diff])(OKHSL 99, 33, 86)
+  base09: '#B6927B' # ANSI 16 - dragonOrange (dragonOrange; Color of Constant)
+  base0F: '#43242B' # ANSI 17 - (dark red or brown) (winterRed color of deprecated highlighting (dark red/brown) )
+  base10: '#12120F' # darker background (dragonBlack2)
+  base11: '#0D0C0C' # darkest background (dragonBlack1)
+  # ansi
+  base08: '#C4746E' # ANSI  1 - red
+  base0B: '#8A9A7B' # ANSI  2 - green
+  base0A: '#C4B28A' # ANSI  3 - yellow (dragonYellow)
+  base0D: '#8BA4B0' # ANSI  4 - blue
+  base0E: '#A292A3' # ANSI  5 - purple
+  base0C: '#8EA4A2' # ANSI  6 - cyan
+  # ansi briGHT
+  base12: '#E46876' # ANSI  9 - bright red
+  base14: '#87A987' # ANSI 10 - bright green
+  base13: '#E6C384' # ANSI 11 - bright yellow
+  base16: '#7FB4CA' # ANSI 12 - bright blue
+  base17: '#938AA9' # ANSI 13 - bright purple
+  base15: '#7AA89F' # ANSI 14 - bright cyan

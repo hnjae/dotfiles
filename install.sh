@@ -53,6 +53,7 @@ main() {
         install_profile "40-linux-desktop"
         install_profile "40-kde"
         install_profile "80-home-desktop"
+        install_profile "99-tinted-theming"
         if [ "${SKIP_ANSIBLE:-}" = "" ]; then
             ANSIBLE_HOST_IS_HOME=1 ANSIBLE_HOST_IS_DESKTOP=1 "${script_dir}/ansible/run.sh"
         fi

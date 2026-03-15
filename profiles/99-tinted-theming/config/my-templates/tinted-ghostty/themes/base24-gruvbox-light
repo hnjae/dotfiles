@@ -1,0 +1,48 @@
+# NOTE:
+#   - following version 0.1.3 of base24 <2026-03-15>
+#   - <https://github.com/tinted-theming/base24/blob/main/styling.md>
+#
+# vim: ft=ghostty
+#
+# Gruvbox Light theme for Ghostty
+# Scheme Author: Tinted Theming (https://github.com/tinted-theming), morhetz (https://github.com/morhetz/gruvbox)
+# Scheme System: base24
+# Template Author: Tinted Terminal (https://github.com/tinted-theming/tinted-terminal), forked by hnjae (https://github.com/hnjae)
+
+# Color palette
+palette = 0=#fbf1c7
+palette = 1=#9d0006
+palette = 2=#79740e
+palette = 3=#b57614
+palette = 4=#076678
+palette = 5=#8f3f71
+palette = 6=#427b58
+palette = 7=#3c3836
+palette = 8=#bdae93
+palette = 9=#cc241d
+palette = 10=#98971a
+palette = 11=#d79921
+palette = 12=#458588
+palette = 13=#b16286
+palette = 14=#689d6a
+palette = 15=#1d2021
+palette = 16=#d65d0e
+palette = 17=#9d0006
+palette = 18=#ebdbb2
+palette = 19=#d5c4a1
+palette = 20=#7c6f64
+palette = 21=#282828
+
+# Foreground & background colors
+background = #fbf1c7
+foreground = #3c3836
+cursor-color = #3c3836
+selection-background = #d5c4a1
+selection-foreground = #3c3836
+
+# Set `macos-icon = custom-style` in your main configuration file to enable theming of the app icon.
+#
+# Set the ghost color to the lightest foreground:
+macos-icon-ghost-color = #1d2021
+# Replace the official icon's blue background with the designated bright blue color:
+macos-icon-screen-color = #458588

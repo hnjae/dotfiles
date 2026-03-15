@@ -1,18 +1,23 @@
 -- https://dotfyle.com/neovim/colorscheme/trending
 
 local colorschemes = {
-  codedark = "codedark",
   gruvbox = "gruvbox",
   gruvbox_material = "gruvbox-material",
   kanagawa = "kanagawa",
-  rose_pine = "rose-pine",
   --
   catppuccin = "catppuccin",
-  cyberdream = "cyberdream",
+
+  -- LIGHT THEME SUCKS:
+  rose_pine = "rose-pine",
   tokyonight = "tokyonight",
+
+  -- LIGHT THEME DOES NOT AUTO RECOGNIZED OR DOES NOT EXISTS:
+  codedark = "codedark",
+  cyberdream = "cyberdream",
 }
 
 local COLORSCHEME = colorschemes.gruvbox_material
+-- local COLORSCHEME = colorschemes.gruvbox
 local color_terminal = (vim.fn.has("gui_running") == 1) or (os.getenv("TERM_PROGRAM") == nil)
 
 ---@type LazySpec[]
@@ -206,7 +211,7 @@ return {
     enabled = COLORSCHEME == "cyberdream",
     version = "*",
     opts = {
-      transparent = true,
+      transparent = false,
     },
   },
   {
