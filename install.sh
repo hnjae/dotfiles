@@ -58,7 +58,7 @@ main() {
             ANSIBLE_HOST_IS_HOME=1 ANSIBLE_HOST_IS_DESKTOP=1 "${script_dir}/ansible/run.sh"
         fi
         ;;
-    *)
+    eris)
         if [ "${SKIP_ANSIBLE:-}" = "" ]; then
             "${script_dir}/ansible/run.sh"
         fi

@@ -1,0 +1,4 @@
+% ostre, fedora-atomic, ublue
+
+# undeply other boots
+ostree admin undeploy <index>

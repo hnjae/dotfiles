@@ -4,7 +4,7 @@
 
 # default: xterm-ghostty
 # ssh server 가 ghostty.terminfo 를 지원하지 않는 경우에 대응
-# term = "xterm-256color"
+term = "xterm-256color"
 
 ################################################################################
 # Terminal Features
