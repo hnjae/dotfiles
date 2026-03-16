@@ -1,30 +1,34 @@
 projects:
+  anki-english-words:
+    url: git@github.com:hnjae/anki-english-words.git
+  anki-history:
+    url: git@github.com:hnjae/anki-history.git
   archive:
-    url: git@github.com:hnjae/archive
+    url: git@github.com:hnjae/archive.git
   dotfiles:
-    url: git@github.com:hnjae/dotfiles
+    url: git@github.com:hnjae/dotfiles.git
   dotfiles-private:
     url: hnjae@eris:/srv/git/dotfiles-private.git
-  hnjae.github.io:
-    url: git@github.com:hnjae/hnjae.github.io
+  infra-desktop:
+    url: git@github.com:hnjae/infra-desktop.git
   ledger:
-    url: git@github.com:hnjae/my-ledger
+    url: git@github.com:hnjae/ledger.git
   my-ledger:
-    url: git@github.com:hnjae/my-ledger
+    url: git@github.com:hnjae/my-ledger.git
   my-python-utils:
-    url: git@github.com:hnjae/my-python-utils
+    url: git@github.com:hnjae/my-python-utils.git
   nix-config:
-    url: git@github.com:hnjae/nix-config
+    url: git@github.com:hnjae/nix-config.git
   notes:
     url: git@github.com:hnjae/notes.git
   obsidian-archived:
     url: git@github.com:hnjae/obsidian-archived.git
   os-images:
-    url: git@github.com:hnjae/os-images
+    url: git@github.com:hnjae/os-images.git
   published-articles:
-    url: git@github.com:hnjae/published-articles
+    url: git@github.com:hnjae/published-articles.git
   py-utils:
-    url: git@github.com:hnjae/py-utils
+    url: git@github.com:hnjae/py-utils.git
   restic-scrub:
     url: hnjae@eris:/srv/git/restic-scrub
 specs:

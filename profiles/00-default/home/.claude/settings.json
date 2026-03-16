@@ -1,8 +1,11 @@
 {
   "permissions": {
     "allow": [
+      "WebSearch",
       "WebFetch(domain:github.com)",
       "WebFetch(domain:docs.rs)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:pypi.org)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
       "Bash(git diff:*)",
@@ -17,12 +20,20 @@
       "Bash(mkdir:*)",
       "Bash(tree:*)",
       "Bash(wc:*)",
+      "Bash(podman build:*)",
+      "Bash(nix build:*)",
+      "Bash(nix-build:*)",
+      "Bash(uv build:*)",
       "Bash(uv run ruff:*)",
       "Bash(uv run ty:*)",
       "Bash(ruff:*)",
       "Bash(ty:*)",
-      "Bash(podman build:*)",
-      "Bash(nix build:*)"
+      "Bash(cargo build:*)",
+      "Bash(cargo fmt:*)",
+      "Bash(cargo clippy:*)",
+      "Bash(go build:*)",
+      "Bash(gofmt:*)",
+      "Bash(goimports:*)"
     ],
     "deny": [
       "Read(.env*)",
@@ -30,7 +41,8 @@
       "Read(**/*.key)",
       "Write(.env*)",
       "Bash(npm:*)",
-      "Bash(pip:*)"
+      "Bash(pip:*)",
+      "Bash(pipx:*)"
     ]
   },
   "syntaxHighlightingDisabled": false,
