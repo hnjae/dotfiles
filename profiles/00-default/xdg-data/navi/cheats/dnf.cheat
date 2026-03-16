@@ -1,0 +1,7 @@
+% dnf
+
+# user installed packages
+dnf repoquery --userinstalled
+
+# find dependencies
+dnf repoquery --whatrequires <package-name>
