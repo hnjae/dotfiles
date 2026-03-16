@@ -41,10 +41,10 @@ install_profile() {
 main() {
     check_cond
 
+    cd "$script_dir"
+
     dotbot_cmd="$(get_dotbot)"
     _hostname="$(uname --nodename)"
-
-    cd "$script_dir"
 
     install_profile "00-default"
 
