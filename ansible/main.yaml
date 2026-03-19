@@ -5,8 +5,6 @@
   roles:
     - gather_facts
     - various
-    - role: flatpak
-      when: is_flatpak
     - role: default_app
       when: is_desktop
     - role: systemd_user_services
