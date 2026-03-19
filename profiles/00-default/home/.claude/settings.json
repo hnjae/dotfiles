@@ -20,6 +20,7 @@
       "Bash(mkdir:*)",
       "Bash(tree:*)",
       "Bash(wc:*)",
+      "Bash(curl:*)",
       "Bash(podman build:*)",
       "Bash(nix build:*)",
       "Bash(nix-build:*)",
