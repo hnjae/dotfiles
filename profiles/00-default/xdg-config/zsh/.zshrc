@@ -152,13 +152,5 @@ ZVM_INSERT_MODE_CURSOR="$ZVM_CURSOR_BEAM"
 ZVM_LINE_INIT_MODE="$ZVM_MODE_INSERT"
 # ZVM_READKEY_ENGINE=$ZVM_READKEY_ENGINE_NEX
 
-# opencode
-export PATH=/home/hnjae/.opencode/bin:$PATH
-
-if [[ -d "/home/linuxbrew/.linuxbrew/bin" ]]; then
-    export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin"
-fi
-
-
 # alias mdream="podman run -it ghcr.io/harlan-zw/mdream:latest"
 # alias mdreamp="podman run -it ghcr.io/harlan-zw/mdream:latest -driver playwright"

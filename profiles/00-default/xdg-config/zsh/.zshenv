@@ -5,6 +5,15 @@
 
 setopt no_global_rcs # do not source global zshrc/zprofile files
 
+# TODO: bazzite 의 경우 /etc/profiles.d source 하기 <2026-03-21>
+if [[ -d "/home/linuxbrew/.linuxbrew/bin" ]]; then
+    export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin"
+fi
+
+if [[ -d "$HOME/.opencode/bin" ]]; then
+    export PATH=$HOME/.opencode/bin:$PATH
+fi
+
 typeset _hm_vars="$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
 [[ -f "$_hm_vars" ]] && source "$_hm_vars"
 unset _hm_vars
