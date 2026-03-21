@@ -155,5 +155,10 @@ ZVM_LINE_INIT_MODE="$ZVM_MODE_INSERT"
 # opencode
 export PATH=/home/hnjae/.opencode/bin:$PATH
 
+if [[ -d "/home/linuxbrew/.linuxbrew/bin" ]]; then
+    export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin"
+fi
+
+
 # alias mdream="podman run -it ghcr.io/harlan-zw/mdream:latest"
 # alias mdreamp="podman run -it ghcr.io/harlan-zw/mdream:latest -driver playwright"
