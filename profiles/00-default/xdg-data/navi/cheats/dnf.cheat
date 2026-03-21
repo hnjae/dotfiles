@@ -5,3 +5,6 @@ dnf repoquery --userinstalled
 
 # find dependencies
 dnf repoquery --whatrequires <package-name>
+
+# list repositories
+dnf repolist --all

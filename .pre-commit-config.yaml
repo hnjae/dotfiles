@@ -24,11 +24,11 @@ repos:
         entry: yamlfmt
         language: system
         types: [yaml]
-      - id: taplo-format
-        name: format toml
-        entry: taplo format
-        language: system
-        types: [toml]
+      # - id: taplo-format
+      #   name: format toml
+      #   entry: taplo format
+      #   language: system
+      #   types: [toml]
       - id: biome-format-json
         name: format json
         entry: biome format --write

@@ -1,3 +1,4 @@
 Host *
   Compression no
+  IdentityAgent ~/.1password/agent.sock
   UserKnownHostsFile ~/.ssh/known_hosts ~/.ssh/known_hosts.permanent

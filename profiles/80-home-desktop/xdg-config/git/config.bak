@@ -1,16 +1,16 @@
 [user]
 	email = 42675338+hnjae@users.noreply.github.com
 	name = KIM Hyunjae
-	signingkey = /home/hnjae/.ssh/id_ed25519.pub
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMJzpwZFnwPxTF4TU7IX5AI+Nwpu9VvjI4A9Jlh3P0pu
 
 [init]
 	defaultBranch = main
 [gpg]
 	format = ssh
 
-; [gpg "ssh"]
-; 	allowedSignersFile = ~/.config/git/allowed_signers
-;	program = "/run/current-system/sw/bin/op-ssh-sign"
+[gpg "ssh"]
+	allowedSignersFile = ~/.config/git/allowed_signers
+	program = "/run/current-system/sw/bin/op-ssh-sign"
 
 [commit]
 	gpgsign = true

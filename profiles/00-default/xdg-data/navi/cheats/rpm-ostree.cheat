@@ -1,0 +1,10 @@
+% rpm-ostree, bootc
+
+# view layerd packages
+rpm-ostree status
+
+# To find out what image your system currently uses, run the following command:
+sudo bootc status
+
+# upgrade image
+sudo bootc upgrade
