@@ -1,2 +1,5 @@
+---
 formatter:
+  include_document_start: true
+  indent: 2
   scan_folded_as_literal: true

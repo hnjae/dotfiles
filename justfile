@@ -15,12 +15,12 @@ install-dotfiles:
     SKIP_ANSIBLE=1 ./install.sh
 
 [group('ci')]
-check:
-    prek run --all-files --hook-stage pre-merge-commit
+format:
+    prek run --hook-stage pre-commit --all-files
 
 [group('ci')]
-format:
-    prek run --all-files
+check:
+    prek run --hook-stage pre-merge-commit --all-files
 
 commit:
     #!/bin/sh

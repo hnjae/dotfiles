@@ -1,5 +1,4 @@
-# See: https://pre-commit.com/
-default_stages: [pre-commit]
+---
 exclude: |
   (?x)^(
     .*/lazy-lock\.json|
@@ -18,6 +17,40 @@ repos:
       - id: check-yaml
       - id: check-toml
       - id: check-xml
+  - repo: local
+    hooks:
+      - id: yamlfmt
+        name: format yaml
+        entry: yamlfmt
+        language: system
+        types: [yaml]
+      - id: taplo-format
+        name: format toml
+        entry: taplo format
+        language: system
+        types: [toml]
+      - id: biome-format-json
+        name: format json
+        entry: biome format --write
+        language: system
+        files: \.(jsonc?)$
+  - repo: local
+    hooks:
+      - id: rumdl-format
+        name: format markdown
+        entry: rumdl check --fix
+        language: system
+        types: [markdown]
+      - id: just-fmt
+        name: format just
+        entry: just --fmt --unstable --justfile
+        language: system
+        files: (^|/)(\.)?justfile$
+      - id: fish-indent
+        name: format fish
+        entry: fish_indent --write
+        language: system
+        types: [fish]
   - repo: local
     hooks:
       - id: shellharden
@@ -43,34 +76,9 @@ repos:
         files: *shell_files
   - repo: local
     hooks:
-      - id: just-fmt
-        name: format just
-        entry: bash -c 'just --fmt --unstable --justfile "$1"' --
-        language: system
-        files: (^|/)(\.)?justfile$
-      - id: fish-indent
-        name: format fish
-        entry: fish_indent --write
-        language: system
-        types: [fish]
-      - id: yamlfmt
-        name: format yaml
-        entry: yamlfmt
-        language: system
-        types: [yaml]
-      - id: biome
-        name: format json(c)
-        entry: biome format --write
-        language: system
-        files: \.(json|jsonc)$
-      - id: rumdl-fmt
-        name: format markdown
-        entry: rumdl fmt
-        language: system
-        types: [markdown]
       - id: rumdl-check
         name: check markdown
-        entry: rumdl check --check
+        entry: rumdl check
         language: system
         types: [markdown]
-        stages: [pre-merge-commit]
+        stages: [pre-merge-commit, pre-push]
