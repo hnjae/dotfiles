@@ -1,4 +1,3 @@
----
 projects:
   _templates:
     url: hnjae@eris:/srv/git/_templates.git
@@ -14,6 +13,8 @@ projects:
     url: hnjae@eris:/srv/git/dotfiles-private.git
   infra-desktop:
     url: git@github.com:hnjae/infra-desktop.git
+  infra-server:
+    url: git@github.com:hnjae/infra-server.git
   ledger:
     url: git@github.com:hnjae/ledger.git
   my-ledger:

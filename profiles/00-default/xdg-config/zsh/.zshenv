@@ -5,8 +5,12 @@
 
 setopt no_global_rcs # do not source global zshrc/zprofile files
 
+# Do not source /etc/zshrc
+NOSYSZSHRC=1
+
 if [[ "${__ZSHENV_SOURCED}" != "" ]]; then return; fi
 __ZSHENV_SOURCED=1
+
 
 export EDITOR="nvim"
 export VISUAL="nvim"

@@ -10,7 +10,7 @@ if [[ "$GHOSTTY_RESOURCES_DIR" != "" && -f "${GHOSTTY_RESOURCES_DIR}/shell-integ
   source "${GHOSTTY_RESOURCES_DIR}/shell-integration/zsh/ghostty-integration"
 fi
 
-if [[ "$TERM" != "dumb" && "$NO_COLOR" != "" ]]; then
+if [[ "$TERM" != "dumb" && "$NO_COLOR" == "" ]]; then
     # NOTE: took 1.3 ms
     PF_INFO="ascii title os host kernel uptime memory shell" pfetch || true
 fi

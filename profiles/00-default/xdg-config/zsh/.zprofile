@@ -9,7 +9,8 @@
 if [[ "${__ZPROFILE_SOURCED}" != "" ]]; then return; fi
 __ZPROFILE_SOURCED=1
 
-NOSYSZSHRC=1
+# Keep /etc/profile for environment setup, but suppress Bazzite's login MOTD.
+USERMOTDSOURCED=Y
 
 # Profiles
 [[ -f "/etc/profile" ]] && emulate sh -c 'source /etc/profile'
