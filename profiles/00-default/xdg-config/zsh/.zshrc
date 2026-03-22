@@ -140,6 +140,17 @@ if [[ ! -f "${ZDOTDIR}/.zimrc" ]]; then
     return
 fi
 
+#################################################
+# ZVM 설정
+#################################################
+# zsh-vi-mode reads these during plugin load, so they must be set before
+# sourcing the generated zimfw init file.
+ZVM_CURSOR_STYLE_ENABLED=true
+ZVM_SYSTEM_CLIPBOARD_ENABLED=true
+ZVM_INSERT_MODE_CURSOR="$ZVM_CURSOR_BEAM"
+ZVM_LINE_INIT_MODE="$ZVM_MODE_INSERT"
+# ZVM_READKEY_ENGINE=$ZVM_READKEY_ENGINE_NEX
+
 # Install missing modules, and update ${ZIM_HOME}/init.zsh if missing or outdated.
 if [[ ! "${ZIM_HOME}/init.zsh" -nt "${ZDOTDIR}/.zimrc" ]]; then
     echo "INFO: Installing ZIM modules..." >&2
@@ -150,13 +161,13 @@ fi
 source "${ZIM_HOME}/init.zsh"
 
 #################################################
-# ZVM 설정
+# Completion keymaps
 #################################################
-ZVM_CURSOR_STYLE_ENABLED=true
-ZVM_SYSTEM_CLIPBOARD_ENABLED=true
-ZVM_INSERT_MODE_CURSOR="$ZVM_CURSOR_BEAM"
-ZVM_LINE_INIT_MODE="$ZVM_MODE_INSERT"
-# ZVM_READKEY_ENGINE=$ZVM_READKEY_ENGINE_NEX
+# zsh-vi-mode leaves Tab unbound in vicmd by default. Mirror the insert-mode
+# completion widget so Tab still completes when the line is in normal mode.
+if bindkey -M viins '^I' &>/dev/null; then
+    bindkey -M vicmd '^I' fzf-tab-complete
+fi
 
 # alias mdream="podman run -it ghcr.io/harlan-zw/mdream:latest"
 # alias mdreamp="podman run -it ghcr.io/harlan-zw/mdream:latest -driver playwright"
