@@ -65,7 +65,7 @@ DefaultPageSize=5
 # Override XKB Option
 OverrideXkbOption=True
 # Custom XKB Option
-CustomXkbOption=caps:backspace,korean:ralt_hangul,ctrl:swap_rwin_rctl\n
+CustomXkbOption=caps:backspace,korean:ralt_hangul,ctrl:swap_rwin_rctl
 # Force Enabled Addons
 EnabledAddons=
 # Force Disabled Addons

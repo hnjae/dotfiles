@@ -1,6 +1,7 @@
 [Layout]
 DisplayNames=
-VariantList=colemak_dh
 LayoutList=us
+Options=caps:backspace,korean:ralt_hangul,ctrl:swap_rwin_rctl
+ResetOldOptions=true
 Use=true
-
+VariantList=colemak_dh
