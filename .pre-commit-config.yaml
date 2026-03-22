@@ -34,13 +34,12 @@ repos:
         entry: biome format --write
         language: system
         files: \.(jsonc?)$
+  - repo: https://github.com/rvben/rumdl-pre-commit
+    rev: v0.1.57
+    hooks:
+      - id: rumdl-fmt
   - repo: local
     hooks:
-      - id: rumdl-format
-        name: format markdown
-        entry: rumdl check --fix
-        language: system
-        types: [markdown]
       - id: just-fmt
         name: format just
         entry: just --fmt --unstable --justfile
@@ -74,11 +73,8 @@ repos:
         entry: shfmt --indent 4 --simplify --write
         language: system
         files: *shell_files
-  - repo: local
+  - repo: https://github.com/rvben/rumdl-pre-commit
+    rev: v0.1.57
     hooks:
-      - id: rumdl-check
-        name: check markdown
-        entry: rumdl check
-        language: system
-        types: [markdown]
+      - id: rumdl
         stages: [pre-merge-commit, pre-push]

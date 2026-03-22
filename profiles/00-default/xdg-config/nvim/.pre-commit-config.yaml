@@ -1,3 +1,4 @@
+---
 # See: https://pre-commit.com/
 repos:
   - repo: local
