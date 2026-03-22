@@ -1,0 +1,5 @@
+---
+- shell:
+    - command: ./deploy.sh
+      description: Deploy secrets from 1Password
+      stderr: true
