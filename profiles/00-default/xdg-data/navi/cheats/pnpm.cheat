@@ -44,3 +44,9 @@ pnpm add -w -D prettier
 
 # run specific packages' package in workspace
 pnpm -F <package-name> exec <name>
+
+# install package globally ($HOME scope)
+pnpm add -g <pkg>
+
+# update packages globally ($HOME scope)
+pnpm update -g
