@@ -1,5 +1,11 @@
 # zmodload zsh/zprof
 
+# source .zprofile if not sourced
+[[ "${__ZPROFILE_SOURCED}" == "" && -f "${ZDOTDIR}/.zprofile" ]] && source "${ZDOTDIR}/.zprofile"
+
+if [[ "${__ZSHRC_SOURCED}" != "" ]]; then return; fi
+__ZSHRC_SOURCED=1
+
 if [[ -n "$GHOSTTY_RESOURCES_DIR" ]]; then
   source "${GHOSTTY_RESOURCES_DIR}/shell-integration/zsh/ghostty-integration"
 fi

@@ -3,30 +3,22 @@
 #   관찰 결과, 위 두 파일을 모두 읽는 경우는 없는 듯.
 #   `login`, `interactive`, `script` 모든 zsh process 가 참조함.
 
+if [[ "${__ZSHENV_SOURCED}" != "" ]]; then return; fi
+__ZSHENV_SOURCED=1
+
 setopt no_global_rcs # do not source global zshrc/zprofile files
 
-# 시스템 환경변수 로드
-[[ -f "/etc/profile" ]] && emulate sh -c 'source /etc/profile'
-
-# hm-session-vars
-[[ -f "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]] && source "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
-
-# ~/.profile
-[[ -f "$HOME/.profile" ]] && source "$HOME/.profile"
-
-[[ -d "$HOME/.opencode/bin" ]] && export "PATH=$HOME/.opencode/bin:$PATH"
+export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
 
 export EDITOR="nvim"
 export VISUAL="nvim"
 
 # XDG Base Directory Specification
+export XDG_BIN_DIR="${XDG_BIN_DIR:-${HOME}/.local/bin}"
+export XDG_CACHE_HOME="${XDG_CACHE_HOME:-${HOME}/.cache}"
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}"
 export XDG_DATA_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}"
 export XDG_STATE_HOME="${XDG_STATE_HOME:-${HOME}/.local/state}"
-export XDG_CACHE_HOME="${XDG_CACHE_HOME:-${HOME}/.cache}"
 
-export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
-
-# autoload -Uz +X compinit
-# functions[compinit]=$'print -u2 \'compinit being called at \'${funcfiletrace[1]}
-# '${functions[compinit]}
+[[ -d "$XDG_BIN_DIR" ]] && export PATH="${XDG_BIN_DIR}:${PATH}"
+[[ -d "$HOME/.opencode/bin" ]] && export "PATH=$HOME/.opencode/bin:$PATH"
