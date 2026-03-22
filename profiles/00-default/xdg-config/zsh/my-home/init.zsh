@@ -1,5 +1,6 @@
-local _hostname="$(hostname)"
-if [[ ${_hostname} == "hemera" || ${_hostname} == "osiris" ]]; then
+typeset _hostname="$(hostname)"
+
+if [[ ${_hostname} == "hemera" || ${_hostname} == "nyx" ]]; then
     # temp
     # export DISABLE_LAYER_AMD_SWITCHABLE_GRAPHICS_1="1"
     # export VK_DRIVER_FILES="/run/current-system/sw/share/vulkan/icd.d/amd_icd64.json"
