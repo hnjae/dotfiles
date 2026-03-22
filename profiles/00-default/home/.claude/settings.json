@@ -50,6 +50,6 @@
       "Bash(pipx:*)"
     ]
   },
-  "syntaxHighlightingDisabled": false,
-  "model": "opus"
+  "model": "opus[1m]",
+  "syntaxHighlightingDisabled": false
 }

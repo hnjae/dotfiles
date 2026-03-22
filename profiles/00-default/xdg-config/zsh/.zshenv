@@ -3,12 +3,10 @@
 #   관찰 결과, 위 두 파일을 모두 읽는 경우는 없는 듯.
 #   `login`, `interactive`, `script` 모든 zsh process 가 참조함.
 
-if [[ "${__ZSHENV_SOURCED}" != "" ]]; then return; fi
-__ZSHENV_SOURCED=1
-
 setopt no_global_rcs # do not source global zshrc/zprofile files
 
-export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
+if [[ "${__ZSHENV_SOURCED}" != "" ]]; then return; fi
+__ZSHENV_SOURCED=1
 
 export EDITOR="nvim"
 export VISUAL="nvim"
@@ -19,6 +17,4 @@ export XDG_CACHE_HOME="${XDG_CACHE_HOME:-${HOME}/.cache}"
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}"
 export XDG_DATA_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}"
 export XDG_STATE_HOME="${XDG_STATE_HOME:-${HOME}/.local/state}"
-
-[[ -d "$XDG_BIN_DIR" ]] && export PATH="${XDG_BIN_DIR}:${PATH}"
-[[ -d "$HOME/.opencode/bin" ]] && export "PATH=$HOME/.opencode/bin:$PATH"
+export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"

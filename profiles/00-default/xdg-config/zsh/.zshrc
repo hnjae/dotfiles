@@ -6,7 +6,7 @@
 if [[ "${__ZSHRC_SOURCED}" != "" ]]; then return; fi
 __ZSHRC_SOURCED=1
 
-if [[ -n "$GHOSTTY_RESOURCES_DIR" ]]; then
+if [[ "$GHOSTTY_RESOURCES_DIR" != "" && -f "${GHOSTTY_RESOURCES_DIR}/shell-integration/zsh/ghostty-integration" ]]; then
   source "${GHOSTTY_RESOURCES_DIR}/shell-integration/zsh/ghostty-integration"
 fi
 
@@ -136,7 +136,7 @@ zstyle ':zim:zmodule' use 'degit'
 typeset -g ZIM_HOME="${XDG_DATA_HOME}/zimfw"
 
 if [[ ! -f "${ZDOTDIR}/.zimrc" ]]; then
-    echo "ERROR: .zimrc not found."
+    echo "ERR: .zimrc not found." > &2
     return
 fi
 
