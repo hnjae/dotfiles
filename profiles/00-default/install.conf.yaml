@@ -1,3 +1,4 @@
+---
 - defaults:
     link:
       create: true
@@ -24,3 +25,9 @@
       path: xdg-bin/*
     ~/.zshenv:
       path: ~/.config/zsh/.zshenv
+    ~/.ssh:
+      glob: true
+      path: ssh/*
+    ~/Projects:
+      glob: true
+      path: Projects/*
