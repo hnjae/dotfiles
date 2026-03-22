@@ -1,5 +1,7 @@
 ---
 projects:
+  _templates:
+    url: hnjae@eris:/srv/git/_templates.git
   anki-english-words:
     url: git@github.com:hnjae/anki-english-words.git
   anki-history:
