@@ -32,27 +32,21 @@ PREVIEW_WIDTH=10
 PREVIEW_HEIGHT=10
 
 while [ "$#" -gt 0 ]; do
-  case "$1" in
-  "--path")
+    case "$1" in
+    "--path")
+        shift
+        FILE_PATH="$1"
+        ;;
+    "--preview-width")
+        shift
+        PREVIEW_WIDTH="$1"
+        ;;
+    "--preview-height")
+        shift
+        PREVIEW_HEIGHT="$1"
+        ;;
+    esac
     shift
-    FILE_PATH="$1"
-    ;;
-  "--preview-width")
-    shift
-    PREVIEW_WIDTH="$1"
-    ;;
-  "--preview-height")
-    shift
-    PREVIEW_HEIGHT="$1"
-    ;;
-  esac
-  shift
 done
 
-main() {
-  pistol "$FILE_PATH" && exit 0
-
-  exit 1
-}
-
-main
+exec pistol -- "$FILE_PATH"
