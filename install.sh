@@ -62,7 +62,8 @@ main() {
         if [ "$(hostname)" != "hemera" ]; then
             git update-index --skip-worktree "profiles/50-kde/xdg-config/kglobalshortcutsrc" 2>/dev/null || true
         fi
-        git update-index --skip-worktree "profiles/50-kde/xdg-config/fcitx5/profile" 2>/dev/null || true
+        git update-index --skip-worktree 'profiles/50-kde/xdg-config/fcitx5/profile' 2>/dev/null || true
+        git update-index --skip-worktree 'profiles/50-kde/xdg-config/fcitx5/conf/hangul.conf' 2>/dev/null || true
 
         # install others
         install_profile "51-linux-desktop"
