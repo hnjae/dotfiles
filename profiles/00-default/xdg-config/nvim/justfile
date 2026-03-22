@@ -1,0 +1,14 @@
+#!/usr/bin/env -S just --justfile
+
+set fallback := true
+
+_:
+    @just --list
+
+[group('ci')]
+format:
+    prek run --hook-stage pre-commit --all-files
+
+[group('ci')]
+check:
+    prek run --hook-stage pre-merge-commit --all-files

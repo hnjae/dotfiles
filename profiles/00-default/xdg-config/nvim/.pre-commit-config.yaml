@@ -1,8 +1,8 @@
 ---
-# See: https://pre-commit.com/
 repos:
   - repo: local
     hooks:
+      # NOTE: git repo root 이 아니라서, local 로 실행해야 한다. <2026-03-22>
       - id: stylua
         name: format lua
         entry: stylua
@@ -13,3 +13,4 @@ repos:
         entry: selene --allow-warnings
         language: system
         types: [lua]
+        stages: [pre-merge-commit, pre-push]
