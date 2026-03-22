@@ -50,16 +50,15 @@ main() {
 
     case "$_hostname" in
     osiris | hemera)
-        install_profile "40-linux-desktop"
-        install_profile "40-kde"
+        install_profile "50-kde"
+        install_profile "51-linux-desktop"
         install_profile "99-tinted-theming"
         if [ "${SKIP_ANSIBLE:-}" = "" ]; then
             ANSIBLE_HOST_IS_HOME=1 ANSIBLE_HOST_IS_DESKTOP=1 "${script_dir}/ansible/run.sh"
         fi
         ;;
     nyx)
-        install_profile "40-linux-desktop"
-        install_profile "40-kde"
+        install_profile "50-kde"
         ;;
     eris)
         if [ "${SKIP_ANSIBLE:-}" = "" ]; then

@@ -1,3 +1,4 @@
+---
 - defaults:
     link:
       create: true
@@ -7,9 +8,6 @@
     ~/.config:
       glob: true
       path: xdg-config/*
-    ~/.local/share:
-      glob: true
-      path: xdg-data/*
     ~/.local/share/applications:
       glob: true
       path: xdg-data.applications/*
