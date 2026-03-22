@@ -136,7 +136,7 @@ zstyle ':zim:zmodule' use 'degit'
 typeset -g ZIM_HOME="${XDG_DATA_HOME}/zimfw"
 
 if [[ ! -f "${ZDOTDIR}/.zimrc" ]]; then
-    echo "ERR: .zimrc not found." > &2
+    echo "ERR: .zimrc not found." >&2
     return
 fi
 
