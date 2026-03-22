@@ -53,21 +53,19 @@ main() {
     fi
 
     case "$_hostname" in
-    osiris | hemera)
+    osiris | nyx)
+        # install kde
         install_profile "50-kde"
+
+        git update-index --skip-worktree "profiles/50-kde/xdg-config/fcitx5/profile" 2>/dev/null || true
+        git update-index --skip-worktree "profiles/50-kde/xdg-config/plasmaparc" 2>/dev/null || true
+        if [ "$(hostname)" != "hemera" ]; then
+            git update-index --skip-worktree "profiles/50-kde/xdg-config/kglobalshortcutsrc" 2>/dev/null || true
+        fi
+
+        # install others
         install_profile "51-linux-desktop"
         install_profile "99-tinted-theming"
-        if [ "${SKIP_ANSIBLE:-}" = "" ]; then
-            ANSIBLE_HOST_IS_HOME=1 ANSIBLE_HOST_IS_DESKTOP=1 "${script_dir}/ansible/run.sh"
-        fi
-        ;;
-    nyx)
-        install_profile "50-kde"
-        ;;
-    eris)
-        if [ "${SKIP_ANSIBLE:-}" = "" ]; then
-            "${script_dir}/ansible/run.sh"
-        fi
         ;;
     esac
 }
