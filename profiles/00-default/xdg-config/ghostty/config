@@ -41,9 +41,8 @@ window-theme = ghostty
 # theme = _base24
 theme = dark:base24-gruvbox-dark,light:base24-my-gruvbox-light
 
-env BAT_THEME="base16-256"
-env BAT_THEME_LIGHT="gruvbox-light"
-env BAT_THEME_DARK="gruvbox-dark"
+env=BAT_THEME_LIGHT="gruvbox-light"
+env=BAT_THEME_DARK="gruvbox-dark"
 
 # background-opacity = 1.0
 # background-blur = true
