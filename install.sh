@@ -53,12 +53,14 @@ main() {
     fi
 
     case "$_hostname" in
-    osiris | nyx)
+    hemera | nyx)
         # install kde
         install_profile "50-kde"
 
         git update-index --skip-worktree "profiles/50-kde/xdg-config/kactivitymanagerdrc" 2>/dev/null || true
         git update-index --skip-worktree "profiles/50-kde/xdg-config/plasmaparc" 2>/dev/null || true
+        git update-index --skip-worktree "profiles/50-kde/xdg-config/bluedevilglobalrc" 2>/dev/null || true
+        git update-index --skip-worktree "profiles/50-kde/xdg-config/dolphinrc" 2>/dev/null || true
         if [ "$(hostname)" != "hemera" ]; then
             git update-index --skip-worktree "profiles/50-kde/xdg-config/kglobalshortcutsrc" 2>/dev/null || true
         fi
