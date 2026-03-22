@@ -1,14 +1,9 @@
+---
 - name: Ensure systemd user directory exists
   include_tasks: ensure-directory.yaml
-- name: Deploy flatpak-update service
-  include_tasks: flatpak-update.yaml
-- name: Deploy ghostty service
-  include_tasks: ghostty.yaml
 - name: Deploy nix-env-gc service
   include_tasks: nix-env-gc.yaml
 - name: Deploy nix-profile-gc service
   include_tasks: nix-profile-gc.yaml
 - name: Deploy trash-empty service
   include_tasks: tash-empty.yaml
-- name: Deploy tldr-update service
-  include_tasks: tldr-update.yaml

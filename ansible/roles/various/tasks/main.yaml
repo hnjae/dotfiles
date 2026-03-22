@@ -1,3 +1,4 @@
+---
 - name: Deploy secrets
   include_tasks: deploy-secrets.yaml
 - name: Deploy systemd user tmpfiles
@@ -8,7 +9,5 @@
   include_tasks: home-set-profile-picture.yaml
 - name: Initialize or sync lazy.nvim
   include_tasks: init-or-sync-lazy-nvim.yaml
-- name: Install Zed editor
-  include_tasks: install-zed-editor.yaml
 - name: Initialize zimfw
   include_tasks: init-zimfw.yaml

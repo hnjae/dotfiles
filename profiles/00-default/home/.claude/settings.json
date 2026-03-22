@@ -35,7 +35,8 @@
       "Bash(cargo clippy:*)",
       "Bash(go build:*)",
       "Bash(gofmt:*)",
-      "Bash(goimports:*)"
+      "Bash(goimports:*)",
+      "Bash(ansible-lint:*)"
     ],
     "deny": [
       "Read(.env*)",

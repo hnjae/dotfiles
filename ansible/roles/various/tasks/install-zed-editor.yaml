@@ -1,5 +1,0 @@
-- name: Install Zed editor
-  when: is_desktop
-  ansible.builtin.shell: curl -f https://zed.dev/install.sh | sh
-  args:
-    creates: "{{ xdg_bin_home }}/zed"
