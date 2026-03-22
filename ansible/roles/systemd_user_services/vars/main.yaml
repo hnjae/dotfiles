@@ -1,1 +1,0 @@
-systemd_path: '{{ xdg_config_home }}/systemd/user'

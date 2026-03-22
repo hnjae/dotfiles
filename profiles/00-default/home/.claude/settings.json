@@ -36,7 +36,9 @@
       "Bash(go build:*)",
       "Bash(gofmt:*)",
       "Bash(goimports:*)",
-      "Bash(ansible-lint:*)"
+      "Bash(ansible-lint:*)",
+      "Bash(prek --help:*)",
+      "Bash(rumdl --help:*)"
     ],
     "deny": [
       "Read(.env*)",

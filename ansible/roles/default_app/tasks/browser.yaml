@@ -1,6 +1,0 @@
-- name: Set default browser
-  vars:
-    app_id: brave-browser
-  community.general.xdg_mime:
-    handler: '{{ app_id }}.desktop'
-    mime_types: [x-scheme-handler/http, x-scheme-handler/https, text/html]

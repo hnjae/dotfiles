@@ -1,9 +1,0 @@
----
-- name: Ensure systemd user directory exists
-  include_tasks: ensure-directory.yaml
-- name: Deploy nix-env-gc service
-  include_tasks: nix-env-gc.yaml
-- name: Deploy nix-profile-gc service
-  include_tasks: nix-profile-gc.yaml
-- name: Deploy trash-empty service
-  include_tasks: tash-empty.yaml
