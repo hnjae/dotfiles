@@ -12,7 +12,7 @@ return {
     }
 
     for _, linter in ipairs(linters) do
-      if vim.fn.executable("linter") then
+      if vim.fn.executable(linter) then
         table.insert(opts.linters_by_ft.nix, linter)
       end
     end
