@@ -8,3 +8,9 @@ dnf repoquery --whatrequires <package-name>
 
 # list repositories
 dnf repolist --all
+
+# query installed reason
+dnf repoquery --installed --qf '%{name} %{reason}\n' bash
+
+# mark installed reason to dependency
+sudo dnf mark depenceny vim
