@@ -7,11 +7,11 @@ ShadowStrength=128
 MenuOpacity=80
 
 [Windeco Exception 0]
-BorderSize=1
+BorderSize=3
 Enabled=true
 ExceptionPattern=brave-browser
 ExceptionType=0
-HideTitleBar=false
+HideTitleBar=true
 Mask=16
 
 [Windeco Exception 1]
