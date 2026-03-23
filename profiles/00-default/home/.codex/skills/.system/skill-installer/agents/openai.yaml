@@ -1,3 +1,4 @@
+---
 interface:
   display_name: "Skill Installer"
   short_description: "Install curated skills from openai/skills or other repos"

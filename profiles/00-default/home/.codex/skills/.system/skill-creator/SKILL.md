@@ -47,7 +47,7 @@ Think of Codex as exploring a path: a narrow bridge with cliffs needs specific g
 
 ### Protect Validation Integrity
 
-You may use subagents during iteration to validate whether a skill works on realistic tasks or whether a suspected problem is real. This is most useful when you want an independent pass on the skill's behavior, outputs, or failure modes after a revision.  Only do this when it is possible to start new subagents.
+You may use subagents during iteration to validate whether a skill works on realistic tasks or whether a suspected problem is real. This is most useful when you want an independent pass on the skill's behavior, outputs, or failure modes after a revision. Only do this when it is possible to start new subagents.
 
 When using subagents for validation, treat that as an evaluation surface. The goal is to learn whether the skill generalizes, not whether another agent can reconstruct the answer from leaked context.
 
@@ -349,9 +349,9 @@ Write the YAML frontmatter with `name` and `description`:
 
 - `name`: The skill name
 - `description`: This is the primary triggering mechanism for your skill, and helps Codex understand when to use the skill.
-  - Include both what the Skill does and specific triggers/contexts for when to use it.
-  - Include all "when to use" information here - Not in the body. The body is only loaded after triggering, so "When to Use This Skill" sections in the body are not helpful to Codex.
-  - Example description for a `docx` skill: "Comprehensive document creation, editing, and analysis with support for tracked changes, comments, formatting preservation, and text extraction. Use when Codex needs to work with professional documents (.docx files) for: (1) Creating new documents, (2) Modifying or editing content, (3) Working with tracked changes, (4) Adding comments, or any other document tasks"
+    - Include both what the Skill does and specific triggers/contexts for when to use it.
+    - Include all "when to use" information here - Not in the body. The body is only loaded after triggering, so "When to Use This Skill" sections in the body are not helpful to Codex.
+    - Example description for a `docx` skill: "Comprehensive document creation, editing, and analysis with support for tracked changes, comments, formatting preservation, and text extraction. Use when Codex needs to work with professional documents (.docx files) for: (1) Creating new documents, (2) Modifying or editing content, (3) Working with tracked changes, (4) Adding comments, or any other document tasks"
 
 Do not include any other fields in YAML frontmatter.
 
@@ -386,30 +386,32 @@ User testing often this happens right after using the skill, with fresh context 
 ## Forward-testing
 
 To forward-test, launch subagents as a way to stress test the skill with minimal context.
-Subagents should *not* know that they are being asked to test the skill.  They should be treated as
-an agent asked to perform a task by the user.  Prompts to subagents should look like:
+Subagents should *not* know that they are being asked to test the skill. They should be treated as
+an agent asked to perform a task by the user. Prompts to subagents should look like:
   `Use $skill-x at /path/to/skill-x to solve problem y`
 Not:
   `Review the skill at /path/to/skill-x; pretend a user asks you to...`
 
 Decision rule for forward-testing:
-  - Err on the side of forward-testing
-  - Ask for approval if you think there's a risk that forward-testing would:
-    * take a long time,
-    * require additional approvals from the user, or
-    * modify live production systems
+
+- Err on the side of forward-testing
+- Ask for approval if you think there's a risk that forward-testing would:
+    - take a long time,
+    - require additional approvals from the user, or
+    - modify live production systems
 
   In these cases, show the user your proposed prompt and request (1) a yes/no decision, and
   (2) any suggested modifictions.
 
 Considerations when forward-testing:
-   - use fresh threads for independent passes
-   - pass the skill, and a request in a similar way the user would.
-   - pass raw artifacts, not your conclusions
-   - avoid showing expected answers or intended fixes
-   - rebuild context from source artifacts after each iteration
-   - review the subagent's output and reasoning and emitted artifacts
-   - avoid leaving artifacts the agent can find on disk between iterations;
+
+- use fresh threads for independent passes
+- pass the skill, and a request in a similar way the user would.
+- pass raw artifacts, not your conclusions
+- avoid showing expected answers or intended fixes
+- rebuild context from source artifacts after each iteration
+- review the subagent's output and reasoning and emitted artifacts
+- avoid leaving artifacts the agent can find on disk between iterations;
      clean up subagents' artifacts to avoid additional contamination.
 
 If forward-testing only succeeds when subagents see leaked context, tighten the skill or the
