@@ -24,28 +24,28 @@ cursor = '0x3c3836'
 
 [colors.normal]
 black = '0xfbf1c7'
-red = '0xc14a4a'
-green = '0x6c782e'
-yellow = '0xb47109'
-blue = '0x45707a'
-magenta = '0x945e80'
-cyan = '0x4c7a5d'
-white = '0x3c3836'
-
-# Bright colors
-[colors.bright]
-black = '0xa89984'
 red = '0x9d0006'
 green = '0x79740e'
 yellow = '0xb57614'
 blue = '0x076678'
 magenta = '0x8f3f71'
 cyan = '0x427b58'
+white = '0x3c3836'
+
+# Bright colors
+[colors.bright]
+black = '0xa89984'
+red = '0x99000f'
+green = '0x686400'
+yellow = '0x8f5400'
+blue = '0x005b6c'
+magenta = '0x8f2a69'
+cyan = '0x256946'
 white = '0x1d2021'
 
 [[colors.indexed_colors]]
 index = 16
-color = "0xc35e0a"
+color = "0xaf3a03"
 
 [[colors.indexed_colors]]
 index = 17

@@ -38,5 +38,4 @@ tinty apply base16-my-custom-theme # 적용
 
 light variant 에서는 다음 규칙을 따른다.
 
-- ANSI Bright 이 더 어두운 색을 사용
-    - base08–base0e (except base09) 와 base12–base17 swap
+- ANSI Bright 은 그냥 더 강조된 색. 채도를 높이거나 해서 강조한 느낌의 색이라 생각하자.

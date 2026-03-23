@@ -1,0 +1,48 @@
+---
+# - following version 0.1.3 of base24 <2026-03-15>
+# - <https://github.com/tinted-theming/base24/blob/main/styling.md>
+# NOTE: gruvbox 에서는 #928374 OKHSL (67, 16, 56)를 comment 색상으로 사용함. (light)
+# 변경점
+# - base10 을 gruvbox 의 light_0 hard 로 변경
+# - base11 의 색상을 임의로 선정
+# - base03 을 #A89984 (light4) 로 변경
+# - base08-base0e 를 gruvbox 의 red-aqua 로 변경
+# - base12-base17 는 위 색상에서 임의로 변경하여 선정
+system: "base24"
+name: "My Gruvbox Light"
+author: "Tinted Theming (https://github.com/tinted-theming), morhetz (https://github.com/morhetz/gruvbox)"
+variant: "light"
+palette:
+  base00: "#fbf1c7"
+  base01: "#ebdbb2"
+  base02: "#d5c4a1" # OKHSL (85, 35, 80)
+  base03: "#A89984" # OKHSL (76, 20, 64)
+  base04: "#7c6f64" # OKHSL (63, 13, 48)
+  base05: "#3c3836"
+  base06: "#282828"
+  base07: "#1d2021"
+  base08: "#9D0006"
+  base09: "#AF3A03"
+  base0A: "#B57614"
+  base0B: "#79740E"
+  base0C: "#427B58"
+  base0D: "#076678"
+  base0E: "#8F3F71"
+  base0F: "#9D0006"
+  base10: "#f9f5d7" # OKHSL (101,  72, 96) / OKLrCH ( 95, 4, 96)
+  base11: "#fffbdb" # OKHSL (101, 100, 98) / OKLrCH (101, 4, 98)
+  base12: "#99000f"
+  base13: "#8f5400"
+  base14: "#686400"
+  base15: "#256946"
+  base16: "#005b6c"
+  base17: "#8f2a69"
+# chatgpt 작성
+# | role   |    normal | bg 대비 |    bright | bg 대비 | 조정 방향                  |
+# | ------ | --------: | ----: | --------: | ----: | ---------------------- |
+# | red    | `#9d0006` |  7.60 | `#99000f` |  7.84 | 아주 소폭 더 깊고 선명하게        |
+# | orange | `#b57614` |  3.33 | `#8f5400` |  5.39 | **명도 낮춤이 핵심**          |
+# | yellow | `#79740e` |  4.29 | `#686400` |  5.43 | 노랑 대신 더 짙은 olive/ochre |
+# | green  | `#427b58` |  4.40 | `#256946` |  5.81 | 약간 더 깊고 채도도 조금 강화      |
+# | cyan   | `#076678` |  5.82 | `#005b6c` |  6.82 | 밝아지지 않게 더 진하게          |
+# | purple | `#8f3f71` |  5.94 | `#8f2a69` |  6.85 | hue 유지, 더 응집된 자주색      |
