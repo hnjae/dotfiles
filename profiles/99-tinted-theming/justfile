@@ -8,22 +8,15 @@ _:
 build:
     for t in config/my-templates/tinted-*; do tinty build "$t"; done
 
-build-legacy-maybe:
-    #!/usr/bin/env bash
-    # Creates tinted-theming/my-templates/tinted-*/themes/base24-*
+sync:
+    tinty install
+    tinty sync # sync with git repo
 
-    set -euo pipefail
+update-remote-git-repo:
+    tinty update
 
-    XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}"
+list-my-schemes:
+    tinty list --custom-schemes
 
-    templates="${XDG_CONFIG_HOME}/tinted-theming/my-templates"
-    myschemes="${XDG_CONFIG_HOME}/tinted-theming/my-schemes"
-
-    if [ ! -d "$templates" ] || [ ! -d "$myschemes" ]; then
-        echo "ERROR: $templates or $myschemes is not installed" >&2
-        exit 1
-    fi
-
-    for template in "$templates"/*; do
-        .lib/tinted-builder-rust/bin/tinted-builder-rust build -s "$myschemes" "$template"
-    done
+generate-themes-from-custom-schemes:
+    tinty init

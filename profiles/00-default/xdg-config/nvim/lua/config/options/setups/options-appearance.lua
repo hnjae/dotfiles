@@ -5,8 +5,7 @@ end
 
 vim.api.nvim_set_option_value("background", "light", {})
 
--- VIM Mode 에 따라 커서 Shape 바뀌는 옵션 해제
--- vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:block,r-cr-o:block"
+-- vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:block,r-cr-o:block" VIM Mode 에 따라 커서 Shape 바뀌는 옵션 해제
 -- vim.opt.guicursor = "n-v-c-sm:block/Cursor,i-ci-ve:block/Cursor,r-cr-o:block/Cursor"
 vim.opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:Cursor/lCursor,sm:block"
 
@@ -17,9 +16,3 @@ vim.opt.listchars = "tab:  ,nbsp:+"
 if vim.fn.has("termguicolors") == 1 and not require("utils").is_console then
   vim.opt.termguicolors = true
 end
-
--- vim.opt.numberwidth = 1 -- default 4 (line number 표기 width; padding 포함)
--- vim.opt.sidescrolloff = 1 -- lazyvim 이 8 로 설정; 이거 적용되는거 맞음?
-
--- vim.opt.signcolumn = "yes"
--- vim.opt.statuscolumn = ""

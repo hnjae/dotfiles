@@ -39,7 +39,7 @@ window-theme = ghostty
 ################################################################################
 # run `ghostty + list-themes` to get a list of available themes
 # theme = _base24
-theme = dark:base24-gruvbox-dark,light:base24-my-gruvbox-light
+theme = dark:base24-my-gruvbox-dark,light:base24-my-gruvbox-light
 
 env=BAT_THEME=base16-256
 env=BAT_THEME_LIGHT=gruvbox-light

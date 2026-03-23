@@ -1,4 +1,0 @@
----
-default:
-  filename: themes/{{ scheme-system }}-{{ scheme-slug }}.colors
-  supported-systems: [base24]

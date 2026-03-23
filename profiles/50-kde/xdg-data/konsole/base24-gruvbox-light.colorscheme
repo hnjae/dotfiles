@@ -2,7 +2,7 @@
 Color=251,241,199
 
 [BackgroundFaint]
-Color=249,245,215
+Color=249,246,215
 
 [BackgroundIntense]
 Color=251,241,199
@@ -14,58 +14,58 @@ Color=251,241,199
 Color=251,241,199
 
 [Color0Intense]
-Color=168,153,132
+Color=189,174,147
 
 [Color1]
-Color=193,74,74
+Color=204,36,29
 
 [Color1Faint]
-Color=193,74,74
+Color=204,36,29
 
 [Color1Intense]
 Color=157,0,6
 
 [Color2]
-Color=108,120,46
+Color=152,151,26
 
 [Color2Faint]
-Color=108,120,46
+Color=152,151,26
 
 [Color2Intense]
 Color=121,116,14
 
 [Color3]
-Color=180,113,9
+Color=215,153,33
 
 [Color3Faint]
-Color=180,113,9
+Color=215,153,33
 
 [Color3Intense]
 Color=181,118,20
 
 [Color4]
-Color=69,112,122
+Color=69,133,136
 
 [Color4Faint]
-Color=69,112,122
+Color=69,133,136
 
 [Color4Intense]
 Color=7,102,120
 
 [Color5]
-Color=148,94,128
+Color=177,98,134
 
 [Color5Faint]
-Color=148,94,128
+Color=177,98,134
 
 [Color5Intense]
 Color=143,63,113
 
 [Color6]
-Color=76,122,93
+Color=104,157,106
 
 [Color6Faint]
-Color=76,122,93
+Color=104,157,106
 
 [Color6Intense]
 Color=66,123,88
@@ -89,6 +89,6 @@ Color=60,56,54
 Color=29,32,33
 
 [General]
-Description=My Gruvbox Light
+Description=Gruvbox Light
 Opacity=1
 Wallpaper=

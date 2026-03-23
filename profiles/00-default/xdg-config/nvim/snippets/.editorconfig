@@ -1,4 +1,0 @@
-# match friendly-snippet's
-[*.{json,jsonc}]
-indent_style = space
-indent_size = 4

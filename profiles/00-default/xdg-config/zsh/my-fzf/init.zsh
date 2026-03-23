@@ -1,4 +1,4 @@
-export FZF_DEFAULT_OPTS="--color=16,border:8 --layout=reverse --smart-case --height=22 --marker=░"
+export FZF_DEFAULT_OPTS="--color=base16,border:8 --layout=reverse --smart-case --height=22 --marker=░"
 
 () {
     local -r target=${1}

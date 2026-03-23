@@ -16,7 +16,7 @@ supported-systems = ["base24"]
 # themes-dir = "themes"
 # hook = "cp -f %f ~/.config/wezterm/colors/_base24.toml"
 # supported-systems = ["base24"]
-#
+
 [[items]]
 path = "~/.config/tinted-theming/my-templates/tinted-ghostty"
 name = "my-ghostty"
@@ -31,12 +31,12 @@ supported-systems = ["base24"]
 # hook = "command cp -f %f ~/.local/share/color-schemes/_base24.colors"
 # supported-systems = ["base24"]
 
-# [[items]]
-# path = "~/.config/tinted-theming/my-templates/tinted-konsole"
-# name = "my-konsole"
-# themes-dir = "themes"
-# hook = "command cp -f %f ~/.local/share/konsole/_base24.colorscheme"
-# supported-systems = ["base24"]
+[[items]]
+path = "~/.config/tinted-theming/my-templates/tinted-konsole"
+name = "my-konsole"
+themes-dir = "themes"
+hook = "command cp -f %f ~/.local/share/konsole/_base24.colorscheme"
+supported-systems = ["base24"]
 
 [[items]]
 path = "https://github.com/tinted-theming/tinted-delta"
