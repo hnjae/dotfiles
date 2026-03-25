@@ -1,0 +1,13 @@
+% appman, AppImage
+
+# Update appman itself
+appman sync
+
+# query package information
+appman about <package>
+
+# download install script
+appman download <package>
+
+# download package not in repository
+appman extra <user>/<project> <APPNAME>

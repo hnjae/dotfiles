@@ -8,6 +8,3 @@
     ~/.config:
       glob: true
       path: xdg-config/*
-    ~/.local/share/applications:
-      glob: true
-      path: xdg-data.applications/*
