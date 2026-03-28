@@ -1,26 +1,29 @@
 # Secrets and machine-local config
-auth.json
-config.toml
+/auth.json
+/config.toml
 
 # Conversation and runtime history
-history.jsonl
-log/
-sessions/
-shell_snapshots/
-tmp/
+/.tmp/
+/cache/
+/history.jsonl
+/log/
+/sessions/
+/shell_snapshots/
+/skills/.system/
+/tmp/
 
 # Caches and databases
-models_cache.json
-logs_*.sqlite
-logs_*.sqlite-shm
-logs_*.sqlite-wal
-state_*.sqlite
-state_*.sqlite-shm
-state_*.sqlite-wal
+/models_cache.json
+/logs_*.sqlite
+/logs_*.sqlite-shm
+/logs_*.sqlite-wal
+/state_*.sqlite
+/state_*.sqlite-shm
+/state_*.sqlite-wal
 
 # Generated or ephemeral metadata
-.personality_migration
-version.json
+/.personality_migration
+/version.json
 
 # Keep rules and skills, but ignore generated marker files if they appear
 skills/.system/.codex-system-skills.marker
