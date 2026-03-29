@@ -44,8 +44,6 @@ zmodule wfxr/forgit --source forgit.plugin.zsh
 # 기타
 zmodule "$ZDOTDIR/my-utilities"
 
-# TODO: c-r 맵핑 해제. fzf 랑 겹침 <2025-06-29>
-ZVM_INIT_MODE="sourcing"
 zmodule jeffreytse/zsh-vi-mode
 zmodule "$ZDOTDIR/my-fzf"
 

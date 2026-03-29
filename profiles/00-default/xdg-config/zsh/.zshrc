@@ -124,10 +124,18 @@ setopt EXTENDED_HISTORY
 #################################################
 # 기타 플러그인 설정
 #################################################
-# export _ZO_FZF_OPTS="--color=16,border:8 --layout=reverse --height=22 --marker=░ --scheme=path"
 
 ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion)
 zstyle ':fzf-tab:*' use-fzf-default-opts yes
+
+#################################################
+# ZVM 설정 (Before sourcing zimfw init file)
+#################################################
+ZVM_INIT_MODE="sourcing" # fzf 가 zvm 설정을 override 하는데 필요.
+ZVM_CURSOR_STYLE_ENABLED=true
+ZVM_SYSTEM_CLIPBOARD_ENABLED=true
+ZVM_INSERT_MODE_CURSOR="$ZVM_CURSOR_BEAM"
+ZVM_LINE_INIT_MODE="$ZVM_MODE_INSERT"
 
 ################################################################################
 # Bootstrap zimfw (NOTE: zimfw 를 git-submodule 로 사용 중.)
@@ -141,15 +149,8 @@ if [[ ! -f "${ZDOTDIR}/.zimrc" ]]; then
 fi
 
 #################################################
-# ZVM 설정
+# Init zimfw
 #################################################
-# zsh-vi-mode reads these during plugin load, so they must be set before
-# sourcing the generated zimfw init file.
-ZVM_CURSOR_STYLE_ENABLED=true
-ZVM_SYSTEM_CLIPBOARD_ENABLED=true
-ZVM_INSERT_MODE_CURSOR="$ZVM_CURSOR_BEAM"
-ZVM_LINE_INIT_MODE="$ZVM_MODE_INSERT"
-# ZVM_READKEY_ENGINE=$ZVM_READKEY_ENGINE_NEX
 
 # Install missing modules, and update ${ZIM_HOME}/init.zsh if missing or outdated.
 if [[ ! "${ZIM_HOME}/init.zsh" -nt "${ZDOTDIR}/.zimrc" ]]; then
