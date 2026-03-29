@@ -24,31 +24,42 @@ _fzf_compgen_dir() {
 elif fd_cmd=${(k)commands[fd]-${(k)commands[fdfind]}}; [[ -n ${fd_cmd} ]]; then
 
     local fd_excludes=(
-        ".cache"
-        ".direnv"
+        # filesystem Snapshots
+        ".snapshots"
+        ".zfs"
+
+        # Git
         ".git"
         ".git-crypt"
 
+        # Build results or dependencies
+        ".cache"
+        ".direnv"
         ".husky/_"
         ".venv"
         "dist"
         "node_modules"
 
+        # Editor
         ".idea"
         ".vscode"
         ".vscode-server"
         ".zed"
 
+        # OS/DE generated files
         ".DS_Store"
         ".Thumbs.db"
         ".directory"
 
+        # Language-specific cache
         ".__pycache__"
         ".mypy_cache"
         ".ruff_cache"
         '\*.pyc'
-        '\*.swp'
         '\*.zwc'
+
+        # Editor temporary files
+        '\*.swp'
         '\*~'
     )
 

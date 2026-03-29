@@ -1,4 +1,3 @@
----
 projects:
   _templates:
     url: hnjae@eris:/srv/git/_templates.git
@@ -6,16 +5,14 @@ projects:
     url: git@github.com:hnjae/anki-english-words.git
   anki-history:
     url: git@github.com:hnjae/anki-history.git
+  ansible:
+    url: git@github.com:hnjae/infra-desktop.git
   archive:
     url: git@github.com:hnjae/archive.git
   dotfiles:
     url: git@github.com:hnjae/dotfiles.git
   dotfiles-private:
     url: hnjae@eris:/srv/git/dotfiles-private.git
-  infra-desktop:
-    url: git@github.com:hnjae/infra-desktop.git
-  infra-server:
-    url: git@github.com:hnjae/infra-server.git
   ledger:
     url: git@github.com:hnjae/ledger.git
   my-ledger:
@@ -28,8 +25,6 @@ projects:
     url: git@github.com:hnjae/notes.git
   obsidian-archived:
     url: git@github.com:hnjae/obsidian-archived.git
-  os-images:
-    url: git@github.com:hnjae/os-images.git
   published-articles:
     url: git@github.com:hnjae/published-articles.git
   py-utils:
