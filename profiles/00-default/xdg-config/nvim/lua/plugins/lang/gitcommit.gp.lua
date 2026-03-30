@@ -35,7 +35,7 @@ return {
         gitdiff
       )
 
-      local agent = gp.get_command_agent("light-think")
+      local agent = gp.get_command_agent("light")
       agent.system_prompt = [[Generate a conventional commit message from the provided diff.
 
 **Requirements:**
