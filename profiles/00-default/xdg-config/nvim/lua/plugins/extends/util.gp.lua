@@ -173,13 +173,17 @@ Chats are saved automatically.
         { name = "CodePerplexityLlama3.1-8B", disable = true },
         { name = "ChatCopilot", disable = true },
         { name = "CodeCopilot", disable = true },
+        -- 2026-03-30 기준
+        -- https://artificialanalysis.ai/leaderboards
+        -- reasoning off: gemini-3-flash (USD 1.13)
+        -- reasoning on: moonshotai/kimi-k2.5 (USD 1.2) or z-ai/glm-5 (USD 1.55)
         {
-          provider = "googleai",
+          provider = "openrouter",
           name = "chat",
           chat = true,
           command = false,
           model = {
-            model = "google/gemini-3-flash",
+            model = "z-ai/glm-5",
             think = true,
           },
           system_prompt = chat_prompt,
@@ -190,7 +194,7 @@ Chats are saved automatically.
           chat = false,
           command = true,
           model = {
-            model = "deepseek/deepseek-v3.2",
+            model = "moonshotai/kimi-k2.5",
             think = true,
           },
           system_prompt = code_prompt,
@@ -201,7 +205,7 @@ Chats are saved automatically.
           chat = false,
           command = true,
           model = {
-            model = "deepseek/deepseek-v3.2",
+            model = "google/gemini-3-flash-preview",
             think = false,
           },
           system_prompt = code_prompt,
@@ -212,7 +216,7 @@ Chats are saved automatically.
           chat = false,
           command = true,
           model = {
-            model = "anthropic/claude-sonnet-4.5",
+            model = "google/gemini-3-flash-preview",
             think = false,
           },
           system_prompt = "",

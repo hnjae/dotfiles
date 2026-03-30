@@ -48,10 +48,6 @@ main() {
 
     install_profile "00-default"
 
-    if command -v op >/dev/null 2>&1 && op account get >/dev/null 2>&1; then
-        install_profile "10-secrets"
-    fi
-
     case "$_hostname" in
     hemera | nyx)
         # install kde
