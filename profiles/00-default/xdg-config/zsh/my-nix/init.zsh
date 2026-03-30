@@ -4,7 +4,7 @@ fi
 
 # export NIXPKGS_ALLOW_UNFREE=1
 #
-if (($ + commands[any - nix - shell])); then
+if (( $+commands[any-nix-shell] )); then
     local initfile="${0:A:h}/_any-nix-shell.zsh"
     # if [[
     #   ! -e "$initfile" ||
@@ -19,8 +19,6 @@ if (($ + commands[any - nix - shell])); then
 
     source "$initfile"
 fi
-
-export NIXPKGS_ALLOW_UNFREE=1
 
 # alias nx=nix
 
