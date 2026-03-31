@@ -19,6 +19,11 @@ check:
 update-submodules:
     .lib/update-submodules.sh
 
+sync-submodules:
+    git submodule foreach --recursive 'git reset --hard && git clean -fd'
+    git submodule sync --quiet --recursive  # URL Update
+    git submodule update --init --recursive # 실제 코드 가져오기
+
 commit:
     #!/bin/sh
 
