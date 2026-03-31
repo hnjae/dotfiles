@@ -11,3 +11,15 @@ appman download <package>
 
 # download package not in repository
 appman extra <user>/<project> <APPNAME>
+
+# Update all
+appman update
+
+# List installed and available packages
+appman list
+
+# List installed and available appimages
+appman list --appimages
+
+# List installed packages
+appman files
