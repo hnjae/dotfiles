@@ -11,10 +11,6 @@ NOSYSZSHRC=1
 if [[ "${__ZSHENV_SOURCED}" != "" ]]; then return; fi
 __ZSHENV_SOURCED=1
 
-
-export EDITOR="nvim"
-export VISUAL="nvim"
-
 # XDG Base Directory Specification
 export XDG_BIN_DIR="${XDG_BIN_DIR:-${HOME}/.local/bin}"
 export XDG_CACHE_HOME="${XDG_CACHE_HOME:-${HOME}/.cache}"

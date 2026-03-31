@@ -35,7 +35,7 @@ repos:
         language: system
         files: \.(jsonc?)$
   - repo: https://github.com/rvben/rumdl-pre-commit
-    rev: v0.1.57
+    rev: v0.1.62
     hooks:
       - id: rumdl-fmt
   - repo: local
@@ -74,7 +74,7 @@ repos:
         language: system
         files: *shell_files
   - repo: https://github.com/rvben/rumdl-pre-commit
-    rev: v0.1.57
+    rev: v0.1.62
     hooks:
       - id: rumdl
         stages: [pre-merge-commit, pre-push]
