@@ -10,3 +10,10 @@
 [submodule "profiles/desktop/xdg-config-home/mpv/script-repos/thumbfast"]
 	path = profiles/desktop/xdg-config-home/mpv/script-repos/thumbfast
 	url = git@github.com:po5/thumbfast.git
+[submodule "profiles/desktop/xdg-config-home/mpv/script-repos/osc.lua"]
+	path = profiles/desktop/xdg-config-home/mpv/script-repos/osc.lua
+	url = git@github.com:po5/thumbfast.git
+	branch = vanilla-osc
+[submodule "profiles/desktop/xdg-config-home/mpv/script-repos/content-red-tester-s-scripts"]
+	path = profiles/desktop/xdg-config-home/mpv/script-repos/content-red-tester-s-scripts
+	url = git@github.com:CogentRedTester/mpv-scripts
