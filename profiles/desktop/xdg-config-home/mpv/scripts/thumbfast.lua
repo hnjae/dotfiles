@@ -1,0 +1,1 @@
+../script-repos/thumbfast/thumbfast.lua

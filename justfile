@@ -1,7 +1,6 @@
 #!/usr/bin/env -S just --justfile
 
 alias fmt := format
-alias lint := check
 
 hostname := `hostname`
 
@@ -11,10 +10,6 @@ _:
 [group('ci')]
 format:
     prek run --hook-stage pre-commit --all-files
-
-[group('ci')]
-check:
-    prek run --hook-stage pre-merge-commit --all-files
 
 update-submodules:
     lib/update-submodules.sh

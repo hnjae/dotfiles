@@ -8,3 +8,5 @@
     ~/.config:
       glob: true
       path: xdg-config-home/*
+    ~/.var/app/io.mpv.Mpv/config/mpv:
+      path: ~/.config/mpv

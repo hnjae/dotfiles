@@ -185,7 +185,7 @@ Chats are saved automatically.
           model = {
             -- model = "z-ai/glm-5",
             -- model = "google/gemini-3-flash-preview",
-            model = "z-ai/glm-4.7-flash";
+            model = "z-ai/glm-4.7-flash",
             think = true,
           },
           system_prompt = chat_prompt,
@@ -198,7 +198,7 @@ Chats are saved automatically.
           model = {
             -- model = "moonshotai/kimi-k2.5",
             -- model = "google/gemini-3-flash-preview",
-            model = "z-ai/glm-4.7-flash";
+            model = "z-ai/glm-4.7-flash",
             think = true,
           },
           system_prompt = code_prompt,
@@ -210,7 +210,7 @@ Chats are saved automatically.
           command = true,
           model = {
             -- model = "google/gemini-3-flash-preview",
-            model = "z-ai/glm-4.7-flash";
+            model = "z-ai/glm-4.7-flash",
             think = false,
           },
           system_prompt = code_prompt,
@@ -222,7 +222,7 @@ Chats are saved automatically.
           command = true,
           model = {
             -- model = "google/gemini-3-flash-preview",
-            model = "z-ai/glm-4.7-flash";
+            model = "z-ai/glm-4.7-flash",
             think = false,
           },
           system_prompt = "",
