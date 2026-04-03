@@ -424,6 +424,13 @@ F161F44635633C7AA91251100BD9987E-c410-related-videos-visibility=none,none,Toggle
 F566EEC8FA588B3A32AE956CDE2E4A76-toggle-side-panel=none,none,Toggle Claude side panel
 _k_friendly_name=org.chromium.Chromium
 
+[org.jeffvli.feishin]
+1FA639F529832920193704779B983C4A-MediaPrevTrack=none,none,Electron shortcut MediaPrevTrack
+5C4EA607CE3A77F79EBE1E57CAD44F6D-MediaStop=none,none,Electron shortcut MediaStop
+6CCE550F2DFD1E7979AD5D6CB9BB27DF-MediaPlayPause=none,none,Electron shortcut MediaPlayPause
+F847C95E4139AD2E04C30371E29A5AAF-MediaNextTrack=none,none,Electron shortcut MediaNextTrack
+_k_friendly_name=Feishin
+
 [org_kde_powerdevil]
 Decrease Keyboard Brightness=Keyboard Brightness Down,Keyboard Brightness Down,Decrease Keyboard Brightness
 Decrease Screen Brightness=Monitor Brightness Down,Monitor Brightness Down,Decrease Screen Brightness
