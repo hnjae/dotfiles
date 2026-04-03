@@ -7,4 +7,4 @@
 - link:
     ~/.config:
       glob: true
-      path: xdg-config/*
+      path: xdg-config-home/*

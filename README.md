@@ -11,6 +11,10 @@ lastmod: 2026-03-22T20:44:34+0900
 - `git-lfs`
 - `python3`
 
+## Naming Convention
+
+- `@` 은 정책 이름. 예를 들어 `@seed` 가 붙을 경우, symlink 를 생성하지 않고, 단지 초기파일만을 넣는다.
+
 ## Install
 
 ```sh

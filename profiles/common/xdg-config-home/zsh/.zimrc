@@ -25,7 +25,6 @@ zmodule "$ZDOTDIR/my-pueue"
 zmodule "$ZDOTDIR/my-rsync"
 zmodule "$ZDOTDIR/my-systemd"
 zmodule "$ZDOTDIR/my-tmux"
-zmodule "$ZDOTDIR/my-wezterm"
 zmodule "$ZDOTDIR/my-zimfw"
 
 # 자체 함수 선언이 있거나 복잡한 모듈

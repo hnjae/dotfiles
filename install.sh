@@ -13,7 +13,7 @@ check_cond() {
 }
 
 get_dotbot() {
-    _dotbot_dir=".lib/dotbot"
+    _dotbot_dir="lib/dotbot"
     _dotbot_bin="bin/dotbot"
     _dotbot_bin_abs="${script_dir}/${_dotbot_dir}/${_dotbot_bin}"
 
@@ -46,26 +46,26 @@ main() {
     dotbot_cmd="$(get_dotbot)"
     _hostname="$(uname --nodename)"
 
-    install_profile "00-default"
+    install_profile "common"
 
     case "$_hostname" in
     hemera | nyx)
-        # install kde
-        install_profile "50-kde"
-
-        git update-index --skip-worktree "profiles/50-kde/xdg-config/kactivitymanagerdrc" 2>/dev/null || true
-        git update-index --skip-worktree "profiles/50-kde/xdg-config/plasmaparc" 2>/dev/null || true
-        git update-index --skip-worktree "profiles/50-kde/xdg-config/bluedevilglobalrc" 2>/dev/null || true
-        git update-index --skip-worktree "profiles/50-kde/xdg-config/dolphinrc" 2>/dev/null || true
-        if [ "$(hostname)" != "hemera" ]; then
-            git update-index --skip-worktree "profiles/50-kde/xdg-config/kglobalshortcutsrc" 2>/dev/null || true
-        fi
-        git update-index --skip-worktree 'profiles/50-kde/xdg-config/fcitx5/profile' 2>/dev/null || true
-        git update-index --skip-worktree 'profiles/50-kde/xdg-config/fcitx5/conf/hangul.conf' 2>/dev/null || true
-
+        install_profile "desktop"
         # install others
-        install_profile "51-linux-desktop"
-        install_profile "99-tinted-theming"
+        install_profile "desktop-linux"
+        install_profile "tinted-theming"
+        install_profile "desktop-kde"
+
+        git update-index --skip-worktree "profiles/desktop-kde/xdg-config-home/kactivitymanagerdrc" 2>/dev/null || true
+        git update-index --skip-worktree "profiles/desktop-kde/xdg-config-home/plasmaparc" 2>/dev/null || true
+        git update-index --skip-worktree "profiles/desktop-kde/xdg-config-home/bluedevilglobalrc" 2>/dev/null || true
+        git update-index --skip-worktree "profiles/desktop-kde/xdg-config-home/dolphinrc" 2>/dev/null || true
+        if [ "$(hostname)" != "hemera" ]; then
+            git update-index --skip-worktree "profiles/desktop-kde/xdg-config-home/kglobalshortcutsrc" 2>/dev/null || true
+        fi
+        git update-index --skip-worktree 'profiles/desktop-kde/xdg-config-home/fcitx5/profile' 2>/dev/null || true
+        git update-index --skip-worktree 'profiles/desktop-kde/xdg-config-home/fcitx5/conf/hangul.conf' 2>/dev/null || true
+
         ;;
     esac
 }

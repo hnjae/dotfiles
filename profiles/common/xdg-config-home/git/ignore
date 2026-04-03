@@ -31,6 +31,5 @@ __pycache__
 
 # Agents
 **/.claude/settings.local.json
-.codex
 
 # vi:ft=gitignore:

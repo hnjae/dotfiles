@@ -7,10 +7,10 @@
 - link:
     ~/.config:
       glob: true
-      path: xdg-config/*
+      path: xdg-config-home/*
     ~/.local/share:
       glob: true
-      path: xdg-data/*
+      path: xdg-data-home/*
     ~/.local/share/applications:
       glob: true
-      path: xdg-data.applications/*
+      path: xdg-data-home.applications/*

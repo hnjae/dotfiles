@@ -17,7 +17,7 @@ check:
     prek run --hook-stage pre-merge-commit --all-files
 
 update-submodules:
-    .lib/update-submodules.sh
+    lib/update-submodules.sh
 
 sync-submodules:
     git submodule foreach --recursive 'git reset --hard && git clean -fd'
@@ -58,11 +58,11 @@ commit:
 
 [group('nvim')]
 nvim-plugin-restore:
-    .lib/nvim-plugin-restore.sh
+    lib/nvim-plugin-restore.sh
 
 [group('nvim')]
 nvim-plugin-sync:
-    .lib/nvim-plugin-sync.sh
+    lib/nvim-plugin-sync.sh
     git reset
     git add -- profiles/00-default/xdg-config/nvim/lazy-lock.json
     git commit -m "build(nvim): update lazy-lock.json"
