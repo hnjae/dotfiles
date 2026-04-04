@@ -1,4 +1,5 @@
 [General]
+confirmLogout=false
 loginMode=emptySession
 
 [LegacySession: saved at previous logout]

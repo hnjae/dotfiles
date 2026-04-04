@@ -49,7 +49,7 @@ select = [
 
   # Things that might be too noisy:
   "PLC", # pylint-convention
-  "PLR", # pylint-refactor
+  # "PLR", # pylint-refactor
   "PLW", # pylint-warning
 
   # Things that bother me in simple Python scripts:
@@ -181,7 +181,6 @@ convention = "pep257"
   "S101",     # assert-used: assert statements are required in tests
   "SLF001",   # private-member-access: necessary to test internal state of objects
   "TRY",      # tryceratops
-
 ]
 
 [tool.ty.src]

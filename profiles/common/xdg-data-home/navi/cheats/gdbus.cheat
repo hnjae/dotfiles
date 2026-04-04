@@ -1,0 +1,10 @@
+% gdbus, d-bus
+
+# ScreenLock
+gdbus call --session \
+  --dest org.freedesktop.ScreenSaver \
+  --object-path /ScreenSaver \
+  --method org.freedesktop.ScreenSaver.Lock
+
+# ScreenLock with qdbus
+qdbus org.freedesktop.ScreenSaver /ScreenSaver Lock
