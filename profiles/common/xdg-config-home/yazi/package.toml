@@ -13,5 +13,25 @@ use = "Sonico98/allmytoes"
 rev = "acdc53b"
 hash = "7bf0ed68a45144b28041affd2a334ff"
 
+[[plugin.deps]]
+use = "AminurAlam/yazi-plugins:spot"
+rev = "1d28640"
+hash = "854227f2312a6287c7872726e74f8de3"
+
+[[plugin.deps]]
+use = "AminurAlam/yazi-plugins:spot-cbz"
+rev = "1d28640"
+hash = "58a1e2153b8aa9479052a0fa7696cfe5"
+
+[[plugin.deps]]
+use = "AminurAlam/yazi-plugins:preview-cbz"
+rev = "1d28640"
+hash = "209e1cdb345b2143f75c0f9d1412bd0c"
+
+[[plugin.deps]]
+use = "beskep/hwp-preview"
+rev = "e130244"
+hash = "ca491864753977cbea28a3eeb48b1688"
+
 [flavor]
 deps = []

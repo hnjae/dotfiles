@@ -15,4 +15,14 @@ prepend_preloaders = [
   { mime = "image/jxl", run = "magick" },
   # Handle other image types with allmytoes
   { mime = "image/*", run = "allmytoes" },
+  # { url = '*.cb{z,r}', run = 'preview-cbz' },
+  # { url = '*.cb{z,r}', run = 'preview-cbz' },
+  { name = "*.{hwp,hwpx}", run = "hwp-preview" },
+  { name = "*.{hwp,hwpx}", run = "hwp-preview" },
+]
+
+prepend_spotters = [
+  { mime = "image/*", run = "spot-image" },
+  { url = '*.cb{z,r}', run = 'spot-cbz' },
+  { url = "video/*", run = "spot-video" },
 ]
