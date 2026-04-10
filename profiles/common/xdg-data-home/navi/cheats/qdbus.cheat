@@ -2,11 +2,10 @@
 ; # Various aliases for session control and power management in KDE Plasma
 ; # Logging out of Plasma, keeping termux and screen sessions
 ; # These are the pre-Plasma 6 versions
-; #alias klogout="qdbus org.kde.ksmserver /KSMServer logout 1 0 1"
 ; #alias klogout-force="qdbus org.kde.ksmserver /KSMServer logout 0 0 1"
 ; # These are the Plasma 6 versions
-; alias klogout="qdbus6 org.kde.LogoutPrompt /LogoutPrompt org.kde.LogoutPrompt.promptLogout"
-; alias klogout-force="qdbus6 org.kde.Shutdown /Shutdown org.kde.Shutdown.logout"
+; alias klogout="qdbus org.kde.LogoutPrompt /LogoutPrompt org.kde.LogoutPrompt.promptLogout"
+; alias klogout-force="qdbus org.kde.Shutdown /Shutdown org.kde.Shutdown.logout"
 ; alias kshutdown="qdbus6 org.kde.LogoutPrompt /LogoutPrompt promptShutDown"
 ; alias kshutdown-force="qdbus6 org.kde.Shutdown /Shutdown org.kde.Shutdown.logoutAndShutdown"
 ; alias kreboot="qdbus6 org.kde.LogoutPrompt /LogoutPrompt promptReboot"

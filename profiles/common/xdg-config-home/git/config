@@ -28,8 +28,8 @@
 [color]
 	pager = true
 
-[interactive]
-	diffFilter = delta --color-only
+; [interactive]
+; 	diffFilter = delta --color-only
 
 [log]
 	date = iso
@@ -44,19 +44,12 @@
 [help]
 	autocorrect = prompt ; 명령어 입력 시 오타를 감지하고 제안하도록 설정하려면 다음을 사용
 
-; [delta]
+[delta]
+	syntax-theme=base16-256
 ; 	navigate = true	# use n and N to move between diff sections
-; 	; syntax-theme=base16
 ; 	side-by-side = true
-; 	syntax-theme = gruvbox-light
 ; 	; diff-so-fancy = true
 ; 	; diff-highlight = true
-; 	minus-emph-style = "syntax #f9a5a5"
-; 	minus-style = "syntax #f6e5db"
-; 	minus-empty-line-marker-style = "syntax #f6e5db"
-; 	plus-emph-style = "syntax #c6f9a5"
-; 	plus-style ="syntax #f0f6db"
-; 	plus-empty-line-marker-style = "syntax #f0f6db"
 
 [pull]
 	ff = "only"
@@ -72,6 +65,7 @@
 	algorithm = histogram
 	mnemonicPrefix = true
 	renames = true
+	external = difft
 
 [fetch]
 	prune = true
@@ -151,8 +145,5 @@
 
 [url "git@github.com:"]
 	insteadOf = https://github.com/:
-
-[include]
-	path = ~/.config/git/_base24-delta.gitconfig
 
 # vi:ft=gitconfig:noexpandtab:sw=8

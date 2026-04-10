@@ -2,20 +2,20 @@ if (( ! $+commands[yazi])); then
     return
 fi
 
-XDG_CACHE_HOME="${XDG_CACHE_HOME:-${HOME}/.cache}"
+mkdir -p "/tmp/$USER/yazi-cwd"
 
 function y() {
-    local tmp
-    tmp="${XDG_CACHE_HOME}/yazicd/$RANDOM"
+    local cwd_file
+    cwd_file="/tmp/$USER/yazi-cwd/$RANDOM"
 
     # `command` is needed in case something is aliased to `yazi`
-    command yazi --cwd-file="$tmp" "$@"
-    if [[ -f $tmp ]]; then
-        if cwd="$(cat "$tmp")" && [[ -n $cwd ]] &&
+    command yazi --cwd-file="$cwd_file" "$@"
+    if [[ -f $cwd_file ]]; then
+        if cwd="$(cat "$cwd_file")" && [[ -n $cwd ]] &&
             [[ -d $cwd && $cwd != "${PWD:-$(pwd)}" ]]; then
             cd -- "$cwd" || return
         fi
 
-        rm -f -- "$tmp"
+        rm -f -- "$cwd_file"
     fi
 }
