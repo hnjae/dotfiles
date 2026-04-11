@@ -1,4 +1,9 @@
 [[mgr.prepend_keymap]]
+on = "Q"
+run = "quit"
+desc = "Quit the process"
+
+[[mgr.prepend_keymap]]
 on = ["d"]
 run = "create --dir"
 desc = "Create a directory"
@@ -76,12 +81,12 @@ desc = "Spot hovered file"
 [[mgr.prepend_keymap]]
 on = ["m", "c"]
 run = "yank"
-desc = "Yank selected files (copy)"
+desc = "Copy selected files"
 
 [[mgr.prepend_keymap]]
 on = ["m", "m"]
 run = "yank --cut"
-desc = "Yank selected files (cut)"
+desc = "Cut selected files"
 
 [[mgr.prepend_keymap]]
 on = ["m", "p"]
