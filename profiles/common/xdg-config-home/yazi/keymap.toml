@@ -19,6 +19,46 @@ run = "plugin my-trash-with-trace"
 desc = "Trash hovered file and create a trace file"
 
 [[mgr.prepend_keymap]]
+on = ["R"]
+run = "plugin my-rename-with-vimv"
+desc = "Rename with vimv"
+
+[[mgr.prepend_keymap]]
+on = ["r"]
+run = "plugin my-toggle-sort-reverse"
+desc = "Toggle reverse sort"
+
+[[mgr.prepend_keymap]]
+on = ["s"]
+run = "plugin my-select-sort"
+desc = "Select sort mode"
+
+[[mgr.prepend_keymap]]
+on = ["g", "h"]
+run = "hidden toggle"
+desc = "Toggle dotfiles"
+
+[[mgr.prepend_keymap]]
+on = ["u"]
+run = "back"
+desc = "Back to previous directory"
+
+[[mgr.prepend_keymap]]
+on = ["U"]
+run = "forward"
+desc = "Forward to next directory"
+
+[[mgr.prepend_keymap]]
+on = ["-"]
+run = "leave"
+desc = "Go to the parent directory"
+
+[[mgr.prepend_keymap]]
+on = ["q", "f"]
+run = "spot"
+desc = "Spot hovered file"
+
+[[mgr.prepend_keymap]]
 on = ["x"]
 run = "plugin my-open-associated"
 desc = "Open hovered entry with associated program"
