@@ -1,0 +1,10 @@
+[formatting]
+column_width = 100
+
+[[rule]]
+include = ["keymap.toml"]
+
+[rule.formatting]
+column_width = 180
+compact_inline_tables = true
+inline_table_expand = false

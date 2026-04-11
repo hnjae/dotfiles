@@ -1,0 +1,4 @@
+std = "yazi-std"
+
+[lints]
+mixed_table = "allow"

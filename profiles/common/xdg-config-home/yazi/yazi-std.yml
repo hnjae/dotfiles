@@ -1,0 +1,19 @@
+---
+base: lua51
+globals:
+  Command:
+    any: true
+  Url:
+    any: true
+  cx:
+    any: true
+  fs:
+    any: true
+  rt:
+    any: true
+  th:
+    any: true
+  ui:
+    any: true
+  ya:
+    any: true

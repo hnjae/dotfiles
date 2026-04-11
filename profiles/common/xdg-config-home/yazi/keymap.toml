@@ -1,238 +1,71 @@
-[[mgr.prepend_keymap]]
-on = "Q"
-run = "quit"
-desc = "Quit the process"
+# Regroup this file with `python3 lib/generate-keymap.py` after edits.
 
-[[mgr.prepend_keymap]]
-on = "<F12>"
-run = "quit"
-desc = "Quit the process"
+[mgr]
+prepend_keymap = [
+  # Quit
+  {on = "Q", run = "quit", desc = "Quit the process"},
+  {on = "<F12>", run = "quit", desc = "Quit the process"},
 
-[[mgr.prepend_keymap]]
-on = ["d"]
-run = "create --dir"
-desc = "Create a directory"
+  # Files
+  {on = ["d"], run = "create --dir", desc = "Create a directory"},
+  {on = ["%"], run = "plugin my-file-create", desc = "Create a file"},
+  {on = ["D"], run = "remove", desc = "Trash selected files"},
+  {on = ["<F3>"], run = "plugin my-trash-with-trace", desc = "Trash hovered file and create a trace file"},
+  {on = ["R"], run = "plugin my-rename-with-vimv", desc = "Rename with vimv"},
 
-[[mgr.prepend_keymap]]
-on = ["%"]
-run = "plugin my-file-create"
-desc = "Create a file"
+  # Sorting
+  {on = ["r"], run = "plugin my-toggle-sort-reverse", desc = "Toggle reverse sort"},
+  {on = ["s"], run = "plugin my-select-sort", desc = "Select sort mode"},
 
-[[mgr.prepend_keymap]]
-on = ["D"]
-run = "remove"
-desc = "Trash selected files"
+  # Navigation
+  {on = ["g", "h"], run = "hidden toggle", desc = "Toggle dotfiles"},
+  {on = ["u"], run = "back", desc = "Back to previous directory"},
+  {on = ["U"], run = "forward", desc = "Forward to next directory"},
+  {on = ["-"], run = "leave", desc = "Go to the parent directory"},
+  {on = ["q", "f"], run = "spot", desc = "Spot hovered file"},
+  {on = ["x"], run = "plugin my-open-associated", desc = "Open hovered entry with associated program"},
+  {on = ["p"], run = "spot", desc = "Spot hovered file"},
+  {on = ["P"], run = "spot", desc = "Spot hovered file"},
 
-[[mgr.prepend_keymap]]
-on = ["<F3>"]
-run = "plugin my-trash-with-trace"
-desc = "Trash hovered file and create a trace file"
+  # Clipboard
+  {on = ["m", "c"], run = "yank", desc = "Copy selected files"},
+  {on = ["m", "m"], run = "yank --cut", desc = "Cut selected files"},
+  {on = ["m", "p"], run = "paste", desc = "Paste yanked files"},
+  {on = ["m", "P"], run = "paste --force", desc = "Paste yanked files (overwrite if the destination exists)"},
+  {on = ["m", "u"], run = "unyank", desc = "Cancel the yank status"},
 
-[[mgr.prepend_keymap]]
-on = ["R"]
-run = "plugin my-rename-with-vimv"
-desc = "Rename with vimv"
+  # Linemode
+  {on = ["i", "s"], run = "linemode size", desc = "Linemode: size"},
+  {on = ["i", "i"], run = "linemode none", desc = "Reset linemode"},
+  {on = ["i", "p"], run = "linemode permissions", desc = "Linemode: permissions"},
+  {on = ["i", "b"], run = "linemode btime", desc = "Linemode: btime"},
+  {on = ["i", "m"], run = "linemode mtime", desc = "Linemode: mtime"},
+  {on = ["i", "o"], run = "linemode owner", desc = "Linemode: owner"},
+  {on = ["i", "n"], run = "linemode none", desc = "Linemode: none"},
 
-[[mgr.prepend_keymap]]
-on = ["r"]
-run = "plugin my-toggle-sort-reverse"
-desc = "Toggle reverse sort"
+  # Copy Helpers
+  {on = ["c", "("], run = "plugin my-copy-bracket-content round-first", desc = "Copy first () content from filename"},
+  {on = ["c", ")"], run = "plugin my-copy-bracket-content round-last", desc = "Copy last () content from filename"},
+  {on = ["c", "["], run = "plugin my-copy-bracket-content square-first", desc = "Copy [] content from filename"},
+  {on = ["c", "]"], run = "plugin my-copy-bracket-content square-last", desc = "Copy last [] content from filename"},
+  {on = ["c", "p"], run = "copy path", desc = "Copy the file path"},
 
-[[mgr.prepend_keymap]]
-on = ["s"]
-run = "plugin my-select-sort"
-desc = "Select sort mode"
+  # Disabled Defaults
+  {on = ["c", "c"], run = "noop"},
+  {on = ["m", "s"], run = "noop"},
+  {on = ["m", "b"], run = "noop"},
+  {on = ["m", "o"], run = "noop"},
+  {on = ["m", "n"], run = "noop"},
+  {on = ["a"], run = "noop"},
 
-[[mgr.prepend_keymap]]
-on = ["g", "h"]
-run = "hidden toggle"
-desc = "Toggle dotfiles"
-
-[[mgr.prepend_keymap]]
-on = ["u"]
-run = "back"
-desc = "Back to previous directory"
-
-[[mgr.prepend_keymap]]
-on = ["U"]
-run = "forward"
-desc = "Forward to next directory"
-
-[[mgr.prepend_keymap]]
-on = ["-"]
-run = "leave"
-desc = "Go to the parent directory"
-
-[[mgr.prepend_keymap]]
-on = ["q", "f"]
-run = "spot"
-desc = "Spot hovered file"
-
-[[mgr.prepend_keymap]]
-on = ["x"]
-run = "plugin my-open-associated"
-desc = "Open hovered entry with associated program"
-
-[[mgr.prepend_keymap]]
-on = ["p"]
-run = "spot"
-desc = "Spot hovered file"
-
-[[mgr.prepend_keymap]]
-on = ["P"]
-run = "spot"
-desc = "Spot hovered file"
-
-[[mgr.prepend_keymap]]
-on = ["m", "c"]
-run = "yank"
-desc = "Copy selected files"
-
-[[mgr.prepend_keymap]]
-on = ["m", "m"]
-run = "yank --cut"
-desc = "Cut selected files"
-
-[[mgr.prepend_keymap]]
-on = ["m", "p"]
-run = "paste"
-desc = "Paste yanked files"
-
-[[mgr.prepend_keymap]]
-on = ["m", "P"]
-run = "paste --force"
-desc = "Paste yanked files (overwrite if the destination exists)"
-
-[[mgr.prepend_keymap]]
-on = ["m", "u"]
-run = "unyank"
-desc = "Cancel the yank status"
-
-[[mgr.prepend_keymap]]
-on = ["i", "s"]
-run = "linemode size"
-desc = "Linemode: size"
-
-[[mgr.prepend_keymap]]
-on = ["i", "i"]
-run = "linemode none"
-desc = "Reset linemode"
-
-[[mgr.prepend_keymap]]
-on = ["i", "p"]
-run = "linemode permissions"
-desc = "Linemode: permissions"
-
-[[mgr.prepend_keymap]]
-on = ["i", "b"]
-run = "linemode btime"
-desc = "Linemode: btime"
-
-[[mgr.prepend_keymap]]
-on = ["i", "m"]
-run = "linemode mtime"
-desc = "Linemode: mtime"
-
-[[mgr.prepend_keymap]]
-on = ["i", "o"]
-run = "linemode owner"
-desc = "Linemode: owner"
-
-[[mgr.prepend_keymap]]
-on = ["i", "n"]
-run = "linemode none"
-desc = "Linemode: none"
-
-[[mgr.prepend_keymap]]
-on = ["c", "("]
-run = "plugin my-copy-bracket-content round-first"
-desc = "Copy first () content from filename"
-
-[[mgr.prepend_keymap]]
-on = ["c", ")"]
-run = "plugin my-copy-bracket-content round-last"
-desc = "Copy last () content from filename"
-
-[[mgr.prepend_keymap]]
-on = ["c", "["]
-run = "plugin my-copy-bracket-content square-first"
-desc = "Copy [] content from filename"
-
-[[mgr.prepend_keymap]]
-on = ["c", "]"]
-run = "plugin my-copy-bracket-content square-last"
-desc = "Copy last [] content from filename"
-
-[[mgr.prepend_keymap]]
-on = ["c", "p"]
-run = "copy path"
-desc = "Copy the file path"
-
-[[mgr.prepend_keymap]]
-on = ["c", "c"]
-run = "noop"
-
-[[mgr.prepend_keymap]]
-on = ["m", "s"]
-run = "noop"
-
-[[mgr.prepend_keymap]]
-on = ["m", "b"]
-run = "noop"
-
-[[mgr.prepend_keymap]]
-on = ["m", "o"]
-run = "noop"
-
-[[mgr.prepend_keymap]]
-on = ["m", "n"]
-run = "noop"
-
-[[mgr.prepend_keymap]]
-on = ["a"]
-run = "noop"
-
-[[mgr.prepend_keymap]]
-on = ["1"]
-run = "plugin relative-motions 1"
-desc = "Move in relative steps"
-
-[[mgr.prepend_keymap]]
-on = ["2"]
-run = "plugin relative-motions 2"
-desc = "Move in relative steps"
-
-[[mgr.prepend_keymap]]
-on = ["3"]
-run = "plugin relative-motions 3"
-desc = "Move in relative steps"
-
-[[mgr.prepend_keymap]]
-on = ["4"]
-run = "plugin relative-motions 4"
-desc = "Move in relative steps"
-
-[[mgr.prepend_keymap]]
-on = ["5"]
-run = "plugin relative-motions 5"
-desc = "Move in relative steps"
-
-[[mgr.prepend_keymap]]
-on = ["6"]
-run = "plugin relative-motions 6"
-desc = "Move in relative steps"
-
-[[mgr.prepend_keymap]]
-on = ["7"]
-run = "plugin relative-motions 7"
-desc = "Move in relative steps"
-
-[[mgr.prepend_keymap]]
-on = ["8"]
-run = "plugin relative-motions 8"
-desc = "Move in relative steps"
-
-[[mgr.prepend_keymap]]
-on = ["9"]
-run = "plugin relative-motions 9"
-desc = "Move in relative steps"
+  # Relative Motions
+  {on = ["1"], run = "plugin relative-motions 1", desc = "Move in relative steps"},
+  {on = ["2"], run = "plugin relative-motions 2", desc = "Move in relative steps"},
+  {on = ["3"], run = "plugin relative-motions 3", desc = "Move in relative steps"},
+  {on = ["4"], run = "plugin relative-motions 4", desc = "Move in relative steps"},
+  {on = ["5"], run = "plugin relative-motions 5", desc = "Move in relative steps"},
+  {on = ["6"], run = "plugin relative-motions 6", desc = "Move in relative steps"},
+  {on = ["7"], run = "plugin relative-motions 7", desc = "Move in relative steps"},
+  {on = ["8"], run = "plugin relative-motions 8", desc = "Move in relative steps"},
+  {on = ["9"], run = "plugin relative-motions 9", desc = "Move in relative steps"},
+]

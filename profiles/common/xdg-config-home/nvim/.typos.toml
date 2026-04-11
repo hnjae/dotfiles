@@ -1,13 +1,21 @@
+[default]
+extend-ignore-re = [
+  "\\bmis-typed\\b",
+]
+
+[default.extend-identifiers]
+GpWhisperEnew = "GpWhisperEnew"
+
 [default.extend-words]
 # In Vim Context:
 nore = "nore"
-Parm = " Parm"
 
 # Prefix in snippets
 FUL = "FUL"
 afe = "afe"
 ba = "ba"
 caf = "caf"
+definit = "definit"
 exten = "exten"
 fle = "fle"
 fo = "fo"
@@ -20,6 +28,7 @@ gti = "gti"
 ontext = "ontext"
 parsef = "parsef"
 pn = "pn"
+processs = "processs"
 selectd = "selectd"
 ser = "ser"
 stip = "stip"
@@ -29,6 +38,7 @@ whe = "whe"
 multline = "multline"
 
 # Proper Noun
+Neuton = "Neuton"
 noice = "noice"
 AKS = "AKS"     # Azurerm Kubernetes Cluster
 
@@ -40,3 +50,9 @@ relm = "relm"
 
 # Cobol
 cpy = "cpy"
+
+[type.vimscript.extend-identifiers]
+shPosnParm = "shPosnParm"
+
+[type.vimscript.extend-words]
+ot = "ot"

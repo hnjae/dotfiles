@@ -1,0 +1,5 @@
+line-length = 79
+
+[lint]
+preview = true
+fixable = ["ALL"]

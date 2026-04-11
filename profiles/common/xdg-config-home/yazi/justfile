@@ -7,3 +7,19 @@ _:
 
 upgrade:
     ya pkg upgrade
+
+alias fmt := format
+
+[group('ci')]
+format:
+    prek run --hook-stage pre-commit --all-files
+
+[group('ci')]
+selene:
+    git ls-files -z -- '*.lua' | xargs -0 -r selene
+
+[group('ci')]
+check: selene
+    ruff check
+    ty check
+    typos
