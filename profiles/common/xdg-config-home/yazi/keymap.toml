@@ -5,7 +5,7 @@ desc = "Create a directory"
 
 [[mgr.prepend_keymap]]
 on = ["%"]
-run = "create"
+run = "plugin my-file-create"
 desc = "Create a file"
 
 [[mgr.prepend_keymap]]
