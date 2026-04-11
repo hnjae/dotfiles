@@ -19,6 +19,26 @@ run = "plugin my-open-associated"
 desc = "Open hovered entry with associated program"
 
 [[mgr.prepend_keymap]]
+on = ["p"]
+run = "spot"
+desc = "Spot hovered file"
+
+[[mgr.prepend_keymap]]
+on = ["P"]
+run = "spot"
+desc = "Spot hovered file"
+
+[[mgr.prepend_keymap]]
+on = ["g", "p"]
+run = "paste"
+desc = "Paste yanked files"
+
+[[mgr.prepend_keymap]]
+on = ["g", "P"]
+run = "paste --force"
+desc = "Paste yanked files (overwrite if the destination exists)"
+
+[[mgr.prepend_keymap]]
 on = ["1"]
 run = "plugin relative-motions 1"
 desc = "Move in relative steps"
