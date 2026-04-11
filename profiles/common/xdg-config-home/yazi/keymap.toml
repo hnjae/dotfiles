@@ -29,14 +29,29 @@ run = "spot"
 desc = "Spot hovered file"
 
 [[mgr.prepend_keymap]]
-on = ["g", "p"]
+on = ["m", "c"]
+run = "yank"
+desc = "Yank selected files (copy)"
+
+[[mgr.prepend_keymap]]
+on = ["m", "m"]
+run = "yank --cut"
+desc = "Yank selected files (cut)"
+
+[[mgr.prepend_keymap]]
+on = ["m", "p"]
 run = "paste"
 desc = "Paste yanked files"
 
 [[mgr.prepend_keymap]]
-on = ["g", "P"]
+on = ["m", "P"]
 run = "paste --force"
 desc = "Paste yanked files (overwrite if the destination exists)"
+
+[[mgr.prepend_keymap]]
+on = ["m", "u"]
+run = "unyank"
+desc = "Cancel the yank status"
 
 [[mgr.prepend_keymap]]
 on = ["1"]
