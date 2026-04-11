@@ -14,6 +14,11 @@ run = "remove"
 desc = "Trash selected files"
 
 [[mgr.prepend_keymap]]
+on = ["<F3>"]
+run = "plugin my-trash-with-trace"
+desc = "Trash hovered file and create a trace file"
+
+[[mgr.prepend_keymap]]
 on = ["x"]
 run = "plugin my-open-associated"
 desc = "Open hovered entry with associated program"
