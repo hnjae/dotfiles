@@ -1,4 +1,19 @@
 [[mgr.prepend_keymap]]
+on = ["d"]
+run = "create --dir"
+desc = "Create a directory"
+
+[[mgr.prepend_keymap]]
+on = ["%"]
+run = "create"
+desc = "Create a file"
+
+[[mgr.prepend_keymap]]
+on = ["D"]
+run = "remove"
+desc = "Trash selected files"
+
+[[mgr.prepend_keymap]]
 on = ["1"]
 run = "plugin relative-motions 1"
 desc = "Move in relative steps"

@@ -33,5 +33,7 @@ use = "beskep/hwp-preview"
 rev = "e130244"
 hash = "ca491864753977cbea28a3eeb48b1688"
 
-[flavor]
-deps = []
+[[flavor.deps]]
+use = "matt-dong-123/base16"
+rev = "b02b7a8"
+hash = "fdb3a7d76f51c0a46bde55322ede9171"
