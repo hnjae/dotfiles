@@ -9,7 +9,7 @@
 
 ### `s` prefix
 
-> `markdonw`,`asciidoc`, `direnv` 등과 같은 파일타입에서는 `s` 로 시작하는 prefix 를 만들자.
+> `markdown`,`asciidoc`, `direnv` 등과 같은 파일타입에서는 `s` 로 시작하는 prefix 를 만들자.
 
 이유: `cmp` 과 같은 autocomplete 플러그인에서 찾기 쉽기 위해.
 
@@ -27,7 +27,6 @@ boilerplate 을 작성
 - `shebang` 의 prefix 는 `shebang` 과 `#env` (`env` 를 쓴다면)
 - `else if` 에는 반드시 `elif` prefix 도 추가할 것.
 - `import`: `im`, `from xxx import yyy`: `fim`
-
 - `prefix`, `description`, `body` 순으로 적을 것. cmp 등에서 description → body 순서로 보여지기 때문에.
 
 ## 같이 보기
