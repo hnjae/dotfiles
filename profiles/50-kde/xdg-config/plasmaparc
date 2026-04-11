@@ -1,3 +1,0 @@
-[General]
-GlobalMuteSources=true
-GlobalMuteSourcesMutedDevices=alsa_input.pci-0000_c3_00.6.HiFi__Mic2__source.0

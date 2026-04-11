@@ -1,0 +1,50 @@
+---
+# - following version 0.1.3 of base24 <2026-03-15>
+# - <https://github.com/tinted-theming/base24/blob/main/styling.md>
+# NOTE: gruvbox 에서는 #928374 OKHSL (67, 16, 56)를 comment 색상으로 사용함. (light)
+# 변경점
+# - base10 을 gruvbox 의 light_0 hard 로 변경
+# - base11 의 색상을 임의로 선정
+# - base03 을 #928374 (gray; color of comment) 로 변경
+# - base08-base0e 를 gruvbox 의 red-aqua 로 변경
+# - base12-base17 는 위 색상에서 임의로 변경하여 선정
+#   - `-A` 버전보다 차이가 더 극적
+# - base0F chatgpt 임의 선정
+system: "base24"
+name: "My Gruvbox Light"
+author: "Tinted Theming (https://github.com/tinted-theming), morhetz (https://github.com/morhetz/gruvbox)"
+variant: "light"
+palette:
+  base00: "#fbf1c7"
+  base01: "#ebdbb2"
+  base02: "#d5c4a1" # OKHSL (85, 35, 80)
+  base03: "#928374"
+  base04: "#7c6f64" # OKHSL (63, 13, 48)
+  base05: "#3c3836"
+  base06: "#282828"
+  base07: "#1d2021"
+  base08: "#9D0006"
+  base09: "#AF3A03"
+  base0A: "#B57614"
+  base0B: "#79740E"
+  base0C: "#427B58"
+  base0D: "#076678"
+  base0E: "#8F3F71"
+  base0F: "#9A7B6F" # by gpt-5.4
+  base10: "#f9f5d7" # OKHSL (101,  72, 96) / OKLrCH ( 95, 4, 96)
+  base11: "#fffbdb" # OKHSL (101, 100, 98) / OKLrCH (101, 4, 98)
+  base12: "#87000d"
+  base13: "#8a4f00"
+  base14: "#5f5c00"
+  base15: "#1f6942"
+  base16: "#005767"
+  base17: "#7d1f5f"
+
+# | color  | normal    |      bg 대비 | bright    |      bg 대비 | 판정                              |
+# | ------ | --------- | ---------: | --------- | ---------: | ------------------------------- |
+# | red    | `#9d0006` | **7.60:1** | `#87000d` | **9.09:1** | normal AAA / bright AAA         |
+# | orange | `#b57614` | **3.33:1** | `#8a4f00` | **5.79:1** | normal 대형텍스트급 / bright AA       |
+# | yellow | `#79740e` | **4.29:1** | `#5f5c00` | **6.13:1** | normal AA 근접 / bright AA~AAA 사이 |
+# | green  | `#427b58` | **4.40:1** | `#1f6942` | **5.86:1** | normal AA 근접 / bright AA        |
+# | cyan   | `#076678` | **5.82:1** | `#005767` | **7.23:1** | normal AA / bright AAA          |
+# | purple | `#8f3f71` | **5.94:1** | `#7d1f5f` | **8.29:1** | normal AA / bright AAA          |

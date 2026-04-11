@@ -85,6 +85,7 @@ select = [
 
 ignore = [
   # Rules that are necessary in specific situations:
+  "S404", # suspicious-subprocess-import
   "S603", # subprocess-without-shell-equals-true", conflicts with S602
   "S607", # start-process-with-partial-path
 

@@ -1,0 +1,5 @@
+% direnv
+; https://direnv.net/man/direnv-stdlib.1.html
+
+# Revoke (disallow)
+direnv revoke .

@@ -4,7 +4,10 @@
 nix profile list
 
 # install nix profile
-nix profile add --refresh '<repo>#<package>'
+nix profile add --refresh '<flake_ref>#<package>'
+
+# install nix package from private repo
+nix profile add --refresh 'git+ssh://git@github.com/hnjae/utils.git?shallow=1#cwebp-lossless'
 
 # remove nix profile
 nix profile remove <profile>

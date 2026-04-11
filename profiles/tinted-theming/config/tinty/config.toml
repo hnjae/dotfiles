@@ -1,6 +1,6 @@
 shell = "bash -c '{}'"
-default-scheme = "base24-my-gruvbox-light-B"
-preferred-schemes = ["base24-my-gruvbox-light-B"]
+default-scheme = "base24-my-gruvbox-light-C"
+preferred-schemes = ["base24-my-gruvbox-light-C"]
 hooks = ["echo \"The current scheme is: $(tinty current)\""]
 
 [[items]]
