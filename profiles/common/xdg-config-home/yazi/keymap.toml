@@ -90,13 +90,23 @@ desc = "Linemode: none"
 
 [[mgr.prepend_keymap]]
 on = ["c", "("]
-run = "plugin my-copy-bracket-content round"
-desc = "Copy () content from filename"
+run = "plugin my-copy-bracket-content round-first"
+desc = "Copy first () content from filename"
+
+[[mgr.prepend_keymap]]
+on = ["c", ")"]
+run = "plugin my-copy-bracket-content round-last"
+desc = "Copy last () content from filename"
 
 [[mgr.prepend_keymap]]
 on = ["c", "["]
-run = "plugin my-copy-bracket-content square"
+run = "plugin my-copy-bracket-content square-first"
 desc = "Copy [] content from filename"
+
+[[mgr.prepend_keymap]]
+on = ["c", "]"]
+run = "plugin my-copy-bracket-content square-last"
+desc = "Copy last [] content from filename"
 
 [[mgr.prepend_keymap]]
 on = ["c", "p"]

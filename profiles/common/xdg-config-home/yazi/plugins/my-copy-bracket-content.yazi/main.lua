@@ -38,10 +38,18 @@ end
 local function extract(name, kind)
   local matched
 
-  if kind == "round" then
+  if kind == "round-first" then
     matched = name:match("%b()")
-  elseif kind == "square" then
+  elseif kind == "round-last" then
+    for value in name:gmatch("%b()") do
+      matched = value
+    end
+  elseif kind == "square-first" then
     matched = name:match("%b[]")
+  elseif kind == "square-last" then
+    for value in name:gmatch("%b[]") do
+      matched = value
+    end
   end
 
   return matched and matched:sub(2, -2) or nil
@@ -50,7 +58,7 @@ end
 return {
   entry = function(_, job)
     local kind = job.args[1]
-    if kind ~= "round" and kind ~= "square" then
+    if kind ~= "round-first" and kind ~= "round-last" and kind ~= "square-first" and kind ~= "square-last" then
       warn("Unsupported bracket type.")
       return
     end
@@ -70,7 +78,7 @@ return {
     end
 
     if #results == 0 then
-      local label = kind == "round" and "()" or "[]"
+      local label = (kind == "square-first" or kind == "square-last") and "[]" or "()"
       warn("No " .. label .. " content found in the target name(s).")
       return
     end
