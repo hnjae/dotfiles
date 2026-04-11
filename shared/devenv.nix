@@ -1,11 +1,12 @@
 { pkgs, ... }:
 {
-  packages = [
-    pkgs.git
+  packages = with pkgs; [
+    git
+    just
+    editorconfig-checker
   ];
 
   git-hooks.hooks = {
-    biome.enable = true;
     rumdl.enable = true;
     yamlfmt.enable = true;
   };

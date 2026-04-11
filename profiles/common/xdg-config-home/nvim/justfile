@@ -11,8 +11,8 @@ format:
 
 [group('ci')]
 lint:
-    selene --allow-warning
+    fd --type f --extension lua . -X selene --allow-warnings
 
 [group('ci')]
-check:
+check: lint
     typos
