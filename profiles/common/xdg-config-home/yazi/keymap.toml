@@ -4,6 +4,11 @@ run = "quit"
 desc = "Quit the process"
 
 [[mgr.prepend_keymap]]
+on = "<F12>"
+run = "quit"
+desc = "Quit the process"
+
+[[mgr.prepend_keymap]]
 on = ["d"]
 run = "create --dir"
 desc = "Create a directory"
@@ -181,6 +186,10 @@ run = "noop"
 
 [[mgr.prepend_keymap]]
 on = ["m", "n"]
+run = "noop"
+
+[[mgr.prepend_keymap]]
+on = ["a"]
 run = "noop"
 
 [[mgr.prepend_keymap]]
