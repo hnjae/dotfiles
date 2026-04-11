@@ -10,5 +10,5 @@ format:
     prek run --hook-stage pre-commit --all-files
 
 [group('ci')]
-check:
-    prek run --hook-stage pre-merge-commit --all-files
+lint:
+    selene --allow-warning
