@@ -89,6 +89,25 @@ run = "linemode none"
 desc = "Linemode: none"
 
 [[mgr.prepend_keymap]]
+on = ["c", "("]
+run = "plugin my-copy-bracket-content round"
+desc = "Copy () content from filename"
+
+[[mgr.prepend_keymap]]
+on = ["c", "["]
+run = "plugin my-copy-bracket-content square"
+desc = "Copy [] content from filename"
+
+[[mgr.prepend_keymap]]
+on = ["c", "p"]
+run = "copy path"
+desc = "Copy the file path"
+
+[[mgr.prepend_keymap]]
+on = ["c", "c"]
+run = "noop"
+
+[[mgr.prepend_keymap]]
 on = ["m", "s"]
 run = "noop"
 

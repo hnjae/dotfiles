@@ -5,4 +5,7 @@ syntax: markdown
 tags: []
 ---
 
+`c` (prefix)
+: copy file path, name to clipboard
+
 // vi:ft=markdown
