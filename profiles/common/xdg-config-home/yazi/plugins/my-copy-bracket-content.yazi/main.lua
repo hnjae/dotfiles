@@ -58,7 +58,12 @@ end
 return {
   entry = function(_, job)
     local kind = job.args[1]
-    if kind ~= "round-first" and kind ~= "round-last" and kind ~= "square-first" and kind ~= "square-last" then
+    if
+      kind ~= "round-first"
+      and kind ~= "round-last"
+      and kind ~= "square-first"
+      and kind ~= "square-last"
+    then
       warn("Unsupported bracket type.")
       return
     end

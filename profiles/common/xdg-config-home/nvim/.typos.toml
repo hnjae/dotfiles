@@ -1,5 +1,42 @@
 [default.extend-words]
-noice = "noice"
+# In Vim Context:
 nore = "nore"
-typ = "typ"
-enew = "enew"
+Parm = " Parm"
+
+# Prefix in snippets
+FUL = "FUL"
+afe = "afe"
+ba = "ba"
+caf = "caf"
+exten = "exten"
+fle = "fle"
+fo = "fo"
+fof = "fof"
+forin = "forin"
+forr = "forr"
+fpr = "fpr"
+fre = "fre"
+gti = "gti"
+ontext = "ontext"
+parsef = "parsef"
+pn = "pn"
+selectd = "selectd"
+ser = "ser"
+stip = "stip"
+whe = "whe"
+
+# LaTeX
+multline = "multline"
+
+# Proper Noun
+noice = "noice"
+AKS = "AKS"     # Azurerm Kubernetes Cluster
+
+# Unreal Frameworks
+UE = "UE"
+
+# Relm4 Frameworks
+relm = "relm"
+
+# Cobol
+cpy = "cpy"

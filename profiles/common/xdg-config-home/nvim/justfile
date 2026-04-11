@@ -12,3 +12,7 @@ format:
 [group('ci')]
 lint:
     selene --allow-warning
+
+[group('ci')]
+check:
+    typos

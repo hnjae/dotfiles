@@ -69,7 +69,8 @@ return {
 
     local trace_name = hovered.stem .. " DELETED"
     local final_url = parent:join(trace_name)
-    local temp_url = parent:join(string.format("%s.tmp-%d", trace_name, math.floor(ya.time() * 1000)))
+    local temp_url =
+      parent:join(string.format("%s.tmp-%d", trace_name, math.floor(ya.time() * 1000)))
 
     local ok, write_err = fs.write(Url(temp_url), content)
     if not ok then
@@ -86,7 +87,11 @@ return {
 
     local renamed, rename_err = fs.rename(Url(temp_url), Url(final_url))
     if not renamed then
-      notify("error", "File was trashed, but finalizing the trace file failed: " .. tostring(rename_err), 8)
+      notify(
+        "error",
+        "File was trashed, but finalizing the trace file failed: " .. tostring(rename_err),
+        8
+      )
       return
     end
 
