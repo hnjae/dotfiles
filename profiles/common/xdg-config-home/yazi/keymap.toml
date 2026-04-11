@@ -14,6 +14,11 @@ run = "remove"
 desc = "Trash selected files"
 
 [[mgr.prepend_keymap]]
+on = ["x"]
+run = "plugin my-open-associated"
+desc = "Open hovered entry with associated program"
+
+[[mgr.prepend_keymap]]
 on = ["1"]
 run = "plugin relative-motions 1"
 desc = "Move in relative steps"
