@@ -4,7 +4,7 @@ fi
 
 mkdir -p "/tmp/$USER/yazi-cwd"
 
-function y() {
+function e() {
     local cwd_file
     cwd_file="/tmp/$USER/yazi-cwd/$RANDOM"
 

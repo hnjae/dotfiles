@@ -28,13 +28,11 @@ zmodule "$ZDOTDIR/my-tmux"
 zmodule "$ZDOTDIR/my-zimfw"
 zmodule "$ZDOTDIR/my-yazi"
 
-# 자체 함수 선언이 있거나 복잡한 모듈
+# 복잡한 모듈
 zmodule environment
 # zmodule input
 zmodule "$ZDOTDIR/my-termtitle" # loads vcs_info, zsh-hook 있음
-zmodule "$ZDOTDIR/my-joshuto"
 zmodule "$ZDOTDIR/my-navi"
-# zmodule "$ZDOTDIR/my-yazi"
 zmodule "MichaelAquilina/zsh-you-should-use"
 # zmodule olets/zsh-abbr --source zsh-abbr.plugin.zsh --use git  # it includes submodules # THIS IS FREAKING SLOW (2025-07-07)
 
