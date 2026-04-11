@@ -18,6 +18,28 @@ local targets = ya.sync(function()
   }
 end)
 
+local function relative_to(cwd, path)
+  if path == cwd then
+    return "."
+  end
+
+  if cwd == "/" then
+    return path:sub(2)
+  end
+
+  if path:sub(1, #cwd) ~= cwd then
+    return path
+  end
+
+  local next_char = path:sub(#cwd + 1, #cwd + 1)
+  if next_char ~= "" and next_char ~= "/" then
+    return path
+  end
+
+  local relative = path:sub(#cwd + 2)
+  return relative ~= "" and relative or "."
+end
+
 local function notify(level, content, timeout)
   ya.notify({
     title = "Rename with vimv",
@@ -35,6 +57,11 @@ return {
       return
     end
 
+    local items = {}
+    for i, item in ipairs(data.items) do
+      items[i] = relative_to(data.cwd, item)
+    end
+
     local permit = ui.hide()
     local cmd = Command("vimv")
       :cwd(data.cwd)
@@ -42,7 +69,7 @@ return {
       :stdout(Command.INHERIT)
       :stderr(Command.INHERIT)
 
-    for _, item in ipairs(data.items) do
+    for _, item in ipairs(items) do
       cmd:arg(item)
     end
 
