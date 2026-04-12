@@ -20,14 +20,15 @@ KeySignature: TypeAlias = tuple[str, ...]
 
 
 SECTION_ORDER = (
+    "Disabled Defaults",
     "Quit",
     "Files",
     "Sorting",
     "Navigation",
     "Clipboard",
+    "System clipboard",
     "Linemode",
     "Copy Helpers",
-    "Disabled Defaults",
     "Relative Motions",
 )
 
@@ -105,11 +106,13 @@ def section_name(entry: dict[str, object]) -> str | None:
         ("<Enter>",),
     }:
         return "Navigation"
-    if first == "m" or signature in {("y", "y"), ("y", "c")}:
+    if first == "m":
         return "Clipboard"
+    if first == "y":
+        return "System clipboard"
     if first == "i":
         return "Linemode"
-    if first in {"c", "y"}:
+    if first == "c":
         return "Copy Helpers"
     if len(first) == 1 and first.isdigit():
         return "Relative Motions"

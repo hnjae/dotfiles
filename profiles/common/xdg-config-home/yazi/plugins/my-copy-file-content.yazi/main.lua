@@ -38,9 +38,8 @@ local function trim(s)
 end
 
 local function file_info(url)
-  local output, err = Command("file")
-    :arg({ "--brief", "--mime", "--dereference", "--", tostring(url) })
-    :output()
+  local output, err =
+    Command("file"):arg({ "--brief", "--mime", "--dereference", "--", tostring(url) }):output()
 
   if not output then
     return nil, nil, "Failed to inspect the file: " .. tostring(err)
@@ -87,18 +86,12 @@ local function content_kind(url, cha)
 end
 
 local function copy_via_wl_copy(url, mime)
-  local cat, cat_err = Command("cat")
-    :arg({ "--", tostring(url) })
-    :stdout(Command.PIPED)
-    :spawn()
+  local cat, cat_err = Command("cat"):arg({ "--", tostring(url) }):stdout(Command.PIPED):spawn()
   if not cat then
     return nil, "Failed to start `cat`: " .. tostring(cat_err)
   end
 
-  local wl, wl_err = Command("wl-copy")
-    :arg({ "--type", mime })
-    :stdin(cat:take_stdout())
-    :status()
+  local wl, wl_err = Command("wl-copy"):arg({ "--type", mime }):stdin(cat:take_stdout()):status()
   if not wl then
     cat:start_kill()
     cat:wait()

@@ -94,8 +94,7 @@ local function trash_with_trace(item)
 
   local trace_name = item.stem .. " DELETED"
   local final_url = parent:join(trace_name)
-  local temp_url =
-    parent:join(string.format("%s.tmp-%d", trace_name, math.floor(ya.time() * 1000)))
+  local temp_url = parent:join(string.format("%s.tmp-%d", trace_name, math.floor(ya.time() * 1000)))
 
   local written, write_err = fs.write(temp_url, content)
   if not written then
@@ -191,10 +190,7 @@ return {
         count_label(trashed, "file", "files")
       )
     end
-    content[#content + 1] = string.format(
-      "Failed on %s.",
-      count_label(failed, "entry", "entries")
-    )
+    content[#content + 1] = string.format("Failed on %s.", count_label(failed, "entry", "entries"))
     content[#content + 1] = "This only works for files."
 
     notify("warn", table.concat(content, " "), 7)
