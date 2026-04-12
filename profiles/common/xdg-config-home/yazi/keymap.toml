@@ -46,6 +46,7 @@ prepend_keymap = [
   # Clipboard
   { on = ["m", "a"], run = "toggle_all --state=on", desc = "Select all files" },
   { on = ["m", "A"], run = "toggle_all --state=off", desc = "Deselect all files in current directory" },
+  { on = ["m", "r"], run = "toggle_all", desc = "Reverse selection in current directory" },
   { on = ["m", "f"], run = "toggle", desc = "Toggle hovered file selection" },
   { on = ["m", "p"], run = "paste", desc = "Paste" },
   { on = ["m", "P"], run = "paste --force", desc = "Paste (overwrite)" },
