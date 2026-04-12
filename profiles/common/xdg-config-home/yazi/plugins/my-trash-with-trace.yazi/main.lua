@@ -54,6 +54,18 @@ return {
       return
     end
 
+    local confirmed = ya.confirm({
+      pos = { "center", w = 60, h = 10 },
+      title = "Trash with trace",
+      body = string.format(
+        'Trash "%s" and create a trace file?\n\nThis only works for files.',
+        hovered.name
+      ),
+    })
+    if not confirmed then
+      return
+    end
+
     local parent = hovered.url.parent
     if not parent then
       notify("error", "Couldn't determine the parent directory.", 7)
