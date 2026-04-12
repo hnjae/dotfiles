@@ -30,6 +30,7 @@ SECTION_ORDER = (
     "Linemode",
     "Copy Helpers",
     "Relative Motions",
+    "Extra Cmds",
 )
 
 
@@ -71,14 +72,19 @@ def is_noop(entry: dict[str, object]) -> bool:
 
 
 def section_name(entry: dict[str, object]) -> str | None:
-    if is_noop(entry):
-        return "Disabled Defaults"
-
     signature = key_signature(entry)
     if signature is None:
+        if is_noop(entry):
+            return "Disabled Defaults"
         return None
 
     first = signature[0]
+
+    if first == "z":
+        return "Extra Cmds"
+
+    if is_noop(entry):
+        return "Disabled Defaults"
 
     if signature in {("q", "q"), ("Q",), ("<F12>",)}:
         return "Quit"

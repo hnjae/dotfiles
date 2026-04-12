@@ -9,6 +9,7 @@ prepend_keymap = [
   {on = ["m", "o"], run = "noop"},
   {on = ["m", "n"], run = "noop"},
   {on = ["m", "m"], run = "noop"},
+  {on = "z", run = "noop"},
 
   # Quit
   {on = ["q", "q"], run = "quit", desc = "Quit the process"},
@@ -32,9 +33,7 @@ prepend_keymap = [
   {on = ["g", "s"], run = "plugin zoxide", desc = "zoxide"},
   {on = ["g", "t"], run = "plugin fzf", desc = "fzf"},
   {on = ["g", "h"], run = "hidden toggle", desc = "Toggle dotfiles"},
-  {on = ["g", "o"], run = "plugin my-open-in-split down", desc = "Open hovered entry in horizontal split"},
   {on = ["g", "p"], run = "plugin my-change-permissions", desc = "Change hovered entry permissions"},
-  {on = ["g", "v"], run = "plugin my-open-in-split right", desc = "Open hovered entry in vertical split"},
   {on = ["u"], run = "back", desc = "Back to previous directory"},
   {on = ["U"], run = "forward", desc = "Forward to next directory"},
   {on = ["-"], run = "leave", desc = "Go to the parent directory"},
@@ -42,6 +41,8 @@ prepend_keymap = [
   {on = ["p"], run = "spot", desc = "Spot hovered file"},
   {on = ["P"], run = "spot", desc = "Spot hovered file"},
   {on = ["<Enter>"], run = "plugin my-open-netrw-cr", desc = "Enter directory or open hovered file"},
+  {on = ["z", "o"], run = "plugin my-open-in-split down", desc = "Open hovered entry in horizontal split"},
+  {on = ["z", "v"], run = "plugin my-open-in-split right", desc = "Open hovered entry in vertical split"},
 
   # Clipboard
   {on = ["m", "a"], run = "toggle_all --state=on", desc = "Select all files"},
