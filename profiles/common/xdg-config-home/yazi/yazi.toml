@@ -1,3 +1,6 @@
+[preview]
+image_quality   = 80
+
 [plugin]
 prepend_previewers = [
   # Allmytoes doesn't handle these by default
