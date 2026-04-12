@@ -36,6 +36,9 @@ systemctl <opt_user> help <systemd_unit>
 # cat unit
 systemctl <opt_user> cat <systemd_unit>
 
+# show dependencies
+systemctl show <systemd_unit>.service -p RequiresMountsFor -p Requires -p After
+
 # analyze critical-chain
 systemd-analyze critical-chain
 

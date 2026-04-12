@@ -49,7 +49,11 @@ return {
     if os.getenv("TMUX") == nil then
       local term_program = os.getenv("TERM_PROGRAM")
       if term_program == "ghostty" then
-        notify("warn", "Ghostty split panes are not controllable from CLI yet. Run Yazi inside tmux for this binding.", 8)
+        notify(
+          "warn",
+          "Ghostty split panes are not controllable from CLI yet. Run Yazi inside tmux for this binding.",
+          8
+        )
       else
         notify("warn", "This split-open binding currently requires tmux.", 7)
       end
@@ -57,17 +61,15 @@ return {
     end
 
     local direction = job.args[1] == "right" and "right" or "down"
-    local status, err = Command("tmux")
-      :arg({
-        "split-window",
-        split_flag(direction),
-        "-c",
-        tostring(hovered.launch_cwd),
-        "-e",
-        "YAZI_SPLIT_TARGET=" .. tostring(hovered.url),
-        shell_command(hovered.is_dir),
-      })
-      :status()
+    local status, err = Command("tmux"):arg({
+      "split-window",
+      split_flag(direction),
+      "-c",
+      tostring(hovered.launch_cwd),
+      "-e",
+      "YAZI_SPLIT_TARGET=" .. tostring(hovered.url),
+      shell_command(hovered.is_dir),
+    }):status()
 
     if not status then
       notify("error", "Failed to start tmux split: " .. tostring(err), 8)

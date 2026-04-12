@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from collections import Counter
 from pathlib import Path
 from typing import TypeAlias
 
@@ -15,20 +16,20 @@ PROJECT_DIR = SCRIPT_PATH.parent.parent
 DEFAULT_KEYMAP_PATH = PROJECT_DIR / "keymap.toml"
 
 
-KeySignature: TypeAlias = str | tuple[str] | tuple[str, str]
+KeySignature: TypeAlias = tuple[str, ...]
 
 
-SECTION_HEADERS: dict[KeySignature, str] = {
-    "Q": "Quit",
-    ("d",): "Files",
-    ("r",): "Sorting",
-    ("g", "h"): "Navigation",
-    ("m", "c"): "Clipboard",
-    ("i", "s"): "Linemode",
-    ("c", "("): "Copy Helpers",
-    ("c", "c"): "Disabled Defaults",
-    ("1",): "Relative Motions",
-}
+SECTION_ORDER = (
+    "Quit",
+    "Files",
+    "Sorting",
+    "Navigation",
+    "Clipboard",
+    "Linemode",
+    "Copy Helpers",
+    "Disabled Defaults",
+    "Relative Motions",
+)
 
 
 def load_keymap(path: Path) -> list[dict[str, object]]:
@@ -55,15 +56,55 @@ def load_keymap(path: Path) -> list[dict[str, object]]:
 def key_signature(entry: dict[str, object]) -> KeySignature | None:
     on = entry.get("on")
     if isinstance(on, str):
-        return on
-    if isinstance(on, list):
-        if len(on) == 1 and isinstance(on[0], str):
-            return (on[0],)
-        if len(on) == 2:
-            first = on[0]
-            second = on[1]
-            if isinstance(first, str) and isinstance(second, str):
-                return (first, second)
+        return (on,)
+    if isinstance(on, list) and on and all(isinstance(key, str) for key in on):
+        return tuple(key for key in on if isinstance(key, str))
+    return None
+
+
+def is_noop(entry: dict[str, object]) -> bool:
+    run = entry.get("run")
+    if run == "noop":
+        return True
+    return isinstance(run, list) and len(run) == 1 and run[0] == "noop"
+
+
+def section_name(entry: dict[str, object]) -> str | None:
+    if is_noop(entry):
+        return "Disabled Defaults"
+
+    signature = key_signature(entry)
+    if signature is None:
+        return None
+
+    first = signature[0]
+
+    if signature in {("q", "q"), ("Q",), ("<F12>",)}:
+        return "Quit"
+    if signature in {("d",), ("%",), ("D",), ("<F3>",), ("R",)}:
+        return "Files"
+    if signature in {("r",), ("s",)}:
+        return "Sorting"
+    if first == "g" or signature in {
+        ("u",),
+        ("U",),
+        ("-",),
+        ("q", "f"),
+        ("x",),
+        ("p",),
+        ("P",),
+        ("<Enter>",),
+    }:
+        return "Navigation"
+    if first == "m":
+        return "Clipboard"
+    if first == "i":
+        return "Linemode"
+    if first in {"c", "y"}:
+        return "Copy Helpers"
+    if len(first) == 1 and first.isdigit():
+        return "Relative Motions"
+
     return None
 
 
@@ -98,7 +139,21 @@ def render_value(value: object) -> str:
     raise TypeError(f"unsupported TOML value: {value!r}")
 
 
+def canonical_entry(entry: dict[str, object]) -> str:
+    return json.dumps(entry, sort_keys=True, separators=(",", ":"))
+
+
 def build_text(entries: list[dict[str, object]]) -> str:
+    grouped = {section: [] for section in SECTION_ORDER}
+    other_entries = []
+
+    for entry in entries:
+        section = section_name(entry)
+        if section is None:
+            other_entries.append(entry)
+        else:
+            grouped[section].append(entry)
+
     lines = [
         "# Regroup this file with `python3 lib/generate-keymap.py` after edits.",
         "",
@@ -107,22 +162,35 @@ def build_text(entries: list[dict[str, object]]) -> str:
     ]
 
     first_entry = True
-    for entry in entries:
-        signature = key_signature(entry)
-        header = (
-            SECTION_HEADERS.get(signature) if signature is not None else None
-        )
-        if header is not None:
-            if not first_entry:
-                lines.append("")
-            lines.append(f"  # {header}")
+    for header in SECTION_ORDER:
+        section_entries = grouped[header]
+        if not section_entries:
+            continue
 
-        rendered = ", ".join(
-            f"{key} = {render_value(value)}"
-            for key, value in ordered_items(entry)
-        )
-        lines.append(f"  {{ {rendered} }},")
-        first_entry = False
+        if not first_entry:
+            lines.append("")
+        lines.append(f"  # {header}")
+
+        for entry in section_entries:
+            rendered = ", ".join(
+                f"{key} = {render_value(value)}"
+                for key, value in ordered_items(entry)
+            )
+            lines.append(f"  {{ {rendered} }},")
+            first_entry = False
+
+    if other_entries:
+        if not first_entry:
+            lines.append("")
+        lines.append("  # Other")
+
+        for entry in other_entries:
+            rendered = ", ".join(
+                f"{key} = {render_value(value)}"
+                for key, value in ordered_items(entry)
+            )
+            lines.append(f"  {{ {rendered} }},")
+            first_entry = False
 
     lines.extend(
         [
@@ -143,8 +211,13 @@ def main() -> int:
     text = build_text(entries)
 
     roundtrip = tomllib.loads(text)
-    if roundtrip != {"mgr": {"prepend_keymap": entries}}:
-        raise RuntimeError("generated keymap is not a semantic roundtrip")
+    roundtrip_entries = roundtrip["mgr"]["prepend_keymap"]
+    if Counter(
+        canonical_entry(entry) for entry in roundtrip_entries
+    ) != Counter(canonical_entry(entry) for entry in entries):
+        raise RuntimeError(
+            "generated keymap does not preserve the same entries"
+        )
 
     path.write_text(text, encoding="utf-8")
     return 0

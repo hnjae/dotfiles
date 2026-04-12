@@ -1,5 +1,5 @@
 [preview]
-image_quality   = 80
+image_quality = 80
 
 [plugin]
 prepend_previewers = [
