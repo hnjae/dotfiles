@@ -105,7 +105,7 @@ def section_name(entry: dict[str, object]) -> str | None:
         ("<Enter>",),
     }:
         return "Navigation"
-    if first == "m":
+    if first == "m" or signature == ("y", "y"):
         return "Clipboard"
     if first == "i":
         return "Linemode"
