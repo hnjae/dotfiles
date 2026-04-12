@@ -80,7 +80,7 @@ def section_name(entry: dict[str, object]) -> str | None:
 
     first = signature[0]
 
-    if first == "z":
+    if first == "z" or signature in {("<F4>",)}:
         return "Extra Cmds"
 
     if is_noop(entry):

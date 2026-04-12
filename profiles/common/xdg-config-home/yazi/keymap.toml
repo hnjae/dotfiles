@@ -43,6 +43,7 @@ prepend_keymap = [
   {on = ["<Enter>"], run = "plugin my-open-netrw-cr", desc = "Enter directory or open hovered file"},
   {on = ["z", "o"], run = "plugin my-open-in-split down", desc = "Open hovered entry in horizontal split"},
   {on = ["z", "v"], run = "plugin my-open-in-split right", desc = "Open hovered entry in vertical split"},
+  {on = ["<F4>"], run = "plugin my-open-cwd-terminal", desc = "Open current directory in tmux split or terminal"},
 
   # Clipboard
   {on = ["m", "a"], run = "toggle_all --state=on", desc = "Select all files"},
