@@ -5,7 +5,6 @@
   git-hooks.hooks = {
     stylua.enable = true;
     typos.enable = true;
-    biome.enable = true;
   };
 
   packages = with pkgs; [

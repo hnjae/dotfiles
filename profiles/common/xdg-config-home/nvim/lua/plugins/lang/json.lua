@@ -5,7 +5,8 @@ return {
     optional = true,
     opts = {
       formatters_by_ft = {
-        json = { "biome", "jq", lsp_format = "fallback" },
+        json = { "biome", lsp_format = "never" },
+        jsonc = { "biome", lsp_format = "never" },
       },
     },
   },

@@ -10,7 +10,7 @@
     },
     "build": {
       "model": "openai/gpt-5.4",
-      "variant": "high"
+      "variant": "medium"
     }
   },
   "permission": {
@@ -26,14 +26,8 @@
       "disabled": true
     },
     "ty": {
-      "command": [
-        "ty",
-        "server"
-      ],
-      "extensions": [
-        ".py",
-        ".pyi"
-      ]
+      "command": ["ty", "server"],
+      "extensions": [".py", ".pyi"]
     }
-  },
+  }
 }
