@@ -81,7 +81,16 @@ def section_name(entry: dict[str, object]) -> str | None:
 
     if signature in {("q", "q"), ("Q",), ("<F12>",)}:
         return "Quit"
-    if signature in {("d",), ("%",), ("D",), ("<F8>",), ("<F3>",), ("R",)}:
+    if signature in {
+        ("d",),
+        ("%",),
+        ("D",),
+        ("<F8>",),
+        ("<F3>",),
+        ("a",),
+        ("A",),
+        ("R",),
+    }:
         return "Files"
     if signature in {("r",), ("s",)}:
         return "Sorting"
