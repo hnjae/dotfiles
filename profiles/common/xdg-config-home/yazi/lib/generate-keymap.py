@@ -92,7 +92,6 @@ def section_name(entry: dict[str, object]) -> str | None:
         ("d",),
         ("%",),
         ("D",),
-        ("<F8>",),
         ("<F3>",),
         ("a",),
         ("A",),
