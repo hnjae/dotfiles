@@ -8,4 +8,4 @@ _:
     @just --list
 
 doctor:
-    pnpm dlx oh-my-opencode doctor --verbose
+    bunx oh-my-opencode doctor --verbose

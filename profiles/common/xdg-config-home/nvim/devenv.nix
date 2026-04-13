@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  languages.lua.enable = true;
+  languages.lua.enable = false;
 
   git-hooks.hooks = {
     stylua.enable = true;

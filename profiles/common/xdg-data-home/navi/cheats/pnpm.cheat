@@ -54,5 +54,8 @@ pnpm update --global
 # debug dependency at global scope
 pnpm why -g <package>
 
-# list packages
+# list packages (global scope)
 pnpm -g list
+
+# remove package (global scope)
+pnpm -g remove <pkg>

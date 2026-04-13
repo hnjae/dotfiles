@@ -18,6 +18,9 @@
     ~/.local/share:
       glob: true
       path: xdg-data-home/*
+    ~/.local/bin:
+      glob: true
+      path: xdg-bin-home/*
     ~/.zshenv:
       path: ~/.config/zsh/.zshenv
     ~/.ssh:

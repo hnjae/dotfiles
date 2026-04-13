@@ -12,35 +12,50 @@
     "hephaestus": { "model": "openai/gpt-5.4" },
 
     // Strategic planner: interview mode before execution
-    "prometheus": { "model": "openai/gpt-5.4", "variant": "xhigh" },
+    "prometheus": {
+      "model": "openai/gpt-5.4",
+      "variant": "xhigh"
+    },
 
     // Architecture consultant: complex design and debugging (default 5.4 high)
-    "oracle": { "model": "openai/gpt-5.4", "variant": "high" },
+    "oracle": {
+      "model": "openai/gpt-5.4",
+      "variant": "high"
+    },
 
     // Documentation and code search (default: mini-max-m2.7)
     "librarian": { "model": "openai/gpt-5.4-mini", "variant": "xhigh" },
 
-    // Rapid codebase navigation: prioritize portability and low-latency official model ids
-    "explore": { "model": "openai/gpt-5.4-mini", "variant": "low" },
+    // Rapid codebase navigation (default grok-code-fast-1)
+    "explore": { "model": "openai/gpt-5.4-mini-fast" },
 
     // Visual tasks: UI/UX, images, diagrams (default: gemini pro high)
-    "multimodal-looker": { "model": "openai/gpt-5.4", "variant": "xhigh" },
+    "multimodal-looker": {
+      "model": "openai/gpt-5.4",
+      "variant": "xhigh"
+    },
 
     // Plan consultant: reviews and improves plans
-    "metis": { "model": "openai/gpt-5.4", "variant": "xhigh" },
+    "metis": {
+      "model": "openai/gpt-5.4",
+      "variant": "xhigh"
+    },
 
     // Critic and reviewer
-    "momus": { "model": "openai/gpt-5.4", "variant": "xhigh" },
+    "momus": {
+      "model": "openai/gpt-5.4",
+      "variant": "xhigh"
+    },
 
-    // Continuation and long-running task handler: benefit from 5.4's larger context window
-    "atlas": { "model": "openai/gpt-5.4" },
+    // Continuation and long-running task handler (default sonnet 4.6)
+    "atlas": { "model": "openai/gpt-5.4-mini" },
 
     // Lightweight task executor for simple jobs (default sonnet 4.6)
     "sisyphus-junior": { "model": "openai/gpt-5.4-mini" }
   },
   "categories": {
     // Visual architecture
-    "visual-engineering": { "model": "openai/gpt-5.4", "variant": "high" },
+    "visual-engineering": { "model": "openai/gpt-5.4", "variant": "xhigh" },
 
     // Strategic reasoning
     "ultrabrain": { "model": "openai/gpt-5.4", "variant": "xhigh" },
@@ -48,20 +63,20 @@
     // Deep research and analysis (default: 5.4 medium)
     "deep": { "model": "openai/gpt-5.4" },
 
-    // Trivial changes: favor official model ids and minimal reasoning overhead
-    "quick": { "model": "openai/gpt-5.4-mini", "variant": "low" },
+    // Trivial changes: fastest possible
+    "quick": { "model": "openai/gpt-5.4-mini-fast" },
 
-    // Good quality while keeping token usage under control
-    "unspecified-low": { "model": "openai/gpt-5.4-mini", "variant": "low" },
+    // : good quality, fast (default: sonnet 4.6)
+    "unspecified-low": { "model": "openai/gpt-5.4-mini" },
 
-    // High-effort planning tasks: strong reasoning without always paying xhigh cost
-    "unspecified-high": { "model": "openai/gpt-5.4", "variant": "high" },
+    // High-effort planning tasks: maximum reasoning
+    "unspecified-high": { "model": "openai/gpt-5.4", "variant": "xhigh" },
 
-    // Documentation from plans: keep it fast and coherent without overreasoning
-    "writing": { "model": "openai/gpt-5.4-mini", "variant": "low" },
+    // Documentation from plans (default: gemini-3-flash)
+    "writing": { "model": "openai/gpt-5.4-mini-fast", "variant": "xhigh" },
 
-    // Creative approaches to problems
-    "artistry": { "model": "openai/gpt-5.4", "variant": "high" }
+    // Creative approaches to problems (default: gemini-3-pro high)
+    "artistry": { "model": "openai/gpt-5.4", "variant": "xhigh" }
   },
   "tmux": { "enabled": true },
   "lsp": {

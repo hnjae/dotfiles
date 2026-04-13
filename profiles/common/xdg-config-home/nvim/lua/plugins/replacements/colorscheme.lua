@@ -17,7 +17,7 @@ local colorschemes = {
 }
 
 -- local COLORSCHEME = colorschemes.gruvbox_material
-local COLORSCHEME = colorschemes.gruvbox
+local COLORSCHEME = colorschemes.gruvbox_material
 local color_terminal = (vim.fn.has("gui_running") == 1) or (os.getenv("TERM_PROGRAM") == nil)
 
 ---@type LazySpec[]

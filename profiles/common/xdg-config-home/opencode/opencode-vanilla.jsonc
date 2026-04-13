@@ -6,19 +6,19 @@
   "agent": {
     "plan": {
       "model": "openai/gpt-5.4",
-      "variant": "xhigh"
+      "variant": "high"
     },
     "build": {
-      "model": "openai/gpt-5.4",
-      "variant": "medium"
+      "model": "openai/gpt-5.4-mini",
+      "variant": "high"
     }
   },
   "permission": {
     "todowrite": "allow",
     "todoread": "allow",
     "webfetch": "allow",
-    "skill": {
-      "git-commit": "allow"
+    "bash": {
+      "npm *": "deny"
     }
   },
   "lsp": {

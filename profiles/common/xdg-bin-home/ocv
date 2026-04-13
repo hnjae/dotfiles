@@ -1,0 +1,11 @@
+#!/bin/sh
+
+XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}"
+export OPENCODE_CONFIG="${XDG_CONFIG_HOME}/opencode/opencode-vanilla.jsonc"
+
+if [ ! -f "$OPENCODE_CONFIG" ]; then
+    echo "ERR: $OPENCODE_CONFIG does not exists." >&2
+    exit 1
+fi
+
+exec opencode

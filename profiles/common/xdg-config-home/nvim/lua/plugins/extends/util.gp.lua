@@ -173,6 +173,7 @@ Chats are saved automatically.
         { name = "CodePerplexityLlama3.1-8B", disable = true },
         { name = "ChatCopilot", disable = true },
         { name = "CodeCopilot", disable = true },
+
         -- 2026-03-30 기준
         -- https://artificialanalysis.ai/leaderboards
         -- reasoning off: gemini-3-flash (USD 1.13)
@@ -183,9 +184,7 @@ Chats are saved automatically.
           chat = true,
           command = false,
           model = {
-            -- model = "z-ai/glm-5",
-            model = "google/gemini-3-flash-preview",
-            -- model = "z-ai/glm-4.7-flash",
+            model = "openai/gpt-5.4-mini",
             think = true,
           },
           system_prompt = chat_prompt,
@@ -196,9 +195,7 @@ Chats are saved automatically.
           chat = false,
           command = true,
           model = {
-            -- model = "moonshotai/kimi-k2.5",
             model = "google/gemini-3-flash-preview",
-            -- model = "z-ai/glm-4.7-flash",
             think = true,
           },
           system_prompt = code_prompt,
@@ -209,9 +206,8 @@ Chats are saved automatically.
           chat = false,
           command = true,
           model = {
-            model = "google/gemini-3-flash-preview",
-            -- model = "z-ai/glm-4.7-flash",
-            think = false,
+            model = "openai/gpt-5.4-nano",
+            think = true,
           },
           system_prompt = code_prompt,
         },
@@ -222,8 +218,7 @@ Chats are saved automatically.
           command = true,
           model = {
             model = "google/gemini-3-flash-preview",
-            -- model = "z-ai/glm-4.7-flash",
-            think = false,
+            think = true,
           },
           system_prompt = "",
         },
