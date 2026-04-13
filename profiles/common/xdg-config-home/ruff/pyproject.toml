@@ -1,192 +1,3 @@
-[tool.ruff]
-line-length = 79
-
-[tool.ruff.lint]
-preview = true
-fixable = ["ALL"]
-select = [
-  # ruff default:
-  "E", # pycodestyle - error
-  "F", # Pyflakes
-
-  # Addons #flake8
-  "AIR",   # Airflow
-  "FAST",  # FastAPI
-  "FURB",  # refurb
-  "N",     # pep8-naming
-  "NPY",   # NumPy-specific rules
-  "PD",    # pandas-vet
-  "PERF",  # Perflint
-  "PGH",   # pygrep-hooks
-  "RUF",   # Ruff-specific rules
-  "UP",    # pyupgrade
-  "PLE",   # pylint-error
-  "A",     # flake8-builtins (e.g. builtin-variable-shadowing)
-  "ASYNC", # flake8-async
-  "B",     # flake8-bugbear
-  "C4",    # flake8-comprehensions
-  "DJ",    # flake8-django
-  "DTZ",   # flake8-datetimez
-  "EM",    # flake8-errmsg
-  "FA",    # flake8-future-annotations
-  "PIE",   # flake8-pie
-  "FBT",   # flake8-boolean-trap
-  "G",     # flake8-logging-format
-  "ICN",   # flake8-import-conventions
-  "INP",   # flake8-no-pep420
-  "INT",   # flake8-gettext
-  "ISC",   # flake8-implicit-str-concat
-  "LOG",   # flake8-logging
-  "PT",    # flake8-pytest-style
-  "PTH",   # flake8-use-pathlib
-  "PYI",   # flake8-pyi
-  "SIM",   # flake8-simplify
-  "SLF",   # flake8-self
-  "SLOT",  # flake8-slots
-  "T",     # flake8-debugger
-  "TID",   # flake8-tidy-imports
-  "YTT",   # flake8-2020
-
-  # Things that might be too noisy:
-  "PLC", # pylint-convention
-  # "PLR", # pylint-refactor
-  "PLW", # pylint-warning
-
-  # Things that bother me in simple Python scripts:
-  # "TD",  # flake8-todos
-  # "FIX", # flake8-fixme
-  # "EXE", # flake8-executable (e.g. shebang-not-executable)
-
-  # Things that might be used in production code:
-  # "C90", # mccabe
-  # "W",   # pycodestyle - warning
-  # "D",   # pydocstyle
-  # "DOC", # pydoclint
-  # "TRY", # tryceratops (e.g. raise-vanilla-class)
-  # "ANN", # flake8-annotations (간단한 스크립트에서는 자동 추론 사용)
-  # "ARG", # flake8-unused-arguments
-  # "BLE", # flake8-blind-except
-  # "CPY", # flake8-copyright
-  # "S",   # flake8-bandit
-  # "T20", # flake8-print
-  # "ERA", # eradicate (e.g. commented-out-code)
-
-  # Use autofix feature only:
-  # "I",     # isort
-  # "COM",   # flake8-commas
-  "COM818", # trailing-commaa-on-bare-tuple
-  # "Q",     # flake8-quotes
-  # "RSE",   # flake8-raise
-  # "RET",   # flake8-return
-  # "TC",    # flake8-type-checking
-  "TC010", # runtime-string-union (autofix not available)
-  # "FLY",   # flynt
-]
-
-ignore = [
-  # Rules that are necessary in specific situations:
-  "S404", # suspicious-subprocess-import
-  "S603", # subprocess-without-shell-equals-true", conflicts with S602
-  "S607", # start-process-with-partial-path
-
-  # Things that bother me in simple Python scripts:
-  # "RUF100", # unused-noqa
-
-  # Things I don't think are necessary:
-  "RUF001", # ambiguous-unicode-character-string
-  "RUF002", # ambiguous-unicode-character-docstring
-  "RUF003", # ambiguous-unicode-character-comment
-
-  # Things that can be fixed by formatter (#flake8-commas):
-  "COM812", # missing-trailing-comma
-  "COM819", # prohibited-trailing-comma
-
-  # Things that can be fixed by formatter (#pydocstyle):
-  "D200", # unnecessary-multiline-docstring
-  "D201", # no-blank-line-before-function
-  "D202", # no-blank-line-after-function
-  "D203", # one-blank-line-before-class
-  "D204", # one-blank-line-after-class
-  "D205", # blank-line-after-summary
-  "D206", # indent-with-spaces
-  "D209", # new-line-after-last-paragraph
-  "D210", # no-surrounding-whitespace
-  "D211", # no-blank-line-before-class
-
-  # Things that can be fixed by formatter (#pycodestyle-error):
-  "E201", # whitespace-after-open-bracket
-  "E202", # whitespace-before-close-bracket
-  "E203", # whitespace-before-punctuation
-  "E204", # whitespace-after-decorator
-  "E211", # whitespace-before-parameters
-  "E221", # multiple-spaces-before-operator
-  "E222", # multiple-spaces-after-operator
-  "E223", # tab-before-operator
-  "E224", # tab-after-operator
-  "E225", # missing-whitespace-around-operator
-  "E226", # missing-whitespace-around-arithmetic-operator
-  "E227", # missing-whitespace-around-bitwise-or-shift-operator
-  "E228", # missing-whitespace-around-modulo-operator
-  "E231", # missing-whitespace
-  "E241", # multiple-spaces-after-comma
-  "E242", # tab-after-comma
-  "E251", # unexpected-spaces-around-keyword-parameter-equals
-  "E252", # missing-whitespace-around-parameter-equals
-  "E261", # too-few-spaces-before-inline-comment
-  "E262", # no-space-after-inline-comment
-  "E265", # no-space-after-block-comment
-  "E266", # multiple-leading-hashes-for-block-comment
-  "E271", # multiple-spaces-after-keyword
-  "E272", # multiple-spaces-before-keyword
-  "E273", # tab-after-keyword
-  "E274", # tab-before-keyword
-  "E275", # missing-whitespace-after-keyword
-  "E301", # blank-line-between-methods
-  "E302", # blank-lines-top-level
-  "E303", # too-many-blank-lines
-  "E304", # blank-line-after-decorator
-  "E305", # blank-lines-after-function-or-class
-  "E306", # blank-lines-before-nested-definition
-  "E501", # line-too-long
-  "E502", # redundant-backslash
-  "E703", # useless-semicolon
-  "E711", # none-comparison
-
-  # Things that can be fixed by formatter (#pycodestyle-warning):
-  "W291", # trailing-whitespace
-  "W292", # missing-newline-at-end-of-file
-  "W293", # blank-line-with-whitespace
-  "W391", # too-many-newlines-at-end-of-file
-]
-
-[tool.ruff.format]
-docstring-code-format = true
-
-[tool.ruff.lint.pydocstyle]
-convention = "pep257"
-
-[tool.ruff.lint.per-file-ignores]
-"tests/*.py" = [
-  "ANN001",   # missing-type-function-argument: mock parameters are self-documenting in tests
-  "ARG002",   # unused-argument: mock parameters required by patch decorators
-  "ASYNC109", # async-function-with-timeout
-  "DOC201",   # docstring-missing-returns
-  "FBT001",   # boolean-type-hint-positional-argument
-  "INP001",   # implicit-namespace-package
-  "PGH003",   # blanket-type-ignore
-  "PLC0415",  # import-outside-top-level
-  "PLC1901",  # compare-to-empty-string
-  "PLR2004",  # magic-value-comparison
-  "PLR6301",  # no-self-use
-  "RUF059",   # unused-unpacked-variable
-  "S101",     # assert-used: assert statements are required in tests
-  "SLF001",   # private-member-access: necessary to test internal state of objects
-  "TRY",      # tryceratops
-]
-
-[tool.ty.src]
-exclude = ["test_*.py"]
-
 [tool.basedpyright]
 "reportMissingParameterType" = false        # ruff ANN001
 "reportUnusedImport" = false                # ruff F401
@@ -195,3 +6,54 @@ exclude = ["test_*.py"]
 "reportPrivateUsage" = false                # ruff SLF001
 "reportImplicitStringConcatenation" = false # conflicts with ruff ISC003 (explicit-string-concatenation)
 exclude = ["test_*.py"]                     # exclude test files from type checking
+
+[tool.ruff]
+line-length = 79
+
+[tool.ruff.format]
+docstring-code-format = true
+
+[tool.ruff.lint]
+preview = true
+fixable = ["ALL"]
+select = ["ALL"]
+ignore = [
+  # Rules that are not necessary in this project:
+  "CPY", # flake8-copyright
+  "D",   # pydocstyle
+  "FIX", # flake8-fixme
+  "TD",  # flake8-todos
+
+  # Rules that are necessary in specific situations:
+  "S404", # suspicious-subprocess-import
+  "S603", # subprocess-without-shell-equals-true", conflicts with S602
+  "S607", # start-process-with-partial-path
+
+  # Things I don't think are necessary:
+  "RUF001", # ambiguous-unicode-character-string
+  "RUF002", # ambiguous-unicode-character-docstring
+  "RUF003", # ambiguous-unicode-character-comment
+
+  # Things that can be fixed by formatter:
+  "COM", # flake8-commas
+  "E",   # pycodestyle-error
+  "I",   # isort
+  "Q",   # flake8-quotes
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = [
+  "PLR", # refactor
+  "S",   # flake8-bandit
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "pep257"
+
+[tool.ruff.lint.mccabe]
+max-complexity = 12 # default: 10
+
+[tool.ruff.lint.flake8-annotations] # ANN
+ignore-fully-untyped = true
+suppress-dummy-args = true
+suppress-none-returning = true

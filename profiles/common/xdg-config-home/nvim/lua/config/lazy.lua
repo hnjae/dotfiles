@@ -30,7 +30,7 @@ require("lazy").setup({
     -- import/override with your plugins
     { import = "plugins.visual" },
     { import = "plugins.overrides" },
-    { import = "plugins.lazydev" },
+    -- { import = "plugins.lazydev" },
     { import = "plugins.replacements" },
     { import = "plugins.extends" },
     { import = "plugins.lang" },
