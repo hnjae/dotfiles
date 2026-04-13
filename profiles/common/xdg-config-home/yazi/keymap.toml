@@ -10,6 +10,7 @@ prepend_keymap = [
   {on = ["m", "n"], run = "noop"},
   {on = ["m", "m"], run = "noop"},
   {on = "z", run = "noop"},
+  {on = "Q", run = "noop"},
 
   # Quit
   {on = ["q", "q"], run = "quit", desc = "Quit the process"},
@@ -46,16 +47,16 @@ prepend_keymap = [
   {on = ["<F4>"], run = "plugin my-open-cwd-terminal", desc = "Open current directory in tmux split or terminal"},
 
   # Clipboard
-  {on = ["m", "a"], run = "toggle_all --state=on", desc = "Select all files"},
-  {on = ["m", "r"], run = "toggle_all", desc = "Reverse selection in current directory"},
-  {on = ["m", "f"], run = "toggle", desc = "Toggle hovered file selection"},
-  {on = ["m", "F"], run = "toggle_all --state=off", desc = "Deselect all files in current directory"},
-  {on = ["m", "u"], run = "escape --select", desc = "Clear all selected files"},
-  {on = ["m", "p"], run = "paste", desc = "Paste"},
-  {on = ["m", "P"], run = "paste --force", desc = "Paste (overwrite)"},
-  {on = ["m", "c"], run = "yank", desc = "Copy"},
-  {on = ["m", "m"], run = "yank --cut", desc = "Cut"},
-  {on = ["m", "q"], run = "unyank", desc = "Cancel the yank status"},
+  {on = ["m", "a"], run = "toggle_all --state=on", desc = "mark-all (cwd)"},
+  {on = ["m", "r"], run = "toggle_all", desc = "mark-reverse (cwd)"},
+  {on = ["m", "f"], run = "toggle", desc = "mark-file"},
+  {on = ["m", "F"], run = "toggle_all --state=off", desc = "UNMARK-cwd"},
+  {on = ["m", "u"], run = "escape --select", desc = "UNMARK-all"},
+  {on = ["m", "p"], run = "paste", desc = "paste"},
+  {on = ["m", "P"], run = "paste --force", desc = "!PASTE"},
+  {on = ["m", "c"], run = "yank", desc = "mark-copy"},
+  {on = ["m", "m"], run = "yank --cut", desc = "mark-move"},
+  {on = ["m", "U"], run = "unyank", desc = "UNYANK-all"},
 
   # System clipboard
   {on = ["y", "y"], run = "plugin my-copy-file-clipboard", desc = "Copy hovered or selected entries to desktop clipboard"},
