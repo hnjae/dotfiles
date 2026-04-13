@@ -13,6 +13,4 @@ vim.opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:Cursor/lCurs
 vim.opt.list = true
 vim.opt.listchars = "tab:  ,nbsp:+"
 
-if vim.fn.has("termguicolors") == 1 and not require("utils").is_console then
-  vim.opt.termguicolors = true
-end
+vim.opt.termguicolors = vim.fn.has("termguicolors") == 1 and os.getenv("XDG_SESSION_TYPE") ~= "tty"

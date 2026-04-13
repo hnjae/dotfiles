@@ -3,36 +3,36 @@ return {
   [1] = "lualine.nvim",
   optional = true,
   opts = function(_, opts)
-    local get_theme = function()
-      --[[
-        NOTE: `theme` 에는 다음 항목이 있어야함. <2023-12-11>
-          - command
-          - visual
-          - replace
-          - insert
-          - normal
-          - inactive
-          - terminal
-      ]]
-      if vim.g.colors_name == nil then
-        return "auto"
-      end
-
-      local is_theme, theme = pcall(require, "lualine.themes." .. vim.g.colors_name)
-
-      if not is_theme then
-        return "auto"
-      end
-
-      -- terminal, command 가 없는 theme 이 많다.
-      -- theme.terminal = theme.terminal or theme.insert
-      -- theme.command = theme.command or theme.insert
-      --
-      -- return theme
-
-      -- return colorscheme name, as it will handles the dark/light variants
-      return vim.g.colors_name
-    end
+    -- local get_theme = function()
+    --   --[[
+    --     NOTE: `theme` 에는 다음 항목이 있어야함. <2023-12-11>
+    --       - command
+    --       - visual
+    --       - replace
+    --       - insert
+    --       - normal
+    --       - inactive
+    --       - terminal
+    --   ]]
+    --   if vim.g.colors_name == nil then
+    --     return "auto"
+    --   end
+    --
+    --   local is_theme, theme = pcall(require, "lualine.themes." .. vim.g.colors_name)
+    --
+    --   if not is_theme then
+    --     return "auto"
+    --   end
+    --
+    --   -- terminal, command 가 없는 theme 이 많다.
+    --   -- theme.terminal = theme.terminal or theme.insert
+    --   -- theme.command = theme.command or theme.insert
+    --   --
+    --   -- return theme
+    --
+    --   -- return colorscheme name, as it will handles the dark/light variants
+    --   return vim.g.colors_name
+    -- end
 
     --  remove progress/location
     opts.sections.lualine_y = {}
