@@ -6,7 +6,6 @@ https://artificialanalysis.ai/leaderboards/models
 */
 {
   "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/master/assets/oh-my-opencode.schema.json",
-  // https://github.com/code-yeongyu/oh-my-opencode/blob/dev/docs/configurations.md
   "agents": {
     ////////////////
     // CORE AGENT //
