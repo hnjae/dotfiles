@@ -1,6 +1,6 @@
 {
   "$schema": "https://opencode.ai/tui.json",
   "keybinds": {
-    "editor_open": "ctrl+g,<leader>e",
+    "editor_open": "ctrl+g,<leader>e"
   }
 }

@@ -53,8 +53,7 @@ local function uri_list(items)
 end
 
 local function copy_with_wl_copy(data)
-  local child, err =
-    Command("wl-copy"):arg({ "--type", "text/uri-list" }):stdin(Command.PIPED):spawn()
+  local child, err = Command("wl-copy"):arg({ "--type", "text/uri-list" }):stdin(Command.PIPED):spawn()
 
   if not child then
     return nil, "Failed to start `wl-copy`: " .. tostring(err)

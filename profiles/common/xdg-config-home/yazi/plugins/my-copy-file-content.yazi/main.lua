@@ -38,8 +38,7 @@ local function trim(s)
 end
 
 local function file_info(url)
-  local output, err =
-    Command("file"):arg({ "--brief", "--mime", "--dereference", "--", tostring(url) }):output()
+  local output, err = Command("file"):arg({ "--brief", "--mime", "--dereference", "--", tostring(url) }):output()
 
   if not output then
     return nil, nil, "Failed to inspect the file: " .. tostring(err)
@@ -156,10 +155,6 @@ return {
       return
     end
 
-    notify(
-      "info",
-      string.format("Copied %s as %s.", item.name, kind == "image" and mime or "text/plain"),
-      4
-    )
+    notify("info", string.format("Copied %s as %s.", item.name, kind == "image" and mime or "text/plain"), 4)
   end,
 }

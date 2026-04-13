@@ -53,3 +53,6 @@ pnpm update --global
 
 # debug dependency at global scope
 pnpm why -g <package>
+
+# list packages
+pnpm -g list

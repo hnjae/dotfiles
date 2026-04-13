@@ -1,0 +1,11 @@
+#!/usr/bin/env -S just --justfile
+
+set unstable := true
+set fallback := true
+set lazy := true
+
+_:
+    @just --list
+
+doctor:
+    pnpm dlx oh-my-opencode doctor --verbose

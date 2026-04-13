@@ -203,6 +203,7 @@
   },
   "tmux": { "enabled": false },
   "git_master": {
+    "git_env_prefix": "GIT_MASTER=1",
     "commit_footer": true,
     "include_co_authored_by": true
   },

@@ -39,10 +39,7 @@ end
 
 local function confirm_body(items)
   if #items == 1 then
-    return string.format(
-      'Trash "%s" and create a trace file?\n\nThis only works for files.',
-      items[1].name
-    )
+    return string.format('Trash "%s" and create a trace file?\n\nThis only works for files.', items[1].name)
   end
 
   return string.format(
@@ -164,10 +161,7 @@ return {
       else
         notify(
           "info",
-          string.format(
-            "Trashed %s and created matching trace files.",
-            count_label(trashed, "file", "files")
-          ),
+          string.format("Trashed %s and created matching trace files.", count_label(trashed, "file", "files")),
           4
         )
       end
@@ -175,20 +169,14 @@ return {
     end
 
     if trashed == 0 and #items == 1 then
-      notify(
-        "warn",
-        string.format('Failed to process "%s": %s', first_failed_name, tostring(first_error)),
-        7
-      )
+      notify("warn", string.format('Failed to process "%s": %s', first_failed_name, tostring(first_error)), 7)
       return
     end
 
     local content = {}
     if trashed > 0 then
-      content[#content + 1] = string.format(
-        "Trashed %s and created matching trace files.",
-        count_label(trashed, "file", "files")
-      )
+      content[#content + 1] =
+        string.format("Trashed %s and created matching trace files.", count_label(trashed, "file", "files"))
     end
     content[#content + 1] = string.format("Failed on %s.", count_label(failed, "entry", "entries"))
     content[#content + 1] = "This only works for files."

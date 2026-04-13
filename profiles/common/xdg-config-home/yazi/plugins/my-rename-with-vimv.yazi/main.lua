@@ -63,11 +63,7 @@ return {
     end
 
     local permit = ui.hide()
-    local cmd = Command("vimv")
-      :cwd(data.cwd)
-      :stdin(Command.INHERIT)
-      :stdout(Command.INHERIT)
-      :stderr(Command.INHERIT)
+    local cmd = Command("vimv"):cwd(data.cwd):stdin(Command.INHERIT):stdout(Command.INHERIT):stderr(Command.INHERIT)
 
     for _, item in ipairs(items) do
       cmd:arg(item)

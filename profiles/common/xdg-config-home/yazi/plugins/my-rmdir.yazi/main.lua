@@ -37,10 +37,7 @@ end
 
 local function confirm_body(items)
   if #items == 1 then
-    return string.format(
-      'Remove "%s" with rmdir?\n\nOnly empty directories can be removed.',
-      items[1].name
-    )
+    return string.format('Remove "%s" with rmdir?\n\nOnly empty directories can be removed.', items[1].name)
   end
 
   return string.format(
@@ -83,30 +80,20 @@ return {
     end
 
     if failed == 0 then
-      notify(
-        "info",
-        string.format("Removed %s.", count_label(removed, "empty directory", "empty directories")),
-        4
-      )
+      notify("info", string.format("Removed %s.", count_label(removed, "empty directory", "empty directories")), 4)
       return
     end
 
     if removed == 0 and #items == 1 then
-      notify(
-        "warn",
-        string.format('Failed to remove "%s": %s', items[1].name, tostring(first_error)),
-        7
-      )
+      notify("warn", string.format('Failed to remove "%s": %s', items[1].name, tostring(first_error)), 7)
       return
     end
 
     local content = {}
     if removed > 0 then
-      content[#content + 1] =
-        string.format("Removed %s.", count_label(removed, "empty directory", "empty directories"))
+      content[#content + 1] = string.format("Removed %s.", count_label(removed, "empty directory", "empty directories"))
     end
-    content[#content + 1] =
-      string.format("Failed to remove %s.", count_label(failed, "entry", "entries"))
+    content[#content + 1] = string.format("Failed to remove %s.", count_label(failed, "entry", "entries"))
     content[#content + 1] = "Only empty directories can be removed."
 
     notify("warn", table.concat(content, " "), 7)
