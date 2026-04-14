@@ -8,4 +8,4 @@ if [ ! -f "$OPENCODE_CONFIG" ]; then
     exit 1
 fi
 
-exec opencode
+OPENCODE_CONFIG="$OPENCODE_CONFIG" exec opencode

@@ -59,7 +59,18 @@
     // Creative approaches to problems
     "artistry": { "model": "openai/gpt-5.4", "variant": "high" }
   },
-  "tmux": { "enabled": true },
+  "tmux": {
+    "enabled": true,
+    "layout": "main-vertical",
+    "main_pane_size": 60,
+    "main_pane_min_width": 120,
+    "agent_pane_min_width": 40
+  },
+  "git_master": {
+    "commit_footer": true,
+    "include_co_authored_by": true,
+    "git_env_prefix": "GIT_MASTER=1"
+  },
   "lsp": {
     "ty": {
       "command": ["ty", "server"],

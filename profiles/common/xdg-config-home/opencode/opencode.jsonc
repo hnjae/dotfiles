@@ -3,7 +3,9 @@
   "plugin": ["oh-my-openagent@latest"],
   "permission": {
     "bash": {
-      "npm *": "deny"
+      "npm *": "deny",
+      "sudo *": "deny",
+      "nix-env *": "deny"
     }
   }
 }

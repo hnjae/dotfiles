@@ -1,0 +1,4 @@
+% bun
+
+# remove global installed package
+bun remove -g <pkg>

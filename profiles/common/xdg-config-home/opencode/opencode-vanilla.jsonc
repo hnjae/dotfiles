@@ -18,7 +18,9 @@
     "todoread": "allow",
     "webfetch": "allow",
     "bash": {
-      "npm *": "deny"
+      "npm *": "deny",
+      "sudo *": "deny",
+      "nix-env *": "deny"
     }
   },
   "lsp": {
