@@ -2,11 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/oh-my-opencode.schema.json",
   "agents": {
     // Main orchestrator: handles delegation and drives tasks to completion
-    "sisyphus": {
-      "model": "openai/gpt-5.4",
-      "variant": "high",
-      "ultrawork": { "model": "openai/gpt-5.4", "variant": "xhigh" }
-    },
+    "sisyphus": { "model": "openai/gpt-5.4", "variant": "xhigh" },
 
     // Deep autonomous worker: end-to-end implementation (default 5.4 medium)
     "hephaestus": { "model": "openai/gpt-5.4" },
@@ -75,6 +71,11 @@
     },
     "basedpyright": {
       "disabled": true
+    },
+    "marksman": {
+      "command": ["marksman", "server"],
+      "extensions": [".md"],
+      "priority": 10
     }
   }
 }

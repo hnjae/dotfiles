@@ -28,6 +28,10 @@
     "ty": {
       "command": ["ty", "server"],
       "extensions": [".py", ".pyi"]
+    },
+    "marksman": {
+      "command": ["marksman", "server"],
+      "extensions": [".md"]
     }
   }
 }

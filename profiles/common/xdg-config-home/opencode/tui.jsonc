@@ -1,6 +1,5 @@
 {
   "$schema": "https://opencode.ai/tui.json",
-  "theme": "system",
   "keybinds": {
     "editor_open": "ctrl+g",
     "session_compact": "",
