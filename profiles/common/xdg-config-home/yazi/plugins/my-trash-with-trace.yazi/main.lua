@@ -39,7 +39,7 @@ end
 
 local function confirm_body(items)
   if #items == 1 then
-    return string.format('Trash "%s" and create a trace file?\n\nThis only works for files.', items[1].name)
+    return string.format('Trash "%s" and create a trace file?', items[1].name)
   end
 
   return string.format(
@@ -73,9 +73,6 @@ local function trash_with_trace(item)
   local cha, cha_err = fs.cha(item.url, false)
   if not cha then
     return nil, "Couldn't inspect the file: " .. tostring(cha_err)
-  end
-  if cha.is_dir then
-    return nil, "Target is a directory."
   end
 
   local parent = item.url.parent

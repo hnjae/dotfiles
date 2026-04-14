@@ -29,6 +29,7 @@ SECTION_ORDER = (
     "System clipboard",
     "Linemode",
     "Copy Helpers",
+    "Tabs",
     "Relative Motions",
     "Extra Cmds",
 )
@@ -86,7 +87,7 @@ def section_name(entry: dict[str, object]) -> str | None:
     if is_noop(entry):
         return "Disabled Defaults"
 
-    if signature in {("q", "q"), ("Q",), ("<F12>",)}:
+    if signature in {("q", "q"), ("Q",), ("W",)}:
         return "Quit"
     if signature in {
         ("d",),
@@ -119,6 +120,8 @@ def section_name(entry: dict[str, object]) -> str | None:
         return "Linemode"
     if first == "c":
         return "Copy Helpers"
+    if signature in {("["), ("]"), ("{"), ("}"), ("<Tab>")}:
+        return "Tabs"
     if len(first) == 1 and first.isdigit():
         return "Relative Motions"
 
