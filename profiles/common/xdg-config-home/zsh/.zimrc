@@ -37,7 +37,8 @@ zmodule "MichaelAquilina/zsh-you-should-use"
 # zmodule olets/zsh-abbr --source zsh-abbr.plugin.zsh --use git  # it includes submodules # THIS IS FREAKING SLOW (2025-07-07)
 
 zmodule "$ZDOTDIR/my-git" # forgit 보다 먼저 로드해야 한다.
-zmodule wfxr/forgit --source forgit.plugin.zsh
+# NOTE: 26.04.0 부터 `forgit add` 가 고장났음. <2026-04-14>
+zmodule wfxr/forgit --tag 26.01.0 --source forgit.plugin.zsh
 
 # 기타
 zmodule "$ZDOTDIR/my-utilities"

@@ -8,7 +8,7 @@ lastmod: 2026-03-22T20:44:34+0900
 
 ## Prerequisite
 
-- `git-lfs`
+- `git`
 - `python3`
 
 ## Naming Convention
@@ -18,8 +18,16 @@ lastmod: 2026-03-22T20:44:34+0900
 ## Install
 
 ```sh
-git clone --recurse-submodules git@github.com:hnjae/dotfiles ~/Projects/dotfiles
-~/Projects/dotfiles/install.sh
+git clone --recurse-submodules git@github.com:hnjae/dotfiles ~/Projects/dotfiles && \
+    ~/Projects/dotfiles/install.sh
+
+# OR
+git clone --recurse-submodules git@github.com:hnjae/dotfiles ~/.local/share/dotfiles && \
+    ~/.local/share/dotfiles/install.sh
+
+# OR
+git clone --recurse-submodules 'https://github.com/hnjae/dotfiles' ~/.local/share/dotfiles && \
+    ~/.local/share/dotfiles/install.sh
 ```
 
 ### Update
