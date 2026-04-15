@@ -12,39 +12,39 @@
 zmodule direnv
 
 # 단순 환경변수 설정 또는 alias 설정만 있는 모듈들
-zmodule "$ZDOTDIR/my-bat"
-zmodule "$ZDOTDIR/my-cheat"
-zmodule "$ZDOTDIR/my-eza"
-zmodule "$ZDOTDIR/my-flatpak"
-zmodule "$ZDOTDIR/my-home"
-zmodule "$ZDOTDIR/my-jq"
-zmodule "$ZDOTDIR/my-mani"
-zmodule "$ZDOTDIR/my-nix"
-zmodule "$ZDOTDIR/my-podman"
-zmodule "$ZDOTDIR/my-pueue"
-zmodule "$ZDOTDIR/my-rsync"
-zmodule "$ZDOTDIR/my-systemd"
-zmodule "$ZDOTDIR/my-tmux"
-zmodule "$ZDOTDIR/my-zimfw"
-zmodule "$ZDOTDIR/my-yazi"
+zmodule "$ZDOTDIR/modules/bat"
+zmodule "$ZDOTDIR/modules/cheat"
+zmodule "$ZDOTDIR/modules/eza"
+zmodule "$ZDOTDIR/modules/flatpak"
+zmodule "$ZDOTDIR/modules/home"
+zmodule "$ZDOTDIR/modules/jq"
+zmodule "$ZDOTDIR/modules/mani"
+zmodule "$ZDOTDIR/modules/nix"
+zmodule "$ZDOTDIR/modules/podman"
+zmodule "$ZDOTDIR/modules/pueue"
+zmodule "$ZDOTDIR/modules/rsync"
+zmodule "$ZDOTDIR/modules/systemd"
+zmodule "$ZDOTDIR/modules/tmux"
+zmodule "$ZDOTDIR/modules/zimfw"
+zmodule "$ZDOTDIR/modules/yazi"
 
 # 복잡한 모듈
 zmodule environment
 # zmodule input
-zmodule "$ZDOTDIR/my-termtitle" # loads vcs_info, zsh-hook 있음
-zmodule "$ZDOTDIR/my-navi"
+zmodule "$ZDOTDIR/modules/termtitle" # loads vcs_info, zsh-hook 있음
+zmodule "$ZDOTDIR/modules/navi"
 zmodule "MichaelAquilina/zsh-you-should-use"
 # zmodule olets/zsh-abbr --source zsh-abbr.plugin.zsh --use git  # it includes submodules # THIS IS FREAKING SLOW (2025-07-07)
 
-zmodule "$ZDOTDIR/my-git" # forgit 보다 먼저 로드해야 한다.
+zmodule "$ZDOTDIR/modules/git" # forgit 보다 먼저 로드해야 한다.
 # NOTE: 26.04.0 부터 `forgit add` 가 고장났음. <2026-04-14>
 zmodule wfxr/forgit --tag 26.01.0 --source forgit.plugin.zsh
 
 # 기타
-zmodule "$ZDOTDIR/my-utilities"
+zmodule "$ZDOTDIR/modules/utilities"
 
 zmodule jeffreytse/zsh-vi-mode
-zmodule "$ZDOTDIR/my-fzf"
+zmodule "$ZDOTDIR/modules/fzf"
 
 ###############################################################################
 # Prompt
@@ -53,7 +53,7 @@ zmodule "$ZDOTDIR/my-fzf"
 # zmodule sindresorhus/pure --source async.zsh --source pure.zsh # 내부에서 git 호출
 # zmodule romkatv/powerlevel10k --use degit
 # zmodule "$ZDOTDIR/my-omp"
-zmodule "$ZDOTDIR/my-starship"
+zmodule "$ZDOTDIR/modules/starship"
 
 ###############################################################################
 # Completion
@@ -66,7 +66,7 @@ zmodule zsh-users/zsh-completions --fpath src
 # completion must be sourced after all modules that add completion definitions.
 # zmodule completion # init compinit
 
-zmodule "$ZDOTDIR/my-compinit"
+zmodule "$ZDOTDIR/modules/compinit"
 zmodule Aloxaf/fzf-tab --source fzf-tab.plugin.zsh # source after compinit
 
 ###############################################################################
@@ -74,7 +74,7 @@ zmodule Aloxaf/fzf-tab --source fzf-tab.plugin.zsh # source after compinit
 ###############################################################################
 
 # > For completions to work, the above line must be added after compinit is called. You may have to rebuild your completions cache by running rm ~/.zcompdump*; compinit.
-zmodule "$ZDOTDIR/my-zoxide"
+zmodule "$ZDOTDIR/modules/zoxide"
 
 
 ###############################################################################
