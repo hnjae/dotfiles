@@ -30,7 +30,10 @@
       glob: true
       path: home.projects/*
 - shell:
-    - command: |
+    - description: Installing submodules
+      command: git submodule update --init --recursive
+    - description: seed files
+      command: |
         set -eu
 
         seed_dir() {
@@ -64,4 +67,3 @@
         }
 
         main
-      description: seed files
