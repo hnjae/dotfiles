@@ -58,8 +58,8 @@ prepend_keymap = [
   {on = ["m", "u"], run = "escape --select", desc = "UNMARK-all"},
   {on = ["m", "p"], run = "paste", desc = "paste"},
   {on = ["m", "P"], run = "paste --force", desc = "!PASTE"},
-  {on = ["m", "c"], run = "yank", desc = "mark-copy"},
-  {on = ["m", "m"], run = "yank --cut", desc = "mark-move"},
+  {on = ["m", "y"], run = "yank", desc = "mark-copy"},
+  {on = ["m", "x"], run = "yank --cut", desc = "mark-move"},
   {on = ["m", "U"], run = "unyank", desc = "UNYANK-all"},
 
   # System clipboard
