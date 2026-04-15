@@ -32,5 +32,6 @@ __pycache__
 # Agents
 **/.claude/settings.local.json
 .sisyphus
+.codex
 
 # vi:ft=gitignore:

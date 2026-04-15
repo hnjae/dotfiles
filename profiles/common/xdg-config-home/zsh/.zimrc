@@ -49,11 +49,8 @@ zmodule "$ZDOTDIR/modules/fzf"
 ###############################################################################
 # Prompt
 ###############################################################################
-
-# zmodule sindresorhus/pure --source async.zsh --source pure.zsh # 내부에서 git 호출
 # zmodule romkatv/powerlevel10k --use degit
-# zmodule "$ZDOTDIR/my-omp"
-zmodule "$ZDOTDIR/modules/starship"
+zmodule "$ZDOTDIR/modules/oh-my-posh"
 
 ###############################################################################
 # Completion
