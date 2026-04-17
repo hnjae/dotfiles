@@ -13,4 +13,4 @@
       path: xdg-data-home/*
     ~/.local/share/applications:
       glob: true
-      path: xdg-data-home.applications/*
+      path: xdg-data-home_applications/*

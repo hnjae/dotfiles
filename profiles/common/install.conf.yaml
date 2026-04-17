@@ -25,10 +25,10 @@
       path: ~/.config/zsh/.zshenv
     ~/.ssh:
       glob: true
-      path: home.ssh/*
-    ~/Projects:
+      path: home_.ssh/*
+    ~/projects:
       glob: true
-      path: home.projects/*
+      path: home_projects/*
 - shell:
     - description: Installing submodules
       command: git submodule update --init --recursive

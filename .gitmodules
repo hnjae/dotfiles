@@ -1,19 +1,19 @@
 [submodule "lib/dotbot"]
 	path = lib/dotbot
-	url = git@github.com:anishathalye/dotbot
+	url = https://github.com/anishathalye/dotbot.git
 [submodule "profiles/common/xdg-data/zimfw"]
 	path = profiles/common/xdg-data/zimfw
 	url = https://github.com/zimfw/zimfw.git
 [submodule "profiles/common/xdg-data-home/zimfw"]
 	path = profiles/common/xdg-data-home/zimfw
-	url = git@github.com:zimfw/zimfw.git
+	url = https://github.com/zimfw/zimfw.git
 [submodule "profiles/desktop/xdg-config-home/mpv/script-repos/thumbfast"]
 	path = profiles/desktop/xdg-config-home/mpv/script-repos/thumbfast
-	url = git@github.com:po5/thumbfast.git
+	url = https://github.com/po5/thumbfast.git
 [submodule "profiles/desktop/xdg-config-home/mpv/script-repos/osc.lua"]
 	path = profiles/desktop/xdg-config-home/mpv/script-repos/osc.lua
-	url = git@github.com:po5/thumbfast.git
+	url = https://github.com/po5/thumbfast.git
 	branch = vanilla-osc
 [submodule "profiles/desktop/xdg-config-home/mpv/script-repos/content-red-tester-s-scripts"]
 	path = profiles/desktop/xdg-config-home/mpv/script-repos/content-red-tester-s-scripts
-	url = git@github.com:CogentRedTester/mpv-scripts
+	url = https://github.com/CogentRedTester/mpv-scripts.git

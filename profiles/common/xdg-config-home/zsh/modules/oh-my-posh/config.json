@@ -7,15 +7,20 @@
       "alignment": "left",
       "segments": [
         {
-          "foreground": "darkGray",
-          "style": "plain",
-          "template": "{{ .UserName }}@{{ .HostName }} ",
           "type": "session",
+          "style": "plain",
+          "foreground": "darkGray",
+          "foreground_templates": [
+            "{{ if .Root }}red{{ end }}",
+            "{{ if .SSHSession }}lightYellow{{ end }}"
+          ],
+          "template": "{{ if .SSHSession }} {{ end }}{{ .UserName }}@{{ .HostName }} ",
           "min_width": 80
         },
         {
-          "foreground": "lightBlue",
+          "type": "path",
           "style": "plain",
+          "foreground": "lightBlue",
           "options": {
             "style": "mixed",
             "display_root": true,
@@ -29,10 +34,11 @@
             }
           },
           "template": "{{ .Path }} ",
-          "type": "path",
           "min_width": 70
         },
         {
+          "type": "git",
+          "style": "plain",
           "foreground": "magenta",
           "options": {
             "branch_ahead_icon": "\u2191",
@@ -48,15 +54,13 @@
             "rebase_icon": "\u2c62 ",
             "tag_icon": "\u25b6 "
           },
-          "style": "plain",
-          "template": " {{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} \u2502{{ end }}{{ if .Staging.Changed }} {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} {{ .StashCount }}{{ end }} ",
-          "type": "git"
+          "template": " {{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} \u2502{{ end }}{{ if .Staging.Changed }} {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} {{ .StashCount }}{{ end }} "
         },
         {
-          "foreground": "lightRed",
+          "type": "status",
           "style": "plain",
-          "template": "\u001b[1mERROR\u001b[0m ",
-          "type": "status"
+          "foreground": "lightRed",
+          "template": "\u001b[1mERROR\u001b[0m "
         }
       ],
       "type": "prompt"
@@ -65,10 +69,10 @@
       "alignment": "right",
       "segments": [
         {
-          "foreground": "darkGray",
+          "type": "shell",
           "style": "plain",
-          "template": "{{ .Name }}",
-          "type": "shell"
+          "foreground": "darkGray",
+          "template": "{{ .Name }}"
         },
         {
           "type": "text",
@@ -95,19 +99,19 @@
           "template": "{{ if .Env.DIRENV_FILE }} <darkGray,>|</>   direnv{{ end }}"
         },
         {
+          "type": "root",
           "foreground": "red",
           "style": "plain",
-          "template": " <darkGray,>as</> root",
-          "type": "root"
+          "template": " <darkGray,>as</> root"
         },
         {
+          "type": "time",
+          "style": "plain",
           "foreground": "darkGray",
           "options": {
             "time_format": "15:04:05"
           },
-          "style": "plain",
           "template": " <darkGray,>|</> {{ .CurrentDate | date .Format }}",
-          "type": "time",
           "min_width": 120
         }
       ],
@@ -118,10 +122,10 @@
       "newline": true,
       "segments": [
         {
-          "foreground": "white",
           "style": "plain",
-          "template": "$",
-          "type": "text"
+          "type": "text",
+          "foreground": "foreground",
+          "template": "$"
         }
       ],
       "type": "prompt"

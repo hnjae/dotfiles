@@ -79,6 +79,16 @@
     "description": "fenced code block (`cb`)",
     "body": ["```${1:lang}", "${0:${TM_SELECTED_TEXT:foo}}", "```"]
   },
+  "codeblock-console": {
+    "prefix": "cbc",
+    "description": "fenced code block for console output",
+    "body": ["```console", "$0", "```"]
+  },
+  "codeblock-sh": {
+    "prefix": "cbs",
+    "description": "fenced code block for sh",
+    "body": ["```sh", "$0", "```"]
+  },
   "superscript": {
     "prefix": "sup",
     "description": "Create a superscript.",
@@ -178,10 +188,5 @@
     "prefix": ["dl", "description-block"],
     "description": "write description (GFM)",
     "body": ["${1:word}", ": ${2:description}"]
-  },
-  "console-codeblock": {
-    "prefix": "con",
-    "description": "fenced code block for console output",
-    "body": ["```console", "$0", "```"]
   }
 }
