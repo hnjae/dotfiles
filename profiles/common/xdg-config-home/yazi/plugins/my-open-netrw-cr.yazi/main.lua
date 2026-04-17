@@ -12,6 +12,11 @@ return {
       return
     end
 
+    if hovered.url.is_archive then
+      ya.emit("plugin", { "my-open-associated" })
+      return
+    end
+
     ya.emit("open", { hovered = true })
   end,
 }
