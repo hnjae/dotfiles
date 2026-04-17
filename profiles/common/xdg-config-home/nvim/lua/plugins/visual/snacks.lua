@@ -5,15 +5,15 @@ return {
   [1] = "snacks.nvim",
   optional = true,
   ---@type snacks.Config
-  opts = {
-    toggle = {
+  opts = function(_, opts)
+    opts.toggle = {
       icon = {
         enabled = icons.toggle_on,
         disabled = icons.toggle,
       },
-    },
+    }
 
-    picker = {
+    opts.picker = {
       icons = {
         files = {
           dir = icons.directory,
@@ -33,6 +33,24 @@ return {
           Hint = icons.severity.hint,
         },
       },
-    },
-  },
+    }
+
+    opts.styles = vim.tbl_deep_extend("force", opts.styles or {}, {
+      terminal = {
+        wo = {
+          -- Snacks windows default to SnacksNormal -> NormalFloat.
+          -- Keep the terminal on the editor background instead.
+          winhighlight = table.concat({
+            "Normal:Normal",
+            "NormalNC:Normal",
+            "WinBar:SnacksWinBar",
+            "WinBarNC:SnacksWinBarNC",
+            "FloatTitle:SnacksTitle",
+            "FloatFooter:SnacksFooter",
+            "WinSeparator:SnacksWinSeparator",
+          }, ","),
+        },
+      },
+    })
+  end,
 }

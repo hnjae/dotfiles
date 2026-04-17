@@ -10,7 +10,7 @@ return {
   priority = 1000,
   init = function()
     vim.g.gruvbox_material_cursor = "auto"
-    vim.g.gruvbox_material_disable_terminal_colors = 0
+    vim.g.gruvbox_material_disable_terminal_colors = 1
 
     vim.g.gruvbox_material_enable_italic = 1
     vim.g.gruvbox_material_enable_bold = 1
