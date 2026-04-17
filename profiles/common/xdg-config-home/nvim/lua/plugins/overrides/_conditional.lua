@@ -5,22 +5,22 @@ return {
   {
     [1] = "mason.nvim",
     optional = true,
-    enabled = have_cc,
+    enabled = false,
   },
   {
     [1] = "mason-lspconfig.nvim",
     optional = true,
-    enabled = have_cc,
-  },
-  {
-    [1] = "nvim-treesitter",
-    optional = true,
-    enabled = have_cc,
+    enabled = false,
   },
   {
     [1] = "none-ls.nvim",
     optional = true,
     enabled = false,
+  },
+  {
+    [1] = "nvim-treesitter",
+    optional = true,
+    enabled = have_cc,
   },
   {
     [1] = "nvim-lint",
