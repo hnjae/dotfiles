@@ -1,77 +1,44 @@
 -- https://dotfyle.com/neovim/colorscheme/trending
 
-local colorschemes = {
-  gruvbox_nvim = "gruvbox-nvim",
-  gruvbox_material = "gruvbox-material",
-}
-
-local COLORSCHEME = colorschemes.gruvbox_material
 local color_terminal = (vim.fn.has("gui_running") == 1) or (os.getenv("TERM_PROGRAM") == nil)
 
----@type LazySpec[]
+---@type LazySpec
 return {
-  {
-    [1] = "ellisonleao/gruvbox.nvim",
-    enabled = COLORSCHEME == colorschemes.gruvbox_nvim,
-    version = false, -- use the latest git commit
-    lazy = false,
-    priority = 1000,
-    opts = {
-      dim_inactive = false,
-      underline = false,
-      terminal_colors = color_terminal,
+  [1] = "sainnhe/gruvbox-material",
+  version = false, -- use the latest git commit
+  lazy = false,
+  priority = 1000,
+  init = function()
+    vim.g.gruvbox_material_cursor = "auto"
+    vim.g.gruvbox_material_disable_terminal_colors = 0
+
+    vim.g.gruvbox_material_enable_italic = 1
+    vim.g.gruvbox_material_enable_bold = 1
+
+    -- Contrast
+    vim.g.gruvbox_material_foreground = "original"
+    vim.g.gruvbox_material_ui_contrast = "high"
+    vim.g.gruvbox_material_inlay_hints_background = "dimmed"
+
+    -- vim.g.gruvbox_material_sign_column_background = "grey"
+    vim.g.gruvbox_material_better_performance = 1
+  end,
+  specs = {
+    {
+      [1] = "LazyVim",
+      optional = true,
+      opts = { colorscheme = "gruvbox-material" },
     },
-    specs = {
-      {
-        [1] = "LazyVim",
-        optional = true,
-        opts = { colorscheme = "gruvbox" },
-      },
-      {
-        [1] = "tokyonight.nvim",
-        enabled = false,
-        optional = true,
-      },
+    {
+      [1] = "tokyonight.nvim",
+      enabled = false,
+      optional = true,
     },
-  },
-  {
-    [1] = "sainnhe/gruvbox-material",
-    enabled = COLORSCHEME == colorschemes.gruvbox_material,
-    version = false, -- use the latest git commit
-    lazy = false,
-    priority = 1000,
-    init = function()
-      vim.g.gruvbox_material_cursor = "auto"
-      vim.g.gruvbox_material_disable_terminal_colors = 0
-
-      vim.g.gruvbox_material_enable_italic = 1
-      vim.g.gruvbox_material_enable_bold = 1
-
-      -- Contrast
-      vim.g.gruvbox_material_foreground = "original"
-      vim.g.gruvbox_material_ui_contrast = "high"
-      vim.g.gruvbox_material_inlay_hints_background = "dimmed"
-
-      -- vim.g.gruvbox_material_sign_column_background = "grey"
-      vim.g.gruvbox_material_better_performance = 1
-    end,
-    specs = {
-      {
-        [1] = "LazyVim",
-        optional = true,
-        opts = { colorscheme = "gruvbox-material" },
-      },
-      {
-        [1] = "tokyonight.nvim",
-        enabled = false,
-        optional = true,
-      },
-      {
-        [1] = "lualine.nvim",
-        optional = true,
-        opts = {
-          theme = "gruvbox-material",
-        },
+    {
+      [1] = "lualine.nvim",
+      optional = true,
+      opts = {
+        theme = "gruvbox-material",
       },
     },
   },
