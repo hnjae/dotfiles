@@ -14,6 +14,21 @@
     }
   },
   "permission": {
+    "read": {
+      "/nix/store/**": "allow"
+    },
+    "glob": {
+      "/nix/store/**": "allow"
+    },
+    "grep": {
+      "/nix/store/**": "allow"
+    },
+    "list": {
+      "/nix/store/**": "allow"
+    },
+    "external_directory": {
+      "/nix/store/**": "allow"
+    },
     "todowrite": "allow",
     "todoread": "allow",
     "webfetch": "allow",

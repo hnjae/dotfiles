@@ -93,12 +93,6 @@
           "template": "{{ if .Env.DEVENV_ROOT }} <darkGray,>|</>  devenv{{ end }}"
         },
         {
-          "type": "text",
-          "style": "plain",
-          "foreground": "green",
-          "template": "{{ if .Env.DIRENV_FILE }} <darkGray,>|</>   direnv{{ end }}"
-        },
-        {
           "type": "root",
           "foreground": "red",
           "style": "plain",
