@@ -73,7 +73,8 @@ prepend_keymap = [
   {on = ["y", ")"], run = "plugin my-copy-bracket-content round-last", desc = "Copy last () content from filename"},
   {on = ["y", "["], run = "plugin my-copy-bracket-content square-first", desc = "Copy [] content from filename"},
   {on = ["y", "]"], run = "plugin my-copy-bracket-content square-last", desc = "Copy last [] content from filename"},
-  {on = ["y", "p"], run = "copy path", desc = "Copy the file path"},
+  {on = ["y", "p"], run = "copy path", desc = "file-path"},
+  {on = ["y", "n"], run = "copy filename", desc = "filename"},
 
   # Linemode
   {on = ["i", "s"], run = "linemode size", desc = "Linemode: size"},

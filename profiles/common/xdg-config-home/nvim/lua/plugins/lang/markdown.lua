@@ -33,19 +33,43 @@ return {
         },
       },
       formatters_by_ft = {
-        ["markdown"] = { "prettier", "rumdl", "markdown-toc" },
-        ["markdown.mdx"] = { "prettier", "rumdl", "markdown-toc" },
+        ["markdown"] = { "rumdl", "markdown-toc" },
+        ["markdown.mdx"] = { "rumdl", "markdown-toc" },
       },
     },
   },
   {
     "nvim-lint",
     optional = true,
-    opts = {
-      linters_by_ft = {
+    opts = function(_, opts)
+      local lint = require("lint")
+
+      -- Post-process rumdl diagnostics so editor noise stays low while the
+      -- formatter can still fix the underlying markdown.
+      if not vim.g._rumdl_lint_wrapped then
+        local wrap = require("lint.util").wrap
+        lint.linters.rumdl = wrap(lint.linters.rumdl, function(diagnostic)
+          if diagnostic.source == "rumdl" then
+            if diagnostic.code == "MD012" then -- MD012: no-multiple-blanks
+              return nil
+            end
+
+            if diagnostic.severity == vim.diagnostic.severity.WARN then
+              diagnostic.severity = vim.diagnostic.severity.INFO
+            end
+          end
+
+          return diagnostic
+        end)
+        vim.g._rumdl_lint_wrapped = true
+      end
+
+      opts.linters_by_ft = vim.tbl_extend("force", opts.linters_by_ft or {}, {
         markdown = { "rumdl" },
-      },
-    },
+      })
+
+      return opts
+    end,
   },
   {
     "nvim-lspconfig",
@@ -86,6 +110,12 @@ return {
               end
 
               -- Call the default handler
+              if result and result.diagnostics then
+                result.diagnostics = vim.tbl_filter(function(diagnostic)
+                  return diagnostic.code ~= "MD012" -- MD012: no-multiple-blanks
+                end, result.diagnostics)
+              end
+
               vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx)
             end,
           },

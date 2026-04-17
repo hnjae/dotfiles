@@ -1,5 +1,7 @@
 % pnpm
 
+; -g:--global
+
 # create `pnpm-lock.yaml` from another package manager's lockfile
 pnpm import <lockfile>
 
@@ -45,17 +47,20 @@ pnpm add -w -D prettier
 # run specific packages' package in workspace
 pnpm -F <package-name> exec <name>
 
+# Run binary without installing
+pnpm dlx <pkg>
+
 # install package at global ($HOME scope)
-pnpm add --global <pkg>
+pnpm --global add <pkg>
 
 # update packages at global scope ($HOME scope)
-pnpm update --global
+pnpm --global update
 
 # debug dependency at global scope
-pnpm why -g <package>
+pnpm --global why <package>
 
 # list packages (global scope)
-pnpm -g list
+pnpm --global list
 
 # remove package (global scope)
-pnpm -g remove <pkg>
+pnpm --global remove <pkg>

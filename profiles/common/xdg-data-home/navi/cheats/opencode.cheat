@@ -1,0 +1,4 @@
+% opencode
+
+# run opencode with tmux integration (oh-my-openagent)
+opencode --port <port>

@@ -18,7 +18,7 @@ preview = true
 fixable = ["ALL"]
 select = ["ALL"]
 ignore = [
-  # Rules that are not necessary in this project:
+  # Rules that are not necessary in various project:
   "CPY", # flake8-copyright
   "D",   # pydocstyle
   "FIX", # flake8-fixme

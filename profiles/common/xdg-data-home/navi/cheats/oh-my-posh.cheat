@@ -1,0 +1,4 @@
+% oh-my-posh, omp
+
+# disable live reload
+oh-my-posh disable reload

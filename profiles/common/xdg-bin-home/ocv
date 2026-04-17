@@ -1,11 +1,16 @@
 #!/bin/sh
 
-XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}"
-export OPENCODE_CONFIG="${XDG_CONFIG_HOME}/opencode/opencode-vanilla.jsonc"
+# XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}"
+# export OPENCODE_CONFIG="${XDG_CONFIG_HOME}/opencode/opencode-vanilla.jsonc"
+#
+# if [ ! -f "$OPENCODE_CONFIG" ]; then
+#     echo "ERR: '$OPENCODE_CONFIG' does not exists." >&2
+#     exit 1
+# fi
+#
+# OPENCODE_CONFIG="$OPENCODE_CONFIG" exec opencode
 
-if [ ! -f "$OPENCODE_CONFIG" ]; then
-    echo "ERR: $OPENCODE_CONFIG does not exists." >&2
-    exit 1
-fi
+# NOTE: 아래가 merge 되기 전까지는 OPENCODE_CONFIG 환경변수 작동 안됨 <2026-04-17>
+# https://github.com/anomalyco/opencode/pull/21280
 
-OPENCODE_CONFIG="$OPENCODE_CONFIG" exec opencode
+exec opencode --pure
