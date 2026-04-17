@@ -87,6 +87,10 @@
       "command": ["marksman", "server"],
       "extensions": [".md"],
       "priority": 10
+    },
+    "docker-ls": {
+      "command": ["docker-language-server", "start"],
+      "extensions": ["Containerfile", "Dockerfile"]
     }
   }
 }
