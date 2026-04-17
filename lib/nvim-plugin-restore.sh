@@ -2,6 +2,11 @@
 
 set -eu
 
+if ! command -v nvim >/dev/null 2>&1; then
+    echo "INFO: neovim is not installed" >&2
+    exit 0
+fi
+
 echo "INFO: Restore plugin status to lazy-lock.json" >&2
 
 nvim --headless -c "$(
