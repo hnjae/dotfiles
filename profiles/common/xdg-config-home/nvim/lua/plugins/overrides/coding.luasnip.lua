@@ -4,7 +4,6 @@
 return {
   [1] = "LuaSnip",
   optional = true,
-  enabled = vim.fn.executable("make") == 1,
   opts = {
     store_selection_keys = "<Tab>",
   },

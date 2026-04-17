@@ -1,8 +1,6 @@
 { pkgs, ... }:
 {
   packages = with pkgs; [
-    git
-    just
     editorconfig-checker
   ];
 

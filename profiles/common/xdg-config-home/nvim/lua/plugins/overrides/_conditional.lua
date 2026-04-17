@@ -27,4 +27,9 @@ return {
     optional = true,
     enabled = have_cc, -- mason.nvim 이 안돌아가는 환경에서는 실행 X
   },
+  {
+    [1] = "LuaSnip",
+    optional = true,
+    enabled = vim.fn.executable("make") == 1,
+  },
 }

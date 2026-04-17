@@ -20,8 +20,12 @@ return {
     vim.g.gruvbox_material_ui_contrast = "high"
     vim.g.gruvbox_material_inlay_hints_background = "dimmed"
 
-    -- vim.g.gruvbox_material_sign_column_background = "grey"
-    vim.g.gruvbox_material_better_performance = 1
+    --[[
+    NOTE:
+      `better_performance` generates `after/syntax` files at startup.
+      If `~/.config/nvim` is read-only, t will fail to first render when the theme tries to write there.
+    --]]
+    vim.g.gruvbox_material_better_performance = 0
   end,
   specs = {
     {
