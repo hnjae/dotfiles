@@ -1,56 +1,74 @@
 local icons = require("globals").icons
 
----@type LazySpec
+---@type LazySpec[]
 return {
-  [1] = "snacks.nvim",
-  optional = true,
-  ---@type snacks.Config
-  opts = function(_, opts)
-    opts.toggle = {
-      icon = {
-        enabled = icons.toggle_on,
-        disabled = icons.toggle,
-      },
-    }
-
-    opts.picker = {
-      icons = {
-        files = {
-          dir = icons.directory,
-          dir_open = icons.directory_open,
-          file = icons.file,
-        },
-
-        lsp = {
+  {
+    [1] = "snacks.nvim",
+    optional = true,
+    ---@type snacks.Config
+    opts = {
+      toggle = {
+        icon = {
           enabled = icons.toggle_on,
           disabled = icons.toggle,
         },
+      },
+      picker = {
+        icons = {
+          files = {
+            dir = icons.directory,
+            dir_open = icons.directory_open,
+            file = icons.file,
+          },
 
-        diagnostics = {
-          Error = icons.severity.error,
-          Warn = icons.severity.warn,
-          Info = icons.severity.info,
-          Hint = icons.severity.hint,
+          lsp = {
+            enabled = icons.toggle_on,
+            disabled = icons.toggle,
+          },
+
+          diagnostics = {
+            Error = icons.severity.error,
+            Warn = icons.severity.warn,
+            Info = icons.severity.info,
+            Hint = icons.severity.hint,
+          },
         },
       },
-    }
-
-    opts.styles = vim.tbl_deep_extend("force", opts.styles or {}, {
-      terminal = {
-        wo = {
-          -- Snacks windows default to SnacksNormal -> NormalFloat.
-          -- Keep the terminal on the editor background instead.
-          winhighlight = table.concat({
-            "Normal:Normal",
-            "NormalNC:Normal",
-            "WinBar:SnacksWinBar",
-            "WinBarNC:SnacksWinBarNC",
-            "FloatTitle:SnacksTitle",
-            "FloatFooter:SnacksFooter",
-            "WinSeparator:SnacksWinSeparator",
-          }, ","),
+      styles = {
+        terminal = {
+          wo = {
+            -- Snacks windows default to SnacksNormal -> NormalFloat.
+            -- Keep the terminal on the editor background instead.
+            winhighlight = table.concat({
+              "Normal:Normal",
+              "NormalNC:Normal",
+              "WinBar:SnacksWinBar",
+              "WinBarNC:SnacksWinBarNC",
+              "FloatTitle:SnacksTitle",
+              "FloatFooter:SnacksFooter",
+              "WinSeparator:SnacksWinSeparator",
+            }, ","),
+          },
         },
       },
-    })
-  end,
+    },
+  },
+  {
+    [1] = "snacks.nvim",
+    optional = true,
+    opts = function()
+      local group = vim.api.nvim_create_augroup("visual_snacks_highlights", { clear = true })
+      local snacks_hl_override = function()
+        -- HACK: Hidden files are linked to NonText by default, which is too dim in gruvbox-material and various themes <2026-04-18>
+        vim.api.nvim_set_hl(0, "SnacksPickerPathHidden", { link = "Comment", force = true })
+      end
+
+      vim.api.nvim_create_autocmd("ColorScheme", {
+        group = group,
+        callback = snacks_hl_override,
+      })
+
+      LazyVim.on_load("snacks.nvim", snacks_hl_override)
+    end,
+  },
 }
