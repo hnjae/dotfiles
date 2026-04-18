@@ -1,7 +1,10 @@
 % podman, docker, container
 
+; -i --interactive
+; -t --tty
+
 # podman run
-podman run -it "<image>" --mount=
+podman run --interactive --tty --rm "<image>" --mount=
 
 # Podman run executable
 podamn run --interactive --tty --rm "<image>" "</bin/sh>"
@@ -47,6 +50,15 @@ sudo podman top <container-name>
 
 # show history of image ()
 sudo podman history <image>
+
+# remove ALL images
+podman images --all --format=json | jq --raw-output '.[].Id' | xargs --no-run-if-empty podman image rm
+
+# list ALL containers
+podman container ls --all --external
+
+# remove ALL containers
+podman container ls --all --external --format json | jq --raw-output '.[].Id' | xargs --no-run-if-empty podman container rm --force
 
 # get tags of image
 skopeo list-tags docker://<uri>
