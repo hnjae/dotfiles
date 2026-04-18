@@ -26,7 +26,6 @@ require("lazy").setup({
       version = "v15.*",
       import = "lazyvim.plugins",
     },
-
     -- import/override with your plugins
     { import = "plugins.visual" },
     { import = "plugins.overrides" },

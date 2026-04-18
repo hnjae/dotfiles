@@ -10,7 +10,7 @@ return {
   {
     [1] = "mason-lspconfig.nvim",
     optional = true,
-    enabled = have_cc,
+    enabled = false, -- use manual installation instead (`go`, `npm` 등 패키지 필요로 함.)
   },
   {
     [1] = "none-ls.nvim",

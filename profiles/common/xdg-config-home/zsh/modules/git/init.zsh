@@ -102,6 +102,7 @@ alias gc="git commit -v"
 alias gca="git commit -v --amend"
 alias gcaN="git commit -v --amend --no-edit"
 alias gcm="git commit -v -m"
+alias "gcm!"="git commit -v -m --no-verify"
 
 ######################################################
 # git-cherry-pick

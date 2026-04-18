@@ -48,6 +48,8 @@ return {
       },
     },
   },
+
+  -- use bash-ls instead <2026-04-18>
   {
     [1] = "nvim-lint",
     optional = true,

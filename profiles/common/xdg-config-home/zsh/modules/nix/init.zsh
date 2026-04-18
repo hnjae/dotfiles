@@ -22,8 +22,8 @@ fi
 
 # alias nx=nix
 
-alias nixf="nix flake"
-alias nixfsh="nix flake show"
-alias nixsr="nix search nixpkgs"
-alias nixs="nix shell --impure 'nixpkgs#"
-alias nixr="nix run --impure 'nixpkgs#"
+alias nf="nix flake"
+alias nfh="nix flake show"
+alias nsp="nix search nixpkgs"
+alias ns="nix shell --impure 'nixpkgs#"
+alias nx="nix run --impure 'nixpkgs#"
