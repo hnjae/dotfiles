@@ -107,7 +107,7 @@
   "Get a value from a dictionary for a key": {
     "prefix": "dict get",
     "body": "dict get ${1:dictionaryValue} ${0:?key ...?}",
-    "description": "Given a dictionary value (first argument) and a key (second argument), this will retrieve the value for that key. Where several keys are supplied, the behaviour of the command shall be as if the result of dict get $dictVal $key was passed as the first argument to dict get with the remaining arguments as second (and possibly subsequent) arguments. If no keys are provided, dict get will return a list containing pairs of elements in a manner similar to array get. That is, the first element of each pair would be the key and the second element would be the value for that key."
+    "description": "Given a dictionary value (first argument) and a key (second argument), this will retrieve the value for that key. Where several keys are supplied, the behavior of the command shall be as if the result of dict get $dictVal $key was passed as the first argument to dict get with the remaining arguments as second (and possibly subsequent) arguments. If no keys are provided, dict get will return a list containing pairs of elements in a manner similar to array get. That is, the first element of each pair would be the key and the second element would be the value for that key."
   },
   "Return keys for a dict": {
     "prefix": "dict keys",

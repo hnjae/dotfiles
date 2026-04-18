@@ -181,9 +181,9 @@
     "description": "Signal declaration",
     "body": ["signal ${1:signal_name} : ${2:std_logic};"]
   },
-  "signal initialised": {
+  "signal initialized": {
     "prefix": "sigi, signali",
-    "description": "Signal declaration with initialisation",
+    "description": "Signal declaration with initialization",
     "body": ["signal ${1:signal_name} : ${2:std_logic} := ${3:'0'};"]
   },
   "variable": {
@@ -191,14 +191,14 @@
     "description": "variable declaration",
     "body": ["variable ${1:var_name} : ${2:integer};"]
   },
-  "variable initialised": {
+  "variable initialized": {
     "prefix": "vari, variablei",
-    "description": "Variable declaration with initialisation",
+    "description": "Variable declaration with initialization",
     "body": ["variable ${1:var_name} : ${2:integer} := ${3:0};"]
   },
   "constant": {
     "prefix": "constant",
-    "description": "Constant declaration with initialisation",
+    "description": "Constant declaration with initialization",
     "body": ["constant ${1:const_name} : ${2:integer} := ${3:0};"]
   },
   "function": {
@@ -272,7 +272,7 @@
     "description": "std_logic Type",
     "body": "std_logic"
   },
-  "std_logic initialised": {
+  "std_logic initialized": {
     "prefix": "stdi",
     "description": "std_logic Type",
     "body": "std_logic := '0';"
@@ -282,7 +282,7 @@
     "description": "std_logic_vector Type",
     "body": "std_logic_vector(${1:7} ${2|downto,to|} ${3:0})"
   },
-  "std_logic_vector initialised": {
+  "std_logic_vector initialized": {
     "prefix": "stdvi",
     "description": "std_logic_vector Type",
     "body": "std_logic_vector(${1:7} ${2|downto,to|} ${3:0}) := (others => '0');"
@@ -292,7 +292,7 @@
     "description": "std_ulogic_vector Type",
     "body": "std_ulogic_vector(${1:7} ${2|downto,to|} ${3:0})"
   },
-  "std_ulogic_vector initialised": {
+  "std_ulogic_vector initialized": {
     "prefix": "stduvi",
     "description": "std_ulogic_vector Type",
     "body": "std_ulogic_vector(${1:7} ${2|downto,to|} ${3:0}) := (others => '0');"
@@ -302,9 +302,9 @@
     "description": "signed Type",
     "body": "signed(${1:7} ${2|downto,to|} ${3:0})"
   },
-  "signed initialised": {
+  "signed initialized": {
     "prefix": "sii",
-    "description": "signed Type initialised",
+    "description": "signed Type initialized",
     "body": "signed(${1:7} ${2|downto,to|} ${3:0}) := (others => '0');"
   },
   "unsigned": {
@@ -312,7 +312,7 @@
     "description": "unsigned Type",
     "body": "unsigned(${1:7} ${2|downto,to|} ${3:0})"
   },
-  "unsigned initialised": {
+  "unsigned initialized": {
     "prefix": "unsi",
     "description": "unsigned Type",
     "body": "unsigned(${1:7} ${2|downto,to|} ${3:0}) := (others => '0');"

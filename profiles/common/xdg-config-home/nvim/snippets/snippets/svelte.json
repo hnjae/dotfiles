@@ -509,20 +509,20 @@
     "body": ["dispatch(${1:key},${2:data})"],
     "description": "svelte dispatch event"
   },
-  "svelte-writeable": {
-    "prefix": "s-writeable",
+  "svelte-writable": {
+    "prefix": "s-writable",
     "body": ["const ${1:store} = writable(${2:initialValue});"],
-    "description": "svelte writeable"
+    "description": "svelte writable"
   },
-  "svelte-writeable-set": {
-    "prefix": "s-writeable-set",
+  "svelte-writable-set": {
+    "prefix": "s-writable-set",
     "body": [
       "const ${1:store} = writable(${2:initialValue}, () => {",
       "\t${3:console.log('got a subscriber');}",
       "\treturn () => ${4:console.log('no more subscribers');}",
       "});"
     ],
-    "description": "svelte writeable w/ set function"
+    "description": "svelte writable w/ set function"
   },
   "svelte-readable": {
     "prefix": "s-readable",

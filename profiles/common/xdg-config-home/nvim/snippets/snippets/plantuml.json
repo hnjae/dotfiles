@@ -144,7 +144,7 @@
   "Node": {
     "prefix": "no",
     "body": "node $1",
-    "description": "A cube modelling a node in the system"
+    "description": "A cube modeling a node in the system"
   },
   "Note left": {
     "prefix": "note-lf",

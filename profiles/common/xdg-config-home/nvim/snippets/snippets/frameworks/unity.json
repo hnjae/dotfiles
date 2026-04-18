@@ -172,7 +172,7 @@
   },
   "MonoBehaviour LateUpdate": {
     "prefix": "LateUpdate()",
-    "description": "LateUpdate is called every frame, if the Behaviour is enabled. It is called after all Update functions have been called.",
+    "description": "LateUpdate is called every frame, if the Behavior is enabled. It is called after all Update functions have been called.",
     "body": ["private void LateUpdate() {", "\t$0", "}"]
   },
   "MonoBehaviour OnAnimatorIK": {
@@ -274,7 +274,7 @@
   },
   "MonoBehaviour OnDisable": {
     "prefix": "OnDisable()",
-    "description": "This function is called when the behaviour becomes disabled or inactive.",
+    "description": "This function is called when the behavior becomes disabled or inactive.",
     "body": ["private void OnDisable() {", "\t$0", "}"]
   },
   "MonoBehaviour OnDisconnectedFromServer": {

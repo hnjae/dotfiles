@@ -143,7 +143,7 @@
   "invalid_codeblock_attributes": {
     "prefix": "#![warn(rustdoc::invalid_codeblock_attributes)]",
     "body": ["#![${1:warn}$0(rustdoc::invalid_codeblock_attributes)]"],
-    "description": "How to report code block attributes in examples that have potentially mis-typed values, when generating the documentation.\n\n* Accepted vales: allow, warn, deny.\n\n* Default: warn\n\n* How to use: This lint option must be added at the top of the src/lib.rs or main.rs file in your binary project."
+    "description": "How to report code block attributes in examples that have potentially mistyped values, when generating the documentation.\n\n* Accepted vales: allow, warn, deny.\n\n* Default: warn\n\n* How to use: This lint option must be added at the top of the src/lib.rs or main.rs file in your binary project."
   },
   "invalid_html_tags": {
     "prefix": "#![warn(rustdoc::invalid_html_tags)]",

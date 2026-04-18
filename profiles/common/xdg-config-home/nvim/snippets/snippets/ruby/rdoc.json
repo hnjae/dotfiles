@@ -142,7 +142,7 @@
   "@!parse": {
     "prefix": "@!parse",
     "body": ["@!parse [${1:language}] ${2:code}$0"],
-    "description": "Parses a block of code as if it were present in the source file at that location. This directive is useful if a class has dynamic meta-programmed behaviour that cannot be recognized by YARD. You can specify the language of the code block using the types specification list. By default, the code language is “ruby”."
+    "description": "Parses a block of code as if it were present in the source file at that location. This directive is useful if a class has dynamic meta-programmed behavior that cannot be recognized by YARD. You can specify the language of the code block using the types specification list. By default, the code language is “ruby”."
   },
   "@!scope": {
     "prefix": "@!scope",
