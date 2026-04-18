@@ -54,8 +54,7 @@ cursor-style = block
 # but DECSCUSR will still be respected.
 cursor-style-blink = false
 shell-integration = none
-# shell-integration-features = no-cursor
-
+shell-integration-features = no-cursor
 
 # gtk-tabs-location = bottom
 gtk-titlebar = false

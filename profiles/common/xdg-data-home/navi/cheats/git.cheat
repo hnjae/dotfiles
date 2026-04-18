@@ -184,15 +184,6 @@ git clone --recurse-submodules "git@<githubdotcom>:<owner>/<repo>"
 # git clone specific branch
 git clone --recurse-submodules --branch <branch-name> "git@<githubdotcom>:<owner>/<repo>"
 
-;################
-; submodule
-;##################
-# Update the URL of submodules in `.git/config` from what's in `.gitmodules`
-git submodule sync --quiet --recursive
-
-# Updates/initialize and fetch git submodules
-git submodule update --init --recursive
-
 ;#############################################################################
 ; misc
 ;#############################################################################

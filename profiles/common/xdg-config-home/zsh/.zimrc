@@ -43,7 +43,7 @@ zmodule wfxr/forgit --tag 26.01.0 --source forgit.plugin.zsh
 # 기타
 zmodule "$ZDOTDIR/modules/utilities"
 
-zmodule jeffreytse/zsh-vi-mode
+zmodule "$ZDOTDIR/modules/zsh-vi-mode"
 zmodule "$ZDOTDIR/modules/fzf"
 
 ###############################################################################

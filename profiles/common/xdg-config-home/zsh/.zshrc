@@ -6,9 +6,10 @@
 if [[ "${__ZSHRC_SOURCED}" != "" ]]; then return; fi
 __ZSHRC_SOURCED=1
 
-if [[ "$GHOSTTY_RESOURCES_DIR" != "" && -f "${GHOSTTY_RESOURCES_DIR}/shell-integration/zsh/ghostty-integration" ]]; then
-  source "${GHOSTTY_RESOURCES_DIR}/shell-integration/zsh/ghostty-integration"
-fi
+# NOTE: This CHANGES the cursor style even if shell commands did not require it. <2026-04-18>
+# if [[ "$GHOSTTY_RESOURCES_DIR" != "" && -f "${GHOSTTY_RESOURCES_DIR}/shell-integration/zsh/ghostty-integration" ]]; then
+#   source "${GHOSTTY_RESOURCES_DIR}/shell-integration/zsh/ghostty-integration"
+# fi
 
 if [[ "$TERM" != "dumb" && "$NO_COLOR" == "" ]]; then
     # NOTE: took 1.3 ms
@@ -128,15 +129,6 @@ setopt EXTENDED_HISTORY
 ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion)
 zstyle ':fzf-tab:*' use-fzf-default-opts yes
 
-#################################################
-# ZVM 설정 (Before sourcing zimfw init file)
-#################################################
-ZVM_INIT_MODE="sourcing" # fzf 가 zvm 설정을 override 하는데 필요.
-ZVM_CURSOR_STYLE_ENABLED=true
-ZVM_SYSTEM_CLIPBOARD_ENABLED=true
-ZVM_INSERT_MODE_CURSOR="$ZVM_CURSOR_BEAM"
-ZVM_LINE_INIT_MODE="$ZVM_MODE_INSERT"
-
 ################################################################################
 # Bootstrap zimfw (NOTE: zimfw 를 git-submodule 로 사용 중.)
 ################################################################################
@@ -169,6 +161,3 @@ source "${ZIM_HOME}/init.zsh"
 if bindkey -M viins '^I' &>/dev/null; then
     bindkey -M vicmd '^I' fzf-tab-complete
 fi
-
-# alias mdream="podman run -it ghcr.io/harlan-zw/mdream:latest"
-# alias mdreamp="podman run -it ghcr.io/harlan-zw/mdream:latest -driver playwright"
