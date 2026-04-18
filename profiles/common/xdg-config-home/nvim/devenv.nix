@@ -9,6 +9,5 @@
 
   packages = with pkgs; [
     selene
-    typos
   ];
 }
