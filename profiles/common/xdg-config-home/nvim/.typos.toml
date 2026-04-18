@@ -1,15 +1,30 @@
+#:schema https://cdn.jsdelivr.net/gh/crate-ci/typos@master/config.schema.json
+
 [default]
-extend-ignore-re = [
-  "\\bmis-typed\\b",
-]
+locale = "en-us"
+
+[files]
+extend-exclude = ["*.snippets"]
 
 [default.extend-identifiers]
 GpWhisperEnew = "GpWhisperEnew"
 
 [default.extend-words]
-# In Vim Context:
+# In vim context:
 nore = "nore"
+fo = "fo"
 
+[type.lua.extend-words]
+"noice" = "noice"     # plugin name
+"spectre" = "spectre" # plugin name
+
+[type.json.extend-identifiers]
+# In Unity context:
+MonoBehaviour = "MonoBehaviour"
+StateMachineBehaviour = "StateMachineBehaviour"
+NetworkBehaviour = "NetworkBehaviour"
+
+[type.json.extend-words]
 # Prefix in snippets
 FUL = "FUL"
 afe = "afe"
@@ -30,11 +45,11 @@ gti = "gti"
 ontext = "ontext"
 parsef = "parsef"
 pn = "pn"
-processs = "processs"
-selectd = "selectd"
 ser = "ser"
 stip = "stip"
 whe = "whe"
+selectd = "selectd"
+processs = "processs"
 
 # LaTeX
 multline = "multline"
@@ -42,7 +57,7 @@ multline = "multline"
 # Proper Noun
 Neuton = "Neuton"
 noice = "noice"
-AKS = "AKS"     # Azurerm Kubernetes Cluster
+AKS = "AKS"       # Azurerm Kubernetes Cluster
 
 # Unreal Frameworks
 UE = "UE"

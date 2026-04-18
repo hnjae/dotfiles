@@ -1,0 +1,35 @@
+#:schema https://cdn.jsdelivr.net/gh/crate-ci/typos@master/config.schema.json
+
+[default]
+locale = "en-us"
+extend-ignore-re = [
+  "alias.*",
+]
+
+[files]
+ignore-dot = false
+extend-exclude = [
+  # Submodules
+  "lib/dotbot/",
+  "**/xdg-data-home/zimfw",
+  "**/mpv/script-repos",
+
+  # Managed by own typos.toml
+  "**/xdg-config-home/nvim",
+
+  # Unmanaged
+  "*.cheat",
+  "**/cheat/cheatsheets",
+  "**/xdg-config-home/fontconfig",
+  "**/xdg-config-home/k*",
+  "**/xdg-config-home/lazygit",
+]
+
+[type.zsh]
+extend-ignore-re = [
+  "alias.*",
+]
+
+[type.zsh.extend-words]
+"ot" = "ot"
+"Pn" = "Pn"

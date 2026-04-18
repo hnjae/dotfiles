@@ -1,0 +1,4 @@
+#:schema https://json.schemastore.org/taplo.json
+
+[formatting]
+array_auto_collapse = false
