@@ -1,0 +1,31 @@
+---
+date: 2026-04-18T09:21:21+0900
+lastmod: 2026-04-18T09:21:21+0900
+syntax: markdown
+tags: []
+---
+
+## Entrypoint 와 CMD 의 차이
+
+```dockerfile
+ENTRYPOINT ["python", "app.py"]
+CMD ["--port", "8080"]
+```
+
+와 같은 형태는
+
+`python app.py --port 8080` 처럼 동작
+
+`podman run myimage --port 9090` 처럼 뒤에 인자를 주면 CMD 가 대체. quadlet 의 `Exec=` key 도 `CMD` 를 오버라이드.
+
+만일
+
+```dockerfile
+CMD ["python", "app.py"]
+```
+
+형태라면, 기본 실행 명령이, `python app.py`
+
+<!--
+vi:ft=markdown
+-->

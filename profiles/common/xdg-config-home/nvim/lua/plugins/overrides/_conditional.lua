@@ -5,12 +5,12 @@ return {
   {
     [1] = "mason.nvim",
     optional = true,
-    enabled = false,
+    enabled = have_cc,
   },
   {
     [1] = "mason-lspconfig.nvim",
     optional = true,
-    enabled = false,
+    enabled = have_cc,
   },
   {
     [1] = "none-ls.nvim",

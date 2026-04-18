@@ -7,6 +7,7 @@ return {
     opts = {
       PATH = "append", -- Mason's bin location is put at the end of PATH
       max_concurrent_installers = 3, -- default: 4
+      log_level = vim.log.levels.WARN,
     },
     specs = {},
   },
