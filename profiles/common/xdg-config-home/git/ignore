@@ -13,6 +13,9 @@ Thumbs.db
 # KDE
 .directory
 
+# Shell
+*.zwc
+
 # Python
 .ropeproject
 __pycache__

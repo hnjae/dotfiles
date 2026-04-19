@@ -6,6 +6,9 @@ extend-ignore-re = [
   "alias.*",
 ]
 
+[default.extend-words]
+CPY = "CPY"
+
 [files]
 ignore-dot = false
 extend-exclude = [

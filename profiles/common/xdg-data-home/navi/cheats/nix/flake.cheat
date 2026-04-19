@@ -7,7 +7,7 @@ nix flake --help
 nix flake init
 
 # create a flake from a specific template
-nix flake init -t templates#<templateName>
+nix flake init -t 'templates#<templateName>'
 
 # list flake
 nix flake show

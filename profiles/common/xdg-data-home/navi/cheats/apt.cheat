@@ -1,0 +1,4 @@
+% apt
+
+# instlal without weak/recommended dependencies
+apt install --no-install-recommends <pkg>

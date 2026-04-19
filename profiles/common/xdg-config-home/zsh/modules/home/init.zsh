@@ -1,17 +1,15 @@
 typeset _hostname="$(hostname)"
 
 if [[ ${_hostname} == "hemera" || ${_hostname} == "nyx" ]]; then
-    # temp
-    # export DISABLE_LAYER_AMD_SWITCHABLE_GRAPHICS_1="1"
-    # export VK_DRIVER_FILES="/run/current-system/sw/share/vulkan/icd.d/amd_icd64.json"
-
     # cd to commonly used directories
-    alias sp='cd "$HOME/Projects"'
-    alias sn='cd "$HOME/Projects/nix-config"'
-    alias sf='cd "$HOME/Projects/dotfiles"'
+    alias sp='cd "$HOME/projects"'
+    alias sn='cd "$HOME/projects/nix-config"'
+    alias sf='cd "$HOME/projects/dotfiles"'
     alias sv='cd "${XDG_CONFIG_HOME:-$HOME/.config}/nvim"'
     alias sz='cd "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}"'
-    alias so='cd "$HOME/Projects/notes"'
+    alias so='cd "$HOME/projects/notes"'
+    alias sy='cd "${XDG_CONFIG_HOME:-$HOME/.config}/yazi"'
+    alias sn='cd "$HOME/projects/nix-config"'
 
     # edit commonly used files
     # alias ed='vi "$HOME/Projects/obsidian/home/dailies/$(date +"%Y-%m-%d").md"'

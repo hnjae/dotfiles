@@ -7,15 +7,15 @@
 podman run --interactive --tty --rm "<image>" --mount=
 
 # Podman run executable
-podamn run --interactive --tty --rm "<image>" "</bin/sh>"
+podman run --interactive --tty --rm "<image>" "/bin/sh"
 
 # Podman run executable detach
-podamn run --interactive --tty --detach --rm "<image>"
+podman run --interactive --tty --detach --rm "<image>"
 
 # podman device mount example
 sudo podman run --mount=type=bind,source=./centos-7_x86_64,destination=/mnt --device=/dev/<>:/dev/xvda:rwm -it "centos:7"
 
-# run bash in container (-it: interactive tty)
+# Podman run bash in container (-it: interactive tty)
 podman exec -it <container-id> /bin/bash
 
 # podman pod list (ls)

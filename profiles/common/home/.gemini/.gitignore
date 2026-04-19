@@ -1,5 +1,6 @@
-/google_accounts.json
-/installation_id
-/oauth_creds.json
-/state.json
-/tmp
+# use allowlist instead of denylist
+*
+!*/
+
+# Files
+!settings.json

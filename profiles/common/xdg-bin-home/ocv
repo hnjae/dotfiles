@@ -13,4 +13,4 @@
 # NOTE: 아래가 merge 되기 전까지는 OPENCODE_CONFIG 환경변수 작동 안됨 <2026-04-17>
 # https://github.com/anomalyco/opencode/pull/21280
 
-exec opencode --pure
+exec opencode --pure "$@"

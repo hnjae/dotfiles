@@ -1,0 +1,49 @@
+line-length = 79
+
+[format]
+docstring-code-format = true
+
+[lint]
+preview = true
+fixable = ["ALL"]
+select = ["ALL"]
+ignore = [
+  # Rules that are not necessary in various project:
+  "CPY", # flake8-copyright
+  "D",   # pydocstyle
+  "FIX", # flake8-fixme
+  "TD",  # flake8-todos
+
+  # Rules that are necessary in specific situations:
+  "S404", # suspicious-subprocess-import
+  "S603", # subprocess-without-shell-equals-true", conflicts with S602
+  "S607", # start-process-with-partial-path
+
+  # Things I don't think are necessary:
+  "RUF001", # ambiguous-unicode-character-string
+  "RUF002", # ambiguous-unicode-character-docstring
+  "RUF003", # ambiguous-unicode-character-comment
+
+  # Things that can be fixed by formatter:
+  "COM", # flake8-commas
+  "E",   # pycodestyle-error
+  "I",   # isort
+  "Q",   # flake8-quotes
+]
+
+[lint.per-file-ignores]
+"tests/**/*.py" = [
+  "PLR", # refactor
+  "S",   # flake8-bandit
+]
+
+[lint.pydocstyle]
+convention = "pep257"
+
+[lint.mccabe]
+max-complexity = 12 # default: 10
+
+[lint.flake8-annotations] # ANN
+ignore-fully-untyped = true
+suppress-dummy-args = true
+suppress-none-returning = true

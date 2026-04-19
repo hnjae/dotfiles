@@ -1,0 +1,6 @@
+% nix3, nix3-flake, nix3-flake-init
+
+# init template from my nix-templates
+nix flake init -t 'git+ssh://git@github.com/hnjae/nix-templates#<template>'
+
+$ template: nix --extra-experimental-features "nix-command flakes" flake show --no-pretty --json -- 'git+ssh://git@github.com/hnjae/nix-templates' | jq -r '.inventory.templates.output.children | keys[]' --- --header "templates"

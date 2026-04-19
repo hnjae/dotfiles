@@ -12,29 +12,22 @@
       "",
       "PROJECT := \"enhance-cb\"",
       "",
-      "# set working-directory := 'bar'",
-      "# set fallback",
       "set unstable := true",
-      "set fallback := true",
+      "set fallback := false",
       "set lazy := true",
       "",
-      "alias fmt := format",
       "hostname := ``",
       "",
       "_:",
       "\t@just --list",
       "",
+      "[group('ci')]",
       "format:",
       "\tnix fmt",
       "",
+      "[group('build')]",
       "build:",
       "\ttypst c *.typ",
-      "",
-      "test-all: build",
-      "\t./test --all",
-      "",
-      "test TEST: build",
-      "\t./test --test {{TEST\\}\\}",
       "",
       "[working-directory: 'bar']",
       "@foo:",
@@ -53,7 +46,7 @@
     "body": ["set fallback"]
   },
   "set working-directory": {
-    "prefix": ["swd", "set-working-directory"],
+    "prefix": ["swd", "set-working-directory", "sdir"],
     "description": "working-directory",
     "body": ["set working-directory := '${0:dir}'"]
   },
@@ -226,16 +219,16 @@
     ]
   },
   "set working-directory for recipe": {
-    "prefix": ["wd"],
+    "prefix": ["wd", "swd", "sdir"],
     "description": "working-directory for recipe",
-    "body": "[workinging-directory: '${0:$TM_SELECTED_TEXT}']"
+    "body": "[working-directory: '${0:$TM_SELECTED_TEXT}']"
   },
   "positional-arguments for recipe": {
     "prefix": ["pos", "positional-arguments"],
     "body": "[positional-arguments]"
   },
   "doc for recipe": {
-    "prefix": ["doc"],
+    "prefix": ["doc", "sdoc"],
     "body": "[doc('${0:$TM_SELECTED_TEXT}')]"
   },
   "confirm for recipe": {
@@ -247,7 +240,7 @@
     "body": "[group('${0:$TM_SELECTED_TEXT}')]"
   },
   "private": {
-    "prefix": ["private", "pri"],
+    "prefix": ["private", "pri", "spri"],
     "description": "make recipe, alias or variable private",
     "body": "[private]"
   },

@@ -14,3 +14,9 @@ cargo clippy -- -W clippy::restriction
 
 # run lintter with nursery category (clippy)
 cargo clippy -- -W clippy::nursery
+
+# Update dependency (Cargo.lock)
+cargo update
+
+# Upgrade dependency (Cargo.toml; requires cargo-edit)
+cargo upgrade
