@@ -18,6 +18,9 @@ sudo virsh -c 'qemu:///system' vol-list default
 # dumpxml
 virsh -c 'qemu+ssh://tofu@eris/system?socket=/run/libvirt/libvirt-sock' dumpxml <test>
 
+# list vol
+virsh -c 'qemu+ssh://tofu@eris/system?socket=/run/libvirt/libvirt-sock' vol-list default
+
 # connect with virt-viewer
 virt-viewer --connect "qemu+ssh://tofu@eris/system?socket=/run/libvirt/libvirt-sock" test
 

@@ -11,9 +11,12 @@ prepend_keymap = [
   {on = ["m", "m"], run = "noop"},
   {on = "z", run = "noop"},
   {on = "Q", run = "noop"},
+  {on = "f", run = "noop"},        # default: filter
   {on = "<C-c>", run = "noop"},    # default: close tab
   {on = "<C-r>", run = "noop"},    # default: invert select
   {on = "~", run = "noop"},        # default: help
+
+  {on = ["z", "z"], run = "filter", desc = "filter"},
 
   # Quit
   {on = ["q", "q"], run = "quit", desc = "Quit the process"},
