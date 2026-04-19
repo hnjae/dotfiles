@@ -34,7 +34,9 @@ ignore = [
 [lint.per-file-ignores]
 "tests/**/*.py" = [
   "PLR", # refactor
+  "ARG", # flake8-unused-arguments
   "S",   # flake8-bandit
+  "SLF", # flake8-self
 ]
 
 [lint.pydocstyle]

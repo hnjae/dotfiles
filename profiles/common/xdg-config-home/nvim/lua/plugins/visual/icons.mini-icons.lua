@@ -1,11 +1,4 @@
-local strip = function(str)
-  return string.sub(str, 1, #str - 1)
-end
-
-local icons = {
-  directory = strip(require("globals").icons.directory),
-  file = strip(require("globals").icons.file),
-}
+local icons = require("globals").icons
 
 ---@type LazySpec
 return {
@@ -143,5 +136,12 @@ return {
     -- use_file_extension = function(ext, file)
     --   return true
     -- end,
+  },
+  specs = {
+    {
+      [1] = "nvim-web-devicons",
+      optional = true,
+      enabled = false,
+    },
   },
 }

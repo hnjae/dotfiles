@@ -1,10 +1,10 @@
+local formatter_icon = require("globals").icons.sort .. " "
+
 ---@type LazyPluginSpec
 local spec = {
   [1] = "lualine.nvim",
   optional = true,
   opts = function(_, opts)
-    local formatter_icon = require("globals").icons.sort
-
     local hide_width = 65
     local truc_width = 110
     local num_source_light_limit = 2

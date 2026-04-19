@@ -158,6 +158,6 @@ source "${ZIM_HOME}/init.zsh"
 #################################################
 # zsh-vi-mode leaves Tab unbound in vicmd by default. Mirror the insert-mode
 # completion widget so Tab still completes when the line is in normal mode.
-if bindkey -M viins '^I' &>/dev/null; then
-    bindkey -M vicmd '^I' fzf-tab-complete
-fi
+# if bindkey -M viins '^I' &>/dev/null; then
+#     bindkey -M vicmd '^I' fzf-tab-complete
+# fi
