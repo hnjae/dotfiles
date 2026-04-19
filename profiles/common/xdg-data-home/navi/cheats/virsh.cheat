@@ -1,0 +1,22 @@
+% virsh, libvirt
+
+# enter console (`<C-]` to exit)
+sudo virsh -c qemu:///system console <name>
+
+# enter console on diffrent machine
+virsh -c 'qemu+ssh://tofu@eris/system?socket=/run/libvirt/libvirt-sock' console <test>
+
+# turn off vm
+virsh -c 'qemu:///system' destroy <test>
+
+# list
+sudo virsh -c qemu:///system list --all
+
+# list
+sudo virsh -c 'qemu:///system' vol-list default
+
+# dumpxml
+virsh -c 'qemu+ssh://tofu@eris/system?socket=/run/libvirt/libvirt-sock' dumpxml <test>
+
+# remove resource
+tofu destroy -var-file=terraform.tfvars

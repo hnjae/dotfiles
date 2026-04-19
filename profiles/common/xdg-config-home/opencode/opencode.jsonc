@@ -4,23 +4,52 @@
   "permission": {
     "read": {
       "/nix/store/**": "allow",
-      "/tmp/**": "allow"
+      "/tmp/**": "allow",
+      "/home/hnjae/.local/share/cargo/**": "allow",
+      "/home/hnjae/.local/share/pnpm/**": "allow",
+      "/home/hnjae/.local/share/nvim/**": "allow",
+      "/home/hnjae/.local/state/nix/**": "allow",
+      "/home/hnjae/.nix-profile/**": "allow"
     },
     "glob": {
       "/nix/store/**": "allow",
-      "/tmp/**": "allow"
+      "/tmp/**": "allow",
+      "/home/hnjae/.local/share/cargo/**": "allow",
+      "/home/hnjae/.local/share/pnpm/**": "allow",
+      "/home/hnjae/.local/share/nvim/**": "allow",
+      "/home/hnjae/.local/state/nix/**": "allow",
+      "/home/hnjae/.nix-profile/**": "allow",
+      "/home/hnjae/.cache/pnpm/**": "allow"
     },
     "grep": {
       "/nix/store/**": "allow",
-      "/tmp/**": "allow"
+      "/tmp/**": "allow",
+      "/home/hnjae/.local/share/cargo/**": "allow",
+      "/home/hnjae/.local/share/pnpm/**": "allow",
+      "/home/hnjae/.local/share/nvim/**": "allow",
+      "/home/hnjae/.local/state/nix/**": "allow",
+      "/home/hnjae/.nix-profile/**": "allow",
+      "/home/hnjae/.cache/pnpm/**": "allow"
     },
     "list": {
       "/nix/store/**": "allow",
-      "/tmp/**": "allow"
+      "/tmp/**": "allow",
+      "/home/hnjae/.local/share/cargo/**": "allow",
+      "/home/hnjae/.local/share/pnpm/**": "allow",
+      "/home/hnjae/.local/share/nvim/**": "allow",
+      "/home/hnjae/.local/state/nix/**": "allow",
+      "/home/hnjae/.nix-profile/**": "allow",
+      "/home/hnjae/.cache/pnpm/**": "allow"
     },
     "external_directory": {
       "/nix/store/**": "allow",
-      "/tmp/**": "allow"
+      "/tmp/**": "allow",
+      "/home/hnjae/.local/share/cargo/**": "allow",
+      "/home/hnjae/.local/share/pnpm/**": "allow",
+      "/home/hnjae/.local/share/nvim/**": "allow",
+      "/home/hnjae/.local/state/nix/**": "allow",
+      "/home/hnjae/.nix-profile/**": "allow",
+      "/home/hnjae/.cache/pnpm/**": "allow"
     },
     "bash": {
       "npm *": "deny",

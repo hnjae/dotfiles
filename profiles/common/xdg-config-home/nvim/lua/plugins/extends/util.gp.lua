@@ -337,7 +337,7 @@ Respond only with the improved text—no explanations, comments, or other text.
         icons = {
           ---@type wk.IconRule[]
           rules = {
-            { plugin = "gp.nvim", icon = wk_icon.icon, color = wk_icon.color },
+            -- { plugin = "gp.nvim", icon = wk_icon.icon, color = wk_icon.color },
           },
         },
         ---@type wk.Spec

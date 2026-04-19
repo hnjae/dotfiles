@@ -15,23 +15,30 @@
   },
   "permission": {
     "read": {
-      "/nix/store/**": "allow"
+      "/nix/store/**": "allow",
+      "/tmp/**": "allow",
+      "/home/hnjae/.local/share/cargo/**": "allow"
     },
     "glob": {
-      "/nix/store/**": "allow"
+      "/nix/store/**": "allow",
+      "/tmp/**": "allow",
+      "/home/hnjae/.local/share/cargo/**": "allow"
     },
     "grep": {
-      "/nix/store/**": "allow"
+      "/nix/store/**": "allow",
+      "/tmp/**": "allow",
+      "/home/hnjae/.local/share/cargo/**": "allow"
     },
     "list": {
-      "/nix/store/**": "allow"
+      "/nix/store/**": "allow",
+      "/tmp/**": "allow",
+      "/home/hnjae/.local/share/cargo/**": "allow"
     },
     "external_directory": {
-      "/nix/store/**": "allow"
+      "/nix/store/**": "allow",
+      "/tmp/**": "allow",
+      "/home/hnjae/.local/share/cargo/**": "allow"
     },
-    "todowrite": "allow",
-    "todoread": "allow",
-    "webfetch": "allow",
     "bash": {
       "npm *": "deny",
       "sudo *": "deny",

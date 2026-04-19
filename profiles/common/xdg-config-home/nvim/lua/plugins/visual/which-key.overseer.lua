@@ -1,5 +1,5 @@
 local wk_icon = {
-  icon = "󰑮 ", -- nf-md-run_fast (from overseer.nvim)
+  icon = "󱤶 ", -- nf-md-cog_play_outline
   color = "blue",
 }
 
@@ -11,7 +11,8 @@ local spec = {
     ---@type wk.IconRule[]
     icons = {
       rules = {
-        { plugin = "overseer.nvim", icon = wk_icon.icon, color = wk_icon.color },
+        -- NOTE: 아래와 같이 설정하면 전부 덮어버림.
+        -- { plugin = "overseer.nvim", icon = wk_icon.icon, color = wk_icon.color },
       },
     },
     ---@type wk.Spec[]

@@ -19,7 +19,8 @@ return {
   -- terminal = "", -- nf-cod-terminal
   terminal = "󰆍", -- nf-md
   cog = "󰢻",
-  git = "󰊢", -- nf-md-git
+  git = "󰊢 ", -- nf-md-git
+  branch = "󰘬", --nf-md-source_branch
   file = "󰈤", -- nf-md-file_outline
   file_edit = "󱇨", -- nf-md-file_edit_outline
   directory = "󰉖", -- nf-md-folder_outline
@@ -75,5 +76,8 @@ return {
 
   result = "", -- nf-oct-checklist
   menu = "󰍜", -- nf-md-menu
+  run = "󰑮 ", -- nf-md-run_fast (from overseer.nvim)
   --
+
+  database = "󱘲", -- nf-md-database_outline
 }
