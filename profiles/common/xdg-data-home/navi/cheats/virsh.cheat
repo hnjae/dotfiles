@@ -18,5 +18,8 @@ sudo virsh -c 'qemu:///system' vol-list default
 # dumpxml
 virsh -c 'qemu+ssh://tofu@eris/system?socket=/run/libvirt/libvirt-sock' dumpxml <test>
 
+# connect with virt-viewer
+virt-viewer --connect "qemu+ssh://tofu@eris/system?socket=/run/libvirt/libvirt-sock" test
+
 # remove resource
 tofu destroy -var-file=terraform.tfvars

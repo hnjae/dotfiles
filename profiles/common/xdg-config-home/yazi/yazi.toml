@@ -1,6 +1,12 @@
 [preview]
 image_quality = 80
 
+[open]
+prepend_rules = [
+  { mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", use = ["open", "reveal"] },
+  { mime = "application/{xml,yaml,x-yaml}", use = ["edit", "reveal"] },
+]
+
 [plugin]
 prepend_previewers = [
   # Allmytoes doesn't handle these by default
