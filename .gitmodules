@@ -20,3 +20,6 @@
 [submodule "profiles/common/xdg-config-home/zsh/modules/zsh-vi-mode/zsh-vi-mode"]
 	path = profiles/common/xdg-config-home/zsh/modules/zsh-vi-mode/zsh-vi-mode
 	url = https://github.com/jeffreytse/zsh-vi-mode
+[submodule "profiles/common/xdg-config-home/zsh/modules/fzf-tab/module"]
+	path = profiles/common/xdg-config-home/zsh/modules/fzf-tab/module
+	url = https://github.com/aloxaf/fzf-tab

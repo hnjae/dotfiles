@@ -32,3 +32,9 @@ function zvm_config() {
 }
 
 source "${0:A:h}/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
+
+# zsh-vi-mode leaves Tab unbound in vicmd by default. Mirror the insert-mode
+# completion widget so Tab still completes when the line is in normal mode.
+# if bindkey -M viins '^I' &>/dev/null; then
+#     bindkey -M vicmd '^I' fzf-tab-complete
+# fi

@@ -105,24 +105,6 @@ setopt SHARE_HISTORY
 setopt EXTENDED_HISTORY
 
 #################################################
-# zsh-abbr 설정
-#################################################
-# typeset -g ABBR_EXPAND_PUSH_ABBREVIATION_TO_HISTORY=1
-# typeset -g ABBR_GET_AVAILABLE_ABBREVIATION=1
-# typeset -g ABBR_LOG_AVAILABLE_ABBREVIATION=1
-#
-# # alias 에서 import 해서 사용할 예정이라 ~/.config 에 위치하지 않도록 한다.
-# typeset -g ABBR_USER_ABBREVIATIONS_FILE="${XDG_STATE_HOME:-${HOME}/.local/state}/zsh-abbr-user"
-#
-# function sync-abbr() {
-#     if [[ "$ABBR_USER_ABBREVIATIONS_FILE" != "" && -f "$ABBR_USER_ABBREVIATIONS_FILE" ]]; then
-#       rm "$ABBR_USER_ABBREVIATIONS_FILE"
-#     fi
-#
-#     abbr import-aliases
-# }
-
-#################################################
 # 기타 플러그인 설정
 #################################################
 
@@ -152,12 +134,3 @@ fi
 
 # Initialize modules.
 source "${ZIM_HOME}/init.zsh"
-
-#################################################
-# Completion keymaps
-#################################################
-# zsh-vi-mode leaves Tab unbound in vicmd by default. Mirror the insert-mode
-# completion widget so Tab still completes when the line is in normal mode.
-# if bindkey -M viins '^I' &>/dev/null; then
-#     bindkey -M vicmd '^I' fzf-tab-complete
-# fi

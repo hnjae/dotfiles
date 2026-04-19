@@ -43,7 +43,7 @@ zmodule wfxr/forgit --tag 26.01.0 --source forgit.plugin.zsh
 # 기타
 zmodule "$ZDOTDIR/modules/utilities"
 
-zmodule "$ZDOTDIR/modules/zsh-vi-mode"
+# zmodule "$ZDOTDIR/modules/zsh-vi-mode"
 zmodule "$ZDOTDIR/modules/fzf"
 
 ###############################################################################
@@ -64,7 +64,7 @@ zmodule zsh-users/zsh-completions --fpath src
 # zmodule completion # init compinit
 
 zmodule "$ZDOTDIR/modules/compinit"
-zmodule Aloxaf/fzf-tab --source fzf-tab.plugin.zsh # source after compinit
+zmodule "$ZDOTDIR/modules/fzf-tab" # source after compinit
 
 ###############################################################################
 # Modules that must be initialized after compinit
