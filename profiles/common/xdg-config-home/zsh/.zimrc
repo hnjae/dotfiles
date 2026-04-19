@@ -43,7 +43,7 @@ zmodule wfxr/forgit --tag 26.01.0 --source forgit.plugin.zsh
 # 기타
 zmodule "$ZDOTDIR/modules/utilities"
 
-# zmodule "$ZDOTDIR/modules/zsh-vi-mode"
+zmodule "$ZDOTDIR/modules/zsh-vi-mode"
 zmodule "$ZDOTDIR/modules/fzf"
 
 ###############################################################################
@@ -64,7 +64,6 @@ zmodule zsh-users/zsh-completions --fpath src
 # zmodule completion # init compinit
 
 zmodule "$ZDOTDIR/modules/compinit"
-zmodule "$ZDOTDIR/modules/fzf-tab" # source after compinit
 
 ###############################################################################
 # Modules that must be initialized after compinit
@@ -73,6 +72,8 @@ zmodule "$ZDOTDIR/modules/fzf-tab" # source after compinit
 # > For completions to work, the above line must be added after compinit is called. You may have to rebuild your completions cache by running rm ~/.zcompdump*; compinit.
 zmodule "$ZDOTDIR/modules/zoxide"
 
+# > fzf-tab needs to be loaded after compinit, but before plugins which will wrap widgets, such as zsh-autosuggestions or fast-syntax-highlighting
+zmodule "$ZDOTDIR/modules/fzf-tab"
 
 ###############################################################################
 # Modules that must be initialized last
@@ -88,6 +89,7 @@ zmodule zsh-users/zsh-syntax-highlighting
 
 # Fish-like autosuggestions for Zsh.
 zmodule zsh-users/zsh-autosuggestions
+
 
 ##########################################################
 # vi:ft=zsh

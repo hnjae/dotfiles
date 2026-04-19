@@ -37,24 +37,6 @@
           "min_width": 70
         },
         {
-          "type": "text",
-          "style": "plain",
-          "foreground": "blue",
-          "template": "{{ if and .Env.IN_NIX_SHELL (or (not .Env.DEVENV_ROOT) .Env.DEVENV_IN_DIRENV_SHELL .Env.DEVENV_FLAKE_SHELL) }} <darkGray,>|</> 󱄅 {{ .Env.IN_NIX_SHELL }}{{ end }}"
-        },
-        {
-          "type": "text",
-          "style": "plain",
-          "foreground": "yellow",
-          "template": "{{ if and .Env.VIRTUAL_ENV (ne .Env.VIRTUAL_ENV \"\") }} <darkGray,>|</>   {{ base .Env.VIRTUAL_ENV }}{{ end }}"
-        },
-        {
-          "type": "text",
-          "style": "plain",
-          "foreground": "cyan",
-          "template": "{{ if .Env.DEVENV_ROOT }} <darkGray,>|</>  devenv{{ end }}"
-        },
-        {
           "type": "git",
           "style": "plain",
           "foreground": "magenta",
@@ -79,6 +61,52 @@
           "style": "plain",
           "foreground": "lightRed",
           "template": "\u001b[1mERROR\u001b[0m "
+        }
+      ],
+      "type": "prompt"
+    },
+    {
+      "alignment": "right",
+      "segments": [
+        {
+          "type": "shell",
+          "style": "plain",
+          "foreground": "darkGray",
+          "template": "{{ .Name }}"
+        },
+        {
+          "type": "text",
+          "style": "plain",
+          "foreground": "blue",
+          "template": "{{ if and .Env.IN_NIX_SHELL (or (not .Env.DEVENV_ROOT) .Env.DEVENV_IN_DIRENV_SHELL .Env.DEVENV_FLAKE_SHELL) }} <darkGray,>|</> 󱄅 {{ .Env.IN_NIX_SHELL }}{{ end }}"
+        },
+        {
+          "type": "text",
+          "style": "plain",
+          "foreground": "yellow",
+          "template": "{{ if and .Env.VIRTUAL_ENV (ne .Env.VIRTUAL_ENV \"\") }} <darkGray,>|</>   {{ base .Env.VIRTUAL_ENV }}{{ end }}"
+        },
+        {
+          "type": "text",
+          "style": "plain",
+          "foreground": "cyan",
+          "template": "{{ if .Env.DEVENV_ROOT }} <darkGray,>|</>  devenv{{ end }}"
+        },
+        {
+          "type": "root",
+          "foreground": "red",
+          "style": "plain",
+          "template": " <darkGray,>as</> root"
+        },
+        {
+          "type": "time",
+          "style": "plain",
+          "foreground": "darkGray",
+          "options": {
+            "time_format": "15:04:05"
+          },
+          "template": " <darkGray,>|</> {{ .CurrentDate | date .Format }}",
+          "min_width": 120
         }
       ],
       "type": "prompt"

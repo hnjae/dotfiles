@@ -109,7 +109,6 @@ setopt EXTENDED_HISTORY
 #################################################
 
 ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion)
-zstyle ':fzf-tab:*' use-fzf-default-opts yes
 
 ################################################################################
 # Bootstrap zimfw (NOTE: zimfw 를 git-submodule 로 사용 중.)
