@@ -23,14 +23,7 @@ return {
             end
           end,
         },
-        ["rumdl"] = {
-          condition = function(_, ctx)
-            local diag = vim.tbl_filter(function(d)
-              return d.source == "rumdl"
-            end, vim.diagnostic.get(ctx.buf))
-            return #diag > 0
-          end,
-        },
+        ["rumdl"] = {},
       },
       formatters_by_ft = {
         ["markdown"] = { "rumdl", "markdown-toc" },
@@ -42,11 +35,14 @@ return {
     "nvim-lint",
     optional = true,
     opts = function(_, opts)
-      local lint = require("lint")
+      opts.linters_by_ft = vim.tbl_extend("force", opts.linters_by_ft or {}, {
+        markdown = { "rumdl" },
+      })
 
-      -- Post-process rumdl diagnostics so editor noise stays low while the
-      -- formatter can still fix the underlying markdown.
-      if not vim.g._rumdl_lint_wrapped then
+      LazyVim.on_load("nvim-lint", function()
+        -- Post-process rumdl diagnostics so editor noise stays low while the
+        -- formatter can still fix the underlying markdown.
+        local lint = require("lint")
         local wrap = require("lint.util").wrap
         lint.linters.rumdl = wrap(lint.linters.rumdl, function(diagnostic)
           if diagnostic.source == "rumdl" then
@@ -61,14 +57,7 @@ return {
 
           return diagnostic
         end)
-        vim.g._rumdl_lint_wrapped = true
-      end
-
-      opts.linters_by_ft = vim.tbl_extend("force", opts.linters_by_ft or {}, {
-        markdown = { "rumdl" },
-      })
-
-      return opts
+      end)
     end,
   },
   {
@@ -101,18 +90,9 @@ return {
                     }
                   }
               ]]
-              -- Lower the severity
-              if result and result.diagnostics then
-                vim.tbl_map(function(diagnostic)
-                  diagnostic.severity = vim.diagnostic.severity.HINT
-                  return diagnostic
-                end, result.diagnostics)
-              end
-
-              -- Call the default handler
               if result and result.diagnostics then
                 result.diagnostics = vim.tbl_filter(function(diagnostic)
-                  return diagnostic.code ~= "MD012" -- MD012: no-multiple-blanks
+                  return not tostring(diagnostic.code):match("^MD")
                 end, result.diagnostics)
               end
 

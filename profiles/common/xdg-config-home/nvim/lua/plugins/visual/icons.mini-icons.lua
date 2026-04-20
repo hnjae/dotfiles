@@ -4,6 +4,7 @@ local icons = require("globals").icons
 return {
   [1] = "mini.icons",
   optional = true,
+  -- cond = not vim.o.termguicolors,
   opts = {
     -- stylua: ignore
     default = {
@@ -114,28 +115,37 @@ return {
       hurl     = { glyph = "󰓡", hl = "MiniIconsGreen" }, -- nf-md
     },
 
-    -- stylua: ignore
-    extension  = {
-      -- Image
-      bmp  = { glyph = '󰈟', hl = 'MiniIconsGreen'  },
-      gif  = { glyph = '󰈟', hl = 'MiniIconsOrange' },
-      jpeg = { glyph = '󰈟', hl = 'MiniIconsOrange' },
-      jpg  = { glyph = '󰈟', hl = 'MiniIconsOrange' },
-      png  = { glyph = '󰈟', hl = 'MiniIconsPurple' },
-      webp = { glyph = '󰈟', hl = 'MiniIconsBlue'   },
-      avif = { glyph = '󰈟', hl = 'MiniIconsBlue'   },
-      heic = { glyph = '󰈟', hl = 'MiniIconsRed' },
-      jxl =  { glyph = '󰈟', hl = 'MiniIconsRed' },
+    --stylua: ignore
+    extension = {
+      -- Images (dircolors, nf-md-file_image_outline)
+      bmp  = { glyph = "󰺰", hl = "MiniIconsPurple" },
+      eps  = { glyph = "󰺰", hl = "MiniIconsPurple" },
+      gif  = { glyph = "󰺰", hl = "MiniIconsPurple" },
+      jpeg = { glyph = "󰺰", hl = "MiniIconsPurple" },
+      jpg  = { glyph = "󰺰", hl = "MiniIconsPurple" },
+      png  = { glyph = "󰺰", hl = "MiniIconsPurple" },
+      tif  = { glyph = "󰺰", hl = "MiniIconsPurple" },
+      tiff = { glyph = "󰺰", hl = "MiniIconsPurple" },
+      webp = { glyph = "󰺰", hl = "MiniIconsPurple" },
+      avif = { glyph = "󰺰", hl = "MiniIconsPurple" },
+      heic = { glyph = "󰺰", hl = "MiniIconsPurple" },
+      jxl  = { glyph = "󰺰", hl = "MiniIconsPurple" },
     },
 
+    -- default nf-cod-*
+    --stylua: ignore
     lsp = {
-      ["function"] = { glyph = "󰊕", hl = "MiniIconsAzure" },
+      constant      = { glyph = '󰏿', hl = 'MiniIconsOrange' }, -- nf-md-pi
+      ['function']  = { glyph = '󰊕', hl = 'MiniIconsAzure'  }, -- nf-md-function
+      method        = { glyph = '󰡱', hl = 'MiniIconsAzure'  }, -- nf-md-function_variant
+      module        = { glyph = '󰏖', hl = 'MiniIconsPurple' }, -- nf-md-package_variant
+      namespace     = { glyph = '󰏗', hl = 'MiniIconsRed'    }, -- nf-md-package_variant_closed
+      number        = { glyph = '󰎠', hl = 'MiniIconsOrange' }, -- nf-md-numeric
+      object        = { glyph = '󰆧', hl = 'MiniIconsGrey'   }, -- nf-md-cube_outline
+      operator      = { glyph = '󱓉', hl = 'MiniIconsCyan'   }, -- nf-md-plus_minus_variant
+      package       = { glyph = '󰏖', hl = 'MiniIconsPurple' }, -- nf-md-package_variant
+      variable      = { glyph = '󰫧', hl = 'MiniIconsCyan'   }, -- nf-md-variable
     },
-
-    -- Control which extensions will be considered during "file" resolution
-    -- use_file_extension = function(ext, file)
-    --   return true
-    -- end,
   },
   specs = {
     {

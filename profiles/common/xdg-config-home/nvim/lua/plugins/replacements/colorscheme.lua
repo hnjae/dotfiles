@@ -7,7 +7,7 @@ return {
   version = false, -- use the latest git commit
   lazy = false,
   priority = 1000,
-  optional = not vim.o.termguicolors,
+  cond = vim.o.termguicolors,
   init = function()
     vim.g.gruvbox_material_cursor = "auto"
     vim.g.gruvbox_material_disable_terminal_colors = 1

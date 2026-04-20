@@ -11,7 +11,7 @@ return {
     ---@type wk.IconRule[]|false
 
     icons = {
-      -- mappings = false,
+      mappings = vim.o.termguicolors,
       rules = {
         { plugin = "yanky.nvim", icon = "󰅌", color = "yellow" },
         { plugin = "vim-dadbod-ui", icon = icons.database, color = "yellow" },

@@ -21,8 +21,13 @@ lastmod: 2026-01-05T15:20:25+0900
 
 - `unzip`: e.g. stylua, codelldb, java-debug-adapter, java-test, tflint, ast-grep
 - `npm`: prettier
-- `go`: goimports, gofumpt, delve
+- `go`: goimports, gofumpt, delve, sqls
 - `python3`: ansible-lint, cmakelang, cmakelint, sqlfluff
+- `pip`: ruff, xmlformatter
+- `meson`: `vala-language-server`
+- `gem`: `steep`, `stree`
+- `luarocks`: `teal-language-server`
+- `cargo`: `svls`
 
 ## TODO
 

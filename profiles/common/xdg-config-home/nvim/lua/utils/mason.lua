@@ -129,11 +129,7 @@ function M.notify_skipped(title, prefix, items)
   end
 
   vim.schedule(function()
-    vim.notify_once(
-      prefix .. table.concat(items, ", "),
-      vim.log.levels.INFO,
-      { title = title }
-    )
+    vim.notify_once(prefix .. table.concat(items, ", "), vim.log.levels.INFO, { title = title })
   end)
 end
 

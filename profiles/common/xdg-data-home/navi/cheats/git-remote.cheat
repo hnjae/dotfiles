@@ -1,0 +1,11 @@
+% git, git-remote
+
+# 한번만 임의로 push
+git push git@github.com:hnjae/<repo>.git HEAD
+
+# 해당 repo에서 앞으로 push만 SSH로:
+git remote set-url --push origin git@github.com:<owner>/<repo>.git
+
+# 되돌리기
+git config --unset remote.origin.pushurl
+

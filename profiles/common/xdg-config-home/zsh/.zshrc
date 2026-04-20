@@ -6,6 +6,9 @@
 if [[ "${__ZSHRC_SOURCED}" != "" ]]; then return; fi
 __ZSHRC_SOURCED=1
 
+# {`#`, `~`, `^`} 를 glob 에서 제외하기
+unsetopt EXTENDED_GLOB
+
 # NOTE: This CHANGES the cursor style even if shell commands did not require it. <2026-04-18>
 # if [[ "$GHOSTTY_RESOURCES_DIR" != "" && -f "${GHOSTTY_RESOURCES_DIR}/shell-integration/zsh/ghostty-integration" ]]; then
 #   source "${GHOSTTY_RESOURCES_DIR}/shell-integration/zsh/ghostty-integration"

@@ -13,10 +13,6 @@
 ├── lang/ # Language-specific settings & plugins
 ```
 
-### `lang`
-
-`nvim-lint` 가 `cwd` 를 함수로 넘길 수 없는 이상, `cwd` 를 설정해야하는 linter 는 `none-ls` 를 사용하자.
-
 ### lazydev
 
 `LazyVim` 에서 관리하는 플러그인들의 설정만 모음. `overrides` 가 너무 커져 별도로 뺌.
@@ -25,11 +21,15 @@
 
 #### `icons`
 
-- `nf-fa-`, `nf-oct-` 종류는 아이콘이 비정상적으로 큰 것 같다. 가능하면 사용하지 말자.
+- `outline` 류의 아이콘을 사용한다.
+- `nf-fa-`, `nf-oct-` 종류는 아이콘이 비정상적으로 크다. 가능하면 사용하지 말자.
     - e.g.:
-        -  : nf-fa-ban
         -  : nf-oct-skip
+        -  : nf-fa-ban
         -  : nf-seti-github
+        -  : nf-seti-db
+        -  : nf-dev-firefox
+        -  : nf-dev-sqldeveloper
         - 󰀚 : nf-md-adjust
         - 󰠆 : nf-md-basketball
         -  : nf-cod-error

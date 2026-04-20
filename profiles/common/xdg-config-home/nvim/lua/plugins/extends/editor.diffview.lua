@@ -18,7 +18,7 @@ return {
     "DiffviewRefresh",
   },
   opts = {
-    use_icons = true,
+    use_icons = vim.o.termguicolors,
     icons = { -- Only applies when use_icons is true.
       folder_closed = " ", --nf-cod-folder
       folder_open = " ", --nf-cod-folder_opened

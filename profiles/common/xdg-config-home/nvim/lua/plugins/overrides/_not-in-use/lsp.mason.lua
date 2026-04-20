@@ -48,7 +48,9 @@ return {
     optional = true,
     opts = {
       automatic_enable = {
-        exclude = { "nil_ls" },
+        exclude = {
+          "nil_ls", -- requires nix
+        },
       },
     },
   },
@@ -62,7 +64,11 @@ return {
       for server, sopts in pairs(opts.servers or {}) do
         if server ~= "*" and mappings[server] then
           local server_opts = sopts == true and {} or sopts
-          if type(server_opts) == "table" and server_opts.enabled ~= false and server_opts.mason ~= false then
+          if
+            type(server_opts) == "table"
+            and server_opts.enabled ~= false
+            and server_opts.mason ~= false
+          then
             local pkg_name = mappings[server]
             local missing = mason_utils.missing_prerequisites(pkg_name)
             if #missing > 0 then

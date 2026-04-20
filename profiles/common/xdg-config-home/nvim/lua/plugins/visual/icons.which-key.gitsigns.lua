@@ -22,10 +22,10 @@ return {
         ---@type wk.Spec[]
         spec = {
           -- Add missing icon from LazyVim v14.14.0 (2025-04-09)
-          { [1] = "[h", mode = { "n" }, icon = wk_icon },
-          { [1] = "]h", mode = { "n" }, icon = wk_icon },
-          { [1] = "[H", mode = { "n" }, icon = wk_icon },
-          { [1] = "]H", mode = { "n" }, icon = wk_icon },
+          { [1] = "[h", mode = { "n" }, icon = wk_icon, desc = "prev-hunk" },
+          { [1] = "]h", mode = { "n" }, icon = wk_icon, desc = "next-hunk" },
+          { [1] = "[H", mode = { "n" }, icon = wk_icon, desc = "first-hunk" },
+          { [1] = "]H", mode = { "n" }, icon = wk_icon, desc = "last-hunk" },
         },
       },
     },
