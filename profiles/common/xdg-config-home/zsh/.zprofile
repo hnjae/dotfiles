@@ -10,14 +10,17 @@ if [[ "${__ZPROFILE_SOURCED}" != "" ]]; then return; fi
 __ZPROFILE_SOURCED=1
 
 # Keep /etc/profile for environment setup, but suppress Bazzite's login MOTD.
-USERMOTDSOURCED=Y
+# USERMOTDSOURCED=Y
 
 # Profiles
+# nix-daemon.sh (from non-NixOS) exports this guard. When an interactive shell later does `exec zsh`,
+# /etc/profile resets PATH in the new process, so we must let Nix re-run as well.
+unset __ETC_PROFILE_NIX_SOURCED
 [[ -f "/etc/profile" ]] && emulate sh -c 'source /etc/profile'
 
-# hm-session-vars
-[[ -f "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]] \
-    && emulate sh -c "source '$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh'"
+# # hm-session-vars (home-manager)
+# [[ -f "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]] \
+#     && emulate sh -c "source '$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh'"
 
 # User profile
 [[ -f "$HOME/.profile" ]] && emulate sh -c "source '$HOME/.profile'"

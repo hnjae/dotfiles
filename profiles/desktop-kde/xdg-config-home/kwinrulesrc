@@ -1,37 +1,21 @@
-[1b689687-7529-4d77-a1db-29e39175ace2]
-Description=1password-normal-window
-aboverule=2
-activity=00000000-0000-0000-0000-000000000000
-activityrule=2
-desktops=\\0
-desktopsrule=2
-title=^(?!1Password$).*$
-titlematch=3
-wmclass=1Password
-wmclassmatch=3
-
 [1d2b1ebc-f2fb-4909-91ba-e50f240f6baf]
-Description=bluedevil-wizard
+Description=bluedevil-wizard@all-virtual-desktop
 above=true
 aboverule=2
 desktops=\\0
 desktopsrule=2
 wmclass=org.kde.bluedevilwizard
+wmclasscomplete=true
 wmclassmatch=1
 
 [50cf73c0-af57-44fe-80f4-9572225f9d1e]
-Description=1password-unlock-window
-above=true
-aboverule=2
+Description=1password@all-virtual-desktop
 activity=00000000-0000-0000-0000-000000000000
 activityrule=2
 desktops=\\0
 desktopsrule=2
-minimizerule=2
-noborderrule=2
-title=1Password
-titlematch=1
-wmclass=1Password
+wmclass=1password 1password
+wmclasscomplete=true
 wmclassmatch=1
 
 [99ec1073-2981-42c5-8371-90867cf9e2ba]
@@ -46,8 +30,8 @@ wmclasscomplete=true
 wmclassmatch=1
 
 [General]
-count=5
-rules=50cf73c0-af57-44fe-80f4-9572225f9d1e,1b689687-7529-4d77-a1db-29e39175ace2,1d2b1ebc-f2fb-4909-91ba-e50f240f6baf,99ec1073-2981-42c5-8371-90867cf9e2ba,c8f2c14b-0693-41c4-8b4f-458b978d9c10
+count=4
+rules=50cf73c0-af57-44fe-80f4-9572225f9d1e,1d2b1ebc-f2fb-4909-91ba-e50f240f6baf,99ec1073-2981-42c5-8371-90867cf9e2ba,c8f2c14b-0693-41c4-8b4f-458b978d9c10
 
 [c8f2c14b-0693-41c4-8b4f-458b978d9c10]
 Description=ticktick
