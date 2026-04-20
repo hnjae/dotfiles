@@ -18,7 +18,7 @@
 	path = profiles/desktop/xdg-config-home/mpv/script-repos/content-red-tester-s-scripts
 	url = https://github.com/CogentRedTester/mpv-scripts.git
 [submodule "profiles/common/xdg-config-home/zsh/modules/zsh-vi-mode/zsh-vi-mode"]
-	path = profiles/common/xdg-config-home/zsh/modules/zsh-vi-mode/zsh-vi-mode
+	path = profiles/common/xdg-config-home/zsh/modules/zsh-vi-mode/module
 	url = https://github.com/jeffreytse/zsh-vi-mode
 [submodule "profiles/common/xdg-config-home/zsh/modules/fzf-tab/module"]
 	path = profiles/common/xdg-config-home/zsh/modules/fzf-tab/module

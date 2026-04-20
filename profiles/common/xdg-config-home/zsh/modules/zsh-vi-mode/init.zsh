@@ -31,7 +31,7 @@ function zvm_config() {
     ZVM_LINE_INIT_MODE="$ZVM_MODE_INSERT"
 }
 
-source "${0:A:h}/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
+source "${0:A:h}/module/zsh-vi-mode.plugin.zsh"
 
 # zsh-vi-mode leaves Tab unbound in vicmd by default. Mirror the insert-mode
 # completion widget so Tab still completes when the line is in normal mode.

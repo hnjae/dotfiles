@@ -49,7 +49,7 @@
             vim.api.nvim_create_autocmd("VimEnter", {
                 once = true,
                 callback = function ()
-                    require("lazy").restore({wait=true})
+                    require("lazy").restore({wait=true, concurrency=2})
                     vim.cmd("qall")
                 end,
             })

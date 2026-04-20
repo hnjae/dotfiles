@@ -1,13 +1,7 @@
 % yazi, ya
 
-# install all yazi plugin listed in `package.toml`
-ya pack -i
-
-# install yazi plugin
-ya pack -a <repo>
-
-# list all yazi plugins installed
-ya pack -l
+# list all yazi plugin installed
+ya pkg list
 
 # upgrade all yazi plugins
-ya pack -u
+ya pkg upgrade

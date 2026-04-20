@@ -230,3 +230,5 @@ git worktree add <path> <branch>
 ; git checkout <commit-alike>
 
 
+# git fetch branch
+git fetch all && git switch <branchname>

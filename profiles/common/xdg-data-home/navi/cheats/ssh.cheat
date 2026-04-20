@@ -1,10 +1,14 @@
 % ssh
 
-# run command
+# run command (does not follows environments in /etc/profile)
 ssh <dst> <command>
+
+# run command with TTY
+ssh -t <dst> <command>
 
 # ssh tunnel
 ssh -L <[LOCAL_IP:]LOCAL_PORT>:<DESTINATION:DESTINATION_PORT> <dst>
 
 # ssh tunnel remote device's localhost port to localhost
 ssh -L <port-local>:localhost:<port-remote> <dst>
+
