@@ -13,4 +13,7 @@ vim.opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:Cursor/lCurs
 vim.opt.list = true
 vim.opt.listchars = "tab:  ,nbsp:+"
 
-vim.opt.termguicolors = vim.fn.has("termguicolors") == 1 and os.getenv("XDG_SESSION_TYPE") ~= "tty"
+-- DOCS:
+-- `XDG_SESSION_TYPE=tty` is also common for SSH/tmux sessions 이라, SSH 환경에서도 쓰기 위해서는 이걸 지표로 삼아서는 안됨.
+-- Only keep truecolor off for the Linux console.
+vim.opt.termguicolors = vim.fn.has("termguicolors") == 1 and os.getenv("TERM") ~= "linux"

@@ -1,6 +1,5 @@
 -- https://dotfyle.com/neovim/colorscheme/trending
-
-local color_terminal = (vim.fn.has("gui_running") == 1) or (os.getenv("TERM_PROGRAM") == nil)
+-- local color_terminal = (vim.fn.has("gui_running") == 1) or (os.getenv("TERM_PROGRAM") == nil)
 
 ---@type LazySpec
 return {
@@ -8,6 +7,7 @@ return {
   version = false, -- use the latest git commit
   lazy = false,
   priority = 1000,
+  optional = not vim.o.termguicolors,
   init = function()
     vim.g.gruvbox_material_cursor = "auto"
     vim.g.gruvbox_material_disable_terminal_colors = 1
