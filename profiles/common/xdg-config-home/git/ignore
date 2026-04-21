@@ -34,7 +34,10 @@ __pycache__
 
 # Agents
 **/.claude/settings.local.json
-.sisyphus
+**/.sisyphus/boulder.json
 .codex
+
+# Miscellaneous
+.tmp
 
 # vi:ft=gitignore:

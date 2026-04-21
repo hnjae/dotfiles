@@ -12,10 +12,13 @@ __ZPROFILE_SOURCED=1
 # Keep /etc/profile for environment setup, but suppress Bazzite's login MOTD.
 # USERMOTDSOURCED=Y
 
-# Profiles
-# nix-daemon.sh (from non-NixOS) exports this guard. When an interactive shell later does `exec zsh`,
+# HACK: <2026-04>
+# nix-daemon.sh (sourced by /etc/profile.d/nix.sh from non-NixOS) exports this guard. When an interactive shell later does `exec zsh`,
 # /etc/profile resets PATH in the new process, so we must let Nix re-run as well.
+# TODO: maybe sourcing `/etc/profile.d/nix.sh` from `/etc/zshenv` might fix the issue?  <2026-04-21>
 unset __ETC_PROFILE_NIX_SOURCED
+
+# Profiles
 [[ -f "/etc/profile" ]] && emulate sh -c 'source /etc/profile'
 
 # # hm-session-vars (home-manager)

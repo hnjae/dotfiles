@@ -131,7 +131,7 @@
 	; updateRefs = true
 
 [tar.zst]
-	command = zstd -12 -T0
+	command = zstd -11 -T0
 
 ; [rerere]   이전의 충돌 해결을 자동으로 재사용하려면 다음 설정을 사용
 ; enabled = true
