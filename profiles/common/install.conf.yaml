@@ -47,12 +47,84 @@
             cat <<'EOF'
         lua
             vim.api.nvim_create_autocmd("VimEnter", {
-                once = true,
-                callback = function ()
-                    require("lazy").restore({wait=true, concurrency=2})
-                    vim.cmd("qall")
-                end,
+              once = true,
+              callback = function ()
+                require("lazy").restore({wait=true, concurrency=2})
+                vim.cmd("qall")
+              end,
             })
+        EOF
+        )"
+    - description: Install Mason tools
+      command: |
+        set -eu
+
+        if ! command -v nvim >/dev/null 2>&1; then
+          echo "INFO: neovim is not installed" >&2
+          exit 0
+        fi
+
+        echo "INFO: Install Mason tools" >&2
+
+        nvim --headless -c "$(
+            cat <<'EOF'
+        lua
+          local ok, plugin = pcall(function()
+            return require("lazy.core.config").plugins["mason.nvim"]
+          end)
+
+          if not ok or not plugin or plugin.enabled == false then
+            vim.cmd("qall")
+            return
+          end
+
+          local opts = require("lazyvim.util").opts("mason.nvim")
+          require("utils.mason").filter_ensure_installed(opts)
+          vim.opt.rtp:prepend(plugin.dir)
+          require("mason").setup(opts)
+          require("mason.api.command").MasonInstall(opts.ensure_installed or {}, {
+            quiet = true,
+          })
+
+          vim.cmd("qall")
+        EOF
+        )"
+    - description: Install/Update treesitter parsers
+      command: |
+        set -eu
+
+        if ! command -v nvim >/dev/null 2>&1; then
+          echo "INFO: neovim is not installed" >&2
+          exit 0
+        fi
+
+        nvim --headless -c "$(
+          cat <<'EOF'
+        lua
+          local ok, plugin = pcall(function()
+            return require("lazy.core.config").plugins["nvim-treesitter"]
+          end)
+
+          if not ok or not plugin or plugin.enabled == false then
+            vim.cmd("qall")
+            return
+          end
+
+          local opts = require("lazyvim.util").opts("nvim-treesitter")
+          local seen, install = {}, {}
+          for _, lang in ipairs(opts.ensure_installed or {}) do
+            if not seen[lang] then
+              seen[lang] = true
+              install[#install + 1] = lang
+            end
+          end
+
+          local TS = require("nvim-treesitter")
+          require("lazyvim.util.treesitter").build(function()
+            TS.install(install, { summary = true }):await(function()
+              vim.cmd("qall")
+            end)
+          end)
         EOF
         )"
     - description: seed files
