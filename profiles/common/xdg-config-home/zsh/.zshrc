@@ -1,10 +1,9 @@
 # zmodload zsh/zprof
 
-# source .zprofile if not sourced
-[[ "${__ZPROFILE_SOURCED}" == "" && -f "${ZDOTDIR}/.zprofile" ]] && source "${ZDOTDIR}/.zprofile"
+setopt no_global_rcs # do not source global zshrc/zprofile files
 
-if [[ "${__ZSHRC_SOURCED}" != "" ]]; then return; fi
-__ZSHRC_SOURCED=1
+if [[ "${__ZSHRC_SOURCED-}" != "" ]]; then return; fi
+typeset -g __ZSHRC_SOURCED=1
 
 # {`#`, `~`, `^`} 를 glob 에서 제외하기
 unsetopt EXTENDED_GLOB
@@ -44,68 +43,6 @@ fi
 # https://stackoverflow.com/a/58842892/30570492
 bindkey "\E[1~" beginning-of-line
 bindkey "\E[4~" end-of-line
-
-
-#################################################
-# History 설정
-#################################################
-
-HISTSIZE="99999"
-SAVEHIST="99999"
-# HISTORY_IGNORE='(l|e|ls|cd *|s *|z *|zi *|si *|rm *|sudo rm *|trash *|trash-put *|trash-rm *|trash-empty|mv|pfkill *|exit|fg|bg|zfs destroy *|zpool destroy *|btrfs subvolume delete *|sudo zfs destroy *|sudo zpool destroy *|sudo btrfs subvolume delete *|* --please-destroy-my-drive *|reboot|shutdown|halt|kexec|systemctl reboot|systemctl halt|systemctl poweroff|systemctl kexec|systemctl soft-reboot|man *|just *|rg *|vi *|vim *|nvim *|nano *|which *|command *|stat *|xdg-open *|mpv *|psql *|git*--hard*|gcm *|sudo wipefs *|sudo badblocks *)'
-HISTFILE="${XDG_STATE_HOME}/zsh_history"
-
-typeset -a history_ignore_patterns=(
-    # 단순 명령어
-    'l' 'e' 'ls' 'exa' 'true' 'false'
-
-    # 이동 명령어
-    'cd *' 's *' 'z *' 'zi *' 'si *' 'si'
-
-    # 파괴적 명령어
-    'rm *' 'sudo rm *' 'mv'
-    'trash *' 'trash-put *' 'trash-rm *' 'trash-empty'
-    'zfs destroy *' 'sudo zfs destroy *'
-    'zpool destroy *' 'sudo zpool destroy *'
-    'btrfs subvolume delete *' 'sudo btrfs subvolume delete *'
-    'btrfs su delete *' 'sudo btrfs su delete *'
-    'sudo wipefs *' 'sudo badblocks *'
-    '* --please-destroy-my-drive *'
-
-    # 시스템 명령어
-    'exit' 'fg' 'bg' 'pfkill *'
-    'reboot' 'shutdown' 'halt' 'kexec'
-    "sudo reboot" "sudo shutdown" "sudo halt"
-    'systemctl reboot' 'systemctl halt' 'systemctl poweroff'
-    'systemctl kexec' 'systemctl soft-reboot'
-
-    # 읽기 전용 명령어
-    'man *' 'which *' 'command *' 'stat *'
-    'just *' 'rg *'
-
-    # 편집기
-    'vi *' 'vim *' 'nvim *' 'nano *'
-
-    # 미디어/앱
-    'xdg-open *' 'mpv *' 'psql *'
-
-    # Git 관련
-    'git*--hard*' 'gcm *'
-)
-
-# 패턴 조합
-HISTORY_IGNORE="(${(j:|:)history_ignore_patterns})"
-
-setopt HIST_FCNTL_LOCK
-unsetopt APPEND_HISTORY
-setopt HIST_IGNORE_DUPS
-setopt HIST_IGNORE_ALL_DUPS
-unsetopt HIST_SAVE_NO_DUPS
-unsetopt HIST_FIND_NO_DUPS
-setopt HIST_IGNORE_SPACE
-setopt HIST_EXPIRE_DUPS_FIRST
-setopt SHARE_HISTORY
-setopt EXTENDED_HISTORY
 
 #################################################
 # 기타 플러그인 설정

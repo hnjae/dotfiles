@@ -1,6 +1,5 @@
 # NOTE:
 # zmodule 은 built-in module 과 이름이 겹치면 안된다! <2025-06-01>
-# `my-` prefix 는 namespace 충돌을 피하기 위한 것.
 
 # This is not sourced during shell startup, and it's only used to configure the
 # zimfw plugin manager.
@@ -8,6 +7,8 @@
 ###############################################################################
 # Modules
 ###############################################################################
+
+zmodule "$ZDOTDIR/modules/history"
 
 zmodule direnv
 

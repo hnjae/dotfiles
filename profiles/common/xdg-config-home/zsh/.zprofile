@@ -1,29 +1,14 @@
-# NOTE:
+# DOCS:
 # Will be sourced after .zshenv and before .zshrc
-# Will NOT be sourced if the shell is not a login shell
+# Will NOT be sourced if the shell is not a login shell.
 
-# HACK: <NixOS 25.05>
-# Login shell (e.g. ssh 로그인) 의 경우, .zshenv 의 no_global_rcs 가 무시되고, `/etc/zshrc` 를 source 함. 왜 일까..
-# NixOS 의 경우 아래의 flag 로 /etc/zshrc 를 이미 source 했다고 치고 무시할 수 있음. (nixpkgs 의 zsh 모듈이 해당 플래그를 사용하는 if 문을 가지고 있음)
+setopt no_global_rcs # do not source global zshrc/zprofile files
 
 if [[ "${__ZPROFILE_SOURCED}" != "" ]]; then return; fi
-__ZPROFILE_SOURCED=1
-
-# Keep /etc/profile for environment setup, but suppress Bazzite's login MOTD.
-# USERMOTDSOURCED=Y
-
-# HACK: <2026-04>
-# nix-daemon.sh (sourced by /etc/profile.d/nix.sh from non-NixOS) exports this guard. When an interactive shell later does `exec zsh`,
-# /etc/profile resets PATH in the new process, so we must let Nix re-run as well.
-# TODO: maybe sourcing `/etc/profile.d/nix.sh` from `/etc/zshenv` might fix the issue?  <2026-04-21>
-unset __ETC_PROFILE_NIX_SOURCED
+typeset -g __ZPROFILE_SOURCED=1
 
 # Profiles
-[[ -f "/etc/profile" ]] && emulate sh -c 'source /etc/profile'
-
-# # hm-session-vars (home-manager)
-# [[ -f "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]] \
-#     && emulate sh -c "source '$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh'"
+[[ -f "/etc/profile" ]] && emulate sh -c '. /etc/profile'
 
 # User profile
-[[ -f "$HOME/.profile" ]] && emulate sh -c "source '$HOME/.profile'"
+[[ -f "$HOME/.profile" ]] && emulate sh -c ". '$HOME/.profile'"
