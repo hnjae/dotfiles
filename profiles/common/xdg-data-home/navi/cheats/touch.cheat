@@ -1,0 +1,4 @@
+% touch
+
+# Update atime, mtime (uses [[CC]YY]MMDDhhmm[.ss])
+touch -a -m -t <time> <file>

@@ -112,10 +112,6 @@ keybind = performable:ctrl+c=copy_to_clipboard
 # claude-code 에서 newline insert
 keybind = shift+enter=text:\x1b\r
 
-# gtk-single-instance = false https://ghostty.org/docs/help/gtk-single-instance
-# linux-cgroup = "always"
-# linux-cgroup-memory-limit = 23622320128
-
+# NOTE: 만일 ghostty 를 linxu 에서 사용한다면:
 # https://ghostty.org/docs/linux/systemd
 # systemctl enable --user app-com.mitchellh.ghostty.service
-# quit-after-last-window-closed = false

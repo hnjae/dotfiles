@@ -14,6 +14,8 @@ if [[ ${_hostname} == "hemera" || ${_hostname} == "nyx" ]]; then
     # edit commonly used files
     # alias ed='vi "$HOME/Projects/obsidian/home/dailies/$(date +"%Y-%m-%d").md"'
     # alias ew='vi "$HOME/Projects/obsidian/home/weeklies/$(date +"%G-W%V").md"'
+
+    alias virshc=' virsh -c "qemu+ssh://tofu@eris/system?socket=/run/libvirt/libvirt-sock"'
 fi
 
 unset _hostname

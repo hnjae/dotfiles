@@ -46,12 +46,7 @@ zmodule "$ZDOTDIR/modules/utilities"
 
 zmodule "$ZDOTDIR/modules/zsh-vi-mode"
 zmodule "$ZDOTDIR/modules/fzf"
-
-###############################################################################
-# Prompt
-###############################################################################
-# zmodule romkatv/powerlevel10k --use degit
-zmodule "$ZDOTDIR/modules/oh-my-posh"
+zmodule "$ZDOTDIR/modules/prompt"
 
 ###############################################################################
 # Completion

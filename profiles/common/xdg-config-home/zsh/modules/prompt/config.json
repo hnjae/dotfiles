@@ -14,7 +14,7 @@
             "{{ if .Root }}red{{ end }}",
             "{{ if .SSHSession }}lightYellow{{ end }}"
           ],
-          "template": "{{ if .SSHSession }} {{ end }}{{ .UserName }}@{{ .HostName }} ",
+          "template": "{{ if .SSHSession }} {{ end }}{{ .UserName }}@{{ .HostName }}",
           "min_width": 80
         },
         {
@@ -27,32 +27,10 @@
             "max_width": 36,
             "max_depth": 6,
             "mixed_threshold": 12,
-            "hide_root_location": true,
-            "mapped_locations": {
-              "~/projects": " ",
-              "~/worktrees": " "
-            }
+            "hide_root_location": true
           },
-          "template": "{{ .Path }} ",
+          "template": " {{ .Path }}",
           "min_width": 70
-        },
-        {
-          "type": "text",
-          "style": "plain",
-          "foreground": "blue",
-          "template": "{{ if and .Env.IN_NIX_SHELL (or (not .Env.DEVENV_ROOT) .Env.DEVENV_IN_DIRENV_SHELL .Env.DEVENV_FLAKE_SHELL) }} <darkGray,>|</> 󱄅 {{ .Env.IN_NIX_SHELL }}{{ end }}"
-        },
-        {
-          "type": "text",
-          "style": "plain",
-          "foreground": "yellow",
-          "template": "{{ if and .Env.VIRTUAL_ENV (ne .Env.VIRTUAL_ENV \"\") }} <darkGray,>|</>   {{ base .Env.VIRTUAL_ENV }}{{ end }}"
-        },
-        {
-          "type": "text",
-          "style": "plain",
-          "foreground": "cyan",
-          "template": "{{ if .Env.DEVENV_ROOT }} <darkGray,>|</>  devenv{{ end }}"
         },
         {
           "type": "git",
@@ -62,7 +40,7 @@
             "branch_ahead_icon": "\u2191",
             "branch_behind_icon": "\u2193",
             "branch_gone_icon": "\u2262",
-            "branch_icon": "\ue0a0 ",
+            "branch_icon": "󰘬 ",
             "branch_identical_icon": "\u2261",
             "cherry_pick_icon": "\u2713 ",
             "commit_icon": "\u25b7 ",
@@ -72,13 +50,31 @@
             "rebase_icon": "\u2c62 ",
             "tag_icon": "\u25b6 "
           },
-          "template": " {{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} \u2502{{ end }}{{ if .Staging.Changed }} {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} {{ .StashCount }}{{ end }} "
+          "template": " {{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} \u2502{{ end }}{{ if .Staging.Changed }} {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} {{ .StashCount }}{{ end }}"
+        },
+        {
+          "type": "text",
+          "style": "plain",
+          "foreground": "yellow",
+          "template": "{{ if and .Env.VIRTUAL_ENV (ne .Env.VIRTUAL_ENV \"\") }}   {{ base .Env.VIRTUAL_ENV }}{{ end }}"
+        },
+        {
+          "type": "text",
+          "style": "plain",
+          "foreground": "blue",
+          "template": "{{ if and .Env.IN_NIX_SHELL (or (not .Env.DEVENV_ROOT) .Env.DEVENV_IN_DIRENV_SHELL .Env.DEVENV_FLAKE_SHELL) }} 󱄅 {{ .Env.IN_NIX_SHELL }}{{ end }}"
+        },
+        {
+          "type": "text",
+          "style": "plain",
+          "foreground": "cyan",
+          "template": "{{ if .Env.DEVENV_ROOT }}  devenv{{ end }}"
         },
         {
           "type": "status",
           "style": "plain",
           "foreground": "lightRed",
-          "template": "\u001b[1mERROR\u001b[0m "
+          "template": " \u001b[1mERROR\u001b[0m"
         }
       ],
       "type": "prompt"

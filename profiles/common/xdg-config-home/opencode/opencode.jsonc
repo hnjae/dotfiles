@@ -3,8 +3,9 @@
   "plugin": ["oh-my-openagent@latest"],
   "permission": {
     "read": {
-      "/nix/store/**": "allow",
-      "/usr/share/**": "allow",
+      "/nix/**": "allow",
+      "/etc/**": "allow",
+      "/usr/**": "allow",
       "/tmp/**": "allow",
       "/home/hnjae/.local/share/cargo/**": "allow",
       "/home/hnjae/.local/share/pnpm/**": "allow",
@@ -13,7 +14,8 @@
       "/home/hnjae/.nix-profile/**": "allow"
     },
     "glob": {
-      "/nix/store/**": "allow",
+      "/nix/**": "allow",
+      "/etc/**": "allow",
       "/usr/share/**": "allow",
       "/tmp/**": "allow",
       "/home/hnjae/.local/share/cargo/**": "allow",
@@ -24,7 +26,8 @@
       "/home/hnjae/.cache/pnpm/**": "allow"
     },
     "grep": {
-      "/nix/store/**": "allow",
+      "/nix/**": "allow",
+      "/etc/**": "allow",
       "/usr/share/**": "allow",
       "/tmp/**": "allow",
       "/home/hnjae/.local/share/cargo/**": "allow",
@@ -35,7 +38,8 @@
       "/home/hnjae/.cache/pnpm/**": "allow"
     },
     "list": {
-      "/nix/store/**": "allow",
+      "/nix/**": "allow",
+      "/etc/**": "allow",
       "/usr/share/**": "allow",
       "/tmp/**": "allow",
       "/home/hnjae/.local/share/cargo/**": "allow",
@@ -46,7 +50,8 @@
       "/home/hnjae/.cache/pnpm/**": "allow"
     },
     "external_directory": {
-      "/nix/store/**": "allow",
+      "/nix/**": "allow",
+      "/etc/**": "allow",
       "/usr/share/**": "allow",
       "/tmp/**": "allow",
       "/home/hnjae/.local/share/cargo/**": "allow",
