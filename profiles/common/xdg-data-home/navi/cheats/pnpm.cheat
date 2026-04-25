@@ -53,8 +53,8 @@ pnpm dlx <pkg>
 # install package at global ($HOME scope)
 pnpm --global add <pkg>
 
-# update packages at global scope ($HOME scope)
-pnpm --global update
+# update packages to its latest at global scope ($HOME scope)
+pnpm --global update --latest
 
 # debug dependency at global scope
 pnpm --global why <package>
