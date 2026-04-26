@@ -1,11 +1,11 @@
 local pf # prefix
 
-pf="zw"
+pf="zm"
 
 alias $pf="zimfw"
-alias ${pf}b="zimfw build"
+alias ${pf}b="zimfw build && exec zsh" # apply changes
 alias ${pf}h="zimfw --help"
-alias ${pf}c="zimfw clean && zimfw build && exec zsh"
+alias ${pf}C="zimfw clean && zimfw build && exec zsh"
 
 # Handles none `my-` modules
 alias ${pf}i="zimfw install -v && exec zsh"
