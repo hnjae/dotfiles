@@ -25,5 +25,5 @@ case "$response" in
         ;;
 esac
 
-git commit --no-verify -m '{{ hostname }}: {{ datetime("%Y-%m-%dT%H:%M:%S%Z") }}'
+git commit --no-verify -m "$(hostname): $(date --iso-8601=seconds)"
 
