@@ -18,20 +18,20 @@ prepend_previewers = [
   { mime = "audio/*", run = "my-mediainfo-preview" },
   { mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", run = "my-archive-previewer" },
   # Allmytoes doesn't handle these by default
-  { mime = "image/svg+xml", run = "magick" },
-  { mime = "image/heic", run = "magick" },
-  { mime = "image/jxl", run = "magick" },
-  # Handle other image types with allmytoes
-  { mime = "image/*", run = "allmytoes" },
+  # { mime = "image/svg+xml", run = "magick" },
+  # { mime = "image/heic", run = "magick" },
+  # { mime = "image/jxl", run = "magick" },
+  # # Handle other image types with allmytoes
+  # { mime = "image/*", run = "allmytoes" },
 ]
 
 prepend_preloaders = [
   # Allmytoes doesn't handle these by default
-  { mime = "image/svg+xml", run = "magick" },
-  { mime = "image/heic", run = "magick" },
-  { mime = "image/jxl", run = "magick" },
+  # { mime = "image/svg+xml", run = "magick" },
+  # { mime = "image/heic", run = "magick" },
+  # { mime = "image/jxl", run = "magick" },
   # Handle other image types with allmytoes
-  { mime = "image/*", run = "allmytoes" },
+  # { mime = "image/*", run = "allmytoes" },
   # { url = '*.cb{z,r}', run = 'preview-cbz' },
   # { url = '*.cb{z,r}', run = 'preview-cbz' },
   { name = "*.{hwp,hwpx}", run = "hwp-preview" },

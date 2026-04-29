@@ -4,6 +4,9 @@ DefaultProfile=zsh.profile
 [General]
 ConfigVersion=1
 
+[KonsoleWindow]
+RememberWindowSize=false
+
 [MemorySettings]
 EnableMemoryMonitoring=true
 
