@@ -4,7 +4,7 @@ if [[ ${_hostname} == "hemera" || ${_hostname} == "nyx" ]]; then
     # cd to commonly used directories
     alias sp='cd "$HOME/projects"'
     alias sn='cd "$HOME/projects/nix-config"'
-    alias sf='cd "$HOME/projects/dotfiles"'
+    alias sf='cd "${XDG_DATA_HOME:-$HOME/.local/share}/dotfiles"'
     alias sv='cd "${XDG_CONFIG_HOME:-$HOME/.config}/nvim"'
     alias sz='cd "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}"'
     alias so='cd "$HOME/projects/notes"'

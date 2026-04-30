@@ -51,3 +51,5 @@ main() {
     deploy_age_key
     deploy_api_keys
 }
+
+main "$@"

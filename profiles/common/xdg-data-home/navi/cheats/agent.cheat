@@ -5,3 +5,9 @@ devenv shell codex -a on-request  --sandbox workspace-write
 
 # run codex with direnv
 direnv exec . codex -a on-request  --sandbox workspace-write
+
+# run codex without sandbox
+codex --sandbox danger-full-access -a untrusted
+
+# run codex with sandbox
+codex --sandbox workspace-write -a on-request
