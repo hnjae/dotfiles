@@ -1,7 +1,7 @@
 [Appearance]
 BoldIntense=false
 ColorScheme=_base24
-Font=Monospace,11,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+Font=Sarasa Fixed K Nerd Font,11,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
 
 [Cursor Options]
 CursorShape=0
