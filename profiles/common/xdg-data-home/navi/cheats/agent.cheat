@@ -1,0 +1,7 @@
+% agent, codex,
+
+# run codex with devenv
+devenv shell codex -a on-request  --sandbox workspace-write
+
+# run codex with direnv
+direnv exec . codex -a on-request  --sandbox workspace-write

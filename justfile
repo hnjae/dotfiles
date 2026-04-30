@@ -19,6 +19,16 @@ sync-submodules:
     git submodule sync --quiet --recursive  # URL Update
     git submodule update --init --recursive # 실제 코드 가져오기
 
+update-dotfiles:
+    git fetch --all --prune
+    git reset --hard origin/main
+    git submodule sync --recursive
+    git submodule update --init --recursive --force
+    git clean -ffd
+    git submodule foreach --recursive 'git reset --hard'
+    git submodule foreach --recursive 'git clean -ffd'
+    ./install.sh
+
 commit:
     #!/bin/sh
 

@@ -18,29 +18,13 @@ lastmod: 2026-03-22T20:44:34+0900
 ## Install
 
 ```sh
-git clone --recurse-submodules git@github.com:hnjae/dotfiles ~/Projects/dotfiles && \
-    ~/Projects/dotfiles/install.sh
-
-# OR
-git clone --recurse-submodules git@github.com:hnjae/dotfiles ~/.local/share/dotfiles && \
+git clone --recurse-submodules --shallow-submodules git@github.com:hnjae/dotfiles ~/.local/share/dotfiles && \
     ~/.local/share/dotfiles/install.sh
 
 # OR
-git clone --recurse-submodules 'https://github.com/hnjae/dotfiles' ~/.local/share/dotfiles && \
+
+git clone --recurse-submodules --shallow-submodules 'https://github.com/hnjae/dotfiles' ~/.local/share/dotfiles && \
     ~/.local/share/dotfiles/install.sh
-```
-
-### Update
-
-```sh
-git fetch --all --prune
-git reset --hard origin/main
-git submodule sync --recursive
-git submodule update --init --recursive --force
-git clean -ffd
-git submodule foreach --recursive 'git reset --hard'
-git submodule foreach --recursive 'git clean -ffd'
-./install.sh
 ```
 
 ## 데스크톱 가이드
