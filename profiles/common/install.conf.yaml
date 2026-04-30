@@ -26,9 +26,9 @@
     ~/.ssh:
       glob: true
       path: home_.ssh/*
-    ~/projects:
+    ~/Projects:
       glob: true
-      path: home_projects/*
+      path: home_Projects/*
 - shell:
     - description: Installing submodules
       command: git submodule update --init --recursive

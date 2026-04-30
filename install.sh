@@ -53,7 +53,6 @@ main() {
         install_profile "desktop"
         # install others
         install_profile "desktop-linux"
-        install_profile "tinted-theming"
         install_profile "desktop-kde"
 
         git update-index --skip-worktree "profiles/desktop-kde/xdg-config-home/kactivitymanagerdrc" 2>/dev/null || true

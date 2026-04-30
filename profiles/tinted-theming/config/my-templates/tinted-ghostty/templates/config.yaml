@@ -1,4 +1,0 @@
----
-default:
-  filename: themes/{{ scheme-system }}-{{ scheme-slug }}
-  supported-systems: [base24]
