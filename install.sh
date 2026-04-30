@@ -56,12 +56,6 @@ main() {
         install_profile "desktop-kde"
 
         git update-index --skip-worktree "profiles/desktop-kde/xdg-config-home/kactivitymanagerdrc" 2>/dev/null || true
-        git update-index --skip-worktree "profiles/desktop-kde/xdg-config-home/plasmaparc" 2>/dev/null || true
-        git update-index --skip-worktree "profiles/desktop-kde/xdg-config-home/bluedevilglobalrc" 2>/dev/null || true
-        git update-index --skip-worktree "profiles/desktop-kde/xdg-config-home/dolphinrc" 2>/dev/null || true
-        if [ "$(hostname)" != "hemera" ]; then
-            git update-index --skip-worktree "profiles/desktop-kde/xdg-config-home/kglobalshortcutsrc" 2>/dev/null || true
-        fi
         git update-index --skip-worktree 'profiles/desktop-kde/xdg-config-home/fcitx5/profile' 2>/dev/null || true
         git update-index --skip-worktree 'profiles/desktop-kde/xdg-config-home/fcitx5/conf/hangul.conf' 2>/dev/null || true
 
