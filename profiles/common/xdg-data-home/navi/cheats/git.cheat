@@ -166,6 +166,9 @@ git remote remove <origin>
 # change remote
 git remote set-url <origin> git@github.com:<owner>/<repository>.git
 
+# change remote (push only)
+git remote set-url --push origin> git@github.com:<owner>/<repository>.git
+
 # disable push on some remotes
 git remote set-url --push <origin> "DISABLE"
 
@@ -231,4 +234,4 @@ git worktree add <path> <branch>
 
 
 # git fetch branch
-git fetch all && git switch <branchname>
+git fetch --all && git switch <branchname>

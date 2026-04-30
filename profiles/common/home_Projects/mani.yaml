@@ -13,8 +13,6 @@ projects:
     url: git@github.com:hnjae/ledger.git
   my-ledger:
     url: git@github.com:hnjae/my-ledger.git
-  my-python-utils:
-    url: git@github.com:hnjae/my-python-utils.git
   nix-packages:
     url: git@github.com:hnjae/nix-packages.git
   notes:
@@ -25,6 +23,16 @@ projects:
     url: git@github.com:hnjae/published-articles.git
   restic-scrub:
     url: hnjae@eris:/srv/git/restic-scrub
+  kiriview:
+    url: git@github.com:hnjae/kiriview.git
+  agentbox.nix:
+    url: git@github.com:hnjae/agentbox.nix.git
+  utils:
+    url: git@github.com:hnjae/utils.git
+  nix-templates:
+    url: git@github.com:hnjae/nix-templates.git
+  homelab-infra:
+    url: git@github.com:hnjae/homelab-infra.git
 specs:
   default:
     output: markdown
