@@ -6,10 +6,6 @@ _:
     @just --list
 
 [group('ci')]
-format:
-    prek run --hook-stage pre-commit --all-files
-
-[group('ci')]
 lint:
     fd --type f --extension lua . -X selene --allow-warnings
 
