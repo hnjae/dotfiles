@@ -8,8 +8,106 @@ from contextlib import suppress
 from pathlib import Path
 
 REMOVED_ASSOCIATIONS = {
-    "image/png": ["org.pwmt.zathura.desktop"],
-    "image/x-adobe-dng": ["org.kde.okular.desktop"],
+    "image/jpeg": [
+        "brave-browser.desktop",
+        "com.brave.Browser.desktop",
+        "org.kde.okular.desktop",
+        "org.pwmt.zathura.desktop",
+    ],
+    "image/gif": [
+        "brave-browser.desktop",
+        "com.brave.Browser.desktop",
+        "org.kde.okular.desktop",
+    ],
+    "image/webp": [
+        "brave-browser.desktop",
+        "com.brave.Browser.desktop",
+    ],
+    "image/png": [
+        "brave-browser.desktop",
+        "com.brave.Browser.desktop",
+        "org.kde.okular.desktop",
+        "org.pwmt.zathura.desktop",
+    ],
+    "image/bmp": [
+        "org.kde.okular.desktop",
+        "org.pwmt.zathura.desktop",
+    ],
+    "image/svg+xml": [
+        "org.pwmt.zathura-pdf-mupdf.desktop",
+        "brave-browser.desktop",
+        "com.brave.Browser.desktop",
+        "org.kde.okular.desktop",
+        # Editors:
+        "org.kde.kwrite.desktop",
+        "dev.zed.Zed.desktop",
+        "nvim.desktop",
+        # Office:
+        "onlyoffice-desktopeditors.desktop",
+    ],
+    "image/apng": [
+        "com.brave.Browser.desktop",
+        "com.interversehq.qView.desktop",  # 2026-05-04 기준 렌더링 잘 안됨
+        "org.kde.gwenview.desktop",  # 2026-05-04 기준 렌더링 잘 안됨
+        "org.kde.okular.desktop",
+    ],
+    "image/x-adobe-dng": [
+        "brave-browser.desktop",
+        "com.interversehq.qView.desktop",  # 2026-05-04 기준 렌더링 잘 안됨
+        "org.kde.gwenview.desktop",  # 2026-05-04 기준 렌더링 잘 안됨
+        "org.kde.okular.desktop",
+    ],
+    "image/tiff": [
+        "brave-browser.desktop",
+        "org.kde.okular.desktop",
+        "org.pwmt.zathura.desktop",
+    ],
+    "image/jp2": [
+        "brave-browser.desktop",
+        "org.kde.okular.desktop",
+    ],
+    "application/pdf": [
+        "brave-browser.desktop",
+        "com.brave.Browser.desktop",
+        "com.yacreader.YACReader.desktop",
+        "onlyoffice-desktopeditors.desktop",
+        "org.gimp.GIMP.desktop",
+        "org.inkscape.Inkscape.desktop",
+        "org.libreoffice.LibreOffice.draw.desktop",
+    ],
+    "text/csv": [
+        "org.kde.okular.desktop",
+    ],
+    "application/vnd.oasis.opendocument.spreadsheet": [
+        "com.yacreader.YACReader.desktop",
+        "org.pwmt.zathura.desktop",
+        "org.kde.ark.desktop",
+    ],
+    "application/vnd.oasis.opendocument.database": [
+        "org.kde.ark.desktop",
+    ],
+    "application/vnd.oasis.opendocument.text": [
+        "org.kde.ark.desktop",
+    ],
+    "text/plain": [
+        "onlyoffice-desktopeditors.desktop",
+        "org.kde.okular.desktop",
+    ],
+    # Archive
+    "application/zip": [
+        "com.yacreader.YACReader.desktop",
+        "org.pwmt.zathura-cb.desktop",
+    ],
+    "application/x-7z-compressed": [
+        "org.pwmt.zathura-cb.desktop",
+    ],
+    "application/vnd.rar": [
+        "com.yacreader.YACReader.desktop",
+        "org.pwmt.zathura-cb.desktop",
+    ],
+    "application/x-tar": [
+        "org.pwmt.zathura-cb.desktop",
+    ],
 }
 
 SECTION = "Removed Associations"

@@ -21,8 +21,9 @@ Thumbs.db
 __pycache__
 .pyc
 
-# nix-flake
+# dev environments
 .direnv
+.devenv
 
 # Cache directory
 .mypy_cache
