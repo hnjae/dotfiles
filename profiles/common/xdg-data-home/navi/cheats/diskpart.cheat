@@ -1,0 +1,26 @@
+
+% diskpart
+
+; diskpart
+; list disk
+; select disk 0
+; clean
+; convert gpt
+;
+; rem === EFI System Partition: 약 4GiB ===
+; create partition efi size=4096
+; format quick fs=fat32 label="System"
+; assign letter=S
+;
+; rem === Microsoft Reserved Partition ===
+; create partition msr size=16
+;
+; rem === Windows partition: 나머지 전체 ===
+; create partition primary size=524292
+; format quick fs=ntfs unit=16K label="<name>"
+; assign letter=W
+;
+; list disk
+; list volume
+; list partition
+; exit

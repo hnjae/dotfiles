@@ -1,10 +1,16 @@
 % agent, codex,
 
 # run codex with devenv
-devenv shell codex -a on-request --sandbox workspace-write
+devenv shell -- codex -a on-request --sandbox workspace-write
 
 # run codex with devenv with danger-full-access
-devenv shell codex -a on-request --sandbox danger-full-access
+devenv shell -- codex -a on-request --sandbox danger-full-access
+
+# run codex with devenv with with readonly
+devenv shell -- codex -a on-request --sandbox read-only
+
+# run codex with nix develop with danger-full-access
+nix develop '.#default' --command codex -a on-request --sandbox danger-full-access
 
 # run codex with direnv
 direnv exec . codex -a on-request --sandbox workspace-write
