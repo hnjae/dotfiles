@@ -12,8 +12,11 @@ devenv shell -- codex -a on-request --sandbox read-only
 # run codex with nix develop with danger-full-access
 nix develop '.#default' --command codex -a on-request --sandbox danger-full-access
 
-# run codex with direnv
+# run codex with direnv (sandboxed)
 direnv exec . codex -a on-request --sandbox workspace-write
+
+# run codex with direnv
+direnv exec . codex -a on-request --sandbox danger-full-access
 
 # run codex without sandbox
 codex --sandbox danger-full-access -a untrusted

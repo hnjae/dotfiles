@@ -10,3 +10,6 @@
       path: xdg-config-home/*
     ~/.var/app/io.mpv.Mpv/config/mpv:
       path: ~/.config/mpv
+- shell:
+    - description: Configure removed MIME associations
+      command: install.d/mimeapps/configure_removed_associations.py
