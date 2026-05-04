@@ -1,4 +1,9 @@
 --[[
+  NOTE:
+    Enable `lang.yaml` from LazyExtra
+--]]
+
+--[[
 
 NOTE:
 

@@ -1,4 +1,3 @@
--- TODO: stylua 가 가끔 indent-type 을 tabs 로 지정해버리는데 이유가 뭔지 해결 <2025-06-08>
 ---@type LazySpec[]
 return {
   {
@@ -8,7 +7,7 @@ return {
       formatters_by_ft = {
         lua = {
           "stylua",
-          -- lsp_format = "never"
+          lsp_format = "never",
         },
       },
     },
@@ -39,30 +38,6 @@ return {
           -- NOTE: ctx.filename 은 absolute path 임
           return vim.startswith(ctx.filename, project_root)
         end,
-      })
-
-      return opts
-    end,
-    specs = {
-      {
-        [1] = "mason.nvim",
-        optional = true,
-        opts = { ensure_installed = { "selene" } },
-      },
-    },
-  },
-  {
-    [1] = "none-ls.nvim",
-    optional = true,
-    opts = function(_, opts)
-      local nls = require("null-ls")
-
-      opts.sources = vim.list_extend(opts.sources or {}, {
-        nls.builtins.diagnostics.selene.with({
-          condition = function(utils)
-            return utils.root_has_file({ "selene.toml" })
-          end,
-        }),
       })
 
       return opts

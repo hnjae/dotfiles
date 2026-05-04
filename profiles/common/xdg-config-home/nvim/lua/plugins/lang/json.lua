@@ -1,3 +1,8 @@
+--[[
+  NOTE:
+    Enable `lang.json` from LazyExtra
+--]]
+
 ---@type LazySpec[]
 return {
   {
@@ -10,19 +15,4 @@ return {
       },
     },
   },
-  -- {
-  --   [1] = "nvim-lspconfig",
-  --   optional = true,
-  --   -- ---@type lspconfig.options
-  --   opts = {
-  --     servers = {
-  --       -- use biome instead
-  --       -- jsonls = {
-  --       --   enabled = false,
-  --       --   mason = false,
-  --       -- },
-
-  --     },
-  --   },
-  -- },
 }

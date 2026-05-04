@@ -1,3 +1,8 @@
+--[[
+  NOTE:
+    Enable `lang.rust` from LazyExtra
+--]]
+
 ---@type LazySpec[]
 return {
   {
@@ -9,6 +14,7 @@ return {
         lazy = false,
         opts = function()
           -- https://github.com/mrjones2014/codesettings.nvim
+          -- .vscode/settings.json 을 읽어들임.
           vim.lsp.config("*", {
             before_init = function(_, config)
               local codesettings = require("codesettings")

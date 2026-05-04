@@ -48,22 +48,21 @@ return {
       },
     },
   },
-
   -- use bash-ls instead <2026-04-18>
-  {
-    [1] = "nvim-lint",
-    optional = true,
-    opts = {
-      linters_by_ft = {
-        sh = { "shellcheck" },
-      },
-    },
-    specs = {
-      {
-        [1] = "mason.nvim",
-        optional = true,
-        opts = { ensure_installed = { "shellcheck" } },
-      },
-    },
-  },
+  -- {
+  --   [1] = "nvim-lint",
+  --   optional = true,
+  --   opts = {
+  --     linters_by_ft = {
+  --       sh = { "shellcheck" },
+  --     },
+  --   },
+  --   specs = {
+  --     {
+  --       [1] = "mason.nvim",
+  --       optional = true,
+  --       opts = { ensure_installed = { "shellcheck" } },
+  --     },
+  --   },
+  -- },
 }

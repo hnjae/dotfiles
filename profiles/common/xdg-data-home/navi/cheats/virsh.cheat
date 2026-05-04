@@ -1,4 +1,4 @@
-% virsh, libvirt
+% virsh, libvirt, tofu
 
 # enter console (`<C-]` to exit)
 sudo virsh -c qemu:///system console <name>
@@ -12,17 +12,21 @@ virsh -c 'qemu:///system' destroy <test>
 # list
 sudo virsh -c qemu:///system list --all
 
-# list
-sudo virsh -c 'qemu:///system' vol-list default
-
 # dumpxml
 virsh -c 'qemu+ssh://tofu@eris/system?socket=/run/libvirt/libvirt-sock' dumpxml <test>
 
 # list vol
 virsh -c 'qemu+ssh://tofu@eris/system?socket=/run/libvirt/libvirt-sock' vol-list default
 
+# list vol of local system
+sudo virsh -c 'qemu:///system' vol-list default
+
 # connect with virt-viewer
 virt-viewer --connect "qemu+ssh://tofu@eris/system?socket=/run/libvirt/libvirt-sock" test
 
+# plan removing resource and aplly
+tofu plan destroy
+
 # remove resource
-tofu destroy -var-file=terraform.tfvars
+tofu destroy [-var-file=terraform.tfvars]
+

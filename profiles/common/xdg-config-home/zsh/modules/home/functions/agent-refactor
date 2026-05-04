@@ -1,0 +1,24 @@
+# vi:ft=zsh
+
+echo "WIP: DON NOT USE IT"
+exit 1
+
+local prompt
+local -a codex_args
+
+prompt="Review this codebase for refactoring opportunities that would improve long-term maintainability. It's pre-release, so breaking changes are fine and you can be thorough.
+
+If the code is already in good shape, just say so — don't invent work.
+
+Otherwise:
+1. Propose a refactoring plan broken into atomic steps.
+2. Execute the steps one at a time.
+3. After each step, write a commit message in [Conventional Commits](https://www.conventionalcommits.org/) format."
+
+codex_args=(
+    --model gpt-5.5
+    -c model_reasoning_effort=xhigh
+    --sandbox danger-full-access
+)
+
+codex exec "${codex_args[@]}" "$prompt"

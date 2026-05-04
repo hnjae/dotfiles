@@ -1,10 +1,16 @@
+--[[
+  NOTE:
+    Enable `lang.toml` from LazyExtra
+--]]
+
 ---@type LazySpec
 return {
+  -- LazyVim does only uses taplo as LSP <2026-05-05>
   [1] = "conform.nvim",
   optional = true,
   opts = {
     formatters_by_ft = {
-      toml = { "taplo" },
+      toml = { "taplo", lsp_format = "never" },
     },
   },
   specs = {

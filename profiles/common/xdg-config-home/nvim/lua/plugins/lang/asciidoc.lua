@@ -52,6 +52,7 @@ return {
         "typescript",
         "javascript",
       }
+
       --[[ NOTE: <2024-04-08>
     `asciidoctor_fenced_languages` 는 styles/<ft-name>.vim 를 요구하는 것 같음
     kotlin 의 경우 syntax support 가 내장되어 있지 않아, 에러 메시지가 뜸.

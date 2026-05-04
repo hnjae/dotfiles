@@ -1,6 +1,6 @@
 --[[
   NOTE:
-    Disable `lang.markdown` from LazyExtra
+    DISABLE `lang.markdown` from LazyExtra
 --]]
 
 ---@type LazySpec[]
@@ -40,6 +40,7 @@ return {
       })
 
       LazyVim.on_load("nvim-lint", function()
+        -- HACK: <2026-Q1>
         -- Post-process rumdl diagnostics so editor noise stays low while the
         -- formatter can still fix the underlying markdown.
         local lint = require("lint")
@@ -70,6 +71,8 @@ return {
           handlers = {
             ["textDocument/publishDiagnostics"] = function(err, result, ctx)
               --[[
+                DOCS: <2025>
+
                 Example of result.diagnostics:
                   {
                     {
@@ -92,6 +95,7 @@ return {
               ]]
               if result and result.diagnostics then
                 result.diagnostics = vim.tbl_filter(function(diagnostic)
+                  -- Use rumdl for theses errors:
                   return not tostring(diagnostic.code):match("^MD")
                 end, result.diagnostics)
               end
