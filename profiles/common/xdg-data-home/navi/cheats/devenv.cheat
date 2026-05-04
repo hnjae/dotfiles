@@ -1,0 +1,4 @@
+% devenv
+
+# refresh cache
+devenv shell --refresh-eval-cache --refresh-task-cache -- true

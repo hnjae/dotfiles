@@ -7,10 +7,13 @@ devenv shell -- codex -a on-request --sandbox workspace-write
 devenv shell -- codex -a on-request --sandbox danger-full-access
 
 # run codex with devenv with with readonly
-devenv shell -- codex -a on-request --sandbox read-only
+codex -a never --sandbox read-only
 
 # run codex with nix develop with danger-full-access
 nix develop '.#default' --command codex -a on-request --sandbox danger-full-access
+
+# run codex with specific nix develop with danger-full-access
+nix develop ".#${PWD##*/}" --command codex -a on-request --sandbox danger-full-access
 
 # run codex with direnv (sandboxed)
 direnv exec . codex -a on-request --sandbox workspace-write
@@ -19,7 +22,7 @@ direnv exec . codex -a on-request --sandbox workspace-write
 direnv exec . codex -a on-request --sandbox danger-full-access
 
 # run codex without sandbox
-codex --sandbox danger-full-access -a untrusted
+codex --sandbox danger-full-access -a on-request
 
 # run codex with sandbox
 codex --sandbox workspace-write -a on-request

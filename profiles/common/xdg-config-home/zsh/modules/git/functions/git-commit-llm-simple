@@ -1,0 +1,75 @@
+# vi:ft=zsh
+
+local type="$1"
+local scope="$2"
+local format
+local prompt
+local msg
+
+if [[ -z "$type" ]]; then
+    echo "Usage: git-commit-llm <type> [scope]"
+    echo "Example:"
+    echo "  git-commit-llm feat"
+    echo "  git-commit-llm feat auth"
+    return 1
+fi
+
+case "$type" in
+    feat|fix|refactor|docs|test|style|perf|build|ci|chore) ;;
+    *)
+        echo "Invalid type: $type"
+        echo "Allowed types: feat, fix, refactor, docs, test, style, perf, build, ci, chore"
+        return 1
+    ;;
+esac
+
+if git diff --cached --quiet; then
+    echo "No staged changes found."
+    return 1
+fi
+
+if [[ -n "$scope" ]]; then
+    format="${type}(${scope}): subject"
+else
+    format="${type}: subject"
+fi
+
+prompt="Inspect the staged changes and return ONLY a Conventional Commit message.
+
+**Fixed format requirements:**
+- You MUST use this exact type: $type"
+
+if [[ -n "$scope" ]]; then
+    prompt="$prompt
+    - You MUST use this exact scope: $scope
+    - Structure: \`$format\`"
+else
+    prompt="$prompt
+    - Do NOT include a scope
+    - Structure: \`$format\`"
+fi
+
+prompt="$prompt
+
+**Subject rules:**
+- Imperative mood
+- Present tense
+- ≤72 characters
+- Describe the primary staged change
+- Focus on WHAT changed, not WHY
+
+**Body rules:**
+- Add a body only if essential context cannot fit in the subject
+- If body is needed, keep it concise
+
+Return ONLY the commit message. No code fences, no explanation."
+
+msg="$(
+    codex exec \
+        --model gpt-5.4-mini \
+        -c model_reasoning_effort='low' \
+        --sandbox read-only \
+        "$prompt"
+)" || return 1
+
+git commit -m "$msg"

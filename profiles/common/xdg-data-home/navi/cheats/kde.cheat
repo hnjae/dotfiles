@@ -1,4 +1,7 @@
-% kde
+% kde, plasma
 
-# trun-off screen
+# trun off screen on kde plasma
 kscreen-doctor --dpms off
+
+# trun off screen and lock on kde plasma
+qdbus org.freedesktop.ScreenSaver /ScreenSaver Lock && sleep 1 && kscreen-doctor --dpms off

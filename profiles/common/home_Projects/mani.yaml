@@ -3,8 +3,6 @@ projects:
     url: git@github.com:hnjae/anki-english-words.git
   anki-history:
     url: git@github.com:hnjae/anki-history.git
-  infra-desktop:
-    url: git@github.com:hnjae/infra-desktop.git
   archive:
     url: git@github.com:hnjae/archive.git
   dotfiles-private:

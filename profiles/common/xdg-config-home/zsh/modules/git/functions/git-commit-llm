@@ -4,7 +4,10 @@ local type="$1"
 local scope="$2"
 local format
 local prompt
-local msg
+local repo_root
+local git_dir
+local git_common_dir
+local -a codex_args
 
 if [[ -z "$type" ]]; then
     echo "Usage: git-commit-llm <type> [scope]"
@@ -23,6 +26,13 @@ case "$type" in
     ;;
 esac
 
+repo_root="$(git rev-parse --show-toplevel 2>/dev/null)" || {
+    echo "Not inside a git repository."
+    return 1
+}
+git_dir="$(git rev-parse --absolute-git-dir 2>/dev/null)" || return 1
+git_common_dir="$(git rev-parse --path-format=absolute --git-common-dir 2>/dev/null)" || git_common_dir="$git_dir"
+
 if git diff --cached --quiet; then
     echo "No staged changes found."
     return 1
@@ -34,7 +44,7 @@ else
     format="${type}: subject"
 fi
 
-prompt="Inspect the staged changes and return ONLY a Conventional Commit message.
+prompt="Inspect the staged changes and create the git commit yourself.
 
 **Fixed format requirements:**
 - You MUST use this exact type: $type"
@@ -62,14 +72,32 @@ prompt="$prompt
 - Add a body only if essential context cannot fit in the subject
 - If body is needed, keep it concise
 
-Return ONLY the commit message. No code fences, no explanation."
+**Commit workflow:**
+- Commit the currently staged changes by running git commands yourself.
+- Before the first commit attempt, record the staged file list and any pre-existing unstaged files.
+- Do NOT unstage, restore, reset, or edit files yourself.
+- Do NOT stage files except for formatter changes made by git hooks, as described below.
+- Do NOT bypass hooks with --no-verify.
+- Do NOT add a Codex co-author trailer; these are user-authored changes.
+- If gitlint or another commit-message hook rejects the message, read the error, revise the message, and retry.
+- If a formatting hook modifies files and the commit fails because those hook changes need staging, stage only hook-modified files that were already in the original staged file list and had no pre-existing unstaged changes, then retry the commit.
+- Use path-specific staging such as \`git add -- <paths>\`; never use broad staging like \`git add -A\`.
+- If hook changes touch unrelated files, files with pre-existing unstaged changes, or require user action, stop and report the exact reason.
+- After success, report the commit hash and commit subject.
 
-msg="$(
-    codex exec \
-        --model gpt-5.4-mini \
-        -c model_reasoning_effort='low' \
-        --sandbox read-only \
-        "$prompt"
-)" || return 1
+Use only the repository at: $repo_root"
 
-git commit -m "$msg"
+codex_args=(
+    --model gpt-5.4-mini
+    -c model_reasoning_effort=low
+    --disable codex_git_commit
+    --sandbox workspace-write
+    --cd "$repo_root"
+    --add-dir "$git_dir"
+)
+
+if [[ "$git_common_dir" != "$git_dir" ]]; then
+    codex_args+=(--add-dir "$git_common_dir")
+fi
+
+codex exec "${codex_args[@]}" "$prompt"
