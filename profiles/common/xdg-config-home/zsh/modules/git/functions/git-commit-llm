@@ -79,7 +79,7 @@ prompt="$prompt
 - Do NOT stage files except for formatter changes made by git hooks, as described below.
 - Do NOT bypass hooks with --no-verify.
 - Do NOT add a Codex co-author trailer; these are user-authored changes.
-- If gitlint or another commit-message hook rejects the message, read the error, revise the message, and retry.
+- If commitlint or another commit-message hook rejects the message, read the error, revise the message, and retry.
 - If a formatting hook modifies files and the commit fails because those hook changes need staging, stage only hook-modified files that were already in the original staged file list and had no pre-existing unstaged changes, then retry the commit.
 - Use path-specific staging such as \`git add -- <paths>\`; never use broad staging like \`git add -A\`.
 - If hook changes touch unrelated files, files with pre-existing unstaged changes, or require user action, stop and report the exact reason.

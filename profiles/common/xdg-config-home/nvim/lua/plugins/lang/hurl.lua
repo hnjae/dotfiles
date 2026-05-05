@@ -40,18 +40,13 @@ return {
   },
   -- stylua: ignore
   keys = {
-    { [1] = prefix, [2] = "", desc="+Rest (Hurl)", ft="hurl" },
-
-    { [1] = prefix .. "a", [2] = "<cmd>HurlRunnerAt<CR>", desc = "run-api",       ft = "hurl" },
-    { [1] = prefix .. "A", [2] = "<cmd>HurlRunner<CR>",   desc = "run-api (All)", ft = "hurl" },
-
-    { [1] = prefix .. "e", [2] = "<cmd>HurlRunnerToEntry<CR>", desc = "run-api (to-entry)", ft = "hurl" },
-    { [1] = prefix .. "E", [2] = "<cmd>HurlRunnerToEnd<CR>",   desc = "run-api (to-end)", ft = "hurl" },
-
-    { [1] = prefix .. "m", [2] = "<cmd>HurlToggleMode<CR>", desc = "hurl-toggle-mode", ft = "hurl", },
-
-    { [1] = prefix .. "v", [2] = "<cmd>HurlVerbose<CR>",     desc = "run-api (verbose)", ft = "hurl", },
-    { [1] = prefix .. "V", [2] = "<cmd>HurlVeryVerbose<CR>", desc = "run-api (very verbose)", ft = "hurl", },
+    { [1] = prefix .. "a", [2] = "<cmd>HurlRunnerAt<CR>",      desc = "run-api",                ft = "hurl" },
+    { [1] = prefix .. "A", [2] = "<cmd>HurlRunner<CR>",        desc = "run-api (All)",          ft = "hurl" },
+    { [1] = prefix .. "e", [2] = "<cmd>HurlRunnerToEntry<CR>", desc = "run-api (to-entry)",     ft = "hurl" },
+    { [1] = prefix .. "E", [2] = "<cmd>HurlRunnerToEnd<CR>",   desc = "run-api (to-end)",       ft = "hurl" },
+    { [1] = prefix .. "v", [2] = "<cmd>HurlVerbose<CR>",       desc = "run-api (verbose)",      ft = "hurl", },
+    { [1] = prefix .. "m", [2] = "<cmd>HurlToggleMode<CR>",    desc = "hurl-toggle-mode",       ft = "hurl", },
+    { [1] = prefix .. "V", [2] = "<cmd>HurlVeryVerbose<CR>",   desc = "run-api (very verbose)", ft = "hurl", },
 
     -- Run Hurl request in visual mode
     { [1] = prefix, mode = "v", [2] = ":HurlRunner<CR>", desc = "hurl-runner", ft = "hurl" },
