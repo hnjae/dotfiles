@@ -1,5 +1,12 @@
 # shellcheck shell=bash
 
+dot_bashenv="${XDG_CONFIG_HOME:-${HOME}/.config}/bash/bashenv"
+if [[ -r "$dot_bashenv" ]]; then
+    # shellcheck source=/dev/null
+    . "$dot_bashenv"
+fi
+unset dot_bashenv
+
 # If not running interactively, don't do anything
 case $- in
 *i*) ;;
@@ -71,4 +78,5 @@ export IRC_CLIENT='irssi'
 # BASH_IT_RELOAD_LEGACY=1
 
 # Load Bash It
+# shellcheck source=/dev/null
 source "${BASH_IT?}/bash_it.sh"

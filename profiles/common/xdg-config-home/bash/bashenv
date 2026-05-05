@@ -1,0 +1,25 @@
+# shellcheck shell=bash
+# vi:ft=bash
+
+if [[ -n "${__DOT_BASHENV_SOURCED-}" ]]; then
+	return
+fi
+__DOT_BASHENV_SOURCED=1
+
+# XDG Base Directory Specification
+export XDG_BIN_DIR="${XDG_BIN_DIR:-${HOME}/.local/bin}"
+export XDG_CACHE_HOME="${XDG_CACHE_HOME:-${HOME}/.cache}"
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}"
+export XDG_DATA_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}"
+export XDG_STATE_HOME="${XDG_STATE_HOME:-${HOME}/.local/state}"
+
+export BASH_ENV="${XDG_CONFIG_HOME}/bash/bashenv"
+
+# Source ~/.config/env.d/*.sh
+for user_env_file in "${XDG_CONFIG_HOME}/env.d"/*.sh; do
+	[[ -r "$user_env_file" ]] || continue
+	# shellcheck source=/dev/null
+	. "$user_env_file"
+done
+
+unset user_env_file
