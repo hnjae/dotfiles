@@ -14,7 +14,7 @@
             "{{ if .Root }}red{{ end }}",
             "{{ if .SSHSession }}lightYellow{{ end }}"
           ],
-          "template": "{{ if .SSHSession }} {{ end }}{{ .UserName }}@{{ .HostName }}",
+          "template": "{{ if .SSHSession }}󰌘 {{ end }}{{ .UserName }}@{{ .HostName }}",
           "min_width": 80
         },
         {
@@ -75,6 +75,16 @@
           "style": "plain",
           "foreground": "lightRed",
           "template": " \u001b[1mERROR\u001b[0m"
+        },
+        {
+          "type": "time",
+          "style": "plain",
+          "foreground": "darkGray",
+          "options": {
+            "time_format": "15:04:05"
+          },
+          "template": "{{ if or .Env.SSH_CONNECTION .Env.SSH_CLIENT .Env.SSH_TTY }} {{ .CurrentDate | date \"2006-01-02\" }}{{ end }} {{ .CurrentDate | date .Format }}",
+          "min_width": 120
         }
       ],
       "type": "prompt"
