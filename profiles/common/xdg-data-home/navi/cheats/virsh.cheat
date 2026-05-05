@@ -25,7 +25,7 @@ sudo virsh -c 'qemu:///system' vol-list default
 virt-viewer --connect "qemu+ssh://tofu@eris/system?socket=/run/libvirt/libvirt-sock" test
 
 # plan removing resource and aplly
-tofu plan destroy
+tofu plan -destroy
 
 # remove resource
 tofu destroy [-var-file=terraform.tfvars]
