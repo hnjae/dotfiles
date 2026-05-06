@@ -1,3 +1,9 @@
 Host *
   Compression no
   UserKnownHostsFile ~/.ssh/known_hosts ~/.ssh/known_hosts.permanent
+
+Host metis
+  IdentityAgent ~/.1password/agent.sock
+
+Host eris
+  IdentityAgent ~/.1password/agent.sock

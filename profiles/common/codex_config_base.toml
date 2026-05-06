@@ -1,0 +1,34 @@
+#:schema https://developers.openai.com/codex/config-schema.json
+
+# https://developers.openai.com/codex/config-reference
+
+model = "gpt-5.5"
+model_reasoning_effort = "xhigh"
+plan_model_reasoning_effort = "xhigh"
+plan_mode_reasoning_effort = "xhigh"
+sandbox_mode = "workspace-write"
+allow_login_shell = false             # for devenv/nixshell etc
+
+[tui]
+theme = "base16-256"
+
+
+[features]
+codex_git_commit = true
+
+[sandbox_workspace_write]
+network_access = true # flake/input/substituter fetch가 필요
+
+# default: inherit =all
+# [shell_environment_policy]
+# inherit = "all"
+# exclude = []
+# set = {}
+# include_only = []
+# experimental_use_profile = false
+
+[analytics]
+enabled = false
+
+[mcp_servers.openaiDeveloperDocs]
+url = "https://developers.openai.com/mcp"
