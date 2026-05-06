@@ -1,0 +1,34 @@
+# Generated from Gruvbox Light Tuned by theme-generator.
+
+[colors.primary]
+background = "#fbf1c7"
+foreground = "#3c3836"
+
+[colors.cursor]
+text = "#fbf1c7"
+cursor = "#3c3836"
+
+[colors.selection]
+text = "#3c3836"
+background = "#d5c4a1"
+
+[colors.normal]
+black = "#fbf1c7"
+red = "#9d0006"
+green = "#79740e"
+yellow = "#b57614"
+blue = "#076678"
+magenta = "#8f3f71"
+cyan = "#427b58"
+white = "#3c3836"
+
+[colors.bright]
+black = "#928374"
+red = "#87000d"
+green = "#5f5c00"
+yellow = "#8a4f00"
+blue = "#005767"
+magenta = "#7d1f5f"
+cyan = "#1f6942"
+white = "#1d2021"
+

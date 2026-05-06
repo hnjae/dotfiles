@@ -44,7 +44,7 @@ theme = _base24
 # theme = dark:base24-my-gruvbox-dark,light:base24-my-gruvbox-light
 
 env=BAT_THEME=base16-256
-env=BAT_THEME_LIGHT=gruvbox-light
+env=BAT_THEME_LIGHT=gruvbox-light-tuned
 env=BAT_THEME_DARK=gruvbox-dark
 
 # background-opacity = 1.0
