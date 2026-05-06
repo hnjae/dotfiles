@@ -9,6 +9,10 @@ fi
 
 kwriteconfig6 --file "bluedevilglobalrc" --group "General" --key "launchState" "enable"
 
+kwriteconfig6 --file "konsolerc" --group "Notification Messages" --key "CloseAllEmptyTabs" --delete
+kwriteconfig6 --file "konsolerc" --group "Notification Messages" --key "CloseAllTabs" --delete
+kwriteconfig6 --file "konsolerc" --group "Notification Messages" --key "CloseSingleTab" --delete
+
 kwriteconfig6 --file "kdeglobals" --group "General" --key "fixed" "Sarasa Fixed K,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1"
 kwriteconfig6 --file "kdeglobals" --group "General" --key "font" "Pretendard,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1"
 kwriteconfig6 --file "kdeglobals" --group "General" --key "menuFont" "Sarasa UI K,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1"

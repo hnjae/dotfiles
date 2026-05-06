@@ -10,8 +10,5 @@ RememberWindowSize=false
 [MemorySettings]
 EnableMemoryMonitoring=true
 
-[Notification Messages]
-CloseAllTabs=true
-
 [UiSettings]
 ColorScheme=
