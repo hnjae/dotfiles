@@ -1,6 +1,8 @@
 # shellcheck shell=bash
 # vi:ft=bash
 
+# NOTE: Mimic .zshenv
+
 if [[ -n "${__DOT_BASHENV_SOURCED-}" ]]; then
 	return
 fi

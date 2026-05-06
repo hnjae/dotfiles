@@ -80,3 +80,7 @@ export IRC_CLIENT='irssi'
 # Load Bash It
 # shellcheck source=/dev/null
 source "${BASH_IT?}/bash_it.sh"
+
+if command -v oh-my-posh > /dev/null 2>&1; then
+    eval "$(oh-my-posh init bash --config "${XDG_CONFIG_HOME:-${HOME}/.config}/oh-my-posh.json")"
+fi
