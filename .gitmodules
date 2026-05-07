@@ -23,6 +23,3 @@
 [submodule "profiles/common/xdg-config-home/zsh/modules/fzf-tab/module"]
 	path = profiles/common/xdg-config-home/zsh/modules/fzf-tab/module
 	url = https://github.com/aloxaf/fzf-tab
-[submodule "profiles/common/xdg-config-home/bash/bash-it"]
-	path = profiles/common/xdg-config-home/bash/bash-it
-	url = https://github.com/bash-it/bash-it

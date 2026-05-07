@@ -1,0 +1,5 @@
+# shellcheck shell=bash
+
+bmodule fzf
+bmodule oh-my-posh
+bmodule zoxide
