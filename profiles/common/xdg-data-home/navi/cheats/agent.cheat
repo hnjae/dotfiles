@@ -6,6 +6,9 @@ devenv shell -- codex -a on-request --sandbox workspace-write --no-alt-screen
 # run codex with devenv with danger-full-access
 devenv shell -- codex -a on-request --sandbox danger-full-access --no-alt-screen
 
+# run codex with devenv with readonly
+devenv shell -- codex --sandbox read-only --no-alt-screen
+
 # run codex with nix develop with danger-full-access
 nix develop '.#default' --command codex -a on-request --sandbox danger-full-access --no-alt-screen
 
@@ -25,5 +28,4 @@ codex --sandbox danger-full-access -a on-request --no-alt-screen
 codex --sandbox workspace-write -a on-request --no-alt-screen
 
 # run codex with devenv with with READONLY
-codex -a never --sandbox read-only --no-alt-screen --no-alt-screen
-
+codex --sandbox read-only --no-alt-screen

@@ -103,6 +103,8 @@ alias gca="git commit -v --amend"
 alias gcaN="git commit -v --amend --no-edit"
 alias gcm="git commit -v -m"
 alias "gcm!"="git commit -v -m --no-verify"
+alias gcd="git-commit-date"
+alias gcl="git-commit-llm"
 
 ######################################################
 # git-cherry-pick
@@ -288,6 +290,7 @@ alias gcr="git-cd-root"
 alias gwip="git-wip"
 alias gunwip="git-unwip"
 alias gtodo="git-todo"
+
 # "ge" = ''vi $(git_status_select)''; # WIP: not working
 
 typeset -g forgit_reflog="greflog"

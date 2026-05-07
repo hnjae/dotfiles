@@ -3,7 +3,7 @@ if vim.fn.has("gui_running") == 1 then
   vim.o.guifont = "monospace:h11"
 end
 
-vim.api.nvim_set_option_value("background", "light", {})
+-- vim.api.nvim_set_option_value("background", "light", {}) OSC 10 / OSC 11 을 잘 받아서 처리하는 듯.
 
 -- vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:block,r-cr-o:block" VIM Mode 에 따라 커서 Shape 바뀌는 옵션 해제
 -- vim.opt.guicursor = "n-v-c-sm:block/Cursor,i-ci-ve:block/Cursor,r-cr-o:block/Cursor"

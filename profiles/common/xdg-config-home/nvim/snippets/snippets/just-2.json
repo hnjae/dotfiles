@@ -46,7 +46,7 @@
     "body": ["set fallback"]
   },
   "set working-directory": {
-    "prefix": ["swd", "set-working-directory", "sdir"],
+    "prefix": ["swdg", "set-working-directory", "sdir"],
     "description": "working-directory",
     "body": ["set working-directory := '${0:dir}'"]
   },

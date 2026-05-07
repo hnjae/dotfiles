@@ -7,3 +7,6 @@ Host metis
 
 Host eris
   IdentityAgent ~/.1password/agent.sock
+
+Host 192.168.*
+  IdentityAgent ~/.1password/agent.sock

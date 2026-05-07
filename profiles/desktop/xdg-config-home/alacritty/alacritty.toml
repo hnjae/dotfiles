@@ -3,8 +3,8 @@
 
 [general]
 import = [
-  "~/.config/alacritty/_base24.toml",
   "~/.config/alacritty/keybindings.toml",
+  "~/.config/alacritty/themes/gruvbox-dark-tuned.toml",
 ]
 
 [colors]
