@@ -108,6 +108,9 @@ REMOVED_ASSOCIATIONS = {
     "application/x-tar": [
         "org.pwmt.zathura-cb.desktop",
     ],
+    # Video
+    "video/mp4": ["net.puddletag.puddletag.desktop"],
+    "video/x-ms-wmv": ["net.puddletag.puddletag.desktop"],
 }
 
 SECTION = "Removed Associations"

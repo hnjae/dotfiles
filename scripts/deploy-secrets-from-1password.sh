@@ -8,7 +8,7 @@ deploy_ssh_key() {
     # --- SSH keys ---
     install -d -m 700 ~/.ssh
 
-    op read "op://Personal/ssh-home/private key" >~/.ssh/id_ed25519
+    op read "op://Personal/ssh-github/private key" >~/.ssh/id_ed25519
     chmod 600 ~/.ssh/id_ed25519
 
     ssh-keygen -y -f ~/.ssh/id_ed25519 >~/.ssh/id_ed25519.pub
@@ -36,7 +36,7 @@ deploy_api_keys() {
 }
 
 main() {
-    if command -v op >/dev/null 2>&1; then
+    if ! command -v op >/dev/null 2>&1; then
         echo "ERR: op 가 설치되어 있지 않습니다." >&2
         exit 1
     fi
