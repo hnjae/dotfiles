@@ -12,15 +12,16 @@ export FZF_DEFAULT_OPTS="--color=base16,border:8 --layout=reverse --smart-case -
 } ${0:h}/_fzf---zsh.zsh fzf --zsh || return 1
 
 local fd_cmd bat_cmd=${(k)commands[bat]-${(k)commands[batcat]}} ls_cmd
+
 if (( ${+commands[bfs]} )); then
     export FZF_DEFAULT_COMMAND="command bfs -mindepth 1 -exclude -name .git -type d,f -printf '%P\n' 2>/dev/null"
     export FZF_ALT_C_COMMAND="command bfs -mindepth 1 -exclude -name .git -type d -printf '%P\n' 2>/dev/null"
     _fzf_compgen_path() {
         command bfs ${1} -exclude -name .git -type d,f -a -not -path ${1} -print
     }
-_fzf_compgen_dir() {
-    command bfs ${1} -exclude -name .git -type d -a -not -path ${1} -print
-}
+    _fzf_compgen_dir() {
+        command bfs ${1} -exclude -name .git -type d -a -not -path ${1} -print
+    }
 elif fd_cmd=${(k)commands[fd]-${(k)commands[fdfind]}}; [[ -n ${fd_cmd} ]]; then
 
     local fd_excludes=(
@@ -63,12 +64,9 @@ elif fd_cmd=${(k)commands[fd]-${(k)commands[fdfind]}}; [[ -n ${fd_cmd} ]]; then
         '\*~'
     )
 
-    export FZF_CTRL_T_COMMAND="command ${fd_cmd} --hidden --no-ignore --one-file-system --follow ${fd_excludes[@]/#/--exclude } --type f --type d . 2>/dev/null"
-    export FZF_ALT_C_COMMAND="command ${fd_cmd} --hidden --no-ignore --one-file-system --follow ${fd_excludes[@]/#/--exclude } --type d . 2>/dev/null"
-    # export FZF_DEFAULT_COMMAND="command ${fd_cmd} -H --no-ignore-vcs -E .git -td -tf"
-    # export FZF_ALT_C_COMMAND="command ${fd_cmd} -H --no-ignore-vcs -E .git -td"
+    export FZF_CTRL_T_COMMAND="command ${fd_cmd} --hidden --one-file-system --follow ${fd_excludes[@]/#/--exclude } --type f --type d . 2>/dev/null"
+    export FZF_ALT_C_COMMAND="command ${fd_cmd} --hidden --one-file-system --follow ${fd_excludes[@]/#/--exclude } --type d . 2>/dev/null"
     eval "_fzf_compgen_path() {
-        # command ${fd_cmd} -H --no-ignore-vcs -E .git -td -tf . \${1}
         command ${fd_cmd} --hidden --one-file-system --no-ignore-vcs --follow ${fd_excludes[@]/#/--exclude } --type f --type d . \${1}
     }"
 eval "_fzf_compgen_dir() {
@@ -89,8 +87,6 @@ fi
 
 if (( ${+commands[eza]} )); then
     ls_cmd='eza --group-directories-first --color=always'
-elif (( ${+commands[lsd]} )); then
-    ls_cmd='lsd --group-directories-first --color=always'
 elif command ls --version &>/dev/null; then
     # GNU
     ls_cmd='ls --group-directories-first --color=always'

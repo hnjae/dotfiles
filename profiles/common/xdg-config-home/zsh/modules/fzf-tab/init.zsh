@@ -8,4 +8,3 @@ zstyle ':fzf-tab:*' use-fzf-default-opts no
 zstyle ':completion:*' menu no
 
 source "${0:A:h}/module/fzf-tab.plugin.zsh"
-
