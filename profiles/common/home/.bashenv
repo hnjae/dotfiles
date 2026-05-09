@@ -1,0 +1,18 @@
+# shellcheck shell=bash
+# vi:ft=bash:sw=4:expandtab
+
+# NOTE: Mimic .zshenv
+
+if [[ -n "${__DOT_BASHENV_SOURCED-}" ]]; then
+    return
+fi
+__DOT_BASHENV_SOURCED=1
+
+# Source ~/.config/env.d/*.sh
+for user_env_file in "${XDG_CONFIG_HOME:-${HOME}/.config}/env.d"/*.sh; do
+    [[ -r "$user_env_file" ]] || continue
+
+    # shellcheck source=/dev/null
+    . "$user_env_file"
+done
+unset user_env_file

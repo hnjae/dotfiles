@@ -17,7 +17,7 @@ export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}"
 export XDG_DATA_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}"
 export XDG_STATE_HOME="${XDG_STATE_HOME:-${HOME}/.local/state}"
 
-# Source ~/.config/env./d*
+# Source ~/.config/env.d/*
 for user_env_file in "${XDG_CONFIG_HOME}/env.d"/*.sh(N); do
     [[ -r "$user_env_file" ]] || continue
     emulate sh -c ". '$user_env_file'"

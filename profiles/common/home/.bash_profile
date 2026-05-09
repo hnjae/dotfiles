@@ -1,24 +1,19 @@
 # shellcheck shell=bash
 
-# XDG_BIN_DIR="${XDG_BIN_DIR:-${HOME}/.local/bin}"
-# XDG_CACHE_HOME="${XDG_CACHE_HOME:-${HOME}/.cache}"
-XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}"
-# XDG_DATA_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}"
-# XDG_STATE_HOME="${XDG_STATE_HOME:-${HOME}/.local/state}"
+# NOTE: login shell 일때 읽힘. (interactive 여부와 상관 없이.)
 
-dot_bashenv="${XDG_CONFIG_HOME}/bash/bashenv"
-if [[ -r "$dot_bashenv" ]]; then
+if [[ -r "${HOME}/.bashenv" ]]; then
     # shellcheck source=/dev/null
-    . "$dot_bashenv"
-fi
-unset dot_bashenv
-
-if shopt -q login_shell && [[ -s "${HOME}/.profile" ]]; then
-    # shellcheck source=/dev/null
-    . "${HOME}/.profile"
+    . "${HOME}/.bashenv"
 fi
 
-if [[ $- == *i* && -z "${__DOT_BASHRC_SOURCED-}" && -s "${HOME}/.bashrc" ]]; then
+for user_profile_file in "${XDG_CONFIG_HOME:-${HOME}/.config}/profile.d"/*.sh; do
+    [[ -r "$user_profile_file" ]] || continue
+    # shellcheck source=/dev/null
+    . "$user_profile_file"
+done
+
+if [[ $- == *i* && -s "${HOME}/.bashrc" ]]; then
     # shellcheck source=/dev/null
     . "${HOME}/.bashrc"
 fi
