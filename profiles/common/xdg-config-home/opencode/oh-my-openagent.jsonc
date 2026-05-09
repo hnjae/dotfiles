@@ -90,14 +90,8 @@
   },
   "lsp": {
     "ty": {
-      "command": [
-        "ty",
-        "server"
-      ],
-      "extensions": [
-        ".py",
-        ".pyi"
-      ],
+      "command": ["ty", "server"],
+      "extensions": [".py", ".pyi"],
       "priority": 10
     },
     "pyright": {
@@ -106,25 +100,19 @@
     "basedpyright": {
       "disabled": true
     },
+    "qmlls": {
+      "command": ["qmlls", "--no-cmake-calls"],
+      "extensions": [".qml"],
+      "priority": 10
+    },
     "marksman": {
-      "command": [
-        "marksman",
-        "server"
-      ],
-      "extensions": [
-        ".md"
-      ],
+      "command": ["marksman", "server"],
+      "extensions": [".md"],
       "priority": 10
     },
     "docker-ls": {
-      "command": [
-        "docker-language-server",
-        "start"
-      ],
-      "extensions": [
-        "Containerfile",
-        "Dockerfile"
-      ]
+      "command": ["docker-language-server", "start"],
+      "extensions": ["Containerfile", "Dockerfile"]
     }
   }
 }

@@ -1,6 +1,6 @@
 [Appearance]
 BoldIntense=false
-ColorScheme=gruvbox-light-tuned
+ColorScheme=gruvbox-dark-tuned
 Font=Sarasa Fixed K Nerd Font,11,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
 
 [Cursor Options]

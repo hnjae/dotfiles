@@ -29,3 +29,9 @@ codex --sandbox workspace-write -a on-request --no-alt-screen
 
 # run codex with devenv with with READONLY
 codex --sandbox read-only --no-alt-screen
+
+# run opencode in YOLO Mode
+OPENCODE_PERMISSION='{"*":"allow"}' opencode
+
+# run opencode in YLO Mode with tmux support
+OPENCODE_PERMISSION='{"*":"allow"}' opencode -- port 4096

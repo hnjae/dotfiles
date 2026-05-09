@@ -40,9 +40,8 @@ window-theme = ghostty
 # Style
 ################################################################################
 # run `ghostty + list-themes` to get a list of available themes
-theme = gruvbox-light-tuned
+theme = dark:gruvbox-dark-tuned,light:gruvbox-light-tuned
 palette-generate = true
-# theme = dark:base24-my-gruvbox-dark,light:base24-my-gruvbox-light
 
 env=BAT_THEME=base16-256
 env=BAT_THEME_LIGHT=gruvbox-light
@@ -75,6 +74,8 @@ window-padding-balance = true
 # disable new window keybinding (context switch 에 방해됨)
 keybind = ctrl+shift+n=unbind
 
+# close single pane
+keybind = ctrl+shift+w=close_surface
 
 # behave like normal terminal
 keybind = ctrl+shift+plus=increase_font_size:0.5

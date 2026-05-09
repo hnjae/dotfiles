@@ -1,3 +1,4 @@
+---
 projects:
   anki-english-words:
     url: git@github.com:hnjae/anki-english-words.git
@@ -31,6 +32,8 @@ projects:
     url: git@github.com:hnjae/nix-templates.git
   homelab-infra:
     url: git@github.com:hnjae/homelab-infra.git
+  kde-plasma-extensions:
+    url: git@github.com:hnjae/kde-plasma-extensions.git
 specs:
   default:
     output: markdown
