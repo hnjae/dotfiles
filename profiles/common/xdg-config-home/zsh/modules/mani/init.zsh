@@ -1,4 +1,4 @@
-if (( ! $+commands[mani] )); then
+if ((!$+commands[mani])); then
     return
 fi
 

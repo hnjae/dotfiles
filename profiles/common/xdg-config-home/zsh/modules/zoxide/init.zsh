@@ -1,4 +1,4 @@
-if (( ! $+commands[zoxide] )); then
+if ((!$+commands[zoxide])); then
     return
 fi
 

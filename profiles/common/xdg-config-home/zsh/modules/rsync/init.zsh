@@ -1,4 +1,4 @@
-if (( ! $+commands[rsync] )); then
+if ((!$+commands[rsync])); then
     return
 fi
 

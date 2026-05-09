@@ -9,14 +9,14 @@
 
     autoload -Uz vcs_info
     zstyle ':vcs_info:*' enable git
-    zstyle ':vcs_info:git*' formats '%r/%S'  # repo-name/subdir
+    zstyle ':vcs_info:git*' formats '%r/%S' # repo-name/subdir
 
     _termtitle_precmd() {
-        vcs_info  # vcs_info_msg_0_ 변수 업데이트
-        local dir="${vcs_info_msg_0_:-${PWD/#$HOME/~}}"  # git이면 repo 기준, 아니면 HOME 기준
+        vcs_info                                        # vcs_info_msg_0_ 변수 업데이트
+        local dir="${vcs_info_msg_0_:-${PWD/#$HOME/~}}" # git이면 repo 기준, 아니면 HOME 기준
 
-        dir="${dir%/.}"  # repo root의 /. 제거
-        [[ -n ${vcs_info_msg_0_} ]] && dir="${giticon}${dir}"  # git repo면 아이콘 추가
+        dir="${dir%/.}"                                       # repo root의 /. 제거
+        [[ -n ${vcs_info_msg_0_} ]] && dir="${giticon}${dir}" # git repo면 아이콘 추가
 
         # Update OSC 7
         print -n "\e]7;file://${HOST}${PWD:gs/ /%20}\e\\"
@@ -30,12 +30,12 @@
     }
 
     _termtitle_preexec() {
-        vcs_info  # vcs_info_msg_0_ 변수 업데이트
+        vcs_info # vcs_info_msg_0_ 변수 업데이트
         local cmd="${${(Az)2}[1]}"
-        local dir="${vcs_info_msg_0_:-${PWD/#$HOME/~}}"  # git이면 repo 기준, 아니면 HOME 기준
+        local dir="${vcs_info_msg_0_:-${PWD/#$HOME/~}}" # git이면 repo 기준, 아니면 HOME 기준
 
-        dir="${dir%/.}"  # repo root의 /. 제거
-        [[ -n ${vcs_info_msg_0_} ]] && dir="${giticon}${dir}"  # git repo면 아이콘 추가
+        dir="${dir%/.}"                                       # repo root의 /. 제거
+        [[ -n ${vcs_info_msg_0_} ]] && dir="${giticon}${dir}" # git repo면 아이콘 추가
 
         # Update OSC 2
         if [[ ${SSH_CONNECTION} != "" ]]; then

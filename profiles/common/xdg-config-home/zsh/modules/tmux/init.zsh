@@ -1,4 +1,4 @@
-if (( ! $+commands[tmux] )); then
+if ((!$+commands[tmux])); then
     return
 fi
 

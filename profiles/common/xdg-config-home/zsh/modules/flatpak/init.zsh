@@ -1,6 +1,6 @@
 # TODO: --user 옵션이 deprecated 된 것 같다?? <2025-05-31>
 
-if (( ! $+commands[flatpak] )); then
+if ((!$+commands[flatpak])); then
     return
 fi
 

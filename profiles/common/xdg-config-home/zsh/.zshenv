@@ -28,4 +28,3 @@ unset user_env_file
 if [[ -z "${ZDOTDIR-}" ]]; then
     export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
 fi
-

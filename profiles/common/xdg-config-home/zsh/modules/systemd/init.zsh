@@ -1,4 +1,4 @@
-if (( ! $+commands[systemctl] )); then
+if ((!$+commands[systemctl])); then
     return
 fi
 
@@ -76,7 +76,7 @@ scxl() {
     fi
 
     echo "INFO: Starting $unit..." >&2
-    nohup sudo systemctl start  "$unit" >/dev/null 2>&1 &
+    nohup sudo systemctl start "$unit" >/dev/null 2>&1 &
 
     exec journalctl --follow --since "12s ago" --output=short-full --unit "$unit"
 }

@@ -1,4 +1,4 @@
-if (( ! $+commands[navi] )) || [[ $TERM == "dumb" || $options[zle] != on ]]; then
+if ((!$+commands[navi])) || [[ $TERM == "dumb" || $options[zle] != on ]]; then
     return
 fi
 

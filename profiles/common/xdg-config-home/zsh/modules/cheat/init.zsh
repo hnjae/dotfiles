@@ -3,7 +3,7 @@
 # TODO: source "https://github.com/cheat/cheat/blob/master/scripts/cheat.zsh" <2025-06-08>
 # /nix/store/k1am50l3yxninsc05dgg13bs45l5x75a-cheat-4.4.2/share/zsh/site-functions/_cheat 에 위치.
 
-if (( ! $+commands[cheat] )); then
+if ((!$+commands[cheat])); then
     return
 fi
 
@@ -13,7 +13,7 @@ alias ch="cheat"
 alias che="cheat -e"
 alias chl="cheat -l"
 
-if (( $+commands[fzf] )); then
+if (($+commands[fzf])); then
     export CHEAT_USE_FZF="true"
 
     function __cheat_select() {

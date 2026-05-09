@@ -1,4 +1,4 @@
-if (( ! $+commands[yazi])); then
+if ((!$+commands[yazi])); then
     return
 fi
 

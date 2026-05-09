@@ -1,4 +1,4 @@
-if (( ! $+commands[jq] )); then
+if ((!$+commands[jq])); then
     return
 fi
 

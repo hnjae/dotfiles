@@ -1,4 +1,4 @@
-if (( ! $+commands[bat] )); then
+if ((!$+commands[bat])); then
     return
 fi
 

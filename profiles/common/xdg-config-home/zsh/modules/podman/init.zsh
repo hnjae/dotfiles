@@ -1,4 +1,4 @@
-if (( ! $+commands[podman] )); then
+if ((!$+commands[podman])); then
     return
 fi
 

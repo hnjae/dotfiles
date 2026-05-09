@@ -1,4 +1,4 @@
-if (( ! ${+commands[eza]} )); then
+if ((!${+commands[eza]})); then
     return
 fi
 
