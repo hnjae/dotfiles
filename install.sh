@@ -85,7 +85,7 @@ log() {
 
     _log_timestamp=$(date '+%Y-%m-%dT%H:%M:%S%z')
 
-    printf '%s[%s]%s %s%s:%s %s\n' \
+    printf '%s[%s]%s %s%s%s: %s\n' \
         "$_log_color_bright_black" \
         "$_log_timestamp" \
         "$_log_color_reset" \
