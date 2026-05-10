@@ -50,12 +50,12 @@ alias ${up}K="systemctl --user kill"
 gp="jc"
 up="jcu"
 
-alias ${gp}="journalctl"
-alias ${up}="journalctl --user"
-alias ${gp}f="journalctl --output=short-full --boot=0 --follow --unit="
-alias ${up}f="journalctl --output=short-full --user --boot=0 --follow --unit="
-alias ${gp}x="journalctl --output=short-full --boot=0 --catalog --follow --unit="
-alias ${up}x="journalctl --output=short-full --user --boot=0 --catalog --follow --unit="
+alias ${gp}="journalctl --output=short-iso"
+alias ${up}="journalctl --user --output=short-iso"
+alias ${gp}f="jc --boot=0 --follow --unit="
+alias ${up}f="jcu --boot=0 --follow --unit="
+alias ${gp}x="jc -boot=0 --catalog --follow --unit="
+alias ${up}x="jcu --boot=0 --catalog --follow --unit="
 
 unset gp up
 

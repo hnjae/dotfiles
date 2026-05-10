@@ -28,4 +28,13 @@ sudo lvcreate -L "${SWAP_LV_SIZE}" -n "${LV_LABEL}" "${VG_NAME}"
 sudo lvcreate -l "100%FREE" -n "${LV_NAME}" "${VG_NAME}"
 
 # remove lv
-sudo lvremove /dev/mapper/<vg-name>-<lv-name>
+sudo lvremove /dev/mapper/<vg-name>/<lv-name>
+
+# increase/extend lv (100%FREE)
+sudo lvextend -l '+100%FREE' /dev/<vg-name>/<lv-name>
+
+# increase/extend lv
+sudo lvextend -L '+10G' /dev/<vg-name>/<lv-name>
+
+# increate filesstem
+sudo btrfs filesystem resize max <mountped-path>

@@ -1,6 +1,7 @@
 --[[
   NOTE:
-    DISABLE `lang.markdown` from LazyExtra
+    - DISABLE `lang.markdown` from LazyExtra
+    - rumdl 이 lsp 로서 동작함. <2026-05-10>
 --]]
 
 ---@type LazySpec[]
@@ -23,87 +24,93 @@ return {
             end
           end,
         },
-        ["rumdl"] = {},
       },
       formatters_by_ft = {
-        ["markdown"] = { "rumdl", "markdown-toc" },
-        ["markdown.mdx"] = { "rumdl", "markdown-toc" },
+        ["markdown"] = { "LSP", "markdown-toc" },
+        ["markdown.mdx"] = { "LSP", "markdown-toc" },
       },
     },
   },
-  {
-    "nvim-lint",
-    optional = true,
-    opts = function(_, opts)
-      opts.linters_by_ft = vim.tbl_extend("force", opts.linters_by_ft or {}, {
-        markdown = { "rumdl" },
-      })
-
-      LazyVim.on_load("nvim-lint", function()
-        -- HACK: <2026-Q1>
-        -- Post-process rumdl diagnostics so editor noise stays low while the
-        -- formatter can still fix the underlying markdown.
-        local lint = require("lint")
-        local wrap = require("lint.util").wrap
-        lint.linters.rumdl = wrap(lint.linters.rumdl, function(diagnostic)
-          if diagnostic.source == "rumdl" then
-            if diagnostic.code == "MD012" then -- MD012: no-multiple-blanks
-              return nil
-            end
-
-            if diagnostic.severity == vim.diagnostic.severity.WARN then
-              diagnostic.severity = vim.diagnostic.severity.INFO
-            end
-          end
-
-          return diagnostic
-        end)
-      end)
-    end,
-  },
+  -- {
+  --   "nvim-lint",
+  --   optional = true,
+  --   opts = function(_, opts)
+  --     opts.linters_by_ft = vim.tbl_extend("force", opts.linters_by_ft or {}, {
+  --       markdown = { "rumdl" },
+  --     })
+  --
+  --     LazyVim.on_load("nvim-lint", function()
+  --       -- HACK: <2026-Q1>
+  --       -- Post-process rumdl diagnostics so editor noise stays low while the
+  --       -- formatter can still fix the underlying markdown.
+  --       local lint = require("lint")
+  --       local wrap = require("lint.util").wrap
+  --       lint.linters.rumdl = wrap(lint.linters.rumdl, function(diagnostic)
+  --         if diagnostic.source == "rumdl" then
+  --           if diagnostic.code == "MD012" then -- MD012: no-multiple-blanks
+  --             return nil
+  --           end
+  --
+  --           if diagnostic.severity == vim.diagnostic.severity.WARN then
+  --             diagnostic.severity = vim.diagnostic.severity.INFO
+  --           end
+  --         end
+  --
+  --         return diagnostic
+  --       end)
+  --     end)
+  --   end,
+  -- },
   {
     "nvim-lspconfig",
     optional = true,
     -- ---@type lspconfig.options
     opts = {
       servers = {
+        -- NOTE: rumdl 사용. <2026-05-10>
         marksman = {
-          handlers = {
-            ["textDocument/publishDiagnostics"] = function(err, result, ctx)
-              --[[
-                DOCS: <2025>
-
-                Example of result.diagnostics:
-                  {
-                    {
-                      code = "2",
-                      message = "Link to non-existent document '<foo>'",
-                      range = {
-                        ["end"] = {
-                          character = 21,
-                          line = 52
-                        },
-                        start = {
-                          character = 12,
-                          line = 52
-                        }
-                      },
-                      severity = 1,
-                      source = "Marksman"
-                    }
-                  }
-              ]]
-              if result and result.diagnostics then
-                result.diagnostics = vim.tbl_filter(function(diagnostic)
-                  -- Use rumdl for theses errors:
-                  return not tostring(diagnostic.code):match("^MD")
-                end, result.diagnostics)
-              end
-
-              vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx)
-            end,
-          },
+          enabled = false,
         },
+        tailwindcss = {
+          enabled = false,
+        },
+        -- marksman = {
+        --   handlers = {
+        --     ["textDocument/publishDiagnostics"] = function(err, result, ctx)
+        --       --[[
+        --         DOCS: <2025>
+        --
+        --         Example of result.diagnostics:
+        --           {
+        --             {
+        --               code = "2",
+        --               message = "Link to non-existent document '<foo>'",
+        --               range = {
+        --                 ["end"] = {
+        --                   character = 21,
+        --                   line = 52
+        --                 },
+        --                 start = {
+        --                   character = 12,
+        --                   line = 52
+        --                 }
+        --               },
+        --               severity = 1,
+        --               source = "Marksman"
+        --             }
+        --           }
+        --       ]]
+        --       if result and result.diagnostics then
+        --         result.diagnostics = vim.tbl_filter(function(diagnostic)
+        --           -- Use rumdl for theses errors:
+        --           return not tostring(diagnostic.code):match("^MD")
+        --         end, result.diagnostics)
+        --       end
+        --
+        --       vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx)
+        --     end,
+        --   },
+        -- },
       },
     },
   },
