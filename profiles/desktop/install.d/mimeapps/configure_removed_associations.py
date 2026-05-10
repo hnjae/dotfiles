@@ -4,113 +4,120 @@ import logging
 import os
 import stat
 import tempfile
+from collections.abc import Iterable
 from contextlib import suppress
 from pathlib import Path
 
-REMOVED_ASSOCIATIONS = {
-    "image/jpeg": [
-        "brave-browser.desktop",
-        "com.brave.Browser.desktop",
-        "org.kde.okular.desktop",
-        "org.pwmt.zathura.desktop",
-    ],
-    "image/gif": [
-        "brave-browser.desktop",
-        "com.brave.Browser.desktop",
-        "org.kde.okular.desktop",
-    ],
-    "image/webp": [
-        "brave-browser.desktop",
-        "com.brave.Browser.desktop",
-    ],
-    "image/png": [
-        "brave-browser.desktop",
-        "com.brave.Browser.desktop",
-        "org.kde.okular.desktop",
-        "org.pwmt.zathura.desktop",
-    ],
-    "image/bmp": [
-        "org.kde.okular.desktop",
-        "org.pwmt.zathura.desktop",
-    ],
-    "image/svg+xml": [
-        "org.pwmt.zathura-pdf-mupdf.desktop",
-        "brave-browser.desktop",
-        "com.brave.Browser.desktop",
-        "org.kde.okular.desktop",
+DesktopName = str | frozenset[str]
+
+
+REMOVED_ASSOCIATIONS: dict[str, set[str]] = {
+    "image/svg+xml": {
         # Editors:
         "org.kde.kwrite.desktop",
         "dev.zed.Zed.desktop",
         "nvim.desktop",
-        # Office:
-        "onlyoffice-desktopeditors.desktop",
-    ],
-    "image/apng": [
-        "com.brave.Browser.desktop",
-        "com.interversehq.qView.desktop",  # 2026-05-04 기준 렌더링 잘 안됨
-        "org.kde.gwenview.desktop",  # 2026-05-04 기준 렌더링 잘 안됨
-        "org.kde.okular.desktop",
-    ],
-    "image/x-adobe-dng": [
-        "brave-browser.desktop",
-        "com.interversehq.qView.desktop",  # 2026-05-04 기준 렌더링 잘 안됨
-        "org.kde.gwenview.desktop",  # 2026-05-04 기준 렌더링 잘 안됨
-        "org.kde.okular.desktop",
-    ],
-    "image/tiff": [
-        "brave-browser.desktop",
-        "org.kde.okular.desktop",
-        "org.pwmt.zathura.desktop",
-    ],
-    "image/jp2": [
-        "brave-browser.desktop",
-        "org.kde.okular.desktop",
-    ],
-    "application/pdf": [
-        "brave-browser.desktop",
-        "com.brave.Browser.desktop",
-        "com.yacreader.YACReader.desktop",
-        "onlyoffice-desktopeditors.desktop",
+    },
+    "application/pdf": {
         "org.gimp.GIMP.desktop",
         "org.inkscape.Inkscape.desktop",
         "org.libreoffice.LibreOffice.draw.desktop",
-    ],
-    "text/csv": [
-        "org.kde.okular.desktop",
-    ],
-    "application/vnd.oasis.opendocument.spreadsheet": [
-        "com.yacreader.YACReader.desktop",
-        "org.pwmt.zathura.desktop",
-        "org.kde.ark.desktop",
-    ],
-    "application/vnd.oasis.opendocument.database": [
-        "org.kde.ark.desktop",
-    ],
-    "application/vnd.oasis.opendocument.text": [
-        "org.kde.ark.desktop",
-    ],
-    "text/plain": [
-        "onlyoffice-desktopeditors.desktop",
-        "org.kde.okular.desktop",
-    ],
-    # Archive
-    "application/zip": [
-        "com.yacreader.YACReader.desktop",
-        "org.pwmt.zathura-cb.desktop",
-    ],
-    "application/x-7z-compressed": [
-        "org.pwmt.zathura-cb.desktop",
-    ],
-    "application/vnd.rar": [
-        "com.yacreader.YACReader.desktop",
-        "org.pwmt.zathura-cb.desktop",
-    ],
-    "application/x-tar": [
-        "org.pwmt.zathura-cb.desktop",
-    ],
-    # Video
-    "video/mp4": ["net.puddletag.puddletag.desktop"],
-    "video/x-ms-wmv": ["net.puddletag.puddletag.desktop"],
+    },
+}
+REMOVED_ASSOCIATIONS_BY_DESKTOP: dict[DesktopName, set[str]] = {
+    "onlyoffice-desktopeditors.desktop": {"text/plain", "application/pdf"},
+    frozenset(
+        {
+            "brave-browser.desktop",
+            "com.brave.Browser.desktop",
+        }
+    ): {
+        "application/pdf",
+        "image/gif",
+        "image/jpeg",
+        "image/png",
+        "image/webp",
+    },
+    frozenset(
+        {
+            # 동일 백엔드 사용 (qtimage/kdeimageformats):
+            "org.kde.gwenview.desktop",
+            "com.interversehq.qView.desktop",
+        }
+    ): {
+        "image/apng",  # 2026-05-04 기준 렌더링 잘 안됨
+        "image/x-adobe-dng",  # 2026-05-04 기준 렌더링 잘 안됨
+        "image/svg+xml",  # 2026-05-04 기준 렌더링 잘 안됨
+    },
+    "org.kde.ark.desktop": {
+        # .desktop 에는 없으나 association 목록에 뜸. <2026-05-10>
+        "application/vnd.oasis.opendocument.text",
+        "application/vnd.oasis.opendocument.spreadsheet",
+        "application/vnd.oasis.opendocument.database",
+    },
+    "org.pwmt.zathura-pdf-mupdf.desktop": {
+        "image/svg+xml",
+        "image/jpeg",
+        "image/png",
+        "image/bmp",
+        "image/x-bmp",
+        "image/tiff",
+        "image/tiff-fx;",
+    },
+    "org.pwmt.zathura-cb.desktop": {
+        "application/x-rar",
+        "application/zip",
+        "application/x-7z-compressed",
+        "application/x-tar",
+        "inode/directory",
+    },
+    "net.puddletag.puddletag.desktop": {
+        "inode/directory",
+        "video/mp4",
+        "video/x-m4v",
+        "video/x-ms-asf",
+        "video/x-ms-wmv",
+    },
+    "com.yacreader.YACReader.desktop": {
+        "application/x-pdf",
+        "application/x-zip",
+        "application/x-rar",
+        "application/x-7z",
+        "inode/directory",
+    },
+    "org.kde.okular.desktop": {
+        "image/bmp",
+        "image/fax-g3",
+        "image/g3fax",
+        "image/gif",
+        "image/jp2",
+        "image/jpeg",
+        "image/png",
+        "image/tiff",
+        "image/vnd.djvu",
+        "image/x-bzeps",
+        "image/x-dds",
+        "image/x-eps",
+        "image/x-exr",
+        "image/x-gzeps",
+        "image/x-hdr",
+        "image/x-ico",
+        "image/x-pcx",
+        "image/x-portable-bitmap",
+        "image/x-portable-graymap",
+        "image/x-portable-pixmap",
+        "image/x-psd",
+        "image/x-rgb",
+        "image/x-tga",
+        "image/x-xbitmap",
+        "image/x-xcf",
+        "image/x-xpixmap",
+        "text/plain",
+        "application/x-cbr",
+        "application/x-cbt",
+        "application/x-cbz",
+        "video/x-mng",
+    },
 }
 
 SECTION = "Removed Associations"
@@ -210,15 +217,37 @@ def entry_key(line: str) -> str | None:
     return stripped.split("=", 1)[0].strip()
 
 
-def association_line(mime_type: str, desktop_ids: list[str]) -> str:
-    return f"{mime_type}={';'.join(desktop_ids)};\n"
+def association_line(mime_type: str, desktop_ids: Iterable[str]) -> str:
+    return f"{mime_type}={';'.join(sorted(desktop_ids))};\n"
+
+
+def merged_removed_associations() -> dict[str, set[str]]:
+    merged: dict[str, set[str]] = {
+        mime_type: set(desktop_ids)
+        for mime_type, desktop_ids in REMOVED_ASSOCIATIONS.items()
+    }
+
+    for desktop_key, mime_types in REMOVED_ASSOCIATIONS_BY_DESKTOP.items():
+        desktop_names = (
+            (desktop_key,)
+            if isinstance(desktop_key, str)
+            else tuple(desktop_key)
+        )
+        for mime_type in sorted(mime_types):
+            merged.setdefault(mime_type, set()).update(desktop_names)
+
+    return merged
+
+
+def managed_association_lines() -> dict[str, str]:
+    return {
+        mime_type: association_line(mime_type, desktop_ids)
+        for mime_type, desktop_ids in merged_removed_associations().items()
+    }
 
 
 def update_removed_associations(lines: list[str]) -> list[str]:
-    desired = {
-        mime_type: association_line(mime_type, desktop_ids)
-        for mime_type, desktop_ids in REMOVED_ASSOCIATIONS.items()
-    }
+    desired = managed_association_lines()
     seen: set[str] = set()
     found_section = False
     in_section = False
@@ -316,7 +345,7 @@ def main() -> None:
         LOGGER.info(
             "Updated %s with %d managed association(s)",
             path,
-            len(REMOVED_ASSOCIATIONS),
+            len(merged_removed_associations()),
         )
     else:
         LOGGER.info("No changes needed for %s", path)

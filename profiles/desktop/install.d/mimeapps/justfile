@@ -1,0 +1,15 @@
+#!/usr/bin/env -S just --justfile
+
+set unstable
+set fallback
+set lazy
+
+_:
+    @just --list
+
+[group('ci')]
+test:
+    python3 -m unittest test_configure_removed_associations.py -v
+
+run:
+    ./configure_removed_associations.py

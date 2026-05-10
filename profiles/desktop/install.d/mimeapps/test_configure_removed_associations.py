@@ -18,6 +18,24 @@ class MimeappsTestCase(unittest.TestCase):
 
 
 class UpdateRemovedAssociationsTest(MimeappsTestCase):
+    SAMPLE_REMOVED_ASSOCIATIONS = {
+        "image/png": {"org.pwmt.zathura.desktop"},
+        "image/x-adobe-dng": {"org.kde.okular.desktop"},
+    }
+
+    def setUp(self) -> None:
+        self._patcher = patch.dict(
+            subject.__dict__,
+            {
+                "REMOVED_ASSOCIATIONS": self.SAMPLE_REMOVED_ASSOCIATIONS,
+                "REMOVED_ASSOCIATIONS_BY_DESKTOP": {},
+            },
+        )
+        self._patcher.start()
+
+    def tearDown(self) -> None:
+        self._patcher.stop()
+
     def test_creates_removed_associations_section(self) -> None:
         self.check_equal(
             subject.update_removed_associations([]),
@@ -27,6 +45,53 @@ class UpdateRemovedAssociationsTest(MimeappsTestCase):
                 "image/x-adobe-dng=org.kde.okular.desktop;\n",
             ],
         )
+
+    def test_adds_desktop_based_associations(self) -> None:
+        with patch.dict(
+            subject.__dict__,
+            {
+                "REMOVED_ASSOCIATIONS_BY_DESKTOP": {
+                    "net.puddletag.puddletag.desktop": {
+                        "image/x-adobe-dng",
+                        "video/mp4",
+                    },
+                    "org.pwmt.zathura.desktop": {"image/png"},
+                },
+            },
+        ):
+            self.check_equal(
+                subject.update_removed_associations([]),
+                [
+                    "[Removed Associations]\n",
+                    "image/png=org.pwmt.zathura.desktop;\n",
+                    "image/x-adobe-dng=net.puddletag.puddletag.desktop;org.kde.okular.desktop;\n",
+                    "video/mp4=net.puddletag.puddletag.desktop;\n",
+                ],
+            )
+
+    def test_adds_frozenset_desktop_based_associations(self) -> None:
+        with patch.dict(
+            subject.__dict__,
+            {
+                "REMOVED_ASSOCIATIONS_BY_DESKTOP": {
+                    frozenset(
+                        {
+                            "group1.desktop",
+                            "group2.desktop",
+                        }
+                    ): {"image/new", "image/png"},
+                },
+            },
+        ):
+            self.check_equal(
+                subject.update_removed_associations([]),
+                [
+                    "[Removed Associations]\n",
+                    "image/png=group1.desktop;group2.desktop;org.pwmt.zathura.desktop;\n",
+                    "image/x-adobe-dng=org.kde.okular.desktop;\n",
+                    "image/new=group1.desktop;group2.desktop;\n",
+                ],
+            )
 
     def test_replaces_only_managed_removed_associations(self) -> None:
         lines = [
@@ -168,16 +233,18 @@ class JournalStreamTest(MimeappsTestCase):
                 )
 
     def test_rejects_stale_environment_value(self) -> None:
-        with tempfile.TemporaryFile() as stream, patch.dict(
-            os.environ, {"JOURNAL_STREAM": "1:2"}
+        with (
+            tempfile.TemporaryFile() as stream,
+            patch.dict(os.environ, {"JOURNAL_STREAM": "1:2"}),
         ):
             self.check_equal(
                 subject.is_journal_stream(stream.fileno()), expected=False
             )
 
     def test_rejects_malformed_environment_value(self) -> None:
-        with tempfile.TemporaryFile() as stream, patch.dict(
-            os.environ, {"JOURNAL_STREAM": "not-a-stream"}
+        with (
+            tempfile.TemporaryFile() as stream,
+            patch.dict(os.environ, {"JOURNAL_STREAM": "not-a-stream"}),
         ):
             self.check_equal(
                 subject.is_journal_stream(stream.fileno()), expected=False
