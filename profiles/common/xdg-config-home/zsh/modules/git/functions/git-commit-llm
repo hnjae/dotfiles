@@ -10,19 +10,19 @@ local git_common_dir
 local -a codex_args
 
 if [[ -z "$type" ]]; then
-    echo "Usage: git-commit-llm <type> [scope]"
-    echo "Example:"
-    echo "  git-commit-llm feat"
-    echo "  git-commit-llm feat auth"
+    echo "Usage: git-commit-llm <type> [scope]" >&2
+    echo "Example:" >&2
+    echo "  git-commit-llm feat" >&2
+    echo "  git-commit-llm feat auth" >&2
     return 1
 fi
 
 case "$type" in
-    feat|fix|refactor|docs|test|style|perf|build|ci|chore) ;;
-    *)
-        echo "Invalid type: $type"
-        echo "Allowed types: feat, fix, refactor, docs, test, style, perf, build, ci, chore"
-        return 1
+feat | fix | refactor | docs | test | style | perf | build | ci | chore) ;;
+*)
+    echo "Invalid type: $type"
+    echo "Allowed types: feat, fix, refactor, docs, test, style, perf, build, ci, chore"
+    return 1
     ;;
 esac
 
@@ -88,8 +88,8 @@ prompt="$prompt
 Use only the repository at: $repo_root"
 
 codex_args=(
-    --model gpt-5.4-mini
-    -c model_reasoning_effort=low
+    --model gpt-5.3-codex-spark
+    -c model_reasoning_effort=high
     --disable codex_git_commit
     --sandbox workspace-write
     --cd "$repo_root"

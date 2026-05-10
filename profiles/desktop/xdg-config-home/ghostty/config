@@ -26,8 +26,9 @@ notify-on-command-finish-action = "bell,notify"
 
 # NOTE: mono space 가 아닌 font 사용 가능
 font-family = "Sarasa Fixed K Nerd Font"
+# font-family = "MesloLGM Nerd Font"
 
-font-size = 11
+font-size = 10
 window-inherit-font-size = false
 # disable ligature
 font-feature = "-calt, -liga, -dlig"
