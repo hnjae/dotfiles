@@ -17,6 +17,12 @@ lpadmin -x <printername>
 # print pdf
 lp -d <printername> -o media=A4 <target>.pdf
 
+# print B5-JiS PDF
+lp -d athena -o PageSize=Custom.182x257mm -o print-scaling=none main.pdf
+
+# print B5-JiS PDF with 긴 변 양면 duplex
+lp -d athena -o PageSize=Custom.182x257mm -o print-scaling=none -o sides=two-sided-long-edge main.pdf
+
 # Add printer (use IPP (AirPrint) protocol)
 lpadmin -p <printername> -E -v "ipp://<fqdn>/ipp/print" -m everywhere
 
