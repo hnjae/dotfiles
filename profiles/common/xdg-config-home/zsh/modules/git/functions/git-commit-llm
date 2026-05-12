@@ -93,6 +93,7 @@ codex_args=(
     --disable codex_git_commit
     --sandbox workspace-write
     --cd "$repo_root"
+    --add-dir "$repo_root"
     --add-dir "$git_dir"
 )
 
