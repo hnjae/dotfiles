@@ -7,6 +7,8 @@ BROWSER="com.brave.Browser.desktop"
 main() {
     handlr set 'video/mpv' io.mpv.Mpv.desktop
     handlr set 'video/x-ms-wmv' io.mpv.Mpv.desktop
+    handlr set "video/x-ms-asf" io.mpv.Mpv.desktop
+
     # handlr set 'audio/*' org.fooyin.fooyin.desktop
     handlr set "x-scheme-handler/http" "$BROWSER"
     handlr set "x-scheme-handler/https" "$BROWSER"

@@ -125,7 +125,7 @@ install_profile() {
     _profile_dir="$script_dir/profiles/$_profile"
 
     log INFO "Running dotbot with profile: $_profile"
-    "$dotbot_cmd" -d "$_profile_dir" -c "${_profile_dir}/${_configfile}"
+    "$dotbot_cmd" --base-directory "$_profile_dir" --config-file "${_profile_dir}/${_configfile}"
 }
 
 main() {

@@ -78,6 +78,13 @@ REMOVED_ASSOCIATIONS_BY_DESKTOP: dict[DesktopName, set[str]] = {
         "video/x-ms-asf",
         "video/x-ms-wmv",
     },
+    "org.musicbrainz.Picard.desktop": {
+        "video/x-ms-asf",
+        "video/x-theora",
+        "video/x-wmv",
+        # .desktop 에는 없으나 association 목록에 뜸. <2026-05-14>
+        "video/x-ms-wmv",
+    },
     "com.yacreader.YACReader.desktop": {
         "application/x-pdf",
         "application/x-zip",
