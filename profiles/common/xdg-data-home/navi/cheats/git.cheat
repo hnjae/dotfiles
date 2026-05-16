@@ -15,6 +15,9 @@ eval "$(ssh-agent -s)"; ssh-add ~/.ssh/id_ed25519
 ;############################################################################
 ; 파일 관련
 
+# remove all git-ignored files
+git clean -dfX
+
 # git add file
 git add <path>
 
