@@ -91,7 +91,7 @@ Use only the repository at: $repo_root"
 
 codex_args=(
     --model gpt-5.3-codex-spark
-    -c model_reasoning_effort=high
+    -c model_reasoning_effort=medium
     --disable codex_git_commit
     --sandbox workspace-write
     --cd "$repo_root"
