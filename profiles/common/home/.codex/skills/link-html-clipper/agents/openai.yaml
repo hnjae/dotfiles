@@ -1,0 +1,4 @@
+interface:
+  display_name: "Link HTML Clipper"
+  short_description: "Turn links and pasted threads into clean HTML clips"
+  default_prompt: "Use $link-html-clipper to turn this source link and pasted text into a clean Obsidian-ready HTML clip."

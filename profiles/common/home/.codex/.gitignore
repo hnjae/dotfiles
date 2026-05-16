@@ -9,7 +9,6 @@
 /log/
 /sessions/
 /shell_snapshots/
-/skills/.system/
 /tmp/
 
 # Caches and databases
@@ -24,8 +23,5 @@
 # Generated or ephemeral metadata
 /.personality_migration
 /version.json
-
-# Keep rules and skills, but ignore generated marker files if they appear
-skills/.system/.codex-system-skills.marker
 
 /installation_id

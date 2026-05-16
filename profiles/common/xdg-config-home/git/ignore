@@ -37,6 +37,8 @@ __pycache__
 **/.claude/settings.local.json
 **/.sisyphus/boulder.json
 .codex
+!.codex/
+
 
 # Miscellaneous
 .tmp
