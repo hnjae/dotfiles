@@ -12,6 +12,7 @@ main() {
     # handlr set 'audio/*' org.fooyin.fooyin.desktop
     handlr set "x-scheme-handler/http" "$BROWSER"
     handlr set "x-scheme-handler/https" "$BROWSER"
+    handlr set "text/html" "$BROWSER"
 
     handlr set "application/vnd.oasis.opendocument.text" "org.libreoffice.LibreOffice.writer.desktop"
 

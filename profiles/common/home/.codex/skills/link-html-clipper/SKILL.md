@@ -31,8 +31,8 @@ The default visual language should follow Obsidian Minimal with the Flexoki pale
 
 3. Handle X/Twitter links.
    - If an X/Twitter status ID is available, derive the post creation timestamp from the Snowflake ID when the exact page metadata is unavailable:
-     - `timestamp_ms = (status_id >> 22) + 1288834974657`
-     - UTC datetime is `new Date(timestamp_ms).toISOString()`.
+        - `timestamp_ms = (status_id >> 22) + 1288834974657`
+        - UTC datetime is `new Date(timestamp_ms).toISOString()`.
    - This derives creation time only. It does not provide post text, author display name, or reply contents.
 
 4. Shape the document.
@@ -43,7 +43,10 @@ The default visual language should follow Obsidian Minimal with the Flexoki pale
 
 5. Write the output file.
    - Create one standalone `.html` file in the current working directory unless the user specifies a path.
-   - Use a descriptive lowercase filename derived from source, author, or topic.
+   - Name the file from the source's written or published date, title, and author using `YYYYMMDD Title — Author.html` (for example, `20260516 Example Title — Jane Doe.html`).
+   - Use the source creation/publication date for `YYYYMMDD`, not the clipping date. If the written date cannot be established from the source or user-provided content, ask the user for it before writing the file; do not invent or substitute today's date.
+   - If the title or author is unknown, ask the user when practical. If the user asks to proceed anyway, use `Untitled` or `Unknown Author` for the missing segment.
+   - Sanitize filename segments only as needed for filesystem safety: remove path separators and control characters, collapse whitespace, and trim surrounding spaces. Keep the title and author readable; do not force lowercase.
    - Scope styles under a root class such as `.source-clip` to make clipping safer.
    - Include embedded CSS only. Avoid external fonts, libraries, images, and scripts by default.
    - Support dark/light mode with both `@media (prefers-color-scheme: dark)` and Obsidian-style `.theme-dark` / `.theme-light` selectors.

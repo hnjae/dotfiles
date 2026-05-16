@@ -95,7 +95,7 @@ diff_bytes="$(git -C "$repo_root" diff --cached --no-ext-diff -- | wc -c | tr -d
         printf ':\n'
         git -C "$repo_root" diff --cached --no-ext-diff --
     fi
-} >"$context_file"
+} >| "$context_file"
 
 prompt="Generate exactly one Conventional Commit message from the staged context in stdin.
 Do not run tools or shell commands. Use only the provided staged context.
@@ -144,7 +144,7 @@ codex_args=(
     --ephemeral
 )
 
-codex exec "${codex_args[@]}" "$prompt" <"$context_file" >"$codex_log" 2>&1
+codex exec "${codex_args[@]}" "$prompt" <"$context_file" >| "$codex_log" 2>&1
 commit_status=$?
 
 if ((commit_status != 0)); then
