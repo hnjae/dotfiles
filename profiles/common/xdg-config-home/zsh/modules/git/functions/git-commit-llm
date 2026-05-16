@@ -74,7 +74,9 @@ prompt="$prompt
 
 **Commit workflow:**
 - Commit the currently staged changes by running git commands yourself.
-- Before the first commit attempt, record the staged file list and any pre-existing unstaged files.
+- Before the first commit attempt, record the staged file list with \`git diff --cached --name-status\` and any pre-existing unstaged files with \`git status --porcelain=v1 --untracked-files=all\`.
+- Use Git porcelain commands for repository state; do not inspect \`.git/index\` or \`.git/index.lock\` as a preflight check.
+- Missing optional files such as \`.git/index.lock\` are normal; do not run commands that fail when optional lock files are absent.
 - Do NOT unstage, restore, reset, or edit files yourself.
 - Do NOT stage files except for formatter changes made by git hooks, as described below.
 - Do NOT bypass hooks with --no-verify.
