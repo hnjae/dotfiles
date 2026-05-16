@@ -104,7 +104,7 @@ alias gcaN="git commit -v --amend --no-edit"
 alias gcm="git commit -v -m"
 alias "gcm!"="git commit -v -m --no-verify"
 alias gcd="git-commit-date"
-alias gce="git-commit-llm"
+alias gcl="git-commit-llm"
 
 ######################################################
 # git-cherry-pick
@@ -246,8 +246,8 @@ alias gplr="git pull --rebase --autostash -v"
 ############################################################################
 # git-clone
 ############################################################################
-alias gcl="git clone --recurse-submodules"
-alias gcls="git clone --depth 1 --recurse-submodules --shallow-submodules"
+alias gcn="git clone --recurse-submodules"
+alias gcns="git clone --depth 1 --recurse-submodules --shallow-submodules"
 
 ############################################################################
 # git-submodule
