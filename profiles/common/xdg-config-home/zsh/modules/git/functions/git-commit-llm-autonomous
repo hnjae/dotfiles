@@ -1,0 +1,147 @@
+# vi:ft=zsh
+
+local type="$1"
+local scope="$2"
+local format
+local prompt
+local repo_root
+local msg_file
+local commit_output
+local commit_status
+local file_path
+local -a codex_args
+local -a staged_files
+local -a clean_staged_files
+local -a hook_modified_files
+
+if [[ -z "$type" ]]; then
+    echo "Usage: git-commit-llm <type> [scope]" >&2
+    echo "Example:" >&2
+    echo "  git-commit-llm feat" >&2
+    echo "  git-commit-llm feat auth" >&2
+    return 1
+fi
+
+case "$type" in
+feat | fix | refactor | docs | test | style | perf | build | ci | chore) ;;
+*)
+    echo "Invalid type: $type"
+    echo "Allowed types: feat, fix, refactor, docs, test, style, perf, build, ci, chore"
+    return 1
+    ;;
+esac
+
+repo_root="$(git rev-parse --show-toplevel 2>/dev/null)" || {
+    echo "Not inside a git repository."
+    return 1
+}
+
+if git -C "$repo_root" diff --cached --quiet; then
+    echo "No staged changes found."
+    return 1
+fi
+
+staged_files=("${(@f)$(git -C "$repo_root" diff --cached --name-only --)}")
+clean_staged_files=()
+
+for file_path in "${staged_files[@]}"; do
+    if git -C "$repo_root" diff --quiet -- "$file_path"; then
+        clean_staged_files+=("$file_path")
+    fi
+done
+
+if [[ -n "$scope" ]]; then
+    format="${type}(${scope}): subject"
+else
+    format="${type}: subject"
+fi
+
+prompt="Inspect the staged changes and return ONLY a Conventional Commit message.
+
+**Fixed format requirements:**
+- You MUST use this exact type: $type"
+
+if [[ -n "$scope" ]]; then
+    prompt="$prompt
+    - You MUST use this exact scope: $scope
+    - Structure: \`$format\`"
+else
+    prompt="$prompt
+    - Do NOT include a scope
+    - Structure: \`$format\`"
+fi
+
+prompt="$prompt
+
+**Subject rules:**
+- Imperative mood
+- Present tense
+- ≤72 characters
+- Describe the primary staged change
+- Focus on WHAT changed, not WHY
+
+**Body rules:**
+- Add a body only if essential context cannot fit in the subject
+- If body is needed, keep it concise
+
+**Output rules:**
+- Do NOT add a Codex co-author trailer; these are user-authored changes.
+- Return only the commit message. No code fences, no explanation.
+
+Use only the repository at: $repo_root"
+
+msg_file="$(mktemp "${TMPDIR:-/tmp}/git-commit-llm.XXXXXX")" || return 1
+
+codex_args=(
+    --model gpt-5.3-codex-spark
+    -c model_reasoning_effort=medium
+    --sandbox read-only
+    --cd "$repo_root"
+    --output-last-message "$msg_file"
+)
+
+codex exec "${codex_args[@]}" "$prompt"
+commit_status=$?
+
+if (( commit_status != 0 )); then
+    rm -f "$msg_file"
+    return "$commit_status"
+fi
+
+if [[ ! -s "$msg_file" ]]; then
+    echo "Codex returned an empty commit message." >&2
+    rm -f "$msg_file"
+    return 1
+fi
+
+commit_output="$(git -C "$repo_root" commit -F "$msg_file" 2>&1)"
+commit_status=$?
+
+if (( commit_status != 0 )); then
+    hook_modified_files=()
+
+    for file_path in "${clean_staged_files[@]}"; do
+        if ! git -C "$repo_root" diff --quiet -- "$file_path"; then
+            hook_modified_files+=("$file_path")
+        fi
+    done
+
+    if (( ${#hook_modified_files[@]} > 0 )); then
+        echo "Staging hook-modified files and retrying commit:" >&2
+        printf '  %s\n' "${hook_modified_files[@]}" >&2
+
+        if git -C "$repo_root" add -- "${hook_modified_files[@]}"; then
+            commit_output="$(git -C "$repo_root" commit -F "$msg_file" 2>&1)"
+            commit_status=$?
+        else
+            commit_status=$?
+        fi
+    fi
+fi
+
+if [[ -n "$commit_output" ]]; then
+    print -r -- "$commit_output"
+fi
+
+rm -f "$msg_file"
+return "$commit_status"
