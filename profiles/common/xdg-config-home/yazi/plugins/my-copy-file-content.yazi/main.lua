@@ -118,13 +118,23 @@ local function base64(data)
   return table.concat(encoded)
 end
 
+local function osc52_sequence(encoded)
+  local sequence = "\027]52;c;" .. encoded .. "\007"
+
+  if os.getenv("TMUX") then
+    return "\027Ptmux;\027" .. sequence .. "\027\\"
+  end
+
+  return sequence
+end
+
 local function copy_with_osc52(data)
   local tty, open_err = io.open("/dev/tty", "w")
   if not tty then
     return nil, "Failed to open `/dev/tty`: " .. tostring(open_err)
   end
 
-  local ok, write_err = tty:write("\027]52;c;" .. base64(data) .. "\007")
+  local ok, write_err = tty:write(osc52_sequence(base64(data)))
   if not ok then
     tty:close()
     return nil, "Failed to write OSC 52 data: " .. tostring(write_err)
