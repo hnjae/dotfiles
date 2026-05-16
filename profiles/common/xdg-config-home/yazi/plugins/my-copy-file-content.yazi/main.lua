@@ -84,6 +84,74 @@ local function content_kind(url, cha)
   return nil, nil, string.format("Unsupported file type: %s", mime)
 end
 
+local alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+
+local function base64_char(index)
+  return alphabet:sub(index + 1, index + 1)
+end
+
+local function base64(data)
+  local encoded = {}
+
+  for index = 1, #data, 3 do
+    local first = data:byte(index)
+    local second = data:byte(index + 1)
+    local third = data:byte(index + 2)
+    local value = first * 0x10000 + (second or 0) * 0x100 + (third or 0)
+
+    encoded[#encoded + 1] = base64_char(math.floor(value / 0x40000) % 64)
+    encoded[#encoded + 1] = base64_char(math.floor(value / 0x1000) % 64)
+
+    if second then
+      encoded[#encoded + 1] = base64_char(math.floor(value / 0x40) % 64)
+    else
+      encoded[#encoded + 1] = "="
+    end
+
+    if third then
+      encoded[#encoded + 1] = base64_char(value % 64)
+    else
+      encoded[#encoded + 1] = "="
+    end
+  end
+
+  return table.concat(encoded)
+end
+
+local function copy_with_osc52(data)
+  local tty, open_err = io.open("/dev/tty", "w")
+  if not tty then
+    return nil, "Failed to open `/dev/tty`: " .. tostring(open_err)
+  end
+
+  local ok, write_err = tty:write("\027]52;c;" .. base64(data) .. "\007")
+  if not ok then
+    tty:close()
+    return nil, "Failed to write OSC 52 data: " .. tostring(write_err)
+  end
+
+  local flushed, flush_err = tty:flush()
+  tty:close()
+
+  if not flushed then
+    return nil, "Failed to flush OSC 52 data: " .. tostring(flush_err)
+  end
+
+  return true, nil
+end
+
+local function copy_text_via_osc52(url)
+  local output, err = Command("cat"):arg({ "--", tostring(url) }):output()
+  if not output then
+    return nil, "Failed to read the file: " .. tostring(err)
+  end
+  if not output.status.success then
+    return nil, string.format("`cat` exited with code %s", tostring(output.status.code))
+  end
+
+  return copy_with_osc52(output.stdout)
+end
+
 local function copy_via_wl_copy(url, mime)
   local cat, cat_err = Command("cat"):arg({ "--", tostring(url) }):stdout(Command.PIPED):spawn()
   if not cat then
@@ -149,12 +217,18 @@ return {
       return
     end
 
-    local ok, copy_err = copy_via_wl_copy(item.url, mime)
+    local ok, copy_err
+    if kind == "text" then
+      ok, copy_err = copy_text_via_osc52(item.url)
+    else
+      ok, copy_err = copy_via_wl_copy(item.url, mime)
+    end
+
     if not ok then
       notify("error", copy_err, 7)
       return
     end
 
-    notify("info", string.format("Copied %s as %s.", item.name, kind == "image" and mime or "text/plain"), 4)
+    notify("info", string.format("Copied %s as %s.", item.name, kind == "image" and mime or "text/plain with OSC 52"), 4)
   end,
 }

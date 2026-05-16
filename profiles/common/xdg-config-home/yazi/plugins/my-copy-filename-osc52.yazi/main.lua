@@ -1,38 +1,33 @@
 local target_names = ya.sync(function()
   local names = {}
+  local selected = cx.active.selected
 
-  for _, url in pairs(cx.active.selected) do
-    names[#names + 1] = url.name or tostring(url)
-  end
-
-  if #names > 0 then
+  if #selected > 0 then
+    for _, url in pairs(selected) do
+      names[#names + 1] = url.name or tostring(url)
+    end
     return names
   end
 
   local hovered = cx.active.current.hovered
   if hovered then
-    return { hovered.name }
+    names[1] = hovered.name
   end
 
   return names
 end)
 
-local function warn(content)
+local function notify(level, content, timeout)
   ya.notify({
-    title = "Copy bracket content",
+    title = "Copy filename OSC 52",
     content = content,
-    timeout = 6,
-    level = "warn",
+    timeout = timeout,
+    level = level,
   })
 end
 
-local function info(content)
-  ya.notify({
-    title = "Copy bracket content",
-    content = content,
-    timeout = 4,
-    level = "info",
-  })
+local function count_label(count)
+  return string.format("%d %s", count, count == 1 and "filename" or "filenames")
 end
 
 local alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
@@ -91,60 +86,20 @@ local function copy_with_osc52(data)
   return true, nil
 end
 
-local function extract(name, kind)
-  local matched
-
-  if kind == "round-first" then
-    matched = name:match("%b()")
-  elseif kind == "round-last" then
-    for value in name:gmatch("%b()") do
-      matched = value
-    end
-  elseif kind == "square-first" then
-    matched = name:match("%b[]")
-  elseif kind == "square-last" then
-    for value in name:gmatch("%b[]") do
-      matched = value
-    end
-  end
-
-  return matched and matched:sub(2, -2) or nil
-end
-
 return {
-  entry = function(_, job)
-    local kind = job.args[1]
-    if kind ~= "round-first" and kind ~= "round-last" and kind ~= "square-first" and kind ~= "square-last" then
-      warn("Unsupported bracket type.")
-      return
-    end
-
+  entry = function()
     local names = target_names()
     if #names == 0 then
-      warn("No hovered or selected file.")
+      notify("warn", "No hovered or selected entries.", 6)
       return
     end
 
-    local results = {}
-    for _, name in ipairs(names) do
-      local value = extract(name, kind)
-      if value then
-        results[#results + 1] = value
-      end
-    end
-
-    if #results == 0 then
-      local label = (kind == "square-first" or kind == "square-last") and "[]" or "()"
-      warn("No " .. label .. " content found in the target name(s).")
-      return
-    end
-
-    local ok, err = copy_with_osc52(table.concat(results, "\n"))
+    local ok, err = copy_with_osc52(table.concat(names, "\n"))
     if not ok then
-      warn(err)
+      notify("error", err, 7)
       return
     end
 
-    info(string.format("Copied %d value(s) with OSC 52.", #results))
+    notify("info", string.format("Copied %s with OSC 52.", count_label(#names)), 4)
   end,
 }

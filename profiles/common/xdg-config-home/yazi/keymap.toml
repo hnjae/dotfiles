@@ -218,11 +218,11 @@ prepend_keymap = [
   { on = [
     "y",
     "p",
-  ], run = "copy path", desc = "file-path" },
+  ], run = "plugin my-copy-path-osc52", desc = "file-path (OSC 52)" },
   { on = [
     "y",
     "n",
-  ], run = "copy filename", desc = "filename" },
+  ], run = "plugin my-copy-filename-osc52", desc = "filename (OSC 52)" },
 
   # Linemode
   { on = [
