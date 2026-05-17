@@ -1,4 +1,5 @@
 # HACK: shfmt 가 현재 `$commands[oh-my-posh]` 를 `$commands[oh - my - - posh]` 로 포맷팅해서 별도 변수 사용. <shfmt 3.13.1; 2026-05-09>
+
 typeset cmd=oh-my-posh
 
 if ((!$+commands[$cmd])); then
