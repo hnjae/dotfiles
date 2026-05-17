@@ -1,0 +1,44 @@
+# vi:ft=zsh
+
+local term="$1"
+local cheats_dir="${XDG_DATA_HOME:-${HOME}/.local/share}/navi/cheats"
+local selected
+
+selected="$(
+    (
+        if ((${+commands[bfs]})); then
+            bfs "$cheats_dir" -type f -name "*.cheat" -print
+        elif ((${+commands[fd]})); then
+            fd . "$cheats_dir" -e cheat -t f
+        elif ((${+commands[fdfind]})); then
+            fdfind . "$cheats_dir" -e cheat -t f
+        else
+            find "$cheats_dir" -type f -name "*.cheat"
+        fi
+    ) |
+        while IFS= read -r file; do
+            awk -v root="$cheats_dir" '
+                BEGIN { OFS = "\t" }
+                FNR == 1 {
+                    rel = FILENAME
+                    sub("^" root "/?", "", rel)
+                    sub(/[.]cheat$/, "", rel)
+                }
+                /^[[:space:]]*$/ { next }
+                /^[[:space:]]*[$]/ { next }
+                {
+                    line = $0
+                    gsub(/\t/, " ", line)
+                    print rel, FNR, line, FILENAME
+                }
+            ' "$file"
+        done |
+        fzf --query="$term" --select-1 --exit-0 \
+            --delimiter=$'\t' \
+            --with-nth=1,2,3 \
+            --preview='bat --language=yaml --color=always --italic-text=always --paging=never --decorations=never -- {4}' |
+        sed -n '1p' |
+        awk -F '\t' '{ print $2 "\t" $4 }'
+)"
+
+echo "$selected"

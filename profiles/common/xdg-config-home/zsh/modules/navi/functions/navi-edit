@@ -1,0 +1,19 @@
+# vi:ft=zsh
+
+local cheats_dir="${XDG_DATA_HOME:-${HOME}/.local/share}/navi/cheats"
+local file line selected term
+
+if [[ -n $1 && -f "$cheats_dir/$1.cheat" ]]; then
+    nvim -- "$cheats_dir/$1.cheat"
+    return
+fi
+
+term="$*"
+selected="$(__navi_select_enhanced "$term")"
+[[ $selected == "" ]] && return
+
+line="${selected%%$'\t'*}"
+file="${selected#*$'\t'}"
+[[ -f $file ]] || return 1
+
+nvim "+${line}" -- "$file"
