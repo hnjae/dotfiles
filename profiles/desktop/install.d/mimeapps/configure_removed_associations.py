@@ -12,11 +12,18 @@ DesktopName = str | frozenset[str]
 
 
 REMOVED_ASSOCIATIONS: dict[str, set[str]] = {
+    "image/x-adobe-dng": {
+        "org.gnome.Loupe.desktop",  # not supported 2026-05-17
+        "com.interversehq.qView.desktop",  # poorly supported 2026-05-17
+    },
+    "image/heic-sequence": {
+        "org.gnome.Loupe.desktop",  # not supported 2026-05-17
+        "org.gimp.GIMP.desktop",  # not supported 2026-05-17
+    },
     "image/svg+xml": {
-        # Editors:
-        "org.kde.kwrite.desktop",
-        "dev.zed.Zed.desktop",
-        "nvim.desktop",
+        "org.kde.kwrite.desktop",  # Editors
+        "dev.zed.Zed.desktop",  # Editors
+        "nvim.desktop",  # Editors
     },
     "application/pdf": {
         "org.gimp.GIMP.desktop",
@@ -25,7 +32,11 @@ REMOVED_ASSOCIATIONS: dict[str, set[str]] = {
     },
 }
 REMOVED_ASSOCIATIONS_BY_DESKTOP: dict[DesktopName, set[str]] = {
-    "onlyoffice-desktopeditors.desktop": {"text/plain", "application/pdf"},
+    "onlyoffice-desktopeditors.desktop": {
+        "text/plain",
+        "application/pdf",
+        "image/svg+xml",  # .desktop 에는 없으나 association 목록에 뜸. <2026-05-10>
+    },
     frozenset(
         {
             "brave-browser.desktop",
@@ -36,6 +47,7 @@ REMOVED_ASSOCIATIONS_BY_DESKTOP: dict[DesktopName, set[str]] = {
         "image/gif",
         "image/jpeg",
         "image/png",
+        "image/svg+xml",  # .desktop 에는 없으나 association 목록에 뜸. <2026-05-10>
         "image/webp",
     },
     frozenset(
@@ -48,6 +60,7 @@ REMOVED_ASSOCIATIONS_BY_DESKTOP: dict[DesktopName, set[str]] = {
         "image/apng",  # 2026-05-04 기준 렌더링 잘 안됨
         "image/x-adobe-dng",  # 2026-05-04 기준 렌더링 잘 안됨
         "image/svg+xml",  # 2026-05-04 기준 렌더링 잘 안됨
+        "image/heic-sequence",  # not supported 2026-05-17
     },
     "org.kde.ark.desktop": {
         # .desktop 에는 없으나 association 목록에 뜸. <2026-05-10>
@@ -80,10 +93,9 @@ REMOVED_ASSOCIATIONS_BY_DESKTOP: dict[DesktopName, set[str]] = {
     },
     "org.musicbrainz.Picard.desktop": {
         "video/x-ms-asf",
+        "video/x-ms-wmv",  # .desktop 에는 없으나 association 목록에 뜸. <2026-05-14>
         "video/x-theora",
         "video/x-wmv",
-        # .desktop 에는 없으나 association 목록에 뜸. <2026-05-14>
-        "video/x-ms-wmv",
     },
     "com.yacreader.YACReader.desktop": {
         "application/x-pdf",
@@ -93,6 +105,9 @@ REMOVED_ASSOCIATIONS_BY_DESKTOP: dict[DesktopName, set[str]] = {
         "inode/directory",
     },
     "org.kde.okular.desktop": {
+        "application/x-cbr",
+        "application/x-cbt",
+        "application/x-cbz",
         "image/bmp",
         "image/fax-g3",
         "image/g3fax",
@@ -102,6 +117,7 @@ REMOVED_ASSOCIATIONS_BY_DESKTOP: dict[DesktopName, set[str]] = {
         "image/png",
         "image/tiff",
         "image/vnd.djvu",
+        "image/x-adobe-dng",  # .desktop 에는 없으나 association 목록에 뜸. <2026-05-17>
         "image/x-bzeps",
         "image/x-dds",
         "image/x-eps",
@@ -120,10 +136,32 @@ REMOVED_ASSOCIATIONS_BY_DESKTOP: dict[DesktopName, set[str]] = {
         "image/x-xcf",
         "image/x-xpixmap",
         "text/plain",
-        "application/x-cbr",
-        "application/x-cbt",
-        "application/x-cbz",
         "video/x-mng",
+    },
+    "com.github.jeromerobert.pdfarranger.desktop": {
+        "application/postscript",
+        "image/bmp",
+        "image/gif",
+        "image/jp2",
+        "image/jpeg",
+        "image/jpg",
+        "image/png",
+        "image/tiff",
+        "image/vnd.zbrush.pcx",
+        "image/x-adobe-dng",  # .desktop 에는 없으나 association 목록에 뜸. <2026-05-17>
+        "image/x-bmp",
+        "image/x-gray",
+        "image/x-ico",
+        "image/x-icon",
+        "image/x-pcx",
+        "image/x-png",
+        "image/x-portable-pixmap",
+    },
+    "com.github.flxzt.rnote.desktop": {
+        "application/pdf",
+        "image/jpeg",
+        "image/png",
+        "image/svg+xml",
     },
 }
 
