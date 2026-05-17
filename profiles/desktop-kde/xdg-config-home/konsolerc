@@ -10,5 +10,8 @@ RememberWindowSize=false
 [MemorySettings]
 EnableMemoryMonitoring=true
 
+[SearchSettings]
+SearchNoWrap=true
+
 [UiSettings]
 ColorScheme=

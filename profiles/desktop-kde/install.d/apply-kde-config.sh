@@ -40,3 +40,6 @@ kwriteconfig6 --file "dolphinrc" --group "InformationPanel" --key "dateFormat" "
 
 kwriteconfig6 --file "plasmaparc" --group "General" --key "AudioFeedback" "false"
 kwriteconfig6 --file "plasmaparc" --group "General" --key "VolumeStep" "4"
+
+# Feedback
+kwriteconfig6 --file "PlasmaUserFeedback" --group "Global" --key "FeedbackLevel" "64"
