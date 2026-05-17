@@ -26,6 +26,10 @@ extend-exclude = [
   "**/xdg-config-home/fontconfig",
   "**/xdg-config-home/k*",
   "**/xdg-config-home/lazygit",
+
+  # Submodules
+  "**/zsh/modules/**/module/*",
+  "**/zsh/modules/**/module/*",
 ]
 
 [type.zsh]

@@ -26,8 +26,8 @@ zmodule "$ZDOTDIR/modules/pueue"
 zmodule "$ZDOTDIR/modules/rsync"
 zmodule "$ZDOTDIR/modules/systemd"
 zmodule "$ZDOTDIR/modules/tmux"
-zmodule "$ZDOTDIR/modules/zimfw"
 zmodule "$ZDOTDIR/modules/yazi"
+zmodule "$ZDOTDIR/modules/zimfw"
 
 # 복잡한 모듈
 zmodule environment
@@ -43,10 +43,8 @@ zmodule wfxr/forgit --tag 26.01.0 --source forgit.plugin.zsh
 
 # 기타
 zmodule "$ZDOTDIR/modules/utilities"
-
 zmodule "$ZDOTDIR/modules/zsh-vi-mode"
 zmodule "$ZDOTDIR/modules/fzf"
-zmodule "$ZDOTDIR/modules/prompt"
 
 ###############################################################################
 # Completion
@@ -60,6 +58,9 @@ zmodule zsh-users/zsh-completions --fpath src
 # zmodule completion # init compinit
 
 zmodule "$ZDOTDIR/modules/compinit"
+
+zmodule "$ZDOTDIR/modules/prompt"
+zmodule "$ZDOTDIR/modules/devenv" # NOTE: precmd_functions 건드림 <2026-05-17>
 
 ###############################################################################
 # Modules that must be initialized after compinit

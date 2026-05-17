@@ -1,8 +1,0 @@
-[default]
-extend-ignore-re = [
-  '(?m)^\s*alias\b.*$',
-]
-
-[default.extend-words]
-# `print -Pn` 맥락에서:
-Pn = "Pn"
