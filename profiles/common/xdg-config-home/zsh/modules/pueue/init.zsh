@@ -1,6 +1,6 @@
 # https://github.com/Nukesor/pueue
 
-if ((!$ + commands[pueue])); then
+if ((!$+commands[pueue])); then
     return
 fi
 
