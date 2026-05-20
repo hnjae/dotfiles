@@ -1,4 +1,3 @@
----
 projects:
   anki-english-words:
     url: git@github.com:hnjae/anki-english-words.git
@@ -34,6 +33,12 @@ projects:
     url: git@github.com:hnjae/homelab-infra.git
   kde-plasma-extensions:
     url: git@github.com:hnjae/kde-plasma-extensions.git
+  relayfm:
+    url: git@github.com:hnjae/relayfm.git
+  icon-normalizer:
+    url: git@github.com:hnjae/icon-normalizer.git
+  asset-manager:
+    url: git@github.com:hnjae/asset-manager.git
 specs:
   default:
     output: markdown
