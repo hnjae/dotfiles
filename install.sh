@@ -116,7 +116,7 @@ get_dotbot() {
         git submodule update --init --recursive # 실제 코드 가져오기
     fi
 
-    printf "$_dotbot_bin_abs"
+    printf '%s' "$_dotbot_bin_abs"
 }
 
 install_profile() {

@@ -8,7 +8,15 @@ tags: []
 ## 메뉴얼
 
 - <https://epomaker.com/products/epomaker-ek75-kit>
-- <https://manuals.plus/epomaker/epomaker-ek75-hot-swappable-via-programmable-keyboard-manual>
+
+#### Via 사용법
+
+[DOCS](https://manuals.plus/epomaker/epomaker-ek75-hot-swappable-via-programmable-keyboard-manual)
+
+- Via 설정에서 Show Design tab 켜기
+- Use V2 definitions (deprecated) 켜기
+- Design 탭에서 Load Draft Definition 으로 `json` 로드
+    - `~/Documents/Backup/2025-03-18 epomaker ek75/EPOMAKER EK75-2.4G.JSON`
 
 #### Epomaker EK75 기기 선택
 

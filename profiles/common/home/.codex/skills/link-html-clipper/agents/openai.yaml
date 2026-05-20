@@ -1,3 +1,4 @@
+---
 interface:
   display_name: "Link HTML Clipper"
   short_description: "Turn links and pasted threads into clean HTML clips"

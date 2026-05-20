@@ -1,6 +1,6 @@
 # shellcheck shell=bash
 
-if ! command -v zoxide > /dev/null 2>&1; then
+if ! command -v zoxide >/dev/null 2>&1; then
     return
 fi
 
@@ -16,7 +16,7 @@ command mkdir -p "$__zoxide_cache_dir" || return
 
 if [[ ! -s "$__zoxide_init_file" || "$__zoxide_init_file" -ot "$__zoxide_bin" ]]; then
     __zoxide_tmp="${__zoxide_init_file}.$$"
-    if command zoxide init bash --no-cmd > "$__zoxide_tmp"; then
+    if command zoxide init bash --no-cmd >"$__zoxide_tmp"; then
         command mv -f "$__zoxide_tmp" "$__zoxide_init_file"
     else
         command rm -f "$__zoxide_tmp"

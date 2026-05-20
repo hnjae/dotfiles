@@ -5,9 +5,9 @@ set -euo pipefail
 script_dir="$(cd -- "$(dirname -- "$0")" && pwd -P)" >/dev/null 2>&1
 
 declare -A BRANCH_BASED_MODULES=(
-    [profiles/desktop/xdg-config-home/mpv/script-repos/thumbfast]=1
-    [profiles/desktop/xdg-config-home/mpv/script-repos/osc.lua]=1
-    [profiles/desktop/xdg-config-home/mpv/script-repos/content-red-tester-s-scripts]=1
+    ["profiles/desktop/xdg-config-home/mpv/script-repos/thumbfast"]=1
+    ["profiles/desktop/xdg-config-home/mpv/script-repos/osc.lua"]=1
+    ["profiles/desktop/xdg-config-home/mpv/script-repos/content-red-tester-s-scripts"]=1
 )
 
 update_module_by_tag() {

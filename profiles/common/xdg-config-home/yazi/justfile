@@ -1,6 +1,6 @@
 #!/usr/bin/env -S just --justfile
 
-set fallback := true
+set fallback
 
 _:
     @just --list

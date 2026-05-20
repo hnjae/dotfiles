@@ -1,14 +1,17 @@
 #!/usr/bin/env -S just --justfile
 
-set fallback := true
+set fallback
 
 _:
     @just --list
 
 [group('ci')]
 lint:
-    fd --type f --extension lua . -X selene --allow-warnings
+    devenv tasks run nvim:lint
 
 [group('ci')]
-check: lint
-    typos
+check:
+    devenv tasks run ci:check
+
+format:
+    devenv shell -- treefmt
