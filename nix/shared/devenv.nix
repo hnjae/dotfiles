@@ -95,4 +95,27 @@
         fi
       fi
     '';
+
+  scripts.prek = {
+    description = "Disabled in subproject shells; use root installer";
+    exec = # sh
+      ''
+        set -eu
+
+        cat >&2 <<'EOF'
+        ERROR: `prek` is disabled in subproject devenv shells.
+
+        Git hooks are owned by the repository root.
+        Run from the repository root instead:
+
+          devenv run install-hooks
+
+        For package-local checks, use:
+
+          devenv run check-hooks
+
+        EOF
+        exit 1
+      '';
+  };
 }
