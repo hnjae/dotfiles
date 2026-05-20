@@ -44,6 +44,7 @@
       settings = {
         excludes = [
           "*.lock"
+          "*-lock.*"
         ];
       };
       programs = {

@@ -51,10 +51,13 @@ pnpm -F <package-name> exec <name>
 pnpm dlx <pkg>
 
 # install package at global ($HOME scope)
-pnpm --global add <pkg>
+pnpm add --global <pkg>
+
+# install package at global allowing build scipt ($HOME scope)
+pnpm add --global --allow-build=<esbuild> some-cli
 
 # update packages to its latest at global scope ($HOME scope)
-pnpm --global update --latest
+pnpm update --global --latest
 
 # debug dependency at global scope
 pnpm --global why <package>
@@ -63,4 +66,4 @@ pnpm --global why <package>
 pnpm --global list
 
 # remove package (global scope)
-pnpm --global remove <pkg>
+npm --global remove <pkg>
