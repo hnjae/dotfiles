@@ -14,6 +14,12 @@ lpstat -p -d -v
 # delete printer
 lpadmin -x <printername>
 
+; # print two-page in single page
+; lp -o media=A4 -o landscape -o number-up=2
+
+# merge two-page in single page
+pdfjam <in-pdf> --nup 2x1 --landscape --paper a4paper --outfile <out-pdf>
+
 # print pdf
 lp -d <printername> -o media=A4 <target>.pdf
 

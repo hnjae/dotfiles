@@ -1,0 +1,37 @@
+---
+# https://github.com/cachix/devenv/blob/main/src/modules/process-managers/process-compose.nix
+# https://github.com/F1bonacc1/process-compose/blob/main/www/docs/tui.md
+# $XDG_CONFIG_HOME/process-compose/theme.yaml
+style:
+  body:
+    fgColor: default
+    bgColor: default
+    secondaryTextColor: blue
+    tertiaryTextColor: green
+    borderColor: black
+  stat_table:
+    keyFgColor: blue
+    valueFgColor: black
+    logoColor: blue
+  proc_table:
+    fgColor: blue
+    fgWarning: yellow
+    fgPending: black
+    fgCompleted: green
+    fgError: red
+    headerFgColor: black
+  help:
+    fgColor: default
+    keyColor: blue
+    hlColor: green
+    categoryFgColor: blue
+  dialog:
+    fgColor: default
+    bgColor: default
+    buttonFgColor: white
+    buttonBgColor: blue
+    buttonFocusFgColor: white
+    buttonFocusBgColor: green
+    labelFgColor: blue
+    fieldFgColor: black
+    fieldBgColor: white
