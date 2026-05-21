@@ -1,17 +1,264 @@
-#!/usr/bin/env python3
+#!/usr/bin/env nu
 
-from pathlib import Path
-import sys
+def err [message: string] {
+    print -e $"np: ($message)"
+}
 
+def usage [] {
+    print "Usage:"
+    print "  np list        Browse nix profile entries with fzf"
+    print "  np list --all  Print all nix profile entry names"
+    print "  np ls          Alias for list"
+    print "  np remove      Remove selected profile entries with fzf"
+    print "  np rm          Alias for remove"
+    print "  np add <pkg>   Install nixpkgs#<pkg>"
+}
 
-def main() -> int:
-    repo_root = Path(__file__).resolve().parents[3]
-    sys.path.insert(0, str(repo_root / "lib" / "nix-profile-manager"))
+def require_cmd [name: string] {
+    if (which $name | is-empty) {
+        err $"($name) is required"
+        exit 127
+    }
+}
 
-    from np import main as np_main
+def load_profile [] {
+    let result = (do { ^nix profile list --json } | complete)
 
-    return np_main()
+    if $result.exit_code != 0 {
+        let message = ($result.stderr | str trim)
+        if ($message | is-empty) {
+            err "nix profile list --json failed"
+        } else {
+            print -e $message
+        }
+        exit $result.exit_code
+    }
 
+    try {
+        $result.stdout | from json
+    } catch {
+        err "could not parse nix profile JSON"
+        exit 1
+    }
+}
 
-if __name__ == "__main__":
-    raise SystemExit(main())
+def profile_entries [profile: record] {
+    if not ("elements" in ($profile | columns)) {
+        return []
+    }
+
+    $profile.elements | transpose name entry | sort-by name
+}
+
+def profile_names [profile: record] {
+    let entries = (profile_entries $profile)
+    if ($entries | is-empty) {
+        return []
+    }
+
+    $entries | get name
+}
+
+def print_names [names: list] {
+    if not ($names | is-empty) {
+        print ($names | str join "\n")
+    }
+}
+
+def preview_source [] {
+    '
+let key_color = (ansi light_blue)
+let green = (ansi green)
+let magenta = (ansi magenta)
+let reset = (ansi reset)
+
+def field [entry: record, name: string] {
+    if ($name in ($entry | columns)) {
+        $entry | get $name
+    } else {
+        "-"
+    }
+}
+
+def color_value [value] {
+    let kind = ($value | describe)
+    let color = if ($kind in ["int" "float" "nothing"]) { $magenta } else { $green }
+    let rendered = if $kind == "nothing" { "null" } else { $value }
+
+    $"($color)($rendered)($reset)"
+}
+
+def emit_kv [key_name: string, value, --indent: string = ""] {
+    print $"($indent)($key_color)($key_name)($reset): (color_value $value)"
+}
+
+def emit_section [key_name: string, --indent: string = ""] {
+    print $"($indent)($key_color)($key_name)($reset):"
+}
+
+def emit_item [value, --indent: string = ""] {
+    print $"($indent)- (color_value $value)"
+}
+
+let name = ($env.NP_PROFILE_NAME? | default "")
+let profile = (open --raw $env.NP_PROFILE_CACHE | from json)
+let entry = ($profile.elements | get --optional $name)
+
+if ($entry | is-empty) {
+    print $"No profile entry named ($name)"
+    exit 0
+}
+
+emit_kv "name" $name
+emit_kv "flake_attribute" (field $entry "attrPath")
+
+emit_section "source"
+emit_kv "original" (field $entry "originalUrl") --indent "  "
+emit_kv "locked" (field $entry "url") --indent "  "
+
+emit_section "profile"
+emit_kv "active" (field $entry "active") --indent "  "
+emit_kv "priority" (field $entry "priority") --indent "  "
+
+let outputs = ($entry | get --optional outputs | default [])
+if not ($outputs | is-empty) {
+    emit_section "outputs"
+    $outputs | each { |output| emit_item $output --indent "  " } | ignore
+}
+
+let store_paths = ($entry | get --optional storePaths | default [])
+emit_section "store_paths"
+if ($store_paths | is-empty) {
+    emit_item "-" --indent "  "
+} else {
+    $store_paths | each { |path| emit_item $path --indent "  " } | ignore
+}
+'
+}
+
+def fzf_names [profile: record, prompt: string, header: string, multi: bool] {
+    require_cmd "fzf"
+
+    let entries = (profile_entries $profile)
+    if ($entries | is-empty) {
+        print "profile is empty"
+        return []
+    }
+
+    let cache = (mktemp -t np-profile.XXXXXXXX)
+    let previewer = (mktemp -t np-preview.XXXXXXXX)
+
+    $profile | to json | save --force $cache
+    preview_source | save --force $previewer
+
+    let preview = $"NP_PROFILE_CACHE=($cache) NP_PROFILE_NAME={} nu ($previewer)"
+    mut args = [
+        "--prompt" $prompt
+        "--header" $header
+        "--height" "80%"
+        "--layout" "reverse"
+        "--border"
+        "--preview" $preview
+        "--preview-window" "right:65%:wrap"
+    ]
+
+    if $multi {
+        $args = ($args | prepend "--multi")
+    }
+    let fzf_args = $args
+
+    let result = (
+        $entries
+        | get name
+        | to text
+        | do { ^fzf ...$fzf_args }
+        | complete
+    )
+
+    try { rm --force $cache }
+    try { rm --force $previewer }
+
+    if $result.exit_code != 0 {
+        return []
+    }
+
+    $result.stdout | lines | where { |line| not ($line | str trim | is-empty) }
+}
+
+def normalize_ref [pkg: string] {
+    if ($pkg | str contains "#") {
+        $pkg
+    } else {
+        $"nixpkgs#($pkg)"
+    }
+}
+
+def main [] {
+    usage
+}
+
+# Browse nix profile entries with fzf, or print every name with --all.
+def "main list" [
+    --all # Print all package names without fzf
+] {
+    let profile = (load_profile)
+    if $all {
+        print_names (profile_names $profile)
+        return
+    }
+
+    let selected = (fzf_names $profile "np list> " "enter: print selected / esc: cancel" false)
+
+    if not ($selected | is-empty) {
+        print ...$selected
+    }
+}
+
+# Alias for `np list`.
+def "main ls" [
+    --all # Print all package names without fzf
+] {
+    if $all {
+        main list --all
+    } else {
+        main list
+    }
+}
+
+# Remove one or more fzf-selected nix profile entries after confirmation.
+def "main remove" [] {
+    let profile = (load_profile)
+    let selected = (fzf_names $profile "np remove> " "tab: mark multiple / enter: remove / esc: cancel" true)
+
+    if ($selected | is-empty) {
+        return
+    }
+
+    print $"Selected ($selected | length) profile entries:"
+    $selected | each { |name| print $"  ($name)" } | ignore
+
+    let answer = (input "Remove selected entries? [y/N] " | str trim | str downcase)
+    if not ($answer in ["y" "yes"]) {
+        print "cancelled"
+        return
+    }
+
+    ^nix profile remove ...$selected
+}
+
+# Alias for `np remove`.
+def "main rm" [] {
+    main remove
+}
+
+# Install packages into the nix profile. Bare names are expanded to nixpkgs#name.
+def "main add" [...packages: string] {
+    if ($packages | is-empty) {
+        err "usage: np add <package> [package ...]"
+        exit 2
+    }
+
+    let refs = ($packages | each { |pkg| normalize_ref $pkg })
+    print $"installing ($refs | str join ', ')"
+    ^nix profile install ...$refs
+}

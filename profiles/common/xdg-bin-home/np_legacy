@@ -1,0 +1,17 @@
+#!/usr/bin/env python3
+
+from pathlib import Path
+import sys
+
+
+def main() -> int:
+    repo_root = Path(__file__).resolve().parents[3]
+    sys.path.insert(0, str(repo_root / "lib" / "nix-profile-manager"))
+
+    from np import main as np_main
+
+    return np_main()
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
