@@ -7,7 +7,7 @@ sudo virsh -c qemu:///system console <name>
 virsh -c 'qemu+ssh://tofu@eris/system?socket=/run/libvirt/libvirt-sock' console <test>
 
 # turn off vm
-virsh -c 'qemu:///system' destroy <test>
+virsh -c 'qemu+ssh://tofu@eris/system?socket=/run/libvirt/libvirt-sock' destroy <test>
 
 # list
 sudo virsh -c qemu:///system list --all
@@ -30,3 +30,4 @@ tofu plan -destroy
 # remove resource
 tofu destroy [-var-file=terraform.tfvars]
 
+; qemu:///system

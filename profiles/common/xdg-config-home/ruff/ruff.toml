@@ -24,16 +24,18 @@ ignore = [
   "RUF002", # ambiguous-unicode-character-docstring
   "RUF003", # ambiguous-unicode-character-comment
 
-  # Things that can be fixed by formatter:
+  # Things that can be fixed by `ruff format`:
   "COM", # flake8-commas
   "E",   # pycodestyle-error
-  "I",   # isort
   "Q",   # flake8-quotes
+
+  # "I",   # isort: `ruff check --fix` 에서만 고쳐지나?
 ]
 
 [lint.per-file-ignores]
 "tests/**/*.py" = [
   "ARG", # flake8-unused-arguments
+  "PLC", # pylint
   "PLR", # refactor
   "S",   # flake8-bandit
   "SLF", # flake8-self

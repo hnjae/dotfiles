@@ -1,0 +1,4 @@
+% gh, github
+
+# gh login usigh oauth
+BROWSER=true gh auth login --hostname github.com --git-protocol ssh --web --skip-ssh-key
