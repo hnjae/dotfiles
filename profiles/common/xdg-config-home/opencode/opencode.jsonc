@@ -1,70 +1,72 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugin": ["oh-my-openagent@latest"],
+  "model": "openai/gpt-5.5",
+  "small_model": "openai/gpt-5.4-mini",
+  "default_agent": "plan",
+  "agent": {
+    "plan": {
+      "model": "openai/gpt-5.5",
+      "variant": "xhigh"
+    },
+    "build": {
+      "model": "openai/gpt-5.4-mini",
+      "variant": "high"
+    }
+  },
   "permission": {
     "read": {
-      "/nix/**": "allow",
-      "/etc/**": "allow",
-      "/usr/**": "allow",
+      "/nix/store/**": "allow",
       "/tmp/**": "allow",
-      "/home/hnjae/.local/share/cargo/**": "allow",
-      "/home/hnjae/.local/share/pnpm/**": "allow",
-      "/home/hnjae/.local/share/nvim/**": "allow",
-      "/home/hnjae/.local/state/nix/**": "allow",
-      "/home/hnjae/.nix-profile/**": "allow"
+      "/home/hnjae/.local/share/cargo/**": "allow"
     },
     "glob": {
-      "/nix/**": "allow",
-      "/etc/**": "allow",
-      "/usr/share/**": "allow",
+      "/nix/store/**": "allow",
       "/tmp/**": "allow",
-      "/home/hnjae/.local/share/cargo/**": "allow",
-      "/home/hnjae/.local/share/pnpm/**": "allow",
-      "/home/hnjae/.local/share/nvim/**": "allow",
-      "/home/hnjae/.local/state/nix/**": "allow",
-      "/home/hnjae/.nix-profile/**": "allow",
-      "/home/hnjae/.cache/pnpm/**": "allow"
+      "/home/hnjae/.local/share/cargo/**": "allow"
     },
     "grep": {
-      "/nix/**": "allow",
-      "/etc/**": "allow",
-      "/usr/share/**": "allow",
+      "/nix/store/**": "allow",
       "/tmp/**": "allow",
-      "/home/hnjae/.local/share/cargo/**": "allow",
-      "/home/hnjae/.local/share/pnpm/**": "allow",
-      "/home/hnjae/.local/share/nvim/**": "allow",
-      "/home/hnjae/.local/state/nix/**": "allow",
-      "/home/hnjae/.nix-profile/**": "allow",
-      "/home/hnjae/.cache/pnpm/**": "allow"
+      "/home/hnjae/.local/share/cargo/**": "allow"
     },
     "list": {
-      "/nix/**": "allow",
-      "/etc/**": "allow",
-      "/usr/share/**": "allow",
+      "/nix/store/**": "allow",
       "/tmp/**": "allow",
-      "/home/hnjae/.local/share/cargo/**": "allow",
-      "/home/hnjae/.local/share/pnpm/**": "allow",
-      "/home/hnjae/.local/share/nvim/**": "allow",
-      "/home/hnjae/.local/state/nix/**": "allow",
-      "/home/hnjae/.nix-profile/**": "allow",
-      "/home/hnjae/.cache/pnpm/**": "allow"
+      "/home/hnjae/.local/share/cargo/**": "allow"
     },
     "external_directory": {
-      "/nix/**": "allow",
-      "/etc/**": "allow",
-      "/usr/share/**": "allow",
+      "/nix/store/**": "allow",
       "/tmp/**": "allow",
-      "/home/hnjae/.local/share/cargo/**": "allow",
-      "/home/hnjae/.local/share/pnpm/**": "allow",
-      "/home/hnjae/.local/share/nvim/**": "allow",
-      "/home/hnjae/.local/state/nix/**": "allow",
-      "/home/hnjae/.nix-profile/**": "allow",
-      "/home/hnjae/.cache/pnpm/**": "allow"
+      "/home/hnjae/.local/share/cargo/**": "allow"
     },
     "bash": {
       "npm *": "deny",
       "sudo *": "deny",
       "nix-env *": "deny"
+    }
+  },
+  "lsp": {
+    "pyright": {
+      "disabled": true
+    },
+    "basedpyright": {
+      "disabled": true
+    },
+    "qmlls": {
+      "command": ["qmlls", "--no-cmake-calls"],
+      "extensions": [".qml"]
+    },
+    "ty": {
+      "command": ["ty", "server"],
+      "extensions": [".py", ".pyi"]
+    },
+    "rumdl": {
+      "command": ["rumdl", "server"],
+      "extensions": [".md"]
+    },
+    "docker-ls": {
+      "command": ["docker-language-server", "start"],
+      "extensions": ["Containerfile", "Dockerfile"]
     }
   }
 }
