@@ -1,0 +1,15 @@
+% nvme, ata
+
+# using nvme-cli
+nvme sanitize <path-to-nvme>
+
+# using nvme-cli
+nvme format <path-to-nvme>
+
+; # using ata secure erase/sanitize (hdparm -I 커맨드에서 출력된 결과문에서: Security: 에서 지원할 경우)
+; sudo hdparm -I <path-to-ata>
+
+# for full trim (not secure)
+blkdiscard -f <path-to-ata>
+
+# 여러 번 반복은 SSD에서는 보안 효과보다 쓰기 수명 소모가 큽니다. “툴이 있냐”에 대한 답은 **있다: shred, nwipe, wipe, dcfldd, dd**이고, “이 SSD에 추천하냐”는 민감 데이터면 Secure Erase/Sanitize, 일반 폐기면 blkdiscard, 덮어쓰기는 보조적 선택입니다.
