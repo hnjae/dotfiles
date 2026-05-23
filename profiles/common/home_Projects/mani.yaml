@@ -1,4 +1,3 @@
----
 projects:
   anki-english-words:
     url: git@github.com:hnjae/anki-english-words.git
@@ -42,6 +41,10 @@ projects:
     url: git@github.com:hnjae/asset-manager.git
   markdown-here-slim:
     url: git@github.com:hnjae/markdown-here-slim.git
+  md-compose-tb:
+    url: git@github.com:hnjae/md-compose-tb.git
+  photo-organizer:
+    url: git@github.com:hnjae/photo-organizer.git
 specs:
   default:
     output: markdown
