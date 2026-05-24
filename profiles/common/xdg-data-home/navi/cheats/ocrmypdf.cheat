@@ -1,4 +1,10 @@
-% ocrmypdf
+% ocrmypdf, img2pdf
 
-# loosy
-ocrmypdf -l "eng+kor" --output-type "pdfa-3" -O 2 --jbig2-lossy in.pdf out.pdf
+# loosy (use --output-type pdfa-3 만약 첨부파일이 있을때.)
+ocrmypdf -l "eng+kor" -O 2 --pdfa-image-compression jpeg inupt.pdf out.pdf
+
+# force ocr + deskew + clean (when ocr) + rotate + loosy jpeg convert + aggressive optimize
+ocrmypdf -l kor+eng --deskew --rotate-pages --clean --optimize 3 --force-ocr --pdfa-image-compression jpeg --jbig2-lossy input.pdf output.pdf
+
+# create pdf from images
+img2pdf --output out.pdf --pagesize A4 *.png

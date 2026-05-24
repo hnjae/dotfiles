@@ -26,6 +26,25 @@ CMD ["python", "app.py"]
 
 형태라면, 기본 실행 명령이, `python app.py`
 
+## Publish
+
+```systemd
+[Container]
+PublishPort=127.0.0.1:3001:3000
+```
+
+은 localhost 에서 3001에 접근 허용.
+
+```systemd
+[Container]
+PublishPort=0.0.0.0:3001:3000
+
+# or
+
+[Container]
+PublishPort=3001:3000
+```
+
 <!--
 vi:ft=markdown
 -->

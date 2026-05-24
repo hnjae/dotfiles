@@ -1,0 +1,4 @@
+interface:
+  display_name: "Researched HTML Note"
+  short_description: "Research-backed standalone HTML notes"
+  default_prompt: "Use $researched-html-note to research this topic and create a polished standalone HTML note."
