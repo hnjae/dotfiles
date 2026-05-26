@@ -34,8 +34,8 @@ prepend_preloaders = [
   # { mime = "image/*", run = "allmytoes" },
   # { url = '*.cb{z,r}', run = 'preview-cbz' },
   # { url = '*.cb{z,r}', run = 'preview-cbz' },
-  { name = "*.{hwp,hwpx}", run = "hwp-preview" },
-  { name = "*.{hwp,hwpx}", run = "hwp-preview" },
+  # { name = "*.{hwp,hwpx}", run = "hwp-preview" },
+  # { name = "*.{hwp,hwpx}", run = "hwp-preview" },
 ]
 
 prepend_spotters = [

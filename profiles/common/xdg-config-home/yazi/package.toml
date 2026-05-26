@@ -5,8 +5,8 @@ hash = "e02a788e5b8ae0fb47fd0193dda589cc"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:types"
-rev = "e84f4fe"
-hash = "4161cfa043b5ba3341d82c6869007b41"
+rev = "c2c16c8"
+hash = "9105494e98299f392aee95340066da9f"
 
 [[plugin.deps]]
 use = "Sonico98/allmytoes"
@@ -15,18 +15,18 @@ hash = "7bf0ed68a45144b28041affd2a334ff"
 
 [[plugin.deps]]
 use = "AminurAlam/yazi-plugins:spot"
-rev = "1d28640"
-hash = "854227f2312a6287c7872726e74f8de3"
+rev = "70a03f3"
+hash = "3d83be32b0859360996e167debc123ee"
 
 [[plugin.deps]]
 use = "AminurAlam/yazi-plugins:spot-cbz"
-rev = "1d28640"
-hash = "58a1e2153b8aa9479052a0fa7696cfe5"
+rev = "70a03f3"
+hash = "f6b34524d5758937c4bf932a9d7e0d5c"
 
 [[plugin.deps]]
 use = "AminurAlam/yazi-plugins:preview-cbz"
-rev = "1d28640"
-hash = "209e1cdb345b2143f75c0f9d1412bd0c"
+rev = "70a03f3"
+hash = "aa9f29ace28b2aacfdde46f50df4d293"
 
 [[plugin.deps]]
 use = "beskep/hwp-preview"
@@ -35,5 +35,5 @@ hash = "ca491864753977cbea28a3eeb48b1688"
 
 [[flavor.deps]]
 use = "matt-dong-123/base16"
-rev = "b02b7a8"
-hash = "fdb3a7d76f51c0a46bde55322ede9171"
+rev = "ed79352"
+hash = "94659ef90cd557d05dbda7076fbbb3f4"
