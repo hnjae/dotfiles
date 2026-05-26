@@ -1,0 +1,33 @@
+#:schema https://developers.openai.com/codex/config-schema.json
+
+# https://developers.openai.com/codex/config-reference
+
+model = "gpt-5.5"
+model_reasoning_effort = "high"
+plan_mode_reasoning_effort = "xhigh"
+sandbox_mode = "workspace-write"
+allow_login_shell = false            # for devenv/nixshell etc
+
+[tui]
+theme = "base16"
+status_line = ["model-with-reasoning", "current-dir"]
+status_line_use_colors = true
+
+[tui.model_availability_nux]
+"gpt-5.5" = 4
+
+[features]
+codex_git_commit = true
+
+[sandbox_workspace_write]
+network_access = true # flake/input/substituter fetch가 필요
+writable_roots = [
+  "/home/hnjae/.cache/nix",
+  "/home/hnjae/.cache/treefmt",
+  "/home/hnjae/.cache/uv",
+  "/home/hnjae/.local/share/pnpm/store",
+  "/run/user/1000",
+]
+
+[analytics]
+enabled = false
