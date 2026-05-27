@@ -2,6 +2,7 @@
 
 local type="$1"
 local scope="$2"
+local scope_mode="none"
 local format
 local prompt
 local repo_root
@@ -21,18 +22,20 @@ local -a clean_staged_files
 local -a hook_modified_files
 
 if [[ -z "$type" ]]; then
-    echo "Usage: git-commit-llm-fixed <type> [scope]" >&2
+    echo "Usage: git-commit-llm <type|auto> [scope|auto]" >&2
     echo "Example:" >&2
-    echo "  git-commit-llm-fixed feat" >&2
-    echo "  git-commit-llm-fixed feat auth" >&2
+    echo "  git-commit-llm feat" >&2
+    echo "  git-commit-llm feat auth" >&2
+    echo "  git-commit-llm feat auto" >&2
+    echo "  git-commit-llm auto" >&2
     return 1
 fi
 
 case "$type" in
-feat | fix | refactor | docs | test | style | perf | build | ci | chore) ;;
+auto | feat | fix | refactor | docs | test | style | perf | build | ci | chore) ;;
 *)
     echo "Invalid type: $type" >&2
-    echo "Allowed types: feat, fix, refactor, docs, test, style, perf, build, ci, chore" >&2
+    echo "Allowed types: auto, feat, fix, refactor, docs, test, style, perf, build, ci, chore" >&2
     return 1
     ;;
 esac
@@ -56,8 +59,24 @@ for file_path in "${staged_files[@]}"; do
     fi
 done
 
-if [[ -n "$scope" ]]; then
+if [[ "$scope" == "auto" ]]; then
+    scope_mode="auto"
+elif [[ "$type" == "auto" && -z "$scope" ]]; then
+    scope_mode="auto"
+elif [[ -n "$scope" ]]; then
+    scope_mode="fixed"
+fi
+
+if [[ "$type" == "auto" ]]; then
+    if [[ "$scope_mode" == "fixed" ]]; then
+        format="<type>(${scope}): subject"
+    else
+        format="<type>[(scope)]: subject"
+    fi
+elif [[ "$scope_mode" == "fixed" ]]; then
     format="${type}(${scope}): subject"
+elif [[ "$scope_mode" == "auto" ]]; then
+    format="${type}[(scope)]: subject"
 else
     format="${type}: subject"
 fi
@@ -95,17 +114,30 @@ diff_bytes="$(git -C "$repo_root" diff --cached --no-ext-diff -- | wc -c | tr -d
         printf ':\n'
         git -C "$repo_root" diff --cached --no-ext-diff --
     fi
-} >| "$context_file"
+} >|"$context_file"
 
 prompt="Generate exactly one Conventional Commit message from the staged context in stdin.
 Do not run tools or shell commands. Use only the provided staged context.
 
-Fixed format requirements:
-- You MUST use this exact type: $type"
+Format requirements:"
 
-if [[ -n "$scope" ]]; then
+if [[ "$type" == "auto" ]]; then
+    prompt="$prompt
+- You MUST choose the best Conventional Commit type from this list: feat, fix, refactor, docs, test, style, perf, build, ci, chore"
+else
+    prompt="$prompt
+- You MUST use this exact type: $type"
+fi
+
+if [[ "$scope_mode" == "fixed" ]]; then
     prompt="$prompt
 - You MUST use this exact scope: $scope
+- Structure: \`$format\`"
+elif [[ "$scope_mode" == "auto" ]]; then
+    prompt="$prompt
+- Include a scope only when the staged changes have a clear, specific scope
+- Use a concise lowercase scope from the primary package, module, tool, config area, or file area
+- Do NOT include a scope when the scope would be broad, ambiguous, or invented
 - Structure: \`$format\`"
 else
     prompt="$prompt
@@ -118,6 +150,7 @@ prompt="$prompt
 Subject rules:
 - Imperative mood
 - Present tense
+- Start the description after the colon with lowercase
 - <=72 characters
 - Describe the primary staged change
 - Prefer exact package, library, tool, or file names over broad categories
@@ -144,7 +177,7 @@ codex_args=(
     --ephemeral
 )
 
-codex exec "${codex_args[@]}" "$prompt" <"$context_file" >| "$codex_log" 2>&1
+codex exec "${codex_args[@]}" "$prompt" <"$context_file" >|"$codex_log" 2>&1
 commit_status=$?
 
 if ((commit_status != 0)); then
