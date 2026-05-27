@@ -57,9 +57,9 @@ update_module_by_tag() {
     fi
 }
 
-update_module_by_default_branch() {
+update_module_by_branch() {
     local module="$1"
-    local default_branch
+    local branch
     local current_commit
     local target_commit
 
@@ -78,26 +78,30 @@ update_module_by_default_branch() {
         git -C "$module" clean -fd
     fi
 
-    # TODO: git fetch -v --porcelain 으로 default_branch 명 캡쳐 <2025-08-13>
+    # TODO: git fetch -v --porcelain 으로 branch 명 캡쳐 <2025-08-13>
 
     git -C "$module" fetch --quiet origin
-    default_branch=$(git -C "$module" remote show origin | grep 'HEAD branch' | cut -d' ' -f5)
+    branch="$(git config --file .gitmodules --get "submodule.$module.branch" || true)"
 
-    if [ "$default_branch" = "" ]; then
-        echo "ERR: No default branch found for $module" >&2
-        return 1
+    if [ "$branch" = "" ]; then
+        branch=$(git -C "$module" remote show origin | grep 'HEAD branch' | cut -d' ' -f5 || true)
+
+        if [ "$branch" = "" ]; then
+            echo "ERR: No branch configured or default branch found for $module" >&2
+            return 1
+        fi
     fi
 
     current_commit=$(git -C "$module" rev-parse HEAD)
-    target_commit=$(git -C "$module" rev-parse "origin/$default_branch")
+    target_commit=$(git -C "$module" rev-parse "origin/$branch")
 
     if [ "$current_commit" = "$target_commit" ]; then
-        echo "INFO: $module is already at the latest commit origin/$default_branch" >&2
+        echo "INFO: $module is already at the latest commit origin/$branch" >&2
         return 0
     fi
 
-    echo "INFO: Updating $module to origin/$default_branch" >&2
-    git -C "$module" reset --hard "origin/$default_branch"
+    echo "INFO: Updating $module to origin/$branch" >&2
+    git -C "$module" reset --hard "origin/$branch"
     git -C "$module" clean -fd
 
     if [ -f "$module/.gitmodules" ]; then
@@ -117,7 +121,7 @@ main() {
     modules="$(git submodule --quiet foreach 'echo $path' 2>/dev/null)"
     while IFS= read -r module; do
         if [[ ${BRANCH_BASED_MODULES[$module]:-} != "" ]]; then
-            update_module_by_default_branch "$module"
+            update_module_by_branch "$module"
         else
             update_module_by_tag "$module"
         fi
