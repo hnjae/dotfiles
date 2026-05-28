@@ -20,7 +20,7 @@ deploy_ssh_key() {
 deploy_age_key() {
     install -d -m 700 "${XDG_CONFIG_HOME}/sops/age"
 
-    op read "op://Personal/ssh-home/age/private-key" >"${XDG_CONFIG_HOME}/sops/age/keys.txt"
+    op read "op://Critical/ssh-home/age/public-key" >"${XDG_CONFIG_HOME}/sops/age/keys.txt"
     chmod 600 "${XDG_CONFIG_HOME}/sops/age/keys.txt"
 
     echo "INFO: age key deployed" >&2

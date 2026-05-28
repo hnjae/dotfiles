@@ -45,6 +45,8 @@ projects:
     url: git@github.com:hnjae/md-compose-tb.git
   photo-organizer:
     url: git@github.com:hnjae/photo-organizer.git
+  xdg-thumbnail:
+    url: git@github.com:hnjae/xdg-thumbnail.git
 specs:
   default:
     output: markdown
