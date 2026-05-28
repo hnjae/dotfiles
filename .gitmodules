@@ -23,3 +23,9 @@
 [submodule "profiles/common/xdg-config-home/zsh/modules/fzf-tab/module"]
 	path = profiles/common/xdg-config-home/zsh/modules/fzf-tab/module
 	url = https://github.com/aloxaf/fzf-tab
+[submodule "profiles/desktop/xdg-config-home/mpv/shaders-repo/mpv-prescalers"]
+	path = profiles/desktop/xdg-config-home/mpv/shaders-repo/mpv-prescalers
+	url = https://github.com/bjin/mpv-prescalers.git
+[submodule "profiles/desktop/xdg-config-home/mpv/shaders-repo/ssim-superres"]
+	path = profiles/desktop/xdg-config-home/mpv/shaders-repo/ssim-superres
+	url = https://gist.github.com/igv/2364ffa6e81540f29cb7ab4c9bc05b6b.git
