@@ -52,17 +52,17 @@ prepend_keymap = [
   ], run = "create --dir", desc = "Create a directory" },
   { on = [
     "%",
-  ], run = "plugin my-file-create", desc = "Create a file" },
+  ], run = "plugin local-file-create", desc = "Create a file" },
   { on = [
     "D",
   ], run = "remove", desc = "Trash selected files" },
   { on = [
     "m",
     "r",
-  ], run = "plugin my-rmdir", desc = "Remove empty directories" },
+  ], run = "plugin local-rmdir", desc = "Remove empty directories" },
   { on = [
     "<F3>",
-  ], run = "plugin my-trash-with-trace", desc = "Trash hovered file and create a trace file" },
+  ], run = "plugin local-trash-with-trace", desc = "Trash hovered file and create a trace file" },
   { on = [
     "a",
   ], run = "rename --hovered --cursor=before_ext", desc = "Rename hovered file before extension" },
@@ -71,15 +71,15 @@ prepend_keymap = [
   ], run = "rename --hovered --cursor=end", desc = "Rename hovered file at end" },
   { on = [
     "R",
-  ], run = "plugin my-rename-with-vimv", desc = "Rename with vimv" },
+  ], run = "plugin local-rename-with-vimv", desc = "Rename with vimv" },
 
   # Sorting
   { on = [
     "r",
-  ], run = "plugin my-toggle-sort-reverse", desc = "Toggle reverse sort" },
+  ], run = "plugin local-toggle-sort-reverse", desc = "Toggle reverse sort" },
   { on = [
     "s",
-  ], run = "plugin my-select-sort", desc = "Select sort mode" },
+  ], run = "plugin local-select-sort", desc = "Select sort mode" },
 
   # Navigation
   # {on = ["q", "f"], run = "spot", desc = "Spot hovered file"},
@@ -98,7 +98,7 @@ prepend_keymap = [
   { on = [
     "g",
     "p",
-  ], run = "plugin my-change-permissions", desc = "Change hovered entry permissions" },
+  ], run = "plugin local-change-permissions", desc = "Change hovered entry permissions" },
   { on = [
     "u",
   ], run = "back", desc = "Back to previous directory" },
@@ -110,7 +110,7 @@ prepend_keymap = [
   ], run = "leave", desc = "Go to the parent directory" },
   { on = [
     "x",
-  ], run = "plugin my-open-associated", desc = "Open hovered entry with associated program" },
+  ], run = "plugin local-open-associated", desc = "Open hovered entry with associated program" },
   { on = [
     "p",
   ], run = "spot", desc = "Spot hovered file" },
@@ -119,18 +119,18 @@ prepend_keymap = [
   ], run = "spot", desc = "Spot hovered file" },
   { on = [
     "<Enter>",
-  ], run = "plugin my-open-netrw-cr", desc = "Enter directory or open hovered file" },
+  ], run = "plugin local-open-netrw-cr", desc = "Enter directory or open hovered file" },
   { on = [
     "z",
     "o",
-  ], run = "plugin my-open-in-split down", desc = "Open hovered entry in horizontal split" },
+  ], run = "plugin local-open-in-split down", desc = "Open hovered entry in horizontal split" },
   { on = [
     "z",
     "v",
-  ], run = "plugin my-open-in-split right", desc = "Open hovered entry in vertical split" },
+  ], run = "plugin local-open-in-split right", desc = "Open hovered entry in vertical split" },
   { on = [
     "<F4>",
-  ], run = "plugin my-open-cwd-terminal", desc = "Open current directory in tmux split or terminal" },
+  ], run = "plugin local-open-cwd-terminal", desc = "Open current directory in tmux split or terminal" },
 
   # Clipboard
   { on = [
@@ -178,51 +178,51 @@ prepend_keymap = [
   { on = [
     "y",
     "y",
-  ], run = "plugin my-copy-file-clipboard", desc = "Copy hovered or selected entries to desktop clipboard" },
+  ], run = "plugin local-copy-file-clipboard", desc = "Copy hovered or selected entries to desktop clipboard" },
   { on = [
     "y",
     "c",
-  ], run = "plugin my-copy-file-content", desc = "Copy hovered file contents to desktop clipboard" },
+  ], run = "plugin local-copy-file-content", desc = "Copy hovered file contents to desktop clipboard" },
   { on = [
     "y",
     "r",
-  ], run = "plugin my-copy-bracket-content round-first", desc = "Copy first () content from filename" },
+  ], run = "plugin local-copy-bracket-content round-first", desc = "Copy first () content from filename" },
   { on = [
     "y",
     "R",
-  ], run = "plugin my-copy-bracket-content round-last", desc = "Copy last () content from filename" },
+  ], run = "plugin local-copy-bracket-content round-last", desc = "Copy last () content from filename" },
   { on = [
     "y",
     "b",
-  ], run = "plugin my-copy-bracket-content square-first", desc = "Copy [] content from filename" },
+  ], run = "plugin local-copy-bracket-content square-first", desc = "Copy [] content from filename" },
   { on = [
     "y",
     "B",
-  ], run = "plugin my-copy-bracket-content square-last", desc = "Copy last [] content from filename" },
+  ], run = "plugin local-copy-bracket-content square-last", desc = "Copy last [] content from filename" },
   { on = [
     "y",
     "(",
-  ], run = "plugin my-copy-bracket-content round-first", desc = "Copy first () content from filename" },
+  ], run = "plugin local-copy-bracket-content round-first", desc = "Copy first () content from filename" },
   { on = [
     "y",
     ")",
-  ], run = "plugin my-copy-bracket-content round-last", desc = "Copy last () content from filename" },
+  ], run = "plugin local-copy-bracket-content round-last", desc = "Copy last () content from filename" },
   { on = [
     "y",
     "[",
-  ], run = "plugin my-copy-bracket-content square-first", desc = "Copy [] content from filename" },
+  ], run = "plugin local-copy-bracket-content square-first", desc = "Copy [] content from filename" },
   { on = [
     "y",
     "]",
-  ], run = "plugin my-copy-bracket-content square-last", desc = "Copy last [] content from filename" },
+  ], run = "plugin local-copy-bracket-content square-last", desc = "Copy last [] content from filename" },
   { on = [
     "y",
     "p",
-  ], run = "plugin my-copy-path-osc52", desc = "file-path (OSC 52)" },
+  ], run = "plugin local-copy-path-osc52", desc = "file-path (OSC 52)" },
   { on = [
     "y",
     "n",
-  ], run = "plugin my-copy-filename-osc52", desc = "filename (OSC 52)" },
+  ], run = "plugin local-copy-filename-osc52", desc = "filename (OSC 52)" },
 
   # Linemode
   { on = [

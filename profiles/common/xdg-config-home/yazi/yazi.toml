@@ -15,8 +15,8 @@ prepend_rules = [
 
 [plugin]
 prepend_previewers = [
-  { mime = "audio/*", run = "my-mediainfo-preview" },
-  { mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", run = "my-archive-previewer" },
+  { mime = "audio/*", run = "local-mediainfo-preview" },
+  { mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", run = "local-archive-previewer" },
   # Allmytoes doesn't handle these by default
   # { mime = "image/svg+xml", run = "magick" },
   # { mime = "image/heic", run = "magick" },
