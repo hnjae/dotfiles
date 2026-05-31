@@ -13,6 +13,7 @@ zmodule "$ZDOTDIR/modules/history"
 zmodule direnv
 
 # 단순 환경변수 설정 또는 alias 설정만 있는 모듈들
+zmodule "$ZDOTDIR/modules/agents"
 zmodule "$ZDOTDIR/modules/bat"
 zmodule "$ZDOTDIR/modules/cheat"
 zmodule "$ZDOTDIR/modules/eza"
