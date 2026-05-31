@@ -29,6 +29,9 @@ zmodule "$ZDOTDIR/modules/tmux"
 zmodule "$ZDOTDIR/modules/yazi"
 zmodule "$ZDOTDIR/modules/zimfw"
 
+# 외부 script source
+zmodule "$ZDOTDIR/modules/1password"
+
 # 복잡한 모듈
 zmodule environment
 # zmodule input

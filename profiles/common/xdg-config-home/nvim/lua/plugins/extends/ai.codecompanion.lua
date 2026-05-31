@@ -23,7 +23,7 @@ return {
         return require("codecompanion.adapters").extend("openai_compatible", {
           formatted_name = "OpenRouter",
           env = {
-            api_key = "cmd:secret-tool lookup api openrouter",
+            api_key = "cmd:op read op://Personal/openrouter-local/credential",
             url = "https://openrouter.ai/api",
             chat_url = "/v1/chat/completions",
             models_endpoint = "/v1/models",

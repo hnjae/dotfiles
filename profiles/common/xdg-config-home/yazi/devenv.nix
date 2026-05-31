@@ -2,7 +2,13 @@
 {
   languages.lua.enable = true;
 
-  packages = with pkgs; [
-    selene
+  packages = [
+    pkgs.selene
+    pkgs.fd
   ];
+
+  # package-local hooks
+  git-hooks.hooks = {
+    typos.enable = true;
+  };
 }
