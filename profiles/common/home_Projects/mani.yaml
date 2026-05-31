@@ -39,8 +39,6 @@ projects:
     url: git@github.com:hnjae/icon-normalizer.git
   asset-manager:
     url: git@github.com:hnjae/asset-manager.git
-  markdown-here-slim:
-    url: git@github.com:hnjae/markdown-here-slim.git
   md-compose-tb:
     url: git@github.com:hnjae/md-compose-tb.git
   photo-organizer:
