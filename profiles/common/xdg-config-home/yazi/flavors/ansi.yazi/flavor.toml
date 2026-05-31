@@ -1,0 +1,135 @@
+# ANSI Color Scheme Flavor for Yazi
+# Uses only Yazi's named terminal colors; no hex colors are hard-coded.
+
+[mgr]
+cwd = { fg = "lightcyan", bold = true }
+
+find_keyword = { fg = "black", bg = "lightyellow", bold = true }
+find_position = { fg = "lightmagenta", bold = true }
+
+marker_copied = { fg = "green", bg = "green" }
+marker_cut = { fg = "red", bg = "red" }
+marker_marked = { fg = "cyan", bg = "cyan" }
+marker_selected = { fg = "yellow", bg = "yellow" }
+
+count_copied = { fg = "black", bg = "lightgreen", bold = true }
+count_cut = { fg = "black", bg = "lightred", bold = true }
+count_selected = { fg = "black", bg = "lightyellow", bold = true }
+
+border_symbol = "│"
+border_style = { fg = "darkgray" }
+
+[tabs]
+active = { fg = "black", bg = "lightcyan", bold = true }
+inactive = { fg = "gray" }
+
+[mode]
+normal_main = { fg = "black", bg = "lightblue", bold = true }
+normal_alt = { fg = "lightblue", bold = true }
+
+select_main = { fg = "black", bg = "lightcyan", bold = true }
+select_alt = { fg = "lightcyan", bold = true }
+
+unset_main = { fg = "black", bg = "lightmagenta", bold = true }
+unset_alt = { fg = "lightmagenta", bold = true }
+
+[status]
+sep_left = { open = "", close = "" }
+sep_right = { open = "", close = "" }
+
+perm_sep = { fg = "darkgray" }
+perm_type = { fg = "lightblue" }
+perm_read = { fg = "yellow" }
+perm_write = { fg = "lightred" }
+perm_exec = { fg = "lightgreen" }
+
+progress_label = { fg = "white", bold = true }
+progress_normal = { fg = "lightgreen", bg = "darkgray" }
+progress_error = { fg = "black", bg = "lightred", bold = true }
+
+[pick]
+border = { fg = "lightblue" }
+active = { fg = "lightmagenta", bold = true }
+inactive = { fg = "gray" }
+
+[input]
+border = { fg = "lightblue" }
+title = { fg = "lightblue", bold = true }
+value = { fg = "white" }
+selected = { fg = "black", bg = "lightyellow" }
+
+[cmp]
+border = { fg = "lightblue" }
+
+[tasks]
+border = { fg = "lightblue" }
+title = { fg = "lightblue", bold = true }
+hovered = { fg = "black", bg = "lightcyan", bold = true }
+
+[which]
+mask = { bg = "black" }
+cand = { fg = "lightcyan", bold = true }
+rest = { fg = "darkgray" }
+desc = { fg = "lightmagenta" }
+separator = " -> "
+separator_style = { fg = "darkgray" }
+
+[help]
+on = { fg = "lightcyan", bold = true }
+run = { fg = "lightmagenta" }
+hovered = { fg = "black", bg = "lightcyan", bold = true }
+footer = { fg = "black", bg = "gray" }
+
+[spot]
+border = { fg = "lightblue" }
+title = { fg = "lightblue", bold = true }
+tbl_col = { fg = "lightcyan", bold = true }
+tbl_cell = { fg = "white" }
+
+[notify]
+title_info = { fg = "lightgreen", bold = true }
+title_warn = { fg = "lightyellow", bold = true }
+title_error = { fg = "lightred", bold = true }
+
+[filetype]
+rules = [
+  { mime = "image/*", fg = "lightmagenta" },
+  { mime = "{audio,video}/*", fg = "lightyellow" },
+  { mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", fg = "lightred" },
+  { mime = "application/{pdf,doc,rtf}", fg = "lightgreen" },
+  { mime = "vfs/{absent,stale}", fg = "darkgray" },
+  { url = "*", fg = "white" },
+  { url = "*/", fg = "lightblue", bold = true },
+]
+
+[icon]
+dirs = [
+  { name = ".config", text = "", fg = "lightmagenta" },
+  { name = ".git", text = "", fg = "lightred" },
+  { name = ".github", text = "", fg = "lightblue" },
+  { name = ".npm", text = "", fg = "lightred" },
+  { name = "Desktop", text = "", fg = "lightcyan" },
+  { name = "Development", text = "", fg = "lightcyan" },
+  { name = "Documents", text = "", fg = "lightcyan" },
+  { name = "Downloads", text = "", fg = "lightgreen" },
+  { name = "Library", text = "", fg = "lightcyan" },
+  { name = "Movies", text = "", fg = "lightyellow" },
+  { name = "Music", text = "", fg = "lightyellow" },
+  { name = "Pictures", text = "", fg = "lightmagenta" },
+  { name = "Public", text = "", fg = "lightcyan" },
+  { name = "Videos", text = "", fg = "lightyellow" },
+]
+
+conds = [
+  { if = "orphan", text = "", fg = "lightred" },
+  { if = "link", text = "", fg = "lightcyan" },
+  { if = "block", text = "", fg = "lightmagenta" },
+  { if = "char", text = "", fg = "lightmagenta" },
+  { if = "fifo", text = "", fg = "lightyellow" },
+  { if = "sock", text = "", fg = "lightgreen" },
+  { if = "sticky", text = "", fg = "lightyellow" },
+  { if = "dummy", text = "", fg = "lightred" },
+  { if = "dir", text = "", fg = "lightblue" },
+  { if = "exec", text = "", fg = "lightgreen" },
+  { if = "!dir", text = "", fg = "white" },
+]

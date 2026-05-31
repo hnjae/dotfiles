@@ -27,8 +27,3 @@ hash = "aa9f29ace28b2aacfdde46f50df4d293"
 use = "beskep/hwp-preview"
 rev = "e130244"
 hash = "ca491864753977cbea28a3eeb48b1688"
-
-[[flavor.deps]]
-use = "matt-dong-123/base16"
-rev = "ed79352"
-hash = "94659ef90cd557d05dbda7076fbbb3f4"

@@ -1,3 +1,3 @@
 [flavor]
-dark = "base16"
-light = "base16"
+dark = "ansi"
+light = "ansi"
