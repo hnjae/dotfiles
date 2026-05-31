@@ -13,6 +13,7 @@ local MOTION_AND_OP_KEYS = {
   { on = "v" },
   { on = "y" },
   { on = "x" },
+  { on = "<Space>" },
   { on = "t" },
   { on = "L" },
   { on = "H" },
@@ -93,6 +94,8 @@ local function parse_command(initial)
     if not tonumber(key) then
       if key == "g" then
         return tonumber(count), key, read_key(G_DIRECTIONS)
+      elseif key == "<Space>" then
+        return tonumber(count), "v", "v"
       elseif key == "v" or key == "d" or key == "y" or key == "x" then
         return tonumber(count), key, read_key(operation_directions(key))
       end
