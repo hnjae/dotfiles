@@ -51,5 +51,6 @@
     ]
   },
   "model": "opus[1m]",
-  "syntaxHighlightingDisabled": false
+  "syntaxHighlightingDisabled": false,
+  "theme": "dark"
 }
