@@ -1,0 +1,93 @@
+# vi:ft=zsh
+
+local _nd_usage="Usage:
+  nd [nix develop args...]
+  nd shell [nix develop args...]
+  nd run [nix develop args...] -- command [args...]
+  nd -- command [args...]
+  nd -c command [args...]
+  nd --command command [args...]"
+
+local _nd_root
+if ! _nd_root="$(git rev-parse --show-toplevel 2>/dev/null)"; then
+    print -u2 -- "nd: not inside a git repository"
+    print -u2 -- "nd: pwd=$PWD"
+    return 1
+fi
+
+local _nd_flake="${_nd_root}/flake.nix"
+if [[ ! -f "$_nd_flake" ]]; then
+    print -u2 -- "nd: flake.nix not found at git root"
+    print -u2 -- "nd: pwd=$PWD"
+    print -u2 -- "nd: git root=$_nd_root"
+    print -u2 -- "nd: expected=$_nd_flake"
+    return 1
+fi
+
+local _nd_attr
+if [[ "$PWD" == "$_nd_root" ]]; then
+    _nd_attr="default"
+else
+    _nd_attr="${PWD:t}"
+fi
+
+local _nd_installable="${_nd_root}#${_nd_attr}"
+local -a _nd_nix_args _nd_cmd
+
+case "${1-}" in
+"")
+    exec nix develop "$_nd_installable" --command zsh
+    ;;
+shell)
+    shift
+    exec nix develop "$_nd_installable" "$@" --command zsh
+    ;;
+run)
+    shift
+    _nd_nix_args=()
+    while (($#)); do
+        if [[ "$1" == "--" ]]; then
+            shift
+            break
+        fi
+        _nd_nix_args+=("$1")
+        shift
+    done
+
+    if ((!$#)); then
+        print -u2 -- "nd: command required after 'nd run --'"
+        print -u2 -- "$_nd_usage"
+        return 2
+    fi
+
+    _nd_cmd=("$@")
+    nix develop "$_nd_installable" "${_nd_nix_args[@]}" --command "${_nd_cmd[@]}"
+    ;;
+--)
+    shift
+    if ((!$#)); then
+        print -u2 -- "nd: command required after 'nd --'"
+        print -u2 -- "$_nd_usage"
+        return 2
+    fi
+
+    nix develop "$_nd_installable" --command "$@"
+    ;;
+-c | --command)
+    if (($# < 2)); then
+        print -u2 -- "nd: command required after '$1'"
+        print -u2 -- "$_nd_usage"
+        return 2
+    fi
+
+    nix develop "$_nd_installable" "$@"
+    ;;
+-*)
+    exec nix develop "$_nd_installable" "$@" --command zsh
+    ;;
+*)
+    print -u2 -- "nd: unknown subcommand '$1'"
+    print -u2 -- "$_nd_usage"
+    return 2
+    ;;
+esac

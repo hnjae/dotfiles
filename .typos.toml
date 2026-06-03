@@ -8,6 +8,7 @@ extend-ignore-re = [
 
 [default.extend-words]
 CPY = "CPY"
+nd = "nd"
 
 [files]
 ignore-dot = false
