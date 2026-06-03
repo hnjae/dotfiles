@@ -1,3 +1,15 @@
+local function is_devenv_nix(bufnr)
+  return vim.api.nvim_buf_get_name(bufnr):find("devenv", 1, true) ~= nil
+end
+
+local function nix_root_dir(bufnr, on_dir)
+  if is_devenv_nix(bufnr) and vim.fn.executable("devenv") == 1 then
+    return
+  end
+
+  on_dir(vim.fs.root(bufnr, { "flake.nix", ".git" }))
+end
+
 --[[
   NOTE:
     Overrides `lang.nix` from LazyExtra
@@ -11,11 +23,28 @@ return {
       opts.servers = opts.servers or {}
       opts.servers.nil_ls = nil
 
+      if vim.fn.executable("devenv") == 1 then
+        opts.servers.devenv = {
+          cmd = { "devenv", "lsp" },
+          filetypes = { "nix" },
+          mason = false,
+          root_dir = function(bufnr, on_dir)
+            if is_devenv_nix(bufnr) then
+              on_dir(vim.fs.root(bufnr, { "devenv.nix", "devenv.yaml", "devenv.lock", ".git" }))
+            end
+          end,
+        }
+      end
+
       if vim.fn.executable("nixd") == 1 then
-        opts.servers.nixd = {}
+        opts.servers.nixd = {
+          root_dir = nix_root_dir,
+        }
         opts.servers.nil_ls = nil
       elseif vim.fn.executable("nil") ~= 1 then
-        opts.servers.nil_ls = {}
+        opts.servers.nil_ls = {
+          root_dir = nix_root_dir,
+        }
       end
     end,
   },
