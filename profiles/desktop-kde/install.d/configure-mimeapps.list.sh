@@ -12,6 +12,7 @@ main() {
     handlr set "video/x-matroska" "$VIDEO_PLAYER"
     handlr set "video/x-msvideo" "$VIDEO_PLAYER"
     handlr set "video/vnd.avi" "$VIDEO_PLAYER"
+    handlr set "video/x-msvideo" "$VIDEO_PLAYER"
 
     # handlr set 'audio/*' org.fooyin.fooyin.desktop
     handlr set "x-scheme-handler/http" "$BROWSER"

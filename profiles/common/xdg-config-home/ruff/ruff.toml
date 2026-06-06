@@ -20,9 +20,11 @@ ignore = [
   "S607", # start-process-with-partial-path
 
   # Things I don't think are necessary:
-  "RUF001", # ambiguous-unicode-character-string
-  "RUF002", # ambiguous-unicode-character-docstring
-  "RUF003", # ambiguous-unicode-character-comment
+  "RUF001",  # ambiguous-unicode-character-string
+  "RUF002",  # ambiguous-unicode-character-docstring
+  "RUF003",  # ambiguous-unicode-character-comment
+  "PLC2401", # non-ascii-name
+  "PLC2403", # non-ascii-import-name
 
   # Things that can be fixed by `ruff format`:
   "COM", # flake8-commas
@@ -34,11 +36,20 @@ ignore = [
 
 [lint.per-file-ignores]
 "tests/**/*.py" = [
-  "ARG", # flake8-unused-arguments
-  "PLC", # pylint
-  "PLR", # refactor
-  "S",   # flake8-bandit
-  "SLF", # flake8-self
+  "ANN",     # flake8-annotations
+  "ARG",     # flake8-unused-arguments
+  "PLC0415", # import-outside-top-level
+  "PLR",     # refactor
+  "S",       # flake8-bandit
+  "SLF",     # flake8-self
+  "TC",      # flake8-type-checking
+
+  # PLC: convention
+  "PLC0415", # import-outside-top-level
+  "PLC1901", # compare-to-empty-string
+
+  # PLW: warning
+  "PLW0717", # too-many-statements-in-try-clause
 ]
 
 [lint.pydocstyle]
