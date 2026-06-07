@@ -5,7 +5,9 @@ from kitty.utils import color_as_int
 FIXED_TAB_BODY_WIDTH = 24
 
 
-def draw_tab(draw_data, screen, tab, before, max_tab_length, index, is_last, extra_data):
+def draw_tab(
+    draw_data, screen, tab, before, max_tab_length, index, is_last, extra_data
+):
     body_width = max(1, min(FIXED_TAB_BODY_WIDTH, max_tab_length))
     end = before + body_width
 

@@ -108,7 +108,14 @@ local function parse_command(initial)
 end
 
 local function is_tab_command(cmd)
-  return cmd == "t" or cmd == "H" or cmd == "L" or cmd == "w" or cmd == "W" or cmd == "<" or cmd == ">" or cmd == "~"
+  return cmd == "t"
+    or cmd == "H"
+    or cmd == "L"
+    or cmd == "w"
+    or cmd == "W"
+    or cmd == "<"
+    or cmd == ">"
+    or cmd == "~"
 end
 
 local active_tab_index = ya.sync(function()

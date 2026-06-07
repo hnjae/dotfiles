@@ -155,7 +155,8 @@ local function make_output_path(source_path, start_time, end_time)
   end
 
   local base = sanitize_filename(media_name(source_path))
-  local stem = string.format("%s_%s-%s", base, filename_timestamp(start_time), filename_timestamp(end_time))
+  local stem =
+    string.format("%s_%s-%s", base, filename_timestamp(start_time), filename_timestamp(end_time))
   local output = utils.join_path(output_dir, stem .. "." .. opts.container)
 
   local suffix = 1
