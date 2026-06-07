@@ -1,0 +1,95 @@
+line-length = 79
+
+[format]
+docstring-code-format = true
+
+[lint]
+preview = true
+fixable = ["ALL"]
+select = ["ALL"]
+ignore = [
+  # Rules that are not necessary in this repository:
+  "CPY", # flake8-copyright
+  "D",   # pydocstyle
+  "DOC", # pydoclint
+  "ERA", # eradicate
+  "FIX", # flake8-fixme
+  "T",   # flake8-print
+  "TD",  # flake8-todos
+
+  # Rules that are necessary in specific situations:
+  "S404", # suspicious-subprocess-import
+  "S603", # subprocess-without-shell-equals-true, conflicts with S602
+  "S607", # start-process-with-partial-path
+
+  # Things I don't think are necessary:
+  "PLC2401", # non-ascii-name
+  "PLC2403", # non-ascii-import-name
+  "RUF001",  # ambiguous-unicode-character-string
+  "RUF002",  # ambiguous-unicode-character-docstring
+  "RUF003",  # ambiguous-unicode-character-comment
+
+  # Things that can be fixed by formatter:
+  "COM", # flake8-commas
+  "E",   # pycodestyle-error
+  "Q",   # flake8-quotes
+  # "I",  # NOTE: isort 는 ruff format 으로 정리되지 않음. <2026-06-06>
+]
+
+[lint.per-file-ignores]
+"apps/reforge/src/reforge/**/*.py" = [
+  "ANN401",  # pyvips, torch, and spandrel expose dynamic runtime boundaries
+  "BLE001",  # pipeline boundaries intentionally wrap broad runtime failures
+  "C901",    # media pipeline orchestration is branch-heavy by design
+  "FBT001",  # runtime probes keep positional bools for simple callbacks
+  "PERF203", # clarity is more important than loop exception micro-optimization
+
+  # PLC: convention
+  "PLC0415", # optional GPU/image imports stay lazy
+  "PLC1901", # empty-string comparisons are clearer in encode-pool plumbing
+
+  # PLR: refactor
+  "PLR0911", # pipeline selectors use early returns for readability
+  "PLR0912", # media pipeline orchestration is branch-heavy by design
+  "PLR0913", # pipeline APIs prefer explicit keyword-only parameters
+  "PLR0914", # staged GPU code keeps named intermediates for diagnostics
+  "PLR0915", # pipeline orchestration is intentionally linear
+  "PLR2004", # image tensor dimensions are more readable inline
+
+  # PLW: warning
+  "PLW0717", # try blocks preserve phase-level failure boundaries
+
+  # TRY: tryceratops
+  "TRY004", # validation errors are user-facing ValueErrors in CLI policy
+]
+"apps/reforge/tests/*.py" = [
+  "BLE001", # CLI/thread harnesses must capture BaseException for assertions
+  "INP001", # tests are collected as files, not as an import package
+  "RUF069", # exact float assertions document serialized configuration values
+]
+"apps/*/tests/**/*.py" = [
+  "ANN", # flake8-annotations
+  "ARG", # flake8-unused-arguments
+  "PLR", # refactor
+  "S",   # flake8-bandit
+  "SLF", # flake8-self
+  "TC",  # flake8-type-checking
+
+  # PLC: convention
+  "PLC0415", # import-outside-top-level
+  "PLC1901", # compare-to-empty-string
+
+  # PLW: warning
+  "PLW0717", # too-many-statements-in-try-clause
+]
+
+[lint.pydocstyle]
+convention = "pep257"
+
+[lint.flake8-annotations]
+ignore-fully-untyped = true
+suppress-dummy-args = true
+suppress-none-returning = true
+
+[lint.mccabe]
+max-complexity = 12 # default: 10

@@ -9,7 +9,7 @@ _:
 
 [group('ci')]
 format:
-    prek run --hook-stage pre-commit --all-files
+    devenv shell -- treefmt
 
 update-submodules:
     lib/update-submodules.sh

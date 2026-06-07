@@ -1,38 +1,34 @@
-{ pkgs, lib, ... }:
 {
-  git-hooks.install.enable = false;
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+{
+  # https://devenv.sh/git-hooks/
+  git-hooks.excludes = [ ".*\\.lock$" ];
   git-hooks.hooks = {
+    # Static checkers
+    detect-private-keys.enable = true;
+    cocogitto = {
+      enable = true;
+      name = "cog verify";
+      description = "Lint commit messages with Cocogitto.";
+      package = pkgs.cocogitto;
+      entry = "${lib.getExe pkgs.cocogitto} verify --file";
+      stages = [ "commit-msg" ];
+    };
+    typos.enable = true;
+
+    # Formatter check
+    treefmt.enable = true;
+
+    # Miscellaneous Checkers/Linters:
+    deadnix.enable = true;
+    statix.enable = true;
+    rumdl.enable = true;
   };
-  # git-hooks.hooks = {
-  #   rumdl.enable = true;
-  #   yamlfmt.enable = true;
-  #   taplo.enable = true;
-  #   typos.enable = true;
-  #   biome = {
-  #     enable = true;
-  #     excludes = [ "lazy-lock\\.json" ];
-  #   };
-  #   "stylua-nvim" = {
-  #     enable = true;
-  #     name = "stylua nvim";
-  #     entry = "${pkgs.stylua}/bin/stylua --respect-ignores --config-path profiles/common/xdg-config-home/nvim/.stylua.toml";
-  #     files = "^profiles/common/xdg-config-home/nvim/.*\\.lua$";
-  #     types = [
-  #       "file"
-  #       "lua"
-  #     ];
-  #     language = "system";
-  #   };
-  #   "stylua-yazi" = {
-  #     enable = true;
-  #     name = "stylua yazi";
-  #     entry = "${pkgs.stylua}/bin/stylua --respect-ignores";
-  #     files = "^profiles/common/xdg-config-home/yazi/.*\\.lua$";
-  #     types = [
-  #       "file"
-  #       "lua"
-  #     ];
-  #     language = "system";
-  #   };
-  # };
+  tasks."ci:git-hooks" = {
+    exec = "${lib.getExe config.git-hooks.package} run --all-files";
+  };
 }

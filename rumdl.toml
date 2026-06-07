@@ -10,3 +10,7 @@ disable = [
 
 [MD007] # ul-indent
 indent = 4
+
+[MD060]
+enabled = true    # table-format
+style = "aligned"

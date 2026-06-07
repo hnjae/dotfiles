@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=https://devenv.sh/devenv.schema.json
+---
+inputs:
+  git-hooks:
+    url: github:cachix/git-hooks.nix
+    inputs:
+      nixpkgs:
+        follows: nixpkgs
+  nixpkgs:
+    url: "https://flakehub.com/f/DeterminateSystems/nixpkgs-weekly/0.1" # nixpkgs-unstable
+  nixpkgs-stable:
+    url: "https://flakehub.com/f/NixOS/nixpkgs/0" # Most recently published stable
+  treefmt-nix:
+    url: github:numtide/treefmt-nix
+    inputs:
+      nixpkgs:
+        follows: nixpkgs
+allowUnfree: true

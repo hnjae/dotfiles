@@ -16,6 +16,10 @@ For feature work or behavior/structure changes, commit each applicable layer of 
 
 Each step is its own commit; skip the ones that don't apply. Pure repository maintenance (build, lint, CI, formatter, dependency metadata) has no intent layer — go straight to implementation. Pause this discipline only when the user asks.
 
+## Design bar
+
+Design the correct end-state, not the cheap one.
+
 ## Trust verified content
 
 If a tool (e.g. `typos`) flags content that is correct, fix the tool's configuration rather than the content.
