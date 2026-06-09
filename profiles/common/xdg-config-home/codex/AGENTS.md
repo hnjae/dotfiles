@@ -24,6 +24,13 @@ Design the correct end-state, not the cheap one.
 
 If a tool (e.g. `typos`) flags content that is correct, fix the tool's configuration rather than the content.
 
-## Commits
+## Git commits
 
 Use Conventional Commits with a scope whenever one clearly applies. Commit on task completion unless the user has said otherwise.
+
+When Codex materially authors a commit's changes, add this exact trailer to the commit message footer (standard trailer block, after a blank line below the body):
+
+`Co-authored-by: Codex <noreply@openai.com>`
+
+- Never duplicate this trailer if it is already present.
+- For commits Codex did not materially author (e.g., amending others' work), omit it unless the user explicitly requests it.
