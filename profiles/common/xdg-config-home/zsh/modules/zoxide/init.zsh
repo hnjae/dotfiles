@@ -23,12 +23,12 @@ local sig="${commands[zoxide]:A}"
 # - zoxide init zsh --no-cmd >/dev/null                   953.7 us ± 425.9 us
 # Cache hit is only modestly faster than regenerating, but still avoids about 1 ms
 # on this machine and keeps the generated init file stable between upgrades.
-if [[
+if [[ 
     ! -e "$initfile" ||
     "$initfile" -ot "${commands[zoxide]}" ||
     ! -e "$sigfile" ||
-    "$(<"$sigfile")" != "$sig"
-]]; then
+    "$(<"$sigfile")" != "$sig" ]] \
+    ; then
 
     $commands[zoxide] init zsh --no-cmd >|"$initfile"
     print -r -- "$sig" >|"$sigfile"
@@ -81,10 +81,22 @@ function s() {
         shift
     fi
 
-    if [[ -f $* ]]; then
-        __zoxide_z "$(dirname "$*")"
+    if [[ $# -eq 0 ]]; then
+        return 0
+    fi
+
+    if [[ $# -gt 1 ]]; then
+        print -u2 "zoxide: too many arguments"
+        return 1
+    fi
+
+    if [[ -f $1 ]]; then
+        __zoxide_z "$(dirname "$1")"
+    elif [[ -d $1 ]]; then
+        __zoxide_z "$1"
     else
-        __zoxide_z "$@"
+        print -u2 "zoxide: $1: No such file or directory"
+        return 1
     fi
 }
 
