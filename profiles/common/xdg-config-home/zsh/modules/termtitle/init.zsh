@@ -3,7 +3,7 @@
 # OSC 7
 # https://wezterm.org/shell-integration.html#osc-7-escape-sequence-to-set-the-working-directory
 # \e\\:  String Terminator
-[[ "${TERM}" != dumb && "${TERM}" != screen* ]] && () {
+[[ -z "${TMUX}" && "${TERM}" != dumb && "${TERM}" != screen* ]] && () {
     builtin emulate -L zsh
     local giticon=" "
 
