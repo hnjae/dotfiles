@@ -20,5 +20,6 @@
 # Generated or ephemeral metadata
 /.personality_migration
 /version.json
+/plugins/cache
 
 /installation_id
