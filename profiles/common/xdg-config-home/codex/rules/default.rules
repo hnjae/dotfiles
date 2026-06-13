@@ -1,6 +1,7 @@
 prefix_rule(pattern=["nix-env"], decision="forbidden")
 prefix_rule(pattern=["sudo"], decision="forbidden")
 prefix_rule(pattern=["npm"], decision="forbidden")
+prefix_rule(pattern=["sops"], decision="forbidden")
 prefix_rule(pattern=["git", "add"], decision="allow")
 prefix_rule(pattern=["git", "commit"], decision="allow")
 prefix_rule(pattern=["git", "switch"], decision="allow")

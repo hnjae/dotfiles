@@ -1,6 +1,6 @@
 /plugins/*
-!/plugins/my-*.yazi/
-!/plugins/my-*.yazi/**
+!/plugins/local-*.yazi/
+!/plugins/local-*.yazi/**
 /flavors
 
 # Devenv
