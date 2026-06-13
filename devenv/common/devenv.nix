@@ -35,6 +35,7 @@
       settings = {
         excludes = [
           "*.lock"
+          "*/lazy-lock.json"
           "*/zed/*.json"
         ];
 
