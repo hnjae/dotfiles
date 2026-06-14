@@ -210,6 +210,22 @@ local function transfer_to_target(cut)
   ya.emit("cd", { Url(data.cwd) })
 end
 
+local function transfer_here(cut)
+  local data = snapshot()
+  if data.selected_count == 0 then
+    notify("warn", "No marked files.", 5)
+    return
+  end
+
+  if cut then
+    ya.emit("yank", { cut = true })
+  else
+    ya.emit("yank", {})
+  end
+
+  ya.emit("paste", {})
+end
+
 local actions = {}
 
 function actions.add_cwd()
@@ -246,6 +262,14 @@ end
 
 function actions.move()
   transfer_to_target(true)
+end
+
+function actions.copy_here()
+  transfer_here(false)
+end
+
+function actions.move_here()
+  transfer_here(true)
 end
 
 return {

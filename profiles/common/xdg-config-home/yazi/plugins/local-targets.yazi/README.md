@@ -7,6 +7,7 @@ Session-local target directories for netrw-style file transfers.
 - Mark source entries with the `m` prefix.
 - Set one or more target directories.
 - Copy or move the marked entries to a selected target with netrw-style maps.
+- Copy or move the marked entries to the current directory without adding a target.
 - Stay in the current directory after target copy or move operations.
 - Use the `c` prefix for explorer-style copy, move, and paste operations in the current directory.
 
@@ -24,5 +25,7 @@ Session-local target directories for netrw-style file transfers.
 - `m .` adds the current directory as a target.
 - `m c` copies marked entries to a selected target.
 - `m m` moves marked entries to a selected target.
-- `m C` clears yazi's target list.
+- `m C` copies marked entries to the current directory.
+- `m M` moves marked entries to the current directory.
+- `m x` clears yazi's target list.
 - `m l` lists yazi's target list.
