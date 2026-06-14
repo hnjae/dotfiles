@@ -87,14 +87,14 @@ local function add_target(path)
   notify("info", "Target added: " .. result.label, 4)
 end
 
-local function target_cands(targets)
+local function target_cands(targets, verb)
   local keys = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" }
   local cands = {}
 
   for i = 1, math.min(#targets, #keys) do
     cands[i] = {
       on = keys[i],
-      desc = targets[i].label,
+      desc = verb .. " to " .. targets[i].label,
     }
   end
 
@@ -119,7 +119,7 @@ local function choose_target(verb)
   end
 
   if #targets <= 10 then
-    local idx = ya.which({ cands = target_cands(targets) })
+    local idx = ya.which({ cands = target_cands(targets, verb) })
     return idx and targets[idx] or nil
   end
 
@@ -127,10 +127,10 @@ local function choose_target(verb)
   for i, target in ipairs(targets) do
     lines[#lines + 1] = string.format("%d. %s", i, target.label)
   end
-  notify("info", table.concat(lines, "\n"), 8)
+  notify("info", verb .. " target:\n" .. table.concat(lines, "\n"), 8)
 
   local value, event = ya.input({
-    title = string.format("Target (1-%d):", #targets),
+    title = string.format("%s target (1-%d):", verb, #targets),
     value = "",
     pos = { "top-center", y = 2, w = 50 },
   })
