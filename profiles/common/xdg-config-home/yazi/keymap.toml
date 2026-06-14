@@ -39,6 +39,7 @@ prepend_keymap = [
 
   # Files
   {on = ["d"], run = "create --dir", desc = "Create a directory"},
+  {on = ["<F7>"], run = "create --dir", desc = "Create a directory"},                                          # NOTE: tow-panel FM 관습
   {on = ["%"], run = "plugin local-file-create", desc = "Create a file"},
   {on = ["D"], run = "remove", desc = "Trash selected files"},
   {on = ["<F8>"], run = "plugin local-rmdir", desc = "Remove empty directories"},
