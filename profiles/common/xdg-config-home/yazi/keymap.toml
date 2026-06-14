@@ -104,6 +104,7 @@ prepend_keymap = [
     "-",
   ], run = "leave", desc = "Go to the parent directory" },
   { on = [
+    "g",
     "x",
   ], run = "plugin local-open-associated", desc = "Open hovered entry with associated program" },
   { on = [
