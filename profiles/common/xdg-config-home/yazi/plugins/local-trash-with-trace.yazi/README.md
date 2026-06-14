@@ -3,6 +3,7 @@
 Local functional plugin for this dotfiles setup.
 
 - `<F3>` runs on the selected files, or the hovered file when nothing is selected
+- after trashing one hovered file, the cursor moves to the next original entry, or the previous entry when there is no next entry
 - writes `<stem> DELETED` in the same directory
 - stores `mediainfo -- <file>` output in that trace file
 - trashes the original file via `trash-put`

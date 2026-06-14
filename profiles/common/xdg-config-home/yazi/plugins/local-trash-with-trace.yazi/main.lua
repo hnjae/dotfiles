@@ -1,6 +1,7 @@
 local targets = ya.sync(function()
   local items = {}
   local selected = cx.active.selected
+  local reveal_after = nil
 
   if #selected > 0 then
     for _, url in pairs(selected) do
@@ -18,10 +19,19 @@ local targets = ya.sync(function()
         name = hovered.name,
         stem = hovered.url.stem or hovered.name,
       }
+
+      local current = cx.active.current
+      local next_file = current.files[current.cursor + 2] or current.files[current.cursor]
+      if next_file then
+        reveal_after = Url(next_file.url)
+      end
     end
   end
 
-  return items
+  return {
+    items = items,
+    reveal_after = reveal_after,
+  }
 end)
 
 local function notify(level, content, timeout)
@@ -116,7 +126,8 @@ end
 
 return {
   entry = function()
-    local items = targets()
+    local data = targets()
+    local items = data.items
     if #items == 0 then
       notify("warn", "No hovered or selected entries.", 6)
       return
@@ -135,13 +146,11 @@ return {
     local failed = 0
     local first_error = nil
     local first_failed_name = nil
-    local revealed = nil
 
     for _, item in ipairs(items) do
       local final_url, err = trash_with_trace(item)
       if final_url then
         trashed = trashed + 1
-        revealed = final_url
       else
         failed = failed + 1
         if first_error == nil then
@@ -152,8 +161,8 @@ return {
     end
 
     if failed == 0 then
-      if #items == 1 and revealed then
-        ya.emit("reveal", { revealed })
+      if #items == 1 and data.reveal_after then
+        ya.emit("reveal", { data.reveal_after })
         notify("info", "Trashed hovered file and created its trace file.", 4)
       else
         notify(
