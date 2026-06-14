@@ -20,7 +20,6 @@ prepend_keymap = [
   {on = ["m", "x"], run = "noop"},
   {on = ["m", "X"], run = "noop"},
   {on = ["m", "z"], run = "noop"},
-  {on = ["m", "l"], run = "noop"},
   {on = ["m", "p"], run = "noop"},
   {on = ["m", "P"], run = "noop"},
   {on = ["m", "y"], run = "noop"},
@@ -82,6 +81,7 @@ prepend_keymap = [
   {on = ["m", "c"], run = "plugin local-targets copy", desc = "copy-marked-to-target"},
   {on = ["m", "m"], run = "plugin local-targets move", desc = "move-marked-to-target"},
   {on = ["m", "C"], run = "plugin local-targets clear", desc = "target-clear"},                   # NOTE: not in netrw
+  {on = ["m", "l"], run = "plugin local-targets list", desc = "target-list"},                     # NOTE: not in netrw
   {on = ["m", "f"], run = "toggle", desc = "mark-file"},
   {on = ["m", "F"], run = "toggle_all --state=off", desc = "UNMARK-cwd"},
   {on = ["m", "u"], run = "escape --select", desc = "UNMARK-all"},

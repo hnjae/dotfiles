@@ -24,3 +24,4 @@ Session-local target directories for netrw-style file transfers.
 - `m c` copies marked entries to a selected target.
 - `m m` moves marked entries to a selected target.
 - `m C` clears yazi's target list.
+- `m l` lists yazi's target list.

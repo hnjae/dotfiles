@@ -87,6 +87,21 @@ local function add_target(path)
   notify("info", "Target added: " .. result.label, 4)
 end
 
+local function list_targets()
+  local targets = get_targets()
+  if #targets == 0 then
+    notify("warn", "No targets set.", 5)
+    return
+  end
+
+  local lines = {}
+  for i, target in ipairs(targets) do
+    lines[#lines + 1] = string.format("%d. %s", i, target.label)
+  end
+
+  notify("info", table.concat(lines, "\n"), 8)
+end
+
 local function target_cands(targets, verb)
   local keys = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" }
   local cands = {}
@@ -192,6 +207,10 @@ end
 function actions.clear()
   clear_targets_state()
   notify("info", "Targets cleared.", 4)
+end
+
+function actions.list()
+  list_targets()
 end
 
 function actions.copy()
