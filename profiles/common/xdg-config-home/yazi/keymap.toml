@@ -57,8 +57,7 @@ prepend_keymap = [
     "D",
   ], run = "remove", desc = "Trash selected files" },
   { on = [
-    "m",
-    "r",
+    "<F8>",
   ], run = "plugin local-rmdir", desc = "Remove empty directories" },
   { on = [
     "<F3>",
@@ -143,6 +142,22 @@ prepend_keymap = [
   ], run = "toggle_all", desc = "mark-reverse (cwd)" },
   { on = [
     "m",
+    "t",
+  ], run = "plugin local-targets add-cwd", desc = "target-current-directory" },
+  { on = [
+    "m",
+    "T",
+  ], run = "plugin local-targets add-hovered", desc = "target-hovered-directory" },
+  { on = [
+    "m",
+    "l",
+  ], run = "plugin local-targets list", desc = "target-list" },
+  { on = [
+    "m",
+    "c",
+  ], run = "plugin local-targets clear", desc = "target-clear" },
+  { on = [
+    "m",
     "f",
   ], run = "toggle", desc = "mark-file" },
   { on = [
@@ -156,11 +171,11 @@ prepend_keymap = [
   { on = [
     "m",
     "p",
-  ], run = "paste", desc = "paste" },
+  ], run = "plugin local-targets paste", desc = "paste-to-target" },
   { on = [
     "m",
     "P",
-  ], run = "paste --force", desc = "!PASTE" },
+  ], run = "plugin local-targets paste-force", desc = "!PASTE-to-target" },
   { on = [
     "m",
     "y",
