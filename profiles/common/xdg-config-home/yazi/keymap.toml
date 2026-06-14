@@ -143,11 +143,11 @@ prepend_keymap = [
   { on = [
     "m",
     "t",
-  ], run = "plugin local-targets add-cwd", desc = "target-current-directory" },
+  ], run = "plugin local-targets add-hovered", desc = "target-hovered-directory" },
   { on = [
     "m",
-    "T",
-  ], run = "plugin local-targets add-hovered", desc = "target-hovered-directory" },
+    ".",
+  ], run = "plugin local-targets add-cwd", desc = "target-current-directory" },
   { on = [
     "m",
     "l",
