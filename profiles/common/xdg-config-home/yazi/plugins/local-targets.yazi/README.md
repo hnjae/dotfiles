@@ -7,6 +7,7 @@ Session-local target directories for netrw-style file transfers.
 - Mark source entries with the `m` prefix.
 - Set one or more target directories.
 - Copy or move the marked entries to a selected target with netrw-style maps.
+- Stay in the current directory after target copy or move operations.
 - Use the `c` prefix for explorer-style copy, move, and paste operations in the current directory.
 
 ## Keymap

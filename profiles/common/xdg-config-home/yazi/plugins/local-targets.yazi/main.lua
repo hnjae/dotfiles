@@ -162,6 +162,22 @@ local function choose_target(verb)
   return targets[idx]
 end
 
+local function target_is_directory(target)
+  local url = Url(target.path)
+  local cha, err = fs.cha(url, false)
+  if not cha then
+    notify("error", "Couldn't inspect target: " .. tostring(err), 7)
+    return false
+  end
+
+  if not cha.is_dir then
+    notify("warn", "Target is not a directory: " .. target.label, 5)
+    return false
+  end
+
+  return true
+end
+
 local function transfer_to_target(cut)
   local data = snapshot()
   if data.selected_count == 0 then
@@ -174,13 +190,24 @@ local function transfer_to_target(cut)
     return
   end
 
+  if not target_is_directory(target) then
+    return
+  end
+
   if cut then
     ya.emit("yank", { cut = true })
   else
     ya.emit("yank", {})
   end
+
+  if target.path == data.cwd then
+    ya.emit("paste", {})
+    return
+  end
+
   ya.emit("cd", { Url(target.path) })
   ya.emit("paste", {})
+  ya.emit("cd", { Url(data.cwd) })
 end
 
 local actions = {}
