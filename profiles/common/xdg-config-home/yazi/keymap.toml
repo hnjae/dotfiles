@@ -4,10 +4,6 @@
 prepend_keymap = [
   # Disabled Defaults
   { on = [
-    "c",
-    "c",
-  ], run = "noop" },
-  { on = [
     "m",
     "s",
   ], run = "noop" },
@@ -132,6 +128,26 @@ prepend_keymap = [
   ], run = "plugin local-open-cwd-terminal", desc = "Open current directory in tmux split or terminal" },
 
   # Clipboard
+  { on = [
+    "c",
+    "c",
+  ], run = "yank", desc = "copy" },
+  { on = [
+    "c",
+    "x",
+  ], run = "yank --cut", desc = "move" },
+  { on = [
+    "c",
+    "v",
+  ], run = "paste", desc = "paste" },
+  { on = [
+    "c",
+    "V",
+  ], run = "paste --force", desc = "!PASTE" },
+  { on = [
+    "c",
+    "u",
+  ], run = "unyank", desc = "UNYANK-all" },
   { on = [
     "m",
     "a",
