@@ -9,7 +9,7 @@ local snapshot = ya.sync(function(state)
       name = hovered.name,
       is_dir = hovered.cha and hovered.cha.is_dir,
     } or nil,
-    yanked_count = #cx.yanked,
+    selected_count = #cx.active.selected,
   }
 end)
 
@@ -87,21 +87,6 @@ local function add_target(path)
   notify("info", "Target added: " .. result.label, 4)
 end
 
-local function list_targets()
-  local targets = get_targets()
-  if #targets == 0 then
-    notify("warn", "No targets set.", 5)
-    return
-  end
-
-  local lines = {}
-  for i, target in ipairs(targets) do
-    lines[#lines + 1] = string.format("%d. %s", i, target.label)
-  end
-
-  notify("info", table.concat(lines, "\n"), 8)
-end
-
 local function target_cands(targets)
   local keys = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" }
   local cands = {}
@@ -116,7 +101,7 @@ local function target_cands(targets)
   return cands
 end
 
-local function choose_target()
+local function choose_target(verb)
   local targets = get_targets()
   if #targets == 0 then
     notify("warn", "No targets set.", 5)
@@ -127,8 +112,8 @@ local function choose_target()
     local target = targets[1]
     local ok = ya.confirm({
       pos = { "center", w = 62, h = 8 },
-      title = "Paste to target?",
-      body = "Paste yanked files to " .. target.label .. "?",
+      title = verb .. " to target?",
+      body = verb .. " marked files to " .. target.label .. "?",
     })
     return ok and target or nil
   end
@@ -162,24 +147,25 @@ local function choose_target()
   return targets[idx]
 end
 
-local function paste_to_target(force)
+local function transfer_to_target(cut)
   local data = snapshot()
-  if data.yanked_count == 0 then
-    notify("warn", "No yanked files.", 5)
+  if data.selected_count == 0 then
+    notify("warn", "No marked files.", 5)
     return
   end
 
-  local target = choose_target()
+  local target = choose_target(cut and "Move" or "Copy")
   if not target then
     return
   end
 
-  ya.emit("cd", { Url(target.path) })
-  if force then
-    ya.emit("paste", { force = true })
+  if cut then
+    ya.emit("yank", { cut = true })
   else
-    ya.emit("paste", {})
+    ya.emit("yank", {})
   end
+  ya.emit("cd", { Url(target.path) })
+  ya.emit("paste", {})
 end
 
 local actions = {}
@@ -208,16 +194,12 @@ function actions.clear()
   notify("info", "Targets cleared.", 4)
 end
 
-function actions.list()
-  list_targets()
+function actions.copy()
+  transfer_to_target(false)
 end
 
-function actions.paste()
-  paste_to_target(false)
-end
-
-function actions.paste_force()
-  paste_to_target(true)
+function actions.move()
+  transfer_to_target(true)
 end
 
 return {

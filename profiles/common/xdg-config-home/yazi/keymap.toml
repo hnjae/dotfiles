@@ -5,11 +5,39 @@ prepend_keymap = [
   # Disabled Defaults
   { on = [
     "m",
+    "a",
+  ], run = "noop" },
+  { on = [
+    "m",
+    "A",
+  ], run = "noop" },
+  { on = [
+    "m",
     "s",
   ], run = "noop" },
   { on = [
     "m",
     "b",
+  ], run = "noop" },
+  { on = [
+    "m",
+    "B",
+  ], run = "noop" },
+  { on = [
+    "m",
+    "d",
+  ], run = "noop" },
+  { on = [
+    "m",
+    "e",
+  ], run = "noop" },
+  { on = [
+    "m",
+    "g",
+  ], run = "noop" },
+  { on = [
+    "m",
+    "h",
   ], run = "noop" },
   { on = [
     "m",
@@ -21,7 +49,47 @@ prepend_keymap = [
   ], run = "noop" },
   { on = [
     "m",
+    "r",
+  ], run = "noop" },
+  { on = [
     "m",
+    "T",
+  ], run = "noop" },
+  { on = [
+    "m",
+    "v",
+  ], run = "noop" },
+  { on = [
+    "m",
+    "x",
+  ], run = "noop" },
+  { on = [
+    "m",
+    "X",
+  ], run = "noop" },
+  { on = [
+    "m",
+    "z",
+  ], run = "noop" },
+  { on = [
+    "m",
+    "l",
+  ], run = "noop" },
+  { on = [
+    "m",
+    "p",
+  ], run = "noop" },
+  { on = [
+    "m",
+    "P",
+  ], run = "noop" },
+  { on = [
+    "m",
+    "y",
+  ], run = "noop" },
+  { on = [
+    "m",
+    "U",
   ], run = "noop" },
   { on = "z", run = "noop" },
   { on = "Q", run = "noop" },
@@ -151,14 +219,6 @@ prepend_keymap = [
   ], run = "unyank", desc = "UNYANK-all" },
   { on = [
     "m",
-    "a",
-  ], run = "toggle_all --state=on", desc = "mark-all (cwd)" },
-  { on = [
-    "m",
-    "r",
-  ], run = "toggle_all", desc = "mark-reverse (cwd)" },
-  { on = [
-    "m",
     "t",
   ], run = "plugin local-targets add-hovered", desc = "target-hovered-directory" },
   { on = [
@@ -167,11 +227,15 @@ prepend_keymap = [
   ], run = "plugin local-targets add-cwd", desc = "target-current-directory" },
   { on = [
     "m",
-    "l",
-  ], run = "plugin local-targets list", desc = "target-list" },
+    "c",
+  ], run = "plugin local-targets copy", desc = "copy-marked-to-target" },
   { on = [
     "m",
-    "c",
+    "m",
+  ], run = "plugin local-targets move", desc = "move-marked-to-target" },
+  { on = [
+    "m",
+    "C",
   ], run = "plugin local-targets clear", desc = "target-clear" },
   { on = [
     "m",
@@ -185,26 +249,6 @@ prepend_keymap = [
     "m",
     "u",
   ], run = "escape --select", desc = "UNMARK-all" },
-  { on = [
-    "m",
-    "p",
-  ], run = "plugin local-targets paste", desc = "paste-to-target" },
-  { on = [
-    "m",
-    "P",
-  ], run = "plugin local-targets paste-force", desc = "!PASTE-to-target" },
-  { on = [
-    "m",
-    "y",
-  ], run = "yank", desc = "mark-copy" },
-  { on = [
-    "m",
-    "x",
-  ], run = "yank --cut", desc = "mark-move" },
-  { on = [
-    "m",
-    "U",
-  ], run = "unyank", desc = "UNYANK-all" },
 
   # System clipboard
   { on = [
