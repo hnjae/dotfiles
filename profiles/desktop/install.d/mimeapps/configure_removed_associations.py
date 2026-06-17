@@ -77,12 +77,23 @@ REMOVED_ASSOCIATIONS_BY_DESKTOP: dict[DesktopName, set[str]] = {
         "image/tiff",
         "image/tiff-fx;",
     },
-    "org.pwmt.zathura-cb.desktop": {
-        "application/x-rar",
-        "application/zip",
+    frozenset(
+        {
+            # 비슷한 류
+            "org.pwmt.zathura-cb.desktop",
+            "com.yacreader.YACReader.desktop",
+        }
+    ): {
+        "application/vnd.oasis.opendocument.spreadsheet",
         "application/x-7z-compressed",
+        "application/x-rar",
         "application/x-tar",
+        "application/zip",
         "inode/directory",
+    },
+    "top.akizip.akizip": {
+        # dolphin 의 Association 목록에 뜨나, 열면 zip 파일 취급도 못함. <2026-06-17>
+        "application/vnd.oasis.opendocument.spreadsheet"
     },
     "net.puddletag.puddletag.desktop": {
         "inode/directory",
@@ -96,13 +107,6 @@ REMOVED_ASSOCIATIONS_BY_DESKTOP: dict[DesktopName, set[str]] = {
         "video/x-ms-wmv",  # .desktop 에는 없으나 association 목록에 뜸. <2026-05-14>
         "video/x-theora",
         "video/x-wmv",
-    },
-    "com.yacreader.YACReader.desktop": {
-        "application/x-pdf",
-        "application/x-zip",
-        "application/x-rar",
-        "application/x-7z",
-        "inode/directory",
     },
     "org.kde.okular.desktop": {
         "application/x-cbr",
