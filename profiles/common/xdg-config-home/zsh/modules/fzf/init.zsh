@@ -39,13 +39,13 @@ export FZF_DEFAULT_OPTS="--color=base16,border:8 --layout=reverse --smart-case -
 local fd_cmd bat_cmd=${(k)commands[bat]-${(k)commands[batcat]}} ls_cmd
 
 if (( ${+commands[bfs]} )); then
-    export FZF_DEFAULT_COMMAND="command bfs -mindepth 1 -exclude -name .git -type d,f -printf '%P\n' 2>/dev/null"
-    export FZF_ALT_C_COMMAND="command bfs -mindepth 1 -exclude -name .git -type d -printf '%P\n' 2>/dev/null"
+    export FZF_DEFAULT_COMMAND="command bfs -mindepth 1 -exclude -name .git -exclude -name .venv -exclude -name .devenv -type d,f -printf '%P\n' 2>/dev/null"
+    export FZF_ALT_C_COMMAND="command bfs -mindepth 1 -exclude -name .git -exclude -name .venv -exclude -name .devenv -type d -printf '%P\n' 2>/dev/null"
     _fzf_compgen_path() {
-        command bfs ${1} -exclude -name .git -type d,f -a -not -path ${1} -print
+        command bfs ${1} -exclude -name .git -exclude -name .venv -exclude -name .devenv -type d,f -a -not -path ${1} -print
     }
     _fzf_compgen_dir() {
-        command bfs ${1} -exclude -name .git -type d -a -not -path ${1} -print
+        command bfs ${1} -exclude -name .git -exclude -name .venv -exclude -name .devenv -type d -a -not -path ${1} -print
     }
 
 elif fd_cmd=${(k)commands[fd]-${(k)commands[fdfind]}}; [[ -n ${fd_cmd} ]]; then

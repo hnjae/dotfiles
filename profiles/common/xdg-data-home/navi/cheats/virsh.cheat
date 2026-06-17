@@ -6,8 +6,14 @@ sudo virsh -c qemu:///system console <name>
 # enter console on diffrent machine
 virsh -c 'qemu+ssh://tofu@eris/system?socket=/run/libvirt/libvirt-sock' console <test>
 
-# turn off vm
+# force turn off vm
 virsh -c 'qemu+ssh://tofu@eris/system?socket=/run/libvirt/libvirt-sock' destroy <test>
+
+# turn off vm
+virsh -c 'qemu+ssh://tofu@eris/system?socket=/run/libvirt/libvirt-sock' shutdown <test>
+
+# turn on vm
+virsh -c 'qemu+ssh://tofu@eris/system?socket=/run/libvirt/libvirt-sock' start <test>
 
 # list
 sudo virsh -c qemu:///system list --all

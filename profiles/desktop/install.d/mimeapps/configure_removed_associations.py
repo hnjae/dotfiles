@@ -37,10 +37,17 @@ REMOVED_ASSOCIATIONS_BY_DESKTOP: dict[DesktopName, set[str]] = {
         "application/pdf",
         "image/svg+xml",  # .desktop 에는 없으나 association 목록에 뜸. <2026-05-10>
     },
+    "com.collaboraoffice.Office.desktop": {
+        "application/pdf",
+    },
     frozenset(
         {
+            # Browsers
+            "app.zen_browser.zen.desktop",
             "brave-browser.desktop",
             "com.brave.Browser.desktop",
+            "com.google.Chrome.desktop",
+            "org.chromium.Chromium.desktop",
         }
     ): {
         "application/pdf",

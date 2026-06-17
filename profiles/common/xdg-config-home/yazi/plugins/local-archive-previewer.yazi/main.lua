@@ -5,7 +5,7 @@ local function fallback(job)
 end
 
 function M:peek(job)
-  local output = Command("archive-previewer"):arg({ tostring(job.file.path) }):output()
+  local output = Command("press"):arg({ "ls", tostring(job.file.path) }):output()
   if not output or not output.status.success or output.stdout == "" then
     return fallback(job)
   end
