@@ -12,6 +12,8 @@ def usage [] {
     print "  np remove      Remove selected profile entries with fzf"
     print "  np rm          Alias for remove"
     print "  np add [pkg]   add nixpkgs#<pkg>; browse nixpkgs with fzf when empty"
+    print "  np upgrade     Upgrade one selected profile entry with fzf"
+    print "  np upgrade -a  Upgrade all profile entries"
 }
 
 def require_cmd [name: string] {
@@ -319,6 +321,31 @@ def "main remove" [] {
 # Alias for `np remove`.
 def "main rm" [] {
     main remove
+}
+
+# Upgrade a selected nix profile entry, or every entry with --all.
+def "main upgrade" [
+    --all(-a) # Upgrade all profile entries without fzf
+] {
+    if $all {
+        print "Upgrading all profile entries"
+        with-env {NIXPKGS_ALLOW_UNFREE: 1} {
+            ^nix profile upgrade --refresh --impure --all
+        }
+        return
+    }
+
+    let profile = (load_profile)
+    let selected = (fzf_names $profile "np upgrade> " "enter: upgrade selected / esc: cancel" false)
+
+    if ($selected | is-empty) {
+        return
+    }
+
+    print $"Upgrading ($selected.0)"
+    with-env {NIXPKGS_ALLOW_UNFREE: 1} {
+        ^nix profile upgrade --refresh --impure $selected.0
+    }
 }
 
 # add packages into the nix profile. Bare names are expanded to nixpkgs#name.
