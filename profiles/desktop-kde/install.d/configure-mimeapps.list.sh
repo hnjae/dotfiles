@@ -4,6 +4,7 @@ set -eu
 
 BROWSER="com.brave.Browser.desktop"
 VIDEO_PLAYER="mpv.desktop"
+IMAGE_VIEWER="org.hnjae.kiriview.desktop"
 
 main() {
     handlr set 'video/mp4' "$VIDEO_PLAYER"
@@ -13,6 +14,8 @@ main() {
     handlr set "video/x-msvideo" "$VIDEO_PLAYER"
     handlr set "video/vnd.avi" "$VIDEO_PLAYER"
     handlr set "video/x-msvideo" "$VIDEO_PLAYER"
+
+    handlr set "image/jpeg" "$IMAGE_VIEWER"
 
     # handlr set 'audio/*' org.fooyin.fooyin.desktop
     handlr set "x-scheme-handler/http" "$BROWSER"

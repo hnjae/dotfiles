@@ -72,6 +72,9 @@ zfs create -o <property>=<value> <dataset-name>
 # set quota
 zfs set quota=<이진접두어> <dataset-name>
 
+# remove quota
+zfs set quota=non <dataset-name>
+
 # rename dataset
 zfs rename <old-dataset> <new-dataset>
 

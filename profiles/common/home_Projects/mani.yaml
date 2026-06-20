@@ -32,8 +32,8 @@ projects:
     url: git@github.com:hnjae/nix-templates.git
   homelab-infra:
     url: git@github.com:hnjae/homelab-infra.git
-  kde-plasma-extensions:
-    url: git@github.com:hnjae/kde-plasma-extensions.git
+  kde-extensions:
+    url: git@github.com:hnjae/kde-extensions.git
   relayfm:
     url: git@github.com:hnjae/relayfm.git
   icon-normalizer:
