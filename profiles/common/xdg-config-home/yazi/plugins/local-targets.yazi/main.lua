@@ -5,13 +5,22 @@ local snapshot = ya.sync(function(state)
   local selected = cx.active.selected
   local selected_paths = {}
   local files = {}
+  local selected_items = {}
 
   for _, url in pairs(selected) do
     selected_paths[tostring(url)] = true
   end
 
   for i, file in ipairs(current.files) do
-    files[i] = tostring(file.url)
+    local path = tostring(file.url)
+    files[i] = path
+
+    if selected_paths[path] then
+      selected_items[#selected_items + 1] = {
+        path = path,
+        name = file.name or path,
+      }
+    end
   end
 
   return {
@@ -24,6 +33,7 @@ local snapshot = ya.sync(function(state)
       is_dir = hovered.cha and hovered.cha.is_dir,
     } or nil,
     selected_count = #selected,
+    selected_items = selected_items,
     selected_paths = selected_paths,
   }
 end)
@@ -131,6 +141,10 @@ local function target_cands(targets, verb)
   return cands
 end
 
+local function count_label(count, singular, plural)
+  return string.format("%d %s", count, count == 1 and singular or plural)
+end
+
 local function choose_target(verb)
   local targets = get_targets()
   if #targets == 0 then
@@ -139,13 +153,7 @@ local function choose_target(verb)
   end
 
   if #targets == 1 then
-    local target = targets[1]
-    local ok = ya.confirm({
-      pos = { "center", w = 62, h = 8 },
-      title = verb .. " to target?",
-      body = verb .. " marked files to " .. target.label .. "?",
-    })
-    return ok and target or nil
+    return targets[1]
   end
 
   if #targets <= 10 then
@@ -175,6 +183,42 @@ local function choose_target(verb)
   end
 
   return targets[idx]
+end
+
+local function transfer_confirm_body(data, target, verb)
+  local limit = 12
+  local lines = {
+    string.format(
+      "%s %s to %s?",
+      verb,
+      count_label(data.selected_count, "marked file", "marked files"),
+      target.label
+    ),
+    "",
+  }
+
+  local displayed = math.min(#data.selected_items, limit)
+
+  for i = 1, displayed do
+    lines[#lines + 1] = "- " .. ya.truncate(data.selected_items[i].name, { max = 60 })
+  end
+
+  local remaining = data.selected_count - displayed
+  if remaining > 0 then
+    lines[#lines + 1] = string.format("... and %d more", remaining)
+  end
+
+  return table.concat(lines, "\n"), #lines
+end
+
+local function confirm_transfer(data, target, verb)
+  local body, line_count = transfer_confirm_body(data, target, verb)
+
+  return ya.confirm({
+    pos = { "center", w = 72, h = math.min(line_count + 5, 20) },
+    title = verb .. " to target?",
+    body = body,
+  })
 end
 
 local function target_is_directory(target)
@@ -243,12 +287,17 @@ local function transfer_to_target(cut)
     return
   end
 
-  local target = choose_target(cut and "Move" or "Copy")
+  local verb = cut and "Move" or "Copy"
+  local target = choose_target(verb)
   if not target then
     return
   end
 
   if not target_is_directory(target) then
+    return
+  end
+
+  if not confirm_transfer(data, target, verb) then
     return
   end
 
