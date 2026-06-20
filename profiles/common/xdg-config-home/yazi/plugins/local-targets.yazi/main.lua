@@ -1,15 +1,30 @@
 local snapshot = ya.sync(function(state)
   state.targets = state.targets or {}
-  local hovered = cx.active.current.hovered
+  local current = cx.active.current
+  local hovered = current.hovered
+  local selected = cx.active.selected
+  local selected_paths = {}
+  local files = {}
+
+  for _, url in pairs(selected) do
+    selected_paths[tostring(url)] = true
+  end
+
+  for i, file in ipairs(current.files) do
+    files[i] = tostring(file.url)
+  end
 
   return {
-    cwd = tostring(cx.active.current.cwd),
+    cwd = tostring(current.cwd),
+    cursor = current.cursor,
+    files = files,
     hovered = hovered and {
       path = tostring(hovered.url),
       name = hovered.name,
       is_dir = hovered.cha and hovered.cha.is_dir,
     } or nil,
-    selected_count = #cx.active.selected,
+    selected_count = #selected,
+    selected_paths = selected_paths,
   }
 end)
 
@@ -178,6 +193,49 @@ local function target_is_directory(target)
   return true
 end
 
+local function selected_path(data, path)
+  return data.selected_paths[path]
+end
+
+local function first_remaining_path(data, target_path, skip_target)
+  local function usable(path)
+    return path and not selected_path(data, path) and (not skip_target or path ~= target_path)
+  end
+
+  for i = data.cursor + 2, #data.files do
+    if usable(data.files[i]) then
+      return data.files[i]
+    end
+  end
+
+  for i = data.cursor, 1, -1 do
+    if usable(data.files[i]) then
+      return data.files[i]
+    end
+  end
+
+  return nil
+end
+
+local function cursor_restore_path(data, target, cut)
+  if not data.hovered then
+    return nil
+  end
+
+  if not cut or not selected_path(data, data.hovered.path) then
+    return data.hovered.path
+  end
+
+  return first_remaining_path(data, target.path, true)
+    or first_remaining_path(data, target.path, false)
+end
+
+local function restore_cursor(path)
+  if path then
+    ya.emit("reveal", { Url(path) })
+  end
+end
+
 local function transfer_to_target(cut)
   local data = snapshot()
   if data.selected_count == 0 then
@@ -194,6 +252,8 @@ local function transfer_to_target(cut)
     return
   end
 
+  local restore_path = cursor_restore_path(data, target, cut)
+
   if cut then
     ya.emit("yank", { cut = true })
   else
@@ -202,12 +262,14 @@ local function transfer_to_target(cut)
 
   if target.path == data.cwd then
     ya.emit("paste", {})
+    restore_cursor(restore_path)
     return
   end
 
   ya.emit("cd", { Url(target.path) })
   ya.emit("paste", {})
   ya.emit("cd", { Url(data.cwd) })
+  restore_cursor(restore_path)
 end
 
 local function transfer_here(cut)

@@ -9,6 +9,7 @@ Session-local target directories for netrw-style file transfers.
 - Copy or move the marked entries to a selected target with netrw-style maps.
 - Copy or move the marked entries to the current directory without adding a target.
 - Stay in the current directory after target copy or move operations.
+- Restore the cursor after target copy or move operations when the original hovered entry still exists; if a moved hovered entry disappears, reveal the next original entry, or the previous entry when there is no next entry.
 - Use the `c` prefix for explorer-style copy, move, and paste operations in the current directory.
 
 ## Keymap
