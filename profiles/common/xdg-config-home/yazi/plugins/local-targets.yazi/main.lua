@@ -328,6 +328,15 @@ local function transfer_here(cut)
     return
   end
 
+  local target = {
+    path = data.cwd,
+    label = "current directory",
+  }
+  local verb = cut and "Move" or "Copy"
+  if not confirm_transfer(data, target, verb) then
+    return
+  end
+
   if cut then
     ya.emit("yank", { cut = true })
   else

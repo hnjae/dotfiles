@@ -7,7 +7,7 @@ Session-local target directories for netrw-style file transfers.
 - Mark source entries with the `m` prefix.
 - Set one or more target directories.
 - Copy or move the marked entries to a selected target with netrw-style maps.
-- Confirm target copy or move operations with a list of up to 12 marked files.
+- Confirm copy or move operations with a list of up to 12 marked files.
 - Copy or move the marked entries to the current directory without adding a target.
 - Stay in the current directory after target copy or move operations.
 - Restore the cursor after target copy or move operations when the original hovered entry still exists; if a moved hovered entry disappears, reveal the next original entry, or the previous entry when there is no next entry.
