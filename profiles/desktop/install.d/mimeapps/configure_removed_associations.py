@@ -33,9 +33,15 @@ REMOVED_ASSOCIATIONS: dict[str, set[str]] = {
 }
 REMOVED_ASSOCIATIONS_BY_DESKTOP: dict[DesktopName, set[str]] = {
     "onlyoffice-desktopeditors.desktop": {
-        "text/plain",
+        "application/epub",
+        "application/x-fictionbook+xml",
         "application/pdf",
-        "image/svg+xml",  # .desktop 에는 없으나 association 목록에 뜸. <2026-05-10>
+        "text/markdown",
+        "text/plain",
+
+        # .desktop 에는 없으나 association 목록에 뜸:
+        "application/yaml", # <2026-06-21>
+        "image/svg+xml",  #  <2026-05-10>
     },
     "com.collaboraoffice.Office.desktop": {
         "application/pdf",
