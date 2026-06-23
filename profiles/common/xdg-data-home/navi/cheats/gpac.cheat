@@ -1,4 +1,4 @@
-% gpac mp4box
+% gpac mp4box mkvmerge
 
 # concat mp4
 MP4Box -cat <video1> -cat <video2> out.mp4
@@ -6,3 +6,28 @@ MP4Box -cat <video1> -cat <video2> out.mp4
 # split mp4 without re-encoding
 MP4Box -splitx 0:1991 input.mp4 -out output.mp4
 
+; clean aperture width = Wn / Wd
+; clean aperture height = Hn / Hd
+; horizontal offset = HOn / HOd
+; vertical offset = VOn / VOd
+; mpv does not support clap <https://github.com/mpv-player/mpv/issues/16278> <2026-06-21>
+# crop video without re-encoding (Wn,Wd,Hn,Hd,HOn,HOd,VOn,VOd)
+MP4Box -clap 1=1920,1,816,1,0,1,0,1 -out out.mp4 in.mp4
+
+; MP4Box -clap 1=640,1,358,161,0,1,0,1 -out out.mp4 in.mp4
+
+;   --cropping VIDEO_TRACK_ID:left,top,right,bottom \
+;  --display-dimensions VIDEO_TRACK_ID:widthxheight \
+; --aspect-ratio track_id:ratio (e.g. 0:16/9)
+# crop video without re-encoding (mkv)
+mkvmerge -o out.mkv --cropping 0:0,132,0,132 --display-dimensions 0:1920x816 in.mkv
+
+# crop video without re-encoding (mkv edit)
+mkvpropedit in.mkv \
+  --edit track:v1 \
+  --set pixel-crop-top=132 \
+  --set pixel-crop-bottom=132 \
+  --set pixel-crop-left=0 \
+  --set pixel-crop-right=0 \
+  --set display-width=1920 \
+  --set display-height=816

@@ -21,3 +21,6 @@ uv run <toolname>
 ; uvx: alias of uv tool run
 # Run command/script/tool in separate environment
 uvx <toolname>
+
+# install package at `$HOME` level
+uv tool install <package>

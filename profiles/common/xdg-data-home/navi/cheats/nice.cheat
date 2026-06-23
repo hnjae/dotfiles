@@ -8,3 +8,9 @@ ionice -c <class> -n <priority> command
 
 # chrt change scheduilg priority idle
 chrt --idle <pid>
+
+# run process with idle
+chrt --idle <cmd>
+
+# run process with batch (SCHED_BATCH)
+chrt --batch <cmd>
