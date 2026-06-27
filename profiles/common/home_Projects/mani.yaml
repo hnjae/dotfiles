@@ -1,4 +1,3 @@
----
 projects:
   anki-english-words:
     url: git@github.com:hnjae/anki-english-words.git
@@ -24,6 +23,8 @@ projects:
     url: hnjae@eris:/srv/git/restic-scrub
   kiriview:
     url: git@github.com:hnjae/kiriview.git
+  hnjae.org:
+    url: git@github.com:hnjae/hnjae.org.git
   agentbox.nix:
     url: git@github.com:hnjae/agentbox.nix.git
   utils:

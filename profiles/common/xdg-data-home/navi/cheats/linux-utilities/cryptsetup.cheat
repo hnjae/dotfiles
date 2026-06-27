@@ -47,6 +47,9 @@ cryptsetup --allow-discards --persistent --perf-no_read_workqueue --perf-no_writ
 # luks header backup
 cryptsetup luksHeaderBackup /dev/<device> --header-backup-file "<header-name>.img"
 
+# luks header backup
+sh -c 'd="$1"; u="${d##*/}"; f="$u.img"; test ! -e "$f" || { echo "exists: $f" >&2; exit 1; }; sudo cryptsetup isLuks "$d" && sudo cryptsetup luksHeaderBackup "$d" --header-backup-file "$f"' _ /dev/disk/by-partlabel/<label>
+
 # add key
 cryptsetup luksAddKey /dev/<device> <keyfile>
 
@@ -78,4 +81,3 @@ systemd-cryptenroll /dev/sdX
 
 # remove slot
 systemd-cryptenroll --wipe-slot=<num> /dev/sdX
-
