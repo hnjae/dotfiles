@@ -1,9 +1,18 @@
 local M = {}
 
 local denylist = {
+  [""] = true,
   diff = true,
   help = true,
+  text = true,
 }
+
+-- local default_listchars = "tab:  ,nbsp:+"
+
+------@param winid number
+---local win_reset_listchars = function(winid)
+---  vim.api.nvim_set_option_value("listchars", default_listchars, { win = winid })
+---end
 
 ---@param winid number
 ---@param bufid number
@@ -28,10 +37,12 @@ M.setup = function()
       end
 
       if denylist[vim.api.nvim_get_option_value("filetype", { buf = ev.buf })] then
+        -- win_reset_listchars(winid)
         return
       end
 
-      win_set_listchars(vim.fn.bufwinid(ev.buf), ev.buf)
+      local winid = vim.fn.bufwinid(ev.buf)
+      win_set_listchars(winid, ev.buf)
     end,
   })
 
@@ -47,6 +58,9 @@ M.setup = function()
       end
 
       if denylist[vim.api.nvim_get_option_value("filetype", { buf = bufid })] then
+        -- for _, winid in ipairs(vim.fn.win_findbuf(bufid)) do
+        --   win_reset_listchars(winid)
+        -- end
         return
       end
 
