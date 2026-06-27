@@ -21,6 +21,9 @@ nix flake update <input>
 # update inputs
 nix flake update
 
+# pin nixpkgs to specific commit
+nix flake lock --override-input nixpkgs github:NixOS/nixpkgs/<commit-hash>
+
 $ input: nix flake metadata --json 2>/dev/null | jq '.locks.nodes.root.inputs | keys[]' --- --header "flake inputs"
 
 ; --preview 'nix flake metadata {-1}'
