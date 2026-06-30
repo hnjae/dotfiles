@@ -1,6 +1,8 @@
 % cups, lp, lpadmin, SANE, AirPrint, AirScan, IPP, eSCL, WDS
 
 ; Okular 에서 인쇄한다면 reverse 는 반드시 키고 인쇄해라. 그래야지 인쇄 결과 정렬이 올바름.
+; -o cupsPrintQuality=High
+; -o print-quality=N (draft(3) .. best (5)), 항구적으로 보는 문서면 반드시 best 킬 것.
 
 # Add printer
 lpadmin -p <printer-name> -E -v "ipp://<ip>/ipp/print" -m everywhere
