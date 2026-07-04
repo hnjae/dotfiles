@@ -7,12 +7,19 @@
 
 ## Land intent before implementation
 
-For feature work or behavior/structure changes, commit each applicable layer of declared intent — in this order — before the code:
+> [!NOTE]
+> `docs/spec` and `docs/architecture`
+>
+> These documents must describe the project’s intended **end state**, not the current implementation, a temporary milestone, a migration phase, a partial plan, or implementation progress.
 
-1. **User-visible behavior changed?** If the repository has `docs/spec/`, update the relevant spec files there; update `SPEC.md` if applicable. Commit.
-2. **Structure changed** (package boundaries, dependencies, major strategy)? If the repository has `docs/architecture/`, update it. Commit.
-3. **Behavior to verify?** Add a failing test when practical. Commit.
-4. Implement. Commit.
+For feature work or behavior/structure changes, commit each applicable layer of declared intent — before the code:
+
+1. Update docs:
+    1. **User-visible behavior changed?** If the repository has `docs/spec/`, update it.
+    2. **Structure changed?** If the repository has `docs/architecture/`, update it.
+    3. Commit.
+2. **Behavior to verify?** Add a failing test when practical. Commit.
+3. Implement. Commit.
 
 Each step is its own commit; skip the ones that don't apply. Pure repository maintenance (build, lint, CI, formatter, dependency metadata) has no intent layer — go straight to implementation. Pause this discipline only when the user asks.
 

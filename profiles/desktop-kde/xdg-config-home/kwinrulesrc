@@ -25,6 +25,8 @@ rules=1d2b1ebc-f2fb-4909-91ba-e50f240f6baf,99ec1073-2981-42c5-8371-90867cf9e2ba,
 
 [c8f2c14b-0693-41c4-8b4f-458b978d9c10]
 Description=ticktick
+desktops=\\0
+desktopsrule=2
 minsize=100,600
 minsizerule=2
 wmclass=ticktick
