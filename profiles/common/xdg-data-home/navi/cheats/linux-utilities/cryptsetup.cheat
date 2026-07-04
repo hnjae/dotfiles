@@ -65,6 +65,12 @@ cryptsetup -v luksOpen --test-passphrase --key-file "<keyfile>" /dev/<device>
 # remove key
 cryptsetup -v luksRemoveKey /dev/<device> <optional-key-file>
 
+# remove token
+cryptsetup token remove --token-id TOKEN_ID /dev/DEVICE
+
+# kill slot
+cryptsetup luksKillSlot /dev/DEVICE SLOT
+
 # change key
 cryptsetup -v luksChangeKey --key-file "<keyfile>"  "/dev/<device>" "<optional-key-file>"
 
