@@ -1,0 +1,6 @@
+**/*
+!.gitignore
+!/agent/
+!/agent/config.yml
+!/agent/config.yaml
+!/agent/AGENTS.md
