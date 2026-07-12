@@ -16,8 +16,8 @@ For changes that add or alter the declared user-visible product contract or dura
 
 1. **Declared user-visible product contract added or changed?** If the repository has `docs/spec/`, update it and commit before code.
 2. **Durable ownership, structure, boundary, identity, lifecycle, or architecture contract added or changed?** If the repository has `docs/architecture/`, update it and commit before code.
-3. **New or changed behavior/boundary needing durable regression coverage?** Add and commit focused behavior/boundary coverage before implementation when it can observe behavior, for example ownership, stale rejection, cache identity, or another stable public/internal contract. When practical, commit the focused test in its expected failing state before implementation rather than weakening it to pass.
-4. Implement and commit.
+3. **New or changed behavior/boundary needing durable regression coverage?** Add focused behavior/boundary coverage before implementation when it can observe behavior, for example ownership, stale rejection, cache identity, or another stable public/internal contract. Verify that the focused test fails for the expected reason, then commit the test.
+4. Implement and verify that the focused and relevant tests pass. Amend the implementation into the preceding test commit so the resulting committed revision is green. If no test commit was needed, commit the implementation normally.
 
 Skip intent-documentation commits when the change implements an already documented end state, fixes a bug within existing documented behavior, narrows a non-contract API, refactors a single owner internally, or performs maintenance that does not change runtime behavior or architecture intent. Add focused tests only when they provide durable signal, then implement directly.
 
