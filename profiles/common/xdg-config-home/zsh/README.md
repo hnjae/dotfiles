@@ -10,14 +10,14 @@ lastmod: 2026-01-12T16:31:53+0900
 
 ### 자주사용하는 abbreviations
 
-| 단어 | abbrv |
-| -- | -- |
-| stat | s/st |
-| list/log | l |
-| start/run | x |
-| push | p |
-| rename | r/n |
-| show | sh/s |
+| 단어      | abbrv |
+| --------- | ----- |
+| stat      | s/st  |
+| list/log  | l     |
+| start/run | x     |
+| push      | p     |
+| rename    | r/n   |
+| show      | sh/s  |
 
 ## zsh
 

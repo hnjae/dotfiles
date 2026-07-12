@@ -38,9 +38,8 @@ REMOVED_ASSOCIATIONS_BY_DESKTOP: dict[DesktopName, set[str]] = {
         "application/pdf",
         "text/markdown",
         "text/plain",
-
         # .desktop 에는 없으나 association 목록에 뜸:
-        "application/yaml", # <2026-06-21>
+        "application/yaml",  # <2026-06-21>
         "image/svg+xml",  #  <2026-05-10>
     },
     "com.collaboraoffice.Office.desktop": {

@@ -1,6 +1,7 @@
-providers: 
+---
+providers:
   webSearch: auto
 symbolPreset: nerd
-theme: 
+theme:
   dark: dark-gruvbox
 setupVersion: 1
