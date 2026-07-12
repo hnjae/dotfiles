@@ -17,7 +17,7 @@ For changes that add or alter the declared user-visible product contract or dura
 1. **Declared user-visible product contract added or changed?** If the repository has `docs/spec/`, update it and commit before code.
 2. **Durable ownership, structure, boundary, identity, lifecycle, or architecture contract added or changed?** If the repository has `docs/architecture/`, update it and commit before code.
 3. **New or changed behavior/boundary needing durable regression coverage?** Add focused behavior/boundary coverage before implementation when it can observe behavior, for example ownership, stale rejection, cache identity, or another stable public/internal contract. Verify that the focused test fails for the expected reason, then commit the test.
-4. Implement and verify that the focused and relevant tests pass. Amend the implementation into the preceding test commit so the resulting committed revision is green, and replace the test-only commit message with a Conventional Commit message that describes the completed behavior while preserving required trailers. If no test commit was needed, commit the implementation normally.
+4. Implement and verify that the focused and relevant tests pass. Amend the implementation into the preceding test commit so the resulting committed revision is green, replace the test-only commit message with a Conventional Commit message that describes the completed behavior, and set required trailers based on authorship of the final amended contents. If no test commit was needed, commit the implementation normally.
 
 Skip intent-documentation commits when the change implements an already documented end state, fixes a bug within existing documented behavior, narrows a non-contract API, refactors a single owner internally, or performs maintenance that does not change runtime behavior or architecture intent. Add focused tests only when they provide durable signal, then implement directly.
 
@@ -39,9 +39,9 @@ If a tool (e.g. `typos`) flags verified-correct content, preserve the content an
 
 Use Conventional Commits with a scope whenever one clearly applies. Commit on task completion unless the user has said otherwise.
 
-When Codex materially authors a commit's changes, add this exact trailer to the commit message footer (standard trailer block, after a blank line below the body):
+Determine attribution from the final commit contents after any amend. When those contents include changes materially authored by Codex, add this exact trailer to the commit message footer (standard trailer block, after a blank line below the body):
 
 `Co-authored-by: Codex <noreply@openai.com>`
 
 - Never duplicate this trailer if it is already present.
-- For commits Codex did not materially author (e.g., amending others' work), omit it unless the user explicitly requests it.
+- When the final commit contents contain no changes materially authored by Codex (e.g., Codex only amends another author's commit metadata), omit it unless the user explicitly requests it.
