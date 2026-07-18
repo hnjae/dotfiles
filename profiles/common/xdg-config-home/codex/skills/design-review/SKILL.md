@@ -21,15 +21,17 @@ Review the repository's current architecture without editing its code or authori
 
 ## Establish scope
 
-1. Before investigation, check whether `DESIGN_REVIEW.md` exists. Inspect only enough to determine ownership. If it is a prior review artifact, leave it untouched until final writing and never use it as evidence. If it contains unrelated content or ownership is ambiguous, stop and ask the user before replacing it.
-2. When the current working directory is inside a Git worktree, treat its Git top-level as `R01`. Otherwise treat the current working directory itself as `R01`, do not search parent directories for a repository, and record branch, HEAD, and working-tree status as `Not available`. Add a nested repository, submodule, or another workspace root only when the user's scope or a first-party workspace manifest directly includes it. Do not discover parent or sibling repositories merely by walking the filesystem.
-3. Record each root's path, branch, HEAD, and dirty or untracked paths, excluding `DESIGN_REVIEW.md`; use `Not available` for version-control fields on non-Git roots.
-4. Inventory authoritative documents and cohesive first-party components. Include public entry points, persisted and external contracts, data ownership, background or concurrent paths, resource lifecycles, and relevant test boundaries. Exclude generated, vendored, dependency, lock, snapshot, and build outputs unless decisive to a finding.
-5. Review the current working tree. Do not treat visibly incomplete work as durable architecture unless repository evidence establishes active behavior, an asserted contract, or an established boundary.
+1. Separate state roots from substantive review scope. When the current working directory is inside a Git worktree, use its Git top-level as the initial state root `R01`; otherwise use the current working directory itself, do not search parents for a repository, and record version-control fields as `Not available`. Add another state root only when the user names it or an in-scope first-party workspace manifest directly includes it.
+2. Derive the review scope from the user's explicit target. If the user requests a repository or codebase review without a narrower target, use the entire initial state root; if the user names a component, service, package, or directory, keep substantive coverage within that target plus only the contracts, owners, dependencies, and consumers needed to trace its material boundaries. Record both state roots and review scope before inventory.
+3. Resolve one absolute `report_path` before checking existing content. Use the user's explicit output path only when its existing parent and resolved location are inside a state root; otherwise ask the user. When no path is provided, use `<R01>/DESIGN_REVIEW.md`. Exclude this exact path from review-evidence snapshots and use it consistently for ownership inspection, writing, drift checks, and final handoff. If it is a symlink or another non-regular filesystem entry, stop and ask the user. If it is a regular prior review artifact, leave it untouched until final writing, never use it as evidence, and separately fingerprint its identity and content for overwrite safety. If it contains unrelated content or ownership is ambiguous, stop and ask before replacing it.
+4. Record each state root's path, branch, HEAD, and dirty or untracked paths; use `Not available` for version-control fields on non-Git roots. Fingerprint decisive evidence files, initially dirty or untracked in-scope files, and any possible verification-command write targets so content drift cannot hide behind an unchanged path-level status. If the required fingerprint set is infeasible, record the exact gap and limit claims accordingly.
+5. Inventory cohesive first-party components and authority candidates within the declared review scope. Include public entry points, persisted and external contracts, data ownership, background or concurrent paths, resource lifecycles, and relevant test boundaries. Exclude generated, vendored, dependency, lock, snapshot, and build outputs unless decisive to a finding.
+6. Review the current working tree. Do not treat visibly incomplete work as durable architecture unless repository evidence establishes active behavior, an asserted contract, or an established boundary.
 
 ## Handle authoritative documents
 
-- Treat `docs/spec/**` and `docs/architecture/**`, when present, as the intended end state and the conformance baseline.
+- Discover authoritative locations and status from applicable repository instructions, document indexes, explicit status markers, and other repository governance. Treat `docs/spec/**` and `docs/architecture/**` as authority candidates, not as normative merely because of their paths; use them as the intended end-state baseline when repository governance establishes that role.
+- When governance identifies another authoritative location, include it. When no repository evidence establishes normative status, describe the candidate documents as context and do not classify implementation divergence from them as a conformance gap.
 - Do not report an unimplemented end-state capability as a defect unless repository evidence establishes that it is currently required or claimed complete.
 - If a provision is contradictory, unsatisfiable, materially ambiguous, or materially unsafe, report the document defect and do not separately report divergence from that provision unless the implementation has an independent defect.
 - If an ambiguity admits multiple reasonable interpretations and repository evidence cannot select one, report the ambiguity and classify implementation divergence only when it conflicts with every reasonable interpretation.
@@ -47,12 +49,14 @@ Create an authority summary and a component coverage summary before delegating. 
 5. Testability, external effects, deterministic control boundaries, and bounded resources.
 6. Trust and authorization boundaries, error semantics, observability, auditability, and recovery.
 
-Use 3–6 investigation subagents when available and proportionate to the mapped scope. Assign exactly one reporting owner to each track; one agent may own at most two cohesive tracks. Give each owner the relevant roots, authoritative provisions, components, entry points, and boundaries. If sufficient subagent capacity is unavailable in core mode, use the available capacity, perform the uncovered work in the main agent, and record the limitation. Subagents investigate only; the main agent owns consolidation, final architectural judgment, and the final artifact.
+Use investigation subagents when available and proportionate to the mapped scope, normally 3–6 for a multi-component review. Core mode may use fewer or none for a small scope. Assign exactly one reporting owner, either a subagent or the main agent, to each track; one subagent may own at most two cohesive tracks. Give each owner the relevant roots, authoritative provisions, components, entry points, and boundaries. Record a capacity limitation only when it leaves material scope or evidence partially inspected or unable to verify. Subagents investigate only; the main agent owns consolidation, final architectural judgment, and the final artifact.
+
+In every delegation prompt, repeat the trust boundary and explicitly prohibit workspace writes, commits, network access, and repository-defined execution. Require subagents to return results through agent messages only.
 
 Ask each reporting owner for no more than 2–3 highest-impact candidates by default and every credible P0 candidate. Require each candidate to include:
 
 - Short title, finding type, authority status, priority, confidence, and explicit assumptions.
-- Two to four decisive evidence items with root-qualified paths and symbols or headings where possible.
+- One to four decisive evidence items with root-qualified paths and symbols or headings where possible; never add filler to meet a count.
 - Observed state, causal mechanism, concrete design concern, and outcome-based acceptance criteria.
 - Inspected, partially inspected, and unable-to-verify parts of the assigned scope.
 
@@ -66,9 +70,10 @@ Do not require interim IDs, canonical candidate IDs, or a disposition ledger in 
 - Report security concerns only with a concrete entry point, data flow, principal or tenant boundary, privilege transition, or missing ownership check.
 - Report resource risks only with a concrete unbounded or multiplicative path. Do not invent workload claims.
 - Use read-only Git history only when it directly establishes a compatibility commitment, repeated coordinated change, divergent change reason, or another claim unavailable from the working tree.
-- Prefer static inspection and commands known not to rewrite tracked files. Run tests, builds, linters, or type checks only when they are material to verification and can use existing dependencies without network access.
-- Before running a command that may create caches, build outputs, coverage data, generated files, or other artifacts, redirect every supported output and cache location to a task-owned temporary directory outside the reviewed roots. If outputs cannot be redirected away from the reviewed roots, or the command may install dependencies or rewrite existing files, ask the user before running it.
-- Record repository state before each potentially writing verification command and recheck tracked, untracked, and relevant ignored output paths afterward. For a non-Git root, record a scoped file inventory and the existence of every expected output path before and after the command instead of inventing version-control state. If unexpected workspace changes appear, stop further verification, record the paths, and do not delete or overwrite any pre-existing or ambiguously owned content. Remove only artifacts proven to have been created by the current review and safe to remove; otherwise ask the user. Record unresolved mutation as a limitation and mark the review Partial when it prevents reliable evidence reverification.
+- Prefer static inspection. Treat tests, builds, package scripts, compiler plugins, config-driven linters or type checkers, and other repository-defined execution as untrusted code.
+- Run repository-defined code only in an execution sandbox that mounts reviewed roots read-only, disables network access, removes ambient secrets, uses a task-owned temporary `HOME` and cache/output directories, applies a bounded timeout, and terminates child processes. If every property cannot be assured, do not execute the code; ask only whether the user wants to accept static or Partial verification or provide a suitable sandbox.
+- Before any permitted verification command that may create caches, build outputs, coverage data, generated files, or other artifacts, redirect every supported output and cache location to a task-owned temporary directory outside the reviewed roots. If an output cannot be redirected or the command may install dependencies or rewrite existing files, ask the user before running it.
+- Snapshot fingerprints and repository state before each permitted command and compare tracked, untracked, relevant ignored, decisive-evidence, and possible-write-target contents afterward. For a non-Git root, compare a scoped file manifest and content fingerprints. If unexpected changes appear, stop further execution, record the paths, and do not delete or overwrite pre-existing or ambiguously owned content. Remove only artifacts proven to belong to the current review and safe to remove; otherwise ask the user. Record unresolved mutation as a limitation and mark the review Partial when it prevents reliable evidence reverification.
 
 ## Classify findings
 
@@ -84,6 +89,7 @@ Use priority for impact and urgency:
 - `P1`: high-impact architectural, maintainability, operability, or change risk.
 - `P2`: medium-impact improvement with concrete correctness, change, or reliability benefit.
 - `P3`: lower-impact cleanup with demonstrated value.
+- `Unassessed`: materially important concern whose condition, causal path, or concrete consequence or change risk cannot be verified.
 
 Use confidence for evidentiary certainty:
 
@@ -91,19 +97,25 @@ Use confidence for evidentiary certainty:
 - `Medium`: repository evidence establishes the defective condition, causal path, and concrete consequence or change risk, while affected scope, likelihood, detectability, or recoverability depends on explicit reasonable assumptions.
 - `Low`: evidence cannot establish the condition, causal path, or a concrete consequence or change risk.
 
-Do not use assumptions to invent a defective condition, causal path, or materiality. Keep Low-confidence concerns out of main findings and place only materially important ones under open questions with the exact evidence needed. Include every independently verified P0. Normally limit the main body to 15 findings and omit P3 unless it provides meaningful change-impact information.
+High- and Medium-confidence findings must use P0–P3; Low-confidence concerns must use `Unassessed`. Do not use assumptions to invent a defective condition, causal path, or materiality. Keep Low-confidence concerns out of main findings and place only materially important ones under open questions with the exact evidence or authoritative decision needed. Include every independently verified P0. Normally limit the main body to 15 findings and omit P3 unless it provides meaningful change-impact information.
 
 ## Verify and consolidate
 
 1. Compare subagent candidates and consolidate obvious duplicates before full verification.
 2. Independently inspect every evidence item used by a promoted finding.
 3. Resolve contradictions, remove generic advice, and reprioritize from verified impact.
-4. Recheck each repository root immediately before final writing. If relevant evidence drifted, reverify it; if reverification is impossible, move the concern to open questions and mark the review partial.
-5. Add a main-agent finding only when discovered during verification or boundary tracing, and do not use main-agent findings to bypass an assigned track.
+4. Recheck state and fingerprints immediately before final writing. If relevant evidence drifted, reverify it; if reverification is impossible, move the concern to open questions and mark the review Partial.
+5. Add a main-agent finding only from a recorded main-agent track assignment in core mode or when discovered during verification or boundary tracing. Do not use main-agent findings to bypass another owner's assigned track.
+
+## Complete and validate core mode
+
+- Mark core completion `Complete` only when every mapped material component, boundary, and confirmed authoritative document in the declared scope was inspected, all six tracks were considered by a recorded owner, and every promoted evidence item was independently reverified. Mark it `Partial` for any material partially inspected or unable-to-verify scope. Missing external evidence does not force Partial when claims are explicitly bounded and all repository-visible scope was inspected.
+- Before claiming integrity `Passed`, verify that `DR-NNN` IDs are unique and sequential, summary priority counts match full findings, Top Design Risks references existing findings consistently, no Low-confidence or Unassessed item appears in main findings, every root and evidence reference resolves, and the final report contains all required sections. Otherwise use `Not fully validated` and record the exact gap.
+- After writing the report, capture state and fingerprints once more while excluding only `report_path`. If relevant drift occurred, reverify affected evidence and revise the report once. Capture one final comparison; if drift persists, move affected claims to open questions, mark completion Partial and integrity Not fully validated, repair structural references, and finish without another snapshot loop.
 
 ## Write `DESIGN_REVIEW.md`
 
-Write one coherent report in English unless the user requests another language. Use sequential `DR-NNN` IDs for full main findings. Put each finding in exactly one primary section and cross-reference it elsewhere instead of duplicating it.
+Write one coherent report to `report_path` in English unless the user requests another language. Use sequential `DR-NNN` IDs for full main findings. Put each finding in exactly one primary section and cross-reference it elsewhere instead of duplicating it.
 
 Use this structure:
 
@@ -120,7 +132,7 @@ For every main finding include:
 - Finding type, authority status, priority, confidence, assumptions, and source track.
 - Impact basis separating verified facts from assumptions.
 - Authoritative basis or an explicit statement that no contract exists.
-- Two to four decisive evidence items formatted as `RNN:path[:line] — symbol or heading — observed fact — supported claim`.
+- One to four decisive evidence items formatted as `RNN:path[:line] — symbol or heading — observed fact — supported claim`; use one when it is sufficient rather than adding filler.
 - Observed state, design concern, directly implicated areas, and observable acceptance criteria.
 
 Acceptance criteria must describe outcomes rather than prescribe classes, layers, patterns, dependency-injection mechanisms, file moves, a complete target architecture, or a migration plan. If evidence cannot support criteria without inventing a product or architecture decision, move the concern to open questions.
@@ -129,7 +141,8 @@ If a main section has no finding, write `No included findings.` Do not invent co
 
 ## Finish safely
 
-- Create or replace only `DESIGN_REVIEW.md`.
+- Create `report_path` when it is absent only after confirming immediately before writing that it remains absent, using an atomic create-if-absent operation and stopping if another entry appeared. Replace it only when it remains the previously verified, owned regular file: compare its separate identity and content fingerprint immediately before writing, stop and ask if it changed, and use an atomic file-replacement operation. Create or replace no other persistent workspace file.
+- Remove task-owned temporary verification artifacts after use. If safe cleanup cannot be proven or completed, leave them untouched and report their exact paths.
 - Do not edit source code, tests, configuration, `docs/spec/**`, or `docs/architecture/**`.
 - Do not commit the review artifact.
-- In the final response, report the review completion state, finding counts, material limitations, and the path to `DESIGN_REVIEW.md`.
+- In the final response, report the review completion state, finding counts, material limitations, and the absolute `report_path`.
