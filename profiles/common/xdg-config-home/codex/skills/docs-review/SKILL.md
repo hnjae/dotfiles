@@ -57,7 +57,7 @@ When the documents conflict, let an unambiguous spec statement govern external b
 
 ## Review before editing
 
-Read [references/review-checklist.md](references/review-checklist.md) completely after inventory and apply every category.
+Read [references/review-checklist.md](references/review-checklist.md) completely as part of skill loading before any project inspection or inventory. After inventory, apply every category before editing.
 
 Build a working model from allowed evidence only:
 

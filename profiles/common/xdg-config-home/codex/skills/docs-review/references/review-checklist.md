@@ -1,6 +1,6 @@
 # Review Checklist
 
-Read this checklist completely after inventorying both document sets. Apply every category before editing and repeat the relevant checks after editing.
+Read this checklist completely as part of skill loading before inspecting or inventorying the project. Apply every category after inventory and before editing, then repeat the relevant checks after editing.
 
 ## 1. Check internal consistency and completeness
 
