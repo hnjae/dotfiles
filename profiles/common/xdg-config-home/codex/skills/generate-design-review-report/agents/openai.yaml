@@ -2,4 +2,4 @@
 interface:
   display_name: "Generate design review report"
   short_description: "Evidence-led architecture and design review"
-  default_prompt: "Use $generate-design-review-report to review this repository in core mode and create DESIGN_REVIEW.md."
+  default_prompt: "Use $generate-design-review-report to review the current project scope in core mode and create DESIGN_REVIEW.md."
