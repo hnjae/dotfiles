@@ -1,0 +1,91 @@
+---
+date: 2026-07-18T17:51:14+0900
+lastmod: 2026-07-18T17:51:14+0900
+syntax: markdown
+tags: []
+---
+
+via gpt-5.6 sol xigh
+
+`agents/openai.yaml`은 Codex가 실행 지침으로 읽는 파일이 아니라, UI와 실행 harness가 스킬을 표시하고 호출하기 위해 사용하는 메타데이터입니다. 즉, 폼이나 마법사를 만드는 UI 정의 파일은 아닙니다.
+
+현재 [openai.yaml](/home/hnjae/.local/share/dotfiles/profiles/common/xdg-config-home/codex/skills/docs-review/agents/openai.yaml)의 의미는 다음과 같습니다.
+
+| 필드 | 사용자에게 보이는 동작 |
+|---|---|
+| `display_name` | Skills 목록과 선택 chip에 `Docs Review`라는 이름으로 표시 |
+| `short_description` | Skills 목록에서 스킬을 빠르게 이해하기 위한 짧은 설명 |
+| `default_prompt` | 사용자가 스킬을 선택할 때 composer에 삽입되는 시작 프롬프트 |
+
+`default_prompt`는 자동 실행되지 않습니다. 사용자가 내용을 확인하고 필요하면 수정한 뒤 전송하는 프롬프트 초안입니다.
+
+## 사용자가 스킬을 호출하는 방법
+
+ChatGPT 데스크톱 앱에서는:
+
+1. 사이드바의 **Skills**를 엽니다.
+2. `Docs Review`를 선택합니다.
+3. `default_prompt`가 시작 프롬프트로 제공됩니다.
+4. 프로젝트나 요청 내용을 보완한 뒤 전송합니다.
+
+CLI와 IDE에서는 다음 두 방법을 사용할 수 있습니다.
+
+- `/skills`를 실행하고 `docs-review` 선택
+- composer에서 `$docs-review`를 직접 입력
+
+예를 들어 현재 프로젝트의 문서를 실제로 수정하려면:
+
+```text
+$docs-review 현재 프로젝트의 docs/spec과 docs/architecture 전체를 하나의 end-state 계약으로 검토하고, 근거가 충분한 문제를 직접 수정해줘.
+```
+
+다른 프로젝트라면:
+
+```text
+$docs-review /path/to/project의 docs/spec과 docs/architecture 전체를 검토하고 직접 수정해줘.
+```
+
+수정 없이 검토만 받으려면:
+
+```text
+$docs-review docs/spec과 docs/architecture 전체를 검토하되 파일은 수정하지 말고 findings만 보고해줘.
+```
+
+파일 하나만 고치려는 경우에는 이 스킬을 호출하지 않는 것이 현재 설계와 맞습니다.
+
+```text
+docs/spec/sessions.md에 세션 만료 동작을 추가해줘.
+```
+
+## 호출 후 내부 동작
+
+사용자가 `$docs-review`를 전송하면 다음 순서로 진행됩니다.
+
+1. Codex가 [SKILL.md](/home/hnjae/.local/share/dotfiles/profiles/common/xdg-config-home/codex/skills/docs-review/SKILL.md)를 전체 로드합니다.
+2. `references/review-checklist.md`를 지시에 따라 읽습니다.
+3. 두 문서 트리를 전수 조사합니다.
+4. 사용자가 편집을 허가했다면 근거가 충분한 문제를 수정합니다.
+5. 수정 내용, open question, 검증 범위를 보고합니다.
+
+`README.md`는 이 과정에서 자동으로 읽히지 않습니다.
+
+## 명시적 호출만 허용하려면
+
+현재 `openai.yaml`에는 invocation policy가 없으므로 기본값인 `true`가 적용됩니다. 따라서 `$docs-review`를 붙이지 않아도 요청이 description과 일치하면 Codex가 자동으로 선택할 수 있습니다.
+
+이 스킬은 두 트리 전체를 편집할 수 있으므로, 사람의 명시적인 선택만 허용하는 것도 좋은 설계입니다.
+
+```yaml
+---
+interface:
+  display_name: "Docs Review"
+  short_description: "Audit and repair spec–architecture contracts"
+  default_prompt: "Use $docs-review to audit and directly repair the complete end-state contract across docs/spec and docs/architecture."
+
+policy:
+  allow_implicit_invocation: false
+```
+
+이렇게 하면 자동 선택은 꺼지지만 `$docs-review`와 Skills UI를 통한 명시적 호출은 계속 작동합니다.
+
+정리하면 `openai.yaml`은 “스킬 선택 화면과 시작 프롬프트”, `SKILL.md`는 “Codex가 실제로 따르는 워크플로”를 담당합니다. 공식 동작은 [Build skills](https://learn.chatgpt.com/docs/build-skills)에서 확인할 수 있습니다.
