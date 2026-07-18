@@ -1,5 +1,5 @@
 ---
 interface:
   display_name: "Docs Review"
-  short_description: "Review and repair end-state project documentation"
-  default_prompt: "Use $docs-review to review and fix docs/spec and docs/architecture as authoritative end-state documents."
+  short_description: "Audit and repair spec–architecture contracts"
+  default_prompt: "Use $docs-review to audit and directly repair the complete end-state contract across docs/spec and docs/architecture."

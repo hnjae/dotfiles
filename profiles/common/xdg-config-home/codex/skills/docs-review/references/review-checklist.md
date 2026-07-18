@@ -41,7 +41,7 @@ Move or rewrite:
 
 Look for:
 
-- Spec guarantees with no architectural enforcement point or cross-cutting strategy established by the allowed documents.
+- Spec guarantees that depend on a durable ownership, cross-component, persistence, security, concurrency, recovery, or operational boundary but have no architectural enforcement point or cross-cutting strategy established by the allowed documents.
 - Architecture that contradicts spec or silently assumes additional product behavior.
 - Incomplete end-to-end flows and unclear component responsibilities.
 - Unowned data, state transitions, validation, permissions, or invariants.
@@ -50,9 +50,13 @@ Look for:
 - Unclear dependency direction or responsibility separation.
 - Architecture rules too vague to guide implementation without inspecting source code.
 
+Treat the need for durable enforcement and the choice of enforcement design as separate conclusions. A spec guarantee can prove that architecture is missing without establishing a new owner, boundary, component, persistence model, or mechanism. Report that gap unless the allowed documents uniquely establish the design.
+
 ## 5. Check traceability
 
-For each material requirement, state, permission, validation, error, edge case, and acceptance criterion in spec, find corresponding architectural coverage.
+For each material requirement, state, permission, validation, error, edge case, and acceptance criterion in spec, determine whether enforcement depends on a durable architectural boundary. A spec item may require no special architectural statement when ordinary local implementation can enforce it without durable ownership, cross-component flow, persistence, security, concurrency, recovery, or operational implications. Record that classification in the working model rather than creating architecture solely for one-to-one traceability.
+
+When architectural coverage is required, one general enforcement rule may cover multiple spec clauses. Prefer that shared rule over restating each external requirement.
 
 For each architecture section, find either:
 
