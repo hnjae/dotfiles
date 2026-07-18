@@ -12,6 +12,7 @@ Look for:
 - Ambiguous wording with multiple materially different interpretations.
 - Missing edge cases or acceptance criteria that the surrounding contract already implies.
 - Requirements without a clear final expected behavior.
+- Material requirements or definitions delegated to a target outside `docs/spec` and `docs/architecture`; classify the reference from allowed text without opening the target, and treat a normative dependency as incomplete coverage and an open question.
 - Current-state, temporary, migration-only, TODO, milestone, or progress-tracking language.
 
 ## 2. Check duplication, redundancy, and divergence
@@ -57,6 +58,8 @@ Treat the need for durable enforcement and the choice of enforcement design as s
 For each material requirement, state, permission, validation, error, edge case, and acceptance criterion in spec, determine whether enforcement depends on a durable architectural boundary. A spec item may require no special architectural statement when ordinary local implementation can enforce it without durable ownership, cross-component flow, persistence, security, concurrency, recovery, or operational implications. Record that classification in the working model rather than creating architecture solely for one-to-one traceability.
 
 When architectural coverage is required, one general enforcement rule may cover multiple spec clauses. Prefer that shared rule over restating each external requirement.
+
+For each material reference whose target leaves both allowed roots, decide from the referring text whether it is informational or supplies normative contract content. Do not follow the target. Record an unresolved normative dependency as a coverage limitation and open question rather than inferring its contents or claiming complete review of the affected contract.
 
 For each architecture section, find either:
 
