@@ -28,7 +28,7 @@ ModifierOnlyKeyTimeout=200
 0=Shift_L
 
 [Hotkey/EnumerateGroupForwardKeys]
-0=Shift+Hangul
+0=Alt+Hangul
 
 [Hotkey/PrevPage]
 0=Up
