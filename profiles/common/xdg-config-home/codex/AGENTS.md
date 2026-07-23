@@ -4,6 +4,8 @@
 
 - **Architecture** docs live in `docs/architecture/`; **user-facing specs** as per-subject files under `docs/spec/` (its `README.md` is an index, not an aggregate). Specs describe external behavior only — no implementation details.
 - Prose is concise and technical. Don't hard-wrap: one paragraph or list item per source line unless Markdown syntax requires otherwise. Use Mermaid for diagrams.
+- Architecture rules must state durable outcomes and invariants, not freeze a preferred implementation. Do not prescribe class or controller decomposition, internal graph or port topology, snapshot or revision counts, value representation, signal or notification choreography, dependency-injection style, or test-harness structure unless that mechanism is itself a durable cross-component constraint. If alternative implementations can
+  preserve ownership, dependency direction, lifecycle safety, failure semantics, and observable behavior, leave the choice to implementation.
 
 ## Land intent before implementation
 
