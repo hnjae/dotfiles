@@ -81,6 +81,8 @@ scxl() {
     exec journalctl --follow --since "12s ago" --output=short-full --unit "$unit"
 }
 
+alias sih="systemd-inhibit"
+
 # _sysstart_completion() {
 #     local -a units
 #     units=($(systemctl list-unit-files --type service --no-pager 2>/dev/null | awk 'NR>1 {print $1}' | sed 's/\.service$//'))
