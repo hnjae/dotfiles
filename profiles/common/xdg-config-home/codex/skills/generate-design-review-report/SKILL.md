@@ -9,8 +9,8 @@ Review the repository's current architecture without editing its code or authori
 
 ## Select the mode
 
-- Use **core mode** unless the user explicitly requests `audit`, `strict`, traceable coverage, or an equivalent assurance level.
-- For audit mode, read [references/audit.md](references/audit.md) completely before inventorying the repository, then apply it as additional and overriding procedure.
+- Use **audit mode** only when the user explicitly requests `audit`, `strict`, traceable coverage, stable inventory or coverage identities, or candidate-disposition accounting. Otherwise use **core mode**. Do not infer audit mode from general requests for a comprehensive, thorough, rigorous, or high-quality review.
+- When audit mode is selected, read [references/audit.md](references/audit.md) completely before inventorying the repository, then apply it as additional and overriding procedure.
 - Do not load the audit reference in core mode.
 
 ## Preserve the trust boundary

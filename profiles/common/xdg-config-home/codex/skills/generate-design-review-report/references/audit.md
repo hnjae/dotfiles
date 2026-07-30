@@ -1,6 +1,6 @@
 # Audit Mode
 
-Apply this reference only when the user explicitly requests audit or strict mode. It supplements the core workflow and overrides any less strict core rule.
+Apply this reference only after the mode-selection rule in `SKILL.md` selects audit mode. It supplements the core workflow and overrides any less strict core rule.
 
 ## Contents
 
@@ -35,13 +35,13 @@ Every non-excluded CU must end as `Inspected`, `Partially inspected: <inspected 
 
 ## Allocation and reporting ownership
 
-- Cover all six core tracks and assign exactly one reporting owner to each.
-- An owner may cover at most two tracks only when each scope is small and the pair is cohesive. Keep their reports, candidate sequences, and coverage records separate.
+- Cover all six core tracks and assign exactly one investigation subagent as the reporting owner of each, including after any transfer; the main agent must not own an audit track.
+- A reporting owner may cover at most two tracks only when each scope is small and the pair is cohesive. Keep their reports, candidate sequences, and coverage records separate.
 - Assign every non-excluded CU and relevant authoritative document before delegation. Give each owner its track, authority-map entries, CU IDs, and named entry points and boundaries. Keep excluded CUs under the main agent in the central coverage map and omit them from track checklists.
 - Record an allocation rationale, later expansion, follow-up, reallocation, owner failure, and material exclusion.
 - If a track crosses independently deployable components or distinct contract, trust, persistence, consistency, concurrency, or lifecycle boundaries, retain one reporting owner and use component-scoped follow-up tasks.
 - Reassess feasibility after every material scope expansion. Add feasible scope to the proper owner; otherwise mark it partial or unavailable, set completion to Partial, and stop that expansion.
-- If an owner fails or returns no usable update, attempt one retry. If that fails, transfer the entire track once with a recoverable handoff. If the replacement fails, mark unfinished scope unavailable and continue with a missing final report; the main agent must not fabricate the track investigation.
+- If an owner fails or returns no usable update, attempt one retry without changing ownership. If that fails, transfer the entire track once with a recoverable handoff to one eligible replacement investigation subagent. Only the current reporting owner may issue the track's canonical candidates and current final report. If the replacement fails, mark unfinished scope unavailable and continue with a missing final report; the main agent must not fabricate the track investigation.
 
 ## Interim and final track reports
 
@@ -119,7 +119,7 @@ Include:
 
 ### Source candidates
 
-Add `Source candidates` to every final finding. Main-agent discoveries receive `M-F<sequence>` IDs and the same candidate schema. A main-agent candidate may arise only during independent verification or boundary tracing.
+Add `Source candidates` to every final finding. Main-agent discoveries receive `M-F<sequence>` IDs and the same candidate schema. A main-agent candidate may arise only during independent verification or boundary tracing; it never satisfies track coverage or replaces a missing current final track report.
 
 ### Candidate disposition appendix
 
