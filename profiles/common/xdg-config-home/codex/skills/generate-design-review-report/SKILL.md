@@ -1,6 +1,6 @@
 ---
 name: generate-design-review-report
-description: Perform evidence-led architecture and design reviews of a repository or scoped subproject and write DESIGN_REVIEW.md. Use when the user asks to assess codebase architecture, authoritative-contract conformance, domain invariants, ownership and boundaries, lifecycle and concurrency, testability and resource boundaries, security, error semantics, observability, or recovery. Use core mode by default and strict audit mode only when explicitly requested. Do not use for an ordinary diff or PR review focused on localized implementation bugs.
+description: Generate a comprehensive, evidence-led design-review report for a repository or explicitly scoped subproject, using DESIGN_REVIEW.md by default. Use only when the user explicitly invokes `$generate-design-review-report` to request that report. Do not use for conversational design advice, targeted architecture or security analysis, diagnosis, code, diff, or PR review, documentation review, or remediation.
 ---
 
 # Design Review
