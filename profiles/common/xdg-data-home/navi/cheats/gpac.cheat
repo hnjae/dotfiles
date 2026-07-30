@@ -31,3 +31,18 @@ mkvpropedit in.mkv \
   --set pixel-crop-right=0 \
   --set display-width=1920 \
   --set display-height=816
+
+# Rotate mkv
+mkvpropedit input.webm --edit track:v1 --set projection-pose-roll=-90
+
+# read raw data of mkv
+mkvinfo <input>
+
+# read raw data of mp4
+mp4dump <input.mp4>
+
+# convert mkv to webm
+ffmpeg -display_rotation:v:0 90 -i <input.mkv> -map 0 -c copy output.mkv
+
+# convert mkv to mp4
+ffmpeg -display_rotation:v:0 90 -i <input.mkv> -c copy output.mp4
