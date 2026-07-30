@@ -1,0 +1,7 @@
+---
+interface:
+  display_name: "Address design review findings"
+  short_description: "Revalidate and remediate design review findings"
+  default_prompt: "Use $address-design-review-findings to revalidate and remediate selected DR-NNN findings from DESIGN_REVIEW.md."
+policy:
+  allow_implicit_invocation: false
