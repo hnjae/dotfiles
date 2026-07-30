@@ -1,0 +1,333 @@
+#!/usr/bin/env python3
+
+import json
+import os
+import shutil
+import subprocess
+import sys
+from pathlib import Path
+from typing import Any
+
+ARGUMENT_COUNT = 2
+SUPPORTED_CODECS = {
+    "video": {"av1", "vp8", "vp9"},
+    "audio": {"opus", "vorbis"},
+    "subtitle": {"webvtt"},
+}
+
+
+class Mkv2WebmError(Exception):
+    pass
+
+
+def fail(message: str) -> None:
+    raise Mkv2WebmError(message)
+
+
+def usage() -> None:
+    print("Usage: mkv2webm input.mkv")
+
+
+def probe(path: Path) -> dict[str, Any]:
+    result = subprocess.run(
+        [
+            "ffprobe",
+            "-v",
+            "error",
+            "-show_format",
+            "-show_streams",
+            "-show_chapters",
+            "-of",
+            "json",
+            str(path),
+        ],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        detail = result.stderr.strip() or "알 수 없는 오류"
+        fail(f"ffprobe가 {path} 파일을 읽지 못했습니다: {detail}")
+
+    try:
+        return json.loads(result.stdout)
+    except json.JSONDecodeError as error:
+        fail(f"ffprobe의 JSON 출력을 해석하지 못했습니다: {error}")
+
+
+def stream_description(stream: dict[str, Any]) -> str:
+    index = stream.get("index", "?")
+    stream_type = stream.get("codec_type", "unknown")
+    codec = stream.get("codec_name", "unknown")
+    tags = stream.get("tags", {})
+    details = []
+
+    for key in ("title", "language", "filename", "mimetype"):
+        value = next(
+            (value for name, value in tags.items() if name.casefold() == key),
+            None,
+        )
+        if value:
+            details.append(f"{key}={value}")
+
+    suffix = f"; {', '.join(details)}" if details else ""
+    return f"스트림 #{index}: {stream_type}/{codec}{suffix}"
+
+
+def tag_losses(
+    source_tags: dict[str, Any],
+    output_tags: dict[str, Any],
+    owner: str,
+) -> list[str]:
+    normalized_output = {
+        key.casefold(): str(value) for key, value in output_tags.items()
+    }
+    losses = []
+
+    for key, value in source_tags.items():
+        if normalized_output.get(key.casefold()) != str(value):
+            losses.append(f"{owner} 메타데이터: {key}={value}")
+
+    return losses
+
+
+def detected_losses(
+    source: dict[str, Any],
+    output: dict[str, Any],
+    included_streams: list[dict[str, Any]],
+    excluded_streams: list[dict[str, Any]],
+) -> list[str]:
+    losses = [
+        f"{stream_description(stream)} (WebM에서 지원되지 않아 제외됨)"
+        for stream in excluded_streams
+    ]
+    output_streams = output.get("streams", [])
+
+    for position, source_stream in enumerate(included_streams):
+        if position >= len(output_streams):
+            losses.append(
+                f"{stream_description(source_stream)} (출력에서 확인되지 않음)"
+            )
+            continue
+
+        output_stream = output_streams[position]
+        owner = f"스트림 #{source_stream.get('index', '?')}"
+        losses.extend(
+            tag_losses(
+                source_stream.get("tags", {}),
+                output_stream.get("tags", {}),
+                owner,
+            )
+        )
+
+        source_disposition = source_stream.get("disposition", {})
+        output_disposition = output_stream.get("disposition", {})
+        for name, enabled in source_disposition.items():
+            if enabled and not output_disposition.get(name):
+                losses.append(f"{owner} disposition: {name}")
+
+    source_chapters = source.get("chapters", [])
+    output_chapters = output.get("chapters", [])
+    if len(output_chapters) < len(source_chapters):
+        for chapter in source_chapters[len(output_chapters) :]:
+            title = chapter.get("tags", {}).get("title")
+            detail = f" ({title})" if title else ""
+            losses.append(f"챕터 #{chapter.get('id', '?')}{detail}")
+
+    for position, source_chapter in enumerate(
+        source_chapters[: len(output_chapters)]
+    ):
+        losses.extend(
+            tag_losses(
+                source_chapter.get("tags", {}),
+                output_chapters[position].get("tags", {}),
+                f"챕터 #{source_chapter.get('id', '?')}",
+            )
+        )
+
+    losses.extend(
+        tag_losses(
+            source.get("format", {}).get("tags", {}),
+            output.get("format", {}).get("tags", {}),
+            "컨테이너",
+        )
+    )
+    return losses
+
+
+def output_path_for(input_path: Path) -> Path:
+    if not input_path.is_file():
+        fail(f"입력 파일이 없습니다: {input_path}")
+    if input_path.suffix.casefold() != ".mkv":
+        fail(f"입력 파일의 확장자가 .mkv가 아닙니다: {input_path}")
+
+    output_path = input_path.with_suffix(".webm")
+    if output_path.exists():
+        fail(f"출력 파일이 이미 있습니다: {output_path}")
+    return output_path
+
+
+def classify_streams(
+    source: dict[str, Any],
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    included_streams = []
+    excluded_streams = []
+
+    for stream in source.get("streams", []):
+        stream_type = stream.get("codec_type")
+        codec = stream.get("codec_name")
+        if codec in SUPPORTED_CODECS.get(stream_type, set()):
+            included_streams.append(stream)
+        else:
+            excluded_streams.append(stream)
+
+    if not included_streams:
+        exclusions = "\n".join(
+            f"  - {stream_description(stream)}" for stream in excluded_streams
+        )
+        detail = f"\n{exclusions}" if exclusions else ""
+        fail(f"WebM에 재인코딩 없이 담을 수 있는 스트림이 없습니다.{detail}")
+    return included_streams, excluded_streams
+
+
+def ffmpeg_command(
+    input_path: Path,
+    output_path: Path,
+    included_streams: list[dict[str, Any]],
+) -> list[str]:
+    command = [
+        "ffmpeg",
+        "-hide_banner",
+        "-nostdin",
+        "-y",
+        "-i",
+        str(input_path),
+    ]
+    for stream in included_streams:
+        command.extend(["-map", f"0:{stream['index']}"])
+    command.extend(
+        [
+            "-map_metadata",
+            "0",
+            "-map_chapters",
+            "0",
+            "-c",
+            "copy",
+            "-f",
+            "webm",
+            str(output_path),
+        ]
+    )
+    return command
+
+
+def run_ffmpeg(
+    input_path: Path,
+    output_path: Path,
+    included_streams: list[dict[str, Any]],
+) -> None:
+    result = subprocess.run(
+        ffmpeg_command(input_path, output_path, included_streams),
+        check=False,
+    )
+    if result.returncode != 0:
+        fail(f"ffmpeg 변환에 실패했습니다 (종료 코드 {result.returncode}).")
+
+
+def match_mtime(source_path: Path, output_path: Path) -> None:
+    source_stat = source_path.stat()
+    output_stat = output_path.stat()
+    os.utime(
+        output_path,
+        ns=(output_stat.st_atime_ns, source_stat.st_mtime_ns),
+    )
+
+
+def remux(
+    input_path: Path,
+    output_path: Path,
+    included_streams: list[dict[str, Any]],
+) -> dict[str, Any]:
+    try:
+        output_path.touch(exist_ok=False)
+    except FileExistsError:
+        fail(f"출력 파일이 이미 있습니다: {output_path}")
+
+    try:
+        run_ffmpeg(input_path, output_path, included_streams)
+        output = probe(output_path)
+        match_mtime(input_path, output_path)
+    except BaseException:
+        output_path.unlink(missing_ok=True)
+        raise
+    return output
+
+
+def report(
+    input_path: Path,
+    output_path: Path,
+    included_stream_count: int,
+    losses: list[str],
+) -> None:
+    print(f"\n생성: {output_path}")
+    print(f"보존된 스트림: {included_stream_count}개 (재인코딩 없음)")
+    print(f"mtime: {input_path}와 일치")
+    print("손실된 정보:")
+    if losses:
+        for loss in losses:
+            print(f"  - {loss}")
+    else:
+        print("  - 감지되지 않음 (스트림, 챕터, 메타데이터 기준)")
+
+
+def convert(input_path: Path) -> Path:
+    output_path = output_path_for(input_path)
+    source = probe(input_path)
+    included_streams, excluded_streams = classify_streams(source)
+    output = remux(input_path, output_path, included_streams)
+    losses = detected_losses(
+        source, output, included_streams, excluded_streams
+    )
+    report(
+        input_path,
+        output_path,
+        len(included_streams),
+        losses,
+    )
+    return output_path
+
+
+def main() -> int:
+    if len(sys.argv) == ARGUMENT_COUNT and sys.argv[1] in {"-h", "--help"}:
+        usage()
+        return 0
+    if len(sys.argv) != ARGUMENT_COUNT:
+        usage()
+        return 2
+
+    missing_commands = [
+        command
+        for command in ("ffmpeg", "ffprobe")
+        if shutil.which(command) is None
+    ]
+    if missing_commands:
+        print(
+            f"mkv2webm: 필요한 명령을 찾지 못했습니다: {', '.join(missing_commands)}",
+            file=sys.stderr,
+        )
+        return 127
+
+    try:
+        convert(Path(sys.argv[1]))
+    except Mkv2WebmError as error:
+        print(f"mkv2webm: {error}", file=sys.stderr)
+        return 1
+    except KeyboardInterrupt:
+        print("\nmkv2webm: 중단되었습니다.", file=sys.stderr)
+        return 130
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
