@@ -1,6 +1,6 @@
 ---
 name: docs-review
-description: Comprehensively review the complete authoritative end-state contract across docs/spec and docs/architecture, and repair it only when explicitly authorized, using only those document trees as review evidence. Use only for comprehensive requests spanning both complete trees, whether review-only or repair, such as reconciling contradictions and duplication, removing current-state or migration language, restoring the spec-versus-architecture boundary, or ensuring architecture enforces documented product guarantees. A review-only request does not authorize edits. Do not use for localized edits to one or a few documents, implementation-backed design reviews, code or PR reviews, or documentation outside these two trees.
+description: Comprehensively review the complete authoritative end-state contract across docs/spec and docs/architecture, and repair it only when explicitly authorized, using only those document trees as review evidence. Use only when the user explicitly invokes `$docs-review` for a comprehensive request spanning both complete trees, whether review-only or repair. A review-only request does not authorize edits. Do not infer invocation from a documentation request, and do not use for localized edits to one or a few documents, implementation-backed design reviews, code or PR reviews, or documentation outside these two trees.
 ---
 
 # Docs Review
