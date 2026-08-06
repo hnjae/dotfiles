@@ -14,14 +14,14 @@
 >
 > These documents must describe the project’s intended **end state**, not the current implementation, a temporary milestone, a migration phase, a partial plan, or implementation progress.
 
-For changes that add or alter the declared user-visible product contract or durable architecture intent, write each applicable intent layer before implementation and review it before merge:
+For changes that add or alter the declared user-visible product contract or durable architecture intent, write each applicable intent layer before implementation and review it before considering the change complete:
 
 1. **Declared user-visible product contract added or changed?** If the repository has `docs/spec/`, update it before code.
 2. **Durable ownership, structure, boundary, identity, lifecycle, or architecture contract added or changed?** If the repository has `docs/architecture/`, update it before code.
 3. **New or changed behavior/boundary needing durable regression coverage?** Add focused behavior/boundary coverage before implementation when it can observe behavior, for example ownership, stale rejection, cache identity, or another stable public/internal contract. When practical, verify that the focused test fails for the expected reason; a failing test need not be preserved as a commit.
 4. Implement the change and verify that the focused and relevant tests pass.
 
-Choose commit boundaries that keep the change coherent and reviewable. For large or cross-cutting changes, prefer separate intent and implementation commits within the same pull request so the intent can be reviewed independently. Small cohesive changes may include documentation, tests, and implementation in one commit. Do not merge end-state documentation as current behavior before its implementation exists; normally merge intent and implementation atomically, or clearly mark an independently merged document as a proposal.
+Choose commit boundaries that keep the change coherent and reviewable. For large or cross-cutting changes, prefer separate intent and implementation commits when this materially improves reviewability. If a pull request is used, keep those commits in the same pull request. Small cohesive changes may include documentation, tests, and implementation in one commit. Do not land end-state documentation as current behavior before its implementation exists; normally complete intent and implementation together, or clearly mark an independently landed document as a proposal.
 
 No intent-documentation update is needed when the change implements an already documented end state, fixes a bug within existing documented behavior, narrows a non-contract API, refactors a single owner internally, or performs maintenance that does not change runtime behavior or architecture intent. Add focused tests only when they provide durable signal, then implement directly.
 
@@ -33,7 +33,7 @@ Do not add tests whose primary assertion freezes incidental or environment-sensi
 
 ## Design bar
 
-Design the correct end-state, not the cheap one.
+Choose the simplest maintainable design that fully satisfies the accepted requirements. Avoid speculative complexity and knowingly temporary workarounds.
 
 ## Trust verified content
 
@@ -41,7 +41,7 @@ If a tool (e.g. `typos`) flags verified-correct content, preserve the content an
 
 ## Git commits
 
-Use Conventional Commits with a scope whenever one clearly applies. Commit on task completion unless the user has said otherwise.
+Use Conventional Commits with a scope whenever one clearly applies. For completed change tasks in a Git repository, commit the verified, in-scope changes unless the user has said otherwise. Do not commit unrelated existing changes, read-only work, or an incomplete or failing result.
 
 Determine attribution from the final commit contents after any amend. When those contents include changes materially authored by Codex, add this exact trailer to the commit message footer (standard trailer block, after a blank line below the body):
 
