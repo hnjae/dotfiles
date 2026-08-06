@@ -14,14 +14,16 @@
 >
 > These documents must describe the project’s intended **end state**, not the current implementation, a temporary milestone, a migration phase, a partial plan, or implementation progress.
 
-For changes that add or alter the declared user-visible product contract or durable architecture intent, commit each applicable intent layer before implementation:
+For changes that add or alter the declared user-visible product contract or durable architecture intent, write each applicable intent layer before implementation and review it before merge:
 
-1. **Declared user-visible product contract added or changed?** If the repository has `docs/spec/`, update it and commit before code.
-2. **Durable ownership, structure, boundary, identity, lifecycle, or architecture contract added or changed?** If the repository has `docs/architecture/`, update it and commit before code.
-3. **New or changed behavior/boundary needing durable regression coverage?** Add focused behavior/boundary coverage before implementation when it can observe behavior, for example ownership, stale rejection, cache identity, or another stable public/internal contract. Verify that the focused test fails for the expected reason, then commit the test.
-4. Implement and verify that the focused and relevant tests pass. Amend the implementation into the preceding test commit so the resulting committed revision is green, replace the test-only commit message with a Conventional Commit message that describes the completed behavior, and set required trailers based on authorship of the final amended contents. If no test commit was needed, commit the implementation normally.
+1. **Declared user-visible product contract added or changed?** If the repository has `docs/spec/`, update it before code.
+2. **Durable ownership, structure, boundary, identity, lifecycle, or architecture contract added or changed?** If the repository has `docs/architecture/`, update it before code.
+3. **New or changed behavior/boundary needing durable regression coverage?** Add focused behavior/boundary coverage before implementation when it can observe behavior, for example ownership, stale rejection, cache identity, or another stable public/internal contract. When practical, verify that the focused test fails for the expected reason; a failing test need not be preserved as a commit.
+4. Implement the change and verify that the focused and relevant tests pass.
 
-Skip intent-documentation commits when the change implements an already documented end state, fixes a bug within existing documented behavior, narrows a non-contract API, refactors a single owner internally, or performs maintenance that does not change runtime behavior or architecture intent. Add focused tests only when they provide durable signal, then implement directly.
+Choose commit boundaries that keep the change coherent and reviewable. For large or cross-cutting changes, prefer separate intent and implementation commits within the same pull request so the intent can be reviewed independently. Small cohesive changes may include documentation, tests, and implementation in one commit. Do not merge end-state documentation as current behavior before its implementation exists; normally merge intent and implementation atomically, or clearly mark an independently merged document as a proposal.
+
+No intent-documentation update is needed when the change implements an already documented end state, fixes a bug within existing documented behavior, narrows a non-contract API, refactors a single owner internally, or performs maintenance that does not change runtime behavior or architecture intent. Add focused tests only when they provide durable signal, then implement directly.
 
 ## Avoid over-constraining tests
 
