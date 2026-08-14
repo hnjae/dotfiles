@@ -1,0 +1,9 @@
+{
+  "plugin": ["oh-my-openagent@latest"],
+  "$schema": "https://opencode.ai/tui.json",
+  "keybinds": {
+    "editor_open": "ctrl+g",
+    "session_compact": "",
+    "app_exit": ""
+  }
+}
