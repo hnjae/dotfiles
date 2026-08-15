@@ -14,6 +14,7 @@ main() {
     handlr set 'video/mp4' "$VIDEO_PLAYER"
     handlr set 'video/webm' "$VIDEO_PLAYER"
     handlr set 'video/x-ms-wmv' "$VIDEO_PLAYER"
+    handlr set 'video/mp2t' "$VIDEO_PLAYER"
 
     # xdg-mime of image files
     handlr set "image/apng" "$IMAGE_VIEWER"

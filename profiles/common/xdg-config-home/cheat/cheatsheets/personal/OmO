@@ -35,11 +35,21 @@ tags: []
 
 ### Core Agents
 
-Sisyphus:
-The default orchestrator. Plans, delegates, and executes complex tasks using specialized subagents with aggressive parallel execution.
+Sisyphus
+: The default orchestrator. Plans, delegates, and executes complex tasks using specialized subagents with aggressive parallel execution.
+: Use claude-code like agents
 
-Hephaestus:
-The Legitimate Craftsman. Autonomous deep worker inspired by AmpCode's deep mode.
+Prometheus
+: Strategic planner with interview mode.
+: Priority: Claude > GPT > Claude-like models
+
+Atlas
+: Todo-list orchestrator.
+: Priority: Claude > GPT > Claude-like models
+
+Hephaestus
+: The Legitimate Craftsman. Autonomous deep worker inspired by AmpCode's deep mode.
+: GPT-native
 
 Oracle:
 Architecture consultation: GPT-5.4 or Claude Opus
@@ -57,21 +67,17 @@ Visual content specialist. Analyzes PDFs, images, diagrams to extract informatio
 
 ### Planning Agents
 
-Prometheus:
-Strategic planner with interview mode.
+Momus
+: Plan reviewer
 
-Momus:
-Plan reviewer
-
-Metis:
-Plan consultant
+Metis
+: Plan consultant (claude-optimized agent)
 
 ### Orchestration Agents
-
-Atlas:
-Todo-list orchestrator.
 
 sisyphus-junior:
 Category-spawned executor.
 
+<!--
 vi:ft=markdown
+-->

@@ -38,6 +38,7 @@ __pycache__
 **/.sisyphus/boulder.json
 .codex
 !.codex/
+.omo
 
 
 # Miscellaneous
