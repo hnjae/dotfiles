@@ -64,28 +64,31 @@ return {
           opts = {
             show_model_choices = false,
           },
-          openrouter_chat = openrouter_adapter("openai/gpt-5.4-mini", {
+          openrouter_chat = openrouter_adapter("google/gemini-3.7-flash:batch", {
             think = {
               mapping = "parameters",
               type = "boolean",
               default = true,
             },
           }),
-          openrouter_light_think = openrouter_adapter("google/gemini-3-flash-preview", {
+
+          openrouter_light_think = openrouter_adapter("google/gemini-3.7-flash:batch", {
             think = {
               mapping = "parameters",
               type = "boolean",
               default = true,
             },
           }),
-          openrouter_light = openrouter_adapter("openai/gpt-5.4-nano", {
+
+          -- $0.1254 / $0.5016per 1M
+          openrouter_light = openrouter_adapter("openai/gpt-5.6-luna:batch", {
             think = {
               mapping = "parameters",
               type = "boolean",
               default = true,
             },
           }),
-          openrouter_language = openrouter_adapter("google/gemini-3-flash-preview", {
+          openrouter_language = openrouter_adapter("google/gemini-3.7-flash:batch", {
             think = {
               mapping = "parameters",
               type = "boolean",

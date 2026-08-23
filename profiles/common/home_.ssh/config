@@ -2,7 +2,7 @@ Host *
   Compression no
   UserKnownHostsFile ~/.ssh/known_hosts ~/.ssh/known_hosts.permanent
 
-Host metis
+Host nyx
   IdentityAgent ~/.1password/agent.sock
 
 Host eris

@@ -1,3 +1,55 @@
 {
-  "$schema": "https://opencode.ai/config.json"
+  "$schema": "https://opencode.ai/config.json",
+  "permission": {
+    "read": {
+      "/nix/store/**": "allow",
+      "/tmp/**": "allow",
+      "/home/hnjae/.local/share/cargo/**": "allow"
+    },
+    "glob": {
+      "/nix/store/**": "allow",
+      "/tmp/**": "allow",
+      "/home/hnjae/.local/share/cargo/**": "allow"
+    },
+    "grep": {
+      "/nix/store/**": "allow",
+      "/tmp/**": "allow",
+      "/home/hnjae/.local/share/cargo/**": "allow"
+    },
+    "list": {
+      "/nix/store/**": "allow",
+      "/tmp/**": "allow",
+      "/home/hnjae/.local/share/cargo/**": "allow"
+    },
+    "external_directory": {
+      "/nix/store/**": "allow",
+      "/tmp/**": "allow",
+      "/home/hnjae/.local/share/cargo/**": "allow"
+    },
+    "bash": {
+      "npm *": "deny",
+      "sudo *": "deny",
+      "nix-env *": "deny"
+    }
+  },
+  "lsp": {
+    "pyright": {
+      "disabled": true
+    },
+    "basedpyright": {
+      "disabled": true
+    },
+    "ty": {
+      "command": ["ty", "server"],
+      "extensions": [".py", ".pyi"]
+    },
+    "qmlls": {
+      "command": ["qmlls", "--no-cmake-calls"],
+      "extensions": [".qml"]
+    },
+    "docker-ls": {
+      "command": ["docker-language-server", "start"],
+      "extensions": ["Containerfile", "Dockerfile"]
+    }
+  }
 }
