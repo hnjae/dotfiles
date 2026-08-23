@@ -72,6 +72,9 @@ zmodule "$ZDOTDIR/modules/devenv" # NOTE: precmd_functions 건드림 <2026-05-17
 # > For completions to work, the above line must be added after compinit is called. You may have to rebuild your completions cache by running rm ~/.zcompdump*; compinit.
 zmodule "$ZDOTDIR/modules/zoxide"
 
+# opencode completion: source 시 compdef 를 호출하므로 compinit 이후에 로드
+zmodule "$ZDOTDIR/modules/opencode"
+
 # > fzf-tab needs to be loaded after compinit, but before plugins which will wrap widgets, such as zsh-autosuggestions or fast-syntax-highlighting
 zmodule "$ZDOTDIR/modules/fzf-tab"
 

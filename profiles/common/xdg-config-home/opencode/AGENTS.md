@@ -41,11 +41,15 @@ If a tool (e.g. `typos`) flags verified-correct content, preserve the content an
 
 ## Git commits
 
-Use Conventional Commits with a scope whenever one clearly applies. Commit on task completion unless the user has said otherwise.
+Use Conventional Commits with a scope whenever one clearly applies. For completed change tasks in a Git repository, commit the verified, in-scope changes unless the user has said otherwise. Do not commit unrelated existing changes, read-only work, or an incomplete or failing result.
 
-When OpenCode materially authors a commit's changes, add this exact trailer to the commit message footer (standard trailer block, after a blank line below the body):
+Determine attribution from the final commit contents after any amend. When those contents include changes materially authored by opencode, add this exact trailer to the commit message footer (standard trailer block, after a blank line below the body):
 
-`Co-authored-by: OpenCode <noreply@opencode.ai>`
+```gitcommit
+🤖 Generated with [opencode](https://opencode.ai)
+
+Co-Authored-By: opencode <noreply@opencode.ai>
+```
 
 - Never duplicate this trailer if it is already present.
-- For commits OpenCode did not materially author (e.g., amending others' work), omit it unless the user explicitly requests it.
+- When the final commit contents contain no changes materially authored by opencode (e.g., opencode only amends another author's commit metadata), omit it unless the user explicitly requests it.
