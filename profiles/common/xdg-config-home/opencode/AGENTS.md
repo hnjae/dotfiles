@@ -38,3 +38,14 @@ Choose the simplest maintainable design that fully satisfies the accepted requir
 ## Trust verified content
 
 If a tool (e.g. `typos`) flags verified-correct content, preserve the content and apply the narrowest available allowlist or suppression. Do not disable or weaken unrelated checks.
+
+## Git commits
+
+Use Conventional Commits with a scope whenever one clearly applies. Commit on task completion unless the user has said otherwise.
+
+When OpenCode materially authors a commit's changes, add this exact trailer to the commit message footer (standard trailer block, after a blank line below the body):
+
+`Co-authored-by: OpenCode <noreply@opencode.ai>`
+
+- Never duplicate this trailer if it is already present.
+- For commits OpenCode did not materially author (e.g., amending others' work), omit it unless the user explicitly requests it.
