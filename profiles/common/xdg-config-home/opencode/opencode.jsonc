@@ -29,7 +29,8 @@
     "bash": {
       "npm *": "deny",
       "sudo *": "deny",
-      "nix-env *": "deny"
+      "nix-env *": "deny",
+      "sops": "deny"
     }
   },
   "lsp": {
