@@ -74,7 +74,7 @@
           "type": "status",
           "style": "plain",
           "foreground": "lightRed",
-          "template": " \u001b[1mERROR\u001b[0m"
+          "template": " ERROR"
         },
         {
           "type": "time",
