@@ -7,8 +7,8 @@ local snapshot = ya.sync(function(state)
   local files = {}
   local selected_items = {}
 
-  for _, url in pairs(selected) do
-    selected_paths[tostring(url)] = true
+  for _, file in pairs(selected) do
+    selected_paths[tostring(file.url)] = true
   end
 
   for i, file in ipairs(current.files) do

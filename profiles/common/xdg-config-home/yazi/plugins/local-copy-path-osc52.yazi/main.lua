@@ -3,8 +3,8 @@ local target_paths = ya.sync(function()
   local selected = cx.active.selected
 
   if #selected > 0 then
-    for _, url in pairs(selected) do
-      paths[#paths + 1] = tostring(Url(url))
+    for _, file in pairs(selected) do
+      paths[#paths + 1] = tostring(file.url)
     end
     return paths
   end

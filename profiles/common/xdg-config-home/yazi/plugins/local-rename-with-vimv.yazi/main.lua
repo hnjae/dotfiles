@@ -2,8 +2,8 @@ local targets = ya.sync(function()
   local items = {}
 
   if #cx.active.selected > 0 then
-    for _, url in pairs(cx.active.selected) do
-      items[#items + 1] = tostring(url)
+    for _, file in pairs(cx.active.selected) do
+      items[#items + 1] = tostring(file.url)
     end
   else
     local hovered = cx.active.current.hovered

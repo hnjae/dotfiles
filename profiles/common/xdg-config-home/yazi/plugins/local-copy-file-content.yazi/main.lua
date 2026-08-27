@@ -5,10 +5,10 @@ local targets = ya.sync(function()
   local selected = cx.active.selected
 
   if #selected > 0 then
-    for _, url in pairs(selected) do
+    for _, file in pairs(selected) do
       items[#items + 1] = {
-        url = Url(url),
-        name = url.name or tostring(url),
+        url = Url(file.url),
+        name = file.name or tostring(file.url),
       }
     end
   else

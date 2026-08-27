@@ -1,8 +1,8 @@
 local target_names = ya.sync(function()
   local names = {}
 
-  for _, url in pairs(cx.active.selected) do
-    names[#names + 1] = url.name or tostring(url)
+  for _, file in pairs(cx.active.selected) do
+    names[#names + 1] = file.name or tostring(file.url)
   end
 
   if #names > 0 then
