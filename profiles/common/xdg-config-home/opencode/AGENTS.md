@@ -46,8 +46,6 @@ Use Conventional Commits with a scope whenever one clearly applies. For complete
 Determine attribution from the final commit contents after any amend. When those contents include changes materially authored by opencode, add this exact trailer to the commit message footer (standard trailer block, after a blank line below the body):
 
 ```gitcommit
-🤖 Generated with [opencode](https://opencode.ai)
-
 Co-Authored-By: opencode <noreply@opencode.ai>
 ```
 

@@ -1,0 +1,4 @@
+% x11, xserver
+
+# list all x window
+xwininfo -root -tree

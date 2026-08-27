@@ -8,5 +8,6 @@ xdg-settings get default-web-browser
 
 # set default
 xdg-mime default <org.kde.okular.desktop> <application/pdf>
+
 # query default
 xdg-mime query default <application/pdf>
