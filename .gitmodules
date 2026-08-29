@@ -29,3 +29,18 @@
 [submodule "profiles/desktop/xdg-config-home/mpv/shaders-repo/ssim-superres"]
 	path = profiles/desktop/xdg-config-home/mpv/shaders-repo/ssim-superres
 	url = https://gist.github.com/igv/2364ffa6e81540f29cb7ab4c9bc05b6b.git
+[submodule "profiles/common/home/.agents/skills-repos/awesome-copilot"]
+	path = profiles/common/home/.agents/skills-repos/awesome-copilot@github
+	url = https://github.com/github/awesome-copilot
+[submodule "profiles/common/home/.agents/skills-repos/skills@vercel-labs"]
+	path = profiles/common/home/.agents/skills-repos/skills@vercel-labs
+	url = https://github.com/vercel-labs/skills
+[submodule "profiles/common/home/.agents/skills-repos/skills@anthropics"]
+	path = profiles/common/home/.agents/skills-repos/skills@anthropics
+	url = https://github.com/anthropics/skills
+[submodule "profiles/common/home/.agents/skills-repos/claude-for-legal@anthropics"]
+	path = profiles/common/home/.agents/skills-repos/claude-for-legal@anthropics
+	url = https://github.com/anthropics/claude-for-legal
+[submodule "profiles/common/home/.agents/skills-repos/superpowers@obra"]
+	path = profiles/common/home/.agents/skills-repos/superpowers@obra
+	url = https://github.com/obra/superpowers
