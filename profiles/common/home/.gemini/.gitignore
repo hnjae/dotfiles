@@ -1,6 +1,0 @@
-# use allowlist instead of denylist
-*
-!*/
-
-# Files
-!settings.json
