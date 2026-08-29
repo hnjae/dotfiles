@@ -1,5 +1,13 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  // "agent": {
+  //   "plan": {
+  //     "model": "provider/model-A"
+  //   },
+  //   "build": {
+  //     "model": "provider/model-B"
+  //   }
+  // },
   "permission": {
     "read": {
       "/nix/store/**": "allow",
@@ -30,7 +38,9 @@
       "npm *": "deny",
       "sudo *": "deny",
       "nix-env *": "deny",
-      "sops": "deny"
+      "sops": "deny",
+      "ssh admin*": "deny",
+      "ssh deploy*": "deny"
     }
   },
   "lsp": {
