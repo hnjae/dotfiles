@@ -39,6 +39,7 @@ __pycache__
 .codex
 !.codex/
 .omo
+.opencode
 
 
 # Miscellaneous
