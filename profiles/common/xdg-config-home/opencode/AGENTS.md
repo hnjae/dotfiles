@@ -39,7 +39,7 @@ Choose the simplest maintainable design that fully satisfies the accepted requir
 
 If a tool (e.g. `typos`) flags verified-correct content, preserve the content and apply the narrowest available allowlist or suppression. Do not disable or weaken unrelated checks.
 
-## Git commits
+## Git commits and pull requests
 
 Use Conventional Commits with a scope whenever one clearly applies. For completed change tasks in a Git repository, commit the verified, in-scope changes unless the user has said otherwise. Do not commit unrelated existing changes, read-only work, or an incomplete or failing result.
 
@@ -51,3 +51,5 @@ Co-Authored-By: opencode <noreply@opencode.ai>
 
 - Never duplicate this trailer if it is already present.
 - When the final commit contents contain no changes materially authored by opencode (e.g., opencode only amends another author's commit metadata), omit it unless the user explicitly requests it.
+
+When a pull request includes commits carrying the trailer above, state the same attribution in the pull request body: an `## Attribution` section reading "This PR was authored with [opencode](https://opencode.ai)." Omit it for pull requests with no attributed commits, unless the user explicitly requests it.
