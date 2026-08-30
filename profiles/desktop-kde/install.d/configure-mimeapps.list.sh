@@ -35,6 +35,7 @@ main() {
     handlr set "x-scheme-handler/http" "$BROWSER"
     handlr set "x-scheme-handler/https" "$BROWSER"
     handlr set "text/html" "$BROWSER"
+    xdg-settings set default-web-browser "$BROWSER"
 
     handlr set "application/vnd.oasis.opendocument.text" "org.libreoffice.LibreOffice.writer.desktop"
     handlr set "application/vnd.oasis.opendocument.spreadsheet" "org.libreoffice.LibreOffice.calc.desktop"

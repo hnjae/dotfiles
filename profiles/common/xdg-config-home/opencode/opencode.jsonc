@@ -1,13 +1,15 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  // "agent": {
-  //   "plan": {
-  //     "model": "provider/model-A"
-  //   },
-  //   "build": {
-  //     "model": "provider/model-B"
-  //   }
-  // },
+  "agent": {
+    "plan": {
+      "model": "zai-coding-plan/glm-5.3-flash",
+      "variant": "high"
+    },
+    "build": {
+      "model": "zai-coding-plan/glm-5.3-flash",
+      "variant": "low"
+    }
+  },
   "permission": {
     "read": {
       "/nix/store/**": "allow",
@@ -36,6 +38,7 @@
     },
     "bash": {
       "npm *": "deny",
+      "npx *": "deny",
       "sudo *": "deny",
       "nix-env *": "deny",
       "sops": "deny",
@@ -62,5 +65,9 @@
       "command": ["docker-language-server", "start"],
       "extensions": ["Containerfile", "Dockerfile"]
     }
-  }
+  },
+  "plugin": [
+    "@mohak34/opencode-notifier@latest",
+    "@simonwjackson/opencode-direnv"
+  ]
 }

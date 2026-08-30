@@ -74,6 +74,3 @@ alias fmime='file --mime-type --brief --'
 alias xmime='xdg-mime query filetype'
 alias nfd2nfc-dryrun='convmv -r -f utf8 -t utf8 --nfc .'
 alias nfd2nfc-run='convmv -r -f utf8 -t utf8 --nfc --notest .'
-
-alias oc="opencode"
-alias ocp="opencode --port 49542"

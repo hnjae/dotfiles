@@ -1,6 +1,8 @@
 # Secrets and machine-local config
 /auth.json
 /config.toml
+/.codex-global-state.json
+/.codex-global-state.json.*
 
 # Conversation and runtime history
 /.tmp/
@@ -17,6 +19,7 @@
 /*.sqlite
 /*.sqlite-shm
 /*.sqlite-wal
+/sqlite/codex-dev.db
 
 # Generated or ephemeral metadata
 /.personality_migration
@@ -27,3 +30,4 @@
 /.sandbox_migration
 /installation_id
 /thread-writer-locks
+/vendor_imports

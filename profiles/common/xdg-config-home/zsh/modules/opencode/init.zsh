@@ -16,3 +16,5 @@ if [[ ! -e "$initfile" || "$initfile" -ot "${commands[opencode]}" ]]; then
 fi
 
 source "$initfile"
+
+alias oc="systemd-inhibit --what=sleep --who=opencode --why='opencode session' opencode --port"

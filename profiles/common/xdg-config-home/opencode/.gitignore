@@ -2,5 +2,8 @@
 /package.json
 /package-lock.json
 /bun.lock
-/.sisyphus
 /service.json
+
+# Created by plugins:
+/opencode-notifier-state.json
+/.sisyphus
