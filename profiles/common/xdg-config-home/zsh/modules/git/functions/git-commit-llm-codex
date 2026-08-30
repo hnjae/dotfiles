@@ -8,17 +8,15 @@ local prompt
 local repo_root
 local context_file
 local msg_file
-local oc_log
-local oc_raw
-local oc_error
+local codex_log
 local commit_output
 local commit_status
 local file_path
 local diff_bytes
 local diff_limit="${GIT_COMMIT_LLM_DIFF_LIMIT:-60000}"
-local oc_model="${GIT_COMMIT_LLM_MODEL:-zai-coding-plan/glm-5.3-flash}"
-local oc_variant="${GIT_COMMIT_LLM_VARIANT:-low}"
-local -a oc_args
+local codex_model="${GIT_COMMIT_LLM_MODEL:-gpt-5.3-codex-spark}"
+local codex_effort="${GIT_COMMIT_LLM_REASONING_EFFORT:-high}"
+local -a codex_args
 local -a staged_files
 local -a clean_staged_files
 local -a hook_modified_files
@@ -88,12 +86,8 @@ msg_file="$(mktemp "${TMPDIR:-/tmp}/git-commit-llm-message.XXXXXX")" || {
     rm -f "$context_file"
     return 1
 }
-oc_log="$(mktemp "${TMPDIR:-/tmp}/git-commit-llm-opencode.XXXXXX")" || {
+codex_log="$(mktemp "${TMPDIR:-/tmp}/git-commit-llm-codex.XXXXXX")" || {
     rm -f "$context_file" "$msg_file"
-    return 1
-}
-oc_raw="$(mktemp "${TMPDIR:-/tmp}/git-commit-llm-opencode.XXXXXX")" || {
-    rm -f "$context_file" "$msg_file" "$oc_log"
     return 1
 }
 
@@ -122,7 +116,7 @@ diff_bytes="$(git -C "$repo_root" diff --cached --no-ext-diff -- | wc -c | tr -d
     fi
 } >|"$context_file"
 
-prompt="Generate exactly one Conventional Commit message from the attached staged context file.
+prompt="Generate exactly one Conventional Commit message from the staged context in stdin.
 Do not run tools or shell commands. Use only the provided staged context.
 
 Format requirements:"
@@ -168,37 +162,34 @@ Body rules:
 - If body is needed, keep it concise
 
 Output rules:
-- Do NOT add a co-author trailer; these are user-authored changes
+- Do NOT add a Codex co-author trailer; these are user-authored changes
 - Return only the commit message
 - No code fences, no explanation"
 
-oc_args=(
-    --pure
-    --format json
-    -m "$oc_model"
-    --variant "$oc_variant"
-    --dir "$repo_root"
+codex_args=(
+    --model "$codex_model"
+    -c "model_reasoning_effort=$codex_effort"
+    --disable shell_tool
+    --disable codex_git_commit
+    --sandbox read-only
+    --cd "$repo_root"
+    --output-last-message "$msg_file"
+    --ephemeral
 )
 
-opencode run "${oc_args[@]}" "$prompt" -f "$context_file" >|"$oc_raw" 2>|"$oc_log"
+codex exec "${codex_args[@]}" "$prompt" <"$context_file" >|"$codex_log" 2>&1
 commit_status=$?
-oc_error="$(jq -r 'select(.type == "error") | .error.data.message // .error.name // empty' "$oc_raw")"
 
-if ((commit_status != 0)) || [[ -n "$oc_error" ]]; then
-    if [[ -n "$oc_error" ]]; then
-        print -r -- "$oc_error" >&2
-    fi
-    cat "$oc_log" >&2
-    rm -f "$context_file" "$msg_file" "$oc_log" "$oc_raw"
-    return $((commit_status != 0 ? commit_status : 1))
+if ((commit_status != 0)); then
+    cat "$codex_log" >&2
+    rm -f "$context_file" "$msg_file" "$codex_log"
+    return "$commit_status"
 fi
 
-jq -r '[select(.type == "text") | .part.text // empty] | join("\n") | gsub("```[a-zA-Z0-9]*"; "") | trim' "$oc_raw" >|"$msg_file"
-
 if [[ ! -s "$msg_file" ]]; then
-    echo "opencode returned an empty commit message." >&2
-    cat "$oc_log" >&2
-    rm -f "$context_file" "$msg_file" "$oc_log" "$oc_raw"
+    echo "Codex returned an empty commit message." >&2
+    cat "$codex_log" >&2
+    rm -f "$context_file" "$msg_file" "$codex_log"
     return 1
 fi
 
@@ -231,5 +222,5 @@ if [[ -n "$commit_output" ]]; then
     print -r -- "$commit_output"
 fi
 
-rm -f "$context_file" "$msg_file" "$oc_log" "$oc_raw"
+rm -f "$context_file" "$msg_file" "$codex_log"
 return "$commit_status"
