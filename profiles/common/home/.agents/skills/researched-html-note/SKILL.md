@@ -1,6 +1,6 @@
 ---
 name: researched-html-note
-description: Create polished Korean standalone HTML notes from researched material for Obsidian. Use when Codex should investigate a topic, compare sources, summarize conventions or technical guidance, preserve source links, and write a self-contained .html file with embedded CSS for reading in a browser or Obsidian.
+description: Create polished Korean standalone HTML notes from researched material for Obsidian. Use when the user asks to investigate a topic, compare sources, summarize conventions or technical guidance, preserve source links, and write a self-contained .html file with embedded CSS for reading in a browser or Obsidian.
 ---
 
 # Researched HTML Note

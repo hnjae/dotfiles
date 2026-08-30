@@ -44,3 +44,6 @@
 [submodule "profiles/common/home/.agents/skills-repos/superpowers@obra"]
 	path = profiles/common/home/.agents/skills-repos/superpowers@obra
 	url = https://github.com/obra/superpowers
+[submodule "profiles/common/home/.agents/skills-repos/skills@mattpocock"]
+	path = profiles/common/home/.agents/skills-repos/skills@mattpocock
+	url = https://github.com/mattpocock/skills

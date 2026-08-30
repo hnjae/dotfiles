@@ -1,6 +1,6 @@
 ---
 name: link-html-clipper
-description: Create polished standalone HTML+CSS clipping files from source URLs, social posts, article excerpts, threads, or user-pasted text. Use when Codex should turn a link or pasted thread into a clean Obsidian-ready HTML file, preserve source URL/author/datetime metadata, support dark and light modes, query the source directly when available, and ask the user for pasted content when the source cannot be fetched reliably.
+description: Create polished standalone HTML+CSS clipping files from source URLs, social posts, article excerpts, threads, or user-pasted text. Use when the user asks to turn a link or pasted thread into a clean Obsidian-ready HTML file, preserve source URL/author/datetime metadata, support dark and light modes, query the source directly when available, and ask the user for pasted content when the source cannot be fetched reliably.
 ---
 
 # Link HTML Clipper
