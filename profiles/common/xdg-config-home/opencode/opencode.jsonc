@@ -68,6 +68,7 @@
   },
   "plugin": [
     "@mohak34/opencode-notifier@latest",
-    "@simonwjackson/opencode-direnv"
+    "@simonwjackson/opencode-direnv",
+    "opentmux"
   ]
 }

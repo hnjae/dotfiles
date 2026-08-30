@@ -1,0 +1,11 @@
+#!/usr/bin/env -S just --justfile
+
+set unstable
+set fallback := false
+set lazy
+
+_:
+    @just --list
+
+bootstrap:
+    pnpm add --global --allow-build='opentmux' 'opentmux'
