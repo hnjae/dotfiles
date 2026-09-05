@@ -47,3 +47,9 @@
 [submodule "profiles/common/home/.agents/skills-repos/skills@mattpocock"]
 	path = profiles/common/home/.agents/skills-repos/skills@mattpocock
 	url = https://github.com/mattpocock/skills
+[submodule "profiles/common/home/.agents/skills-repos/ffmpeg-skill@kajisho5"]
+	path = profiles/common/home/.agents/skills-repos/ffmpeg-skill@kajisho5
+	url = https://github.com/kajisho5/ffmpeg-skill
+[submodule "profiles/common/home/.agents/skills-repos/skills@humanlayer"]
+	path = profiles/common/home/.agents/skills-repos/skills@humanlayer
+	url = https://github.com/humanlayer/skills
