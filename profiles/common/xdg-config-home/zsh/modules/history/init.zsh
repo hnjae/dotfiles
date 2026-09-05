@@ -29,6 +29,7 @@ typeset -a history_ignore_patterns=(
     "sudo reboot" "sudo shutdown" "sudo halt"
     'systemctl reboot' 'systemctl halt' 'systemctl poweroff'
     'systemctl kexec' 'systemctl soft-reboot'
+    'tailscale login'
 
     # 읽기 전용 명령어
     'man *' 'which *' 'command *' 'stat *'

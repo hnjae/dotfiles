@@ -9,6 +9,7 @@ IMAGE_VIEWER="org.hnjae.kiriview.desktop"
 main() {
     handlr set "video/vnd.avi" "$VIDEO_PLAYER"
     handlr set "video/x-matroska" "$VIDEO_PLAYER"
+    handlr set "application/x-matroska" "$VIDEO_PLAYER"
     handlr set "video/x-ms-asf" "$VIDEO_PLAYER"
     handlr set "video/x-msvideo" "$VIDEO_PLAYER"
     handlr set 'video/mp4' "$VIDEO_PLAYER"
@@ -16,6 +17,7 @@ main() {
     handlr set 'video/x-ms-wmv' "$VIDEO_PLAYER"
     handlr set 'video/mp2t' "$VIDEO_PLAYER"
     handlr set 'video/MP2T' "$VIDEO_PLAYER"
+    handlr set 'video/ogg' "$VIDEO_PLAYER"
 
     # xdg-mime of image files
     handlr set "image/apng" "$IMAGE_VIEWER"

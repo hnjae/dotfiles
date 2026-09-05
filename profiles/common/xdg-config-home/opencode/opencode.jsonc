@@ -1,5 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "autoupdate": "notify",
   "agent": {
     "plan": {
       "model": "zai-coding-plan/glm-5.3-flash",
