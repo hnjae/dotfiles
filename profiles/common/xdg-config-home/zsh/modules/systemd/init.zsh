@@ -81,7 +81,7 @@ scxl() {
     exec journalctl --follow --since "12s ago" --output=short-full --unit "$unit"
 }
 
-alias sih="systemd-inhibit"
+alias sih="systemd-inhibit --what=sleep"
 
 # _sysstart_completion() {
 #     local -a units

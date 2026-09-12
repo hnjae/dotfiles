@@ -4,7 +4,7 @@
 flac --best --verify <input> -o <output>.flac
 
 # recompress flac file
-fd -e flac --exec flac --best --verify {} -o out.{.}.flac
+fd -e flac --exec flac --best --verify '{}' -o '{//}/out.{/.}.flac'
 
 # verify flac files
 fd -e flac --exec flac -d -t
