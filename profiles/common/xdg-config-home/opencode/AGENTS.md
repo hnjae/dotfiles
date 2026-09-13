@@ -41,15 +41,6 @@ If a tool (e.g. `typos`) flags verified-correct content, preserve the content an
 
 ## Git commits and pull requests
 
-Use Conventional Commits with a scope whenever one clearly applies. For completed change tasks in a Git repository, commit the verified, in-scope changes unless the user has said otherwise. Do not commit unrelated existing changes, read-only work, or an incomplete or failing result.
+For completed change tasks in a Git repository, commit the verified, in-scope changes unless the user has said otherwise. Do not commit unrelated existing changes, read-only work, or an incomplete or failing result.
 
-Determine attribution from the final commit contents after any amend. When those contents include changes materially authored by opencode, add this exact trailer to the commit message footer (standard trailer block, after a blank line below the body):
-
-```gitcommit
-Co-Authored-By: opencode <noreply@opencode.ai>
-```
-
-- Never duplicate this trailer if it is already present.
-- When the final commit contents contain no changes materially authored by opencode (e.g., opencode only amends another author's commit metadata), omit it unless the user explicitly requests it.
-
-When a pull request includes commits carrying the trailer above, state the same attribution in the pull request body: an `## Attribution` section reading "This PR was authored with [opencode](https://opencode.ai)." Omit it for pull requests with no attributed commits, unless the user explicitly requests it.
+Use the `git-commit` skill for creating commits.
