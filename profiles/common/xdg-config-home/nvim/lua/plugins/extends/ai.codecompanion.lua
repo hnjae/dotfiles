@@ -64,7 +64,7 @@ return {
           opts = {
             show_model_choices = false,
           },
-          openrouter_chat = openrouter_adapter("google/gemini-3.7-flash:batch", {
+          openrouter_chat = openrouter_adapter("deepseek/deepseek-v4.1-flash", {
             think = {
               mapping = "parameters",
               type = "boolean",
@@ -72,7 +72,7 @@ return {
             },
           }),
 
-          openrouter_light_think = openrouter_adapter("google/gemini-3.7-flash:batch", {
+          openrouter_light_think = openrouter_adapter("deepseek/deepseek-v4.1-flash", {
             think = {
               mapping = "parameters",
               type = "boolean",
@@ -80,15 +80,15 @@ return {
             },
           }),
 
-          -- $0.1254 / $0.5016per 1M
-          openrouter_light = openrouter_adapter("openai/gpt-5.6-luna:batch", {
+          openrouter_light = openrouter_adapter("deepseek/deepseek-v4.1-flash", {
             think = {
               mapping = "parameters",
               type = "boolean",
               default = true,
             },
           }),
-          openrouter_language = openrouter_adapter("google/gemini-3.7-flash:batch", {
+
+          openrouter_language = openrouter_adapter("deepseek/deepseek-v4.1-flash", {
             think = {
               mapping = "parameters",
               type = "boolean",
