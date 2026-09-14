@@ -5,27 +5,32 @@
     "read": {
       "/nix/store/**": "allow",
       "/tmp/**": "allow",
-      "/home/hnjae/.local/share/cargo/**": "allow"
+      "/home/hnjae/.local/share/cargo/**": "allow",
+      "/home/hnjae/git/**": "allow"
     },
     "glob": {
       "/nix/store/**": "allow",
       "/tmp/**": "allow",
-      "/home/hnjae/.local/share/cargo/**": "allow"
+      "/home/hnjae/.local/share/cargo/**": "allow",
+      "/home/hnjae/git/**": "allow"
     },
     "grep": {
       "/nix/store/**": "allow",
       "/tmp/**": "allow",
-      "/home/hnjae/.local/share/cargo/**": "allow"
+      "/home/hnjae/.local/share/cargo/**": "allow",
+      "/home/hnjae/git/**": "allow"
     },
     "list": {
       "/nix/store/**": "allow",
       "/tmp/**": "allow",
-      "/home/hnjae/.local/share/cargo/**": "allow"
+      "/home/hnjae/.local/share/cargo/**": "allow",
+      "/home/hnjae/git/**": "allow"
     },
     "external_directory": {
       "/nix/store/**": "allow",
       "/tmp/**": "allow",
-      "/home/hnjae/.local/share/cargo/**": "allow"
+      "/home/hnjae/.local/share/cargo/**": "allow",
+      "/home/hnjae/git/**": "allow"
     },
     "bash": {
       "npm *": "deny",
