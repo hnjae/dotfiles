@@ -44,3 +44,13 @@ If a tool (e.g. `typos`) flags verified-correct content, preserve the content an
 For completed change tasks in a Git repository, commit the verified, in-scope changes unless the user has said otherwise. Do not commit unrelated existing changes, read-only work, or an incomplete or failing result.
 
 Use the `git-commit` skill for creating commits; it defines the commit message format and the `Assisted-by:` AI attribution trailer.
+
+## AI attribution
+
+When you author a pull request description or an issue/review comment of substance, append a final line disclosing LLM assistance:
+
+```text
+Assisted-by: LLM <harness> <model>
+```
+
+`<harness>` is the agent harness name (e.g. `opencode`) and `<model>` is the model identifier in use; the executing agent fills in its own values, never hardcoded. Omit the line for purely mechanical one-liners such as `Closes #123`.
