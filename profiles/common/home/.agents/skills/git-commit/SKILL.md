@@ -129,12 +129,6 @@ Assisted-by: LLM <harness> <model>
 - `<harness>`: the agent harness name, e.g. `opencode`, `claude-code`
 - `<model>`: the model identifier in use, e.g. `glm-5.3-flash`
 
-Example:
-
-```text
-Assisted-by: LLM opencode glm-5.3-flash
-```
-
 Rules:
 
 - Use `Assisted-by:` instead of `Co-Authored-By:` for AI disclosure. `Co-Authored-By` asserts joint authorship; `Assisted-by` is a disclosure trailer.

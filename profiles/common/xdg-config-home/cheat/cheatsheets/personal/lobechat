@@ -5,10 +5,10 @@ tags: [ LobeChat ]
 <https://github.com/lobehub/lobe-chat>
 
 - New Chat:
-  - `<A-n>` or `<A-k>`
+    - `<A-n>` or `<A-k>`
 
 - reGenerate:
-  - `<A-r>` ?
+    - `<A-r>` ?
 
 - `<C-[>`, `<C-]>`
 - `<C-S-?>`
