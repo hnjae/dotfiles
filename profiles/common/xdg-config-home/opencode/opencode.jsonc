@@ -1,72 +1,24 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "autoupdate": "notify",
-  "permission": {
-    "read": {
-      "/nix/store/**": "allow",
-      "/tmp/**": "allow",
-      "/home/hnjae/.local/share/cargo/**": "allow",
-      "/home/hnjae/git/**": "allow"
-    },
-    "glob": {
-      "/nix/store/**": "allow",
-      "/tmp/**": "allow",
-      "/home/hnjae/.local/share/cargo/**": "allow",
-      "/home/hnjae/git/**": "allow"
-    },
-    "grep": {
-      "/nix/store/**": "allow",
-      "/tmp/**": "allow",
-      "/home/hnjae/.local/share/cargo/**": "allow",
-      "/home/hnjae/git/**": "allow"
-    },
-    "list": {
-      "/nix/store/**": "allow",
-      "/tmp/**": "allow",
-      "/home/hnjae/.local/share/cargo/**": "allow",
-      "/home/hnjae/git/**": "allow"
-    },
-    "external_directory": {
-      "/nix/store/**": "allow",
-      "/tmp/**": "allow",
-      "/home/hnjae/.local/share/cargo/**": "allow",
-      "/home/hnjae/git/**": "allow"
-    },
-    "bash": {
-      "npm *": "deny",
-      "npx *": "deny",
-      "sudo *": "deny",
-      "nix-env *": "deny",
-      "sops": "deny",
-      "ssh admin*": "deny",
-      "ssh deploy*": "deny"
-    }
-  },
-  "lsp": {
-    "pyright": {
+  "permissions": [
+    // https://opencode.ai/v2/docs/permissions
+    { "action": "websearch", "resource": "*", "effect": "allow" },
+    // use `pnpm` instead
+    { "action": "shell", "resource": "npm *", "effect": "deny" },
+    { "action": "shell", "resource": "npx *", "effect": "deny" },
+    // use `nix` instead
+    { "action": "shell", "resource": "nix-env *", "effect": "deny" },
+    // use `uvx` instead
+    { "action": "shell", "resource": "pipx *", "effect": "deny" },
+    // hardning
+    { "action": "shell", "resource": "sudo *", "effect": "deny" },
+    { "action": "shell", "resource": "ssh admin*", "effect": "deny" },
+    { "action": "shell", "resource": "ssh deploy*", "effect": "deny" },
+    { "action": "shell", "resource": "sops*", "effect": "deny" }
+  ],
+  "formatter": {
+    "prettier": {
       "disabled": true
-    },
-    "basedpyright": {
-      "disabled": true
-    },
-    "ty": {
-      "command": ["ty", "server"],
-      "extensions": [".py", ".pyi"]
-    },
-    "qmlls": {
-      "command": ["qmlls", "--no-cmake-calls"],
-      "extensions": [".qml"]
-    },
-    "docker-ls": {
-      "command": ["docker-language-server", "start"],
-      "extensions": ["Containerfile", "Dockerfile"]
     }
-  },
-  "plugin": [
-    // NOTE: does not work for opencode2 <2026-09-17>
-    // "@mohak34/opencode-notifier@latest",
-    // "@simonwjackson/opencode-direnv",
-    // "opentmux",
-    // "cc-safety-net@latest"
-  ]
+  }
 }

@@ -8,4 +8,4 @@ _:
     @just --list
 
 bootstrap:
-    pnpm add --global --allow-build='opentmux' 'opentmux'
+    echo "foo"
