@@ -63,9 +63,10 @@
     }
   },
   "plugin": [
-    "@mohak34/opencode-notifier@latest",
-    "@simonwjackson/opencode-direnv",
-    "opentmux",
-    "cc-safety-net@latest"
+    // NOTE: does not work for opencode2 <2026-09-17>
+    // "@mohak34/opencode-notifier@latest",
+    // "@simonwjackson/opencode-direnv",
+    // "opentmux",
+    // "cc-safety-net@latest"
   ]
 }

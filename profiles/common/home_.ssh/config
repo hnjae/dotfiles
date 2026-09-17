@@ -11,5 +11,11 @@ Host eris
 Host aether
   IdentityAgent ~/.1password/agent.sock
 
+Host hermes
+  IdentityAgent ~/.1password/agent.sock
+
 Host 192.168.*
+  IdentityAgent ~/.1password/agent.sock
+
+Host 10.*
   IdentityAgent ~/.1password/agent.sock

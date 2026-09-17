@@ -17,4 +17,4 @@ fi
 
 source "$initfile"
 
-alias oc="systemd-inhibit --what=sleep --who=opencode --why='opencode session' opencode --port"
+alias oc="systemd-inhibit --what=sleep --who=opencode --why='opencode session' opencode"
