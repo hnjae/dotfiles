@@ -127,7 +127,7 @@ Assisted-by: LLM <harness> <model>
 ```
 
 - `<harness>`: the agent harness name, e.g. `opencode`, `claude-code`
-- `<model>`: the model identifier in use, e.g. `glm-5.3-flash`
+- `<model>`: the model identifier in use without its provider prefix, e.g. `glm-5.3-flash`, not `zai-coding-plan/glm-5.3-flash`
 
 Rules:
 

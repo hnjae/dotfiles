@@ -53,4 +53,4 @@ When you author a pull request description or an issue/review comment of substan
 Assisted-by: LLM <harness> <model>
 ```
 
-`<harness>` is the agent harness name (e.g. `opencode`) and `<model>` is the model identifier in use; the executing agent fills in its own values, never hardcoded. Omit the line for purely mechanical one-liners such as `Closes #123`.
+`<harness>` is the agent harness name (e.g. `opencode`) and `<model>` is the model identifier in use without its provider prefix (e.g. `glm-5.3-flash`, not `zai-coding-plan/glm-5.3-flash`); the executing agent fills in its own values, never hardcoded. Omit the line for purely mechanical one-liners such as `Closes #123`.
