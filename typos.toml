@@ -1,7 +1,7 @@
 #:schema https://cdn.jsdelivr.net/gh/crate-ci/typos@master/config.schema.json
 
 [default]
-locale = "en-us"
+locale = "en"
 extend-ignore-re = [
   "alias.*",
 ]
@@ -17,6 +17,9 @@ extend-exclude = [
   "lib/dotbot/",
   "**/xdg-data-home/zimfw",
   "**/mpv/script-repos",
+  "**/mpv/shaders-repo",
+  "**/zsh/modules/**/module",
+  "**/.agents/skills-repos",
 
   # Managed by own typos.toml
   "**/xdg-config-home/nvim",
@@ -28,10 +31,7 @@ extend-exclude = [
   "**/xdg-config-home/k*",
   "**/xdg-config-home/lazygit",
   "**/xdg-config-home/**/themes/**/*.ini",
-
-  # Submodules
-  "**/zsh/modules/**/module/*",
-  "**/zsh/modules/**/module/*",
+  "**/xdg-data-home/kxmlgui5",
 ]
 
 [type.zsh]
