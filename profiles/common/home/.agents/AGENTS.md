@@ -50,7 +50,7 @@ Use the `git-commit` skill for creating commits; it defines the commit message f
 When you author a pull request description or an issue/review comment of substance, append a final line disclosing LLM assistance:
 
 ```text
-Assisted-by: LLM <harness> <model>
+Assisted-by: LLM opencode glm-5.3-flash
 ```
 
-`<harness>` is the agent harness name (e.g. `opencode`) and `<model>` is the model identifier in use without its provider prefix (e.g. `glm-5.3-flash`, not `zai-coding-plan/glm-5.3-flash`); the executing agent fills in its own values, never hardcoded. Omit the line for purely mechanical one-liners such as `Closes #123`.
+The token after `LLM` is the agent harness name (e.g. `opencode`) and the final token is the model identifier in use without its provider prefix (e.g. `glm-5.3-flash`, not `zai-coding-plan/glm-5.3-flash`). Write plain space-separated tokens without angle brackets; the executing agent fills in its own values, never hardcoded. Omit the line for purely mechanical one-liners such as `Closes #123`.

@@ -102,7 +102,7 @@ git commit -m "$(cat <<'EOF'
 <optional body>
 
 <optional footer>
-Assisted-by: LLM <harness> <model>
+Assisted-by: LLM opencode glm-5.3-flash
 EOF
 )"
 ```
@@ -123,14 +123,15 @@ Disclose LLM assistance with an `Assisted-by:` trailer, following the Fedora AI 
 - The executing agent fills in its own identity; never hardcode values.
 
 ```text
-Assisted-by: LLM <harness> <model>
+Assisted-by: LLM opencode glm-5.3-flash
 ```
 
-- `<harness>`: the agent harness name, e.g. `opencode`, `claude-code`
-- `<model>`: the model identifier in use without its provider prefix, e.g. `glm-5.3-flash`, not `zai-coding-plan/glm-5.3-flash`
+- The token after `LLM` is the agent harness name, e.g. `opencode`, `claude-code`
+- The final token is the model identifier in use without its provider prefix, e.g. `glm-5.3-flash`, not `zai-coding-plan/glm-5.3-flash`
 
 Rules:
 
+- Write the value as plain space-separated tokens; never wrap the harness or model in angle brackets (e.g. `<opencode>` is wrong).
 - Use `Assisted-by:` instead of `Co-Authored-By:` for AI disclosure. `Co-Authored-By` asserts joint authorship; `Assisted-by` is a disclosure trailer.
 - Place it in the footer (the last paragraph) of the commit message.
 - Never add `Signed-off-by` on behalf of the AI; DCO certification is human-only.
