@@ -35,7 +35,7 @@ Use `assets/researched-note-template.html` as the starting point unless the targ
 
 4. Shape the document.
    - Start with the answer or practical conclusion.
-   - Add 3-5 key-point cards when they improve scanning.
+   - Add 3-5 numbered key points when they improve scanning.
    - Organize body sections around decisions a reader needs to make, not around the order sources were found.
    - Include code blocks, examples, tables, or decision matrices when they make the note more actionable.
    - For coding conventions, distinguish language syntax, project convention, ecosystem habit, and external-system names.
@@ -43,7 +43,7 @@ Use `assets/researched-note-template.html` as the starting point unless the targ
 5. Style and implementation.
    - Create one standalone `.html` file with embedded CSS only.
    - Support light and dark mode through both `@media (prefers-color-scheme: dark)` and `.theme-dark` / `.theme-light` selectors.
-   - Use restrained Obsidian/Flexoki-like styling: warm paper/ink neutrals, thin borders, low shadow, cyan links.
+   - Use the printed-clipping visual language: warm paper and ink neutrals with a rust-red accent, hairline borders, dashed rules, and a scissor-mark snip decoration. No shadows or decorative gradients. Body text uses the system `sans-serif`, headings the system `serif`, and code the system `monospace`; never load webfonts.
    - Do not add external fonts, external CSS, images, or scripts unless the user explicitly asks.
    - Scope page styles under `.source-clip` or another root class.
 
