@@ -2,7 +2,8 @@
 
 set -eu
 
-BROWSER="com.brave.Browser.desktop"
+# BROWSER="com.brave.Browser.desktop"
+BROWSER="firefox.desktop"
 VIDEO_PLAYER="mpv.desktop"
 IMAGE_VIEWER="org.hnjae.kiriview.desktop"
 
