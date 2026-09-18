@@ -172,17 +172,21 @@ Output rules:
 - Return only the commit message
 - No code fences, no explanation"
 
+if [[ -n "$oc_variant" ]]; then
+    oc_model="${oc_model}#${oc_variant}"
+fi
+
 oc_args=(
-    --pure
     --format json
     -m "$oc_model"
-    --variant "$oc_variant"
-    --dir "$repo_root"
 )
 
-opencode run "${oc_args[@]}" "$prompt" -f "$context_file" >|"$oc_raw" 2>|"$oc_log"
+(
+    cd "$repo_root" || exit 1
+    opencode run "${oc_args[@]}" "$prompt" -f "$context_file" >|"$oc_raw" 2>|"$oc_log"
+)
 commit_status=$?
-oc_error="$(jq -r 'select(.type == "error") | .error.data.message // .error.name // empty' "$oc_raw")"
+oc_error="$(jq -r 'select(.type == "error") | .error.message // .error.type // empty' "$oc_raw")"
 
 if ((commit_status != 0)) || [[ -n "$oc_error" ]]; then
     if [[ -n "$oc_error" ]]; then
