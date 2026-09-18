@@ -2,3 +2,9 @@
 
 # read(scan) font file
 fc-scan <fontfile>
+
+# find out what matches monospace
+fc-match monospace
+
+# list all fonts that matches monospace
+fc-match -s monospace | head
