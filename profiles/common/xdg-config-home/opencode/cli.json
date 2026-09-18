@@ -1,3 +1,4 @@
+// vi:ft=jsonc
 {
   "$schema": "https://opencode.ai/v2/cli.json",
   "theme": {
@@ -11,5 +12,38 @@
     "scrollbar": false,
     "thinking": "show"
   },
-  "animations": true
+  "animations": true,
+  "keybinds": {
+    "prompt.editor": ["ctrl+g", "<leader>e"], // default `<leader>e`
+    "session.compact": "", // default `<leader>c`
+    "app.exit": "", // default `<leader>q`
+    "session.first": ["ctrl+g", "alt+home"], // remove "home"
+    "session.last": ["ctrl+alt+g", "alt+end"], // remove "end"
+    "prompt.clear": "", // default: `ctrl+c`. `C-c` 는 terminate 인데 어색함.
+    "input.select.all": "ctrl+shift+a", // default: super+a
+    "input.delete": ["delete", "shift+delete"] // default: includes: `C-d` (`C-d` 는 vim 에서 scroll down 이라 어색함)
+    // TODO: remap following <2026-09-18>
+    // https://opencode.ai/v2/docs/cli/keybinds
+    // input.undo, input.redo :
+  },
+  "lsp": {
+    "pyright": {
+      "disabled": true
+    },
+    "basedpyright": {
+      "disabled": true
+    },
+    "ty": {
+      "command": ["ty", "server"],
+      "extensions": [".py", ".pyi"]
+    },
+    "qmlls": {
+      "command": ["qmlls", "--no-cmake-calls"],
+      "extensions": [".qml"]
+    },
+    "docker-ls": {
+      "command": ["docker-language-server", "start"],
+      "extensions": ["Containerfile", "Dockerfile"]
+    }
+  }
 }
