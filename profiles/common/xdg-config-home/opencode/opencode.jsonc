@@ -14,7 +14,14 @@
     { "action": "shell", "resource": "sudo *", "effect": "deny" },
     { "action": "shell", "resource": "ssh admin*", "effect": "deny" },
     { "action": "shell", "resource": "ssh deploy*", "effect": "deny" },
-    { "action": "shell", "resource": "sops*", "effect": "deny" }
+    { "action": "shell", "resource": "sops*", "effect": "deny" },
+
+    // Read dotfiles
+    {
+      "action": "read",
+      "resource": "/home/hnjae/.local/share/dotfiles/*",
+      "effect": "allow"
+    }
   ],
   "formatter": {
     "prettier": {
