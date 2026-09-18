@@ -11,7 +11,7 @@ Create a self-contained HTML document that preserves a source link and its visib
 
 Use `assets/obsidian-source-clip-template.html` as the starting point when a styled standalone page is requested.
 
-The default visual language should follow Obsidian Minimal with the Flexoki palette: warm paper/ink neutrals, restrained borders, low shadow, no decorative gradients, and cyan links/active accents. Use Flexoki base values for text, backgrounds, and interface lines; use `cyan-600` in light mode and `cyan-400` in dark mode for links and active markers.
+The default visual language is a printed clipping: warm paper and ink neutrals with a rust-red accent, hairline borders, dashed rules, and a scissor-mark snip decoration. No shadows or decorative gradients. Body text uses the system `sans-serif` and headings use the system `serif`; never load webfonts — rely on generic system families (`sans-serif`, `serif`, `monospace`).
 
 ## Workflow
 
@@ -38,7 +38,7 @@ The default visual language should follow Obsidian Minimal with the Flexoki pale
 4. Shape the document.
    - Keep the source text faithful. Lightly segment, title, and label sections, but do not summarize away details unless the user asks for a summary.
    - For threads, treat the first post as primary and subsequent posts as replies in sequence. If the user says replies are siblings, avoid implying nested reply hierarchy.
-   - Add a short subtitle and 2-4 key-point cards only when they improve scanning.
+   - Add a short subtitle and 2-4 numbered key points only when they improve scanning.
    - Put reference links in a final section when the source text contains them.
 
 5. Write the output file.
