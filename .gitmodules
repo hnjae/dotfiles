@@ -53,3 +53,12 @@
 [submodule "profiles/common/home/.agents/skills-repos/skills@humanlayer"]
 	path = profiles/common/home/.agents/skills-repos/skills@humanlayer
 	url = https://github.com/humanlayer/skills
+[submodule "profiles/common/home/.agents/skills-repos/i-have-adhd@ayghri"]
+	path = profiles/common/home/.agents/skills-repos/i-have-adhd@ayghri
+	url = https://github.com/ayghri/i-have-adhd
+[submodule "profiles/common/home/.agents/skills-repos/security-audit-skill@cloudflare"]
+	path = profiles/common/home/.agents/skills-repos/security-audit-skill@cloudflare
+	url = https://github.com/cloudflare/security-audit-skill
+[submodule "profiles/common/home/.agents/skills-repos/andrej-karpathy-skills@multica-ai"]
+	path = profiles/common/home/.agents/skills-repos/andrej-karpathy-skills@multica-ai
+	url = https://github.com/multica-ai/andrej-karpathy-skills

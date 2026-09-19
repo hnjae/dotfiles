@@ -31,3 +31,6 @@
 /installation_id
 /thread-writer-locks
 /vendor_imports
+/plugins
+/sqlite
+/rollout-migrations
