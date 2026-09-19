@@ -37,8 +37,9 @@ update_module_by_tag() {
     latest_tag="$(git -C "$module" tag -l --sort=-version:refname | head -n1)"
 
     if [ "$latest_tag" = "" ]; then
-        echo "ERR: No tags found in $module" >&2
-        return 1
+        echo "INFO: No tags found in $module, updating by branch instead" >&2
+        update_module_by_branch "$module"
+        return
     fi
 
     if git -C "$module" diff --quiet HEAD "$latest_tag"; then
