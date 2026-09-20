@@ -1,5 +1,12 @@
 # Agent Guidelines
 
+## Session start
+
+At the start of every session, before answering the first request, load these skills with the `skill` tool:
+
+- `i-have-adhd`
+- `karpathy-guidelines`
+
 ## Documentation
 
 - **Architecture** docs live in `docs/architecture/`; **user-facing specs** as per-subject files under `docs/spec/` (its `README.md` is an index, not an aggregate). Specs describe external behavior only — no implementation details.
