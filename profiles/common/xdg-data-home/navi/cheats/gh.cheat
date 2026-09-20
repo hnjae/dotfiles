@@ -2,3 +2,12 @@
 
 # gh login usigh oauth
 BROWSER=true gh auth login --hostname github.com --git-protocol ssh --web --skip-ssh-key
+
+# switch(checkout) to specific github pr
+gh pr checkout <number>
+
+# create worktree
+gh pr checkout 4 --worktree ~/Projects/pr-4
+
+# remove worktree
+git -C ~/Projects/nix-config worktree remove ~/Projects/pr-4
