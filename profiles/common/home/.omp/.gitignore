@@ -1,0 +1,9 @@
+/logs
+/run
+/agent/sessions
+/agent/terminal-sessions
+/agent/*.db
+/agent/*.db-shm
+/agent/*.db-wal
+/agent/*_cache.json
+/agent/last-changelog-version
