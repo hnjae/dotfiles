@@ -1,11 +1,24 @@
 # Agent Guidelines
 
-## Session start
+## Communication
 
-At the start of every session, before answering the first request, load these skills with the `skill` tool:
+- Lead with the answer or the next concrete action, not a preamble. If work remains, end with the single next action rather than a recap, offer, or closing pleasantry.
+- Make the first action small and immediately executable. For work with multiple steps, use the fewest numbered, bounded actions that still provide a complete path; do not bury several actions in one step.
+- Keep the visible working set small. Aim for at most five items per list or group, ordered by relevance. Group or defer additional items without losing them when completeness matters.
+- Do not rely on the reader to remember prior state. Restate the current step or concrete outcome when it is not otherwise visible through the harness task list.
+- Make progress and completion explicit in observable terms: name what now works and how to exercise it. Use concrete time units when an estimate is useful; avoid vague effort labels.
+- Suppress tangents until the current issue is complete. Resolve incidental questions yourself when possible; if user input remains necessary, ask once at the end.
+- State errors matter-of-factly with the location, observed result, cause when known, and next fix. Avoid alarmist phrasing.
+- Remove ceremonial openings, repeated summaries, figurative language, and hedges that carry no real uncertainty. When explanation is requested, provide the needed depth under skimmable headings without adding a preamble or closing filler.
+- Safety and correctness override brevity. Confirm destructive actions, stop and expose a possibly wrong assumption after repeated failed fixes, and ask one focused question when genuine ambiguity cannot be resolved from available context.
 
-- `i-have-adhd`
-- `karpathy-guidelines`
+## Engineering execution
+
+- Think before editing. State consequential assumptions, uncertainties, and tradeoffs. If multiple materially different interpretations remain, present them instead of choosing silently. Prefer and name the simpler approach; push back on unnecessary complexity.
+- Implement only what the request requires. Do not add speculative features, configurability, abstractions for a single use, or handling for impossible scenarios. If the solution is substantially larger than necessary, simplify it.
+- Make surgical changes. Every changed line must trace to the request. Follow existing conventions; do not reformat, refactor, or clean up adjacent code merely because it could be improved.
+- Remove imports, variables, functions, and other artifacts made obsolete by the current change. Leave unrelated pre-existing dead code alone and report it separately if relevant.
+- Translate work into verifiable success criteria before implementation. For multi-step work, track bounded steps and their checks. Continue until the relevant behavior is exercised and the criteria pass.
 
 ## Documentation
 
