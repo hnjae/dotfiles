@@ -1,9 +1,14 @@
+/install-id
 /logs
 /run
-/agent/sessions
-/agent/terminal-sessions
+gpu_cache.json
+
+# Agents
 /agent/*.db
 /agent/*.db-shm
 /agent/*.db-wal
-/agent/*_cache.json
+/agent/cache
+/agent/custom-session-files
 /agent/last-changelog-version
+/agent/sessions
+/agent/terminal-sessions
