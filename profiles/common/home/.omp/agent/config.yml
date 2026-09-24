@@ -6,11 +6,12 @@ setupVersion: 2
 composer:
   shape: claude
 modelRoles:
-  default: openai-codex/gpt-6-luna:high
+  # NOTE: plan mode 에서 작성한 plan 은 `smol`, `default`, `slow` 중 하나에서 실행하게 된다. <2026-09-24>
   plan: openai-codex/gpt-6-sol:low
+  default: openai-codex/gpt-6-luna:high
   slow: openai-codex/gpt-6-luna:xhigh
-  task: openai-codex/gpt-6-luna:medium
   smol: openai-codex/gpt-6-luna:low
+  task: openai-codex/gpt-6-luna:medium
 hideThinkingBlock: false
 statusLine:
   preset: nerd
