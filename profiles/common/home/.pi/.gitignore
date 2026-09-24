@@ -1,0 +1,5 @@
+# Agents
+/agent/sessions
+/agent/models-store.json
+/agent/auth.json
+/agent/trust.json

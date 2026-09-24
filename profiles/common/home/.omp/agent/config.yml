@@ -4,11 +4,14 @@ theme:
   light: light-gruvbox
 setupVersion: 2
 composer:
-  shape: band
+  shape: claude
 modelRoles:
-  default: openai-codex/gpt-6-sol:low
+  default: openai-codex/gpt-6-luna:high
   plan: openai-codex/gpt-6-sol:low
   slow: openai-codex/gpt-6-luna:xhigh
   task: openai-codex/gpt-6-luna:medium
   smol: openai-codex/gpt-6-luna:low
 hideThinkingBlock: false
+statusLine:
+  preset: nerd
+  contextLine: embedded

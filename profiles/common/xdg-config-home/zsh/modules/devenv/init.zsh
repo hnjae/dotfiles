@@ -1,4 +1,5 @@
-if ((!$+commands[devenv])); then
+# NOTE: do not autoload devenv when not in tmux <2026-09-24>
+if ((!$+commands[devenv])) || [[ -z ${TMUX:-} ]]; then
     return
 fi
 
@@ -17,7 +18,7 @@ local sig="${commands[devenv]:A}"
 # - zsh -fc 'source cached-hook.zsh'                 5.6 ms ± 0.9 ms
 # - devenv hook zsh >/dev/null                      22.9 ms ± 3.2 ms
 # Baseline-adjusted cost: eval hook is about +24.4 ms; cached hook is about +1.9 ms.
-if [[
+if [[ 
     ! -e "$initfile" ||
     "$initfile" -ot "${commands[devenv]}" ||
     ! -e "$sigfile" ||
