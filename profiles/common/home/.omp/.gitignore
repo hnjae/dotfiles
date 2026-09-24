@@ -1,7 +1,9 @@
+gpu_cache.json
+
 /install-id
 /logs
 /run
-gpu_cache.json
+/security
 
 # Agents
 /agent/*.db
@@ -12,3 +14,4 @@ gpu_cache.json
 /agent/last-changelog-version
 /agent/sessions
 /agent/terminal-sessions
+/agent/blobs

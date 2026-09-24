@@ -1,3 +1,4 @@
+---
 symbolPreset: nerd
 theme:
   dark: dark-gruvbox
@@ -6,7 +7,6 @@ setupVersion: 2
 composer:
   shape: claude
 modelRoles:
-  # NOTE: plan mode 에서 작성한 plan 은 `smol`, `default`, `slow` 중 하나에서 실행하게 된다. <2026-09-24>
   plan: openai-codex/gpt-6-sol:low
   default: openai-codex/gpt-6-luna:high
   slow: openai-codex/gpt-6-luna:xhigh
@@ -14,5 +14,20 @@ modelRoles:
   task: openai-codex/gpt-6-luna:medium
 hideThinkingBlock: false
 statusLine:
-  preset: nerd
+  preset: default
   contextLine: embedded
+  separator: block
+  transparent: true
+security:
+  enabled: true
+tui:
+  textSizing: true
+  imeSafeCursor: false
+display:
+  showTokenUsage: true
+  showTurnTime: true
+  smoothStreaming: true
+  pinnedAgents: full
+proseOnlyThinking: true
+astGrep:
+  enabled: true

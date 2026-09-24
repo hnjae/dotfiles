@@ -60,14 +60,8 @@ If a tool (e.g. `typos`) flags verified-correct content, preserve the content an
 
 For completed change tasks in a Git repository, commit the verified, in-scope changes unless the user has said otherwise. Do not commit unrelated existing changes, read-only work, or an incomplete or failing result.
 
-Use the `git-commit` skill for creating commits; it defines the commit message format and the `Assisted-by:` AI attribution trailer.
+Use the `git-commit` skill for creating commits.
 
-## AI attribution
+## Pull requests
 
-When you author a pull request description or an issue/review comment of substance, append a final line disclosing LLM assistance:
-
-```text
-Assisted-by: LLM opencode glm-5.3-flash
-```
-
-The token after `LLM` is the agent harness name (e.g. `opencode`) and the final token is the model identifier in use without its provider prefix (e.g. `glm-5.3-flash`, not `zai-coding-plan/glm-5.3-flash`). Write plain space-separated tokens without angle brackets; the executing agent fills in its own values, never hardcoded. Omit the line for purely mechanical one-liners such as `Closes #123`.
+Use the `pull-request` skill for creating pull requests.
