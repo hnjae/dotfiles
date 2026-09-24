@@ -1,0 +1,41 @@
+{
+  "skill_name": "pull-request",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "In /tmp/forge-pr-evals/github-dirty, draft a GitHub PR for the committed feature on the current branch. The working tree also has an unrelated uncommitted file; exclude it. Do not push or create a remote PR. Return a title and body.",
+      "expected_output": "A title and body grounded only in the committed comparison, with the unrelated dirty file excluded, checks accurately marked unrun, and an attribution trailer. No Git or remote state changes.",
+      "files": [],
+      "expectations": [
+        "The draft describes the committed feature from the branch comparison and does not describe the unrelated uncommitted file as included.",
+        "The body identifies checks as not run or not verified and does not claim unobserved test success.",
+        "The substantive body ends with an Assisted-by trailer using plain harness and model tokens.",
+        "The run does not push, create a remote review request, stage files, or create a commit."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "In /tmp/forge-pr-evals/gitlab-no-auth, publish a GitLab merge request for the committed feature on the current branch. This is an offline evaluation: do not access the network, push, or create any remote item. Check the local fixture and report the specific authentication/publication blocker with a grounded title/body draft.",
+      "expected_output": "A grounded MR draft and a specific missing-authentication or unavailable-publication blocker; no fabricated URL or claim of publication.",
+      "files": [],
+      "expectations": [
+        "The output provides a title and body based on the committed comparison.",
+        "The output identifies the missing authentication or publication access as a blocker.",
+        "The output does not invent a GitLab URL or claim that an MR was created.",
+        "The run does not access the network, push, stage files, or create a commit."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "In /tmp/forge-pr-evals/forgejo-template, draft a Forgejo PR for the committed change on the current branch. Follow the repository's PR template exactly where applicable. Do not push or create a remote PR.",
+      "expected_output": "A Forgejo PR title and body that reflect the committed change, preserve the repository template's requested headings, accurately state test status, and do not mutate local or remote state.",
+      "files": [],
+      "expectations": [
+        "The body follows the headings and requested content in the repository's committed PR template.",
+        "The draft describes the committed change rather than inventing unrelated changes.",
+        "The output does not claim unobserved checks passed.",
+        "The run does not push, create a remote review request, stage files, or create a commit."
+      ]
+    }
+  ]
+}
