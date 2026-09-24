@@ -1,12 +1,11 @@
 ---
 symbolPreset: nerd
 theme:
-  dark: titanium
-  light: light
+  dark: dark-gruvbox
+  light: light-gruvbox
 setupVersion: 2
 composer:
   shape: band
 modelRoles:
-  default: openai-codex/gpt-5.6-luna:low
-  chat: openai-codex/gpt-5.6-sol:low
+  chat: openai-codex/gpt-6-luna:high
 hideThinkingBlock: false
