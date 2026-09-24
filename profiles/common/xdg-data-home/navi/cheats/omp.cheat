@@ -1,0 +1,4 @@
+% omp, oh-my-pi
+
+# install plugin
+omp plugin install npm:cc-safety-net --dry-run

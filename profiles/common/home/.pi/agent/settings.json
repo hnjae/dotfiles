@@ -3,5 +3,9 @@
   "theme": "dark",
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-6-luna",
-  "hideThinkingBlock": false
+  "hideThinkingBlock": false,
+  "packages": [
+    "npm:pi-mcp-adapter",
+    "npm:cc-safety-net"
+  ]
 }

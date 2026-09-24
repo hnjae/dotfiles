@@ -3,3 +3,5 @@
 /agent/models-store.json
 /agent/auth.json
 /agent/trust.json
+/agent/mcp-cache.json
+/agent/mcp-onboarding.json

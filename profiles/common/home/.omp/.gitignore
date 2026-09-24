@@ -4,6 +4,8 @@ gpu_cache.json
 /logs
 /run
 /security
+/plugins/node_modules
+/cache
 
 # Agents
 /agent/*.db

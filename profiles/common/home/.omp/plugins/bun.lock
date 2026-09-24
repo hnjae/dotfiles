@@ -1,0 +1,15 @@
+{
+  "lockfileVersion": 1,
+  "configVersion": 1,
+  "workspaces": {
+    "": {
+      "name": "omp-plugins",
+      "dependencies": {
+        "cc-safety-net": "npm:cc-safety-net",
+      },
+    },
+  },
+  "packages": {
+    "cc-safety-net": ["cc-safety-net@2.4.6", "", { "peerDependencies": { "@opencode-ai/plugin": "^1.18.29", "@opencode/plugin": "^2.0.6" }, "optionalPeers": ["@opencode-ai/plugin", "@opencode/plugin"], "bin": { "ccsn": "dist/bin/cc-safety-net.js", "cc-safety-net": "dist/bin/cc-safety-net.js" } }, "sha512-v6urIjvsoeKmVQsa02XIyfUYywTNPbfe9oKMmorkB9bt6hp0HbBhALQs7hfwNvwuIHHDhxzVHDrfNlIBwgIZDQ=="],
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "pi-extensions",
+  "private": true,
+  "dependencies": {
+    "cc-safety-net": "^2.4.6",
+    "pi-mcp-adapter": "^2.37.0"
+  }
+}
