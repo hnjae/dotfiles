@@ -25,7 +25,8 @@ notify-on-command-finish-action = "bell,notify"
 # run `ghostty +list-fonts` to get a list of available fonts
 
 # NOTE: mono space 가 아닌 font 사용 가능
-font-family = "Sarasa Fixed K Nerd Font"
+# font-family = "Sarasa Fixed K Nerd Font"
+font-family = "0xProto Nerd Font"
 # font-family = "MesloLGM Nerd Font"
 
 font-size = 10
