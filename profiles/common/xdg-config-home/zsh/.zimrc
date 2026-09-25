@@ -10,8 +10,6 @@
 
 zmodule "$ZDOTDIR/modules/history"
 
-zmodule direnv
-
 # 단순 환경변수 설정 또는 alias 설정만 있는 모듈들
 zmodule "$ZDOTDIR/modules/agents"
 zmodule "$ZDOTDIR/modules/bat"
@@ -65,6 +63,7 @@ zmodule "$ZDOTDIR/modules/compinit"
 
 zmodule "$ZDOTDIR/modules/prompt"
 zmodule "$ZDOTDIR/modules/devenv" # NOTE: precmd_functions 건드림 <2026-05-17>
+zmodule "$ZDOTDIR/modules/direnv"
 
 ###############################################################################
 # Modules that must be initialized after compinit

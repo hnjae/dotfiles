@@ -1,5 +1,5 @@
 # NOTE: do not autoload devenv when not in tmux <2026-09-24>
-if ((!$+commands[devenv])) || [[ -z ${TMUX:-} ]]; then
+if [[ -z ${TMUX:-} ]] || ((!$+commands[devenv])); then
     return
 fi
 
@@ -24,8 +24,9 @@ if [[
     ! -e "$sigfile" ||
     "$(<"$sigfile")" != "$sig" ]] \
     ; then
-    $commands[devenv] hook zsh >|"$initfile"
+    "$commands[devenv]" hook zsh >|"$initfile" || return 1
     print -r -- "$sig" >|"$sigfile"
+    zcompile -UR "$initfile"
 fi
 
 source "$initfile"
