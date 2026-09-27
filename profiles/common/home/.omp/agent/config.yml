@@ -30,3 +30,5 @@ display:
 proseOnlyThinking: true
 astGrep:
   enabled: true
+dev:
+  autoqaConsent: granted

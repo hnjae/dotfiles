@@ -6,6 +6,7 @@ gpu_cache.json
 /security
 /plugins/node_modules
 /cache
+/autoqa.db
 
 # Agents
 /agent/*.db
