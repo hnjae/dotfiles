@@ -17,6 +17,10 @@
 
 Treat questions, suspected causes, and requests for advice as read-only investigation. Answer with the evidence found and, when useful, a proposed fix. Do not edit files, run mutating commands, or create commits unless the user explicitly asks to apply a change. A question such as “Could Kitty be intercepting this key?” authorizes diagnosis, not a fix.
 
+## Clarification during discovery
+
+Check readily available configuration and capabilities before asking. If materially different approaches remain and the deciding fact is unavailable from the repository, tools, or conversation, ask one focused question rather than pursuing speculative branches. State what is known and which answer would unblock the work. Once a scoped action is authorized, carry it through without seeking confirmation for routine, reversible steps.
+
 ## Engineering execution
 
 - Think before editing. State consequential assumptions, uncertainties, and tradeoffs. If multiple materially different interpretations remain, present them instead of choosing silently. Prefer and name the simpler approach; push back on unnecessary complexity.
