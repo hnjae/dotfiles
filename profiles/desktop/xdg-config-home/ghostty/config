@@ -89,25 +89,23 @@ keybind = ctrl+minus=unbind
 keybind = ctrl+enter=unbind
 # keybind = ctrl+shift+enter=toggle_split_zoom
 
-# default: ctrl-alt-(arrow)
-keybind = alt+h=goto_split:previous
-keybind = alt+l=goto_split:next
-keybind = alt+j=goto_split:down
-keybind = alt+k=goto_split:up
-keybind = alt+left=goto_split:left
-keybind = alt+down=goto_split:down
-keybind = alt+up=goto_split:up
-keybind = alt+right=goto_split:right
-
-# Move tab (like other terminals/browser)
-keybind = ctrl+shift+page_up=move_tab:-1
-keybind = ctrl+shift+page_down=move_tab:1
-
-# ctrl+hjkl: lazyvim 내부 윈도우 커서 이동
+# Split navigation (leave Alt keys to terminal applications).
+keybind = ctrl+shift+left=goto_split:left
+keybind = ctrl+shift+down=goto_split:down
+keybind = ctrl+shift+up=goto_split:up
+keybind = ctrl+shift+right=goto_split:right
 keybind = ctrl+shift+h=goto_split:left
 keybind = ctrl+shift+j=goto_split:down
 keybind = ctrl+shift+k=goto_split:up
 keybind = ctrl+shift+l=goto_split:right
+
+# Tab selection and ordering.
+keybind = ctrl+page_up=previous_tab
+keybind = ctrl+page_down=next_tab
+keybind = ctrl+tab=next_tab
+keybind = ctrl+shift+tab=previous_tab
+keybind = ctrl+shift+page_up=move_tab:-1
+keybind = ctrl+shift+page_down=move_tab:1
 
 # paste_from_clipboard
 keybind = shift+delete=copy_to_clipboard
