@@ -34,3 +34,6 @@
 /plugins
 /sqlite
 /rollout-migrations
+/packages
+/app-server-daemon
+/app-server-control

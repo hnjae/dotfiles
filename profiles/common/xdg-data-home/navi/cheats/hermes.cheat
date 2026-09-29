@@ -1,0 +1,7 @@
+% hermes, hermes-agent
+
+# list logined providers
+hermes auth list
+
+# logout provider
+hermes logout --provider <provider-name>

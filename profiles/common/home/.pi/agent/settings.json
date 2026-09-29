@@ -4,8 +4,5 @@
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-6-luna",
   "hideThinkingBlock": true,
-  "packages": [
-    "npm:pi-mcp-adapter",
-    "npm:cc-safety-net"
-  ]
+  "packages": ["npm:pi-mcp-adapter", "npm:cc-safety-net"]
 }

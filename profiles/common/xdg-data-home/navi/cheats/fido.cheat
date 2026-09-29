@@ -1,0 +1,19 @@
+% fido, yubikey
+
+# List all fido keys
+fido2-token -L
+
+# Configure initial Password
+fido2-token -S /dev/hidraw<number>
+
+# Changes password
+sudo fido2-token -C /dev/hidraw<number>
+
+# List all discoverable credential passkeys (비-discoverable 방식은 안보임)
+fido2-token -L -r /dev/hidraw<number>
+
+# Get passkeys credential id
+fido2-token -L -k <e.g. google.com> /dev/hidraw<number>
+
+# Delete discoverable credential passkeys
+fido2-token -D -i '<CREDENTIAL_ID_HERE>' /dev/hidraw<number>
