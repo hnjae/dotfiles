@@ -1,0 +1,14 @@
+---
+date: 2026-09-30T09:25:28+0900
+lastmod: 2026-09-30T09:25:28+0900
+syntax: markdown
+tags: []
+---
+
+## Open editor (claude-code, hermes)
+
+`C-g`
+
+<!--
+vi:ft=markdown
+-->
