@@ -29,6 +29,10 @@
     ~/Projects:
       glob: true
       path: home_Projects/*
+    # xdg-config-home@merge:
+    ~/.config/codex/AGENTS.md: xdg-config-home@merge/codex/AGENTS.md
+    ~/.config/codex/rules: xdg-config-home@merge/codex/rules
+    ~/.config/codex/skills: xdg-config-home@merge/codex/skills
 - shell:
     - description: Installing submodules
       command: git submodule update --init --recursive
