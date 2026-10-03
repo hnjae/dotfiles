@@ -27,6 +27,7 @@ zmodule "$ZDOTDIR/modules/systemd"
 zmodule "$ZDOTDIR/modules/tmux"
 zmodule "$ZDOTDIR/modules/yazi"
 zmodule "$ZDOTDIR/modules/zimfw"
+zmodule "$ZDOTDIR/modules/operating-system-command"
 
 # 외부 script source
 zmodule "$ZDOTDIR/modules/1password"

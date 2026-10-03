@@ -1,0 +1,3 @@
+# vi:ft=zsh
+
+printf '\033]52;c;%s\a' "$(base64 -w0)"
