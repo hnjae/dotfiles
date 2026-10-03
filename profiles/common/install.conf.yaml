@@ -35,6 +35,7 @@
     ~/.config/codex/skills: xdg-config-home@merge/codex/skills
     ~/.claude/settings.json: xdg-config-home@merge/claude/settings.json
     ~/.claude/skills: xdg-config-home@merge/claude/skills
+    ~/.claude/CLAUDE.md: xdg-config-home@merge/claude/CLAUDE.md
 - shell:
     - description: Installing submodules
       command: git submodule update --init --recursive
