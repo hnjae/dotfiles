@@ -1,0 +1,35 @@
+{
+  "skill_name": "nix-project-setup",
+  "evals": [
+    {
+      "id": 1,
+      "name": "go-new-setup",
+      "prompt": "Apply my limitping-style Nix setup to this Go CLI: adapt .editorconfig, .envrc, and justfile; use flake-parts partitions to separate packages from dev checks, git-hooks, and treefmt. Preserve the custom recipe and HELLO_MODE environment setup, update usage documentation, and leave the second application unchanged. There is no CI configuration.",
+      "expected_output": "Working Go package and dev checks using separate input flake/locks, adapted companion files, existing custom recipe and environment retained, no licensing changes, repeat application produces no changes.",
+      "files": [],
+      "assertions": [
+        "The package derivation evaluates and builds with the target executable.",
+        "Package evaluation succeeds without the development input directory.",
+        "Development outputs include formatting, hook, and Go test/static-analysis checks.",
+        "Original custom recipe and HELLO_MODE environment setting remain usable.",
+        "Go indentation is tabs; companion files follow the requested setup.",
+        "No licensing or application behavior changes are introduced."
+      ]
+    },
+    {
+      "id": 2,
+      "name": "rust-existing-setup",
+      "prompt": "Migrate this Rust project's existing Nix setup to the limitping-style flake-parts partitions, treefmt-nix, and git-hooks/prek structure. Preserve the named hello-rust package, custom recipe, HELLO_MODE, Makefile tabs, and Markdown whitespace exception. Keep the handwritten treefmt.toml and its behavior. Introduce no Go tools or licensing changes. A second application should make no changes.",
+      "expected_output": "Existing Rust package preserved, development outputs routed to separate partition, Rust formatting/test checks, original regular config retained or explicitly reconciled, indentation exceptions retained, idempotent adaptation.",
+      "files": [],
+      "assertions": [
+        "The original named Rust package remains available and evaluates.",
+        "Package evaluation succeeds without the development input directory.",
+        "Development outputs include formatting, hook, and Rust project test checks.",
+        "The regular treefmt.toml retains its original contents.",
+        "Custom recipe, HELLO_MODE, Makefile tabs, and Markdown whitespace exception are retained.",
+        "No Go tooling, licensing changes, or application behavior changes are introduced."
+      ]
+    }
+  ]
+}

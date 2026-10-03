@@ -1,0 +1,20 @@
+#!/usr/bin/env -S just --justfile
+
+set unstable
+set fallback := false
+set lazy
+
+_:
+    @just --list
+
+[group('ci')]
+format:
+    nix fmt
+
+[group('build')]
+build:
+    nix build
+
+[group('ci')]
+check:
+    nix flake check
