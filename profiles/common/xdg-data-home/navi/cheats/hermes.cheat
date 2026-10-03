@@ -5,3 +5,12 @@ hermes auth list
 
 # logout provider
 hermes logout --provider <provider-name>
+
+# update to stable channel
+hermes update --set-channel stable
+
+# restart gateway
+hermes gateway restart
+
+# restart gateway
+systemctl --user restart hermes-gateway.service
