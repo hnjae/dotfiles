@@ -1,0 +1,18 @@
+---
+date: 2026-10-03T23:38:47+0900
+lastmod: 2026-10-03T23:38:47+0900
+syntax: markdown
+tags: []
+---
+
+## 단축키
+
+`C-A-z`
+: shrink vertical tab
+
+`C-A-x`
+: toggle ai sidebar
+
+<!--
+vi:ft=markdown
+-->

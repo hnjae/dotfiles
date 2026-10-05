@@ -1,6 +1,6 @@
 ---
 name: pull-request
-description: "Write, draft, or publish a pull request or merge request from committed changes. Use this skill whenever a user asks to draft, write, describe, open, create, or publish a GitHub pull request, GitLab merge request, or Gitea/Forgejo pull request, even if they use another platform's terminology."
+description: "Prepare a pull request or merge request from committed changes. Use whenever the user asks to draft, write, describe, raise, open, create, submit, or publish a PR/MR on GitHub, GitLab, Gitea, or Forgejo, including requests using other platform terminology."
 ---
 
 # Pull Request and Merge Request Workflow

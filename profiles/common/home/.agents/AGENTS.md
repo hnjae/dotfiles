@@ -62,9 +62,3 @@ For every implementation change, apply the steps that fit, in order:
 A request to implement a change authorizes committing it on the current branch; don't create branches or push unless asked. Stage only your own changes.
 
 Commit as a professional team would, even when working solo: each commit is one coherent intent that builds and passes tests, so it can be read, reverted, or bisected on its own, and its message says why, not just what. Put a change's intent docs, tests, and implementation in the same commit, so docs never describe behavior that doesn't exist yet.
-
-Use the `git-commit` skill for creating commits.
-
-## Pull requests
-
-Use the `pull-request` skill for creating pull requests.
