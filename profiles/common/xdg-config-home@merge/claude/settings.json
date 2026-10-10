@@ -1,5 +1,5 @@
 {
-  "model": "opus",
+  "model": "sonnet",
   "modelSettings": {
     "claude-opus-5-5": {
       "effortLevel": "high",
@@ -14,6 +14,7 @@
       "autoCompactWindow": 500000
     }
   },
+  "subagentPromptCacheTtl": "1h",
   "advisorModel": "opus",
   "tui": "fullscreen",
   "theme": "auto"
