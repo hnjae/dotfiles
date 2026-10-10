@@ -62,3 +62,6 @@
 [submodule "profiles/common/home/.agents/skills-repos/andrej-karpathy-skills@multica-ai"]
 	path = profiles/common/home/.agents/skills-repos/andrej-karpathy-skills@multica-ai
 	url = https://github.com/multica-ai/andrej-karpathy-skills
+[submodule "profiles/common/home/.agents/skills-repos/anti-slop@miqdadbadjuber"]
+	path = profiles/common/home/.agents/skills-repos/anti-slop@miqdadbadjuber
+	url = https://github.com/miqdadbadjuber/anti-slop
