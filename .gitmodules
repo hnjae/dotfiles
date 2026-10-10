@@ -68,3 +68,6 @@
 [submodule "profiles/common/home/.agents/skills-repos/kar-plain@Burntgogi"]
 	path = profiles/common/home/.agents/skills-repos/kar-plain@Burntgogi
 	url = https://github.com/Burntgogi/kar-plain
+[submodule "profiles/common/home/.agents/skills-repos/ai-slop-thresher@Burntgogi"]
+	path = profiles/common/home/.agents/skills-repos/ai-slop-thresher@Burntgogi
+	url = https://github.com/Burntgogi/ai-slop-thresher
