@@ -2,15 +2,19 @@
   "model": "opus",
   "modelSettings": {
     "claude-opus-5-5": {
-      "effortLevel": "high"
+      "effortLevel": "high",
+      "autoCompactWindow": 800000
     },
     "claude-sonnet-5-5": {
-      "effortLevel": "xhigh"
+      "effortLevel": "high",
+      "autoCompactWindow": 700000
     },
     "claude-haiku-5-5": {
-      "effortLevel": "xhigh"
+      "effortLevel": "xhigh",
+      "autoCompactWindow": 500000
     }
   },
+  "advisorModel": "opus",
   "tui": "fullscreen",
   "theme": "auto"
 }

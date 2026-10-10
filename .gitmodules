@@ -65,3 +65,6 @@
 [submodule "profiles/common/home/.agents/skills-repos/anti-slop@miqdadbadjuber"]
 	path = profiles/common/home/.agents/skills-repos/anti-slop@miqdadbadjuber
 	url = https://github.com/miqdadbadjuber/anti-slop
+[submodule "profiles/common/home/.agents/skills-repos/kar-plain@Burntgogi"]
+	path = profiles/common/home/.agents/skills-repos/kar-plain@Burntgogi
+	url = https://github.com/Burntgogi/kar-plain
