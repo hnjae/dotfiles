@@ -9,6 +9,27 @@ tags: []
 
 `C-g`
 
+## Queue message
+
+Codex
+: `<Tab>`
+
+Hermes agents
+: `/queue blabla`
+
+## How-to use skill
+
+Codex
+: `$<skill-name>`
+
+Opencode
+: `@<skill-name>`
+
+## Edit last-sent message
+
+Codex
+: `<Esc><Esc><Enter>` 로 선택. 이후 edit
+
 <!--
 vi:ft=markdown
 -->
