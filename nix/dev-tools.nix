@@ -1,0 +1,20 @@
+pkgs: with pkgs; [
+  biome
+  cocogitto
+  deadnix
+  git
+  just
+  nixfmt
+  prek
+  ruff
+  rumdl
+  shellcheck
+  shellharden
+  shfmt
+  statix
+  stylua
+  taplo
+  treefmt
+  typos
+  yamlfmt
+]

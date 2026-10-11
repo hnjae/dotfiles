@@ -1,11 +1,2 @@
-
-# Devenv
-.devenv*
-devenv.local.nix
-devenv.local.yaml
-
-# direnv
-.direnv
-
-# Manged by devenv:
-.pre-commit-config.yaml
+.direnv/
+.devenv/

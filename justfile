@@ -1,4 +1,5 @@
 #!/usr/bin/env -S just --justfile
+set lazy
 
 alias fmt := format
 
@@ -9,7 +10,19 @@ _:
 
 [group('ci')]
 format:
-    devenv shell -- treefmt
+    treefmt
+
+[group('ci')]
+format-check:
+    treefmt --ci
+
+hooks-install:
+    prek install --config .pre-commit-config.yaml
+
+[group('ci')]
+check:
+    prek validate-config .pre-commit-config.yaml
+    prek run --config .pre-commit-config.yaml --all-files
 
 update-submodules:
     lib/update-submodules.sh

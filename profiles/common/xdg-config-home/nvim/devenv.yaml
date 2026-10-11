@@ -1,5 +1,0 @@
-# yaml-language-server: $schema=https://devenv.sh/devenv.schema.json
----
-imports:
-  - /devenv/common
-  - /devenv/lua

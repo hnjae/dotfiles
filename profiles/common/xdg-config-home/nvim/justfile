@@ -7,11 +7,11 @@ _:
 
 [group('ci')]
 lint:
-    devenv tasks run nvim:lint
+    fd --type f --extension lua . -X selene --allow-warnings
 
 [group('ci')]
-check:
-    devenv tasks run ci:check
+check: lint
+    just --justfile "$(realpath '{{ justfile_directory() }}/../../../../justfile')" check
 
 format:
-    devenv shell -- treefmt
+    just --justfile "$(realpath '{{ justfile_directory() }}/../../../../justfile')" format
