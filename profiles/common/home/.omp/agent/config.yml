@@ -8,14 +8,14 @@ composer:
   shape: pi
   tokenRate: true
 modelRoles:
-  default: openai-codex/gpt-6-sol:medium # AAIndex: 40 / USD 0.25
-  plan: openai-codex/gpt-6-sol:medium # AAIndex: 40 / USD 0.25
+  default: openai-codex/gpt-6-luna:max
+  plan: openai-codex/gpt-6.1-sol:high
   commit: openai-codex/gpt-6-luna:low
-  tiny: openai-codex/gpt-6-luna:low # AAII: 21
-  smol: openai-codex/gpt-6-luna:high # AAII: 32 / USD 0.03
-  slow: openai-codex/gpt-6-sol:max # AAII: 37 / USD 0.07
+  tiny: openai-codex/gpt-6-luna:low
+  smol: openai-codex/gpt-6-luna:high
+  slow: openai-codex/gpt-6.1-luna:max
   task: openai-codex/gpt-6-luna:auto
-  vision: openai-codex/gpt-6-luna:auto
+  # vision: openai-codex/gpt-6-luna:auto
 hideThinkingBlock: false
 statusLine:
   preset: default
@@ -39,11 +39,11 @@ astGrep:
   enabled: true
 dev:
   autoqaConsent: granted
-retry:
-  fallbackChains:
-    openai-codex/gpt-6-sol:
-      - openrouter/z-ai/xiaomi/mimo-v2.6-pro:high
-    openai-codex/gpt-6-luna:
-      - openrouter/~deepseek/deepseek-flash-latest:high
+# retry:
+#   fallbackChains:
+#     openai-codex/gpt-6-sol:
+#       - openrouter/z-ai/xiaomi/mimo-v2.6-pro:high
+#     openai-codex/gpt-6-luna:
+#       - openrouter/~deepseek/deepseek-flash-latest:high
 task:
   showResolvedModelBadge: true
