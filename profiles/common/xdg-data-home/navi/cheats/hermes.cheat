@@ -12,5 +12,8 @@ hermes update --set-channel stable
 # restart gateway
 hermes gateway restart
 
+# mcp login
+hermes mcp login <mcp-name>
+
 # restart gateway
 systemctl --user restart hermes-gateway.service

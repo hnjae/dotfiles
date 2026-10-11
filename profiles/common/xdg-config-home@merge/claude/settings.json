@@ -1,21 +1,23 @@
 {
   "model": "sonnet",
+  "subagentPromptCacheTtl": "1h",
   "modelSettings": {
     "claude-opus-5-5": {
-      "effortLevel": "high",
+      "effortLevel": "medium",
       "autoCompactWindow": 800000
     },
     "claude-sonnet-5-5": {
       "effortLevel": "high",
-      "autoCompactWindow": 700000
+      "autoCompactWindow": 600000
     },
     "claude-haiku-5-5": {
       "effortLevel": "xhigh",
-      "autoCompactWindow": 500000
+      "autoCompactWindow": 400000
     }
   },
-  "subagentPromptCacheTtl": "1h",
   "advisorModel": "opus",
   "tui": "fullscreen",
-  "theme": "auto"
+  "theme": "auto",
+  "remoteControlAtStartup": true,
+  "agentPushNotifEnabled": true
 }
