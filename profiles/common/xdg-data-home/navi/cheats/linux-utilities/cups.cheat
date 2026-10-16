@@ -36,3 +36,9 @@ lpadmin -p <printername> -E -v "ipp://<fqdn>/ipp/print" -m everywhere
 
 # list printer options
 lpoptions -p <printername> -l
+
+# change print-quality=5 by default (for current users)
+lpoptions -p athena -o print-quality=5
+
+# change print-quality=5 as global
+sudo lpadmin -p athena -o print-quality-default=5

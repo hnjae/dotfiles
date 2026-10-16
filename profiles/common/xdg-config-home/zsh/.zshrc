@@ -73,3 +73,6 @@ fi
 
 # Initialize modules.
 source "${ZIM_HOME}/init.zsh"
+
+# bun completions
+[ -s "/home/hnjae/.local/share/bun/_bun" ] && source "/home/hnjae/.local/share/bun/_bun"
