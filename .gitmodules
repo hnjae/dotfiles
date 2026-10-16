@@ -71,3 +71,6 @@
 [submodule "profiles/common/home/.agents/skills-repos/ai-slop-thresher@Burntgogi"]
 	path = profiles/common/home/.agents/skills-repos/ai-slop-thresher@Burntgogi
 	url = https://github.com/Burntgogi/ai-slop-thresher
+[submodule "profiles/common/home/.agents/skills-repos/im-not-ai@epoko77-ai"]
+	path = profiles/common/home/.agents/skills-repos/im-not-ai@epoko77-ai
+	url = https://github.com/epoko77-ai/im-not-ai
