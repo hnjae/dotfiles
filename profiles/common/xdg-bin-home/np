@@ -330,7 +330,7 @@ def "main upgrade" [
     if $all {
         print "Upgrading all profile entries"
         with-env {NIXPKGS_ALLOW_UNFREE: 1} {
-            ^nix profile upgrade --refresh --impure --all
+            ^nix profile upgrade --refresh --impure --option allow-import-from-derivation true --all
         }
         return
     }
@@ -344,7 +344,7 @@ def "main upgrade" [
 
     print $"Upgrading ($selected.0)"
     with-env {NIXPKGS_ALLOW_UNFREE: 1} {
-        ^nix profile upgrade --refresh --impure $selected.0
+        ^nix profile upgrade --refresh --impure --option allow-import-from-derivation true $selected.0
     }
 }
 
