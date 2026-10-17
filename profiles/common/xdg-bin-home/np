@@ -328,9 +328,15 @@ def "main upgrade" [
     --all(-a) # Upgrade all profile entries without fzf
 ] {
     if $all {
+        let profile = (load_profile)
+        let sources = (profile_entries $profile | group-by --to-table { |item| $item.entry.originalUrl? | default "" })
+
         print "Upgrading all profile entries"
-        with-env {NIXPKGS_ALLOW_UNFREE: 1} {
-            ^nix profile upgrade --refresh --impure --option allow-import-from-derivation true --all
+        for source in $sources {
+            let names = ($source.items | get name)
+            with-env {NIXPKGS_ALLOW_UNFREE: 1} {
+                ^nix profile upgrade --refresh --impure --option allow-import-from-derivation true ...$names
+            }
         }
         return
     }
