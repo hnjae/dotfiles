@@ -43,7 +43,7 @@
     ~/.pi/agent/npm/package.json: xdg-config-home@merge/pi/agent/npm/package.json
     ~/.pi/agent/mcp.json: xdg-config-home@merge/pi/agent/mcp.json
     ~/.pi/agent/settings.json: xdg-config-home@merge/pi/agent/settings.json
-    ~/.pi/agent/extensions/pi-permission-system/config.json: xdg-config-home@merge/pi/agent/extensions/pi-permission-system/config.json
+    ~/.pi/agent/extensions: xdg-config-home@merge/pi/agent/extensions
 - shell:
     - description: Installing submodules
       command: git submodule update --init --recursive
