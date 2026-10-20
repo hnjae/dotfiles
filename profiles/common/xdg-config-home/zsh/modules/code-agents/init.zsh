@@ -1,4 +1,4 @@
-alias dsh="pnpm dlx '@deepseek-ai/dsh'"
+# alias dsh="pnpm dlx '@deepseek-ai/dsh'"
 
 # if ((!$+commands[opencode])); then
 #     return

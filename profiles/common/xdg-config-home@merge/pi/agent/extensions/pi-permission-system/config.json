@@ -1,0 +1,27 @@
+{
+  "permission": {
+    "*": "allow",
+    "path": {
+      "*": "allow",
+      "*.env": "deny",
+      "*.env.*": "deny",
+      "*.env.example": "allow"
+    },
+    "bash": {
+      "*": "ask",
+      "rm -rf *": "deny",
+      "sudo *": "ask"
+    },
+    "external_directory": {
+      "*": "ask",
+      "~/.cargo/registry/*": "allow",
+      "~/.local/share/cargo/registry": "allow",
+      "~/.local/share/bun/install/global": "allow",
+      "~/.local/share/pnpm": "allow"
+    },
+    "external_directory_read": {
+      "~/Projects/*": "allow",
+      "~/git/*": "allow"
+    }
+  }
+}

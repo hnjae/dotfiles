@@ -40,6 +40,10 @@
     ~/.omp/agent/config.yml: xdg-config-home@merge/omp/agent/config.yml
     ~/.omp/agent/mcp.json: xdg-config-home@merge/omp/agent/mcp.json
     ~/.omp/plugins: xdg-config-home@merge/omp/plugins
+    ~/.pi/agent/npm/package.json: xdg-config-home@merge/pi/agent/npm/package.json
+    ~/.pi/agent/mcp.json: xdg-config-home@merge/pi/agent/mcp.json
+    ~/.pi/agent/settings.json: xdg-config-home@merge/pi/agent/settings.json
+    ~/.pi/agent/extensions/pi-permission-system/config.json: xdg-config-home@merge/pi/agent/extensions/pi-permission-system/config.json
 - shell:
     - description: Installing submodules
       command: git submodule update --init --recursive

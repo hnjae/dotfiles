@@ -1,0 +1,30 @@
+{
+  "mcpServers": {
+    "mdn": {
+      "url": "https://mcp.mdn.mozilla.net/"
+    },
+    "context7": {
+      "url": "https://mcp.context7.com/mcp"
+    },
+    "kagi-mcp": {
+      "command": "/home/hnjae/.local/share/bun/install/global/node_modules/kagi-cli/vendor/x86_64-unknown-linux-gnu/kagi",
+      "args": ["mcp"],
+      "toolExposure": {
+        "kagi_extract": "hidden"
+      }
+    },
+    "exa": {
+      "url": "https://mcp.exa.ai/mcp",
+      "toolExposure": {
+        "web_search_exa": "hidden"
+      }
+    },
+    "firecrawl": {
+      "url": "https://mcp.firecrawl.dev/v2/mcp-oauth",
+      "toolExposure": {
+        "firecrawl_search": "hidden",
+        "firecrawl_search_feedback": "hidden"
+      }
+    }
+  }
+}

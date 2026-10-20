@@ -38,3 +38,9 @@ OPENCODE_PERMISSION='{"*":"allow"}' opencode
 
 # run opencode in YLO Mode with tmux support
 OPENCODE_PERMISSION='{"*":"allow"}' opencode -- port 4096
+
+# list mcp in pi
+pi mcp list
+
+# list mcp in claude-code
+claude mcp list

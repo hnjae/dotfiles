@@ -1,0 +1,12 @@
+{
+  "name": "pi-extensions",
+  "private": true,
+  "dependencies": {
+    "@gotgenes/pi-permission-system": "^41.0.0",
+    "@pi-unipi/notify": "^2.20.5",
+    "cc-safety-net": "^2.6.16",
+    "pi-advisor-flow": "^0.14.1",
+    "pi-lens": "^4.4.4",
+    "pi-subagents": "^0.79.1"
+  }
+}

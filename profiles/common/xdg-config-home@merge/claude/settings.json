@@ -1,5 +1,5 @@
 {
-  "model": "sonnet",
+  "model": "haiku",
   "subagentPromptCacheTtl": "1h",
   "modelSettings": {
     "claude-opus-5-5": {
