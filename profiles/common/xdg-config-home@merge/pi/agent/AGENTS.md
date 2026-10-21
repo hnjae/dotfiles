@@ -1,1 +1,0 @@
-../../../home/.agents/AGENTS.md

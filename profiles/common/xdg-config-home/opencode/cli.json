@@ -22,6 +22,7 @@
     "input.select.all": "ctrl+shift+a",
     "input.delete": ["delete", "shift+delete"]
   },
+  "plugins": ["@prevalentware/opencode-goal-plugin"],
   "lsp": {
     "pyright": {
       "disabled": true

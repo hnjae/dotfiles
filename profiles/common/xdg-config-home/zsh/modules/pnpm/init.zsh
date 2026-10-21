@@ -1,1 +1,0 @@
-alias npx="pnpm dlx"

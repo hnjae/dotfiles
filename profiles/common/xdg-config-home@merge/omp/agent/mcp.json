@@ -8,6 +8,11 @@
     "mdn": {
       "type": "http",
       "url": "https://mcp.mdn.mozilla.net"
+    },
+    "kagi": {
+      "type": "stdio",
+      "command": "kagi",
+      "args": ["mcp", "--exclude-tools", "kagi_extract"]
     }
   }
 }

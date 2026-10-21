@@ -3,39 +3,25 @@ theme:
   dark: dark-gruvbox
   light: light-gruvbox
 setupVersion: 2
-composer:
-  shape: pi
-  tokenRate: true
 modelRoles:
-  default: openai-codex/gpt-6.1-sol:medium
-  plan: openai-codex/gpt-6.1-sol:high
-  commit: openai-codex/gpt-6-luna:low
-  tiny: openai-codex/gpt-6-luna:low
-  smol: openai-codex/gpt-6-luna:high
-  slow: openai-codex/gpt-6.1-luna:max
-  task: openai-codex/gpt-6-luna:auto
-hideThinkingBlock: false
-statusLine:
-  preset: default
-  contextLine: embedded
-  transparent: true
-security:
-  enabled: true
+  default: opencode-go/deepseek-v4.1-flash:high
+  advisor: opencode-go/muse-spark-1.3-contributor:xhigh
+  slow: opencode-go/muse-spark-1.3-contributor:high
+  smol: opencode-go/deepseek-v4.1-flash:low
 tui:
   textSizing: true
-  imeSafeCursor: false
-  codexResetFireworks: false
-  tight: false
+  vimMode: true
+  vimModeDisplay: text
+  tight: true
+  mouse: true
 display:
   showTokenUsage: true
-  showTurnTime: true
-  smoothStreaming: true
-  pinnedAgents: full
   cacheMissMarker: true
-proseOnlyThinking: true
 astGrep:
   enabled: true
-dev:
-  autoqaConsent: granted
-task:
-  showResolvedModelBadge: true
+secrets:
+  enabled: true
+personality: none
+advisor:
+  enabled: true
+hideThinkingBlock: true
