@@ -17,12 +17,12 @@ format-check:
     treefmt --ci
 
 hooks-install:
-    prek install --config .pre-commit-config.yaml
+    prek install --config prek.toml
 
 [group('ci')]
 check:
-    prek validate-config .pre-commit-config.yaml
-    prek run --config .pre-commit-config.yaml --all-files
+    prek validate-config prek.toml
+    prek run --config prek.toml --all-files
 
 update-submodules:
     lib/update-submodules.sh
