@@ -1,8 +1,8 @@
 ---
-date: 2026-09-17T23:50:49+0900
-lastmod: 2026-09-17T23:50:49+0900
+date: 2026-10-24T23:36:27+0900
+lastmod: 2026-10-24T23:36:27+0900
 ---
 
-## TODO
+## Bootstrap
 
-Add [cc-safety-net](https://github.com/kenryu42/cc-safety-net) when it supports opencode v2
+`/connect` 로 `context7`, `exa` 등에 연결

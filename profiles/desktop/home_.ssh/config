@@ -3,6 +3,10 @@
 Host *
   Compression no
   UserKnownHostsFile ~/.ssh/known_hosts ~/.ssh/known_hosts.permanent
+  IdentityAgent ~/.1password/agent.sock
+
+Host forgejo-runner
+  IdentityAgent ~/.1password/agent.sock
 
 Host nyx
   IdentityAgent ~/.1password/agent.sock

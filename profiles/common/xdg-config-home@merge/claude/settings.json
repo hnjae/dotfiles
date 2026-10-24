@@ -1,14 +1,17 @@
 {
+  "env": {
+    "DISABLE_AUTOUPDATER": "1"
+  },
   "model": "sonnet",
   "subagentPromptCacheTtl": "1h",
   "modelSettings": {
     "claude-opus-5-5": {
-      "effortLevel": "medium",
-      "autoCompactWindow": 800000
+      "effortLevel": "high",
+      "autoCompactWindow": 700000
     },
     "claude-sonnet-5-5": {
       "effortLevel": "high",
-      "autoCompactWindow": 600000
+      "autoCompactWindow": 500000
     },
     "claude-haiku-5-5": {
       "effortLevel": "xhigh",

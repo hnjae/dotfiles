@@ -8,14 +8,29 @@
     "wrap": "word"
   },
   "session": {
-    "sidebar": "auto",
+    "sidebar": "hide",
     "scrollbar": false,
-    "thinking": "show"
+    "thinking": "show",
+    "verbosity": "medium",
+    "image_preview": true
   },
   "animations": true,
   "keybinds": {
     "session.first": "",
     "session.last": "",
     "prompt.editor": "ctrl+g"
+  },
+  "attention": {
+    "volume": 1,
+    "notifications": true,
+    "sound": true
+  },
+  "prompt": {
+    "image_preview": true
+  },
+  "tabs": {
+    "layout": "horizontal",
+    "scope": "cwd",
+    "mode": "off"
   }
 }

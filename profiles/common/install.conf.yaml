@@ -26,9 +26,6 @@
     ~/.ssh:
       glob: true
       path: home_.ssh/*
-    ~/Projects:
-      glob: true
-      path: home_Projects/*
     # xdg-config-home@merge:
     ~/.claude/settings.json: xdg-config-home@merge/claude/settings.json
     ~/.claude/skills: xdg-config-home@merge/claude/skills

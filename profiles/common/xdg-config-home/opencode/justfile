@@ -1,0 +1,73 @@
+#!/usr/bin/env -S just --justfile
+
+set unstable
+set fallback := false
+set lazy
+
+_:
+    @just --list
+
+[doc('Rotate the service password; the old one stops working once the service restarts.')]
+rotate-password:
+    #!/usr/bin/env sh
+    set -euo pipefail
+
+    secret="$(openssl rand -hex 32)"
+    opencode service set password "$secret"
+    opencode service start
+    echo "Password rotated. Read it with: opencode service get password"
+
+[doc('Install plugins listed in opencode.jsonc and load them in the running service.')]
+plugins-install:
+    #!/usr/bin/env sh
+    set -euo pipefail
+
+    opencode reload
+    just --justfile '{{ justfile() }}' plugins-status
+
+[doc('Update outdated plugins, then reload so the service loads the new versions.')]
+plugins-update:
+    #!/usr/bin/env sh
+    set -euo pipefail
+
+    opencode plugin update
+    opencode reload
+    just --justfile '{{ justfile() }}' plugins-status
+
+[doc('Show every package plugin and fail when one is configured but not active.')]
+plugins-status:
+    #!/usr/bin/env sh
+    set -euo pipefail
+
+    expected="$(opencode api get /api/config | jq '[
+        .[]?.info.plugins[]?
+        | (if type == "object" then .package else . end)
+        | select((startswith(".") or startswith("/") or startswith("~") or startswith("file:")) | not)
+    ] | length')"
+    if [ "$expected" -eq 0 ]; then
+        echo "No package plugins configured."
+        exit 0
+    fi
+
+    # A reload registers package plugins asynchronously, so poll until they settle.
+    rows=""
+    i=0
+    while :; do
+        rows="$(opencode api plugin.list \
+            | jq -r '.data[] | select(.source.type == "package") | "\(.state.status)\t\(.source.target)"')"
+        count="$(printf '%s' "$rows" | grep -c . || true)"
+        [ "$count" -ge "$expected" ] && break
+        i=$((i + 1))
+        [ "$i" -ge 20 ] && break
+        sleep 0.5
+    done
+
+    printf '%s\n' "$rows"
+    if [ "$count" -lt "$expected" ]; then
+        echo "Loaded $count of $expected package plugins; rerun after the install finishes." >&2
+        exit 1
+    fi
+    if printf '%s\n' "$rows" | grep -qv '^active'; then
+        echo "Some plugins are configured but not active." >&2
+        exit 1
+    fi

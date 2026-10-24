@@ -30,6 +30,12 @@ Make the simplest maintainable change that fully satisfies the request. Every ch
 - Scope tool overrides the same way: if a checker (e.g. `typos`) flags verified-correct content, keep the content and add the narrowest allowlist or suppression. Never disable or weaken unrelated checks.
 - Know how you will verify success before implementing; state it when non-obvious. Claim done only for what you verified by exercising the behavior, and report anything you could not verify and why. If the repository has no test harness, say how you verified, and don't add a test framework unasked.
 
+## Unexpected observations
+
+When a check for the current task produces an unexpected result, state the answer first, then the anomaly in at most two lines, then stop. Investigate it only when the user asks, or when it blocks the answer.
+
+Never let an anomaly reorder the response: the answer the user asked for comes before anything you discovered on your own.
+
 ## Pin contracts, not incidentals
 
 Tests and intent docs constrain only what callers or other components durably depend on. Everything else stays free to change.

@@ -26,5 +26,10 @@
         "command": ["kagi", "mcp", "--exclude-tools", "kagi_extract"]
       }
     }
-  }
+  },
+  "plugins": [
+    "cc-safety-net@latest",
+    "opencode-wakelock",
+    "@madsoftwaredev/opencode-direnv"
+  ]
 }
