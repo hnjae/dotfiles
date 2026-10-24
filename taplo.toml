@@ -2,6 +2,7 @@
 
 [formatting]
 array_auto_collapse = false
+inline_table_expand = false
 
 [[rule]]
 include = ["profiles/common/xdg-config-home/yazi/keymap.toml"]
@@ -9,4 +10,3 @@ include = ["profiles/common/xdg-config-home/yazi/keymap.toml"]
 [rule.formatting]
 column_width = 180
 compact_inline_tables = true
-inline_table_expand = false

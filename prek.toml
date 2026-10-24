@@ -4,67 +4,17 @@ exclude = '\.lock$'
 
 [[repos]]
 repo = "builtin"
-
-[[repos.hooks]]
-id = "detect-private-key"
+hooks = [{ id = "detect-private-key" }]
 
 [[repos]]
 repo = "local"
-
-[[repos.hooks]]
-id = "treefmt"
-name = "treefmt"
-entry = "treefmt --fail-on-change --no-cache"
-language = "system"
-require_serial = true
-
-[[repos.hooks]]
-id = "typos"
-name = "typos"
-entry = "typos --force-exclude"
-language = "system"
-types = ["text"]
-
-[[repos.hooks]]
-id = "biome"
-name = "biome"
-entry = "biome lint --no-errors-on-unmatched"
-language = "system"
-files = '\.(js|jsx|ts|tsx|mjs|cjs|mts|cts|json|jsonc|css)$'
-exclude = '(^|/)(lazy-lock\.json|zed/[^/]*\.json)$'
-
-[[repos.hooks]]
-id = "deadnix"
-name = "deadnix"
-entry = "deadnix --fail"
-language = "system"
-files = '\.nix$'
-
-[[repos.hooks]]
-id = "statix"
-name = "statix"
-entry = "sh -c 'for file; do statix check --format errfmt \"$file\" || exit $?; done' statix"
-language = "system"
-files = '\.nix$'
-
-[[repos.hooks]]
-id = "rumdl"
-name = "rumdl"
-entry = "rumdl check"
-language = "system"
-files = '\.(md|markdown)$'
-require_serial = true
-
-[[repos.hooks]]
-id = "shellcheck"
-name = "shellcheck"
-entry = "shellcheck"
-language = "system"
-files = '(^|/)([^/]*\.(sh|bash)|\.env(rc)?(\.[^/]*)?)$'
-
-[[repos.hooks]]
-id = "cocogitto"
-name = "cog verify"
-entry = "cog verify --file"
-language = "system"
-stages = ["commit-msg"]
+hooks = [
+  { id = "treefmt", name = "treefmt", entry = "treefmt --fail-on-change --no-cache", language = "system", require_serial = true },
+  { id = "typos", name = "typos", entry = "typos --force-exclude", language = "system", types = ["text"] },
+  { id = "biome", name = "biome", entry = "biome lint --no-errors-on-unmatched", language = "system", files = '\.(js|jsx|ts|tsx|mjs|cjs|mts|cts|json|jsonc|css)$', exclude = '(^|/)(lazy-lock\.json|zed/[^/]*\.json)$' },
+  { id = "deadnix", name = "deadnix", entry = "deadnix --fail", language = "system", files = '\.nix$' },
+  { id = "statix", name = "statix", entry = "sh -c 'for file; do statix check --format errfmt \"$file\" || exit $?; done' statix", language = "system", files = '\.nix$' },
+  { id = "rumdl", name = "rumdl", entry = "rumdl check", language = "system", files = '\.(md|markdown)$', require_serial = true },
+  { id = "shellcheck", name = "shellcheck", entry = "shellcheck", language = "system", files = '(^|/)([^/]*\.(sh|bash)|\.env(rc)?(\.[^/]*)?)$' },
+  { id = "cocogitto", name = "cog verify", entry = "cog verify --file", language = "system", stages = ["commit-msg"] },
+]
