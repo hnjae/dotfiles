@@ -11,5 +11,10 @@
     "scrollbar": false,
     "thinking": "show"
   },
-  "animations": true
+  "animations": true,
+  "keybinds": {
+    "session.first": "",
+    "session.last": "",
+    "prompt.editor": "ctrl+g"
+  }
 }
