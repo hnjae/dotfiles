@@ -15,5 +15,11 @@ hermes gateway restart
 # mcp login
 hermes mcp login <mcp-name>
 
+# run specific profile
+hermes --profile=<foo>
+
+# list profiles
+hermes profile list
+
 # restart gateway
 systemctl --user restart hermes-gateway.service
