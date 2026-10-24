@@ -48,3 +48,5 @@
       command: install.d/install-treesitter-parsers.sh
     - description: seed files
       command: install.d/seed-files.sh
+    - description: Install yazi plugins
+      command: install.d/install-yazi-plugins.sh
