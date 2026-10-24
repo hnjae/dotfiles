@@ -2,3 +2,6 @@
 
 # remove global installed package
 bun remove -g <pkg>
+
+# install package global
+bun install -g --trust <@opencode/cli>
