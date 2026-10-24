@@ -74,3 +74,6 @@
 [submodule "profiles/common/home/.agents/skills-repos/im-not-ai@epoko77-ai"]
 	path = profiles/common/home/.agents/skills-repos/im-not-ai@epoko77-ai
 	url = https://github.com/epoko77-ai/im-not-ai
+[submodule "profiles/common/home/.agents/skills-repos/SimpleEnglish@AminBlg"]
+	path = profiles/common/home/.agents/skills-repos/SimpleEnglish@AminBlg
+	url = https://github.com/AminBlg/SimpleEnglish

@@ -13,7 +13,7 @@ tui:
   vimMode: true
   vimModeDisplay: text
   tight: true
-  mouse: true
+  mouse: false # 이걸 키면 터미널 단에서 스크롤이 안된다.
 display:
   showTokenUsage: true
   cacheMissMarker: true
