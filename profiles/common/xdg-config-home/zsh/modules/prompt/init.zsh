@@ -25,6 +25,8 @@ fi
 
 # NOTE: example of oh-my-posh result: `export POSH_SESSION_ID="f0f2ffb7-f1f2-423b-a4df-bd39162caf67";source $'/home/hnjae/.cache/oh-my-posh/init.14695981039346656037.zsh'`
 
-eval "$($commands[$cmd] --config "${XDG_CONFIG_HOME:-${HOME}/.config}/oh-my-posh.json" init zsh)"
+# NOTE: `--strict` 없이는 생성 스크립트 캐시에 oh-my-posh 의 절대 store path 가 박히고,
+# 캐시 키가 버전 문자열뿐이라 `nix profile upgrade` 후에도 갱신되지 않아 GC 된 path 를 실행한다.
+eval "$($commands[$cmd] --config "${XDG_CONFIG_HOME:-${HOME}/.config}/oh-my-posh.json" init zsh --strict)"
 
 unset cmd
