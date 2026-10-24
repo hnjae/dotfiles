@@ -11,36 +11,5 @@
     "scrollbar": false,
     "thinking": "show"
   },
-  "animations": true,
-  "keybinds": {
-    "prompt.editor": ["ctrl+g", "<leader>e"],
-    "session.compact": "",
-    "app.exit": "",
-    "session.first": ["ctrl+g", "alt+home"],
-    "session.last": ["ctrl+alt+g", "alt+end"],
-    "prompt.clear": "",
-    "input.select.all": "ctrl+shift+a",
-    "input.delete": ["delete", "shift+delete"]
-  },
-  "plugins": ["@prevalentware/opencode-goal-plugin"],
-  "lsp": {
-    "pyright": {
-      "disabled": true
-    },
-    "basedpyright": {
-      "disabled": true
-    },
-    "ty": {
-      "command": ["ty", "server"],
-      "extensions": [".py", ".pyi"]
-    },
-    "qmlls": {
-      "command": ["qmlls", "--no-cmake-calls"],
-      "extensions": [".qml"]
-    },
-    "docker-ls": {
-      "command": ["docker-language-server", "start"],
-      "extensions": ["Containerfile", "Dockerfile"]
-    }
-  }
+  "animations": true
 }

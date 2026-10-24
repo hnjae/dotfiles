@@ -1,0 +1,239 @@
+#!/usr/bin/env python3
+# ruff: file-ignore[raw-string-in-exception, f-string-in-exception, print, raise-vanilla-args]
+"""Pick a TickTick project with fzf, dump its tasks to markdown, open in $EDITOR.
+
+usage: tt-view [--all]
+
+Requires the `ticktick` CLI and `fzf` on PATH. Read-only: nothing is written
+back to TickTick. `--all` also lists completed and dropped tasks.
+"""
+
+import json
+import os
+import shlex
+import shutil
+import subprocess
+import sys
+import tempfile
+from datetime import UTC, datetime
+from pathlib import Path
+from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
+
+PRIORITY = {0: None, 1: "low", 3: "medium", 5: "high"}
+
+
+class TickTickError(Exception):
+    pass
+
+
+def run_json(*args: str) -> object:
+    try:
+        proc = subprocess.run(
+            ["ticktick", *args, "--json"],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+    except FileNotFoundError as exc:
+        raise TickTickError("`ticktick` CLI not found on PATH") from exc
+    if proc.returncode != 0:
+        detail = proc.stderr.strip() or proc.stdout.strip() or "no output"
+        raise TickTickError(f"ticktick {' '.join(args)} failed: {detail}")
+    try:
+        return json.loads(proc.stdout)
+    except json.JSONDecodeError as exc:
+        raise TickTickError(
+            f"ticktick {' '.join(args)} returned invalid JSON"
+        ) from exc
+
+
+def pick_project() -> dict:
+    projects = run_json("project", "list")
+    if not isinstance(projects, list):
+        raise TickTickError("unexpected project list format")
+    projects = [p for p in projects if p.get("kind") == "TASK"]
+    projects.sort(key=lambda p: p.get("sortOrder", 0))
+    if not projects:
+        raise TickTickError("no task projects found")
+    # Inbox is not in `project list`; the CLI exposes it under the id "inbox".
+    projects.insert(0, {"id": "inbox", "name": "Inbox"})
+
+    if shutil.which("fzf") is None:
+        raise TickTickError("`fzf` not found on PATH")
+
+    listing = "".join(f"{p['name']}\t{p['id']}\n" for p in projects)
+    proc = subprocess.run(
+        ["fzf", "--delimiter=\t", "--with-nth=1", "--prompt=project> "],
+        input=listing,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if proc.returncode != 0 or not proc.stdout.strip():
+        sys.exit(130)
+    return next(
+        p for p in projects if p["id"] == proc.stdout.strip().split("\t")[1]
+    )
+
+
+def local_dt(value: str, tz_name: str | None) -> datetime | None:
+    try:
+        dt = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f%z")
+    except ValueError:
+        return None
+    try:
+        tz = ZoneInfo(tz_name) if tz_name else None
+    except (ZoneInfoNotFoundError, ValueError):
+        tz = None
+    return dt.astimezone(tz) if tz else dt
+
+
+def due_label(task: dict) -> str:
+    due = task.get("dueDate")
+    if not due:
+        return ""
+    dt = local_dt(due, task.get("timeZone"))
+    if dt is None:
+        return ""
+    if task.get("isAllDay"):
+        return dt.strftime("%Y-%m-%d")
+    return dt.strftime("%Y-%m-%d %H:%M")
+
+
+def meta(task: dict) -> str:
+    bits = []
+    if day := due_label(task):
+        bits.append(f"due {day}")
+    if priority := PRIORITY.get(task.get("priority", 0)):
+        bits.append(priority)
+    if tags := task.get("tags"):
+        bits.extend(f"#{t}" for t in tags)
+    return f"  ({' · '.join(bits)})" if bits else ""
+
+
+def notes(task: dict) -> list[str]:
+    body = (task.get("content") or "").strip() or (
+        task.get("desc") or ""
+    ).strip()
+    return [
+        f"  > {line}" if line.strip() else "  >" for line in body.splitlines()
+    ]
+
+
+def task_block(task: dict, depth: int, children: dict, out: list[str]) -> None:
+    pad = "  " * depth
+    status = task.get("status", 0)
+    box = "x" if status in {2, -1} else " "
+    title = task.get("title") or "(untitled)"
+    if status == -1:
+        title = f"~~{title}~~ dropped"
+    out.append(f"{pad}- [{box}] {title}{meta(task)}")
+    out.extend(f"{pad}{line}" for line in notes(task))
+    for item in sorted(
+        task.get("items") or [], key=lambda i: i.get("sortOrder", 0)
+    ):
+        box = "x" if item.get("status", 0) == 1 else " "
+        out.append(f"{pad}  - [{box}] {item.get('title', '')}")
+    for child in sorted(
+        children.get(task["id"], []), key=lambda t: t.get("sortOrder", 0)
+    ):
+        task_block(child, depth + 1, children, out)
+
+
+def render(
+    project: dict, project_data: dict, tasks: list[dict], scope: str
+) -> str:
+    columns = sorted(
+        project_data.get("columns") or [], key=lambda c: c.get("sortOrder", 0)
+    )
+    column_names = {c["id"]: c["name"] for c in columns}
+    order = {c["id"]: i for i, c in enumerate(columns)}
+
+    groups: dict[str | None, list[dict]] = {}
+    for task in tasks:
+        groups.setdefault(task.get("columnId"), []).append(task)
+
+    stamp = datetime.now(UTC).astimezone()
+    out = [
+        f"# {project['name']}",
+        "",
+        f"_{len(tasks)} {scope} · {stamp:%Y-%m-%d %H:%M}_",
+        "",
+    ]
+
+    if len(groups) > 1:
+        keys = sorted(groups, key=lambda c: order.get(c, len(order)))
+    else:
+        keys = list(groups)
+    show_headings = len(columns) > 1
+
+    for key in keys:
+        group = groups[key]
+        roots = [t for t in group if not t.get("parentId")]
+        known = {t["id"] for t in group}
+        # orphaned subtasks (parent outside this view) become roots
+        roots += [
+            t
+            for t in group
+            if t.get("parentId") and t["parentId"] not in known
+        ]
+        children: dict[str, list[dict]] = {}
+        for task in group:
+            if parent := task.get("parentId"):
+                children.setdefault(parent, []).append(task)
+
+        if show_headings:
+            out.extend([f"## {column_names.get(key, '기타')}", ""])
+        for task in sorted(roots, key=lambda t: t.get("sortOrder", 0)):
+            task_block(task, 0, children, out)
+        out.append("")
+
+    return "\n".join(out).rstrip() + "\n"
+
+
+def open_editor(text: str, project: dict) -> None:
+    editor = os.environ.get("VISUAL") or os.environ.get("EDITOR") or "vi"
+    slug = project["name"][:32].replace("/", "-")
+    fd, name = tempfile.mkstemp(
+        prefix=f"ticktick-{slug}-", suffix=".md", dir="/tmp"
+    )
+    with os.fdopen(fd, "w", encoding="utf-8") as handle:
+        handle.write(text)
+    path = Path(name)
+
+    try:
+        subprocess.run([*shlex.split(editor), str(path)], check=False)
+    finally:
+        print(path)
+
+
+def show_project(*, include_all: bool) -> None:
+    project = pick_project()
+    project_data = run_json("project", "data", project["id"])
+    tasks = run_json("task", "filter", "--projects", project["id"])
+    if not isinstance(project_data, dict) or not isinstance(tasks, list):
+        raise TickTickError("unexpected project data format")
+    if include_all:
+        scope = "tasks"
+    else:
+        tasks = [t for t in tasks if t.get("status") == 0]
+        scope = "open tasks"
+    tasks.sort(key=lambda t: t.get("sortOrder", 0))
+    open_editor(render(project, project_data, tasks, scope), project)
+
+
+def main() -> int:
+    args = sys.argv[1:]
+    if "-h" in args or "--help" in args:
+        print(__doc__.strip())
+        return 0
+    try:
+        show_project(include_all="--all" in args)
+    except TickTickError as exc:
+        print(f"tt-view: {exc}", file=sys.stderr)
+        return 1
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
