@@ -5,3 +5,6 @@ bun remove -g <pkg>
 
 # install package global
 bun install -g --trust <@opencode/cli>
+
+# list packages
+bun pm ls -g

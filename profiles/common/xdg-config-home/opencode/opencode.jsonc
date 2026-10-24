@@ -1,5 +1,16 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "formatter": true,
+  "websearch": {
+    "provider": "exa"
+  },
+  "permissions": [
+    {
+      "action": "websearch",
+      "resource": "*",
+      "effect": "allow"
+    }
+  ],
   "mcp": {
     "servers": {
       "mdn": {
@@ -12,12 +23,7 @@
       },
       "kagi": {
         "type": "local",
-        "command": [
-          "kagi",
-          "mcp",
-          "--exclude-tools",
-          "kagi_extract"
-        ]
+        "command": ["kagi", "mcp", "--exclude-tools", "kagi_extract"]
       }
     }
   }

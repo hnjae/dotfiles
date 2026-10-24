@@ -29,7 +29,7 @@ zmodule "$ZDOTDIR/modules/tmux"
 zmodule "$ZDOTDIR/modules/yazi"
 zmodule "$ZDOTDIR/modules/zimfw"
 zmodule "$ZDOTDIR/modules/operating-system-command"
-zmodule "$ZDOTDIR/modules/code-agents"
+zmodule "$ZDOTDIR/modules/opencode"
 
 # 외부 script source
 zmodule "$ZDOTDIR/modules/1password"
