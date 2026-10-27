@@ -1,28 +1,28 @@
 #!/bin/sh
-# ccgo - Claude Code를 별도 config dir + 1Password dotenv 로 실행
+# ccx - Claude Code를 별도 config dir + 1Password dotenv 로 실행
 # POSIX sh (dash, bash --posix, busybox ash, macOS /bin/sh)
 set -eu
 
 : "${HOME:?HOME is not set}"
 
-config_dir="${CLAUDE_CC_GO_CONFIG_DIR:-$HOME/.claude-ccgo}"
-dotenv_file="${CLAUDE_CC_GO_DOTENV:-$HOME/.local/dotenv@1password/ccgo.env}"
+config_dir="$HOME/.claude-ccx"
+dotenv_file="${XDG_DATA_HOME:-$HOME/.local/share}/secrets/ccx.env"
 
-if [ ! -r "$dotenv_file" ]; then
-    printf 'ccgo: cannot read env file: %s\n' "$dotenv_file" >&2
+# 1Password 는 .env 를 named pipe 로 마운트하므로 한 번만 읽는다
+if ! env_content=$(cat "$dotenv_file"); then
+    printf 'ccx: cannot read env file: %s\n' "$dotenv_file" >&2
     exit 1
 fi
 
 # 문법 검사만 (실행하지 않음)
-if ! sh -n "$dotenv_file" 2>/dev/null; then
-    printf 'ccgo: env file is not valid POSIX sh syntax: %s\n' "$dotenv_file" >&2
+if ! printf '%s\n' "$env_content" | sh -n 2>/dev/null; then
+    printf 'ccx: env file is not valid POSIX sh syntax: %s\n' "$dotenv_file" >&2
     exit 1
 fi
 
 # 기존 환경변수를 건드리지 않고 파일 값을 export
 set -a
-# shellcheck disable=SC1090
-. "$dotenv_file"
+eval "$env_content"
 set +a
 
 # dotenv 뒤에 두어 이 스크립트의 값이 이기게 함
@@ -35,16 +35,17 @@ export ANTHROPIC_API_KEY="$OPENCODE_API_KEY"
 # - gemini-4-argon <2026-10-27>
 # - glm-5.3-flash <2026-10-27>
 # - mimo-v2.6-flash <2026-10-27>
-export ANTHROPIC_MODEL="deepseek-v4.1-flash[1m]"
+# export ANTHROPIC_MODEL="deepseek-v4.1-flash[1m]"
 export ANTHROPIC_DEFAULT_FABLE_MODEL="kimi-k3.1-pro[1m]"
 export ANTHROPIC_DEFAULT_OPUS_MODEL="minimax-m3.1-flash[1m]"
 export ANTHROPIC_DEFAULT_SONNET_MODEL="deepseek-v4.1-flash[1m]"
-export ANTHROPIC_DEFAULT_HAIKU_MODEL="qwen3.7-flash[1m]"
+export ANTHROPIC_DEFAULT_HAIKU_MODEL="deepseek-v4.1-flash[1m]"
+# export ANTHROPIC_DEFAULT_HAIKU_MODEL="qwen3.7-plus[1m]"
 export CLAUDE_CODE_SUBAGENT_MODEL="deepseek-v4.1-flash[1m]"
 
 # PATH 조정까지 반영한 뒤 바이너리 확정
 claude_bin=$(command -v claude) || {
-    printf 'ccgo: claude not found in PATH\n' >&2
+    printf 'ccx: claude not found in PATH\n' >&2
     exit 127
 }
 

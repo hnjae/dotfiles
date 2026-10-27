@@ -18,7 +18,11 @@
     "kagi": {
       "type": "stdio",
       "command": "kagi",
-      "args": ["mcp", "--exclude-tools", "kagi_extract"]
+      "args": [
+        "mcp",
+        "--exclude-tools",
+        "kagi_extract,kagi_fastgpt,kagi_enrich_web,kagi_enrich_news"
+      ]
     }
   }
 }

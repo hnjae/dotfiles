@@ -14,9 +14,9 @@
     ~/.local/bin:
       glob: true
       path: xdg-bin-home/*
-    ~/.claude-ccgo:
+    ~/.claude-ccx:
       glob: true
-      path: home+.claude-ccgo/*
+      path: home+.claude-ccx/*
     ~/.var/app/io.mpv.Mpv/config/mpv:
       path: ~/.config/mpv
 - shell:

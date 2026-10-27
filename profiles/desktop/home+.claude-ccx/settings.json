@@ -1,5 +1,10 @@
 {
-  "model": "fable",
+  "permissions": {
+    "deny": [
+      "WebSearch"
+    ]
+  },
+  "model": "opus",
   "modelSettings": {
     "deepseek-v4.1-flash": {
       "autoCompactWindow": 500000
@@ -16,9 +21,6 @@
     "kimi-k3.1-pro": {
       "autoCompactWindow": 500000
     }
-  },
-  "permissions": {
-    "deny": ["WebSearch"]
   },
   "theme": "auto"
 }

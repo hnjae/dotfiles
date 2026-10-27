@@ -1,5 +1,10 @@
 % systemd-inhibit
 
+# systemd-inhibit how-to
+systemd-inhibit [--what=sleep] [--why=foo] sleep 1h
 
-# inhibit sleep 1h
-systemd-inhibit [--what=sleep] sleep 1h
+# No sleep
+systemd-inhibit --what=sleep --why="manual sleep blocking" sleep <1h>
+
+# inhibit idle (no display 화면 꺼짐)
+systemd-inhibit --what=idle [--why=foo] sleep 1h
