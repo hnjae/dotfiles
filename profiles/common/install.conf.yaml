@@ -23,9 +23,6 @@
       path: xdg-bin-home/*
     ~/.zshenv:
       path: ~/.config/zsh/.zshenv
-    ~/.ssh:
-      glob: true
-      path: home+.ssh/*
     ~/.claude:
       glob: true
       path: home+.claude/*
