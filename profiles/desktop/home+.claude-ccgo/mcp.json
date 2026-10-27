@@ -6,6 +6,19 @@
       "headers": {
         "x-api-key": "${EXA_API_KEY}"
       }
+    },
+    "context7": {
+      "type": "http",
+      "url": "https://mcp.context7.com/mcp"
+    },
+    "mdn": {
+      "type": "http",
+      "url": "https://mcp.mdn.mozilla.net"
+    },
+    "kagi": {
+      "type": "stdio",
+      "command": "kagi",
+      "args": ["mcp", "--exclude-tools", "kagi_extract"]
     }
   }
 }
