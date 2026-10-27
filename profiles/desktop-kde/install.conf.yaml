@@ -13,7 +13,7 @@
       path: xdg-data-home/*
     ~/.local/share/applications:
       glob: true
-      path: xdg-data-home_applications/*
+      path: xdg-data-home+applications/*
 - shell:
     - description: Apply KDE config keys
-      command: install.d/apply-kde-config.sh
+      command: _install/apply-kde-config.sh

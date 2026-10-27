@@ -7,7 +7,7 @@
 - link:
     ~/.ssh:
       glob: true
-      path: home_.ssh/*
+      path: home+.ssh/*
     ~/.config:
       glob: true
       path: xdg-config-home/*
@@ -18,4 +18,4 @@
       path: ~/.config/mpv
 - shell:
     - description: Configure removed MIME associations
-      command: install.d/mimeapps/configure_removed_associations.py
+      command: _install/mimeapps/configure_removed_associations.py

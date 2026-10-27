@@ -25,26 +25,26 @@
       path: ~/.config/zsh/.zshenv
     ~/.ssh:
       glob: true
-      path: home_.ssh/*
+      path: home+.ssh/*
     ~/.claude:
       glob: true
-      path: home_.claude/*
+      path: home+.claude/*
     ~/.omp:
       glob: true
-      path: home_.omp/*
+      path: home+.omp/*
     ~/.omp/agent:
       glob: true
-      path: home_.omp_agent/*
+      path: home+.omp+agent/*
 - shell:
     - description: Installing submodules
       command: git submodule update --init --recursive
     - description: Install/Restore neovim plugins
-      command: install.d/restore-neovim-plugins.sh
+      command: _install/restore-neovim-plugins.sh
     - description: Install Mason tools
-      command: install.d/install-mason-tools.sh
+      command: _install/install-mason-tools.sh
     - description: Install/Update treesitter parsers
-      command: install.d/install-treesitter-parsers.sh
+      command: _install/install-treesitter-parsers.sh
     - description: seed files
-      command: install.d/seed-files.sh
+      command: _install/seed-files.sh
     - description: Install yazi plugins
-      command: install.d/install-yazi-plugins.sh
+      command: _install/install-yazi-plugins.sh
