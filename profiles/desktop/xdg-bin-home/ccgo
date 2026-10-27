@@ -48,4 +48,4 @@ claude_bin=$(command -v claude) || {
     exit 127
 }
 
-exec "$claude_bin" "$@"
+exec "$claude_bin" "--mcp-config=$config_dir/mcp.json" "$@"
