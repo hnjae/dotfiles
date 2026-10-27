@@ -7,12 +7,38 @@ script_dir="$(cd -- "$(dirname -- "$0")" && pwd -P)" >/dev/null 2>&1
 
 # POSIX sh compatible logger
 
+# systemd exports JOURNAL_STREAM as the `device:inode` of the journal socket it
+# attached to stderr, and every child process inherits it, so the variable
+# alone only proves that some unit started us. Prefix output with a priority
+# only when stderr is that very socket; otherwise journald already records the
+# priority, and the `<6>` prefix leaks into terminals, pipes, and log files of
+# commands that merely descend from a unit.
+_log_stderr_is_journal() {
+    _log_stderr_id=
+
+    if [ "${JOURNAL_STREAM:-}" = "" ] || [ -t 2 ]; then
+        return 1
+    fi
+
+    # `/proc/$$`, not `/proc/self`: `self` here is `stat`, whose stderr the
+    # redirection has already pointed at /dev/null.
+    if _log_stderr_id=$(stat -Lc '%d:%i' "/proc/$$/fd/2" 2>/dev/null); then
+        if [ "$_log_stderr_id" = "$JOURNAL_STREAM" ]; then
+            return 0
+        fi
+        return 1
+    fi
+
+    # Cannot inspect stderr's identity; trust the inherited variable.
+    return 0
+}
+
 _log_init() {
     if [ "${LOG_SYSTEMD:-}" = "1" ]; then
         _log_systemd=1
     elif [ "${LOG_SYSTEMD:-}" = "0" ]; then
         _log_systemd=0
-    elif [ "${JOURNAL_STREAM:-}" != "" ] || [ "${INVOCATION_ID:-}" != "" ]; then
+    elif _log_stderr_is_journal; then
         _log_systemd=1
     else
         _log_systemd=0
