@@ -61,23 +61,24 @@ if [ ! -f "$package_file" ]; then
     exit 0
 fi
 
-missing=""
-for name in $(plugin_names); do
-    if [ ! -d "$config_dir/plugins/$name" ]; then
-        missing="$missing $name"
-    fi
-done
+missing="$(
+    plugin_names | while IFS= read -r name; do
+        if [ ! -d "$config_dir/plugins/$name" ]; then
+            printf ' %s' "$name"
+        fi
+    done
+)"
 
 current_hash="$(hash_file "$package_file")"
 
-if [ -z "$missing" ] &&
+if [ "$missing" = "" ] &&
     [ -f "$state_file" ] &&
     [ "$(cat "$state_file")" = "$current_hash" ]; then
     echo "INFO: yazi plugins are unchanged; skipping" >&2
     exit 0
 fi
 
-if [ -n "$missing" ]; then
+if [ "$missing" != "" ]; then
     echo "INFO: yazi plugins are missing:$missing" >&2
 fi
 
