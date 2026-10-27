@@ -26,14 +26,15 @@
     ~/.ssh:
       glob: true
       path: home_.ssh/*
-    # xdg-config-home@merge:
-    ~/.claude/settings.json: xdg-config-home@merge/claude/settings.json
-    ~/.claude/skills: xdg-config-home@merge/claude/skills
-    ~/.claude/CLAUDE.md: xdg-config-home@merge/claude/CLAUDE.md
-    ~/.omp/agent/AGENTS.md: xdg-config-home@merge/omp/agent/AGENTS.md
-    ~/.omp/agent/config.yml: xdg-config-home@merge/omp/agent/config.yml
-    ~/.omp/agent/mcp.json: xdg-config-home@merge/omp/agent/mcp.json
-    ~/.omp/plugins: xdg-config-home@merge/omp/plugins
+    ~/.claude:
+      glob: true
+      path: home_.claude/*
+    ~/.omp:
+      glob: true
+      path: home_.omp/*
+    ~/.omp/agent:
+      glob: true
+      path: home_.omp_agent/*
 - shell:
     - description: Installing submodules
       command: git submodule update --init --recursive
