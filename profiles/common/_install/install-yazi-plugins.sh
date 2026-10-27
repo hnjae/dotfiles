@@ -41,8 +41,10 @@ install_into_scratch() {
     scratch_dir="$(mktemp -d)"
     trap 'rm -rf "$scratch_dir"' EXIT
 
+    mkdir -p "$scratch_dir/cache"
     cp "$package_file" "$scratch_dir/package.toml"
-    (cd "$scratch_dir" && YAZI_CONFIG_HOME="$scratch_dir" ya pkg install)
+    (cd "$scratch_dir" &&
+        YAZI_CONFIG_HOME="$scratch_dir" XDG_CACHE_HOME="$scratch_dir/cache" ya pkg install)
 
     mkdir -p "$config_dir/plugins"
     plugin_names | while IFS= read -r name; do
