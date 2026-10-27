@@ -1,23 +1,41 @@
----
 symbolPreset: nerd
 theme:
   dark: dark-gruvbox
   light: light-gruvbox
 setupVersion: 2
 modelRoles:
+  advisor: opencode-go/gemini-4-argon:medium # advisor: The independent reasoning model used by Advisor.
   default: opencode-go/deepseek-v4.1-flash:high
-  advisor: opencode-go/muse-spark-1.3-contributor:xhigh
-  slow: opencode-go/muse-spark-1.3-contributor:high
-  smol: opencode-go/deepseek-v4.1-flash:low
+  slow: opencode-go/muse-spark-1.3-contributor:high # slow: Thorough reasoning where extra latency is acceptable.
+  task: opencode-go/deepseek-v4.1-flash:high # task: General subagent work when the agent does not request another model.
+  plan: opencode-go/deepseek-v4.1-flash:high
+  memory: opencode-go/deepseek-v4.1-flash:high
+  designer: opencode-go/deepseek-v4.1-flash:high
+  vision: opencode-go/deepseek-v4.1-flash:high # Image inspection when a vision-capable model is needed.
+  # Low
+  smol: opencode-go/deepseek-v4.1-flash:low # smol:  You want lightweight work to favor speed and cost. It is also the usual handoff target for prewalk.
+  tiny: opencode-go/deepseek-v4.1-flash:low # tiny: Very small online classifications, titles, memory support, and speech cleanup; when unassigned it follows the smol preference.
+  commit: opencode-go/deepseek-v4.1-flash:low # Commit-message generation; commit flows can fall through to other usable roles when this is unassigned.
+  judge: opencode-go/deepseek-v4.1-flash:low
+  widget: opencode-go/deepseek-v4.1-flash:low
+  web: web/exa
 tui:
   textSizing: true
   vimMode: true
   vimModeDisplay: text
   tight: true
-  mouse: false # 이걸 키면 터미널 단에서 스크롤이 안된다.
+  mouse: false
+  resizeScrollback: rebuild
+  completeScrollback: true
 display:
   showTokenUsage: true
   cacheMissMarker: true
+  shimmer: kitt
+  smoothStreaming: false
+  subagentLivePreview: true
+  hideToolActivity: false
+  showTurnTime: false
+  collapseCompacted: true
 astGrep:
   enabled: true
 secrets:
@@ -26,3 +44,36 @@ personality: none
 advisor:
   enabled: true
 hideThinkingBlock: true
+composer:
+  shape: rail
+  tokenRate: false
+statusLine:
+  preset: default
+  contextLine: embedded
+  sessionAccent: true
+  transparent: false
+  compactThinkingLevel: false
+  showHookStatus: true
+images:
+  blockImages: false
+bash:
+  enabled: true
+  allowCompoundCommands: true
+followUpMode: one-at-a-time
+interruptMode: immediate
+power:
+  sleepPrevention: idle
+compaction:
+  idleEnabled: true
+  idleTimeoutSeconds: 3600
+edit:
+  mode: hashline
+generate_image:
+  enabled: false
+textVerbosity: low
+error:
+  notify: "on"
+retry:
+  fallbackChains:
+    opencode-go/deepseek-v4.1-flash:
+      - opencode-go/deepseek-v4.1-flash
