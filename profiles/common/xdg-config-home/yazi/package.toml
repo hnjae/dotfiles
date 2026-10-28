@@ -27,3 +27,6 @@ hash = "aa9f29ace28b2aacfdde46f50df4d293"
 use = "beskep/hwp-preview"
 rev = "e130244"
 hash = "ca491864753977cbea28a3eeb48b1688"
+
+[flavor]
+deps = []
