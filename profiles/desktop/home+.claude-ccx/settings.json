@@ -4,7 +4,7 @@
       "WebSearch"
     ]
   },
-  "model": "opus",
+  "model": "sonnet",
   "modelSettings": {
     "deepseek-v4.1-flash": {
       "autoCompactWindow": 500000
@@ -22,5 +22,8 @@
       "autoCompactWindow": 500000
     }
   },
-  "theme": "auto"
+  "theme": "auto",
+  "enabledPlugins": {
+    "rust-analyzer-lsp@claude-plugins-official": true
+  }
 }

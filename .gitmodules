@@ -77,3 +77,6 @@
 [submodule "profiles/common/home/.agents/skills-repos/SimpleEnglish@AminBlg"]
 	path = profiles/common/home/.agents/skills-repos/SimpleEnglish@AminBlg
 	url = https://github.com/AminBlg/SimpleEnglish
+[submodule "profiles/common/home/.agents/miscellaneous-repos/jailbreaks@togg53192-cmd"]
+	path = profiles/common/home/.agents/miscellaneous-repos/jailbreaks@togg53192-cmd
+	url = https://github.com/togg53192-cmd/jailbreaks
