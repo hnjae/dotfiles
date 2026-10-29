@@ -4,7 +4,10 @@
       "WebSearch"
     ]
   },
-  "model": "sonnet",
+  "model": "haiku",
+  "enabledPlugins": {
+    "rust-analyzer-lsp@claude-plugins-official": true
+  },
   "modelSettings": {
     "deepseek-v4.1-flash": {
       "autoCompactWindow": 500000
@@ -22,8 +25,5 @@
       "autoCompactWindow": 500000
     }
   },
-  "theme": "auto",
-  "enabledPlugins": {
-    "rust-analyzer-lsp@claude-plugins-official": true
-  }
+  "theme": "auto"
 }

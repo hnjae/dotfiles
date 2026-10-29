@@ -37,11 +37,12 @@ export ANTHROPIC_API_KEY="$OPENCODE_API_KEY"
 # - mimo-v2.6-flash <2026-10-27>
 # export ANTHROPIC_MODEL="deepseek-v4.1-flash[1m]"
 export ANTHROPIC_DEFAULT_FABLE_MODEL="kimi-k3.1-pro[1m]"
-export ANTHROPIC_DEFAULT_OPUS_MODEL="minimax-m3.1-flash[1m]"
+export ANTHROPIC_DEFAULT_OPUS_MODEL="deepseek-v4.1-flash[1m]"
 export ANTHROPIC_DEFAULT_SONNET_MODEL="deepseek-v4.1-flash[1m]"
 export ANTHROPIC_DEFAULT_HAIKU_MODEL="deepseek-v4.1-flash[1m]"
-# export ANTHROPIC_DEFAULT_HAIKU_MODEL="qwen3.7-plus[1m]"
 export CLAUDE_CODE_SUBAGENT_MODEL="deepseek-v4.1-flash[1m]"
+# export ANTHROPIC_DEFAULT_OPUS_MODEL="minimax-m3.1-flash[1m]"
+# export ANTHROPIC_DEFAULT_HAIKU_MODEL="qwen3.7-plus[1m]"
 
 # PATH 조정까지 반영한 뒤 바이너리 확정
 claude_bin=$(command -v claude) || {

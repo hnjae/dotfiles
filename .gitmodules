@@ -36,7 +36,7 @@
 	path = profiles/common/home/.agents/skills-repos/skills@vercel-labs
 	url = https://github.com/vercel-labs/skills
 [submodule "profiles/common/home/.agents/skills-repos/skills@anthropics"]
-	path = profiles/common/home/.agents/skills-repos/skills@anthropics
+	path = profiles/common/home/.agents/skills/skills@anthropics
 	url = https://github.com/anthropics/skills
 [submodule "profiles/common/home/.agents/skills-repos/claude-for-legal@anthropics"]
 	path = profiles/common/home/.agents/skills-repos/claude-for-legal@anthropics
@@ -57,13 +57,13 @@
 	path = profiles/common/home/.agents/skills-repos/i-have-adhd@ayghri
 	url = https://github.com/ayghri/i-have-adhd
 [submodule "profiles/common/home/.agents/skills-repos/security-audit-skill@cloudflare"]
-	path = profiles/common/home/.agents/skills-repos/security-audit-skill@cloudflare
+	path = profiles/common/home/.agents/skills/security-audit-skill
 	url = https://github.com/cloudflare/security-audit-skill
 [submodule "profiles/common/home/.agents/skills-repos/andrej-karpathy-skills@multica-ai"]
 	path = profiles/common/home/.agents/skills-repos/andrej-karpathy-skills@multica-ai
 	url = https://github.com/multica-ai/andrej-karpathy-skills
 [submodule "profiles/common/home/.agents/skills-repos/anti-slop@miqdadbadjuber"]
-	path = profiles/common/home/.agents/skills-repos/anti-slop@miqdadbadjuber
+	path = profiles/common/home/.agents/skills/anti-slop
 	url = https://github.com/miqdadbadjuber/anti-slop
 [submodule "profiles/common/home/.agents/skills-repos/kar-plain@Burntgogi"]
 	path = profiles/common/home/.agents/skills-repos/kar-plain@Burntgogi
@@ -75,8 +75,14 @@
 	path = profiles/common/home/.agents/skills-repos/im-not-ai@epoko77-ai
 	url = https://github.com/epoko77-ai/im-not-ai
 [submodule "profiles/common/home/.agents/skills-repos/SimpleEnglish@AminBlg"]
-	path = profiles/common/home/.agents/skills-repos/SimpleEnglish@AminBlg
+	path = profiles/common/home/.agents/skills/simple-english
 	url = https://github.com/AminBlg/SimpleEnglish
 [submodule "profiles/common/home/.agents/miscellaneous-repos/jailbreaks@togg53192-cmd"]
 	path = profiles/common/home/.agents/miscellaneous-repos/jailbreaks@togg53192-cmd
 	url = https://github.com/togg53192-cmd/jailbreaks
+[submodule "profiles/common/home/.agents/skills-repos/BeautifulRust@morganlinton"]
+	path = profiles/common/home/.agents/skills/beautiful-rust
+	url = https://github.com/morganlinton/BeautifulRust
+[submodule "profiles/common/home/.agents/skills/skills@vercel-labs"]
+	path = profiles/common/home/.agents/skills/skills@vercel-labs
+	url = https://github.com/vercel-labs/skills
