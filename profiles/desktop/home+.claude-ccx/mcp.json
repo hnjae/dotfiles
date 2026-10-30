@@ -23,6 +23,10 @@
         "--exclude-tools",
         "kagi_extract,kagi_fastgpt,kagi_enrich_web,kagi_enrich_news"
       ]
+    },
+    "nixos": {
+      "command": "uvx",
+      "args": ["mcp-nixos"]
     }
   }
 }
