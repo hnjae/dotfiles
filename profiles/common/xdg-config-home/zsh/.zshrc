@@ -74,5 +74,5 @@ fi
 # Initialize modules.
 source "${ZIM_HOME}/init.zsh"
 
-# bun completions
-[ -s "/home/hnjae/.local/share/bun/_bun" ] && source "/home/hnjae/.local/share/bun/_bun"
+# NOTE: bun 자동완성은 Nix 프로필의 zsh site-functions(`_bun`)를 compinit 이 등록해서 처리한다.
+#   여기서 직접 source 하면 존재하지 않는 경로의 test 실패가 셸 종료 상태(1)로 새어나간다. <2026-10-31>
