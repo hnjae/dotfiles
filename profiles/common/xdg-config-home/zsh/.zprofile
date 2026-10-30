@@ -12,7 +12,7 @@ if [[ "${__ZPROFILE_SOURCED}" != "" ]]; then return; fi
 typeset -g __ZPROFILE_SOURCED=1
 
 for user_profile_file in "${XDG_CONFIG_HOME:-${HOME}/.config}/profile.d"/*.sh(N); do
-    [[ -r "$user_env_file" ]] || continue
-    emulate sh -c ". '$user_env_file'"
+    [[ -r "$user_profile_file" ]] || continue
+    emulate sh -c ". '$user_profile_file'"
 done
 unset user_profile_file
