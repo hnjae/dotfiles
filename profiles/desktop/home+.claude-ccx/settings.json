@@ -1,8 +1,9 @@
 {
+  "env": {
+    "DISABLE_AUTOUPDATER": "1"
+  },
   "permissions": {
-    "deny": [
-      "WebSearch"
-    ]
+    "deny": ["WebSearch"]
   },
   "model": "haiku",
   "enabledPlugins": {
@@ -14,16 +15,21 @@
     },
     "minimax-m3.1-flash": {
       "autoCompactWindow": 500000
-    },
-    "qwen3.8-flash": {
-      "autoCompactWindow": 300000
-    },
-    "qwen3.7-flash": {
-      "autoCompactWindow": 300000
-    },
-    "kimi-k3.1-pro": {
-      "autoCompactWindow": 500000
     }
   },
-  "theme": "auto"
+  "theme": "auto",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "^(startup|resume|clear|compact|fork)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$HOME/.claude/hooks/herdr-agent-state.sh\" session",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
 }

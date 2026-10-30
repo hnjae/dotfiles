@@ -7,7 +7,7 @@
   "modelSettings": {
     "claude-opus-5-5": {
       "effortLevel": "high",
-      "autoCompactWindow": 700000
+      "autoCompactWindow": 500000
     },
     "claude-sonnet-5-5": {
       "effortLevel": "high",
@@ -15,12 +15,26 @@
     },
     "claude-haiku-5-5": {
       "effortLevel": "xhigh",
-      "autoCompactWindow": 400000
+      "autoCompactWindow": 350000
     }
   },
   "advisorModel": "opus",
   "tui": "fullscreen",
   "theme": "auto",
   "remoteControlAtStartup": true,
-  "agentPushNotifEnabled": true
+  "agentPushNotifEnabled": true,
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "^(startup|resume|clear|compact|fork)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$HOME/.claude/hooks/herdr-agent-state.sh\" session",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
 }
