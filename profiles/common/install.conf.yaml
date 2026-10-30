@@ -26,12 +26,6 @@
     ~/.claude:
       glob: true
       path: home+.claude/*
-    ~/.omp:
-      glob: true
-      path: home+.omp/*
-    ~/.omp/agent:
-      glob: true
-      path: home+.omp+agent/*
 - shell:
     - description: Installing submodules
       command: git submodule update --init --recursive

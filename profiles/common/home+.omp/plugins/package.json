@@ -1,7 +1,0 @@
-{
-  "name": "omp-plugins",
-  "private": true,
-  "dependencies": {
-    "cc-safety-net": "npm:cc-safety-net"
-  }
-}
