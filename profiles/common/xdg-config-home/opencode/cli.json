@@ -32,5 +32,6 @@
     "layout": "horizontal",
     "scope": "cwd",
     "mode": "off"
-  }
+  },
+  "plugins": ["./herdr-opencode"]
 }
