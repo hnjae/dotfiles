@@ -1,0 +1,12 @@
+% ptouch-print, PT-P710B, Brother
+
+; 대략 pt ≈ 인쇄 px × 0.85가 상한이라고. 6mm: 32px
+
+# print info
+ptouch-print --info
+
+# print something (font 크기 자동으로 최대 크기로 선택)
+ptouch-print --font "Sarasa Gothic K" -t "서랍 A"
+
+# print something
+ptouch-print --fontsize 22 --font "Monoplex CJK" -t "2026-10-31"

@@ -1,0 +1,4 @@
+% herdr
+
+# install integration hooks
+herdr integration install hermes
