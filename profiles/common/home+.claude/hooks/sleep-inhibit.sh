@@ -24,7 +24,7 @@ start)
     setsid -f sh -c '
       echo $$ >"$1"
       exec systemd-inhibit --what=sleep --who="Claude Code" \
-        --why="Claude Code is working" --mode=block sleep infinity
+        --why="Claude Code is working" --mode=block-weak sleep infinity
     ' sh "$pid_file" >/dev/null 2>&1 </dev/null
     ;;
 stop)

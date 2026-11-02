@@ -23,7 +23,8 @@
   "attention": {
     "volume": 1,
     "notifications": true,
-    "sound": true
+    // 이거 true 이면 alsa 없는 system 에서 tui 를 정상적으로 못씀.
+    "sound": false
   },
   "prompt": {
     "image_preview": true
