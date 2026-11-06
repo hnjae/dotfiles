@@ -13,7 +13,7 @@ kwriteconfig6 --file "konsolerc" --group "Notification Messages" --key "CloseAll
 kwriteconfig6 --file "konsolerc" --group "Notification Messages" --key "CloseAllTabs" --delete
 kwriteconfig6 --file "konsolerc" --group "Notification Messages" --key "CloseSingleTab" --delete
 
-kwriteconfig6 --file "kdeglobals" --group "General" --key "fixed" "monospace,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1"
+kwriteconfig6 --file "kdeglobals" --group "General" --key "fixed" "ui-monospace,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1"
 kwriteconfig6 --file "kdeglobals" --group "General" --key "font" "system-ui,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1"
 kwriteconfig6 --file "kdeglobals" --group "General" --key "menuFont" "system-ui,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1"
 kwriteconfig6 --file "kdeglobals" --group "General" --key "smallestReadableFont" "system-ui,8,-1,5,400,0,0,0,0,0,0,0,0,0,0,1"
@@ -26,7 +26,7 @@ kwriteconfig6 --file "dolphinrc" --group "CompactMode" --key "ViewFont" "system-
 
 kwriteconfig6 --file "dolphinrc" --group "DetailsMode" --key "PreviewSize" "16"
 kwriteconfig6 --file "dolphinrc" --group "DetailsMode" --key "UseSystemFont" "false"
-kwriteconfig6 --file "dolphinrc" --group "DetailsMode" --key "ViewFont" "monospace,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1"
+kwriteconfig6 --file "dolphinrc" --group "DetailsMode" --key "ViewFont" "ui-monospace,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1"
 
 kwriteconfig6 --file "dolphinrc" --group "IconsMode" --key "UseSystemFont" "false"
 kwriteconfig6 --file "dolphinrc" --group "IconsMode" --key "ViewFont" "system-ui,11,-1,5,400,0,0,0,0,0,0,0,0,0,0,1"
