@@ -3,26 +3,6 @@
     "DISABLE_AUTOUPDATER": "1"
   },
   "model": "sonnet",
-  "subagentPromptCacheTtl": "1h",
-  "modelSettings": {
-    "claude-opus-5-5": {
-      "effortLevel": "high",
-      "autoCompactWindow": 500000
-    },
-    "claude-sonnet-5-5": {
-      "effortLevel": "high",
-      "autoCompactWindow": 500000
-    },
-    "claude-haiku-5-5": {
-      "effortLevel": "xhigh",
-      "autoCompactWindow": 350000
-    }
-  },
-  "advisorModel": "opus",
-  "tui": "fullscreen",
-  "theme": "auto",
-  "remoteControlAtStartup": true,
-  "agentPushNotifEnabled": true,
   "hooks": {
     "SessionStart": [
       {
@@ -92,5 +72,28 @@
         ]
       }
     ]
+  },
+  "subagentPromptCacheTtl": "1h",
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "high",
+      "autoCompactWindow": 500000
+    },
+    "claude-sonnet-5-5": {
+      "effortLevel": "high",
+      "autoCompactWindow": 500000
+    },
+    "claude-haiku-5-5": {
+      "effortLevel": "xhigh",
+      "autoCompactWindow": 350000
+    }
+  },
+  "advisorModel": "opus",
+  "tui": "fullscreen",
+  "theme": "auto",
+  "remoteControlAtStartup": true,
+  "agentPushNotifEnabled": true,
+  "enabledPlugins": {
+    "cc-plugin-you-should-know@builtin": true
   }
 }

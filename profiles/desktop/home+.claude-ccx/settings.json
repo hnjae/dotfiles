@@ -3,21 +3,11 @@
     "DISABLE_AUTOUPDATER": "1"
   },
   "permissions": {
-    "deny": ["WebSearch"]
+    "deny": [
+      "WebSearch"
+    ]
   },
-  "model": "haiku",
-  "enabledPlugins": {
-    "rust-analyzer-lsp@claude-plugins-official": true
-  },
-  "modelSettings": {
-    "deepseek-v4.1-flash": {
-      "autoCompactWindow": 500000
-    },
-    "minimax-m3.1-flash": {
-      "autoCompactWindow": 500000
-    }
-  },
-  "theme": "auto",
+  "model": "sonnet",
   "hooks": {
     "SessionStart": [
       {
@@ -87,5 +77,18 @@
         ]
       }
     ]
-  }
+  },
+  "enabledPlugins": {
+    "rust-analyzer-lsp@claude-plugins-official": true
+  },
+  "modelSettings": {
+    "deepseek-v4.1-flash": {
+      "effortLevel": "high",
+      "autoCompactWindow": 500000
+    },
+    "minimax-m3.1-flash": {
+      "autoCompactWindow": 500000
+    }
+  },
+  "theme": "auto"
 }

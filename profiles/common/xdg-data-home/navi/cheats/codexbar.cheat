@@ -1,0 +1,4 @@
+% codexbar
+
+# show usage
+codexbar usage --provider enabled
