@@ -2,7 +2,7 @@
   "env": {
     "DISABLE_AUTOUPDATER": "1"
   },
-  "model": "sonnet",
+  "model": "haiku",
   "hooks": {
     "SessionStart": [
       {
@@ -73,6 +73,16 @@
       }
     ]
   },
+  "statusLine": {
+    "type": "command",
+    "command": "bunx -y ccstatusline@latest",
+    "padding": 0,
+    "refreshInterval": 10
+  },
+  "enabledPlugins": {
+    "cc-plugin-you-should-know@builtin": true,
+    "rust-analyzer-lsp@claude-plugins-official": true
+  },
   "subagentPromptCacheTtl": "1h",
   "modelSettings": {
     "claude-opus-5-5": {
@@ -84,7 +94,7 @@
       "autoCompactWindow": 500000
     },
     "claude-haiku-5-5": {
-      "effortLevel": "xhigh",
+      "effortLevel": "high",
       "autoCompactWindow": 350000
     }
   },
@@ -92,15 +102,5 @@
   "tui": "fullscreen",
   "theme": "auto",
   "remoteControlAtStartup": true,
-  "agentPushNotifEnabled": true,
-  "enabledPlugins": {
-    "cc-plugin-you-should-know@builtin": true,
-    "rust-analyzer-lsp@claude-plugins-official": true
-  },
-  "statusLine": {
-    "type": "command",
-    "command": "bunx -y ccstatusline@latest",
-    "padding": 0,
-    "refreshInterval": 10
-  }
+  "agentPushNotifEnabled": true
 }

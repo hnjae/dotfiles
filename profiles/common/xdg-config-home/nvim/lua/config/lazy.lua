@@ -23,7 +23,7 @@ require("lazy").setup({
     {
       [1] = "LazyVim/LazyVim",
       -- CHECK: <https://github.com/LazyVim/LazyVim/releases>
-      version = "v15.*",
+      version = "v16.*",
       import = "lazyvim.plugins",
     },
     -- import/override with your plugins
