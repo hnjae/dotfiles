@@ -11,7 +11,7 @@
     "sidebar": "hide",
     "scrollbar": false,
     "thinking": "show",
-    "verbosity": "medium",
+    "verbosity": "low",
     "image_preview": true
   },
   "animations": true,

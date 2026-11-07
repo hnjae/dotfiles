@@ -3,9 +3,7 @@
     "DISABLE_AUTOUPDATER": "1"
   },
   "permissions": {
-    "deny": [
-      "WebSearch"
-    ]
+    "deny": ["WebSearch"]
   },
   "model": "sonnet",
   "hooks": {
@@ -80,6 +78,12 @@
   },
   "enabledPlugins": {
     "rust-analyzer-lsp@claude-plugins-official": true
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bunx -y ccstatusline@latest",
+    "padding": 0,
+    "refreshInterval": 10
   },
   "modelSettings": {
     "deepseek-v4.1-flash": {
