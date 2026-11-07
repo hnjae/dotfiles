@@ -75,7 +75,7 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "bunx -y ccstatusline@latest",
+    "command": "ccstatusline",
     "padding": 0,
     "refreshInterval": 10
   },
