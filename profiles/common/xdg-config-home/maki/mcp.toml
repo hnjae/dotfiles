@@ -1,0 +1,15 @@
+# MCP servers for maki, ported from ~/.claude-ccx/mcp.json (exa excluded).
+# Schema: https://maki.sh/docs/mcp/
+
+[mcp.context7]
+url = "https://mcp.context7.com/mcp"
+enabled = true
+
+[mcp.mdn]
+url = "https://mcp.mdn.mozilla.net"
+
+[mcp.kagi]
+command = ["kagi", "mcp", "--exclude-tools", "kagi_extract,kagi_fastgpt,kagi_enrich_web,kagi_enrich_news"]
+
+[mcp.nixos]
+command = ["uvx", "mcp-nixos"]
