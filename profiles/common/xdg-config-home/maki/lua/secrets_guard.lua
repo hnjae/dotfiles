@@ -11,10 +11,42 @@
 
 local home = maki.uv.os_homedir()
 local xdg_config = maki.uv.os_getenv("XDG_CONFIG_HOME") or (home .. "/.config")
+local xdg_state = maki.uv.os_getenv("XDG_STATE_HOME") or (home .. "/.local/state")
+local xdg_cache = maki.uv.os_getenv("XDG_CACHE_HOME") or (home .. "/.cache")
 
 local PROTECTED_DIRS = {
   home .. "/.ssh",
   xdg_config .. "/sops",
+}
+
+-- Shell and REPL history can hold a password typed by mistake, so the files
+-- are refused even though they are not secret material themselves.
+local PROTECTED_FILES = {
+  -- zsh: the XDG path this user sets, plus every default it could fall back to
+  xdg_state .. "/zsh_history",
+  home .. "/.zsh_history",
+  home .. "/.histfile",
+  home .. "/.history",
+  home .. "/.local/share/zsh/history",
+  -- bash
+  home .. "/.bash_history",
+  xdg_state .. "/bash/history",
+  -- python REPL
+  xdg_state .. "/python_history",
+  home .. "/.python_history",
+  -- fish
+  xdg_state .. "/fish/fish_history",
+  home .. "/.local/share/fish/fish_history",
+  home .. "/.config/fish/fish_history",
+  -- other shells and tools
+  home .. "/.local/share/psql_history",
+  home .. "/.psql_history",
+  home .. "/.sqlite_history",
+  home .. "/.node_repl_history",
+  home .. "/.irb_history",
+  xdg_cache .. "/kitty/shell.history.json",
+  home .. "/.claude/history.jsonl",
+  home .. "/.codex/history.jsonl",
 }
 
 -- Fields that name a path the tool will open, create, or search.
@@ -28,6 +60,15 @@ local COMMAND_FIELDS = { "command", "cmd", "script" }
 local function is_secret_file(path)
   local name = path:match("([^/]+)$") or path
   return name == ".env" or name:sub(1, 5) == ".env."
+end
+
+local function is_protected_file(path)
+  for _, file in ipairs(PROTECTED_FILES) do
+    if path == file then
+      return file
+    end
+  end
+  return nil
 end
 
 local function under_protected_dir(path)
@@ -53,15 +94,10 @@ local function expand(text)
   local out = { text }
   for _, alias in ipairs(ALIASES) do
     local prefix, replacement = alias[1], alias[2]
-    for _, root in ipairs(PROTECTED_DIRS) do
-      local suffix = root:sub(#replacement + 1)
-      if suffix ~= "" then
-        local spelled = prefix .. suffix
-        if text:find(spelled, 1, true) then
-          out[#out + 1] =
-            text:gsub(spelled:gsub("[%^%$%(%)%%%.%[%]%*%+%-%?]", "%%%0"), replacement .. suffix)
-        end
-      end
+    -- Any occurrence of the alias is rewritten, so a protected file such as
+    -- `~/.local/state/zsh_history` matches as well as a protected directory.
+    if text:find(prefix, 1, true) then
+      out[#out + 1] = text:gsub(prefix:gsub("[%^%$%(%)%%%.%[%]%*%+%-%?]", "%%%0"), replacement)
     end
   end
   return out
@@ -79,6 +115,10 @@ local function check_command(text)
       end
       if is_secret_file(clean) then
         return clean
+      end
+      local file = is_protected_file(clean)
+      if file then
+        return file
       end
     end
     -- A path can also sit inside a longer string, such as
@@ -100,6 +140,10 @@ local function check_path(text)
     end
     if is_secret_file(variant) then
       return variant
+    end
+    local file = is_protected_file(variant)
+    if file then
+      return file
     end
   end
   return nil
