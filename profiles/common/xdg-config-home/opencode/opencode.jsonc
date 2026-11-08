@@ -11,6 +11,13 @@
       "effect": "allow"
     }
   ],
+  "policies": [
+    {
+      "action": "tool.use",
+      "resource": "shell:*sops *",
+      "effect": "deny"
+    }
+  ],
   "mcp": {
     "servers": {
       "mdn": {
