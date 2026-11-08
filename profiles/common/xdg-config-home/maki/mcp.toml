@@ -19,5 +19,6 @@ command = [
 [mcp.nixos]
 command = ["uvx", "mcp-nixos"]
 
-[mcp.datadog]
-url = "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=all"
+# [mcp.datadog]
+# url = "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=all"
+# enabled = true
