@@ -31,3 +31,9 @@ maki.setup({
 require("herdr")
 require("secrets_guard")
 require("wakelock")
+
+-- Open the chat input in $EDITOR. Bound in both modes so it works whether
+-- the input has the keyboard or a picker just closed.
+maki.keymap.set({ "n", "i" }, "<C-g>", function()
+  maki.ui.action("edit_input")
+end, { desc = "Edit input in $EDITOR" })
