@@ -1,0 +1,217 @@
+# Global agent permissions. Whitelist: commands listed here run without a
+# prompt; anything unlisted still prompts. Deny always wins over allow.
+#
+# Patterns: `cmd *` matches bare `cmd` and `cmd` + args. Path scopes use
+# `dir/**`. Commands split by `&&`, `;`, `|` are checked individually, so
+# every part of a chain needs its own entry.
+#
+# Not covered here on purpose: `$(...)`, backticks, `(...)` and `$((...))`
+# always prompt regardless of these rules.
+
+# Read-only inspection.
+[bash]
+allow = [
+  # navigation and inspection
+  "cd *",
+  "pwd *",
+  "ls *",
+  "ll *",
+  "la *",
+  "tree *",
+  "stat *",
+  "file *",
+  "du *",
+  "df *",
+  "wc *",
+  "head *",
+  "tail *",
+  "cat *",
+  "bat *",
+  "less *",
+  "echo *",
+  "printf *",
+  "date *",
+  "which *",
+  "type *",
+  "command *",
+  "env *",
+  "true *",
+  "false *",
+  "sleep *",
+  "test *",
+  "[ *",
+
+  # search
+  "grep *",
+  "rg *",
+  "fd *",
+  "find *",
+  "fdfind *",
+  "sed *",
+  "awk *",
+  "jq *",
+  "yq *",
+  "sort *",
+  "uniq *",
+  "cut *",
+  "tr *",
+  "xargs *",
+
+  # git (read + local write; remote mutation stays out)
+  "git status *",
+  "git log *",
+  "git diff *",
+  "git show *",
+  "git branch *",
+  "git remote *",
+  "git tag *",
+  "git blame *",
+  "git stash *",
+  "git add *",
+  "git commit *",
+  "git checkout *",
+  "git switch *",
+  "git restore *",
+  "git mv *",
+  "git rm *",
+  "git submodule *",
+  "git rev-parse *",
+  "git ls-files *",
+  "git config *",
+  "git clone *",
+  "git fetch *",
+  "git pull *",
+  "git push *",
+  "git reset *",
+
+  # nix
+  "nix *",
+  "nixos-rebuild *",
+  "nvd *",
+
+  # js / lua tooling
+  "bun *",
+  "node *",
+  "npm *",
+  "pnpm *",
+  "npx *",
+  "luajit *",
+  "lua *",
+  "stylua *",
+
+  # python
+  "python *",
+  "python3 *",
+  "uv *",
+  "uvx *",
+  "pip *",
+  "pipx *",
+
+  # rust / build
+  "cargo *",
+  "rustc *",
+  "rustfmt *",
+  "clippy *",
+  "make *",
+  "just *",
+  "cmake *",
+  "gcc *",
+  "clang *",
+
+  # file management (non-destructive forms only)
+  "mkdir *",
+  "cp *",
+  "mv *",
+  "ln *",
+  "touch *",
+  "chmod *",
+  "rmdir *",
+  "rsync *",
+
+  # maki / herdr
+  "maki *",
+  "herdr *",
+  "codex *",
+  "codexbar *",
+  "opencode *",
+  "claude *",
+  "tmux *",
+  "systemctl --user *",
+  "journalctl --user *",
+
+  # media helpers
+  "ffmpeg *",
+  "ffmpeg-trim *",
+  "yt-dlp *",
+  # sops: encrypt side only. Deny must stay narrow here, because a deny
+  # beats every allow. Forms not listed in either list, such as
+  # `sops --output-type json x.yaml`, still prompt.
+  "sops encrypt *",
+  "sops -e *",
+  "sops --encrypt *",
+  "sops updatekeys *",
+  "sops rotate *",
+  "ydl *",
+  "reforge *",
+  "fc-list *",
+  "ssh-keygen *",
+  "ssh *",
+
+  # network reads
+  "curl *",
+  "wget *",
+  "ping *",
+  "dig *",
+  "nslookup *",
+]
+
+# Blocked even if an allow pattern above would match. Deny beats YOLO too.
+deny = [
+  # sops: decrypting the plaintext is not allowed. Keep this list narrow
+  # and explicit; `sops *` would also block the encrypt forms allowed above.
+  "sops decrypt *",
+  "sops -d *",
+  "sops --decrypt *",
+  "sops exec-env *",
+  "sops exec-file *",
+  "sops edit *",
+  "sudo *",
+  "doas *",
+  "su *",
+  "rm -rf /*",
+  "rm -rf ~/*",
+  "rm -rf $HOME/*",
+  "git push --force *",
+  "git push -f *",
+  "git clean -fdx *",
+  "mkfs *",
+  "dd *",
+  "shutdown *",
+  "reboot *",
+  "poweroff *",
+  "systemctl poweroff *",
+  "systemctl reboot *",
+  "chmod -R 777 *",
+  "chown -R *",
+  ":(){ *",
+]
+
+# Web tools prompt by default; these are the read-only lookups worth skipping.
+[websearch]
+allow = ["*"]
+
+[webfetch]
+allow = ["*"]
+
+# MCP servers: allow read-only tools, deny anything that mutates.
+[mcp.context7]
+default = "allow"
+
+[mcp.mdn]
+default = "allow"
+
+[mcp.nixos]
+default = "allow"
+
+[mcp.kagi]
+default = "allow"
