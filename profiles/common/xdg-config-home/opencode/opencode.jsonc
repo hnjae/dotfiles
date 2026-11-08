@@ -12,9 +12,27 @@
     }
   ],
   "policies": [
+    { "action": "tool.use", "resource": "shell:*sops *", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:*age -d *", "effect": "deny" },
     {
       "action": "tool.use",
-      "resource": "shell:*sops *",
+      "resource": "shell:*age --decrypt*",
+      "effect": "deny"
+    },
+    { "action": "tool.use", "resource": "shell:*gpg *-d *", "effect": "deny" },
+    {
+      "action": "tool.use",
+      "resource": "shell:*gpg *--decrypt*",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "shell:*openssl enc *-d *",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "shell:*openssl enc *--decrypt*",
       "effect": "deny"
     }
   ],
