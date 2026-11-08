@@ -1,9 +1,20 @@
 # Grants for the plugins in ~/.config/maki/lua.
 #
 # herdr.lua shells out to the herdr binary and reads HERDR_* from the
-# environment. It never reads session transcripts, so session_read stays off.
+# environment. It never reads session transcripts.
+#
+# secrets_guard.lua wraps `tool.*.input`, which maki prices at every
+# permission because tools like `read` declare no capability of their own.
+# It reads no file and runs nothing; the grants exist only to let the layer
+# fire.
 [permissions]
 run = true
 env = true
-fs_read = false
-session_read = false
+fs_read = true
+fs_write = true
+net = true
+agent = true
+session_read = true
+session_write = true
+session_settings = true
+input = true

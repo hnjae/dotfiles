@@ -7,6 +7,15 @@
 - English is the default, not a hard rule. Keep proper nouns and terms whose nuance English dilutes in their original language (e.g. 국세기본법, 天命). Mixing other languages into an English sentence is fine; an AI parses such a sentence well.
 - The reason for the English default is that less capable models have weaker multilingual ability.
 
+## Secrets
+
+- Never read, print, or copy secret material: `~/.ssh`, `~/.config/sops`, `.env` and `.env.*`, keyrings, password stores.
+- The `secrets_guard` plugin blocks those paths for every tool. A block is a decision, not an obstacle: report it and let the user handle the file.
+- Do not work around a block by encoding paths, splitting strings, or reaching the same data another way. That defeats the guard the user asked for.
+- Commands that print secrets are denied in `permissions.toml` (`sops decrypt`, `op read`, `gpg -d`, `secret-tool lookup`, and similar). Do not retry them with different flags.
+- Everything else in bash runs without a prompt, so nothing else will stop a mistake. Treat a command that touches credentials as your own responsibility.
+- Sandboxing is the user's call, not yours. If a task needs secrets, ask the user to run it or to sandbox maki.
+
 ## Investigation
 
 - When attempts keep failing for the same reason, stop and name the assumption that may be wrong.

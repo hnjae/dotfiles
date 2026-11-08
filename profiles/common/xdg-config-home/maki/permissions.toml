@@ -1,171 +1,25 @@
-# Global agent permissions. Whitelist: commands listed here run without a
-# prompt; anything unlisted still prompts. Deny always wins over allow.
+# Global agent permissions.
+#
+# bash runs anything without a prompt; only the deny list stops a command.
+# A deny beats every allow, the default, and YOLO mode, so keep it narrow
+# and explicit rather than broad.
 #
 # Patterns: `cmd *` matches bare `cmd` and `cmd` + args. Path scopes use
-# `dir/**`. Commands split by `&&`, `;`, `|` are checked individually, so
-# every part of a chain needs its own entry.
+# `dir/**`. Commands split by `&&`, `;`, `|` are checked individually.
 #
 # Not covered here on purpose: `$(...)`, backticks, `(...)` and `$((...))`
-# always prompt regardless of these rules.
+# always prompt regardless of these rules. Secrets are also guarded outside
+# this file, by the secrets_guard plugin, which blocks secret paths for every
+# tool rather than only bash.
 
-# Read-only inspection.
 [bash]
-allow = [
-  # navigation and inspection
-  "cd *",
-  "pwd *",
-  "ls *",
-  "ll *",
-  "la *",
-  "tree *",
-  "stat *",
-  "file *",
-  "du *",
-  "df *",
-  "wc *",
-  "head *",
-  "tail *",
-  "cat *",
-  "bat *",
-  "less *",
-  "echo *",
-  "printf *",
-  "date *",
-  "which *",
-  "type *",
-  "command *",
-  "env *",
-  "true *",
-  "false *",
-  "sleep *",
-  "test *",
-  "[ *",
+# Every command runs without a prompt. The deny list below is what stays
+# blocked, so keep it narrow and explicit: a deny beats everything,
+# including this default and YOLO mode.
+default = "allow"
+allow = true
 
-  # search
-  "grep *",
-  "rg *",
-  "fd *",
-  "find *",
-  "fdfind *",
-  "sed *",
-  "awk *",
-  "jq *",
-  "yq *",
-  "sort *",
-  "uniq *",
-  "cut *",
-  "tr *",
-  "xargs *",
-
-  # git (read + local write; remote mutation stays out)
-  "git status *",
-  "git log *",
-  "git diff *",
-  "git show *",
-  "git branch *",
-  "git remote *",
-  "git tag *",
-  "git blame *",
-  "git stash *",
-  "git add *",
-  "git commit *",
-  "git checkout *",
-  "git switch *",
-  "git restore *",
-  "git mv *",
-  "git rm *",
-  "git submodule *",
-  "git rev-parse *",
-  "git ls-files *",
-  "git config *",
-  "git clone *",
-  "git fetch *",
-  "git pull *",
-  "git push *",
-  "git reset *",
-
-  # nix
-  "nix *",
-  "nixos-rebuild *",
-  "nvd *",
-
-  # js / lua tooling
-  "bun *",
-  "node *",
-  "npm *",
-  "pnpm *",
-  "npx *",
-  "luajit *",
-  "lua *",
-  "stylua *",
-
-  # python
-  "python *",
-  "python3 *",
-  "uv *",
-  "uvx *",
-  "pip *",
-  "pipx *",
-
-  # rust / build
-  "cargo *",
-  "rustc *",
-  "rustfmt *",
-  "clippy *",
-  "make *",
-  "just *",
-  "cmake *",
-  "gcc *",
-  "clang *",
-
-  # file management (non-destructive forms only)
-  "mkdir *",
-  "cp *",
-  "mv *",
-  "ln *",
-  "touch *",
-  "chmod *",
-  "rmdir *",
-  "rsync *",
-
-  # maki / herdr
-  "maki *",
-  "herdr *",
-  "codex *",
-  "codexbar *",
-  "opencode *",
-  "claude *",
-  "tmux *",
-  "systemctl --user *",
-  "journalctl --user *",
-
-  # media helpers
-  "ffmpeg *",
-  "ffmpeg-trim *",
-  "yt-dlp *",
-  # sops: encrypt side only. Deny must stay narrow here, because a deny
-  # beats every allow. Forms not listed in either list, such as
-  # `sops --output-type json x.yaml`, still prompt.
-  "sops encrypt *",
-  "sops -e *",
-  "sops --encrypt *",
-  "sops updatekeys *",
-  "sops rotate *",
-  "ydl *",
-  "reforge *",
-  "fc-list *",
-  "ssh-keygen *",
-  "ssh *",
-
-  # network reads
-  "curl *",
-  "wget *",
-  "ping *",
-  "dig *",
-  "nslookup *",
-]
-
-# Blocked even if an allow pattern above would match. Deny beats YOLO too.
+# Blocked even under default = "allow" and YOLO.
 deny = [
   # sops: decrypting the plaintext is not allowed. Keep this list narrow
   # and explicit; `sops *` would also block the encrypt forms allowed above.
@@ -175,6 +29,29 @@ deny = [
   "sops exec-env *",
   "sops exec-file *",
   "sops edit *",
+  # op: every path that puts a secret value in the clear.
+  "op read *",
+  "op inject *",
+  "op run *",
+  "op item get *",
+  "op document get *",
+  "op export *",
+  # gpg: decrypting and exporting private keys.
+  "gpg --decrypt *",
+  "gpg -d *",
+  "gpg --export-secret-keys *",
+  "gpg --export-secret-subkeys *",
+  "gpg --gen-key *",
+  "gpg --gen-revoke *",
+  # age has no encrypt-only split worth keeping, and sops drives it.
+  "age --decrypt *",
+  "age -d *",
+  "age-keygen *",
+  # libsecret and KWallet: lookup/read print the stored secret.
+  "secret-tool lookup *",
+  "secret-tool search *",
+  "kwallet-query --read-password *",
+  "kwallet-query -r *",
   "sudo *",
   "doas *",
   "su *",
