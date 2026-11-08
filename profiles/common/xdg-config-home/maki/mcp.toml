@@ -9,7 +9,15 @@ enabled = true
 url = "https://mcp.mdn.mozilla.net"
 
 [mcp.kagi]
-command = ["kagi", "mcp", "--exclude-tools", "kagi_extract,kagi_fastgpt,kagi_enrich_web,kagi_enrich_news"]
+command = [
+  "kagi",
+  "mcp",
+  "--exclude-tools",
+  "kagi_extract,kagi_fastgpt,kagi_enrich_web,kagi_enrich_news",
+]
 
 [mcp.nixos]
 command = ["uvx", "mcp-nixos"]
+
+[mcp.datadog]
+url = "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=all"

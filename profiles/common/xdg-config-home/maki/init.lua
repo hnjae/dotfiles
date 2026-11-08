@@ -26,6 +26,9 @@ maki.setup({
     -- room. The default 20% reserves too little for long sessions.
     compaction_buffer = "50%",
   },
+  -- Start every new session at high effort instead of inheriting the last
+  -- `/thinking` value. The current session keeps what it already has.
+  always_thinking = "high",
 })
 
 require("herdr")
