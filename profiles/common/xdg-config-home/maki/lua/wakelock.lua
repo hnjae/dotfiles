@@ -31,6 +31,9 @@ end
 local enabled = is_desktop_session() and has_systemd_inhibit()
 
 local job_id = nil
+-- One notice per run: a lock that keeps failing would otherwise pop up on
+-- every turn. The log keeps every failure.
+local notified = false
 
 local function release()
   if job_id then
@@ -60,7 +63,12 @@ local function acquire()
     end,
   })
   if not id then
-    maki.log.warn("wakelock: systemd-inhibit failed to start: " .. tostring(err))
+    local reason = tostring(err)
+    maki.log.warn("wakelock: systemd-inhibit failed to start: " .. reason)
+    if not notified then
+      notified = true
+      maki.notify("Suspend lock failed: " .. reason, "warn", { title = "maki" })
+    end
     return
   end
   job_id = id
