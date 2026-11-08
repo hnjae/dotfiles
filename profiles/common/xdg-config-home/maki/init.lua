@@ -25,3 +25,4 @@ maki.setup({
 
 require("herdr")
 require("secrets_guard")
+require("wakelock")
