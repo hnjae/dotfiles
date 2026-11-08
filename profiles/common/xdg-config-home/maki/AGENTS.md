@@ -9,13 +9,10 @@
 
 ## Secrets
 
-- Never read, print, or copy secret material: `~/.ssh`, `~/.config/sops`, `.env` and `.env.*`, keyrings, password stores.
-- Shell and REPL history counts too. A password typed by mistake ends up there, so never read it, and never search it for "context" about past commands.
-- The `secrets_guard` plugin blocks those paths for every tool. A block is a decision, not an obstacle: report it and let the user handle the file.
-- Do not work around a block by encoding paths, splitting strings, or reaching the same data another way. That defeats the guard the user asked for.
-- Commands that print secrets are denied in `permissions.toml` (`sops decrypt`, `op read`, `gpg -d`, `secret-tool lookup`, and similar). Do not retry them with different flags.
-- Everything else in bash runs without a prompt, so nothing else will stop a mistake. Treat a command that touches credentials as your own responsibility.
-- Sandboxing is the user's call, not yours. If a task needs secrets, ask the user to run it or to sandbox maki.
+- Never read, print, or copy secret material: `~/.ssh`, `~/.config/sops`, `.env` and `.env.*`, keyrings, password stores, and shell or REPL history. A password typed by mistake ends up in history.
+- A block is a decision, not an obstacle: report it and let the user handle the file.
+- Do not work around a block by encoding paths, splitting strings, or reaching the same data another way.
+- Everything else in bash runs without a prompt, so a command that touches credentials is on you. Sandboxing is the user's call.
 
 ## Investigation
 
