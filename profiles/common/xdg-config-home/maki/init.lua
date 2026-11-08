@@ -21,6 +21,11 @@ maki.setup({
   ui = {
     notifications = desktop_session() and "notify" or "auto",
   },
+  agent = {
+    -- Compact once 50% of the window is spent, leaving the rest as working
+    -- room. The default 20% reserves too little for long sessions.
+    compaction_buffer = "50%",
+  },
 })
 
 require("herdr")
