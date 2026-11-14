@@ -10,6 +10,7 @@
     },
     "exa": {
       "url": "https://mcp.exa.ai/mcp",
+      "description": "Exa web search and page fetch. web_search_exa (codemode) finds pages from a description of the ideal page; web_fetch_exa (direct) reads known URLs as clean markdown, several per call. Also offers MCP resources.",
       "toolExposure": {
         "web_fetch_exa": "direct",
         "web_search_exa": "codemode"
@@ -43,6 +44,7 @@
     "codegraph": {
       "command": "codegraph",
       "args": ["serve", "--mcp"],
+      "description": "CodeGraph: a per-project SQLite graph of a codebase's symbols, edges, and files. codegraph_explore (direct) returns the verbatim source of the matching symbols plus the call paths between them; pass projectPath for a repo other than the session's.",
       "toolExposure": {
         "codegraph_explore": "direct"
       }
