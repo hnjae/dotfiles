@@ -2,10 +2,10 @@
 # Restore with `profiles/common/_install/agent-skills.py restore`.
 # Claude exposure is a separate decision: ~/.agents/claude-skills.txt
 
-[[source]]
-repo = "Burntgogi/ai-slop-thresher"
-hash = "634d04dc6753e2d2d4fe5327b138a4c97874ebe6"
-skills = ["ai-slop-thresher"]
+# [[source]]
+# repo = "Burntgogi/ai-slop-thresher"
+# hash = "634d04dc6753e2d2d4fe5327b138a4c97874ebe6"
+# skills = ["ai-slop-thresher"]
 
 [[source]]
 repo = "Burntgogi/kar-plain"
@@ -16,24 +16,24 @@ skills = ["kar-plain"]
 repo = "anthropics/skills"
 hash = "2c5958ecac7cee2b583967a2c4981d0f4a75c579"
 skills = [
-  "academy-guide",
+  # "claude-api",
+  # "slack-gif-creator",
+  # "academy-guide",
+  # "webapp-testing",
+  # "web-artifacts-builder",
+  # "doc-coauthoring",
   "algorithmic-art",
   "brand-guidelines",
   "canvas-design",
-  "claude-api",
   "discernment-nudge",
-  "doc-coauthoring",
-  "docx",
   "frontend-design",
   "internal-comms",
   "mcp-builder",
-  "pdf",
-  "pptx",
   "skill-creator",
-  "slack-gif-creator",
   "theme-factory",
-  "web-artifacts-builder",
-  "webapp-testing",
+  "pdf",
+  "docx",
+  "pptx",
   "xlsx",
 ]
 
@@ -50,7 +50,7 @@ skills = [
   "github-actions-efficiency",
   "github-actions-hardening",
   "github-actions-runtime-upgrade-conventions",
-  "mcp-security-audit",
+  # "mcp-security-audit",
 ]
 
 [[source]]
@@ -62,30 +62,30 @@ skills = ["show-me"]
 repo = "mattpocock/skills"
 hash = "5863806dd4e15c63174bee4e7515a4256792ecfa"
 skills = [
-  "code-review",
-  "codebase-design",
-  "diagnosing-bugs",
-  "domain-modeling",
   "grilling",
-  "pr",
-  "prototype",
-  "research",
   "tdd",
-  "wizard",
-  "writing-for-agents",
+  # "code-review",
+  # "codebase-design",
+  # "diagnosing-bugs",
+  # "domain-modeling",
+  # "pr",
+  # "prototype",
+  # "wizard",
+  "writing-for-agents", # Writes AGENTS.md
+  "research",
 ]
 
-[[source]]
-repo = "miqdadbadjuber/anti-slop"
-hash = "35b54dc660aa7d11428ee62c5788ad36bc18ac3c"
-skills = [
-  "antislop",
-  "antislop-code",
-  "antislop-copywriting",
-  "antislop-human",
-  "antislop-layoutmobile",
-  "antislop-ui",
-]
+# [[source]]
+# repo = "miqdadbadjuber/anti-slop"
+# hash = "35b54dc660aa7d11428ee62c5788ad36bc18ac3c"
+# skills = [
+#   "antislop",
+#   "antislop-code",
+#   "antislop-copywriting",
+#   "antislop-human",
+#   "antislop-layoutmobile",
+#   "antislop-ui",
+# ]
 
 [[source]]
 repo = "morganlinton/BeautifulRust"
@@ -110,12 +110,12 @@ path = "skill-data"
 skills = [
   "agentcore",
   "core",
-  "derive-client",
-  "dogfood",
+  # "derive-client",
+  # "dogfood",
   "electron",
-  "protected-vercel-deployments",
-  "slack",
-  "vercel-sandbox",
+  # "protected-vercel-deployments",
+  # "slack",
+  # "vercel-sandbox",
   "webmcp-gen",
 ]
 

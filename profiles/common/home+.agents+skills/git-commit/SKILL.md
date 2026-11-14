@@ -1,7 +1,6 @@
 ---
 name: git-commit
 description: "Create a Conventional Commit from repository changes. Use whenever the user asks to commit changes, make or create a commit, save work in Git as a commit, or invokes /commit."
-allowed-tools: Bash
 ---
 
 # Git Commit with Conventional Commits
@@ -102,7 +101,7 @@ git commit -m "$(cat <<'EOF'
 <optional body>
 
 <optional footer>
-Assisted-by: LLM opencode glm-5.3-flash
+Assisted-by: LLM pi glm-5.3-flash
 EOF
 )"
 ```
@@ -123,10 +122,10 @@ Disclose LLM assistance with an `Assisted-by:` trailer, following the Fedora AI 
 - The executing agent fills in its own identity; never hardcode values.
 
 ```text
-Assisted-by: LLM opencode glm-5.3-flash
+Assisted-by: LLM pi glm-5.3-flash
 ```
 
-- The token after `LLM` is the agent harness name, e.g. `opencode`, `claude-code`
+- The token after `LLM` is the agent harness name, e.g. `pi`, `opencode`, `codex`
 - The final token is the model identifier in use without its provider prefix, e.g. `glm-5.3-flash`, not `zai-coding-plan/glm-5.3-flash`
 
 Rules:
