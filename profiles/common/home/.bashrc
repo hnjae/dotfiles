@@ -51,3 +51,6 @@ fi
 
 unset -f bmodule
 unset __bash_module_root __bash_modules_file
+
+# TODO: bmodule 로 작성. <2026-11-14>
+if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init bash)"; fi

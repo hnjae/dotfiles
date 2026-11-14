@@ -42,63 +42,63 @@ type Inhibitor = { release(): void };
 
 /** The part of dbus-next this extension uses. */
 type DbusBus = {
-	getProxyObject(
-		name: string,
-		path: string,
-	): Promise<{ getInterface(name: string): unknown }>;
-	disconnect(): void;
+  getProxyObject(
+    name: string,
+    path: string,
+  ): Promise<{ getInterface(name: string): unknown }>;
+  disconnect(): void;
 };
 
 type Login1Manager = {
-	Inhibit(
-		what: string,
-		who: string,
-		why: string,
-		mode: string,
-	): Promise<unknown>;
+  Inhibit(
+    what: string,
+    who: string,
+    why: string,
+    mode: string,
+  ): Promise<unknown>;
 };
 
 type DbusBinding = { bus: DbusBus; manager: Login1Manager };
 
 function isDesktopSession(): boolean {
-	if (!process.env.XDG_SESSION_TYPE) return false;
-	return Boolean(process.env.DBUS_SESSION_BUS_ADDRESS);
+  if (!process.env.XDG_SESSION_TYPE) return false;
+  return Boolean(process.env.DBUS_SESSION_BUS_ADDRESS);
 }
 
 function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
-	return Promise.race([
-		promise,
-		new Promise<never>((_resolve, reject) => {
-			// unref: a stuck binding must not hold the event loop open.
-			setTimeout(() => reject(new Error(`no answer in ${ms} ms`)), ms).unref();
-		}),
-	]);
+  return Promise.race([
+    promise,
+    new Promise<never>((_resolve, reject) => {
+      // unref: a stuck binding must not hold the event loop open.
+      setTimeout(() => reject(new Error(`no answer in ${ms} ms`)), ms).unref();
+    }),
+  ]);
 }
 
 /** Close whatever the binding handed back for the `h` return value. */
 function releaseHandle(handle: unknown): void {
-	const closeFd = (fd: number) => {
-		try {
-			closeSync(fd);
-		} catch {
-			// Already closed; the lock it held is gone either way.
-		}
-	};
+  const closeFd = (fd: number) => {
+    try {
+      closeSync(fd);
+    } catch {
+      // Already closed; the lock it held is gone either way.
+    }
+  };
 
-	if (typeof handle === "number") {
-		closeFd(handle);
-		return;
-	}
-	if (handle && typeof handle === "object") {
-		const { fd, destroy, close } = handle as {
-			fd?: unknown;
-			destroy?: () => void;
-			close?: () => void;
-		};
-		if (typeof fd === "number") closeFd(fd);
-		else if (typeof destroy === "function") destroy();
-		else if (typeof close === "function") close();
-	}
+  if (typeof handle === "number") {
+    closeFd(handle);
+    return;
+  }
+  if (handle && typeof handle === "object") {
+    const { fd, destroy, close } = handle as {
+      fd?: unknown;
+      destroy?: () => void;
+      close?: () => void;
+    };
+    if (typeof fd === "number") closeFd(fd);
+    else if (typeof destroy === "function") destroy();
+    else if (typeof close === "function") close();
+  }
 }
 
 /**
@@ -110,51 +110,51 @@ function releaseHandle(handle: unknown): void {
  * but no real binding has answered with an fd here.
  */
 async function openDbusBinding(): Promise<DbusBinding | null> {
-	try {
-		const loaded = (await import("dbus-next")) as {
-			default?: { systemBus?: () => DbusBus };
-			systemBus?: () => DbusBus;
-		};
-		const dbus = loaded.default ?? loaded;
-		if (typeof dbus.systemBus !== "function") return null;
+  try {
+    const loaded = (await import("dbus-next")) as {
+      default?: { systemBus?: () => DbusBus };
+      systemBus?: () => DbusBus;
+    };
+    const dbus = loaded.default ?? loaded;
+    if (typeof dbus.systemBus !== "function") return null;
 
-		const bus = dbus.systemBus();
-		const proxy = await bus.getProxyObject(BUS_NAME, BUS_PATH);
-		const manager = proxy.getInterface(BUS_INTERFACE) as Login1Manager;
-		if (typeof manager.Inhibit !== "function") {
-			bus.disconnect();
-			return null;
-		}
+    const bus = dbus.systemBus();
+    const proxy = await bus.getProxyObject(BUS_NAME, BUS_PATH);
+    const manager = proxy.getInterface(BUS_INTERFACE) as Login1Manager;
+    if (typeof manager.Inhibit !== "function") {
+      bus.disconnect();
+      return null;
+    }
 
-		releaseHandle(
-			await withTimeout(
-				manager.Inhibit(WHAT, WHO, WHY, MODE),
-				PROBE_TIMEOUT_MS,
-			),
-		);
-		return { bus, manager };
-	} catch {
-		return null;
-	}
+    releaseHandle(
+      await withTimeout(
+        manager.Inhibit(WHAT, WHO, WHY, MODE),
+        PROBE_TIMEOUT_MS,
+      ),
+    );
+    return { bus, manager };
+  } catch {
+    return null;
+  }
 }
 
 async function acquireThrough(binding: DbusBinding): Promise<Inhibitor | null> {
-	try {
-		const handle = await withTimeout(
-			binding.manager.Inhibit(WHAT, WHO, WHY, MODE),
-			PROBE_TIMEOUT_MS,
-		);
-		let released = false;
-		return {
-			release() {
-				if (released) return;
-				released = true;
-				releaseHandle(handle);
-			},
-		};
-	} catch {
-		return null;
-	}
+  try {
+    const handle = await withTimeout(
+      binding.manager.Inhibit(WHAT, WHO, WHY, MODE),
+      PROBE_TIMEOUT_MS,
+    );
+    let released = false;
+    return {
+      release() {
+        if (released) return;
+        released = true;
+        releaseHandle(handle);
+      },
+    };
+  } catch {
+    return null;
+  }
 }
 
 /**
@@ -163,65 +163,65 @@ async function acquireThrough(binding: DbusBinding): Promise<Inhibitor | null> {
  * guard for a pi that dies without releasing: EOF ends `cat`, and the lock drops.
  */
 function acquireThroughChild(): Inhibitor | null {
-	const child = spawn(
-		"systemd-inhibit",
-		[`--what=${WHAT}`, `--who=${WHO}`, `--why=${WHY}`, `--mode=${MODE}`, "cat"],
-		{ detached: true, stdio: ["pipe", "ignore", "ignore"] },
-	);
+  const child = spawn(
+    "systemd-inhibit",
+    [`--what=${WHAT}`, `--who=${WHO}`, `--why=${WHY}`, `--mode=${MODE}`, "cat"],
+    { detached: true, stdio: ["pipe", "ignore", "ignore"] },
+  );
 
-	let released = false;
-	return {
-		release() {
-			if (released) return;
-			released = true;
-			child.stdin?.end();
-			if (child.pid === undefined) return;
-			try {
-				process.kill(-child.pid, "SIGTERM");
-			} catch {
-				// Already gone; the EOF above covered the lock.
-			}
-		},
-	};
+  let released = false;
+  return {
+    release() {
+      if (released) return;
+      released = true;
+      child.stdin?.end();
+      if (child.pid === undefined) return;
+      try {
+        process.kill(-child.pid, "SIGTERM");
+      } catch {
+        // Already gone; the EOF above covered the lock.
+      }
+    },
+  };
 }
 
 export default function (pi: ExtensionAPI) {
-	if (!isDesktopSession()) return;
+  if (!isDesktopSession()) return;
 
-	let held: Inhibitor | null = null;
-	let binding: DbusBinding | null | undefined;
-	let unavailable = false;
+  let held: Inhibitor | null = null;
+  let binding: DbusBinding | null | undefined;
+  let unavailable = false;
 
-	async function acquire(): Promise<void> {
-		if (held || unavailable) return;
+  async function acquire(): Promise<void> {
+    if (held || unavailable) return;
 
-		if (binding === undefined) binding = await openDbusBinding();
-		held =
-			(binding && (await acquireThrough(binding))) ?? acquireThroughChild();
+    if (binding === undefined) binding = await openDbusBinding();
+    held =
+      (binding && (await acquireThrough(binding))) ?? acquireThroughChild();
 
-		if (!held) {
-			// No path works on this machine; one report per session, not per run.
-			unavailable = true;
-			console.warn(`wakelock: no usable sleep inhibitor (${WHY})`);
-		}
-	}
+    if (!held) {
+      // No path works on this machine; one report per session, not per run.
+      unavailable = true;
+      console.warn(`wakelock: no usable sleep inhibitor (${WHY})`);
+    }
+  }
 
-	function release(): void {
-		held?.release();
-		held = null;
-	}
+  function release(): void {
+    held?.release();
+    held = null;
+  }
 
-	pi.on("agent_start", async () => {
-		await acquire();
-	});
+  pi.on("agent_start", async () => {
+    await acquire();
+  });
 
-	pi.on("agent_settled", async (_event, ctx) => {
-		if (ctx.isIdle()) release();
-	});
+  pi.on("agent_settled", async (_event, ctx) => {
+    if (ctx.isIdle()) release();
+  });
 
-	pi.on("session_shutdown", async () => {
-		release();
-		binding?.bus.disconnect();
-		binding = undefined;
-	});
+  pi.on("session_shutdown", async () => {
+    release();
+    binding?.bus.disconnect();
+    binding = undefined;
+  });
 }

@@ -2,5 +2,23 @@
   "lastChangelogVersion": "1.5.2",
   "defaultProvider": "opencode-go",
   "defaultModel": "deepseek-v4.1-flash",
-  "packages": ["npm:cc-safety-net", "npm:@tintinweb/pi-subagents"]
+  "packages": [
+    "npm:cc-safety-net",
+    "npm:@tintinweb/pi-subagents",
+    "npm:billion-context",
+    "npm:pi-worktrunk"
+  ],
+  "enableSkillCommands": true,
+  "terminal": {
+    "showTerminalProgress": false
+  },
+  "markdown": {
+    "mermaid": "streaming"
+  },
+  "showCacheMissNotices": true,
+  "treeFilterMode": "default",
+  "tuiMode": "fullscreen",
+  "extensionChangelogVersions": {
+    "{\"source\":\"npm:@tintinweb/pi-subagents\",\"scope\":\"user\"}": "0.25.0"
+  }
 }

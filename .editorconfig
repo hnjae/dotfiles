@@ -12,7 +12,7 @@ indent_style = tab
 indent_size = 8
 tab_width = 8
 
-[*.{yaml,toml,json,jsonc,conf}]
+[*.{yaml,toml,json,jsonc,conf,js,ts}]
 indent_size = 2
 indent_style = space
 
