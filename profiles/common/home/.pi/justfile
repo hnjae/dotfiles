@@ -1,0 +1,17 @@
+#!/usr/bin/env -S just --justfile
+
+set unstable
+set fallback := false
+set lazy
+
+_:
+    @just --list
+
+doctor:
+    bunx cc-safety-net doctor
+
+login-mcp-context7:
+    pi mcp login context7
+
+login-mcp-exa:
+    pi mcp login exa

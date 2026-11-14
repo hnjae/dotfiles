@@ -10,11 +10,11 @@ Commands that change UI state. Run `agent-desktop <command> --help` for flags.
 
 Which gestures have a headless path:
 
-| Command | Headless |
-|---------|----------|
+| Command                                                                                                            | Headless                                                                    |
+| ------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------- |
 | `click`, `set-value`, `clear`, `select`, `check`, `uncheck`, `toggle`, `expand`, `collapse`, `scroll`, `scroll-to` | Yes, where the element advertises a semantic action (not `scroll` on Linux) |
-| `type`, `right-click`, `focus` | OS-dependent. Read the platform skill for which need `--headed` |
-| `double-click`, `triple-click`, `hover`, `drag`, `mouse-*` | No. They need `--headed` |
+| `type`, `right-click`, `focus`                                                                                     | OS-dependent. Read the platform skill for which need `--headed`             |
+| `double-click`, `triple-click`, `hover`, `drag`, `mouse-*`                                                         | No. They need `--headed`                                                    |
 
 Native cross-app drag and drop may not start from synthetic events. It works for same-view drags and for web drag and drop.
 
@@ -22,12 +22,12 @@ Native cross-app drag and drop may not start from synthetic events. It works for
 
 A successful action reports what happened, not only that it ran.
 
-| Field | Meaning |
-|-------|---------|
-| `data.steps` | Each mechanism tried, in order: `label`, `outcome` (`attempted`, `skipped`, `succeeded`), `mechanism` (`semantic_api` or `physical_synthetic`), `verified` |
-| `data.disposition.delivery` | `delivered_verified` when the effect was observed, `delivered_unverified` when the app claimed success without an observable change |
-| `data.post_state` | The target's state after the action, when it has one |
-| `data.surfaces` | Overlays open once the action settled |
+| Field                       | Meaning                                                                                                                                                    |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `data.steps`                | Each mechanism tried, in order: `label`, `outcome` (`attempted`, `skipped`, `succeeded`), `mechanism` (`semantic_api` or `physical_synthetic`), `verified` |
+| `data.disposition.delivery` | `delivered_verified` when the effect was observed, `delivered_unverified` when the app claimed success without an observable change                        |
+| `data.post_state`           | The target's state after the action, when it has one                                                                                                       |
+| `data.surfaces`             | Overlays open once the action settled                                                                                                                      |
 
 Stateful actions (`set-value`, `type`, `clear`, `check`, `uncheck`, `toggle`, `expand`, `collapse`) re-read state after they run. A readable contradiction returns `ACTION_FAILED` with `details.kind: "post_action_verification"`. A failed read keeps its own error code, so even `STALE_REF` or `TIMEOUT` can follow delivery. An unreadable postcondition does not fail the action. Missing evidence alone returns success with `delivered_unverified`, `details.verification_scope: "unavailable"` and `verification_reason: "insufficient_evidence"`.
 
@@ -39,24 +39,24 @@ Stateful actions (`set-value`, `type`, `clear`, `check`, `uncheck`, `toggle`, `e
 
 Exit codes: `0` success, `1` structured error, `2` argument error. The `error` object can carry `details`, `recovery` and `disposition`. Ignore unknown keys.
 
-| Code | Meaning | Recovery |
-|------|---------|----------|
-| `PERM_DENIED` | A required OS permission is missing | Read the platform skill |
-| `ELEMENT_NOT_FOUND` | Ref is absent, or the requested surface is absent | Read `details.kind` and `details.surface`; open an absent menu or refresh only after checking the UI |
-| `STALE_REF` | Ref no longer matches the live UI | Snapshot again, use the new ref |
-| `AMBIGUOUS_TARGET` | Several live elements match the ref's identity, or it was not proven unique at capture | Act on a control unique in the window; identical twins need `--headed mouse-click --xy` (see `commands-observation.md`) |
-| `SNAPSHOT_NOT_FOUND` | Snapshot id missing or expired | Snapshot again |
-| `APP_NOT_FOUND` | App not running | `launch` it |
-| `WINDOW_NOT_FOUND` | No matching window | Check the name, use `list-windows` |
-| `ACTION_FAILED` | Action rejected, blocked, or contradicted by the result | Read `error.details`. A `checks[]` report names the blocking check. After delivery, read `disposition.retry` and `details.post_state` |
-| `ACTION_NOT_SUPPORTED` | Element cannot do this | Use another command |
-| `POLICY_DENIED` | A physical or headed path was blocked | Add `--headed` if physical input is intended. A dangerous key combo needs `--force` |
-| `APP_UNRESPONSIVE` | A liveness probe also failed after an uncertain mutation | Take a fresh snapshot. Wait for recovery before you retry |
-| `TIMEOUT` | Wait or actionability condition not met | Read `error.details.kind` |
-| `INVALID_ARGS` | Bad arguments, or a protected system process was targeted for close | Check syntax |
-| `PLATFORM_NOT_SUPPORTED` | The adapter lacks this method | Use another approach |
-| `NOTIFICATION_NOT_FOUND` | Notification index or fingerprint no longer matches | List again |
-| `INTERNAL` | Unexpected OS failure | Read `message`. Retry once only if `disposition.retry` is `safe` |
+| Code                     | Meaning                                                                                | Recovery                                                                                                                              |
+| ------------------------ | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `PERM_DENIED`            | A required OS permission is missing                                                    | Read the platform skill                                                                                                               |
+| `ELEMENT_NOT_FOUND`      | Ref is absent, or the requested surface is absent                                      | Read `details.kind` and `details.surface`; open an absent menu or refresh only after checking the UI                                  |
+| `STALE_REF`              | Ref no longer matches the live UI                                                      | Snapshot again, use the new ref                                                                                                       |
+| `AMBIGUOUS_TARGET`       | Several live elements match the ref's identity, or it was not proven unique at capture | Act on a control unique in the window; identical twins need `--headed mouse-click --xy` (see `commands-observation.md`)               |
+| `SNAPSHOT_NOT_FOUND`     | Snapshot id missing or expired                                                         | Snapshot again                                                                                                                        |
+| `APP_NOT_FOUND`          | App not running                                                                        | `launch` it                                                                                                                           |
+| `WINDOW_NOT_FOUND`       | No matching window                                                                     | Check the name, use `list-windows`                                                                                                    |
+| `ACTION_FAILED`          | Action rejected, blocked, or contradicted by the result                                | Read `error.details`. A `checks[]` report names the blocking check. After delivery, read `disposition.retry` and `details.post_state` |
+| `ACTION_NOT_SUPPORTED`   | Element cannot do this                                                                 | Use another command                                                                                                                   |
+| `POLICY_DENIED`          | A physical or headed path was blocked                                                  | Add `--headed` if physical input is intended. A dangerous key combo needs `--force`                                                   |
+| `APP_UNRESPONSIVE`       | A liveness probe also failed after an uncertain mutation                               | Take a fresh snapshot. Wait for recovery before you retry                                                                             |
+| `TIMEOUT`                | Wait or actionability condition not met                                                | Read `error.details.kind`                                                                                                             |
+| `INVALID_ARGS`           | Bad arguments, or a protected system process was targeted for close                    | Check syntax                                                                                                                          |
+| `PLATFORM_NOT_SUPPORTED` | The adapter lacks this method                                                          | Use another approach                                                                                                                  |
+| `NOTIFICATION_NOT_FOUND` | Notification index or fingerprint no longer matches                                    | List again                                                                                                                            |
+| `INTERNAL`               | Unexpected OS failure                                                                  | Read `message`. Retry once only if `disposition.retry` is `safe`                                                                      |
 
 `ELEMENT_NOT_FOUND` with `details.kind: "surface_absent"` and `details.complete: true` is complete absence evidence. An absent `menubar` can mean the app exposes no menu bar. For `surface: menu`, snapshot `menubar` when it exists, click its item without `--headed`, then snapshot `--surface menu`. Missing `complete`, `complete: false`, a timeout or an incomplete read is unknown, not absent. If the earlier action has `delivery_uncertain` and `retry: unsafe`, inspect the current UI before any action; do not repeat it.
 
@@ -194,16 +194,16 @@ agent-desktop --headed mouse-move --xy 100,200
 
 ## Choose the command
 
-| Goal | Use | Fall back to |
-|------|-----|--------------|
-| Click a button | `click @ref` | `--headed mouse-click --xy X,Y` |
-| Fill a text field | `set-value @ref "text"` | `clear` then `type` |
-| Set a checkbox | `check` / `uncheck` | `toggle` when state is unknown |
-| Pick a dropdown option | `select @ref "Option"` | open the menu, then `snapshot --surface menu` |
-| Open a context menu | `right-click @ref` | `--headed mouse-click --button right` |
-| Move between fields | `press tab` | `focus @ref` |
+| Goal                     | Use                         | Fall back to                                    |
+| ------------------------ | --------------------------- | ----------------------------------------------- |
+| Click a button           | `click @ref`                | `--headed mouse-click --xy X,Y`                 |
+| Fill a text field        | `set-value @ref "text"`     | `clear` then `type`                             |
+| Set a checkbox           | `check` / `uncheck`         | `toggle` when state is unknown                  |
+| Pick a dropdown option   | `select @ref "Option"`      | open the menu, then `snapshot --surface menu`   |
+| Open a context menu      | `right-click @ref`          | `--headed mouse-click --button right`           |
+| Move between fields      | `press tab`                 | `focus @ref`                                    |
 | Copy text out of a field | `get @ref --property value` | `press` the copy shortcut, then `clipboard-get` |
-| Find an off-screen item | `scroll @area`, then `find` | `scroll-to @ref` |
+| Find an off-screen item  | `scroll @area`, then `find` | `scroll-to @ref`                                |
 
 ## Agent cursor
 

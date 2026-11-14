@@ -1,0 +1,35 @@
+{
+  "mcpServers": {
+    "context7": {
+      "url": "https://mcp.context7.com/mcp",
+      "exposure": "codemode"
+    },
+    "mdn": {
+      "url": "https://mcp.mdn.mozilla.net/",
+      "exposure": "direct"
+    },
+    "exa": {
+      "url": "https://mcp.exa.ai/mcp",
+      "toolExposure": {
+        "web_fetch_exa": "direct",
+        "web_search_exa": "codemode"
+      }
+    },
+    "kagi": {
+      "command": "kagi",
+      "args": [
+        "mcp",
+        "--exclude-tools",
+        "kagi_extract,kagi_fastgpt,kagi_enrich_web,kagi_enrich_news"
+      ]
+    },
+    "nixos": {
+      "command": "uvx",
+      "args": ["mcp-nixos"],
+      "toolExposure": {
+        "nix": "deferred",
+        "nix_versions": "direct"
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "rulebook_version": 2,
+  "name": "secret-tool-read",
+  "version": "1.0.0",
+  "description": "Block secret-tool subcommands that print stored passwords or item contents.",
+  "allowed_commands": ["secret-tool"],
+  "rules": [
+    {
+      "name": "block-secret-tool-lookup",
+      "command": "secret-tool",
+      "match": { "command_path": ["lookup"] },
+      "reason": "secret-tool lookup prints the stored password.",
+      "intent": "manual_only"
+    },
+    {
+      "name": "block-secret-tool-search",
+      "command": "secret-tool",
+      "match": { "command_path": ["search"] },
+      "reason": "secret-tool search prints stored item data.",
+      "intent": "manual_only"
+    }
+  ]
+}

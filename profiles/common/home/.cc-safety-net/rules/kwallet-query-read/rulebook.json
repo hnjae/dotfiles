@@ -1,0 +1,16 @@
+{
+  "rulebook_version": 1,
+  "name": "kwallet-query-read",
+  "version": "1.0.0",
+  "description": "Block kwallet-query invocations that print stored secrets.",
+  "allowed_commands": ["kwallet-query"],
+  "rules": [
+    {
+      "name": "block-kwallet-query-read",
+      "command": "kwallet-query",
+      "block_args": ["-r", "--read-password"],
+      "reason": "kwallet-query -r prints a stored secret.",
+      "intent": "manual_only"
+    }
+  ]
+}

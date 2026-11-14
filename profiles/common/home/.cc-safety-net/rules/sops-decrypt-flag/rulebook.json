@@ -1,0 +1,16 @@
+{
+  "rulebook_version": 1,
+  "name": "sops-decrypt-flag",
+  "version": "1.0.0",
+  "description": "Block sops decryption invoked with a flag.",
+  "allowed_commands": ["sops"],
+  "rules": [
+    {
+      "name": "block-sops-decrypt-flag",
+      "command": "sops",
+      "block_args": ["-d", "--decrypt"],
+      "reason": "Decrypting a sops file prints plaintext to the agent.",
+      "intent": "manual_only"
+    }
+  ]
+}

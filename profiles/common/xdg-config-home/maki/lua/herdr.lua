@@ -21,8 +21,10 @@ local DEBOUNCE_MS = 120
 local pane_id = maki.uv.os_getenv("HERDR_PANE_ID")
 local bin = maki.uv.os_getenv("HERDR_BIN_PATH")
 local enabled = maki.uv.os_getenv("HERDR_ENV") == "1"
-  and pane_id ~= nil and pane_id ~= ""
-  and bin ~= nil and bin ~= ""
+  and pane_id ~= nil
+  and pane_id ~= ""
+  and bin ~= nil
+  and bin ~= ""
 
 if not enabled then
   return {}
@@ -49,11 +51,18 @@ local running = false
 
 local function build_argv(state, session_id)
   local argv = {
-    bin, "pane", "report-agent", pane_id,
-    "--source", SOURCE,
-    "--agent", AGENT,
-    "--state", state,
-    "--seq", tostring(next_seq()),
+    bin,
+    "pane",
+    "report-agent",
+    pane_id,
+    "--source",
+    SOURCE,
+    "--agent",
+    AGENT,
+    "--state",
+    state,
+    "--seq",
+    tostring(next_seq()),
   }
   if session_id and session_id ~= "" then
     argv[#argv + 1] = "--agent-session-id"
@@ -171,10 +180,16 @@ maki.api.create_autocmd("SessionEnd", {
     local reason = data.reason
     if reason == "shutdown" or reason == "delete" or reason == "completed" then
       maki.fn.jobstart({
-        bin, "pane", "release-agent", pane_id,
-        "--source", SOURCE,
-        "--agent", AGENT,
-        "--seq", tostring(next_seq()),
+        bin,
+        "pane",
+        "release-agent",
+        pane_id,
+        "--source",
+        SOURCE,
+        "--agent",
+        AGENT,
+        "--seq",
+        tostring(next_seq()),
       }, { scope = "plugin", stdout = false, stderr = false })
     end
   end,

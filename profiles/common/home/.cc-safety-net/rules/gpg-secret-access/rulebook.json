@@ -1,0 +1,33 @@
+{
+  "rulebook_version": 1,
+  "name": "gpg-secret-access",
+  "version": "1.0.0",
+  "description": "Block gpg invocations that print decrypted data or export private keys.",
+  "allowed_commands": ["gpg", "gpg2"],
+  "rules": [
+    {
+      "name": "block-gpg-secret-read",
+      "command": "gpg",
+      "block_args": [
+        "-d",
+        "--decrypt",
+        "--export-secret-keys",
+        "--export-secret-subkeys"
+      ],
+      "reason": "This gpg invocation prints decrypted data or a private key.",
+      "intent": "manual_only"
+    },
+    {
+      "name": "block-gpg2-secret-read",
+      "command": "gpg2",
+      "block_args": [
+        "-d",
+        "--decrypt",
+        "--export-secret-keys",
+        "--export-secret-subkeys"
+      ],
+      "reason": "This gpg2 invocation prints decrypted data or a private key.",
+      "intent": "manual_only"
+    }
+  ]
+}

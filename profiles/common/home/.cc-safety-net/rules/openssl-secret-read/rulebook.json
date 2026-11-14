@@ -1,0 +1,101 @@
+{
+  "rulebook_version": 2,
+  "name": "openssl-secret-read",
+  "version": "1.0.0",
+  "description": "Block openssl invocations that print decrypted data or private keys.",
+  "allowed_commands": ["openssl"],
+  "rules": [
+    {
+      "name": "block-openssl-enc-decrypt",
+      "command": "openssl",
+      "match": { "command_path": ["enc"], "any_args": ["-d", "--decrypt"] },
+      "reason": "openssl enc -d decrypts a file to plaintext.",
+      "intent": "manual_only"
+    },
+    {
+      "name": "block-openssl-decrypt-stream",
+      "command": "openssl",
+      "match": { "command_path": ["cms"], "any_args": ["-decrypt"] },
+      "reason": "openssl cms -decrypt prints decrypted message content.",
+      "intent": "manual_only"
+    },
+    {
+      "name": "block-openssl-smime-decrypt",
+      "command": "openssl",
+      "match": { "command_path": ["smime"], "any_args": ["-decrypt"] },
+      "reason": "openssl smime -decrypt prints decrypted message content.",
+      "intent": "manual_only"
+    },
+    {
+      "name": "block-openssl-pkeyutl-decrypt",
+      "command": "openssl",
+      "match": { "command_path": ["pkeyutl"], "any_args": ["-decrypt"] },
+      "reason": "openssl pkeyutl -decrypt prints decrypted data.",
+      "intent": "manual_only"
+    },
+    {
+      "name": "block-openssl-rsautl-decrypt",
+      "command": "openssl",
+      "match": { "command_path": ["rsautl"], "any_args": ["-decrypt"] },
+      "reason": "openssl rsautl -decrypt prints decrypted data.",
+      "intent": "manual_only"
+    },
+    {
+      "name": "block-openssl-pkey-print",
+      "command": "openssl",
+      "match": {
+        "command_path": ["pkey"],
+        "exclude_args": ["-pubout", "-check"]
+      },
+      "reason": "openssl pkey prints a private key.",
+      "intent": "manual_only"
+    },
+    {
+      "name": "block-openssl-rsa-print",
+      "command": "openssl",
+      "match": {
+        "command_path": ["rsa"],
+        "exclude_args": ["-pubout", "-check"]
+      },
+      "reason": "openssl rsa prints a private key.",
+      "intent": "manual_only"
+    },
+    {
+      "name": "block-openssl-ec-print",
+      "command": "openssl",
+      "match": {
+        "command_path": ["ec"],
+        "exclude_args": ["-pubout", "-check"]
+      },
+      "reason": "openssl ec prints a private key.",
+      "intent": "manual_only"
+    },
+    {
+      "name": "block-openssl-dsa-print",
+      "command": "openssl",
+      "match": {
+        "command_path": ["dsa"],
+        "exclude_args": ["-pubout", "-check"]
+      },
+      "reason": "openssl dsa prints a private key.",
+      "intent": "manual_only"
+    },
+    {
+      "name": "block-openssl-pkcs8-print",
+      "command": "openssl",
+      "match": {
+        "command_path": ["pkcs8"],
+        "exclude_args": ["-pubout", "-check"]
+      },
+      "reason": "openssl pkcs8 prints a private key.",
+      "intent": "manual_only"
+    },
+    {
+      "name": "block-openssl-pkcs12-print",
+      "command": "openssl",
+      "match": { "command_path": ["pkcs12"] },
+      "reason": "openssl pkcs12 prints a private key and certificates.",
+      "intent": "manual_only"
+    }
+  ]
+}

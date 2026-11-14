@@ -36,12 +36,12 @@ Use `--cdp` for Electron and Chromium apps whose web contents are dense or slow 
 
 The port exists only for a fresh process. `launch` never quits a running app for you, because that loses the user's state. A running target returns `ACTION_FAILED` with `details.kind: "cdp_requires_fresh_launch"`. Run `close-app`, confirm the exit, then launch again with `--cdp`.
 
-| `details.kind` | Meaning | Recovery |
-|----------------|---------|----------|
-| `cdp_requires_fresh_launch` | App already running | `close-app`, confirm exit, relaunch |
-| `cdp_port_in_use` (`INVALID_ARGS`) | The named port is bound | Name another port, or omit it |
-| `cdp_switch_conflict` (`INVALID_ARGS`) | `--arg` carried a `--remote-debugging-*` or `--remote-allow-origins` switch | Drop that `--arg` |
-| `cdp_endpoint_unavailable` | No endpoint answered before the deadline | The app stays running. Use the accessibility path |
+| `details.kind`                         | Meaning                                                                     | Recovery                                          |
+| -------------------------------------- | --------------------------------------------------------------------------- | ------------------------------------------------- |
+| `cdp_requires_fresh_launch`            | App already running                                                         | `close-app`, confirm exit, relaunch               |
+| `cdp_port_in_use` (`INVALID_ARGS`)     | The named port is bound                                                     | Name another port, or omit it                     |
+| `cdp_switch_conflict` (`INVALID_ARGS`) | `--arg` carried a `--remote-debugging-*` or `--remote-allow-origins` switch | Drop that `--arg`                                 |
+| `cdp_endpoint_unavailable`             | No endpoint answered before the deadline                                    | The app stays running. Use the accessibility path |
 
 Handoff: agent-desktop never talks to the port itself. Check `command -v agent-browser`. If it exists, run `agent-browser connect <port>` and use its snapshot, click and type workflow (`agent-browser skills get electron` has the guide). Playwright, Puppeteer and other CDP clients also work. Do not write raw CDP by hand or call app-internal APIs. If no client exists, ask the user to run `npm install -g agent-browser`, or stay on the accessibility path.
 

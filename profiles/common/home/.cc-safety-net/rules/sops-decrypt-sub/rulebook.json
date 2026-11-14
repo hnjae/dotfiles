@@ -1,0 +1,30 @@
+{
+  "rulebook_version": 2,
+  "name": "sops-decrypt-sub",
+  "version": "1.0.0",
+  "description": "Block sops subcommands that decrypt into plaintext.",
+  "allowed_commands": ["sops"],
+  "rules": [
+    {
+      "name": "block-sops-decrypt-subcommand",
+      "command": "sops",
+      "match": { "command_path": ["decrypt"] },
+      "reason": "Decrypting a sops file prints plaintext to the agent.",
+      "intent": "manual_only"
+    },
+    {
+      "name": "block-sops-exec-env",
+      "command": "sops",
+      "match": { "command_path": ["exec-env"] },
+      "reason": "exec-env decrypts sops secrets into a child process environment.",
+      "intent": "manual_only"
+    },
+    {
+      "name": "block-sops-exec-file",
+      "command": "sops",
+      "match": { "command_path": ["exec-file"] },
+      "reason": "exec-file decrypts sops secrets into a temporary file.",
+      "intent": "manual_only"
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "rulebook_version": 2,
+  "name": "op-secret-read",
+  "version": "1.0.0",
+  "description": "Block 1Password CLI invocations that print secrets or tokens.",
+  "allowed_commands": ["op"],
+  "rules": [
+    {
+      "name": "block-op-read",
+      "command": "op",
+      "match": { "command_path": ["read"] },
+      "reason": "op read prints a secret reference value.",
+      "intent": "manual_only"
+    },
+    {
+      "name": "block-op-inject",
+      "command": "op",
+      "match": { "command_path": ["inject"] },
+      "reason": "op inject prints a template with secrets substituted.",
+      "intent": "manual_only"
+    },
+    {
+      "name": "block-op-item-reveal",
+      "command": "op",
+      "match": {
+        "command_path": ["item", "get"],
+        "any_args": ["--reveal", "--otp", "--share-link"]
+      },
+      "reason": "This op item get form prints a concealed value, a one-time password, or a shareable link.",
+      "intent": "manual_only"
+    },
+    {
+      "name": "block-op-document-get",
+      "command": "op",
+      "match": { "command_path": ["document", "get"] },
+      "reason": "op document get downloads document content.",
+      "intent": "manual_only"
+    },
+    {
+      "name": "block-op-signin-raw",
+      "command": "op",
+      "match": { "command_path": ["signin"], "any_args": ["--raw"] },
+      "reason": "op signin --raw prints a session token.",
+      "intent": "manual_only"
+    },
+    {
+      "name": "block-op-connect-token-create",
+      "command": "op",
+      "match": { "command_path": ["connect", "token", "create"] },
+      "reason": "op connect token create prints a new Connect token.",
+      "intent": "manual_only"
+    },
+    {
+      "name": "block-op-service-account-create",
+      "command": "op",
+      "match": { "command_path": ["service-account", "create"] },
+      "reason": "op service-account create prints a service account token.",
+      "intent": "manual_only"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "rulebook_version": 2,
+  "name": "keyctl-read",
+  "version": "1.0.0",
+  "description": "Block keyctl subcommands that print kernel keyring payloads.",
+  "allowed_commands": ["keyctl"],
+  "rules": [
+    {
+      "name": "block-keyctl-read",
+      "command": "keyctl",
+      "match": { "command_path": ["read"] },
+      "reason": "keyctl read prints a keyring payload.",
+      "intent": "manual_only"
+    },
+    {
+      "name": "block-keyctl-pipe",
+      "command": "keyctl",
+      "match": { "command_path": ["pipe"] },
+      "reason": "keyctl pipe writes a keyring payload to stdout.",
+      "intent": "manual_only"
+    },
+    {
+      "name": "block-keyctl-print",
+      "command": "keyctl",
+      "match": { "command_path": ["print"] },
+      "reason": "keyctl print dumps a keyring payload.",
+      "intent": "manual_only"
+    }
+  ]
+}

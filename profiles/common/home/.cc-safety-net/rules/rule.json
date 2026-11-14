@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "rules": [
+    "sops-decrypt-flag",
+    "sops-decrypt-sub",
+    "gpg-secret-access",
+    "secret-tool-read",
+    "kwallet-query-read",
+    "openssl-secret-read",
+    "keyctl-read",
+    "op-secret-read"
+  ],
+  "overrides": {},
+  "transparent_wrappers": []
+}

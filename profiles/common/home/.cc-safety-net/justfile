@@ -1,0 +1,11 @@
+#!/usr/bin/env -S just --justfile
+
+set unstable
+set fallback := false
+set lazy
+
+_:
+    @just --list
+
+doctor:
+    bunx cc-safety-net doctor
