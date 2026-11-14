@@ -37,6 +37,8 @@
       command: git submodule update --init --recursive
     - description: Restoring agent skills
       command: _install/agent-skills.py restore
+    - description: Reconciling pi packages
+      command: _install/pi-packages.sh
     - description: Install/Restore neovim plugins
       command: _install/restore-neovim-plugins.sh
     - description: Install Mason tools
