@@ -44,6 +44,7 @@
 - Commit after each completed task in a multi-step request without waiting for an explicit commit instruction. A task is one item of the breakdown you created for the request, not one user message.
 - Commit only in the repository that owns the task's primary change. Leave changes in other repositories uncommitted and report them.
 - Stage only the files that belong to the task. Do not sweep in unrelated working-tree changes.
+- When a follow-up change only fixes the commit you just made (formatting, a missed file, a mistake in the same change), amend that commit instead of stacking a new one. Use a separate commit for work that stands on its own. Amend only local commits; if the commit was already pushed, ask before rewriting history.
 - Let the repository's git hooks validate the commit. Do not bypass them with `--no-verify`, and do not add a full build or test run unless the user asks.
 - If a task cannot pass the hooks on its own, merge it with the next task instead of committing a broken intermediate state. Do not make WIP commits.
 - Skip tasks that produce no file changes, such as investigation, planning, or review.
