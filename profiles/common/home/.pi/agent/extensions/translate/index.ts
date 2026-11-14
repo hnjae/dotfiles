@@ -94,9 +94,12 @@ export default function translate(pi: ExtensionAPI) {
       return { action: "transform", text: result.english };
     } finally {
       clearTimeout(timer);
-      setStatus(ctx, undefined);
+      showState(ctx);
     }
   });
+
+  // The footer carries the switch, so "off" is visible rather than assumed.
+  pi.on("session_start", (_event, ctx) => showState(ctx));
 
   pi.registerEntryRenderer(ENTRY_TYPE, (entry, { expanded }, theme) => {
     const data = entry.data as { text?: string } | null;
@@ -116,24 +119,25 @@ export default function translate(pi: ExtensionAPI) {
     description: "Translate Korean prompts to English before they are sent",
     handler: async (args, ctx) => {
       const arg = args.trim().toLowerCase();
-      if (arg === "on" || arg === "off") {
-        enabled = arg === "on";
-        ctx.ui.notify(`translate: ${arg}`, "info");
+      if (arg === "status") {
+        const model = ctx.modelRegistry.find(MODEL.provider, MODEL.id)
+          ? "configured"
+          : "MISSING";
+        ctx.ui.notify(
+          `translate ${enabled ? "on" : "off"} · ${SOURCE}→${TARGET} · ` +
+            `${MODEL.provider}/${MODEL.id} (${model}) · ${unitCache.size} lines, ` +
+            `${promptCache.size} prompts cached`,
+          "info",
+        );
         return;
       }
-      if (arg && arg !== "status") {
+      if (arg && arg !== "on" && arg !== "off") {
         ctx.ui.notify("usage: /translate [on|off|status]", "warning");
         return;
       }
-      const state = enabled ? "on" : "off";
-      const model = ctx.modelRegistry.find(MODEL.provider, MODEL.id)
-        ? "configured"
-        : "MISSING";
-      ctx.ui.notify(
-        `translate ${state} · ${SOURCE}→${TARGET} · ${MODEL.provider}/${MODEL.id} (${model}) · ` +
-          `${unitCache.size} lines, ${promptCache.size} prompts cached`,
-        "info",
-      );
+      enabled = arg ? arg === "on" : !enabled;
+      showState(ctx);
+      ctx.ui.notify(`translate ${enabled ? "on" : "off"}`, "info");
     },
   });
 }
@@ -259,6 +263,11 @@ function missingUnits(out: (string | null)[]): number[] {
   return out.flatMap((translated, index) =>
     translated === null ? [index] : [],
   );
+}
+
+/** "on" or "off" in the footer; a running translation replaces it for a while. */
+function showState(ctx: ExtensionContext): void {
+  setStatus(ctx, `translate ${enabled ? "on" : "off"}`);
 }
 
 function setStatus(ctx: ExtensionContext, text: string | undefined): void {
