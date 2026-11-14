@@ -151,6 +151,11 @@ def installed(name: str) -> bool:
     return (STORE / name / "SKILL.md").is_file()
 
 
+def pool_entries() -> list[Path]:
+    """List the pool, tolerating a machine that has not restored yet."""
+    return sorted(STORE.iterdir()) if STORE.is_dir() else []
+
+
 def read_state() -> dict[str, dict[str, str | None]]:
     """Read which commit and subpath each installed skill came from."""
     if not STATE.is_file():
@@ -158,10 +163,19 @@ def read_state() -> dict[str, dict[str, str | None]]:
     return json.loads(STATE.read_text(encoding="utf-8"))
 
 
+def write_text(path: Path, body: str) -> None:
+    """Write a file atomically, skipping the write when nothing changes."""
+    if path.is_file() and path.read_text(encoding="utf-8") == body:
+        return
+    temporary = path.with_name(path.name + ".tmp")
+    temporary.write_text(body, encoding="utf-8")
+    temporary.replace(path)
+
+
 def write_state(state: dict[str, dict[str, str | None]]) -> None:
     """Record provenance for the pool, sorted to keep diffs stable."""
     body = json.dumps(dict(sorted(state.items())), indent=2)
-    STATE.write_text(f"{body}\n", encoding="utf-8")
+    write_text(STATE, f"{body}\n")
 
 
 def provenance(source: Source, path: str | None) -> dict[str, str | None]:
@@ -206,6 +220,8 @@ def prune(desired: set[str], *, dry_run: bool) -> list[str]:
     Symlinks are authored skills and belong to dotbot, never to this script.
     """
     removed = []
+    if not STORE.is_dir():
+        return removed
     for entry in sorted(STORE.iterdir()):
         if entry.name in desired or entry.is_symlink() or not entry.is_dir():
             continue
@@ -236,7 +252,10 @@ def sync_exposure() -> None:
             print(f"skip {name}: not in the pool", file=sys.stderr)
             continue
         target = CLAUDE / name
+        link = str(STORE / name)
         if target.is_symlink():
+            if str(target.readlink()) == link:
+                continue
             target.unlink()
         elif target.exists():
             continue
@@ -345,7 +364,7 @@ def block_key(text: str) -> tuple[str, str]:
 def write_manifest(preamble: str, blocks: list[str]) -> None:
     """Rewrite the manifest from its parts."""
     body = "\n\n".join(blocks)
-    MANIFEST.write_text(f"{preamble}\n\n{body}\n", encoding="utf-8")
+    write_text(MANIFEST, f"{preamble}\n\n{body}\n")
 
 
 def add(args: argparse.Namespace) -> int:
@@ -433,7 +452,7 @@ def show_pool(_: argparse.Namespace) -> int:
     listed = set(owner)
     unlisted = sorted(
         entry.name
-        for entry in STORE.iterdir()
+        for entry in pool_entries()
         if entry.is_dir()
         and not entry.is_symlink()
         and entry.name not in listed
@@ -454,7 +473,7 @@ def verify(_: argparse.Namespace) -> int:
     ]
     problems += [
         f"in the pool but not in the manifest: {entry.name}"
-        for entry in sorted(STORE.iterdir())
+        for entry in pool_entries()
         if entry.is_dir()
         and not entry.is_symlink()
         and entry.name not in listed
