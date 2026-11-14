@@ -14,6 +14,7 @@ copied into the pool.
 from __future__ import annotations
 
 import argparse
+import json
 import re
 import shutil
 import subprocess
@@ -28,6 +29,7 @@ STORE = Path.home() / ".agents/skills"
 MANIFEST = Path.home() / ".agents/skills.toml"
 EXPOSED = Path.home() / ".agents/claude-skills.txt"
 CLAUDE = Path.home() / ".claude/skills"
+STATE = Path.home() / ".agents/skills.state.json"
 AUTHORED = Path(__file__).resolve().parents[1] / "home+.agents+skills"
 NAME_RE = re.compile(r"^[a-zA-Z0-9][a-zA-Z0-9._-]*$")
 REPO_RE = re.compile(r"^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$")
@@ -149,6 +151,24 @@ def installed(name: str) -> bool:
     return (STORE / name / "SKILL.md").is_file()
 
 
+def read_state() -> dict[str, dict[str, str | None]]:
+    """Read which commit and subpath each installed skill came from."""
+    if not STATE.is_file():
+        return {}
+    return json.loads(STATE.read_text(encoding="utf-8"))
+
+
+def write_state(state: dict[str, dict[str, str | None]]) -> None:
+    """Record provenance for the pool, sorted to keep diffs stable."""
+    body = json.dumps(dict(sorted(state.items())), indent=2)
+    STATE.write_text(f"{body}\n", encoding="utf-8")
+
+
+def provenance(source: Source, path: str | None) -> dict[str, str | None]:
+    """Describe where one source group came from."""
+    return {"repo": source.repo, "commit": source.commit, "path": path}
+
+
 def install(
     source: Source,
     path: str | None,
@@ -236,12 +256,23 @@ def restore(args: argparse.Namespace) -> int:
         sources = [source for source in sources if source.repo in args.repo]
 
     failed = 0
+    state = read_state()
     for source in sources:
         for path, names in groups(source).items():
-            todo = (
-                names if args.force else [n for n in names if not installed(n)]
-            )
-            if todo and not install(source, path, todo, dry_run=args.dry_run):
+            origin = provenance(source, path)
+            todo = [
+                name
+                for name in names
+                if args.force
+                or not installed(name)
+                or (name in state and state[name] != origin)
+            ]
+            if not todo:
+                continue
+            if install(source, path, todo, dry_run=args.dry_run):
+                for name in todo:
+                    state[name] = origin
+            else:
                 failed += 1
 
     listed = {skill.name for source in sources for skill in source.skills}
@@ -251,6 +282,9 @@ def restore(args: argparse.Namespace) -> int:
             verb = "would remove" if args.dry_run else "removed"
             print(f"{verb} {len(removed)} unlisted: {' '.join(removed)}")
     if not args.dry_run:
+        write_state(
+            {name: value for name, value in state.items() if name in listed}
+        )
         sync_exposure()
     return 1 if failed else 0
 
@@ -338,6 +372,10 @@ def add(args: argparse.Namespace) -> int:
         return 0
     if not install(source, args.path, args.skill, dry_run=False):
         return 1
+    state = read_state()
+    for name in args.skill:
+        state[name] = provenance(source, args.path)
+    write_state(state)
     preamble, blocks = split_blocks(MANIFEST.read_text(encoding="utf-8"))
     blocks.append(block_text(source))
     blocks.sort(key=block_key)
@@ -426,6 +464,15 @@ def verify(_: argparse.Namespace) -> int:
         for name in read_exposure()
         if not installed(name)
     ]
+    state = read_state()
+    for source in sources:
+        for path, names in groups(source).items():
+            origin = provenance(source, path)
+            problems += [
+                f"installed from an older commit, run restore: {name}"
+                for name in names
+                if name in state and state[name] != origin
+            ]
     for problem in problems:
         print(problem)
     print(
