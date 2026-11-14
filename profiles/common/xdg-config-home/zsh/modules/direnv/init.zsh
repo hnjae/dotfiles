@@ -1,4 +1,4 @@
-if ((!$+commands[direnv])) || [[ -z ${TMUX:-} && -z ${HERDR_ENV:-} ]]; then
+if ((!$+commands[direnv])) || [[ -z ${TMUX:-} && -z ${HERDR_ENV:-} && -z ${HC_TERMINAL_ID:-} ]]; then
     return
 fi
 
