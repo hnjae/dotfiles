@@ -1,0 +1,130 @@
+# Third-party agent skills: one block per upstream repository, pinned by commit.
+# Restore with `profiles/common/_install/agent-skills.py restore`.
+# Claude exposure is a separate decision: ~/.agents/claude-skills.txt
+
+[[source]]
+repo = "Burntgogi/ai-slop-thresher"
+hash = "634d04dc6753e2d2d4fe5327b138a4c97874ebe6"
+skills = ["ai-slop-thresher"]
+
+[[source]]
+repo = "Burntgogi/kar-plain"
+hash = "e18ac7de536fb9f48ae48f38e8cdd3cc6b4484f6"
+skills = ["kar-plain"]
+
+[[source]]
+repo = "anthropics/skills"
+hash = "2c5958ecac7cee2b583967a2c4981d0f4a75c579"
+skills = [
+  "academy-guide",
+  "algorithmic-art",
+  "brand-guidelines",
+  "canvas-design",
+  "claude-api",
+  "discernment-nudge",
+  "doc-coauthoring",
+  "docx",
+  "frontend-design",
+  "internal-comms",
+  "mcp-builder",
+  "pdf",
+  "pptx",
+  "skill-creator",
+  "slack-gif-creator",
+  "theme-factory",
+  "web-artifacts-builder",
+  "webapp-testing",
+  "xlsx",
+]
+
+[[source]]
+repo = "cloudflare/security-audit-skill"
+hash = "c1c8a8c1471069fb0e188eeaff69b8e8db6564a8"
+skills = ["security-audit"]
+
+[[source]]
+repo = "github/awesome-copilot"
+hash = "8ecd5b17f02fe5fbebf35eccd1867265eded811f"
+skills = [
+  "create-readme",
+  "github-actions-efficiency",
+  "github-actions-hardening",
+  "github-actions-runtime-upgrade-conventions",
+  "mcp-security-audit",
+]
+
+[[source]]
+repo = "humanlayer/skills"
+hash = "4d69d20f6e9b57b4fcf0d501ccfb1be961f0f329"
+skills = ["show-me"]
+
+[[source]]
+repo = "mattpocock/skills"
+hash = "5863806dd4e15c63174bee4e7515a4256792ecfa"
+skills = [
+  "code-review",
+  "codebase-design",
+  "diagnosing-bugs",
+  "domain-modeling",
+  "grilling",
+  "pr",
+  "prototype",
+  "research",
+  "tdd",
+  "wizard",
+  "writing-for-agents",
+]
+
+[[source]]
+repo = "miqdadbadjuber/anti-slop"
+hash = "35b54dc660aa7d11428ee62c5788ad36bc18ac3c"
+skills = [
+  "antislop",
+  "antislop-code",
+  "antislop-copywriting",
+  "antislop-human",
+  "antislop-layoutmobile",
+  "antislop-ui",
+]
+
+[[source]]
+repo = "morganlinton/BeautifulRust"
+hash = "b9718436d77ee7bcf17cdcb6aa27628feb95d97a"
+skills = [
+  "rust-best-practices",
+  "rust-port",
+  "rust-review",
+]
+
+[[source]]
+repo = "vercel-labs/agent-browser"
+hash = "d52a5e90c372ec4710c69adc3837ac14bbd852aa"
+ref = "v0.41.2"
+skills = ["agent-browser"]
+
+[[source]]
+repo = "vercel-labs/agent-browser"
+hash = "d52a5e90c372ec4710c69adc3837ac14bbd852aa"
+ref = "v0.41.2"
+path = "skill-data"
+skills = [
+  "agentcore",
+  "core",
+  "derive-client",
+  "dogfood",
+  "electron",
+  "protected-vercel-deployments",
+  "slack",
+  "vercel-sandbox",
+  "webmcp-gen",
+]
+
+[[source]]
+repo = "vercel-labs/agent-desktop"
+hash = "46d2adf885002633b77d5a9956c9464b24f61431"
+skills = ["agent-desktop"]
+
+[[source]]
+repo = "vercel-labs/skills"
+hash = "b716f9dc2ba36b6aa8f0080615e5a3a6caeac63b"
+skills = ["find-skills"]
