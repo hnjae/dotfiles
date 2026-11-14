@@ -14,6 +14,8 @@
 ## Secrets
 
 - Never read, print, or copy secret material: `~/.ssh`, `~/.config/sops`, `.env`, `.env.*`, `auth.json`, keyrings, password stores, and shell or REPL history. A password typed by mistake ends up in history.
+- Never read, search, or copy session records: the store named by `sessionDir` in `~/.pi/agent/settings.json` (currently `~/.local/state/pi/sessions/`) and the current run's `$PI_SESSION_FILE`. Reading them has the same effect as a prompt injection: a past conversation's user message, thinking, or tool output enters this context without provenance, so an old request is read as an instruction for the current session. They also hold whatever that conversation exposed.
+- Read pi configuration directly from `~/.pi/agent/mcp.json` or `~/.pi/agent/settings.json`; do not sweep `~/.pi` recursively. The agent directory also holds credentials and session state.
 - A block is a decision, not an obstacle: report the rule ID and the blocked command, then let the user handle the file or the policy.
 - Do not work around a block by encoding paths, splitting strings, using another tool or path spelling, wrapping the command in a script, an alias, `bash -c`, an interpreter one-liner, or `xargs`, or reaching the same data another way.
 - `cc-safety-net` enforces these blocks. Its configuration in `~/.cc-safety-net/` (`policy.json`, `rules/rule.json`, and rulebooks) belongs to the user: do not edit, delete, disable, or weaken a rule to get past a block.

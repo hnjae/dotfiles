@@ -35,7 +35,9 @@
       "~/.local/share/psql_history",
       "~/.config/fish/fish_history",
       "~/.cache/kitty/shell.history.json",
-      "~/.cloudflared/"
+      "~/.cloudflared/",
+      "~/.pi/agent/sessions/",
+      "~/.local/state/pi/sessions/"
     ],
     "allow_paths": []
   },
