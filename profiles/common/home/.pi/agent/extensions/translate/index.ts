@@ -11,7 +11,9 @@
  * damage them. A prompt whose translation fails is sent as typed rather than
  * half-translated: a mixed-language prompt is worse than a Korean one.
  *
- * `MODEL` is a constant on purpose; that is where a setting goes later.
+ * The switch starts off, so a session sends exactly what is typed until
+ * `/translate on`. `MODEL` is a constant on purpose; that is where a setting
+ * goes later.
  */
 import type {
   ExtensionAPI,
@@ -45,6 +47,10 @@ const BUDGET_MS = 20_000;
 const STATUS_KEY = "translate";
 const ENTRY_TYPE = "translate-source";
 
+/** Nerd Font Material Design icons: `nf-md-translate` and `nf-md-translate_off`. */
+const ON_ICON = "\u{f05ca}";
+const OFF_ICON = "\u{f0e06}";
+
 /** Braille frames, so the footer moves while a translation is in flight. */
 const FRAMES = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"];
 const FRAME_MS = 90;
@@ -54,7 +60,8 @@ const unitCache = new Map<string, string>();
 /** Finished prompts, so a retyped or recalled draft costs nothing. */
 const promptCache = new Map<string, string>();
 
-let enabled = true;
+/** Off until a session turns it on with `/translate on`; the switch is not persisted. */
+let enabled = false;
 let warnedMissingModel = false;
 
 type TranslatorModel = NonNullable<
@@ -74,7 +81,7 @@ export default function translate(pi: ExtensionAPI) {
       if (ctx.hasUI && !warnedMissingModel) {
         warnedMissingModel = true;
         ctx.ui.notify(
-          `translate: ${MODEL.provider}/${MODEL.id} is not configured; prompts go as typed`,
+          `${OFF_ICON} ${MODEL.provider}/${MODEL.id} is not configured; prompts go as typed`,
           "warning",
         );
       }
@@ -89,7 +96,7 @@ export default function translate(pi: ExtensionAPI) {
       if ("error" in result) {
         if (ctx.hasUI)
           ctx.ui.notify(
-            `translate: ${result.error}; the prompt went as typed`,
+            `${OFF_ICON} ${result.error}; the prompt went as typed`,
             "warning",
           );
         return { action: "continue" };
@@ -111,7 +118,10 @@ export default function translate(pi: ExtensionAPI) {
     const box = new Box(1, 0, (line) => theme.bg("customMessageBg", line));
     box.addChild(
       new Text(
-        theme.fg("dim", `${SOURCE} ▸ ${expanded ? text : shorten(text)}`),
+        theme.fg(
+          "dim",
+          `${ON_ICON} ${SOURCE} ▸ ${expanded ? text : shorten(text)}`,
+        ),
         0,
         0,
       ),
@@ -128,7 +138,7 @@ export default function translate(pi: ExtensionAPI) {
           ? "configured"
           : "MISSING";
         ctx.ui.notify(
-          `translate ${enabled ? "on" : "off"} · ${SOURCE}→${TARGET} · ` +
+          `${stateIcon()} translate ${enabled ? "on" : "off"} · ${SOURCE}→${TARGET} · ` +
             `${MODEL.provider}/${MODEL.id} (${model}) · ${unitCache.size} lines, ` +
             `${promptCache.size} prompts cached`,
           "info",
@@ -136,12 +146,18 @@ export default function translate(pi: ExtensionAPI) {
         return;
       }
       if (arg && arg !== "on" && arg !== "off") {
-        ctx.ui.notify("usage: /translate [on|off|status]", "warning");
+        ctx.ui.notify(
+          `usage: ${stateIcon()} /translate [on|off|status]`,
+          "warning",
+        );
         return;
       }
       enabled = arg ? arg === "on" : !enabled;
       showState(ctx);
-      ctx.ui.notify(`translate ${enabled ? "on" : "off"}`, "info");
+      ctx.ui.notify(
+        `${stateIcon()} translate ${enabled ? "on" : "off"}`,
+        "info",
+      );
     },
   });
 }
@@ -277,7 +293,10 @@ function spinning(ctx: ExtensionContext): () => void {
   if (!ctx.hasUI) return () => {};
   let frame = 0;
   const paint = () => {
-    setStatus(ctx, `${FRAMES[frame] ?? ""} translating ko→en…`);
+    setStatus(
+      ctx,
+      `${ON_ICON} ${FRAMES[frame] ?? ""} translating ${SOURCE}→${TARGET}…`,
+    );
     frame = (frame + 1) % FRAMES.length;
   };
   paint();
@@ -290,7 +309,12 @@ function spinning(ctx: ExtensionContext): () => void {
 
 /** "on" or "off" in the footer; a running translation replaces it for a while. */
 function showState(ctx: ExtensionContext): void {
-  setStatus(ctx, `translate ${enabled ? "on" : "off"}`);
+  setStatus(ctx, `${stateIcon()} translate ${enabled ? "on" : "off"}`);
+}
+
+/** The icon that matches the switch, so the state reads without the word. */
+function stateIcon(): string {
+  return enabled ? ON_ICON : OFF_ICON;
 }
 
 function setStatus(ctx: ExtensionContext, text: string | undefined): void {

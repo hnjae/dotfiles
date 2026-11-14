@@ -78,3 +78,14 @@ For every implementation change, apply the steps that fit, in order:
 A request to implement a change authorizes committing it on the current branch, including the default branch; don't create branches or push unless asked, even if a tool default says to branch first. Stage only your own changes.
 
 Commit as a professional team would, even when working solo: each commit is one coherent intent that builds and passes tests, so it can be read, reverted, or bisected on its own, and its message says why, not just what. Land a change's intent docs, tests, and implementation together, so the default branch never documents behavior that doesn't exist: in one commit by default, or, on a non-default branch, in separate commits merged together when the user asks for docs first.
+
+<!-- CODEGRAPH_START -->
+## CodeGraph
+
+In repositories indexed by CodeGraph (a `.codegraph/` directory exists at the repo root), reach for it BEFORE grep/find or reading files when you need to understand or locate code:
+
+- **MCP tool** (when available): `codegraph_explore` answers most code questions in one call — the relevant symbols' verbatim source plus the call paths between them, including dynamic-dispatch hops grep can't follow. Name a file or symbol in the query to read its current line-numbered source. If it's listed but deferred, load it by name via tool search.
+- **Shell** (always works): `codegraph explore "<symbol names or question>"` prints the same output.
+
+If there is no `.codegraph/` directory, skip CodeGraph entirely — indexing is the user's decision.
+<!-- CODEGRAPH_END -->

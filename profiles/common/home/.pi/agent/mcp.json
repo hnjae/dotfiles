@@ -30,6 +30,13 @@
         "nix": "deferred",
         "nix_versions": "direct"
       }
+    },
+    "codegraph": {
+      "command": "codegraph",
+      "args": ["serve", "--mcp"],
+      "toolExposure": {
+        "codegraph_explore": "direct"
+      }
     }
   }
 }

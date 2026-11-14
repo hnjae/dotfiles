@@ -41,8 +41,10 @@ __pycache__
 .omo
 .opencode
 
-
 # Miscellaneous
 .tmp
+
+# Codegraph
+.codegraph/
 
 # vi:ft=gitignore:
