@@ -42,3 +42,9 @@ extend-ignore-re = [
 [type.zsh.extend-words]
 "ot" = "ot"
 "Pn" = "Pn"
+
+# `-ot` is a zsh file test, not a typo.
+[type.md]
+extend-ignore-re = [
+  "-ot",
+]

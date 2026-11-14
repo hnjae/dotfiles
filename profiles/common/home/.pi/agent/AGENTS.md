@@ -6,6 +6,11 @@
 - English is the default, not a hard rule. Keep proper nouns and terms whose nuance English dilutes in their original language (e.g. 국세기본법, 天命). Mixing other languages into an English sentence is fine; an AI parses such a sentence well.
 - The reason for the English default is that less capable models have weaker multilingual ability.
 
+## Markdown
+
+- Do not hard-wrap prose. Write one paragraph per line so a later edit shows only the lines it changes.
+- Wrap only when the repository declares a width: `.editorconfig` `max_line_length`, `rumdl` MD013 `line-length`, `.mdformat.toml` `wrap`, `.prettierrc` `proseWrap`, or an explicit rule in the repository's `AGENTS.md`. A disabled or absent length means no hard wrapping.
+
 ## Secrets
 
 - Never read, print, or copy secret material: `~/.ssh`, `~/.config/sops`, `.env`, `.env.*`, `auth.json`, keyrings, password stores, and shell or REPL history. A password typed by mistake ends up in history.
