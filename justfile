@@ -23,6 +23,7 @@ hooks-install:
 check:
     prek validate-config prek.toml
     prek run --config prek.toml --all-files
+    just pi-check
 
 update-submodules:
     lib/update-submodules.sh
@@ -73,6 +74,11 @@ commit:
     esac
 
     git commit --no-verify -m '{{ hostname }}: {{ datetime("%Y-%m-%dT%H:%M:%S%Z") }}'
+
+# Forward to the pi config's own extension check, so `just check` covers it.
+[group('pi')]
+pi-check:
+    @just --justfile "{{ justfile_directory() }}/profiles/common/home/.pi/justfile" check
 
 [group('nvim')]
 nvim-plugin-restore:

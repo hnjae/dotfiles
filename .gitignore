@@ -1,3 +1,4 @@
 .direnv/
 .devenv/
 .worktrees/
+node_modules/

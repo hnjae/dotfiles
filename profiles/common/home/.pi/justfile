@@ -15,3 +15,28 @@ login-mcp-context7:
 
 login-mcp-exa:
     pi mcp login exa
+
+# Typecheck the extensions against the installed pi's own type declarations.
+check:
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    cd "{{ justfile_directory() }}/tooling"
+
+    installed=$(pi --version | tail -1)
+    pinned=$(python3 -c 'import json, pathlib; print(json.loads(pathlib.Path("package.json").read_text())["devDependencies"]["@earendil-works/pi-coding-agent"])')
+    if [ "$installed" != "$pinned" ]; then
+        echo "pi $installed is running but the types are pinned to $pinned" >&2
+        echo "run: (cd ~/.pi && just types-sync)" >&2
+        exit 1
+    fi
+
+    bun install --frozen-lockfile
+    node_modules/.bin/tsc -p tsconfig.json
+
+# Re-pin the type declarations to the pi binary on PATH, then reinstall.
+types-sync:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    cd "{{ justfile_directory() }}/tooling"
+    bun add -d "@earendil-works/pi-coding-agent@$(pi --version | tail -1)"
