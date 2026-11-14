@@ -6,6 +6,7 @@
     - `anchor` is `home`, `xdg-config-home`, `xdg-data-home`, or `xdg-bin-home`. `subpath` is the path below the anchor with `/` written as `+`, keeping dots literal (`home+.omp+agent` → `~/.omp/agent`).
     - `@seed` copies instead of linking. A directory starting with `_` is not a link source (`_install` holds scripts run by `install.conf.yaml`).
     - Use a dedicated directory only where the target must stay a real directory (it holds runtime files). Otherwise link the whole directory as a child of its anchor.
+- **Install scripts**: anything under `profiles/<profile>/_install/` runs on every `install.sh` and `just update-dotfiles`, so it must be idempotent. A second run with nothing to do changes no file, link, or state, and reports that instead of rewriting: compare before writing, and make a removal conditional on what is actually there.
 - **Agent skills**: third-party and authored skills share one store, `~/.agents/skills/`, and differ by ownership:
     - Authored skills live in `profiles/common/home+.agents+skills/<name>/` and are linked into the store by dotbot.
     - Third-party skills are pinned in `profiles/common/home+.agents/skills.toml` (live: `~/.agents/skills.toml`): one block per repository with a commit hash, a skill list, and optionally a `path` for repositories whose skills live outside the discoverable layout. Never commit their content.
