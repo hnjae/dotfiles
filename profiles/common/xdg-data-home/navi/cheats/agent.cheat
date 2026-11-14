@@ -44,3 +44,6 @@ pi mcp list
 
 # list mcp in claude-code
 claude mcp list
+
+# run claude with new git worktree
+claude --worktree <name>

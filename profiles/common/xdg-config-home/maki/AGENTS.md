@@ -3,7 +3,6 @@
 ## Language
 
 - Write everything a future AI will read in English: files, code comments, commit messages, docs, and tool output.
-- Interact with the user in Korean.
 - English is the default, not a hard rule. Keep proper nouns and terms whose nuance English dilutes in their original language (e.g. 국세기본법, 天命). Mixing other languages into an English sentence is fine; an AI parses such a sentence well.
 - The reason for the English default is that less capable models have weaker multilingual ability.
 

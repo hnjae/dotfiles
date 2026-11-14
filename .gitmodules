@@ -72,7 +72,7 @@
 	path = profiles/common/home/.agents/skills-repos/im-not-ai@epoko77-ai
 	url = https://github.com/epoko77-ai/im-not-ai
 [submodule "profiles/common/home/.agents/skills-repos/SimpleEnglish@AminBlg"]
-	path = profiles/common/home/.agents/skills/simple-english
+	path = profiles/common/home/.agents/skills-repos/simple-english
 	url = https://github.com/AminBlg/SimpleEnglish
 [submodule "profiles/common/home/.agents/miscellaneous-repos/jailbreaks@togg53192-cmd"]
 	path = profiles/common/home/.agents/miscellaneous-repos/jailbreaks@togg53192-cmd

@@ -2,7 +2,7 @@
   "env": {
     "DISABLE_AUTOUPDATER": "1"
   },
-  "model": "haiku",
+  "model": "claude-fable-5-2",
   "hooks": {
     "SessionStart": [
       {
@@ -96,6 +96,9 @@
     "claude-haiku-5-5": {
       "effortLevel": "high",
       "autoCompactWindow": 350000
+    },
+    "claude-fable-5-2": {
+      "effortLevel": "medium"
     }
   },
   "advisorModel": "opus",
