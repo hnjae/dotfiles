@@ -33,6 +33,11 @@ check:
 
     bun install --frozen-lockfile
     node_modules/.bin/tsc -p tsconfig.json
+    node --test "{{ justfile_directory() }}/agent/extensions/translate/tests/*.test.ts"
+
+# Run the extension tests on their own.
+test:
+    node --test "{{ justfile_directory() }}/agent/extensions/translate/tests/*.test.ts"
 
 # Re-pin the type declarations to the pi binary on PATH, then reinstall.
 types-sync:
