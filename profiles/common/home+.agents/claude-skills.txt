@@ -11,6 +11,7 @@
 # Authored in this repository.
 docs-review
 fork-maintenance
-git-commit
 link-html-clipper
 researched-html-note
+
+# Authored but deliberately kept out of Claude Code: git-commit
