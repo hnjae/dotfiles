@@ -21,7 +21,16 @@
         "mcp",
         "--exclude-tools",
         "kagi_extract,kagi_fastgpt,kagi_enrich_web,kagi_enrich_news"
-      ]
+      ],
+      "description": "Kagi search/news/summarize/translate/assistant/image/lens/redirect/bang/history. Direct: kagi_search, kagi_batch_search, kagi_news_search, kagi_image_search, kagi_summarize. Reach the rest from a codemode script (payloads are large: news 355 KB, news_categories 161 KB, smallweb 601 KB): kagi_quick, kagi_news, kagi_news_categories, kagi_news_chaos, kagi_news_filter_presets, kagi_smallweb, kagi_translate, kagi_lens_list, kagi_lens_get, kagi_site_pref_list, kagi_redirect_list, kagi_redirect_get, kagi_custom_bang_list, kagi_custom_bang_get, kagi_assistant_thread_list, kagi_assistant_thread_get, kagi_assistant_thread_export, kagi_assistant_custom_list, kagi_assistant_custom_get, kagi_assistant_models, kagi_auth_check, kagi_auth_status, kagi_history_list, kagi_history_stats.",
+      "exposure": "codemode",
+      "toolExposure": {
+        "kagi_search": "direct",
+        "kagi_batch_search": "direct",
+        "kagi_news_search": "direct",
+        "kagi_image_search": "direct",
+        "kagi_summarize": "direct"
+      }
     },
     "nixos": {
       "command": "uvx",
