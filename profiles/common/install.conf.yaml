@@ -32,9 +32,6 @@
     ~/.agents/skills:
       glob: true
       path: home+.agents+skills/*
-    ~/.claude/skills:
-      glob: true
-      path: home+.agents+skills/*
 - shell:
     - description: Installing submodules
       command: git submodule update --init --recursive

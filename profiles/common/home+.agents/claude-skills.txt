@@ -1,0 +1,16 @@
+# Skills exposed to Claude Code, one name per line.
+#
+# `~/.agents/skills/` is the installed pool: everything there is visible to pi,
+# and nothing here changes that. This file only chooses what `~/.claude/skills`
+# links to, because Claude Code does not scan the pool by itself.
+#
+# Apply a change with `profiles/common/_install/agent-skills.sh sync`.
+# List what is installed but not exposed with `agent-skills.sh pool`.
+# To expose everything: `ls ~/.agents/skills > ~/.agents/claude-skills.txt`.
+
+# Authored in this repository.
+docs-review
+fork-maintenance
+git-commit
+link-html-clipper
+researched-html-note
