@@ -8,6 +8,11 @@
 # skills = ["ai-slop-thresher"]
 
 [[source]]
+repo = "ayghri/i-have-adhd"
+hash = "1ecea1993b7fce257ffbd686c070948b5e07eda6"
+skills = ["i-have-adhd"]
+
+[[source]]
 repo = "Burntgogi/kar-plain"
 hash = "e18ac7de536fb9f48ae48f38e8cdd3cc6b4484f6"
 skills = ["kar-plain"]

@@ -5,7 +5,6 @@
   "packages": [
     "npm:cc-safety-net",
     "npm:@tintinweb/pi-subagents",
-    "npm:billion-context",
     "npm:pi-worktrunk"
   ],
   "enableSkillCommands": true,
