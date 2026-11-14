@@ -78,6 +78,14 @@ commit:
 nvim-plugin-restore:
     lib/nvim-plugin-restore.sh
 
+[group('skills')]
+agent-skills-update:
+    profiles/common/_install/agent-skills.py update
+
+[group('skills')]
+agent-skills-restore:
+    profiles/common/_install/agent-skills.py restore
+
 [group('nvim')]
 nvim-plugin-sync:
     lib/nvim-plugin-sync.sh
