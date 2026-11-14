@@ -5,7 +5,9 @@
   "packages": [
     "npm:cc-safety-net",
     "npm:@tintinweb/pi-subagents",
-    "npm:pi-worktrunk"
+    "npm:pi-worktrunk",
+    "npm:@narumitw/pi-plan-mode",
+    "npm:@narumitw/pi-btw"
   ],
   "enableSkillCommands": true,
   "terminal": {
@@ -18,6 +20,8 @@
   "treeFilterMode": "default",
   "tuiMode": "fullscreen",
   "extensionChangelogVersions": {
-    "{\"source\":\"npm:@tintinweb/pi-subagents\",\"scope\":\"user\"}": "0.25.0"
+    "{\"source\":\"npm:@tintinweb/pi-subagents\",\"scope\":\"user\"}": "0.25.0",
+    "{\"source\":\"npm:@narumitw/pi-plan-mode\",\"scope\":\"user\"}": "0.60.1",
+    "{\"source\":\"npm:@narumitw/pi-btw\",\"scope\":\"user\"}": "0.63.8"
   }
 }

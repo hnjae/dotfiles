@@ -47,3 +47,9 @@ claude mcp list
 
 # run claude with new git worktree
 claude --worktree <name>
+
+# install pi plugins
+pi install billion-context
+
+# remove pi plugins
+pi remove billion-context
