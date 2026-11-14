@@ -34,7 +34,8 @@
       "~/.local/share/fish/fish_history",
       "~/.local/share/psql_history",
       "~/.config/fish/fish_history",
-      "~/.cache/kitty/shell.history.json"
+      "~/.cache/kitty/shell.history.json",
+      "~/.cloudflared/"
     ],
     "allow_paths": []
   },
