@@ -45,6 +45,10 @@ const BUDGET_MS = 20_000;
 const STATUS_KEY = "translate";
 const ENTRY_TYPE = "translate-source";
 
+/** Braille frames, so the footer moves while a translation is in flight. */
+const FRAMES = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"];
+const FRAME_MS = 90;
+
 /** Restored translations, keyed by the unit they belong to (text and spans). */
 const unitCache = new Map<string, string>();
 /** Finished prompts, so a retyped or recalled draft costs nothing. */
@@ -79,7 +83,7 @@ export default function translate(pi: ExtensionAPI) {
 
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), BUDGET_MS);
-    setStatus(ctx, "translating ko→en…");
+    const stopSpin = spinning(ctx);
     try {
       const result = await toEnglish(event.text, ctx, model, controller.signal);
       if ("error" in result) {
@@ -94,7 +98,7 @@ export default function translate(pi: ExtensionAPI) {
       return { action: "transform", text: result.english };
     } finally {
       clearTimeout(timer);
-      showState(ctx);
+      stopSpin();
     }
   });
 
@@ -263,6 +267,25 @@ function missingUnits(out: (string | null)[]): number[] {
   return out.flatMap((translated, index) =>
     translated === null ? [index] : [],
   );
+}
+
+/**
+ * Moves a spinner through the switch's footer slot; the returned function stops
+ * it and puts the switch back. Nothing to animate without a UI.
+ */
+function spinning(ctx: ExtensionContext): () => void {
+  if (!ctx.hasUI) return () => {};
+  let frame = 0;
+  const paint = () => {
+    setStatus(ctx, `${FRAMES[frame] ?? ""} translating ko→en…`);
+    frame = (frame + 1) % FRAMES.length;
+  };
+  paint();
+  const timer = setInterval(paint, FRAME_MS);
+  return () => {
+    clearInterval(timer);
+    showState(ctx);
+  };
 }
 
 /** "on" or "off" in the footer; a running translation replaces it for a while. */
