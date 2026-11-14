@@ -1,12 +1,13 @@
 # Agent Guidelines
 
 - **No backward compatibility**: This repo has one user. Make clean breaks; skip migrations, shims, and legacy support unless explicitly requested.
-- **Commits**: Use Conventional Commits. Pick the narrowest accurate scope:
-    - subproject name, for changes localized to one tool under `apps/`;
-    - otherwise a repo-level scope (`ci`, `docs`, `deps`, `nix`);
-    - omit the scope only when none fits.
 - **Profile directory names**: Under `profiles/<profile>/`, a link source is named `<anchor>[+<subpath>][@<mode>]`.
     - Its children are symlinked into the target by a `glob: true` entry in that profile's `install.conf.yaml`, so adding a child needs no yaml edit.
     - `anchor` is `home`, `xdg-config-home`, `xdg-data-home`, or `xdg-bin-home`. `subpath` is the path below the anchor with `/` written as `+`, keeping dots literal (`home+.omp+agent` → `~/.omp/agent`).
     - `@seed` copies instead of linking. A directory starting with `_` is not a link source (`_install` holds scripts run by `install.conf.yaml`).
     - Use a dedicated directory only where the target must stay a real directory (it holds runtime files). Otherwise link the whole directory as a child of its anchor.
+- **Agent skills**: third-party and authored skills share one store, `~/.agents/skills/`, and differ by ownership:
+    - Authored skills live in `profiles/common/home+.agents+skills/<name>/` and are linked by dotbot into `~/.agents/skills/` and `~/.claude/skills/`.
+    - Third-party skills are pinned in `profiles/common/home+.agents/skills-lock.json` (live: `~/.agents/skills-lock.json`) and restored by `_install/agent-skills.sh restore`, which also mirrors each one into `~/.claude/skills/`. Never commit their content.
+    - Keep the store flat at the top level: one directory per skill, `SKILL.md` at `<store>/<name>/SKILL.md`. Claude Code does not recurse, so bucket directories hide their skills from it. (`~/.claude/skills/synced/` is Claude's own account bucket; leave it alone.)
+    - Add or update a skill only through `profiles/common/_install/agent-skills.sh add <owner/repo> -s <name> -y`, which installs from the tracked lock's directory and records the entry there. Use a `.../tree/<ref>/<path>` source when the skill sits outside the repo's discoverable layout, and never reuse an authored skill's name.

@@ -26,9 +26,20 @@
     ~/.claude:
       glob: true
       path: home+.claude/*
+    ~/.agents:
+      glob: true
+      path: home+.agents/*
+    ~/.agents/skills:
+      glob: true
+      path: home+.agents+skills/*
+    ~/.claude/skills:
+      glob: true
+      path: home+.agents+skills/*
 - shell:
     - description: Installing submodules
       command: git submodule update --init --recursive
+    - description: Restoring agent skills
+      command: _install/agent-skills.sh restore
     - description: Install/Restore neovim plugins
       command: _install/restore-neovim-plugins.sh
     - description: Install Mason tools

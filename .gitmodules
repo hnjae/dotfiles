@@ -1,9 +1,6 @@
 [submodule "lib/dotbot"]
 	path = lib/dotbot
 	url = https://github.com/anishathalye/dotbot.git
-[submodule "profiles/common/xdg-data/zimfw"]
-	path = profiles/common/xdg-data/zimfw
-	url = https://github.com/zimfw/zimfw.git
 [submodule "profiles/common/xdg-data-home/zimfw"]
 	path = profiles/common/xdg-data-home/zimfw
 	url = https://github.com/zimfw/zimfw.git
@@ -17,7 +14,7 @@
 [submodule "profiles/desktop/xdg-config-home/mpv/script-repos/content-red-tester-s-scripts"]
 	path = profiles/desktop/xdg-config-home/mpv/script-repos/content-red-tester-s-scripts
 	url = https://github.com/CogentRedTester/mpv-scripts.git
-[submodule "profiles/common/xdg-config-home/zsh/modules/zsh-vi-mode/zsh-vi-mode"]
+[submodule "profiles/common/xdg-config-home/zsh/modules/zsh-vi-mode/module"]
 	path = profiles/common/xdg-config-home/zsh/modules/zsh-vi-mode/module
 	url = https://github.com/jeffreytse/zsh-vi-mode
 [submodule "profiles/common/xdg-config-home/zsh/modules/fzf-tab/module"]
@@ -29,60 +26,6 @@
 [submodule "profiles/desktop/xdg-config-home/mpv/shaders-repo/ssim-superres"]
 	path = profiles/desktop/xdg-config-home/mpv/shaders-repo/ssim-superres
 	url = https://gist.github.com/igv/2364ffa6e81540f29cb7ab4c9bc05b6b.git
-[submodule "profiles/common/home/.agents/skills-repos/awesome-copilot"]
-	path = profiles/common/home/.agents/skills-repos/awesome-copilot@github
-	url = https://github.com/github/awesome-copilot
-[submodule "profiles/common/home/.agents/skills-repos/skills@anthropics"]
-	path = profiles/common/home/.agents/skills/skills@anthropics
-	url = https://github.com/anthropics/skills
-[submodule "profiles/common/home/.agents/skills-repos/claude-for-legal@anthropics"]
-	path = profiles/common/home/.agents/skills-repos/claude-for-legal@anthropics
-	url = https://github.com/anthropics/claude-for-legal
-[submodule "profiles/common/home/.agents/skills-repos/superpowers@obra"]
-	path = profiles/common/home/.agents/skills-repos/superpowers@obra
-	url = https://github.com/obra/superpowers
-[submodule "profiles/common/home/.agents/skills-repos/skills@mattpocock"]
-	path = profiles/common/home/.agents/skills-repos/skills@mattpocock
-	url = https://github.com/mattpocock/skills
-[submodule "profiles/common/home/.agents/skills-repos/ffmpeg-skill@kajisho5"]
-	path = profiles/common/home/.agents/skills-repos/ffmpeg-skill@kajisho5
-	url = https://github.com/kajisho5/ffmpeg-skill
-[submodule "profiles/common/home/.agents/skills-repos/skills@humanlayer"]
-	path = profiles/common/home/.agents/skills-repos/skills@humanlayer
-	url = https://github.com/humanlayer/skills
-[submodule "profiles/common/home/.agents/skills-repos/i-have-adhd@ayghri"]
-	path = profiles/common/home/.agents/skills-repos/i-have-adhd@ayghri
-	url = https://github.com/ayghri/i-have-adhd
-[submodule "profiles/common/home/.agents/skills-repos/security-audit-skill@cloudflare"]
-	path = profiles/common/home/.agents/skills/security-audit-skill
-	url = https://github.com/cloudflare/security-audit-skill
-[submodule "profiles/common/home/.agents/skills-repos/andrej-karpathy-skills@multica-ai"]
-	path = profiles/common/home/.agents/skills-repos/andrej-karpathy-skills@multica-ai
-	url = https://github.com/multica-ai/andrej-karpathy-skills
-[submodule "profiles/common/home/.agents/skills-repos/anti-slop@miqdadbadjuber"]
-	path = profiles/common/home/.agents/skills/anti-slop
-	url = https://github.com/miqdadbadjuber/anti-slop
-[submodule "profiles/common/home/.agents/skills-repos/kar-plain@Burntgogi"]
-	path = profiles/common/home/.agents/skills-repos/kar-plain@Burntgogi
-	url = https://github.com/Burntgogi/kar-plain
-[submodule "profiles/common/home/.agents/skills-repos/ai-slop-thresher@Burntgogi"]
-	path = profiles/common/home/.agents/skills-repos/ai-slop-thresher@Burntgogi
-	url = https://github.com/Burntgogi/ai-slop-thresher
-[submodule "profiles/common/home/.agents/skills-repos/im-not-ai@epoko77-ai"]
-	path = profiles/common/home/.agents/skills-repos/im-not-ai@epoko77-ai
-	url = https://github.com/epoko77-ai/im-not-ai
-[submodule "profiles/common/home/.agents/skills-repos/SimpleEnglish@AminBlg"]
-	path = profiles/common/home/.agents/skills-repos/simple-english
-	url = https://github.com/AminBlg/SimpleEnglish
-[submodule "profiles/common/home/.agents/miscellaneous-repos/jailbreaks@togg53192-cmd"]
-	path = profiles/common/home/.agents/miscellaneous-repos/jailbreaks@togg53192-cmd
+[submodule "profiles/common/_agents/jailbreaks@togg53192-cmd"]
+	path = profiles/common/_agents/jailbreaks@togg53192-cmd
 	url = https://github.com/togg53192-cmd/jailbreaks
-[submodule "profiles/common/home/.agents/skills-repos/BeautifulRust@morganlinton"]
-	path = profiles/common/home/.agents/skills/beautiful-rust
-	url = https://github.com/morganlinton/BeautifulRust
-[submodule "profiles/common/home/.agents/skills/skills@vercel-labs"]
-	path = profiles/common/home/.agents/skills/skills@vercel-labs
-	url = https://github.com/vercel-labs/skills
-[submodule "profiles/common/home/.agents/skills/agent-browser"]
-	path = profiles/common/home/.agents/skills/agent-browser
-	url = https://github.com/vercel-labs/agent-browser

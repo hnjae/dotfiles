@@ -28,6 +28,12 @@
 - Report when a phase ends: what is now known, what is still open, and the single next action.
 - Ask before moving from investigation into implementation when the user asked only for a plan or a survey.
 
+## Approval
+
+- An approval covers only what the question named. When the change carries a decision the question did not spell out, list it as its own item: default, observable effect, cost of reverting.
+- Measure before judging. Quote the number ("pi sees 29 more skills") instead of a direction ("probably a benefit"). A direction with no count is what makes a side effect invisible.
+- Split reversible steps from behaviour changes. A reversible step may proceed and be reported afterwards; a change in what the user sees gets its own line before it happens.
+
 ## Commits
 
 - Commit after each completed task in a multi-step request without waiting for an explicit commit instruction. A task is one item of the breakdown you created for the request, not one user message.

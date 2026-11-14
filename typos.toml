@@ -19,7 +19,7 @@ extend-exclude = [
   "**/mpv/script-repos",
   "**/mpv/shaders-repo",
   "**/zsh/modules/**/module",
-  "**/.agents/skills-repos",
+  "**/_agents/jailbreaks@togg53192-cmd/",
 
   # Managed by own typos.toml
   "**/xdg-config-home/nvim",
