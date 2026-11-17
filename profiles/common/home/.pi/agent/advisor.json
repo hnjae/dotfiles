@@ -1,0 +1,10 @@
+{
+  "advisor": "mistral/zai-glm-5-3",
+  "advisorEffort": "high",
+  "advisorFallbackModel": "mistral/zai-glm-5-3-flash",
+  "executor": "mistral/deepseek-v4-1-flash-1017",
+  "executorEffort": "high",
+  "simpleMode": true,
+  "advisorOutcomeLogging": false,
+  "contextMaxChars": 200000
+}

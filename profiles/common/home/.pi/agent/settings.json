@@ -1,13 +1,16 @@
 {
   "lastChangelogVersion": "1.5.2",
-  "defaultProvider": "opencode-go",
-  "defaultModel": "deepseek-v4.1-flash",
+  "defaultProvider": "mistral",
+  "defaultModel": "zai-glm-5-3-flash",
   "packages": [
     "npm:cc-safety-net",
-    "npm:@narumitw/pi-plan-mode",
     "npm:@narumitw/pi-btw",
+    "git:github.com/johnlindquist/pi-emphasis",
     "npm:pi-claude-code-ui",
-    "npm:@narumitw/pi-subagents"
+    "npm:@tintinweb/pi-subagents",
+    "npm:@tintinweb/pi-tasks",
+    "npm:pi-schedule-prompt",
+    "npm:pi-advisor-flow"
   ],
   "enableSkillCommands": true,
   "terminal": {
@@ -19,10 +22,15 @@
   "showCacheMissNotices": true,
   "treeFilterMode": "default",
   "tuiMode": "fullscreen",
-  "sessionDir": "~/.local/state/pi/sessions",
   "extensionChangelogVersions": {
-    "{\"source\":\"npm:@tintinweb/pi-subagents\",\"scope\":\"user\"}": "0.25.0",
+    "{\"source\":\"npm:@tintinweb/pi-subagents\",\"scope\":\"user\"}": "0.26.1",
     "{\"source\":\"npm:@narumitw/pi-plan-mode\",\"scope\":\"user\"}": "0.60.1",
-    "{\"source\":\"npm:@narumitw/pi-btw\",\"scope\":\"user\"}": "0.63.8"
+    "{\"source\":\"npm:@narumitw/pi-btw\",\"scope\":\"user\"}": "0.63.8",
+    "{\"source\":\"npm:pi-claude-code-ui\",\"scope\":\"user\"}": "1.0.112",
+    "{\"source\":\"npm:@narumitw/pi-subagents\",\"scope\":\"user\"}": "3.4.5",
+    "{\"source\":\"npm:@narumitw/pi-progress\",\"scope\":\"user\"}": "0.8.0",
+    "{\"source\":\"npm:@tintinweb/pi-tasks\",\"scope\":\"user\"}": "0.9.1",
+    "{\"source\":\"npm:pi-schedule-prompt\",\"scope\":\"user\"}": "0.5.1",
+    "{\"source\":\"npm:pi-advisor-flow\",\"scope\":\"user\"}": "0.16.0"
   }
 }

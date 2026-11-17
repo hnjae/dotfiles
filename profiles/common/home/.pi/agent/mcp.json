@@ -40,14 +40,6 @@
         "nix": "deferred",
         "nix_versions": "direct"
       }
-    },
-    "codegraph": {
-      "command": "codegraph",
-      "args": ["serve", "--mcp"],
-      "description": "CodeGraph: a per-project SQLite graph of a codebase's symbols, edges, and files. codegraph_explore (direct) returns the verbatim source of the matching symbols plus the call paths between them; pass projectPath for a repo other than the session's.",
-      "toolExposure": {
-        "codegraph_explore": "direct"
-      }
     }
   }
 }
