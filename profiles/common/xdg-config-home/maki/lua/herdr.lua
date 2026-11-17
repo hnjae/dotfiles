@@ -1,107 +1,37 @@
--- Report maki's agent state and resumable session to herdr.
+-- Report maki's agent state to herdr, in both of its front ends.
 --
--- herdr has no `integration install maki` target. maki is a "state only"
--- agent there: herdr scrapes the status bar. This plugin upgrades that to
--- the documented self-reporting path (herdr docs: "Add Herdr support to
--- your agent"), which also enables native session restore.
+-- herdr TUI: reports through `herdr pane report-agent` (see herdr/tui.lua).
+-- herdr app: there is no report command, so the app learns state from
+-- OSC 7501 on the pane's output (see herdr/app.lua).
 --
--- Contract that matters, from that doc:
---   * --source must be stable and unique. One value for the whole plugin.
---   * --seq must strictly increase across sessions and agent restarts, or
---     herdr drops the report. We use a monotonic millisecond clock.
---   * The resume command goes after `--`, first word is a bare command name.
---   * Send the resume command with a state report, not on its own, so the
---     source already holds the pane.
---   * Nothing happens outside herdr.
+-- The status mapping, focused-session tracking, and event wiring are shared;
+-- only the transport differs. Nothing happens outside herdr.
 
-local SOURCE = "maki"
-local AGENT = "maki"
 local DEBOUNCE_MS = 120
 
-local pane_id = maki.uv.os_getenv("HERDR_PANE_ID")
-local bin = maki.uv.os_getenv("HERDR_BIN_PATH")
-local enabled = maki.uv.os_getenv("HERDR_ENV") == "1"
-  and pane_id ~= nil
-  and pane_id ~= ""
-  and bin ~= nil
-  and bin ~= ""
+local function env(name)
+  local value = maki.uv.os_getenv(name)
+  if value == nil or value == "" then
+    return nil
+  end
+  return value
+end
 
-if not enabled then
+local pane_id = env("HERDR_PANE_ID")
+local bin = env("HERDR_BIN_PATH")
+-- Prefer the TUI when both are set: maki then runs inside the TUI, and the
+-- app sees the TUI, not maki.
+local transport
+if env("HERDR_ENV") == "1" then
+  if pane_id ~= nil and bin ~= nil then
+    transport = require("herdr.tui").new({ pane_id = pane_id, bin = bin })
+  end
+elseif env("HC_TERMINAL_ID") ~= nil then
+  transport = require("herdr.app").new()
+end
+
+if transport == nil then
   return {}
-end
-
--- Strictly increasing sequence. Herdr ignores a report whose seq is not
--- higher than the last one it accepted, so this must never repeat, even
--- across a plugin reload in the same process.
-local last_seq = 0
-local function next_seq()
-  -- os.time() is whole seconds; keep a counter to stay monotonic inside one.
-  local now = os.time() * 1000 + (last_seq % 1000) + 1
-  if now <= last_seq then
-    now = last_seq + 1
-  end
-  last_seq = now
-  return now
-end
-
--- Latest desired state. Only the newest report matters; older ones are
--- dropped while a report is in flight.
-local pending = nil
-local running = false
-
-local function build_argv(state, session_id)
-  local argv = {
-    bin,
-    "pane",
-    "report-agent",
-    pane_id,
-    "--source",
-    SOURCE,
-    "--agent",
-    AGENT,
-    "--state",
-    state,
-    "--seq",
-    tostring(next_seq()),
-  }
-  if session_id and session_id ~= "" then
-    argv[#argv + 1] = "--agent-session-id"
-    argv[#argv + 1] = session_id
-    argv[#argv + 1] = "--"
-    argv[#argv + 1] = "maki"
-    argv[#argv + 1] = "-r"
-    argv[#argv + 1] = session_id
-  end
-  return argv
-end
-
-local function drain()
-  if running or pending == nil then
-    return
-  end
-  local report = pending
-  pending = nil
-  running = true
-  -- scope = "plugin" so the job survives the autocmd callback that started
-  -- it; a default "task" scope job dies with the dispatch.
-  local ok, err = maki.fn.jobstart(build_argv(report.state, report.session_id), {
-    scope = "plugin",
-    stdout = false,
-    stderr = false,
-    on_exit = function()
-      running = false
-      drain()
-    end,
-  })
-  if not ok then
-    running = false
-    maki.log.warn("herdr: report failed to start: " .. tostring(err))
-  end
-end
-
-local function report(state, session_id)
-  pending = { state = state, session_id = session_id }
-  drain()
 end
 
 -- Map maki's three statuses onto herdr's. needs_input means maki is asking
@@ -133,7 +63,7 @@ local function on_status(ev)
   end
   local state = map_status(data.status)
   if state then
-    report(state, session_id)
+    transport.report(state, session_id)
   end
 end
 
@@ -157,7 +87,7 @@ maki.api.create_autocmd("SessionFocusChanged", {
         end
       end
     end
-    report(state, session_id)
+    transport.report(state, session_id)
   end,
 })
 
@@ -167,31 +97,15 @@ maki.api.create_autocmd("SessionFocusChanged", {
 maki.set_notify_handler(function(msg, level, opts)
   local session_id = maki.session.current()
   if session_id == focused and level ~= "info" then
-    report("blocked", session_id)
+    transport.report("blocked", session_id)
   end
   maki.ui.flash(msg)
 end)
 
--- Release only when the user actually quits. A reload keeps the session
--- running in the new plugin host, so it is not a quit.
 maki.api.create_autocmd("SessionEnd", {
   callback = function(ev)
     local data = ev.data or {}
-    local reason = data.reason
-    if reason == "shutdown" or reason == "delete" or reason == "completed" then
-      maki.fn.jobstart({
-        bin,
-        "pane",
-        "release-agent",
-        pane_id,
-        "--source",
-        SOURCE,
-        "--agent",
-        AGENT,
-        "--seq",
-        tostring(next_seq()),
-      }, { scope = "plugin", stdout = false, stderr = false })
-    end
+    transport.session_ended(data.reason)
   end,
 })
 
@@ -211,7 +125,7 @@ do
   end
   maki.async.spawn(function()
     maki.async.sleep(DEBOUNCE_MS)
-    report(state, session_id)
+    transport.report(state, session_id)
   end)
 end
 
