@@ -25,8 +25,6 @@ local PROTECTED_DIRS = {
   home .. "/.config/gcloud",
   home .. "/.gcp",
   home .. "/.cloudflared",
-  home .. "/.pi/agent/sessions",
-  xdg_state .. "/pi/sessions",
 }
 
 -- Shell and REPL history can hold a password typed by mistake, so the files

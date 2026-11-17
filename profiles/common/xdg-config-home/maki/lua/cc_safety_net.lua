@@ -14,9 +14,17 @@
 local home = maki.uv.os_homedir()
 local config = maki.env.config_dir()
 
+-- cc-safety-net is installed globally with bun:
+--   bun install -g --trust cc-safety-net@latest
+-- BUN_INSTALL wins; otherwise bun follows XDG_DATA_HOME, then ~/.bun.
+local bun_install = maki.uv.os_getenv("BUN_INSTALL")
+local xdg_data = maki.uv.os_getenv("XDG_DATA_HOME") or (home .. "/.local/share")
 local API_CANDIDATES = {
-  maki.fs.joinpath(home, ".local/share/maki/npm/node_modules/cc-safety-net/dist/api.js"),
-  maki.fs.joinpath(home, ".pi/agent/npm/node_modules/cc-safety-net/dist/api.js"),
+  maki.fs.joinpath(
+    bun_install or (xdg_data .. "/bun"),
+    "install/global/node_modules/cc-safety-net/dist/api.js"
+  ),
+  maki.fs.joinpath(home, ".bun/install/global/node_modules/cc-safety-net/dist/api.js"),
 }
 local WRAPPER = maki.fs.joinpath(config, "lua/cc_safety_net/check.mjs")
 local MAX_PAYLOAD = 64 * 1024

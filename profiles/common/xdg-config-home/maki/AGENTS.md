@@ -22,6 +22,13 @@
 - A non-deterministic result means your measurement is uncontrolled, not that the tool is random. Fix every input, change one, and re-measure.
 - When a question is answered, say so and name the next action instead of continuing to gather supporting evidence.
 
+## Planning
+
+- A finding is a constraint, not a note. If the investigation calls a design fragile, duplicative, or wrong, the plan makes removing it a required step. Do not move that removal to an optional phase.
+- An optional phase that is the only thing preventing a known-bad state is not optional. Either make it required or keep the bad state out of the implementation.
+- A temporary fallback must carry its removal condition in the plan ("temporary: remove when X") and must not ship as the final state.
+- Before implementing, re-read the plan against the findings that produced it. A step that contradicts a stated principle means the plan is wrong, not that the principle is negotiable.
+
 ## Reporting
 
 - Report when a phase ends: what is now known, what is still open, and the single next action.
