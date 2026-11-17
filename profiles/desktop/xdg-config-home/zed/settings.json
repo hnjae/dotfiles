@@ -7,6 +7,7 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "proxy": "",
   "auto_update": true,
   "telemetry": {
     "diagnostics": false,
@@ -55,8 +56,8 @@
   // "buffer_line_height": { "custom": 1.6 },
   "theme": {
     "mode": "system",
-    "light": "Gruvbox Light",
-    "dark": "Gruvbox Dark"
+    "light": "Gruvbox Light Hard",
+    "dark": "Gruvbox Dark Hard"
   },
   "cursor_blink": false,
   "vim_mode": true

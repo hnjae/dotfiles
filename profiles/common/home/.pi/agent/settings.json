@@ -4,10 +4,10 @@
   "defaultModel": "deepseek-v4.1-flash",
   "packages": [
     "npm:cc-safety-net",
-    "npm:@tintinweb/pi-subagents",
-    "npm:pi-worktrunk",
     "npm:@narumitw/pi-plan-mode",
-    "npm:@narumitw/pi-btw"
+    "npm:@narumitw/pi-btw",
+    "npm:pi-claude-code-ui",
+    "npm:@narumitw/pi-subagents"
   ],
   "enableSkillCommands": true,
   "terminal": {

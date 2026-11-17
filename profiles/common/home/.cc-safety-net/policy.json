@@ -9,7 +9,21 @@
   },
   "destructive_command_protection": {
     "enabled": true,
-    "overrides": {},
+    "overrides": {
+      "git.checkout-ambiguous": "off",
+      "git.checkout-double-dash": "off",
+      "git.checkout-force": "off",
+      "git.checkout-ref-path": "off",
+      "git.clean-force": "off",
+      "git.reset-hard": "off",
+      "git.reset-merge": "off",
+      "git.restore-unstaged": "off",
+      "git.restore-worktree": "off",
+      "git.stash-clear": "off",
+      "git.stash-drop": "off",
+      "git.switch-discard-changes": "off",
+      "git.switch-force": "off"
+    },
     "allow_paths": []
   },
   "secret_protection": {
