@@ -6,8 +6,8 @@
 #
 # secrets_guard.lua wraps `tool.*.input`, which maki prices at every
 # permission because tools like `read` declare no capability of their own.
-# It reads no file and runs nothing; the grants exist only to let the layer
-# fire.
+# cc_safety_net.lua wraps the same slot and runs node to check commands.
+# The grants exist only to let the layers fire.
 [permissions]
 run = true
 env = true

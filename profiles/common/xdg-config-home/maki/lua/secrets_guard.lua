@@ -17,6 +17,16 @@ local xdg_cache = maki.uv.os_getenv("XDG_CACHE_HOME") or (home .. "/.cache")
 local PROTECTED_DIRS = {
   home .. "/.ssh",
   xdg_config .. "/sops",
+  -- Credential stores cc-safety-net blocks as well.
+  home .. "/.aws",
+  home .. "/.kube",
+  home .. "/.docker",
+  home .. "/.config/gh",
+  home .. "/.config/gcloud",
+  home .. "/.gcp",
+  home .. "/.cloudflared",
+  home .. "/.pi/agent/sessions",
+  xdg_state .. "/pi/sessions",
 }
 
 -- Shell and REPL history can hold a password typed by mistake, so the files
@@ -47,6 +57,13 @@ local PROTECTED_FILES = {
   xdg_cache .. "/kitty/shell.history.json",
   home .. "/.claude/history.jsonl",
   home .. "/.codex/history.jsonl",
+  -- Credential files cc-safety-net blocks as well.
+  home .. "/.claude/.credentials.json",
+  home .. "/.codex/auth.json",
+  home .. "/.gemini/oauth_creds.json",
+  home .. "/.npmrc",
+  home .. "/.netrc",
+  home .. "/.git-credentials",
 }
 
 -- Fields that name a path the tool will open, create, or search.
@@ -56,10 +73,42 @@ local PATH_FIELDS = { "path", "file_path", "file", "directory", "dir", "cwd", "t
 local COMMAND_FIELDS = { "command", "cmd", "script" }
 
 -- `.env` and every `.env.<suffix>` holds secrets wherever it sits. Templates
--- are refused too: one rule, no exceptions.
+-- are refused too: one rule, no exceptions. The basenames and extensions
+-- mirror the cc-safety-net rules maki would otherwise miss.
+local SECRET_BASENAMES = {
+  "id_rsa",
+  "id_ed25519",
+  "id_ecdsa",
+  "credentials",
+}
+
+local SECRET_EXTENSIONS = {
+  "kdbx",
+  "key",
+  "keystore",
+  "pem",
+  "p12",
+}
+
 local function is_secret_file(path)
   local name = path:match("([^/]+)$") or path
-  return name == ".env" or name:sub(1, 5) == ".env."
+  if name == ".env" or name:sub(1, 5) == ".env." then
+    return path
+  end
+  for _, basename in ipairs(SECRET_BASENAMES) do
+    if name == basename then
+      return path
+    end
+  end
+  local ext = name:match("%.([^.]+)$")
+  if ext then
+    for _, extension in ipairs(SECRET_EXTENSIONS) do
+      if ext == extension then
+        return path
+      end
+    end
+  end
+  return nil
 end
 
 local function is_protected_file(path)
