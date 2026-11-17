@@ -7,13 +7,7 @@
     "SessionStart": [
       {
         "matcher": "^(startup|resume|clear|compact|fork)$",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash \"$HOME/.claude/hooks/herdr-agent-state.sh\" session",
-            "timeout": 10
-          }
-        ]
+        "hooks": []
       }
     ],
     "UserPromptSubmit": [
@@ -40,18 +34,6 @@
     ],
     "StopFailure": [
       {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "sh \"$HOME/.claude/hooks/sleep-inhibit.sh\" stop",
-            "timeout": 10
-          }
-        ]
-      }
-    ],
-    "Notification": [
-      {
-        "matcher": "idle_prompt",
         "hooks": [
           {
             "type": "command",

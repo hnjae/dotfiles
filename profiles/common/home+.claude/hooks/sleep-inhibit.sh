@@ -6,7 +6,8 @@
 set -eu
 
 action="${1:-}"
-session_id="$(jq -r '.session_id // empty')"
+input="$(cat)"
+session_id="$(printf '%s' "$input" | jq -r '.session_id // empty')"
 [ "$session_id" != "" ] || exit 0
 
 pid_file="${XDG_RUNTIME_DIR:-/tmp}/claude-sleep-inhibit.$session_id"
@@ -28,6 +29,12 @@ start)
     ' sh "$pid_file" >/dev/null 2>&1 </dev/null
     ;;
 stop)
+    # A turn can end while background tasks still run; their completion wakes
+    # the session later, so keep the inhibitor until none are in flight.
+    if printf '%s' "$input" |
+        jq -e '(.background_tasks // []) | length > 0' >/dev/null 2>&1; then
+        exit 0
+    fi
     if holder_alive; then
         kill -- "-$(cat "$pid_file")" 2>/dev/null || true
     fi
