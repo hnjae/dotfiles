@@ -7,3 +7,4 @@ lastmod: 2026-11-08T14:24:58+0900
 
 - login to mcp:
   `maki mcp auth context7`
+- install `cc-safety-net`: `bun install -g --trust 'cc-safety-net@latest'`
