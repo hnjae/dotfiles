@@ -12,27 +12,9 @@
     }
   ],
   "policies": [
-    { "action": "tool.use", "resource": "shell:*sops *", "effect": "deny" },
-    { "action": "tool.use", "resource": "shell:*age -d *", "effect": "deny" },
     {
       "action": "tool.use",
       "resource": "shell:*age --decrypt*",
-      "effect": "deny"
-    },
-    { "action": "tool.use", "resource": "shell:*gpg *-d *", "effect": "deny" },
-    {
-      "action": "tool.use",
-      "resource": "shell:*gpg *--decrypt*",
-      "effect": "deny"
-    },
-    {
-      "action": "tool.use",
-      "resource": "shell:*openssl enc *-d *",
-      "effect": "deny"
-    },
-    {
-      "action": "tool.use",
-      "resource": "shell:*openssl enc *--decrypt*",
       "effect": "deny"
     }
   ],
@@ -46,19 +28,15 @@
         "type": "remote",
         "url": "https://mcp.context7.com/mcp"
       },
-      "kagi": {
+      // "codegraph": {
+      //   "type": "local",
+      //   "command": ["codegraph", "serve", "--mcp"],
+      //   "disabled": false,
+      //   "codemode": false
+      // }
+      "nixos": {
         "type": "local",
-        "command": ["kagi", "mcp", "--exclude-tools", "kagi_extract"]
-      },
-      "codegraph": {
-        "type": "local",
-        "command": [
-          "codegraph",
-          "serve",
-          "--mcp"
-        ],
-        "disabled": false,
-        "codemode": false
+        "command": ["uvx", "mcp-nixos"]
       }
     }
   },

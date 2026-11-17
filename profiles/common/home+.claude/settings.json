@@ -2,7 +2,7 @@
   "env": {
     "DISABLE_AUTOUPDATER": "1"
   },
-  "model": "haiku",
+  "model": "sonnet",
   "hooks": {
     "SessionStart": [
       {

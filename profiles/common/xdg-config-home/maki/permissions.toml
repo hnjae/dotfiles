@@ -92,3 +92,13 @@ default = "allow"
 
 [mcp.kagi]
 default = "allow"
+
+[edit]
+allow = [
+    "/tmp/**",
+]
+
+[write]
+allow = [
+    "/tmp/**",
+]
