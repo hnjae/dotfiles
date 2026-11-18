@@ -1,0 +1,13 @@
+#!/usr/bin/env -S just --justfile
+
+set unstable
+set fallback
+set lazy
+
+_:
+    @just --list
+
+# Refresh model-catalogs/mistral.json from the Mistral API and the codex
+# agent prompt pinned to the installed binary. Needs MISTRAL_API_KEY.
+models-update:
+    "{{ justfile_directory() }}/model-catalogs/update.py"
