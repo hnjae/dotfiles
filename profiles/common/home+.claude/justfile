@@ -1,0 +1,11 @@
+#!/usr/bin/env -S just --justfile
+
+set unstable
+set fallback := false
+set lazy
+
+_:
+    @just --list
+
+add-mcp:
+    claude mcp add nixos --transport stdio -- uvx mcp-nixos

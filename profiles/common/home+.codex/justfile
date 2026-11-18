@@ -28,3 +28,6 @@ models-update:
     set +a
 
     exec "{{ justfile_directory() }}/model-catalogs/update.py"
+
+KILL-SERVER:
+    pkill -f 'codex app-server'

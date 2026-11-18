@@ -42,6 +42,12 @@ OPENCODE_PERMISSION='{"*":"allow"}' opencode -- port 4096
 # list mcp in pi
 pi mcp list
 
+# list mcp in codex
+codex mcp list
+
+# codex mcp login
+codex mcp login <exa>
+
 # list mcp in claude-code
 claude mcp list
 
