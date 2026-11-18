@@ -15,7 +15,7 @@
         },
         {
           "effort": "high",
-          "description": "Use the most reasoning compute for complex tasks"
+          "description": "Greater reasoning depth for complex problems"
         }
       ],
       "default_reasoning_level": "high",
@@ -25,7 +25,7 @@
       "priority": 400,
       "support_verbosity": false,
       "input_modalities": ["text", "image"],
-      "context_window": 1000000,
+      "context_window": 1048576,
       "truncation_policy": {
         "mode": "tokens",
         "limit": 10000
@@ -51,13 +51,14 @@
           "description": "Maximum reasoning depth"
         }
       ],
+      "default_reasoning_level": "high",
       "shell_type": "shell_command",
       "visibility": "list",
       "supported_in_api": true,
       "priority": 300,
       "support_verbosity": false,
       "input_modalities": ["text"],
-      "context_window": 1000000,
+      "context_window": 1048576,
       "truncation_policy": {
         "mode": "tokens",
         "limit": 10000
@@ -83,13 +84,14 @@
           "description": "Maximum reasoning depth"
         }
       ],
+      "default_reasoning_level": "high",
       "shell_type": "shell_command",
       "visibility": "list",
       "supported_in_api": true,
       "priority": 200,
       "support_verbosity": false,
       "input_modalities": ["text", "image"],
-      "context_window": 1000000,
+      "context_window": 1048576,
       "truncation_policy": {
         "mode": "tokens",
         "limit": 10000
@@ -108,7 +110,7 @@
       "priority": 100,
       "support_verbosity": false,
       "input_modalities": ["text", "image"],
-      "context_window": 1000000,
+      "context_window": 1048576,
       "truncation_policy": {
         "mode": "tokens",
         "limit": 10000
