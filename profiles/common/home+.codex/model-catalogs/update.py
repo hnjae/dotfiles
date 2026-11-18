@@ -27,7 +27,9 @@ import subprocess
 import sys
 import urllib.error
 import urllib.request
+from dataclasses import dataclass
 from pathlib import Path
+from typing import NoReturn
 
 MODELS_URL = "https://api.mistral.ai/v1/models"
 PROMPT_URL = (
@@ -39,41 +41,54 @@ PROMPT_URL = (
 CATALOG = Path(__file__).resolve().parent / "mistral.json"
 TRUNCATION_LIMIT = 10_000
 
+
+@dataclass(frozen=True)
+class Curated:
+    """Human metadata for one catalog model, from docs.mistral.ai."""
+
+    id: str
+    display_name: str
+    description: str
+    priority: int
+    efforts: list[str]
+    default_effort: str | None
+
+
 # Curated entries, in descending picker priority. `id` is the exact model id on
 # La Plateforme; codex sends it verbatim as the API `model` field.
 CURATED = [
-    {
-        "id": "mistral-large-4",
-        "display_name": "Mistral Large 4",
-        "description": "State-of-the-art open-weight general-purpose multimodal model by Mistral",
-        "priority": 400,
-        "efforts": ["low", "medium", "high"],
-        "default_effort": "high",
-    },
-    {
-        "id": "zai-glm-5-3",
-        "display_name": "Z.ai GLM 5.3",
-        "description": "Third-party open-weight text model from Z.ai, hosted by Mistral for long-context coding and agentic workflows",
-        "priority": 300,
-        "efforts": ["low", "high", "max"],
-        "default_effort": "high",
-    },
-    {
-        "id": "zai-glm-5-3-flash",
-        "display_name": "Z.ai GLM 5.3 Flash",
-        "description": "Multimodal third-party model from Z.ai, hosted by Mistral for developer agent workflows and complex tool-use tasks",
-        "priority": 200,
-        "efforts": ["low", "high", "max"],
-        "default_effort": "high",
-    },
-    {
-        "id": "deepseek-v4-1-flash-1017",
-        "display_name": "DeepSeek V4.1 Flash 1017",
-        "description": "Third-party open-weight model from DeepSeek, hosted by Mistral with support for text and image inputs",
-        "priority": 100,
-        "efforts": [],
-        "default_effort": None,
-    },
+    Curated(
+        id="mistral-large-4",
+        display_name="Mistral Large 4",
+        description="State-of-the-art open-weight general-purpose multimodal model by Mistral",
+        priority=400,
+        efforts=["low", "medium", "high"],
+        default_effort="high",
+    ),
+    Curated(
+        id="zai-glm-5-3",
+        display_name="Z.ai GLM 5.3",
+        description="Third-party open-weight text model from Z.ai, hosted by Mistral for long-context coding and agentic workflows",
+        priority=300,
+        efforts=["low", "high", "max"],
+        default_effort="high",
+    ),
+    Curated(
+        id="zai-glm-5-3-flash",
+        display_name="Z.ai GLM 5.3 Flash",
+        description="Multimodal third-party model from Z.ai, hosted by Mistral for developer agent workflows and complex tool-use tasks",
+        priority=200,
+        efforts=["low", "high", "max"],
+        default_effort="high",
+    ),
+    Curated(
+        id="deepseek-v4-1-flash-1017",
+        display_name="DeepSeek V4.1 Flash 1017",
+        description="Third-party open-weight model from DeepSeek, hosted by Mistral with support for text and image inputs",
+        priority=100,
+        efforts=[],
+        default_effort=None,
+    ),
 ]
 
 EFFORT_DESCRIPTIONS = {
@@ -84,17 +99,18 @@ EFFORT_DESCRIPTIONS = {
 }
 
 
-def fail(message: str) -> None:
+def fail(message: str) -> NoReturn:
     print(f"error: {message}", file=sys.stderr)
     sys.exit(1)
 
 
 def get_json(url: str, key: str | None = None) -> object:
-    request = urllib.request.Request(url)
+    # Only this module's https constants reach these audited open calls.
+    request = urllib.request.Request(url)  # ruff: ignore[suspicious-url-open-usage]
     if key:
         request.add_header("Authorization", f"Bearer {key}")
     try:
-        with urllib.request.urlopen(request, timeout=30) as response:
+        with urllib.request.urlopen(request, timeout=30) as response:  # ruff: ignore[suspicious-url-open-usage]
             return json.load(response)
     except urllib.error.HTTPError as err:
         fail(f"GET {url} failed with HTTP {err.code}")
@@ -117,9 +133,10 @@ def codex_version() -> str:
 
 def fetch_prompt(version: str) -> str:
     url = PROMPT_URL.format(version=version)
-    request = urllib.request.Request(url)
+    # Audited open call: the url is built from this module's https constant.
+    request = urllib.request.Request(url)  # ruff: ignore[suspicious-url-open-usage]
     try:
-        with urllib.request.urlopen(request, timeout=30) as response:
+        with urllib.request.urlopen(request, timeout=30) as response:  # ruff: ignore[suspicious-url-open-usage]
             return response.read().decode()
     except urllib.error.HTTPError as err:
         fail(
@@ -134,6 +151,8 @@ def load_cards(payload: object) -> dict[str, dict]:
     depend on the API's array order.
     """
     cards = payload.get("data", []) if isinstance(payload, dict) else payload
+    if not isinstance(cards, list):
+        fail(f"unexpected /v1/models payload shape: {type(cards).__name__}")
     return {
         card["id"]: card
         for card in cards
@@ -160,25 +179,25 @@ def resolve_card(cards: dict[str, dict], wanted: str) -> dict | None:
     return claimants[0] if claimants else None
 
 
-def build_entry(curated: dict, card: dict, prompt: str) -> dict:
+def build_entry(curated: Curated, card: dict, prompt: str) -> dict:
     capabilities = card.get("capabilities", {})
     entry = {
-        "slug": curated["id"],
-        "display_name": curated["display_name"],
-        "description": curated["description"],
+        "slug": curated.id,
+        "display_name": curated.display_name,
+        "description": curated.description,
         "supported_reasoning_levels": [
             {"effort": effort, "description": EFFORT_DESCRIPTIONS[effort]}
-            for effort in curated["efforts"]
+            for effort in curated.efforts
         ],
     }
-    if curated["default_effort"]:
-        entry["default_reasoning_level"] = curated["default_effort"]
+    if curated.default_effort:
+        entry["default_reasoning_level"] = curated.default_effort
     entry.update(
         {
             "shell_type": "shell_command",
             "visibility": "list",
             "supported_in_api": True,
-            "priority": curated["priority"],
+            "priority": curated.priority,
             "support_verbosity": False,
             "input_modalities": ["text"]
             + (["image"] if capabilities.get("vision") else []),
@@ -192,13 +211,17 @@ def build_entry(curated: dict, card: dict, prompt: str) -> dict:
 
 
 def summarize(old: dict, new: dict) -> list[str]:
+    """One deterministic line per added, removed, or changed model."""
     old_models = {model["slug"]: model for model in old.get("models", [])}
     new_models = {model["slug"]: model for model in new["models"]}
-    lines = []
-    for slug in sorted(old_models.keys() - new_models.keys()):
-        lines.append(f"- {slug}: removed")
-    for slug in sorted(new_models.keys() - old_models.keys()):
-        lines.append(f"- {slug}: added")
+    lines = [
+        f"- {slug}: removed"
+        for slug in sorted(old_models.keys() - new_models.keys())
+    ]
+    lines += [
+        f"- {slug}: added"
+        for slug in sorted(new_models.keys() - old_models.keys())
+    ]
     for slug in sorted(old_models.keys() & new_models.keys()):
         fields = [
             key
@@ -267,11 +290,9 @@ def main() -> None:
 
     models = []
     for curated in CURATED:
-        card = resolve_card(cards, curated["id"])
+        card = resolve_card(cards, curated.id)
         if card is None:
-            print(
-                f"- {curated['id']}: dropped (absent or archived on the API)"
-            )
+            print(f"- {curated.id}: dropped (absent or archived on the API)")
             continue
         capabilities = card.get("capabilities", {})
         if (
@@ -279,7 +300,7 @@ def main() -> None:
             or capabilities.get("function_calling") is False
         ):
             print(
-                f"- {curated['id']}: dropped (cannot drive a coding agent: {capabilities})"
+                f"- {curated.id}: dropped (cannot drive a coding agent: {capabilities})"
             )
             continue
         models.append(build_entry(curated, card, prompt))
@@ -287,7 +308,7 @@ def main() -> None:
         fail(
             "no curated model is available; refusing to write an empty catalog"
         )
-    print_candidates(cards, {curated["id"] for curated in CURATED})
+    print_candidates(cards, {curated.id for curated in CURATED})
 
     new_catalog = {"models": models}
     old_catalog = (
