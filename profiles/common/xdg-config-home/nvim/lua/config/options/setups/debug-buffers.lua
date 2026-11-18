@@ -6,8 +6,8 @@ vim.api.nvim_create_user_command("DebugBuffers", function()
     if
       vim.tbl_contains({
         "noice",
-        "cmp_menu",
-        "cmp_docs",
+        "blink-cmp-menu",
+        "blink-cmp-documentation",
       }, vim.api.nvim_get_option_value("filetype", { buf = bufid }))
     then
       goto continue

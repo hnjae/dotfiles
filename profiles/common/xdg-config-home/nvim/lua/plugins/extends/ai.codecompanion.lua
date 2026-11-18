@@ -262,17 +262,5 @@ Please respond by writing table driven unit tests for the code above.]],
   dependencies = {
     { "nvim-treesitter/nvim-treesitter" },
     { "nvim-lua/plenary.nvim" },
-    {
-      [1] = "nvim-cmp",
-      optional = true,
-      ---@param opts cmp.ConfigSchema
-      opts = function(_, opts)
-        table.insert(opts.sources, {
-          name = "codecompanion",
-        })
-
-        return opts
-      end,
-    },
   },
 }
