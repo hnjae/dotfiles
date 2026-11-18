@@ -26,6 +26,9 @@
     ~/.claude:
       glob: true
       path: home+.claude/*
+    ~/.codex:
+      glob: true
+      path: home+.codex/*
     ~/.agents:
       glob: true
       path: home+.agents/*

@@ -1,0 +1,27 @@
+#!/bin/sh
+
+set -eu
+
+: "${HOME:?HOME is not set}"
+
+dotenv_file="${XDG_DATA_HOME:-$HOME/.local/share}/secrets/MISTRAL.env"
+
+# 1Password 는 .env 를 named pipe 로 마운트하므로 한 번만 읽는다
+if ! env_content=$(cat "$dotenv_file"); then
+    printf 'codex: cannot read env file: %s\n' "$dotenv_file" >&2
+    exit 1
+fi
+
+# 문법 검사만 (실행하지 않음)
+if ! printf '%s\n' "$env_content" | sh -n 2>/dev/null; then
+    printf 'codex: env file is not valid POSIX sh syntax: %s\n' "$dotenv_file" >&2
+    exit 1
+fi
+
+# 기존 환경변수를 건드리지 않고 파일 값을 export
+set -a
+eval "$env_content"
+set +a
+
+nix run 'github:numtide/llm-agents.nix#codex' -- "$@"
+

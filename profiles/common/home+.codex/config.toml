@@ -1,0 +1,13 @@
+model = "zai-glm-5-3"
+model_provider = "mistral"
+web_search = "disabled"
+model_catalog_json = "~/.codex/model-catalogs/mistral.json"
+
+[model_providers.mistral]
+name = "Mistral La Plateforme"
+base_url = "https://api.mistral.ai/v1"
+env_key = "MISTRAL_API_KEY"
+wire_api = "responses"
+
+[tui]
+screen_reader_detection_done = true
