@@ -23,18 +23,5 @@ set -a
 eval "$env_content"
 set +a
 
-nix_stderr=$(mktemp "${TMPDIR:-/tmp}/codex-nix-stderr.XXXXXX")
-trap 'rm -f "$nix_stderr"' EXIT
-
-if nix run 'github:numtide/llm-agents.nix#codex' -- "$@" 2>"$nix_stderr"; then
-    nix_status=0
-else
-    nix_status=$?
-fi
-
-# The flake asks for a restricted setting; Nix intentionally rejects it for
-# untrusted users. Hide only that repeated, expected notice.
-grep -v "ignoring the client-specified setting 'trusted-public-keys'" "$nix_stderr" >&2 || :
-
-exit "$nix_status"
+exec "$HOME/.nix-profile/bin/codex" "$@"
 
