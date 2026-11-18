@@ -3,6 +3,7 @@ model_provider = "mistral"
 web_search = "disabled"
 model_catalog_json = "~/.codex/model-catalogs/mistral.json"
 model_reasoning_effort = "high"
+check_for_update_on_startup = false
 
 [model_providers.mistral]
 name = "Mistral La Plateforme"
@@ -17,6 +18,7 @@ screen_reader_detection_done = true
 # TODO: 이거 true 면 작동 안함. 지원 한계인지 설정 문제인지는 모르겠음. <2026-11-19>
 # >  {"error":{"code":"3051","message":"tools: Value error, Tool types ['custom'] are not supported; this endpoint currently supports only client-executed function tools.","param":"tools","type":"invalid_request_error"}}
 code_mode = false
+prevent_idle_sleep = true
 
 [mcp_servers.mdn]
 url = "https://mcp.mdn.mozilla.net/"
@@ -38,6 +40,9 @@ source = "https://github.com/kenryu42/cc-marketplace.git"
 [plugins."cc-safety-net@cc-marketplace"]
 enabled = true
 
+#########
+# STATE #
+#########
 
 [hooks.state]
 
