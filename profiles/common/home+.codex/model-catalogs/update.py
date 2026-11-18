@@ -127,23 +127,37 @@ def fetch_prompt(version: str) -> str:
         )
 
 
-def fetch_model_cards(key: str) -> dict[str, dict]:
-    """Return the API's base-model cards keyed by id, with aliases resolved.
+def load_cards(payload: object) -> dict[str, dict]:
+    """Return base, non-archived cards keyed by their own id.
 
-    Fine-tuned models (ids starting with `ft:`) are left out; they are user
-    jobs, not provider models worth listing in the catalog.
+    Aliases are folded in only by `resolve_card`, with a rule that does not
+    depend on the API's array order.
     """
-    payload = get_json(MODELS_URL, key)
     cards = payload.get("data", []) if isinstance(payload, dict) else payload
-    by_id: dict[str, dict] = {}
-    for card in cards:
-        model_id = card.get("id", "")
-        if model_id.startswith("ft:") or card.get("archived"):
-            continue
-        by_id[model_id] = card
-        for alias in card.get("aliases", []):
-            by_id.setdefault(alias, card)
-    return by_id
+    return {
+        card["id"]: card
+        for card in cards
+        if card.get("id")
+        and not card["id"].startswith("ft:")
+        and not card.get("archived")
+    }
+
+
+def resolve_card(cards: dict[str, dict], wanted: str) -> dict | None:
+    """Resolve a model id to its card, deterministically.
+
+    An exact id always wins. Otherwise the claiming card with the newest
+    `created` wins, tie-broken by id: the API lists aliases as mutual cliques
+    with identical timestamps, so the tie-break is what usually decides,
+    and it never depends on the order of the response array.
+    """
+    if wanted in cards:
+        return cards[wanted]
+    claimants = sorted(
+        (card for card in cards.values() if wanted in card.get("aliases", [])),
+        key=lambda card: (-card.get("created", 0), card["id"]),
+    )
+    return claimants[0] if claimants else None
 
 
 def build_entry(curated: dict, card: dict, prompt: str) -> dict:
@@ -196,34 +210,64 @@ def summarize(old: dict, new: dict) -> list[str]:
     return lines
 
 
+def alias_groups(cards: dict[str, dict]) -> list[list[str]]:
+    """Group card ids into the API's mutual alias cliques.
+
+    The API registers every spelling of one model as its own card and lists
+    the siblings as aliases, so "which names are the same model" is exactly
+    connected components over the id-to-alias edges, built from sorted names
+    so the groups do not depend on the response order.
+    """
+    parent = {name: name for name in sorted(cards)}
+
+    def root(name: str) -> str:
+        while parent[name] != name:
+            parent[name] = parent[parent[name]]
+            name = parent[name]
+        return name
+
+    for name in sorted(cards):
+        for alias in sorted(cards[name].get("aliases", [])):
+            if alias in parent:
+                parent[root(name)] = root(alias)
+    groups: dict[str, list[str]] = {}
+    for name in sorted(cards):
+        groups.setdefault(root(name), []).append(name)
+    return list(groups.values())
+
+
 def print_candidates(cards: dict[str, dict], known: set[str]) -> None:
-    candidates = sorted(
-        {
-            card.get("id", model_id)
-            for model_id, card in cards.items()
-            if card.get("id", model_id) not in known
-            and not model_id.startswith("ft:")
-            and card.get("capabilities", {}).get("completion_chat")
-            and card.get("capabilities", {}).get("function_calling")
-        }
-    )
+    """One deterministic line per model family the catalog does not cover."""
+    candidates = []
+    for group in alias_groups(cards):
+        if any(name in known for name in group):
+            continue
+        card = cards[min(group)]
+        capabilities = card.get("capabilities", {})
+        if not (
+            capabilities.get("completion_chat")
+            and capabilities.get("function_calling")
+        ):
+            continue
+        if card.get("deprecation"):
+            continue
+        candidates.append(min(group))
     if candidates:
-        print(
-            "other tool-calling chat models on the API (candidates for CURATED):"
-        )
-        print("  " + ", ".join(candidates))
+        print("model families on the API but not in CURATED:")
+        for candidate in sorted(candidates):
+            print(f"  {candidate}")
 
 
 def main() -> None:
     key = os.environ.get("MISTRAL_API_KEY")
     if not key:
         fail("MISTRAL_API_KEY is not set (create one at console.mistral.ai)")
-    cards = fetch_model_cards(key)
+    cards = load_cards(get_json(MODELS_URL, key))
     prompt = fetch_prompt(codex_version())
 
     models = []
     for curated in CURATED:
-        card = cards.get(curated["id"])
+        card = resolve_card(cards, curated["id"])
         if card is None:
             print(
                 f"- {curated['id']}: dropped (absent or archived on the API)"
