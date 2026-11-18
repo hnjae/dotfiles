@@ -1,7 +1,8 @@
-model = "zai-glm-5-3"
+model = "mistral-large-4"
 model_provider = "mistral"
 web_search = "disabled"
 model_catalog_json = "~/.codex/model-catalogs/mistral.json"
+model_reasoning_effort = "high"
 
 [model_providers.mistral]
 name = "Mistral La Plateforme"

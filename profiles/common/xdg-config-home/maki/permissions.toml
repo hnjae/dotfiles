@@ -95,10 +95,10 @@ default = "allow"
 
 [edit]
 allow = [
-    "/tmp/**",
+  "/tmp/**",
 ]
 
 [write]
 allow = [
-    "/tmp/**",
+  "/tmp/**",
 ]
