@@ -288,9 +288,10 @@ APPLY_PATCH_BULLET_RE = re.compile(
     r"^- Use the `apply_patch` tool to edit files .*$", re.MULTILINE
 )
 SHELL_EDIT_BULLET = (
-    "- Edit files through the shell tool: read the file before changing it, "
-    "write the new contents with a quoted heredoc or a short Python script, "
-    "and verify the result with `git diff`."
+    "- Edit files through the shell tool: read the file before changing it.\n"
+    "- Use `rg` and `sed -n` for narrow reads; do not `cat` large files. "
+    "For a large file in a language ast-grep supports, use the "
+    "`ast-grep-outline` skill to inspect its outline when needed."
 )
 
 
