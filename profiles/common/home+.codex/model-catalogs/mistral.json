@@ -103,7 +103,21 @@
       "slug": "deepseek-v4-1-flash-1017",
       "display_name": "DeepSeek V4.1 Flash 1017",
       "description": "Third-party open-weight model from DeepSeek, hosted by Mistral with support for text and image inputs",
-      "supported_reasoning_levels": [],
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Minimize reasoning compute for simpler tasks"
+        },
+        {
+          "effort": "high",
+          "description": "Greater reasoning depth for complex problems"
+        },
+        {
+          "effort": "max",
+          "description": "Maximum reasoning depth"
+        }
+      ],
+      "default_reasoning_level": "high",
       "shell_type": "shell_command",
       "visibility": "list",
       "supported_in_api": true,

@@ -90,8 +90,8 @@ CURATED = [
         display_name="DeepSeek V4.1 Flash 1017",
         description="Third-party open-weight model from DeepSeek, hosted by Mistral with support for text and image inputs",
         priority=100,
-        efforts=[],
-        default_effort=None,
+        efforts=["low", "high", "max"],
+        default_effort="high",
     ),
 ]
 
