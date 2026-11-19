@@ -164,12 +164,18 @@ def read_state() -> dict[str, dict[str, str | None]]:
 
 
 def write_text(path: Path, body: str) -> None:
-    """Write a file atomically, skipping the write when nothing changes."""
-    if path.is_file() and path.read_text(encoding="utf-8") == body:
+    """Write a file atomically, skipping the write when nothing changes.
+
+    The live manifest is a symlink into the dotfiles repository. Resolve it
+    before replacing so an edit reaches the tracked file instead of turning the
+    symlink into a regular file.
+    """
+    target = path.resolve() if path.is_symlink() else path
+    if target.is_file() and target.read_text(encoding="utf-8") == body:
         return
-    temporary = path.with_name(path.name + ".tmp")
+    temporary = target.with_name(target.name + ".tmp")
     temporary.write_text(body, encoding="utf-8")
-    temporary.replace(path)
+    temporary.replace(target)
 
 
 def write_state(state: dict[str, dict[str, str | None]]) -> None:
@@ -348,8 +354,13 @@ def block_text(source: Source) -> str:
 
 
 def split_blocks(text: str) -> tuple[str, list[str]]:
-    """Split the manifest into its preamble and raw blocks."""
-    parts = text.split(HEADING)
+    """Split the manifest into its preamble and raw blocks.
+
+    Match only a real block header at the start of a line. The manifest keeps
+    commented-out examples as ``# [[source]]``, and splitting on the bare token
+    would turn those comments into empty blocks.
+    """
+    parts = re.split(r"^\[\[source\]\]$", text, flags=re.MULTILINE)
     preamble = parts[0].rstrip("\n")
     return preamble, [HEADING + part.rstrip("\n") for part in parts[1:]]
 
