@@ -1,10 +1,11 @@
-model = "zai-glm-5-3"
+model = "zai-glm-5-3-flash"
 model_provider = "mistral"
 web_search = "disabled"
 model_catalog_json = "~/.codex/model-catalogs/mistral.json"
 model_reasoning_effort = "high"
 check_for_update_on_startup = false
 plan_mode_reasoning_effort = "high"
+
 
 [model_providers.mistral]
 name = "Mistral La Plateforme"
@@ -20,6 +21,31 @@ screen_reader_detection_done = true
 # >  {"error":{"code":"3051","message":"tools: Value error, Tool types ['custom'] are not supported; this endpoint currently supports only client-executed function tools.","param":"tools","type":"invalid_request_error"}}
 code_mode = false
 prevent_idle_sleep = true
+
+[shell_environment_policy]
+inherit = "core"
+set = { DEVENV_TUI = "false" }
+
+[shell_environment_policy.filters]
+"LD_*" = "include"
+"LC_*" = "include"
+"LIBEXEC_PATH" = "include"
+"XDG_*" = "include"
+"KITTY_*" = "include"
+"TMUX" = "include"
+"TMUX_*" = "include"
+"HC_TERMINAL_*" = "include"
+"DIRENV_*" = "include"
+"DEVENV_*" = "include"
+"AWS_*" = "exclude"
+"AZURE_*" = "exclude"
+"*_KEY" = "exclude"
+"*_SECRET" = "exclude"
+"*_PASSWORD" = "exclude"
+"*KEY*" = "exclude"
+"*SECRET*" = "exclude"
+"*TOKEN*" = "exclude"
+"*PASSWORD*" = "exclude"
 
 [mcp_servers.mdn]
 url = "https://mcp.mdn.mozilla.net/"
