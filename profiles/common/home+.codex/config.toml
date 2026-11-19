@@ -2,6 +2,7 @@ model = "deepseek-v4-1-flash-1017"
 model_provider = "mistral"
 web_search = "disabled"
 model_catalog_json = "~/.codex/model-catalogs/mistral.json"
+model_instructions_file = "~/.codex/BASE_INSTRUCTIONS.md"
 check_for_update_on_startup = false
 
 

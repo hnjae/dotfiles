@@ -1,6 +1,11 @@
 tree-root-file = "treefmt.toml"
 walk = "git"
-excludes = ["*.lock", "**/lazy-lock.json", "**/zed/*.json"]
+excludes = [
+  "*.lock",
+  "**/lazy-lock.json",
+  "**/zed/*.json",
+  "**/home+.codex/BASE_INSTRUCTIONS.md",
+]
 
 [formatter.nixfmt]
 command = "nixfmt"

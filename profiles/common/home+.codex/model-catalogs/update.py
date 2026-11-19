@@ -6,11 +6,11 @@ GET https://api.mistral.ai/v1/models using $MISTRAL_API_KEY. Human metadata
 (display names, descriptions, reasoning levels, priority) is curated in
 CURATED below, mirroring the model pages on docs.mistral.ai.
 
-base_instructions comes from openai/codex at the tag matching the installed
-binary: the prompt is embedded in the binary and changes between releases, so
-the `main` branch would drift from what the installed codex expects. Without
-any instructions a catalog model runs with an empty system prompt, so the
-field must stay.
+The system prompt comes from openai/codex at the tag matching the installed
+binary and is written to BASE_INSTRUCTIONS.md after applying rewrite_prompt.
+config.toml selects it with `model_instructions_file`, so the catalog carries
+only model metadata. The file is generated; edit rewrite_prompt or the
+upstream pin, not BASE_INSTRUCTIONS.md directly.
 
 `apply_patch_tool_type` stays unset on purpose: Mistral's Responses endpoint
 accepts only client-executed function tools, and codex serializes the freeform
@@ -42,6 +42,7 @@ PROMPT_URL = (
 # The catalog sits next to this script, both linked into ~/.codex/; resolve
 # the symlink when invoked from there.
 CATALOG = Path(__file__).resolve().parent / "mistral.json"
+INSTRUCTIONS = Path(__file__).resolve().parents[1] / "BASE_INSTRUCTIONS.md"
 TRUNCATION_LIMIT = 10_000
 
 
@@ -182,7 +183,7 @@ def resolve_card(cards: dict[str, dict], wanted: str) -> dict | None:
     return claimants[0] if claimants else None
 
 
-def build_entry(curated: Curated, card: dict, prompt: str) -> dict:
+def build_entry(curated: Curated, card: dict) -> dict:
     capabilities = card.get("capabilities", {})
     entry = {
         "slug": curated.id,
@@ -207,7 +208,9 @@ def build_entry(curated: Curated, card: dict, prompt: str) -> dict:
             "context_window": card.get("max_context_length"),
             "truncation_policy": {"mode": "tokens", "limit": TRUNCATION_LIMIT},
             "experimental_supported_tools": [],
-            "base_instructions": prompt,
+            # The catalog parser requires a prompt field. Keep it empty; the
+            # real prompt comes from model_instructions_file.
+            "base_instructions": "",
         }
     )
     return entry
@@ -288,10 +291,7 @@ APPLY_PATCH_BULLET_RE = re.compile(
     r"^- Use the `apply_patch` tool to edit files .*$", re.MULTILINE
 )
 SHELL_EDIT_BULLET = (
-    "- Edit files through the shell tool: read the file before changing it.\n"
-    "- Use `rg` and `sed -n` for narrow reads; do not `cat` large files. "
-    "For a large file in a language ast-grep supports, use the "
-    "`ast-grep-outline` skill to inspect its outline when needed."
+    "- Prefer `ast-grep-outline` skill over `cat` when you need structure map."
 )
 
 
@@ -328,29 +328,46 @@ def rewrite_prompt(prompt: str) -> str:
     return prompt
 
 
-def check_prompt() -> None:
-    """Exit non-zero when the catalog prompt is stale for the installed codex.
+def write_if_changed(path: Path, body: str) -> bool:
+    """Write text atomically, returning whether the file changed."""
+    if path.is_file() and path.read_text(encoding="utf-8") == body:
+        return False
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_name(path.name + ".tmp")
+    temporary.write_text(body, encoding="utf-8")
+    temporary.replace(path)
+    return True
 
-    The catalog embeds the system prompt from the codex release it was
-    generated for. A codex upgrade can change that prompt even when the model
-    list does not, so compare the content instead of a version string.
+
+def check_instructions() -> None:
+    """Exit non-zero when BASE_INSTRUCTIONS.md is stale for installed codex.
+
+    The file is the system prompt selected by `model_instructions_file`. A
+    codex upgrade can change the prompt even when the model list does not, so
+    compare the content instead of a version string.
     """
-    if not CATALOG.exists():
-        fail(f"{CATALOG} does not exist; run `just models-update`")
+    if not INSTRUCTIONS.is_file():
+        fail(f"{INSTRUCTIONS} does not exist; run `just models-update`")
     version = codex_version()
     expected = rewrite_prompt(fetch_prompt(version))
+    actual = INSTRUCTIONS.read_text(encoding="utf-8")
+    if actual != expected:
+        fail(
+            f"{INSTRUCTIONS} is stale for codex {version}; "
+            "run `just models-update`"
+        )
     models = json.loads(CATALOG.read_text()).get("models", [])
-    stale = [
+    embedded = [
         model["slug"]
         for model in models
-        if model.get("base_instructions") != expected
+        if model.get("base_instructions") != ""
     ]
-    if stale:
+    if embedded:
         fail(
-            f"catalog prompt is stale for codex {version} "
-            f"({', '.join(stale)}); run `just models-update`"
+            "catalog must keep an empty base_instructions placeholder "
+            f"({', '.join(embedded)}); run `just models-update`"
         )
-    print(f"catalog prompt matches codex {version}")
+    print(f"instructions match codex {version}")
 
 
 def main() -> None:
@@ -358,11 +375,11 @@ def main() -> None:
     parser.add_argument(
         "--check",
         action="store_true",
-        help="only verify that the catalog prompt matches the installed codex",
+        help="only verify that BASE_INSTRUCTIONS.md matches the installed codex",
     )
     args = parser.parse_args()
     if args.check:
-        check_prompt()
+        check_instructions()
         return
 
     key = os.environ.get("MISTRAL_API_KEY")
@@ -370,6 +387,10 @@ def main() -> None:
         fail("MISTRAL_API_KEY is not set (create one at console.mistral.ai)")
     cards = load_cards(get_json(MODELS_URL, key))
     prompt = rewrite_prompt(fetch_prompt(codex_version()))
+    if write_if_changed(INSTRUCTIONS, prompt):
+        print(f"wrote {INSTRUCTIONS}")
+    else:
+        print(f"{INSTRUCTIONS} is up to date")
 
     models = []
     for curated in CURATED:
@@ -386,7 +407,7 @@ def main() -> None:
                 f"- {curated.id}: dropped (cannot drive a coding agent: {capabilities})"
             )
             continue
-        models.append(build_entry(curated, card, prompt))
+        models.append(build_entry(curated, card))
     if not models:
         fail(
             "no curated model is available; refusing to write an empty catalog"
