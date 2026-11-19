@@ -4,6 +4,7 @@ web_search = "disabled"
 model_catalog_json = "~/.codex/model-catalogs/mistral.json"
 model_instructions_file = "~/.codex/BASE_INSTRUCTIONS.md"
 check_for_update_on_startup = false
+model_reasoning_effort = "high"
 
 
 [model_providers.mistral]
@@ -84,7 +85,7 @@ enabled = true
 
 [hooks.state."cc-safety-net@cc-marketplace:hooks/codex.json:pre_tool_use:0:0"]
 trusted_hash = "sha256:5174e0a51d30e5607ceaa390f6be6d5bf3487b570b8d42fbe70b2f8b40f16aa2"
-trusted_content_hash = "sha256:134335b98f9c738081b6c123cd333d7f34f824c11de2ea8574f029f5413c247e"
+trusted_content_hash = "sha256:a8216372ac6e68d1cf5bcb5333ce326f863bcaed323663e3843670e3aa63700c"
 
 [projects."/home/hnjae/.local/share/dotfiles"]
 trust_level = "trusted"
