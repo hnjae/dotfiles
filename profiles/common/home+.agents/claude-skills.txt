@@ -15,3 +15,6 @@ link-html-clipper
 researched-html-note
 
 # Authored but deliberately kept out of Claude Code: git-commit
+
+# Third-party: ast-grep/agent-skill
+ast-grep
