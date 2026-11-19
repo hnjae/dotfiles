@@ -18,3 +18,4 @@ researched-html-note
 
 # Third-party: ast-grep/agent-skill
 ast-grep
+ast-grep-outline

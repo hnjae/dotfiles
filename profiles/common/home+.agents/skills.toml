@@ -41,7 +41,7 @@ skills = [
 repo = "ast-grep/agent-skill"
 hash = "0613dc7f82bbfb3b557380b54726b92f73358460"
 path = "ast-grep/skills"
-skills = ["ast-grep"]
+skills = ["ast-grep", "ast-grep-outline"]
 
 [[source]]
 repo = "ayghri/i-have-adhd"
