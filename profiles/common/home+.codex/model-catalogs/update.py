@@ -15,7 +15,9 @@ field must stay.
 `apply_patch_tool_type` stays unset on purpose: Mistral's Responses endpoint
 accepts only client-executed function tools, and codex serializes the freeform
 apply_patch tool as {"type": "custom"}, which the endpoint rejects with error
-3051. File edits then go through the shell function tool.
+3051. File edits then go through the shell tool, and `rewrite_prompt` replaces
+the upstream apply_patch instruction with shell-edit guidance so the model is
+not sent into a tool that is not registered.
 """
 
 from __future__ import annotations
@@ -282,6 +284,50 @@ def print_candidates(cards: dict[str, dict], known: set[str]) -> None:
             print(f"  {candidate}")
 
 
+APPLY_PATCH_BULLET_RE = re.compile(
+    r"^- Use the `apply_patch` tool to edit files .*$", re.MULTILINE
+)
+SHELL_EDIT_BULLET = (
+    "- Edit files through the shell tool: read the file before changing it, "
+    "write the new contents with a quoted heredoc or a short Python script, "
+    "and verify the result with `git diff`. Do not call `apply_patch`; it is "
+    "not registered in this environment."
+)
+
+
+def rewrite_prompt(prompt: str) -> str:
+    """Replace the upstream freeform apply_patch instruction with shell edits.
+
+    Mistral's Responses endpoint rejects custom tools, so the catalog leaves
+    apply_patch unregistered. The upstream prompt still tells the model to use
+    it, which sends weaker models into a tool that does not exist.
+    """
+    prompt, count = APPLY_PATCH_BULLET_RE.subn(
+        SHELL_EDIT_BULLET, prompt, count=1
+    )
+    if count != 1:
+        fail(
+            "could not find the apply_patch instruction in the upstream prompt"
+        )
+    prompt = prompt.replace(
+        "Do not waste tokens by re-reading files after calling `apply_patch` on them. "
+        "The tool call will fail if it didn't work.",
+        "Do not waste tokens by re-reading files after a successful shell edit. "
+        "Check the command output instead.",
+        1,
+    )
+    prompt = prompt.replace(
+        "if you've created or modified files using `apply_patch`",
+        "if you've created or modified files with the shell",
+        1,
+    )
+    if prompt.count("apply_patch") != SHELL_EDIT_BULLET.count("apply_patch"):
+        fail(
+            "upstream prompt still mentions apply_patch; update rewrite_prompt"
+        )
+    return prompt
+
+
 def check_prompt() -> None:
     """Exit non-zero when the catalog prompt is stale for the installed codex.
 
@@ -292,7 +338,7 @@ def check_prompt() -> None:
     if not CATALOG.exists():
         fail(f"{CATALOG} does not exist; run `just models-update`")
     version = codex_version()
-    expected = fetch_prompt(version)
+    expected = rewrite_prompt(fetch_prompt(version))
     models = json.loads(CATALOG.read_text()).get("models", [])
     stale = [
         model["slug"]
@@ -323,7 +369,7 @@ def main() -> None:
     if not key:
         fail("MISTRAL_API_KEY is not set (create one at console.mistral.ai)")
     cards = load_cards(get_json(MODELS_URL, key))
-    prompt = fetch_prompt(codex_version())
+    prompt = rewrite_prompt(fetch_prompt(codex_version()))
 
     models = []
     for curated in CURATED:
