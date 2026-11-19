@@ -1,3 +1,4 @@
+// vi:ft=jsonc
 // Zed settings
 //
 // For information on how to configure Zed, see the Zed
@@ -39,8 +40,9 @@
   "ui_font_family": "Pretendard",
   "agent": {
     "default_model": {
-      "provider": "copilot_chat",
-      "model": "o3-mini"
+      "enable_thinking": true,
+      "provider": "mistral",
+      "model": "deepseek-v4-1-flash-1017"
     },
   },
   "ui_font_size": 16,
@@ -62,4 +64,3 @@
   "cursor_blink": false,
   "vim_mode": true
 }
-// vi:ft=jsonc
