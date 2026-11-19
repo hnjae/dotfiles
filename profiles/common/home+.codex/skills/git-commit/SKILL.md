@@ -116,7 +116,7 @@ Co-authored-by: Codex <Model display name> <noreply@openai.com>
 ```
 
 - The email is always `noreply@openai.com`: it identifies the Codex tooling, not the model's vendor. Never change it per model.
-- `<Model display name>` is the display name of the model running this session, e.g. `GLM 5.3 Flash`, not a provider-prefixed slug such as `zai-coding-plan/glm-5.3-flash` or a catalog slug such as `zai-glm-5-3-flash`. If you do not know it, ask the user instead of guessing.
+- `<Model display name>` is the model display name for the exact revision running this session, written as its vendor brands it: `Kimi K3.1 Pro`, `Gemini 4 Hydrogen`, `Claude Sonnet 5.5`, `GPT-6.2 Astra`. It is not a provider-prefixed slug (`zai-coding-plan/glm-5.3-flash`) or a raw catalog slug (`zai-glm-5-3-flash`). Preserve every revision suffix verbatim, since suffixes can identify distinct deployments and benchmarks: the slug `deepseek-v4-1-flash-1017` becomes `DeepSeek V4.1 Flash 1017`, not `DeepSeek V4.1 Flash`. If the runtime reports a shorter display name than the slug, append the missing revision suffix instead of trusting the shorter name. Drop only provider namespaces and slug punctuation, never a version or revision component. If you cannot map the slug to a display name without losing revision information, ask the user instead of guessing.
 - Place it in the footer (the last paragraph) of the commit message. `--trailer` does this.
 - Never add `Signed-off-by` on behalf of the AI; DCO certification is human-only (the Linux kernel's AI coding assistant guidance says the same).
 
