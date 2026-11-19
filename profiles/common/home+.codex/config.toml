@@ -64,6 +64,9 @@ url = "https://mcp.context7.com/mcp"
 command = "uvx"
 args = ["mcp-nixos"]
 
+[mcp_servers.deepwiki]
+url = "https://mcp.deepwiki.com/mcp"
+
 [marketplaces.cc-marketplace]
 source_type = "git"
 source = "https://github.com/kenryu42/cc-marketplace.git"
