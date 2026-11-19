@@ -58,24 +58,16 @@ git diff --staged
 # If nothing staged, use working tree diff
 git diff
 
-# Also check status
+# Lists untracked files too, which `git diff` never shows
 git status --porcelain
 ```
 
 ### 2. Stage Files (if needed)
 
-If nothing is staged or you want to group changes differently:
+If nothing is staged or you want to group changes differently, stage explicit paths that belong to this commit. Do not use globs or `git add -A`; they sweep in unrelated changes.
 
 ```bash
-# Stage specific files
 git add path/to/file1 path/to/file2
-
-# Stage by pattern
-git add *.test.*
-git add src/components/*
-
-# Interactive staging
-git add -p
 ```
 
 **Never commit secrets** (.env, credentials.json, private keys).
@@ -86,54 +78,47 @@ Analyze the diff to determine:
 
 - **Type**: What kind of change is this?
 - **Scope**: What area/module is affected?
-- **Description**: One-line summary of what changed (present tense, imperative mood, <72 chars)
+- **Description**: One-line summary of what changed (imperative, present tense, at most 72 chars)
+- **Body**: Add one when the reason for the change is not obvious from the description.
 
 ### 4. Execute Commit
 
+Pass each paragraph as its own `-m`. Add the attribution trailer with `--trailer` (see AI Assistance Attribution) instead of writing it into the message text.
+
 ```bash
-# Single line
-git commit -m "<type>[scope]: <description>"
+# No attribution needed
+git commit -m "<type>[scope]: <description>" -m "<optional body>"
 
-# Multi-line with body/footer
-git commit -m "$(cat <<'EOF'
-<type>[scope]: <description>
-
-<optional body>
-
-<optional footer>
-Assisted-by: LLM pi glm-5.3-flash
-EOF
-)"
+# Attribution needed
+git commit -m "<type>[scope]: <description>" -m "<optional body>" \
+  --trailer "Co-authored-by: Codex <Model display name> <noreply@openai.com>"
 ```
 
 ## Best Practices
 
 - One logical change per commit
-- Present tense: "add" not "added"
-- Imperative mood: "fix bug" not "fixes bug"
+- Imperative present tense: "add" not "added", "fix bug" not "fixes bug"
 - Reference issues: `Closes #123`, `Refs #456`
-- Keep description under 72 characters
 
 ## AI Assistance Attribution
 
-Disclose LLM assistance with an `Assisted-by:` trailer, following the Fedora AI contribution policy and the Linux kernel `Assisted-by` convention.
+Disclose LLM assistance with a `Co-authored-by:` trailer.
 
-- Append the trailer **only when the LLM materially contributed to the committed changes** (code, docs, config). Generating only the commit message does not require it.
-- The executing agent fills in its own identity; never hardcode values.
+When to add it:
+
+- Add it when the agent edited files that are part of this commit during the current session (code, docs, config). A commit that mixes agent and human edits counts.
+- Omit it when the agent did not write any of the committed changes, e.g. the user made them by hand and the agent only stages, writes the message, and commits.
+
+Format:
 
 ```text
-Assisted-by: LLM pi glm-5.3-flash
+Co-authored-by: Codex <Model display name> <noreply@openai.com>
 ```
 
-- The token after `LLM` is the agent harness name, e.g. `pi`, `opencode`, `codex`
-- The final token is the model identifier in use without its provider prefix, e.g. `glm-5.3-flash`, not `zai-coding-plan/glm-5.3-flash`
-
-Rules:
-
-- Write the value as plain space-separated tokens; never wrap the harness or model in angle brackets (e.g. `<opencode>` is wrong).
-- Use `Assisted-by:` instead of `Co-Authored-By:` for AI disclosure. `Co-Authored-By` asserts joint authorship; `Assisted-by` is a disclosure trailer.
-- Place it in the footer (the last paragraph) of the commit message.
-- Never add `Signed-off-by` on behalf of the AI; DCO certification is human-only.
+- The email is always `noreply@openai.com`: it identifies the Codex tooling, not the model's vendor. Never change it per model.
+- `<Model display name>` is the display name of the model running this session, e.g. `GLM 5.3 Flash`, not a provider-prefixed slug such as `zai-coding-plan/glm-5.3-flash` or a catalog slug such as `zai-glm-5-3-flash`. If you do not know it, ask the user instead of guessing.
+- Place it in the footer (the last paragraph) of the commit message. `--trailer` does this.
+- Never add `Signed-off-by` on behalf of the AI; DCO certification is human-only (the Linux kernel's AI coding assistant guidance says the same).
 
 ## Git Safety Protocol
 
@@ -141,4 +126,4 @@ Rules:
 - NEVER run destructive commands (--force, hard reset) without explicit request
 - NEVER skip hooks (--no-verify) unless user asks
 - NEVER force push to main/master
-- If commit fails due to hooks, fix and create NEW commit (don't amend)
+- If a hook rejects the commit, no commit was created: fix the problem, re-stage, and run `git commit` again. Do not `--amend`; that would rewrite the previous commit.

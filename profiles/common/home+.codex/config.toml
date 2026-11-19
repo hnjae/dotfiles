@@ -5,6 +5,7 @@ model_catalog_json = "~/.codex/model-catalogs/mistral.json"
 model_instructions_file = "~/.codex/BASE_INSTRUCTIONS.md"
 check_for_update_on_startup = false
 model_reasoning_effort = "high"
+plan_mode_reasoning_effort = "max"
 
 
 [model_providers.mistral]
