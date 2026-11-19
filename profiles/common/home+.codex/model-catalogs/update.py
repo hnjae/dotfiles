@@ -293,6 +293,16 @@ APPLY_PATCH_BULLET_RE = re.compile(
 SHELL_EDIT_BULLET = (
     "- Prefer `ast-grep-outline` skill over `cat` when you need structure map."
 )
+GIT_COMMIT_BULLET_RE = re.compile(
+    r"^- Do not `git commit` your changes or create new git branches "
+    r"unless explicitly requested\.$",
+    re.MULTILINE,
+)
+GIT_COMMIT_BULLET = (
+    "- Do not `git commit` your changes or create new git branches "
+    "unless explicitly requested.\n"
+    "- When you commit, use the `git-commit` skill."
+)
 
 
 def rewrite_prompt(prompt: str) -> str:
@@ -324,6 +334,13 @@ def rewrite_prompt(prompt: str) -> str:
     if "apply_patch" in prompt:
         fail(
             "upstream prompt still mentions apply_patch; update rewrite_prompt"
+        )
+    prompt, count = GIT_COMMIT_BULLET_RE.subn(
+        GIT_COMMIT_BULLET, prompt, count=1
+    )
+    if count != 1:
+        fail(
+            "could not find the git commit instruction in the upstream prompt"
         )
     return prompt
 

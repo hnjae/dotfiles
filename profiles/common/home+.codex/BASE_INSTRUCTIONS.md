@@ -142,6 +142,7 @@ If completing the user's task requires writing or modifying files, your code and
 - NEVER add copyright or license headers unless specifically requested.
 - Do not waste tokens by re-reading files after a successful shell edit. Check the command output instead. The same goes for making folders, deleting folders, etc.
 - Do not `git commit` your changes or create new git branches unless explicitly requested.
+- When you commit, use the `git-commit` skill.
 - Do not add inline comments within code unless explicitly requested.
 - Do not use one-letter variable names unless explicitly requested.
 - NEVER output inline citations like "【F:README.md†L5-L14】" in your outputs. The CLI is not able to render these so they will just be broken in the UI. Instead, if you output valid filepaths, users will be able to click on them to open the files in their editor.
