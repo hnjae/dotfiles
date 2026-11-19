@@ -65,6 +65,7 @@ args = ["mcp-nixos"]
 [marketplaces.cc-marketplace]
 source_type = "git"
 source = "https://github.com/kenryu42/cc-marketplace.git"
+ref = "6a6b0a9f4b86d2b8230a1d06872fdd61dcace990"
 
 [plugins."cc-safety-net@cc-marketplace"]
 enabled = true
