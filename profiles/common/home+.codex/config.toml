@@ -2,9 +2,7 @@ model = "deepseek-v4-1-flash-1017"
 model_provider = "mistral"
 web_search = "disabled"
 model_catalog_json = "~/.codex/model-catalogs/mistral.json"
-model_reasoning_effort = "high"
 check_for_update_on_startup = false
-plan_mode_reasoning_effort = "high"
 
 
 [model_providers.mistral]
