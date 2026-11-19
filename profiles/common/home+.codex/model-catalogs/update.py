@@ -20,6 +20,7 @@ apply_patch tool as {"type": "custom"}, which the endpoint rejects with error
 
 from __future__ import annotations
 
+import argparse
 import json
 import os
 import re
@@ -223,11 +224,11 @@ def summarize(old: dict, new: dict) -> list[str]:
         for slug in sorted(new_models.keys() - old_models.keys())
     ]
     for slug in sorted(old_models.keys() & new_models.keys()):
-        fields = [
+        fields = sorted(
             key
-            for key in new_models[slug]
-            if old_models[slug].get(key) != new_models[slug][key]
-        ]
+            for key in set(old_models[slug]) | set(new_models[slug])
+            if old_models[slug].get(key) != new_models[slug].get(key)
+        )
         if fields:
             lines.append(f"- {slug}: updated {', '.join(fields)}")
     return lines
@@ -281,7 +282,43 @@ def print_candidates(cards: dict[str, dict], known: set[str]) -> None:
             print(f"  {candidate}")
 
 
+def check_prompt() -> None:
+    """Exit non-zero when the catalog prompt is stale for the installed codex.
+
+    The catalog embeds the system prompt from the codex release it was
+    generated for. A codex upgrade can change that prompt even when the model
+    list does not, so compare the content instead of a version string.
+    """
+    if not CATALOG.exists():
+        fail(f"{CATALOG} does not exist; run `just models-update`")
+    version = codex_version()
+    expected = fetch_prompt(version)
+    models = json.loads(CATALOG.read_text()).get("models", [])
+    stale = [
+        model["slug"]
+        for model in models
+        if model.get("base_instructions") != expected
+    ]
+    if stale:
+        fail(
+            f"catalog prompt is stale for codex {version} "
+            f"({', '.join(stale)}); run `just models-update`"
+        )
+    print(f"catalog prompt matches codex {version}")
+
+
 def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--check",
+        action="store_true",
+        help="only verify that the catalog prompt matches the installed codex",
+    )
+    args = parser.parse_args()
+    if args.check:
+        check_prompt()
+        return
+
     key = os.environ.get("MISTRAL_API_KEY")
     if not key:
         fail("MISTRAL_API_KEY is not set (create one at console.mistral.ai)")

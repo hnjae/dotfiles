@@ -27,7 +27,14 @@ models-update:
     source "$env_file"
     set +a
 
-    exec "{{ justfile_directory() }}/model-catalogs/update.py"
+    "{{ justfile_directory() }}/model-catalogs/update.py"
+    biome format --write "{{ justfile_directory() }}/model-catalogs/mistral.json"
+
+# Verify the catalog prompt matches the installed codex version.
+models-check:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    exec "{{ justfile_directory() }}/model-catalogs/update.py" --check
 
 KILL-SERVER:
     pkill -f 'codex app-server'
