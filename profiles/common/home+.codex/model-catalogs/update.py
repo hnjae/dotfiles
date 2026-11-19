@@ -290,8 +290,7 @@ APPLY_PATCH_BULLET_RE = re.compile(
 SHELL_EDIT_BULLET = (
     "- Edit files through the shell tool: read the file before changing it, "
     "write the new contents with a quoted heredoc or a short Python script, "
-    "and verify the result with `git diff`. Do not call `apply_patch`; it is "
-    "not registered in this environment."
+    "and verify the result with `git diff`."
 )
 
 
@@ -321,7 +320,7 @@ def rewrite_prompt(prompt: str) -> str:
         "if you've created or modified files with the shell",
         1,
     )
-    if prompt.count("apply_patch") != SHELL_EDIT_BULLET.count("apply_patch"):
+    if "apply_patch" in prompt:
         fail(
             "upstream prompt still mentions apply_patch; update rewrite_prompt"
         )
