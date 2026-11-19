@@ -23,5 +23,4 @@ set -a
 eval "$env_content"
 set +a
 
-exec "$HOME/.nix-profile/bin/codex" "$@"
-
+exec "$HOME/.nix-profile/bin/codex" --sandbox danger-full-access "$@"

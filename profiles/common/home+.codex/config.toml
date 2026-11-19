@@ -1,9 +1,10 @@
-model = "zai-glm-5-3-flash"
+model = "zai-glm-5-3"
 model_provider = "mistral"
 web_search = "disabled"
 model_catalog_json = "~/.codex/model-catalogs/mistral.json"
 model_reasoning_effort = "high"
 check_for_update_on_startup = false
+plan_mode_reasoning_effort = "high"
 
 [model_providers.mistral]
 name = "Mistral La Plateforme"
@@ -51,4 +52,7 @@ trusted_hash = "sha256:5174e0a51d30e5607ceaa390f6be6d5bf3487b570b8d42fbe70b2f8b4
 trusted_content_hash = "sha256:134335b98f9c738081b6c123cd333d7f34f824c11de2ea8574f029f5413c247e"
 
 [projects."/home/hnjae/.local/share/dotfiles"]
+trust_level = "trusted"
+
+[projects."/home/hnjae/Projects/nix-config"]
 trust_level = "trusted"
