@@ -7,8 +7,6 @@ description: Prepare an upstream-derived project for independent maintenance whe
 
 Turn an upstream project into an independently maintained fork while following the scope the user requested. For a full independent-maintenance transition, default the outbound license to `AGPL-3.0-or-later` unless the user selects another license. A request limited to one area, such as REUSE compliance or release setup, does not authorize changes to unrelated licensing or infrastructure. Preserve the rights, notices, and obligations attached to inherited material throughout the work.
 
-Read [the reference transition](references/limitping.md) when an example would help. Its repository names, language, file deletions, and commit count are examples, not defaults for other projects.
-
 ## 1. Establish the target and scope
 
 Read repository instructions and relevant `docs/spec/` and `docs/architecture/` files when present. Inspect the working tree, remotes, manifests, license files, file headers, installer, updater, and release configuration before editing. Use `rg` for searches.

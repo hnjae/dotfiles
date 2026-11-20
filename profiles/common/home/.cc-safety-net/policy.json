@@ -60,7 +60,22 @@
       "~/.local/state/nvim/blink/",
       "~/.local/state/nvim/sessions/",
       "~/.local/state/nvim/swap/",
-      "~/.local/state/nvim/undo/"
+      "~/.local/state/nvim/undo/",
+      "~/.config/codexbar/config.json",
+      "~/.config/1Password",
+      "~/.config/BraveSoftware",
+      "~/.config/chromium",
+      "~/.config/google-chrome",
+      "~/.config/google-chrome-beta",
+      "~/.config/google-chrome-unstable",
+      "~/.config/vivaldi",
+      "~/.config/vivaldi-snapshot",
+      "~/.config/microsoft-edge",
+      "~/.config/microsoft-edge-dev",
+      "~/.config/mozilla",
+      "~/.config/kdeconnect",
+      "~/.config/kagi-cli/config.toml",
+      "~/.config/ticktick-cli/config.json"
     ],
     "allow_paths": []
   },

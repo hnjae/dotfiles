@@ -1,16 +1,16 @@
 [global]
 flavor = "standard"
 disable = [
-  "MD001", # heading-increment
-  "MD013", # line-length
-  "MD036", # no-emphasis-as-heading
-  "MD040", # fenced-code-language
-  "MD041", # first-line-heading
+  "fenced-code-language",
+  "first-line-heading",
+  "heading-increment",
+  "line-length",
+  "no-emphasis-as-heading",
 ]
 
-[MD007] # ul-indent
+["ul-indent"]
 indent = 4
 
-[MD060]
-enabled = true    # table-format
+["table-format"]
+enabled = true
 style = "aligned"

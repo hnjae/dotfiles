@@ -1,0 +1,15 @@
+# Vibe user-level hooks, loaded for every session (project .vibe/hooks.toml
+# would take precedence for an event name; none is defined there).
+
+[[hooks]]
+name = "cc-safety-net"
+type = "pre_tool"
+# Shell surfaces only: the interactive bash tool and background processes.
+# Mirrors Vibe's shell-guard guidance (background calls go through
+# process_start, which a "bash" matcher misses).
+match = "re:bash|process_start"
+# Fail open: a non-zero exit (missing node, api.js, timeout, bad payload)
+# warns in the UI and lets the call proceed (Vibe hook default).
+timeout = 3.0
+description = "Block destructive commands via cc-safety-net's public API"
+command = "$HOME/.vibe/hooks/cc_safety_net_pre_tool.sh"

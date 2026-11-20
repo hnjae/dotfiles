@@ -37,6 +37,4 @@ git clone --recurse-submodules --shallow-submodules 'https://github.com/hnjae/do
         - Ask approval for each new **application** 으로 설정하기
         - `$HOME/.config/1Password/ssh/agent.toml` 수정
 1. `install.sh` 재실행.
-1. Copilot 인증 하기 (사용한다면)
-   - `nvim` 로 Copilot 이 활성화되는 filetype 의 파일을 열고, `Copilot auth` 실행
 1. `gh auth login` 으로 인증하기

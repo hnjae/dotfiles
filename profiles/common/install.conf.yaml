@@ -29,6 +29,9 @@
     ~/.codex:
       glob: true
       path: home+.codex/*
+    ~/.vibe:
+      glob: true
+      path: home+.vibe/*
     ~/.agents:
       glob: true
       path: home+.agents/*
