@@ -8,7 +8,7 @@ Scope: everything under this directory (`~/.config/zsh`, `$ZDOTDIR`). The root `
 - Editing `.zimrc` makes the next `.zshrc` run `zimfw init -q` and rewrite `${ZIM_HOME}/init.zsh`.
 - `NOSYSZSHRC` and `no_global_rcs` keep distro `/etc/zshrc` and `/etc/profile` from overriding `PATH`; `EXTENDED_GLOB` stays off so `#`, `~`, and `^` are literal in globs.
 - This directory is a symlink into the dotfiles repo, so generated caches land in the repo working tree.
-- `fzf`, `fzf-tab`, and `zsh-vi-mode` vendor upstream code (their `LICENSE` stays); upstream sources are submodules under `module/`.
+- `fzf`, `fzf-tab`, and `zsh-vi-mode` vendor upstream code (their `NOTICE.md` stays); upstream sources are submodules under `module/`.
 
 ## Adding a module
 

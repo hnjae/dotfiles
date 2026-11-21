@@ -1,3 +1,6 @@
+-- SPDX-License-Identifier: AGPL-3.0-or-later
+-- SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+
 --[[
 NOTE:
   - snacks.statuscolumn 이 조건 상관 없이 8 글자나 차치해서 대체 함. <LazyVim 14.14.0; 2025-04-22>

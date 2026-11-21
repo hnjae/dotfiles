@@ -1,3 +1,6 @@
+-- SPDX-License-Identifier: AGPL-3.0-or-later
+-- SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+
 function uuid7()
   local handle = io.popen("uuidgen -7")
   if handle then

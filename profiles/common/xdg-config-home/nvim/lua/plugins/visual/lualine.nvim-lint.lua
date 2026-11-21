@@ -1,3 +1,7 @@
+-- SPDX-License-Identifier: AGPL-3.0-or-later
+-- SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+-- SPDX-FileCopyrightText: 2024 LazyVim
+
 ---@type LazyPluginSpec
 local spec = {
   [1] = "lualine.nvim",
@@ -49,7 +53,7 @@ local spec = {
       ----------------------------
       -- Based on code from LazyVim (2026-01-13)
       -- Copyright (c) 2024 LazyVim
-      -- Licensed under the Apache License 2.0
+      -- Original licensed under the Apache License 2.0 (see NOTICE.md in the nvim config root)
       -- Source: https://github.com/LazyVim/LazyVim/blob/c64a61734fc9d45470a72603395c02137802bc6f/lua/lazyvim/plugins/linting.lua
       local names = lint._resolve_linter_by_ft(vim.bo[bufnr].filetype)
 

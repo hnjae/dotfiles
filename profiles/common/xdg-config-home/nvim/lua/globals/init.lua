@@ -1,3 +1,6 @@
+-- SPDX-License-Identifier: AGPL-3.0-or-later
+-- SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+
 --[[
   README:
     - 설정 전역에 필요한 data 를 모아둡니다.

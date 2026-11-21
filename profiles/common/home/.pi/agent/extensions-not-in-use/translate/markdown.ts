@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+
 // Splits Markdown into what a translator may touch and what it must not.
 //
 // A document becomes blocks (what the display groups by) made of parts: a

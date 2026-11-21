@@ -1,3 +1,6 @@
+-- SPDX-License-Identifier: AGPL-3.0-or-later
+-- SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+
 -- LazyExtra's coding.blink (with coding.luasnip)
 -- cmdline 은 blink 로 완성하지 않고 nvim 기본 동작을 유지한다.
 

@@ -1,3 +1,7 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+# SPDX-FileCopyrightText: 2024 Eric Nielsen and contributors
+
 if ((!$+commands[direnv])) || [[ -z ${TMUX:-} && -z ${HERDR_ENV:-} && -z ${HC_TERMINAL_ID:-} ]]; then
     return
 fi

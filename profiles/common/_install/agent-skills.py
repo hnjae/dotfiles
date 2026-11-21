@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+
 """Install the agent skills pinned in skills.toml and expose some to Claude Code.
 
 `~/.agents/skills/` is the installed pool: every skill in it is visible to pi,

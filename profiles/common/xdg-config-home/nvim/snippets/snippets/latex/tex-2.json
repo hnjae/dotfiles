@@ -1,7 +1,0 @@
-{
-  "begin": {
-    "prefix": "begin",
-    "description": "begin",
-    "body": ["\\begin{$1}", "${0:${TM_SELECTED_TEXT}}", "\\end{$1}"]
-  }
-}

@@ -1,3 +1,6 @@
+-- SPDX-License-Identifier: AGPL-3.0-or-later
+-- SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+
 -- Follow official document's example
 -- https://toml.io/en/v1.0.0 <2023-12-11>
 

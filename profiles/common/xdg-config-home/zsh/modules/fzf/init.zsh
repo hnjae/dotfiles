@@ -1,3 +1,7 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-FileCopyrightText: 2021-2025 Eric Nielsen and contributors
+# SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+
 export FZF_DEFAULT_OPTS="--color=base16,border:8 --layout=reverse --smart-case --height=22 --marker=░"
 
 () {

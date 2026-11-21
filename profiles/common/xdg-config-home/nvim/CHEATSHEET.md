@@ -16,6 +16,8 @@
 
 - LazyVim 의 `mini.ai` 설정 (v14.14.0):
 
+  Excerpts from `coding.lua` and `treesitter.lua` of LazyVim v14.14.0, Copyright (c) 2024 LazyVim, originally licensed under the Apache License 2.0 (see `NOTICE.md` in this directory): <https://github.com/LazyVim/LazyVim/tree/v14.14.0/lua/lazyvim/plugins>
+
   ``` lua
   -- coding.lua
       custom_textobjects = {

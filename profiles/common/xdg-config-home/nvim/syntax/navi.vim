@@ -1,3 +1,7 @@
+" SPDX-License-Identifier: Vim
+" SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+" SPDX-FileCopyrightText: Vim contributors
+
 " https://github.com/denisidoro/navi/blob/master/docs/cheatsheet/syntax/README.md
 
 " Based on vim's syntax/sh.vim

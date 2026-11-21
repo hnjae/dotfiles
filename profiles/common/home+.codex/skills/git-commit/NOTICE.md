@@ -1,8 +1,13 @@
-git-commit skill
+# Notice
 
-Copyright (c) 2026 KIM Hyunjae
+This skill is derived from the git-commit skill of github/awesome-copilot.
 
-This skill is derived from the git-commit skill in [github/awesome-copilot](https://github.com/github/awesome-copilot). The original copyright and permission notice, retained as required by the upstream license:
+- Upstream: [github/awesome-copilot](https://github.com/github/awesome-copilot).
+- License: MIT. Copyright GitHub, Inc. (full text below).
+- Modifications: yes. Copyright of the modifications: 2022-2026 KIM Hyunjae.
+- Distribution: this repository distributes the material under AGPL-3.0-or-later, which the MIT license permits.
+
+## MIT License
 
 ```text
 MIT License

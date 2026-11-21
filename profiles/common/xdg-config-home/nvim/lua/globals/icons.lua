@@ -1,3 +1,6 @@
+-- SPDX-License-Identifier: AGPL-3.0-or-later
+-- SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+
 -- https://www.nerdfonts.com/
 -- NOTE: 가능하면 `nf-md` variant 사용하기
 -- `nf-oct` 랑 `nf-fa` 는 너무 크다.

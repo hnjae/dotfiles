@@ -1,3 +1,6 @@
+-- SPDX-License-Identifier: AGPL-3.0-or-later
+-- SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+
 -- Notification mode: desktop notifications on a graphical Linux session,
 -- otherwise maki's default "auto" (OSC 9 in a supported terminal, BEL else).
 --

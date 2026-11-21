@@ -1,4 +1,8 @@
 #!/bin/sh
+
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+
 # Hold a systemd sleep inhibitor while Claude Code works on a prompt.
 # Usage: sleep-inhibit.sh start|stop   (hook JSON on stdin)
 # One inhibitor per session; its process group id is kept in $XDG_RUNTIME_DIR.

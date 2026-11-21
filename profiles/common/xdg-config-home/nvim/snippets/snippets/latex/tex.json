@@ -1,0 +1,240 @@
+{
+  "begin": {
+    "prefix": "begin",
+    "description": "begin",
+    "body": ["\\begin{$1}", "${0:${TM_SELECTED_TEXT}}", "\\end{$1}"]
+  },
+  "sectionexpr": {
+    "prefix": "sectionexpr",
+    "description": "実験 section & subsection",
+    "body": [
+      "\\\\section{$1}",
+      "\\\\subsection{目的・概要}",
+      "\\\\subsection{実験方法}",
+      "\\\\subsection{実験結果}",
+      "\\\\subsection{考察}"
+    ]
+  },
+  "lstinput": {
+    "prefix": "lstinput",
+    "description": "input listing files",
+    "body": [
+      "\\\\begin{figure}[tbp] % option htbp",
+      "\t\\\\centering",
+      "\t\\\\lstinputlisting[",
+      "\t\tlanguage=$1,",
+      "\t\tlinerange={},",
+      "\t\tfirstnumber=,",
+      "\t\t{\"$4\"}",
+      "\t\t]",
+      "\t\\\\caption{$4}",
+      "\t\\\\label{fig:$3}",
+      "\\\\end{figure}"
+    ]
+  },
+  "lst": {
+    "prefix": "lst",
+    "description": "input myself",
+    "body": [
+      "\\\\begin{lstlisting}[language=$1, numbers=none, frame=l]",
+      "$2",
+      "\\\\end{lstlisting}"
+    ]
+  },
+  "figure": {
+    "prefix": "figure",
+    "description": "input figure",
+    "body": [
+      "\\\\begin{figure}[tbp] % option htbp",
+      "\t\\\\centering",
+      "\t\\\\includegraphics[width=$1\\\\textwidth]{$2}",
+      "\t\\\\caption{$4}",
+      "\t\\\\label{fig:$3}",
+      "\\\\end{figure}"
+    ]
+  },
+  "subfigure": {
+    "prefix": "subfigure",
+    "description": "input subfigure",
+    "body": [
+      "\\\\begin{figure}",
+      "\t\\\\centering",
+      "\t\\\\begin{subfigure}[b]{$1\\\\textwidth}",
+      "\t\t\\\\includegraphics[width=\\\\textwidth]{}",
+      "\t\t\\\\caption{}",
+      "\t\t\\\\label{fig:}",
+      "\t\\\\end{subfigure}",
+      "\t\\\\quad",
+      "\t~ %add desired spacing between images, e. g. ~, \\\\quad, \\\\qquad, \\\\hfill etc.",
+      "\t% (or add blank line to force the subfigure onto a new line)",
+      "\t\\\\begin{subfigure}[b]{$2\\\\textwidth}",
+      "\t\t\\\\includegraphics[width=\\\\textwidth]{}",
+      "\t\t\\\\caption{}",
+      "\t\t\\\\label{fig:}",
+      "\t\\\\end{subfigure}",
+      "\t\\\\label{fig:}",
+      "\t\\\\caption{}",
+      "\\\\end{figure}"
+    ]
+  },
+  "table": {
+    "prefix": "table",
+    "description": "input table",
+    "body": [
+      "\\\\begin{table}",
+      "\t\\\\centering",
+      "\t\\\\caption{$1}",
+      "\t\\\\label{tab:$2}",
+      "\t\\\\begin{tabular}{$3}",
+      "\t\t\\\\toprule",
+      "\t\t$4 &",
+      "\t\t\\\\midrule",
+      "\t\t&",
+      "\t\t\\\\bottomrule",
+      "\t\\\\end{tabular}",
+      "\\\\end{table}"
+    ]
+  },
+  "wraptable": {
+    "prefix": "wraptable",
+    "description": "input wraptable",
+    "body": [
+      "\\\\begin{wraptable}{$1:lcr}{\\\\linewidth}",
+      "\t\\\\centering",
+      "\t\\\\caption{$1}",
+      "\t\\\\label{tab:$2}",
+      "\t\\\\begin{tabular}{$3}",
+      "\t\t\\\\toprule",
+      "\t\t$4 &",
+      "\t\t\\\\midrule",
+      "\t\t&",
+      "\t\t\\\\bottomrule",
+      "\t\\\\end{tabular}",
+      "\\\\end{wraptable}"
+    ]
+  },
+  "array": {
+    "prefix": "array",
+    "description": "array w/ bracket",
+    "body": [
+      "\\\\left(",
+      "\t\\\\begin{array}{$1}",
+      "\t$2",
+      "\t\\\\end{array}",
+      "\\\\right)"
+    ]
+  },
+  "descr": {
+    "prefix": "descr",
+    "description": "lists with description",
+    "body": [
+      "% \\\\usepackage{enumitem}",
+      "\\\\begin{description}[style=nextline]",
+      "\t\\\\item [\\\\texttt{$1}] $2",
+      "\\\\end{description}"
+    ]
+  },
+  "verb": {
+    "prefix": "verb",
+    "description": "verbatim",
+    "body": ["\\\\verb|$1|"]
+  },
+  "subsubsec": {
+    "prefix": "subsubsec",
+    "description": "subsubsection",
+    "body": ["\\\\subsubsection{$1}"]
+  },
+  "subsec": {
+    "prefix": "subsec",
+    "description": "subsection",
+    "body": ["\\\\subsection{$1}"]
+  },
+  "sec": {
+    "prefix": "sec",
+    "description": "section",
+    "body": ["\\\\section{$1}"]
+  },
+  "dot": {
+    "prefix": "dot",
+    "description": "dot (도함수)",
+    "body": ["\\\\dot{$1} $2"]
+  },
+  "ddot": {
+    "prefix": "ddot",
+    "description": "ddot (도함수)",
+    "body": ["\\\\ddot{$1} $2"]
+  },
+  "lap": {
+    "prefix": "lap",
+    "description": "laplace",
+    "body": ["\\\\mathcal{L}\\\\left[ $1 \\\\right] $2"]
+  },
+  "lapinv": {
+    "prefix": "lapinv",
+    "description": "laplace Inverse",
+    "body": ["\\\\mathcal{L}^{-1}\\\\left[ $1 \\\\right] $2"]
+  },
+  "mbf": {
+    "prefix": "mbf",
+    "description": "mathbf",
+    "body": ["\\\\mathbf{$1}"]
+  },
+  "par": {
+    "prefix": "par",
+    "description": "paragraph",
+    "body": [
+      "\\\\paragraph{\\\\hspace{0.25\\\\baselineskip} $1} \\\\hfill\\\\par",
+      "$2"
+    ]
+  },
+  "bs": {
+    "prefix": "bs",
+    "description": "boldsymbol",
+    "body": ["\\\\boldsymbol{$1} $2"]
+  },
+  "figref": {
+    "prefix": "figref",
+    "description": "Figref",
+    "body": ["\\\\Figref{$1} $2"]
+  },
+  "serif": {
+    "prefix": "serif",
+    "description": "serif",
+    "body": ["\\\\textrm{$1} $2"]
+  },
+  "sans-serif": {
+    "prefix": "sans-serif",
+    "description": "sans-serif",
+    "body": ["\\\\textsf{$1} $2"]
+  },
+  "mono": {
+    "prefix": "mono",
+    "description": "monospace (typewriter)",
+    "body": ["\\\\texttt{$1} $2"]
+  },
+  "tt": {
+    "prefix": "tt",
+    "description": "monospace (typewriter)",
+    "body": ["\\\\texttt{$1} $2"]
+  },
+  "underline": {
+    "prefix": "underline",
+    "description": "underline",
+    "body": ["\\\\underline{$1}"]
+  },
+  "emph": {
+    "prefix": "emph",
+    "description": "emph",
+    "body": ["\\\\emph{$1}"]
+  },
+  "textit": {
+    "prefix": "textit",
+    "description": "textit",
+    "body": ["\\\\textit{$1}"]
+  },
+  "textbf": {
+    "prefix": "textbf",
+    "description": "textbf",
+    "body": ["\\\\textbf{$1}"]
+  }
+}

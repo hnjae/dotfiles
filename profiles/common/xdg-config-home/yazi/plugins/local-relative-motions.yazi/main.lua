@@ -1,3 +1,6 @@
+-- SPDX-License-Identifier: AGPL-3.0-or-later
+-- SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+
 local MOTION_AND_OP_KEYS = {
   { on = "0" },
   { on = "1" },

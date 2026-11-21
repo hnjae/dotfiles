@@ -1,3 +1,8 @@
+#!/usr/bin/env bash
+
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+
 # Vibe pre_tool adapter for cc-safety-net.
 #
 # Port of ~/.config/maki/lua/cc_safety_net.lua to Vibe's hook protocol.
@@ -17,10 +22,10 @@
 # BUN_INSTALL wins; otherwise bun follows XDG_DATA_HOME, then ~/.bun.
 bun_install="${BUN_INSTALL:-}"
 xdg_data="${XDG_DATA_HOME:-$HOME/.local/share}"
-API_CANDIDATES="
-${bun_install:-$xdg_data/bun}/install/global/node_modules/cc-safety-net/dist/api.js
-$HOME/.bun/install/global/node_modules/cc-safety-net/dist/api.js
-"
+API_CANDIDATES=(
+    "${bun_install:-$xdg_data/bun}/install/global/node_modules/cc-safety-net/dist/api.js"
+    "$HOME/.bun/install/global/node_modules/cc-safety-net/dist/api.js"
+)
 
 # Same wrapper logic as the maki integration (checkCommand per command,
 # first deny wins); kept as a local copy so Vibe does not depend on the

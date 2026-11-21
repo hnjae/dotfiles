@@ -1,3 +1,6 @@
+-- SPDX-License-Identifier: AGPL-3.0-or-later
+-- SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+
 local function add_gitcommit_linter(opts, linter)
   opts.linters_by_ft = opts.linters_by_ft or {}
   opts.linters_by_ft.gitcommit = opts.linters_by_ft.gitcommit or {}

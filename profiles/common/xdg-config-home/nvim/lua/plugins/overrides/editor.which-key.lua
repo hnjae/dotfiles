@@ -1,3 +1,6 @@
+-- SPDX-License-Identifier: AGPL-3.0-or-later
+-- SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+
 -- Resolve upstream LazyVim v15 which-key health false positives without changing key behavior.
 -- The filtered mappings are still active in Neovim; they are only hidden from which-key's tree.
 -- • 여기서 filtered mappings는 “실제 Neovim keymap을 삭제하거나 비활성화한 것”이 아니라, which-key가 자기 목록/tree에 넣지 않도록 걸러낸 keymap이라는 뜻입니다. <gpt 5.5; 2026-05-23>

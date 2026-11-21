@@ -1,3 +1,8 @@
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+-->
+
 <match target="pattern">
   <test qual="any" name="family"><string>Georgia</string></test>
   <edit name="family" mode="assign" binding="same"><string>Ubuntu</string></edit>

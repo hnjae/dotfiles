@@ -1,3 +1,6 @@
+-- SPDX-License-Identifier: AGPL-3.0-or-later
+-- SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+
 -- Block access to secret paths from every tool call.
 --
 -- `read` and friends never declare a permission scope, so permissions.toml

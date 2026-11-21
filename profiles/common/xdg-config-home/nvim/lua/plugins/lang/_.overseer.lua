@@ -1,3 +1,7 @@
+-- SPDX-License-Identifier: AGPL-3.0-or-later
+-- SPDX-FileCopyrightText: 2022 Steven Arcangeli
+-- SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+
 ---@type LazySpec
 return {
   [1] = "overseer.nvim",
@@ -7,7 +11,10 @@ return {
       local overseer = require("overseer")
 
       local templates = {
-        -- based on https://github.com/stevearc/overseer.nvim/blob/master/doc/tutorials.md
+        -- Based on the overseer.nvim tutorials (modified)
+        -- Copyright (c) 2022 Steven Arcangeli
+        -- Original licensed under the MIT License (see NOTICE.md in the nvim config root)
+        -- Source: https://github.com/stevearc/overseer.nvim/blob/master/doc/tutorials.md
         {
           name = "run file",
           builder = function()

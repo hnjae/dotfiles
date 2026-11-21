@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+
 # Create Btrfs subvolumes for paths that should stay out of parent snapshots
 #
 # Nested Btrfs subvolumes are not included in non-recursive snapshots of their

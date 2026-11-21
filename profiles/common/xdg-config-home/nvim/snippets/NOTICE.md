@@ -1,12 +1,18 @@
-This directory contains code forked from <https://github.com/zimfw/fzf>(Commit: 3a3dc71797ba8d07aed32f73f37bbc7cc8825bf8), originally licensed under the MIT License (see below).
+# Notice
 
-All modifications to the original code made in this project are licensed under the main license of the root project. Please refer to the LICENSE file in the root directory for details.
+`snippets/` contains modifications of friendly-snippets.
 
-----
+- Upstream: [friendly-snippets](https://github.com/rafamadriz/friendly-snippets), forked from commit `efff286dd74c22f731cdec26a70b46e5b203c619` (2024-12-02) on 2025-04-08.
+- License: MIT. Copyright (c) 2021 Rafael Madriz (full text below).
+- Modifications: files derived from friendly-snippets carry the `-friendly` suffix; their snippets were modified and removed where an original snippet replaces them. The other snippet files are original work. Copyright of the modifications: 2022-2026 KIM Hyunjae.
+- Distribution: this repository distributes the material under AGPL-3.0-or-later, which the MIT license permits.
 
+## MIT License
+
+```text
 MIT License
 
-Copyright (c) 2021-2025 Eric Nielsen and contributors
+Copyright (c) 2021 Rafael Madriz
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -25,3 +31,4 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+```

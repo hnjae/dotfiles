@@ -4,7 +4,6 @@ excludes = [
   "*.lock",
   "**/lazy-lock.json",
   "**/zed/*.json",
-  "**/home+.codex/BASE_INSTRUCTIONS.md",
 ]
 
 [formatter.nixfmt]

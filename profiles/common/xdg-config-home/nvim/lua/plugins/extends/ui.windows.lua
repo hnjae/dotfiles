@@ -1,3 +1,6 @@
+-- SPDX-License-Identifier: AGPL-3.0-or-later
+-- SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+
 --[[
   - 다이나믹한 창 크기 조절
   - CTRL-W_bar, CTRL-W_, CTRL-W_= 설정

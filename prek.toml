@@ -11,10 +11,11 @@ repo = "local"
 hooks = [
   { id = "treefmt", name = "treefmt", entry = "treefmt --fail-on-change --no-cache", language = "system", require_serial = true },
   { id = "typos", name = "typos", entry = "typos --force-exclude", language = "system", types = ["text"] },
+  { id = "reuse", name = "reuse lint", entry = "reuse lint", language = "system", pass_filenames = false, always_run = true },
   { id = "biome", name = "biome", entry = "biome lint --no-errors-on-unmatched", language = "system", files = '\.(js|jsx|ts|tsx|mjs|cjs|mts|cts|json|jsonc|css)$', exclude = '(^|/)(lazy-lock\.json|zed/[^/]*\.json)$' },
   { id = "deadnix", name = "deadnix", entry = "deadnix --fail", language = "system", files = '\.nix$' },
   { id = "statix", name = "statix", entry = "sh -c 'for file; do statix check --format errfmt \"$file\" || exit $?; done' statix", language = "system", files = '\.nix$' },
-  { id = "rumdl", name = "rumdl", entry = "rumdl check", language = "system", files = '\.(md|markdown)$', exclude = 'home\+\.codex/BASE_INSTRUCTIONS\.md$', require_serial = true },
+  { id = "rumdl", name = "rumdl", entry = "rumdl check", language = "system", files = '\.(md|markdown)$', require_serial = true },
   { id = "shellcheck", name = "shellcheck", entry = "shellcheck", language = "system", files = '(^|/)([^/]*\.(sh|bash)|\.env(rc)?(\.[^/]*)?)$' },
   { id = "cocogitto", name = "cog verify", entry = "cog verify --file", language = "system", stages = ["commit-msg"] },
 ]

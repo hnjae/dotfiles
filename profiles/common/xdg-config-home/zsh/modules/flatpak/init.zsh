@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+
 # TODO: --user 옵션이 deprecated 된 것 같다?? <2025-05-31>
 
 if ((!$+commands[flatpak])); then

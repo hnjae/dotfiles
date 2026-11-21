@@ -1,9 +1,18 @@
-`my-utility`의 일부 코드는 `https://github.com/zimfw/utility` 에서 차용했으며, 해당 프로젝트의 라이센스는 다음과 같습니다.
+# Notice
 
+This directory contains code forked from zim-zoxide.
+
+- Upstream: [kiesman99/zim-zoxide](https://github.com/kiesman99/zim-zoxide), commit `274fc5e09ecc851cd398d894b16c4b1b5e1a9a01`.
+- License: MIT. The upstream license file leaves the copyright line as the template placeholder `[YEAR] [FULL NAME]`, kept verbatim below.
+- Modifications: yes. Copyright of the modifications: 2022-2026 KIM Hyunjae.
+- Distribution: this repository distributes the material under AGPL-3.0-or-later, which the MIT license permits.
+
+## MIT License
+
+```text
 MIT License
 
-Copyright (c) 2015-2016 Matt Hamilton and contributors
-Copyright (c) 2016-2024 Eric Nielsen, Matt Hamilton and contributors
+Copyright (c) [YEAR] [FULL NAME]
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,3 +31,4 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+```

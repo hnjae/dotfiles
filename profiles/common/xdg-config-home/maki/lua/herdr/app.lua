@@ -1,3 +1,6 @@
+-- SPDX-License-Identifier: AGPL-3.0-or-later
+-- SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+
 -- herdr app transport: report through OSC 7501 on the pane's output.
 --
 -- The app has no report command. It learns agent state from OSC 7501, so

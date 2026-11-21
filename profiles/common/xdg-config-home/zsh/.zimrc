@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+
 # NOTE:
 # zmodule 은 built-in module 과 이름이 겹치면 안된다! <2025-06-01>
 

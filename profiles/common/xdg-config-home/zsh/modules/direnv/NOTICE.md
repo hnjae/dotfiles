@@ -1,16 +1,18 @@
-This directory contains code forked from <https://github.com/kiesman99/zim-zoxide>
-(commit `274fc5e09ecc851cd398d894b16c4b1b5e1a9a01`), originally licensed under
-the MIT License (see below).
+# Notice
 
-All modifications to the original code made in this project are licensed under
-the main license of the root project. Please refer to the LICENSE file in the root
-directory for details.
+This zsh module is derived from the direnv module of Zim.
 
-----
+- Upstream: [zimfw/direnv](https://github.com/zimfw/direnv).
+- License: MIT. Copyright (c) 2024 Eric Nielsen and contributors (full text below).
+- Modifications: yes. Copyright of the modifications: 2022-2026 KIM Hyunjae.
+- Distribution: this repository distributes the material under AGPL-3.0-or-later, which the MIT license permits.
 
+## MIT License
+
+```text
 MIT License
 
-Copyright (c) [YEAR] [FULL NAME]
+Copyright (c) 2024 Eric Nielsen and contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -29,3 +31,4 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+```

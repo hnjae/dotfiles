@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+
 set -euo pipefail
 
 script_dir="$(cd -- "$(dirname -- "$0")" && pwd -P)" >/dev/null 2>&1

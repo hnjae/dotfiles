@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+
 # NOTE: do not autoload devenv when not in tmux <2026-09-24>
 if [[ -z ${TMUX:-} ]] || ((!$+commands[devenv])); then
     return

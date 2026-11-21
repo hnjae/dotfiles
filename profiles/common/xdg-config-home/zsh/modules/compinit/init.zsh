@@ -1,3 +1,11 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-FileCopyrightText: 2009-2011 Robby Russell and contributors
+# SPDX-FileCopyrightText: 2011-2015 Sorin Ionescu and contributors
+# SPDX-FileCopyrightText: 2015-2016 Matt Hamilton and contributors
+# SPDX-FileCopyrightText: 2016-2025 Eric Nielsen, Matt Hamilton and contributors
+# SPDX-FileCopyrightText: 2020 Roman Perepelitsa
+# SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+
 # TODO: 대충 fork 해서 필요 없어보이는 코드 comment-out 한게 전부라, 코드 리뷰 필요.  <2025-06-30>
 #
 # Completion enhancements

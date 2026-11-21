@@ -1,3 +1,6 @@
+-- SPDX-License-Identifier: AGPL-3.0-or-later
+-- SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+
 -- nvim-qt 에서는 안먹는 것 같다.
 if vim.fn.has("gui_running") == 1 then
   vim.o.guifont = "monospace:h11"

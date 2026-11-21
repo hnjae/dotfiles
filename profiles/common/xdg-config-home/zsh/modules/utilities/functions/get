@@ -1,3 +1,8 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-FileCopyrightText: 2015-2016 Matt Hamilton and contributors
+# SPDX-FileCopyrightText: 2016-2024 Eric Nielsen, Matt Hamilton and contributors
+# SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+
 if (( ${+commands[aria2c]} )); then
   aria2c --max-connection-per-server=5 --continue "$@"
 elif (( ${+commands[axel]} )); then

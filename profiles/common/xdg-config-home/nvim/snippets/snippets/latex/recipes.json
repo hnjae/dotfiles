@@ -1,0 +1,85 @@
+{
+  "Figure": {
+    "prefix": ["sfigure", "figure"],
+    "description": "Figure",
+    "body": [
+      "% file stem should not include \".\"",
+      "\\\\begin{figure\\} % option htbp / add ! to force it",
+      "\t\\\\centering",
+      "\t% use natheight, natwidth for bounding box",
+      "\t\\\\includegraphics[width=0.6\\textwidth]{\\}",
+      "\t\\\\caption{\\}",
+      "\t\\\\label{\\}",
+      "\\\\end{figure\\}"
+    ]
+  },
+  "Multi Figure": {
+    "prefix": ["smultifigure", "multifigure"],
+    "description": "Add Multiple Figure",
+    "body": [
+      "\\\\begin{figure\\}",
+      "\t\\\\centering",
+      "\t\\\\begin{subfigure\\}[b]{0.3\\textwidth\\}",
+      "\t\t\\\\includegraphics[width=\\textwidth]{\\}",
+      "\t\t\\\\caption{\\}",
+      "\t\t\\\\label{fig:\\}",
+      "\t\\\\end{subfigure\\}",
+      "\t~ %add desired spacing between images, e. g. ~, \\\\quad, \\\\qquad, \\\\hfill etc.",
+      "\t%(or a blank line to force the subfigure onto a new line)",
+      "\t\\\\begin{subfigure\\}[b]{0.3\\textwidth\\}",
+      "\t\t\\\\includegraphics[width=\\textwidth]{\\}",
+      "\t\t\\\\caption{\\}",
+      "\t\t\\\\label{fig:\\}",
+      "\t\\\\end{subfigure\\}",
+      "\t~ %add desired spacing between images, e. g. ~, \\\\quad, \\\\qquad, \\\\hfill etc.",
+      "\t%(or a blank line to force the subfigure onto a new line)",
+      "\t\\\\begin{subfigure\\}[b]{0.3\\textwidth\\}",
+      "\t\t\\\\includegraphics[width=\\textwidth]{\\}",
+      "\t\t\\\\caption{\\}",
+      "\t\t\\\\label{fig:\\}",
+      "\t\\\\end{subfigure\\}",
+      "\t\\\\caption{\\}\\\\label{fig:\\}",
+      "\\\\end{figure\\}"
+    ]
+  },
+  "sxelatex-set-font": {
+    "prefix": "sxelatex-set-font",
+    "description": "set font (XeLaTeX)",
+    "body": [
+      "\\\\usepackage{fontspec\\}",
+      "",
+      "\\\\setmainfont[",
+      "\tBoldFont={Hiragino Mincho ProN W6\\},",
+      "\tItalicFont={Hiragino Mincho ProN W3\\},",
+      "\tItalicFeatures={FakeSlant\\}",
+      "]{Hiragino Mincho ProN W3\\}\t% rmfamily",
+      "",
+      "\\\\setsansfont[",
+      "\tBoldFont={Hiragino Sans W6\\},",
+      "\tItalicFont={Hiragino Sans W3\\},",
+      "\tItalicFeatures={FakeSlant\\}",
+      "]",
+      "{Hiragino Sans W3\\}\t% sffamily",
+      "",
+      "\\\\setmonofont[",
+      "\t% Scale=0.9,",
+      "\tItalicFont={Noto Sans Mono CJK JP\\},",
+      "\tItalicFeatures={FakeSlant\\}",
+      "]{Noto Sans Mono CJK JP\\}"
+    ]
+  },
+  "longtable": {
+    "prefix": ["slongtable", "longtable"],
+    "description": "longtable (\\usepackage{longtable})",
+    "body": [
+      "\\\\begin{longtable}[${1|l,c,r|}]{${2:l r l}}",
+      "\t$0",
+      "\\\\end{longtable}"
+    ]
+  },
+  "fullwidth-paragraph": {
+    "prefix": ["sfwparagraph", "fwparagraph"],
+    "description": "paragraph and subparagraph followed by a full-width space",
+    "body": ["\\\\paragraph{$1}　\\\\\\\\", "\\\\subparagraph{$2}　\\\\\\\\"]
+  }
+}

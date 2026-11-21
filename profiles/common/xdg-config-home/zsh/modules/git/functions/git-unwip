@@ -1,1 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+
 git log -n 1 | grep -q -c -- "--wip--" && git reset 'HEAD~1'

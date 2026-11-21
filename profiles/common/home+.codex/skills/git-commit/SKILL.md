@@ -21,19 +21,19 @@ Create standardized, semantic git commits using the Conventional Commits specifi
 
 ## Commit Types
 
-| Type       | Purpose                        |
+| Type | Purpose |
 | ---------- | ------------------------------ |
-| `feat`     | New feature                    |
-| `fix`      | Bug fix                        |
-| `docs`     | Documentation only             |
-| `style`    | Formatting/style (no logic)    |
+| `feat` | New feature |
+| `fix` | Bug fix |
+| `docs` | Documentation only |
+| `style` | Formatting/style (no logic) |
 | `refactor` | Code refactor (no feature/fix) |
-| `perf`     | Performance improvement        |
-| `test`     | Add/update tests               |
-| `build`    | Build system/dependencies      |
-| `ci`       | CI/config changes              |
-| `chore`    | Maintenance/misc               |
-| `revert`   | Revert commit                  |
+| `perf` | Performance improvement |
+| `test` | Add/update tests |
+| `build` | Build system/dependencies |
+| `ci` | CI/config changes |
+| `chore` | Maintenance/misc |
+| `revert` | Revert commit |
 
 ## Breaking Changes
 

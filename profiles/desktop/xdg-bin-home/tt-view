@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+
 # ruff: file-ignore[raw-string-in-exception, f-string-in-exception, print, raise-vanilla-args]
 """Pick a TickTick project with fzf, dump its tasks to markdown, open in $EDITOR.
 

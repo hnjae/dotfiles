@@ -7,30 +7,23 @@
     "snippets": [
       {
         "language": "all",
-        "path": "./snippets/global-2.json"
-      },
-      {
-        "language": "all",
         "path": "./snippets/global.json"
       },
       {
+        "language": "all",
+        "path": "./snippets/global-friendly.json"
+      },
+      {
         "language": "hurl",
-        "path": "./snippets/hurl-2.json"
+        "path": "./snippets/hurl.json"
       },
       {
         "language": "direnv",
-        "path": "./snippets/direnv-2.json"
+        "path": "./snippets/direnv.json"
       },
       {
         "language": "just",
-        "path": "./snippets/just-2.json"
-      },
-      {
-        "language": [
-          "license",
-          "plaintext"
-        ],
-        "path": "./snippets/license-2.json"
+        "path": "./snippets/just.json"
       },
       {
         "language": [
@@ -40,225 +33,244 @@
         "path": "./snippets/license.json"
       },
       {
+        "language": [
+          "license",
+          "plaintext"
+        ],
+        "path": "./snippets/license-friendly.json"
+      },
+      {
         "language": "c",
-        "path": "./snippets/c/c.json"
+        "path": "./snippets/c/c-friendly.json"
       },
       {
         "language": "cdoc",
-        "path": "./snippets/c/cdoc.json"
+        "path": "./snippets/c/cdoc-friendly.json"
       },
       {
         "language": "cpp",
-        "path": "./snippets/cpp/cpp.json"
+        "path": "./snippets/cpp/cpp-friendly.json"
       },
       {
         "language": "cppdoc",
-        "path": "./snippets/cpp/cppdoc.json"
+        "path": "./snippets/cpp/cppdoc-friendly.json"
       },
       {
         "language": [
           "csharp",
           "cs"
         ],
-        "path": "./snippets/csharp/csharp.json"
+        "path": "./snippets/csharp/csharp-friendly.json"
       },
       {
         "language": "csharpdoc",
-        "path": "./snippets/csharp/csharpdoc.json"
-      },
-      {
-        "language": "editorconfig",
-        "path": "./snippets/editorconfig-2.json"
+        "path": "./snippets/csharp/csharpdoc-friendly.json"
       },
       {
         "language": "editorconfig",
         "path": "./snippets/editorconfig.json"
       },
       {
+        "language": "editorconfig",
+        "path": "./snippets/editorconfig-friendly.json"
+      },
+      {
         "language": [
           "gitcommit",
           "NeogitCommitMessage"
         ],
-        "path": "./snippets/gitcommit.json"
+        "path": "./snippets/gitcommit-friendly.json"
       },
       {
         "language": "ejs",
-        "path": "./snippets/frameworks/ejs.json"
+        "path": "./snippets/frameworks/ejs-friendly.json"
       },
       {
         "language": "eruby",
-        "path": "./snippets/erb.json"
+        "path": "./snippets/erb-friendly.json"
       },
       {
         "language": "erlang",
-        "path": "./snippets/erlang.json"
+        "path": "./snippets/erlang-friendly.json"
       },
       {
         "language": "elixir",
-        "path": "./snippets/elixir.json"
+        "path": "./snippets/elixir-friendly.json"
       },
       {
         "language": [
           "eelixir",
           "heex"
         ],
-        "path": "./snippets/eelixir.json"
+        "path": "./snippets/eelixir-friendly.json"
       },
       {
         "language": "fortran",
-        "path": "./snippets/fortran.json"
+        "path": "./snippets/fortran-friendly.json"
       },
       {
         "language": "glsl",
-        "path": "./snippets/glsl.json"
+        "path": "./snippets/glsl-friendly.json"
       },
       {
         "language": "nix",
-        "path": "./snippets/nix-2/_.json"
+        "path": "./snippets/nix/_.json"
       },
       {
         "language": "nix",
-        "path": "./snippets/nix-2/home-manager.json"
+        "path": "./snippets/nix/home-manager.json"
       },
       {
         "language": "nix",
-        "path": "./snippets/nix-2/lib.attrsets.json"
+        "path": "./snippets/nix/lib.attrsets.json"
       },
       {
         "language": "nix",
-        "path": "./snippets/nix-2/lib.lists.json"
+        "path": "./snippets/nix/lib.lists.json"
       },
       {
         "language": "nix",
-        "path": "./snippets/nix-2/lib.strings.json"
+        "path": "./snippets/nix/lib.strings.json"
       },
       {
         "language": "nix",
-        "path": "./snippets/nix-2/lib.json"
+        "path": "./snippets/nix/lib.json"
       },
       {
         "language": "nix",
-        "path": "./snippets/nix-2/nixos.json"
+        "path": "./snippets/nix/nixos.json"
       },
       {
         "language": "nix",
-        "path": "./snippets/nix-2/nixpkgs.json"
+        "path": "./snippets/nix/nixpkgs.json"
       },
       {
         "language": "kivy",
-        "path": "./snippets/kivy.json"
+        "path": "./snippets/kivy-friendly.json"
       },
       {
         "language": "liquid",
-        "path": "./snippets/liquid.json"
+        "path": "./snippets/liquid-friendly.json"
       },
       {
         "language": "fish",
-        "path": "./snippets/fish-2.json"
-      },
-      {
-        "language": "lua",
-        "path": "./snippets/lua/lua-2.json"
-      },
-      {
-        "language": "lua",
-        "path": "./snippets/lua/neovim-2.json"
+        "path": "./snippets/fish.json"
       },
       {
         "language": "lua",
         "path": "./snippets/lua/lua.json"
       },
       {
+        "language": "lua",
+        "path": "./snippets/lua/neovim.json"
+      },
+      {
+        "language": "lua",
+        "path": "./snippets/lua/lua/annotations.json"
+      },
+      {
+        "language": "lua",
+        "path": "./snippets/lua/lua/boilerplate.json"
+      },
+      {
+        "language": "lua",
+        "path": "./snippets/lua/lua/lazy-nvim.json"
+      },
+      {
+        "language": "lua",
+        "path": "./snippets/lua/lua-friendly.json"
+      },
+      {
         "language": "luadoc",
-        "path": "./snippets/lua/luadoc.json"
+        "path": "./snippets/lua/luadoc-friendly.json"
       },
       {
         "language": "go",
-        "path": "./snippets/go.json"
+        "path": "./snippets/go-friendly.json"
       },
       {
         "language": "fennel",
-        "path": "./snippets/fennel.json"
+        "path": "./snippets/fennel-friendly.json"
       },
       {
         "language": "fsh",
-        "path": "./snippets/fsh.json"
+        "path": "./snippets/fsh-friendly.json"
       },
       {
         "language": "php",
-        "path": "./snippets/php/php.json"
+        "path": "./snippets/php/php-friendly.json"
       },
       {
         "language": "phpdoc",
-        "path": "./snippets/php/phpdoc.json"
+        "path": "./snippets/php/phpdoc-friendly.json"
       },
       {
         "language": "quarto",
-        "path": "./snippets/quarto.json"
+        "path": "./snippets/quarto-friendly.json"
       },
       {
         "language": "rescript",
-        "path": "./snippets/rescript.json"
+        "path": "./snippets/rescript-friendly.json"
       },
       {
         "language": "ruby",
-        "path": "./snippets/ruby/ruby.json"
+        "path": "./snippets/ruby/ruby-friendly.json"
       },
       {
         "language": "rdoc",
-        "path": "./snippets/ruby/rdoc.json"
+        "path": "./snippets/ruby/rdoc-friendly.json"
       },
       {
         "language": "rails",
-        "path": "./snippets/frameworks/rails.json"
+        "path": "./snippets/frameworks/rails-friendly.json"
       },
       {
         "language": "rust",
-        "path": "./snippets/rust/rust.json"
+        "path": "./snippets/rust/rust-friendly.json"
       },
       {
         "language": "rustdoc",
-        "path": "./snippets/rust/rustdoc.json"
+        "path": "./snippets/rust/rustdoc-friendly.json"
       },
       {
         "language": "rust",
-        "path": "./snippets/frameworks/relm4/workers.json"
+        "path": "./snippets/frameworks/relm4/workers-friendly.json"
       },
       {
         "language": "rust",
-        "path": "./snippets/frameworks/relm4/factories.json"
+        "path": "./snippets/frameworks/relm4/factories-friendly.json"
       },
       {
         "language": "rust",
-        "path": "./snippets/frameworks/relm4/templates.json"
+        "path": "./snippets/frameworks/relm4/templates-friendly.json"
       },
       {
         "language": "rust",
-        "path": "./snippets/frameworks/relm4/components.json"
+        "path": "./snippets/frameworks/relm4/components-friendly.json"
       },
       {
         "language": "haskell",
-        "path": "./snippets/haskell.json"
+        "path": "./snippets/haskell-friendly.json"
       },
       {
         "language": "scala",
-        "path": "./snippets/scala.json"
+        "path": "./snippets/scala-friendly.json"
       },
       {
         "language": "solidity",
-        "path": "./snippets/solidity.json"
+        "path": "./snippets/solidity-friendly.json"
       },
       {
         "language": "swift",
-        "path": "./snippets/swift.json"
+        "path": "./snippets/swift-friendly.json"
       },
       {
         "language": "sql",
-        "path": "./snippets/sql.json"
+        "path": "./snippets/sql-friendly.json"
       },
       {
         "language": "systemverilog",
-        "path": "./snippets/systemverilog.json"
+        "path": "./snippets/systemverilog-friendly.json"
       },
       {
         "language": [
@@ -267,7 +279,7 @@
           "sh",
           "zsh"
         ],
-        "path": "./snippets/shell/expression-2.json"
+        "path": "./snippets/shell/expression.json"
       },
       {
         "language": [
@@ -276,7 +288,7 @@
           "sh",
           "zsh"
         ],
-        "path": "./snippets/shell/recipes-2.json"
+        "path": "./snippets/shell/recipes.json"
       },
       {
         "language": [
@@ -285,16 +297,7 @@
           "sh",
           "zsh"
         ],
-        "path": "./snippets/shell/boilerplates-2.json"
-      },
-      {
-        "language": [
-          "shellscript",
-          "shell",
-          "sh",
-          "zsh"
-        ],
-        "path": "./snippets/shell/shell-2.json"
+        "path": "./snippets/shell/boilerplates.json"
       },
       {
         "language": [
@@ -306,15 +309,17 @@
         "path": "./snippets/shell/shell.json"
       },
       {
-        "language": "shelldoc",
-        "path": "./snippets/shell/shelldoc.json"
+        "language": [
+          "shellscript",
+          "shell",
+          "sh",
+          "zsh"
+        ],
+        "path": "./snippets/shell/shell-friendly.json"
       },
       {
-        "language": [
-          "markdown",
-          "rmd"
-        ],
-        "path": "./snippets/markdown-2.json"
+        "language": "shelldoc",
+        "path": "./snippets/shell/shelldoc-friendly.json"
       },
       {
         "language": [
@@ -325,44 +330,51 @@
       },
       {
         "language": [
-          "plaintex",
-          "tex"
+          "markdown",
+          "rmd"
         ],
-        "path": "./snippets/latex/recipes-2.json"
+        "path": "./snippets/markdown-friendly.json"
       },
       {
         "language": [
           "plaintex",
           "tex"
         ],
-        "path": "./snippets/latex/tex-2.json"
+        "path": "./snippets/latex/recipes.json"
       },
       {
         "language": [
           "plaintex",
           "tex"
         ],
-        "path": "./snippets/latex.json"
+        "path": "./snippets/latex/tex.json"
+      },
+      {
+        "language": [
+          "plaintex",
+          "tex"
+        ],
+        "path": "./snippets/latex-friendly.json"
       },
       {
         "language": "plantuml",
-        "path": "./snippets/plantuml.json"
+        "path": "./snippets/plantuml-friendly.json"
       },
       {
         "language": "java",
-        "path": "./snippets/java/java.json"
+        "path": "./snippets/java/java-friendly.json"
       },
       {
         "language": "java-testing",
-        "path": "./snippets/java/java-tests.json"
+        "path": "./snippets/java/java-tests-friendly.json"
       },
       {
         "language": "javadoc",
-        "path": "./snippets/java/javadoc.json"
+        "path": "./snippets/java/javadoc-friendly.json"
       },
       {
         "language": "julia",
-        "path": "./snippets/julia.json"
+        "path": "./snippets/julia-friendly.json"
       },
       {
         "language": [
@@ -375,7 +387,7 @@
           "astro",
           "blade"
         ],
-        "path": "./snippets/html.json"
+        "path": "./snippets/html-friendly.json"
       },
       {
         "language": [
@@ -385,7 +397,7 @@
           "less",
           "stylus"
         ],
-        "path": "./snippets/css.json"
+        "path": "./snippets/css-friendly.json"
       },
       {
         "language": [
@@ -394,22 +406,15 @@
           "vue",
           "svelte"
         ],
-        "path": "./snippets/javascript/javascript.json"
+        "path": "./snippets/javascript/javascript-friendly.json"
       },
       {
         "language": "jsdoc",
-        "path": "./snippets/javascript/jsdoc.json"
+        "path": "./snippets/javascript/jsdoc-friendly.json"
       },
       {
         "language": "tsdoc",
-        "path": "./snippets/javascript/tsdoc.json"
-      },
-      {
-        "language": [
-          "typescript",
-          "typescriptreact"
-        ],
-        "path": "./snippets/javascript/typescript-2.json"
+        "path": "./snippets/javascript/tsdoc-friendly.json"
       },
       {
         "language": [
@@ -419,12 +424,47 @@
         "path": "./snippets/javascript/typescript.json"
       },
       {
-        "language": "javascriptreact",
-        "path": "./snippets/javascript/next.json"
+        "language": [
+          "typescript",
+          "typescriptreact"
+        ],
+        "path": "./snippets/javascript/typescript/_.json"
+      },
+      {
+        "language": [
+          "typescript",
+          "typescriptreact"
+        ],
+        "path": "./snippets/javascript/typescript/array.json"
+      },
+      {
+        "language": [
+          "typescript",
+          "typescriptreact"
+        ],
+        "path": "./snippets/javascript/typescript/object.json"
+      },
+      {
+        "language": [
+          "typescript",
+          "typescriptreact"
+        ],
+        "path": "./snippets/javascript/typescript/types.json"
       },
       {
         "language": "typescriptreact",
-        "path": "./snippets/javascript/react-ts-2.json"
+        "path": "./snippets/javascript/typescript/typescriptreact.json"
+      },
+      {
+        "language": [
+          "typescript",
+          "typescriptreact"
+        ],
+        "path": "./snippets/javascript/typescript-friendly.json"
+      },
+      {
+        "language": "javascriptreact",
+        "path": "./snippets/javascript/next-friendly.json"
       },
       {
         "language": "typescriptreact",
@@ -432,82 +472,78 @@
       },
       {
         "language": "typescriptreact",
-        "path": "./snippets/javascript/next-ts.json"
-      },
-      {
-        "language": "javascriptreact",
-        "path": "./snippets/javascript/react.json"
-      },
-      {
-        "language": "javascriptreact",
-        "path": "./snippets/javascript/react-native.json"
+        "path": "./snippets/javascript/react-ts-friendly.json"
       },
       {
         "language": "typescriptreact",
-        "path": "./snippets/javascript/react-native-ts.json"
+        "path": "./snippets/javascript/next-ts-friendly.json"
+      },
+      {
+        "language": "javascriptreact",
+        "path": "./snippets/javascript/react-friendly.json"
+      },
+      {
+        "language": "javascriptreact",
+        "path": "./snippets/javascript/react-native-friendly.json"
+      },
+      {
+        "language": "typescriptreact",
+        "path": "./snippets/javascript/react-native-ts-friendly.json"
       },
       {
         "language": [
           "javascriptreact",
           "typescriptreact"
         ],
-        "path": "./snippets/javascript/react-es7.json"
+        "path": "./snippets/javascript/react-es7-friendly.json"
       },
       {
         "language": "remix",
-        "path": "./snippets/frameworks/remix-ts.json"
+        "path": "./snippets/frameworks/remix-ts-friendly.json"
       },
       {
         "language": "terraform",
-        "path": "./snippets/terraform.json"
+        "path": "./snippets/terraform-friendly.json"
       },
       {
         "language": "svelte",
-        "path": "./snippets/svelte.json"
+        "path": "./snippets/svelte-friendly.json"
       },
       {
         "language": "vue",
-        "path": "./snippets/frameworks/vue/html.json"
+        "path": "./snippets/frameworks/vue/html-friendly.json"
       },
       {
         "language": "vue",
-        "path": "./snippets/frameworks/vue/nuxt-html.json"
+        "path": "./snippets/frameworks/vue/nuxt-html-friendly.json"
       },
       {
         "language": "vue",
-        "path": "./snippets/frameworks/vue/nuxt-script.json"
+        "path": "./snippets/frameworks/vue/nuxt-script-friendly.json"
       },
       {
         "language": "vue",
-        "path": "./snippets/frameworks/vue/script.json"
+        "path": "./snippets/frameworks/vue/script-friendly.json"
       },
       {
         "language": "vue",
-        "path": "./snippets/frameworks/vue/vue.json"
+        "path": "./snippets/frameworks/vue/vue-friendly.json"
       },
       {
         "language": "vue",
-        "path": "./snippets/frameworks/vue/style.json"
+        "path": "./snippets/frameworks/vue/style-friendly.json"
       },
       {
         "language": "angular",
-        "path": "./snippets/frameworks/angular/html.json"
+        "path": "./snippets/frameworks/angular/html-friendly.json"
       },
       {
         "language": "angular",
-        "path": "./snippets/frameworks/angular/typescript.json"
+        "path": "./snippets/frameworks/angular/typescript-friendly.json"
       },
       {
         "language": "angular",
-        "path": "./snippets/frameworks/angular/jsonc.json"
-      },
-      {
-        "language": "python",
-        "path": "./snippets/python/python-2.json"
-      },
-      {
-        "language": "python",
-        "path": "./snippets/python/datetime-2.json"
+        "path": "./snippets/frameworks/angular/jsonc-friendly.json"
       },
       {
         "language": "python",
@@ -515,111 +551,112 @@
       },
       {
         "language": "python",
-        "path": "./snippets/python/comprehension.json"
+        "path": "./snippets/python/datetime.json"
       },
       {
         "language": "python",
-        "path": "./snippets/python/unittest.json"
+        "path": "./snippets/python/python-friendly.json"
       },
       {
         "language": "python",
-        "path": "./snippets/python/debug.json"
+        "path": "./snippets/python/comprehension-friendly.json"
+      },
+      {
+        "language": "python",
+        "path": "./snippets/python/unittest-friendly.json"
+      },
+      {
+        "language": "python",
+        "path": "./snippets/python/debug-friendly.json"
       },
       {
         "language": "pydoc",
-        "path": "./snippets/python/pydoc.json"
+        "path": "./snippets/python/pydoc-friendly.json"
       },
       {
         "language": "django",
-        "path": "./snippets/frameworks/django/admin.json"
+        "path": "./snippets/frameworks/django/admin-friendly.json"
       },
       {
         "language": "django",
-        "path": "./snippets/frameworks/django/forms.json"
+        "path": "./snippets/frameworks/django/forms-friendly.json"
       },
       {
         "language": "django",
-        "path": "./snippets/frameworks/django/models.json"
+        "path": "./snippets/frameworks/django/models-friendly.json"
       },
       {
         "language": "django",
-        "path": "./snippets/frameworks/django/tags.json"
+        "path": "./snippets/frameworks/django/tags-friendly.json"
       },
       {
         "language": "django",
-        "path": "./snippets/frameworks/django/urls.json"
+        "path": "./snippets/frameworks/django/urls-friendly.json"
       },
       {
         "language": "django",
-        "path": "./snippets/frameworks/django/views.json"
+        "path": "./snippets/frameworks/django/views-friendly.json"
       },
       {
         "language": [
           "djangohtml",
           "htmldjango"
         ],
-        "path": "./snippets/frameworks/djangohtml.json"
+        "path": "./snippets/frameworks/djangohtml-friendly.json"
       },
       {
         "language": "django-rest",
-        "path": "./snippets/frameworks/django/django_rest/serializers.json"
+        "path": "./snippets/frameworks/django/django_rest/serializers-friendly.json"
       },
       {
         "language": "django-rest",
-        "path": "./snippets/frameworks/django/django_rest/views.json"
+        "path": "./snippets/frameworks/django/django_rest/views-friendly.json"
       },
       {
         "language": "flutter",
-        "path": "./snippets/frameworks/flutter.json"
+        "path": "./snippets/frameworks/flutter-friendly.json"
       },
       {
         "language": "jekyll",
-        "path": "./snippets/frameworks/jekyll.json"
+        "path": "./snippets/frameworks/jekyll-friendly.json"
       },
       {
         "language": "cobol",
-        "path": "./snippets/cobol/vscode_cobol.json"
+        "path": "./snippets/cobol/vscode_cobol-friendly.json"
       },
       {
         "language": "cobol",
-        "path": "./snippets/cobol/vscode_cobol-compound.json"
+        "path": "./snippets/cobol/vscode_cobol-compound-friendly.json"
       },
       {
         "language": "cobol",
-        "path": "./snippets/cobol/vscode_cobol_dir.json"
+        "path": "./snippets/cobol/vscode_cobol_dir-friendly.json"
       },
       {
         "language": "cobol",
-        "path": "./snippets/cobol/vscode_cobol_jcl.json"
+        "path": "./snippets/cobol/vscode_cobol_jcl-friendly.json"
       },
       {
         "language": "kotlin",
-        "path": "./snippets/kotlin/kotlin.json"
+        "path": "./snippets/kotlin/kotlin-friendly.json"
       },
       {
         "language": "kdoc",
-        "path": "./snippets/kotlin/kdoc.json"
+        "path": "./snippets/kotlin/kdoc-friendly.json"
       },
       {
         "language": [
           "plaintex",
           "tex"
         ],
-        "path": "./snippets/latex/latex-snippets.json"
+        "path": "./snippets/latex/latex-snippets-friendly.json"
       },
       {
         "language": [
           "plaintex",
           "tex"
         ],
-        "path": "./snippets/latex/vscode-latex-snippets.json"
-      },
-      {
-        "language": [
-          "bibtex",
-          "bib"
-        ],
-        "path": "./snippets/latex/bibtex-2.json"
+        "path": "./snippets/latex/vscode-latex-snippets-friendly.json"
       },
       {
         "language": [
@@ -629,192 +666,199 @@
         "path": "./snippets/latex/bibtex.json"
       },
       {
+        "language": [
+          "bibtex",
+          "bib"
+        ],
+        "path": "./snippets/latex/bibtex-friendly.json"
+      },
+      {
         "language": "twig",
-        "path": "./snippets/frameworks/twig.json"
+        "path": "./snippets/frameworks/twig-friendly.json"
       },
       {
         "language": "blade",
-        "path": "./snippets/frameworks/blade/blade.json"
+        "path": "./snippets/frameworks/blade/blade-friendly.json"
       },
       {
         "language": "blade",
-        "path": "./snippets/frameworks/blade/helpers.json"
+        "path": "./snippets/frameworks/blade/helpers-friendly.json"
       },
       {
         "language": "blade",
-        "path": "./snippets/frameworks/blade/livewire.json"
+        "path": "./snippets/frameworks/blade/livewire-friendly.json"
       },
       {
         "language": "blade",
-        "path": "./snippets/frameworks/blade/snippets.json"
+        "path": "./snippets/frameworks/blade/snippets-friendly.json"
       },
       {
         "language": [
           "r",
           "rmd"
         ],
-        "path": "./snippets/r.json"
+        "path": "./snippets/r-friendly.json"
       },
       {
         "language": "rmd",
-        "path": "./snippets/rmarkdown.json"
-      },
-      {
-        "language": "org",
-        "path": "./snippets/org-2.json"
+        "path": "./snippets/rmarkdown-friendly.json"
       },
       {
         "language": "org",
         "path": "./snippets/org.json"
       },
       {
+        "language": "org",
+        "path": "./snippets/org-friendly.json"
+      },
+      {
         "language": "norg",
-        "path": "./snippets/norg.json"
+        "path": "./snippets/norg-friendly.json"
       },
       {
         "language": "mint",
-        "path": "./snippets/mint.json"
+        "path": "./snippets/mint-friendly.json"
       },
       {
         "language": "gdscript",
-        "path": "./snippets/gdscript.json"
+        "path": "./snippets/gdscript-friendly.json"
       },
       {
         "language": "yaml",
-        "path": "./snippets/kubernetes.json"
+        "path": "./snippets/kubernetes-friendly.json"
       },
       {
         "language": "yaml",
-        "path": "./snippets/docker/docker-compose.json"
+        "path": "./snippets/docker/docker-compose-friendly.json"
       },
       {
         "language": "make",
-        "path": "./snippets/make.json"
+        "path": "./snippets/make-friendly.json"
       },
       {
         "language": "dart",
-        "path": "./snippets/dart.json"
+        "path": "./snippets/dart-friendly.json"
       },
       {
         "language": "objc",
-        "path": "./snippets/objc.json"
+        "path": "./snippets/objc-friendly.json"
       },
       {
         "language": "unreal",
-        "path": "./snippets/frameworks/unreal.json"
+        "path": "./snippets/frameworks/unreal-friendly.json"
       },
       {
         "language": "unity",
-        "path": "./snippets/frameworks/unity.json"
+        "path": "./snippets/frameworks/unity-friendly.json"
       },
       {
         "language": "tcl",
-        "path": "./snippets/tcl.json"
+        "path": "./snippets/tcl-friendly.json"
       },
       {
         "language": "perl",
-        "path": "./snippets/perl.json"
+        "path": "./snippets/perl-friendly.json"
       },
       {
         "language": "verilog",
-        "path": "./snippets/verilog.json"
+        "path": "./snippets/verilog-friendly.json"
       },
       {
         "language": "vhdl",
-        "path": "./snippets/vhdl.json"
+        "path": "./snippets/vhdl-friendly.json"
       },
       {
         "language": "dockerfile",
-        "path": "./snippets/docker/docker_file.json"
+        "path": "./snippets/docker/docker_file-friendly.json"
       },
       {
         "language": "edge",
-        "path": "./snippets/frameworks/edge.json"
+        "path": "./snippets/frameworks/edge-friendly.json"
       },
       {
         "language": [
           "powershell",
           "ps1"
         ],
-        "path": "./snippets/PowerShell.json"
+        "path": "./snippets/PowerShell-friendly.json"
       },
       {
         "language": "nu",
-        "path": "./snippets/nushell.json"
+        "path": "./snippets/nushell-friendly.json"
       },
       {
         "language": "reason",
-        "path": "./snippets/reason.json"
+        "path": "./snippets/reason-friendly.json"
       },
       {
         "language": [
           "ocaml",
           "ocamlinterface"
         ],
-        "path": "./snippets/ocaml/ocaml.json"
+        "path": "./snippets/ocaml/ocaml-friendly.json"
       },
       {
         "language": "ocaml.ocamllex",
-        "path": "./snippets/ocaml/ocamllex.json"
+        "path": "./snippets/ocaml/ocamllex-friendly.json"
       },
       {
         "language": "dune-project",
-        "path": "./snippets/ocaml/dune-project.json"
+        "path": "./snippets/ocaml/dune-project-friendly.json"
       },
       {
         "language": "dune",
-        "path": "./snippets/ocaml/dune.json"
+        "path": "./snippets/ocaml/dune-friendly.json"
       },
       {
         "language": "purescript",
-        "path": "./snippets/purescript.json"
+        "path": "./snippets/purescript-friendly.json"
       },
       {
         "language": "gleam",
-        "path": "./snippets/gleam.json"
-      },
-      {
-        "language": "asciidoc",
-        "path": "./snippets/asciidoc-2.json"
+        "path": "./snippets/gleam-friendly.json"
       },
       {
         "language": "asciidoc",
         "path": "./snippets/asciidoc.json"
       },
       {
+        "language": "asciidoc",
+        "path": "./snippets/asciidoc-friendly.json"
+      },
+      {
         "language": "beancount",
-        "path": "./snippets/beancount.json"
+        "path": "./snippets/beancount-friendly.json"
       },
       {
         "language": "rst",
-        "path": "./snippets/rst.json"
+        "path": "./snippets/rst-friendly.json"
       },
       {
         "language": "loremipsum",
-        "path": "./snippets/loremipsum.json"
+        "path": "./snippets/loremipsum-friendly.json"
       },
       {
         "language": "cmake",
-        "path": "./snippets/cmake.json"
+        "path": "./snippets/cmake-friendly.json"
       },
       {
         "language": "zig",
-        "path": "./snippets/zig.json"
+        "path": "./snippets/zig-friendly.json"
       },
       {
         "language": [
           "json",
           "jsonc"
         ],
-        "path": "./snippets/json-snippet-2.json"
+        "path": "./snippets/json-snippet.json"
       },
       {
         "language": "typst",
-        "path": "./snippets/typst-2.json"
+        "path": "./snippets/typst/typst.json"
       },
       {
         "language": "navi",
-        "path": "./snippets/navi-2.json"
+        "path": "./snippets/navi.json"
       }
     ]
   }

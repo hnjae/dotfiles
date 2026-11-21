@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+
 # DOCS:
 # Will be sourced after .zshenv and before .zshrc
 # Will NOT be sourced if the shell is not a login shell.

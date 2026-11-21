@@ -1,3 +1,6 @@
+-- SPDX-License-Identifier: AGPL-3.0-or-later
+-- SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+
 local MAX_SIZE = 4 * 1024 * 1024
 
 local targets = ya.sync(function()

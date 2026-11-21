@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+
 /**
  * Redact known secret values from every tool result before the model sees them.
  *

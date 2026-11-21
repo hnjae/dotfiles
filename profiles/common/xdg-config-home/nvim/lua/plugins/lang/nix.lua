@@ -1,3 +1,6 @@
+-- SPDX-License-Identifier: AGPL-3.0-or-later
+-- SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+
 local function is_devenv_nix(bufnr)
   return vim.api.nvim_buf_get_name(bufnr):find("devenv", 1, true) ~= nil
 end

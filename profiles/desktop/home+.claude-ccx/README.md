@@ -8,14 +8,14 @@ builtin `WebSearch`는 Anthropic 서버가 실행하는 server-side tool이라 o
 
 이 디렉터리는 dotfiles의 `profiles/desktop/home+.claude-ccx/`이고, 자식 파일이 glob으로 `~/.claude-ccx/`에 심볼릭 링크된다.
 
-| 파일            | 역할                                     |
+| 파일 | 역할 |
 | --------------- | ---------------------------------------- |
-| `README.md`     | 이 문서                                  |
-| `CLAUDE.md`     | 전역 지침                                |
-| `settings.json` | 모델별 `autoCompactWindow` 등 설정       |
-| `mcp.json`      | MCP 서버 정의 (exa, context7, mdn, kagi) |
-| `rules/`        | 전역 규칙 (웹 최신성 정책)               |
-| `skills/`       | 스킬                                     |
+| `README.md` | 이 문서 |
+| `CLAUDE.md` | 전역 지침 |
+| `settings.json` | 모델별 `autoCompactWindow` 등 설정 |
+| `mcp.json` | MCP 서버 정의 (exa, context7, mdn, kagi) |
+| `rules/` | 전역 규칙 (웹 최신성 정책) |
+| `skills/` | 스킬 |
 
 런처는 `profiles/desktop/xdg-bin-home/ccx`이고 `~/.local/bin/ccx`로 링크된다. 런처가 하는 일은 다음과 같다.
 
@@ -43,12 +43,12 @@ builtin `WebSearch`는 Anthropic 서버가 실행하는 server-side tool이라 o
 
 서버 정의는 `mcp.json`에 있고, 비밀은 파일에 넣지 않는다. 값이 필요하면 `${VAR}`로 참조하고 `ccx.env`에서 공급한다.
 
-| 서버       | 종류               | 인증                       |
+| 서버 | 종류 | 인증 |
 | ---------- | ------------------ | -------------------------- |
-| `exa`      | http               | `EXA_API_KEY` 헤더 (자동)  |
-| `context7` | http               | 없이도 동작, 로그인은 선택 |
-| `mdn`      | http               | 없음                       |
-| `kagi`     | stdio (`kagi mcp`) | `kagi auth`                |
+| `exa` | http | `EXA_API_KEY` 헤더 (자동) |
+| `context7` | http | 없이도 동작, 로그인은 선택 |
+| `mdn` | http | 없음 |
+| `kagi` | stdio (`kagi mcp`) | `kagi auth` |
 
 ### Kagi
 

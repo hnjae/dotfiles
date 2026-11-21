@@ -1,20 +1,19 @@
-This directory contains code forked from <https://github.com/zimfw/completion>
-(commit `adfaf70893f3a51c12ce7ee935d4f4d1f0a9f2b2`), originally licensed under
-the MIT License (see below).
+# Notice
 
-All modifications to the original code made in this project are licensed under
-the main license of the root project. Please refer to the LICENSE file in the root
-directory for details.
+Part of the code in this directory (the `my-utility` module) is borrowed from zimfw/utility.
 
-----
+- Upstream: [zimfw/utility](https://github.com/zimfw/utility).
+- License: MIT. Copyright (c) 2015-2024 Matt Hamilton, Eric Nielsen and contributors (full text below).
+- Modifications: yes. Copyright of the modifications: 2022-2026 KIM Hyunjae.
+- Distribution: this repository distributes the material under AGPL-3.0-or-later, which the MIT license permits.
 
+## MIT License
+
+```text
 MIT License
 
-Copyright (c) 2009-2011 Robby Russell and contributors
-Copyright (c) 2011-2015 Sorin Ionescu and contributors
 Copyright (c) 2015-2016 Matt Hamilton and contributors
-Copyright (c) 2020 Roman Perepelitsa
-Copyright (c) 2016-2025 Eric Nielsen, Matt Hamilton and contributors
+Copyright (c) 2016-2024 Eric Nielsen, Matt Hamilton and contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -33,3 +32,4 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+```

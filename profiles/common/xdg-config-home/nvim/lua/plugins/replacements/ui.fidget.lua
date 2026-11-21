@@ -1,3 +1,6 @@
+-- SPDX-License-Identifier: AGPL-3.0-or-later
+-- SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+
 --[[
   - NOTE: 우 하단, LSP 로딩하는것 알려주는 플러그인
     - <https://github.com/j-hui/fidget.nvim>

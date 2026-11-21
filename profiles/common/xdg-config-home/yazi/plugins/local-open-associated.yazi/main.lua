@@ -1,3 +1,6 @@
+-- SPDX-License-Identifier: AGPL-3.0-or-later
+-- SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+
 local current_hovered = ya.sync(function()
   local hovered = cx.active.current.hovered
   return hovered and Url(hovered.url) or nil

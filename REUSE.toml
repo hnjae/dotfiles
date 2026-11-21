@@ -1,0 +1,53 @@
+version = 1
+SPDX-PackageName = "dotfiles"
+
+[[annotations]]
+path = [
+  "**/*.md",
+  "**/*.txt",
+  "**/*.conf",
+  "**/*.editorconfig",
+  "**/*.ini",
+  "**/*.json",
+  "**/*.toml",
+  "**/*.yaml",
+  "**/*.yml",
+  "**/*.lock",
+  "**/*.cheat",
+  "**/home+.ssh/**/*",
+  "**/cheat/cheatsheets/**/*",
+  "**/fcitx5/data/*",
+  "**/ghostty/themes/*",
+  "**/git/allowed_signers",
+  "**/rsync-exclude",
+
+  # Rewritten by their own application, so a header would be dropped on the next save.
+  "**/xdg-config-home/*",
+  "**/xdg-config-home/fcitx5/config",
+  "**/xdg-config-home/fcitx5/profile",
+  "**/xdg-data-home/konsole/*.colorscheme",
+  "**/xdg-data-home/konsole/*.profile",
+  "**/xdg-data-home/kxmlgui5/**/*.rc",
+  "**/xdg-config-home@seed/qalculate/qalc.cfg",
+  # The whole content is the locale name, so a comment would corrupt it.
+  "**/xdg-config-home/user-dirs.locale",
+  #Templates whose copies must not inherit a header.
+  "**/home+.agents+skills/*/assets/*.html",
+]
+precedence = "closest"
+SPDX-FileCopyrightText = "2022-2026 KIM Hyunjae"
+SPDX-License-Identifier = "AGPL-3.0-or-later"
+
+# Snippet files derived from friendly-snippets (forked at efff286, 2024-12-02) carry the `-friendly` suffix; the other files in the directory are the maintainer's own work.
+[[annotations]]
+path = "**/nvim/snippets/**/*-friendly.json"
+precedence = "override"
+SPDX-FileCopyrightText = ["2021 Rafael Madriz", "2022-2026 KIM Hyunjae"]
+SPDX-License-Identifier = "AGPL-3.0-or-later"
+
+# Notice files quote upstream license text, which REUSE would otherwise read as their own copyright. Last, so it wins over the tables above.
+[[annotations]]
+path = "**/NOTICE.md"
+precedence = "override"
+SPDX-FileCopyrightText = "2022-2026 KIM Hyunjae"
+SPDX-License-Identifier = "AGPL-3.0-or-later"

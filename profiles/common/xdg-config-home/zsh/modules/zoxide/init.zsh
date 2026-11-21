@@ -1,3 +1,7 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+# SPDX-FileCopyrightText: kiesman99 (zim-zoxide)
+
 if ((!$+commands[zoxide])); then
     return
 fi

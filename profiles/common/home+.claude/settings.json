@@ -2,7 +2,7 @@
   "env": {
     "DISABLE_AUTOUPDATER": "1"
   },
-  "model": "opus",
+  "model": "sonnet",
   "hooks": {
     "SessionStart": [
       {
@@ -81,7 +81,7 @@
       "autoCompactWindow": 500000
     },
     "claude-sonnet-5-5": {
-      "effortLevel": "high",
+      "effortLevel": "xhigh",
       "autoCompactWindow": 500000
     },
     "claude-haiku-5-5": {

@@ -1,3 +1,6 @@
+-- SPDX-License-Identifier: AGPL-3.0-or-later
+-- SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+
 ---@description: return true when the window should be filtered
 local filter_win = function(window_id, filters)
   local bufnr = vim.api.nvim_win_get_buf(window_id)

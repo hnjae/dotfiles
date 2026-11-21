@@ -1,3 +1,7 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-FileCopyrightText: 2014-2017 Hyeon Kim
+# SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+
 [user]
 	email = 42675338+hnjae@users.noreply.github.com
 	name = KIM Hyunjae

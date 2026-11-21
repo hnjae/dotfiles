@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+
 LABELS_NORMAL=("Black" "Red" "Green" "Yellow" "Blue" "Magenta" "Cyan" "White")
 LABELS_BRIGHT=("Bright Black" "Bright Red" "Bright Green" "Bright Yellow" "Bright Blue" "Bright Magenta" "Bright Cyan" "Bright White")
 

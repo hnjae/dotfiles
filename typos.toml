@@ -9,6 +9,7 @@ extend-ignore-re = [
 [default.extend-words]
 CPY = "CPY"
 nd = "nd"
+Ratatui = "Ratatui"
 
 [files]
 ignore-dot = false

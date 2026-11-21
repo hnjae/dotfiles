@@ -13,4 +13,4 @@ indent = 4
 
 ["table-format"]
 enabled = true
-style = "aligned"
+style = "compact"

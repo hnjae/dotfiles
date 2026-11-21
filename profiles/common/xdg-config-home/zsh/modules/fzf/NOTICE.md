@@ -1,11 +1,18 @@
-Copyright (c) 2026 KIM Hyunjae
+# Notice
 
-This zsh module is derived from the direnv in [github:zimfw/direnv](https://github.com/zimfw/direnv). The original copyright and permission notice, retained as required by the upstream license:
+This directory contains code forked from zimfw/fzf.
+
+- Upstream: [zimfw/fzf](https://github.com/zimfw/fzf), commit `3a3dc71797ba8d07aed32f73f37bbc7cc8825bf8`.
+- License: MIT. Copyright (c) 2021-2025 Eric Nielsen and contributors (full text below).
+- Modifications: yes. Copyright of the modifications: 2022-2026 KIM Hyunjae.
+- Distribution: this repository distributes the material under AGPL-3.0-or-later, which the MIT license permits.
+
+## MIT License
 
 ```text
 MIT License
 
-Copyright (c) 2024 Eric Nielsen and contributors
+Copyright (c) 2021-2025 Eric Nielsen and contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

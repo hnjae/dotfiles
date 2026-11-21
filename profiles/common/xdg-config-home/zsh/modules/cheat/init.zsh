@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+
 # https://github.com/cheat/cheat
 
 # TODO: source "https://github.com/cheat/cheat/blob/master/scripts/cheat.zsh" <2025-06-08>

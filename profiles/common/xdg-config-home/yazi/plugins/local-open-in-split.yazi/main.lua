@@ -1,3 +1,6 @@
+-- SPDX-License-Identifier: AGPL-3.0-or-later
+-- SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+
 local hovered_item = ya.sync(function()
   local hovered = cx.active.current.hovered
   if not hovered then

@@ -1,3 +1,6 @@
+-- SPDX-License-Identifier: AGPL-3.0-or-later
+-- SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+
 -- bash 는 sh 로 구분됨 (2022-04-14)
 -- https://lug.fh-swf.de/vim/vim-bash/StyleGuideShell.en.pdf
 -- https://google.github.io/styleguide/shellguide.html

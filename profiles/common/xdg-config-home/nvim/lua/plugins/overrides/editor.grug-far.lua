@@ -1,3 +1,7 @@
+-- SPDX-License-Identifier: AGPL-3.0-or-later
+-- SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+-- SPDX-FileCopyrightText: 2024 LazyVim
+
 ---@type LazySpec
 return {
   [1] = "grug-far.nvim",
@@ -37,7 +41,10 @@ return {
     }
     -- or use vim.tbl_contains(require("lspconfig.configs.ast_grep").default_config, vim.bo.filetype)
 
-    -- based on LazyVim v14.14.0
+    -- Based on code from LazyVim v14.14.0 (modified: ast-grep engine, `<leader>se`)
+    -- Copyright (c) 2024 LazyVim
+    -- Original licensed under the Apache License 2.0 (see NOTICE.md in the nvim config root)
+    -- Source: https://github.com/LazyVim/LazyVim/blob/3f034d0a7f58031123300309f2efd3bb0356ee21/lua/lazyvim/plugins/editor.lua
     local key = {
       [1] = "<leader>se",
       [2] = function()

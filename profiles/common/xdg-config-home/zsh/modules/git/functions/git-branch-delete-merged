@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
+
 # this does not deletes remote branch?
 # https://gist.github.com/schacon/942899
 # https://gist.github.com/ryanc414/f7686d2c97808b41ed8518a5840e2d78
