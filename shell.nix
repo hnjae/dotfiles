@@ -2,7 +2,7 @@
 # SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
 
 let
-  nixpkgs = fetchTarball "github:cachix/devenv-nixpkgs/rolling";
+  nixpkgs = fetchTarball "https://github.com/cachix/devenv-nixpkgs/archive/refs/heads/rolling.tar.gz";
   pkgs = import nixpkgs {
     config = { };
     overlays = [ ];
