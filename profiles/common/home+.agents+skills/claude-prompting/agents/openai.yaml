@@ -1,0 +1,7 @@
+---
+interface:
+  display_name: "Claude Prompting"
+  short_description: "Review or rewrite prompts for Claude"
+  default_prompt: "Use $claude-prompting to review this prompt against Anthropic's prompting best practices."
+policy:
+  allow_implicit_invocation: false

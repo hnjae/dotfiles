@@ -9,6 +9,7 @@
 # To expose everything: `ls ~/.agents/skills > ~/.agents/claude-skills.txt`.
 
 # Authored in this repository.
+claude-prompting
 docs-review
 fork-maintenance
 link-html-clipper
