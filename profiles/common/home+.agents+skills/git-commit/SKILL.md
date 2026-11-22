@@ -127,6 +127,7 @@ Format, by harness:
 
 | Harness | Trailer |
 | ------- | ------- |
+| Claude | `Co-authored-by: <Model display name> <noreply@anthropic.com>` |
 | Codex | `Co-authored-by: <Model display name> <noreply@openai.com>` |
 | Maki | `Co-authored-by: <Model display name> <noreply@maki.sh>` |
 | OpenCode | `Co-authored-by: <Model display name> <noreply@opencode.ai>` |
