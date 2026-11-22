@@ -12,6 +12,7 @@
 claude-prompting
 docs-review
 fork-maintenance
+intent-driven-development
 link-html-clipper
 researched-html-note
 

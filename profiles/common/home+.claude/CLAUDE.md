@@ -47,23 +47,9 @@ Tests and intent docs constrain only what callers or other components durably de
 - Never make incidental or environment-sensitive details the primary assertion: prose, logs, whitespace, wrapping, colors, large snapshots, private names or paths, source patterns, call paths, unspecified ordering, timing outside a performance contract, timestamps, random values, third-party rendering. CLI help tests may check that documented commands and options are visible, not their wording.
 - Skip new tests when existing tests already exercise the changed behavior and would catch its regression, or when the only practical assertions would be incidental (typical for docs, formatting, and mechanical changes). Verify those manually, unless parser behavior or another documented contract changes.
 
-### Docs
+## Intent docs
 
-These docs carry intent across sessions: future agent sessions and the user read them instead of reconstructing intent from code. A repository opts in by having `docs/spec/` or `docs/architecture/`; never create either unless asked.
-
-- `docs/spec/` holds user-facing specs, one file per subject; its `README.md` indexes them and does not aggregate them. Specs describe external behavior only.
-- `docs/architecture/` states durable invariants: ownership, dependency direction, lifecycle safety, failure semantics, observable behavior. Leave mechanisms (class or module decomposition, internal data flow, value representation, event wiring, dependency-injection style, test-harness structure) to implementation unless the mechanism is itself a cross-component constraint.
-- Both describe the intended end state, never current implementation, progress, milestones, migration phases, or partial plans.
-- Concise technical prose. In `docs/` files, no hard wraps: one paragraph or list item per source line. Commit messages are exempt. Mermaid for diagrams.
-
-## Intent before implementation
-
-For every implementation change, apply the steps that fit, in order:
-
-1. Read the relevant `docs/spec/` and `docs/architecture/` files, if they exist. They define intended behavior: when code and docs disagree, the docs win unless the request changes them. If the disagreement is outside the request's scope, report it instead of resolving it.
-2. If the user-visible contract changes, update `docs/spec/`. If ownership, boundary, identity, or lifecycle intent changes, update `docs/architecture/`. Skip this step when implementing an already documented end state, fixing a bug within documented behavior, narrowing a non-contract API, refactoring within a single owner, or doing maintenance that changes neither runtime behavior nor architecture intent.
-3. If the change needs regression coverage, write a focused contract test first. When practical, confirm it fails for the expected reason.
-4. Implement, confirm the focused and relevant tests pass, and re-review the intent docs against the result.
+A repository opts in to intent docs by having `docs/spec/` or `docs/architecture/`; never create either unless asked. In a repository that has either, invoke the `intent-driven-development` skill before any implementation change. In `docs/` files, write concise technical prose with no hard wraps (one paragraph or list item per source line) and use Mermaid for diagrams.
 
 ## Commits
 
