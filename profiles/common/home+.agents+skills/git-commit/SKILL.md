@@ -83,26 +83,27 @@ Analyze the diff to determine:
 
 ### 4. Execute Commit
 
-Pass each paragraph as its own `-m`. Every git command runs non-interactively: pass `-m` or `--no-edit`. A command that opens an editor (`--amend` alone, `commit` without `-m`, `rebase -i`) hangs until cancelled.
+Every git command runs non-interactively: pass `-m` or `--no-edit`. A command that opens an editor (`commit` without `-m`, `rebase -i`) hangs until cancelled.
 
-Add the attribution trailer with `--trailer` (see AI Assistance Attribution) instead of writing it into the message text.
+Pass each paragraph as its own `-m`. Add the attribution trailer with `--trailer` (see AI Assistance Attribution) instead of writing it into the message text.
 
 ```bash
 # No attribution needed
 git commit -m "<type>[scope]: <description>" -m "<optional body>"
 
-# Attribution needed
-git commit -m "<type>[scope]: <description>" -m "<optional body>" --trailer "Co-authored-by: Maki DeepSeek V4.1 Flash 1017 <noreply@maki.sh>"
+# Attribution needed (Codex example; use the form for your harness)
+git commit -m "<type>[scope]: <description>" -m "<optional body>" \
+  --trailer "Co-authored-by: GPT-6.2 Astra <noreply@openai.com>"
 ```
 
-### 5. Rewrite a Local Commit
+### 5. Rewrite the Last Local Commit (only when the user asks)
 
 ```sh
 # Keep the message, add the trailer
-git commit --amend --no-edit --trailer "Co-authored-by: Maki DeepSeek V4.1 Flash 1017 <noreply@maki.sh>"
+git commit --amend --no-edit --trailer "Co-authored-by: GPT-6.2 Astra <noreply@openai.com>"
 
 # Change the body or an existing trailer
-git commit --amend -m "<subject>" -m "<body>" -m "Co-authored-by: Maki DeepSeek V4.1 Flash 1017 <noreply@maki.sh>"
+git commit --amend -m "<subject>" -m "<body>" -m "Co-authored-by: GPT-6.2 Astra <noreply@openai.com>"
 ```
 
 `--trailer` appends: amending a commit that already carries the trailer with a different value leaves both lines. To change a trailer, rewrite the message with `-m`. Amend only a commit that is not pushed.
@@ -122,15 +123,17 @@ When to add it:
 - Add it when the agent edited files that are part of this commit during the current session (code, docs, config). A commit that mixes agent and human edits counts.
 - Omit it when the agent did not write any of the committed changes, e.g. the user made them by hand and the agent only stages, writes the message, and commits.
 
-Format:
+Format, by harness:
 
-```text
-Co-authored-by: Maki DeepSeek V4.1 Flash 1017 <noreply@maki.sh>
-```
+| Harness | Trailer |
+| ------- | ------- |
+| Codex | `Co-authored-by: <Model display name> <noreply@openai.com>` |
+| Maki | `Co-authored-by: <Model display name> <noreply@maki.sh>` |
+| Pi | `Co-authored-by: <Model display name> <noreply@pi.dev>` |
 
-- The email is always `noreply@maki.sh`: it identifies the Maki tooling, not the model's vendor. Never change it per model.
-- Write the display name bare: only the email is wrapped in `<>`. Angle brackets in a template mark placeholders and never appear in the trailer. The example names come from one model; substitute the running model's display name.
-- The display name is the model display name for the exact revision running this session, written as its vendor brands it: `Kimi K3.1 Pro`, `Gemini 4 Hydrogen`, `Claude Sonnet 5.5`, `GPT-6.2 Astra`. It is not a provider-prefixed slug (`zai-coding-plan/glm-5.3-flash`) or a raw catalog slug (`zai-glm-5-3-flash`). Preserve every revision suffix verbatim, since suffixes can identify distinct deployments and benchmarks: the slug `deepseek-v4-1-flash-1017` becomes `DeepSeek V4.1 Flash 1017`, not `DeepSeek V4.1 Flash`. If the runtime reports a shorter display name than the slug, append the missing revision suffix instead of trusting the shorter name. Drop only provider namespaces and slug punctuation, never a version or revision component. If you cannot map the slug to a display name without losing revision information, ask the user instead of guessing.
+- Each address identifies the tooling, not the model's vendor; never change it per model. For any other harness, use the attribution line its own instructions specify; never invent an address.
+- Write the display name bare: only the email is wrapped in `<>`.
+- `<Model display name>` is the model display name for the exact revision running this session, written as its vendor brands it: `Kimi K3.1 Pro`, `Gemini 4 Hydrogen`, `Claude Sonnet 5.5`, `GPT-6.2 Astra`. It is not a provider-prefixed slug (`zai-coding-plan/glm-5.3-flash`) or a raw catalog slug (`zai-glm-5-3-flash`). Preserve every revision suffix verbatim, since suffixes can identify distinct deployments and benchmarks: the slug `deepseek-v4-1-flash-1017` becomes `DeepSeek V4.1 Flash 1017`, not `DeepSeek V4.1 Flash`. If the runtime reports a shorter display name than the slug, append the missing revision suffix instead of trusting the shorter name. Drop only provider namespaces and slug punctuation, never a version or revision component. If you cannot map the slug to a display name without losing revision information, ask the user instead of guessing.
 - Place it in the footer (the last paragraph) of the commit message. `--trailer` does this.
 - Never add `Signed-off-by` on behalf of the AI; DCO certification is human-only (the Linux kernel's AI coding assistant guidance says the same).
 
