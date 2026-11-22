@@ -100,9 +100,12 @@ def open_directory_at(parent_fd: int, name: str, path: str, error: str) -> int:
 
 def hash_file_at(
     parent_fd: int, name: str, expected: os.stat_result, path: str
-) -> str:
+) -> str | None:
+    """Return the file's SHA-256, or None when permissions forbid reading it."""
     try:
         file_fd = os.open(name, file_flags(), dir_fd=parent_fd)
+    except PermissionError:
+        return None
     except OSError as exc:
         raise ManifestError(
             "unstable_tree", f"File changed while opening: {path}"
@@ -149,12 +152,22 @@ def scan_directory(
             ) from exc
         record = entry_record(path, metadata)
         if stat.S_ISREG(metadata.st_mode):
-            record["sha256"] = hash_file_at(directory_fd, name, metadata, path)
+            digest = hash_file_at(directory_fd, name, metadata, path)
+            if digest is None:
+                record["readable"] = False
+            else:
+                record["sha256"] = digest
         entries.append(record)
         if stat.S_ISDIR(metadata.st_mode):
-            child_fd = open_directory_at(
-                directory_fd, name, path, "unreadable_entry"
-            )
+            try:
+                child_fd = open_directory_at(
+                    directory_fd, name, path, "unreadable_entry"
+                )
+            except ManifestError as exc:
+                if not isinstance(exc.__cause__, PermissionError):
+                    raise
+                record["readable"] = False
+                continue
             try:
                 entries.extend(scan_directory(child_fd, path))
             finally:

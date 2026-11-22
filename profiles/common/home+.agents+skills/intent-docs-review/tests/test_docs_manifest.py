@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
@@ -96,6 +97,36 @@ class DocsManifestTests(unittest.TestCase):
                 ["docs/spec/product.md"],
             )
             self.assertIn("sha256", comparison["changed"][0]["fields"])
+
+    @unittest.skipIf(os.geteuid() == 0, "root ignores permission bits")
+    def test_snapshot_records_unreadable_entries_without_aborting(
+        self,
+    ) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            project = self.make_project(root)
+            locked_file = project / "docs" / "spec" / "locked.md"
+            locked_file.write_text("secret\n", encoding="utf-8")
+            locked_directory = project / "docs" / "architecture" / "locked"
+            locked_directory.mkdir()
+            (locked_directory / "inner.md").write_text("x\n", encoding="utf-8")
+            locked_file.chmod(0)
+            locked_directory.chmod(0)
+            try:
+                result = self.run_manifest("snapshot", project)
+            finally:
+                locked_directory.chmod(0o700)
+                locked_file.chmod(0o600)
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+            entries = {
+                entry["path"]: entry
+                for entry in json.loads(result.stdout)["entries"]
+            }
+            self.assertFalse(entries["docs/spec/locked.md"]["readable"])
+            self.assertNotIn("sha256", entries["docs/spec/locked.md"])
+            self.assertFalse(entries["docs/architecture/locked"]["readable"])
+            self.assertNotIn("docs/architecture/locked/inner.md", entries)
 
     def test_snapshot_rejects_a_symlinked_required_root(self) -> None:
         with tempfile.TemporaryDirectory() as temporary_directory:
