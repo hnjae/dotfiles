@@ -1,7 +1,7 @@
 {
   "lastChangelogVersion": "1.5.2",
   "defaultProvider": "mistral",
-  "defaultModel": "zai-glm-5-3-flash",
+  "defaultModel": "deepseek-v4-1-flash-1017",
   "packages": [
     "npm:cc-safety-net",
     "npm:@narumitw/pi-btw",

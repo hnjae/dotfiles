@@ -131,6 +131,7 @@ Format, by harness:
 | Maki | `Co-authored-by: <Model display name> <noreply@maki.sh>` |
 | OpenCode | `Co-authored-by: <Model display name> <noreply@opencode.ai>` |
 | Pi | `Co-authored-by: <Model display name> <noreply@pi.dev>` |
+| Vibe | `Co-authored-by: <Model display name> <vibe@mistral.ai>` |
 
 - Each address identifies the tooling, not the model's vendor; never change it per model. For any other harness, use the attribution line its own instructions specify; never invent an address.
 - Write the display name bare: only the email is wrapped in `<>`.
