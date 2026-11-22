@@ -4,8 +4,8 @@
 # and nothing here changes that. This file only chooses what `~/.claude/skills`
 # links to, because Claude Code does not scan the pool by itself.
 #
-# Apply a change with `profiles/common/_install/agent-skills.sh sync`.
-# List what is installed but not exposed with `agent-skills.sh pool`.
+# Apply a change with `profiles/common/_install/agent-skills.py sync`.
+# List what is installed but not exposed with `agent-skills.py pool`.
 # To expose everything: `ls ~/.agents/skills > ~/.agents/claude-skills.txt`.
 
 # Authored in this repository.
