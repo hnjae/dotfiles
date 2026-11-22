@@ -168,27 +168,6 @@ def scan_directory(
     return entries
 
 
-def hard_link_groups(entries: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    grouped: dict[tuple[int, int], list[dict[str, Any]]] = {}
-    for entry in entries:
-        if entry["type"] == "file" and entry["hard_links"] > 1:
-            grouped.setdefault((entry["device"], entry["inode"]), []).append(
-                entry
-            )
-    groups = []
-    for aliases in grouped.values():
-        paths = sorted(entry["path"] for entry in aliases)
-        link_count = aliases[0]["hard_links"]
-        groups.append(
-            {
-                "paths": paths,
-                "link_count": link_count,
-                "has_unaccounted_aliases": link_count > len(paths),
-            }
-        )
-    return sorted(groups, key=lambda group: group["paths"])
-
-
 def build_manifest(project_root: Path) -> dict[str, Any]:
     if (
         not hasattr(os, "O_DIRECTORY")
@@ -257,7 +236,6 @@ def build_manifest(project_root: Path) -> dict[str, Any]:
         "schema_version": SCHEMA_VERSION,
         "roots": root_records,
         "entries": entries,
-        "hard_link_groups": hard_link_groups(entries),
     }
 
 

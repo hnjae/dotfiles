@@ -1,6 +1,6 @@
 # Review Checklist
 
-Read this checklist completely as part of skill loading before inspecting or inventorying the project. Apply every category after inventory and before editing, then repeat the relevant checks after editing.
+Apply every category after inventory and before editing, then repeat the relevant checks after editing.
 
 ## 1. Check internal consistency and completeness
 
@@ -44,12 +44,12 @@ Look for:
 
 - Spec guarantees that depend on a durable ownership, cross-component, persistence, security, concurrency, recovery, or operational boundary but have no architectural enforcement point or cross-cutting strategy established by the allowed documents.
 - Architecture that contradicts spec or silently assumes additional product behavior.
-- Incomplete end-to-end flows and unclear component responsibilities.
+- Cross-component flows with gaps or unclear responsibility.
 - Unowned data, state transitions, validation, permissions, or invariants.
 - Persistence, transaction, consistency, concurrency, idempotency, or ordering gaps.
 - Failure-handling, recovery, security, authorization, observability, or operational gaps; report the gap instead of inventing a mechanism when no unique rule follows from the documents.
 - Unclear dependency direction or responsibility separation.
-- Architecture rules too vague to guide implementation without inspecting source code.
+- Architecture rules too vague to tell an implementation which constraint it must satisfy.
 
 Treat the need for durable enforcement and the choice of enforcement design as separate conclusions. A spec guarantee can prove that architecture is missing without establishing a new owner, boundary, component, persistence model, or mechanism. Report that gap unless the allowed documents uniquely establish the design.
 
