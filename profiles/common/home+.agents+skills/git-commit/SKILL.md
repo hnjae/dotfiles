@@ -129,6 +129,7 @@ Format, by harness:
 | ------- | ------- |
 | Codex | `Co-authored-by: <Model display name> <noreply@openai.com>` |
 | Maki | `Co-authored-by: <Model display name> <noreply@maki.sh>` |
+| OpenCode | `Co-authored-by: <Model display name> <noreply@opencode.ai>` |
 | Pi | `Co-authored-by: <Model display name> <noreply@pi.dev>` |
 
 - Each address identifies the tooling, not the model's vendor; never change it per model. For any other harness, use the attribution line its own instructions specify; never invent an address.
