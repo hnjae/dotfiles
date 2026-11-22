@@ -1,11 +1,12 @@
 ---
 name: intent-docs-review
-description: Comprehensively review the complete authoritative end-state contract across docs/spec and docs/architecture, and repair it only when explicitly authorized, using only those document trees as review evidence. Use only when the user explicitly invokes `$intent-docs-review` for a comprehensive request spanning both complete trees, whether review-only or repair. A review-only request does not authorize edits. Do not infer invocation from a documentation request, and do not use for localized edits to one or a few documents, implementation-backed design reviews, code or PR reviews, or documentation outside these two trees.
+description: Comprehensively review the complete authoritative end-state contract across docs/spec and docs/architecture, and repair it only when explicitly authorized, using only those document trees as review evidence. Use only when the user explicitly invokes this skill (`/intent-docs-review` in Claude Code, `$intent-docs-review` in Codex) for a comprehensive request spanning both complete trees, whether review-only or repair. A review-only request does not authorize edits. Do not infer invocation from a documentation request, and do not use for localized edits to one or a few documents, implementation-backed design reviews, code or PR reviews, or documentation outside these two trees.
+disable-model-invocation: true
 ---
 
-# Docs Review
+# Intent Docs Review
 
-Review `docs/spec` and `docs/architecture` as one complete end-state contract. When the user explicitly authorizes fixes across both trees, directly repair every resolvable defect found within that scope. A review-only request or an explicitly limited request does not authorize broader edits. Prefer coherent, targeted fixes over broad rewrites.
+Review `docs/spec` and `docs/architecture` as one complete end-state contract. When the user explicitly authorizes fixes across both trees, directly repair every resolvable defect found within that scope. A review-only request, an invocation that does not ask for repair, or an explicitly limited request does not authorize broader edits. Prefer coherent, targeted fixes over broad rewrites.
 
 ## Preserve instruction and evidence boundaries
 

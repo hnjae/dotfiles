@@ -1,6 +1,6 @@
 ---
 name: intent-driven-development
-description: Keep `docs/spec/` and `docs/architecture/` as the source of intent while making an implementation change (also called spec-driven development). Use for any implementation change (feature, bug fix, refactor, maintenance) in a repository that has either directory — read the intent docs first, update them when the contract changes, write a failing contract test when the change needs regression coverage, then implement. Not for creating `docs/spec/` or `docs/architecture/` in a repository that lacks them (only when the user asks), and not for a comprehensive review of both trees (use intent-docs-review).
+description: Keep `docs/spec/` and `docs/architecture/` as the source of intent while making an implementation change (also called spec-driven development). Use for any implementation change (feature, bug fix, refactor, maintenance) in a repository that has either directory — read the intent docs first, update them when the contract changes, write a failing contract test when the change needs regression coverage, then implement. Not for creating `docs/spec/` or `docs/architecture/` in a repository that lacks them (only when the user asks), and not for a comprehensive review of both trees (that is intent-docs-review, which runs only when the user invokes it; suggest it instead of starting it).
 ---
 
 # Intent-Driven Development
