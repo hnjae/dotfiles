@@ -52,6 +52,12 @@ deny = [
   "secret-tool search *",
   "kwallet-query --read-password *",
   "kwallet-query -r *",
+  # Environment dumps print every variable; bare env stays blocked while
+  # `env FOO=bar cmd` keeps working.
+  "printenv *",
+  "env",
+  "set",
+  "export -p*",
   "sudo *",
   "doas *",
   "su *",

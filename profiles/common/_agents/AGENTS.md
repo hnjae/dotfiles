@@ -13,7 +13,10 @@
 
 ## Secrets
 
-- Never read, print, or copy secret material: `~/.ssh`, `~/.config/sops`, `.env`, `.env.*`, `auth.json`, keyrings, password stores, and shell or REPL history. A password typed by mistake ends up in history.
+- Never read, print, or copy secret material: `~/.ssh`, `~/.config/sops`, `.env`, `.env.*`, `auth.json`, keyrings, password stores, shell or REPL history, and any credential in the process environment (`env`, `printenv`, `export -p`, `set`). A password typed by mistake ends up in history.
+- Never probe a secret either. Whether a variable is set, how long it is, its hash, its first characters, or its decrypted form is the same material: `[ -n "$VAR" ]`, `${#VAR}`, `grep VAR ~/.zshrc`, `env | grep`, and comparing against a guess are all off-limits.
+- A `${VAR}` reference in a config file names a requirement, not a question to answer. Report the name and let the user supply the value, or take the option that reads nothing: a keyless endpoint, OAuth login, or asking.
+- Every tool result reaches the model provider, so printing a secret once discloses it off the machine even when no file changes. "Just checking" is a disclosure.
 - A block is a decision, not an obstacle: report it and let the user handle the file.
 - Do not work around a block by encoding paths, splitting strings, or reaching the same data another way.
 - Everything else in bash runs without a prompt, so a command that touches credentials is on you. Sandboxing is the user's call.
