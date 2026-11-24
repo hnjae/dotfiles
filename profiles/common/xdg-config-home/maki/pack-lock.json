@@ -1,0 +1,8 @@
+{
+  "packages": {
+    "maki-mistral": {
+      "src": "https://github.com/dkarvik/maki-mistral.git",
+      "rev": "891055f151875f460aa225fcaf9c29fb4b74971e"
+    }
+  }
+}

@@ -40,6 +40,11 @@ require("secrets_guard")
 require("wakelock")
 require("emphasis")
 
+-- Third-party packages:
+maki.pack.add({
+  "https://github.com/dkarvik/maki-mistral.git",
+})
+
 -- Open the chat input in $EDITOR. Bound in both modes so it works whether
 -- the input has the keyboard or a picker just closed.
 maki.keymap.set({ "n", "i" }, "<C-g>", function()
