@@ -51,6 +51,10 @@ Tests and intent docs constrain only what callers or other components durably de
 
 A repository opts in to intent docs by having `docs/spec/` or `docs/architecture/`; never create either unless asked. In a repository that has either, invoke the `intent-driven-development` skill before any implementation change. In `docs/` files, write concise technical prose with no hard wraps (one paragraph or list item per source line) and use Mermaid for diagrams.
 
+## Secrets
+
+If secret material reaches your context, by mistake or at the user's request, tell the user in your next reply: name the file or command and the kind of secret it exposed (API key, password, token), without repeating the value. The secret has already reached the model provider, so the user may need to rotate it.
+
 ## Commits
 
 A request to implement a change authorizes committing it on the current branch, including the default branch; don't create branches or push unless asked, even if a tool default says to branch first. Stage only your own changes. Make every commit through the `git-commit` skill; invoke it instead of running `git commit` directly.
