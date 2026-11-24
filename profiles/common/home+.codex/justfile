@@ -10,24 +10,40 @@ set lazy
 _:
     @just --list
 
-# Refresh model-catalogs/mistral.json from the Mistral API and the codex
-# agent prompt pinned to the installed binary. The Mistral key comes from
-# ~/.local/share/secrets/MISTRAL.env.
+# Both generated files age on different clocks: the catalog follows the
+# Mistral API, the prompt follows the installed codex binary. Each one has its
+# own generator in lib/ and its own update and check recipe here.
+
+# Refresh model-catalogs/mistral.json from the Mistral API (key from 1Password).
 models-update:
     #!/bin/sh
     set -eu
 
     export MISTRAL_API_KEY="$(op read 'op://Personal/w57nor5w4jz3kt27372limfixu/credential')"
 
-    "{{ justfile_directory() }}/model-catalogs/update.py"
+    "{{ justfile_directory() }}/lib/model-catalog.py"
     biome format --write "{{ justfile_directory() }}/model-catalogs/mistral.json"
 
-# Verify the catalog prompt matches the installed codex version.
+# Verify model-catalogs/mistral.json offline, without the API key.
 models-check:
     #!/bin/sh
     set -eu
 
-    exec "{{ justfile_directory() }}/model-catalogs/update.py" --check
+    exec "{{ justfile_directory() }}/lib/model-catalog.py" --check
+
+# Rewrite BASE_INSTRUCTIONS.md from the installed codex prompt.
+instructions-update:
+    #!/bin/sh
+    set -eu
+
+    exec "{{ justfile_directory() }}/lib/base-instructions.py"
+
+# Verify BASE_INSTRUCTIONS.md against the installed codex prompt.
+instructions-check:
+    #!/bin/sh
+    set -eu
+
+    exec "{{ justfile_directory() }}/lib/base-instructions.py" --check
 
 KILL-SERVER:
     pkill -f 'codex app-server'

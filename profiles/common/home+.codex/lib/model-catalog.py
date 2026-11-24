@@ -10,18 +10,18 @@ GET https://api.mistral.ai/v1/models using $MISTRAL_API_KEY. Human metadata
 (display names, descriptions, reasoning levels, priority) is curated in
 CURATED below, mirroring the model pages on docs.mistral.ai.
 
-The system prompt comes from openai/codex at the tag matching the installed
-binary and is written to BASE_INSTRUCTIONS.md after applying rewrite_prompt.
-config.toml selects it with `model_instructions_file`, so the catalog carries
-only model metadata. The file is generated; edit rewrite_prompt or the
-upstream pin, not BASE_INSTRUCTIONS.md directly.
+The catalog is written to `model-catalogs/mistral.json` beside this script's
+directory, which the common profile links into `~/.codex/model-catalogs/`. It
+carries model metadata only, because the system prompt is a separate
+artifact: see `lib/base-instructions.py` for the file `config.toml` selects
+with `model_instructions_file`.
 
 `apply_patch_tool_type` stays unset on purpose: Mistral's Responses endpoint
 accepts only client-executed function tools, and codex serializes the freeform
 apply_patch tool as {"type": "custom"}, which the endpoint rejects with error
-3051. File edits then go through the shell tool, and `rewrite_prompt` replaces
-the upstream apply_patch instruction with shell-edit guidance so the model is
-not sent into a tool that is not registered.
+3051. File edits then go through the shell tool, and `base_instructions` stays
+an empty placeholder while `lib/base-instructions.py` rewrites the upstream
+apply_patch instruction into shell-edit guidance.
 """
 
 from __future__ import annotations
@@ -29,8 +29,6 @@ from __future__ import annotations
 import argparse
 import json
 import os
-import re
-import subprocess
 import sys
 import urllib.error
 import urllib.request
@@ -39,14 +37,11 @@ from pathlib import Path
 from typing import NoReturn
 
 MODELS_URL = "https://api.mistral.ai/v1/models"
-PROMPT_URL = (
-    "https://raw.githubusercontent.com/openai/codex/"
-    "rust-v{version}/codex-rs/models-manager/prompt.md"
+# This profile is self-contained: the script sets its output from its own
+# location, and resolving the `~/.codex/lib` link lands on the same tree.
+CATALOG = (
+    Path(__file__).resolve().parents[1] / "model-catalogs" / "mistral.json"
 )
-# The catalog sits next to this script, both linked into ~/.codex/; resolve
-# the symlink when invoked from there.
-CATALOG = Path(__file__).resolve().parent / "mistral.json"
-INSTRUCTIONS = Path(__file__).resolve().parents[1] / "BASE_INSTRUCTIONS.md"
 TRUNCATION_LIMIT = 10_000
 
 
@@ -122,34 +117,6 @@ def get_json(url: str, key: str | None = None) -> object:
             return json.load(response)
     except urllib.error.HTTPError as err:
         fail(f"GET {url} failed with HTTP {err.code}")
-
-
-def codex_version() -> str:
-    try:
-        out = subprocess.run(
-            ["codex", "--version"], capture_output=True, text=True, check=True
-        ).stdout
-    except (OSError, subprocess.CalledProcessError):
-        fail("codex is not on PATH; cannot pin the prompt version")
-    match = re.search(r"\d+\.\d+\.\d+", out)
-    if not match:
-        fail(
-            f"cannot parse a version from `codex --version` output: {out.strip()!r}"
-        )
-    return match.group(0)
-
-
-def fetch_prompt(version: str) -> str:
-    url = PROMPT_URL.format(version=version)
-    # Audited open call: the url is built from this module's https constant.
-    request = urllib.request.Request(url)  # ruff: ignore[suspicious-url-open-usage]
-    try:
-        with urllib.request.urlopen(request, timeout=30) as response:  # ruff: ignore[suspicious-url-open-usage]
-            return response.read().decode()
-    except urllib.error.HTTPError as err:
-        fail(
-            f"fetching {url} failed with HTTP {err.code}; the release tag may not exist yet"
-        )
 
 
 def load_cards(payload: object) -> dict[str, dict]:
@@ -291,65 +258,6 @@ def print_candidates(cards: dict[str, dict], known: set[str]) -> None:
             print(f"  {candidate}")
 
 
-APPLY_PATCH_BULLET_RE = re.compile(
-    r"^- Use the `apply_patch` tool to edit files .*$", re.MULTILINE
-)
-SHELL_EDIT_BULLET = (
-    "- Prefer `ast-grep-outline` skill over `cat` when you need structure map."
-)
-GIT_COMMIT_BULLET_RE = re.compile(
-    r"^- Do not `git commit` your changes or create new git branches "
-    r"unless explicitly requested\.$",
-    re.MULTILINE,
-)
-GIT_COMMIT_BULLET = (
-    "- Do not `git commit` your changes or create new git branches "
-    "unless explicitly requested.\n"
-    "- When you commit, use the `git-commit` skill."
-)
-
-
-def rewrite_prompt(prompt: str) -> str:
-    """Replace the upstream freeform apply_patch instruction with shell edits.
-
-    Mistral's Responses endpoint rejects custom tools, so the catalog leaves
-    apply_patch unregistered. The upstream prompt still tells the model to use
-    it, which sends weaker models into a tool that does not exist.
-    """
-
-    prompt, count = APPLY_PATCH_BULLET_RE.subn(
-        SHELL_EDIT_BULLET, prompt, count=1
-    )
-    if count != 1:
-        fail(
-            "could not find the apply_patch instruction in the upstream prompt"
-        )
-    prompt = prompt.replace(
-        "Do not waste tokens by re-reading files after calling `apply_patch` on them. "
-        "The tool call will fail if it didn't work.",
-        "Do not waste tokens by re-reading files after a successful shell edit. "
-        "Check the command output instead.",
-        1,
-    )
-    prompt = prompt.replace(
-        "if you've created or modified files using `apply_patch`",
-        "if you've created or modified files with the shell",
-        1,
-    )
-    if "apply_patch" in prompt:
-        fail(
-            "upstream prompt still mentions apply_patch; update rewrite_prompt"
-        )
-    prompt, count = GIT_COMMIT_BULLET_RE.subn(
-        GIT_COMMIT_BULLET, prompt, count=1
-    )
-    if count != 1:
-        fail(
-            "could not find the git commit instruction in the upstream prompt"
-        )
-    return prompt
-
-
 def write_if_changed(path: Path, body: str) -> bool:
     """Write text atomically, returning whether the file changed."""
     if path.is_file() and path.read_text(encoding="utf-8") == body:
@@ -361,58 +269,34 @@ def write_if_changed(path: Path, body: str) -> bool:
     return True
 
 
-def check_instructions() -> None:
-    """Exit non-zero when BASE_INSTRUCTIONS.md is stale for installed codex.
+def check() -> None:
+    """Exit non-zero when the catalog breaks an invariant codex relies on.
 
-    The file is the system prompt selected by `model_instructions_file`. A
-    codex upgrade can change the prompt even when the model list does not, so
-    compare the content instead of a version string.
+    The catalog parser requires a `base_instructions` field, but the real
+    prompt comes from `model_instructions_file`, so the field must stay an
+    empty placeholder. The check is offline: it never contacts the API.
     """
-    if not INSTRUCTIONS.is_file():
-        fail(f"{INSTRUCTIONS} does not exist; run `just models-update`")
-    version = codex_version()
-    expected = rewrite_prompt(fetch_prompt(version))
-    actual = INSTRUCTIONS.read_text(encoding="utf-8")
-    if actual != expected:
-        fail(
-            f"{INSTRUCTIONS} is stale for codex {version}; "
-            "run `just models-update`"
-        )
-    models = json.loads(CATALOG.read_text()).get("models", [])
+    if not CATALOG.is_file():
+        fail(f"{CATALOG} does not exist; run `just models-update`")
+    models = json.loads(CATALOG.read_text(encoding="utf-8")).get("models", [])
+    if not models:
+        fail(f"{CATALOG} lists no models; run `just models-update`")
     embedded = [
-        model["slug"]
-        for model in models
-        if model.get("base_instructions") != ""
+        model["slug"] for model in models if model["base_instructions"]
     ]
     if embedded:
         fail(
             "catalog must keep an empty base_instructions placeholder "
             f"({', '.join(embedded)}); run `just models-update`"
         )
-    print(f"instructions match codex {version}")
+    print(f"{len(models)} models, base_instructions empty in each")
 
 
-def main() -> None:
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument(
-        "--check",
-        action="store_true",
-        help="only verify that BASE_INSTRUCTIONS.md matches the installed codex",
-    )
-    args = parser.parse_args()
-    if args.check:
-        check_instructions()
-        return
-
+def update() -> None:
     key = os.environ.get("MISTRAL_API_KEY")
     if not key:
         fail("MISTRAL_API_KEY is not set (create one at console.mistral.ai)")
     cards = load_cards(get_json(MODELS_URL, key))
-    prompt = rewrite_prompt(fetch_prompt(codex_version()))
-    if write_if_changed(INSTRUCTIONS, prompt):
-        print(f"wrote {INSTRUCTIONS}")
-    else:
-        print(f"{INSTRUCTIONS} is up to date")
 
     models = []
     for curated in CURATED:
@@ -453,6 +337,20 @@ def main() -> None:
     print(
         "restart codex to apply (the catalog loads at startup only): pkill -f 'codex app-server'"
     )
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--check",
+        action="store_true",
+        help="verify the catalog invariants without contacting the API",
+    )
+    args = parser.parse_args()
+    if args.check:
+        check()
+        return
+    update()
 
 
 if __name__ == "__main__":
