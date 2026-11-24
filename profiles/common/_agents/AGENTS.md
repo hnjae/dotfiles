@@ -15,8 +15,10 @@
 
 - Never read, print, or copy secret material: `~/.ssh`, `~/.config/sops`, `.env`, `.env.*`, `auth.json`, keyrings, password stores, shell or REPL history, and any credential in the process environment (`env`, `printenv`, `export -p`, `set`). A password typed by mistake ends up in history.
 - Never probe a secret either. Whether a variable is set, how long it is, its hash, its first characters, or its decrypted form is the same material: `[ -n "$VAR" ]`, `${#VAR}`, `grep VAR ~/.zshrc`, `env | grep`, and comparing against a guess are all off-limits.
+- Exception: when the user explicitly asks you to read or check a specific secret file or value, you may do so for that request only. A `cc-safety-net` or harness block still wins: report it instead of working around it.
 - A `${VAR}` reference in a config file names a requirement, not a question to answer. Report the name and let the user supply the value, or take the option that reads nothing: a keyless endpoint, OAuth login, or asking.
 - Every tool result reaches the model provider, so printing a secret once discloses it off the machine even when no file changes. "Just checking" is a disclosure.
+- If secret material reaches your context, by mistake or at the user's request, tell the user in your next reply: name the file or command and the kind of secret it exposed (API key, password, token), without repeating the value. The secret has already reached the model provider, so the user may need to rotate it.
 - When `cc-safety-net` or the harness blocks a command, treat the block as the user's decision: stop, report what was blocked, and let the user handle the file.
 - Do not work around a block by encoding paths, splitting strings, or reaching the same data another way.
 - Bash commands may run without a confirmation prompt, so you alone must keep every command away from credentials. Whether to sandbox commands is the user's decision.
@@ -26,14 +28,14 @@
 
 - When attempts keep failing for the same reason, stop and name the assumption that may be wrong.
 - Cap retries of the same probe at three tries. If all three fail, report the conclusion and the evidence, and ask before trying a fourth variation.
-- Vary one input per try and record the observed result. If two tries return the same result, the variable under test is not the cause; stop varying it.
+- Vary one input per try and record the observed result. If two values of an input give the same result, look for the cause elsewhere first; the input may still matter outside the values you tried.
 - Before calling an external tool's behavior a bug, check its official documentation and say that you did. An undocumented behavior you have not looked up is not evidence of a bug.
-- A non-deterministic result means your measurement is uncontrolled, not that the tool is random. Fix every input, change one, and re-measure.
+- When identical runs give different results, first suspect an uncontrolled input: fix every input you can, change one, and re-measure. If the result still varies, the system may be genuinely non-deterministic (network, concurrency, model sampling); report that instead of retrying.
 - When a question is answered, say so and name the next action instead of continuing to gather supporting evidence.
 
 ## Planning
 
-- Treat each finding as a constraint. If the investigation calls a design fragile, duplicative, or wrong, make removing it a required step of the plan. Do not move that removal to an optional phase.
+- Treat each finding that blocks the user's goal as a constraint. If the investigation shows that a design the task touches is fragile, duplicative, or wrong in a way that blocks the goal, make removing it a required step of the plan. Do not move that removal to an optional phase. Report other such findings without acting on them.
 - If an optional phase is the only thing preventing a known-bad state, either make it required or keep the bad state out of the implementation.
 - A temporary fallback must carry its removal condition in the plan ("temporary: remove when X") and must not ship as the final state.
 - Before implementing, re-read the plan against the findings that produced it. If a step contradicts a stated principle, fix the plan; the principle stays.
@@ -47,8 +49,14 @@
 
 - An approval covers only what the question named. When the change carries a decision the question did not spell out, list it as its own item: default, observable effect, cost of reverting.
 - Measure before judging. Quote the number ("pi sees 29 more skills") instead of a direction ("probably a benefit"). A direction with no count is what makes a side effect invisible.
-- Split reversible steps from behavior changes. A reversible step may proceed and be reported afterwards; list a change in what the user sees as its own item and get approval before making it.
+- Split reversible steps from behavior changes. A reversible step may proceed and be reported afterwards; a change in behavior the user sees that the request did not name gets its own item and approval before you make it.
 - Ask before discarding data you did not create: deleting files, `git reset --hard`, `git checkout -- <path>`, `git clean`, or dropping a stash. These cannot be undone.
+
+## Changes
+
+- Make only the changes the request asks for or clearly needs; every changed line should trace to the request.
+- Do not add unrequested features, refactors, abstractions, configurability, or handling for impossible cases. If one would help, mention it at the end instead of making it.
+- Follow the existing conventions; do not reformat or tidy adjacent code.
 
 ## Verification
 
