@@ -1,6 +1,40 @@
 {
   "models": [
     {
+      "slug": "mistralai/mistral-large-4-0",
+      "display_name": "Mistral Large 4",
+      "description": "State-of-the-art open-weight general-purpose multimodal model by Mistral",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Minimize reasoning compute for simpler tasks"
+        },
+        {
+          "effort": "medium",
+          "description": "Balance reasoning quality with token usage and latency"
+        },
+        {
+          "effort": "high",
+          "description": "Greater reasoning depth for complex problems"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 200,
+      "support_verbosity": false,
+      "input_modalities": ["text", "image"],
+      "context_window": 1048576,
+      "truncation_policy": {
+        "mode": "tokens",
+        "limit": 10000
+      },
+      "experimental_supported_tools": [],
+      "apply_patch_tool_type": "freeform",
+      "base_instructions": "",
+      "default_reasoning_level": "high"
+    },
+    {
       "slug": "deepseek/deepseek-v4.1-flash-1017",
       "display_name": "DeepSeek V4.1 Flash 1017",
       "description": "Fast DeepSeek model for efficient chat, coding help, and agent loops",
@@ -18,7 +52,6 @@
           "description": "Maximum reasoning depth"
         }
       ],
-      "default_reasoning_level": "high",
       "shell_type": "shell_command",
       "visibility": "list",
       "supported_in_api": true,
@@ -32,7 +65,8 @@
       },
       "experimental_supported_tools": [],
       "apply_patch_tool_type": "freeform",
-      "base_instructions": ""
+      "base_instructions": "",
+      "default_reasoning_level": "high"
     }
   ]
 }

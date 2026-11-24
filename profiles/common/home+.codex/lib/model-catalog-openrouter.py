@@ -56,6 +56,14 @@ class Curated:
 # model id; codex sends it verbatim as the API `model` field.
 CURATED = [
     Curated(
+        id="mistralai/mistral-large-4-0",
+        display_name="Mistral Large 4",
+        description="State-of-the-art open-weight general-purpose multimodal model by Mistral",
+        priority=200,
+        efforts=["low", "medium", "high"],
+        default_effort="high",
+    ),
+    Curated(
         id="deepseek/deepseek-v4.1-flash-1017",
         display_name="DeepSeek V4.1 Flash 1017",
         description="Fast DeepSeek model for efficient chat, coding help, and agent loops",
@@ -67,6 +75,7 @@ CURATED = [
 
 EFFORT_DESCRIPTIONS = {
     "low": "Minimize reasoning compute for simpler tasks",
+    "medium": "Balance reasoning quality with token usage and latency",
     "high": "Greater reasoning depth for complex problems",
     "max": "Maximum reasoning depth",
 }
