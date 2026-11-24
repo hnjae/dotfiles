@@ -38,6 +38,7 @@ require("herdr")
 require("cc_safety_net")
 require("secrets_guard")
 require("wakelock")
+require("emphasis")
 
 -- Open the chat input in $EDITOR. Bound in both modes so it works whether
 -- the input has the keyboard or a picker just closed.
