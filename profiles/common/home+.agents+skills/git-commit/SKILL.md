@@ -93,17 +93,17 @@ git commit -m "<type>[scope]: <description>" -m "<optional body>"
 
 # Attribution needed (Codex example; use the form for your harness)
 git commit -m "<type>[scope]: <description>" -m "<optional body>" \
-  --trailer "Co-authored-by: GPT-6.2 Astra <noreply@openai.com>"
+  --trailer "Assisted-by: codex:gpt-6.2-astra"
 ```
 
 ### 5. Rewrite the Last Local Commit (only when the user asks)
 
 ```sh
 # Keep the message, add the trailer
-git commit --amend --no-edit --trailer "Co-authored-by: GPT-6.2 Astra <noreply@openai.com>"
+git commit --amend --no-edit --trailer "Assisted-by: codex:gpt-6.2-astra"
 
 # Change the body or an existing trailer
-git commit --amend -m "<subject>" -m "<body>" -m "Co-authored-by: GPT-6.2 Astra <noreply@openai.com>"
+git commit --amend -m "<subject>" -m "<body>" -m "Assisted-by: codex:gpt-6.2-astra"
 ```
 
 `--trailer` appends: amending a commit that already carries the trailer with a different value leaves both lines. To change a trailer, rewrite the message with `-m`. Amend only a commit that is not pushed.
@@ -116,27 +116,27 @@ git commit --amend -m "<subject>" -m "<body>" -m "Co-authored-by: GPT-6.2 Astra 
 
 ## AI Assistance Attribution
 
-Disclose LLM assistance with a `Co-authored-by:` trailer.
+Disclose LLM assistance with an `Assisted-by:` trailer, following the Linux kernel's coding-assistant guidance (<https://docs.kernel.org/process/coding-assistants.html>). Never use `Co-authored-by:` for an AI: the model is a tool, not an author.
 
 When to add it:
 
 - Add it when the agent edited files that are part of this commit during the current session (code, docs, config). A commit that mixes agent and human edits counts.
 - Omit it when the agent did not write any of the committed changes, e.g. the user made them by hand and the agent only stages, writes the message, and commits.
 
-Format, by harness:
+Format: `Assisted-by: <harness>:<model> [<tool> ...]`, e.g. `Assisted-by: claude-code:claude-opus-5-5`.
 
-| Harness | Trailer |
-| ------- | ------- |
-| Claude | `Co-authored-by: <Model display name> <noreply@anthropic.com>` |
-| Codex | `Co-authored-by: <Model display name> <noreply@openai.com>` |
-| Maki | `Co-authored-by: <Model display name> <noreply@maki.sh>` |
-| OpenCode | `Co-authored-by: <Model display name> <noreply@opencode.ai>` |
-| Pi | `Co-authored-by: <Model display name> <noreply@pi.dev>` |
-| Vibe | `Co-authored-by: <Model display name> <vibe@mistral.ai>` |
+| Harness | `<harness>` |
+| ------- | ----------- |
+| Claude Code | `claude-code` |
+| Codex | `codex` |
+| Maki | `maki` |
+| OpenCode | `opencode` |
+| Pi | `pi` |
+| Vibe | `vibe` |
 
-- Each address identifies the tooling, not the model's vendor; never change it per model. For any other harness, use the attribution line its own instructions specify; never invent an address.
-- Write the display name bare: only the email is wrapped in `<>`.
-- `<Model display name>` is the model display name for the exact revision running this session, written as its vendor brands it: `Kimi K3.1 Pro`, `Gemini 4 Hydrogen`, `Claude Sonnet 5.5`, `GPT-6.2 Astra`. It is not a provider-prefixed slug (`zai-coding-plan/glm-5.3-flash`) or a raw catalog slug (`zai-glm-5-3-flash`). Preserve every revision suffix verbatim, since suffixes can identify distinct deployments and benchmarks: the slug `deepseek-v4-1-flash-1017` becomes `DeepSeek V4.1 Flash 1017`, not `DeepSeek V4.1 Flash`. If the runtime reports a shorter display name than the slug, append the missing revision suffix instead of trusting the shorter name. Drop only provider namespaces and slug punctuation, never a version or revision component. If you cannot map the slug to a display name without losing revision information, ask the user instead of guessing.
+- `<harness>` identifies the tooling, not the model's vendor; never change it per model. For any other harness, use the name its own instructions specify; if none, ask the user instead of inventing one.
+- `<model>` is the model ID the runtime reports for this session, not a display name. Drop only the provider or router namespace: `zai-coding-plan/glm-5.3-flash` becomes `glm-5.3-flash`, `us.anthropic.claude-opus-5-5` becomes `claude-opus-5-5`. Keep every version and revision component verbatim (`deepseek-v4-1-flash-1017`, not `deepseek-v4-1-flash`). If the runtime reports no model ID, ask the user instead of guessing.
+- List a `<tool>` only for a specialized analysis tool the agent ran to produce the change (e.g. `coccinelle`, `sparse`). Never list basic tooling such as git, compilers, editors, or test runners; usually the trailer has no tools.
 - Place it in the footer (the last paragraph) of the commit message. `--trailer` does this.
 - Never add `Signed-off-by` on behalf of the AI; DCO certification is human-only (the Linux kernel's AI coding assistant guidance says the same).
 

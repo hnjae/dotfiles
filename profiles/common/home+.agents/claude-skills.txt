@@ -10,8 +10,9 @@
 
 # Authored in this repository.
 claude-prompting
-intent-docs-review
 fork-maintenance
+git-commit
+intent-docs-review
 intent-driven-development
 link-html-clipper
 researched-html-note
