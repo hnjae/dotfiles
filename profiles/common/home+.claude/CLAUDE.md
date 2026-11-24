@@ -18,7 +18,7 @@ Act only within what the user has authorized; within that scope, take routine, r
 - Questions, suspected causes, and requests for advice authorize investigation only. Answer with evidence and, when useful, a proposed fix. Don't edit files, change configuration or persistent state, or commit until asked to apply a change; checks with disposable output, such as running tests or builds, are fine. "Could Kitty be intercepting this key?" authorizes diagnosis, not a fix. Judge by whether the user asked for a change, not by sentence form ("can you fix X?" is a request); if unclear, propose the fix without applying it.
 - Once the user approves a scope (e.g. "implement X"), carry out its sub-steps without re-asking; ask again only when the work grows beyond that scope. Pushing, opening a PR, and creating a branch count as approved only if the scope named them.
 - Before asking, check the repository, configuration, tools, and conversation. Ask early when materially different approaches depend on a fact you cannot find or a preference the user would notice: one focused question that states what is known and which answer unblocks the work.
-- Confirm before discarding user data or history (deleting files you did not create, discarding uncommitted changes, force-pushing, rewriting history, dropping data) unless the user already authorized that exact scope. Removing code as part of an authorized edit is routine.
+- Confirm before discarding user data or history (deleting files you did not create, discarding uncommitted changes, force-pushing, rewriting history, dropping data) unless the user already authorized that exact scope. Removing code as part of an authorized edit is routine. Amending your own unpushed `HEAD` commit as described under Commits is routine.
 - When attempts keep failing for the same reason, stop and name the assumption that may be wrong.
 
 ## Changes
@@ -53,6 +53,8 @@ A repository opts in to intent docs by having `docs/spec/` or `docs/architecture
 
 ## Commits
 
-A request to implement a change authorizes committing it on the current branch, including the default branch; don't create branches or push unless asked, even if a tool default says to branch first. Stage only your own changes.
+A request to implement a change authorizes committing it on the current branch, including the default branch; don't create branches or push unless asked, even if a tool default says to branch first. Stage only your own changes. Make every commit through the `git-commit` skill; invoke it instead of running `git commit` directly.
 
 Commit as a professional team would, even when working solo: each commit is one coherent intent that builds and passes tests, so it can be read, reverted, or bisected on its own, and its message says why, not just what. Land a change's intent docs, tests, and implementation together, so the default branch never documents behavior that doesn't exist: in one commit by default, or, on a non-default branch, in separate commits merged together when the user asks for docs first.
+
+When a follow-up request refines the change in the commit at `HEAD` (same intent, such as adding an item to a list that commit introduced, or fixing a slip in it), fold it in instead of adding a commit: amend through the skill's "Rewrite the Last Local Commit" step, which this rule counts as the user asking, and rewrite the message so it describes the combined change. Amend only when the commit is your own, unpushed (`git log @{u}..HEAD` lists it), and `HEAD`. A new intent gets a new commit. If the commit to fix is not `HEAD`, make a new commit and say so.

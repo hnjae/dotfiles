@@ -316,6 +316,7 @@ def rewrite_prompt(prompt: str) -> str:
     apply_patch unregistered. The upstream prompt still tells the model to use
     it, which sends weaker models into a tool that does not exist.
     """
+
     prompt, count = APPLY_PATCH_BULLET_RE.subn(
         SHELL_EDIT_BULLET, prompt, count=1
     )

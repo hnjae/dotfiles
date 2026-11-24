@@ -14,29 +14,19 @@ _:
 # agent prompt pinned to the installed binary. The Mistral key comes from
 # ~/.local/share/secrets/MISTRAL.env.
 models-update:
-    #!/usr/bin/env bash
-    set -euo pipefail
+    #!/bin/sh
+    set -eu
 
-    env_file="$HOME/.local/share/secrets/MISTRAL.env"
-    # The secrets store may serve this as a named pipe, not a regular file.
-    if [[ ! -e "$env_file" ]]; then
-        echo "error: $env_file does not exist; put MISTRAL_API_KEY in it" >&2
-        exit 1
-    fi
-
-    # set -a exports MISTRAL_API_KEY even if MISTRAL.env has no `export`.
-    set -a
-    # shellcheck disable=SC1090
-    source "$env_file"
-    set +a
+    export MISTRAL_API_KEY="$(op read 'op://Personal/w57nor5w4jz3kt27372limfixu/credential')"
 
     "{{ justfile_directory() }}/model-catalogs/update.py"
     biome format --write "{{ justfile_directory() }}/model-catalogs/mistral.json"
 
 # Verify the catalog prompt matches the installed codex version.
 models-check:
-    #!/usr/bin/env bash
-    set -euo pipefail
+    #!/bin/sh
+    set -eu
+
     exec "{{ justfile_directory() }}/model-catalogs/update.py" --check
 
 KILL-SERVER:

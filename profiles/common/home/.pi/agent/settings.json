@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "1.5.2",
+  "lastChangelogVersion": "1.6.0",
   "defaultProvider": "mistral",
   "defaultModel": "deepseek-v4-1-flash-1017",
   "packages": [
@@ -23,9 +23,9 @@
   "treeFilterMode": "default",
   "tuiMode": "fullscreen",
   "extensionChangelogVersions": {
-    "{\"source\":\"npm:@tintinweb/pi-subagents\",\"scope\":\"user\"}": "0.26.2",
+    "{\"source\":\"npm:@tintinweb/pi-subagents\",\"scope\":\"user\"}": "0.26.3",
     "{\"source\":\"npm:@narumitw/pi-plan-mode\",\"scope\":\"user\"}": "0.60.1",
-    "{\"source\":\"npm:@narumitw/pi-btw\",\"scope\":\"user\"}": "0.63.8",
+    "{\"source\":\"npm:@narumitw/pi-btw\",\"scope\":\"user\"}": "0.63.9",
     "{\"source\":\"npm:pi-claude-code-ui\",\"scope\":\"user\"}": "1.0.112",
     "{\"source\":\"npm:@narumitw/pi-subagents\",\"scope\":\"user\"}": "3.4.5",
     "{\"source\":\"npm:@narumitw/pi-progress\",\"scope\":\"user\"}": "0.8.0",
