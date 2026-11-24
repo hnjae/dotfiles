@@ -12,12 +12,14 @@
 # this file, by the secrets_guard plugin, which blocks secret paths for every
 # tool rather than only bash.
 
+default = "deny"
+
 [bash]
-# Every command runs without a prompt. The deny list below is what stays
-# blocked, so keep it narrow and explicit: a deny beats everything,
-# including this default and YOLO mode.
-default = "allow"
-allow = true
+# allow = true
+allow = [
+  "cargo *",
+  "git *",
+]
 
 # Blocked even under default = "allow" and YOLO.
 deny = [

@@ -82,6 +82,11 @@ maki.keymap.set("n", "i", function()
   maki.ui.set_mode("i")
 end, { desc = "Enter insert mode" })
 
+-- default: `<C-b>`
+maki.keymap.set("n", "<C-S-b>", function()
+  maki.ui.action("background")
+end)
+
 -- Show the input mode in the status bar, so normal mode is visible.
 -- The label is empty on purpose: the mode name is the whole message.
 local function show_mode()
