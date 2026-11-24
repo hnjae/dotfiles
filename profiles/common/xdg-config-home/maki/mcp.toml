@@ -1,5 +1,10 @@
-# MCP servers for maki, ported from ~/.claude-ccx/mcp.json (exa excluded).
+# MCP servers for maki, ported from ~/.claude-ccx/mcp.json.
 # Schema: https://maki.sh/docs/mcp/
+
+# Keyless hosted endpoint: free rate limit, no agent_run. Add an
+# x-api-key header (${EXA_API_KEY}) or use ?login for OAuth to lift the limit.
+[mcp.exa]
+url = "https://mcp.exa.ai/mcp"
 
 [mcp.context7]
 url = "https://mcp.context7.com/mcp"

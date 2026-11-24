@@ -81,6 +81,9 @@ allow = ["*"]
 allow = ["*"]
 
 # MCP servers: allow read-only tools, deny anything that mutates.
+[mcp.exa]
+default = "allow"
+
 [mcp.context7]
 default = "allow"
 
