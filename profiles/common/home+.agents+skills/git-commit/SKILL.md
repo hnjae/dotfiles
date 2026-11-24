@@ -135,7 +135,11 @@ Format: `Assisted-by: <harness>:<model> [<tool> ...]`, e.g. `Assisted-by: claude
 | Vibe | `vibe` |
 
 - `<harness>` identifies the tooling, not the model's vendor; never change it per model. For any other harness, use the name its own instructions specify; if none, ask the user instead of inventing one.
-- `<model>` is the model ID the runtime reports for this session, not a display name. Drop only the provider or router namespace: `zai-coding-plan/glm-5.3-flash` becomes `glm-5.3-flash`, `us.anthropic.claude-opus-5-5` becomes `claude-opus-5-5`. Keep every version and revision component verbatim (`deepseek-v4-1-flash-1017`, not `deepseek-v4-1-flash`). If the runtime reports no model ID, ask the user instead of guessing.
+- `<model>` is the model's canonical upstream ID, made portable across providers: not a display name, and not a verbatim copy of whatever the serving provider reports. Normalize in two steps.
+  1. Drop the provider or router namespace: `zai-coding-plan/glm-5.3-flash` becomes `glm-5.3-flash`, `us.anthropic.claude-opus-5-5` becomes `claude-opus-5-5`, `deepseek/deepseek-v4.1-flash-1017` becomes `deepseek-v4.1-flash-1017`.
+  2. Restore the upstream spelling when the serving provider re-spelled the ID. Mistral writes a dotted version as a dash: `deepseek-v4-1-flash-1017` becomes `deepseek-v4.1-flash-1017`. Only the version segment moves; a trailing date or revision block keeps its dash (`-1017`, `-0813`).
+- Do not blanket-convert dashes to dots. Some families are natively dashed and stay so (`claude-opus-5-5`), and shortening a name is not normalization: keep every version and revision component (`deepseek-v4.1-flash-1017`, not `deepseek-v4.1-flash`).
+- When you cannot tell how the upstream spells the ID, check another provider's config for the same model, the harness model catalog, or the vendor's docs. If none of those settles it, ask the user instead of guessing.
 - List a `<tool>` only for a specialized analysis tool the agent ran to produce the change (e.g. `coccinelle`, `sparse`). Never list basic tooling such as git, compilers, editors, or test runners; usually the trailer has no tools.
 - Place it in the footer (the last paragraph) of the commit message. `--trailer` does this.
 - Never add `Signed-off-by` on behalf of the AI; DCO certification is human-only (the Linux kernel's AI coding assistant guidance says the same).

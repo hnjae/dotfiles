@@ -4,7 +4,7 @@ This skill is derived from the git-commit skill of github/awesome-copilot.
 
 - Upstream: [github/awesome-copilot](https://github.com/github/awesome-copilot).
 - License: MIT. Copyright GitHub, Inc. (full text below).
-- Modifications: yes. Copyright of the modifications: 2022-2026 KIM Hyunjae.
+- Modifications: yes. Copyright of the modifications: 2026 KIM Hyunjae.
 - Distribution: this repository distributes the material under AGPL-3.0-or-later, which the MIT license permits.
 
 ## MIT License
