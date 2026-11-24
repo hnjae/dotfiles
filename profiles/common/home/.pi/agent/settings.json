@@ -10,7 +10,8 @@
     "npm:@tintinweb/pi-subagents",
     "npm:@tintinweb/pi-tasks",
     "npm:pi-schedule-prompt",
-    "npm:pi-advisor-flow"
+    "npm:pi-advisor-flow",
+    "npm:pi-away"
   ],
   "enableSkillCommands": true,
   "terminal": {
@@ -32,5 +33,9 @@
     "{\"source\":\"npm:@tintinweb/pi-tasks\",\"scope\":\"user\"}": "0.9.1",
     "{\"source\":\"npm:pi-schedule-prompt\",\"scope\":\"user\"}": "0.5.1",
     "{\"source\":\"npm:pi-advisor-flow\",\"scope\":\"user\"}": "0.17.0"
-  }
+  },
+  "terminalTheme": true,
+  "groupToolCalls": true,
+  "thinkingMode": "live",
+  "bashIntent": "model"
 }
