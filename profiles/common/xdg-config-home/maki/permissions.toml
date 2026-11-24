@@ -90,9 +90,6 @@ default = "allow"
 [mcp.nixos]
 default = "allow"
 
-[mcp.kagi]
-default = "allow"
-
 [edit]
 allow = [
   "/tmp/**",
