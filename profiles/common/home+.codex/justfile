@@ -10,12 +10,15 @@ set lazy
 _:
     @just --list
 
-# Both generated files age on different clocks: the catalog follows the
-# Mistral API, the prompt follows the installed codex binary. Each one has its
-# own generator in lib/ and its own update and check recipe here.
+# The generated files age on different clocks: each catalog follows its
+# provider's API, and the prompt follows the installed codex binary. Each one
+# has its own generator in lib/ and its own update and check recipe here.
+
+# Refresh every catalog. OpenRouter runs first because it needs no credentials.
+models-update: models-update-openrouter models-update-mistral
 
 # Refresh model-catalogs/mistral.json from the Mistral API (key from 1Password).
-models-update:
+models-update-mistral:
     #!/bin/sh
     set -eu
 
@@ -24,12 +27,30 @@ models-update:
     "{{ justfile_directory() }}/lib/model-catalog.py"
     biome format --write "{{ justfile_directory() }}/model-catalogs/mistral.json"
 
+# Refresh model-catalogs/openrouter.json from the public OpenRouter API.
+models-update-openrouter:
+    #!/bin/sh
+    set -eu
+
+    "{{ justfile_directory() }}/lib/model-catalog-openrouter.py"
+    biome format --write "{{ justfile_directory() }}/model-catalogs/openrouter.json"
+
+# Verify every catalog offline.
+models-check: models-check-mistral models-check-openrouter
+
 # Verify model-catalogs/mistral.json offline, without the API key.
-models-check:
+models-check-mistral:
     #!/bin/sh
     set -eu
 
     exec "{{ justfile_directory() }}/lib/model-catalog.py" --check
+
+# Verify model-catalogs/openrouter.json offline, without the API.
+models-check-openrouter:
+    #!/bin/sh
+    set -eu
+
+    exec "{{ justfile_directory() }}/lib/model-catalog-openrouter.py" --check
 
 # Rewrite BASE_INSTRUCTIONS.md from the installed codex prompt.
 instructions-update:
