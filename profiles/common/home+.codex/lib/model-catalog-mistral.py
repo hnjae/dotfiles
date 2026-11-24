@@ -13,15 +13,15 @@ CURATED below, mirroring the model pages on docs.mistral.ai.
 The catalog is written to `model-catalogs/mistral.json` beside this script's
 directory, which the common profile links into `~/.codex/model-catalogs/`. It
 carries model metadata only, because the system prompt is a separate
-artifact: see `lib/base-instructions.py` for the file `config.toml` selects
-with `model_instructions_file`.
+artifact: see `lib/base-instructions.py` for the provider-specific prompt
+file `config.toml` selects with `model_instructions_file`.
 
 `apply_patch_tool_type` stays unset on purpose: Mistral's Responses endpoint
 accepts only client-executed function tools, and codex serializes the freeform
 apply_patch tool as {"type": "custom"}, which the endpoint rejects with error
 3051. File edits then go through the shell tool, and `base_instructions` stays
-an empty placeholder while `lib/base-instructions.py` rewrites the upstream
-apply_patch instruction into shell-edit guidance.
+an empty placeholder while `rewrite_mistral` in `lib/base-instructions.py`
+rewrites the upstream apply_patch instruction into shell-edit guidance.
 """
 
 from __future__ import annotations

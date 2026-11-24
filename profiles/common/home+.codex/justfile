@@ -24,7 +24,7 @@ models-update-mistral:
 
     export MISTRAL_API_KEY="$(op read 'op://Personal/w57nor5w4jz3kt27372limfixu/credential')"
 
-    "{{ justfile_directory() }}/lib/model-catalog.py"
+    "{{ justfile_directory() }}/lib/model-catalog-mistral.py"
     biome format --write "{{ justfile_directory() }}/model-catalogs/mistral.json"
 
 # Refresh model-catalogs/openrouter.json from the public OpenRouter API.
@@ -43,7 +43,7 @@ models-check-mistral:
     #!/bin/sh
     set -eu
 
-    exec "{{ justfile_directory() }}/lib/model-catalog.py" --check
+    exec "{{ justfile_directory() }}/lib/model-catalog-mistral.py" --check
 
 # Verify model-catalogs/openrouter.json offline, without the API.
 models-check-openrouter:
@@ -52,14 +52,14 @@ models-check-openrouter:
 
     exec "{{ justfile_directory() }}/lib/model-catalog-openrouter.py" --check
 
-# Rewrite BASE_INSTRUCTIONS.md from the installed codex prompt.
+# Rewrite both provider prompt files from the installed codex prompt.
 instructions-update:
     #!/bin/sh
     set -eu
 
     exec "{{ justfile_directory() }}/lib/base-instructions.py"
 
-# Verify BASE_INSTRUCTIONS.md against the installed codex prompt.
+# Verify both provider prompt files against the installed codex prompt.
 instructions-check:
     #!/bin/sh
     set -eu

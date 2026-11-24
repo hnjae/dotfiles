@@ -14,7 +14,9 @@ The catalog is written to `model-catalogs/openrouter.json` beside this
 script's directory, which the common profile links into
 `~/.codex/model-catalogs/`. Entries set `apply_patch_tool_type` to
 `freeform`: OpenRouter forwards custom tools to the model unchanged, so
-Codex can edit files through its native apply_patch tool.
+Codex can edit files through its native apply_patch tool. The system prompt
+is a separate artifact selected by `model_instructions_file`; see
+`BASE_INSTRUCTIONS.openrouter.md`.
 """
 
 from __future__ import annotations

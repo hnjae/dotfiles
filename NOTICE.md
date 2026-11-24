@@ -6,7 +6,7 @@ MIT and Apache-2.0 material is included under AGPL-3.0-or-later, which those lic
 
 | Material | Upstream | License | Notice |
 | ------------------------------------------------------------------------------------- | -------------------------------------------- | ------------------- | --------------------------------------------------------- |
-| `profiles/common/home+.codex/BASE_INSTRUCTIONS.md` | OpenAI Codex | Apache-2.0 | `profiles/common/home+.codex/NOTICE.md` |
+| `profiles/common/home+.codex/BASE_INSTRUCTIONS.openrouter.md`, `profiles/common/home+.codex/BASE_INSTRUCTIONS.mistral.md` | OpenAI Codex | Apache-2.0 | `profiles/common/home+.codex/NOTICE.md` |
 | LazyVim excerpts in `profiles/common/xdg-config-home/nvim/` | LazyVim | Apache-2.0 | `profiles/common/xdg-config-home/nvim/NOTICE.md` |
 | `profiles/common/xdg-config-home/nvim/lua/plugins/lang/_.overseer.lua` | overseer.nvim | MIT | `profiles/common/xdg-config-home/nvim/NOTICE.md` |
 | `profiles/common/xdg-config-home/nvim/snippets/` | friendly-snippets | MIT | `profiles/common/xdg-config-home/nvim/snippets/NOTICE.md` |

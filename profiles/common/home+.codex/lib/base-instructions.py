@@ -3,22 +3,25 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 # SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
 
-"""Regenerate BASE_INSTRUCTIONS.md from the installed codex release.
+"""Regenerate the provider-specific prompt files from the installed codex release.
 
-The system prompt comes from openai/codex at the tag matching the installed
-binary and is written to `BASE_INSTRUCTIONS.md` beside this script's
-directory after applying rewrite_prompt. `config.toml` selects the file with
-`model_instructions_file`, so the model catalog (`lib/model-catalog.py`)
-carries only model metadata. The file is generated; edit rewrite_prompt, not
-BASE_INSTRUCTIONS.md.
+The upstream system prompt comes from openai/codex at the tag matching the
+installed binary. This script writes two files beside itself:
 
-The prompt cannot stay verbatim. The catalog leaves `apply_patch`
-unregistered because Mistral's Responses endpoint rejects the freeform custom
-tool codex serializes it as, so rewrite_prompt replaces the upstream
-apply_patch instruction with shell-edit guidance and removes the rest of the
-mentions that would send the model into a tool that does not exist. A codex
-upgrade can change the prompt even when the model list does not, so
-`--check` compares the content instead of a version string.
+- `BASE_INSTRUCTIONS.openrouter.md` keeps the upstream `apply_patch`
+  instruction, because the OpenRouter catalog registers the freeform tool.
+- `BASE_INSTRUCTIONS.mistral.md` replaces `apply_patch` with shell-edit
+  guidance, because Mistral's Responses endpoint rejects custom tools.
+
+Both files add the repository's `git-commit` skill instruction through
+`rewrite_common`; only the Mistral variant runs `rewrite_mistral`.
+The rendered Markdown is then formatted with `rumdl fmt` so the checked-in
+files match the repository's Markdown rules.
+`config.toml` selects the active file with `model_instructions_file`, so the
+model catalogs carry only model metadata. The prompt files are generated;
+edit the rewrite functions, not the outputs. A codex upgrade can change the
+prompt even when the model list does not, so `--check` compares content
+instead of a version string.
 """
 
 from __future__ import annotations
@@ -36,9 +39,13 @@ PROMPT_URL = (
     "https://raw.githubusercontent.com/openai/codex/"
     "rust-v{version}/codex-rs/models-manager/prompt.md"
 )
-# This profile is self-contained: the script sets its output from its own
+# This profile is self-contained: the script sets its outputs from its own
 # location, and resolving the `~/.codex/lib` link lands on the same tree.
-INSTRUCTIONS = Path(__file__).resolve().parents[1] / "BASE_INSTRUCTIONS.md"
+PROMPT_DIR = Path(__file__).resolve().parents[1]
+PROMPT_FILES = {
+    "openrouter": PROMPT_DIR / "BASE_INSTRUCTIONS.openrouter.md",
+    "mistral": PROMPT_DIR / "BASE_INSTRUCTIONS.mistral.md",
+}
 
 
 def fail(message: str) -> NoReturn:
@@ -92,14 +99,25 @@ GIT_COMMIT_BULLET = (
 )
 
 
-def rewrite_prompt(prompt: str) -> str:
+def rewrite_common(prompt: str) -> str:
+    """Add the repository's commit guidance to the upstream prompt."""
+    prompt, count = GIT_COMMIT_BULLET_RE.subn(
+        GIT_COMMIT_BULLET, prompt, count=1
+    )
+    if count != 1:
+        fail(
+            "could not find the git commit instruction in the upstream prompt"
+        )
+    return prompt
+
+
+def rewrite_mistral(prompt: str) -> str:
     """Replace the upstream freeform apply_patch instruction with shell edits.
 
-    Mistral's Responses endpoint rejects custom tools, so the catalog leaves
-    apply_patch unregistered. The upstream prompt still tells the model to use
-    it, which sends weaker models into a tool that does not exist.
+    Mistral's Responses endpoint rejects custom tools, so the Mistral catalog
+    leaves apply_patch unregistered. The upstream prompt still tells the model
+    to use it, which sends weaker models into a tool that does not exist.
     """
-
     prompt, count = APPLY_PATCH_BULLET_RE.subn(
         SHELL_EDIT_BULLET, prompt, count=1
     )
@@ -121,16 +139,40 @@ def rewrite_prompt(prompt: str) -> str:
     )
     if "apply_patch" in prompt:
         fail(
-            "upstream prompt still mentions apply_patch; update rewrite_prompt"
-        )
-    prompt, count = GIT_COMMIT_BULLET_RE.subn(
-        GIT_COMMIT_BULLET, prompt, count=1
-    )
-    if count != 1:
-        fail(
-            "could not find the git commit instruction in the upstream prompt"
+            "upstream prompt still mentions apply_patch; update rewrite_mistral"
         )
     return prompt
+
+
+def format_markdown(body: str) -> str:
+    """Format generated Markdown with the repository's rumdl configuration."""
+    try:
+        result = subprocess.run(
+            ["rumdl", "fmt", "-"],
+            input=body,
+            text=True,
+            capture_output=True,
+            check=True,
+        )
+    except FileNotFoundError:
+        fail("rumdl is not on PATH; cannot format the prompt files")
+    except subprocess.CalledProcessError as err:
+        fail(f"rumdl fmt failed: {err.stderr.strip()}")
+    return result.stdout
+
+
+def render(version: str) -> dict[Path, str]:
+    """Render both provider prompts from one upstream fetch."""
+    common = rewrite_common(fetch_prompt(version))
+    if "apply_patch" not in common:
+        fail(
+            "upstream prompt no longer mentions apply_patch; "
+            "update rewrite_common"
+        )
+    return {
+        PROMPT_FILES["openrouter"]: format_markdown(common),
+        PROMPT_FILES["mistral"]: format_markdown(rewrite_mistral(common)),
+    }
 
 
 def write_if_changed(path: Path, body: str) -> bool:
@@ -145,27 +187,32 @@ def write_if_changed(path: Path, body: str) -> bool:
 
 
 def check() -> None:
-    """Exit non-zero when BASE_INSTRUCTIONS.md is stale for installed codex."""
-    if not INSTRUCTIONS.is_file():
-        fail(f"{INSTRUCTIONS} does not exist; run `just instructions-update`")
+    """Exit non-zero when either prompt file is stale for installed codex."""
     version = codex_version()
-    expected = rewrite_prompt(fetch_prompt(version))
-    actual = INSTRUCTIONS.read_text(encoding="utf-8")
-    if actual != expected:
-        fail(
-            f"{INSTRUCTIONS} is stale for codex {version}; "
-            "run `just instructions-update`"
-        )
-    print(f"instructions match codex {version}")
+    expected = render(version)
+    for path, body in expected.items():
+        if not path.is_file():
+            fail(f"{path} does not exist; run `just instructions-update`")
+        actual = path.read_text(encoding="utf-8")
+        if actual != body:
+            fail(
+                f"{path} is stale for codex {version}; "
+                "run `just instructions-update`"
+            )
+    print(f"instructions match codex {version} ({len(expected)} files)")
 
 
 def update() -> None:
-    prompt = rewrite_prompt(fetch_prompt(codex_version()))
-    if write_if_changed(INSTRUCTIONS, prompt):
-        print(f"wrote {INSTRUCTIONS}")
+    version = codex_version()
+    changed = False
+    for path, body in render(version).items():
+        if write_if_changed(path, body):
+            print(f"wrote {path}")
+            changed = True
+        else:
+            print(f"{path} is up to date")
+    if changed:
         print("restart codex to apply: pkill -f 'codex app-server'")
-    else:
-        print(f"{INSTRUCTIONS} is up to date")
 
 
 def main() -> None:
@@ -173,7 +220,7 @@ def main() -> None:
     parser.add_argument(
         "--check",
         action="store_true",
-        help="only verify that BASE_INSTRUCTIONS.md matches the installed codex",
+        help="only verify that both prompt files match the installed codex",
     )
     args = parser.parse_args()
     if args.check:

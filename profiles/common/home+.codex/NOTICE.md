@@ -1,11 +1,11 @@
 # Notice
 
-[BASE_INSTRUCTIONS.md](BASE_INSTRUCTIONS.md) is generated from the Codex CLI system prompt (`codex-rs/models-manager/prompt.md` at the `rust-v<version>` tag matching the installed `codex` binary, see `PROMPT_URL` in [lib/base-instructions.py](lib/base-instructions.py)).
+[BASE_INSTRUCTIONS.openrouter.md](BASE_INSTRUCTIONS.openrouter.md) and [BASE_INSTRUCTIONS.mistral.md](BASE_INSTRUCTIONS.mistral.md) are generated from the Codex CLI system prompt (`codex-rs/models-manager/prompt.md` at the `rust-v<version>` tag matching the installed `codex` binary, see `PROMPT_URL` in [lib/base-instructions.py](lib/base-instructions.py)).
 
 - Upstream: [OpenAI Codex](https://github.com/openai/codex).
 - License: Apache License 2.0 (full text below). Copyright 2025 OpenAI. Upstream NOTICE: "OpenAI Codex / Copyright 2025 OpenAI"; its Ratatui credit does not apply to this file.
-- Modifications: yes. The file is generated, not edited by hand: `rewrite_prompt` in [lib/base-instructions.py](lib/base-instructions.py) replaces the upstream `apply_patch` instructions with shell-edit guidance and adds a `git-commit` skill instruction. Copyright of the modifications: 2022-2026 KIM Hyunjae.
-- Distribution: this repository distributes the file under AGPL-3.0-or-later, which the Apache License 2.0 permits. The upstream text remains available under Apache-2.0 from the upstream project.
+- Modifications: yes. The files are generated, not edited by hand: `rewrite_common` in [lib/base-instructions.py](lib/base-instructions.py) adds a `git-commit` skill instruction to both. `rewrite_mistral` additionally replaces the upstream `apply_patch` instructions with shell-edit guidance for the Mistral variant. The OpenRouter variant keeps the upstream `apply_patch` instructions. Copyright of the modifications: 2022-2026 KIM Hyunjae.
+- Distribution: this repository distributes the files under AGPL-3.0-or-later, which the Apache License 2.0 permits. The upstream text remains available under Apache-2.0 from the upstream project.
 
 ## Apache License 2.0
 

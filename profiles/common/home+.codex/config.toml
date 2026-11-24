@@ -1,4 +1,4 @@
-model_instructions_file = "~/.codex/BASE_INSTRUCTIONS.md"
+model_instructions_file = "~/.codex/BASE_INSTRUCTIONS.openrouter.md"
 check_for_update_on_startup = false
 model_reasoning_effort = "high"
 plan_mode_reasoning_effort = "max"
@@ -8,6 +8,7 @@ plan_mode_reasoning_effort = "max"
 # model = "deepseek-v4-1-flash-1017"
 # web_search = "disabled"
 # model_catalog_json = "~/.codex/model-catalogs/mistral.json"
+# model_instructions_file = "~/.codex/BASE_INSTRUCTIONS.mistral.md"
 #
 # [model_providers.mistral]
 # name = "Mistral La Plateforme"
