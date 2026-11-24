@@ -14,7 +14,7 @@
 ## Secrets
 
 - Never read, print, or copy secret material: `~/.ssh`, `~/.config/sops`, `.env`, `.env.*`, `auth.json`, keyrings, password stores, shell or REPL history, and any credential in the process environment (`env`, `printenv`, `export -p`, `set`). A password typed by mistake ends up in history.
-- Never probe a secret either. Whether a variable is set, how long it is, its hash, its first characters, or its decrypted form is the same material: `[ -n "$VAR" ]`, `${#VAR}`, `grep VAR ~/.zshrc`, `env | grep`, and comparing against a guess are all off-limits.
+- Never print anything that reveals part of a secret either: a prefix or suffix, a hash, its decrypted form, or comparisons against guesses. `grep VAR ~/.zshrc` and `env | grep` print the value itself. Checking only whether it is set or how long it is (`[ -n "$VAR" ]`, `${#VAR}`) is fine, but not under xtrace (`set -x`, `bash -x`), which prints expanded arguments such as the value inside `[ -n "$VAR" ]`.
 - Exception: when the user explicitly asks you to read or check a specific secret file or value, you may do so for that request only. A `cc-safety-net` or harness block still wins: report it instead of working around it.
 - A `${VAR}` reference in a config file names a requirement, not a question to answer. Report the name and let the user supply the value, or take the option that reads nothing: a keyless endpoint, OAuth login, or asking.
 - Every tool result reaches the model provider, so printing a secret once discloses it off the machine even when no file changes. "Just checking" is a disclosure.
