@@ -9,7 +9,7 @@
 # To expose everything: `ls ~/.agents/skills > ~/.agents/claude-skills.txt`.
 
 # Authored in this repository.
-claude-prompting
+prompt-review
 fork-maintenance
 git-commit
 intent-docs-review

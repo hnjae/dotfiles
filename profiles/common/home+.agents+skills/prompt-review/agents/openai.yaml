@@ -1,0 +1,7 @@
+---
+interface:
+  display_name: "Prompt Review"
+  short_description: "Review or rewrite prompts and agent instructions"
+  default_prompt: "Use $prompt-review to review this prompt against Anthropic's prompting best practices."
+policy:
+  allow_implicit_invocation: false

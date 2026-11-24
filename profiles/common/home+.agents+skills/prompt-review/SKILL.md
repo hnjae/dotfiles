@@ -1,9 +1,9 @@
 ---
-name: claude-prompting
+name: prompt-review
 description: Review or rewrite instruction text written for Claude against Anthropic's prompting best practices. Use when asked to review, improve, or rewrite a skill, a CLAUDE.md or AGENTS.md, a subagent or delegation prompt, or a one-off prompt. Not for system prompts of apps built on the Messages API or for API request settings, and not for creating a new skill or running skill evals (that is skill-creator).
 ---
 
-# Claude Prompting
+# Prompt Review
 
 Review or rewrite text that Claude reads as instructions, applying the rules in [`references/techniques.md`](references/techniques.md). That file distills Anthropic's prompting guides; the rules carry the evidence, so cite them instead of personal taste.
 
