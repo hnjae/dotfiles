@@ -108,6 +108,7 @@ allow = [
   "https://docs.rs/**",
   "https://docs.podman.io/**",
   "https://www.freedesktop.org/**",
+  "https://wiki.archlinux.org/**",
 
   "https://developers.openai.com/**",
   "https://docs.pi.dev/**",
