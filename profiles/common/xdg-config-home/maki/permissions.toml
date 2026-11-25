@@ -1,25 +1,9 @@
 # Global agent permissions.
-#
-# bash runs anything without a prompt; only the deny list stops a command.
-# A deny beats every allow, the default, and YOLO mode, so keep it narrow
-# and explicit rather than broad.
-#
-# Patterns: `cmd *` matches bare `cmd` and `cmd` + args. Path scopes use
-# `dir/**`. Commands split by `&&`, `;`, `|` are checked individually.
-#
-# Not covered here on purpose: `$(...)`, backticks, `(...)` and `$((...))`
-# always prompt regardless of these rules. Secrets are also guarded outside
-# this file, by the secrets_guard plugin, which blocks secret paths for every
-# tool rather than only bash.
 
-default = "deny"
+default = "prompt"
 
 [bash]
-# allow = true
-allow = [
-  "cargo *",
-  "git *",
-]
+default = "allow"
 
 # Blocked even under default = "allow" and YOLO.
 deny = [
@@ -31,6 +15,7 @@ deny = [
   "sops exec-env *",
   "sops exec-file *",
   "sops edit *",
+
   # op: every path that puts a secret value in the clear.
   "op read *",
   "op inject *",
@@ -38,6 +23,7 @@ deny = [
   "op item get *",
   "op document get *",
   "op export *",
+
   # gpg: decrypting and exporting private keys.
   "gpg --decrypt *",
   "gpg -d *",
@@ -45,24 +31,31 @@ deny = [
   "gpg --export-secret-subkeys *",
   "gpg --gen-key *",
   "gpg --gen-revoke *",
+
   # age has no encrypt-only split worth keeping, and sops drives it.
   "age --decrypt *",
   "age -d *",
   "age-keygen *",
+
   # libsecret and KWallet: lookup/read print the stored secret.
   "secret-tool lookup *",
   "secret-tool search *",
   "kwallet-query --read-password *",
   "kwallet-query -r *",
+
   # Environment dumps print every variable; bare env stays blocked while
   # `env FOO=bar cmd` keeps working.
   "printenv *",
   "env",
   "set",
   "export -p*",
+
+  # Rootful
   "sudo *",
   "doas *",
   "su *",
+
+  # Might delete files:
   "rm -rf /*",
   "rm -rf ~/*",
   "rm -rf $HOME/*",
@@ -71,14 +64,23 @@ deny = [
   "git clean -fdx *",
   "mkfs *",
   "dd *",
+
+  # System shutdown
   "shutdown *",
   "reboot *",
   "poweroff *",
   "systemctl poweroff *",
   "systemctl reboot *",
+
+  # Mods files
   "chmod -R 777 *",
   "chown -R *",
+
   ":(){ *",
+
+  # very local
+  "ssh admin@",
+  "ssh hnjae@",
 ]
 
 # Web tools prompt by default; these are the read-only lookups worth skipping.
@@ -86,7 +88,14 @@ deny = [
 allow = ["*"]
 
 [webfetch]
-allow = ["*"]
+default = "prompt"
+allow = [
+  "https://github.com/**",
+  "https://maki.sh/**",
+  "https://api.github.com/**",
+  "https://raw.githubusercontent.com/**",
+  "https://objects.githubusercontent.com/**",
+]
 
 # MCP servers: allow read-only tools, deny anything that mutates.
 [mcp.exa]
@@ -104,9 +113,11 @@ default = "allow"
 [edit]
 allow = [
   "/tmp/**",
+  "~/.config/maki/**",
 ]
 
 [write]
 allow = [
   "/tmp/**",
+  "~/.config/maki/**",
 ]

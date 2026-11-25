@@ -6,6 +6,12 @@
 - English is the default, not a hard rule. Keep proper nouns and terms whose nuance English dilutes in their original language (e.g. 국세기본법, 天命). Mixing other languages into an English sentence is fine; an AI parses such a sentence well.
 - The reason for the English default is that less capable models have weaker multilingual ability.
 
+## Prose
+
+- A sentence earns its place by changing what the reader does or believes: a rule, a requirement, a fact they would otherwise get wrong, a decision they would otherwise make differently. Delete a clause and re-read; if the text still says the same thing to do, leave it deleted.
+- Put mechanism in the document whose subject is that mechanism (e.g. `docs/architecture`, an API reference, a comment at the site) or in the commit message. In a rule or a procedure, the action and the condition that changes it are the whole content.
+- Keep a measured finding however long it runs: a dated observation or a failure mode seen in practice changes decisions.
+
 ## Markdown
 
 - Do not hard-wrap prose. Write one paragraph per line so a later edit shows only the lines it changes.
