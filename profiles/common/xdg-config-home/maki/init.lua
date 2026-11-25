@@ -37,6 +37,7 @@ maki.setup({
 require("herdr")
 require("cc_safety_net")
 require("secrets_guard")
+require("build_guard")
 require("wakelock")
 require("emphasis")
 
