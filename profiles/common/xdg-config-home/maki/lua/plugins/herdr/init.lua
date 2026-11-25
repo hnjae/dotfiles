@@ -27,10 +27,10 @@ local bin = env("HERDR_BIN_PATH")
 local transport
 if env("HERDR_ENV") == "1" then
   if pane_id ~= nil and bin ~= nil then
-    transport = require("herdr.tui").new({ pane_id = pane_id, bin = bin })
+    transport = require("plugins.herdr.tui").new({ pane_id = pane_id, bin = bin })
   end
 elseif env("HC_TERMINAL_ID") ~= nil then
-  transport = require("herdr.app").new()
+  transport = require("plugins.herdr.app").new()
 end
 
 if transport == nil then

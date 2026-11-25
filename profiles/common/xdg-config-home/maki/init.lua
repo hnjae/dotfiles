@@ -1,136 +1,23 @@
 -- SPDX-License-Identifier: AGPL-3.0-or-later
 -- SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
 
--- Notification mode: desktop notifications on a graphical Linux session,
--- otherwise maki's default "auto" (OSC 9 in a supported terminal, BEL else).
---
--- maki's "notify" mode needs a D-Bus session bus. The check is only a hint:
--- if the bus disappears later, maki's own fallback handles it.
-local function desktop_session()
-  if maki.uv.os_getenv("HERDR_ENV") == "1" then
-    return false
-  end
-  if maki.uv.os_getenv("XDG_SESSION_TYPE") == nil then
-    return false
-  end
-  local bus = maki.uv.os_getenv("DBUS_SESSION_BUS_ADDRESS")
-  if bus == nil or bus == "" then
-    return false
-  end
-  return true
-end
+-- Load order matters only where a comment says so.
 
-maki.setup({
-  ui = {
-    notifications = desktop_session() and "notify" or "auto",
-  },
-  agent = {
-    -- Compact once 50% of the window is spent, leaving the rest as working
-    -- room. The default 20% reserves too little for long sessions.
-    compaction_buffer = "50%",
-  },
-  -- Start every new session at high effort instead of inheriting the last
-  -- `/thinking` value. The current session keeps what it already has.
-  always_thinking = "high",
-})
+require("config.options")
+require("config.keymaps")
+require("config.autocmds")
+require("config.commands")
+require("config.packs")
 
--- The stock conventions forbid committing unless asked, which contradicts the
--- project instructions this agent runs under. Replace the section instead of
--- appending to it; `conventions` accepts no hints. A copy of
--- maki-agent/src/prompts/system_conventions.md, current as of maki commit
--- 2b6aaeeb (2026-11-25T23:55:38+09:00); diff it again when maki updates that
--- file.
-maki.api.set_prompt({
-  prompt = "system",
-  slot = "conventions",
-  content = [[
-- Never assume a library is available. Check the project's dependency files first.
-- Match existing code style, naming conventions, and patterns.
-- Follow security best practices. Never expose secrets or keys.
-- Commit only as the project's AGENTS.md directs, and never push unless explicitly asked.
-- Never force push, skip hooks, or amend commits you didn't create.
-- Never commit secrets (.env, credentials, keys).
-- When referencing code, use `file_path:line_number` format.]],
-})
+require("prompts.conventions")
+require("prompts.emphasis")
+require("prompts.shell_visibility")
 
--- `/resume` as an alias for the built-in session picker.
-maki.api.register_command({
-  name = "/resume",
-  description = "Alias for /sessions",
-  handler = function()
-    local ok, err = maki.api.run_command("/sessions")
-    if not ok then
-      maki.ui.flash("could not run /sessions: " .. err)
-    end
-  end,
-})
-
-require("herdr")
-require("cc_safety_net")
-require("secrets_guard")
--- After secrets_guard: it calls `prev` first, so the hard path blocks stay in
+require("plugins.guard.cc_safety_net")
+require("plugins.guard.secrets")
+-- After guard.secrets: it calls `prev` first, so the hard path blocks stay in
 -- front of the ssh prompt.
-require("ssh_guard")
-require("build_guard")
-require("wakelock")
-require("emphasis")
-require("shell_visibility")
-
--- Third-party packages:
-maki.pack.add({
-  "https://github.com/dkarvik/maki-mistral.git",
-})
-
--- Open the chat input in $EDITOR. Bound in both modes so it works whether
--- the input has the keyboard or a picker just closed.
-maki.keymap.set({ "n", "i" }, "<C-g>", function()
-  maki.ui.action("edit_input")
-end, { desc = "Edit input in $EDITOR" })
-
--- Flip between plan and build. `<Tab>` is swallowed below so this is the
--- only key that switches modes.
-local function toggle_mode()
-  local info, err = maki.session.read()
-  if not info then
-    maki.notify("Mode switch failed: " .. tostring(err), "warn", { title = "maki" })
-    return
-  end
-  local next_mode = info.mode == "plan" and "build" or "plan"
-  local ok, set_err = maki.session.set_mode(next_mode)
-  if not ok then
-    maki.notify("Mode switch failed: " .. tostring(set_err), "warn", { title = "maki" })
-  end
-end
-
-maki.keymap.set({ "n", "i" }, "<S-Tab>", toggle_mode, { desc = "Toggle plan/build mode" })
-
--- Take `<Tab>` away from the stock plan/build switch. Not calling
--- `ev.fallback()` is what stops Maki's own handling.
-maki.keymap.set({ "n", "i" }, "<Tab>", function() end, { desc = "Disabled" })
-
--- A vim-style insert/normal switch on `<C-Esc>`, leaving plain `<Esc>` to
--- Maki so `Esc Esc` keeps working. `i` goes back to insert.
-maki.keymap.set("i", "<C-Esc>", function()
-  maki.ui.set_mode("n")
-end, { desc = "Leave insert mode" })
-
-maki.keymap.set("n", "i", function()
-  maki.ui.set_mode("i")
-end, { desc = "Enter insert mode" })
-
--- default: `<C-b>`
-maki.keymap.set("n", "<C-S-b>", function()
-  maki.ui.action("background")
-end)
-
--- Show the input mode in the status bar, so normal mode is visible.
--- The label is empty on purpose: the mode name is the whole message.
-local function show_mode()
-  if maki.fn.mode() == "n" then
-    maki.ui.set_status_hint({ { "NORMAL", "" } })
-  else
-    maki.ui.set_status_hint({ { "INPUT", "" } })
-  end
-end
-
-maki.api.create_autocmd("ModeChanged", { callback = show_mode })
+require("plugins.guard.ssh")
+require("plugins.guard.build")
+require("plugins.herdr")
+require("plugins.wakelock")

@@ -5,11 +5,11 @@
 --
 -- cc-safety-net owns the shell parser, the destructive-command rules, and
 -- the user's rulebooks in ~/.cc-safety-net. Its public API checks commands
--- only, so secret paths stay in secrets_guard.lua. Only inputs that carry a
+-- only, so secret paths stay in guard/secrets.lua. Only inputs that carry a
 -- command field pay the Node startup cost.
 --
 -- Nothing happens when node, cc-safety-net, or the wrapper is missing: the
--- layer is not installed and secrets_guard still protects paths.
+-- layer is not installed and guard/secrets still protects paths.
 --
 -- `code_execution` runs Python, not a shell command, so it is not checked
 -- here; its sandbox is a separate boundary.
@@ -29,7 +29,7 @@ local API_CANDIDATES = {
   ),
   maki.fs.joinpath(home, ".bun/install/global/node_modules/cc-safety-net/dist/api.js"),
 }
-local WRAPPER = maki.fs.joinpath(config, "lua/cc_safety_net/check.mjs")
+local WRAPPER = maki.fs.joinpath(config, "lua/plugins/guard/cc_safety_net/check.mjs")
 local MAX_PAYLOAD = 64 * 1024
 local TIMEOUT_MS = 3000
 -- Runtime failures fail open by default: a broken Node install should not
@@ -54,7 +54,7 @@ if not api or not node or not maki.fs.metadata(WRAPPER) then
   return {}
 end
 
--- Fields that hold a shell command line, matching secrets_guard.lua.
+-- Fields that hold a shell command line, matching guard/secrets.lua.
 local COMMAND_FIELDS = { "command", "cmd", "script" }
 
 -- Nested calls (`batch`) carry their own tool inputs.

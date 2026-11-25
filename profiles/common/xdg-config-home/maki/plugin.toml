@@ -1,12 +1,13 @@
 # Grants for the plugins in ~/.config/maki/lua.
 #
-# herdr.lua picks the transport: herdr/tui.lua shells out to the herdr
-# binary and reads HERDR_* from the environment, while herdr/app.lua writes
+# plugins/herdr/ picks the transport: tui.lua shells out to the herdr
+# binary and reads HERDR_* from the environment, while app.lua writes
 # OSC 7501 to /dev/tty. They never read session transcripts.
 #
-# secrets_guard.lua wraps `tool.*.input`, which maki prices at every
+# plugins/guard/secrets.lua wraps `tool.*.input`, which maki prices at every
 # permission because tools like `read` declare no capability of their own.
-# cc_safety_net.lua wraps the same slot and runs node to check commands.
+# plugins/guard/cc_safety_net/ wraps the same slot and runs node to check
+# commands.
 # The grants exist only to let the layers fire.
 [permissions]
 run = true
