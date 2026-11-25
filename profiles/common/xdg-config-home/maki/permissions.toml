@@ -100,13 +100,16 @@ allow = ["*"]
 default = "prompt"
 allow = [
   "https://github.com/**",
-  "https://maki.sh/**",
   "https://api.github.com/**",
-  "https://raw.githubusercontent.com/**",
   "https://objects.githubusercontent.com/**",
+  "https://raw.githubusercontent.com/**",
+
+  "https://pypi.org/**",
+  "https://docs.rs/**",
+
   "https://developers.openai.com/**",
   "https://docs.pi.dev/**",
-  "https://pypi.org/**",
+  "https://maki.sh/**",
 ]
 
 # MCP servers: allow read-only tools, deny anything that mutates.
