@@ -38,6 +38,7 @@
 - Before calling an external tool's behavior a bug, check its official documentation and say that you did. An undocumented behavior you have not looked up is not evidence of a bug.
 - When identical runs give different results, first suspect an uncontrolled input: fix every input you can, change one, and re-measure. If the result still varies, the system may be genuinely non-deterministic (network, concurrency, model sampling); report that instead of retrying.
 - When a question is answered, say so and name the next action instead of continuing to gather supporting evidence.
+- Before packaging a third-party project, check how it is distributed, in this order: this repository's existing inputs, nixpkgs, the upstream project's own flake or package. An upstream flake is a dependency to consume, not a spec to copy; a local derivation needs a reason the upstream output cannot serve.
 
 ## Claims
 
@@ -48,6 +49,8 @@
 
 ## Planning
 
+- Before the first edit, send an approach message: what already exists, the options and their cost, the one you recommend, the policy choices left open (pin, follows, update behavior), and how you will verify it. Wait for agreement when the request does not name the approach.
+- Do not start a build or fetch that runs for minutes before the approach is agreed. A cancelled run is a signal about the approach: stop and ask instead of retrying a variant.
 - Treat each finding that blocks the user's goal as a constraint. If the investigation shows that a design the task touches is fragile, duplicative, or wrong in a way that blocks the goal, make removing it a required step of the plan. Do not move that removal to an optional phase. Report other such findings without acting on them.
 - If an optional phase is the only thing preventing a known-bad state, either make it required or keep the bad state out of the implementation.
 - A temporary fallback must carry its removal condition in the plan ("temporary: remove when X") and must not ship as the final state.
