@@ -109,6 +109,7 @@ allow = [
   "https://docs.podman.io/**",
   "https://www.freedesktop.org/**",
   "https://wiki.archlinux.org/**",
+  "https://doc.traefik.io/**",
 
   "https://developers.openai.com/**",
   "https://docs.pi.dev/**",
@@ -117,6 +118,11 @@ allow = [
 
   "https://old.reddit.com/**",
   "https://www.reddit.com/**",
+
+  # Random docs, wiki:
+  "https://doc.*/**",
+  "https://docs.*/**",
+  "https://wiki.*/**",
 ]
 
 # MCP servers: allow read-only tools, deny anything that mutates.
