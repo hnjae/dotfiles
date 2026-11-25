@@ -5,10 +5,24 @@ default = "prompt"
 [bash]
 default = "allow"
 
-# Blocked even under default = "allow" and YOLO.
+# Blocked even under default = "allow" and YOLO. A rule matches one simple
+# command: `foo *` covers `foo` and `foo <args>`, a bare `foo` covers only
+# `foo`. A line the shell cannot split stays one scope, so a rule there sees
+# only the beginning of the whole line.
+#
+# Ordered by what cannot be undone: the widest reach first.
 deny = [
-  # sops: decrypting the plaintext is not allowed. Keep this list narrow
-  # and explicit; `sops *` would also block the encrypt forms allowed above.
+  # Another user, root above all: root reaches every store below without the
+  # rules being asked again.
+  "sudo *",
+  "doas *",
+  "su *",
+
+  # Secrets. Each block names the subcommand that prints a value or hands out
+  # a key; the forms that write ciphertext stay allowed.
+
+  # sops: plaintext to stdout or an editor. Keep the list narrow, since
+  # `sops *` would block the encrypt forms too.
   "sops decrypt *",
   "sops -d *",
   "sops --decrypt *",
@@ -16,7 +30,7 @@ deny = [
   "sops exec-file *",
   "sops edit *",
 
-  # op: every path that puts a secret value in the clear.
+  # 1Password: read, inject, run, and export all print the value.
   "op read *",
   "op inject *",
   "op run *",
@@ -24,7 +38,7 @@ deny = [
   "op document get *",
   "op export *",
 
-  # gpg: decrypting and exporting private keys.
+  # OpenPGP: decrypt, export private keys, create or revoke a key.
   "gpg --decrypt *",
   "gpg -d *",
   "gpg --export-secret-keys *",
@@ -32,50 +46,49 @@ deny = [
   "gpg --gen-key *",
   "gpg --gen-revoke *",
 
-  # age has no encrypt-only split worth keeping, and sops drives it.
+  # age: no encrypt-only split worth keeping, and sops drives it anyway.
   "age --decrypt *",
   "age -d *",
   "age-keygen *",
 
-  # libsecret and KWallet: lookup/read print the stored secret.
+  # Desktop keyrings: lookup and read print the stored value.
   "secret-tool lookup *",
   "secret-tool search *",
   "kwallet-query --read-password *",
   "kwallet-query -r *",
 
-  # Environment dumps print every variable; bare env stays blocked while
-  # `env FOO=bar cmd` keeps working.
+  # The environment holds every variable at once. The bare forms are the whole
+  # rule, so `env FOO=bar cmd` still runs.
   "printenv *",
   "env",
   "set",
   "export -p*",
 
-  # Rootful
-  "sudo *",
-  "doas *",
-  "su *",
-
-  # Might delete files:
+  # Deletion that cannot be undone: a root, untracked files, or a device
+  # written in place of a file.
   "rm -rf /*",
   "rm -rf ~/*",
   "rm -rf $HOME/*",
-  "git push --force *",
-  "git push -f *",
   "git clean -fdx *",
   "mkfs *",
   "dd *",
 
-  # System shutdown
+  # History that already left this machine.
+  "git push --force *",
+  "git push -f *",
+
+  # A mode or an owner spread over a whole tree: undoing it needs root.
+  "chmod -R 777 *",
+  "chown -R *",
+
+  # Power state: the session and everything else running ends with it.
   "shutdown *",
   "reboot *",
   "poweroff *",
   "systemctl poweroff *",
   "systemctl reboot *",
 
-  # Mods files
-  "chmod -R 777 *",
-  "chown -R *",
-
+  # Fork bomb: the process table fills and nothing else can start.
   ":(){ *",
 ]
 
