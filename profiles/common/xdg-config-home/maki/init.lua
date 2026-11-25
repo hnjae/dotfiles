@@ -11,6 +11,7 @@ require("config.packs")
 
 require("prompts.conventions")
 require("prompts.emphasis")
+require("prompts.i_have_adhd")
 require("prompts.shell_visibility")
 
 require("plugins.guard.cc_safety_net")
