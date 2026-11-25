@@ -39,6 +39,13 @@
 - When identical runs give different results, first suspect an uncontrolled input: fix every input you can, change one, and re-measure. If the result still varies, the system may be genuinely non-deterministic (network, concurrency, model sampling); report that instead of retrying.
 - When a question is answered, say so and name the next action instead of continuing to gather supporting evidence.
 
+## Claims
+
+- Write a statement as fact only when a tool result or a file you read in this session shows it. For a mutable external system, name the check and the date in the same sentence.
+- Label every other proposition where it appears: `from training data`, `inferred from <source>`, or `not checked`. Training data cannot establish the current state of an external repository, service, or host.
+- An absence in what you read is not an absence in the system: a README naming no `stable` branch does not establish that the repository has none. Fetch the branch list or report only what you read.
+- When a claim turns out to be unverified, name that claim and the evidence that corrects it. Do not restate the corrected conclusion as though the original sentence had been checked.
+
 ## Planning
 
 - Treat each finding that blocks the user's goal as a constraint. If the investigation shows that a design the task touches is fragile, duplicative, or wrong in a way that blocks the goal, make removing it a required step of the plan. Do not move that removal to an optional phase. Report other such findings without acting on them.
