@@ -108,6 +108,23 @@ skills = [
 ]
 
 [[source]]
+repo = "samber/cc-skills-golang"
+hash = "d68d80aec298e1b74b37c2a472c002b5217248b3"
+skills = [
+  "golang-safety",
+  "golang-concurrency",
+  "golang-error-handling",
+  "golang-testing",
+  "golang-security",
+  "golang-modernize",
+  "golang-performance",
+  "golang-benchmark",
+  "golang-continuous-integration",
+  "golang-dependency-management",
+  "golang-documentation",
+]
+
+[[source]]
 repo = "vercel-labs/agent-browser"
 hash = "d52a5e90c372ec4710c69adc3837ac14bbd852aa"
 ref = "v0.41.2"

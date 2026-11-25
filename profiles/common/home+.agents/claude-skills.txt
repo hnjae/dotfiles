@@ -22,3 +22,16 @@ researched-html-note
 # Third-party: ast-grep/agent-skill
 ast-grep
 ast-grep-outline
+
+# Third-party: samber/cc-skills-golang
+golang-safety
+golang-concurrency
+golang-error-handling
+golang-testing
+golang-security
+golang-modernize
+golang-performance
+golang-benchmark
+golang-continuous-integration
+golang-dependency-management
+golang-documentation
