@@ -43,6 +43,7 @@ require("ssh_guard")
 require("build_guard")
 require("wakelock")
 require("emphasis")
+require("shell_visibility")
 
 -- Third-party packages:
 maki.pack.add({

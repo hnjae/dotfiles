@@ -106,6 +106,8 @@ allow = [
 
   "https://pypi.org/**",
   "https://docs.rs/**",
+  "https://docs.podman.io/**",
+  "https://www.freedesktop.org/**",
 
   "https://developers.openai.com/**",
   "https://docs.pi.dev/**",
@@ -114,7 +116,6 @@ allow = [
 
   "https://old.reddit.com/**",
   "https://www.reddit.com/**",
-  "https://www.freedesktop.org/**",
 ]
 
 # MCP servers: allow read-only tools, deny anything that mutates.
