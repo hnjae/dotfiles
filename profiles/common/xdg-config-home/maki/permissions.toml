@@ -104,6 +104,9 @@ allow = [
   "https://api.github.com/**",
   "https://raw.githubusercontent.com/**",
   "https://objects.githubusercontent.com/**",
+  "https://developers.openai.com/**",
+  "https://docs.pi.dev/**",
+  "https://pypi.org/**",
 ]
 
 # MCP servers: allow read-only tools, deny anything that mutates.
@@ -118,6 +121,7 @@ default = "allow"
 
 [mcp.nixos]
 default = "allow"
+allow = ["*"]
 
 [edit]
 allow = [
