@@ -5,5 +5,6 @@
 -- their output is invisible to it.
 maki.api.register_prompt_hint({
   slot = "tool_usage",
-  content = "- A line submitted with a leading `!` runs a shell command, and its result reaches you on the next turn as a user message shaped `I ran: $ <command>` followed by `Output:` or `Error:`. A `!!` line runs the same way but hides the result from you. Never tell the user that `!` output does not reach you.",
+  prompt = "system",
+  content = "- A line submitted with a leading `!` runs a shell command. While it runs you receive nothing; its result reaches you only after it finishes, when the next turn is sent, as a user message shaped `I ran: $ <command>` followed by `Output:` or `Error:`. A `!!` line runs the same way but hides the result from you. Never tell the user that `!` output does not reach you.",
 })
