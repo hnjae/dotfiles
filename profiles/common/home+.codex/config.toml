@@ -41,7 +41,7 @@ theme = "base16-256"
 show_tooltips = true
 
 [features]
-# TODO: 이거 true 면 작동 안함. 지원 한계인지 설정 문제인지는 모르겠음. <2026-11-19>
+# NOTE: mistral endpoint 를 쓸때 code_mode 가 true 면 작동 안함. 지원 한계인지 설정 문제인지는 모르겠음. <2026-11-19>
 # >  {"error":{"code":"3051","message":"tools: Value error, Tool types ['custom'] are not supported; this endpoint currently supports only client-executed function tools.","param":"tools","type":"invalid_request_error"}}
 code_mode = false
 prevent_idle_sleep = true
@@ -90,6 +90,9 @@ args = ["mcp-nixos"]
 
 [mcp_servers.deepwiki]
 url = "https://mcp.deepwiki.com/mcp"
+
+[mcp_servers.deepwiki.tools.ask_wiki_question]
+approval_mode = "approve"
 
 [marketplaces.cc-marketplace]
 source_type = "git"

@@ -10,8 +10,13 @@ url = "https://mcp.exa.ai/mcp"
 url = "https://mcp.context7.com/mcp"
 enabled = true
 
+[mcp_servers.deepwiki]
+url = "https://mcp.deepwiki.com/mcp"
+enabled = true
+
 [mcp.mdn]
 url = "https://mcp.mdn.mozilla.net"
+enabled = true
 
 [mcp.nixos]
 command = ["uvx", "mcp-nixos"]

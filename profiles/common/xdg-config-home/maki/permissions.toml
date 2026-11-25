@@ -110,6 +110,11 @@ allow = [
   "https://developers.openai.com/**",
   "https://docs.pi.dev/**",
   "https://maki.sh/**",
+  "https://skills.sh/**",
+
+  "https://old.reddit.com/**",
+  "https://www.reddit.com/**",
+  "https://www.freedesktop.org/**",
 ]
 
 # MCP servers: allow read-only tools, deny anything that mutates.
@@ -120,6 +125,9 @@ default = "allow"
 default = "allow"
 
 [mcp.mdn]
+default = "allow"
+
+[mcp.deepwiki]
 default = "allow"
 
 [mcp.nixos]
