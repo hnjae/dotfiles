@@ -37,6 +37,9 @@ maki.setup({
 require("herdr")
 require("cc_safety_net")
 require("secrets_guard")
+-- After secrets_guard: it calls `prev` first, so the hard path blocks stay in
+-- front of the ssh prompt.
+require("ssh_guard")
 require("build_guard")
 require("wakelock")
 require("emphasis")
