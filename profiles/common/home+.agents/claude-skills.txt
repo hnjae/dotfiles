@@ -16,6 +16,7 @@ intent-docs-review
 intent-driven-development
 link-html-clipper
 researched-html-note
+herdr-core
 
 # Authored but deliberately kept out of Claude Code: git-commit
 
