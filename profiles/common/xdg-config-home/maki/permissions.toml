@@ -99,30 +99,31 @@ allow = ["*"]
 [webfetch]
 default = "prompt"
 allow = [
-  "https://github.com/**",
-  "https://api.github.com/**",
-  "https://objects.githubusercontent.com/**",
-  "https://raw.githubusercontent.com/**",
-
-  "https://pypi.org/**",
-  "https://docs.rs/**",
-  "https://docs.podman.io/**",
-  "https://www.freedesktop.org/**",
-  "https://wiki.archlinux.org/**",
-  "https://doc.traefik.io/**",
-
-  "https://developers.openai.com/**",
-  "https://docs.pi.dev/**",
-  "https://maki.sh/**",
-  "https://skills.sh/**",
-
-  "https://old.reddit.com/**",
-  "https://www.reddit.com/**",
-
-  # Random docs, wiki:
-  "https://doc.*/**",
-  "https://docs.*/**",
-  "https://wiki.*/**",
+  "*",
+  # "https://github.com/**",
+  # "https://api.github.com/**",
+  # "https://objects.githubusercontent.com/**",
+  # "https://raw.githubusercontent.com/**",
+  #
+  # "https://pypi.org/**",
+  # "https://docs.rs/**",
+  # "https://docs.podman.io/**",
+  # "https://www.freedesktop.org/**",
+  # "https://wiki.archlinux.org/**",
+  # "https://doc.traefik.io/**",
+  #
+  # "https://developers.openai.com/**",
+  # "https://docs.pi.dev/**",
+  # "https://maki.sh/**",
+  # "https://skills.sh/**",
+  #
+  # "https://old.reddit.com/**",
+  # "https://www.reddit.com/**",
+  #
+  # # Random docs, wiki:
+  # "https://doc.*.*/**",
+  # "https://docs.*.*/**",
+  # "https://wiki.*.*/**",
 ]
 
 # MCP servers: allow read-only tools, deny anything that mutates.

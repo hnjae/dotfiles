@@ -81,7 +81,7 @@
   "subagentPromptCacheTtl": "1h",
   "modelSettings": {
     "claude-opus-5-5": {
-      "effortLevel": "high",
+      "effortLevel": "medium",
       "autoCompactWindow": 500000
     },
     "claude-sonnet-5-5": {
