@@ -18,8 +18,6 @@ link-html-clipper
 researched-html-note
 herdr-core
 
-# Authored but deliberately kept out of Claude Code: git-commit
-
 # Third-party: ast-grep/agent-skill
 ast-grep
 ast-grep-outline
