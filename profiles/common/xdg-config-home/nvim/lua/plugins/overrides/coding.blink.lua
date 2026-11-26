@@ -15,8 +15,8 @@ return {
       cmdline = { enabled = false },
 
       completion = {
-        -- disable preselect
-        list = { selection = { preselect = false, auto_insert = false } },
+        -- like the builtin completion: no preselect, <C-n>/<C-p> insert the item right away
+        list = { selection = { preselect = false, auto_insert = true } },
         menu = {
           draw = {
             columns = {
@@ -79,7 +79,15 @@ return {
             end
           end,
           "snippet_forward",
-          "accept",
+          -- expand a selected snippet item (auto_insert only previews its first line);
+          -- other items are already inserted, so <Tab> falls through
+          function(cmp)
+            local item = cmp.get_selected_item()
+            local snippet_kind = require("blink.cmp.types").CompletionItemKind.Snippet
+            if item and item.kind == snippet_kind then
+              return cmp.accept()
+            end
+          end,
           "fallback",
         },
         ["<S-Tab>"] = { "snippet_backward", "fallback" },
