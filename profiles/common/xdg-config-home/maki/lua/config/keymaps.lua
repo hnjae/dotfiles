@@ -7,6 +7,11 @@ maki.keymap.set({ "n", "i" }, "<C-g>", function()
   maki.ui.action("edit_input")
 end, { desc = "Edit input in $EDITOR" })
 
+-- Thinking level each mode runs at. Plan mode reasons about the whole change,
+-- so it gets the top rung; build mode executes and only needs the level a new
+-- session starts at (`always_thinking` in config/options.lua).
+local mode_thinking = { plan = "max", build = "high" }
+
 -- Flip between plan and build. `<Tab>` is swallowed below so this is the
 -- only key that switches modes.
 local function toggle_mode()
@@ -19,6 +24,13 @@ local function toggle_mode()
   local ok, set_err = maki.session.set_mode(next_mode)
   if not ok then
     maki.notify("Mode switch failed: " .. tostring(set_err), "warn", { title = "maki" })
+    return
+  end
+  -- A model that lacks the top rung snaps down, so a failure here is the only
+  -- thing worth reporting; `maki.model.get().thinking_shown` names the result.
+  local _, think_err = maki.model.set({ thinking = mode_thinking[next_mode] })
+  if think_err then
+    maki.notify("Thinking switch failed: " .. tostring(think_err), "warn", { title = "maki" })
   end
 end
 
