@@ -52,6 +52,10 @@ Tests and intent docs constrain only what callers or other components durably de
 
 A repository opts in to intent docs by having `docs/spec/` or `docs/architecture/`; never create either unless asked. In a repository that has either, invoke the `intent-driven-development` skill before any implementation change. In `docs/` files, write concise technical prose with no hard wraps (one paragraph or list item per source line) and use Mermaid for diagrams.
 
+## Nix
+
+Before writing, editing, or reviewing Nix code, invoke the `nix-best-practices` skill.
+
 ## Secrets
 
 If secret material reaches your context, by mistake or at the user's request, tell the user in your next reply: name the file or command and the kind of secret it exposed (API key, password, token), without repeating the value. The secret has already reached the model provider, so the user may need to rotate it.

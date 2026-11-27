@@ -17,6 +17,7 @@ intent-driven-development
 link-html-clipper
 researched-html-note
 herdr-core
+nix-best-practices
 
 # Third-party: ast-grep/agent-skill
 ast-grep
