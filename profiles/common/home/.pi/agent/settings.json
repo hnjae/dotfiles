@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "1.6.0",
+  "lastChangelogVersion": "1.6.1",
   "defaultProvider": "mistral",
   "defaultModel": "deepseek-v4-1-flash-1017",
   "packages": [
@@ -20,7 +20,6 @@
   "markdown": {
     "mermaid": "streaming"
   },
-  "showCacheMissNotices": true,
   "treeFilterMode": "default",
   "tuiMode": "fullscreen",
   "extensionChangelogVersions": {
@@ -37,5 +36,11 @@
   "terminalTheme": true,
   "groupToolCalls": true,
   "thinkingMode": "live",
-  "bashIntent": "model"
+  "bashIntent": "model",
+  "notices": {
+    "cacheMisses": true,
+    "cacheWarming": true,
+    "compactionCosts": true,
+    "reasoningDrops": true
+  }
 }
