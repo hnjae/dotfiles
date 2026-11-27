@@ -2,7 +2,7 @@
 
 ## Language
 
-- Write everything a future AI will read in English: files, code comments, commit messages, docs, and the output of programs you write. This rule does not set the language of your replies to the user.
+- Write everything a future AI will read in English: files, code comments, commit messages, docs, and logs and output another program or agent consumes. This rule does not set the language of your replies to the user.
 - English is the default, not a hard rule. Keep proper nouns and terms whose nuance English dilutes in their original language (e.g. 국세기본법, 天命). Mixing other languages into an English sentence is fine; an AI parses such a sentence well.
 - The reason for the English default is that less capable models have weaker multilingual ability.
 
@@ -27,7 +27,7 @@ READMEs, guides, and `docs/` hold only what a reader cannot get from the code, `
 
 ## Secrets
 
-- Never read, print, or copy secret material: `~/.ssh`, `~/.config/sops`, `.env`, `.env.*`, `auth.json`, keyrings, password stores, shell or REPL history, and any credential in the process environment (`env`, `printenv`, `export -p`, `set`). A password typed by mistake ends up in history.
+- Never read, print, or copy secret material: `~/.ssh`, `~/.config/sops`, `.env`, `.env.*`, `auth.json`, keyrings, password stores, shell or REPL history, and any credential in the process environment (`env`, `printenv`, `export -p`, `set`). A password typed by mistake ends up in history. Templates such as `.env.example` and `.env.sample` are not secret material.
 - Never print anything that reveals part of a secret either: a prefix or suffix, a hash, its decrypted form, or comparisons against guesses. `grep VAR ~/.zshrc` and `env | grep` print the value itself. Checking only whether it is set or how long it is (`[ -n "$VAR" ]`, `${#VAR}`) is fine, but not under xtrace (`set -x`, `bash -x`), which prints expanded arguments such as the value inside `[ -n "$VAR" ]`.
 - Exception: when the user explicitly asks you to read or check a specific secret file or value, you may do so for that request only. A `cc-safety-net` or harness block still wins: report it instead of working around it.
 - A `${VAR}` reference in a config file names a requirement, not a question to answer. Report the name and let the user supply the value, or take the option that reads nothing: a keyless endpoint, OAuth login, or asking.
@@ -46,7 +46,6 @@ READMEs, guides, and `docs/` hold only what a reader cannot get from the code, `
 - Before calling an external tool's behavior a bug, check its official documentation and say that you did. An undocumented behavior you have not looked up is not evidence of a bug.
 - When identical runs give different results, first suspect an uncontrolled input: fix every input you can, change one, and re-measure. If the result still varies, the system may be genuinely non-deterministic (network, concurrency, model sampling); report that instead of retrying.
 - When a question is answered, say so and name the next action instead of continuing to gather supporting evidence.
-- Before packaging a third-party project, check how it is distributed, in this order: this repository's existing inputs, nixpkgs, the upstream project's own flake or package. An upstream flake is a dependency to consume, not a spec to copy; a local derivation needs a reason the upstream output cannot serve.
 
 ## Claims
 
@@ -57,7 +56,7 @@ READMEs, guides, and `docs/` hold only what a reader cannot get from the code, `
 
 ## Planning
 
-- For a change beyond a single obvious edit, send an approach message before the first edit: what already exists, the options and their cost, the one you recommend, the policy choices left open (for Nix flake inputs: pin, `follows`, update behavior), and how you will verify it. Wait for agreement when the request does not name the approach.
+- For a change beyond a single obvious edit, send an approach message before the first edit: what already exists, the options and their cost, the one you recommend, the policy choices left open, and how you will verify it. Wait for agreement when the request does not name the approach.
 - Do not start a build or fetch that runs for minutes before the approach is agreed. A cancelled run is a signal about the approach: stop and ask instead of retrying a variant.
 - Treat each finding that blocks the user's goal as a constraint. If the investigation shows that a design the task touches is fragile, duplicative, or wrong in a way that blocks the goal, make removing it a required step of the plan. Do not move that removal to an optional phase. Report other such findings without acting on them.
 - If an optional phase is the only thing preventing a known-bad state, either make it required or keep the bad state out of the implementation.
@@ -73,7 +72,7 @@ READMEs, guides, and `docs/` hold only what a reader cannot get from the code, `
 
 - An approval covers only what the question named. When the change carries a decision the question did not spell out, list it as its own item: default, observable effect, cost of reverting.
 - Measure before judging. Quote the number ("pi sees 29 more skills") instead of a direction ("probably a benefit"). A direction with no count is what makes a side effect invisible.
-- Split reversible steps from behavior changes. A reversible step may proceed and be reported afterwards; a change in behavior the user sees that the request did not name gets its own item and approval before you make it.
+- Split reversible steps from behavior changes. A reversible step within the agreed approach may proceed and be reported afterwards; a change in behavior the user sees that the request did not name gets its own item and approval before you make it.
 - Ask before discarding data you did not create: deleting files, `git reset --hard`, `git checkout -- <path>`, `git clean`, or dropping a stash. These cannot be undone.
 - Ask before outward-facing actions: opening PRs or issues, posting comments, sending messages. They publish content that may be cached or indexed even if deleted later.
 
