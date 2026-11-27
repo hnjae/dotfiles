@@ -36,6 +36,11 @@ Make the simplest maintainable change that fully satisfies the request. Every ch
 
 A failure your own change caused is part of the task: fix it. When a check for the current task produces an unexpected result unrelated to the requested outcome, state the answer the user asked for first, then the anomaly in at most two lines, and do not investigate it further. Investigate it only when the user asks, or when it blocks the answer.
 
+## Markdown
+
+- Do not hard-wrap. In every Markdown file you write, put one paragraph or list item per source line, with no hard wraps: the user's editor soft-wraps, and hard-wrapped text becomes hard to read once the window is narrower than the wrap width.
+- Wrap only when the repository declares a width: `.editorconfig` `max_line_length`, `rumdl` MD013 `line-length`, `.mdformat.toml` `wrap`, or an explicit rule in the repository's `AGENTS.md` (`CLAUDE.md`). A disabled or absent length means no hard wrapping.
+
 ## Pin contracts, not incidentals
 
 Tests and intent docs constrain only what callers or other components durably depend on. Everything else stays free to change.
@@ -52,8 +57,6 @@ READMEs, guides, and `docs/` hold only what a reader cannot get from the code, `
 
 - Keep: the purpose and boundaries, the rationale and rejected alternatives, contracts callers depend on, one-time manual steps (bootstrap) the code cannot perform, and gotchas that are costly to rediscover.
 - Drop: option, flag, mount, port, or dependency lists, what a module does line by line, diagrams of code flow, and generic steps (deploy, rollback, status checks).
-- State a fact once and link to it elsewhere. Before deleting a section, search for code comments that point at it.
-- In every Markdown file you write, not only docs (including `CLAUDE.md`, `AGENTS.md`, skills, and memory files), put one paragraph or list item per source line, with no hard wraps: the user's editor soft-wraps, and hard-wrapped text becomes hard to read once the window is narrower than the wrap width.
 
 ## Intent docs
 

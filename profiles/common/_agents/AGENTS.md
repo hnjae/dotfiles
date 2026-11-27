@@ -14,8 +14,8 @@
 
 ## Markdown
 
-- Do not hard-wrap prose. Write one paragraph per line so a later edit shows only the lines it changes.
-- Wrap only when the repository declares a width: `.editorconfig` `max_line_length`, `rumdl` MD013 `line-length`, `.mdformat.toml` `wrap`, `.prettierrc` `proseWrap`, or an explicit rule in the repository's `AGENTS.md`. A disabled or absent length means no hard wrapping.
+- Do not hard-wrap. In every Markdown file you write, put one paragraph or list item per source line, with no hard wraps: the user's editor soft-wraps, and hard-wrapped text becomes hard to read once the window is narrower than the wrap width.
+- Wrap only when the repository declares a width: `.editorconfig` `max_line_length`, `rumdl` MD013 `line-length`, `.mdformat.toml` `wrap`, or an explicit rule in the repository's `AGENTS.md` (`CLAUDE.md`). A disabled or absent length means no hard wrapping.
 
 ## Docs
 
@@ -65,7 +65,6 @@ READMEs, guides, and `docs/` hold only what a reader cannot get from the code, `
 
 ## Reporting
 
-- Report when a phase ends: what is now known, what is still open, and the single next action.
 - Ask before moving from investigation into implementation when the user asked only a question (such as whether something is the cause) or for a plan or a survey. Those requests authorize investigation, not edits or commits.
 
 ## Approval
@@ -81,6 +80,7 @@ READMEs, guides, and `docs/` hold only what a reader cannot get from the code, `
 - Make only the changes the request asks for or clearly needs; every changed line should trace to the request.
 - Do not add unrequested features, refactors, abstractions, configurability, or handling for impossible cases. If one would help, mention it at the end instead of making it.
 - Follow the existing conventions; do not reformat or tidy adjacent code.
+- if a checker (e.g. `typos`) flags verified-correct content, keep the content and add the narrowest allowlist or suppression. Never disable or weaken unrelated checks.
 
 ## Verification
 
@@ -88,7 +88,11 @@ READMEs, guides, and `docs/` hold only what a reader cannot get from the code, `
 
 ## Skills
 
-- This file names skills such as `git-commit`. If your harness has no skill tool, read `~/.agents/skills/<name>/SKILL.md` and follow it.
+- If your harness has no skill tool, read `~/.agents/skills/<name>/SKILL.md` and follow it.
+
+## Nix
+
+Before writing, editing, or reviewing Nix code, invoke the `nix-best-practices` skill.
 
 ## Intent docs
 
