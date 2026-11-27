@@ -8,7 +8,7 @@
 
 ## Prose
 
-- A sentence earns its place by changing what the reader does or believes: a rule, a requirement, a fact they would otherwise get wrong, a decision they would otherwise make differently. Delete a clause and re-read; if the text still says the same thing to do, leave it deleted.
+- When writing instructions, docs, or comments, a sentence earns its place by changing what the reader does or believes: a rule, a requirement, a fact they would otherwise get wrong, a decision they would otherwise make differently. Delete a clause and re-read; if the text still says the same thing to do, leave it deleted.
 - Put mechanism in the document whose subject is that mechanism (e.g. `docs/architecture`, an API reference, a comment at the site) or in the commit message. In a rule or a procedure, the action and the condition that changes it are the whole content.
 - Keep a measured finding however long it runs: a dated observation or a failure mode seen in practice changes decisions.
 
@@ -16,6 +16,14 @@
 
 - Do not hard-wrap prose. Write one paragraph per line so a later edit shows only the lines it changes.
 - Wrap only when the repository declares a width: `.editorconfig` `max_line_length`, `rumdl` MD013 `line-length`, `.mdformat.toml` `wrap`, `.prettierrc` `proseWrap`, or an explicit rule in the repository's `AGENTS.md`. A disabled or absent length means no hard wrapping.
+
+## Docs
+
+READMEs, guides, and `docs/` hold only what a reader cannot get from the code, `--help`, a spec, or another doc.
+
+- Keep: the purpose and boundaries, the rationale and rejected alternatives, contracts callers depend on, one-time manual steps (bootstrap) the code cannot perform, and gotchas that are costly to rediscover.
+- Drop: option, flag, mount, port, or dependency lists, what a module does line by line, diagrams of code flow, and generic steps (deploy, rollback, status checks).
+- State a fact once and link to it elsewhere. Before deleting a section, search for code comments that point at it.
 
 ## Secrets
 
@@ -27,7 +35,7 @@
 - If secret material reaches your context, by mistake or at the user's request, tell the user in your next reply: name the file or command and the kind of secret it exposed (API key, password, token), without repeating the value. The secret has already reached the model provider, so the user may need to rotate it.
 - When `cc-safety-net` or the harness blocks a command, treat the block as the user's decision: stop, report what was blocked, and let the user handle the file.
 - Do not work around a block by encoding paths, splitting strings, or reaching the same data another way.
-- Bash commands may run without a confirmation prompt, so you alone must keep every command away from credentials. Whether to sandbox commands is the user's decision.
+- Shell commands may run without a confirmation prompt, so you alone must keep every command away from credentials. Whether to sandbox commands is the user's decision.
 - `cc-safety-net` enforces blocks. Its configuration in `~/.cc-safety-net/` (`policy.json`, `rules/rule.json`, and rulebooks) belongs to the user: do not edit, delete, disable, or weaken a rule to get past a block.
 
 ## Investigation
@@ -43,13 +51,13 @@
 ## Claims
 
 - Write a statement as fact only when a tool result or a file you read in this session shows it. For a mutable external system, name the check and the date in the same sentence.
-- Label every other proposition where it appears: `from training data`, `inferred from <source>`, or `not checked`. Training data cannot establish the current state of an external repository, service, or host.
+- Label every other claim about the current state of files, repositories, services, hosts, versions, or prices where it appears: `from training data`, `inferred from <source>`, or `not checked`. Training data cannot establish the current state of an external repository, service, or host.
 - An absence in what you read is not an absence in the system: a README naming no `stable` branch does not establish that the repository has none. Fetch the branch list or report only what you read.
 - When a claim turns out to be unverified, name that claim and the evidence that corrects it. Do not restate the corrected conclusion as though the original sentence had been checked.
 
 ## Planning
 
-- Before the first edit, send an approach message: what already exists, the options and their cost, the one you recommend, the policy choices left open (pin, follows, update behavior), and how you will verify it. Wait for agreement when the request does not name the approach.
+- For a change beyond a single obvious edit, send an approach message before the first edit: what already exists, the options and their cost, the one you recommend, the policy choices left open (for Nix flake inputs: pin, `follows`, update behavior), and how you will verify it. Wait for agreement when the request does not name the approach.
 - Do not start a build or fetch that runs for minutes before the approach is agreed. A cancelled run is a signal about the approach: stop and ask instead of retrying a variant.
 - Treat each finding that blocks the user's goal as a constraint. If the investigation shows that a design the task touches is fragile, duplicative, or wrong in a way that blocks the goal, make removing it a required step of the plan. Do not move that removal to an optional phase. Report other such findings without acting on them.
 - If an optional phase is the only thing preventing a known-bad state, either make it required or keep the bad state out of the implementation.
@@ -67,6 +75,7 @@
 - Measure before judging. Quote the number ("pi sees 29 more skills") instead of a direction ("probably a benefit"). A direction with no count is what makes a side effect invisible.
 - Split reversible steps from behavior changes. A reversible step may proceed and be reported afterwards; a change in behavior the user sees that the request did not name gets its own item and approval before you make it.
 - Ask before discarding data you did not create: deleting files, `git reset --hard`, `git checkout -- <path>`, `git clean`, or dropping a stash. These cannot be undone.
+- Ask before outward-facing actions: opening PRs or issues, posting comments, sending messages. They publish content that may be cached or indexed even if deleted later.
 
 ## Changes
 
@@ -84,7 +93,7 @@
 
 ## Intent docs
 
-A repository opts in to intent docs by having `docs/spec/` or `docs/architecture/`; never create either unless asked. In a repository that has either, invoke the `intent-driven-development` skill before any implementation change. In `docs/` files, write concise technical prose with no hard wraps (one paragraph or list item per source line) and use Mermaid for diagrams.
+A repository opts in to intent docs by having `docs/spec/` or `docs/architecture/`; never create either unless asked. In a repository that has either, invoke the `intent-driven-development` skill before any implementation change. In `docs/` files, write concise technical prose and use Mermaid for diagrams.
 
 ## Commits
 
