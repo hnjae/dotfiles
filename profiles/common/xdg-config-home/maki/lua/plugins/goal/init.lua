@@ -13,6 +13,7 @@ local MAX_STALLS = 3
 local MAX_JUDGE_ATTEMPTS = 2
 local MAX_AUDIT_OPENS = 2
 local AUDIT_RETRY_MS = 250
+local AUDIT_TIMEOUT_MS = 300000
 local MAX_TRANSCRIPT_CHARS = 40000
 local MAX_TOOL_RESULT_CHARS = 2000
 
@@ -566,6 +567,16 @@ local function run_audit(session_id, record)
       max_tool_chars = MAX_TOOL_RESULT_CHARS,
     })
     local auditor, auditor_err
+    local timed_out = false
+    -- The audit runs in a spawned task, so it has no turn deadline. This is
+    -- the only bound: a provider that never answers must not leave the goal
+    -- auditing forever. Closing the session cancels the prompt.
+    local watchdog = maki.defer_fn(function()
+      timed_out = true
+      if auditor then
+        auditor:close()
+      end
+    end, AUDIT_TIMEOUT_MS)
     for attempt = 1, MAX_AUDIT_OPENS do
       auditor, auditor_err = maki.agent.session({
         session = session_id,
@@ -582,7 +593,16 @@ local function run_audit(session_id, record)
         maki.async.sleep(AUDIT_RETRY_MS)
       end
     end
+    if timed_out then
+      watchdog:stop()
+      if auditor then
+        auditor:close()
+      end
+      audit_error(session_id, record, "the completion audit timed out")
+      return
+    end
     if not auditor then
+      watchdog:stop()
       error("cannot open auditor: " .. tostring(auditor_err), 0)
     end
     local verdict
@@ -604,8 +624,13 @@ local function run_audit(session_id, record)
       end
       prompt = JUDGE_RETRY
     end
+    watchdog:stop()
     auditor:close()
     if not result then
+      if timed_out then
+        audit_error(session_id, record, "the completion audit timed out")
+        return
+      end
       error("auditor failed: " .. tostring(prompt_err), 0)
     end
     if not verdict then
@@ -719,7 +744,9 @@ maki.api.create_autocmd("TurnEnd", {
           return
         end
         if record.status == "auditing" then
-          run_audit(session_id, record)
+          maki.async.spawn(function()
+            run_audit(session_id, record)
+          end)
           return
         end
         if not fence then
