@@ -24,6 +24,7 @@ format-check:
 lint:
     prek validate-config prek.toml
     prek run --config prek.toml --all-files
+    prek run --config prek.toml --all-files --hook-stage manual
     just pi-check
 
 [group('ci')]

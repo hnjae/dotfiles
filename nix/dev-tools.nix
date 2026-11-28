@@ -7,6 +7,7 @@ pkgs: with pkgs; [
   deadnix
   git
   just
+  nixf-diagnose
   nixfmt
   prek
   reuse
