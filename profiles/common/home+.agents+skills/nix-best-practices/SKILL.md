@@ -1,6 +1,6 @@
 ---
 name: nix-best-practices
-description: Conventions for writing and reviewing Nix code in any repository: list, attribute-set, and string composition; inline shell and other scripts built with `pkgs.writers`; and how data files reach a module. Use whenever you write, edit, refactor, or review a `.nix` file, a flake, a NixOS or home-manager module, or a derivation, even when the user does not mention style or conventions. A repository's own `AGENTS.md` overrides these rules where they conflict.
+description: "Conventions for writing and reviewing Nix code in any repository: list, attribute-set, and string composition; inline shell and other scripts built with `pkgs.writers`; and how data files reach a module. Use whenever you write, edit, refactor, or review a `.nix` file, a flake, a NixOS or home-manager module, or a derivation, even when the user does not mention style or conventions. A repository's own `AGENTS.md` overrides these rules where they conflict."
 ---
 
 # Nix Best Practices
