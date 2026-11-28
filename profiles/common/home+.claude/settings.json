@@ -6,7 +6,7 @@
     "commit": "",
     "pr": ""
   },
-  "model": "opus",
+  "model": "haiku",
   "hooks": {
     "SessionStart": [
       {

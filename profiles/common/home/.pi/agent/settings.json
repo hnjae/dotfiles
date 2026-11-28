@@ -13,7 +13,9 @@
     "npm:pi-advisor-flow",
     "npm:pi-away"
   ],
-  "extensions": ["-extensions/translate/index.ts"],
+  "extensions": [
+    "-extensions/translate/index.ts"
+  ],
   "enableSkillCommands": true,
   "terminal": {
     "showTerminalProgress": false
@@ -26,7 +28,7 @@
   "extensionChangelogVersions": {
     "{\"source\":\"npm:@tintinweb/pi-subagents\",\"scope\":\"user\"}": "0.26.3",
     "{\"source\":\"npm:@narumitw/pi-plan-mode\",\"scope\":\"user\"}": "0.60.1",
-    "{\"source\":\"npm:@narumitw/pi-btw\",\"scope\":\"user\"}": "0.64.0",
+    "{\"source\":\"npm:@narumitw/pi-btw\",\"scope\":\"user\"}": "0.64.1",
     "{\"source\":\"npm:pi-claude-code-ui\",\"scope\":\"user\"}": "1.0.112",
     "{\"source\":\"npm:@narumitw/pi-subagents\",\"scope\":\"user\"}": "3.4.5",
     "{\"source\":\"npm:@narumitw/pi-progress\",\"scope\":\"user\"}": "0.8.0",
