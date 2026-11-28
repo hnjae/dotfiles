@@ -22,7 +22,7 @@ REUSE (`reuse` hook, `REUSE.toml`, SPDX headers) is out of scope: leave it as it
 | `python` | module `python` | `ruff.toml` |
 | `lua` | module `lua` | `stylua.toml` |
 
-Shared files carry every module's settings. A block wrapped in `# >>> <tag>` and `# <<< <tag>` lines (marker alone on its line, no nesting) belongs to that tag. To render, keep a block's content when its tag is enabled, drop the block when it is not, delete every marker line, and copy the rest verbatim. Tags are the module names plus the env (`shell-nix` or `flake`). Template files hold no license header, so rendered files get none.
+Shared files carry every module's settings. A block wrapped in `# >>> <tag>` and `# <<< <tag>` lines (marker alone on its line, no nesting) belongs to that tag. To render, keep a block's content when its tag is enabled, drop the block when it is not, delete every marker line, and copy the rest verbatim. Tags are the module names plus the env (`shell-nix`, `flake`, or `devenv`). Template files hold no license header, so rendered files get none.
 
 ## Opt-in modules
 
@@ -35,11 +35,11 @@ Enable a module when `git ls-files` shows a matching tracked file. Ignore the mo
 | `python` | `*.py *.pyi` |
 | `lua` | `*.lua` |
 
-Everything else is core and always on, including taplo. The environment is `shell-nix` when the repository has `shell.nix` and `flake` when it has `flake.nix`; if it has neither, ask.
+Everything else is core and always on, including taplo. The environment is `devenv` when the repository has `devenv.nix` or `devenv.yaml`, even alongside `flake.nix`, because devenv then owns the dev shell. Otherwise it is `flake` when the repository has `flake.nix`, then `shell-nix` when it has `shell.nix`; if it has none of these, ask.
 
 ## Environment contract
 
-The tool list lives in one place, the `packages` list of `shell-nix/shell.nix.tmpl`, embedded in the dev shell itself. The dev shell must contain every package of the rendered list, together with the repository's own packages in the same list, and run `prek install --quiet` in its `shellHook`.
+The tool list lives in one place, the `packages` list of `shell-nix/shell.nix.tmpl`, embedded in the dev shell itself. The dev shell must contain every package of the rendered list, together with the repository's own packages in the same list, and run `prek install --quiet` when it starts (`shellHook`; `enterShell` in devenv).
 
 `shell.nix` is a starting point for new `shell-nix` repositories; an existing one keeps its own structure and only gains the missing packages and the hook. A `flake` repository creates no `shell.nix`: render the same template for its list and hook, and put them in the devShell of its own `flake.nix`:
 
@@ -61,6 +61,8 @@ Where the devShell goes in a flake repository:
 - With flake-parts but no partitions, it is `devShells.default` in `perSystem`.
 - In a plain flake, it is `devShells.<system>.default`.
 - When adding it would make `flake.nix` large, create `nix/`, split the flake into files there, and import them from `flake.nix`.
+
+A `devenv` repository creates no `shell.nix` and adds no devShell to `flake.nix`: render the same template, add the list to `packages` in the `devenv.nix` that defines the shared shell (follow `imports` in `devenv.yaml` to find it), and put `prek install --quiet` in `enterShell`.
 
 ## Justfile contract
 
@@ -130,14 +132,15 @@ A difference the user has declined will come up again on the next run: that is e
     2. Remove the modules and inputs.
     3. Run `nix flake lock` so the lock file drops the inputs.
     4. Point a `formatter` output at `pkgs.treefmt`.
+- In a `devenv` repository, the same tools come from devenv's `git-hooks` and `treefmt` options, with their inputs in `devenv.yaml`, and they generate `.pre-commit-config.yaml` and `treefmt.toml` (often gitignored). Compare the generated files, but treat them as legacy output, not as the repository's own config. The migration is the same difference of its own, with these changes: remove the options and inputs, run `devenv update` instead of `nix flake lock` so `devenv.lock` drops the inputs, and remove the generated files from `.gitignore` so the new `prek.toml` and `treefmt.toml` are tracked.
 - Make the dev shell meet the environment contract: add the missing template packages to its `packages` list and keep the repository's own entries. If `.git/hooks/` holds hook scripts that prek did not write (left by pre-commit, git-hooks.nix, or `cog install-hook`), run `prek install --force` once, because a plain `prek install` keeps the old hooks running alongside its own.
 
 ## Verify
 
 Run each check and report its result. A check that failed to start does not count as passing; when one cannot run, say which and why.
 
-1. In a `flake` repository, check the dev shell: `git add` new files (flakes ignore untracked ones), then run `nix develop --command sh -c 'for c in <executables>; do command -v "$c" >/dev/null || echo "missing: $c"; done'` with the executable of every package in the rendered list (`cocogitto` provides `cog`). It must print nothing.
-2. Run `prek validate-config prek.toml`, `prek run --all-files`, and `prek run --all-files --hook-stage manual`, inside `nix develop` for a flake repository. Report failures that existing repository content causes (for example formatting the new treefmt config would change) instead of fixing unrelated files.
+1. In a `flake` repository, check the dev shell: `git add` new files (flakes ignore untracked ones), then run `nix develop --command sh -c 'for c in <executables>; do command -v "$c" >/dev/null || echo "missing: $c"; done'` with the executable of every package in the rendered list (`cocogitto` provides `cog`). It must print nothing. In a `devenv` repository, run the same loop with `devenv shell -- sh -c '...'`.
+2. Run `prek validate-config prek.toml`, `prek run --all-files`, and `prek run --all-files --hook-stage manual`, inside `nix develop` for a flake repository and `devenv shell` for a devenv repository. Report failures that existing repository content causes (for example formatting the new treefmt config would change) instead of fixing unrelated files.
 3. Repeat Sync steps 1–4. Only the differences the user declined may remain.
 
 ## Editing the template
