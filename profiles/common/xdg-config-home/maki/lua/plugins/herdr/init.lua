@@ -95,13 +95,15 @@ maki.api.create_autocmd("SessionFocusChanged", {
 })
 
 -- The user has to answer something: maki raises a notification for it.
--- Chain to whatever handler was installed before us so the notice still
--- shows the way the user configured it.
+-- This handler can run inside an async task, where the session lookup and
+-- the OSC write cannot yield. Report from a task and flash here.
 maki.set_notify_handler(function(msg, level, opts)
-  local session_id = maki.session.current()
-  if session_id == focused and level ~= "info" then
-    transport.report("blocked", session_id)
-  end
+  maki.async.spawn(function()
+    local session_id = maki.session.current()
+    if session_id == focused and level ~= "info" then
+      transport.report("blocked", session_id)
+    end
+  end)
   maki.ui.flash(msg)
 end)
 
