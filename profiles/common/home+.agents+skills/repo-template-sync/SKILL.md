@@ -68,20 +68,35 @@ A `devenv` repository creates no `shell.nix` and adds no devShell to `flake.nix`
 
 ## Justfile contract
 
-`justfile` is repository-owned and every repository has one (a missing one is a difference: create it). It must provide these recipes. The body states the required effect; the repository may add its own steps, which is why no template file exists for it (`import` rejects a recipe defined twice, so a repository could not extend an imported one).
+`justfile` is repository-owned and every repository has one (a missing one is a difference: create it). It starts with this preamble, so the file runs itself and bare `just` lists what the repository can do:
 
 ```just
-[group('tooling')]
+#!/usr/bin/env -S just --justfile
+
+set unstable
+set fallback := false
+set lazy
+
+_:
+    @just --list
+```
+
+The `fallback` setting sends `just` to an ancestor directory's justfile when this one lacks the recipe, so that line earns its place only where an ancestor justfile exists: `set fallback := false` (just's default) keeps a project nested in another repository from reaching that repository's recipes, and bare `set fallback` opts into them instead. With no ancestor justfile, leave the line out. A missing line of the preamble is a difference, like a missing file.
+
+It must also provide these recipes. The body states the required effect; the repository may add its own steps, which is why no template file exists for it (`import` rejects a recipe defined twice, so a repository could not extend an imported one).
+
+```just
+[group('ci')]
 format:
     treefmt
 
-[group('tooling')]
+[group('ci')]
 lint:
     prek validate-config prek.toml
     prek run --all-files
     prek run --all-files --hook-stage manual
 
-[group('tooling')]
+[group('ci')]
 ci: lint
 ```
 
