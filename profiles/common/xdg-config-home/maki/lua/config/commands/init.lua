@@ -5,3 +5,4 @@
 
 require("config.commands.resume")
 require("config.commands.copy")
+require("config.commands.skills")
