@@ -14,6 +14,7 @@ require("prompts.i_have_adhd")
 require("prompts.shell_visibility")
 
 require("plugins.mode_thinking")
+require("plugins.goal")
 require("plugins.guard.cc_safety_net")
 require("plugins.guard.secrets")
 -- After guard.secrets: it calls `prev` first, so the hard path blocks stay in
