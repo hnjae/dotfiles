@@ -6,6 +6,23 @@
 -- session starts at (`always_thinking` in config/options.lua).
 local mode_thinking = { plan = "max", build = "high" }
 
+-- The plan form's built-in implement rows switch modes without going through
+-- `toggle_mode`, so they set the build level themselves.
+maki.api.set_slot("ui.plan_form.actions", function(prev, ev)
+  local rows = prev(ev)
+  for _, row in ipairs(rows) do
+    if row.action == "implement" or row.action == "clear_and_implement" then
+      row.handler = function()
+        local _, err = maki.model.set({ thinking = mode_thinking.build })
+        if err then
+          maki.notify("Thinking switch failed: " .. tostring(err), "warn", { title = "maki" })
+        end
+      end
+    end
+  end
+  return rows
+end)
+
 -- Flip between plan and build. `<Tab>` is swallowed below so this is the
 -- only key that switches modes.
 local function toggle_mode()
