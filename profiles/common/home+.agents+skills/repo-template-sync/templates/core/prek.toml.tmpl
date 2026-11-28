@@ -24,5 +24,8 @@ hooks = [
   { id = "nixf-diagnose", name = "nixf-diagnose", entry = "nixf-diagnose", language = "system", files = '\.nix$' },
   { id = "rumdl", name = "rumdl", entry = "rumdl check", language = "system", files = '\.(md|markdown)$', require_serial = true },
   { id = "shellcheck", name = "shellcheck", entry = "shellcheck", language = "system", files = '(^|/)([^/]*\.(sh|bash)|\.env(rc)?(\.[^/]*)?)$' },
+  # >>> python
+  { id = "ruff", name = "ruff check", entry = "ruff check", language = "system", files = '\.(py|pyi)$' },
+  # <<< python
   { id = "cog-verify", name = "cog verify", entry = "cog verify --file", language = "system", stages = ["commit-msg"] },
 ]

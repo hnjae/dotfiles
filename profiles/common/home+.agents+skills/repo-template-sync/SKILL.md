@@ -82,7 +82,8 @@ ci: lint
 ```
 
 - `format` rewrites files with `treefmt`.
-- `lint` runs every checker the dev shell installs: every hook of both stages (`pre-commit` and `manual`), the hook config check, and the repository's own linters and type checks (not tests). A checker in the `packages` list that no hook or `lint` step reaches is a difference.
+- `lint` runs every checker the dev shell installs: every hook of both stages (`pre-commit` and `manual`), the hook config check, and the repository's own linters and type checks (not tests).
+- For every linter or analyzer in the list, name the hook or `lint` step that runs it, and check the mode. A formatter rewrites files and does not check: `treefmt` runs `ruff format`, so `ruff check` needs its own hook or `lint` step. One whose only reachable mode is formatting, or that no command reaches, is a difference.
 - `ci` is what CI runs: `lint`, plus tests and any other check.
 - The repository may split `lint` into smaller recipes (a `typecheck` that `lint` depends on) as long as `lint` still has the whole effect.
 
@@ -96,7 +97,7 @@ The `pre-commit` hook runs on every commit, so it holds only checks that are fas
 
 1. Detect the env and modules.
 2. Render every applicable template for comparison only, in your scratch space or in memory. Nothing in the repository changes before step 6, because the user approves every change first.
-3. Compare each rendered file with the repository's file. A missing file is one difference. Also check the environment and justfile contracts, and look for legacy files, retired tools, and obsolete installers listed under "Applying" below.
+3. Compare each rendered file with the repository's file. A missing file is one difference. Also check the environment and justfile contracts (including a reachable checking command for every installed linter or analyzer), and look for legacy files, retired tools, and obsolete installers listed under "Applying" below.
 4. Sort what you find:
     - Local customization: settings the repository has and the template lacks (extra treefmt formatters and prek hooks, excludes, typos words, taplo rules, project packages). Keep them and do not report them. A retired tool is the exception: report it.
     - Difference: everything else, such as a value that conflicts, a template block the repository lacks, a missing file, a legacy file, or a tool the repository adds whose package is missing from the dev-shell `packages` list.
@@ -141,4 +142,4 @@ Run each check and report its result. A check that failed to start does not coun
 
 ## Editing the template
 
-Edit the files in this skill's own `templates/` directory. The skill directory is a symlink into the dotfiles repository, so the edits land in that repository wherever it is checked out; commit them there. Keep settings generic: no project paths, no license headers. Add a tool by putting its settings in the shared files under a tag (or a new directory for a whole file) and its package in the `shell-nix/shell.nix.tmpl` list, then update the tables above.
+Edit the files in this skill's own `templates/` directory. The skill directory is a symlink into the dotfiles repository, so the edits land in that repository wherever it is checked out; commit them there. Keep settings generic: no project paths, no license headers. Add a tool by putting its settings in the shared files under a tag (or a new directory for a whole file) and its package in the `shell-nix/shell.nix.tmpl` list. When the tool checks files, add a hook that runs its checking mode; a formatter entry in `treefmt.toml` does not cover it. Then update the tables above.
