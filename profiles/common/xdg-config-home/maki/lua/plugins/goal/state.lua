@@ -324,6 +324,7 @@ function M.after_turn(record, execution_id, tools_used, limits, now)
     next_record.updated_at = now
     return next_record, "paused"
   end
+  next_record.rounds = next_record.rounds + 1
   if next_record.rounds >= limits.rounds then
     next_record.status = "paused"
     next_record.summary = nil
@@ -332,7 +333,6 @@ function M.after_turn(record, execution_id, tools_used, limits, now)
     next_record.updated_at = now
     return next_record, "paused"
   end
-  next_record.rounds = next_record.rounds + 1
   next_record.updated_at = now
   return next_record, "continue"
 end

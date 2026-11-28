@@ -427,12 +427,17 @@ local function parse_verdict(text)
   return nil
 end
 
-local function audit_error(session_id, message)
+local function audit_error(session_id, expected, message)
   local record, read_err, path = read_goal(session_id)
   if not record then
     if read_err then
       log_warn("audit cleanup: " .. read_err)
     end
+    return
+  end
+  if
+    record.status ~= "auditing" or not State.matches(record, expected.id, expected.execution_id)
+  then
     return
   end
   local paused, pause_err = State.force_pause(record, message, os.time())
@@ -498,7 +503,7 @@ local function run_audit(session_id, record, path)
       error("auditor failed: " .. tostring(prompt_err), 0)
     end
     if not verdict then
-      audit_error(session_id, "the auditor returned no usable verdict")
+      audit_error(session_id, record, "the auditor returned no usable verdict")
       return
     end
 
@@ -544,7 +549,7 @@ local function run_audit(session_id, record, path)
   auditing[session_id] = nil
   if not ok then
     log_warn("audit [session " .. session_id .. "]: " .. tostring(audit_err))
-    audit_error(session_id, "the completion audit failed: " .. tostring(audit_err))
+    audit_error(session_id, record, "the completion audit failed: " .. tostring(audit_err))
   end
 end
 
@@ -592,8 +597,8 @@ maki.api.create_autocmd("TurnEnd", {
           return
         end
         if reason == "cancelled" or reason == "dropped" then
-          if record.status == "auditing" then
-            audit_error(session_id, "the turn was cancelled during the completion audit")
+          if record.status == "auditing" and fence then
+            audit_error(session_id, record, "the turn was cancelled during the completion audit")
           end
           refresh_hint(session_id)
           return
@@ -660,7 +665,7 @@ maki.api.create_autocmd("TurnError", {
           return
         end
         local updated, update_err
-        if record.status == "auditing" then
+        if record.status == "auditing" and fence then
           updated, update_err = State.force_pause(
             record,
             "turn failed during the completion audit: " .. tostring(event.data.message),
