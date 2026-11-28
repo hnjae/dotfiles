@@ -49,11 +49,17 @@ PROMPT_FILES = {
 
 
 def fail(message: str) -> NoReturn:
+    """Print an error message and exit with status 1."""
     print(f"error: {message}", file=sys.stderr)
     sys.exit(1)
 
 
 def codex_version() -> str:
+    """Return the installed codex version.
+
+    Returns:
+        The dotted version parsed from `codex --version`.
+    """
     try:
         out = subprocess.run(
             ["codex", "--version"], capture_output=True, text=True, check=True
@@ -69,6 +75,11 @@ def codex_version() -> str:
 
 
 def fetch_prompt(version: str) -> str:
+    """Fetch the upstream prompt for a codex release.
+
+    Returns:
+        The prompt text.
+    """
     url = PROMPT_URL.format(version=version)
     # Audited open call: the url is built from this module's https constant.
     request = urllib.request.Request(url)  # ruff: ignore[suspicious-url-open-usage]
@@ -100,7 +111,11 @@ GIT_COMMIT_BULLET = (
 
 
 def rewrite_common(prompt: str) -> str:
-    """Add the repository's commit guidance to the upstream prompt."""
+    """Add the repository's commit guidance to the upstream prompt.
+
+    Returns:
+        The rewritten prompt.
+    """
     prompt, count = GIT_COMMIT_BULLET_RE.subn(
         GIT_COMMIT_BULLET, prompt, count=1
     )
@@ -117,6 +132,9 @@ def rewrite_mistral(prompt: str) -> str:
     Mistral's Responses endpoint rejects custom tools, so the Mistral catalog
     leaves apply_patch unregistered. The upstream prompt still tells the model
     to use it, which sends weaker models into a tool that does not exist.
+
+    Returns:
+        The rewritten prompt.
     """
     prompt, count = APPLY_PATCH_BULLET_RE.subn(
         SHELL_EDIT_BULLET, prompt, count=1
@@ -145,7 +163,11 @@ def rewrite_mistral(prompt: str) -> str:
 
 
 def format_markdown(body: str) -> str:
-    """Format generated Markdown with the repository's rumdl configuration."""
+    """Format generated Markdown with the repository's rumdl configuration.
+
+    Returns:
+        The formatted Markdown.
+    """
     try:
         result = subprocess.run(
             ["rumdl", "fmt", "-"],
@@ -162,7 +184,11 @@ def format_markdown(body: str) -> str:
 
 
 def render(version: str) -> dict[Path, str]:
-    """Render both provider prompts from one upstream fetch."""
+    """Render both provider prompts from one upstream fetch.
+
+    Returns:
+        The rendered body for each provider.
+    """
     common = rewrite_common(fetch_prompt(version))
     if "apply_patch" not in common:
         fail(
@@ -176,7 +202,11 @@ def render(version: str) -> dict[Path, str]:
 
 
 def write_if_changed(path: Path, body: str) -> bool:
-    """Write text atomically, returning whether the file changed."""
+    """Write text atomically, returning whether the file changed.
+
+    Returns:
+        Whether the file content changed.
+    """
     if path.is_file() and path.read_text(encoding="utf-8") == body:
         return False
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -203,6 +233,7 @@ def check() -> None:
 
 
 def update() -> None:
+    """Write both prompt files when their content changed."""
     version = codex_version()
     changed = False
     for path, body in render(version).items():
@@ -216,6 +247,7 @@ def update() -> None:
 
 
 def main() -> None:
+    """Run the command-line interface."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--check",

@@ -7,6 +7,7 @@ import stat
 import tempfile
 import unittest
 from pathlib import Path
+from typing import ClassVar
 from unittest.mock import patch
 
 import configure_removed_associations as subject
@@ -21,7 +22,7 @@ class MimeappsTestCase(unittest.TestCase):
 
 
 class UpdateRemovedAssociationsTest(MimeappsTestCase):
-    SAMPLE_REMOVED_ASSOCIATIONS = {
+    SAMPLE_REMOVED_ASSOCIATIONS: ClassVar[dict[str, set[str]]] = {
         "image/png": {"org.pwmt.zathura.desktop"},
         "image/x-adobe-dng": {"org.kde.okular.desktop"},
     }

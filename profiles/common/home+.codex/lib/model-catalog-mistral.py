@@ -103,11 +103,17 @@ EFFORT_DESCRIPTIONS = {
 
 
 def fail(message: str) -> NoReturn:
+    """Print an error message and exit with status 1."""
     print(f"error: {message}", file=sys.stderr)
     sys.exit(1)
 
 
 def get_json(url: str, key: str | None = None) -> object:
+    """Fetch a URL and decode its JSON body.
+
+    Returns:
+        The decoded JSON payload.
+    """
     # Only this module's https constants reach these audited open calls.
     request = urllib.request.Request(url)  # ruff: ignore[suspicious-url-open-usage]
     if key:
@@ -124,6 +130,9 @@ def load_cards(payload: object) -> dict[str, dict]:
 
     Aliases are folded in only by `resolve_card`, with a rule that does not
     depend on the API's array order.
+
+    Returns:
+        Cards keyed by id, excluding fine-tuned and archived ones.
     """
     cards = payload.get("data", []) if isinstance(payload, dict) else payload
     if not isinstance(cards, list):
@@ -144,6 +153,9 @@ def resolve_card(cards: dict[str, dict], wanted: str) -> dict | None:
     `created` wins, tie-broken by id: the API lists aliases as mutual cliques
     with identical timestamps, so the tie-break is what usually decides,
     and it never depends on the order of the response array.
+
+    Returns:
+        The matching card, or None when no card claims the id.
     """
     if wanted in cards:
         return cards[wanted]
@@ -155,6 +167,11 @@ def resolve_card(cards: dict[str, dict], wanted: str) -> dict | None:
 
 
 def build_entry(curated: Curated, card: dict) -> dict:
+    """Build the catalog entry for one curated model.
+
+    Returns:
+        The catalog entry.
+    """
     capabilities = card.get("capabilities", {})
     entry = {
         "slug": curated.id,
@@ -188,7 +205,11 @@ def build_entry(curated: Curated, card: dict) -> dict:
 
 
 def summarize(old: dict, new: dict) -> list[str]:
-    """One deterministic line per added, removed, or changed model."""
+    """One deterministic line per added, removed, or changed model.
+
+    Returns:
+        The change lines, sorted by slug.
+    """
     old_models = {model["slug"]: model for model in old.get("models", [])}
     new_models = {model["slug"]: model for model in new["models"]}
     lines = [
@@ -217,6 +238,9 @@ def alias_groups(cards: dict[str, dict]) -> list[list[str]]:
     the siblings as aliases, so "which names are the same model" is exactly
     connected components over the id-to-alias edges, built from sorted names
     so the groups do not depend on the response order.
+
+    Returns:
+        One group of card ids per alias clique.
     """
     parent = {name: name for name in sorted(cards)}
 
@@ -259,7 +283,11 @@ def print_candidates(cards: dict[str, dict], known: set[str]) -> None:
 
 
 def write_if_changed(path: Path, body: str) -> bool:
-    """Write text atomically, returning whether the file changed."""
+    """Write text atomically, returning whether the file changed.
+
+    Returns:
+        Whether the file content changed.
+    """
     if path.is_file() and path.read_text(encoding="utf-8") == body:
         return False
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -293,6 +321,7 @@ def check() -> None:
 
 
 def update() -> None:
+    """Write the catalog from the live API when it changed."""
     key = os.environ.get("MISTRAL_API_KEY")
     if not key:
         fail("MISTRAL_API_KEY is not set (create one at console.mistral.ai)")
@@ -340,6 +369,7 @@ def update() -> None:
 
 
 def main() -> None:
+    """Run the command-line interface."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--check",

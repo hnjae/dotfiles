@@ -61,7 +61,11 @@ class Source:
 
 
 def fail(message: str) -> None:
-    """Print an error and stop."""
+    """Print an error and stop.
+
+    Raises:
+        SystemExit: Always, with status 1.
+    """
     print(f"error: {message}", file=sys.stderr)
     raise SystemExit(1)
 
@@ -73,7 +77,11 @@ def check_path(repo: str, path: str) -> None:
 
 
 def read_manifest() -> list[Source]:
-    """Parse and validate skills.toml."""
+    """Parse and validate skills.toml.
+
+    Returns:
+        The validated sources.
+    """
     if not MANIFEST.is_file():
         fail(f"no manifest at {MANIFEST}")
     raw = tomllib.loads(MANIFEST.read_text(encoding="utf-8"))
@@ -135,7 +143,11 @@ def validate(sources: list[Source]) -> None:
 
 
 def groups(source: Source) -> dict[str | None, list[str]]:
-    """Group the skills of a source by the subpath they live under."""
+    """Group the skills of a source by the subpath they live under.
+
+    Returns:
+        Skill names keyed by the subpath they live under.
+    """
     grouped: dict[str | None, list[str]] = {}
     for skill in source.skills:
         key = skill.path if skill.path is not None else source.path
@@ -144,24 +156,40 @@ def groups(source: Source) -> dict[str | None, list[str]]:
 
 
 def source_url(source: Source, path: str | None) -> str:
-    """Build the CLI source argument for one subpath of a repository."""
+    """Build the CLI source argument for one subpath of a repository.
+
+    Returns:
+        The source argument for the CLI.
+    """
     if path:
         return f"https://github.com/{source.repo}/tree/{source.commit}/{path}"
     return f"{source.repo}#{source.commit}"
 
 
 def installed(name: str) -> bool:
-    """Return whether the pool holds a working copy of the skill."""
+    """Return whether the pool holds a working copy of the skill.
+
+    Returns:
+        Whether the skill's SKILL.md exists in the pool.
+    """
     return (STORE / name / "SKILL.md").is_file()
 
 
 def pool_entries() -> list[Path]:
-    """List the pool, tolerating a machine that has not restored yet."""
+    """List the pool, tolerating a machine that has not restored yet.
+
+    Returns:
+        The pool entries, or an empty list before the first restore.
+    """
     return sorted(STORE.iterdir()) if STORE.is_dir() else []
 
 
 def read_state() -> dict[str, dict[str, str | None]]:
-    """Read which commit and subpath each installed skill came from."""
+    """Read which commit and subpath each installed skill came from.
+
+    Returns:
+        The recorded provenance, empty without a state file.
+    """
     if not STATE.is_file():
         return {}
     return json.loads(STATE.read_text(encoding="utf-8"))
@@ -189,7 +217,11 @@ def write_state(state: dict[str, dict[str, str | None]]) -> None:
 
 
 def provenance(source: Source, path: str | None) -> dict[str, str | None]:
-    """Describe where one source group came from."""
+    """Describe where one source group came from.
+
+    Returns:
+        The repo, commit, and subpath of the group.
+    """
     return {"repo": source.repo, "commit": source.commit, "path": path}
 
 
@@ -200,7 +232,11 @@ def install(
     *,
     dry_run: bool,
 ) -> bool:
-    """Fetch one source group and copy the named skills into the pool."""
+    """Fetch one source group and copy the named skills into the pool.
+
+    Returns:
+        Whether every skill was installed.
+    """
     where = source.repo + (f"/{path}" if path else "")
     if dry_run:
         print(f"would install {', '.join(names)} from {where}")
@@ -228,6 +264,9 @@ def prune(desired: set[str], *, dry_run: bool) -> list[str]:
     """Remove pool directories the manifest does not list.
 
     Symlinks are authored skills and belong to dotbot, never to this script.
+
+    Returns:
+        The removed names, or those a dry run would remove.
     """
     removed = []
     if not STORE.is_dir():
@@ -242,7 +281,11 @@ def prune(desired: set[str], *, dry_run: bool) -> list[str]:
 
 
 def read_exposure() -> list[str]:
-    """Read the Claude exposure list."""
+    """Read the Claude exposure list.
+
+    Returns:
+        The skill names in the exposure list.
+    """
     if not EXPOSED.is_file():
         fail(f"no exposure list at {EXPOSED}")
     names = []
@@ -276,7 +319,11 @@ def sync_exposure() -> None:
 
 
 def restore(args: argparse.Namespace) -> int:
-    """Install what the manifest lists, prune the rest, then sync exposure."""
+    """Install what the manifest lists, prune the rest, then sync exposure.
+
+    Returns:
+        The process exit status.
+    """
     sources = read_manifest()
     if args.repo:
         unknown = sorted(set(args.repo) - {source.repo for source in sources})
@@ -319,7 +366,11 @@ def restore(args: argparse.Namespace) -> int:
 
 
 def resolve_commit(repo: str, ref: str) -> str:
-    """Resolve a ref to a commit through the remote."""
+    """Resolve a ref to a commit through the remote.
+
+    Returns:
+        The commit SHA the ref points at.
+    """
     url = f"https://github.com/{repo}.git"
     for candidate in (ref, f"refs/tags/{ref}"):
         result = subprocess.run(
@@ -341,7 +392,11 @@ def resolve_commit(repo: str, ref: str) -> str:
 
 
 def block_text(source: Source) -> str:
-    """Render one manifest block."""
+    """Render one manifest block.
+
+    Returns:
+        The rendered manifest block.
+    """
     lines = [HEADING, f'repo = "{source.repo}"', f'hash = "{source.commit}"']
     if source.ref:
         lines.append(f'ref = "{source.ref}"')
@@ -363,6 +418,9 @@ def split_blocks(text: str) -> tuple[str, list[str]]:
     Match only a real block header at the start of a line. The manifest keeps
     commented-out examples as ``# [[source]]``, and splitting on the bare token
     would turn those comments into empty blocks.
+
+    Returns:
+        The preamble and the raw blocks.
     """
     parts = re.split(r"^\[\[source\]\]$", text, flags=re.MULTILINE)
     preamble = parts[0].rstrip("\n")
@@ -370,7 +428,11 @@ def split_blocks(text: str) -> tuple[str, list[str]]:
 
 
 def block_key(text: str) -> tuple[str, str]:
-    """Sort key of a raw block: repository, then subpath."""
+    """Sort key of a raw block: repository, then subpath.
+
+    Returns:
+        The repository and subpath that sort the block.
+    """
     repo = re.search(r'^repo = "(.*)"$', text, re.MULTILINE)
     path = re.search(r'^path = "(.*)"$', text, re.MULTILINE)
     return (repo.group(1) if repo else "", path.group(1) if path else "")
@@ -383,7 +445,11 @@ def write_manifest(preamble: str, blocks: list[str]) -> None:
 
 
 def add(args: argparse.Namespace) -> int:
-    """Install skills from a repository and append them to the manifest."""
+    """Install skills from a repository and append them to the manifest.
+
+    Returns:
+        The process exit status.
+    """
     sources = read_manifest()
     existing = {
         skill.name
@@ -420,7 +486,11 @@ def add(args: argparse.Namespace) -> int:
 
 
 def update(args: argparse.Namespace) -> int:
-    """Re-resolve the pinned commit of every block, or of the named ones."""
+    """Re-resolve the pinned commit of every block, or of the named ones.
+
+    Returns:
+        The process exit status.
+    """
     preamble, blocks = split_blocks(MANIFEST.read_text(encoding="utf-8"))
     changed = 0
     for index, text in enumerate(blocks):
@@ -448,7 +518,11 @@ def update(args: argparse.Namespace) -> int:
 
 
 def show_pool(_: argparse.Namespace) -> int:
-    """List pool skills that are not exposed to Claude Code."""
+    """List pool skills that are not exposed to Claude Code.
+
+    Returns:
+        The process exit status.
+    """
     sources = read_manifest()
     exposed = set(read_exposure())
     owner = {
@@ -478,7 +552,11 @@ def show_pool(_: argparse.Namespace) -> int:
 
 
 def verify(_: argparse.Namespace) -> int:
-    """Check that manifest, pool, and exposure agree."""
+    """Check that manifest, pool, and exposure agree.
+
+    Returns:
+        The process exit status.
+    """
     sources = read_manifest()
     listed = {skill.name for source in sources for skill in source.skills}
     problems = [
@@ -516,13 +594,21 @@ def verify(_: argparse.Namespace) -> int:
 
 
 def do_sync(_: argparse.Namespace) -> int:
-    """Apply the exposure list."""
+    """Apply the exposure list.
+
+    Returns:
+        The process exit status.
+    """
     sync_exposure()
     return 0
 
 
 def build_parser() -> argparse.ArgumentParser:
-    """Describe the command line."""
+    """Describe the command line.
+
+    Returns:
+        The argument parser.
+    """
     parser = argparse.ArgumentParser(
         description=__doc__,
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -564,7 +650,11 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main() -> int:
-    """Run the requested command, restoring by default."""
+    """Run the requested command, restoring by default.
+
+    Returns:
+        The process exit status.
+    """
     argv = sys.argv[1:]
     if not argv or argv[0].startswith("-"):
         argv = ["restore", *argv]

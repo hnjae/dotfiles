@@ -3,6 +3,13 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 # SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
 
+"""Keep the [Removed Associations] section of mimeapps.list in sync.
+
+The lists below record MIME types a desktop entry claims but cannot handle,
+plus types that only appear in the association list. Running this script
+rewrites the managed section and leaves every other line untouched.
+"""
+
 import logging
 import os
 import stat
@@ -43,7 +50,7 @@ REMOVED_ASSOCIATIONS_BY_DESKTOP: dict[DesktopName, set[str]] = {
         "text/plain",
         # .desktop 에는 없으나 association 목록에 뜸:
         "application/yaml",  # <2026-06-21>
-        "image/svg+xml",  #  <2026-05-10>
+        "image/svg+xml",  # <2026-05-10>
     },
     "com.collaboraoffice.Office.desktop": {
         "application/pdf",
@@ -208,13 +215,21 @@ LOGGER = logging.getLogger(__name__)
 
 
 class LevelFormatter(logging.Formatter):
+    """Format records with a display level from a level-name map."""
+
     def __init__(
         self, fmt: str, level_names: dict[int, str], datefmt: str | None = None
     ) -> None:
+        """Initialize the formatter with a level-name map."""
         super().__init__(fmt, datefmt=datefmt)
         self.level_names = level_names
 
     def format(self, record: logging.LogRecord) -> str:
+        """Format one record with its mapped display level.
+
+        Returns:
+            The formatted record.
+        """
         record.display_level = self.level_names.get(
             record.levelno, record.levelname
         )
@@ -222,6 +237,7 @@ class LevelFormatter(logging.Formatter):
 
 
 def configure_logging() -> None:
+    """Send logs to journald when stderr is its stream, else to stderr."""
     handler = logging.StreamHandler()
 
     if is_journal_stream(handler.stream.fileno()):
@@ -241,6 +257,11 @@ def configure_logging() -> None:
 
 
 def is_journal_stream(fd: int) -> bool:
+    """Return whether a descriptor is the journal stream from JOURNAL_STREAM.
+
+    Returns:
+        Whether fd matches the device and inode in JOURNAL_STREAM.
+    """
     journal_stream = os.environ.get("JOURNAL_STREAM")
     if journal_stream is None:
         return False
@@ -257,6 +278,11 @@ def is_journal_stream(fd: int) -> bool:
 
 
 def config_home() -> Path:
+    """Return the XDG config home, defaulting to ~/.config.
+
+    Returns:
+        The configuration directory.
+    """
     configured = os.environ.get("XDG_CONFIG_HOME")
     if configured:
         return Path(configured).expanduser()
@@ -264,17 +290,32 @@ def config_home() -> Path:
 
 
 def is_section_header(line: str) -> bool:
+    """Return whether a line is an INI-style section header.
+
+    Returns:
+        Whether the stripped line starts with `[` and ends with `]`.
+    """
     stripped = line.strip()
     return stripped.startswith("[") and stripped.endswith("]")
 
 
 def section_name(line: str) -> str | None:
+    """Return the name inside a section header, or None for other lines.
+
+    Returns:
+        The section name without brackets, or None.
+    """
     if not is_section_header(line):
         return None
     return line.strip()[1:-1]
 
 
 def entry_key(line: str) -> str | None:
+    """Return the key of an association line, or None for headings and blanks.
+
+    Returns:
+        The text before the first `=`, or None.
+    """
     stripped = line.strip()
     if not stripped or stripped.startswith(("#", ";")) or "=" not in stripped:
         return None
@@ -282,10 +323,20 @@ def entry_key(line: str) -> str | None:
 
 
 def association_line(mime_type: str, desktop_ids: Iterable[str]) -> str:
+    """Render one sorted association line.
+
+    Returns:
+        The MIME type and its desktop ids, terminated by a newline.
+    """
     return f"{mime_type}={';'.join(sorted(desktop_ids))};\n"
 
 
 def merged_removed_associations() -> dict[str, set[str]]:
+    """Merge the by-type and by-desktop removal lists.
+
+    Returns:
+        Removed desktop ids keyed by MIME type.
+    """
     merged: dict[str, set[str]] = {
         mime_type: set(desktop_ids)
         for mime_type, desktop_ids in REMOVED_ASSOCIATIONS.items()
@@ -304,6 +355,11 @@ def merged_removed_associations() -> dict[str, set[str]]:
 
 
 def managed_association_lines() -> dict[str, str]:
+    """Render every managed association line, keyed by MIME type.
+
+    Returns:
+        The rendered line for each MIME type.
+    """
     return {
         mime_type: association_line(mime_type, desktop_ids)
         for mime_type, desktop_ids in merged_removed_associations().items()
@@ -311,6 +367,11 @@ def managed_association_lines() -> dict[str, str]:
 
 
 def update_removed_associations(lines: list[str]) -> list[str]:
+    """Rewrite the managed section in place, preserving other lines.
+
+    Returns:
+        The updated file lines.
+    """
     desired = managed_association_lines()
     seen: set[str] = set()
     found_section = False
@@ -353,6 +414,7 @@ def update_removed_associations(lines: list[str]) -> list[str]:
 def append_missing_entries(
     result: list[str], desired: dict[str, str], seen: set[str]
 ) -> None:
+    """Append managed entries that the section does not contain yet."""
     missing = [key for key in desired if key not in seen]
     if missing and result and not result[-1].endswith("\n"):
         result[-1] = f"{result[-1]}\n"
@@ -363,6 +425,7 @@ def append_missing_entries(
 
 
 def append_new_section(result: list[str], desired: dict[str, str]) -> None:
+    """Append a new managed section when the file has none."""
     if result and result[-1] != "\n":
         if not result[-1].endswith("\n"):
             result[-1] = f"{result[-1]}\n"
@@ -373,6 +436,7 @@ def append_new_section(result: list[str], desired: dict[str, str]) -> None:
 
 
 def write_atomically(path: Path, lines: list[str]) -> None:
+    """Replace a file with new lines, keeping its mode."""
     path.parent.mkdir(parents=True, exist_ok=True)
     mode = stat.S_IMODE(path.stat().st_mode) if path.exists() else 0o644
     fd, tmp_name = tempfile.mkstemp(
@@ -392,6 +456,7 @@ def write_atomically(path: Path, lines: list[str]) -> None:
 
 
 def main() -> None:
+    """Update the managed associations in mimeapps.list."""
     configure_logging()
 
     path = config_home() / "mimeapps.list"

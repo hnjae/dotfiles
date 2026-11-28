@@ -1,16 +1,22 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 # SPDX-FileCopyrightText: 2022-2026 KIM Hyunjae
 
+"""Draw a compact kitty tab bar with a fixed-width title budget."""
+
 from kitty.tab_bar import as_rgb, draw_title
 from kitty.utils import color_as_int
-
 
 FIXED_TAB_BODY_WIDTH = 24
 
 
-def draw_tab(
-    draw_data, screen, tab, before, max_tab_length, index, is_last, extra_data
+def draw_tab(  # ruff: ignore[too-many-arguments, too-many-positional-arguments]
+    draw_data, screen, tab, before, max_tab_length, index, is_last, _extra_data
 ):
+    """Draw one tab and return the column where its body ends.
+
+    Returns:
+        The x coordinate just past the tab body.
+    """
     body_width = max(1, min(FIXED_TAB_BODY_WIDTH, max_tab_length))
     end = before + body_width
 

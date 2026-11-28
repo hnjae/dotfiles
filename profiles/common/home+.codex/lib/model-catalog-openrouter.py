@@ -82,11 +82,17 @@ EFFORT_DESCRIPTIONS = {
 
 
 def fail(message: str) -> NoReturn:
+    """Print an error message and exit with status 1."""
     print(f"error: {message}", file=sys.stderr)
     sys.exit(1)
 
 
 def get_json(url: str) -> object:
+    """Fetch a URL and decode its JSON body.
+
+    Returns:
+        The decoded JSON payload.
+    """
     # Audited open call: the url is this module's https constant.
     request = urllib.request.Request(url)  # ruff: ignore[suspicious-url-open-usage]
     try:
@@ -97,6 +103,11 @@ def get_json(url: str) -> object:
 
 
 def load_cards(payload: object) -> dict[str, dict]:
+    """Return cards keyed by their own id.
+
+    Returns:
+        Cards keyed by id.
+    """
     cards = payload.get("data", []) if isinstance(payload, dict) else payload
     if not isinstance(cards, list):
         fail(f"unexpected /v1/models payload shape: {type(cards).__name__}")
@@ -108,6 +119,11 @@ def load_cards(payload: object) -> dict[str, dict]:
 
 
 def build_entry(curated: Curated, card: dict) -> dict:
+    """Build the catalog entry for one curated model.
+
+    Returns:
+        The catalog entry.
+    """
     architecture = card.get("architecture", {})
     modalities = [
         modality
@@ -147,7 +163,11 @@ def build_entry(curated: Curated, card: dict) -> dict:
 
 
 def summarize(old: dict, new: dict) -> list[str]:
-    """One deterministic line per added, removed, or changed model."""
+    """One deterministic line per added, removed, or changed model.
+
+    Returns:
+        The change lines, sorted by slug.
+    """
     old_models = {model["slug"]: model for model in old.get("models", [])}
     new_models = {model["slug"]: model for model in new["models"]}
     lines = [
@@ -194,6 +214,7 @@ def check() -> None:
 
 
 def update() -> None:
+    """Write the catalog from the live API when it changed."""
     cards = load_cards(get_json(MODELS_URL))
     models = []
     for curated in CURATED:
@@ -231,6 +252,7 @@ def update() -> None:
 
 
 def main() -> None:
+    """Run the command-line interface."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--check",

@@ -1,5 +1,11 @@
 line-length = 79
 
+extend-exclude = [
+  # Submodules: vendored, not ours to lint.
+  "lib/dotbot",
+  "profiles/common/xdg-data-home/zimfw",
+]
+
 [format]
 docstring-code-format = true
 
@@ -78,6 +84,23 @@ ignore = [
 
   # PLW: pylint warning
   "too-many-statements-in-try-clause", # PLW0717
+
+  # unittest is the test framework here; its assert methods are the style.
+  "pytest-unittest-assertion", # PT009
+]
+
+# Test modules that live next to the code they test.
+"**/test_*.py" = [
+  "D",   # pydocstyle
+  "DOC", # pydoclint
+
+  # unittest is the test framework here; its assert methods are the style.
+  "pytest-unittest-assertion", # PT009
+]
+
+# kitty loads this file directly; it is not a package.
+"profiles/desktop/xdg-config-home/kitty/tab_bar.py" = [
+  "implicit-namespace-package", # INP001
 ]
 
 [lint.pydocstyle]
