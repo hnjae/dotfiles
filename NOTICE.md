@@ -1,6 +1,6 @@
 # Third-party notices
 
-This repository is distributed under AGPL-3.0-or-later (see `LICENSE`). This file is an index of the material taken from other projects. The notices that the upstream licenses require sit next to the material, so they travel when a single directory is copied. A directory taken wholesale from one upstream keeps that upstream's `LICENSE`; a directory with modifications or several sources has a `NOTICE.md`; a single file keeps its notice in its header or in a comment.
+This repository is distributed under AGPL-3.0-or-later (see `LICENSE`). This file is an index of the material taken from other projects. The notices that the upstream licenses require sit next to the material, so they travel when a single directory is copied. A directory taken wholesale from one upstream keeps that upstream's `LICENSE`; a directory with modifications or several sources has a `NOTICE.md`; a single file keeps its notice in its header or in a comment, or in its `.license` sidecar when it already has one.
 
 MIT and Apache-2.0 material is included under AGPL-3.0-or-later, which those licenses permit. The rows marked "kept" are not under AGPL-3.0-or-later, because the upstream license does not allow it; their texts are in `LICENSES/`.
 
@@ -11,7 +11,7 @@ MIT and Apache-2.0 material is included under AGPL-3.0-or-later, which those lic
 | `profiles/common/xdg-config-home/nvim/lua/plugins/lang/_.overseer.lua` | overseer.nvim | MIT | `profiles/common/xdg-config-home/nvim/NOTICE.md` |
 | `profiles/common/xdg-config-home/nvim/snippets/` | friendly-snippets | MIT | `profiles/common/xdg-config-home/nvim/snippets/NOTICE.md` |
 | `profiles/common/home+.codex/skills/git-commit/` | github/awesome-copilot | MIT | `profiles/common/home+.codex/skills/git-commit/NOTICE.md` |
-| `profiles/common/home+.agents+skills/herdr-core/` | herdrdev/herdr-core | Apache-2.0 | `profiles/common/home+.agents+skills/herdr-core/NOTICE.md` |
+| `profiles/common/home+.agents+skills/herdr-core/` | herdrdev/herdr-core | Apache-2.0 | `profiles/common/home+.agents+skills/herdr-core/SKILL.md.license` |
 | `profiles/common/xdg-config-home/zsh/modules/{compinit,direnv,fzf,utilities,zoxide}/` | Zim modules, zim-zoxide | MIT | `NOTICE.md` in each directory |
 | `profiles/common/xdg-config-home/nvim/syntax/asciidoctor.vim` | vim-asciidoctor | MIT | file header |
 | `all` alias in `profiles/desktop/xdg-config-home/git/config` | simnalamburt/.dotfiles | MIT | comment in the file |
