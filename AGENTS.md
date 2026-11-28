@@ -8,7 +8,7 @@ Under `profiles/<profile>/`, a link source is named `<anchor>[+<subpath>][@<mode
 
 - Its children are symlinked into the target by a `glob: true` entry in that profile's `install.conf.yaml`, so adding a child needs no yaml edit.
 - `anchor` is `home`, `xdg-config-home`, `xdg-data-home`, or `xdg-bin-home`. `subpath` is the path below the anchor with `/` written as `+`, keeping dots literal (`home+.omp+agent` → `~/.omp/agent`).
-- `@seed` copies instead of linking. A directory starting with `_` is not a link source (`_install` holds scripts run by `install.conf.yaml`).
+- `@seed` copies once. `@sync` copies on every install and wins over the target when content or mode differs; it never deletes target-only files. Below the anchor, synced files are `0600` (`0755` for `xdg-bin-home`) and directories are `0700`; use it only when the target must be a real file or directory, such as ai-jail's trusted config. A directory starting with `_` is not a link source (`_install` holds scripts run by `install.conf.yaml`).
 - Give a target its own link source only when the target must stay a real directory because programs write runtime files into it (`home+.agents+skills/` → `~/.agents/skills/`, where `agent-skills.py restore` installs third-party skills). Otherwise put the directory under its anchor so the whole directory is one symlink (`xdg-config-home/nvim/` → `~/.config/nvim`).
 
 ## Install scripts

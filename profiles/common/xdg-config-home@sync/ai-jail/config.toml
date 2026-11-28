@@ -66,5 +66,7 @@ ro_maps = [
 [commands.opencode]
 # The preset maps only ~/.local/share/opencode; config and runtime state live
 # elsewhere. AGENTS.md resolves to ~/_agents once the config dir is bound.
-ro_maps = ["~/.local/share/dotfiles/profiles/common/_agents:/home/hnjae/_agents"]
+ro_maps = [
+  "~/.local/share/dotfiles/profiles/common/_agents:/home/hnjae/_agents",
+]
 rw_maps = ["~/.config/opencode", "~/.local/state/opencode"]

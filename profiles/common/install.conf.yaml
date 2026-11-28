@@ -56,5 +56,7 @@
       command: _install/install-treesitter-parsers.sh
     - description: seed files
       command: _install/seed-files.sh
+    - description: sync files
+      command: _install/sync-files.sh
     - description: Install yazi plugins
       command: _install/install-yazi-plugins.sh
