@@ -75,16 +75,22 @@ format:
 lint:
     prek validate-config prek.toml
     prek run --all-files
+    prek run --all-files --hook-stage manual
 
 [group('tooling')]
 ci: lint
 ```
 
 - `format` rewrites files with `treefmt`.
-- `lint` runs every hook and checks the hook config, plus the repository's own linters and type checks (not tests).
+- `lint` runs every checker the dev shell installs: every hook of both stages (`pre-commit` and `manual`), the hook config check, and the repository's own linters and type checks (not tests). A checker in the `packages` list that no hook or `lint` step reaches is a difference.
 - `ci` is what CI runs: `lint`, plus tests and any other check.
+- The repository may split `lint` into smaller recipes (a `typecheck` that `lint` depends on) as long as `lint` still has the whole effect.
 
 A recipe with one of these names but another meaning (a `lint` that runs only project linters) is a difference. Recommend adding the missing effect to it instead of renaming it.
+
+## Hook stages
+
+The `pre-commit` hook runs on every commit, so it holds only checks that are fast on staged files: formatting, whitespace, typos, secrets, and the quick linters the template ships. A repository's slow checks (type checkers, whole-project analysis) get `stages = ["manual"]`, so a commit never waits for them and `lint` still runs them.
 
 ## Sync
 
@@ -130,7 +136,7 @@ A difference the user has declined will come up again on the next run: that is e
 Run each check and report its result. A check that failed to start does not count as passing; when one cannot run, say which and why.
 
 1. In a `flake` repository, check the dev shell: `git add` new files (flakes ignore untracked ones), then run `nix develop --command sh -c 'for c in <executables>; do command -v "$c" >/dev/null || echo "missing: $c"; done'` with the executable of every package in the rendered list (`cocogitto` provides `cog`). It must print nothing.
-2. Run `prek validate-config prek.toml` and `prek run --all-files`, inside `nix develop` for a flake repository. Report failures that existing repository content causes (for example formatting the new treefmt config would change) instead of fixing unrelated files.
+2. Run `prek validate-config prek.toml`, `prek run --all-files`, and `prek run --all-files --hook-stage manual`, inside `nix develop` for a flake repository. Report failures that existing repository content causes (for example formatting the new treefmt config would change) instead of fixing unrelated files.
 3. Repeat Sync steps 1–4. Only the differences the user declined may remain.
 
 ## Editing the template
