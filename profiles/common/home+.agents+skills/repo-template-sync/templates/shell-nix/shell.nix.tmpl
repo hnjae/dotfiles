@@ -10,6 +10,14 @@ pkgs.mkShellNoCC {
     # >>> biome
     biome
     # <<< biome
+    # >>> rust
+    cargo
+    clippy
+    rustc
+    rustfmt
+    # The linker rustc calls; mkShellNoCC leaves it out.
+    stdenv.cc
+    # <<< rust
     cocogitto
     deadnix
     git

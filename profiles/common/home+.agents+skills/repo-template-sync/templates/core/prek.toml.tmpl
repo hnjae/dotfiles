@@ -28,5 +28,8 @@ hooks = [
   { id = "ruff", name = "ruff check", entry = "ruff check", language = "system", files = '\.(py|pyi)$' },
   { id = "ty", name = "ty check", entry = "ty check", language = "system", pass_filenames = false, always_run = true, stages = ["manual"] },
   # <<< python
+  # >>> rust
+  { id = "clippy", name = "cargo clippy", entry = "cargo clippy --workspace --all-targets --all-features -- -D warnings", language = "system", pass_filenames = false, always_run = true, stages = ["manual"] },
+  # <<< rust
   { id = "cog-verify", name = "cog verify", entry = "cog verify --file", language = "system", stages = ["commit-msg"] },
 ]

@@ -1,0 +1,4 @@
+#:schema https://json.schemastore.org/rustfmt.json
+
+# treefmt runs rustfmt on single files, so rustfmt cannot read the edition from Cargo.toml; it defaults to 2015 and rejects newer syntax such as let chains. Keep this equal to the `edition` in Cargo.toml.
+edition = "2024"

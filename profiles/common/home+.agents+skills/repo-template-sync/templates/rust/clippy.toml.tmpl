@@ -1,0 +1,19 @@
+# This file only tunes lints; it cannot turn them on. The lint levels live in the `[lints]` table of `Cargo.toml` (see the skill's Rust lints contract), and most keys below relax restriction lints that are off until that table enables them.
+# No `msrv` here: clippy reads `rust-version` from `Cargo.toml`, and a second copy drifts.
+
+# Suggest the better signature even when it changes a public item: agents write most of the code, and these crates have no downstream users to break.
+avoid-breaking-exported-api = false
+
+# Tests may fail loudly on a broken fixture instead of propagating errors; the lints stay on for every other code path.
+allow-expect-in-tests = true
+allow-indexing-slicing-in-tests = true
+allow-large-stack-frames-in-tests = true
+allow-panic-in-tests = true
+allow-unwrap-in-tests = true
+allow-useless-vec-in-tests = true
+# dbg! stays denied in tests too: it is never meant to be committed.
+
+# A const initializer that fails is a programmer error caught at compile time, so unwrap, expect, and indexing are fine there.
+allow-expect-in-consts = true
+allow-unwrap-in-consts = true
+suppress-restriction-lint-in-const = true
