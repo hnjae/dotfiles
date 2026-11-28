@@ -18,7 +18,11 @@
   "keybinds": {
     "session.first": "",
     "session.last": "",
-    "prompt.editor": "ctrl+g"
+    "prompt.editor": "ctrl+g",
+    "input.select.up": "none",
+    "input.select.down": "none",
+    "variant.cycle": "shift+down",
+    "variant.list": "shift+up"
   },
   "attention": {
     "volume": 1,
