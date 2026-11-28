@@ -90,10 +90,17 @@ includes = [
 # <<< biome
 # >>> python
 
+[formatter.ruff-isort]
+command = "ruff"
+options = ["check", "--select", "I", "--fix", "--quiet"]
+includes = ["*.py", "*.pyi"]
+priority = 10
+
 [formatter.ruff]
 command = "ruff"
 options = ["format"]
 includes = ["*.py", "*.pyi"]
+priority = 20
 # <<< python
 # >>> lua
 
