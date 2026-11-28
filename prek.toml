@@ -4,7 +4,12 @@ exclude = '\.lock$'
 
 [[repos]]
 repo = "builtin"
-hooks = [{ id = "detect-private-key" }]
+hooks = [
+  { id = "trailing-whitespace" },
+  { id = "end-of-file-fixer" },
+  { id = "check-added-large-files" },
+  { id = "detect-private-key", types = ["text"] },
+]
 
 [[repos]]
 repo = "local"
@@ -17,5 +22,5 @@ hooks = [
   { id = "statix", name = "statix", entry = "sh -c 'for file; do statix check --format errfmt \"$file\" || exit $?; done' statix", language = "system", files = '\.nix$' },
   { id = "rumdl", name = "rumdl", entry = "rumdl check", language = "system", files = '\.(md|markdown)$', require_serial = true },
   { id = "shellcheck", name = "shellcheck", entry = "shellcheck", language = "system", files = '(^|/)([^/]*\.(sh|bash)|\.env(rc)?(\.[^/]*)?)$' },
-  { id = "cocogitto", name = "cog verify", entry = "cog verify --file", language = "system", stages = ["commit-msg"] },
+  { id = "cog-verify", name = "cog verify", entry = "cog verify --file", language = "system", stages = ["commit-msg"] },
 ]

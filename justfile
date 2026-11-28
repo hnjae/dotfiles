@@ -20,14 +20,14 @@ format:
 format-check:
     treefmt --ci
 
-hooks-install:
-    prek install --config prek.toml
-
 [group('ci')]
-check:
+lint:
     prek validate-config prek.toml
     prek run --config prek.toml --all-files
     just pi-check
+
+[group('ci')]
+ci: lint
 
 update-submodules:
     lib/update-submodules.sh
@@ -79,7 +79,7 @@ commit:
 
     git commit --no-verify -m '{{ hostname }}: {{ datetime("%Y-%m-%dT%H:%M:%S%Z") }}'
 
-# Forward to the pi config's own extension check, so `just check` covers it.
+# Forward to the pi config's own extension check, so `just lint` covers it.
 [group('pi')]
 pi-check:
     @just --justfile "{{ justfile_directory() }}/profiles/common/home/.pi/justfile" check

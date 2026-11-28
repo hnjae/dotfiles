@@ -12,6 +12,6 @@ pkgs.mkShellNoCC {
   packages = import ./nix/dev-tools.nix pkgs;
   shellHook = # sh
     ''
-      just --justfile ${pkgs.lib.escapeShellArg (toString ./justfile)} hooks-install
+      prek install --quiet
     '';
 }
