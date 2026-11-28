@@ -563,6 +563,7 @@ local function run_audit(session_id, record)
     end
     local transcript = Transcript.render(messages, {
       encode = maki.json.encode,
+      since_ms = record.created_at * 1000,
       max_chars = MAX_TRANSCRIPT_CHARS,
       max_tool_chars = MAX_TOOL_RESULT_CHARS,
     })

@@ -88,7 +88,7 @@ local function render_block(block, options)
     return "[tool_use "
       .. escape(block.name or "?")
       .. "] "
-      .. escape(encode_input(options.encode, block.input))
+      .. escape(cut(encode_input(options.encode, block.input), options.max_tool_chars))
   end
   if block.type == "tool_result" then
     local label = block.is_error and "[tool_result error]" or "[tool_result]"
@@ -131,19 +131,27 @@ function M.render(messages, options)
   local parts = {}
   local used = 0
   local count = 0
+  local since_ms = options.since_ms
   for index = #messages, 1, -1 do
     if count >= max_messages or used >= max_chars then
       break
     end
-    local rendered = render_message(messages[index], render_options)
-    if rendered ~= "" then
-      rendered = cut(rendered, max_chars - used)
-      if rendered == "" then
-        break
+    local message = messages[index]
+    -- Messages appended before the goal cannot be evidence for it. A message
+    -- without a timestamp predates the field, so it predates the goal too.
+    if
+      since_ms == nil or (type(message.created_at) == "number" and message.created_at >= since_ms)
+    then
+      local rendered = render_message(message, render_options)
+      if rendered ~= "" then
+        rendered = cut(rendered, max_chars - used)
+        if rendered == "" then
+          break
+        end
+        table.insert(parts, 1, rendered)
+        used = used + #rendered + 1
+        count = count + 1
       end
-      table.insert(parts, 1, rendered)
-      used = used + #rendered + 1
-      count = count + 1
     end
   end
   return "<transcript>\n" .. table.concat(parts, "\n") .. "\n</transcript>"

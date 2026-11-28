@@ -8,47 +8,8 @@ local here = (arg[0]:match("^(.*)/[^/]*$") or ".")
 local S = dofile(here .. "/../lua/plugins/goal/state.lua")
 
 local LIMITS = { rounds = 50, stalls = 3 }
-local passed, failed = 0, 0
-
-local function case(name, fn)
-  local ok, err = pcall(fn)
-  if ok then
-    passed = passed + 1
-    return
-  end
-  failed = failed + 1
-  io.stderr:write("FAIL " .. name .. ": " .. tostring(err) .. "\n")
-end
-
-local function eq(actual, expected, label)
-  if actual ~= expected then
-    error(
-      (label or "value") .. ": expected " .. tostring(expected) .. ", got " .. tostring(actual),
-      2
-    )
-  end
-end
-
-local function match(value, pattern, label)
-  if type(value) ~= "string" or not value:match(pattern) then
-    error((label or "value") .. ": expected " .. pattern .. ", got " .. tostring(value), 2)
-  end
-end
-
-local function truthy(value, label)
-  if not value then
-    error(label or "expected a value", 2)
-  end
-end
-
-local function missing(value, err, label)
-  if value ~= nil then
-    error((label or "value") .. ": expected nil, got " .. tostring(value), 2)
-  end
-  if err == nil then
-    error((label or "value") .. ": expected an error", 2)
-  end
-end
+local h = dofile(here .. "/harness.lua")
+local case, eq, match, truthy, missing = h.case, h.eq, h.match, h.truthy, h.missing
 
 local function record(overrides)
   local goal = S.new_goal("goal-1", "exec-1", "ship it", 100)
@@ -224,5 +185,4 @@ case("the state directory falls back to XDG and HOME", function()
   truthy(err)
 end)
 
-print(string.format("%d passed, %d failed", passed, failed))
-os.exit(failed == 0 and 0 or 1)
+h.report()
