@@ -89,12 +89,25 @@ A recipe with one of these names but another meaning (a `lint` that runs only pr
 ## Sync
 
 1. Detect the env and modules.
-2. Render every applicable template.
+2. Render every applicable template for comparison only, in your scratch space or in memory. Nothing in the repository changes before step 6, because the user approves every change first.
 3. Compare each rendered file with the repository's file. A missing file is one difference. Also check the environment and justfile contracts, and look for legacy files, retired tools, and obsolete installers listed under "Applying" below.
-4. Sort what you find. Settings the repository has and the template lacks (extra treefmt formatters and prek hooks, excludes, typos words, taplo rules, project packages) are local customization: keep them and do not report them, except retired tools. A tool the repository adds this way gets its package in the same dev-shell `packages` list. Everything else is a difference: a value that conflicts, a template block the repository lacks, a missing file, a legacy file.
+4. Sort what you find:
+    - Local customization: settings the repository has and the template lacks (extra treefmt formatters and prek hooks, excludes, typos words, taplo rules, project packages). Keep them and do not report them. A retired tool is the exception: report it.
+    - Difference: everything else, such as a value that conflicts, a template block the repository lacks, a missing file, a legacy file, or a tool the repository adds whose package is missing from the dev-shell `packages` list.
 5. Show the user the differences in one review, grouped by file. For each, give the repository's value, the template's value, and a recommendation (almost always "take the template"; "keep the repository's" when the difference is clearly project-specific). When the user asks only to check, stop here.
 6. Apply only what the user approves, following the rules below. Leave the rest untouched.
 7. Verify.
+
+<example>
+`treefmt.toml`
+
+- `walk`: repository `"filesystem"`, template `"git"`. Recommend: take the template.
+- `[formatter.yamlfmt]`: repository lacks it, template has it (`yamlfmt` module on). Recommend: take the template.
+
+`.editorconfig-checker.json`
+
+- Retired tool `editorconfig-checker`. Recommend: delete it, along with its prek hook and dev-shell package.
+</example>
 
 A difference the user has declined will come up again on the next run: that is expected, so do not try to remember it.
 
@@ -103,15 +116,23 @@ A difference the user has declined will come up again on the next run: that is e
 - Keep a hook's `stages`, and set `default_install_hook_types` to the template's types plus every stage a kept hook uses (a local `pre-push` hook needs `pre-push`).
 - A path the repository keeps out of one tool (test fixtures, vendored code) must stay out of every hook and formatter the template adds: put it in prek's top-level `exclude` as well as in the formatter's `excludes`.
 - Keep existing license information as it is: an SPDX header goes below a shebang or first-line directive, and JSON takes a `<file>.license` sidecar. In a repository that uses REUSE, give every new file license information the same way, following `reuse-compliance`; elsewhere add none. Leave an existing `reuse` hook alone.
-- Legacy names move without leaving a shim: `.pre-commit-config.yaml` to `prek.toml`, `.rumdl.toml` to `rumdl.toml`, `biome.jsonc` to `biome.json`. Commit-msg checking moves into the `cog-verify` prek hook and any `[git_hooks]` table leaves `cog.toml`. Delete the files that replaced them, and remove obsolete installers (a justfile `hooks-install` recipe, `cog install-hook`) along with references to them.
+- Legacy names move without leaving a shim: `.pre-commit-config.yaml` to `prek.toml` (translated to TOML), `.rumdl.toml` to `rumdl.toml`, `biome.jsonc` to `biome.json`. Commit-msg checking moves into the `cog-verify` prek hook and any `[git_hooks]` table leaves `cog.toml`. Once a legacy file's content is in its new file, delete the legacy file, and remove obsolete installers (a justfile `hooks-install` recipe, `cog install-hook`) along with references to them.
 - Retired tools are never removed on their own: report each place one appears as a difference and remove only what the user approves. `editorconfig-checker` is retired (its prek hook, justfile steps, dev-shell package, and `.editorconfig-checker.json`); the `end-of-file-fixer` hook replaces it.
-- `git-hooks.nix` and `treefmt-nix` migrate to `prek.toml` and `treefmt.toml`: the flake modules (including a `git-hooks.nix` or `treefmt.nix` file under `nix/`), their flake inputs, a `shellHook` taken from them, and a `formatter` output built from them. Translate every enabled hook and formatter into the template's hooks and formatters; what the template lacks becomes a local entry. Remove the modules and inputs, run `nix flake lock` so the lock file drops the inputs, and point a `formatter` output at `pkgs.treefmt`. This rewrites the flake, so propose it as a difference of its own and apply it only on approval.
-- Make the dev shell meet the environment contract: add the missing template packages to its `packages` list and keep the repository's own entries. If other hook shims exist, run `prek install --force` once.
+- `git-hooks.nix` and `treefmt-nix` migrate to `prek.toml` and `treefmt.toml`. The migration covers the flake modules (including a `git-hooks.nix` or `treefmt.nix` file under `nix/`), their flake inputs, a `shellHook` taken from them, and a `formatter` output built from them. This rewrites the flake, so propose it as a difference of its own and apply it only on approval. Once approved:
+    1. Translate every enabled hook and formatter into the template's hooks and formatters; what the template lacks becomes a local entry.
+    2. Remove the modules and inputs.
+    3. Run `nix flake lock` so the lock file drops the inputs.
+    4. Point a `formatter` output at `pkgs.treefmt`.
+- Make the dev shell meet the environment contract: add the missing template packages to its `packages` list and keep the repository's own entries. If `.git/hooks/` holds hook scripts that prek did not write (left by pre-commit, git-hooks.nix, or `cog install-hook`), run `prek install --force` once, because a plain `prek install` keeps the old hooks running alongside its own.
 
 ## Verify
 
-In a `flake` repository, first check the dev shell: `git add` new files (flakes ignore untracked ones), then run `nix develop --command sh -c 'for c in <executables>; do command -v "$c" >/dev/null || echo "missing: $c"; done'` with the executable of every package in the rendered list (`cocogitto` provides `cog`). It must print nothing. Then run `prek validate-config prek.toml` and `prek run --all-files`, inside `nix develop` for a flake repository. Report failures that existing repository content causes (for example formatting the new treefmt config would change) instead of fixing unrelated files. Running the sync again must report only the differences the user declined.
+Run each check and report its result. A check that failed to start does not count as passing; when one cannot run, say which and why.
+
+1. In a `flake` repository, check the dev shell: `git add` new files (flakes ignore untracked ones), then run `nix develop --command sh -c 'for c in <executables>; do command -v "$c" >/dev/null || echo "missing: $c"; done'` with the executable of every package in the rendered list (`cocogitto` provides `cog`). It must print nothing.
+2. Run `prek validate-config prek.toml` and `prek run --all-files`, inside `nix develop` for a flake repository. Report failures that existing repository content causes (for example formatting the new treefmt config would change) instead of fixing unrelated files.
+3. Repeat Sync steps 1–4. Only the differences the user declined may remain.
 
 ## Editing the template
 
-Edit the templates in the dotfiles repository. Keep settings generic: no project paths, no license headers. Add a tool by putting its settings in the shared files under a tag (or a new directory for a whole file) and its package in the `shell-nix/shell.nix.tmpl` list, then update the tables above.
+Edit the files in this skill's own `templates/` directory. The skill directory is a symlink into the dotfiles repository, so the edits land in that repository wherever it is checked out; commit them there. Keep settings generic: no project paths, no license headers. Add a tool by putting its settings in the shared files under a tag (or a new directory for a whole file) and its package in the `shell-nix/shell.nix.tmpl` list, then update the tables above.
