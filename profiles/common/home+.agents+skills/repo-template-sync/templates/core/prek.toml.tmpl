@@ -26,6 +26,7 @@ hooks = [
   { id = "shellcheck", name = "shellcheck", entry = "shellcheck", language = "system", files = '(^|/)([^/]*\.(sh|bash)|\.env(rc)?(\.[^/]*)?)$' },
   # >>> python
   { id = "ruff", name = "ruff check", entry = "ruff check", language = "system", files = '\.(py|pyi)$' },
+  { id = "ty", name = "ty check", entry = "ty check", language = "system", pass_filenames = false, always_run = true, stages = ["manual"] },
   # <<< python
   { id = "cog-verify", name = "cog verify", entry = "cog verify --file", language = "system", stages = ["commit-msg"] },
 ]
