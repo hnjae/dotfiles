@@ -29,4 +29,3 @@ case "$response" in
 esac
 
 git commit --no-verify -m "$(hostname): $(date --iso-8601=seconds)"
-

@@ -28,7 +28,7 @@ alias -- ne="navi-edit"
 # Repeated runs show the cache check/source path is about 26x cheaper than
 # regenerating the widget script each time; single-run measurements are near
 # hyperfine noise.
-if [[ 
+if [[
     ! -e "$initfile" ||
     "$initfile" -ot "${commands[navi]}" ||
     ! -e "$sigfile" ||

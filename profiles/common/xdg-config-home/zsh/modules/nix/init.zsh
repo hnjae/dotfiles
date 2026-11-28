@@ -34,7 +34,7 @@ if (($+commands[$cmd])); then
     # Repeated runs show the cache check/source path is about 54x cheaper than
     # regenerating the init script each time; single-run cache hit is close to
     # hyperfine noise but still avoids the any-nix-shell process.
-    if [[ 
+    if [[
         ! -e "$initfile" ||
         "$initfile" -ot "${commands[$cmd]}" ||
         ! -e "$sigfile" ||

@@ -35,4 +35,3 @@ fi
 echo "$_files" | while IFS="" read -r "file"; do
   echo "'$file'"
 done
-

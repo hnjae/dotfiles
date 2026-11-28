@@ -27,7 +27,7 @@ local sig="${commands[zoxide]:A}"
 # - zoxide init zsh --no-cmd >/dev/null                   953.7 us ± 425.9 us
 # Cache hit is only modestly faster than regenerating, but still avoids about 1 ms
 # on this machine and keeps the generated init file stable between upgrades.
-if [[ 
+if [[
     ! -e "$initfile" ||
     "$initfile" -ot "${commands[zoxide]}" ||
     ! -e "$sigfile" ||

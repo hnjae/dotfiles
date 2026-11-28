@@ -14,4 +14,3 @@ sudo tailscale set --exit-node=<exit-node-ip> --exit-node-allow-lan-access=true
 
 # Stop using exit node
 sudo tailscale set --exit-node=
-

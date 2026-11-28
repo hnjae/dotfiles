@@ -8,8 +8,8 @@
 # save:
 #     name:
 #         location: "path/to/parent/directory"
-#         entries: 
-#         # these are files which will be backed up. 
+#         entries:
+#         # these are files which will be backed up.
 #         # They should be present in the specified location.
 #             - file1
 #             - file2
@@ -19,7 +19,7 @@
 #     # These may include files like complete icon packs and themes..
 #     name:
 #         location: "path/to/parent/directory"
-#         entries: 
+#         entries:
 #             - file1
 #             - file2
 # ...

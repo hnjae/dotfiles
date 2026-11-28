@@ -8,4 +8,3 @@ git remote set-url --push origin git@github.com:<owner>/<repo>.git
 
 # 되돌리기
 git config --unset remote.origin.pushurl
-

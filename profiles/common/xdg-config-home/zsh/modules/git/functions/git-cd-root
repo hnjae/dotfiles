@@ -10,4 +10,3 @@ if command -v __zoxide_z >/dev/null 2>&1; then
 fi
 
 "$cd" "$(git rev-parse --show-toplevel || echo .)"
-

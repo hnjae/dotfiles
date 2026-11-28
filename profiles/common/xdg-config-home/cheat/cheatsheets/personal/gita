@@ -17,4 +17,3 @@
 | `gbl`    | `FORGIT_BLAME_FZF_OPTS`           |
 | `gfu`    | `FORGIT_FIXUP_FZF_OPTS`           |
 | `gcp`    | `FORGIT_CHERRY_PICK_FZF_OPTS`     |
-

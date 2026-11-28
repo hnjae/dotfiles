@@ -36,7 +36,7 @@ if [[ -z "${NO_COLOR}" || "$TERM" != "dumb" || -s "${HOME}/.dir_colors" ]]; then
     # - repeat 200 cached hit: 30.6 ms; repeat 200 dircolors: 252.3 ms
     # Repeated runs show the cache check/source path is about 8x cheaper than
     # running dircolors each time; single-run measurements are near hyperfine noise.
-    if [[ 
+    if [[
         ! -e "$initdircolors" ||
         "$initdircolors" -ot "${HOME}/.dir_colors" ||
         "$initdircolors" -ot "$dircolors_cmd" ||
