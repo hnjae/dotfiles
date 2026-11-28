@@ -42,7 +42,13 @@ local function state_dir()
   if not ok then
     dir = nil
   end
-  return State.resolve_state_dir(dir, os.getenv)
+  -- os.getenv is not in Luau; the fallback also has to survive a revoked
+  -- env grant, so read it through maki.uv with a pcall.
+  local function getenv(name)
+    local read, value = pcall(maki.uv.os_getenv, name)
+    return read and value or nil
+  end
+  return State.resolve_state_dir(dir, getenv)
 end
 
 local function goal_path(session_id)
