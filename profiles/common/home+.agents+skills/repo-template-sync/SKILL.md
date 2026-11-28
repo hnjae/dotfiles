@@ -7,7 +7,7 @@ description: "Bring a repository in line with the author's shared tooling templa
 
 The templates in `templates/` are the single source of truth for the tooling every repository shares. A repository gets only the parts it needs. The repository keeps no state about the template: each run compares the repository with the current template, and the user approves every change before it is applied.
 
-REUSE (`reuse` hook, `REUSE.toml`, SPDX headers) is out of scope: leave it as it is and use `reuse-compliance`.
+REUSE licensing (`REUSE.toml`, SPDX headers, license texts) is out of scope: follow `reuse-compliance`. The one REUSE element here is the `reuse lint` hook, which a repository that uses REUSE gets before commit (see Opt-in modules).
 
 ## Template layout
 
@@ -23,7 +23,7 @@ REUSE (`reuse` hook, `REUSE.toml`, SPDX headers) is out of scope: leave it as it
 | `lua` | module `lua` | `stylua.toml` |
 | `rust` | module `rust` | `clippy.toml`, `rustfmt.toml` |
 
-Shared files carry every module's settings. A block wrapped in `# >>> <tag>` and `# <<< <tag>` lines (marker alone on its line, no nesting) belongs to that tag. To render, keep a block's content when its tag is enabled, drop the block when it is not, delete every marker line, and copy the rest verbatim. Tags are the module names plus the env (`shell-nix`, `flake`, or `devenv`). Template files hold no license header, so rendered files get none.
+Shared files carry every module's settings. A block wrapped in `# >>> <tag>` and `# <<< <tag>` lines (marker alone on its line, no nesting) belongs to that tag. To render, keep a block's content when its tag is enabled, drop the block when it is not, delete every marker line, and copy the rest verbatim. Tags are the module names plus `reuse` and the env (`shell-nix`, `flake`, or `devenv`). Template files hold no license header, so rendered files get none.
 
 ## Opt-in modules
 
@@ -36,6 +36,7 @@ Enable a module when `git ls-files` shows a matching tracked file. Ignore the mo
 | `python` | `*.py *.pyi` |
 | `lua` | `*.lua` |
 | `rust` | `*.rs` |
+| `reuse` | `REUSE.toml`, `.reuse/dep5`, or `LICENSES/` |
 
 Everything else is core and always on, including taplo. The environment is `devenv` when the repository has `devenv.nix` or `devenv.yaml`, even alongside `flake.nix`, because devenv then owns the dev shell. Otherwise it is `flake` when the repository has `flake.nix`, then `shell-nix` when it has `shell.nix`; if it has none of these, ask.
 
@@ -163,7 +164,7 @@ undocumented_unsafe_blocks = "warn"
 
 ## Hook stages
 
-The `pre-commit` hook runs on every commit, so it holds only checks that are fast on staged files: formatting, whitespace, typos, secrets, and the quick linters the template ships. A repository's slow checks (type checkers, whole-project analysis) get `stages = ["manual"]`, so a commit never waits for them and `lint` still runs them.
+The `pre-commit` hook runs on every commit, so it holds only checks that are fast on staged files: formatting, whitespace, typos, secrets, and the quick linters the template ships. A repository's slow checks (type checkers, whole-project analysis) get `stages = ["manual"]`, so a commit never waits for them and `lint` still runs them. `reuse lint` is the exception among whole-project checks: it reads file headers and owns no cache, so it stays in `pre-commit` and catches an unlicensed file in the commit that adds it.
 
 ## Sync
 
@@ -194,7 +195,7 @@ A difference the user has declined will come up again on the next run: that is e
 
 - Keep a hook's `stages`, and set `default_install_hook_types` to the template's types plus every stage a kept hook uses (a local `pre-push` hook needs `pre-push`).
 - A path the repository keeps out of one tool (test fixtures, vendored code) must stay out of every hook and formatter the template adds: put it in prek's top-level `exclude` as well as in the formatter's `excludes`.
-- Keep existing license information as it is: an SPDX header goes below a shebang or first-line directive, and JSON takes a `<file>.license` sidecar. In a repository that uses REUSE, give every new file license information the same way, following `reuse-compliance`; elsewhere add none. Leave an existing `reuse` hook alone.
+- Keep existing license information as it is: an SPDX header goes below a shebang or first-line directive, and JSON takes a `<file>.license` sidecar. In a repository that uses REUSE, give every new file license information the same way, following `reuse-compliance`, and add the `reuse` template block to `prek.toml` and its package to the dev shell; elsewhere add neither, and keep an existing `reuse` hook only if the repository wants it.
 - Legacy names move without leaving a shim: `.pre-commit-config.yaml` to `prek.toml` (translated to TOML), `.rumdl.toml` to `rumdl.toml`, `biome.jsonc` to `biome.json`, `.clippy.toml` to `clippy.toml`, `.rustfmt.toml` to `rustfmt.toml`. Commit-msg checking moves into the `cog-verify` prek hook and any `[git_hooks]` table leaves `cog.toml`. Once a legacy file's content is in its new file, delete the legacy file, and remove obsolete installers (a justfile `hooks-install` recipe, `cog install-hook`) along with references to them.
 - Retired tools are never removed on their own: report each place one appears as a difference and remove only what the user approves. `editorconfig-checker` is retired (its prek hook, justfile steps, dev-shell package, and `.editorconfig-checker.json`); the `end-of-file-fixer` hook replaces it.
 - `git-hooks.nix` and `treefmt-nix` migrate to `prek.toml` and `treefmt.toml`. The migration covers the flake modules (including a `git-hooks.nix` or `treefmt.nix` file under `nix/`), their flake inputs, a `shellHook` taken from them, and a `formatter` output built from them. This rewrites the flake, so propose it as a difference of its own and apply it only on approval. Once approved:

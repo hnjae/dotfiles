@@ -24,6 +24,9 @@ hooks = [
   { id = "nixf-diagnose", name = "nixf-diagnose", entry = "nixf-diagnose", language = "system", files = '\.nix$' },
   { id = "rumdl", name = "rumdl", entry = "rumdl check", language = "system", files = '\.(md|markdown)$', require_serial = true },
   { id = "shellcheck", name = "shellcheck", entry = "shellcheck", language = "system", files = '(^|/)([^/]*\.(sh|bash)|\.env(rc)?(\.[^/]*)?)$' },
+  # >>> reuse
+  { id = "reuse", name = "reuse lint", entry = "reuse lint", language = "system", pass_filenames = false, always_run = true },
+  # <<< reuse
   # >>> python
   { id = "ruff", name = "ruff check", entry = "ruff check", language = "system", files = '\.(py|pyi)$' },
   { id = "ty", name = "ty check", entry = "ty check", language = "system", pass_filenames = false, always_run = true, stages = ["manual"] },
