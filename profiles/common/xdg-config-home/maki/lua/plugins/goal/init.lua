@@ -25,6 +25,7 @@ local running = {}
 local turn_tools = {}
 local auditing = {}
 local id_counter = 0
+local state_lock = maki.async.semaphore(1)
 
 local function new_id(prefix)
   id_counter = id_counter + 1
@@ -108,10 +109,21 @@ local function write_goal(path, session_id, record)
   return true
 end
 
--- Normalize a state left behind by an interrupted audit. Commands use this;
--- read-only paths and tool calls use read_goal so an audit in progress is
--- not cancelled by a status check.
-local function load_goal(session_id)
+-- Goal state is read-modify-write across yields. Every transition runs from
+-- the read that validates it to the atomic write under this lock, so a
+-- command, a turn end, and the auditor cannot interleave their writes.
+-- Delivery and the auditor prompt stay outside it: they are slow and act on
+-- the record they were handed.
+local function serialized(fn)
+  local permit = state_lock:acquire()
+  local result = table.pack(pcall(fn))
+  permit:release()
+  return table.unpack(result, 1, result.n)
+end
+
+-- Normalize a state left behind by an interrupted audit. Callers hold the
+-- lock; load_goal is the locked entry point for commands that only read.
+local function reload_goal(session_id)
   local record, read_err, path = read_goal(session_id)
   if not record then
     return record, read_err, path
@@ -129,6 +141,16 @@ local function load_goal(session_id)
     return nil, write_err, path
   end
   return paused, nil, path
+end
+
+local function load_goal(session_id)
+  local ok, record, err, path = serialized(function()
+    return reload_goal(session_id)
+  end)
+  if not ok then
+    return nil, tostring(record)
+  end
+  return record, err, path
 end
 
 local function interrupted(session_id, record)
@@ -155,7 +177,7 @@ local function clear_fences(session_id)
   auditing[session_id] = nil
 end
 
-local function deliver(session_id, path, record, text)
+local function deliver(session_id, record, text)
   pending[session_id] = { execution_id = record.execution_id, goal_id = record.id }
   local ok, delivered, delivery_err = pcall(maki.session.notify, text, {
     session = session_id,
@@ -169,15 +191,29 @@ local function deliver(session_id, path, record, text)
   end
   pending[session_id] = nil
   if record.status == "active" then
-    local blocked = State.request_blocked(
-      record,
-      record.id,
-      record.execution_id,
-      "goal delivery failed: " .. tostring(delivery_err),
-      os.time()
-    )
-    if blocked then
-      write_goal(path, session_id, blocked)
+    local locked, current = serialized(function()
+      local latest, read_err, latest_path = read_goal(session_id)
+      if not latest then
+        return nil, read_err
+      end
+      local next_record = State.request_blocked(
+        latest,
+        record.id,
+        record.execution_id,
+        "goal delivery failed: " .. tostring(delivery_err),
+        os.time()
+      )
+      if not next_record then
+        return nil
+      end
+      local written, write_err = write_goal(latest_path, session_id, next_record)
+      if not written then
+        return nil, write_err
+      end
+      return next_record
+    end)
+    if not locked then
+      log_warn("cannot record the delivery failure: " .. tostring(current))
     end
   end
   return nil, delivery_err
@@ -201,23 +237,32 @@ local function start_goal(objective)
   if not session_id then
     return nil, session_err
   end
-  local existing, read_err = load_goal(session_id)
-  if read_err then
-    return nil, read_err
-  end
-  if existing and existing.status ~= "complete" then
-    return nil, "a goal already exists (" .. existing.status .. "); use /goal clear first"
-  end
   local path, path_err = goal_path(session_id)
   if not path then
     return nil, path_err
   end
-  local record = State.new_goal(new_id("goal"), new_id("exec"), objective, os.time())
-  local written, write_err = write_goal(path, session_id, record)
-  if not written then
-    return nil, write_err
+  local ok, record, transition_err = serialized(function()
+    local existing, read_err = reload_goal(session_id)
+    if read_err then
+      return nil, read_err
+    end
+    if existing and existing.status ~= "complete" then
+      return nil, "a goal already exists (" .. existing.status .. "); use /goal clear first"
+    end
+    local created = State.new_goal(new_id("goal"), new_id("exec"), objective, os.time())
+    local written, write_err = write_goal(path, session_id, created)
+    if not written then
+      return nil, write_err
+    end
+    return created
+  end)
+  if not ok then
+    return nil, tostring(record)
   end
-  local delivered, delivery_err = deliver(session_id, path, record, Prompt.kickoff(record))
+  if not record then
+    return nil, transition_err
+  end
+  local delivered, delivery_err = deliver(session_id, record, Prompt.kickoff(record))
   if not delivered then
     return nil, delivery_err
   end
@@ -229,17 +274,26 @@ local function pause_goal()
   if not session_id then
     return nil, session_err
   end
-  local record, read_err, path = read_goal(session_id)
-  if not record then
-    return nil, read_err or "no goal is set for this session"
+  local ok, paused, pause_err = serialized(function()
+    local record, read_err, path = read_goal(session_id)
+    if not record then
+      return nil, read_err or "no goal is set for this session"
+    end
+    local next_record, err = State.pause(record, os.time())
+    if not next_record then
+      return nil, err
+    end
+    local written, write_err = write_goal(path, session_id, next_record)
+    if not written then
+      return nil, write_err
+    end
+    return next_record
+  end)
+  if not ok then
+    return nil, tostring(paused)
   end
-  local paused, pause_err = State.pause(record, os.time())
   if not paused then
     return nil, pause_err
-  end
-  local written, write_err = write_goal(path, session_id, paused)
-  if not written then
-    return nil, write_err
   end
   clear_fences(session_id)
   return paused, nil, session_id
@@ -250,22 +304,31 @@ local function resume_goal()
   if not session_id then
     return nil, session_err
   end
-  local record, read_err, path = load_goal(session_id)
-  if not record then
-    return nil, read_err or "no goal is set for this session"
+  local ok, resumed, resume_err = serialized(function()
+    local record, read_err, path = reload_goal(session_id)
+    if not record then
+      return nil, read_err or "no goal is set for this session"
+    end
+    if record.status == "active" and (pending[session_id] or running[session_id]) then
+      return nil, "the goal is already running"
+    end
+    local next_record, err = State.resume(record, new_id("exec"), os.time())
+    if not next_record then
+      return nil, err
+    end
+    local written, write_err = write_goal(path, session_id, next_record)
+    if not written then
+      return nil, write_err
+    end
+    return next_record
+  end)
+  if not ok then
+    return nil, tostring(resumed)
   end
-  if record.status == "active" and (pending[session_id] or running[session_id]) then
-    return nil, "the goal is already running"
-  end
-  local resumed, resume_err = State.resume(record, new_id("exec"), os.time())
   if not resumed then
     return nil, resume_err
   end
-  local written, write_err = write_goal(path, session_id, resumed)
-  if not written then
-    return nil, write_err
-  end
-  local delivered, delivery_err = deliver(session_id, path, resumed, Prompt.continuation(resumed))
+  local delivered, delivery_err = deliver(session_id, resumed, Prompt.continuation(resumed))
   if not delivered then
     return nil, delivery_err
   end
@@ -281,9 +344,18 @@ local function clear_goal()
   if not path then
     return nil, path_err
   end
-  local removed, remove_err = maki.fs.rm(path, { force = true })
+  local ok, removed, remove_err = serialized(function()
+    local deleted, err = maki.fs.rm(path, { force = true })
+    if not deleted then
+      return nil, "cannot delete goal state: " .. tostring(err)
+    end
+    return true
+  end)
+  if not ok then
+    return nil, tostring(removed)
+  end
   if not removed then
-    return nil, "cannot delete goal state: " .. tostring(remove_err)
+    return nil, remove_err
   end
   clear_fences(session_id)
   maki.ui.set_status_hint(nil, { session = session_id })
@@ -381,24 +453,38 @@ maki.api.register_tool({
     if not session_id then
       return { llm_output = tostring(session_err or "this run has no session"), is_error = true }
     end
-    local record, read_err, path = read_goal(session_id)
-    if not record then
-      return { llm_output = read_err or "no goal is set for this session", is_error = true }
-    end
-    local updated, update_err
-    if input.status == "complete" then
-      updated, update_err =
-        State.request_complete(record, input.goal_id, input.execution_id, input.summary, os.time())
-    else
-      updated, update_err =
-        State.request_blocked(record, input.goal_id, input.execution_id, input.summary, os.time())
+    local ok, updated, update_err = serialized(function()
+      local record, read_err, path = read_goal(session_id)
+      if not record then
+        return nil, read_err or "no goal is set for this session"
+      end
+      local next_record, err
+      if input.status == "complete" then
+        next_record, err = State.request_complete(
+          record,
+          input.goal_id,
+          input.execution_id,
+          input.summary,
+          os.time()
+        )
+      else
+        next_record, err =
+          State.request_blocked(record, input.goal_id, input.execution_id, input.summary, os.time())
+      end
+      if not next_record then
+        return nil, err
+      end
+      local written, write_err = write_goal(path, session_id, next_record)
+      if not written then
+        return nil, write_err
+      end
+      return next_record
+    end)
+    if not ok then
+      return { llm_output = tostring(updated), is_error = true }
     end
     if not updated then
       return { llm_output = update_err, is_error = true }
-    end
-    local written, write_err = write_goal(path, session_id, updated)
-    if not written then
-      return { llm_output = write_err, is_error = true }
     end
     refresh_hint(session_id)
     if input.status == "complete" then
@@ -430,33 +516,41 @@ local function parse_verdict(text)
 end
 
 local function audit_error(session_id, expected, message)
-  local record, read_err, path = read_goal(session_id)
-  if not record then
-    if read_err then
-      log_warn("audit cleanup: " .. read_err)
+  local ok, paused, pause_err = serialized(function()
+    local record, read_err, path = read_goal(session_id)
+    if not record then
+      return nil, read_err
     end
+    if
+      record.status ~= "auditing" or not State.matches(record, expected.id, expected.execution_id)
+    then
+      return nil
+    end
+    local next_record, err = State.force_pause(record, message, os.time())
+    if not next_record then
+      return nil, err
+    end
+    local written, write_err = write_goal(path, session_id, next_record)
+    if not written then
+      return nil, write_err
+    end
+    return next_record
+  end)
+  if not ok then
+    log_warn("audit cleanup: " .. tostring(paused))
     return
   end
-  if
-    record.status ~= "auditing" or not State.matches(record, expected.id, expected.execution_id)
-  then
-    return
-  end
-  local paused, pause_err = State.force_pause(record, message, os.time())
   if not paused then
-    log_warn("audit cleanup: " .. tostring(pause_err))
-    return
-  end
-  local written, write_err = write_goal(path, session_id, paused)
-  if not written then
-    log_warn("audit cleanup: " .. tostring(write_err))
+    if pause_err then
+      log_warn("audit cleanup: " .. tostring(pause_err))
+    end
     return
   end
   refresh_hint(session_id)
   maki.notify("goal paused: " .. message, "warn", { title = "goal" })
 end
 
-local function run_audit(session_id, record, path)
+local function run_audit(session_id, record)
   if auditing[session_id] then
     return
   end
@@ -519,40 +613,49 @@ local function run_audit(session_id, record, path)
       return
     end
 
-    local latest, latest_err, latest_path = read_goal(session_id)
-    if not latest then
-      if latest_err then
-        error(latest_err, 0)
+    local locked, updated, update_err = serialized(function()
+      local latest, latest_err, latest_path = read_goal(session_id)
+      if not latest then
+        return nil, latest_err
       end
-      return
-    end
-    if
-      latest.id ~= record.id
-      or latest.execution_id ~= record.execution_id
-      or latest.status ~= "auditing"
-    then
-      return
-    end
-    local updated, update_err
-    if verdict.approved then
-      updated, update_err = State.audit_approved(latest, latest.id, latest.execution_id, os.time())
-    else
-      updated, update_err =
-        State.audit_rejected(latest, latest.id, latest.execution_id, verdict.reason, os.time())
+      if
+        latest.id ~= record.id
+        or latest.execution_id ~= record.execution_id
+        or latest.status ~= "auditing"
+      then
+        return nil
+      end
+      local next_record, err
+      if verdict.approved then
+        next_record, err = State.audit_approved(latest, latest.id, latest.execution_id, os.time())
+      else
+        next_record, err =
+          State.audit_rejected(latest, latest.id, latest.execution_id, verdict.reason, os.time())
+      end
+      if not next_record then
+        return nil, err
+      end
+      local written, write_err = write_goal(latest_path, session_id, next_record)
+      if not written then
+        return nil, write_err
+      end
+      return next_record
+    end)
+    if not locked then
+      error(tostring(updated), 0)
     end
     if not updated then
-      error(update_err, 0)
-    end
-    local written, write_err = write_goal(latest_path, session_id, updated)
-    if not written then
-      error(write_err, 0)
+      if update_err then
+        error(update_err, 0)
+      end
+      return
     end
     refresh_hint(session_id)
     if verdict.approved then
       maki.notify("goal complete: " .. verdict.reason, "info", { title = "goal" })
     else
       local delivered, delivery_err =
-        deliver(session_id, latest_path, updated, Prompt.continuation(updated, verdict.reason))
+        deliver(session_id, updated, Prompt.continuation(updated, verdict.reason))
       if not delivered then
         error("audit feedback delivery failed: " .. tostring(delivery_err), 0)
       end
@@ -600,7 +703,7 @@ maki.api.create_autocmd("TurnEnd", {
 
     maki.async.run(function()
       local ok, err = pcall(function()
-        local record, read_err, path = read_goal(session_id)
+        local record, read_err = read_goal(session_id)
         if not record then
           if read_err then
             log_warn(read_err)
@@ -616,22 +719,38 @@ maki.api.create_autocmd("TurnEnd", {
           return
         end
         if record.status == "auditing" then
-          run_audit(session_id, record, path)
+          run_audit(session_id, record)
           return
         end
         if not fence then
           refresh_hint(session_id)
           return
         end
-        local next_record, decision =
-          State.after_turn(record, fence.execution_id, tools_used, LIMITS, os.time())
+        local locked, next_record, decision, write_err = serialized(function()
+          local current, current_err, current_path = read_goal(session_id)
+          if not current then
+            return nil, nil, current_err
+          end
+          local next, turn_decision =
+            State.after_turn(current, fence.execution_id, tools_used, LIMITS, os.time())
+          if not next then
+            return nil, nil, nil
+          end
+          local written, err = write_goal(current_path, session_id, next)
+          if not written then
+            return nil, nil, err
+          end
+          return next, turn_decision
+        end)
+        if not locked then
+          error(next_record, 0)
+        end
         if not next_record then
+          if write_err then
+            error(write_err, 0)
+          end
           refresh_hint(session_id)
           return
-        end
-        local written, write_err = write_goal(path, session_id, next_record)
-        if not written then
-          error(write_err, 0)
         end
         if decision == "paused" then
           refresh_hint(session_id)
@@ -644,7 +763,6 @@ maki.api.create_autocmd("TurnEnd", {
         end
         local delivered, delivery_err = deliver(
           session_id,
-          path,
           next_record,
           Prompt.continuation(next_record, next_record.audit_reason)
         )
@@ -668,43 +786,51 @@ maki.api.create_autocmd("TurnError", {
     turn_tools[session_id] = nil
     maki.async.run(function()
       local ok, err = pcall(function()
-        local record, read_err, path = read_goal(session_id)
-        if not record then
-          if read_err then
-            log_warn(read_err)
+        local locked, updated, update_err = serialized(function()
+          local current, read_err, current_path = read_goal(session_id)
+          if not current then
+            return nil, read_err
+          end
+          local next_record, err
+          if current.status == "auditing" and fence then
+            next_record, err = State.force_pause(
+              current,
+              "turn failed during the completion audit: " .. tostring(event.data.message),
+              os.time()
+            )
+          elseif
+            fence
+            and current.status == "active"
+            and current.execution_id == fence.execution_id
+          then
+            next_record, err = State.request_blocked(
+              current,
+              current.id,
+              current.execution_id,
+              "turn failed: " .. tostring(event.data.message),
+              os.time()
+            )
+          else
+            return nil
+          end
+          if not next_record then
+            return nil, err
+          end
+          local written, write_err = write_goal(current_path, session_id, next_record)
+          if not written then
+            return nil, write_err
+          end
+          return next_record
+        end)
+        if not locked then
+          error(updated, 0)
+        end
+        if not updated then
+          if update_err then
+            error(update_err, 0)
           end
           refresh_hint(session_id)
           return
-        end
-        local updated, update_err
-        if record.status == "auditing" and fence then
-          updated, update_err = State.force_pause(
-            record,
-            "turn failed during the completion audit: " .. tostring(event.data.message),
-            os.time()
-          )
-        elseif
-          fence
-          and record.status == "active"
-          and record.execution_id == fence.execution_id
-        then
-          updated, update_err = State.request_blocked(
-            record,
-            record.id,
-            record.execution_id,
-            "turn failed: " .. tostring(event.data.message),
-            os.time()
-          )
-        else
-          refresh_hint(session_id)
-          return
-        end
-        if not updated then
-          error(update_err, 0)
-        end
-        local written, write_err = write_goal(path, session_id, updated)
-        if not written then
-          error(write_err, 0)
         end
         refresh_hint(session_id)
         maki.notify("goal blocked after a turn error", "warn", { title = "goal" })
