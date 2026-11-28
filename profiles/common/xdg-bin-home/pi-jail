@@ -1,0 +1,43 @@
+#!/bin/sh
+
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-FileCopyrightText: 2026 KIM Hyunjae
+
+set -eu
+
+: "${HOME:?HOME is not set}"
+
+# --rw-map: without it the jail home is a throwaway tmpfs and pi starts signed
+# out, without settings, extensions, or sessions.
+# --allow-host: the pi preset allows only package registries and github; the
+# model API host of the configured provider must be opened explicitly. A host
+# entry covers its subdomains but matches no pattern, so one entry per
+# research MCP server's registrable domain is enough.
+# --: everything after it reaches pi untouched instead of being parsed as an
+# ai-jail flag (-h, -v, -s, --json).
+exec ai-jail \
+    --exec \
+    --rw-map "$HOME/.pi" \
+    --allow-host openai.com \
+    --allow-host mistral.ai \
+    --allow-host anthropic.com \
+    --allow-host openrouter.ai \
+    --allow-host exa.ai \
+    --allow-host context7.com \
+    --allow-host mozilla.net \
+    --allow-host github.com \
+    --allow-host githubusercontent.com \
+    --allow-host docs.rs \
+    --allow-host pypi.org \
+    --allow-host podman.io \
+    --allow-host freedesktop.org \
+    --allow-host archlinux.org \
+    --allow-host debian.org \
+    --allow-host fedoraproject.org \
+    --allow-host nixos.org \
+    --allow-host traefik.io \
+    --allow-host skills.sh \
+    --allow-host maki.sh \
+    --allow-host pi.dev \
+    --allow-host hnjae.org \
+    pi -- "$@"
