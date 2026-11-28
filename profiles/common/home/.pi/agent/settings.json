@@ -13,6 +13,7 @@
     "npm:pi-advisor-flow",
     "npm:pi-away"
   ],
+  "extensions": ["-extensions/translate/index.ts"],
   "enableSkillCommands": true,
   "terminal": {
     "showTerminalProgress": false
