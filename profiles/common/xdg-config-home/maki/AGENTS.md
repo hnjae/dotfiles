@@ -1,1 +1,1 @@
-../../_agents/AGENTS.md
+../../home+.agents/AGENTS.md

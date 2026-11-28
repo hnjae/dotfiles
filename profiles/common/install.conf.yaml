@@ -32,6 +32,9 @@
     ~/.vibe:
       glob: true
       path: home+.vibe/*
+    ~/.pi:
+      glob: true
+      path: home+.pi/*
     ~/.agents:
       glob: true
       path: home+.agents/*

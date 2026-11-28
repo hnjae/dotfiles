@@ -1,0 +1,70 @@
+no_status_bar = false
+
+# Global base: every command merges over this. [commands.<name>] tables add to it.
+allow_hosts = [
+  "openai.com",
+  "mistral.ai",
+  "anthropic.com",
+  "openrouter.ai",
+  "exa.ai",
+  "context7.com",
+  "mozilla.net",
+  "github.com",
+  "githubusercontent.com",
+  "docs.rs",
+  "pypi.org",
+  "podman.io",
+  "freedesktop.org",
+  "archlinux.org",
+  "debian.org",
+  "fedoraproject.org",
+  "nixos.org",
+  "nix-community.github.io",
+  "nix-darwin.github.io",
+  "flakehub.com",
+  "nix.dev",
+  "noogle.dev",
+  "devbox.sh",
+  "notashelf.dev",
+  "traefik.io",
+  "skills.sh",
+  "maki.sh",
+  "models.dev",
+  "deepwiki.com",
+  "pi.dev",
+  "hnjae.org",
+]
+# ai-jail binds only the paths leading to the invoked command, and the agents
+# sit in the user profile, so the NixOS system profile stays out of these jails.
+# Without it there is no bash, git, or python3, and uvx cannot find an interpreter.
+ro_maps = [
+  "/run/current-system/sw",
+  "~/.nix-profile",
+  "~/.agents",
+  "~/.local/share/dotfiles/profiles/common/_agents:/home/_agents",
+]
+
+[commands.pi]
+rw_maps = ["~/.pi"]
+
+[commands.maki]
+# Maki keeps config, sessions, and credentials outside the checkout; without
+# these the jail starts logged out and cannot save a session.
+rw_maps = ["~/.config/maki", "~/.local/state/maki"]
+
+[commands.claude]
+# The preset maps ~/.claude, but CLAUDE.md is a symlink into dotfiles.
+ro_maps = ["~/.local/share/dotfiles/profiles/common/home+.claude"]
+
+[commands.codex]
+# ~/.codex/AGENTS.md is a symlink into dotfiles whose target links to ../_agents.
+ro_maps = [
+  "~/.local/share/dotfiles/profiles/common/home+.codex",
+  "~/.local/share/dotfiles/profiles/common/_agents",
+]
+
+[commands.opencode]
+# The preset maps only ~/.local/share/opencode; config and runtime state live
+# elsewhere. AGENTS.md resolves to ~/_agents once the config dir is bound.
+ro_maps = ["~/.local/share/dotfiles/profiles/common/_agents:/home/hnjae/_agents"]
+rw_maps = ["~/.config/opencode", "~/.local/state/opencode"]
