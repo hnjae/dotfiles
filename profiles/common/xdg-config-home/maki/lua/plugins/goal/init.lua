@@ -143,7 +143,7 @@ local function refresh_hint(session_id)
     return
   end
   local text = State.hint(record, interrupted(session_id, record), MAX_ROUNDS)
-  maki.ui.set_status_hint(text and { { text, "foreground" } } or nil, { session = session_id })
+  maki.ui.set_status_hint(text and { { text, "" } } or nil, { session = session_id })
 end
 
 local function clear_fences(session_id)

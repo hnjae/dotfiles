@@ -28,7 +28,7 @@ function M.kickoff(record)
     "",
     "Work from the current files, tests, and command output. Preserve every explicit requirement and do not redefine success. Verify the result before declaring completion.",
     "Call goal_update with the matching goal_id and execution_id when the goal is complete or blocked.",
-    "When declaring complete, include a completion_summary with the evidence. An independent auditor checks that summary against the conversation before the goal is accepted.",
+    "When declaring complete, include a summary with the evidence. An independent auditor checks that summary against the conversation before the goal is accepted.",
     "A blocked declaration means a true impasse that needs user input or an external change, not merely slow or difficult work.",
   }, "\n")
 end
