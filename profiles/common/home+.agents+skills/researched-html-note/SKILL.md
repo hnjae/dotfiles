@@ -58,13 +58,21 @@ Use `assets/researched-note-template.html` as the starting point unless the targ
 
 - Use Korean by default for researched HTML notes, unless the requested artifact should be in another language.
 - Keep generated prose concise and direct. The HTML should read as a polished note, not a marketing page.
-- If the user asks to disclose model or tool provenance, place it in the header metadata or footer rather than inside the technical argument.
 - If the user asks for an answer first and a file second, answer briefly in chat and still create the HTML file.
+
+## Provenance
+
+Every note records who produced it, mirroring the `authors` and `models` frontmatter keys of the user's Markdown notes. Record it twice: as `<meta>` tags in `<head>` for tools, and as header meta items for readers.
+
+- `authors` is the harness (coding agent) running this skill, such as `hermes` or `claude-code`. `models` lists the model IDs that did the research and writing, such as `claude-sonnet-5-5`.
+- Write only what you know. Include another model only when the user names it or a subagent you spawned ran on it; never guess an ID. If the harness or model is unknown, omit that tag and header item instead of writing a placeholder.
+- `{{PROVENANCE_META}}` is one `<meta name="author" content="…">` per author, then one `<meta name="model" content="…">` per model, one per line. Do not join values with commas: HTML has no list type, so each value gets its own tag.
+- `{{AUTHORS}}` and `{{MODELS}}` are the same values as plain text joined with `, `.
 
 ## Template Use
 
 When using `assets/researched-note-template.html`:
 
-- Replace `{{TITLE}}`, `{{SUBTITLE}}`, `{{AUTHOR}}`, `{{DATETIME_ISO}}`, `{{DATETIME_DISPLAY}}`, `{{SOURCE_URL}}`, `{{KEY_POINTS}}`, `{{CONTENT_BLOCKS}}`, and `{{FOOTER_NOTE}}`.
+- Replace `{{TITLE}}`, `{{SUBTITLE}}`, `{{PROVENANCE_META}}`, `{{AUTHORS}}`, `{{MODELS}}`, `{{DATETIME_ISO}}`, `{{DATETIME_DISPLAY}}`, `{{SOURCE_URL}}`, `{{KEY_POINTS}}`, `{{CONTENT_BLOCKS}}`, and `{{FOOTER_NOTE}}`.
 - Delete unused sections instead of leaving empty placeholders.
 - Add or remove section blocks freely, but keep the embedded CSS self-contained.
