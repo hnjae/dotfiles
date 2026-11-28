@@ -10,7 +10,7 @@
 
 # Authored in this repository.
 prompt-review
-fork-maintenance
+reuse-compliance
 git-commit
 intent-docs-review
 intent-driven-development

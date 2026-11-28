@@ -1,11 +1,11 @@
 ---
-name: fork-maintenance
-description: Prepare an upstream-derived project for independent maintenance when asked to take over a fork or move its licensing and distribution to fork ownership. For a full transition with no license selected, default the outbound license to AGPL-3.0-or-later after checking inherited obligations. Use for coordinated licensing, package identity, installation, update, or release ownership changes. For a request limited to one surface, stay within that scope; do not infer relicensing or a full takeover from a request such as adopting REUSE. Stop on license conflicts. Not for routine upstream syncs or unrelated release work.
+name: reuse-compliance
+description: Apply REUSE licensing to a repository, including SPDX headers, sidecars, REUSE.toml, LICENSES/ texts, and notices for inherited material. When the request is a full takeover of an upstream fork, also move licensing and distribution to fork ownership. For a request limited to one surface, such as adopting REUSE, stay within that scope; do not infer relicensing or a full takeover from it. Stop on license conflicts. Not for routine upstream syncs or unrelated release work.
 ---
 
-# Fork Maintenance
+# REUSE Compliance
 
-Turn an upstream project into an independently maintained fork while following the scope the user requested. For a full independent-maintenance transition, default the outbound license to `AGPL-3.0-or-later` unless the user selects another license. A request limited to one area, such as REUSE compliance or release setup, does not authorize changes to unrelated licensing or infrastructure. Preserve the rights, notices, and obligations attached to inherited material throughout the work.
+Apply REUSE licensing while following the scope the user requested. For a full independent-maintenance transition of an upstream fork, default the outbound license to `AGPL-3.0-or-later` unless the user selects another license. A request limited to one area, such as REUSE compliance or release setup, does not authorize changes to unrelated licensing or infrastructure. Preserve the rights, notices, and obligations attached to inherited material throughout the work.
 
 ## 1. Establish the target and scope
 

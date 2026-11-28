@@ -28,7 +28,7 @@ Third-party and authored skills share one store, `~/.agents/skills/` (the pool),
 
 ## Licensing
 
-The repo is `AGPL-3.0-or-later` and REUSE-compliant; the `reuse lint` pre-commit hook rejects a file with no license information. The `fork-maintenance` skill holds the full rules.
+The repo is `AGPL-3.0-or-later` and REUSE-compliant; the `reuse lint` pre-commit hook rejects a file with no license information. The `reuse-compliance` skill holds the full rules.
 
 - Declare license information closest to the file: an SPDX header (license line first, copyright lines directly after with no spacer line, `2026 KIM Hyunjae`), else a `<file>.license` sidecar, else a glob in the default table of `REUSE.toml`, which is only for formats that cannot hold a header. Do not put license identifiers anywhere else in `REUSE.toml`.
 - Put a header below shebangs and first-line directives (`# shellcheck shell=`, `--- @sync entry`, modelines). Never put one in JSON, frontmatter, generated files, or files an application rewrites: the comment would break parsing or be lost on the next rewrite.
