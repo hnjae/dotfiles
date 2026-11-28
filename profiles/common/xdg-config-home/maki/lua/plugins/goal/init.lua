@@ -11,6 +11,8 @@ local Transcript = require("plugins.goal.transcript")
 local MAX_ROUNDS = 50
 local MAX_STALLS = 3
 local MAX_JUDGE_ATTEMPTS = 2
+local MAX_AUDIT_OPENS = 2
+local AUDIT_RETRY_MS = 250
 local MAX_TRANSCRIPT_CHARS = 40000
 local MAX_TOOL_RESULT_CHARS = 2000
 
@@ -469,13 +471,23 @@ local function run_audit(session_id, record, path)
       max_chars = MAX_TRANSCRIPT_CHARS,
       max_tool_chars = MAX_TOOL_RESULT_CHARS,
     })
-    local auditor, auditor_err = maki.agent.session({
-      session = session_id,
-      scope = "session",
-      name = "goal-auditor",
-      system = Prompt.judge_system(),
-      thinking = "off",
-    })
+    local auditor, auditor_err
+    for attempt = 1, MAX_AUDIT_OPENS do
+      auditor, auditor_err = maki.agent.session({
+        session = session_id,
+        scope = "session",
+        name = "goal-auditor",
+        system = Prompt.judge_system(),
+        thinking = "off",
+      })
+      if auditor then
+        break
+      end
+      if attempt < MAX_AUDIT_OPENS then
+        maki.log.info("goal: auditor open failed, retrying: " .. tostring(auditor_err))
+        maki.async.sleep(AUDIT_RETRY_MS)
+      end
+    end
     if not auditor then
       error("cannot open auditor: " .. tostring(auditor_err), 0)
     end
