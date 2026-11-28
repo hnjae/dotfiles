@@ -6,7 +6,7 @@
     "commit": "",
     "pr": ""
   },
-  "model": "sonnet",
+  "model": "haiku",
   "hooks": {
     "SessionStart": [
       {
@@ -81,7 +81,7 @@
   "subagentPromptCacheTtl": "1h",
   "modelSettings": {
     "claude-opus-5-5": {
-      "effortLevel": "medium",
+      "effortLevel": "high",
       "autoCompactWindow": 500000
     },
     "claude-sonnet-5-5": {
