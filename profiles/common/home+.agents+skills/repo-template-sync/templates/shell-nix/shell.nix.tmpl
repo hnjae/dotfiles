@@ -1,0 +1,41 @@
+let
+  nixpkgs = fetchTarball "https://github.com/cachix/devenv-nixpkgs/archive/refs/heads/rolling.tar.gz";
+  pkgs = import nixpkgs {
+    config = { };
+    overlays = [ ];
+  };
+in
+pkgs.mkShellNoCC {
+  packages = with pkgs; [
+    # >>> biome
+    biome
+    # <<< biome
+    cocogitto
+    deadnix
+    git
+    just
+    nixfmt
+    prek
+    # >>> python
+    ruff
+    # <<< python
+    rumdl
+    shellcheck
+    shellharden
+    shfmt
+    statix
+    # >>> lua
+    stylua
+    # <<< lua
+    taplo
+    treefmt
+    typos
+    # >>> yamlfmt
+    yamlfmt
+    # <<< yamlfmt
+  ];
+  shellHook = # sh
+    ''
+      prek install --quiet
+    '';
+}

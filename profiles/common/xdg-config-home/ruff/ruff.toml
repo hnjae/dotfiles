@@ -6,50 +6,78 @@ docstring-code-format = true
 [lint]
 preview = true
 fixable = ["ALL"]
+# Deny list: every rule is on unless ignored below. The strictness is intended: agents write most of the code, so tighter lint costs little.
 select = ["ALL"]
 ignore = [
-  # Rules that are not necessary in various project:
+  # Not a pattern used here: a copyright notice at the top of each file.
   "CPY", # flake8-copyright
-  "D",   # pydocstyle
+
+  # Code is sometimes commented out temporarily.
+  "ERA", # eradicate
+
+  # TODO and FIXME comments are allowed to stay in the code.
   "FIX", # flake8-fixme
   "TD",  # flake8-todos
 
-  # Rules that are necessary in specific situations:
-  "S404", # suspicious-subprocess-import
-  "S603", # subprocess-without-shell-equals-true", conflicts with S602
-  "S607", # start-process-with-partial-path
+  # Scripts print instead of setting up a logger.
+  "print",   # T201
+  "p-print", # T203
 
-  # Things I don't think are necessary:
-  "RUF001",  # ambiguous-unicode-character-string
-  "RUF002",  # ambiguous-unicode-character-docstring
-  "RUF003",  # ambiguous-unicode-character-comment
-  "PLC2401", # non-ascii-name
-  "PLC2403", # non-ascii-import-name
+  # S: flake8-bandit, subprocess rules.
+  # S602 (shell=True) and S603 (any other call with computed arguments) cannot both stay on, or subprocess is unusable: S603 is ignored and S602 stays enabled.
+  # S404 flags every import of subprocess, which amounts to forbidding it: enable it in a repository that needs to restrict subprocess.
+  # S607 demands full executable paths, which makes the code non-portable.
+  "suspicious-subprocess-import",         # S404
+  "subprocess-without-shell-equals-true", # S603
+  "start-process-with-partial-path",      # S607
 
-  # Things that can be fixed by `ruff format`:
-  "COM", # flake8-commas
-  "E",   # pycodestyle-error
-  "Q",   # flake8-quotes
+  # Unicode is fine here: the environment supports it, and ruff reports the characters as escapes that are hard to read.
+  "ambiguous-unicode-character-comment",   # RUF003
+  "ambiguous-unicode-character-docstring", # RUF002
+  "ambiguous-unicode-character-string",    # RUF001
 
-  # "I",   # isort: `ruff check --fix` 에서만 고쳐지나?
+  # Non-ASCII identifiers are allowed: there is no legacy toolchain to support.
+  "non-ascii-import-name", # PLC2403
+  "non-ascii-name",        # PLC2401
+
+  # Rules that conflict with the formatter:
+  "missing-trailing-comma",                    # COM812
+  "prohibited-trailing-comma",                 # COM819
+  "indentation-with-invalid-multiple",         # E111
+  "indentation-with-invalid-multiple-comment", # E114
+  "over-indented",                             # E117
+  "line-too-long",                             # E501
+  "bad-quotes-inline-string",                  # Q000
+  "bad-quotes-multiline-string",               # Q001
+  "bad-quotes-docstring",                      # Q002
+  "avoidable-escaped-quote",                   # Q003
+
+  # I (isort) stays enabled: ruff format does not sort imports.
 ]
 
 [lint.per-file-ignores]
+# Normal in test code: fixtures, assert, private names, boolean arguments, no docstrings, no __init__.py.
 "tests/**/*.py" = [
-  "ANN",     # flake8-annotations
-  "ARG",     # flake8-unused-arguments
-  "PLC0415", # import-outside-top-level
-  "PLR",     # refactor
-  "S",       # flake8-bandit
-  "SLF",     # flake8-self
-  "TC",      # flake8-type-checking
+  "ANN", # flake8-annotations
+  "ARG", # flake8-unused-arguments
+  "D",   # pydocstyle
+  "DOC", # pydoclint
+  "FBT", # flake8-boolean-trap
+  "PLR", # pylint refactor
+  "S",   # flake8-bandit
+  "SLF", # flake8-self
+  "TC",  # flake8-type-checking
 
-  # PLC: convention
-  "PLC0415", # import-outside-top-level
-  "PLC1901", # compare-to-empty-string
+  # INP: flake8-no-pep420
+  "implicit-namespace-package", # INP001
 
-  # PLW: warning
-  "PLW0717", # too-many-statements-in-try-clause
+  # PLC: pylint convention
+  "compare-to-empty-string",  # PLC1901
+  "import-outside-top-level", # PLC0415
+  "import-private-name",      # PLC2701
+
+  # PLW: pylint warning
+  "too-many-statements-in-try-clause", # PLW0717
 ]
 
 [lint.pydocstyle]
@@ -57,8 +85,3 @@ convention = "pep257"
 
 [lint.mccabe]
 max-complexity = 12 # default: 10
-
-[lint.flake8-annotations] # ANN
-ignore-fully-untyped = true
-suppress-dummy-args = true
-suppress-none-returning = true

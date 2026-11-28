@@ -33,6 +33,7 @@ path = [
   "**/xdg-config-home/user-dirs.locale",
   #Templates whose copies must not inherit a header.
   "**/home+.agents+skills/*/assets/*.html",
+  "**/home+.agents+skills/repo-template-sync/templates/**",
 ]
 precedence = "closest"
 SPDX-FileCopyrightText = "2022-2026 KIM Hyunjae"

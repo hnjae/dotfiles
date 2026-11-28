@@ -1,0 +1,53 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+tab_width = 8
+
+[.gitmodules]
+indent_style = tab
+indent_size = 8
+tab_width = 8
+
+[*.{yaml,toml,json,jsonc,conf,js,ts}]
+indent_size = 2
+indent_style = space
+
+[*.{md}]
+indent_size = 4
+indent_style = space
+
+[{justfile,.justfile}]
+indent_size = 4
+indent_style = space
+
+[*.{sh,bash,fish,zsh,nu}]
+indent_size = 4
+indent_style = space
+
+[.{env,envrc}]
+indent_size = 4
+indent_style = space
+
+[.{env,envrc}.*]
+indent_size = 4
+indent_style = space
+
+[*.nix]
+indent_size = 2
+indent_style = space
+# >>> python
+
+[*.py]
+indent_size = 4
+indent_style = space
+# <<< python
+# >>> lua
+
+[*.lua]
+indent_style = space
+indent_size = 2
+# <<< lua

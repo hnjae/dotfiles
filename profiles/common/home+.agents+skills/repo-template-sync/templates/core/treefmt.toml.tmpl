@@ -1,0 +1,104 @@
+tree-root-file = "treefmt.toml"
+walk = "git"
+excludes = ["*.lock"]
+
+[formatter.nixfmt]
+command = "nixfmt"
+includes = ["*.nix"]
+
+[formatter.taplo]
+command = "taplo"
+options = ["fmt"]
+includes = ["*.toml"]
+# >>> yamlfmt
+
+[formatter.yamlfmt]
+command = "yamlfmt"
+options = ["-conf", "yamlfmt.yaml"]
+includes = ["*.yaml", "*.yml"]
+# <<< yamlfmt
+
+[formatter.just]
+command = "just"
+options = ["--unstable", "--fmt", "--justfile"]
+includes = [
+  "justfile",
+  ".justfile",
+  "**/justfile",
+  "**/.justfile",
+  "*.just",
+  "*.justfile",
+]
+no-positional-arg-support = true
+
+[formatter.rumdl]
+command = "rumdl"
+options = ["fmt"]
+includes = ["*.md", "*.markdown"]
+
+[formatter.shellharden]
+command = "shellharden"
+options = ["--replace"]
+includes = [
+  "*.sh",
+  "*.bash",
+  ".envrc",
+  ".envrc.*",
+  ".env",
+  ".env.*",
+  "**/.envrc",
+  "**/.envrc.*",
+  "**/.env",
+  "**/.env.*",
+]
+priority = 10
+
+[formatter.shfmt]
+command = "shfmt"
+options = ["-w"]
+includes = [
+  "*.sh",
+  "*.bash",
+  ".envrc",
+  ".envrc.*",
+  ".env",
+  ".env.*",
+  "**/.envrc",
+  "**/.envrc.*",
+  "**/.env",
+  "**/.env.*",
+]
+priority = 30
+# >>> biome
+
+[formatter.biome]
+command = "biome"
+options = ["format", "--write", "--no-errors-on-unmatched"]
+includes = [
+  "*.js",
+  "*.jsx",
+  "*.ts",
+  "*.tsx",
+  "*.mjs",
+  "*.cjs",
+  "*.mts",
+  "*.cts",
+  "*.json",
+  "*.jsonc",
+  "*.css",
+]
+# <<< biome
+# >>> python
+
+[formatter.ruff]
+command = "ruff"
+options = ["format"]
+includes = ["*.py", "*.pyi"]
+# <<< python
+# >>> lua
+
+[formatter.stylua]
+command = "stylua"
+options = ["--search-parent-directories"]
+includes = ["*.lua"]
+# <<< lua

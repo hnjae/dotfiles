@@ -18,6 +18,7 @@ link-html-clipper
 researched-html-note
 herdr-core
 nix-best-practices
+repo-template-sync
 
 # Third-party: ast-grep/agent-skill
 ast-grep
