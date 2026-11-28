@@ -6,7 +6,7 @@
     "commit": "",
     "pr": ""
   },
-  "model": "haiku",
+  "model": "sonnet",
   "hooks": {
     "SessionStart": [
       {

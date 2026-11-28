@@ -1,6 +1,6 @@
 ---
 name: git-commit
-description: "Create a Conventional Commit from repository changes. Use whenever the user asks to commit changes, make or create a commit, save work in Git as a commit, or invokes /commit."
+description: "Create a Conventional Commit from repository changes. Use for any commit you create: the user asks, /commit is invoked, or you commit on your own initiative."
 ---
 
 # Git Commit with Conventional Commits
