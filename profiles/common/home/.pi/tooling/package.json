@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "devDependencies": {
-    "@earendil-works/pi-coding-agent": "1.5.2",
+    "@earendil-works/pi-coding-agent": "1.6.1",
     "@types/node": "^24",
     "dbus-next": "0.10.2",
     "typescript": "^5.9"

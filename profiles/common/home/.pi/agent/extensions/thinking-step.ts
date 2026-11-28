@@ -15,7 +15,10 @@
  * hidden level is never requested, the last press at either end clamps instead
  * of landing on a level pi would have to move back up from.
  */
-import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
+import type {
+  ExtensionAPI,
+  ExtensionContext,
+} from "@earendil-works/pi-coding-agent";
 
 const LEVELS = [
   "off",
@@ -29,14 +32,9 @@ const LEVELS = [
 type Level = (typeof LEVELS)[number];
 
 /** The parts of the active model the level list depends on. */
-type ModelFacts =
-  | {
-      reasoning?: boolean;
-      thinkingLevelMap?: Partial<Record<Level, string | null>>;
-      name?: string;
-    }
-  | null
-  | undefined;
+type ModelFacts = ExtensionContext["model"];
+
+type Shortcut = Parameters<ExtensionAPI["registerShortcut"]>[0];
 
 function availableLevels(model: ModelFacts): Level[] {
   if (!model?.reasoning) return ["off"];
@@ -53,12 +51,12 @@ function step(model: ModelFacts, current: Level, delta: 1 | -1): Level {
   const index = levels.indexOf(current);
   if (index === -1) return levels[0] ?? "off";
   const target = Math.min(Math.max(index + delta, 0), levels.length - 1);
-  return levels[target];
+  return levels[target] ?? "off";
 }
 
 export default function (pi: ExtensionAPI) {
   const register = (
-    key: string,
+    key: Shortcut,
     delta: 1 | -1,
     description: string,
     end: string,
